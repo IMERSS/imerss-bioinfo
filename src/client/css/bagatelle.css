@@ -1,0 +1,18 @@
+.fld-bagatelle-segment {
+    stroke: #444;
+    stroke-width: 1px;
+}
+
+.fld-bagatelle-label {
+    fill: none
+}
+
+.flc-bagatelle-svg {
+    font-size: 0.03px
+}
+
+.ui-tooltip {
+//    color: white;
+//    background: black;
+    max-width: 500px;
+}

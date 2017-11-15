@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="node_modules/infusion/src/lib/normalize/css/normalize.css" />
+        <link rel="stylesheet" href="node_modules/infusion/src/lib/jquery/ui/css/default-theme/jquery-ui.css"></script>
+        <link rel="stylesheet" type="text/css" href="node_modules/infusion/src/framework/core/css/fluid.css" />
+        <link rel="stylesheet" type="text/css" href="node_modules/infusion/src/framework/core/css/fluidDebugging.css" />
+        <link rel="stylesheet" type="text/css" href="node_modules/infusion/src/components/overviewPanel/css/OverviewPanel.css" />
+        <link rel="stylesheet" type="text/css" href="node_modules/infusion/src/components/inlineEdit/css/InlineEdit.css" />
+
+        <script src="node_modules/infusion/src/lib/jquery/core/js/jquery.js"></script>
+        <script src="node_modules/infusion/src/lib/jquery/ui/js/jquery-ui.js"></script>
+
+        <script src="node_modules/infusion/src/lib/fastXmlPull/js/fastXmlPull.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/jquery.keyboard-a11y.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/Fluid.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/FluidDebugging.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/FluidDocument.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/FluidRequests.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/FluidIoC.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/DataBinding.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/ModelTransformation.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/ModelTransformationTransforms.js"></script>
+        <script src="node_modules/infusion/src/framework/enhancement/js/ContextAwareness.js"></script>
+        <script src="node_modules/infusion/src/framework/enhancement/js/ProgressiveEnhancement.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/FluidView.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/ResourceLoader.js"></script>
+        <script src="node_modules/infusion/src/framework/renderer/js/fluidParser.js"></script>
+
+        <script src="node_modules/infusion/src/components/inlineEdit/js/InlineEdit.js"></script>
+
+        <script src="node_modules/infusion/src/components/tooltip/js/Tooltip.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="src/client/css/bagatelle.css"/>
+
+        <script src="src/client/js/colour.js"></script>
+        <script src="src/client/js/bagatelle.js"></script>
+        
+        <!-- Below here: definitions for the authoring environment -->
+
+        <script src="node_modules/fluid-authoring/src/shared/js/AuthorUtils.js"></script>
+        <script src="node_modules/fluid-authoring/src/client/js/PlainAriaLabels.js"></script>
+        <script src="node_modules/fluid-authoring/src/client/js/KeyboardSupport.js"></script>
+        <script src="node_modules/fluid-authoring/src/client/js/DecoratorViewComponent.js"></script>
+        <script src="node_modules/fluid-authoring/src/client/js/FluidViewDebuggingCore.js"></script>
+        <script src="node_modules/fluid-authoring/src/client/js/ViewComponentSupport.js"></script>
+        <script src="node_modules/fluid-authoring/src/client/js/DynamicComponentIndexer.js"></script>
+
+        <title>Bagatelle: Biodiversity Galiano Species List November 2017 as Zoomable Sunburst</title>
+    </head>
+
+    <body>
+        <h2>Bagatelle: Biodiversity Galiano Species List November 2017 as Zoomable Sunburst</h2>
+        <div class="fl-bagatelle-container">
+            <svg width="1000" height="1000" viewBox="-1.1 -1.1 2.2 2.2" class="flc-bagatelle-svg">
+            </svg>
+        </div>
+        <script>
+            hortis.sunburstLoader({
+                container: ".fl-bagatelle-container",
+                treeFile: "data/Animalia.json"});   
+        </script>
+    </body>
+</html>
