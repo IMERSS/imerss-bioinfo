@@ -45,7 +45,8 @@ fluid.defaults("hortis.sunburst", {
     styles: {
         segment: "fld-bagatelle-segment",
         label: "fld-bagatelle-label",
-        labelPath: "fld-bagatelle-labelPath"
+        labelPath: "fld-bagatelle-labelPath",
+        clickable: "fl-bagatelle-clickable"
     },
     colours: {
         documented: "#9ecae1",
@@ -65,8 +66,8 @@ fluid.defaults("hortis.sunburst", {
     markup: {
         segmentHeader: "<g xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">",
         segment: "<path id=\"%id\" d=\"%path\" visibility=\"visibility\" class=\"%clazz\" vector-effect=\"non-scaling-stroke\" style=\"fill: %fillColour;\"></path>",
-        label: "<path id=\"%labelPathId\" d=\"%textPath\" visibility=\"%labelVisibility\" class=\"%textPathClass\" vector-effect=\"non-scaling-stroke\"></path>"
-            + "<text id=\"%labelId\" clas=\"%textClass\" visibility=\"%labelVisibility\"><textPath xlink:href=\"#%labelPathId\" startOffset=\"50%\" style=\"text-anchor: middle\">%label</textPath></text>",
+        label: "<path id=\"%labelPathId\" d=\"%textPath\" visibility=\"%labelVisibility\" class=\"%labelPathClass\" vector-effect=\"non-scaling-stroke\"></path>"
+            + "<text id=\"%labelId\" class=\"%labelClass\" visibility=\"%labelVisibility\"><textPath xlink:href=\"#%labelPathId\" startOffset=\"50%\" style=\"text-anchor: middle\">%label</textPath></text>",
         segmentFooter: "</g>",
         tooltipHeader: "<div><table>",
         tooltipRow: "<tr><td>%key: </td><td>%value</td>",
@@ -268,6 +269,14 @@ hortis.circularTextPath = function (outerRadius) {
         "A", ar, " ", ar, " 0 1 0 ", "0.0001 ", -ar]);
 };
 
+hortis.isClickable = function (row) {
+    return row.childCount > 1 || row.iNaturalistLink;
+};
+
+hortis.elementClass = function (row, styles, baseStyle) {
+    return styles[baseStyle] + (hortis.isClickable(row) ? " " + styles.clickable : "");
+};
+
 hortis.updateScale = function (that) {
     that.flatTree.forEach(function (row) {
         var attrs = hortis.attrsForRow(that, row);
@@ -275,6 +284,7 @@ hortis.updateScale = function (that) {
         if (segment) {
             segment.setAttribute("d", attrs.path);
             segment.setAttribute("visibility", attrs.visibility);
+            segment.setAttribute("class", hortis.elementClass(row, that.options.styles, "segment"));
         }
         var labelPath = fluid.byId("hortis-labelpath-" + row.id);
         if (labelPath) {
@@ -284,6 +294,7 @@ hortis.updateScale = function (that) {
         var label = fluid.byId("hortis-label-" + row.id);
         if (label) {
             label.setAttribute("visibility", attrs.labelVisibility);
+            label.setAttribute("class", hortis.elementClass(row, that.options.styles, "label"));
         }
     });
 };
@@ -391,8 +402,9 @@ hortis.renderSegment = function (that, row) {
         id: "hortis-segment-" + row.id,
         labelPathId: "hortis-labelpath-" + row.id,
         labelId: "hortis-label-" + row.id,
-        clazz: that.options.styles.segment,
-        textPathClass: that.options.styles.label,
+        clazz: hortis.elementClass(row, that.options.styles, "segment"),
+        labelPathClass: that.options.styles.labelPath,
+        labelClass: hortis.elementClass(row, that.options.styles, "label"),
         fillColour: hortis.colourForRow(that.options.parsedColours, row)
     }, hortis.attrsForRow(that, row));
     return hortis.renderSVGTemplate(that.options.markup.segment, terms)

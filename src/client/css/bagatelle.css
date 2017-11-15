@@ -3,7 +3,7 @@
     stroke-width: 1px;
 }
 
-.fld-bagatelle-label {
+.fld-bagatelle-labelPath {
     fill: none
 }
 
@@ -15,4 +15,8 @@
 //    color: white;
 //    background: black;
     max-width: 500px;
+}
+
+.fl-bagatelle-clickable {
+    cursor: pointer;
 }
