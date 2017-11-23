@@ -123,6 +123,9 @@ fluid.defaults("hortis.sunburst", {
         "onCreate.bindMouse": {
             funcName: "hortis.bindMouse",
             args: ["{that}"]
+        },
+        "onCreate.registerFailureTrigger": {
+            funcName: "hortis.bindFailureTrigger"
         }
     },
     tree: null,
@@ -133,6 +136,14 @@ fluid.defaults("hortis.sunburst", {
         index: "@expand:hortis.indexTree({that}.flatTree)" // map id to row
     }
 });
+
+hortis.bindFailureTrigger = function (that) {
+    $(".flc-trigger-failure").click(function () {
+        var row = that.index["6ucmquhv-233"];
+        hortis.beginZoom(that, row);
+    });
+};
+
 hortis.tooltipFields = ["species", "commonName", "reporting", "lastCollected", "collector", "documenter", "collection"];
 
 // Lifted from Infusion Tooltip.js
@@ -375,7 +386,6 @@ hortis.elementToRow = function (that, element) {
 
 hortis.beginZoom = function (that, row) {
     that.container.stop(true, true);
-    hortis.updateTooltip(that, null);
     var initialScale = fluid.copy(that.model.scale);
     var newBound = hortis.boundNodes(that, row.id);
     that.container.animate({"zoomProgress": 1}, {
