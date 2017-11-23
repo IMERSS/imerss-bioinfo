@@ -443,7 +443,7 @@ hortis.attrsForRow = function (that, row) {
     return togo;
 };
 
-hortis.renderSegment = function (that, row, aster) {
+hortis.renderSegment = function (that, row) {
     var isLayoutRoot = row.id === that.model.layoutId;
     var terms = $.extend({
         id: "hortis-segmentz" + row.id,
@@ -455,7 +455,7 @@ hortis.renderSegment = function (that, row, aster) {
         fillColour: hortis.colourForRow(that.options.parsedColours, row)
     }, hortis.attrsForRow(that, row));
     return hortis.renderSVGTemplate(that.options.markup.segment, terms)
-       + (aster ? "" : hortis.renderSVGTemplate(that.options.markup.label, terms));
+       + hortis.renderSVGTemplate(that.options.markup.label, terms);
 };
 
 fluid.setLogging(false);
@@ -468,13 +468,11 @@ hortis.render = function (that) {
     var markup = that.options.markup.segmentHeader;
     for (var i = 0; i < that.flatTree.length; ++i) {
         if (that.visMap[i]) {
-            if (!aster || rows >= 20) {
-                markup += that.renderSegment(that.flatTree[i], aster);
-            }
+            markup += that.renderSegment(that.flatTree[i], aster);
             ++rows;
             if (aster && rows === 21) {
-                console.log("BREAKING AT " + rows);
-                break;
+                console.log("Asterozoa BREAKING AT " + rows);
+//                break;
             }
         }
     }
@@ -482,10 +480,8 @@ hortis.render = function (that) {
     console.log("Composed markup ", markup);
     var container = that.locate("svg");
     container.empty();
-    window.setTimeout(function () {
-        console.log("Begin render");
-        hortis.renderSVGElement(markup, container);
-    }, 5000);
+    console.log("Begin render");
+    hortis.renderSVGElement(markup, container);
     console.log("Render complete");
 };
 

@@ -15,9 +15,6 @@ hortis.renderSVGElement = function (markup, parentContainer) {
     var container = $.parseXML(markup);
     console.log("markup parsed to ", container.documentElement.nodeName);
     var element = container.documentElement;
-    if (!element) {
-        console.log("FAILED");
-    }
     parentContainer.append(element);
     return element;
 };
