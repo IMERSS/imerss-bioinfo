@@ -4,6 +4,7 @@
         "fluid_3_0_0": true
     },
     "rules": {
-        "strict": ["error", "global"]
+        "strict": ["error", "global"],
+        "no-loop-func": 0
     }
 }

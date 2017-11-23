@@ -3,6 +3,10 @@
     stroke-width: 1px;
 }
 
+.fld-bagatelle-segment.fl-bagatelle-layoutRoot {
+    stroke-width: 2.5px;
+}
+
 .fld-bagatelle-labelPath {
     fill: none
 }

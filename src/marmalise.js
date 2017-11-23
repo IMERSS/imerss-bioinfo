@@ -120,6 +120,15 @@ hortis.flatToTree = function (rows) {
     return tree;
 };
 
+hortis.flattenChildren = function (root) {
+    var children = [];
+    fluid.each(root.children, function (value) {
+        children.push(hortis.flattenChildren(value));
+    });
+    root.children = children;
+    return root;
+};
+
 var result = hortis.readCSV(process.argv[2], __dirname + "/../data/Galiano-map.json");
 
 fluid.setLogging(true);
@@ -128,6 +137,7 @@ fluid.logObjectRenderChars = 10240;
 result.then(function (result) {
 //    console.log(JSON.stringify(result, null, 2));
     var tree = hortis.flatToTree(result.rows);
+    hortis.flattenChildren(tree);
     console.log(JSON.stringify(tree, null, 2));
 }, function (error) {
     fluid.fail(error);
