@@ -11,7 +11,7 @@ The current workflow processes this using a command-line script, but will shortl
 
 To convert a CSV file, run `marmalise.js` e.g. via a line such as 
 
-    node marmalise.js data/Animalia.csv > Animalia.json
+    node src/marmalise.js data/Animalia.csv data/Fungi.csv data/Plantae.csv > Life.json
     
 Then remove the 3 lines of junk from the head of the JSON file and paste it into the `data` directory.
 

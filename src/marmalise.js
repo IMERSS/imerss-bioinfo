@@ -27,10 +27,9 @@ hortis.validateHeaders = function (map, headers, rejector) {
     });
 };
 
-hortis.readCSV = function (fileName, mapFile) {
+hortis.readCSV = function (fileName, map) {
     var rows = [];
     var togo = fluid.promise();
-    var map = require(mapFile);
 
     var rowStream = fs.createReadStream(fileName)
       .pipe(csv());
@@ -111,13 +110,11 @@ hortis.storeAtPath = function (tree, path, row) {
     });
 };
 
-hortis.flatToTree = function (rows) {
-    var tree = hortis.newTaxon("Life", "Life", 0);
+hortis.flatToTree = function (tree, rows) {
     rows.forEach(function (row) {
         var path = hortis.taxaToPath(row);
         hortis.storeAtPath(tree, path, row);
     });
-    return tree;
 };
 
 hortis.flattenChildren = function (root) {
@@ -129,16 +126,30 @@ hortis.flattenChildren = function (root) {
     return root;
 };
 
-var result = hortis.readCSV(process.argv[2], __dirname + "/../data/Galiano-map.json");
-
 fluid.setLogging(true);
 fluid.logObjectRenderChars = 10240;
 
-result.then(function (result) {
-//    console.log(JSON.stringify(result, null, 2));
-    var tree = hortis.flatToTree(result.rows);
+var map = require(__dirname + "/../data/Galiano-map.json");
+var tree = hortis.newTaxon("Life", "Life", 0);
+
+var files = process.argv.slice(2);
+var results = files.map(function (file) {
+    var togo = fluid.promise();
+    var result = hortis.readCSV(file, map);
+    result.then(function (result) {
+        // console.log(JSON.stringify(result.rows[0], null, 2));
+        hortis.flatToTree(tree, result.rows);
+        togo.resolve();
+    }, function (error) {
+        fluid.fail(error);
+    });
+    return togo;
+});
+
+var fullResult = fluid.promise.sequence(results);
+fullResult.then(function () {
     hortis.flattenChildren(tree);
     console.log(JSON.stringify(tree, null, 2));
-}, function (error) {
-    fluid.fail(error);
 });
+
+

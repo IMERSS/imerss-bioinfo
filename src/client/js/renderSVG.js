@@ -13,7 +13,6 @@ var hortis = fluid.registerNamespace("hortis");
 hortis.renderSVGElement = function (markup, parentContainer) {
     // Approach taken from http://stackoverflow.com/a/36507333
     var container = $.parseXML(markup);
-    console.log("markup parsed to ", container.documentElement.nodeName);
     var element = container.documentElement;
     parentContainer.append(element);
     return element;

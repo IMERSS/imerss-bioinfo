@@ -53,11 +53,11 @@ fluid.defaults("hortis.sunburst", {
         documented: "#9ecae1",
         undocumented: "#e7969c"
     },
-    zoomDuration: 750,
+    zoomDuration: 1250,
     scaleConfig: {
         innerDepth: 1 / 22,
-        outerDepth: 1 - 14 / 22,
-        maxNodes: 300
+        outerDepth: 1 - 13 / 22,
+        maxNodes: 200
     },
     parsedColours: "@expand:hortis.parseColours({that}.options.colours)",
     model: {
@@ -71,9 +71,10 @@ fluid.defaults("hortis.sunburst", {
     },
     markup: {
         segmentHeader: "<g xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">",
-        segment: "<path id=\"%id\" d=\"%path\" visibility=\"%visibility\" class=\"%clazz\" vector-effect=\"non-scaling-stroke\" style=\"fill: %fillColour;\"></path>",
+        segment: "<path id=\"%id\" d=\"%path\" visibility=\"%visibility\" class=\"%clazz\" vector-effect=\"non-scaling-stroke\" style=\"%style\"></path>",
         label: "<path id=\"%labelPathId\" d=\"%textPath\" visibility=\"%labelVisibility\" class=\"%labelPathClass\" vector-effect=\"non-scaling-stroke\"></path>"
-            + "<text id=\"%labelId\" dominant-baseline=\"middle\" class=\"%labelClass\" visibility=\"%labelVisibility\"><textPath xlink:href=\"#%labelPathId\" startOffset=\"50%\" style=\"text-anchor: middle\">%label</textPath></text>",
+            + "<text id=\"%labelId\" dominant-baseline=\"middle\" class=\"%labelClass\" visibility=\"%labelVisibility\" style=\"%labelStyle\">"
+            + "<textPath xlink:href=\"#%labelPathId\" startOffset=\"50%\" style=\"text-anchor: middle\">%label</textPath></text>",
         segmentFooter: "</g>",
         tooltipHeader: "<div><table>",
         tooltipRow: "<tr><td>%key: </td><td>%value</td>",
@@ -123,9 +124,6 @@ fluid.defaults("hortis.sunburst", {
         "onCreate.bindMouse": {
             funcName: "hortis.bindMouse",
             args: ["{that}"]
-        },
-        "onCreate.registerFailureTrigger": {
-            funcName: "hortis.bindFailureTrigger"
         }
     },
     tree: null,
@@ -137,12 +135,6 @@ fluid.defaults("hortis.sunburst", {
     }
 });
 
-hortis.bindFailureTrigger = function (that) {
-    $(".flc-trigger-failure").click(function () {
-        var row = that.index["6ucmquhv-233"];
-        hortis.beginZoom(that, row);
-    });
-};
 
 hortis.tooltipFields = ["species", "commonName", "reporting", "lastCollected", "collector", "documenter", "collection"];
 
@@ -320,26 +312,35 @@ hortis.elementClass = function (row, isLayoutRoot, styles, baseStyle) {
         + (isLayoutRoot ? " " + styles.layoutRoot : "");
 };
 
+hortis.elementStyle = function (attrs, elementType) {
+    var opacity = attrs.opacity === undefined ? "" : " opacity: " + attrs.opacity + ";";
+    return elementType === "segment" ? 
+        "fill: " + attrs.fillColour + ";" + opacity : opacity
+};
+
 hortis.updateScale = function (that) {
     that.flatTree.forEach(function (row, index) {
-        if (that.visMap[index]) {
+        if (that.visMap[index] || that.oldVisMap && that.oldVisMap[index]) {
             var attrs = hortis.attrsForRow(that, row);
+            attrs.fillColour = hortis.colourForRow(that.options.parsedColours, row);
             var isLayoutRoot = row.id === that.model.layoutId;
-            var segment = fluid.byId("hortis-segmentz" + row.id);
+            var segment = fluid.byId("hortis-segment:" + row.id);
             if (segment) {
                 segment.setAttribute("d", attrs.path);
                 segment.setAttribute("visibility", attrs.visibility);
                 segment.setAttribute("class", hortis.elementClass(row, isLayoutRoot, that.options.styles, "segment"));
+                segment.setAttribute("style", hortis.elementStyle(attrs, "segment"));
             }
-            var labelPath = fluid.byId("hortis-labelpathz" + row.id);
+            var labelPath = fluid.byId("hortis-labelpath:" + row.id);
             if (labelPath) {
                 labelPath.setAttribute("d", attrs.textPath);
                 labelPath.setAttribute("visibility", attrs.labelVisibility);
             }
-            var label = fluid.byId("hortis-labelz" + row.id);
+            var label = fluid.byId("hortis-label:" + row.id);
             if (label) {
                 label.setAttribute("visibility", attrs.labelVisibility);
                 label.setAttribute("class", hortis.elementClass(row, isLayoutRoot, that.options.styles, "label"));
+                label.setAttribute("style", hortis.elementStyle(attrs, "label"));
             }
         }
     });
@@ -376,7 +377,7 @@ hortis.colourForRow = function (parsedColours, row) {
 
 hortis.elementToId = function (element) {
     var id = element.id;
-    return id.substring(id.indexOf("z") + 1);;
+    return id.substring(id.indexOf(":") + 1);;
 };
 
 hortis.elementToRow = function (that, element) {
@@ -388,18 +389,24 @@ hortis.beginZoom = function (that, row) {
     that.container.stop(true, true);
     var initialScale = fluid.copy(that.model.scale);
     var newBound = hortis.boundNodes(that, row.id);
+    newBound.scale.zoomProgress = 1;
+    console.log("Begin zoom");
+    that.oldVisMap = that.visMap;
+    that.visMap = newBound.visMap;
+    that.render();
     that.container.animate({"zoomProgress": 1}, {
-        easing: "linear",
+        easing: "swing",
         duration: that.options.zoomDuration,
-        step: function (progress) {
-            var interpScale = hortis.interpolateModels(progress, initialScale, newBound.scale);
+        step: function (zoomProgress) {
+            var interpScale = hortis.interpolateModels(zoomProgress, initialScale, newBound.scale);
             that.applier.change("scale", interpScale);
         },
         complete: function () {
             console.log("Zoom complete");
+            delete that.oldVisMap;
             that.container[0].zoomProgress = 0;
             that.applier.change("layoutId", row.id);
-            that.visMap = newBound.visMap;
+            that.applier.change("scale.zoomProgress", 0); // TODO: suppress render here
             that.render();
         }
     });
@@ -430,14 +437,15 @@ hortis.attrsForRow = function (that, row) {
     var label = row.rank ? (row.rank === "Life" ? "Life" : row.rank + ": " + row.name) : row.species;
     var outerLength = outerRadius * (rightAngle - leftAngle);
     if (fluid.model.isSameValue(leftAngle, Math.PI)) {
-        // leftAngle += 1e-4;
-        console.log("ADJUSTED LEFTANGLE");
+        // Eliminate Chrome crash bug exhibited in https://amb26.github.io/svg-failure/ but apparently only on Windows 7!
+        // Note that 1e-5 will be too small!
+        leftAngle += 1e-4;
     }
     var labelVisibility = isOuterSegment ? outerLength > 0.035 : outerLength > label.length * 0.016; // TODO: make a guess of this factor from font size (e.g. 2/3 of it)
     var togo = {
         visibility: isVisible ? "visible" : "hidden",
         labelVisibility: isVisible && labelVisibility ? "visible" : "hidden",
-        label: label
+        label: label,
     };
     if (isComplete) {
         togo.textPath = hortis.circularTextPath(outerRadius);
@@ -450,20 +458,30 @@ hortis.attrsForRow = function (that, row) {
         togo.textPath = isOuterSegment ? hortis.linearTextPath(leftAngle, rightAngle, innerRadius, outerRadius) : hortis.segmentTextPath(leftAngle, rightAngle, outerRadius);
         togo.path = hortis.segmentPath(leftAngle, rightAngle, innerRadius, outerRadius);
     }
+    if (that.oldVisMap) {
+        var index = row.flatIndex;
+        if (!that.oldVisMap[index] && that.visMap[index]) {
+            togo.opacity = that.model.scale.zoomProgress;
+        } else if (that.oldVisMap[index] && !that.visMap[index]) {
+            togo.opacity = 1 - that.model.scale.zoomProgress;
+        }
+    }
     return togo;
 };
 
 hortis.renderSegment = function (that, row) {
     var isLayoutRoot = row.id === that.model.layoutId;
     var terms = $.extend({
-        id: "hortis-segmentz" + row.id,
-        labelPathId: "hortis-labelpathz" + row.id,
-        labelId: "hortis-labelz" + row.id,
+        id: "hortis-segment:" + row.id,
+        labelPathId: "hortis-labelpath:" + row.id,
+        labelId: "hortis-label:" + row.id,
         clazz: hortis.elementClass(row, isLayoutRoot, that.options.styles, "segment"),
         labelPathClass: that.options.styles.labelPath,
         labelClass: hortis.elementClass(row, isLayoutRoot, that.options.styles, "label"),
         fillColour: hortis.colourForRow(that.options.parsedColours, row)
     }, hortis.attrsForRow(that, row));
+    terms.style = hortis.elementStyle(terms, "segment");
+    terms.labelStyle = hortis.elementStyle(terms, "label");
     return hortis.renderSVGTemplate(that.options.markup.segment, terms)
        + hortis.renderSVGTemplate(that.options.markup.label, terms);
 };
@@ -471,28 +489,17 @@ hortis.renderSegment = function (that, row) {
 fluid.setLogging(false);
 
 hortis.render = function (that) {
-    console.log("Begin render");
     var rootRow = that.index[that.model.layoutId];
-    var aster = rootRow.name === "Asterozoa";
-    var rows = 0;
     var markup = that.options.markup.segmentHeader;
     for (var i = 0; i < that.flatTree.length; ++i) {
-        if (that.visMap[i]) {
-            markup += that.renderSegment(that.flatTree[i], aster);
-            ++rows;
-            if (aster && rows === 21) {
-                console.log("Asterozoa BREAKING AT " + rows);
-//                break;
-            }
+        if (that.visMap[i] || that.oldVisMap && that.oldVisMap[i]) {
+            markup += that.renderSegment(that.flatTree[i]);
         }
     }
     markup += that.options.markup.segmentFooter;
-    console.log("Composed markup ", markup);
     var container = that.locate("svg");
     container.empty();
-    console.log("Begin render");
     hortis.renderSVGElement(markup, container);
-    console.log("Render complete");
 };
 
 
