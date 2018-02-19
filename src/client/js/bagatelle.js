@@ -38,6 +38,7 @@ fluid.defaults("hortis.sunburst", {
     gradeNames: ["fluid.newViewComponent"],
     selectors: {
         svg: ".flc-bagatelle-svg",
+        taxonDisplay: ".fld-bagatelle-taxonDisplay",
         segment: ".fld-bagatelle-segment",
         label: ".fld-bagatelle-label",
         segmentAndLabel: "@expand:hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label)"
@@ -136,7 +137,18 @@ fluid.defaults("hortis.sunburst", {
 });
 
 
+hortis.capitalize = function(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 hortis.tooltipFields = ["species", "commonName", "reporting", "lastCollected", "collector", "documenter", "collection"];
+
+hortis.tooltipLookup = {
+    commonName: "Common Name",
+    lastCollected: "Last Collected",
+    iNaturalist: "Observation",
+    taxonLink: "iNaturalist Taxon"
+}
 
 // Lifted from Infusion Tooltip.js
 hortis.isInDocument = function (node) {
@@ -147,13 +159,21 @@ hortis.isInDocument = function (node) {
     return $.contains(dokkument, container) || dokkument === container;
 };
 
+hortis.imageLoaded = function (element) {
+    $(element).removeClass("fl-bagatelle-imgLoading");
+    var parent = $(element).closest("div");
+    var overlay = parent.find(".fl-bagatelle-imgLoadingOverlay");
+    overlay.remove();
+};
+
 hortis.renderTooltip = function (row, markup) {
     if (!row) {
         return null;
     }
     var dumpRow = function (key, value) {
         if (value) {
-            togo += fluid.stringTemplate(markup.tooltipRow, {key: key, value: value});
+            var keyName = hortis.tooltipLookup[key] || hortis.capitalize(key);
+            togo += fluid.stringTemplate(markup.tooltipRow, {key: keyName, value: value});
         }
     };
     var togo = markup.tooltipHeader;
@@ -167,6 +187,14 @@ hortis.renderTooltip = function (row, markup) {
         if (row.iNaturalistLink) {
             dumpRow("iNaturalist", "<a href=\"" + row.iNaturalistLink + "\">" + row.iNaturalistLink + "</a>");
         }
+        if (row.photoLink) {
+        // See this nonsense: https://stackoverflow.com/questions/5843035/does-before-not-work-on-img-elements
+            dumpRow("photo", "<div><span class=\"fl-bagatelle-imgLoadingOverlay\"></span><img onload=\"hortis.imageLoaded(this)\" class=\"fl-bagatelle-photo fl-bagatelle-imgLoading\" src=\"" + row.photoLink + "\"/></div>");
+        }
+        if (row.upstreamID) {
+            var taxonLink = "http://www.inaturalist.org/taxon/" + row.upstreamID;
+            dumpRow("taxonLink", "<a href=\"" + taxonLink + "\">" + taxonLink + "</a>");
+        }
     }
     togo += markup.tooltipFooter;
     return togo;
@@ -175,6 +203,12 @@ hortis.renderTooltip = function (row, markup) {
 hortis.updateTooltip = function (that, id) {
     console.log("updateTooltip for id ", id);
     var content = id ? hortis.renderTooltip(that.index[id], that.options.markup) : null;
+    var taxonDisplay = that.locate("taxonDisplay");
+    if (content) {
+        taxonDisplay.empty();
+        taxonDisplay.html(content);
+    }
+/*    
     if (that.tooltipTarget) {
         if (hortis.isInDocument(that.tooltipTarget)) {
             that.tooltipTarget.tooltip("destroy");
@@ -197,7 +231,7 @@ hortis.updateTooltip = function (that, id) {
             that.tooltipTarget.tooltip("destroy");
             that.tooltipTarget = null;
         }
-    }
+    }*/
 };
 
 hortis.bindMouse = function (that) {

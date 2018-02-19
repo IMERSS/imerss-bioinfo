@@ -24,3 +24,44 @@
 .fl-bagatelle-clickable {
     cursor: pointer;
 }
+
+.fld-bagatelle-taxonDisplay table {
+   border: 1px solid #aaa;
+   border-collapse: collapse;
+}
+
+//.fld-bagatelle-taxonDisplay tr {
+//   border-bottom: 1px solid #eee;
+//}
+
+.fld-bagatelle-taxonDisplay tr:nth-child(even) {
+   background: #eeeeee;
+}
+
+.fld-bagatelle-taxonDisplay tr:last-child {
+    border: none;
+}
+
+.fld-bagatelle-taxonDisplay td:first-child {
+    padding-right: 10px;
+}
+
+
+.fl-bagatelle-imgLoadingOverlay:after {
+    content: "";
+    position: absolute;
+    background-image: url(../img/loading-icon.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 300px;
+    width: 400px;
+}
+
+.fl-bagatelle-photo {
+    width: 400px;
+}
+
+
+.fl-bagatelle-imgLoading {
+    min-height: 300px;
+}

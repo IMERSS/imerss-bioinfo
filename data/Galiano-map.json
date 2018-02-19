@@ -13,6 +13,7 @@
     "suborder": "Suborder",
     "superfamily": "Superfamily",
     "family": "Family",
+    "subfamily": "Subfamily",
     "origin": "Origin",
     "status": "Status",
     "reporting": "Reporting",
@@ -22,6 +23,8 @@
     "firstDocumented": "First Documented",
     "documenter": "Documenter",
     "iNaturalistLink": "iNaturalist Link",
+    "upstreamID": "ID",
+    "photoLink": "iNaturalist Photo",
     "notes": "Notes",
     "statsCode": "Stats Code"
 }
