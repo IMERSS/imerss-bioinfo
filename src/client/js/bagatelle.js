@@ -141,7 +141,7 @@ hortis.capitalize = function(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-hortis.tooltipFields = ["species", "commonName", "reporting", "lastCollected", "collector", "documenter", "collection"];
+hortis.tooltipFields = ["species", "commonName", "reporting", "lastCollected", "collector", "collection", "documenter"];
 
 hortis.tooltipLookup = {
     commonName: "Common Name",
@@ -192,7 +192,7 @@ hortis.renderTooltip = function (row, markup) {
             dumpRow("photo", "<div><span class=\"fl-bagatelle-imgLoadingOverlay\"></span><img onload=\"hortis.imageLoaded(this)\" class=\"fl-bagatelle-photo fl-bagatelle-imgLoading\" src=\"" + row.photoLink + "\"/></div>");
         }
         if (row.upstreamID) {
-            var taxonLink = "http://www.inaturalist.org/taxon/" + row.upstreamID;
+            var taxonLink = "http://www.inaturalist.org/taxa/" + row.upstreamID;
             dumpRow("taxonLink", "<a href=\"" + taxonLink + "\">" + taxonLink + "</a>");
         }
     }
