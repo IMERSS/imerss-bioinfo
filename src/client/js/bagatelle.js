@@ -39,6 +39,7 @@ fluid.defaults("hortis.sunburst", {
     selectors: {
         svg: ".flc-bagatelle-svg",
         taxonDisplay: ".fld-bagatelle-taxonDisplay",
+        autocomplete: ".fld-bagatelle-autocomplete",
         segment: ".fld-bagatelle-segment",
         label: ".fld-bagatelle-label",
         segmentAndLabel: "@expand:hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label)"
@@ -49,6 +50,18 @@ fluid.defaults("hortis.sunburst", {
         layoutRoot: "fl-bagatelle-layoutRoot",
         labelPath: "fld-bagatelle-labelPath",
         clickable: "fl-bagatelle-clickable"
+    },
+    components: {
+        autocomplete: {
+            type: "hortis.autocomplete",
+            options: {
+                container: "{sunburst}.dom.autocomplete",
+                id: "fli-bagatelle-autocomplete",
+                invokers: {
+                    query: "hortis.queryAutocomplete({sunburst}.flatTree, {arguments}.0, {arguments}.1)"
+                }
+            }
+        }
     },
     colours: {
         documented: "#9ecae1",
@@ -86,7 +99,7 @@ fluid.defaults("hortis.sunburst", {
         renderSegment: "hortis.renderSegment({that}, {arguments}.0, {arguments}.1)",
         angleScale: "hortis.angleScale({arguments}.0, {that}.model.scale)",
         elementToRow: "hortis.elementToRow({that}, {arguments}.0)",
-        segmentClicked: "hortis.segmentClicked({that}, {arguments}.0)"
+        segmentClicked: "hortis.segmentClicked({that}, {arguments}.0)",
     },
     modelListeners: {
         scale: {
@@ -149,6 +162,21 @@ hortis.tooltipLookup = {
     iNaturalist: "Observation",
     taxonLink: "iNaturalist Taxon"
 }
+
+hortis.queryAutocomplete = function (flatTree, query, callback) {
+    var output = [];
+    for (var i = 0; i < flatTree.length; ++ i) {
+        var row = flatTree[i];
+        var display = hortis.labelForRow(row) + (row.commonName ? " (" + row.commonName + ")" : "");
+        if (display.toLowerCase().indexOf(query) !== -1) {
+            output.push(display);
+        }
+        if (output.length >= 20) {
+            break;
+        }
+    };
+    callback(output);
+};
 
 // Lifted from Infusion Tooltip.js
 hortis.isInDocument = function (node) {
@@ -242,13 +270,16 @@ hortis.bindMouse = function (that) {
         that.segmentClicked(that.index[id]);
     });
     svg.on("mouseenter", segmentAndLabel, function (e) {
+        window.clearTimeout(that.leaveTimeout);
         var id = hortis.elementToId(this);
         that.mouseEvent = e;
         that.applier.change("hoverId", id);
     });
     svg.on("mouseleave", segmentAndLabel, function (e) {
-        that.mouseEvent = e;
-        that.applier.change("hoverId", null);
+        that.leaveTimeout = window.setTimeout(function () {
+            that.mouseEvent = e;
+            that.applier.change("hoverId", null);
+        }, 50);
     });
 };
 
@@ -456,6 +487,10 @@ hortis.segmentClicked = function (that, row) {
     }
 };
 
+hortis.labelForRow = function (row) {
+    return row.rank ? (row.rank === "Life" ? "Life" : row.rank + ": " + row.name) : row.species;
+};
+
 // This guide is a great one for "bestiary of reuse failures": https://www.visualcinnamon.com/2015/09/placing-text-on-arcs.html
 // What the chaining method reduces one to who is unable to allocate any intermediate variables
 
@@ -468,7 +503,7 @@ hortis.attrsForRow = function (that, row) {
     var isCircle = fluid.model.isSameValue(innerRadius, 0) && isComplete;
     var isVisible = !fluid.model.isSameValue(leftAngle, rightAngle) && !fluid.model.isSameValue(innerRadius, outerRadius);
     var isOuterSegment = fluid.model.isSameValue(outerRadius - innerRadius, that.options.scaleConfig.outerDepth);
-    var label = row.rank ? (row.rank === "Life" ? "Life" : row.rank + ": " + row.name) : row.species;
+    var label = hortis.labelForRow(row);
     var outerLength = outerRadius * (rightAngle - leftAngle);
     if (fluid.model.isSameValue(leftAngle, Math.PI)) {
         // Eliminate Chrome crash bug exhibited in https://amb26.github.io/svg-failure/ but apparently only on Windows 7!

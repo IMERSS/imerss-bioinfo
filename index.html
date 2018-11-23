@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="node_modules/infusion/src/lib/normalize/css/normalize.css" />
         <link rel="stylesheet" href="node_modules/infusion/src/lib/jquery/ui/css/default-theme/jquery-ui.css"></script>
         <link rel="stylesheet" type="text/css" href="node_modules/infusion/src/framework/core/css/fluid.css" />
+        <link rel="stylesheet" type="text/css" href="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css" />
 
         <script src="node_modules/infusion/src/lib/jquery/core/js/jquery.js"></script>
         <script src="node_modules/infusion/src/lib/jquery/ui/js/jquery-ui.js"></script>
@@ -30,12 +31,15 @@
 
         <script src="node_modules/infusion/src/components/tooltip/js/Tooltip.js"></script>
 
+        <script src="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js"></script>
+
         <link rel="stylesheet" type="text/css" href="src/client/css/bagatelle.css"/>
 
         <script src="src/client/js/colour.js"></script>
         <script src="src/client/js/renderSVG.js"></script>
         <script src="src/client/js/bagatelle.js"></script>
-        
+        <script src="src/client/js/autocomplete.js"></script>
+
         <!-- Below here: definitions for the authoring environment -->
 
         <script src="node_modules/fluid-authoring/src/shared/js/AuthorUtils.js"></script>
@@ -52,7 +56,10 @@
     <body>
         <h2>Bagatelle: Biodiversity Galiano Species List November 2017 as Zoomable Sunburst</h2>
         <div class="fl-bagatelle-container">
-            <table><tr><td>
+            <table><tr class="flc-bagatelle-autocomplete-row"><td>
+                <label for="fli-bagatelle-autocomplete">Select a taxon: </label>
+                <div class="fld-bagatelle-autocomplete"></div>
+            <tr><td>
             <svg width="1000" height="1000" viewBox="-1.1 -1.1 2.2 2.2" class="flc-bagatelle-svg">
             </svg>
             </td><td class="fld-bagatelle-taxonDisplay">

@@ -65,3 +65,17 @@
 .fl-bagatelle-imgLoading {
     min-height: 300px;
 }
+
+.fld-bagatelle-autocomplete {
+    width: 30em;
+    margin-left: 1rem;
+    display: inline-block;
+}
+
+.flc-bagatelle-autocomplete-row {
+    text-align: center;
+}
+
+.autocomplete__menu {
+  max-height: 600px
+}
