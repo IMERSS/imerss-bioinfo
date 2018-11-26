@@ -13,15 +13,27 @@ var hortis = fluid.registerNamespace("hortis");
 fluid.defaults("hortis.autocomplete", {
     gradeNames: ["fluid.newViewComponent"],
     listeners: {
-        "onCreate.render": "hortis.autocomplete.render"
+        "onCreate.render": "hortis.autocomplete.render",
     },
+    events: {
+        onConfirm: null,
+    },
+    flattenMember: "",
     invokers: {
-        query: "hortis.autocomplete.emptyQuery"
+        query: "hortis.autocomplete.emptyQuery",
+        renderSuggestion: "fluid.identity",
+        renderInputValue: "fluid.identity"
     },
     widgetOptions: {
         displayMenu: "overlay"
     }
 });
+
+hortis.autocomplete.source = function (that, query, callback) {
+    var promiseToGo = fluid.fireTransformEvent(that, query);
+    promiseToGo.then(callback);
+    return promiseToGo;
+};
 
 hortis.autocomplete.emptyQuery = function (query, callback) {
     callback("");
@@ -31,7 +43,12 @@ hortis.autocomplete.render = function (that) {
     var widgetOptions = $.extend({
         element: that.container[0],
         id: that.options.id,
-        source: that.query
+        source: that.query,
+        templates: {
+            suggestion: that.renderSuggestion,
+            inputValue: that.renderInputValue
+        },
+        onConfirm: that.events.onConfirm.fire,
     }, that.options.widgetOptions);
     that.widget = accessibleAutocomplete(widgetOptions);
 };

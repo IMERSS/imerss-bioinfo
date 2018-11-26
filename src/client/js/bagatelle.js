@@ -57,8 +57,13 @@ fluid.defaults("hortis.sunburst", {
             options: {
                 container: "{sunburst}.dom.autocomplete",
                 id: "fli-bagatelle-autocomplete",
+                listeners: {
+                    onConfirm: "hortis.confirmAutocomplete({sunburst}, {arguments}.0)"
+                },
                 invokers: {
-                    query: "hortis.queryAutocomplete({sunburst}.flatTree, {arguments}.0, {arguments}.1)"
+                    query: "hortis.queryAutocomplete({sunburst}.flatTree, {arguments}.0, {arguments}.1)",
+                    renderInputValue: "hortis.autocompleteInputForRow",
+                    renderSuggestion: "hortis.autocompleteSuggestionForRow"
                 }
             }
         }
@@ -161,21 +166,39 @@ hortis.tooltipLookup = {
     lastCollected: "Last Collected",
     iNaturalist: "Observation",
     taxonLink: "iNaturalist Taxon"
-}
+};
+
+hortis.autocompleteInputForRow = function (row) {
+    return row ? hortis.labelForRow(row) + (row.commonName ? " (" + row.commonName + ")" : "") : row;
+};
+
+hortis.autocompleteSuggestionForRow = function (row) {
+    return hortis.autocompleteInputForRow(row) + (row.childCount > 1 ? " (" + row.childCount + " species)" : "");
+};
 
 hortis.queryAutocomplete = function (flatTree, query, callback) {
     var output = [];
     for (var i = 0; i < flatTree.length; ++ i) {
         var row = flatTree[i];
-        var display = hortis.labelForRow(row) + (row.commonName ? " (" + row.commonName + ")" : "");
+        var display = hortis.autocompleteInputForRow(row);
         if (display.toLowerCase().indexOf(query) !== -1) {
-            output.push(display);
+            output.push(row);
         }
         if (output.length >= 20) {
             break;
         }
     };
     callback(output);
+};
+
+hortis.confirmAutocomplete = function (that, row) {
+    if (row) { // on blur it may send nothing
+        var zoomTo = row.childCount > 1 ? row : row.parent;
+        var zoomAction = hortis.beginZoom(that, zoomTo);
+        zoomAction.then(function () {
+            hortis.updateTooltip(that, row.id);
+        });
+    }
 };
 
 // Lifted from Infusion Tooltip.js
@@ -456,6 +479,7 @@ hortis.beginZoom = function (that, row) {
     var newBound = hortis.boundNodes(that, row.id);
     newBound.scale.zoomProgress = 1;
     console.log("Begin zoom");
+    var togo = fluid.promise();
     that.oldVisMap = that.visMap;
     that.visMap = newBound.visMap;
     that.render();
@@ -473,8 +497,10 @@ hortis.beginZoom = function (that, row) {
             that.applier.change("layoutId", row.id);
             that.applier.change("scale.zoomProgress", 0); // TODO: suppress render here
             that.render();
+            togo.resolve();
         }
     });
+    return togo;
 };
 
 hortis.segmentClicked = function (that, row) {

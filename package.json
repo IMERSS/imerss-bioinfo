@@ -6,7 +6,7 @@
     "dependencies": {
         "infusion": "3.0.0-dev.20171102T191539Z.c0636b395",
         "fluid-authoring": "amb26/fluid-authoring#FLUID-4884",
-        "csv-parser": "1.12.0",
+        "csv-parser": "2.1.0",
         "accessible-autocomplete": "1.6.2"
     },
     "devDependencies": {

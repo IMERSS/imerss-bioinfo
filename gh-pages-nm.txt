@@ -1,14 +1,13 @@
 node_modules/infusion/src/lib/normalize/css/normalize.css
 node_modules/infusion/src/lib/jquery/ui/css/default-theme/jquery-ui.css
 node_modules/infusion/src/framework/core/css/fluid.css
-node_modules/infusion/src/framework/core/css/fluidDebugging.css
-node_modules/infusion/src/components/overviewPanel/css/OverviewPanel.css
-node_modules/infusion/src/components/inlineEdit/css/InlineEdit.css
+node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css
 node_modules/infusion/src/lib/jquery/core/js/jquery.js
 node_modules/infusion/src/lib/jquery/ui/js/jquery-ui.js
 node_modules/infusion/src/lib/fastXmlPull/js/fastXmlPull.js
 node_modules/infusion/src/framework/core/js/jquery.keyboard-a11y.js
 node_modules/infusion/src/framework/core/js/Fluid.js
+node_modules/infusion/src/framework/core/js/FluidPromises.js
 node_modules/infusion/src/framework/core/js/FluidDebugging.js
 node_modules/infusion/src/framework/core/js/FluidDocument.js
 node_modules/infusion/src/framework/core/js/FluidRequests.js
@@ -24,6 +23,7 @@ node_modules/infusion/src/framework/renderer/js/fluidParser.js
 node_modules/infusion/src/framework/core/js/FluidViewDebugging.js
 node_modules/infusion/src/components/inlineEdit/js/InlineEdit.js
 node_modules/infusion/src/components/tooltip/js/Tooltip.js
+node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js
 node_modules/fluid-authoring/src/shared/js/AuthorUtils.js
 node_modules/fluid-authoring/src/shared/js/ComponentGraphUtilities.js
 node_modules/fluid-authoring/src/client/js/PlainAriaLabels.js
