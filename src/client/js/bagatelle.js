@@ -178,6 +178,7 @@ hortis.autocompleteSuggestionForRow = function (row) {
 
 hortis.queryAutocomplete = function (flatTree, query, callback) {
     var output = [];
+    query = query.toLowerCase();
     for (var i = 0; i < flatTree.length; ++ i) {
         var row = flatTree[i];
         var display = hortis.autocompleteInputForRow(row);
