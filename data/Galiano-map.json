@@ -17,7 +17,7 @@
     "origin": "Origin",
     "status": "Status",
     "reporting": "Reporting",
-    "lastCollected": "Last Collected/Reported (y-m-d)",
+    "collected": "Collected/Reported (y-m-d)",
     "collector": "Collector/Source",
     "collection": "Collection/List",
     "firstDocumented": "First Documented",

@@ -6,6 +6,9 @@ Licenses.
 You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
+
+/* global accessibleAutocomplete */
+
 "use strict";
 
 var hortis = fluid.registerNamespace("hortis");
@@ -13,10 +16,10 @@ var hortis = fluid.registerNamespace("hortis");
 fluid.defaults("hortis.autocomplete", {
     gradeNames: ["fluid.newViewComponent"],
     listeners: {
-        "onCreate.render": "hortis.autocomplete.render",
+        "onCreate.render": "hortis.autocomplete.render"
     },
     events: {
-        onConfirm: null,
+        onConfirm: null
     },
     flattenMember: "",
     invokers: {
@@ -48,7 +51,9 @@ hortis.autocomplete.render = function (that) {
             suggestion: that.renderSuggestion,
             inputValue: that.renderInputValue
         },
-        onConfirm: that.events.onConfirm.fire,
+        onConfirm: that.events.onConfirm.fire
     }, that.options.widgetOptions);
     that.widget = accessibleAutocomplete(widgetOptions);
+    // TODO: another one for the bestiary of reuse failures
+    $("input", that.container).attr("spellcheck", false);
 };

@@ -151,5 +151,3 @@ fullResult.then(function () {
     hortis.flattenChildren(tree);
     console.log(JSON.stringify(tree, null, 2));
 });
-
-

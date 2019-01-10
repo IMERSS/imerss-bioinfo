@@ -12,11 +12,33 @@ var hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.sunburstLoader", {
     gradeNames: ["fluid.newViewComponent", "fluid.resourceLoader"],
-    resourceOptions: {
-        dataType: "json"
-    },
+    sunburstPixels: 1002,
+    markupTemplate: "html/bagatelle.html",
+    queryOnStartup: "",
     resources: {
-        tree: "{that}.options.treeFile"
+        tree: {
+            href: "{that}.options.treeFile",
+            dataType: "json"
+        },
+        markup: {
+            href: "{that}.options.markupTemplate",
+            dataType: "text"
+        }
+    },
+    invokers: {
+        resolveResources: {
+            funcName: "fluid.identity",
+            args: "{that}.options.resources"
+        }
+    },
+    listeners: {
+        "onResourcesLoaded.renderMarkup": {
+            priority: "first",
+            listener: "hortis.sunburstLoader.renderMarkup",
+            args: ["{that}.container", "{that}.resources.markup.resourceText", "{that}.options.renderMarkup", {
+                sunburstPixels: "{that}.options.sunburstPixels"
+            }]
+        }
     },
     components: {
         sunburst: {
@@ -24,7 +46,8 @@ fluid.defaults("hortis.sunburstLoader", {
             createOnEvent: "onResourcesLoaded",
             options: {
                 container: "{sunburstLoader}.container",
-                tree: "{sunburstLoader}.resources.tree.resourceText"
+                tree: "{sunburstLoader}.resources.tree.resourceText",
+                queryOnStartup: "{sunburstLoader}.options.queryOnStartup"
             }
         }
     }
@@ -32,6 +55,13 @@ fluid.defaults("hortis.sunburstLoader", {
 
 hortis.combineSelectors = function () {
     return fluid.makeArray(arguments).join(", ");
+};
+
+hortis.sunburstLoader.renderMarkup = function (container, template, renderMarkup, terms) {
+    if (renderMarkup) {
+        var rendered = fluid.stringTemplate(template, terms);
+        container.html(rendered);
+    }
 };
 
 fluid.defaults("hortis.sunburst", {
@@ -104,7 +134,7 @@ fluid.defaults("hortis.sunburst", {
         renderSegment: "hortis.renderSegment({that}, {arguments}.0, {arguments}.1)",
         angleScale: "hortis.angleScale({arguments}.0, {that}.model.scale)",
         elementToRow: "hortis.elementToRow({that}, {arguments}.0)",
-        segmentClicked: "hortis.segmentClicked({that}, {arguments}.0)",
+        segmentClicked: "hortis.segmentClicked({that}, {arguments}.0)"
     },
     modelListeners: {
         scale: {
@@ -155,7 +185,7 @@ fluid.defaults("hortis.sunburst", {
 });
 
 
-hortis.capitalize = function(string) {
+hortis.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
@@ -179,7 +209,7 @@ hortis.autocompleteSuggestionForRow = function (row) {
 hortis.queryAutocomplete = function (flatTree, query, callback) {
     var output = [];
     query = query.toLowerCase();
-    for (var i = 0; i < flatTree.length; ++ i) {
+    for (var i = 0; i < flatTree.length; ++i) {
         var row = flatTree[i];
         var display = hortis.autocompleteInputForRow(row);
         if (display.toLowerCase().indexOf(query) !== -1) {
@@ -260,7 +290,7 @@ hortis.updateTooltip = function (that, id) {
         taxonDisplay.empty();
         taxonDisplay.html(content);
     }
-/*    
+/*
     if (that.tooltipTarget) {
         if (hortis.isInDocument(that.tooltipTarget)) {
             that.tooltipTarget.tooltip("destroy");
@@ -403,8 +433,7 @@ hortis.elementClass = function (row, isLayoutRoot, styles, baseStyle) {
 
 hortis.elementStyle = function (attrs, elementType) {
     var opacity = attrs.opacity === undefined ? "" : " opacity: " + attrs.opacity + ";";
-    return elementType === "segment" ? 
-        "fill: " + attrs.fillColour + ";" + opacity : opacity
+    return elementType === "segment" ? "fill: " + attrs.fillColour + ";" + opacity : opacity;
 };
 
 hortis.updateScale = function (that) {
@@ -541,7 +570,7 @@ hortis.attrsForRow = function (that, row) {
     var togo = {
         visibility: isVisible ? "visible" : "hidden",
         labelVisibility: isVisible && labelVisibility ? "visible" : "hidden",
-        label: label,
+        label: label
     };
     if (isComplete) {
         togo.textPath = hortis.circularTextPath(outerRadius);
@@ -585,7 +614,6 @@ hortis.renderSegment = function (that, row) {
 fluid.setLogging(false);
 
 hortis.render = function (that) {
-    var rootRow = that.index[that.model.layoutId];
     var markup = that.options.markup.segmentHeader;
     for (var i = 0; i < that.flatTree.length; ++i) {
         if (that.visMap[i] || that.oldVisMap && that.oldVisMap[i]) {
@@ -647,8 +675,19 @@ hortis.computeMaxDepth = function (flatTree) {
     return flatTree[flatTree.length - 1].depth;
 };
 
+hortis.doInitialQuery = function (that) {
+    var togo = that.flatTree[0];
+    var storeQueryResult = function (result) {
+        togo = result[0];
+    };
+    if (that.options.queryOnStartup) {
+        hortis.queryAutocomplete(that.flatTree, that.options.queryOnStartup, storeQueryResult);
+    }
+    return togo;
+};
+
 hortis.computeInitialScale = function (that) {
-    var root = that.flatTree[0];
+    var root = hortis.doInitialQuery(that);
     that.applier.change("", {
         layoutId: root.id
     });
