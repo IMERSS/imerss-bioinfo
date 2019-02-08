@@ -1,0 +1,7 @@
+This implementation was grabbed from the inside of the bower package for the 0.6.0 release of 
+https://github.com/pierrec/node-lz4 since
+ - the build/lz4.js file was found to be mysteriously irrelevant, despite being updated recently
+ - the actual build shell script failed even when tested in a Linux VM on "not finding ./bindings", perhaps a node mismatch issue
+ 
+There is a sign we could revisit this at some point and produce a smaller and more reproducible decoder by mashing
+together the 3 files in "Benzinga's" https://github.com/Benzinga/lz4js

@@ -13,14 +13,16 @@ var buildIndex = {
     ],
     localSource: [
         "src/client/css/bagatelle.css",
-        "src/auxBuild/restoreJQuery.jsz",
+        "src/auxBuild/restoreJQuery.js",
+        "src/lib/jquery.binarytransport.js",
+        "src/lib/lz4.js",
         "src/client/js/bagatelle.js",
         "src/client/js/autocomplete.js",
         "src/client/js/colour.js",
         "src/client/js/renderSVG.js"
     ],
     codeHeader: "",
-    codeFooter: "\njQuery.noConflict()",
+    codeFooter: "", // "\njQuery.noConflict()",
     copy: [{
         src: "src/client/img/loading-icon.gif",
         dest: "build/img/loading-icon.gif"
@@ -31,8 +33,8 @@ var buildIndex = {
         src: "src/buildTest/index.html",
         dest: "build/index.html"
     }, {
-        src: "data/Life.json",
-        dest: "build/data/Life.json"
+        src: "data/Galiano-Life.json.lz4",
+        dest: "build/data/Galiano-Life.json.lz4"
     }]
 };
 

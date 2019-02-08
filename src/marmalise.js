@@ -5,6 +5,9 @@
 var fluid = require("infusion");
 var csv = require("csv-parser");
 var fs = require("fs");
+var lz4 = require("lz4");
+var minimist = require("minimist");
+var stream = require("stream");
 
 var hortis = fluid.registerNamespace("hortis");
 
@@ -80,20 +83,26 @@ hortis.newTaxon = function (name, rank, depth) {
     };
 };
 
-hortis.cleanRow = function (row, depth) {
+hortis.addCounts = function (row, counts) {
+    fluid.each(counts, function (countDef, key) {
+        row[key] = row[countDef.column] === countDef.equals ? 1 : 0;
+    });
+};
+
+hortis.cleanRow = function (row, depth, counts) {
     row.depth = depth;
     row.id = fluid.allocateGuid();
     row.childCount = 1;
-    row.undocumentedCount = row.iNaturalistLink ? 0 : 1;
+    hortis.addCounts(row, counts);
     fluid.each(row, function (value, key) {
-        if (typeof(value) === "string" && value.trim() === "" || value === "—") {
+        if (typeof(value) === "string" && value.trim() === "" || value === "—") { // Note funny AS hyphen in here
             delete row[key];
         }
     });
 };
 
-hortis.storeAtPath = function (tree, path, row) {
-    hortis.cleanRow(row, path.length);
+hortis.storeAtPath = function (tree, path, row, counts) {
+    hortis.cleanRow(row, path.length, counts);
     var node = tree;
     path.forEach(function (seg, index) {
         var last = index === path.length - 1;
@@ -105,15 +114,17 @@ hortis.storeAtPath = function (tree, path, row) {
             child = node.children[seg] = (last ? row : hortis.newTaxon(seg, rank, index + 1));
         }
         ++node.childCount;
-        node.undocumentedCount += row.undocumentedCount;
+        fluid.each(counts, function (countDef, key) {
+            node[key] += row[key];
+        });
         node = child;
     });
 };
 
-hortis.flatToTree = function (tree, rows) {
+hortis.flatToTree = function (tree, rows, counts) {
     rows.forEach(function (row) {
         var path = hortis.taxaToPath(row);
-        hortis.storeAtPath(tree, path, row);
+        hortis.storeAtPath(tree, path, row, counts);
     });
 };
 
@@ -126,19 +137,36 @@ hortis.flattenChildren = function (root) {
     return root;
 };
 
-fluid.setLogging(true);
-fluid.logObjectRenderChars = 10240;
+hortis.writeLZ4File = function (text, filename) {
+    var input = new stream.Readable();
+    input.push(text);
+    input.push(null);
 
-var map = require(__dirname + "/../data/Galiano-map.json");
+    var output = fs.createWriteStream(filename);
+
+    var encoder = lz4.createEncoderStream();
+    input.pipe(encoder).pipe(output);
+    output.on("finish", function () {
+        var stats = fs.statSync(filename);
+        console.log("Written " + stats.size + " bytes to " + filename);
+    });
+};
+
+var parsedArgs = minimist(process.argv.slice(2));
+
+var outputFile = parsedArgs.o || "Life.json.lz4";
+var mapFile = parsedArgs.map || __dirname + "/../data/Galiano-map.json"; 
+
+var map = JSON.parse(fs.readFileSync(mapFile, "utf-8"));
 var tree = hortis.newTaxon("Life", "Life", 0);
 
-var files = process.argv.slice(2);
+var files = parsedArgs._;
 var results = files.map(function (file) {
     var togo = fluid.promise();
-    var result = hortis.readCSV(file, map);
+    var result = hortis.readCSV(file, map.columns);
     result.then(function (result) {
         // console.log(JSON.stringify(result.rows[0], null, 2));
-        hortis.flatToTree(tree, result.rows);
+        hortis.flatToTree(tree, result.rows, map.counts);
         togo.resolve();
     }, function (error) {
         fluid.fail(error);
@@ -149,5 +177,7 @@ var results = files.map(function (file) {
 var fullResult = fluid.promise.sequence(results);
 fullResult.then(function () {
     hortis.flattenChildren(tree);
-    console.log(JSON.stringify(tree, null, 2));
+    var text = JSON.stringify(tree);
+    hortis.writeLZ4File(text, outputFile);
+    console.log();
 });

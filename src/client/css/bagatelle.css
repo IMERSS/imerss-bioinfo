@@ -36,7 +36,11 @@
 //}
 
 .fld-bagatelle-taxonDisplay tr:nth-child(even) {
-   background: #eeeeee;
+   background: #eee;
+}
+
+.fld-bagatelle-taxonDisplay tr:nth-child(odd) {
+   background: #fff;
 }
 
 .fld-bagatelle-taxonDisplay tr:last-child {

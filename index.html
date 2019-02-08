@@ -36,6 +36,9 @@
 
         <script src="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js"></script>
 
+        <script src="src/lib/lz4.js"></script>
+        <script src="src/lib/jquery.binarytransport.js"></script>
+
         <link rel="stylesheet" type="text/css" href="src/client/css/bagatelle.css"/>
 
         <script src="src/client/js/colour.js"></script>
@@ -43,11 +46,11 @@
         <script src="src/client/js/bagatelle.js"></script>
         <script src="src/client/js/autocomplete.js"></script>
 
-        <title>Bagatelle: Biodiversity Galiano Species List November 2017 as Zoomable Sunburst</title>
+        <title>Bagatelle: Metchosin Species List December 2018 as Zoomable Sunburst</title>
     </head>
 
     <body>
-        <h2>Bagatelle: Biodiversity Galiano Species List November 2017 as Zoomable Sunburst</h2>
+        <h2>Bagatelle: Metchosin Species List December 2018 as Zoomable Sunburst</h2>
         <div class="fl-bagatelle-container">
             <table><tr class="flc-bagatelle-autocomplete-row"><td>
                 <label for="fli-bagatelle-autocomplete">Select a taxon: </label>
@@ -62,7 +65,7 @@
         <script>
             hortis.sunburstLoader({
                 container: ".fl-bagatelle-container",
-                treeFile: "data/Life.json"});
+                treeFile: "data/Metchosin-Life.json.lz4"});
         </script>
     </body>
 </html>

@@ -18,7 +18,11 @@ fluid.defaults("hortis.sunburstLoader", {
     resources: {
         tree: {
             href: "{that}.options.treeFile",
-            dataType: "json"
+            dataType: "binary",
+            options: {
+                processData: false,
+                responseType: "arraybuffer"
+            }
         },
         markup: {
             href: "{that}.options.markupTemplate",
@@ -46,12 +50,19 @@ fluid.defaults("hortis.sunburstLoader", {
             createOnEvent: "onResourcesLoaded",
             options: {
                 container: "{sunburstLoader}.container",
-                tree: "{sunburstLoader}.resources.tree.resourceText",
+                tree: "@expand:hortis.decompressLZ4({sunburstLoader}.resources.tree.resourceText)",
                 queryOnStartup: "{sunburstLoader}.options.queryOnStartup"
             }
         }
     }
 });
+
+hortis.decompressLZ4 = function (arrayBuffer) {
+    var uint8in = new Uint8Array(arrayBuffer);
+    var uint8out = lz4.decompress(uint8in);
+    var text = new TextDecoder("utf-8").decode(uint8out);
+    return JSON.parse(text);
+};
 
 hortis.combineSelectors = function () {
     return fluid.makeArray(arguments).join(", ");
