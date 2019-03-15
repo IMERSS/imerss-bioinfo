@@ -17,7 +17,7 @@ module.exports = function (grunt) {
         lintAll: {
             sources: {
                 md: [ "*.md"],
-                js: ["src/*.js", "src/client/**/*.js", "tests/**/*.js", "./*.js"],
+                js: ["src/*.js", "src/client/**/*.js", "src/dataProcessing/**/*.js", "tests/**/*.js", "./*.js"],
                 json: ["*.json", "src/**/*.json", "data/**/*.json", "tests/**/*.json"],
                 other: ["./.*"]
             }

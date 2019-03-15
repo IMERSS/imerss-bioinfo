@@ -3,63 +3,60 @@
 "use strict";
 
 var fluid = require("infusion");
-var csv = require("csv-parser");
 var fs = require("fs");
 var lz4 = require("lz4");
 var minimist = require("minimist");
 var stream = require("stream");
 
+require("./dataProcessing/readCSV.js");
+
 var hortis = fluid.registerNamespace("hortis");
 
 hortis.ranks = fluid.freezeRecursive(require("../data/ranks.json"));
 
-hortis.mapRow = function (data, map, index) {
+fluid.defaults("hortis.bagatelle.csvReader", {
+    gradeNames: "hortis.csvFileReader",
+    members: {
+        rows: []
+    },
+    mapColumns: null,
+    listeners: {
+        "onHeaders.validateHeaders": {
+            funcName: "hortis.bagatelle.validateHeaders",
+            args: ["{that}.options.map", "{that}.headers", "{that}.events.onError"]
+        },
+        "onRow.storeRow": "hortis.bagatelle.storeRow({that}, {arguments}.0)",
+        "onCompletion.resolve": {
+            func: "{that}.completionPromise.resolve",
+            args: {
+                rows: "{that}.rows"
+            }
+        }
+    }
+});
+
+hortis.bagatelle.mapRow = function (data, mapColumns, index) {
     var togo = {};
-    fluid.each(map, function (label, key) {
+    fluid.each(mapColumns, function (label, key) {
         togo[key] = data[label];
     });
     togo.index = index;
     return togo;
 };
 
-hortis.validateHeaders = function (map, headers, rejector) {
-    fluid.each(map, function (label) {
+hortis.bagatelle.storeRow = function (that, row) {
+    var mappedRow = hortis.bagatelle.mapRow(row, that.options.mapColumns, that.rows.length + 1);
+    that.rows.push(mappedRow);
+};
+
+hortis.bagatelle.validateHeaders = function (mapColumns, headers, onError) {
+    fluid.each(mapColumns, function (label) {
         if (headers.indexOf(label) === -1) {
-            rejector("Error in headers - field " + label + " required in map file was not found");
+            onError.fire("Error in headers - field " + label + " required in map file was not found");
         }
     });
 };
 
-// TODO: factor out hortis.csvReader from filterFirst.js
-hortis.readCSV = function (fileName, map) {
-    var rows = [];
-    var togo = fluid.promise();
-
-    var rowStream = fs.createReadStream(fileName)
-      .pipe(csv());
-
-    var rejector = function (error) {
-        togo.reject("Error at line " + rows.length + " reading file " + fileName + ": " + error);
-    };
-
-    rowStream.on("data", function (data) {
-        rows.push(hortis.mapRow(data, map, rows.length + 1));
-    });
-    rowStream.on("error", function (error) {
-        rejector(error);
-    });
-    rowStream.on("headers", function (headers) {
-        hortis.validateHeaders(map, headers, rejector);
-    });
-    rowStream.on("end", function () {
-        togo.resolve({
-            map: map,
-            rows: rows
-        });
-    });
-
-    return togo;
-};
 
 hortis.taxaToPath = function (row) {
     var rowTaxa = [];
@@ -90,20 +87,28 @@ hortis.addCounts = function (row, counts) {
     });
 };
 
-hortis.cleanRow = function (row, depth, counts) {
-    row.depth = depth;
-    row.id = fluid.allocateGuid();
-    row.childCount = 1;
-    hortis.addCounts(row, counts);
+hortis.cleanRow = function (row) {
     fluid.each(row, function (value, key) {
-        if (typeof(value) === "string" && value.trim() === "" || value === "—") { // Note funny AS hyphen in here
-            delete row[key];
+        if (typeof(value) === "string") {
+            var trimmed = value.trim();
+            if (trimmed === "" || trimmed === "—") { // Note funny AS hyphen in here
+                delete row[key];
+            } else {
+                row[key] = trimmed;
+            }
         }
     });
 };
 
+hortis.rowToTaxon = function (row, depth, counts) {
+    row.depth = depth;
+    row.id = fluid.allocateGuid();
+    row.childCount = 1;
+    hortis.addCounts(row, counts);
+};
+
 hortis.storeAtPath = function (tree, path, row, counts) {
-    hortis.cleanRow(row, path.length, counts);
+    hortis.rowToTaxon(row, path.length, counts);
     var node = tree;
     path.forEach(function (seg, index) {
         var last = index === path.length - 1;
@@ -113,6 +118,9 @@ hortis.storeAtPath = function (tree, path, row, counts) {
                 return row[rank] === seg ? rank : undefined;
             });
             child = node.children[seg] = (last ? row : hortis.newTaxon(seg, rank, index + 1));
+            if (!child.rank && child !== row) {
+                throw Error("Emitting row without rank ", child);
+            }
         }
         ++node.childCount;
         fluid.each(counts, function (countDef, key) {
@@ -124,6 +132,7 @@ hortis.storeAtPath = function (tree, path, row, counts) {
 
 hortis.flatToTree = function (tree, rows, counts) {
     rows.forEach(function (row) {
+        hortis.cleanRow(row);
         var path = hortis.taxaToPath(row);
         hortis.storeAtPath(tree, path, row, counts);
     });
@@ -136,6 +145,14 @@ hortis.flattenChildren = function (root) {
     });
     root.children = children;
     return root;
+};
+
+hortis.parseCounts = function (counts) {
+    fluid.each(counts, function (oneCount) {
+        if (oneCount.equals === "") {
+            oneCount.equals = undefined;
+        }
+    });
 };
 
 hortis.writeLZ4File = function (text, filename) {
@@ -159,12 +176,17 @@ var outputFile = parsedArgs.o || "Life.json.lz4";
 var mapFile = parsedArgs.map || __dirname + "/../data/Galiano-map.json";
 
 var map = JSON.parse(fs.readFileSync(mapFile, "utf-8"));
+hortis.parseCounts(map.counts);
+
 var tree = hortis.newTaxon("Life", "Life", 0);
 
 var files = parsedArgs._;
 var results = files.map(function (file) {
     var togo = fluid.promise();
-    var result = hortis.readCSV(file, map.columns);
+    var result = hortis.bagatelle.csvReader({
+        inputFile: file,
+        mapColumns: map.columns
+    }).completionPromise;
     result.then(function (result) {
         // console.log(JSON.stringify(result.rows[0], null, 2));
         hortis.flatToTree(tree, result.rows, map.counts);
@@ -180,5 +202,4 @@ fullResult.then(function () {
     hortis.flattenChildren(tree);
     var text = JSON.stringify(tree);
     hortis.writeLZ4File(text, outputFile);
-    console.log();
 });
