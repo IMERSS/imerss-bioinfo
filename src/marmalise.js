@@ -30,6 +30,7 @@ hortis.validateHeaders = function (map, headers, rejector) {
     });
 };
 
+// TODO: factor out hortis.csvReader from filterFirst.js
 hortis.readCSV = function (fileName, map) {
     var rows = [];
     var togo = fluid.promise();
@@ -155,7 +156,7 @@ hortis.writeLZ4File = function (text, filename) {
 var parsedArgs = minimist(process.argv.slice(2));
 
 var outputFile = parsedArgs.o || "Life.json.lz4";
-var mapFile = parsedArgs.map || __dirname + "/../data/Galiano-map.json"; 
+var mapFile = parsedArgs.map || __dirname + "/../data/Galiano-map.json";
 
 var map = JSON.parse(fs.readFileSync(mapFile, "utf-8"));
 var tree = hortis.newTaxon("Life", "Life", 0);
