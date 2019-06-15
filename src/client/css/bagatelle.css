@@ -17,13 +17,30 @@
 }
 
 .ui-tooltip {
-//    color: white;
-//    background: black;
+/*    color: white;
+    background: black; */
     max-width: 500px;
 }
 
 .fl-bagatelle-clickable {
     cursor: pointer;
+}
+
+.fld-bagatelle-taxonDisplay > div {
+    float: right;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    height: 0px;
+    overflow:visible;
+}
+
+.fl-taxonDisplay-key {
+    width: 12em;
+}
+
+.fl-taxonDisplay-value {
+    width: 100%;
 }
 
 .fld-bagatelle-taxonDisplay table {

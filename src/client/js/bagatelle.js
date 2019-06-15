@@ -140,7 +140,7 @@ fluid.defaults("hortis.sunburst", {
             + "<textPath xlink:href=\"#%labelPathId\" startOffset=\"50%\" style=\"text-anchor: middle\">%label</textPath></text>",
         segmentFooter: "</g>",
         tooltipHeader: "<div><table>",
-        tooltipRow: "<tr><td>%key: </td><td>%value</td>",
+        tooltipRow: "<tr><td class=\"fl-taxonDisplay-key\">%key: </td><td class=\"fl-taxonDisplay-value\">%value</td>",
         tooltipFooter: "</table></div>"
     },
     invokers: {
