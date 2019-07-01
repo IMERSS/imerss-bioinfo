@@ -1,0 +1,10 @@
+{
+    "columns": {
+        "taxonId": "taxonID",
+        "scientificName": "scientificName",
+        "parentNameUsageId": "parentNameUsageID",
+        "taxonRank": "taxonRank",
+        "vernacularName": "vernacularName",
+        "wikipediaUrl": "wikipedia_url"
+    }
+}

@@ -36,7 +36,8 @@ fluid.defaults("hortis.sunburstLoader", {
         resolveResources: {
             funcName: "fluid.identity",
             args: "{that}.options.resources"
-        }
+        },
+        resolveColourStrategy: "hortis.resolveColourStrategy({that}.options.colourCount)"
     },
     listeners: {
         "onResourcesLoaded.renderMarkup": {
@@ -53,6 +54,8 @@ fluid.defaults("hortis.sunburstLoader", {
             createOnEvent: "onResourcesLoaded",
             options: {
                 container: "{sunburstLoader}.container",
+                gradeNames: "{sunburstLoader}.resolveColourStrategy",
+                colourCount: "{sunburstLoader}.options.colourCount",
                 tree: "@expand:hortis.decompressLZ4({sunburstLoader}.resources.tree.resourceText)",
                 queryOnStartup: "{sunburstLoader}.options.queryOnStartup"
             }
@@ -77,6 +80,22 @@ hortis.sunburstLoader.renderMarkup = function (container, template, renderMarkup
         container.html(rendered);
     }
 };
+
+hortis.colouringGrades = {
+    undocumentedCount: "fluid.component",
+    observationCount: "hortis.sunburstWithObsColour"
+};
+
+hortis.resolveColourStrategy = function (countField) {
+    return hortis.colouringGrades[countField];
+};
+
+fluid.defaults("hortis.sunburstWithObsColour", {
+    gradeNames: "fluid.component",
+    invokers: {
+        fillColourForRow: "hortis.obsColourForRow({that}.options.parsedColours, {arguments}.0, {that}.flatTree.0)"
+    }
+});
 
 fluid.defaults("hortis.sunburst", {
     gradeNames: ["fluid.newViewComponent"],
@@ -113,8 +132,8 @@ fluid.defaults("hortis.sunburst", {
         }
     },
     colours: {
-        documented: "#9ecae1",
-        undocumented: "#e7969c"
+        lowColour: "#9ecae1",
+        highColour: "#e7969c"
     },
     zoomDuration: 1250,
     scaleConfig: {
@@ -123,6 +142,7 @@ fluid.defaults("hortis.sunburst", {
         maxNodes: 200
     },
     parsedColours: "@expand:hortis.parseColours({that}.options.colours)",
+    colourCount: "undocumentedCount",
     model: {
         scale: {
             left: 0,
@@ -135,8 +155,9 @@ fluid.defaults("hortis.sunburst", {
     markup: {
         segmentHeader: "<g xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">",
         segment: "<path id=\"%id\" d=\"%path\" visibility=\"%visibility\" class=\"%clazz\" vector-effect=\"non-scaling-stroke\" style=\"%style\"></path>",
+        // dominant-baseline fails on some old Chromium and AS machines
         label: "<path id=\"%labelPathId\" d=\"%textPath\" visibility=\"%labelVisibility\" class=\"%labelPathClass\" vector-effect=\"non-scaling-stroke\"></path>"
-            + "<text id=\"%labelId\" dominant-baseline=\"middle\" class=\"%labelClass\" visibility=\"%labelVisibility\" style=\"%labelStyle\">"
+            + "<text id=\"%labelId\" dy=\"0.25em\" class=\"%labelClass\" visibility=\"%labelVisibility\" style=\"%labelStyle\">"
             + "<textPath xlink:href=\"#%labelPathId\" startOffset=\"50%\" style=\"text-anchor: middle\">%label</textPath></text>",
         segmentFooter: "</g>",
         tooltipHeader: "<div><table>",
@@ -148,7 +169,8 @@ fluid.defaults("hortis.sunburst", {
         renderSegment: "hortis.renderSegment({that}, {arguments}.0, {arguments}.1)",
         angleScale: "hortis.angleScale({arguments}.0, {that}.model.scale)",
         elementToRow: "hortis.elementToRow({that}, {arguments}.0)",
-        segmentClicked: "hortis.segmentClicked({that}, {arguments}.0)"
+        segmentClicked: "hortis.segmentClicked({that}, {arguments}.0)",
+        fillColourForRow: "hortis.undocColourForRow({that}.options.parsedColours, {arguments}.0)"
     },
     modelListeners: {
         scale: {
@@ -203,11 +225,16 @@ hortis.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-hortis.tooltipFields = ["species", "commonName", "reporting", "lastCollected", "collector", "collection", "documenter"];
+hortis.tooltipFields = ["species", "taxonName", "commonName", "reporting", "lastCollected", "collector", "collection", "documenter",
+"observationCount", "dateObserved", "placeName"];
 
 hortis.tooltipLookup = {
+    taxonName: "Taxon Name",
     commonName: "Common Name",
     lastCollected: "Last Collected",
+    dateObserved: "Date Observed",
+    placeName: "Place Name",
+    observationCount: "Observation Count",
     iNaturalist: "Observation",
     taxonLink: "iNaturalist Taxon"
 };
@@ -276,6 +303,7 @@ hortis.renderTooltip = function (row, markup) {
     if (row.rank) {
         dumpRow(row.rank, row.name);
         dumpRow("species", row.childCount);
+        dumpRow("observationCount", row.observationCount);
     } else {
         hortis.tooltipFields.forEach(function (field) {
             dumpRow(field, row[field]);
@@ -287,8 +315,9 @@ hortis.renderTooltip = function (row, markup) {
         // See this nonsense: https://stackoverflow.com/questions/5843035/does-before-not-work-on-img-elements
             dumpRow("photo", "<div><span class=\"fl-bagatelle-imgLoadingOverlay\"></span><img onload=\"hortis.imageLoaded(this)\" class=\"fl-bagatelle-photo fl-bagatelle-imgLoading\" src=\"" + row.photoLink + "\"/></div>");
         }
-        if (row.upstreamID) {
-            var taxonLink = "http://www.inaturalist.org/taxa/" + row.upstreamID;
+        var iNatId = row.upstreamID || row.iNaturalistTaxonId;
+        if (iNatId) {
+            var taxonLink = "http://www.inaturalist.org/taxa/" + iNatId;
             dumpRow("taxonLink", "<a href=\"" + taxonLink + "\">" + taxonLink + "</a>");
         }
     }
@@ -436,7 +465,7 @@ hortis.boundNodes = function (that, layoutId, isInit) {
 };
 
 hortis.isClickable = function (row) {
-    return row.childCount > 1 || row.iNaturalistLink;
+    return row.childCount > 1 || row.iNaturalistLink || row.iNaturalistTaxonId;
 };
 
 hortis.elementClass = function (row, isLayoutRoot, styles, baseStyle) {
@@ -454,7 +483,7 @@ hortis.updateScale = function (that) {
     that.flatTree.forEach(function (row, index) {
         if (that.visMap[index] || that.oldVisMap && that.oldVisMap[index]) {
             var attrs = hortis.attrsForRow(that, row);
-            attrs.fillColour = hortis.colourForRow(that.options.parsedColours, row);
+            attrs.fillColour = that.fillColourForRow(row);
             var isLayoutRoot = row.id === that.model.layoutId;
             var segment = fluid.byId("hortis-segment:" + row.id);
             if (segment) {
@@ -501,9 +530,16 @@ hortis.interpolateModels = function (f, m1, m2) {
     });
 };
 
-hortis.colourForRow = function (parsedColours, row) {
+hortis.undocColourForRow = function (parsedColours, row) {
     var undocFraction = row.undocumentedCount / row.childCount;
-    var interp = hortis.interpolateColour(undocFraction, parsedColours.documented, parsedColours.undocumented);
+    var interp = hortis.interpolateColour(undocFraction, parsedColours.lowColour, parsedColours.highColour);
+    return fluid.colour.arrayToString(interp);
+};
+
+hortis.obsColourForRow = function (parsedColours, row, rootRow) {
+    var fraction = Math.pow(row.observationCount / rootRow.observationCount, 0.2);
+    var interp = hortis.interpolateColour(fraction, parsedColours.lowColour, parsedColours.highColour);
+    console.log("fraction " , fraction, " interp ", interp);
     return fluid.colour.arrayToString(interp);
 };
 
@@ -553,12 +589,14 @@ hortis.segmentClicked = function (that, row) {
     } else {
         if (row.iNaturalistLink) {
             window.open(row.iNaturalistLink);
+        } else if (row.iNaturalistTaxonId) {
+            window.open("http://www.inaturalist.org/taxa/" + row.iNaturalistTaxonId);
         }
     }
 };
 
 hortis.labelForRow = function (row) {
-    return row.rank ? (row.rank === "Life" ? "Life" : row.rank + ": " + row.name) : row.species;
+    return row.rank ? (row.rank === "Life" ? "Life" : row.rank + ": " + row.name) : row.species || row.taxonName;
 };
 
 // This guide is a great one for "bestiary of reuse failures": https://www.visualcinnamon.com/2015/09/placing-text-on-arcs.html
@@ -617,7 +655,7 @@ hortis.renderSegment = function (that, row) {
         clazz: hortis.elementClass(row, isLayoutRoot, that.options.styles, "segment"),
         labelPathClass: that.options.styles.labelPath,
         labelClass: hortis.elementClass(row, isLayoutRoot, that.options.styles, "label"),
-        fillColour: hortis.colourForRow(that.options.parsedColours, row)
+        fillColour: that.fillColourForRow(row)
     }, hortis.attrsForRow(that, row));
     terms.style = hortis.elementStyle(terms, "segment");
     terms.labelStyle = hortis.elementStyle(terms, "label");

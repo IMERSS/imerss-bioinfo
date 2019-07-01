@@ -35,6 +35,9 @@ var buildIndex = {
     }, {
         src: "data/Galiano-Life.json.lz4",
         dest: "build/data/Galiano-Life.json.lz4"
+    }, {
+        src: "data/Valdes-Life.json.lz4",
+        dest: "build/data/Valdes-Life.json.lz4"
     }]
 };
 

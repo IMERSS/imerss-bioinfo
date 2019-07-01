@@ -10,6 +10,7 @@ var stream = require("stream");
 
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
+require("./utils/settleStructure.js");
 
 var hortis = fluid.registerNamespace("hortis");
 
@@ -26,22 +27,26 @@ hortis.taxaToPath = function (row) {
     return rowTaxa;
 };
 
-hortis.newTaxon = function (name, rank, depth) {
-    return {
+hortis.newTaxon = function (name, rank, depth, counts) {
+    var togo = {
         name: name,
         id: fluid.allocateGuid(),
         rank: rank,
         depth: depth,
         childCount: 0,
-        undocumentedCount: 0,
         children: {},
         layoutLeft: 0
     };
+    fluid.each(counts, function (oneCount) {
+        togo[oneCount.column] = 0;
+    });
+    return togo;
 };
 
 hortis.addCounts = function (row, counts) {
     fluid.each(counts, function (countDef, key) {
-        row[key] = row[countDef.column] === countDef.equals ? 1 : 0;
+        var countField = row[countDef.column];
+        row[key] = countDef.free ? Number(countField) : (countField === countDef.equals ? 1 : 0);
     });
 };
 
@@ -62,6 +67,7 @@ hortis.rowToTaxon = function (row, depth, counts) {
     row.depth = depth;
     row.id = fluid.allocateGuid();
     row.childCount = 1;
+    row.children = {};
     hortis.addCounts(row, counts);
 };
 
@@ -75,7 +81,7 @@ hortis.storeAtPath = function (tree, path, row, counts) {
             var rank = fluid.find(hortis.ranks, function (rank) {
                 return row[rank] === seg ? rank : undefined;
             });
-            child = node.children[seg] = (last ? row : hortis.newTaxon(seg, rank, index + 1));
+            child = node.children[seg] = (last ? row : hortis.newTaxon(seg, rank, index + 1, counts));
             if (!child.rank && child !== row) {
                 throw Error("Emitting row without rank ", child);
             }
@@ -133,10 +139,10 @@ var parsedArgs = minimist(process.argv.slice(2));
 var outputFile = parsedArgs.o || "Life.json.lz4";
 var mapFile = parsedArgs.map || __dirname + "/../data/Galiano-map.json";
 
-var map = JSON.parse(fs.readFileSync(mapFile, "utf-8"));
+var map = hortis.readJSONSync(mapFile);
 hortis.parseCounts(map.counts);
 
-var tree = hortis.newTaxon("Life", "Life", 0);
+var tree = hortis.newTaxon("Life", "Life", 0, map.counts);
 
 var files = parsedArgs._;
 var results = files.map(function (file) {

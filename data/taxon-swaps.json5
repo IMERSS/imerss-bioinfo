@@ -1,0 +1,513 @@
+{
+    "Acanthascus dowlingi": {
+        taxonNames: {
+            "round lipped boot sponge": {
+                type: "commonName",
+            },
+            "Staurocalyptus dowlingi": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "424717",
+    },
+    "Antho graceae": {
+        taxonNames: {
+            "red-brown encrusting sponge": {
+                type: "commonName",
+            },
+            "Anthoarcuata graceae": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "459794",
+    },
+    "Antho karykina": {
+        taxonNames: {
+            "bright red sponge": {
+                type: "commonName",
+            },
+            "Plocamia karykina": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "345142",
+    },
+    "Antiopella fusca": {
+        taxonNames: {
+            "white-and-orange-tipped nudibranch": {
+                type: "commonName",
+            },
+            "Janolus fuscus": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "47460",
+            },
+        },
+        iNaturalistTaxonId: "886884",
+    },
+    "Apata pricei": {
+        taxonNames: {
+            "Price's aeolid": {
+                type: "commonName",
+            },
+            "Flabellina pricei": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "50456",
+            },
+        },
+        iNaturalistTaxonId: "631469",
+    },
+    "Ascidia columbiana": {
+        taxonNames: {
+            "sea blisters": {
+                type: "commonName",
+            },
+            "Ascidia columbiana / A. callosa": {
+                resolvedBy: "AB",
+                notes: "callosa is 566446 with 3 obs",
+            },
+        },
+        iNaturalistTaxonId: "428617",
+    },
+    "Asemichthys taylori": {
+        taxonNames: {
+            "spinynose sculpin": {
+                type: "commonName",
+            },
+            "Radulinus taylori": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "492673",
+            },
+        },
+        iNaturalistTaxonId: "172639",
+    },
+    "Balanus glandula": {
+        taxonNames: {
+            "common acorn barnacles": {
+                type: "commonName",
+            },
+            "Balanus glandula/Balanus crenatus": {
+                resolvedBy: "AB",
+                notes: "crenatus is 117672 with 195 obs",
+            },
+        },
+        iNaturalistTaxonId: "81610",
+    },
+    Chaetopterus: {
+        taxonNames: {
+            "U-shaped parchment tubeworm": {
+                type: "commonName",
+            },
+            "Chaeopterus species complex": {
+                resolvedBy: "AB",
+                notes: "misspelling in obs record",
+            },
+        },
+        iNaturalistTaxonId: "171303",
+    },
+    Corallinoideae: {
+        taxonNames: {
+            "articulated coralline algae": {
+                type: "commonName",
+            },
+            "Bossiella, Calliarthron, Corallina, Serraticardia": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "840800",
+    },
+    "Coryphella verrucosa": {
+        taxonNames: {
+            "red-gilled nudibranch": {
+                type: "commonName",
+            },
+            "Flabellina verrucosa": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "50461",
+            },
+        },
+        iNaturalistTaxonId: "633193",
+    },
+    "Cumathamnion decipiens": {
+        taxonNames: {
+            "winged rib": {
+                type: "commonName",
+            },
+            "Delesseria decipiens": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "429953",
+            },
+        },
+        iNaturalistTaxonId: "496909",
+    },
+    Didemnidae: {
+        taxonNames: {
+            "white glove leather": {
+                type: "commonName",
+            },
+            "Didemnum/Trididemnum complex": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "54931",
+    },
+    Ectocarpales: {
+        taxonNames: {
+            "brown tuft": {
+                type: "commonName",
+            },
+            "Ectocarpus, Feldmannia, Hincksia, Pilayella": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "117795",
+    },
+    "Ectopleura crocea": {
+        taxonNames: {
+            "bushy pink-mouth hydroid": {
+                type: "commonName",
+            },
+            "Pinauay crocea": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "63649",
+            },
+        },
+        iNaturalistTaxonId: "324497",
+    },
+    "Ectopleura marina": {
+        taxonNames: {
+            "solitary pink-mouth hydroid": {
+                type: "commonName",
+            },
+            "Pinauay marina": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "63648",
+            },
+        },
+        iNaturalistTaxonId: "492142",
+    },
+    "Epigamia magna": {
+        taxonNames: {
+            "noble necklace-worm": {
+                type: "commonName",
+            },
+            "Autolytus magnus": {
+                resolvedBy: "AB",
+                notes: "WoRMS",
+            },
+        },
+        iNaturalistTaxonId: "628178",
+    },
+    "Fucus distichus": {
+        taxonNames: {
+            rockweed: {
+                type: "commonName",
+            },
+            "Fucus gardneri": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "69155",
+    },
+    "Gadus chalcogrammus": {
+        taxonNames: {
+            "walleye pollock": {
+                type: "commonName",
+            },
+            "Theragra chalcogramma": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "180034",
+            },
+        },
+        iNaturalistTaxonId: "614161",
+    },
+    "Glebocarcinus oregonensis": {
+        taxonNames: {
+            "pygmy rock crab": {
+                type: "commonName",
+            },
+            "Cancer oregonensis": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "429951",
+    },
+    "Henricia aspera": {
+        taxonNames: {
+            "ridged blood star": {
+                type: "commonName",
+            },
+            "Henricia aspera aspera": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "293168",
+    },
+    "Henricia leviuscula": {
+        taxonNames: {
+            "blood star": {
+                type: "commonName",
+            },
+            "Henricia leviuscula leviuscula": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "47664",
+    },
+    "Himatina trophina": {
+        taxonNames: {
+            "red flabellina": {
+                type: "commonName",
+            },
+            "Flabellina triophina": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "50459",
+            },
+        },
+        iNaturalistTaxonId: "633561",
+    },
+    "Integripelta bilabiata": {
+        taxonNames: {
+            "derby hat bryozoan": {
+                type: "commonName",
+            },
+            "Eurystomella bilabiata": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "334556",
+    },
+    "Laqueus vancouveriensis": {
+        taxonNames: {
+            "transverse lamp shell": {
+                type: "commonName",
+            },
+            "Laqueus vancouverensis": {
+                resolvedBy: "AB",
+                notes: "misspelling in obs record",
+            },
+        },
+        iNaturalistTaxonId: "525797",
+    },
+    "Lottia scutum": {
+        taxonNames: {
+            "plate limpet": {
+                type: "commonName",
+            },
+            "Tectura scutum": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "338322",
+            },
+        },
+        iNaturalistTaxonId: "129962",
+    },
+    "Membranipora villosa": {
+        taxonNames: {
+            "kelp-encrusting bryozoan": {
+                type: "commonName",
+            },
+            "Membranipora serrilamella": {
+                resolvedBy: "AB",
+                notes: "Incredible",
+            },
+        },
+        iNaturalistTaxonId: "360867",
+    },
+    "Metacarcinus magister": {
+        taxonNames: {
+            "Dungeness crab": {
+                type: "commonName",
+            },
+            "Cancer magister": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "63697",
+    },
+    "Mopalia kennerleyi": {
+        taxonNames: {
+            "northern hairy chiton": {
+                type: "commonName",
+            },
+            "Mopalia kennerlyi": {
+                resolvedBy: "AB",
+                notes: "misspelling in obs record",
+            },
+        },
+        iNaturalistTaxonId: "360858",
+    },
+    "Neoesperiopsis rigida": {
+        taxonNames: {
+            "orange finger sponge": {
+                type: "commonName",
+            },
+            "Amphilectus rigida": {
+                resolvedBy: "AB",
+                notes: "iNat also has 59878-Isodictya-rigida with no obs",
+            },
+        },
+        iNaturalistTaxonId: "367052",
+    },
+    "Neosabellaria cementarium": {
+        taxonNames: {
+            "cemented sandmason tubeworm": {
+                type: "commonName",
+            },
+            "Sabellaria cementarium": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "339237",
+    },
+    "Neverita lewisii": {
+        taxonNames: {
+            "Lewis's moonsnail": {
+                type: "commonName",
+            },
+            "Euspira lewisii": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "116659",
+            },
+        },
+        iNaturalistTaxonId: "447427",
+    },
+    "Orienthella trilineata": {
+        taxonNames: {
+            "three-lined nudibranch": {
+                type: "commonName",
+            },
+            "Flabellina trilineata": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "47430",
+            },
+        },
+        iNaturalistTaxonId: "764704",
+    },
+    "Osmundea spectabilis": {
+        taxonNames: {
+            "sea laurel": {
+                type: "commonName",
+            },
+            "Laurencia spectabilis": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "339015",
+    },
+    "Plocamium cartilagineum pacificum": {
+        taxonNames: {
+            "sea braid": {
+                type: "commonName",
+            },
+            "Plocamium cartilageneum pacificum": {
+                resolvedBy: "AB",
+                notes: "misspelling in obs record",
+            },
+        },
+        iNaturalistTaxonId: "339051",
+    },
+    "Podocerus cristatus": {
+        taxonNames: {
+            "neon sea flea": {
+                type: "commonName",
+            },
+            "Podoceras cristatus": {
+                resolvedBy: "AB",
+                notes: "misspelling in obs record",
+            },
+        },
+        iNaturalistTaxonId: "60636",
+    },
+    "Primavelans insculpta": {
+        taxonNames: {
+            "fluted bryozoan": {
+                type: "commonName",
+            },
+            "Hippodiplosia insculpta": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "485347",
+            },
+        },
+        iNaturalistTaxonId: "429861",
+    },
+    "Pyropia nereocystis": {
+        taxonNames: {
+            "bull-kelp nori": {
+                type: "commonName",
+            },
+            "Porphyra nereocystis": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "447086",
+            },
+        },
+        iNaturalistTaxonId: "542165",
+    },
+    "Rhacochilus vacca": {
+        taxonNames: {
+            "pile perch": {
+                type: "commonName",
+            },
+            "Damalichthys vacca": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "111616",
+    },
+    "Saccharina bongardiana": {
+        taxonNames: {
+            "dark-brown wrack kelp": {
+                type: "commonName",
+            },
+            "Laminaria bongardiana": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "429869",
+            },
+        },
+        iNaturalistTaxonId: "465193",
+    },
+    "Schuchertinia milleri": {
+        taxonNames: {
+            "hedge-hog hydroid": {
+                type: "commonName",
+            },
+            "Clavactinia milleri": {
+                resolvedBy: "AB",
+                notes: "Guess based on proximity in WoRMS, correlation in common name",
+            },
+        },
+        iNaturalistTaxonId: "854771",
+    },
+    "Strongylocentrotus franciscanus": {
+        taxonNames: {
+            "red sea urchin": {
+                type: "commonName",
+            },
+            "Mesocentrotus franciscanus": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "49126",
+    },
+    "Trichotropis cancellata": {
+        taxonNames: {
+            "checkered hairysnail": {
+                type: "commonName",
+            },
+            "Trichotropsis cancellata": {
+                resolvedBy: "AB",
+                notes: "misspelled in obs record",
+            },
+        },
+        iNaturalistTaxonId: "447177",
+    },
+    "Tritonia tetraquetra": {
+        taxonNames: {
+            "orange-peel nudibranch": {
+                type: "commonName",
+            },
+            "Tritonia gigantea": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "545545",
+    },
+}
