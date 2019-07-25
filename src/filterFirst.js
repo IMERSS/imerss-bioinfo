@@ -10,8 +10,6 @@ require("./dataProcessing/filterFirst.js");
 
 var hortis = fluid.registerNamespace("hortis");
 
-
-
 fluid.defaults("hortis.filterFirst.csvReader", {
     gradeNames: "hortis.filterFirst",
     outputFile: null,

@@ -8,9 +8,9 @@ var lz4 = require("lz4");
 var minimist = require("minimist");
 var stream = require("stream");
 
+require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
-require("./utils/settleStructure.js");
 
 var hortis = fluid.registerNamespace("hortis");
 
@@ -137,7 +137,7 @@ hortis.writeLZ4File = function (text, filename) {
 var parsedArgs = minimist(process.argv.slice(2));
 
 var outputFile = parsedArgs.o || "Life.json.lz4";
-var mapFile = parsedArgs.map || __dirname + "/../data/Galiano-map.json";
+var mapFile = parsedArgs.map || "data/Galiano/Galiano-map.json";
 
 var map = hortis.readJSONSync(mapFile);
 hortis.parseCounts(map.counts);

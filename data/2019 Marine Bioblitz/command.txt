@@ -1,0 +1,3 @@
+node src/taxonomise.js data/2019\ Marine\ Bioblitz/bioblitz-2019.csv data/2019\ Marine\ Bioblitz/bioblitz-2019-map.json data/2019\ Marine
+\ Bioblitz/bioblitz-2019-out-map.json --filter "island=Prevost Island" --o reintegrated-Prevost.csv
+

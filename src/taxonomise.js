@@ -3,21 +3,47 @@
 "use strict";
 
 var fluid = require("infusion");
+var minimist = require("minimist");
 
+require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
 require("./dataProcessing/filterFirst.js");
 require("./utils/settleStructure.js");
 
 fluid.setLogging(true);
+fluid.defeatLogging = true;
 
 var hortis = fluid.registerNamespace("hortis");
 
+var parsedArgs = minimist(process.argv.slice(2));
+
 var taxaMap = hortis.readJSONSync("data/iNaturalist/iNaturalist-taxa-map.json", "reading iNaturalist taxa map file");
-var dataMap = hortis.readJSONSync(process.argv[3] || "data/Valdes/Valdes-map.json", "reading Observations map file");
-var dataOutMap = hortis.readJSONSync(process.argv[4] || "data/Valdes/Valdes-out-map.json", "reading Observations output map file");
+var dataMap = hortis.readJSONSync(parsedArgs._[1] || "data/Valdes/Valdes-map.json", "reading Observations map file");
+var dataOutMap = hortis.readJSONSync(parsedArgs._[2] || "data/Valdes/Valdes-out-map.json", "reading Observations output map file");
 var taxonResolveMap = hortis.readJSONSync("data/TaxonResolution-map.json", "reading taxon resolution map");
 var swaps = hortis.readJSONSync("data/taxon-swaps.json5", "reading taxon swaps file");
+
+hortis.parseFilters = function (argFilters) {
+    var filters = fluid.makeArray(argFilters);
+    return filters.map(function (oneFilter) {
+        var eqpos = oneFilter.indexOf("=");
+        if (eqpos === -1) {
+            fluid.fail("Filter string " + oneFilter + " must be of the form <column>=<value>");
+        } else {
+            var togo = {
+                column: oneFilter.substring(0, eqpos),
+                value: oneFilter.substring(eqpos + 1)
+            };
+            if (!dataMap.columns[togo.column]) {
+                fluid.fail("Column " + togo.column + " is unknown in input map file");
+            }
+            return togo;
+        }
+    });
+};
+
+var parsedFilters = hortis.parseFilters(parsedArgs.filter);
 
 hortis.invertSwaps = function (swaps) {
     var invertedSwaps = {};
@@ -35,11 +61,11 @@ var invertedSwaps = hortis.invertSwaps(swaps);
 
 var dataPromises = {
     observations: hortis.bagatelle.csvReader({
-        inputFile: process.argv[2] || "data/Valdes/Valdes marine data (dives included).csv",
+        inputFile: parsedArgs._[0] || "data/Valdes/Valdes marine data (dives included).csv",
         mapColumns: dataMap.columns
     }).completionPromise,
     taxa: hortis.bagatelle.csvReader({
-        inputFile: "data/iNaturalist-taxa.csv",
+        inputFile: "data/iNaturalist/iNaturalist-taxa.csv",
         mapColumns: taxaMap.columns
     }).completionPromise
 };
@@ -70,6 +96,18 @@ hortis.resolveTaxa = function (target, taxaById, taxonId, columns) {
     }
 };
 
+hortis.filterOneRow = function (row, filters) {
+    return filters.every(function (oneFilter) {
+        return row[oneFilter.column] === oneFilter.value;
+    });
+};
+
+hortis.filterRows = function (rows, filters) {
+    return rows.filter(function (oneRow) {
+        return hortis.filterOneRow(oneRow, filters);
+    });
+};
+
 hortis.doFilterFirst = function (outrows) {
     var that = hortis.filterFirst({
         dateField: dataOutMap.dateField,
@@ -95,7 +133,7 @@ hortis.writeReintegratedObservations = function (fileName, observations, taxaByI
     outrows = hortis.doFilterFirst(outrows);
 
     var promise = fluid.promise();
-    hortis.bagatelle.writeCSV("reintegrated.csv", dataOutMap.columns, outrows, promise);
+    hortis.bagatelle.writeCSV(fileName, dataOutMap.columns, outrows, promise);
 };
 
 hortis.settleStructure(dataPromises).then(function (data) {
@@ -108,7 +146,11 @@ hortis.settleStructure(dataPromises).then(function (data) {
     });
     var identifiedTo = {}; // Two-level hash of {taxonLevel, obs index} to obs
     var lookups = [];
-    data.observations.rows.forEach(function (obs, index) {
+    var obsRows = hortis.filterRows(data.observations.rows, parsedFilters);
+    if (parsedFilters.length > 0) {
+        console.log("Filtered observations to list of " + obsRows.length + " with " + parsedFilters.length + " filters");
+    }
+    obsRows.forEach(function (obs, index) {
         var san = hortis.sanitizeValdesSpecies(obs.taxonName);
         var taxonLevel = "Undetermined";
         if (!san.includes("undetermined")) {
@@ -145,9 +187,9 @@ hortis.settleStructure(dataPromises).then(function (data) {
         };
     });
     var promise = fluid.promise();
-    var writeResolutionFile = false;
+    var writeResolutionFile = parsedArgs.writeRes;
     if (writeResolutionFile) {
         hortis.bagatelle.writeCSV("taxonResolution.csv", taxonResolveMap.columns, resolutionRows, promise);
     }
-    hortis.writeReintegratedObservations("reintegrated.csv", data.observations.rows, taxaById, lookups);
+    hortis.writeReintegratedObservations(parsedArgs.o || "reintegrated.csv", obsRows, taxaById, lookups);
 });

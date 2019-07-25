@@ -27,6 +27,7 @@ hortis.filterFirst.storeRow = function (that, row) {
     if (existing) {
         if (row.timestamp < existing.timestamp) {
             that.uniqueRows[uniqueVal] = row;
+            row[obsCountField] = existing[obsCountField];
         }
         that.uniqueRows[uniqueVal][obsCountField]++;
     } else {

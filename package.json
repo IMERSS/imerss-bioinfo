@@ -8,6 +8,8 @@
         "kettle": "1.11.0",
         "fluid-authoring": "amb26/fluid-authoring#FLUID-4884",
         "csv-parser": "2.1.0",
+        "event-stream": "4.0.1",
+        "bson": "4.0.2",
         "csv-writer": "1.2.0",
         "minimist": "1.2.0",
         "lz4": "0.6.0",

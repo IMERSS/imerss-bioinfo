@@ -138,7 +138,7 @@ fluid.defaults("hortis.sunburst", {
     zoomDuration: 1250,
     scaleConfig: {
         innerDepth: 1 / 22,
-        outerDepth: 1 - 13 / 22,
+        outerDepth: 12 / 22,
         maxNodes: 200
     },
     parsedColours: "@expand:hortis.parseColours({that}.options.colours)",
@@ -465,7 +465,7 @@ hortis.boundNodes = function (that, layoutId, isInit) {
 };
 
 hortis.isClickable = function (row) {
-    return row.childCount > 1 || row.iNaturalistLink || row.iNaturalistTaxonId;
+    return row.children.length > 0 || row.iNaturalistLink || row.iNaturalistTaxonId;
 };
 
 hortis.elementClass = function (row, isLayoutRoot, styles, baseStyle) {
@@ -584,7 +584,7 @@ hortis.beginZoom = function (that, row) {
 };
 
 hortis.segmentClicked = function (that, row) {
-    if (row.childCount > 1) {
+    if (row.children.length > 0) {
         hortis.beginZoom(that, row);
     } else {
         if (row.iNaturalistLink) {

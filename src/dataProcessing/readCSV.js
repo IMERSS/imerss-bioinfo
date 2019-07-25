@@ -51,6 +51,7 @@ hortis.csvReader.rejector = function (that, error) {
 };
 
 hortis.csvReader.bindStream = function (that) {
+    var now = Date.now();
     that.rowStream.on("data", function (data) {
         that.events.onRow.fire(data);
     });
@@ -61,6 +62,7 @@ hortis.csvReader.bindStream = function (that) {
         that.events.onHeaders.fire(headers);
     });
     that.rowStream.on("end", function () {
+        console.log("Read " + that.line + " lines in " + (Date.now() - now) + " ms");
         that.events.onCompletion.fire();
     });
 };

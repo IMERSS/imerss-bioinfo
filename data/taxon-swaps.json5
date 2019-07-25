@@ -92,6 +92,18 @@
         },
         iNaturalistTaxonId: "81610",
     },
+    "Bathyagonus infraspinatus": {
+        taxonNames: {
+            "spinycheek starsnout": {
+                type: "commonName",
+            },
+            "Bathyagonus infraspinata": {
+                resolvedBy: "AB",
+                notes: "misspelling in obs record",
+            },
+        },
+        iNaturalistTaxonId: "525797",
+    },
     Chaetopterus: {
         taxonNames: {
             "U-shaped parchment tubeworm": {
@@ -312,6 +324,17 @@
         },
         iNaturalistTaxonId: "360867",
     },
+    "Metacarcinus gracilis": {
+        taxonNames: {
+            "Graceful Rock Crab": {
+                type: "commonName",
+            },
+            "Cancer gracilis": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "116721",
+    },
     "Metacarcinus magister": {
         taxonNames: {
             "Dungeness crab": {
@@ -319,6 +342,7 @@
             },
             "Cancer magister": {
                 resolvedBy: "AB",
+                oldiNaturalistTaxonId: "295526"
             },
         },
         iNaturalistTaxonId: "63697",
@@ -392,6 +416,18 @@
             },
         },
         iNaturalistTaxonId: "339015",
+    },
+    "Pentidotea resecata": {
+        taxonNames: {
+            "Eelgrass Isopod": {
+                type: "commonName",
+            },
+            "Idotea resecata": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "261239"
+            },
+        },
+        iNaturalistTaxonId: "141842",
     },
     "Plocamium cartilagineum pacificum": {
         taxonNames: {

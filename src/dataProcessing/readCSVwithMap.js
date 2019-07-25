@@ -27,6 +27,7 @@ fluid.defaults("hortis.bagatelle.csvReader", {
         }
     }
 });
+// Speed on taxa - 500ms on IoC dispatch, 1300ms on mapping
 
 hortis.bagatelle.mapRow = function (data, mapColumns, index) {
     var togo = {};

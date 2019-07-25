@@ -10,6 +10,7 @@
         "geoPrivacy": "Geoprivacy",
         "maxDepth": "Max. depth",
         "bottomTime": "Bottom time",
-        "commonName": "Common name"
+        "commonName": "Common name",
+        "island": "Island"
     }
 }
