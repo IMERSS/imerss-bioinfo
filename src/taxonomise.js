@@ -70,7 +70,7 @@ var dataPromises = {
     }).completionPromise
 };
 
-hortis.sanitizeValdesSpecies = function (name) {
+hortis.sanitizeSpeciesName = function (name) {
     name = name.trim();
     [" sp.", " spp.", "?", " etc."].forEach(function (toRemove) {
         var index = name.indexOf(toRemove);
@@ -79,6 +79,10 @@ hortis.sanitizeValdesSpecies = function (name) {
         }
     });
     name = name.replace(" ssp.", "");
+    name = name.replace(" var.", "");
+    name = name.replace(" s.lat.", "");
+    name = name.replace(" cf ", " ");
+    name = name.replace(" x ", " × ");
     return name;
 };
 
@@ -151,7 +155,7 @@ hortis.settleStructure(dataPromises).then(function (data) {
         console.log("Filtered observations to list of " + obsRows.length + " with " + parsedFilters.length + " filters");
     }
     obsRows.forEach(function (obs, index) {
-        var san = hortis.sanitizeValdesSpecies(obs.taxonName);
+        var san = hortis.sanitizeSpeciesName(obs.taxonName);
         var taxonLevel = "Undetermined";
         if (!san.includes("undetermined")) {
             var resolved = invertedSwaps[san];

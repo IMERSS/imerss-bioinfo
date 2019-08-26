@@ -544,6 +544,265 @@
                 resolvedBy: "AB",
             },
         },
-        iNaturalistTaxonId: "545545",
+        iNaturalistTaxonId: "545545"
+    },
+    "Amsinckia menziesii intermedia": {
+        taxonNames: {
+            "Rancher's fiddleneck": {
+                type: "commonName",
+            },
+            "Amsinckia intermedia": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "49141"
+    },
+    "Anthoceros punctatus": {
+        taxonNames: {
+            "Dotted Hornwort": {
+                type: "commonName",
+            },
+            "Aspiromitus punctatus": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "158432"
+    },
+    "Atriplex dioica": {
+        taxonNames: {
+            "Thickleaf Orach": {
+                type: "commonName",
+            },
+            "Atriplex subspicata": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "75701"
+    },
+    "Racomitrium heterostichum": {
+        taxonNames: {
+            "Yellow-green Rock Moss": {
+                type: "commonName",
+            },
+            "Bucklandiella heterosticha": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "167683"
+    },
+    "Racomitrium macounii": {
+        taxonNames: {
+            "Macoun's Rock Moss": {
+                type: "commonName",
+            },
+            "Bucklandiella macounii": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "167686"
+    },
+    "Carex leporina": {
+        taxonNames: {
+            "Oval Sedge": {
+                type: "commonName",
+            },
+            "Carex ovalis": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "160051",
+            },
+        },
+        iNaturalistTaxonId: "76067"
+    },
+    "Chiloscyphus pallescens fragilis": {
+        taxonNames: {
+            "Chiloscyphus fragilis": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "239995"
+    },
+    "Cymathaere triplicata": {
+        taxonNames: {
+            "Three-ribbed Kelp": {
+                type: "commonName",
+            },
+            "Cymathere triplicata": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "462185",
+            },
+        },
+        iNaturalistTaxonId: "429947"
+    },
+    "Epilobium hallianum": {
+        taxonNames: {
+            "Hall's Willowherb": {
+                type: "commonName",
+            },
+            "Epilobium halleanum": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "162361",
+            },
+        },
+        iNaturalistTaxonId: "76831"
+    },
+    "Filago germanica": {
+        taxonNames: {
+            "Common Cudweed": {
+                type: "commonName",
+            },
+            "Filago vulgaris": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "62004",
+            },
+        },
+        iNaturalistTaxonId: "634625"
+    },
+    "Reynoutria japonica": {
+        taxonNames: {
+            "Japanese Knotweed": {
+                type: "commonName",
+            },
+            "Fallopia japonica": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "77130",
+            },
+        },
+        iNaturalistTaxonId: "914922"
+    },
+    "Reynoutria sachalinensis": {
+        taxonNames: {
+            "Giant Knotweed": {
+                type: "commonName",
+            },
+            "Fallopia sachalinensis": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "77131",
+            },
+        },
+        iNaturalistTaxonId: "593040"
+    },
+    "Grindelia hirsutula": {
+        taxonNames: {
+            "Hairy Gumweed": {
+                type: "commonName",
+            },
+            "Grindelia hirsutula hirsutula": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "55383",
+            },
+        },
+        iNaturalistTaxonId: "55364"
+    },
+    "Physcomitrium pyriforme": {
+        taxonNames: {
+            "Common Bladder Moss": {
+                type: "commonName",
+            },
+            "Physcomitrium megalocarpum": {
+                resolvedBy: "AB",
+                notes: "Found as synonym in GBIF"
+            },
+        },
+        iNaturalistTaxonId: "154195"
+    },
+    "Plocamium cartilagineum pacificum": {
+        taxonNames: {
+            "Plocamium pacificum": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "339051"
+    },
+    "Potentilla anserina": {
+        taxonNames: {
+            "Common Silverweed": {
+                type: "commonName",
+            },
+            "Potentilla egedii": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "62216"
+    },
+    "Poterium polygamum": {
+        taxonNames: {
+            "Poterium sanguisorba polygamum": {
+                resolvedBy: "AB",
+                notes: "Poterium sanguisorba has become Sanguisorba minor - pretty confusing",
+                oldiNaturalistTaxonId: "78744",
+            },
+        },
+        iNaturalistTaxonId: "55736"
+    },
+    "Salicornia depressa": {
+        taxonNames: {
+            "Virginia Glasswort": {
+                type: "commonName",
+            },
+            "Salicornia virginica": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "63367",
+            },
+        },
+        iNaturalistTaxonId: "78930"
+    },
+    "Salicornia perennis": {
+        taxonNames: {
+            "Perennial Glasswort": {
+                type: "commonName",
+            },
+            "Sarcocornia perennis": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "601046",
+            },
+        },
+        iNaturalistTaxonId: "78932"
+    },
+    "Silene latifolia alba": {
+        taxonNames: {
+            "White Campion": {
+                type: "commonName",
+            },
+            "Silene alba": {
+                resolvedBy: "AB",
+                notes: "Unclear whether Silene latifolia itself is meant",
+                oldiNaturalistTaxonId: "79109",
+            },
+        },
+        iNaturalistTaxonId: "128683"
+    },
+    "Solanum nodiflorum nutans": {
+        taxonNames: {
+            "Small-flowered Nightshade": {
+                type: "commonName",
+            },
+            "Solanum americanum nodiflorum": {
+                resolvedBy: "AB",
+                notes: "I think iNat's taxonomy is probably screwed up here, showing two parallel 'nutans' ssp"
+            },
+        },
+        iNaturalistTaxonId: "414039"
+    },
+    "Stachys chamissonis cooleyae": {
+        taxonNames: {
+            "Cooley's Hedge-Nettle": {
+                type: "commonName",
+            },
+            "Stachys cooleyae": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "52627"
+    },
+    "Torreyochloa pallida pauciflora": {
+        taxonNames: {
+            "Weak Manna Grass": {
+                type: "commonName",
+            },
+            "Torreyochloa pauciflora": {
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "81431"
     },
 }

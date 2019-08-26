@@ -37,8 +37,8 @@ hortis.newTaxon = function (name, rank, depth, counts) {
         children: {},
         layoutLeft: 0
     };
-    fluid.each(counts, function (oneCount) {
-        togo[oneCount.column] = 0;
+    fluid.each(counts, function (oneCount, key) {
+        togo[key] = 0;
     });
     return togo;
 };
