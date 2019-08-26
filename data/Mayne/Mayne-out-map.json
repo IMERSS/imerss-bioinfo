@@ -26,9 +26,10 @@
         "accessionNumber": "Accession Number", 
         "firstObserved": "First observed",
         "iNaturalistLink": "iNaturalist Link",
+        "iNaturalistTaxonName": "iNaturalist taxon name",
+        "iNaturalistTaxonId": "iNaturalist taxon ID",
         "photoLink": "iNaturalist Photo",
-        "notes": "Notes",
-        "upstreamID": "ID"
+        "notes": "Notes"
     },
     "counts": {
         "undocumentedCount": {
