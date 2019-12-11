@@ -31,3 +31,7 @@ hortis.pointInPolygon = function (point, vs) {
     
     return inside;
 };
+
+hortis.isPoint = function (point) {
+    return Number.isFinite(point[0]) && Number.isFinite(point[1]);
+};

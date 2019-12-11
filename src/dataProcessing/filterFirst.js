@@ -9,7 +9,8 @@ var hortis = fluid.registerNamespace("hortis");
 fluid.defaults("hortis.filterFirst", {
     gradeNames: "fluid.component",
     members: {
-        uniqueRows: {}
+        uniqueRows: {},
+        discardedRows: {}
     },
     dateField: null,
     uniqueField: null,
@@ -28,6 +29,12 @@ hortis.filterFirst.storeRow = function (that, row) {
         if (row.timestamp < existing.timestamp) {
             that.uniqueRows[uniqueVal] = row;
             row[obsCountField] = existing[obsCountField];
+        } else {
+            var discardEntry = that.discardedRows[uniqueVal];
+            if (!discardEntry) {
+                that.discardedRows[uniqueVal] = discardEntry = [that.uniqueRows[uniqueVal]];
+            }
+            discardEntry.push(row);
         }
         that.uniqueRows[uniqueVal][obsCountField]++;
     } else {

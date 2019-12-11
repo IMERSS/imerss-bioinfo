@@ -16,11 +16,16 @@ var hortis = fluid.registerNamespace("hortis");
 fluid.defaults("hortis.sunburstLoader", {
     gradeNames: ["fluid.newViewComponent", "fluid.resourceLoader"],
     sunburstPixels: 1002,
-    markupTemplate: "html/bagatelle.html",
+    markupTemplate: "%resourceBase/html/bagatelle.html",
+    phyloMap: "%resourceBase/json/phyloMap.json",
+    resourceBase: "src/client",
+    terms: {
+        resourceBase: "{that}.options.resourceBase"
+    },
     queryOnStartup: "",
     resources: {
         tree: {
-            href: "{that}.options.treeFile",
+            url: "{that}.options.treeFile",
             dataType: "binary",
             options: {
                 processData: false,
@@ -28,14 +33,18 @@ fluid.defaults("hortis.sunburstLoader", {
             }
         },
         markup: {
-            href: "{that}.options.markupTemplate",
+            url: "{that}.options.markupTemplate",
             dataType: "text"
+        },
+        phyloMap: {
+            url: "{that}.options.phyloMap",
+            dataType: "json"
         }
     },
     invokers: {
         resolveResources: {
-            funcName: "fluid.identity",
-            args: "{that}.options.resources"
+            funcName: "hortis.resolveResources",
+            args: ["{that}.options.resources", "{that}.options.terms"]
         },
         resolveColourStrategy: "hortis.resolveColourStrategy({that}.options.colourCount)"
     },
@@ -62,6 +71,15 @@ fluid.defaults("hortis.sunburstLoader", {
         }
     }
 });
+
+hortis.resolveResources = function (resources, terms) {
+    var mapped = fluid.transform(resources, function (oneResource) {
+        return fluid.extend(true, {}, oneResource, {
+            url: fluid.stringTemplate(oneResource.url, terms)
+        });
+    });
+    return mapped;
+};
 
 hortis.decompressLZ4 = function (arrayBuffer) {
     var uint8in = new Uint8Array(arrayBuffer);
@@ -105,11 +123,13 @@ fluid.defaults("hortis.sunburst", {
         autocomplete: ".fld-bagatelle-autocomplete",
         segment: ".fld-bagatelle-segment",
         label: ".fld-bagatelle-label",
-        segmentAndLabel: "@expand:hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label)"
+        phyloPic: ".fld-bagatelle-phyloPic",
+        mousable: "@expand:hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label, {that}.options.selectors.phyloPic)"
     },
     styles: {
         segment: "fld-bagatelle-segment",
         label: "fld-bagatelle-label",
+        phyloPic: "fld-bagatelle-phyloPic",
         layoutRoot: "fl-bagatelle-layoutRoot",
         labelPath: "fld-bagatelle-labelPath",
         clickable: "fl-bagatelle-clickable"
@@ -137,9 +157,14 @@ fluid.defaults("hortis.sunburst", {
     },
     zoomDuration: 1250,
     scaleConfig: {
+      // original settings 1 and 12
         innerDepth: 1 / 22,
-        outerDepth: 12 / 22,
-        maxNodes: 200
+        outerDepth: 13 / 22,
+        rootRadii: [3 / 22,
+            3 / 22,
+            3 / 22,
+            13 / 22],
+        maxNodes: 100
     },
     parsedColours: "@expand:hortis.parseColours({that}.options.colours)",
     colourCount: "undocumentedCount",
@@ -150,7 +175,8 @@ fluid.defaults("hortis.sunburst", {
             radiusScale: []
         },
         layoutId: null,
-        hoverId: null
+        hoverId: null,
+        commonNames: true
     },
     markup: {
         segmentHeader: "<g xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">",
@@ -159,6 +185,7 @@ fluid.defaults("hortis.sunburst", {
         label: "<path id=\"%labelPathId\" d=\"%textPath\" visibility=\"%labelVisibility\" class=\"%labelPathClass\" vector-effect=\"non-scaling-stroke\"></path>"
             + "<text id=\"%labelId\" dy=\"0.25em\" class=\"%labelClass\" visibility=\"%labelVisibility\" style=\"%labelStyle\">"
             + "<textPath xlink:href=\"#%labelPathId\" startOffset=\"50%\" style=\"text-anchor: middle\">%label</textPath></text>",
+        phyloPic: "<image id=\"%phyloPicId\" class=\"%phyloPicClass fl-bagatelle-clickable\" xlink:href=\"%phyloPicUrl\" height=\"%diameter\" width=\"%diameter\" x=\"%phyloPicX\" y=\"%phyloPicY\" />",
         segmentFooter: "</g>",
         tooltipHeader: "<div><table>",
         tooltipRow: "<tr><td class=\"fl-taxonDisplay-key\">%key: </td><td class=\"fl-taxonDisplay-value\">%value</td>",
@@ -202,6 +229,11 @@ fluid.defaults("hortis.sunburst", {
             args: ["{that}", "{that}.model.layoutId", true],
             priority: "before:render"
         },
+        "onCreate.applyPhyloMap": {
+            funcName: "hortis.applyPhyloMap",
+            args: ["{sunburstLoader}.resources.phyloMap.resourceText", "{that}.flatTree", "{sunburstLoader}.options.terms"],
+            priority: "before:render"
+        },
         "onCreate.render": {
             func: "{that}.render",
             priority: "after:computeInitialScale"
@@ -223,20 +255,6 @@ fluid.defaults("hortis.sunburst", {
 
 hortis.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-hortis.tooltipFields = ["species", "taxonName", "commonName", "reporting", "lastCollected", "collector", "collection", "documenter",
-"observationCount", "dateObserved", "placeName"];
-
-hortis.tooltipLookup = {
-    taxonName: "Taxon Name",
-    commonName: "Common Name",
-    lastCollected: "Last Collected",
-    dateObserved: "Date Observed",
-    placeName: "Place Name",
-    observationCount: "Observation Count",
-    iNaturalist: "Observation",
-    taxonLink: "iNaturalist Taxon"
 };
 
 hortis.autocompleteInputForRow = function (row) {
@@ -289,33 +307,140 @@ hortis.imageLoaded = function (element) {
     overlay.remove();
 };
 
+hortis.rowToPhyloIndex = function (row) {
+    return row.rank + ":" + row.iNaturalistTaxonName;
+};
+
+hortis.paintChildren = function (row, parsed) {
+    row.lowColour = parsed.lowColour;
+    row.highColour = parsed.highColour;
+    row.children.forEach(function (child) {
+        hortis.paintChildren(child, parsed);
+    });
+};
+
+hortis.applyPhyloMap = function (phyloMap, rows, terms) {
+    var parsedMap = fluid.transform(phyloMap, function (onePhylo) {
+        var parsedColour = fluid.colour.hexToArray(onePhylo.colour);
+        var hsl = fluid.colour.rgbToHsl(parsedColour);
+        return {
+            phyloPicUrl: fluid.stringTemplate(onePhylo.pic, terms),
+            lowColour: fluid.colour.hslToRgb([hsl[0], hsl[1], hsl[2] * 0.2 + 0.8]),
+            highColour: fluid.colour.hslToRgb([hsl[0], hsl[1], hsl[2] * 0.8 + 0.2])
+        };
+    });
+    rows.forEach(function (row) {
+        var phyloIndex = hortis.rowToPhyloIndex(row);
+        var parsed = parsedMap[phyloIndex];
+        if (parsed) {
+            row.phyloPicUrl = parsed.phyloPicUrl;
+            hortis.paintChildren(row, parsed);
+        }
+    });
+};
+
+// hortis.tooltipFields = ["species", "iNaturalistTaxonName", "commonName", "reporting", "lastCollected", "collector", "collection", "observer", "firstObserved", "placeName"];
+
+hortis.tooltipLookup = {
+    iNaturalistTaxonName: "Taxon Name",
+    lastCollected: "Last Collected",
+    firstObserved: "First Observed",
+    observer: "Observer",
+    placeName: "Place Name",
+    observationCount: "Observation Count",
+    iNaturalistObsLink: "Observation",
+    taxonLink: "iNaturalist Taxon",
+    wikipediaSummary: "Wikipedia Summary",
+    iNaturalistTaxonImage: "iNaturalist Taxon Image",
+    phyloPic: "Taxon Icon",
+    commonName: "Common Name"
+};
+
+hortis.specialRows = {
+    collected: {
+        key: "Collected",
+        value: [{collected: "%x"}, {collector: " by %x"}]
+    },
+    observed: {
+        key: "Observed",
+        value: [{firstObserved: "%x"}, {observer: " by %x"}]
+    }
+};
+
+hortis.commonFields = ["wikipediaSummary", "commonName"];
+
+hortis.dumpRow = function (key, value, markup) {
+    if (value) {
+        var keyName = hortis.tooltipLookup[key] || hortis.capitalize(key);
+        return fluid.stringTemplate(markup.tooltipRow, {key: keyName, value: value});
+    } else {
+        return "";
+    }
+};
+
+hortis.renderSpecialRow = function (row, rowEntry, markup) {
+    var values = rowEntry.value.map(function (oneEntry) {
+        var key = Object.keys(oneEntry)[0];
+        return {
+            x: row[key],
+            template: oneEntry[key]
+        };
+    });
+    var valueText = "";
+    values.forEach(function (oneValue) {
+        valueText += oneValue.x ? fluid.stringTemplate(oneValue.template, oneValue) : "";
+    });
+    return hortis.dumpRow(rowEntry.key, valueText, markup);
+};
+
 hortis.renderTooltip = function (row, markup) {
     if (!row) {
         return null;
     }
-    var dumpRow = function (key, value) {
-        if (value) {
-            var keyName = hortis.tooltipLookup[key] || hortis.capitalize(key);
-            togo += fluid.stringTemplate(markup.tooltipRow, {key: keyName, value: value});
-        }
-    };
     var togo = markup.tooltipHeader;
+    var dumpRow = function (keyName, value) {
+        togo += hortis.dumpRow(keyName, value, markup);
+    };
+    var dumpImage = function (keyName, url) {
+        togo += hortis.dumpRow(keyName, "<div><span class=\"fl-bagatelle-imgLoadingOverlay\"></span><img onload=\"hortis.imageLoaded(this)\" class=\"fl-bagatelle-photo fl-bagatelle-imgLoading\" src=\"" + url + "\"/></div>", markup);
+    };
+    var dumpPhyloPic = function (keyName, url) {
+        togo += hortis.dumpRow(keyName, "<div><img height=\"150\" width=\"150\" class=\"fl-bagatelle-photo\" src=\"" + url + "\"/></div>", markup);
+    };
     if (row.rank) {
-        dumpRow(row.rank, row.name);
+        if (row.phyloPicUrl) {
+            dumpPhyloPic("phyloPic", row.phyloPicUrl);
+        }
+        dumpRow(row.rank, row.iNaturalistTaxonName);
+        hortis.commonFields.forEach(function (field) {
+            dumpRow(field, row[field]);
+        });
+        if (row.iNaturalistTaxonImage) {
+            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage);
+        }
         dumpRow("species", row.childCount);
         dumpRow("observationCount", row.observationCount);
     } else {
-        hortis.tooltipFields.forEach(function (field) {
-            dumpRow(field, row[field]);
-        });
-        if (row.iNaturalistLink) {
-            dumpRow("iNaturalist", "<a href=\"" + row.iNaturalistLink + "\">" + row.iNaturalistLink + "</a>");
+        if (row.iNaturalistTaxonImage && !row.obsPhotoLink) {
+            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage);
         }
-        if (row.photoLink) {
+        if (row.species) {
+            dumpRow("species", row.species);
+        } else {
+            dumpRow("iNaturalistTaxonName", row.iNaturalistTaxonName);
+        }
+        togo += hortis.renderSpecialRow(row, hortis.specialRows.collected, markup);
+        dumpRow("collection", row.collection);
+        dumpRow("reporting", row.reporting);
+        togo += hortis.renderSpecialRow(row, hortis.specialRows.observed, markup);
+        if (row.iNaturalistObsLink) {
+            dumpRow("iNaturalistObsLink", "<a href=\"" + row.iNaturalistObsLink + "\">" + row.iNaturalistObsLink + "</a>");
+        }
+        if (row.obsPhotoLink) {
         // See this nonsense: https://stackoverflow.com/questions/5843035/does-before-not-work-on-img-elements
-            dumpRow("photo", "<div><span class=\"fl-bagatelle-imgLoadingOverlay\"></span><img onload=\"hortis.imageLoaded(this)\" class=\"fl-bagatelle-photo fl-bagatelle-imgLoading\" src=\"" + row.photoLink + "\"/></div>");
+            dumpImage("Observation photo", row.obsPhotoLink);
         }
-        var iNatId = row.upstreamID || row.iNaturalistTaxonId;
+        var iNatId = row.iNaturalistTaxonId;
         if (iNatId) {
             var taxonLink = "http://www.inaturalist.org/taxa/" + iNatId;
             dumpRow("taxonLink", "<a href=\"" + taxonLink + "\">" + taxonLink + "</a>");
@@ -359,20 +484,27 @@ hortis.updateTooltip = function (that, id) {
     }*/
 };
 
+hortis.isAtRoot = function (that, layoutId) {
+    return (layoutId || that.model.layoutId) === that.flatTree[0].id;
+};
+
 hortis.bindMouse = function (that) {
     var svg = that.locate("svg");
-    var segmentAndLabel = that.options.selectors.segmentAndLabel;
-    svg.on("click", segmentAndLabel, function () {
+    var mousable = that.options.selectors.mousable;
+    svg.on("click", mousable, function () {
         var id = hortis.elementToId(this);
+        if (!hortis.isAtRoot(that) && that.index[id].phyloPicUrl) {
+            id = that.flatTree[0].id;
+        }
         that.segmentClicked(that.index[id]);
     });
-    svg.on("mouseenter", segmentAndLabel, function (e) {
+    svg.on("mouseenter", mousable, function (e) {
         window.clearTimeout(that.leaveTimeout);
         var id = hortis.elementToId(this);
         that.mouseEvent = e;
         that.applier.change("hoverId", id);
     });
-    svg.on("mouseleave", segmentAndLabel, function (e) {
+    svg.on("mouseleave", mousable, function (e) {
         that.leaveTimeout = window.setTimeout(function () {
             that.mouseEvent = e;
             that.applier.change("hoverId", null);
@@ -400,19 +532,27 @@ hortis.outRings = function (array, count, width) {
     }
 };
 
-hortis.makeRadiusScale = function (innerRings, visRings, totalRings, options) {
+hortis.makeRadiusScale = function (innerRings, visRings, totalRings, scaleConfig, isAtRoot) {
     console.log("makeRadiusScale with innerRings ", innerRings, " visRings ", visRings);
-    // Allocate as many outerRings as we can without making in between rings narrower than innerDepth
-    // Total amount available is 1 - innerRadius, in between thickness would be (1 - outerRings * options.outerDepth - innerRadius) / (totalRings - outerRings - innerRings);
-    var outerRings = Math.floor((1 - visRings * options.innerDepth) / (options.outerDepth - options.innerDepth));
-    console.log("outerRings determined as ", outerRings);
-    var middleRings = visRings - outerRings - innerRings;
-    var middleDepth = (1 - outerRings * options.outerDepth - innerRings * options.innerDepth) / middleRings;
     var togo = [0];
-    hortis.outRings(togo, innerRings, options.innerDepth);
-    hortis.outRings(togo, middleRings, middleDepth);
-    hortis.outRings(togo, outerRings, options.outerDepth);
-    hortis.outRings(togo, totalRings - visRings, 0);
+    if (isAtRoot && scaleConfig.rootRadii) {
+        scaleConfig.rootRadii.forEach(function (radius) {
+            hortis.outRings(togo, 1, 1000 * radius);
+        });
+        hortis.outRings(togo, 1 + totalRings - togo.length, 0);
+    } else {
+        // Allocate as many outerRings as we can without making in between rings narrower than innerDepth
+        // Total amount available is 1 - innerRadius, in between thickness would be (1 - outerRings * options.outerDepth - innerRadius) / (totalRings - outerRings - innerRings);
+        var outerRings = Math.floor((1 - visRings * scaleConfig.innerDepth) / (scaleConfig.outerDepth - scaleConfig.innerDepth));
+        console.log("outerRings determined as ", outerRings);
+        var middleRings = visRings - outerRings - innerRings;
+        var middleDepth = (1 - outerRings * scaleConfig.outerDepth - innerRings * scaleConfig.innerDepth) / middleRings;
+
+        hortis.outRings(togo, innerRings, 1000 * scaleConfig.innerDepth);
+        hortis.outRings(togo, middleRings, 1000 * middleDepth);
+        hortis.outRings(togo, outerRings, 1000 * scaleConfig.outerDepth);
+        hortis.outRings(togo, totalRings - visRings, 0);
+    }
     console.log("makeRadiusScale returning ", togo);
     return togo;
 };
@@ -447,7 +587,8 @@ hortis.boundNodes = function (that, layoutId, isInit) {
             break;
         }
     }
-    var radiusScale = hortis.makeRadiusScale(layoutRoot.depth, depth + 1, that.maxDepth + 1, that.options.scaleConfig);
+    var isAtRoot = hortis.isAtRoot(that, layoutId);
+    var radiusScale = hortis.makeRadiusScale(layoutRoot.depth, depth + 1, that.maxDepth + 1, that.options.scaleConfig, isAtRoot);
     var togo = {
         visMap: visMap,
         scale: {
@@ -479,6 +620,14 @@ hortis.elementStyle = function (attrs, elementType) {
     return elementType === "segment" ? "fill: " + attrs.fillColour + ";" + opacity : opacity;
 };
 
+hortis.phyloPicAttrMap = {
+    visibility: "visibility",
+    x: "phyloPicX",
+    y: "phyloPicY",
+    height: "diameter",
+    width: "diameter"
+};
+
 hortis.updateScale = function (that) {
     that.flatTree.forEach(function (row, index) {
         if (that.visMap[index] || that.oldVisMap && that.oldVisMap[index]) {
@@ -492,7 +641,7 @@ hortis.updateScale = function (that) {
                 segment.setAttribute("class", hortis.elementClass(row, isLayoutRoot, that.options.styles, "segment"));
                 segment.setAttribute("style", hortis.elementStyle(attrs, "segment"));
             }
-            var labelPath = fluid.byId("hortis-labelpath:" + row.id);
+            var labelPath = fluid.byId("hortis-labelPath:" + row.id);
             if (labelPath) {
                 labelPath.setAttribute("d", attrs.textPath);
                 labelPath.setAttribute("visibility", attrs.labelVisibility);
@@ -503,6 +652,12 @@ hortis.updateScale = function (that) {
                 label.setAttribute("class", hortis.elementClass(row, isLayoutRoot, that.options.styles, "label"));
                 label.setAttribute("style", hortis.elementStyle(attrs, "label"));
             }
+            var pic = fluid.byId("hortis-phyloPic:" + row.id);
+            if (pic) {
+                fluid.each(hortis.phyloPicAttrMap, function (source, target) {
+                    pic.setAttribute(target, attrs[source]);
+                });
+            }
         }
     });
 };
@@ -511,12 +666,6 @@ hortis.renderSVGTemplate = function (template, terms) {
     return fluid.stringTemplate(template, terms);
 };
 
-hortis.interpolateColour = function (f, c1, c2) {
-    return fluid.transform([
-        (1 - f) * c1[0] + f * c2[0],
-        (1 - f) * c1[1] + f * c2[1],
-        (1 - f) * c1[2] + f * c2[2]], Math.round);
-};
 
 hortis.interpolateModels = function (f, m1, m2) {
     return fluid.transform(m1, function (value, key) {
@@ -532,20 +681,19 @@ hortis.interpolateModels = function (f, m1, m2) {
 
 hortis.undocColourForRow = function (parsedColours, row) {
     var undocFraction = row.undocumentedCount / row.childCount;
-    var interp = hortis.interpolateColour(undocFraction, parsedColours.lowColour, parsedColours.highColour);
+    var interp = fluid.colour.interpolate(undocFraction, row.lowColour || parsedColours.lowColour, row.highColour || parsedColours.highColour);
     return fluid.colour.arrayToString(interp);
 };
 
 hortis.obsColourForRow = function (parsedColours, row, rootRow) {
     var fraction = Math.pow(row.observationCount / rootRow.observationCount, 0.2);
-    var interp = hortis.interpolateColour(fraction, parsedColours.lowColour, parsedColours.highColour);
-    console.log("fraction " , fraction, " interp ", interp);
+    var interp = fluid.colour.interpolate(fraction, row.lowColour || parsedColours.lowColour, row.highColour || parsedColours.highColour);
     return fluid.colour.arrayToString(interp);
 };
 
 hortis.elementToId = function (element) {
     var id = element.id;
-    return id.substring(id.indexOf(":") + 1);;
+    return id.substring(id.indexOf(":") + 1);
 };
 
 hortis.elementToRow = function (that, element) {
@@ -595,8 +743,15 @@ hortis.segmentClicked = function (that, row) {
     }
 };
 
-hortis.labelForRow = function (row) {
-    return row.rank ? (row.rank === "Life" ? "Life" : row.rank + ": " + row.name) : row.species || row.taxonName;
+hortis.nameOverrides = {
+    "Chromista": "Chromists"
+};
+
+hortis.labelForRow = function (row, commonNames) {
+    var name = commonNames && row.commonName ? row.commonName : row.iNaturalistTaxonName;
+    name = hortis.nameOverrides[row.iNaturalistTaxonName] || name;
+    return hortis.capitalize(name);
+    // return row.rank ? (row.rank === "Life" ? "Life" : row.rank + ": " + name) : name;
 };
 
 // This guide is a great one for "bestiary of reuse failures": https://www.visualcinnamon.com/2015/09/placing-text-on-arcs.html
@@ -605,24 +760,32 @@ hortis.labelForRow = function (row) {
 hortis.attrsForRow = function (that, row) {
     var leftAngle = that.angleScale(row.leftIndex),
         rightAngle = that.angleScale(row.leftIndex + row.childCount),
+        midAngle = (leftAngle + rightAngle) / 2,
         innerRadius = that.model.scale.radiusScale[row.depth],
         outerRadius = that.model.scale.radiusScale[row.depth + 1];
+    var isAtRoot = hortis.isAtRoot(that);
     var isComplete = fluid.model.isSameValue(leftAngle, 0) && fluid.model.isSameValue(rightAngle, 2 * Math.PI);
     var isCircle = fluid.model.isSameValue(innerRadius, 0) && isComplete;
     var isVisible = !fluid.model.isSameValue(leftAngle, rightAngle) && !fluid.model.isSameValue(innerRadius, outerRadius);
-    var isOuterSegment = fluid.model.isSameValue(outerRadius - innerRadius, that.options.scaleConfig.outerDepth);
-    var label = hortis.labelForRow(row);
+    var isOuterSegment = fluid.model.isSameValue(outerRadius - innerRadius, that.options.scaleConfig.outerDepth * 1000);
+    var label = hortis.labelForRow(row, that.model.commonNames);
     var outerLength = outerRadius * (rightAngle - leftAngle);
+    var midRadius = (isCircle || !isAtRoot) ? 0 : (innerRadius + outerRadius) / 2;
+    var radius = outerRadius - midRadius;
     if (fluid.model.isSameValue(leftAngle, Math.PI)) {
         // Eliminate Chrome crash bug exhibited in https://amb26.github.io/svg-failure/ but apparently only on Windows 7!
         // Note that 1e-5 will be too small!
         leftAngle += 1e-4;
     }
-    var labelVisibility = isOuterSegment ? outerLength > 0.035 : outerLength > label.length * 0.016; // TODO: make a guess of this factor from font size (e.g. 2/3 of it)
+    var labelVisibility = isOuterSegment ? outerLength > 35 : outerLength > label.length * 16; // TODO: make a guess of this factor from font size (e.g. 2/3 of it)
     var togo = {
         visibility: isVisible ? "visible" : "hidden",
         labelVisibility: isVisible && labelVisibility ? "visible" : "hidden",
-        label: label
+        label: label,
+        phyloPicX: Math.cos(midAngle) * midRadius - radius,
+        phyloPicY: -Math.sin(midAngle) * midRadius - radius,
+        phyloPicUrl: row.phyloPicUrl,
+        diameter: 2 * radius
     };
     if (isComplete) {
         togo.textPath = hortis.circularTextPath(outerRadius);
@@ -650,28 +813,47 @@ hortis.renderSegment = function (that, row) {
     var isLayoutRoot = row.id === that.model.layoutId;
     var terms = $.extend({
         id: "hortis-segment:" + row.id,
-        labelPathId: "hortis-labelpath:" + row.id,
+        labelPathId: "hortis-labelPath:" + row.id,
         labelId: "hortis-label:" + row.id,
+        phyloPicId: "hortis-phyloPic:" + row.id,
         clazz: hortis.elementClass(row, isLayoutRoot, that.options.styles, "segment"),
         labelPathClass: that.options.styles.labelPath,
+        phyloPicClass: that.options.styles.phyloPic,
         labelClass: hortis.elementClass(row, isLayoutRoot, that.options.styles, "label"),
         fillColour: that.fillColourForRow(row)
     }, hortis.attrsForRow(that, row));
     terms.style = hortis.elementStyle(terms, "segment");
     terms.labelStyle = hortis.elementStyle(terms, "label");
-    return hortis.renderSVGTemplate(that.options.markup.segment, terms)
-       + hortis.renderSVGTemplate(that.options.markup.label, terms);
+    var togo = [{
+        position: 0,
+        markup: hortis.renderSVGTemplate(that.options.markup.segment, terms)
+    }, {
+        position: 1,
+        markup: hortis.renderSVGTemplate(that.options.markup.label, terms)
+    }];
+    if (terms.phyloPicUrl) {
+        togo.push({
+            position: 0,
+            markup: hortis.renderSVGTemplate(that.options.markup.phyloPic, terms)
+        });
+    }
+    return togo;
 };
 
-fluid.setLogging(false);
+hortis.elementComparator = function (element1, element2) {
+    return element1.position - element2.position;
+};
 
 hortis.render = function (that) {
     var markup = that.options.markup.segmentHeader;
+    var elements = [];
     for (var i = 0; i < that.flatTree.length; ++i) {
         if (that.visMap[i] || that.oldVisMap && that.oldVisMap[i]) {
-            markup += that.renderSegment(that.flatTree[i]);
+            elements = elements.concat(that.renderSegment(that.flatTree[i]));
         }
     }
+    elements.sort(hortis.elementComparator);
+    markup += fluid.getMembers(elements, "markup").join("");
     markup += that.options.markup.segmentFooter;
     var container = that.locate("svg");
     container.empty();

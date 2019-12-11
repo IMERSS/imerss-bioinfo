@@ -8,6 +8,7 @@ var minimist = require("minimist");
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
+require("./dataProcessing/writeCSV.js");
 require("./dataProcessing/filterFirst.js");
 require("./utils/settleStructure.js");
 
@@ -60,11 +61,11 @@ hortis.invertSwaps = function (swaps) {
 var invertedSwaps = hortis.invertSwaps(swaps);
 
 var dataPromises = {
-    observations: hortis.bagatelle.csvReader({
+    observations: hortis.csvReaderWithMap({
         inputFile: parsedArgs._[0] || "data/Valdes/Valdes marine data (dives included).csv",
         mapColumns: dataMap.columns
     }).completionPromise,
-    taxa: hortis.bagatelle.csvReader({
+    taxa: hortis.csvReaderWithMap({
         inputFile: "data/iNaturalist/iNaturalist-taxa.csv",
         mapColumns: taxaMap.columns
     }).completionPromise
@@ -72,15 +73,21 @@ var dataPromises = {
 
 hortis.sanitizeSpeciesName = function (name) {
     name = name.trim();
-    [" sp.", " spp.", "?", " etc."].forEach(function (toRemove) {
+    [" sp.", " spp.", "?", " etc.", " / "].forEach(function (toRemove) {
         var index = name.indexOf(toRemove);
         if (index !== -1) {
             name = name.substring(0, index);
         }
     });
+    name = name.replace(/ (\(.*\))/g, "");
     name = name.replace(" ssp.", "");
+    name = name.replace(" grp.", "");
     name = name.replace(" var.", "");
+    name = name.replace(" ined.", "");
+    name = name.replace(" aff.", "");
     name = name.replace(" s.lat.", "");
+    name = name.replace(" complex", "");
+    name = name.replace(" species complex", "");
     name = name.replace(" cf ", " ");
     name = name.replace(" x ", " × ");
     return name;
@@ -112,17 +119,33 @@ hortis.filterRows = function (rows, filters) {
     });
 };
 
-hortis.doFilterFirst = function (outrows) {
+hortis.blankRow = function (row) {
+    return fluid.transform(row, function (/* col */) {
+        return "";
+    });
+};
+
+hortis.doFilterFirst = function (outrows, summarise) {
     var that = hortis.filterFirst({
         dateField: dataOutMap.dateField,
         uniqueField: dataOutMap.uniqueField
     });
     outrows.forEach(that.storeRow);
     that.destroy();
+    if (!summarise && Object.keys(that.discardedRows).length) {
+        var outDiscards = [];
+        console.log("Warning: the following rows were discarded as duplicates:");
+        fluid.each(that.discardedRows, function (discardedRows) {
+            outDiscards.push.apply(outDiscards, discardedRows);
+            outDiscards.push(hortis.blankRow(discardedRows[0]));
+        });
+        hortis.writeCSV("duplicates.csv", dataOutMap.columns, outDiscards, fluid.promise());
+        console.log(outDiscards.length + " duplicate rows written to duplicates.csv");
+    }
     return that.uniqueRows;
 };
 
-hortis.writeReintegratedObservations = function (fileName, observations, taxaById, lookups) {
+hortis.writeReintegratedObservations = function (fileName, observations, taxaById, lookups, summarise) {
     var outrows = [];
     observations.forEach(function (row, index) {
         var lookup = lookups[index];
@@ -134,10 +157,10 @@ hortis.writeReintegratedObservations = function (fileName, observations, taxaByI
             outrows.push(outrow);
         }
     });
-    outrows = hortis.doFilterFirst(outrows);
+    outrows = hortis.doFilterFirst(outrows, summarise);
 
     var promise = fluid.promise();
-    hortis.bagatelle.writeCSV(fileName, dataOutMap.columns, outrows, promise);
+    hortis.writeCSV(fileName, dataOutMap.columns, outrows, promise);
 };
 
 hortis.settleStructure(dataPromises).then(function (data) {
@@ -193,7 +216,8 @@ hortis.settleStructure(dataPromises).then(function (data) {
     var promise = fluid.promise();
     var writeResolutionFile = parsedArgs.writeRes;
     if (writeResolutionFile) {
-        hortis.bagatelle.writeCSV("taxonResolution.csv", taxonResolveMap.columns, resolutionRows, promise);
+        hortis.writeCSV("taxonResolution.csv", taxonResolveMap.columns, resolutionRows, promise);
     }
-    hortis.writeReintegratedObservations(parsedArgs.o || "reintegrated.csv", obsRows, taxaById, lookups);
+    var summarise = parsedArgs.summarise;
+    hortis.writeReintegratedObservations(parsedArgs.o || "reintegrated.csv", obsRows, taxaById, lookups, summarise);
 });

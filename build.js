@@ -24,8 +24,11 @@ var buildIndex = {
     codeHeader: "",
     codeFooter: "", // "\njQuery.noConflict()",
     copy: [{
-        src: "src/client/img/loading-icon.gif",
-        dest: "build/img/loading-icon.gif"
+        src: "src/client/img",
+        dest: "build/img"
+    }, {
+        src: "src/client/json",
+        dest: "build/json"
     }, {
         src: "src/client/html/bagatelle.html",
         dest: "build/html/bagatelle.html"
@@ -38,6 +41,9 @@ var buildIndex = {
     }, {
         src: "data/Valdes-Life.json.lz4",
         dest: "build/data/Valdes-Life.json.lz4"
+    }, {
+        src: "data/Galiano WoL/Life.json.lz4",
+        dest: "build/data/Galiano WoL/Life.json.lz4"
     }]
 };
 

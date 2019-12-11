@@ -16,6 +16,8 @@ fluid.defaults("hortis.csvReader", {
         headers: {},
         completionPromise: "@expand:fluid.promise()"
     },
+    csvOptions: {
+    },
     events: {
         onHeaders: null,
         onRow: null,
@@ -78,5 +80,23 @@ fluid.defaults("hortis.csvFileReader", {
 });
 
 hortis.csvFileReader.openFileStream = function (that) {
-    that.rowStream = fs.createReadStream(that.options.inputFile).pipe(csvModule());
+    that.rowStream = fs.createReadStream(that.options.inputFile).pipe(
+        csvModule(that.options.csvOptions)
+    );
 };
+
+// TODO: Fix all these namespaces
+fluid.defaults("hortis.storingCSVReader", {
+    members: {
+        rows: []
+    },
+    listeners: {
+        "onCompletion.resolve": {
+            func: "{that}.completionPromise.resolve",
+            args: {
+                rows: "{that}.rows",
+                headers: "{that}.headers"
+            }
+        }
+    }
+});

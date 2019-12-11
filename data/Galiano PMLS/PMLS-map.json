@@ -1,0 +1,16 @@
+{
+    "columns": {
+        "taxonName": "Scientific name",
+        "commonName": "Common name",
+        "dateObserved": "Date observed",
+        "description": "Description",
+        "placeName": "Place name",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "tags": "Tags",
+        "geoPrivacy": "Geoprivacy",
+        "maxDepth": "Max. depth",
+        "bottomTime": "Bottom time",
+        "observerName": "Observer name"
+    }
+}

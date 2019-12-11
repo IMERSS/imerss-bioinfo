@@ -3,33 +3,22 @@
 "use strict";
 
 var fluid = require("infusion");
-var fs = require("fs");
-var lz4 = require("lz4");
 var minimist = require("minimist");
-var stream = require("stream");
 
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
+require("./dataProcessing/LZ4.js");
+require("./iNaturalist/loadTaxa.js");
+require("./iNaturalist/taxonAPI.js");
 
 var hortis = fluid.registerNamespace("hortis");
 
 hortis.ranks = fluid.freezeRecursive(require("../data/ranks.json"));
 
-
-hortis.taxaToPath = function (row) {
-    var rowTaxa = [];
-    fluid.each(hortis.ranks, function (rank) {
-        if (row[rank]) {
-            rowTaxa.push(row[rank]);
-        }
-    });
-    return rowTaxa;
-};
-
-hortis.newTaxon = function (name, rank, depth, counts) {
+hortis.newTaxon = function (iNaturalistTaxonName, rank, depth, counts) {
     var togo = {
-        name: name,
+        iNaturalistTaxonName: iNaturalistTaxonName,
         id: fluid.allocateGuid(),
         rank: rank,
         depth: depth,
@@ -71,19 +60,35 @@ hortis.rowToTaxon = function (row, depth, counts) {
     hortis.addCounts(row, counts);
 };
 
-hortis.storeAtPath = function (tree, path, row, counts) {
+hortis.fullRecordTransform = {
+    "wikipediaSummary": "wikipedia_summary",
+    "commonName": "common_name.name",
+    "iNaturalistTaxonId": "id",
+    "iNaturalistTaxonImage": "default_photo.medium_url"
+};
+
+hortis.addTaxonInfo = function (row, fullRecord) {
+    fluid.each(hortis.fullRecordTransform, function (path, target) {
+        var source = fluid.get(fullRecord, path);
+        row[target] = source;
+    });
+};
+
+hortis.storeAtPath = function (treeBuilder, path, row) {
+    var counts = treeBuilder.map.counts;
     hortis.rowToTaxon(row, path.length, counts);
-    var node = tree;
-    path.forEach(function (seg, index) {
+    var node = treeBuilder.tree;
+    path.forEach(function (doc, index) {
         var last = index === path.length - 1;
-        var child = node.children[seg];
+        var name = doc.name;
+        var child = node.children[name];
         if (!child) {
-            var rank = fluid.find(hortis.ranks, function (rank) {
-                return row[rank] === seg ? rank : undefined;
-            });
-            child = node.children[seg] = (last ? row : hortis.newTaxon(seg, rank, index + 1, counts));
-            if (!child.rank && child !== row) {
-                throw Error("Emitting row without rank ", child);
+            child = node.children[name] = (last ? row : hortis.newTaxon(name, doc.rank, index + 1, counts));
+            try {
+                hortis.addTaxonInfo(child, doc);
+            } catch (e) {
+                console.log("While storing row ", row);
+                throw e;
             }
         }
         ++node.childCount;
@@ -94,12 +99,31 @@ hortis.storeAtPath = function (tree, path, row, counts) {
     });
 };
 
-hortis.flatToTree = function (tree, rows, counts) {
-    rows.forEach(function (row) {
-        hortis.cleanRow(row);
-        var path = hortis.taxaToPath(row);
-        hortis.storeAtPath(tree, path, row, counts);
+
+
+hortis.taxaToPathiNat = function (taxonAPIFileBase, row) {
+    var baseDoc = hortis.iNatTaxa.loadTaxonDoc(taxonAPIFileBase, row.iNaturalistTaxonId);
+    var parentTaxaIds = hortis.iNatTaxa.parentTaxaIds(baseDoc);
+    var ancestourDocs = parentTaxaIds.map(function (id) {
+        return hortis.iNatTaxa.loadTaxonDoc(taxonAPIFileBase, id);
     });
+    var rankDocs = ancestourDocs.filter(function (oneDoc) {
+        return hortis.ranks.includes(oneDoc.rank);
+    });
+    return rankDocs.concat([baseDoc]);
+};
+
+
+hortis.applyRowsToTree = function (treeBuilder, rows) {
+    rows.forEach(function (row, index) {
+        if (index % 100 === 0) {
+            process.stdout.write(index + " ... ");
+        }
+        hortis.cleanRow(row);
+        var path = hortis.taxaToPathiNat(treeBuilder.options.taxonAPIFileBase, row);
+        treeBuilder.storeAtPath(path, row);
+    });
+    console.log("");
 };
 
 hortis.flattenChildren = function (root) {
@@ -119,51 +143,68 @@ hortis.parseCounts = function (counts) {
     });
 };
 
-hortis.writeLZ4File = function (text, filename) {
-    var input = new stream.Readable();
-    input.push(text);
-    input.push(null);
+hortis.loadMapWithCounts = function (mapFile) {
+    var map = hortis.readJSONSync(mapFile);
+    hortis.parseCounts(map.counts);
+    return map;
+};
 
-    var output = fs.createWriteStream(filename);
+hortis.rootNode = function (map) {
+    return hortis.newTaxon("Life", "Life", 0, map.counts);
+};
 
-    var encoder = lz4.createEncoderStream();
-    input.pipe(encoder).pipe(output);
-    output.on("finish", function () {
-        var stats = fs.statSync(filename);
-        console.log("Written " + stats.size + " bytes to " + filename);
+fluid.defaults("hortis.treeBuilder", {
+    gradeNames: "fluid.component",
+    taxonAPIFileBase: "e:/data/iNaturalist/taxonAPI",
+    mapFile: "data/Galiano/Galiano-map.json",
+    outputFile: "Life.json.lz4",
+    inputFiles: [],
+    members: {
+        // Mutable tree to which each file contributes its taxa
+        tree: "@expand:hortis.rootNode({that}.map)",
+        map: "@expand:hortis.loadMapWithCounts({that}.options.mapFile)"
+    },
+    invokers: {
+        applyRowsToTree: "hortis.applyRowsToTree({that}, {arguments}.1)", // rows
+        storeAtPath: "hortis.storeAtPath({that}, {arguments}.0, {arguments}.1)" // path, row
+    },
+    listeners: {
+        "onCreate.marmalise": "hortis.marmalise({that})"
+    }
+});
+
+hortis.marmalise = function (treeBuilder) {
+    var results = treeBuilder.options.inputFiles.map(function (fileName) {
+        var togo = fluid.promise();
+        var result = hortis.csvReaderWithMap({
+            inputFile: fileName,
+            mapColumns: treeBuilder.map.columns
+        }).completionPromise;
+        result.then(function (result) {
+            // console.log(JSON.stringify(result.rows[0], null, 2));
+            console.log("Applying " + result.rows.length + " rows from " + fileName);
+            treeBuilder.applyRowsToTree(fileName, result.rows);
+            togo.resolve();
+        }, function (error) {
+            fluid.fail(error);
+        });
+        return togo;
+    });
+
+    var fullResult = fluid.promise.sequence(results);
+    fullResult.then(function () {
+        hortis.flattenChildren(treeBuilder.tree);
+        // fs.writeFileSync("marmalised.json", JSON.stringify(treeBuilder.tree, null, 4));
+        var text = JSON.stringify(treeBuilder.tree);
+        hortis.writeLZ4File(text, treeBuilder.options.outputFile);
     });
 };
 
+
 var parsedArgs = minimist(process.argv.slice(2));
 
-var outputFile = parsedArgs.o || "Life.json.lz4";
-var mapFile = parsedArgs.map || "data/Galiano/Galiano-map.json";
-
-var map = hortis.readJSONSync(mapFile);
-hortis.parseCounts(map.counts);
-
-var tree = hortis.newTaxon("Life", "Life", 0, map.counts);
-
-var files = parsedArgs._;
-var results = files.map(function (file) {
-    var togo = fluid.promise();
-    var result = hortis.bagatelle.csvReader({
-        inputFile: file,
-        mapColumns: map.columns
-    }).completionPromise;
-    result.then(function (result) {
-        // console.log(JSON.stringify(result.rows[0], null, 2));
-        hortis.flatToTree(tree, result.rows, map.counts);
-        togo.resolve();
-    }, function (error) {
-        fluid.fail(error);
-    });
-    return togo;
-});
-
-var fullResult = fluid.promise.sequence(results);
-fullResult.then(function () {
-    hortis.flattenChildren(tree);
-    var text = JSON.stringify(tree);
-    hortis.writeLZ4File(text, outputFile);
+hortis.treeBuilder({
+    mapFile: parsedArgs.map,
+    outputFile: parsedArgs.o,
+    inputFiles: parsedArgs._
 });

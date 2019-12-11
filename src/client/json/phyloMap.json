@@ -1,0 +1,18 @@
+{
+    "kingdom:Animalia": {
+        "pic": "%resourceBase/img/Animalia_2.svg",
+        "colour": "#f26522"
+    },
+    "kingdom:Chromista": {
+        "pic": "%resourceBase/img/Chromista.svg",
+        "colour": "#009fd3"
+    },
+    "kingdom:Plantae": {
+        "pic": "%resourceBase/img/Plantae_2.svg",
+        "colour": "#8cc63f"
+    },
+    "kingdom:Protozoa": {
+        "pic": "%resourceBase/img/Protista.svg",
+        "colour": "#1eb28f"
+    }
+}

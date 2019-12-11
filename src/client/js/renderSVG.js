@@ -83,14 +83,14 @@ hortis.linearTextPath = function (leftAngle, rightAngle, innerRadius, outerRadiu
 hortis.segmentTextPath = function (startAngle, endAngle, outerRadius) {
     var cs = Math.cos(startAngle), ss = -Math.sin(startAngle),
         ce = Math.cos(endAngle), se = -Math.sin(endAngle),
-        ar = outerRadius - 0.015,
+        ar = outerRadius - 15,
         lfa = (+((endAngle - startAngle) >= Math.PI)).toString();
     return hortis.emitPath(["M", cs * ar, " ", ss * ar,
         "A", ar, " ", ar, " 0 ", lfa, " 0 ", ce * ar, " ", se * ar]);
 };
 
 hortis.circularTextPath = function (outerRadius) {
-    var ar = outerRadius - 0.015;
-    return hortis.emitPath(["M", "-0.0001 ", -ar,
-        "A", ar, " ", ar, " 0 1 0 ", "0.0001 ", -ar]);
+    var ar = outerRadius - 15;
+    return hortis.emitPath(["M", "-0.1 ", -ar,
+        "A", ar, " ", ar, " 0 1 0 ", "0.1 ", -ar]);
 };

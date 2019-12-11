@@ -1,6 +1,6 @@
 {
     "columns": {
-        "species": "Taxon",
+        "taxonName": "Taxon",
         "author": "Author",
         "commonName": "Common Name",
         "kingdom": "Kingdom",

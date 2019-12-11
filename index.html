@@ -46,17 +46,17 @@
         <script src="src/client/js/bagatelle.js"></script>
         <script src="src/client/js/autocomplete.js"></script>
 
-        <title>Bagatelle: Metchosin Species List December 2018 as Zoomable Sunburst</title>
+        <title>Bagatelle: Galiano Web of Life Preliminary Marine List</title>
     </head>
 
     <body>
-        <h2>Bagatelle: Metchosin Species List December 2018 as Zoomable Sunburst</h2>
+        <h2>Bagatelle: Galiano Web of Life Preliminary Marine List</h2>
         <div class="fl-bagatelle-container">
             <table><tr class="flc-bagatelle-autocomplete-row"><td>
                 <label for="fli-bagatelle-autocomplete">Select a taxon: </label>
                 <div class="fld-bagatelle-autocomplete"></div>
             <tr><td>
-            <svg width="1000" height="1000" viewBox="-1.1 -1.1 2.2 2.2" class="flc-bagatelle-svg">
+            <svg width="1000" height="1000" viewBox="-1100 -1100 2200 2200" class="flc-bagatelle-svg">
             </svg>
             </td><td class="fld-bagatelle-taxonDisplay">
             </td></tr>
@@ -65,8 +65,8 @@
         <script>
             hortis.sunburstLoader({
                 container: ".fl-bagatelle-container",
-                colourCount: "undocumentedCount",
-                treeFile: "data/Mayne/Life.json.lz4"});
+                // colourCount: "undocumentedCount",
+                treeFile: "data/Galiano WoL/Life.json.lz4"});
         </script>
     </body>
 </html>

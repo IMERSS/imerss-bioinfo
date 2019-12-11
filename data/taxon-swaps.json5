@@ -274,6 +274,10 @@
                 resolvedBy: "AB",
                 oldiNaturalistTaxonId: "50459",
             },
+            "Himatina triophina": {
+                resolvedBy: "AB",
+                notes: "Misspelling in PMLS",
+            },
         },
         iNaturalistTaxonId: "633561",
     },
@@ -804,5 +808,541 @@
             },
         },
         iNaturalistTaxonId: "81431"
+    }, // Beginning PMLS records here
+    "Melanochlamys diomedea": {
+        taxonNames: {
+            "Albatross Aglaja": {
+                type: "commonName",
+            },
+            "Aglaja diomedea": {
+                resolvedBy: "AB",
+                notes: "This is current in WoRMS, ITIS lags",
+                oldiNaturalistTaxonId: "49845",
+            },
+        },
+        iNaturalistTaxonId: "345334"
+    },    
+    "Celleporina robertsoniae": {
+        taxonNames: {
+            "Orange Bryozoan": {
+                type: "commonName",
+            },
+            "Celleprina robersoniae": {
+                notes: "Misspelling in PMLS",
+                resolvedBy: "AB",
+            },
+            "Celleporina robersoniae": {
+                notes: "Misspelling in Mayne",
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "485340"
+    },
+    "Antiopella fusca": {
+        taxonNames: {
+            "White-and-Orange-Tipped Nudibranch": {
+                type: "commonName",
+            },
+            "Antiopella fuscus": {
+                notes: "Misspelling in PMLS",
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "886884"
+    },
+    "Chaetopterus": {
+        taxonNames: {
+            "Parchment Tubeworms": {
+                type: "commonName",
+            },
+            "Chaeopterus": {
+                notes: "Misspelling in PMLS",
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "171303"
+    },
+    "Leptasterias hexactis": {
+        taxonNames: {
+            "Six-rayed Star": {
+                type: "commonName",
+            },
+            "Leptasterias aequalis": {
+                resolvedBy: "AB",
+                notes: "iNaturalist note: I realize this will probably be unpleasant to some, particularly those of us in the Bay Area, since the 4th edition Light's specifically mentions that L. hexactis is the invalid synonym, but this is how WoRMS treats these two species, and that's the authority we're trying to follow for marine inverts.",
+                oldiNaturalistTaxonId: "120883",
+            },
+        },
+        iNaturalistTaxonId: "117691"
+    },
+    "Puncturella cucullata": {
+        taxonNames: {
+            "Hooded Puncturella": {
+                type: "commonName",
+            },
+            "Cranopsis cucullata": {
+                resolvedBy: "AB",
+                notes: "This is current in WoRMS, ITIS lags",
+                oldiNaturalistTaxonId: "447404",
+            },
+        },
+        iNaturalistTaxonId: "904312"
+    },  
+    "Cyanea ferruginea": {
+        taxonNames: {
+            "Cyanea ferrugenia": {
+                notes: "Misspelling in PMLS",
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "786996"
+    },
+    "Ericthonius rubricornis": {
+        taxonNames: {
+            "Erichthonius rubricornis": {
+                notes: "Misspelling in PMLS",
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "552302"
+    },
+    "Gadus chalcogrammus": {
+        taxonNames: {
+            "Alaska Pollock": {
+                type: "commonName",
+            },
+            "Gadus chalcogramma": {
+                notes: "Misspelling in PMLS",
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "614161"
+    },
+    "Halecium beanii": {
+        taxonNames: {
+            "Halecium beani": {
+                notes: "Misspelling in PMLS",
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "668120"
+    },
+    "Halichondria sitiens": {
+        taxonNames: {
+            "Halicondria (Eumastia) sitiens": {
+                notes: "Misspelling in PMLS",
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "459775"
+    },
+    "Lepeophtheirus": {
+        taxonNames: {
+            "Lepeophtherius sp. B": {
+                notes: "Misspelling in PMLS",
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "329133"
+    },
+    "Oxydromus pugettensis": {
+        taxonNames: {
+            "Bat Star Worm": {
+                type: "commonName",
+            },
+            "Ophiodromus pugettensis": {
+                resolvedBy: "AB",
+                notes: "This is current in WoRMS, ITIS lags",
+                oldiNaturalistTaxonId: "339266",
+            },
+        },
+        iNaturalistTaxonId: "494514"
+    },
+    "Paciocinebrina interfossa": {
+        taxonNames: {
+            "Sculptured Rocksnail": {
+                type: "commonName",
+            },
+            "Ocinebrina interfossa": {
+                resolvedBy: "AB",
+                notes: "This is current in WoRMS, ITIS lags",
+                oldiNaturalistTaxonId: "129928",
+            },
+        },
+        iNaturalistTaxonId: "910801"
+    },  
+    "Paciocinebrina lurida": {
+        taxonNames: {
+            "Lurid Rocksnail": {
+                type: "commonName",
+            },
+            "Ocinebrina lurida": {
+                resolvedBy: "AB",
+                notes: "This is current in WoRMS, ITIS lags",
+                oldiNaturalistTaxonId: "129927",
+            },
+        },
+        iNaturalistTaxonId: "910800"
+    }, 
+    "Ophiura luetkenii": {
+        taxonNames: {
+            "Ophiura lüetkenii": {
+                notes: "Misspelling in PMLS and iNat",
+                resolvedBy: "AB",
+            },
+        },
+        iNaturalistTaxonId: "255865"
+    },
+    "Cistenides granulata": {
+        taxonNames: {
+            "Pectinaria granulata": {
+                resolvedBy: "AB",
+                notes: "WoRMS says that Pectinaria is accepted but Cistenides is preferred"
+            },
+        },
+        iNaturalistTaxonId: "464624"
+    }, 
+    "Stenogramma interruptum": {
+        taxonNames: {
+            "Stenogramma interrupta": {
+                resolvedBy: "AB",
+                notes: "This appears to be incorrect Latin but this is how it currently is in WoRMS"
+            },
+        },
+        iNaturalistTaxonId: "339049"
+    }, // From here Mayne Animalia
+    "Anas crecca carolinensis": {
+        taxonNames: {
+            "Anas carolinensis": {
+                resolvedBy: "AB",
+                notes: "Avibase and modern taxonomic sources support 'Anas carolinensis', however, iNaturalist is based on odd sources such as 'Clements checklist' and hence eBird which still stick to crecca (as does AOS)"
+            },
+        },
+        iNaturalistTaxonId: "123676"
+    },    
+    "Anser caerulescens": {
+        taxonNames: {
+            "Chen caerulescens": {
+                resolvedBy: "AB",
+                notes: "WP: The AOU and BirdLife International place this species and the other 'white geese' in the Chen genus, while other authorities follow the traditional treatment of placing these species in the 'gray goose' genus Anser"
+            },
+        },
+        iNaturalistTaxonId: "558426"
+    },    
+    "Glaucidium gnoma californicum": {
+        taxonNames: {
+            "Glaucidium californicum": {
+                resolvedBy: "AB",
+                notes: "WP: Some taxonomic authorities, including the IOU separates this species from [gnoma], while others, such as the AOU, do not. Results from DNA sequence comparisons of cytochrome-b have been weak and inconclusive."
+            },
+        },
+        iNaturalistTaxonId: "237013"
+    },  
+    "Peromyscus maniculatus": {
+        taxonNames: {
+            "Peromyscus maniculatus angustus": {
+                authority: "Hall, 1932",
+                resolvedBy: "AB",
+                notes: "ITIS considers this 'invalid - junior synonym' and it is not in MDD"
+            },
+        },
+        iNaturalistTaxonId: "44396"
+    },
+    "Apomatus geniculata": {
+        taxonNames: {
+            "Apomatus geniculatus": {
+                resolvedBy: "AB",
+                notes: "This name 'preferred' in WoRMS"
+            },
+        },
+        iNaturalistTaxonId: "936447"
+    },  
+    "Cortinicara gibbosa": {
+        taxonNames: {
+            "Cortinicaria gibbosa": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Mayne Animalia"
+            },
+        },
+        iNaturalistTaxonId: "174190"
+    },  
+    "Laqueus californianus": {
+        taxonNames: {
+            "Laqueus californicus": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Mayne Animalia"
+            },
+        },
+        iNaturalistTaxonId: "551350"
+    }, // From here Mayne Fungi
+    "Arthopyrenia plumbaria": {
+        taxonNames: {
+            "Arthopyrenia plumbea": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Mayne Animalia"
+            },
+        },
+        iNaturalistTaxonId: "214339"
+    },
+    "Pyrenodesmia olivacea": {
+        taxonNames: {
+            "Caloplaca olivacea": {
+                resolvedBy: "AB",
+                notes: "Swap from Mayne Animalia, listed as Caloplaca olivacea ined. but actually in http://www.indexfungorum.org/names/namesrecord.asp?RecordID=403029"
+            },
+        },
+        iNaturalistTaxonId: "940105"
+    },
+    "Circinaria caesiocinerea": {
+        taxonNames: {
+            "Aspicilia caesiocinerea": {
+                resolvedBy: "AB",
+                notes: "Circinaria is current in Species Fungorum",
+                oldiNaturalistTaxonId: "205532",
+            },
+            "Aspicilia caesiocinera": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Mayne Animalia",
+            },
+        },
+        iNaturalistTaxonId: "462704"
+    }, 
+    "Polycauliona bolacina": {
+        taxonNames: {
+            "Waxy Firedot Lichen": {
+                type: "commonName",
+            },
+            "Caloplaca bolacina": {
+                resolvedBy: "AB",
+                notes: "Polycauliona is current in Species Fungorum, but Placodium in Mycobank",
+                oldiNaturalistTaxonId: "117936",
+            },
+        },
+        iNaturalistTaxonId: "463823"
+    }, 
+    "Leproplaca chrysodeta": {
+        taxonNames: {
+            "Caloplaca chrysodeta": {
+                resolvedBy: "AB",
+                notes: "Leproplaca is current in Species Fungorum",
+                oldiNaturalistTaxonId: "215798",
+            },
+        },
+        iNaturalistTaxonId: "463369"
+    }, 
+    "Cladonia rangiferina": {
+        taxonNames: {
+            "Gray Reindeer Lichen": {
+                type: "commonName",
+            },
+            "Cladina rangiferina": {
+                resolvedBy: "AB",
+                notes: "Cladonia is current in Species Fungorum",
+                oldiNaturalistTaxonId: "632105",
+            },
+        },
+        iNaturalistTaxonId: "119778"
+    }, 
+    "Diplotomma penichrum": {
+        taxonNames: {
+            "Diplotomma penichra": {
+                resolvedBy: "AB",
+                notes: "Spelling as in Mycobase/NALH/Index Fungorum, even though wrong gender - does not appear in Species Fungorum!",
+            },
+        },
+        iNaturalistTaxonId: "218550"
+    }, 
+    "Hypocenomyce castaneocinerea": {
+        taxonNames: {
+            "Hypocenomyce castanocinerea": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Mayne Animalia - note that swap to Carbonicola myrmecina is pending",
+            },
+        },
+        iNaturalistTaxonId: "203992"
+    }, 
+    "Myriolecis dispersa": {
+        taxonNames: {
+            "Mortar Rim Lichen": {
+                type: "commonName",
+            },
+            "Lecanora dispersa": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "222855",
+            },
+        },
+        iNaturalistTaxonId: "532146"
+    }, 
+    "Mycobilimbia berengeriana": {
+        taxonNames: {
+            "Lecidea berengeriana": {
+                resolvedBy: "AB",
+                notes: "Current in Esslinger's checklist but not in Index Fungorum or Species Fungorum"
+            },
+            "Lecidea beringeriana": {
+                resolvedBy: "AB",
+                notes: "Typo in Mayne Animalia"
+            },
+        },
+        iNaturalistTaxonId: "225328"
+    }, 
+    "Montanelia sorediata": {
+        taxonNames: {
+            "Powdered Camouflage Lichen": {
+                type: "commonName",
+            },
+            "Melanelia sorediata": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "224577",
+            },
+        },
+        iNaturalistTaxonId: "463543"
+    }, 
+    "Ochrolechia subathallina": {
+        taxonNames: {
+            "Ochrolechia subthallina": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Mayne Animalia",
+            },
+        },
+        iNaturalistTaxonId: "226123"
+    }, 
+    "Usnea dasopoga": {
+        taxonNames: {
+            "Fishbone Beard Lichen": {
+                type: "commonName",
+            },
+            "Usnea dasypoga": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Mayne Animalia",
+            },
+        },
+        iNaturalistTaxonId: "532452"
+    }, 
+    "Polycauliona candelaria": {
+        taxonNames: {
+            "Shrubby Sunburst Lichen": {
+                type: "commonName",
+            },
+            "Xanthoria candelaria": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "117905",
+            },
+        },
+        iNaturalistTaxonId: "463825"
+    }, // From here Galiano Animalia
+    "Ochlerotatus togoi": {
+        taxonNames: {
+            "Aedes togoi": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "458901",
+            },
+        },
+        iNaturalistTaxonId: "774500"
+    },     
+    "Spatula clypeata": {
+        "Northern Shoveler": {
+            type: "commonName",
+        },
+        taxonNames: {
+            "Anas clypeata": {
+                resolvedBy: "AB",
+                notes: "Swap from \"Clements Checklist v2018\"",
+                oldiNaturalistTaxonId: "6961",
+            },
+        },
+        iNaturalistTaxonId: "558438"
+    },
+    "Patiria miniata": {
+        "Northern Shoveler": {
+            type: "commonName",
+        },
+        taxonNames: {
+            "Asterina miniata": {
+                resolvedBy: "AB",
+                notes: "kueda of 2014",
+                oldiNaturalistTaxonId: "255739",
+            },
+        },
+        iNaturalistTaxonId: "48830"
+    },
+    "Blapylis": {
+        taxonNames: {
+            "Blapylus": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Galiano Animalia"
+            }
+        },
+        iNaturalistTaxonId: "326234"
+    },
+    "Buprestis langii": {
+        taxonNames: {
+            "Buprestis langi": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Galiano Animalia"
+            }
+        },
+        iNaturalistTaxonId: "455225"
+    },
+    "Chlamys hastata": {
+        taxonNames: {
+            "Chlamys hastata hericia": {
+                resolvedBy: "AB",
+                notes: "ssp. not accepted at WoRMS"
+            }
+        },
+        iNaturalistTaxonId: "180013"
+    },
+    "Ziminella japonica": {
+        taxonNames: {
+            "Flabellina japonica": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "50454",
+            },
+        },
+        iNaturalistTaxonId: "877359"
+    },
+    "Meuniera membranacea": {
+        taxonNames: {
+            "Navicula membranacea": {
+                resolvedBy: "AB",
+                notes: "Current status of Meuniera in WoRMS is \"uncertain\"",
+            },
+        },
+        iNaturalistTaxonId: "484128"
+    },
+    "Phyllochaetopterus prolifica": {
+        taxonNames: {
+            "Phyllochaeopterus prolifica": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Galiano Marine Animalia"
+            }
+        },
+        iNaturalistTaxonId: "467241"
+    },
+    "Pylaiella": {
+        taxonNames: {
+            "Pilayella": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Galiano Marine Animalia"
+            }
+        },
+        iNaturalistTaxonId: "202294"
+    },
+    "Haliclona": {
+        taxonNames: {
+            "Reniera": {
+                resolvedBy: "AB",
+            }
+        },
+        iNaturalistTaxonId: "129864"
+    },
+    "Membraneis challengeri": {
+        taxonNames: {
+            "Tropidoneis antarctica": {
+                resolvedBy: "AB",
+            }
+        },
+        iNaturalistTaxonId: "521233"
     },
 }
