@@ -6,16 +6,16 @@ var fluid = require("infusion");
 var minimist = require("minimist");
 
 require("./dataProcessing/readCSV.js");
-require("./dataProcessing/filterFirst.js");
+require("./dataProcessing/summarise.js");
 
 var hortis = fluid.registerNamespace("hortis");
 
-fluid.defaults("hortis.filterFirst.csvReader", {
-    gradeNames: "hortis.filterFirst",
+fluid.defaults("hortis.summarise.csvReader", {
+    gradeNames: "hortis.summarise",
     outputFile: null,
     listeners: {
         "onHeaders.validateHeaders": {
-            funcName: "hortis.filterFirst.validateHeaders",
+            funcName: "hortis.summarise.validateHeaders",
             args: ["{that}.headers", "{that}.options.dateField", "{that}.options.uniqueField", "{that}.events.onError"]
         },
         "onRow.storeRow": "{that}.storeRow",
@@ -26,7 +26,7 @@ fluid.defaults("hortis.filterFirst.csvReader", {
     }
 });
 
-hortis.filterFirst.validateHeaders = function (headers, dateField, uniqueField, onError) {
+hortis.summarise.validateHeaders = function (headers, dateField, uniqueField, onError) {
     if (!headers.includes(dateField)) {
         onError.fire("Date field " + dateField + " not found in headers ", headers);
     }
@@ -39,7 +39,7 @@ var parsedArgs = minimist(process.argv.slice(2));
 
 var outputFile = parsedArgs.o || "filtered.csv";
 
-var that = hortis.filterFirst.csvReader({
+var that = hortis.summarise.csvReader({
     uniqueField: "Taxon name",
     dateField: "Date observed",
     inputFile: "data/Galiano/Galiano_marine_species_catalogue.csv",

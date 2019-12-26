@@ -13,7 +13,12 @@
 }
 
 .flc-bagatelle-svg {
-    font-size: 30px
+    font-size: 30px;
+}
+
+.fld-bagatelle-map {
+    width: 800px;
+    height: 600px;
 }
 
 .ui-tooltip {

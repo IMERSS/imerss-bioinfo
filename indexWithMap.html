@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="node_modules/infusion/src/lib/normalize/css/normalize.css" />
+        <link rel="stylesheet" href="node_modules/infusion/src/lib/jquery/ui/css/default-theme/jquery-ui.css"></script>
+        <link rel="stylesheet" type="text/css" href="node_modules/infusion/src/framework/core/css/fluid.css" />
+        <link rel="stylesheet" type="text/css" href="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+
+        <script src="node_modules/infusion/src/lib/jquery/core/js/jquery.js"></script>
+        <script src="node_modules/infusion/src/lib/jquery/ui/js/jquery-ui.js"></script>
+
+        <script src="node_modules/infusion/src/lib/fastXmlPull/js/fastXmlPull.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/jquery.keyboard-a11y.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/Fluid.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/FluidPromises.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/FluidDebugging.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/FluidDocument.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/FluidRequests.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/FluidIoC.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/DataBinding.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/ModelTransformation.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/ModelTransformationTransforms.js"></script>
+        <script src="node_modules/infusion/src/framework/enhancement/js/ContextAwareness.js"></script>
+        <script src="node_modules/infusion/src/framework/enhancement/js/ProgressiveEnhancement.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/FluidView.js"></script>
+        <script src="node_modules/infusion/src/framework/core/js/ResourceLoader.js"></script>
+        <script src="node_modules/infusion/src/framework/renderer/js/fluidParser.js"></script>
+
+        <script src="node_modules/infusion/src/components/inlineEdit/js/InlineEdit.js"></script>
+
+        <script src="node_modules/infusion/src/components/tooltip/js/Tooltip.js"></script>
+
+        <script src="node_modules/fluid-authoring/src/client/js/ViewComponentSupport.js"></script>
+
+        <script src="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js"></script>
+        <script src="data/Galiano/Galiano_map_0.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+        <script src="src/lib/lz4.js"></script>
+        <script src="src/lib/jquery.binarytransport.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="src/client/css/bagatelle.css"/>
+
+        <script src="src/client/js/colour.js"></script>
+        <script src="src/client/js/renderSVG.js"></script>
+        <script src="src/client/js/bagatelle.js"></script>
+        <script src="src/client/js/leafletMap.js"></script>
+        <script src="src/client/js/autocomplete.js"></script>
+
+        <title>Bagatelle: Galiano Data Paper Preliminary Marine List</title>
+    </head>
+
+    <body>
+        <h2>Bagatelle: Galiano Data Paper Preliminary Marine List</h2>
+        <div class="fl-bagatelle-container">
+            <table><tr><td>
+            <div class="fld-bagatelle-map">
+            </div>
+            </td><td>
+            <table><tr class="flc-bagatelle-autocomplete-row"><td>
+                <label for="fli-bagatelle-autocomplete">Select a taxon: </label>
+                <div class="fld-bagatelle-autocomplete"></div>
+            <tr>
+            <td>
+            <svg width="800" height="800" viewBox="-1100 -1100 2200 2200" class="flc-bagatelle-svg">
+            </svg>
+            </td>
+            <td class="fld-bagatelle-taxonDisplay">
+            </td></tr>
+            </table>
+            </td></tr>
+            </table>
+        </div>
+        <script>
+            hortis.sunburstLoaderWithMap({
+                container: ".fl-bagatelle-container",
+                colourCount: "observationCount",
+                geoJSONMapLayers: [json_Galiano_map_0],
+                treeFile: "data/Galiano PMLS/PMLS-Life.json.lz4"});
+        </script>
+    </body>
+</html>

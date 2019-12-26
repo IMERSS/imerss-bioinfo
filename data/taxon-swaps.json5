@@ -929,7 +929,7 @@
     },
     "Halichondria sitiens": {
         taxonNames: {
-            "Halicondria (Eumastia) sitiens": {
+            "Halicondria sitiens": {
                 notes: "Misspelling in PMLS",
                 resolvedBy: "AB",
             },
@@ -938,7 +938,7 @@
     },
     "Lepeophtheirus": {
         taxonNames: {
-            "Lepeophtherius sp. B": {
+            "Lepeophtherius": {
                 notes: "Misspelling in PMLS",
                 resolvedBy: "AB",
             },
@@ -1344,5 +1344,28 @@
             }
         },
         iNaturalistTaxonId: "521233"
+    },
+    "Mopalia kennerleyi": {
+        taxonNames: {
+            "Mopalia kennerelyi": {
+                resolvedBy: "AB",
+                notes: "Misspelling in PMLS"
+            },
+            "Mopalia kennerlyi": {
+                resolvedBy: "AB",
+                notes: "Misspelling in PMLS"
+            }            
+        },
+        iNaturalistTaxonId: "360858"
+    },
+    "Didemnidae": {
+        taxonNames: {
+            "Didemnum/Trididemnum": {
+                resolvedBy: "AB",
+                notes: "PMLS resolution",
+                criticalNotes: "Didemnum spp. in our dive log data for Galiano Island is most likely via our Didemnun/Trididemnum category. This category has traditionally been used for encrusting whitish compound tunicate that often forms large sheets . We have followed this procedure based upon Gretchen Lambert's advice. An impossible task to go further in the field and without specimen sampling."
+            }
+        },
+        iNaturalistTaxonId: "54931"
     },
 }

@@ -9,7 +9,7 @@ require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
 require("./dataProcessing/writeCSV.js");
-require("./dataProcessing/filterFirst.js");
+require("./dataProcessing/summarise.js");
 require("./utils/settleStructure.js");
 
 fluid.setLogging(true);
@@ -79,6 +79,7 @@ hortis.sanitizeSpeciesName = function (name) {
             name = name.substring(0, index);
         }
     });
+    name = name.replace("�", "ue");
     name = name.replace(/ (\(.*\))/g, "");
     name = name.replace(" ssp.", "");
     name = name.replace(" grp.", "");
@@ -86,8 +87,8 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace(" ined.", "");
     name = name.replace(" aff.", "");
     name = name.replace(" s.lat.", "");
-    name = name.replace(" complex", "");
     name = name.replace(" species complex", "");
+    name = name.replace(" complex", "");
     name = name.replace(" cf ", " ");
     name = name.replace(" x ", " × ");
     return name;
@@ -125,14 +126,18 @@ hortis.blankRow = function (row) {
     });
 };
 
-hortis.doFilterFirst = function (outrows, summarise) {
-    var that = hortis.filterFirst({
+hortis.doSummarise = function (outrows, summarise) {
+    var that = hortis.summarise({
         dateField: dataOutMap.dateField,
         uniqueField: dataOutMap.uniqueField
     });
     outrows.forEach(that.storeRow);
     that.destroy();
-    if (!summarise && Object.keys(that.discardedRows).length) {
+    if (summarise) {
+        fluid.each(that.uniqueRows, function (row) {
+            row.coords = row.coords && JSON.stringify(row.coords);
+        });
+    } else if (Object.keys(that.discardedRows).length) {
         var outDiscards = [];
         console.log("Warning: the following rows were discarded as duplicates:");
         fluid.each(that.discardedRows, function (discardedRows) {
@@ -157,7 +162,7 @@ hortis.writeReintegratedObservations = function (fileName, observations, taxaByI
             outrows.push(outrow);
         }
     });
-    outrows = hortis.doFilterFirst(outrows, summarise);
+    outrows = hortis.doSummarise(outrows, summarise);
 
     var promise = fluid.promise();
     hortis.writeCSV(fileName, dataOutMap.columns, outrows, promise);

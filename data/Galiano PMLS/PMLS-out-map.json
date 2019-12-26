@@ -15,15 +15,11 @@
         "subfamily": "Subfamily",
         "tribe": "Tribe",
         "genus": "Genus",
+        "species": "Species",
         "dateObserved": "Date observed",
         "description": "Description",
         "placeName": "Place name",
-        "latitude": "Latitude",
-        "longitude": "Longitude",
-        "tags": "Tags",
-        "geoPrivacy": "Geoprivacy",
-        "maxDepth": "Max. depth",
-        "bottomTime": "Bottom time",
+        "coords": "Coordinates",
         "commonName": "Common name",
         "observerName": "Observer name",
         "iNaturalistTaxonName": "iNaturalist taxon name",
@@ -37,5 +33,5 @@
         }
     },
     "dateField": "dateObserved",
-    "uniqueField": "taxonName"
+    "uniqueField": "iNaturalistTaxonName"
 }

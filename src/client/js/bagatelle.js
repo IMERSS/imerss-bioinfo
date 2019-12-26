@@ -211,9 +211,6 @@ fluid.defaults("hortis.sunburst", {
             args: ["{that}", "{change}.value"]
         }
     },
-    events: {
-        zoomCompleted: null
-    },
     listeners: {
         "onCreate.doLayout": {
             func: "hortis.doLayout",

@@ -76,7 +76,7 @@ hortis.logWork = function (that) {
 
 hortis.noteSkip = function (that, message) {
     ++that.skipCount;
-    if (that.skipCount % 100 === 0) {
+    if (that.skipCount % 1000 === 0) {
         console.log(message);
         hortis.logWork(that);
     }
@@ -85,6 +85,7 @@ hortis.noteSkip = function (that, message) {
 hortis.queueFetchWork = function (queue) {
     var that = {
         queue: queue,
+        cache: {},
         skipCount: 0,
         fetched: []
     };
@@ -93,9 +94,13 @@ hortis.queueFetchWork = function (queue) {
             var head = that.queue.shift();
             var filename = hortis.iNatTaxa.filenameFromTaxonId(taxonAPIFileBase, head.id);
             var doc;
-            if (fs.existsSync(filename)) {
+            if (that.cache[filename] || fs.existsSync(filename)) {
                 hortis.noteSkip(that, "File " + filename + " exists, skipping");
-                doc = hortis.readJSONSync(filename);
+                doc = that.cache[filename];
+                if (!doc) {
+                    doc = hortis.readJSONSync(filename);
+                    that.cache[filename] = doc;
+                }
                 hortis.enqueueAncestry(doc, that.queue);
                 fluid.invokeLater(oneWork);
             } else {
