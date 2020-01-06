@@ -1,0 +1,15 @@
+{
+    inputs: {
+        iNat: {
+            input: "%bagatelle/data/iNaturalist/Galiano_iNat_marine_observations_2019_09_08.csv",
+            map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map.json",
+            outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json"
+        },
+        PMLS: {
+            input: "%bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2019-10-13.csv",
+            map: "%bagatelle/data/Galiano PMLS/PMLS-map.json",
+            outMap: "%bagatelle/data/Galiano PMLS/PMLS-out-map.json"
+        }
+    },
+    output: "%bagatelle/reintegrated.csv"
+}

@@ -11,6 +11,7 @@ require("./dataProcessing/readCSVwithMap.js");
 require("./dataProcessing/writeCSV.js");
 require("./dataProcessing/summarise.js");
 require("./utils/settleStructure.js");
+require("./iNaturalist/iNatUrls.js");
 
 fluid.setLogging(true);
 fluid.defeatLogging = true;

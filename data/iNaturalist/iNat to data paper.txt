@@ -1,0 +1,6 @@
+1. Summarize all the marine phyla
+2. Query iNat for CSV outputs of all observations of each phylum
+3. Merge CSVs
+4. Sort by Genus
+5. Delete everything that has a missing value in that field (everything that hasn't been IDed to Genus)
+6. Delete terrestrial species within those phyla

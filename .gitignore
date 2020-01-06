@@ -2,3 +2,5 @@ node_modules
 .project
 package-lock.json
 build
+/node_modules
+/node_modules

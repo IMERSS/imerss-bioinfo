@@ -1,15 +1,16 @@
 {
     "columns": {
-        "observedDay": "observed_on",
-        "observedBy": "user_login",
-        "createdAt": "created_at",
-        "url": "url",
+        "dateObserved": "observed_on",
+        "observerName": "user_login",
+        "iNaturalistObsLink": "url",
         "imageUrl": "image_url",
         "latitude": "latitude",
         "longitude": "longitude",
-        "coordinatesObscured": "coordinates_obscured",
-        "scientificName": "scientific_name",
+        "taxonName": "scientific_name",
         "commonName": "common_name",
-        "taxonId": "taxon_id"
-    }
+        "iNaturalistTaxonId": "taxon_id"
+    },
+    "datasetId": "iNat",
+    "datasetClass": "citizen",
+    "id": "hortis.iNaturalistObsFromUrl(%iNaturalistObsLink)"
 }

@@ -12,5 +12,8 @@
         "maxDepth": "Max. depth",
         "bottomTime": "Bottom time",
         "observerName": "Observer name"
-    }
+    },
+    "datasetId": "PMLS",
+    "datasetClass": "naturalist",
+    "id": "%rowNumber"
 }
