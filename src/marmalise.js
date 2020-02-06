@@ -4,6 +4,7 @@
 
 var fluid = require("infusion");
 var minimist = require("minimist");
+var fs = require("fs");
 
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
@@ -173,6 +174,10 @@ fluid.defaults("hortis.treeBuilder", {
     }
 });
 
+hortis.filterDataset = function (dataset) {
+    return fluid.filterKeys(dataset, ["name", "colour"]);
+};
+
 hortis.marmalise = function (treeBuilder) {
     var results = treeBuilder.options.inputFiles.map(function (fileName) {
         var togo = fluid.promise();
@@ -194,8 +199,12 @@ hortis.marmalise = function (treeBuilder) {
     var fullResult = fluid.promise.sequence(results);
     fullResult.then(function () {
         hortis.flattenChildren(treeBuilder.tree);
-        // fs.writeFileSync("marmalised.json", JSON.stringify(treeBuilder.tree, null, 4));
-        var text = JSON.stringify(treeBuilder.tree);
+        var output = {
+            datasets: fluid.transform(treeBuilder.map.datasets, hortis.filterDataset),
+            tree: treeBuilder.tree
+        };
+        fs.writeFileSync("marmalised.json", JSON.stringify(output, null, 4));
+        var text = JSON.stringify(output);
         hortis.writeLZ4File(text, treeBuilder.options.outputFile);
     });
 };

@@ -20,7 +20,7 @@ hortis.writeCSV = function (fileName, headersOrMap, rows, completionPromise) {
     });
     var promise = csvWriter.writeRecords(arrayRows);
     promise.then(function () {
-        fluid.log("Written CSV file ", fileName);
+        fluid.log("Written " + arrayRows.length + " lines to CSV file ", fileName);
     });
     fluid.promise.follow(promise, completionPromise);
 };

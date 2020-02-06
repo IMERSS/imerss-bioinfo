@@ -10,7 +10,8 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 
         <script src="node_modules/infusion/src/lib/jquery/core/js/jquery.js"></script>
-        <script src="node_modules/infusion/src/lib/jquery/ui/js/jquery-ui.js"></script>
+        <script src="node_modules/infusion/src/lib/jquery/ui/js/version.js"></script>
+        <script src="node_modules/infusion/src/lib/jquery/ui/js/keycode.js"></script>
 
         <script src="node_modules/infusion/src/lib/fastXmlPull/js/fastXmlPull.js"></script>
         <script src="node_modules/infusion/src/framework/core/js/jquery.keyboard-a11y.js"></script>
@@ -28,8 +29,6 @@
         <script src="node_modules/infusion/src/framework/core/js/FluidView.js"></script>
         <script src="node_modules/infusion/src/framework/core/js/ResourceLoader.js"></script>
         <script src="node_modules/infusion/src/framework/renderer/js/fluidParser.js"></script>
-
-        <script src="node_modules/infusion/src/components/inlineEdit/js/InlineEdit.js"></script>
 
         <script src="node_modules/infusion/src/components/tooltip/js/Tooltip.js"></script>
 
@@ -57,7 +56,11 @@
         <h2>Bagatelle: Galiano Data Paper Preliminary Marine List</h2>
         <div class="fl-bagatelle-container">
             <table><tr><td>
-            <div class="fld-bagatelle-map">
+            <div class="fld-bagatelle-map-holder">
+                <div class="fld-bagatelle-map">
+                </div>
+                <div class="fld-bagatelle-dataset-controls">
+                </div>
             </div>
             </td><td>
             <table><tr class="flc-bagatelle-autocomplete-row"><td>
@@ -79,7 +82,7 @@
                 container: ".fl-bagatelle-container",
                 colourCount: "observationCount",
                 geoJSONMapLayers: [json_Galiano_map_0],
-                treeFile: "data/Galiano PMLS/PMLS-Life.json.lz4"});
+                vizFile: "data/dataPaper/Life.json.lz4"});
         </script>
     </body>
 </html>

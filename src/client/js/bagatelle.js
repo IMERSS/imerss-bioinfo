@@ -24,8 +24,8 @@ fluid.defaults("hortis.sunburstLoader", {
     },
     queryOnStartup: "",
     resources: {
-        tree: {
-            url: "{that}.options.treeFile",
+        viz: {
+            url: "{that}.options.vizFile",
             dataType: "binary",
             options: {
                 processData: false,
@@ -65,7 +65,8 @@ fluid.defaults("hortis.sunburstLoader", {
                 container: "{sunburstLoader}.container",
                 gradeNames: "{sunburstLoader}.resolveColourStrategy",
                 colourCount: "{sunburstLoader}.options.colourCount",
-                tree: "@expand:hortis.decompressLZ4({sunburstLoader}.resources.tree.resourceText)",
+                viz: "@expand:hortis.decompressLZ4({sunburstLoader}.resources.viz.resourceText)",
+                tree: "{that}.options.viz.tree",
                 queryOnStartup: "{sunburstLoader}.options.queryOnStartup"
             }
         }

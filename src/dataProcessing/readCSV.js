@@ -49,7 +49,9 @@ hortis.csvReader.storeHeaders = function (that, headers) {
 };
 
 hortis.csvReader.rejector = function (that, error) {
-    that.completionPromise.reject("Error at line " + that.line + " reading file " + that.options.inputFile + ": " + error);
+    that.completionPromise.reject({
+        message: "Error at line " + that.line + " reading file " + that.options.inputFile + ": " + error
+    });
 };
 
 hortis.csvReader.bindStream = function (that) {
@@ -65,7 +67,9 @@ hortis.csvReader.bindStream = function (that) {
     });
     that.rowStream.on("end", function () {
         console.log("Read " + that.line + " lines in " + (Date.now() - now) + " ms");
-        that.events.onCompletion.fire();
+        if (!that.completionPromise.disposition) {
+            that.events.onCompletion.fire();
+        }
     });
 };
 
@@ -85,7 +89,6 @@ hortis.csvFileReader.openFileStream = function (that) {
     );
 };
 
-// TODO: Fix all these namespaces
 fluid.defaults("hortis.storingCSVReader", {
     members: {
         rows: []

@@ -12,9 +12,13 @@ fluid.defaults("hortis.summarise", {
         uniqueRows: {},
         discardedRows: {}
     },
-    dateField: null,
-    uniqueField: null,
-    obsCountField: "observationCount",
+    fields: {
+        date: "dateObserved",
+        unique: "iNaturalistTaxonName", // Field which identifies observations as being of the same taxon
+        obsCount: "observationCount",
+        obsId: "observationId",
+        coords: "coords"
+    },
     invokers: {
         storeRow: "hortis.summarise.storeRow({that}, {arguments}.0)"
     }
@@ -25,27 +29,26 @@ hortis.parseFloat = function (str) {
     return isNaN(str) ? NaN : parseFloat(str);
 };
 
-hortis.summarise.pushCoordinates = function (existing, row) {
+hortis.summarise.pushCoordinates = function (existing, row, coordsField, obsId) {
     var latitude = hortis.parseFloat(row.latitude);
     var longitude = hortis.parseFloat(row.longitude);
     if (!isNaN(latitude) && !isNaN(longitude)) {
-        var coords = existing.coords;
-        if (!coords) {
-            coords = existing.coords = [];
-        }
-        coords.push([latitude, longitude]);
+        fluid.set(existing, [coordsField, obsId], [latitude, longitude]);
     };
 };
 
 hortis.summarise.storeRow = function (that, row) {
-    var obsCountField = that.options.obsCountField;
-    row.timestamp = Date.parse(row[that.options.dateField]);
-    var uniqueVal = row[that.options.uniqueField];
+    var fields = that.options.fields;
+    var obsCountField = fields.obsCount;
+    var coordsField = fields.coords;
+    row.timestamp = Date.parse(row[fields.date]);
+    var uniqueVal = row[fields.unique];
     var existing = that.uniqueRows[uniqueVal];
     if (existing) {
         if (row.timestamp < existing.timestamp) {
             that.uniqueRows[uniqueVal] = row;
             row[obsCountField] = existing[obsCountField];
+            row[coordsField] = existing[coordsField];
         } else {
             var discardEntry = that.discardedRows[uniqueVal];
             if (!discardEntry) {
@@ -58,5 +61,9 @@ hortis.summarise.storeRow = function (that, row) {
         existing = that.uniqueRows[uniqueVal] = row;
         row[obsCountField] = 1;
     }
-    hortis.summarise.pushCoordinates(existing, row);
+    var obsId = row[fields.obsId];
+    if (obsId === undefined) {
+        fluid.fail("Unable to find unique observation field for row ", row);
+    }
+    hortis.summarise.pushCoordinates(existing, row, coordsField, obsId);
 };

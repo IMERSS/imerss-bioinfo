@@ -13,7 +13,7 @@ fluid.defaults("hortis.csvReaderWithMap", {
     listeners: {
         "onHeaders.validateHeaders": {
             funcName: "hortis.validateHeaders",
-            args: ["{that}.options.map", "{that}.headers", "{that}.events.onError"]
+            args: ["{that}.options.mapColumns", "{that}.headers", "{that}.events.onError"]
         },
         "onRow.storeRow": "hortis.storeRow({that}, {arguments}.0)"
     }
@@ -35,6 +35,9 @@ hortis.storeRow = function (that, row) {
 };
 
 hortis.validateHeaders = function (mapColumns, headers, onError) {
+    if (!mapColumns || mapColumns.length === 0) {
+        fluid.fail("Error in csvReaderWithMap - no mapColumns were supplied");
+    }
     fluid.each(mapColumns, function (label) {
         if (headers.indexOf(label) === -1) {
             onError.fire("Error in headers - field " + label + " required in map file was not found");

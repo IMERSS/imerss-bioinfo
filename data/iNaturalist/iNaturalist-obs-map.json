@@ -7,10 +7,9 @@
         "latitude": "latitude",
         "longitude": "longitude",
         "taxonName": "scientific_name",
-        "commonName": "common_name",
         "iNaturalistTaxonId": "taxon_id"
     },
     "datasetId": "iNat",
     "datasetClass": "citizen",
-    "id": "hortis.iNaturalistObsFromUrl(%iNaturalistObsLink)"
+    "observationId": "hortis.iNaturalistObsFromUrl(%iNaturalistObsLink)"
 }

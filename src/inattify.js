@@ -7,6 +7,7 @@ var fs = require("fs");
 var kettle = require("kettle");
 var minimist = require("minimist");
 
+require("./utils/utils.js");
 require("./utils/settleStructure.js");
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");

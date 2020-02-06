@@ -15,5 +15,5 @@
     },
     "datasetId": "PMLS",
     "datasetClass": "naturalist",
-    "id": "%rowNumber"
+    "observationId": "%rowNumber"
 }

@@ -14,10 +14,10 @@ hortis.settleStructure = function (structure) {
         inSync: true, // Are we still in synchronous scanning - necessary to avoid double resolution on hitting unresolved === 0 on initial scan
         unresolved: 0,
         depth: 0,
-        togo: fluid.promise(),
+        promise: fluid.promise(),
         structure: structure,
         resolve: function () {
-            settleRec.togo.resolve(structure);
+            settleRec.promise.resolve(structure);
         }
     };
     hortis.settleStructureRecurse(structure, settleRec);
@@ -25,7 +25,7 @@ hortis.settleStructure = function (structure) {
     if (settleRec.unresolved === 0) { // Case of 0 asynchronous promises found
         settleRec.resolve();
     }
-    return settleRec.togo;
+    return settleRec.promise;
 };
 
 hortis.settleStructureRecurse = function (structure, settleRec) {
@@ -54,7 +54,9 @@ hortis.settleStructurePush = function (settleRec, holder, promise, key) {
             settleRec.resolve();
         }
     }, function (err) {
-        settleRec.togo.reject(fluid.upgradeError(err, " while resolving promise with key " + key));
+        if (!settleRec.promise.disposition) {
+            settleRec.promise.reject(hortis.upgradeError(err, " while resolving promise with key " + key));
+        }
     });
 };
 

@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
         <link rel="stylesheet" type="text/css" href="css/bagatelle-all.css" />
         <script src="../node_modules/infusion/src/lib/jquery/core/js/jquery.js"></script>
         <script src="js/bagatelle-all.js"></script>
-        <title>Bagatelle: Biodiversity Galiano Species List December 2018 as Zoomable Sunburst</title>
+        <script src="data/Galiano/Galiano_map_0.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <title>Bagatelle: Galiano Data Paper Preliminary Marine List</title>
     </head>
 
     <body>
-        <h2>Bagatelle: Biodiversity Galiano Species List December 2018 as Zoomable Sunburst</h2>
+        <h2>Bagatelle: Galiano Data Paper Preliminary Marine List</h2>
         <div class="fl-bagatelle-container">
         </div>
         <script>
-            hortis.sunburstLoader({
+            hortis.sunburstLoaderWithMap({
                 container: ".fl-bagatelle-container",
                 resourceBase: ".",
                 renderMarkup: true,
-//                queryOnStartup: "Arachnida",
-                treeFile: "data/Galiano WoL/Life.json.lz4"});
+                colourCount: "observationCount",
+                geoJSONMapLayers: [json_Galiano_map_0],
+                vizFile: "data/dataPaper/Life.json.lz4"});
         </script>
     </body>
 </html>

@@ -19,6 +19,7 @@ var buildIndex = {
         "src/client/js/bagatelle.js",
         "src/client/js/autocomplete.js",
         "src/client/js/colour.js",
+        "src/client/js/leafletMap.js",
         "src/client/js/renderSVG.js"
     ],
     codeHeader: "",
@@ -32,15 +33,18 @@ var buildIndex = {
     }, {
         src: "src/client/html/bagatelle.html",
         dest: "build/html/bagatelle.html"
+    },  {
+        src: "src/client/html/bagatelle-map.html",
+        dest: "build/html/bagatelle-map.html"
     }, {
         src: "src/buildTest/index.html",
         dest: "build/index.html"
     }, {
-        src: "data/Galiano-Life.json.lz4",
-        dest: "build/data/Galiano-Life.json.lz4"
+        src: "data/dataPaper/Life.json.lz4",
+        dest: "build/data/dataPaper/Life.json.lz4"
     }, {
-        src: "data/Valdes-Life.json.lz4",
-        dest: "build/data/Valdes-Life.json.lz4"
+        src: "data/Galiano/Galiano_map_0.js",
+        dest: "build/data/Galiano/Galiano_map_0.js"
     }, {
         src: "data/Galiano WoL/Life.json.lz4",
         dest: "build/data/Galiano WoL/Life.json.lz4"
