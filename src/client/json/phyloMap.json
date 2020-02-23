@@ -14,5 +14,45 @@
     "kingdom:Protozoa": {
         "pic": "%resourceBase/img/Protista.svg",
         "colour": "#1eb28f"
+    },
+    "phylum:Annelida": {
+        "pic": "%resourceBase/img/Animalia_Annelida.svg",
+        "colour": "#f26522"
+    },
+    "phylum:Chaetognatha": {
+        "pic": "%resourceBase/img/Animalia_Chaetognatha.svg",
+        "colour": "#f26522"
+    },
+    "phylum:Cnidaria": {
+        "pic": "%resourceBase/img/Animalia_Cnidaria.svg",
+        "colour": "#f26522"
+    },
+    "phylum:Ctenophora": {
+        "pic": "%resourceBase/img/Animalia_Ctenophora.svg",
+        "colour": "#f26522"
+    },
+    "phylum:Nemertea": {
+        "pic": "%resourceBase/img/Animalia_Nemertea.svg",
+        "colour": "#f26522"
+    },
+    "phylum:Phoronida": {
+        "pic": "%resourceBase/img/Animalia_Phoronida.svg",
+        "colour": "#f26522"
+    },
+    "phylum:Porifera": {
+        "pic": "%resourceBase/img/Animalia_Porifera.svg",
+        "colour": "#f26522"
+    },
+    "phylum:Platyhelminthes": {
+        "pic": "%resourceBase/img/Animalia_Platyhelminthes.svg",
+        "colour": "#f26522"
+    },
+    "phylum:Sipuncula": {
+        "pic": "%resourceBase/img/Animalia_Sipuncula.svg",
+        "colour": "#f26522"
+    },
+    "life:Life": {
+        "taxonPic": "%resourceBase/img/Plankton.jpg",
+        "taxonPicDescription": "<em>\"The Importance of Plankton\"</em> by Susan Taylor"
     }
 }

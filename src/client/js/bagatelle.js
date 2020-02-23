@@ -23,6 +23,7 @@ fluid.defaults("hortis.sunburstLoader", {
         resourceBase: "{that}.options.resourceBase"
     },
     queryOnStartup: "",
+    selectOnStartup: "",
     resources: {
         viz: {
             url: "{that}.options.vizFile",
@@ -67,7 +68,8 @@ fluid.defaults("hortis.sunburstLoader", {
                 colourCount: "{sunburstLoader}.options.colourCount",
                 viz: "@expand:hortis.decompressLZ4({sunburstLoader}.resources.viz.resourceText)",
                 tree: "{that}.options.viz.tree",
-                queryOnStartup: "{sunburstLoader}.options.queryOnStartup"
+                queryOnStartup: "{sunburstLoader}.options.queryOnStartup",
+                selectOnStartup: "{sunburstLoader}.options.selectOnStartup"
             }
         }
     }
@@ -230,7 +232,7 @@ fluid.defaults("hortis.sunburst", {
         "onCreate.applyPhyloMap": {
             funcName: "hortis.applyPhyloMap",
             args: ["{sunburstLoader}.resources.phyloMap.resourceText", "{that}.flatTree", "{sunburstLoader}.options.terms"],
-            priority: "before:render"
+            priority: "before:computeInitialScale"
         },
         "onCreate.render": {
             func: "{that}.render",
@@ -309,30 +311,40 @@ hortis.rowToPhyloIndex = function (row) {
     return row.rank + ":" + row.iNaturalistTaxonName;
 };
 
-hortis.paintChildren = function (row, parsed) {
+hortis.colourChildren = function (row, parsed) {
     row.lowColour = parsed.lowColour;
     row.highColour = parsed.highColour;
     row.children.forEach(function (child) {
-        hortis.paintChildren(child, parsed);
+        hortis.colourChildren(child, parsed);
     });
 };
 
 hortis.applyPhyloMap = function (phyloMap, rows, terms) {
     var parsedMap = fluid.transform(phyloMap, function (onePhylo) {
-        var parsedColour = fluid.colour.hexToArray(onePhylo.colour);
-        var hsl = fluid.colour.rgbToHsl(parsedColour);
-        return {
-            phyloPicUrl: fluid.stringTemplate(onePhylo.pic, terms),
-            lowColour: fluid.colour.hslToRgb([hsl[0], hsl[1], hsl[2] * 0.2 + 0.8]),
-            highColour: fluid.colour.hslToRgb([hsl[0], hsl[1], hsl[2] * 0.8 + 0.2])
-        };
+        var togo = {};
+        if (onePhylo.pic) {
+            togo.phyloPicUrl = fluid.stringTemplate(onePhylo.pic, terms);
+        }
+        if (onePhylo.taxonPic) {
+            togo.taxonPic = fluid.stringTemplate(onePhylo.taxonPic, terms);
+        }
+        togo.taxonPicDescription = onePhylo.taxonPicDescription;
+        if (onePhylo.colour) {
+            var parsedColour = fluid.colour.hexToArray(onePhylo.colour);
+            var hsl = fluid.colour.rgbToHsl(parsedColour);
+            togo.lowColour = fluid.colour.hslToRgb([hsl[0], hsl[1], hsl[2] * 0.2 + 0.8]);
+            togo.highColour = fluid.colour.hslToRgb([hsl[0], hsl[1], hsl[2] * 0.8 + 0.2]);
+        }
+        return togo;
     });
     rows.forEach(function (row) {
         var phyloIndex = hortis.rowToPhyloIndex(row);
         var parsed = parsedMap[phyloIndex];
         if (parsed) {
             row.phyloPicUrl = parsed.phyloPicUrl;
-            hortis.paintChildren(row, parsed);
+            row.taxonPic    = parsed.taxonPic;
+            row.taxonPicDescription = parsed.taxonPicDescription;
+            hortis.colourChildren(row, parsed);
         }
     });
 };
@@ -351,6 +363,8 @@ hortis.tooltipLookup = {
     wikipediaSummary: "Wikipedia Summary",
     iNaturalistTaxonImage: "iNaturalist Taxon Image",
     phyloPic: "Taxon Icon",
+    taxonPic: "Taxon Picture",
+    taxonPicDescription: "Taxon Picture Description",
     commonName: "Common Name"
 };
 
@@ -413,9 +427,12 @@ hortis.renderTooltip = function (row, markup) {
         hortis.commonFields.forEach(function (field) {
             dumpRow(field, row[field]);
         });
-        if (row.iNaturalistTaxonImage) {
+        if (row.iNaturalistTaxonImage && !row.taxonPic) {
             dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage);
+        } else if (row.taxonPic) {
+            dumpImage("taxonPic", row.taxonPic);
         }
+        dumpRow("taxonPicDescription", row.taxonPicDescription);
         dumpRow("species", row.childCount);
         dumpRow("observationCount", row.observationCount);
     } else {
@@ -752,6 +769,21 @@ hortis.labelForRow = function (row, commonNames) {
     // return row.rank ? (row.rank === "Life" ? "Life" : row.rank + ": " + name) : name;
 };
 
+// Returns true if the supplied row is either at the layout root or above it. Alternatively - can we get to the
+// global root from the layout root without hitting this row - if so it is not "shadowing" us (and hence its phylopic
+// should not go to the centre)
+hortis.isAboveLayoutRoot = function (row, that) {
+    var layoutId = that.model.layoutId;
+    var layoutRow = that.index[layoutId];
+    while (layoutRow) {
+        if (layoutRow.id === row.id) {
+            return false;
+        }
+        layoutRow = layoutRow.parent;
+    }
+    return true;
+};
+
 // This guide is a great one for "bestiary of reuse failures": https://www.visualcinnamon.com/2015/09/placing-text-on-arcs.html
 // What the chaining method reduces one to who is unable to allocate any intermediate variables
 
@@ -761,14 +793,15 @@ hortis.attrsForRow = function (that, row) {
         midAngle = (leftAngle + rightAngle) / 2,
         innerRadius = that.model.scale.radiusScale[row.depth],
         outerRadius = that.model.scale.radiusScale[row.depth + 1];
-    var isAtRoot = hortis.isAtRoot(that);
+    var isAboveLayoutRoot = hortis.isAboveLayoutRoot(row, that);
     var isComplete = fluid.model.isSameValue(leftAngle, 0) && fluid.model.isSameValue(rightAngle, 2 * Math.PI);
     var isCircle = fluid.model.isSameValue(innerRadius, 0) && isComplete;
     var isVisible = !fluid.model.isSameValue(leftAngle, rightAngle) && !fluid.model.isSameValue(innerRadius, outerRadius);
     var isOuterSegment = fluid.model.isSameValue(outerRadius - innerRadius, that.options.scaleConfig.outerDepth * 1000);
     var label = hortis.labelForRow(row, that.model.commonNames);
     var outerLength = outerRadius * (rightAngle - leftAngle);
-    var midRadius = (isCircle || !isAtRoot) ? 0 : (innerRadius + outerRadius) / 2;
+    // Note that only purpose of midRadius is to position phylopic
+    var midRadius = (isCircle || !isAboveLayoutRoot) ? 0 : (innerRadius + outerRadius) / 2;
     var radius = outerRadius - midRadius;
     if (fluid.model.isSameValue(leftAngle, Math.PI)) {
         // Eliminate Chrome crash bug exhibited in https://amb26.github.io/svg-failure/ but apparently only on Windows 7!
@@ -826,12 +859,15 @@ hortis.renderSegment = function (that, row) {
         position: 0,
         markup: hortis.renderSVGTemplate(that.options.markup.segment, terms)
     }, {
-        position: 1,
+        position: 2,
         markup: hortis.renderSVGTemplate(that.options.markup.label, terms)
     }];
     if (terms.phyloPicUrl) {
+        if (row.id.endsWith("-1725")) {
+            console.log("1725:", terms);
+        }
         togo.push({
-            position: 0,
+            position: 1,
             markup: hortis.renderSVGTemplate(that.options.markup.phyloPic, terms)
         });
     }
@@ -914,6 +950,11 @@ hortis.doInitialQuery = function (that) {
     };
     if (that.options.queryOnStartup) {
         hortis.queryAutocomplete(that.flatTree, that.options.queryOnStartup, storeQueryResult);
+    }
+    if (that.options.selectOnStartup) {
+        hortis.queryAutocomplete(that.flatTree, that.options.selectOnStartup, function (result) {
+            hortis.updateTooltip(that, result[0].id);
+        });
     }
     return togo;
 };

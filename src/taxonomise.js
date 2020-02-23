@@ -33,6 +33,13 @@ var fusion = hortis.readJSONSync(parsedArgs.fusion);
 hortis.ranks = fluid.freezeRecursive(require("../data/ranks.json"));
 
 hortis.baseCommonOutMap = fluid.freezeRecursive({
+    "columns": {
+        "iNaturalistTaxonName": "iNaturalist taxon name",
+        "iNaturalistTaxonId": "iNaturalist taxon ID"
+    }
+});
+
+hortis.baseSummariseCommonOutMap = fluid.freezeRecursive(fluid.extend(true, {}, hortis.baseCommonOutMap, {
     "counts": {
         "observationCount": {
             "column": "observationCount",
@@ -41,11 +48,9 @@ hortis.baseCommonOutMap = fluid.freezeRecursive({
     },
     "columns": {
         "observationCount": "Observation count",
-        "iNaturalistTaxonName": "iNaturalist taxon name",
-        "iNaturalistTaxonId": "iNaturalist taxon ID",
         "coords": "Coordinates"
     }
-});
+}));
 
 hortis.ranksToColumns = function (ranks) {
     return fluid.transform(fluid.arrayToHash(ranks), function (troo, key) {
@@ -57,8 +62,12 @@ hortis.commonOutMap = fluid.freezeRecursive(fluid.extend(true, {}, hortis.baseCo
     columns: hortis.ranksToColumns(hortis.ranks)
 }));
 
-hortis.combineOutMaps = function (outMaps) {
-    var extendArgs = [true, {}, hortis.commonOutMap].concat(outMaps);
+hortis.summariseCommonOutMap = fluid.freezeRecursive(fluid.extend(true, {}, hortis.baseSummariseCommonOutMap, {
+    columns: hortis.ranksToColumns(hortis.ranks)
+}));
+
+hortis.combineOutMaps = function (outMaps, summarise) {
+    var extendArgs = [true, {}, summarise ? hortis.summariseCommonOutMap : hortis.commonOutMap].concat(outMaps);
     return fluid.extend.apply(null, extendArgs);
 };
 
@@ -217,7 +226,7 @@ hortis.blankRow = function (row) {
 };
 
 hortis.doSummarise = function (outrows, outMap, summarise) {
-    var that = hortis.summarise();
+    var that = hortis.summarise({summarise: summarise});
     outrows.forEach(that.storeRow);
     that.destroy();
     if (summarise) {
@@ -253,12 +262,16 @@ hortis.makeTaxonomiser = function (data) {
     return that;
 };
 
+hortis.isSelfUndetermined = function (name) {
+    return !name || name.includes("undetermined") || name.includes("various");
+};
+
 hortis.applyObservations = function (that, taxa, obsRows) {
     var identifiedTo = {}; // Two-level hash of {taxonLevel, obs index} to obs
     obsRows.forEach(function (obs, index) { // TODO - get better index
         var san = hortis.sanitizeSpeciesName(obs.taxonName);
         var taxonLevel = "Undetermined";
-        if (!san.includes("undetermined")) {
+        if (!hortis.isSelfUndetermined(san)) {
             var resolved = invertedSwaps[san];
             if (resolved) {
                 san = resolved;
@@ -277,13 +290,17 @@ hortis.applyObservations = function (that, taxa, obsRows) {
     var undets = identifiedTo["Undetermined"];
 
     fluid.each(undets, function (undet) {
-        if (!undet.taxonName.includes("undetermined")) {
+        if (!hortis.isSelfUndetermined(undet.taxonName)) {
             that.undetHash[undet.taxonName] = undet;
         }
     });
     var undetKeys = Object.keys(that.undetHash).sort();
-    console.log("Listing " + undetKeys.length + " undetermined species in observations: ");
-    console.log(undetKeys.join("\n"));
+    console.log("\nListing " + undetKeys.length + " undetermined species in observations: \n");
+    undetKeys.forEach(function (undetKey) {
+        var row = that.undetHash[undetKey];
+        console.log(undetKey + (row.observationId ? (": " + row.observationId) : ""));
+    });
+    console.log();
     that.undetKeys = undetKeys;
 };
 
@@ -307,7 +324,7 @@ hortis.writeReintegratedObservations = function (that, fileName, observations, o
 
 hortis.writeCombinedOutMap = function (inFilename, doc) {
     var filename = fluid.module.resolvePath(inFilename);
-    var formatted = JSON.stringify(doc, null, 4);
+    var formatted = JSON.stringify(doc, null, 4) + "\n";
     fs.writeFileSync(filename, formatted);
     console.log("Written " + formatted.length + " bytes to " + filename);
 };
@@ -339,12 +356,16 @@ hortis.settleStructure(dataPromises).then(function (data) {
         hortis.writeResolutionFile(that);
     }
     var summarise = parsedArgs.summarise || fusion.summarise;
-    var combinedOutMap = hortis.combineOutMaps(Object.values(fluid.getMembers(datasets, "outMap")));
+    var combinedOutMap = hortis.combineOutMaps(Object.values(fluid.getMembers(datasets, "outMap")).concat[{
+        counts: fusion.counts
+    }], summarise);
     combinedOutMap.datasets = fusion.datasets;
     hortis.writeReintegratedObservations(that, parsedArgs.dry ? "reintegrated.csv" :
         fluid.module.resolvePath(fusion.output), flatObs, combinedOutMap, summarise);
     hortis.writeCombinedOutMap(fusion.combinedOutMap, combinedOutMap);
 }, function (err) {
     fluid.fail("Error loading data", err);
-    console.log(err.stack);
+    if (err.stack) {
+        console.log(err.stack);
+    }
 });

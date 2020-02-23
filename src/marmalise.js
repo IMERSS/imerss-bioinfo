@@ -151,7 +151,7 @@ hortis.loadMapWithCounts = function (mapFile) {
 };
 
 hortis.rootNode = function (map) {
-    return hortis.newTaxon("Life", "Life", 0, map.counts);
+    return hortis.newTaxon("Life", "life", 0, map.counts);
 };
 
 fluid.defaults("hortis.treeBuilder", {

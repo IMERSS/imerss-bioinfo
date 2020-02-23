@@ -17,7 +17,7 @@
         "upstreamID": "ID",
         "obsPhotoLink": "iNaturalist Photo",
         "notes": "Notes",
-        "criticalNotes": "criticalNotes"
+        "criticalNotes": "Critical Notes"
     },
     "counts": {
         "undocumentedCount": {

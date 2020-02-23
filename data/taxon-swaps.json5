@@ -516,17 +516,6 @@
         },
         iNaturalistTaxonId: "854771",
     },
-    "Strongylocentrotus franciscanus": {
-        taxonNames: {
-            "red sea urchin": {
-                type: "commonName",
-            },
-            "Mesocentrotus franciscanus": {
-                resolvedBy: "AB",
-            },
-        },
-        iNaturalistTaxonId: "49126",
-    },
     "Trichotropis cancellata": {
         taxonNames: {
             "checkered hairysnail": {
@@ -990,6 +979,10 @@
                 notes: "Misspelling in PMLS and iNat",
                 resolvedBy: "AB",
             },
+            "Ophiura lutkeni": {
+                notes: "Misspelling in RBCM",
+                resolvedBy: "AB",
+            }
         },
         iNaturalistTaxonId: "255865"
     },
@@ -1048,15 +1041,6 @@
         },
         iNaturalistTaxonId: "44396"
     },
-    "Apomatus geniculata": {
-        taxonNames: {
-            "Apomatus geniculatus": {
-                resolvedBy: "AB",
-                notes: "This name 'preferred' in WoRMS"
-            },
-        },
-        iNaturalistTaxonId: "936447"
-    },  
     "Cortinicara gibbosa": {
         taxonNames: {
             "Cortinicaria gibbosa": {
@@ -1206,7 +1190,7 @@
             },
         },
         iNaturalistTaxonId: "226123"
-    }, 
+    },
     "Usnea dasopoga": {
         taxonNames: {
             "Fishbone Beard Lichen": {
@@ -1367,5 +1351,172 @@
             }
         },
         iNaturalistTaxonId: "54931"
+    },  // From here WoL
+    "Ciliatocardium ciliatum": {
+        taxonNames: {
+            "Clinocardium ciliatum": {
+                resolvedBy: "AB",
+                notes: "From WoL data",
+                oldiNaturalistTaxonId: "125365"
+            }
+        },
+        iNaturalistTaxonId: "940646"
+    },
+    "Ampelisca macrocephala unsocalae": {
+        taxonNames: {
+            "Ampelisca unsocalae": {
+                resolvedBy: "AB",
+                notes: "This is not current in WoRMS, has been flagged in iNat but not yet acted on"
+            }
+        },
+        iNaturalistTaxonId: "313004"
+    },
+    "Irtugovia pacifica": {
+        taxonNames: {
+            "Antithamnionella pacifica": {
+                resolvedBy: "AB",
+                notes: "This is not current in WoRMS, has been flagged in iNat (done on 10/2/20)"
+            }
+        },                
+        iNaturalistTaxonId: "500285"
+    },
+    "Scagelia americana": {
+        taxonNames: {
+            "Scagelia occidentalis": {
+                resolvedBy: "AB",
+                notes: "Error in WoL and also data paper"
+            }
+        },             
+        iNaturalistTaxonId: "957344"
+    }, // From here RBCM
+    "Gadila aberrans": {
+        taxonNames: {
+            "Cadulus hepburni": {
+                resolvedBy: "AB",
+                notes: "Unaccepted acc. WoRMS, has been corrected in data paper",
+            }
+        },
+        iNaturalistTaxonId: "509660"
+    },
+    "Clinocardium nuttallii": {
+        taxonNames: {
+            "Clinocardium nuttalli": {
+                resolvedBy: "AB",
+                notes: "Misspelling in PMLS",
+            },
+        },
+        iNaturalistTaxonId: "69925"
+    },
+    "Compsomyax subdiaphana": {
+        taxonNames: {
+            "Compsomyax subdiaphara": {
+                resolvedBy: "AB",
+                notes: "Misspelling in RBCM",
+            },
+        },
+        iNaturalistTaxonId: "957357"
+    },
+    "Zelentia pustulata": {
+        taxonNames: {
+            "Cuthona pustulata": {
+                resolvedBy: "AB",
+                notes: "Unaccepted acc. WoRMS, has been corrected in data paper",
+            }
+        },
+        iNaturalistTaxonId: "564602"
+    },
+    "Acteocina culcitella": {
+        taxonNames: {
+            "Cylichnella culcitella": {
+                resolvedBy: "AB",
+                notes: "Not even listed at WoRMS - presumably one citation of the authority (Gould, 1853) must be faulty",
+            }
+        },
+        iNaturalistTaxonId: "49788"
+    },
+    "Stephanocystis geminata": {
+        taxonNames: {
+            "Cystoseira geminata": {
+                resolvedBy: "AB",
+                notes: "PMLS obs Unaccepted acc. WoRMS, is missing from data paper entirely?",
+            }
+        },
+        iNaturalistTaxonId: "866748"
+    },
+    "Amphiodia periercta": {
+        taxonNames: {
+            "Diamphiodia periercta": {
+                resolvedBy: "AB",
+                notes: "Unaccepted acc. WoRMS, has been corrected in data paper",
+            }
+        },
+        iNaturalistTaxonId: "957349"
+    },
+    "Glycymeris septentrionalis": {
+        taxonNames: {
+            "Glycymeris subobsoleta": {
+                resolvedBy: "AB",
+                notes: "Unaccepted acc. WoRMS, has been corrected in data paper",
+            }
+        },
+        iNaturalistTaxonId: "479438"
+    },
+    "Macoma carlottensis": {
+        taxonNames: {
+            "Macoma inflatula": {
+                resolvedBy: "AB",
+                notes: "Unaccepted acc. WoRMS, has been corrected in data paper",
+            }
+        },
+        iNaturalistTaxonId: "957354"
+    },
+    "Mitrella gausapata": {
+        taxonNames: {
+            "Mitrella gausapta": {
+                resolvedBy: "AB",
+                notes: "Misspelling in RBCM",
+            },
+        },
+        iNaturalistTaxonId: "347322"
+    },
+    "Apostichopus californicus": {
+        taxonNames: {
+            "Parastichopus californicus": {
+                resolvedBy: "AB",
+                notes: "Unaccepted acc. WoRMS, has been corrected in data paper",
+            }
+        },
+        iNaturalistTaxonId: "202640"
+    },
+    "Mesocentrotus franciscanus": {
+        taxonNames: {
+            "Strongylocentrotus franciscanus": {
+                resolvedBy: "AB",
+                notes: "Self-drift within iNat dataset - will disappear on next export",
+            }
+        },
+        iNaturalistTaxonId: "992313"
+    },
+    "Yoldia aeolica": {
+        taxonNames: {
+            "Yoldia ensifera": {
+                resolvedBy: "AB",
+                notes: "Unaccepted acc. WoRMS, has been corrected in data paper",
+            },
+            "Yoldia scissurata": {
+                resolvedBy: "AB",
+                notes: "Unaccepted acc. WoRMS, has been corrected in data paper",
+            }
+        },
+        iNaturalistTaxonId: "957342"
+    },
+    "Yoldia hyperborea": {
+        taxonNames: {
+            "Yoldia hyperborea limatuloides": {
+                resolvedBy: "AB",
+                notes: "Unaccepted acc. WoRMS, has been corrected in data paper",
+            }
+        },
+        iNaturalistTaxonId: "996928"
     },
 }

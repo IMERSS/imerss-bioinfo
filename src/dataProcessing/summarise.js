@@ -8,6 +8,7 @@ var hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.summarise", {
     gradeNames: "fluid.component",
+    summarise: true,
     members: {
         uniqueRows: {},
         discardedRows: {}
@@ -61,9 +62,11 @@ hortis.summarise.storeRow = function (that, row) {
         existing = that.uniqueRows[uniqueVal] = row;
         row[obsCountField] = 1;
     }
-    var obsId = row[fields.obsId];
-    if (obsId === undefined) {
-        fluid.fail("Unable to find unique observation field for row ", row);
+    if (that.options.summarise) {
+        var obsId = row[fields.obsId];
+        if (obsId === undefined) {
+            fluid.fail("Unable to find unique observation field for row ", row);
+        }
+        hortis.summarise.pushCoordinates(existing, row, coordsField, obsId);
     }
-    hortis.summarise.pushCoordinates(existing, row, coordsField, obsId);
 };

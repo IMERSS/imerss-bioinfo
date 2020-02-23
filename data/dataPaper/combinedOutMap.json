@@ -1,14 +1,8 @@
 {
-    "counts": {
-        "observationCount": {
-            "column": "observationCount",
-            "free": true
-        }
-    },
     "columns": {
-        "observationCount": "Observation count",
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
+        "observationCount": "Observation count",
         "coords": "Coordinates",
         "kingdom": "Kingdom",
         "phylum": "Phylum",
@@ -24,14 +18,13 @@
         "subfamily": "Subfamily",
         "tribe": "Tribe",
         "genus": "Genus",
-        "species": "Species",
-        "taxonName": "Taxon name",
-        "dateObserved": "Date observed",
-        "description": "Description",
-        "placeName": "Place name",
-        "commonName": "Common name",
-        "observerName": "Observer name",
-        "iNaturalistObsLink": "Observation"
+        "species": "Species"
+    },
+    "counts": {
+        "observationCount": {
+            "column": "observationCount",
+            "free": true
+        }
     },
     "datasets": {
         "PMLS": {
@@ -47,6 +40,13 @@
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99"
+        },
+        "RBCM": {
+            "name": "Royal British Columbia Museum Observations 2019-10-25",
+            "input": "E:/source/gits/bagatelle/data/RBCM/RBCM_records_Galiano_2019-10-25.csv",
+            "map": "E:/source/gits/bagatelle/data/RBCM/RBCM-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
+            "colour": "#29a329"
         }
     }
 }
