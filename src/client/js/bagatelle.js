@@ -13,17 +13,21 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 
 var hortis = fluid.registerNamespace("hortis");
 
+fluid.setLogging(true);
+
 fluid.defaults("hortis.sunburstLoader", {
     gradeNames: ["fluid.newViewComponent", "fluid.resourceLoader"],
     sunburstPixels: 1002,
     markupTemplate: "%resourceBase/html/bagatelle.html",
     phyloMap: "%resourceBase/json/phyloMap.json",
     resourceBase: "src/client",
-    terms: {
-        resourceBase: "{that}.options.resourceBase"
-    },
     queryOnStartup: "",
     selectOnStartup: "",
+    resourceOptions: {
+        terms: {
+            resourceBase: "{that}.options.resourceBase"
+        }
+    },
     resources: {
         viz: {
             url: "{that}.options.vizFile",
@@ -43,10 +47,6 @@ fluid.defaults("hortis.sunburstLoader", {
         }
     },
     invokers: {
-        resolveResources: {
-            funcName: "hortis.resolveResources",
-            args: ["{that}.options.resources", "{that}.options.terms"]
-        },
         resolveColourStrategy: "hortis.resolveColourStrategy({that}.options.colourCount)"
     },
     listeners: {
@@ -66,10 +66,12 @@ fluid.defaults("hortis.sunburstLoader", {
                 container: "{sunburstLoader}.container",
                 gradeNames: "{sunburstLoader}.resolveColourStrategy",
                 colourCount: "{sunburstLoader}.options.colourCount",
-                viz: "@expand:hortis.decompressLZ4({sunburstLoader}.resources.viz.resourceText)",
-                tree: "{that}.options.viz.tree",
                 queryOnStartup: "{sunburstLoader}.options.queryOnStartup",
-                selectOnStartup: "{sunburstLoader}.options.selectOnStartup"
+                selectOnStartup: "{sunburstLoader}.options.selectOnStartup",
+                members: {
+                    viz: "@expand:hortis.decompressLZ4({sunburstLoader}.resources.viz.resourceText)",
+                    tree: "{that}.viz.tree"
+                }
             }
         }
     }
@@ -126,8 +128,9 @@ fluid.defaults("hortis.sunburst", {
         autocomplete: ".fld-bagatelle-autocomplete",
         segment: ".fld-bagatelle-segment",
         label: ".fld-bagatelle-label",
-        phyloPic: ".fld-bagatelle-phyloPic",
-        mousable: "@expand:hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label, {that}.options.selectors.phyloPic)"
+        phyloPic: ".fld-bagatelle-phyloPic"
+        // No longer supportable under FLUID-6145: BUG
+        // mousable: "@expand:hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label, {that}.options.selectors.phyloPic)"
     },
     styles: {
         segment: "fld-bagatelle-segment",
@@ -200,7 +203,8 @@ fluid.defaults("hortis.sunburst", {
         angleScale: "hortis.angleScale({arguments}.0, {that}.model.scale)",
         elementToRow: "hortis.elementToRow({that}, {arguments}.0)",
         segmentClicked: "hortis.segmentClicked({that}, {arguments}.0)",
-        fillColourForRow: "hortis.undocColourForRow({that}.options.parsedColours, {arguments}.0)"
+        fillColourForRow: "hortis.undocColourForRow({that}.options.parsedColours, {arguments}.0)",
+        getMousable: "hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label, {that}.options.selectors.phyloPic)"
     },
     modelListeners: {
         scale: {
@@ -231,7 +235,7 @@ fluid.defaults("hortis.sunburst", {
         },
         "onCreate.applyPhyloMap": {
             funcName: "hortis.applyPhyloMap",
-            args: ["{sunburstLoader}.resources.phyloMap.resourceText", "{that}.flatTree", "{sunburstLoader}.options.terms"],
+            args: ["{sunburstLoader}.resources.phyloMap.parsed", "{that}.flatTree", "{sunburstLoader}.options.resourceOptions.terms"],
             priority: "before:computeInitialScale"
         },
         "onCreate.render": {
@@ -243,10 +247,10 @@ fluid.defaults("hortis.sunburst", {
             args: ["{that}"]
         }
     },
-    tree: null,
     members: {
         visMap: [], // array of visibility aligned with flatTree
-        flatTree: "@expand:hortis.flattenTree({that}.options.tree)",
+        tree: null,
+        flatTree: "@expand:hortis.flattenTree({that}.tree)",
         maxDepth: "@expand:hortis.computeMaxDepth({that}.flatTree)",
         index: "@expand:hortis.indexTree({that}.flatTree)" // map id to row
     }
@@ -283,7 +287,7 @@ hortis.queryAutocomplete = function (flatTree, query, callback) {
 
 hortis.confirmAutocomplete = function (that, row) {
     if (row) { // on blur it may send nothing
-        var zoomTo = row.childCount > 1 ? row : row.parent;
+        var zoomTo = row.children.length > 0 ? row : row.parent;
         var zoomAction = hortis.beginZoom(that, zoomTo);
         zoomAction.then(function () {
             hortis.updateTooltip(that, row.id);
@@ -466,7 +470,6 @@ hortis.renderTooltip = function (row, markup) {
 };
 
 hortis.updateTooltip = function (that, id) {
-    console.log("updateTooltip for id ", id);
     var content = id ? hortis.renderTooltip(that.index[id], that.options.markup) : null;
     var taxonDisplay = that.locate("taxonDisplay");
     if (content) {
@@ -505,13 +508,15 @@ hortis.isAtRoot = function (that, layoutId) {
 
 hortis.bindMouse = function (that) {
     var svg = that.locate("svg");
-    var mousable = that.options.selectors.mousable;
+    // var mousable = that.options.selectors.mousable;
+    var mousable = that.getMousable();
     svg.on("click", mousable, function () {
         var id = hortis.elementToId(this);
-        if (!hortis.isAtRoot(that) && that.index[id].phyloPicUrl) {
-            id = that.flatTree[0].id;
+        var row = that.index[id];
+        if (!hortis.isAboveLayoutRoot(row, that) && that.index[id].phyloPicUrl) {
+            row = that.flatTree[0];
         }
-        that.segmentClicked(that.index[id]);
+        that.segmentClicked(row);
     });
     svg.on("mouseenter", mousable, function (e) {
         window.clearTimeout(that.leaveTimeout);
@@ -696,7 +701,7 @@ hortis.interpolateModels = function (f, m1, m2) {
 
 hortis.undocColourForRow = function (parsedColours, row) {
     var undocFraction = row.undocumentedCount / row.childCount;
-    var interp = fluid.colour.interpolate(undocFraction, row.lowColour || parsedColours.lowColour, row.highColour || parsedColours.highColour);
+    var interp = fluid.colour.interpolate(undocFraction, row.highColour || parsedColours.highColour, row.lowColour || parsedColours.lowColour);
     return fluid.colour.arrayToString(interp);
 };
 

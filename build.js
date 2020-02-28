@@ -14,7 +14,6 @@ var buildIndex = {
     localSource: [
         "src/client/css/bagatelle.css",
         "src/auxBuild/restoreJQuery.js",
-        "src/lib/jquery.binarytransport.js",
         "src/lib/lz4.js",
         "src/client/js/bagatelle.js",
         "src/client/js/autocomplete.js",
@@ -76,7 +75,7 @@ var filesToContentHash = function (allFiles, extension) {
         return file.endsWith(extension);
     });
     var hash = fluid.transform(fluid.arrayToHash(extFiles), function (troo, filename) {
-        return fs.readFileSync(filename, "utf-8");
+        return fs.readFileSync(filename, "utf8");
     });
     return hash;
 };
@@ -106,7 +105,7 @@ var buildFromFiles = function (buildIndex, nodeFiles) {
     });
     fs.removeSync("build");
     fs.ensureDirSync("build/js");
-    fs.writeFileSync("build/js/bagatelle-all.js", minified.code);
+    fs.writeFileSync("build/js/bagatelle-all.js", minified.code, "utf8");
     fs.writeFileSync("build/js/bagatelle-all.js.map", minified.map);
 
     var cssHash = filesToContentHash(allFiles, ".css");

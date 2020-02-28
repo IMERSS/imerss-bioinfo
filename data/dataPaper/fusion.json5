@@ -1,21 +1,21 @@
 {
     datasets: {
         PMLS: {
-            name: "Pacific Marine Life Survey Observations 2019-10-13",
+            name: "Pacific Marine Life Survey Observations (1968-2018)",
             input: "%bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2019-10-13.csv",
             map: "%bagatelle/data/Galiano PMLS/PMLS-map.json",
             outMap: "%bagatelle/data/Galiano PMLS/PMLS-out-map.json",
             colour: "#931362"
         },
         iNat: {
-            name: "Galiano iNaturalist Marine Observations 2019-09-08",
+            name: "Galiano iNaturalist Marine Observations (2005-2019)",
             input: "%bagatelle/data/iNaturalist/Galiano_iNat_marine_observations_2019_09_08.csv",
             map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map.json",
             outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99"
         },
         RBCM: {
-            name: "Royal British Columbia Museum Observations 2019-10-25",
+            name: "Royal British Columbia Museum Observations (1893-2011)",
             input: "%bagatelle/data/RBCM/RBCM_records_Galiano_2019-10-25.csv",
             map: "%bagatelle/data/RBCM/RBCM-map.json",
             outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",

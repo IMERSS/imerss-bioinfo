@@ -203,7 +203,7 @@ hortis.marmalise = function (treeBuilder) {
             datasets: fluid.transform(treeBuilder.map.datasets, hortis.filterDataset),
             tree: treeBuilder.tree
         };
-        fs.writeFileSync("marmalised.json", JSON.stringify(output, null, 4));
+        fs.writeFileSync("marmalised.json", JSON.stringify(output, null, 4) + "\n");
         var text = JSON.stringify(output);
         hortis.writeLZ4File(text, treeBuilder.options.outputFile);
     });

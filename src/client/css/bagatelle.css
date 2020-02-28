@@ -70,6 +70,12 @@
     padding: 2px;
 }
 
+.fld-bagatelle-dataset-controls td {
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 1.2rem;
+}
+
 .fld-bagatelle-dataset-legend {
     display: inline-block;
     width: 1.5rem;
@@ -85,6 +91,10 @@
     margin: 4px;
 }
 
+.fld-bagatelle-dataset-footer {
+    text-align: center;
+}
+
 .fld-bagatelle-map-holder {
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
@@ -92,6 +102,10 @@
 
 .fld-bagatelle-dataset-name {
     vertical-align: middle;
+}
+
+.fld-bagatelle-map-grid {
+    z-index: 750;
 }
 
 .fld-bagatelle-map-tooltip {
@@ -103,6 +117,10 @@
     font-size: 0.9rem;
     background-color: white;
     border: 1px solid black;
+}
+
+.fl-bagatelle-highlightBlock {
+    stroke: blue;
 }
 
 .fld-bagatelle-map-tooltip tr:nth-child(even) {

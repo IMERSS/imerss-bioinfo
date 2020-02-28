@@ -49,6 +49,18 @@ fluid.colour.interpolate = function (f, c1, c2) {
         (1 - f) * c1[2] + f * c2[2]], Math.round);
 };
 
+fluid.colour.average = function (ca) {
+    var sum = ca.reduce(function (total, c) {
+        total[0] += c[0];
+        total[1] += c[1];
+        total[2] += c[2];
+        return total;
+    }, [0, 0, 0]);
+    return sum.map(function (e) {
+        return e / ca.length;
+    });
+};
+
 /**
  * Converts an RGB color value to HSL. Conversion formula
  * adapted from http://en.wikipedia.org/wiki/HSL_color_space.

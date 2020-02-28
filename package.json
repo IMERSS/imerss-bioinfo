@@ -4,9 +4,8 @@
     "version": "0.0.1",
     "author": "Antranig Basman",
     "dependencies": {
-        "infusion": "3.0.0-dev.20190905T163833Z.b024bff87",
-        "kettle": "1.11.0",
-        "fluid-authoring": "amb26/fluid-authoring#FLUID-4884",
+        "infusion": "3.0.0-dev.20200214T151835Z.ab768289a.FLUID-6145",
+        "kettle": "1.12.0-dev.20191220T164344Z.f1fef17.FLUID-6145",
         "csv-parser": "2.1.0",
         "event-stream": "4.0.1",
         "csv-writer": "1.2.0",
