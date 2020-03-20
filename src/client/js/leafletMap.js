@@ -212,6 +212,12 @@ hortis.leafletMap.createTooltip = function (that, markup) {
     that.map.createPane("hortis-tooltip", tooltip[0]);
     that.map.createPane("hortis-grid");
     that.gridGroup = L.layerGroup({pane: "hortis-grid"}).addTo(that.map);
+    var container = that.map.getContainer(); 
+    $(container).on("click", function (event) {
+        if (event.target === container) {
+            that.applier.change("mapBlockTooltipId", null);
+        }
+    });
 };
 
 hortis.rectFromCorner = function (tl, latres, longres) {
@@ -400,6 +406,8 @@ hortis.leafletMap.updateTooltip = function (map, key) {
         tooltip.show();
         var element = bucket.Lpolygon.getElement();
         element.classList.add("fl-bagatelle-highlightBlock");
+        var parent = element.parentNode;
+        parent.insertBefore(element, null);
     } else {
         tooltip.hide();
     }
