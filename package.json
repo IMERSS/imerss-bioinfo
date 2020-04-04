@@ -10,7 +10,7 @@
         "event-stream": "4.0.1",
         "csv-writer": "1.2.0",
         "glob": "7.1.4",
-        "minimist": "1.2.0",
+        "minimist": "1.2.5",
         "lz4": "0.6.0",
         "json5": "2.1.0",
         "accessible-autocomplete": "1.6.2"
