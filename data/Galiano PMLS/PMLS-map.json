@@ -11,7 +11,7 @@
         "geoPrivacy": "Geoprivacy",
         "maxDepth": "Max. depth",
         "bottomTime": "Bottom time",
-        "observerName": "Observer name"
+        "observer": "Observer name"
     },
     "datasetId": "PMLS",
     "datasetClass": "naturalist",

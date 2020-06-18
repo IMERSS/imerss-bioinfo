@@ -5,7 +5,7 @@
         "description": "Description",
         "placeName": "Place name",
         "commonName": "Common name",
-        "observerName": "Observer name",
+        "observer": "Observer name",
         "iNaturalistObsLink": "Observation"
     }
 }

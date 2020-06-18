@@ -1,11 +1,13 @@
 {
     "columns": {
         "dateObserved": "observed_on",
-        "observerName": "user_login",
+        "observer": "user_login",
         "iNaturalistObsLink": "url",
         "imageUrl": "image_url",
         "latitude": "latitude",
         "longitude": "longitude",
+        "privateLatitude": "private_latitude",
+        "privateLongitude": "private_longitude",
         "taxonName": "scientific_name",
         "iNaturalistTaxonId": "taxon_id"
     },

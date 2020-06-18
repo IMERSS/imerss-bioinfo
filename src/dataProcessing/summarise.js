@@ -31,8 +31,8 @@ hortis.parseFloat = function (str) {
 };
 
 hortis.summarise.pushCoordinates = function (existing, row, coordsField, obsId) {
-    var latitude = hortis.parseFloat(row.latitude);
-    var longitude = hortis.parseFloat(row.longitude);
+    var latitude = hortis.parseFloat(row.privateLatitude || row.latitude);
+    var longitude = hortis.parseFloat(row.privateLongitude || row.longitude);
     if (!isNaN(latitude) && !isNaN(longitude)) {
         fluid.set(existing, [coordsField, obsId], [latitude, longitude]);
     };

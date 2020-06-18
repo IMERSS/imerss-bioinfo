@@ -159,7 +159,8 @@ fluid.defaults("hortis.sunburst", {
     },
     colours: {
         lowColour: "#9ecae1",
-        highColour: "#e7969c"
+        highColour: "#e7969c",
+        unfocusedColour: "#ddd"
     },
     zoomDuration: 1250,
     scaleConfig: {
@@ -180,6 +181,7 @@ fluid.defaults("hortis.sunburst", {
             right: 0,
             radiusScale: []
         },
+        rowFocus: {},
         layoutId: null,
         hoverId: null,
         commonNames: true
@@ -199,6 +201,7 @@ fluid.defaults("hortis.sunburst", {
     },
     invokers: {
         render: "hortis.render({that})",
+        renderLight: "hortis.renderLight({that})",
         renderSegment: "hortis.renderSegment({that}, {arguments}.0, {arguments}.1)",
         angleScale: "hortis.angleScale({arguments}.0, {that}.model.scale)",
         elementToRow: "hortis.elementToRow({that}, {arguments}.0)",
@@ -209,12 +212,15 @@ fluid.defaults("hortis.sunburst", {
     modelListeners: {
         scale: {
             excludeSource: "init",
-            funcName: "hortis.updateScale",
-            args: ["{that}", "{change}.value"]
+            func: "{that}.renderLight"
         },
         hoverId: {
             excludeSource: "init",
             funcName: "hortis.updateTooltip",
+            args: ["{that}", "{change}.value"]
+        },
+        rowFocus: {
+            funcName: "hortis.updateRowFocus",
             args: ["{that}", "{change}.value"]
         }
     },
@@ -648,7 +654,7 @@ hortis.phyloPicAttrMap = {
     width: "diameter"
 };
 
-hortis.updateScale = function (that) {
+hortis.renderLight = function (that) {
     that.flatTree.forEach(function (row, index) {
         if (that.visMap[index] || that.oldVisMap && that.oldVisMap[index]) {
             var attrs = hortis.attrsForRow(that, row);
@@ -708,7 +714,70 @@ hortis.undocColourForRow = function (parsedColours, row) {
 hortis.obsColourForRow = function (parsedColours, row, rootRow) {
     var fraction = Math.pow(row.observationCount / rootRow.observationCount, 0.2);
     var interp = fluid.colour.interpolate(fraction, row.lowColour || parsedColours.lowColour, row.highColour || parsedColours.highColour);
-    return fluid.colour.arrayToString(interp);
+    var focusProp = row.focusCount / row.childCount;
+    var interp2 = fluid.colour.interpolate(focusProp, parsedColours.unfocusedColour, interp);
+    return fluid.colour.arrayToString(interp2);
+};
+
+hortis.pathFromRoot = function (row) {
+    var togo = [];
+    while (row) {
+        togo.unshift(row);
+        row = row.parent;
+    }
+    return togo;
+};
+
+hortis.lcaRoot = function (parents) {
+    var lcaRoot;
+    for (var i = 0; ; ++i) {
+        var commonValue = null;
+        for (var key in parents) {
+            var seg = parents[key][i];
+            if (seg === undefined) {
+                commonValue = null;
+                break;
+            } else if (commonValue === null) {
+                commonValue = seg;
+            } else if (commonValue !== seg) {
+                commonValue = null;
+                break;
+            }
+        }
+        if (commonValue === null) {
+            break;
+        } else {
+            lcaRoot = commonValue;
+        }
+    }
+    return lcaRoot;
+};
+
+hortis.updateRowFocus = function (that, rowFocus) {
+    var flatTree = that.flatTree;
+    var focusAll = $.isEmptyObject(rowFocus);
+    for (var i = flatTree.length - 1; i >= 0; --i) {
+        var row = flatTree[i];
+        var focusCount;
+        if (focusAll || rowFocus[row.id]) {
+            focusCount = row.childCount;
+        } else {
+            focusCount = row.children.reduce(function (sum, child) {
+                return sum + child.focusCount;
+            }, 0);
+        }
+        row.focusCount = focusCount;
+    }
+    if (focusAll) {
+        that.renderLight();
+    } else {
+        var parents = fluid.transform(rowFocus, function (troo, key) {
+            return hortis.pathFromRoot(that.index[key]);
+        });
+        var lca = hortis.lcaRoot(parents);
+        var target = Object.keys(parents).length === 1 ? lca.parent : lca;
+        hortis.beginZoom(that, target);
+    }
 };
 
 hortis.elementToId = function (element) {
@@ -868,9 +937,6 @@ hortis.renderSegment = function (that, row) {
         markup: hortis.renderSVGTemplate(that.options.markup.label, terms)
     }];
     if (terms.phyloPicUrl) {
-        if (row.id.endsWith("-1725")) {
-            console.log("1725:", terms);
-        }
         togo.push({
             position: 1,
             markup: hortis.renderSVGTemplate(that.options.markup.phyloPic, terms)

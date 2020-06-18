@@ -3,6 +3,6 @@
         "taxonName": "Taxon name",
         "dateObserved": "Date observed",
         "placeName": "Place name",
-        "observerName": "Observer name"
+        "observer": "Observer name"
     }
 }

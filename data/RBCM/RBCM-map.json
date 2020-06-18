@@ -3,7 +3,7 @@
         "catalogueNumber": "CatalogueNumber",
         "taxonName": "ScientificName",
         "dateObserved": "CollectionDate",
-        "observerName": "Collector",
+        "observer": "Collector",
         "placeName": "LocationName",
         "latitude": "Latitude",
         "longitude": "Longitude"

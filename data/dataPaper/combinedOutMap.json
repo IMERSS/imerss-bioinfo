@@ -18,7 +18,14 @@
         "subfamily": "Subfamily",
         "tribe": "Tribe",
         "genus": "Genus",
-        "species": "Species"
+        "species": "Species",
+        "taxonName": "Taxon name",
+        "dateObserved": "Date observed",
+        "description": "Description",
+        "placeName": "Place name",
+        "commonName": "Common name",
+        "observer": "Observer name",
+        "iNaturalistObsLink": "Observation"
     },
     "counts": {
         "observationCount": {
@@ -28,7 +35,7 @@
     },
     "datasets": {
         "PMLS": {
-            "name": "Pacific Marine Life Survey Observations (1968-2018)",
+            "name": "Pacific Marine Life Survey Dive Records (1968-2018)",
             "input": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2019-10-13.csv",
             "map": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS-map.json",
             "outMap": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS-out-map.json",
@@ -42,10 +49,10 @@
             "colour": "#2C8C99"
         },
         "RBCM": {
-            "name": "Royal British Columbia Museum Observations (1893-2011)",
+            "name": "Royal British Columbia Museum Voucher Specimens (1893-2011)",
             "input": "E:/source/gits/bagatelle/data/RBCM/RBCM_records_Galiano_2019-10-25.csv",
             "map": "E:/source/gits/bagatelle/data/RBCM/RBCM-map.json",
-            "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/RBCM/RBCM-out-map.json",
             "colour": "#29a329"
         }
     }

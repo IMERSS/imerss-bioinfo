@@ -13,6 +13,7 @@ var buildIndex = {
     ],
     localSource: [
         "src/client/css/bagatelle.css",
+        "src/client/css/bagatelle-wp-overrides.css",
         "src/auxBuild/restoreJQuery.js",
         "src/lib/lz4.js",
         "src/client/js/bagatelle.js",
@@ -35,6 +36,9 @@ var buildIndex = {
     },  {
         src: "src/client/html/bagatelle-map.html",
         dest: "build/html/bagatelle-map.html"
+    },  {
+        src: "src/client/html/bagatelle-map-only.html",
+        dest: "build/html/bagatelle-map-only.html"
     }, {
         src: "src/buildTest/index.html",
         dest: "build/index.html"

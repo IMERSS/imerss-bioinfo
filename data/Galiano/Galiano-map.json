@@ -3,18 +3,6 @@
         "taxonName": "Taxon",
         "author": "Author",
         "commonName": "Common Name",
-        "kingdom": "Kingdom",
-        "phylum": "Phylum",
-        "subphylum": "Subphylum",
-        "superclass": "Superclass",
-        "class": "Class",
-        "subclass": "Subclass",
-        "superorder": "Superorder",
-        "order": "Order",
-        "suborder": "Suborder",
-        "superfamily": "Superfamily",
-        "family": "Family",
-        "subfamily": "Subfamily",
         "origin": "Origin",
         "status": "Status",
         "reporting": "Reporting",
@@ -34,5 +22,8 @@
             "column": "iNaturalistLink",
             "equals": ""
         }
-    }
+    },
+    "datasetId": "GAL",
+    "datasetClass": "naturalist",
+    "observationId": "%datasetId:%rowNumber"
 }

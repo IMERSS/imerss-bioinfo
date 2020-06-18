@@ -478,12 +478,46 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
             container: "{sunburstLoaderWithMap}.dom.mapHolder",
             createOnEvent: "sunburstLoaded",
             options: {
-                datasets: "{sunburst}.viz.datasets",
-                geoJSONMapLayers: "{sunburstLoaderWithMap}.options.geoJSONMapLayers"
+                gradeNames: "hortis.mapWithSunburst"
             }
         }
     }
 });
+
+fluid.defaults("hortis.mapLoaderWithoutSunburst", {
+    // TODO: Refactor this obvious insanity
+    gradeNames: "hortis.sunburstLoaderWithMap",
+    markupTemplate: "%resourceBase/html/bagatelle-map-only.html"
+});
+
+fluid.defaults("hortis.mapWithSunburst", {
+    modelListeners: {
+        mapFocusedTooltipToSunburst: {
+            path: "{map}.model.mapBlockTooltipId",
+            func: "hortis.mapBlockToFocusedTaxa",
+            args: ["{change}.value", "{map}", "{sunburst}"]
+        }
+    },
+    datasets: "{sunburst}.viz.datasets",
+    geoJSONMapLayers: "{sunburstLoaderWithMap}.options.geoJSONMapLayers"
+});
+
+// Can't use modelRelay because of https://issues.fluidproject.org/browse/FLUID-6208
+hortis.mapBlockToFocusedTaxa = function (mapBlockTooltipId, map, sunburst) {
+    var togo = {};
+    if (mapBlockTooltipId) {
+        var bucket = map.toPlot[mapBlockTooltipId];
+        if (bucket) {
+            fluid.each(bucket.byTaxonId, function (obs, taxonId) {
+                togo[taxonId] = true;
+            });
+        }
+    }
+    var trans = sunburst.applier.initiate();
+    trans.change("rowFocus", null, "DELETE");
+    trans.change("rowFocus", togo);
+    trans.commit();
+};
 
 // From https://en.wikipedia.org/wiki/Longitude#Length_of_a_degree_of_longitude
 hortis.WGS84a = 6378137;
@@ -607,7 +641,7 @@ hortis.quantiser.indexTree = function (that) {
         if (row.coords) {
             var coords = JSON.parse(row.coords);
             fluid.each(coords, function (coord, obsId) {
-                that.indexObs(coord, obsId, row.iNaturalistTaxonId);
+                that.indexObs(coord, obsId, row.id);
             });
         }
     });

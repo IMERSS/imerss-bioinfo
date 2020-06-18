@@ -1,0 +1,29 @@
+#sidebar {
+    display: none;
+}
+.et_boxed_layout #page-container, .et_fixed_nav.et_boxed_layout #page-container #top-header, .et_fixed_nav.et_boxed_layout #page-container #main-header, .et_boxed_layout #page-container .container, .et_boxed_layout #page-container .et_pb_row {
+    max-width: 2600px;
+}
+#main-content .container:before {
+    content: none
+}
+.fl-bagatelle-container {
+    line-height: 1.4em;
+}
+.fld-bagatelle-taxonDisplay {
+    font-size: 14px;
+}
+.fld-bagatelle-dataset-controls {
+    font-size: 16px;
+}
+#content-area table td, #content-area table th, #content-area table tr, #main-content table.cart td, #main-content table.cart th, #main-content table.cart tr, table.cart td, table.cart th, table.cart tr {
+    padding: 0px 5px
+}
+
+table {
+   border: none !important;
+}
+
+td {
+   border: none !important;
+}

@@ -24,5 +24,8 @@
             "column": "iNaturalistObsLink",
             "equals": ""
         }
-    }
+    },
+    "datasetId": "GAL-WOL",
+    "datasetClass": "naturalist",
+    "observationId": "%rowNumber"
 }

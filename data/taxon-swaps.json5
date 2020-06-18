@@ -1371,14 +1371,14 @@
         },
         iNaturalistTaxonId: "313004"
     },
-    "Irtugovia pacifica": {
+    "Antithamnionella pacifica": {
         taxonNames: {
-            "Antithamnionella pacifica": {
+            "Irtugovia pacifica": {
                 resolvedBy: "AB",
-                notes: "This is not current in WoRMS, has been flagged in iNat (done on 10/2/20)"
+                oldiNaturalistTaxonId: "500285"
             }
         },                
-        iNaturalistTaxonId: "500285"
+        iNaturalistTaxonId: "1031132"
     },
     "Scagelia americana": {
         taxonNames: {
@@ -1518,5 +1518,226 @@
             }
         },
         iNaturalistTaxonId: "996928"
+    }, // From here main Galiano checklist
+    "Acronicta insita": {
+        taxonNames: {
+            "Powdered Camouflage Lichen": {
+                type: "commonName",
+            },
+            "Acronicta dactylina": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "212425",
+                notes: "Jim Johnson cites $115 volume of Fascicle 25.4 of Noctuoidea of the Wedge Entomological Research Foundation"
+            }
+        },
+        iNaturalistTaxonId: "1063932"
+    },
+    "Agaricus sylvicola": {
+        taxonNames: {
+            "Agaricus silvicola": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Galiano Master List",
+            },
+        },
+        iNaturalistTaxonId: "154291"
+    },
+    "Ageniella accepta": {
+        taxonNames: {
+            "Agienella blaisdelli": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Galiano Master List via Chris Ratzlaff's ",
+            },
+            "Ageniella blaisdelli": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name in iNaturalist",
+            },
+        },
+        iNaturalistTaxonId: "265669"
+    },
+    "Ageniella euphorbiae": {
+        taxonNames: {
+            "Agienella euphorbiae": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Galiano Master List via Chris Ratzlaff's ",
+            },
+        },
+        iNaturalistTaxonId: "1095139"
+    },
+    "Jackrogersella multiformis": {
+        taxonNames: {
+            "Annulohypoxylon multiforme": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "350086",
+                notes: "Unaccepted name in iNaturalist",
+            },
+        },
+        iNaturalistTaxonId: "895016"
+    },
+    "Aquilegia formosa": {
+        taxonNames: {
+            "Aquilegia formosa formosa": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "48251",
+                notes: "Unaccepted name in iNaturalist, cites Calflora",
+            },
+        },
+        iNaturalistTaxonId: "48244"
+    },
+    "Arachnospila fumipennis": {
+        taxonNames: {
+            "Arachnospila fumipennis eureka": {
+                resolvedBy: "AB",
+                notes: "iNat does not recognise ssp",
+            },
+        },
+        iNaturalistTaxonId: "705189"
+    },
+    "Arthothelium spectabile": {
+        taxonNames: {
+            "Arthonia spectabilis": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name in iNaturalist",
+            },
+        },
+        iNaturalistTaxonId: "214359"
+    },
+    "Circinaria leprosescens": {
+        taxonNames: {
+            "Aspicilia leprosescens": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "214460",
+                notes: "Unaccepted name in iNaturalist, cites Esslinger version 23",
+            },
+        },
+        iNaturalistTaxonId: "462710"
+    },
+    "Blennothallia fecunda": {
+        taxonNames: {
+            "Blennothallia fecundum": {
+                resolvedBy: "AS",
+                notes: "Misspelling in Galiano Master List",
+            },
+        },
+        iNaturalistTaxonId: "462484"
+    },
+    "Xerocomellus chrysenteron": {
+        taxonNames: {
+            "Boletus chrysenteron": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "54426",
+                notes: "Taxon merge in iNat, no source",
+            },
+        },
+        iNaturalistTaxonId: "438013"
+    },
+    "Xerocomus subtomentosus": {
+        taxonNames: {
+            "Boletus subtomentosus": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "143315",
+                notes: "Taxon swap in iNat, no source",
+            },
+        },
+        iNaturalistTaxonId: "485374"
+    },
+    "Bombus bifarius": {
+        taxonNames: {
+            "Bombus vancouverensis": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "1020304",
+                notes: "Bombus vancouverensis vancouverensis was recently split, but the change on iNat is complicated and will likely be delayed, so I suppose we should just retain Bombus bifarius for now",
+            },
+        },
+        iNaturalistTaxonId: "127052"
+    },
+    "Bryoria pseudofuscescens": {
+        taxonNames: {
+            "Bryoria friabilis": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "205676",
+                notes: "I forgot, Bryoria friabilis was recently sunk by some genetic study...",
+            },
+        },
+        iNaturalistTaxonId: "205673"
+    },
+    "Racomitrium affine": {
+        taxonNames: {
+            "Bucklandiella affinis": {
+                resolvedBy: "AS",
+                notes: "Unaccepted name in iNaturalist",
+            },
+        },
+        iNaturalistTaxonId: "167675"
+    },
+    "Racomitrium pacificum": {
+        taxonNames: {
+            "Bucklandiella pacifica": {
+                resolvedBy: "AS",
+                notes: "Unaccepted name in iNaturalist",
+            },
+        },
+        iNaturalistTaxonId: "167691"
+    },
+    "Flavoplaca marina": {
+        taxonNames: {
+            "Caloplaca marina": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "208401"
+            },
+        },
+        iNaturalistTaxonId: "462953"
+    },
+    "Polycauliona rosei": {
+        taxonNames: {
+            "Caloplaca rosei": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "215852",
+            },
+        },
+        iNaturalistTaxonId: "463838"
+    },
+    "Polycauliona stellata": {
+        taxonNames: {
+            "Caloplaca stellata": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "215864",
+            },
+        },
+        iNaturalistTaxonId: "463839"
+    },
+    "Chrysoperla carnea-group": {
+        taxonNames: {
+            "Chrysoperla carnea": {
+                resolvedBy: "AS",
+            },
+        },
+        iNaturalistTaxonId: "858297"
+    },
+    "Evagetes crassicornis": {
+        taxonNames: {
+            "Evagetes crassicornis crassicornis": {
+                resolvedBy: "AS",
+                notes: "Removed nominate subspecies epithet to correspond with Taxon on iNat"
+            }
+        },
+        iNaturalistTaxonId: "127798"
+    },
+    "Lamium purpureum hybridum": {
+        taxonNames: {
+            "Lamium hybridum": {
+                resolvedBy: "AS",
+                notes: "Changed name to correspond with taxon on iNat - Revisit"
+            }
+        },
+        iNaturalistTaxonId: "127798"
+    },
+    "Lomatium grayi": {
+        taxonNames: {
+            "Lomatium papilioniferum": {
+                resolvedBy: "AS",
+                notes: "I think adding this taxon to iNat may require creating an atlas, however, so to keep things simple let’s just call this Lomatium grayi for now?"
+            }
+        },
+        iNaturalistTaxonId: "77808"
     },
 }

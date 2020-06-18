@@ -120,7 +120,8 @@
 }
 
 .fl-bagatelle-highlightBlock {
-    stroke: blue;
+    stroke: deepskyblue;
+    sroke-width: 4px;
 }
 
 .fld-bagatelle-map-tooltip tr:nth-child(even) {

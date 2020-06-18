@@ -23,6 +23,8 @@ fluid.defeatLogging = true;
 
 var hortis = fluid.registerNamespace("hortis");
 
+hortis.ranks = fluid.freezeRecursive(require("../data/ranks.json"));
+
 var parsedArgs = minimist(process.argv.slice(2));
 
 var taxaMap = hortis.readJSONSync("data/iNaturalist/iNaturalist-taxa-map.json", "reading iNaturalist taxa map file");
@@ -30,7 +32,8 @@ var taxonResolveMap = hortis.readJSONSync("data/TaxonResolution-map.json", "read
 var swaps = hortis.readJSONSync("data/taxon-swaps.json5", "reading taxon swaps file");
 var fusion = hortis.readJSONSync(parsedArgs.fusion);
 
-hortis.ranks = fluid.freezeRecursive(require("../data/ranks.json"));
+var discardRanksBelow = "genus";
+var discardRanksBelowIndex = hortis.ranks.indexOf(discardRanksBelow);
 
 hortis.baseCommonOutMap = fluid.freezeRecursive({
     "columns": {
@@ -94,7 +97,7 @@ hortis.checkFilters = function (filter, mapColumns) {
     return filter || [];
 };
 
-hortis.makeObsIdGenerator = function (idField) {
+hortis.makeObsIdGenerator = function (idField, dataset) {
     if (idField.includes("(")) {
         var parsed = fluid.compactStringToRec(idField, "idGenerator");
         return function (obsRow) {
@@ -105,15 +108,15 @@ hortis.makeObsIdGenerator = function (idField) {
         };
     } else { // It must be a simple reference
         return function (obsRow, rowNumber) {
-            var terms = fluid.extend({}, obsRow, {rowNumber: rowNumber});
+            var terms = fluid.extend({}, obsRow, {rowNumber: rowNumber}, dataset);
             return fluid.stringTemplate(idField, terms);
         };
     }
 };
 
-hortis.assignObsIds = function (rows, map) {
+hortis.assignObsIds = function (rows, map, dataset) {
     if (map.observationId) {
-        var idGenerator = hortis.makeObsIdGenerator(map.observationId);
+        var idGenerator = hortis.makeObsIdGenerator(map.observationId, dataset);
         rows.forEach(function (row, index) {
             var id = map.datasetId + ":" + idGenerator(row, index);
             row.observationId = id;
@@ -122,15 +125,15 @@ hortis.assignObsIds = function (rows, map) {
     return rows;
 };
 
-hortis.filterOneRow = function (row, filters) {
+hortis.preFilterOneRow = function (row, filters) {
     return filters.every(function (oneFilter) {
         return row[oneFilter.column] === oneFilter.value;
     });
 };
 
-hortis.filterRows = function (rows, filters) {
+hortis.preFilterRows = function (rows, filters) {
     return rows.filter(function (oneRow) {
-        return hortis.filterOneRow(oneRow, filters);
+        return hortis.preFilterOneRow(oneRow, filters);
     });
 };
 
@@ -156,8 +159,8 @@ hortis.oneDatasetToLoadable = function (dataset) {
     return {
         rawInput: rawInput,
         obsRows: fluid.promise.map(rawInput, function (data) {
-            var rowsWithId = hortis.assignObsIds(data.rows, map);
-            var filteredRows = hortis.filterRows(rowsWithId, parsedFilters);
+            var rowsWithId = hortis.assignObsIds(data.rows, map, dataset);
+            var filteredRows = hortis.preFilterRows(rowsWithId, parsedFilters);
             if (parsedFilters.length > 0) {
                 console.log("Filtered observations to list of " + filteredRows.length + " with " + parsedFilters.length + " filters");
             }
@@ -240,20 +243,24 @@ hortis.doSummarise = function (outrows, outMap, summarise) {
             outDiscards.push.apply(outDiscards, discardedRows);
             outDiscards.push(hortis.blankRow(discardedRows[0]));
         });
-        hortis.writeCSV("duplicates.csv", outMap.columns, outDiscards, fluid.promise());
+        hortis.writeCSV("duplicates.csv", fluid.extend({}, outMap.columns, {
+            observationId: "Allocated ID"})
+        , outDiscards, fluid.promise());
         console.log(outDiscards.length + " duplicate rows written to duplicates.csv");
     }
-    return that.uniqueRows;
+    return Object.values(that.uniqueRows);
 };
 
-hortis.makeTaxonomiser = function (data) {
+hortis.makeTaxonomiser = function (data, options) {
     var that = {
+        options: fluid.extend(true, {}, options),
         taxaHash: {}, // map iNat scientificName to taxon
         taxaById: {},  // map iNat taxonId to taxon
         // Initialised from observations:
-        lookups: [],  // Map of obs index to iNat taxon
+        obsIdToTaxon: [],  // Map of obs id to iNat taxon
         undetHash: {}, // Map of taxon name to undetermined taxon
-        undetKeys: [] // Keys of undetHash
+        undetKeys: [], // Keys of undetHash
+        discardedTaxa: {} // Map of discarded taxon name to taxon for filtering by identification level
     };
     data.taxa.rows.forEach(function (taxon) {
         that.taxaHash[taxon.scientificName] = taxon;
@@ -267,8 +274,12 @@ hortis.isSelfUndetermined = function (name) {
 };
 
 hortis.applyObservations = function (that, taxa, obsRows) {
-    var identifiedTo = {}; // Two-level hash of {taxonLevel, obs index} to obs
-    obsRows.forEach(function (obs, index) { // TODO - get better index
+    var identifiedTo = {}; // Two-level hash of {rank, obs index} to obs
+    obsRows.forEach(function (obs) {
+        var obsId = obs.observationId;
+        if (obsId === undefined) {
+            fluid.fail("Observation ", obs, " was not assigned an id");
+        }
         var san = hortis.sanitizeSpeciesName(obs.taxonName);
         var taxonLevel = "Undetermined";
         if (!hortis.isSelfUndetermined(san)) {
@@ -276,18 +287,39 @@ hortis.applyObservations = function (that, taxa, obsRows) {
             if (resolved) {
                 san = resolved;
             }
-            var lookup = that.taxaHash[san];
-            if (lookup) {
-                taxonLevel = lookup.taxonRank;
-                that.lookups[index] = lookup;
+            var taxon = that.taxaHash[san];
+            if (taxon) {
+                taxonLevel = taxon.taxonRank;
+                that.obsIdToTaxon[obsId] = taxon;
             }
         }
-        fluid.set(identifiedTo, [taxonLevel, obs.index], obs);
+        fluid.set(identifiedTo, [taxonLevel, obsId], obs);
     });
     fluid.each(identifiedTo, function (recs, taxonLevel) {
         console.log("Identified " + Object.keys(recs).length + " records to " + taxonLevel);
     });
+
     var undets = identifiedTo["Undetermined"];
+
+    if (that.options.discardRanksBelowIndex !== -1) {
+        hortis.ranks.forEach(function (rank, rankIndex) {
+            if (rankIndex < that.options.discardRanksBelowIndex) {
+                var toDiscard = identifiedTo[rank];
+                if (toDiscard && Object.keys(toDiscard).length) {
+                    fluid.each(toDiscard, function (obs, obsId) {
+                        var taxon = that.obsIdToTaxon[obsId];
+                        fluid.set(that.discardedTaxa, [taxon.scientificName, obsId], obs);
+                        delete that.obsIdToTaxon[obsId];
+                    });
+                }
+            }
+        });
+    }
+    fluid.each(that.discardedTaxa, function (obsMap, taxonName) {
+        var keys = Object.keys(obsMap);
+        console.log("Discarded " + keys.length + " observations for taxon " + taxonName + " which were only identified to rank " + that.taxaHash[taxonName].taxonRank + ":");
+        console.log(keys.join(", "));
+    });
 
     fluid.each(undets, function (undet) {
         if (!hortis.isSelfUndetermined(undet.taxonName)) {
@@ -304,19 +336,37 @@ hortis.applyObservations = function (that, taxa, obsRows) {
     that.undetKeys = undetKeys;
 };
 
-hortis.writeReintegratedObservations = function (that, fileName, observations, outMap, summarise) {
+
+hortis.applyPostFilters = function (obsRows, filters) {
+    var origRows = obsRows.length;
+    fluid.each(filters, function (filter) {
+        obsRows = obsRows.filter(function (row) {
+            var element = row[filter.field];
+            var match = element === filter.equals;
+            var pass = filter.exclude ? !match : match;
+            return pass;
+        });
+    });
+    console.log("Discarded " + (origRows - obsRows.length) + " rows by applying " + hortis.pluralise(Object.keys(filters).length, " filter"));
+    return obsRows;
+};
+
+hortis.writeReintegratedObservations = function (that, fileName, observations, outMap, summarise, filters) {
     var outrows = [];
-    observations.forEach(function (row, index) {
-        var lookup = that.lookups[index];
-        if (lookup) {
+    observations.forEach(function (row) {
+        var taxon = that.obsIdToTaxon[row.observationId];
+        if (taxon) {
             var outrow = fluid.copy(row);
-            outrow.iNaturalistTaxonName = lookup.scientificName;
-            outrow.iNaturalistTaxonId = lookup.taxonId;
-            hortis.resolveTaxa(outrow, that.taxaById, lookup.taxonId, outMap.columns);
+            outrow.iNaturalistTaxonName = taxon.scientificName;
+            outrow.iNaturalistTaxonId = taxon.taxonId;
+            hortis.resolveTaxa(outrow, that.taxaById, taxon.taxonId, outMap.columns);
             outrows.push(outrow);
         }
     });
     outrows = hortis.doSummarise(outrows, outMap, summarise);
+    if (filters) {
+        outrows = hortis.applyPostFilters(outrows, filters);
+    }
 
     var promise = fluid.promise();
     hortis.writeCSV(fileName, outMap.columns, outrows, promise);
@@ -341,6 +391,7 @@ hortis.writeResolutionFile = function (that) {
 };
 
 hortis.settleStructure(dataPromises).then(function (data) {
+    var summarise = parsedArgs.summarise || fusion.summarise;
     var datasets = data.datasets;
     var flatObs = [];
     fluid.each(datasets, function (dataset) {
@@ -348,20 +399,21 @@ hortis.settleStructure(dataPromises).then(function (data) {
     });
     console.log("Loaded " + flatObs.length + " observations from " + hortis.pluralise(Object.keys(datasets).length, "dataset") +
         " to match against " + data.taxa.rows.length + " taxa");
-    var that = hortis.makeTaxonomiser(data);
+    var that = hortis.makeTaxonomiser(data, {
+        discardRanksBelowIndex: discardRanksBelowIndex
+    });
     hortis.applyObservations(that, data.taxa, flatObs);
 
     var writeResolutionFile = parsedArgs.writeRes; // TODO: doesn't seem that this is read or modified any more
     if (writeResolutionFile) {
         hortis.writeResolutionFile(that);
     }
-    var summarise = parsedArgs.summarise || fusion.summarise;
-    var combinedOutMap = hortis.combineOutMaps(Object.values(fluid.getMembers(datasets, "outMap")).concat[{
+    var combinedOutMap = hortis.combineOutMaps(Object.values(fluid.getMembers(datasets, "outMap")).concat([{
         counts: fusion.counts
-    }], summarise);
+    }]), summarise);
     combinedOutMap.datasets = fusion.datasets;
     hortis.writeReintegratedObservations(that, parsedArgs.dry ? "reintegrated.csv" :
-        fluid.module.resolvePath(fusion.output), flatObs, combinedOutMap, summarise);
+        fluid.module.resolvePath(fusion.output), flatObs, combinedOutMap, summarise, fusion.filters);
     hortis.writeCombinedOutMap(fusion.combinedOutMap, combinedOutMap);
 }, function (err) {
     fluid.fail("Error loading data", err);
