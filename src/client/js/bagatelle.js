@@ -71,6 +71,9 @@ fluid.defaults("hortis.sunburstLoader", {
                 members: {
                     viz: "@expand:hortis.decompressLZ4({sunburstLoader}.resources.viz.resourceText)",
                     tree: "{that}.viz.tree"
+                },
+                model: {
+                    commonNames: "{sunburstLoader}.options.commonNames"
                 }
             }
         }
@@ -171,7 +174,7 @@ fluid.defaults("hortis.sunburst", {
             3 / 22,
             3 / 22,
             13 / 22],
-        maxNodes: 100
+        maxNodes: 200
     },
     parsedColours: "@expand:hortis.parseColours({that}.options.colours)",
     colourCount: "undocumentedCount",
@@ -450,10 +453,13 @@ hortis.renderTooltip = function (row, markup) {
             dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage);
         }
         if (row.species) {
-            dumpRow("species", row.species);
+            dumpRow("species", row.species + (row.authority ? (" " + row.authority) : ""));
         } else {
             dumpRow("iNaturalistTaxonName", row.iNaturalistTaxonName);
         }
+        hortis.commonFields.forEach(function (field) {
+            dumpRow(field, row[field]);
+        });
         togo += hortis.renderSpecialRow(row, hortis.specialRows.collected, markup);
         dumpRow("collection", row.collection);
         dumpRow("reporting", row.reporting);
@@ -706,7 +712,7 @@ hortis.interpolateModels = function (f, m1, m2) {
 };
 
 hortis.undocColourForRow = function (parsedColours, row) {
-    var undocFraction = row.undocumentedCount / row.childCount;
+    var undocFraction = 1 - row.undocumentedCount / row.childCount;
     var interp = fluid.colour.interpolate(undocFraction, row.highColour || parsedColours.highColour, row.lowColour || parsedColours.lowColour);
     return fluid.colour.arrayToString(interp);
 };

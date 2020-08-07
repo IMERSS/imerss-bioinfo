@@ -1,7 +1,7 @@
 {
     "columns": {
         "taxonName": "Taxon",
-        "author": "Author",
+        "authority": "Author",
         "commonName": "Common Name",
         "origin": "Origin",
         "status": "Status",
@@ -9,19 +9,14 @@
         "collected": "Collected/Reported (y-m-d)",
         "collector": "Collector/Source",
         "collection": "Collection/List",
-        "firstDocumented": "First Documented",
-        "documenter": "Documenter",
+        "firstObserved": "First Documented",
+        "observer": "Documenter",
+        "documenting": "Documenting",
         "iNaturalistLink": "iNaturalist Link",
         "upstreamID": "ID",
         "photoLink": "iNaturalist Photo",
         "notes": "Notes",
         "statsCode": "Stats Code"
-    },
-    "counts": {
-        "undocumentedCount": {
-            "column": "iNaturalistLink",
-            "equals": ""
-        }
     },
     "datasetId": "GAL",
     "datasetClass": "naturalist",

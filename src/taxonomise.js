@@ -201,6 +201,7 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace(/ (\(.*\))/g, "");
     name = name.replace(" ssp.", "");
     name = name.replace(" grp.", "");
+    name = name.replace(" group", "");
     name = name.replace(" var.", "");
     name = name.replace(" ined.", "");
     name = name.replace(" aff.", "");

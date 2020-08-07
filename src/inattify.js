@@ -77,7 +77,7 @@ hortis.logWork = function (that) {
 
 hortis.noteSkip = function (that, message) {
     ++that.skipCount;
-    if (that.skipCount % 1000 === 0) {
+    if (that.skipCount % 10000 === 0) {
         console.log(message);
         hortis.logWork(that);
     }

@@ -18,22 +18,22 @@
         "genus": "Genus",
         "species": "Species",
         "taxonName": "Taxon name",
+        "authority": "Author",
         "dateObserved": "Date observed",
         "description": "Description",
         "placeName": "Place name",
-        "latitude": "Latitude",
-        "longitude": "Longitude",
-        "tags": "Tags",
-        "geoPrivacy": "Geoprivacy",
-        "maxDepth": "Max. depth",
-        "bottomTime": "Bottom time",
         "commonName": "Common name",
-        "observationCount": "Observation count"
+        "collected": "Collected/Reported (y-m-d)",
+        "collector": "Collector/Source",
+        "collection": "Collection/List",
+        "firstObserved": "First Observed",
+        "observer": "Observer",
+        "documenting": "Documenting"
     },
     "counts": {
-        "observationCount": {
-            "column": "observationCount",
-            "free": true
+        "undocumentedCount": {
+            "column": "documenting",
+            "equals": "unobserved"
         }
     },
     "dateField": "dateObserved",

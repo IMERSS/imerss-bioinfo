@@ -71,7 +71,9 @@ hortis.fullRecordTransform = {
 hortis.addTaxonInfo = function (row, fullRecord) {
     fluid.each(hortis.fullRecordTransform, function (path, target) {
         var source = fluid.get(fullRecord, path);
-        row[target] = source;
+        if (row[target] === undefined) {
+            row[target] = source;
+        }
     });
 };
 
@@ -100,13 +102,19 @@ hortis.storeAtPath = function (treeBuilder, path, row) {
     });
 };
 
+hortis.loadCachedTaxonDoc = function (treeBuilder, id) {
+    var existing = treeBuilder.taxonCache[id];
+    if (!existing) {
+        existing = treeBuilder.taxonCache[id] = hortis.iNatTaxa.loadTaxonDoc(treeBuilder.options.taxonAPIFileBase, id);
+    }
+    return existing;
+}
 
-
-hortis.taxaToPathiNat = function (taxonAPIFileBase, row) {
-    var baseDoc = hortis.iNatTaxa.loadTaxonDoc(taxonAPIFileBase, row.iNaturalistTaxonId);
+hortis.taxaToPathiNat = function (treeBuilder, row) {
+    var baseDoc = hortis.loadCachedTaxonDoc(treeBuilder, row.iNaturalistTaxonId);
     var parentTaxaIds = hortis.iNatTaxa.parentTaxaIds(baseDoc);
     var ancestourDocs = parentTaxaIds.map(function (id) {
-        return hortis.iNatTaxa.loadTaxonDoc(taxonAPIFileBase, id);
+        return hortis.loadCachedTaxonDoc(treeBuilder, id);
     });
     var rankDocs = ancestourDocs.filter(function (oneDoc) {
         return hortis.ranks.includes(oneDoc.rank);
@@ -121,7 +129,7 @@ hortis.applyRowsToTree = function (treeBuilder, rows) {
             process.stdout.write(index + " ... ");
         }
         hortis.cleanRow(row);
-        var path = hortis.taxaToPathiNat(treeBuilder.options.taxonAPIFileBase, row);
+        var path = hortis.taxaToPathiNat(treeBuilder, row);
         treeBuilder.storeAtPath(path, row);
     });
     console.log("");
@@ -163,7 +171,9 @@ fluid.defaults("hortis.treeBuilder", {
     members: {
         // Mutable tree to which each file contributes its taxa
         tree: "@expand:hortis.rootNode({that}.map)",
-        map: "@expand:hortis.loadMapWithCounts({that}.options.mapFile)"
+        map: "@expand:hortis.loadMapWithCounts({that}.options.mapFile)",
+        // map of taxonId to taxon file
+        taxonCache: {}
     },
     invokers: {
         applyRowsToTree: "hortis.applyRowsToTree({that}, {arguments}.1)", // rows
@@ -214,6 +224,6 @@ var parsedArgs = minimist(process.argv.slice(2));
 
 hortis.treeBuilder({
     mapFile: parsedArgs.map,
-    outputFile: parsedArgs.o,
+    outputFile: parsedArgs.o || parsedArgs.output,
     inputFiles: parsedArgs._
 });

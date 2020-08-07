@@ -46,6 +46,9 @@ var buildIndex = {
         src: "data/dataPaper/Life.json.lz4",
         dest: "build/data/dataPaper/Life.json.lz4"
     }, {
+        src: "data/Galiano/Galiano-Life.json.lz4",
+        dest: "build/data/Galiano/Galiano-Life.json.lz4"
+    }, {
         src: "data/Galiano/Galiano_map_0.js",
         dest: "build/data/Galiano/Galiano_map_0.js"
     }, {

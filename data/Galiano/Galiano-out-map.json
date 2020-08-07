@@ -1,24 +1,24 @@
 {
     "columns": {
         "taxonName": "Taxon name",
+        "authority": "Author",
         "dateObserved": "Date observed",
         "description": "Description",
         "placeName": "Place name",
-        "latitude": "Latitude",
-        "longitude": "Longitude",
-        "tags": "Tags",
-        "geoPrivacy": "Geoprivacy",
-        "maxDepth": "Max. depth",
-        "bottomTime": "Bottom time",
         "commonName": "Common name",
+        "collected": "Collected/Reported (y-m-d)",
+        "collector": "Collector/Source",
+        "collection": "Collection/List",
+        "firstObserved": "First Observed",
+        "observer": "Observer",
+        "documenting": "Documenting",
         "iNaturalistTaxonName": "iNaturalist taxon name",
-        "iNaturalistTaxonId": "iNaturalist taxon ID",
-        "observationCount": "Observation count"
+        "iNaturalistTaxonId": "iNaturalist taxon ID"
     },
     "counts": {
-        "observationCount": {
-            "column": "observationCount",
-            "free": true
+        "undocumentedCount": {
+            "column": "documenting",
+            "equals": "unobserved"
         }
     },
     "dateField": "dateObserved",
