@@ -1,0 +1,23 @@
+{
+    "columns": {
+        "taxonName": "Taxon name",
+        "authority": "Author",
+        "commonName": "Common name",
+        "collected": "Collected/Reported (y-m-d)",
+        "collector": "Collector/Source",
+        "collection": "Collection/List",
+        "firstObserved": "First Observed",
+        "observer": "Observer",
+        "documenting": "Documenting",
+        "iNaturalistTaxonName": "iNaturalist taxon name",
+        "iNaturalistTaxonId": "iNaturalist taxon ID"
+    },
+    "counts": {
+        "undocumentedCount": {
+            "column": "documenting",
+            "equals": "unobserved"
+        }
+    },
+    "dateField": "firstObserved",
+    "uniqueField": "taxonName"
+}

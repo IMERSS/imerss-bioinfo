@@ -1,0 +1,21 @@
+{
+    "columns": {
+        "taxonName": "Taxon",
+        "authority": "Author",
+        "commonName": "Common Name",
+        "reporting": "Reporting Status",
+        "collected": "Collected/Reported (y-m-d)",
+        "collector": "Collector/Source",
+        "collection": "Collection/List",
+        "firstObserved": "First Observed",
+        "observer": "Observer",
+        "documenting": "iNat Observation",
+        "iNaturalistLink": "iNaturalist Link",
+        "upstreamID": "ID",
+        "photoLink": "iNaturalist Photo",
+        "notes": "Notes"
+    },
+    "datasetId": "DATA",
+    "datasetClass": "naturalist",
+    "observationId": "%datasetId:%rowNumber"
+}

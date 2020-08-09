@@ -1740,4 +1740,58 @@
         },
         iNaturalistTaxonId: "77808"
     },
+    "Aphrodita negligens": {
+        taxonNames: {
+            "Aphrodite negligens": {
+                resolvedBy: "AB",
+                notes: "Misspelling in Galiano Data Paper, Aphrodita is accepted in WoRMS",
+            },
+        },
+        iNaturalistTaxonId: "733687"
+    },
+    "Zemysina orbella": {
+        taxonNames: {
+            "Diplodonta orbella": {
+                resolvedBy: "AS",
+                notes: "However, this report has opened a can of WoRMS because it is based on a voucher specimen at the RBCM that is now in question. Stand by Solved. This taxon was split and ours is now recognized as Zemysina impolita. Deleted redundant row and merged metadata."
+            },
+        },
+        iNaturalistTaxonId: "1073521"
+    },
+    "Nassarius mendicus": {
+        taxonNames: {
+            "Hima mendica": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name in PMLS catalogue, fixed in data paper"
+            },
+        },
+        iNaturalistTaxonId: "129938"
+    },
+    "Pandalus": {
+        taxonNames: {
+            "Pandalopsis": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name in RBCM catalogue, fixed in data paper. Notes there: \"We have changed the name as per WoRMS, however note that this taxon is already databased on GBIF under the old name. \"Since generic splits are rather arbitrary, not sure why they [split off Pandalus lucidirimicolus] when all the Pandalopsis fall out together in their tree.\" Gregory Jensen" 
+            },
+        },
+        iNaturalistTaxonId: "47709"
+    },
+    "Pandalus lucidirimicolus": {
+        taxonNames: {
+            "Pandalopsis lucidirimicola": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name in PMLS catalogue, fixed in data paper. Notes there: \"We have changed the name as per WoRMS, however note that this taxon is already databased on GBIF under the old name. \"Since generic splits are rather arbitrary, not sure why they [split off Pandalus lucidirimicolus] when all the Pandalopsis fall out together in their tree.\" Gregory Jensen"
+            },
+        },
+        iNaturalistTaxonId: "1111164"
+    },
+    "Megayoldia thraciaeformis": {
+        taxonNames: {
+            "Yoldia thraciaeformis": {
+                resolvedBy: "AB",
+                notes: "Accessioned at RBCM as Yoldia thraciaeformis (Storer, 1838) –unaccepted acc. to WoRMS"
+            },
+        },
+        iNaturalistTaxonId: "957355"
+    },
 }

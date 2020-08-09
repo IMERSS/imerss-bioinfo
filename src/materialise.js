@@ -7,12 +7,18 @@ var fluid = require("infusion");
 var glob = require("glob");
 var kettle = require("kettle");
 var fs = require("fs");
+fluid.require("%bagatelle");
 
-var dir = process.argv[2];
+var baseDir = fluid.module.resolvePath("%bagatelle/data/dataPaper-in/Animalia/");
+
+var dir = process.argv[2] || "e:/data/Google Drive/Galiano Data Paper 2020/Marine Life/Animalia";
 var source = kettle.dataSource.URL({
     url: "https://docs.google.com/spreadsheets/d/%id/export?format=csv&id=%id&gid=0",
     termMap: {
         id: "%id"
+    },
+    requestOptions: {
+        followAllRedirects: true
     },
     components: {
         encoding: {
@@ -46,7 +52,7 @@ glob(dir + "/*.gsheet", function (er, files) {
     records.forEach(function (oneRecord) {
         source.get({id: oneRecord.id}).then(function (doc) {
             console.log("Got doc ", doc);
-            fs.writeFileSync("Animalia/" + oneRecord.segment + ".csv", doc);
+            fs.writeFileSync(baseDir + oneRecord.segment + ".csv", doc);
         }, function (err) {
             console.log("Got err ", err);
         });

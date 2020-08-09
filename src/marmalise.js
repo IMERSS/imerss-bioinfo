@@ -108,7 +108,7 @@ hortis.loadCachedTaxonDoc = function (treeBuilder, id) {
         existing = treeBuilder.taxonCache[id] = hortis.iNatTaxa.loadTaxonDoc(treeBuilder.options.taxonAPIFileBase, id);
     }
     return existing;
-}
+};
 
 hortis.taxaToPathiNat = function (treeBuilder, row) {
     var baseDoc = hortis.loadCachedTaxonDoc(treeBuilder, row.iNaturalistTaxonId);

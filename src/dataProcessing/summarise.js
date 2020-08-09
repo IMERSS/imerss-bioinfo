@@ -15,6 +15,7 @@ fluid.defaults("hortis.summarise", {
     },
     fields: {
         date: "dateObserved",
+        collection: "collection",
         unique: "iNaturalistTaxonName", // Field which identifies observations as being of the same taxon
         obsCount: "observationCount",
         obsId: "observationId",
@@ -42,6 +43,7 @@ hortis.summarise.storeRow = function (that, row) {
     var fields = that.options.fields;
     var obsCountField = fields.obsCount;
     var coordsField = fields.coords;
+    var collectionField = fields.collection;
     row.timestamp = Date.parse(row[fields.date]);
     var uniqueVal = row[fields.unique];
     var existing = that.uniqueRows[uniqueVal];
@@ -50,6 +52,7 @@ hortis.summarise.storeRow = function (that, row) {
             that.uniqueRows[uniqueVal] = row;
             row[obsCountField] = existing[obsCountField];
             row[coordsField] = existing[coordsField];
+            row[collectionField] = existing[collectionField];
         } else {
             var discardEntry = that.discardedRows[uniqueVal];
             if (!discardEntry) {

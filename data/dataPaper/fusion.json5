@@ -2,14 +2,14 @@
     datasets: {
         PMLS: {
             name: "Pacific Marine Life Survey Dive Records (1968-2018)",
-            input: "%bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2019-10-13.csv",
+            input: "%bagatelle/data/Galiano PMLS/PMLS_records_Galiano_2020_08_04.csv",
             map: "%bagatelle/data/Galiano PMLS/PMLS-map.json",
             outMap: "%bagatelle/data/Galiano PMLS/PMLS-out-map.json",
             colour: "#931362"
         },
         iNat: {
-            name: "Galiano iNaturalist Marine Observations (2005-2019)",
-            input: "%bagatelle/data/iNaturalist/Galiano_iNat_marine_observations_2019_09_08.csv",
+            name: "Galiano iNaturalist Marine Observations (2005-2020)",
+            input: "%bagatelle/data/iNaturalist/iNat_Catalogue_Marine_Animalia_2020_08_04.csv",
             map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map.json",
             outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99"
@@ -27,9 +27,14 @@
             field: "kingdom", // Recall that these are before outMap is applied
             equals: "Plantae",
             exclude: true
+        },
+        Chromista: {
+            field: "kingdom", // Recall that these are before outMap is applied
+            equals: "Chromista",
+            exclude: true
         }
     },
     summarise: true,
-    output: "%bagatelle/reintegrated.csv",
+    output: "%bagatelle/data/dataPaper/reintegrated.csv",
     combinedOutMap: "%bagatelle/data/dataPaper/combinedOutMap.json"
 }

@@ -8,8 +8,7 @@
         "longitude": "longitude",
         "privateLatitude": "private_latitude",
         "privateLongitude": "private_longitude",
-        "taxonName": "scientific_name",
-        "iNaturalistTaxonId": "taxon_id"
+        "taxonName": "scientific_name"
     },
     "datasetId": "iNat",
     "datasetClass": "citizen",

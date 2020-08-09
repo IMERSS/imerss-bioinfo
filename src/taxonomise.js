@@ -32,7 +32,8 @@ var taxonResolveMap = hortis.readJSONSync("data/TaxonResolution-map.json", "read
 var swaps = hortis.readJSONSync("data/taxon-swaps.json5", "reading taxon swaps file");
 var fusion = hortis.readJSONSync(parsedArgs.fusion);
 
-var discardRanksBelow = "genus";
+//var discardRanksBelow = "genus"; // TODO: Make this an argument
+var discardRanksBelow = "species";
 var discardRanksBelowIndex = hortis.ranks.indexOf(discardRanksBelow);
 
 hortis.baseCommonOutMap = fluid.freezeRecursive({
@@ -51,6 +52,7 @@ hortis.baseSummariseCommonOutMap = fluid.freezeRecursive(fluid.extend(true, {}, 
     },
     "columns": {
         "observationCount": "Observation count",
+        "collection": "Collection/List",
         "coords": "Coordinates"
     }
 }));
@@ -122,6 +124,10 @@ hortis.assignObsIds = function (rows, map, dataset) {
             row.observationId = id;
         });
     }
+    rows.forEach(function (row) {
+        // TODO: Source this field from hortis.summarise - implies pushing summarise through args all the way back to hortis.fusionToLoadable
+        row.collection = map.datasetId;
+    });
     return rows;
 };
 

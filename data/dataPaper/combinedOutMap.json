@@ -3,6 +3,7 @@
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
         "observationCount": "Observation count",
+        "collection": "Collection/List",
         "coords": "Coordinates",
         "kingdom": "Kingdom",
         "phylum": "Phylum",
@@ -36,14 +37,14 @@
     "datasets": {
         "PMLS": {
             "name": "Pacific Marine Life Survey Dive Records (1968-2018)",
-            "input": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2019-10-13.csv",
+            "input": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS_records_Galiano_2020_08_04.csv",
             "map": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS-map.json",
             "outMap": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS-out-map.json",
             "colour": "#931362"
         },
         "iNat": {
-            "name": "Galiano iNaturalist Marine Observations (2005-2019)",
-            "input": "E:/source/gits/bagatelle/data/iNaturalist/Galiano_iNat_marine_observations_2019_09_08.csv",
+            "name": "Galiano iNaturalist Marine Observations (2005-2020)",
+            "input": "E:/source/gits/bagatelle/data/iNaturalist/iNat_Catalogue_Marine_Animalia_2020_08_04.csv",
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99"
