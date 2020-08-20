@@ -1749,15 +1749,6 @@
         },
         iNaturalistTaxonId: "733687"
     },
-    "Zemysina orbella": {
-        taxonNames: {
-            "Diplodonta orbella": {
-                resolvedBy: "AS",
-                notes: "However, this report has opened a can of WoRMS because it is based on a voucher specimen at the RBCM that is now in question. Stand by Solved. This taxon was split and ours is now recognized as Zemysina impolita. Deleted redundant row and merged metadata."
-            },
-        },
-        iNaturalistTaxonId: "1073521"
-    },
     "Nassarius mendicus": {
         taxonNames: {
             "Hima mendica": {
@@ -1793,5 +1784,158 @@
             },
         },
         iNaturalistTaxonId: "957355"
+    },
+    "Spiochaetopterus costarum pottsi": {
+        taxonNames: {
+            "Spiochaetopterus costarum": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: Records under the name of Spiochaetopterus costarum need to be adjusted in the PMLS database"
+            },
+        },
+        iNaturalistTaxonId: "552559"
+    },
+    "Keenaea centifilosa": {
+        taxonNames: {
+            "Nemocardium centifilosum": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: Reported as Nemocardium centifilosum (RBCM 979-00327); we cannot change this record name; swap"
+            },
+        },
+        iNaturalistTaxonId: "962184"
+    },
+    "Mytilus": {
+        taxonNames: {
+            "Mytilus trossulus": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: 4. Mytilus trossulus cannot be discriminated from M. edulis / M. galloprovincialis in the field."
+            },
+        },
+        iNaturalistTaxonId: "62807"
+    },
+    "Schuchertinia allmanii": {
+        taxonNames: {
+            "Clavactinia serrata": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: 1. This is now going under the name Schuchertinia allmanii in our curated summary."
+            },
+        },
+        iNaturalistTaxonId: "1118982"
+    },
+    "Myxicola sp.B": {
+        taxonNames: {
+            "Myxicola infundibulum": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: 6. Leslie Harris, polychaete expert, remarks ... 'our NEP specimens are distinctly different both morphologically & genetically from infundibulum. All of the original specimens need to be re-examined so we can decide what name (or names) to use in the NEP'"
+            },
+        },
+        iNaturalistTaxonId: "49534"
+    },
+    "Myxicola sp.A": {
+        taxonNames: {
+            "Myxicola aesthetica": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: 6. Leslie Harris, polychaete expert, remarks ... 'our NEP specimens are distinctly different both morphologically & genetically from infundibulum. All of the original specimens need to be re-examined so we can decide what name (or names) to use in the NEP'"
+            },
+        },
+        iNaturalistTaxonId: "49534"
+    },
+    "Phyllochaetopterus": {
+        taxonNames: {
+            "Phyllochaetopterus claparedii": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: 9. Leslie Harris, polychaete expert, remarks ... \"Considering ... the presence of multiple species of Phyllochaetopterus in the NEP some of which are undescribed, I would use Phyllochaetopterus sp. in your list.\" - Leslie Harris"
+            },
+        },
+        iNaturalistTaxonId: "374226"
+    },
+    "Phoca vitulina richardii": {
+        taxonNames: {
+            "Phoca vitulina": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: 8. You may or may not want to recognize the ssp on your list, Donna. We will otherwise run a swap on this one."
+            },
+        },
+        iNaturalistTaxonId: "117766"
+    },
+    "Nereis": {
+        taxonNames: {
+            "Nereis procera": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: 7. Nereis procera cannot be identified without dissection. Unless it was collected & given to a taxonomist any dive observation will most likely be wrong"
+            },
+        },
+        iNaturalistTaxonId: "81791"
+    },
+/*    "Zemysina orbella": {
+        taxonNames: {
+            "Diplodonta orbella": {
+                resolvedBy: "AS",
+                notes: "However, this report has opened a can of WoRMS because it is based on a voucher specimen at the RBCM that is now in question. Stand by Solved. This taxon was split and ours is now recognized as Zemysina impolita. Deleted redundant row and merged metadata."
+            },
+        },
+        iNaturalistTaxonId: "1073521"
+    },*/
+    "Zemysina impolita": {
+        taxonNames: {
+            "Diplodonta impolita": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: 2. however this taxon has since been split, with Zemysina orbella recognized as a southern species and Diplodonta impolita S.S. Berry, 1953 as a northern species (Coan et al. 2000)",
+                oldiNaturalistTaxonId: "551115",
+            },
+            "Diplodonta orbella": {
+                resolvedBy: "AS",
+                notes: "See above record - iNat does not recognise this taxon though we want it in the data paper. This swap is just for alignment"
+            }
+        },
+        iNaturalistTaxonId: "1118984"
+    },
+    "Euphysa": {
+        taxonNames: {
+            "Euphysa flammea": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: 3. Claudia Mills: ... Am I getting old, or do I just not believe the old stories? I don’t think that anyone has studied this genus carefully here, actually... The reason that I’ve settled on calling them just Euphysa sp. is that one mostly sees the adult. ..."
+            },
+        },
+        iNaturalistTaxonId: "247163"
+    },
+    "Rhabdus rectius": {
+        taxonNames: {
+            "Dentalium rectius": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: Listed as Rhabdus rectius; Suggest we implement a swap: note: Accessioned at RBCM as Dentalium rectius Carpenter, 1864 unaccepted acc. to WoRMS",
+                oldiNaturalistTaxonId: "448311",
+            },
+        },
+        iNaturalistTaxonId: "957345"
+    },
+    "Asterozoa": {
+        taxonNames: {
+            "Patiria miniata": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: We can retain the catalogue record but we have deliberately omitted from our summary because the record is very doubtful given the known distribution of this species",
+                oldiNaturalistTaxonId: "48830",
+            },
+        },
+        iNaturalistTaxonId: "481959"
+    },
+    "Lyonsia bracteata": {
+        taxonNames: {
+            "Lyonsia californica": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: Listed as Lyonsia bracteata; Reported as L. californica (RBCM 979-03305); the original ID by Cowan is Lyonsia pugetensis which is now accepted as Lyonsia bracteata.  I cannot tell at what stage the name. L. californica was adopted, at best I can assume it was an incorrect synonymy that got recorded.",
+                oldiNaturalistTaxonId: "179831",
+            },
+        },
+        iNaturalistTaxonId: "1118981"
+    },
+    "Isodictya rigida": {
+        taxonNames: {
+            "Neoesperiopsis rigida": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: Listed as Isodictya rigida; reported as Amphilectus rigida (GBIF); as Neoesperiopsis rigida (RBCM)",
+                oldiNaturalistTaxonId: "367052",
+            },
+        },
+        iNaturalistTaxonId: "459878"
     },
 }

@@ -1,0 +1,7 @@
+{
+    "columns": {
+        "taxonName": "Taxon name",
+        "dateObserved": "Date observed",
+        "commonName": "Common name"
+    }
+}

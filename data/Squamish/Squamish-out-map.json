@@ -1,0 +1,19 @@
+{
+    "columns": {
+        "taxonName": "Taxon name",
+        "origin": "Origin",
+        "status": "Status",
+        "reporting": "Reporting Status",
+        "collected": "Collected/Reported (y-m-d)",
+        "collector": "Collector/Source",
+        "collection": "Collection/List",
+        "firstObserved": "First Observed",
+        "observer": "Observer",
+        "accessionNumber": "Accession Number",
+        "iNaturalistObsLink": "iNaturalist Observation Link",
+        "obsPhotoLink": "iNaturalist Obs Photo Link",
+        "notes": "Notes",
+        "criticalNotes": "Critical Notes",
+        "commonName": "Common name"
+    }
+}

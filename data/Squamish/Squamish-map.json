@@ -1,38 +1,29 @@
 {
     "columns": {
-        "species": "Taxon",
-        "author": "Author of Species",
+        "taxonName": "Taxon",
+        "author": "Author",
         "commonName": "Common Name",
-        "kingdom": "Kingdom",
-        "phylum": "Phylum",
-        "subphylum": "Subphylum",
-        "superclass": "Superclass",
-        "class": "Class",
-        "subclass": "Subclass",
-        "superorder": "Superorder",
-        "order": "Order",
-        "suborder": "Suborder",
-        "superfamily": "Superfamily",
-        "family": "Family",
-        "subfamily": "Subfamily",
         "origin": "Origin",
-        "status": "Status (B.C.)",
-        "reporting": "reporting",
-        "collected": "Last Collected/ Reported",
+        "status": "Status",
+        "reporting": "Reporting",
+        "collected": "Last Collected/Reported (y-m-d)",
         "collector": "Collector/Source",
-        "collection": "Collection Accession #/List",
-        "firstDocumented": "First Documented",
-        "documenter": "Documenter",
-        "iNaturalistLink": "iNaturalist Link",
+        "collection": "Collection/List",
+        "firstObserved": "First Documented",
+        "observer": "Documenter",
+        "accessionNumber": "Catalogue Number",
+        "iNaturalistObsLink": "iNaturalist Link",
         "upstreamID": "ID",
-        "photoLink": "iNaturalist Photo",
-        "notes": "Notes",
-        "statsCode": "Stats Code"
+        "obsPhotoLink": "iNaturalist photo",
+        "notes": "Notes"
     },
     "counts": {
         "undocumentedCount": {
-            "column": "iNaturalistLink",
+            "column": "iNaturalistObsLink",
             "equals": ""
         }
-    }
+    },
+    "datasetId": "SQUAMISH",
+    "datasetClass": "naturalist",
+    "observationId": "%rowNumber"
 }

@@ -1,0 +1,12 @@
+{
+    "columns": {
+        "taxonName": "Taxon",
+        "commonName": "Common Name",
+        "dateObserved": "Date",
+        "latitude": "LatitudeDD",
+        "longitude": "LongitudeDD"
+    },
+    "datasetId": "BCCSN",
+    "datasetClass": "naturalist",
+    "observationId": "%rowNumber"
+}

@@ -354,7 +354,7 @@ hortis.applyPostFilters = function (obsRows, filters) {
             return pass;
         });
     });
-    console.log("Discarded " + (origRows - obsRows.length) + " rows by applying " + hortis.pluralise(Object.keys(filters).length, " filter"));
+    console.log("Discarded " + (origRows - obsRows.length) + " rows by applying " + hortis.pluralise(Object.keys(filters).length, "filter"));
     return obsRows;
 };
 

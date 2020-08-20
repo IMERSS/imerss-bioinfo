@@ -55,6 +55,20 @@
             "map": "E:/source/gits/bagatelle/data/RBCM/RBCM-map.json",
             "outMap": "E:/source/gits/bagatelle/data/RBCM/RBCM-out-map.json",
             "colour": "#29a329"
+        },
+        "BCCSN": {
+            "name": "British Columbia Cetacean Sightings Network (2001-2020)",
+            "input": "E:/source/gits/bagatelle/data/BCCSN/BC_Cetacean_Sightings_Network_galiano_biodiversity_catalogue_2020_07_15.csv",
+            "map": "E:/source/gits/bagatelle/data/BCCSN/BCCSN-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/BCCSN/BCCSN-out-map.json",
+            "colour": "#55a329"
+        },
+        "CMN": {
+            "name": "Canadian Museum of Nature via VertNet (1982)",
+            "input": "E:/source/gits/bagatelle/data/CMN/Vert_Net_CMN_Marine_Vertebrate_Collections_2019-04-28.csv",
+            "map": "E:/source/gits/bagatelle/data/CMN/CMN-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/CMN/CMN-out-map.json",
+            "colour": "#77a329"
         }
     }
 }
