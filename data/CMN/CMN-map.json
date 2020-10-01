@@ -1,11 +1,11 @@
 {
     "columns": {
-        "taxonName": "scientificname",
-        "dateObserved": "eventdate",
-        "latitude": "decimallatitude",
-        "longitude": "decimallongitude",
-        "placeName": "locality",
-        "catalogueNumber": "catalognumber"
+        "taxonName": "TAXON_LINK",
+        "dateObserved": "DATE_COLLECTED",
+        "latitude": "LAT_DD",
+        "longitude": "LONG_DD",
+        "placeName": "PLACE_COLLECTED",
+        "catalogueNumber": "ID_NUMBER"
     },
     "datasetId": "CMN",
     "datasetClass": "naturalist",

@@ -32,8 +32,8 @@ var taxonResolveMap = hortis.readJSONSync("data/TaxonResolution-map.json", "read
 var swaps = hortis.readJSONSync("data/taxon-swaps.json5", "reading taxon swaps file");
 var fusion = hortis.readJSONSync(parsedArgs.fusion);
 
-//var discardRanksBelow = "genus"; // TODO: Make this an argument
-var discardRanksBelow = "species";
+var discardRanksBelow = "genus"; // TODO: Make this an argument
+// var discardRanksBelow = "species";
 var discardRanksBelowIndex = hortis.ranks.indexOf(discardRanksBelow);
 
 hortis.baseCommonOutMap = fluid.freezeRecursive({
@@ -206,6 +206,7 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace("�", "ue");
     name = name.replace(/ (\(.*\))/g, "");
     name = name.replace(" ssp.", "");
+    name = name.replace(" subsp.", "");
     name = name.replace(" grp.", "");
     name = name.replace(" group", "");
     name = name.replace(" var.", "");
@@ -215,6 +216,7 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace(" species complex", "");
     name = name.replace(" complex", "");
     name = name.replace(" cf ", " ");
+    name = name.replace(" ?", " ");
     name = name.replace(" x ", " × ");
     return name;
 };

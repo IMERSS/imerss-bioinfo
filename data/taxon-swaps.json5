@@ -1476,6 +1476,11 @@
                 resolvedBy: "AB",
                 notes: "Misspelling in RBCM",
             },
+            "Alia gausapata": {
+                resolvedBy: "AB",
+                notes: "Old name in RBCM",
+                oldiNaturalistTaxonId: "339169"
+            },
         },
         iNaturalistTaxonId: "347322"
     },
@@ -1937,5 +1942,65 @@
             },
         },
         iNaturalistTaxonId: "459878"
+    },
+    "Bugulina californica": {
+        taxonNames: {
+            "Bugula californica": {
+                resolvedBy: "AB",
+                notes: "iNat has only partially accounted for the split of Bugula listed in WoRMS for Jan 2020, I've done a few of these myself and flagged the rest",
+                oldiNaturalistTaxonId: "196131",
+            },
+        },
+        iNaturalistTaxonId: "551808"
+    },
+    "Squalus suckleyi": {
+        taxonNames: {
+            "Squalus acanthias": {
+                resolvedBy: "AS",
+                notes: "If that name hasn't changed in the latest CMN database I won't bother them again. We should swap the name in our dataset (swapping out Squalus acanthias and retaining S. suckeyi) and take note of the discrepancy with CMN records. This is an uncontroversial matter and will eventually be resolved on the CMN end.",
+                furtherNote: "WARNING: Should be limited scope swap, only for this database!",
+                oldiNaturalistTaxonId: "52306",
+            },
+        },
+        iNaturalistTaxonId: "201523"
+    },
+    "Eusergestes similis": {
+        taxonNames: {
+            "Sergestes similis": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name still used in RBCM GBIF catalogue",
+            },
+        },
+        iNaturalistTaxonId: "459581"
+    },
+    "Microsteris gracilis": {
+        taxonNames: {
+            "Phlox gracilis": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name still used in RBCM GBIF catalogue",
+                oldiNaturalistTaxonId: "57212",
+            },
+        },
+        iNaturalistTaxonId: "61210"
+    },
+    "Spergularia marina": {
+        taxonNames: {
+            "Spergularia salina": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name still used in RBCM GBIF catalogue",
+                oldiNaturalistTaxonId: "169161",
+            },
+        },
+        iNaturalistTaxonId: "79169"
+    },
+    "Primula meadia": {
+        taxonNames: {
+            "Dodecatheon meadia": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name still used in RBCM GBIF catalogue",
+                oldiNaturalistTaxonId: "116353",
+            },
+        },
+        iNaturalistTaxonId: "549981"
     },
 }
