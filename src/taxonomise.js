@@ -348,13 +348,16 @@ hortis.applyObservations = function (that, taxa, obsRows) {
 
 hortis.applyPostFilters = function (obsRows, filters) {
     var origRows = obsRows.length;
-    fluid.each(filters, function (filter) {
-        obsRows = obsRows.filter(function (row) {
+    obsRows = obsRows.filter(function (row) {
+        var pass = Object.values(filters).reduce(function (pass, filter) {
             var element = row[filter.field];
             var match = element === filter.equals;
-            var pass = filter.exclude ? !match : match;
+            if (match) {
+                pass = filter.exclude ? !match : match;
+            }
             return pass;
-        });
+        }, true);
+        return pass;
     });
     console.log("Discarded " + (origRows - obsRows.length) + " rows by applying " + hortis.pluralise(Object.keys(filters).length, "filter"));
     return obsRows;

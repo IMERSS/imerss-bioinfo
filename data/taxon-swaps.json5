@@ -1891,6 +1891,11 @@
                 resolvedBy: "AS",
                 notes: "See above record - iNat does not recognise this taxon though we want it in the data paper. This swap is just for alignment"
             }
+            "Zemysina orbella": {
+                resolvedBy: "AB",
+                notes: "See above record - latest RBCM export has now assigned this to Zemysina orbella rather than Diplodonta",
+                oldiNaturalistTaxonId: "1073521"
+            }
         },
         iNaturalistTaxonId: "1118984"
     },
@@ -2002,5 +2007,27 @@
             },
         },
         iNaturalistTaxonId: "549981"
+    },
+    "Strongylocentrotus pallidus": {
+        taxonNames: {
+            "Strongylocentrotus fragilis": {
+                resolvedBy: "AS",
+                notes: "previously misidentified as Strongylocentrotus fragilis; no collector name listed in metadata",
+                furtherNote: "WARNING: Should be limited scope swap, only for RBCM!",
+                oldiNaturalistTaxonId: "293190",
+            },
+        },
+        iNaturalistTaxonId: "129221"
+    },
+    "Nucella": {
+        taxonNames: {
+            "Thais": {
+                resolvedBy: "AS",
+                notes: "This case of 'Thais' undoubtedly refers to an unidentified Nucella in the RBCM collection. I will bring this to Heidi's attention and she may be able to resolve it. Otherwise, for now, I recommend that we omit it. When it comes time to publish we may have a few odd items in our catalogues that do not correspond with the summaries. We can retain these items in the catalogues and just make sure we account for the cause of the discrepancy.",
+                furtherNote: "WARNING: Should be limited scope swap, only for RBCM!",
+                oldiNaturalistTaxonId: "193907",
+            },
+        },
+        iNaturalistTaxonId: "69999"
     },
 }

@@ -52,6 +52,11 @@
             equals: "Eupulmonata",
             exclude: true
         },
+        Myosotella: {
+            field: "genus", // That blasted saltwater snail in the mix!
+            equals: "Myosotella",
+            exclude: false
+        },
         Hygrophila: {
             field: "superorder", // Freshwater snails
             equals: "Hygrophila",
@@ -63,7 +68,7 @@
             exclude: true
         },
         Diplopoda: {
-            field: "class", // Springtails
+            field: "class", // Millipedes
             equals: "Diplopoda",
             exclude: true
         },
@@ -101,21 +106,6 @@
         Diplopoda: {
             field: "class",
             equals: "Diplopoda",
-            exclude: true
-        },
-        Collembola: {
-            field: "subclass",
-            equals: "Collembola",
-            exclude: true
-        },
-        Eupulmonata: {
-            field: "superorder",
-            equals: "Eupulmonata",
-            exclude: true
-        },
-        Hygrophila: {
-            field: "superorder",
-            equals: "Hygrophila",
             exclude: true
         },
         Chiroptera: {

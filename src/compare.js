@@ -50,6 +50,16 @@ hortis.reportExcess = function (names, hash, mapColumns, filename) {
     hortis.writeCSV(filename, map.columns, excessRows, fluid.promise());
 };
 
+hortis.castOutGenera = function (hash) {
+    console.log("Original size: " + Object.keys(hash).length);
+    fluid.each(hash, function (row, name) {
+        if (row.species) {
+            delete hash[row.genus];
+        }
+    });
+    console.log("After casting out genera: " + Object.keys(hash).length);
+};
+
 fluid.promise.sequence(promises).then(function () {
     console.log("Loaded " + readers.length + " CSV files");
     var rows = fluid.getMembers(readers, "rows");
@@ -63,6 +73,7 @@ fluid.promise.sequence(promises).then(function () {
         });
         return togo;
     });
+    hashes.forEach(hortis.castOutGenera);
     var onlyOne = hortis.findExcess(hashes[0], hashes[1]);
     hortis.reportExcess(onlyOne, hashes[0], map.columns, "excess1.csv");
     var onlyTwo = hortis.findExcess(hashes[1], hashes[0]);
