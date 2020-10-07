@@ -1,0 +1,11 @@
+{
+    "columns": {
+        "taxonName": "Species",
+        "dateObserved": "Date",
+        "latitude": "Latitude",
+        "longitude": "Longitude"
+    },
+    "datasetId": "CHU",
+    "datasetClass": "naturalist",
+    "observationId": "%rowNumber"
+}

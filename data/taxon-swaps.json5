@@ -1890,7 +1890,7 @@
             "Diplodonta orbella": {
                 resolvedBy: "AS",
                 notes: "See above record - iNat does not recognise this taxon though we want it in the data paper. This swap is just for alignment"
-            }
+            },
             "Zemysina orbella": {
                 resolvedBy: "AB",
                 notes: "See above record - latest RBCM export has now assigned this to Zemysina orbella rather than Diplodonta",
@@ -2029,5 +2029,16 @@
             },
         },
         iNaturalistTaxonId: "69999"
+    },
+    "Chlamys rubida": {
+        taxonNames: {
+            "Chlamys islandica": {
+                resolvedBy: "AS",
+                notes: "Yes, based on our conversation with Rick it looks like it should be listed as Chlamys rubida (Hinds, 1845). C. islandica is a North Atlantic species... probably C. rubida was separated",
+                furtherNote: "WARNING: Should be limited scope swap, only for RBCM!",
+                oldiNaturalistTaxonId: "458935",
+            },
+        },
+        iNaturalistTaxonId: "84496"
     },
 }

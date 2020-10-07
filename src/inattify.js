@@ -12,6 +12,7 @@ require("./utils/settleStructure.js");
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
+require("./dataProcessing/taxonScrape.js");
 
 require("./iNaturalist/taxonAPI.js");
 
@@ -54,12 +55,6 @@ resultsPromise.then(function (results) {
     });
     hortis.queueFetchWork(queue);
 });
-
-hortis.writeiNatTaxonDoc = function (filename, doc) {
-    var formatted = JSON.stringify(doc, null, 4);
-    fs.writeFileSync(filename, formatted);
-    console.log("Written " + formatted.length + " bytes to " + filename);
-};
 
 // fluid.setLogging(true);
 
@@ -108,7 +103,8 @@ hortis.queueFetchWork = function (queue) {
                 doc = source.get(head).then(function (doc) {
                     that.fetched.push(head);
                     hortis.enqueueAncestry(doc, that.queue);
-                    hortis.writeiNatTaxonDoc(filename, doc);
+                    hortis.writeTaxonDoc(filename, doc);
+                    that.cache[filename] = doc;
                     nextWork();
                 }, function (err) {
                     console.log("Received ERROR for id " + head.id, err);
