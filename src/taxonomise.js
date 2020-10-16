@@ -79,9 +79,13 @@ hortis.combineOutMaps = function (outMaps, summarise) {
 hortis.invertSwaps = function (swaps) {
     var invertedSwaps = {};
     fluid.each(swaps, function (value, resolvedTaxon) {
+        var iNaturalistTaxonId = value.iNaturalistTaxonId;
+        if (!iNaturalistTaxonId) {
+            fluid.fail("Swap with name " + resolvedTaxon + " does not have iNaturalistTaxonId");
+        }
         fluid.each(value.taxonNames, function (record, taxonName) {
             if (record.type !== "commonName") {
-                invertedSwaps[taxonName] = resolvedTaxon;
+                invertedSwaps[taxonName] = iNaturalistTaxonId;
             }
         });
     });
@@ -292,11 +296,8 @@ hortis.applyObservations = function (that, taxa, obsRows) {
         var san = hortis.sanitizeSpeciesName(obs.taxonName);
         var taxonLevel = "Undetermined";
         if (!hortis.isSelfUndetermined(san)) {
-            var resolved = invertedSwaps[san];
-            if (resolved) {
-                san = resolved;
-            }
-            var taxon = that.taxaHash[san];
+            var invertedId = invertedSwaps[san];
+            var taxon = invertedId && that.taxaById[invertedId] || that.taxaHash[san];
             if (taxon) {
                 taxonLevel = taxon.taxonRank;
                 that.obsIdToTaxon[obsId] = taxon;

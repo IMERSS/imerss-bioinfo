@@ -2041,4 +2041,53 @@
         },
         iNaturalistTaxonId: "84496"
     },
+    "Paralaoma servile": {
+        taxonNames: {
+            "Paralaoma servilis": {
+                resolvedBy: "AB",
+                notes: "Land snail that we need to swap so we can swap it away",
+            },
+        },
+        iNaturalistTaxonId: "1068846"
+    },
+    "Triopha modesta": {
+        taxonNames: {
+            "Triopha catalinae": {
+                resolvedBy: "AS",
+                notes: "Triopha modesta has been determined to be a trans-Pacific species and is far more likely to be off the coast of British Columbia. It has both flat and branching tubercles and globular bits on their side (“relatively small and dendritic dorsal tubercles, two rows of arborescent tubercles on the dorso-lateral appendages of larger individuals”). Whereas Triopha catalinae has been determined to be an eastern Pacific species (but there is overlap) and have large, conical or rounded dorsal tubercles.",
+                furtherNote: "PMLS will eventually swap this themselves",
+                oldiNaturalistTaxonId: "47454",
+            },
+        },
+        iNaturalistTaxonId: "1133369"
+    },
+     // Begin **CHU** swaps here:    
+    "Semisuberites cribrosa": {
+        taxonNames: {
+            "Stylissa stipitata": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name appearing in Jackson Chu's dives",
+            },
+        },
+        iNaturalistTaxonId: "194571"
+    },
+    "Actiniaria": {
+        taxonNames: {
+            "Actinaria": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name appearing in Jackson Chu's dives",
+            },
+        },
+        iNaturalistTaxonId: "47797"
+    },
+    "Tetilla": {
+        taxonNames: {
+            "Tetilla": {
+                resolvedBy: "AB",
+                notes: "We need to somehow disambiguate incoming data, just do a swap for this CHU genus for now",
+                oldiNaturalistTaxonId: "772137"
+            },
+        },
+        iNaturalistTaxonId: "247194"
+    },
 }

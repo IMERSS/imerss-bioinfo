@@ -44,7 +44,7 @@
         },
         "iNat": {
             "name": "Galiano iNaturalist Marine Observations (2005-2020)",
-            "input": "E:/source/gits/bagatelle/data/iNaturalist/iNat_Catalogue_Animalia_2020_10_07.csv",
+            "input": "E:/source/gits/bagatelle/data/iNaturalist/iNat_Catalogue_Animalia_2020_10_16.csv",
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99"
@@ -64,6 +64,13 @@
             "colour": "#55a329"
         },
         "CMN": {
+            "name": "Canadian Museum of Nature via VertNet (1928-1982)",
+            "input": "E:/source/gits/bagatelle/data/CMN/CMN_Galiano_Island_Marine_fauna_2020_09_11.csv",
+            "map": "E:/source/gits/bagatelle/data/CMN/CMN-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/CMN/CMN-out-map.json",
+            "colour": "#77a329"
+        },
+        "CHU": {
             "name": "Jackson Chu's ROV Surveys (2018-2019)",
             "input": "E:/source/gits/bagatelle/data/Chu/CHU_2010_ROV_Marine_occurrence_records_2020_10_07.csv",
             "map": "E:/source/gits/bagatelle/data/Chu/Chu-map.json",

@@ -9,7 +9,7 @@
         },
         iNat: {
             name: "Galiano iNaturalist Marine Observations (2005-2020)",
-            input: "%bagatelle/data/iNaturalist/iNat_Catalogue_Animalia_2020_10_07.csv",
+            input: "%bagatelle/data/iNaturalist/iNat_Catalogue_Animalia_2020_10_16.csv",
             map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map.json",
             outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99"
@@ -35,7 +35,7 @@
             outMap: "%bagatelle/data/CMN/CMN-out-map.json",
             colour: "#77a329"
         },
-        CMN: {
+        CHU: {
             name: "Jackson Chu's ROV Surveys (2018-2019)",
             input: "%bagatelle/data/Chu/CHU_2010_ROV_Marine_occurrence_records_2020_10_07.csv",
             map: "%bagatelle/data/Chu/Chu-map.json",
@@ -74,9 +74,14 @@
             equals: "Collembola",
             exclude: true
         },
-        Diplopoda: {
-            field: "class", // Millipedes
-            equals: "Diplopoda",
+        Myriapoda: {
+            field: "subphylum", // Millipedes
+            equals: "Myriapoda",
+            exclude: true
+        },
+        Oniscidea: {
+            field: "suborder", // Woodlice
+            equals: "Oniscidea",
             exclude: true
         },
         Branchiopoda: {
