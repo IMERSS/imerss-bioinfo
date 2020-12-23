@@ -52,7 +52,7 @@ hortis.reportExcess = function (names, hash, mapColumns, filename) {
 
 hortis.castOutGenera = function (hash) {
     console.log("Original size: " + Object.keys(hash).length);
-    fluid.each(hash, function (row, name) {
+    fluid.each(hash, function (row) {
         if (row.species) {
             delete hash[row.genus];
         }

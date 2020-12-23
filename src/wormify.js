@@ -46,7 +46,7 @@ var outMapColumns = fluid.copy(map.columns);
 
 delete outMapColumns.authority;
 outMapColumns.authority = "Authority";
-outMapColumns.WoRMSAuthority = "WoRMS Authority"
+outMapColumns.WoRMSAuthority = "WoRMS Authority";
 
 
 resultsPromise.then(function (results) {

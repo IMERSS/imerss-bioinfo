@@ -32,7 +32,7 @@ fluid.defaults("hortis.leafletMap", {
         tooltipRow: "<tr><td class=\"fl-taxonDisplay-key\">%key: </td><td class=\"fl-taxonDisplay-value\">%value</td>",
         tooltipFooter: "</table>"
     },
-    fitBounds: [[48.865,-123.65],[49.005,-123.25]],
+    fitBounds: [[48.855,-123.65],[49.005,-123.25]],
     listeners: {
         "buildMap.fitBounds": "hortis.leafletMap.fitBounds({that}.map, {that}.options.fitBounds)",
         "buildMap.createTooltip": "hortis.leafletMap.createTooltip({that}, {that}.options.markup)"
@@ -59,6 +59,11 @@ fluid.defaults("hortis.leafletMap", {
             excludeSource: "init",
             func: "hortis.leafletMap.updateTooltipHighlight",
             args: ["{that}", "{change}.oldValue"]
+        },
+        drawScale: {
+            path: "{quantiser}.model.squareSide",
+            func: "hortis.leafletMap.drawScale",
+            args: ["{that}", "{change}.value"]
         }
     },
     invokers: {
@@ -164,7 +169,7 @@ hortis.renderDatasetControls = function (map, datasets, quantiserDatasets) {
     });
     var createFooter = function (prefix, dataset) {
         if (prefix) {
-            map.quantiser.datasetToSummary(dataset);
+            map.quantiser.datasetToSummary(dataset, map.quantiser.model.squareSide);
         } else {
             dataset.taxaCount = dataset.area = "";
         }
@@ -376,6 +381,11 @@ hortis.leafletMap.updateTooltipHighlight = function (map, oldKey) {
     }
 };
 
+hortis.leafletMap.drawScale = function (map, squareSide) {
+    var dimText = squareSide.toFixed(0) + "m";
+    map.container.find(".leaflet-bottom.leaflet-left").text("Block size: " + dimText + " x " + dimText);
+};
+
 hortis.leafletMap.updateTooltip = function (map, key) {
     var tooltip = map.locate("tooltip");
     var bucket = map.toPlot[key];
@@ -394,9 +404,9 @@ hortis.leafletMap.updateTooltip = function (map, key) {
         var lng0 = p[0][1], lng1 = p[1][1];
         dumpRow("Latitude", c(lat0) + " to " + c(lat1));
         dumpRow("Longitude", c(lng0) + " to " + c(lng1));
-        dumpRow("Dimensions", ((lat1 - lat0) * hortis.latitudeLength(lat0)).toFixed(0) + "m x " +
-            ((lng1 - lng0) * hortis.longitudeLength(lat0)).toFixed(0) + "m");
-        if (bucket.count < 5) {
+//        dumpRow("Dimensions", ((lat1 - lat0) * hortis.latitudeLength(lat0)).toFixed(0) + "m x " +
+//            ((lng1 - lng0) * hortis.longitudeLength(lat0)).toFixed(0) + "m");
+        if (bucket.count < 5 && map.options.showObsListInTooltip) {
             var obs = fluid.flatten(Object.values(bucket.byTaxonId));
             var obsString = fluid.transform(obs, hortis.leafletMap.renderObsId).join("<br/>");
             dumpRow("Observations", obsString);
@@ -478,7 +488,8 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
             container: "{sunburstLoaderWithMap}.dom.mapHolder",
             createOnEvent: "sunburstLoaded",
             options: {
-                gradeNames: "hortis.mapWithSunburst"
+                gradeNames: "hortis.mapWithSunburst",
+                showObsListInTooltip: "{hortis.configHolder}.options.showObsListInTooltip"
             }
         }
     }
@@ -562,11 +573,19 @@ fluid.defaults("hortis.quantiser", {
                 func: "hortis.longToLat"
             }
         },
+        squareSide: {
+            target: "squareSide",
+            singleTransform: {
+                type: "fluid.transforms.free",
+                func: "hortis.quantiser.squareSide",
+                args: ["{that}.options.baseLatitude", "{that}.model.latResolution"]
+            }
+        },
         index: {
             target: "indexVersion",
             singleTransform: {
                 type: "fluid.transforms.free",
-                args: ["{that}", "{that}.model.latResolution"],
+                args: ["{that}", "{that}.model.latResolution", "{that}.model.squareSide"],
                 func: "hortis.quantiser.indexTree"
             }
         }
@@ -581,10 +600,14 @@ fluid.defaults("hortis.quantiser", {
         indexUpdated: null
     },
     invokers: {
-        datasetToSummary: "hortis.quantiser.datasetToSummary({that}, {arguments}.0)", // bucket - will be modified
+        datasetToSummary: "hortis.quantiser.datasetToSummary({that}, {arguments}.0, {arguments}.1)", // bucket - will be modified
         indexObs: "hortis.quantiser.indexObs({that}, {arguments}.0, {arguments}.1, {arguments}.2)" // coord, obsId, id
     }
 });
+
+hortis.quantiser.squareSide = function (baseLatitude, latResolution) {
+    return hortis.latitudeLength(baseLatitude) * latResolution;
+};
 
 hortis.quantiser.indexToCoord = function (index, latres, longres) {
     var coords = index.split("|");
@@ -629,14 +652,13 @@ hortis.quantiser.indexObs = function (that, coord, obsId, rowId) {
     bucketTaxa.push(obsId);
 };
 
-hortis.quantiser.datasetToSummary = function (that, dataset) {
-    var squareSide = hortis.latitudeLength(that.options.baseLatitude) * that.model.latResolution;
+hortis.quantiser.datasetToSummary = function (that, dataset, squareSide) {
     var squareArea = squareSide * squareSide / (1000 * 1000);
     dataset.taxaCount = Object.keys(dataset.byTaxonId).length;
     dataset.area = (Object.keys(dataset.buckets).length * squareArea).toFixed(2);
 };
 
-hortis.quantiser.indexTree = function (that) {
+hortis.quantiser.indexTree = function (that, latResolution, squareSide) {
     that.flatTree.forEach(function (row) {
         if (row.coords) {
             var coords = JSON.parse(row.coords);
@@ -646,7 +668,9 @@ hortis.quantiser.indexTree = function (that) {
         }
     });
 
-    fluid.each(that.datasets, that.datasetToSummary);
+    fluid.each(that.datasets, function (dataset) {
+        that.datasetToSummary(dataset, squareSide);
+    });
 
     return that.model.indexVersion + 1;
 };

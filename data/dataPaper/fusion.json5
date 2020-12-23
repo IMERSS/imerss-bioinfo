@@ -33,14 +33,21 @@
             input: "%bagatelle/data/CMN/CMN_Galiano_Island_Marine_fauna_2020_09_11.csv",
             map: "%bagatelle/data/CMN/CMN-map.json",
             outMap: "%bagatelle/data/CMN/CMN-out-map.json",
-            colour: "#77a329"
+            colour: "#a7a329"
+        },
+        "Gal-Salm": {
+            name: "Galiano Salmonids (Erickson, 2000)",
+            input: "%bagatelle/data/Galiano Salmonids/Erickson_2000_Galiano_Salmonids.csv",
+            map: "%bagatelle/data/Galiano Salmonids/Gal-Salm-map.json",
+            outMap: "%bagatelle/data/Galiano Salmonids/Gal-Salm-out-map.json",
+            colour: "#c7a329"
         },
         CHU: {
             name: "Jackson Chu's ROV Surveys (2018-2019)",
             input: "%bagatelle/data/Chu/CHU_2010_ROV_Marine_occurrence_records_2020_10_07.csv",
             map: "%bagatelle/data/Chu/Chu-map.json",
             outMap: "%bagatelle/data/Chu/Chu-out-map.json",
-            colour: "#77a329"
+            colour: "#f7a329"
         }
     },
     filters: {

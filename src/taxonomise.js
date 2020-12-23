@@ -94,13 +94,13 @@ hortis.invertSwaps = function (swaps) {
 
 var invertedSwaps = hortis.invertSwaps(swaps);
 
-hortis.checkFilters = function (filter, mapColumns) {
-    fluid.each(filter, function (oneFilter) {
-        if (!mapColumns[oneFilter.column]) {
-            fluid.fail("Column " + oneFilter.column + " is unknown in input map file");
+hortis.checkFilters = function (filters, mapColumns) {
+    fluid.each(filters, function (oneFilter) {
+        if (!mapColumns[oneFilter.field]) {
+            fluid.fail("Column " + oneFilter.field + " is unknown in input map file");
         }
     });
-    return filter || [];
+    return filters || {};
 };
 
 hortis.makeObsIdGenerator = function (idField, dataset) {
@@ -134,7 +134,7 @@ hortis.assignObsIds = function (rows, map, dataset) {
     });
     return rows;
 };
-
+/*
 hortis.preFilterOneRow = function (row, filters) {
     return filters.every(function (oneFilter) {
         return row[oneFilter.column] === oneFilter.value;
@@ -145,6 +145,26 @@ hortis.preFilterRows = function (rows, filters) {
     return rows.filter(function (oneRow) {
         return hortis.preFilterOneRow(oneRow, filters);
     });
+};
+*/
+
+hortis.applyFilters = function (obsRows, filters, filterCount) {
+    var origRows = obsRows.length;
+    obsRows = obsRows.filter(function (row) {
+        var pass = Object.values(filters).reduce(function (pass, filter) {
+            var element = row[filter.field];
+            var match = element === filter.equals;
+            if (match) {
+                pass = filter.exclude ? !match : match;
+            }
+            return pass;
+        }, true);
+        return pass;
+    });
+    if (filterCount > 0) {
+        console.log("Discarded " + (origRows - obsRows.length) + " rows by applying " + hortis.pluralise(Object.keys(filters).length, "filter"));
+    }
+    return obsRows;
 };
 
 hortis.resolvePaths = function (obj, pathKeys) {
@@ -170,9 +190,10 @@ hortis.oneDatasetToLoadable = function (dataset) {
         rawInput: rawInput,
         obsRows: fluid.promise.map(rawInput, function (data) {
             var rowsWithId = hortis.assignObsIds(data.rows, map, dataset);
-            var filteredRows = hortis.preFilterRows(rowsWithId, parsedFilters);
-            if (parsedFilters.length > 0) {
-                console.log("Filtered observations to list of " + filteredRows.length + " with " + parsedFilters.length + " filters");
+            var filterCount = Object.keys(parsedFilters).length;
+            var filteredRows = hortis.applyFilters(rowsWithId, parsedFilters, filterCount);
+            if (filterCount > 0) {
+                console.log("Pre-filtered observations to list of " + filteredRows.length + " with " + filterCount + " filters");
             }
             return filteredRows;
         }),
@@ -346,24 +367,6 @@ hortis.applyObservations = function (that, taxa, obsRows) {
     that.undetKeys = undetKeys;
 };
 
-
-hortis.applyPostFilters = function (obsRows, filters) {
-    var origRows = obsRows.length;
-    obsRows = obsRows.filter(function (row) {
-        var pass = Object.values(filters).reduce(function (pass, filter) {
-            var element = row[filter.field];
-            var match = element === filter.equals;
-            if (match) {
-                pass = filter.exclude ? !match : match;
-            }
-            return pass;
-        }, true);
-        return pass;
-    });
-    console.log("Discarded " + (origRows - obsRows.length) + " rows by applying " + hortis.pluralise(Object.keys(filters).length, "filter"));
-    return obsRows;
-};
-
 hortis.writeReintegratedObservations = function (that, fileName, observations, outMap, summarise, filters) {
     var outrows = [];
     observations.forEach(function (row) {
@@ -378,7 +381,7 @@ hortis.writeReintegratedObservations = function (that, fileName, observations, o
     });
     outrows = hortis.doSummarise(outrows, outMap, summarise);
     if (filters) {
-        outrows = hortis.applyPostFilters(outrows, filters);
+        outrows = hortis.applyFilters(outrows, filters, Object.keys(filters).length);
     }
 
     var promise = fluid.promise();

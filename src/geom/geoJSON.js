@@ -6,6 +6,12 @@ var fluid = require("infusion");
 
 var hortis = fluid.registerNamespace("hortis");
 
+hortis.countTrue = function (array) {
+    return array.reduce( function(a, c) {return a + c;}, 0);
+};
+
+hortis.intersections = 0;
+
 hortis.intersectsFeature = function (feature, mappedRow) {
     if (!hortis.isPoint(mappedRow.point)) {
         return false;
@@ -13,21 +19,29 @@ hortis.intersectsFeature = function (feature, mappedRow) {
         var reject = function (message) {
             fluid.fail(message + " for feature ", feature);
         };
+        var intersectPolygon = function (polyPolygon) {
+            var intersects = polyPolygon.map(function (polygon) {
+                ++hortis.intersections;
+                return hortis.pointInPolygon(mappedRow.point, polygon);
+            });
+            var count = hortis.countTrue(intersects);
+            return count % 2;
+        };
         var geometry = feature.geometry;
-        if (geometry.type !== "MultiPolygon") {
+        // Stupid export of Galiano polygon has the latter type
+        if (geometry.type !== "MultiPolygon" && geometry.type !== "MultiLineString") {
             reject("Cannot handle feature type " + geometry.type);
         } else {
-            var multiPolygon = geometry.coordinates;
-            var intersects = multiPolygon.find(function (polyPolygon) {
-                if (polyPolygon.length !== 1) {
-                    // This would require us to rewrite point_in_polygon so it accumulated the winding count over nested polygons
-                    reject("Cannot handle compound multipolygon with " + polyPolygon[0].length + " polygon elements");
-                }
-                if (hortis.pointInPolygon(mappedRow.point, polyPolygon[0])) {
-                    return true;
-                }
-            });
-            return intersects ? true : false;
+            var coords = geometry.coordinates;
+            var intersects = false;
+            if (geometry.type === "MultiLineString") {
+                intersects = intersectPolygon(coords);
+            } else {
+                intersects = coords.find(function (polyPolygon) {
+                    return intersectPolygon(polyPolygon);
+                });
+            }
+            return intersects;
         }
     }
 };

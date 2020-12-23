@@ -15,14 +15,19 @@ var hortis = fluid.registerNamespace("hortis");
 
 fluid.setLogging(true);
 
+fluid.defaults("hortis.configHolder", {
+    gradeNames: "fluid.component"
+});
+
 fluid.defaults("hortis.sunburstLoader", {
-    gradeNames: ["fluid.newViewComponent", "fluid.resourceLoader"],
+    gradeNames: ["fluid.newViewComponent", "fluid.resourceLoader", "hortis.configHolder"],
     sunburstPixels: 1002,
     markupTemplate: "%resourceBase/html/bagatelle.html",
     phyloMap: "%resourceBase/json/phyloMap.json",
     resourceBase: "src/client",
     queryOnStartup: "",
     selectOnStartup: "",
+    showObsListInTooltip: true,
     resourceOptions: {
         terms: {
             resourceBase: "{that}.options.resourceBase"

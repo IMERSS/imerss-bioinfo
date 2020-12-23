@@ -1,0 +1,11 @@
+{
+    "columns": {
+        "taxonName": "SCIENTIFIC_NAME",
+        "commonName": "SPECIES",
+        "latitude": "Latitude",
+        "longitude": "Longitude"
+    },
+    "datasetId": "Gal-Salm",
+    "datasetClass": "naturalist",
+    "observationId": "%rowNumber"
+}

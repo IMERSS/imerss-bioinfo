@@ -31,5 +31,5 @@ input.completionPromise.then(function () {
         return row;
     });
     var completion = fluid.promise();
-    hortis.writeCSV(fluid.module.resolvePath(outputFile), input.headers, rows, completion); 
+    hortis.writeCSV(fluid.module.resolvePath(outputFile), input.headers, rows, completion);
 });

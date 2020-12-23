@@ -28,7 +28,6 @@ hortis.pointInPolygon = function (point, vs) {
             && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
         if (intersect) inside = !inside;
     }
-    
     return inside;
 };
 
