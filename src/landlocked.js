@@ -6,6 +6,7 @@ var fluid = require("infusion");
 var minimist = require("minimist");
 fluid.require("%bagatelle");
 
+require("./utils/utils.js");
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
@@ -26,8 +27,8 @@ var xetthecum_boundary = hortis.readJSONSync(fluid.module.resolvePath("%bagatell
 var parsedArgs = minimist(process.argv.slice(2));
 
 var outputFile = parsedArgs.o || "landlocked.csv";
-var inputFile = parsedArgs._[0] || "%bagatelle/data/dataPaper/reintegrated.csv";
-var mapFile = parsedArgs.map || "%bagatelle/data/dataPaper/combinedOutMap.json";
+var inputFile = parsedArgs._[0] || "%bagatelle/data/dataPaper/reintegrated-obs.csv";
+var mapFile = parsedArgs.map || "%bagatelle/data/dataPaper/combinedOutMap-obs.json";
 
 var map = hortis.readJSONSync(fluid.module.resolvePath(mapFile), "reading map file");
 
@@ -85,6 +86,7 @@ var allXetthecumFeatures = Xetthecum_site_class.concat(TrincomaliFeature);
 hortis.getXetthecumProps = function (obsRows) {
     var now = Date.now();
     var extractedProps = obsRows.map(function (row) {
+        row.point = [hortis.parseFloat(row.longitude), hortis.parseFloat(row.latitude)];
         return hortis.findFeatureProperties(allXetthecumFeatures, row, Xetthecum_extract_props, Xetthecum_id_prop);
     });
     console.log("Evaluated " + hortis.intersections + " intersections in " + (Date.now() - now) + " ms");
@@ -102,18 +104,7 @@ hortis.getXetthecumProps = function (obsRows) {
 };
 
 reader.completionPromise.then(function () {
-    var obsRows = [];
-
-    reader.rows.forEach(function (row) {
-        var obs = JSON.parse(row.coords);
-        fluid.each(obs, function (oneObs, key) {
-            obsRows.push({
-                key: key,
-                point: [oneObs[1], oneObs[0]], // geoJSON standard is long, lat
-                iNaturalistTaxonName: row.iNaturalistTaxonName
-            });
-        });
-    });
+    var obsRows = reader.rows;
     console.log("Matching against " + obsRows.length + " observations");
 
     var filtered = hortis.getXetthecumProps(obsRows);
@@ -123,7 +114,7 @@ reader.completionPromise.then(function () {
 */
     var mapped = filtered.map(function (row) {
         var outRow = {
-            key: row.key,
+            observationId: row.observationId,
             latitude: row.point[1],
             longitude: row.point[0],
             iNaturalistTaxonName: row.iNaturalistTaxonName
@@ -134,5 +125,5 @@ reader.completionPromise.then(function () {
         return outRow;
     });
     var completion = fluid.promise();
-    hortis.writeCSV(fluid.module.resolvePath(outputFile), ["key", "latitude", "longitude", "iNaturalistTaxonName"].concat(Xetthecum_extract_props), mapped, completion);
+    hortis.writeCSV(fluid.module.resolvePath(outputFile), ["observationId", "latitude", "longitude", "iNaturalistTaxonName"].concat(Xetthecum_extract_props), mapped, completion);
 });

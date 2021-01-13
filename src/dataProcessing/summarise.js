@@ -26,17 +26,10 @@ fluid.defaults("hortis.summarise", {
     }
 });
 
-// Helpful answer: https://stackoverflow.com/a/35759874
-hortis.parseFloat = function (str) {
-    return isNaN(str) ? NaN : parseFloat(str);
-};
-
-hortis.summarise.pushCoordinates = function (existing, row, coordsField, obsId) {
+hortis.summarise.parseCoordinates = function (row) {
     var latitude = hortis.parseFloat(row.privateLatitude || row.latitude);
     var longitude = hortis.parseFloat(row.privateLongitude || row.longitude);
-    if (!isNaN(latitude) && !isNaN(longitude)) {
-        fluid.set(existing, [coordsField, obsId], [latitude, longitude]);
-    };
+    return !isNaN(latitude) && !isNaN(longitude) ? [latitude, longitude] : null;
 };
 
 hortis.summarise.storeRow = function (that, row) {
@@ -48,6 +41,10 @@ hortis.summarise.storeRow = function (that, row) {
     var uniqueVal = row[fields.unique];
     var existing = that.uniqueRows[uniqueVal];
     if (existing) {
+        // TODO: This is an incomplete and ancient workflow - in practice to fully "Simonize" we should do this
+        // separately in the category of naturalist and citizen obs - but it would be better instead to do this
+        // as post-processing after the process of fusing obs. Also we would like to recover the ability to work
+        // on data which had already been summarised, although this is of low priority
         if (row.timestamp < existing.timestamp) {
             that.uniqueRows[uniqueVal] = row;
             row[obsCountField] = existing[obsCountField];
@@ -70,6 +67,11 @@ hortis.summarise.storeRow = function (that, row) {
         if (obsId === undefined) {
             fluid.fail("Unable to find unique observation field for row ", row);
         }
-        hortis.summarise.pushCoordinates(existing, row, coordsField, obsId);
+        var coords = hortis.summarise.parseCoordinates(row);
+        if (coords) {
+            fluid.set(existing, [coordsField, obsId], coords);
+            row.latitude = coords[0];
+            row.longitude = coords[1];
+        }
     }
 };

@@ -21,7 +21,6 @@ fluid.defaults("hortis.autocomplete", {
     events: {
         onConfirm: null
     },
-    flattenMember: "",
     invokers: {
         query: "hortis.autocomplete.emptyQuery",
         renderSuggestion: "fluid.identity",
@@ -31,12 +30,6 @@ fluid.defaults("hortis.autocomplete", {
         displayMenu: "overlay"
     }
 });
-
-hortis.autocomplete.source = function (that, query, callback) {
-    var promiseToGo = fluid.fireTransformEvent(that, query);
-    promiseToGo.then(callback);
-    return promiseToGo;
-};
 
 hortis.autocomplete.emptyQuery = function (query, callback) {
     callback("");

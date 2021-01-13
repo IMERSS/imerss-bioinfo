@@ -14,6 +14,7 @@ require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
 require("./dataProcessing/writeCSV.js");
 require("./dataProcessing/summarise.js");
+require("./dataProcessing/coordinatePatch.js");
 require("./utils/utils.js");
 require("./utils/settleStructure.js");
 require("./iNaturalist/iNatUrls.js");
@@ -36,6 +37,12 @@ var discardRanksBelow = "genus"; // TODO: Make this an argument
 // var discardRanksBelow = "species";
 var discardRanksBelowIndex = hortis.ranks.indexOf(discardRanksBelow);
 
+hortis.combineMaps = function (maps, mutable) {
+    var extendArgs = [true, {}].concat(maps);
+    var extended = fluid.extend.apply(null, extendArgs);
+    return mutable ? extended : fluid.freezeRecursive(extended);
+};
+
 hortis.baseCommonOutMap = fluid.freezeRecursive({
     "columns": {
         "iNaturalistTaxonName": "iNaturalist taxon name",
@@ -43,7 +50,7 @@ hortis.baseCommonOutMap = fluid.freezeRecursive({
     }
 });
 
-hortis.baseSummariseCommonOutMap = fluid.freezeRecursive(fluid.extend(true, {}, hortis.baseCommonOutMap, {
+hortis.baseSummariseCommonOutMap = hortis.combineMaps([hortis.baseCommonOutMap, {
     "counts": {
         "observationCount": {
             "column": "observationCount",
@@ -55,7 +62,7 @@ hortis.baseSummariseCommonOutMap = fluid.freezeRecursive(fluid.extend(true, {}, 
         "collection": "Collection/List",
         "coords": "Coordinates"
     }
-}));
+}]);
 
 hortis.ranksToColumns = function (ranks) {
     return fluid.transform(fluid.arrayToHash(ranks), function (troo, key) {
@@ -63,18 +70,21 @@ hortis.ranksToColumns = function (ranks) {
     });
 };
 
-hortis.commonOutMap = fluid.freezeRecursive(fluid.extend(true, {}, hortis.baseCommonOutMap, {
+hortis.commonOutMap = hortis.combineMaps([hortis.baseCommonOutMap, {
     columns: hortis.ranksToColumns(hortis.ranks)
-}));
+}]);
 
-hortis.summariseCommonOutMap = fluid.freezeRecursive(fluid.extend(true, {}, hortis.baseSummariseCommonOutMap, {
+hortis.commonObsOutMap = hortis.combineMaps([hortis.commonOutMap, {
+    columns: {
+        observationId: "observationId",
+        latitude: "Latitude",
+        longitude: "Longitude"
+    }
+}]);
+
+hortis.summariseCommonOutMap = hortis.combineMaps([hortis.baseSummariseCommonOutMap, {
     columns: hortis.ranksToColumns(hortis.ranks)
-}));
-
-hortis.combineOutMaps = function (outMaps, summarise) {
-    var extendArgs = [true, {}, summarise ? hortis.summariseCommonOutMap : hortis.commonOutMap].concat(outMaps);
-    return fluid.extend.apply(null, extendArgs);
-};
+}]);
 
 hortis.invertSwaps = function (swaps) {
     var invertedSwaps = {};
@@ -134,19 +144,6 @@ hortis.assignObsIds = function (rows, map, dataset) {
     });
     return rows;
 };
-/*
-hortis.preFilterOneRow = function (row, filters) {
-    return filters.every(function (oneFilter) {
-        return row[oneFilter.column] === oneFilter.value;
-    });
-};
-
-hortis.preFilterRows = function (rows, filters) {
-    return rows.filter(function (oneRow) {
-        return hortis.preFilterOneRow(oneRow, filters);
-    });
-};
-*/
 
 hortis.applyFilters = function (obsRows, filters, filterCount) {
     var origRows = obsRows.length;
@@ -162,7 +159,7 @@ hortis.applyFilters = function (obsRows, filters, filterCount) {
         return pass;
     });
     if (filterCount > 0) {
-        console.log("Discarded " + (origRows - obsRows.length) + " rows by applying " + hortis.pluralise(Object.keys(filters).length, "filter"));
+        console.log("Discarded " + (origRows - obsRows.length) + " rows by applying " + hortis.pluralise(filterCount, "filter"));
     }
     return obsRows;
 };
@@ -202,15 +199,28 @@ hortis.oneDatasetToLoadable = function (dataset) {
     };
 };
 
-hortis.datasetsToLoadable = function (datasets) {
-    return fluid.transform(datasets, function (dataset) {
-        return hortis.oneDatasetToLoadable(dataset);
-    });
+hortis.onePatchToLoadable = function (patch) {
+    hortis.resolvePaths(patch, ["map", "input"]);
+    var map = hortis.readJSONSync(patch.map, "reading patch map file");
+    var patchData = hortis.csvReaderWithMap({
+        inputFile: patch.input,
+        mapColumns: map.columns
+    }).completionPromise;
+    return {
+        patchData: patchData,
+        processor: patch.processor,
+        map: map
+    };
 };
 
 hortis.fusionToLoadable = function (fusion, taxaMap) {
     return {
-        datasets: hortis.datasetsToLoadable(fusion.datasets),
+        datasets: fluid.transform(fusion.datasets, function (dataset) {
+            return hortis.oneDatasetToLoadable(dataset);
+        }),
+        patches: fluid.transform(fusion.patches, function (patch) {
+            return hortis.onePatchToLoadable(patch);
+        }),
         taxa: hortis.csvReaderWithMap({
             inputFile: "data/iNaturalist/iNaturalist-taxa.csv",
             mapColumns: taxaMap.columns
@@ -307,7 +317,8 @@ hortis.isSelfUndetermined = function (name) {
     return !name || name.includes("undetermined") || name.includes("various");
 };
 
-hortis.applyObservations = function (that, taxa, obsRows) {
+// Side-effects: populates that.obsIdToTaxon, that.undetHash, that.undetKeys, that.discardedTaxa
+hortis.applyObservations = function (that, obsRows) {
     var identifiedTo = {}; // Two-level hash of {rank, obs index} to obs
     obsRows.forEach(function (obs) {
         var obsId = obs.observationId;
@@ -367,8 +378,8 @@ hortis.applyObservations = function (that, taxa, obsRows) {
     that.undetKeys = undetKeys;
 };
 
-hortis.writeReintegratedObservations = function (that, fileName, observations, outMap, summarise, filters) {
-    var outrows = [];
+hortis.resolveObservationTaxa = function (that, observations, outMap) {
+    var togo = [];
     observations.forEach(function (row) {
         var taxon = that.obsIdToTaxon[row.observationId];
         if (taxon) {
@@ -376,19 +387,48 @@ hortis.writeReintegratedObservations = function (that, fileName, observations, o
             outrow.iNaturalistTaxonName = taxon.scientificName;
             outrow.iNaturalistTaxonId = taxon.taxonId;
             hortis.resolveTaxa(outrow, that.taxaById, taxon.taxonId, outMap.columns);
-            outrows.push(outrow);
+            togo.push(outrow);
         }
     });
-    outrows = hortis.doSummarise(outrows, outMap, summarise);
-    if (filters) {
-        outrows = hortis.applyFilters(outrows, filters, Object.keys(filters).length);
-    }
-
-    var promise = fluid.promise();
-    hortis.writeCSV(fileName, outMap.columns, outrows, promise);
+    return togo;
 };
 
-hortis.writeCombinedOutMap = function (inFilename, doc) {
+
+hortis.applyPatches = function (resolved, patches) {
+    fluid.each(patches, function (patch, key) {
+        fluid.invokeGlobalFunction(patch.processor, [resolved, patch, key]);
+    });
+};
+
+hortis.resolveAndFilter = function (that, observations, filters, outMap, summarise) {
+    var togo = {};
+    var outrows = hortis.resolveObservationTaxa(that, observations, outMap);
+
+    var summarisedRows = hortis.doSummarise(outrows, outMap, summarise);
+    filters = filters || {};
+    var filterCount = Object.keys(filters).length;
+    togo.summarisedRows = hortis.applyFilters(summarisedRows, filters, filterCount);
+
+    if (summarise) {
+        togo.obsRows = hortis.applyFilters(outrows, filters, filterCount);
+    }
+    return togo;
+};
+
+hortis.writeReintegratedObservations = function (resolved, fileName, outMapFileName) {
+    // If we've been asked to summarise, also output obs since we must at least have input obs! "Not summarising" is probably an obsolete workflow
+    if (resolved.obsRows) {
+        var reintegratedObsFile = hortis.obsifyFilename(fileName);
+        hortis.writeCSV(reintegratedObsFile, resolved.combinedObsOutMap.columns, resolved.obsRows, fluid.promise());
+
+        var combinedObsOutMapFilename = hortis.obsifyFilename(outMapFileName);
+        hortis.writeJSONOutput(combinedObsOutMapFilename, resolved.combinedObsOutMap);
+    }
+    hortis.writeCSV(fileName, resolved.combinedOutMap, resolved.summarisedRows, fluid.promise());
+    hortis.writeJSONOutput(outMapFileName, resolved.combinedOutMap);
+};
+
+hortis.writeJSONOutput = function (inFilename, doc) {
     var filename = fluid.module.resolvePath(inFilename);
     var formatted = JSON.stringify(doc, null, 4) + "\n";
     fs.writeFileSync(filename, formatted);
@@ -406,6 +446,11 @@ hortis.writeResolutionFile = function (that) {
     hortis.writeCSV("taxonResolution.csv", taxonResolveMap.columns, resolutionRows, promise);
 };
 
+hortis.obsifyFilename = function (filename) {
+    var lastDot = filename.lastIndexOf(".");
+    return filename.substring(0, lastDot) + "-obs" + filename.substring(lastDot);
+};
+
 hortis.settleStructure(dataPromises).then(function (data) {
     var summarise = parsedArgs.summarise || fusion.summarise;
     var datasets = data.datasets;
@@ -418,19 +463,29 @@ hortis.settleStructure(dataPromises).then(function (data) {
     var that = hortis.makeTaxonomiser(data, {
         discardRanksBelowIndex: discardRanksBelowIndex
     });
-    hortis.applyObservations(that, data.taxa, flatObs);
+    hortis.applyObservations(that, flatObs);
 
     var writeResolutionFile = parsedArgs.writeRes; // TODO: doesn't seem that this is read or modified any more
     if (writeResolutionFile) {
         hortis.writeResolutionFile(that);
     }
-    var combinedOutMap = hortis.combineOutMaps(Object.values(fluid.getMembers(datasets, "outMap")).concat([{
+    var outMaps = Object.values(fluid.getMembers(datasets, "outMap"));
+    var combinedOutMap = hortis.combineMaps([summarise ? hortis.summariseCommonOutMap : hortis.commonOutMap].concat(outMaps).concat({
         counts: fusion.counts
-    }]), summarise);
+    }), true);
     combinedOutMap.datasets = fusion.datasets;
-    hortis.writeReintegratedObservations(that, parsedArgs.dry ? "reintegrated.csv" :
-        fluid.module.resolvePath(fusion.output), flatObs, combinedOutMap, summarise, fusion.filters);
-    hortis.writeCombinedOutMap(fusion.combinedOutMap, combinedOutMap);
+
+    var resolved = hortis.resolveAndFilter(that, flatObs, fusion.filters, combinedOutMap, summarise);
+
+    hortis.applyPatches(resolved, data.patches);
+
+    var reintegratedFilename = parsedArgs.dry ? "reintegrated.csv" : fluid.module.resolvePath(fusion.output);
+
+    resolved.combinedOutMap = combinedOutMap;
+    resolved.combinedObsOutMap = hortis.combineMaps([hortis.commonObsOutMap].concat(outMaps), true);
+
+    hortis.writeReintegratedObservations(resolved, reintegratedFilename, fusion.combinedOutMap);
+
 }, function (err) {
     fluid.fail("Error loading data", err);
     if (err.stack) {

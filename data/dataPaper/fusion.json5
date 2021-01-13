@@ -50,6 +50,16 @@
             colour: "#f7a329"
         }
     },
+    patches: {
+        PhaseICoordinates: {
+            input: "%bagatelle/data/dataPaper/Corrected_georeferencing_marine_animal_occurrence_records_corrected_2021-01-13.csv",
+            map: "%bagatelle/data/dataPaper/correctedGeoreferencing-map.json",
+            processor: "hortis.processCoordinatePatch"
+        }
+    },
+    summarise: true,
+    output: "%bagatelle/data/dataPaper/reintegrated.csv",
+    combinedOutMap: "%bagatelle/data/dataPaper/combinedOutMap.json",
     filters: {
         Plantae: {
             field: "kingdom", // Recall that these are before outMap is applied
@@ -177,8 +187,5 @@
             equals: "Procyonidae",
             exclude: true
         },
-    },
-    summarise: true,
-    output: "%bagatelle/data/dataPaper/reintegrated.csv",
-    combinedOutMap: "%bagatelle/data/dataPaper/combinedOutMap.json"
+    }
 }
