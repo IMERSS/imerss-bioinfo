@@ -17,7 +17,7 @@ fluid.setLogging(true);
 var parsedArgs = minimist(process.argv.slice(2));
 
 var outputFile = parsedArgs.o || "unscrewed.csv";
-var inputFile = parsedArgs._[0] || "%bagatelle/data/RBCM/RBCM_GBIF_records_intersected_with_Galiano_polygon_2020_09_29.tsv";
+var inputFile = parsedArgs._[0] || "%bagatelle/data/RBCM/RBCM_GBIF_records_intersected_with_Galiano_polygon_2021_01_18.tsv";
 
 var input = hortis.csvReaderWithoutMap({
     inputFile: fluid.module.resolvePath(inputFile),

@@ -2061,6 +2061,36 @@
         },
         iNaturalistTaxonId: "1133369"
     },
+    "Triopha": {
+        taxonNames: {
+            "Triopha maculata": {
+                resolvedBy: "AS",
+                notes: "Acc. to past correspondence with Donna, this one should have been removed from the PMLS records.",
+                oldiNaturalistTaxonId: "47110",
+            },
+        },
+        iNaturalistTaxonId: "47111"
+    },
+    "Urticina grebelnyi": {
+        taxonNames: {
+            "Urticina crassicornis": {
+                resolvedBy: "AS",
+                notes: "This surely represents Urticina grebelnyi. I have kicked Urticina crassicornis out of the records as it is an implausible report. Ideally we would have the specimen assessed in collections at RBCM to confirm. I will check in with Heidi about this.",
+                oldiNaturalistTaxonId: "127236",
+            },
+        },
+        iNaturalistTaxonId: "492672"
+    },
+    "Sagittoidea": {
+        taxonNames: {
+            "Parasagitta elegans": {
+                resolvedBy: "AS",
+                notes: "Mail of 18/1/21: Based on our research, there is no way we can be confident that the chaetognaths in the PMLS records are Parasagitta elegans.",
+                oldiNaturalistTaxonId: "448318",
+            },
+        },
+        iNaturalistTaxonId: "246116"
+    },
      // Begin **CHU** swaps here:    
     "Semisuberites cribrosa": {
         taxonNames: {

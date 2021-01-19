@@ -424,7 +424,7 @@ hortis.writeReintegratedObservations = function (resolved, fileName, outMapFileN
         var combinedObsOutMapFilename = hortis.obsifyFilename(outMapFileName);
         hortis.writeJSONOutput(combinedObsOutMapFilename, resolved.combinedObsOutMap);
     }
-    hortis.writeCSV(fileName, resolved.combinedOutMap, resolved.summarisedRows, fluid.promise());
+    hortis.writeCSV(fileName, resolved.combinedOutMap.columns, resolved.summarisedRows, fluid.promise());
     hortis.writeJSONOutput(outMapFileName, resolved.combinedOutMap);
 };
 

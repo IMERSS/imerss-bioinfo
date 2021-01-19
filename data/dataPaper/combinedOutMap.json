@@ -44,14 +44,14 @@
         },
         "iNat": {
             "name": "Galiano iNaturalist Marine Observations (2005-2020)",
-            "input": "E:/source/gits/bagatelle/data/iNaturalist/iNat_Catalogue_Animalia_2020_10_16.csv",
+            "input": "E:/source/gits/bagatelle/data/iNaturalist/iNat_Catalogue_Animalia_2021_01_18.csv",
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99"
         },
         "RBCM": {
             "name": "Royal British Columbia Museum Voucher Specimens (1893-2011)",
-            "input": "E:/source/gits/bagatelle/data/RBCM/RBCM_GBIF_records_intersected_with_Galiano_polygon_2020_09_29_unscrewed.csv",
+            "input": "E:/source/gits/bagatelle/data/RBCM/RBCM_GBIF_records_intersected_with_Galiano_polygon_2021_01_18_unscrewed.csv",
             "map": "E:/source/gits/bagatelle/data/RBCM/RBCM-map.json",
             "outMap": "E:/source/gits/bagatelle/data/RBCM/RBCM-out-map.json",
             "colour": "#29a329"

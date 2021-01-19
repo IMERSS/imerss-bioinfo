@@ -49,8 +49,6 @@ iNat:16014197,48.90057,-123.4068833333,Cymatogaster aggregata,yes,record mostly 
 iNat:16144794,48.8941883333,-123.3360966667,Hexagrammos stelleri,no,location appears accurate; intertidal species,48.8941883333,-123.3360966667
 iNat:16335612,48.8822348887,-123.3336118507,Orcinus orca,yes,"location highly inaccurate; uncertain; moved to nearby offshore waters in Strait of Georgia, near Whaler Bay, though orcas are not commonly seen here",48.8968557668683,-123.32861464822
 iNat:16407423,48.9427162976,-123.4950318542,Eumetopias jubatus,yes,coordinates obscured; Karen Steve Smith provided me with the correct coordinates,48.990246,-123.581148
-iNat:16620434,48.9832098699,-123.5555677551,Pectinatella magnifica,no,freshwater species; remove from dataset,48.9832098699,-123.5555677551
-iNat:16620436,48.9832110141,-123.5555678892,Pectinatella magnifica,no,freshwater species; remove from dataset,48.9832110141,-123.5555678892
 iNat:17046325,49.0114197416,-123.5752051324,Pisaster ochraceus,yes,shunted to adjacent intertidal,49.0125948865365,-123.575077876998
 iNat:17772044,48.923647,-123.441472,Orcinus orca,yes,location highly inaccurate; likely observed in Active Pass; coordinates not actually obscured on iNaturalist,48.8600644430896,-123.344854020828
 iNat:17772045,48.923647,-123.441472,Orcinus orca,yes,location highly inaccurate; likely observed in Active Pass; coordinates not actually obscured on iNaturalist,48.8600644430896,-123.344854020828
@@ -273,7 +271,7 @@ iNat:2975888,48.940211,-123.502679,Asemichthys taylori,yes,shunted to adjacent w
 iNat:2975914,48.940211,-123.502679,Leucilla nuttingi,yes,shunted to adjacent waters in Retreat Cove,48.9402562054685,-123.502377900626
 iNat:2975918,48.940211,-123.502679,Armina californica,yes,shunted to adjacent waters in Retreat Cove,48.9403739853809,-123.502404649696
 iNat:2975940,48.940211,-123.502679,Virgularia,yes,shunted to adjacent waters in Retreat Cove,48.940323646138,-123.502361532861
-iNat:2975951,48.940211,-123.502679,Tritonia tetraquetra,yes,shunted to adjacent waters in Retreat Cove,48.9403405248624,-123.502353179941
+iNat:2975951,48.940211,-123.502679,Tritonia exsulans,yes,shunted to adjacent waters in Retreat Cove,48.9403405248624,-123.502353179941
 iNat:2975966,48.940211,-123.502679,Dendronotus iris,yes,shunted to adjacent waters in Retreat Cove,48.9403294084641,-123.502327501427
 iNat:2975974,48.940211,-123.502679,Dendronotus iris,yes,shunted to adjacent waters in Retreat Cove,48.9403124183984,-123.502361420178
 iNat:2975984,48.940211,-123.502679,Mesocentrotus franciscanus,yes,shunted to adjacent waters in Retreat Cove,48.9403125297416,-123.502335854354
@@ -285,7 +283,7 @@ iNat:2976021,48.940211,-123.502679,Sebastes maliger,yes,shunted to adjacent wate
 iNat:2976031,48.940211,-123.502679,Chlamys hastata,yes,shunted to adjacent waters in Retreat Cove,48.9403123812828,-123.502369942119
 iNat:2976038,48.940211,-123.502679,Cadlina luteomarginata,yes,shunted to adjacent waters in Retreat Cove,48.9402896659767,-123.50242937031
 iNat:2976049,48.940211,-123.502679,Jordania zonope,yes,shunted to adjacent waters in Retreat Cove,48.9403234605534,-123.502404142577
-iNat:2976072,48.940211,-123.502679,Cadlina luteomarginata,yes,shunted to adjacent waters in Retreat Cove,48.9403786339551,-123.502626276805
+iNat:2976072,48.940211,-123.502679,Cadlina klasmalmbergi,yes,shunted to adjacent waters in Retreat Cove,48.9403786339551,-123.502626276805
 iNat:2976109,48.940211,-123.502679,Henricia leviuscula,yes,shunted to adjacent waters in Retreat Cove,48.9403067302968,-123.502378407717
 iNat:2976114,48.940211,-123.502679,Sebastes maliger,yes,shunted to adjacent waters in Retreat Cove,48.9402843861644,-123.502352616534
 iNat:2976120,48.940211,-123.502679,Ophiodon elongatus,yes,shunted to adjacent waters in Retreat Cove,48.9402731955391,-123.502343981918

@@ -1,0 +1,507 @@
+key,latitude,longitude,iNaturalis,Corrected,Correction,Lat_new,Long_new
+iNat:22642730,48.884836309800001,-123.321729410200007,Metridium senile,no,"location appears accurate; intertidal species",5414703.599,476413.709
+iNat:24771938,48.884619698300000,-123.321132231099995,Metridium senile,no,"location appears accurate; intertidal species",5414679.335,476457.387
+iNat:14063625,48.862286802900002,-123.321533203100003,Doris montereyensis,yes,"record appears mostly accurate; shunted slightly to nearby intertidal",5412181.340,476415.995
+iNat:22659344,48.877658333299998,-123.316820000000007,Doris montereyensis,no,"record appears accurate; intertidal life; Sturdies Bay",5413904.165,476770.298
+iNat:24553778,48.900128333300003,-123.406883333300001,Doris montereyensis,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416455.864,470152.563
+iNat:24711784,49.013266470200001,-123.573353000200001,Doris montereyensis,yes,shunted to adjacent intertidal,5429079.280,458058.293
+iNat:24711795,49.013266470200001,-123.573353000200001,Doris montereyensis,yes,shunted to adjacent intertidal,5429078.764,458056.746
+iNat:24711911,48.871708353499997,-123.311601171400000,Doris montereyensis,yes,"record appears mostly accurate; shunted to nearby intertidal Bellhouse Park",5413212.809,477149.741
+iNat:12684290,48.940241399999998,-123.504348500000006,Pagurus beringanus,yes,shunted to adjacent waters in Retreat Cove,5420888.566,463042.444
+iNat:7624475,48.899486541700000,-123.341651916499998,Evasterias troschelii,no,"location appears accurate; intertidal species",5416338.532,474960.491
+iNat:7701388,48.940536999999999,-123.504198000000002,Evasterias troschelii,yes,shunted to adjacent waters in Retreat Cove,5421028.985,463102.980
+iNat:22642728,48.884834546000000,-123.321717472700001,Evasterias troschelii,no,"location appears accurate; intertidal species",5414703.400,476414.583
+iNat:24535399,48.900222839999998,-123.406905399999999,Evasterias troschelii,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416467.993,470145.428
+iNat:24714308,49.013559231499997,-123.573290058900000,Evasterias troschelii,yes,shunted to adjacent intertidal,5429107.047,458043.065
+iNat:2976016,48.940210999999998,-123.502679000000001,Rhinogobiops nicholsii,yes,shunted to adjacent waters in Retreat Cove,5420939.741,463210.323
+iNat:2976323,48.940210999999998,-123.502679000000001,Rhinogobiops nicholsii,yes,shunted to adjacent waters in Retreat Cove,5420945.358,463205.330
+iNat:2976382,48.940210999999998,-123.502679000000001,Rhinogobiops nicholsii,yes,shunted to adjacent waters in Retreat Cove,5420937.869,463210.323
+iNat:7674360,48.941057663800002,-123.505844592900004,Rhinogobiops nicholsii,yes,shunted to adjacent waters in Retreat Cove,5421023.369,462944.463
+iNat:3707593,48.940241399999998,-123.504348500000006,Sebastes caurinus,yes,shunted to adjacent waters in Retreat Cove,5420892.311,463040.572
+iNat:6967042,48.940241399999998,-123.504348500000006,Hexagrammos decagrammus,yes,shunted to adjacent waters in Retreat Cove,5420888.566,463039.948
+iNat:2976120,48.940210999999998,-123.502679000000001,Ophiodon elongatus,yes,shunted to adjacent waters in Retreat Cove,5420937.869,463213.444
+iNat:2976334,48.940210999999998,-123.502679000000001,Artedius fenestralis,yes,shunted to adjacent waters in Retreat Cove,5420944.110,463209.699
+iNat:2976007,48.940210999999998,-123.502679000000001,Ptilosarcus gurneyi,yes,shunted to adjacent waters in Retreat Cove,5420946.606,463209.075
+iNat:3706037,48.897206072700001,-123.398703573000006,Serpula columbiana,no,"location appears accurate; intertidal species",5416105.385,470777.880
+iNat:5704172,48.867971666700001,-123.387108333300006,Serpula columbiana,no,"record appears accurate; intertidal / shoreline bluff at Phillimore Point",5412851.220,471611.185
+iNat:7701427,48.940494129299999,-123.504307508300002,Serpula columbiana,yes,shunted to adjacent waters in Retreat Cove,5421034.602,463091.123
+iNat:7674363,48.940437517200003,-123.504042148400003,Schizobranchia insignis,yes,shunted to adjacent waters in Retreat Cove,5421030.233,463104.229
+iNat:7674357,48.940352951199998,-123.505243778099995,Crassadoma gigantea,yes,shunted to adjacent waters in Retreat Cove,5420932.252,462988.773
+iNat:24519360,48.872197866400001,-123.310927748699996,Diodora aspera,no,"location appears accurate; intertidal life; Bellhouse Park",5413295.382,477199.845
+iNat:3735082,48.929412999999997,-123.475513000000007,Nucella lamellosa,no,Neostylidium eschrichtii,5419717.969,465170.711
+iNat:3910093,48.868538087399997,-123.387107849100005,Nucella lamellosa,yes,shunted to adjacent intertidal,5412891.471,471606.512
+iNat:4021643,48.879360947400002,-123.405990600600006,Nucella lamellosa,yes,shunted to nearby bay where this species was documented (I recall this personally),5414117.961,470357.498
+iNat:5483732,48.887270999999998,-123.398881000000003,Nucella lamellosa,maybe,"can't tell if I changed this or not; check; either way, it is good (on shoreline)",5415001.043,470759.083
+iNat:5620545,48.885262997700003,-123.321211337999998,Nucella lamellosa,no,"location appears accurate; intertidal species",5414750.871,476451.890
+iNat:6391045,48.963765220500001,-123.550400736900002,Nucella lamellosa,yes,shunted to adjacent intertidal,5423539.486,459679.504
+iNat:24701225,48.897775000000003,-123.408386111100000,Nucella lamellosa,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416215.604,470069.841
+iNat:44275647,48.999434185900000,-123.574265607800001,Nucella lamellosa,yes,"moved to north Galiano shoreline; Dionisio among the most likely localities",5429080.149,458058.114
+iNat:2975966,48.940210999999998,-123.502679000000001,Dendronotus iris,yes,shunted to adjacent waters in Retreat Cove,5420944.110,463214.692
+iNat:2975974,48.940210999999998,-123.502679000000001,Dendronotus iris,yes,shunted to adjacent waters in Retreat Cove,5420942.237,463212.195
+iNat:2976490,48.940210999999998,-123.502679000000001,Dirona albolineata,yes,shunted to adjacent waters in Retreat Cove,5420944.110,463217.188
+iNat:24689686,48.900192380000000,-123.406818439999995,Dirona albolineata,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416459.431,470149.709
+iNat:3707787,48.923646900000001,-123.441472000000005,Hermissenda crassicornis,yes,"location highly inaccurate; moved to Retreat Cove (observation of Karolle Wall) where this species was most likely observed",5421049.082,463114.895
+iNat:24711794,49.013266470200001,-123.573353000200001,Hermissenda crassicornis,yes,shunted to adjacent intertidal,5429078.764,458057.261
+iNat:2976243,48.940210999999998,-123.502679000000001,Scyra acutifrons,yes,shunted to adjacent waters in Retreat Cove,5420945.358,463209.699
+iNat:2825535,48.944128999999997,-123.463068000000007,Balanus nubilus,yes,shunted to nearby shoreline,5421359.231,466096.186
+iNat:2975823,48.940210999999998,-123.502679000000001,Balanus nubilus,yes,shunted to adjacent waters in Retreat Cove,5420942.862,463205.954
+iNat:2635155,48.920330999999997,-123.450632999999996,Pisaster ochraceus,maybe,"can't tell if changed this or not; check; either way, it is good (on shoreline)",5418697.280,466987.073
+iNat:3735121,48.929412999999997,-123.475513000000007,Pisaster ochraceus,no,Neostylidium eschrichtii,5419717.969,465170.711
+iNat:4134153,49.014304199999998,-123.573885799999999,Pisaster ochraceus,no,"record accurate; Dionisio shoreline",5429204.557,458036.662
+iNat:6391048,48.963427114700004,-123.544607162500000,Pisaster ochraceus,yes,shunted to adjacent intertidal,5423331.354,459842.749
+iNat:7580680,48.885984000000001,-123.413805699999998,Pisaster ochraceus,yes,shunted to adjacent intertidal,5414679.290,469487.626
+iNat:7674354,48.940719403000003,-123.504728793900000,Pisaster ochraceus,yes,shunted to adjacent waters in Retreat Cove,5421048.956,463040.572
+iNat:12970639,48.940577168099999,-123.503349960600005,Pisaster ochraceus,yes,shunted to adjacent waters in Retreat Cove,5420999.029,463144.170
+iNat:17046325,49.011419741600001,-123.575205132400001,Pisaster ochraceus,yes,shunted to adjacent intertidal,5429015.202,457948.057
+iNat:22642731,48.884843364799998,-123.321745503399995,Pisaster ochraceus,no,"location appears accurate; intertidal species",5414704.389,476412.533
+iNat:23572984,48.895584824700002,-123.410403694199999,Pisaster ochraceus,yes,"record appears mostly accurate; shunted into nearby intertidal on Grey Peninsula",5415939.468,469889.058
+iNat:24520727,48.871484250000002,-123.311096680000006,Pisaster ochraceus,no,"record appears accurate; intertidal species; Bellhouse Park",5413216.105,477187.133
+iNat:24633668,48.964653333299999,-123.515786666699995,Pisaster ochraceus,no,"location appears accurate; intertidal species",5423654.651,462247.442
+iNat:24674122,48.964702777799999,-123.515786111099999,Pisaster ochraceus,no,"location appears accurate; intertidal species",5423660.147,462247.520
+iNat:24674178,48.964652777799998,-123.515786111099999,Pisaster ochraceus,no,"location appears accurate; intertidal species",5423654.589,462247.482
+iNat:24694077,48.963627777799999,-123.514616666699993,Pisaster ochraceus,no,"location appears accurate; intertidal species",5423540.065,462332.306
+iNat:24698195,48.963275000000003,-123.514380000000003,Pisaster ochraceus,no,"location appears accurate; intertidal species",5423500.732,462349.364
+iNat:24702033,48.872369999999997,-123.310526666700000,Pisaster ochraceus,no,"location appears accurate; intertidal life; Bellhouse Park",5413314.397,477229.334
+iNat:24702036,48.872394999999997,-123.310508333300007,Pisaster ochraceus,no,"location appears accurate; intertidal life; Bellhouse Park",5413317.170,477230.690
+iNat:24708488,48.872451586700002,-123.310544276700000,Pisaster ochraceus,no,"location appears accurate; intertidal life; Bellhouse Park",5413323.472,477228.080
+iNat:24708763,48.872394999999997,-123.310559999999995,Pisaster ochraceus,no,"location appears accurate; intertidal life; Bellhouse Park",5413317.186,477226.901
+iNat:24711910,48.871820716400002,-123.311123078600005,Pisaster ochraceus,yes,"location appears mostly accurate; shunted to nearby intertidal Bellhouse Park",5413215.262,477178.412
+iNat:24714303,49.013559231499997,-123.573290058900000,Pisaster ochraceus,yes,shunted to adjacent intertidal,5429107.491,458043.509
+iNat:24714311,49.013559231499997,-123.573290058900000,Pisaster ochraceus,yes,shunted to intertidal,5429108.378,458043.065
+iNat:24768138,48.859728333299998,-123.352561666699998,Pisaster ochraceus,no,"record appears mostly accurate; intertidal species",5411922.554,474140.434
+iNat:24771924,48.884619698300000,-123.321132231099995,Pisaster ochraceus,no,"location appears accurate; intertidal species",5414679.335,476457.387
+iNat:25199535,48.872376568699998,-123.310523238100004,Pisaster ochraceus,no,"location appears accurate; intertidal life; Bellhouse Park",5413315.126,477229.588
+iNat:25860483,48.883239963500003,-123.316761628500004,Pisaster ochraceus,no,"location appears accurate; intertidal species",5414524.616,476777.162
+iNat:26707155,48.898820000000001,-123.338986000000006,Pisaster ochraceus,no,"location appears accurate; intertidal species",5416263.562,475155.544
+iNat:38778457,48.882317143800002,-123.316082260599998,Pisaster ochraceus,no,"location appears accurate; intertidal species",5414421.826,476826.543
+iNat:44275644,48.999434185900000,-123.574265607800001,Pisaster ochraceus,yes,"moved to north Galiano shoreline; Dionisio among the most likely localities",5429085.108,458056.271
+iNat:49173766,48.897459278100001,-123.403287586399998,Pisaster ochraceus,no,"location appears accurate; intertidal Montague Harbour",5416135.304,470442.055
+iNat:49173828,48.897422147400000,-123.403700288600007,Pisaster ochraceus,no,"location appears accurate; intertidal Montague Harbour",5416131.337,470411.785
+iNat:12744163,48.940892996800002,-123.504407286399996,Pisaster brevispinus,yes,shunted to adjacent waters in Retreat Cove,5421039.595,463072.400
+iNat:24540309,48.900205493000001,-123.406891822800006,Pisaster brevispinus,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416465.853,470149.709
+iNat:25199664,48.900087811100001,-123.406826444100005,Pisaster brevispinus,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416462.285,470146.141
+iNat:2976217,48.940210999999998,-123.502679000000001,Orthasterias koehleri,yes,shunted to adjacent waters in Retreat Cove,5420940.989,463213.444
+iNat:3706322,48.940241399999998,-123.504348500000006,Orthasterias koehleri,yes,shunted to adjacent waters in Retreat Cove,5420892.935,463040.572
+iNat:2975990,48.940210999999998,-123.502679000000001,Dermasterias imbricata,yes,shunted to adjacent waters in Retreat Cove,5420945.358,463207.827
+iNat:3734874,48.929412999999997,-123.475513000000007,Dermasterias imbricata,no,"record appears accurate; intertidal species",5419717.969,465170.711
+iNat:6391050,48.963539817200001,-123.548555374100005,Dermasterias imbricata,yes,shunted to intertidal,5423457.157,459745.924
+iNat:7673053,48.940109823000000,-123.502974271699998,Dermasterias imbricata,yes,shunted to adjacent waters in Retreat Cove,5420908.537,463208.451
+iNat:10819152,49.008944875799997,-123.584829012800000,Dermasterias imbricata,yes,shunted to adjacent intertidal,5428608.175,457196.474
+iNat:10826346,48.895679602100003,-123.410032347500007,Dermasterias imbricata,yes,"record appears mostly accurate; shunted into nearby intertidal on Grey Peninsula",5415949.052,469909.378
+iNat:23572001,48.897172330200000,-123.409357382600007,Dermasterias imbricata,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416142.581,469987.081
+iNat:24521901,48.871484398800000,-123.311764597899995,Dermasterias imbricata,maybe,"can't tell if changed this or not; check; either way it is good (on shoreline)",5413216.323,477138.154
+iNat:24702038,48.872275000000002,-123.310773333300006,Dermasterias imbricata,no,"location appears accurate; intertidal life; Bellhouse Park",5413303.910,477211.203
+iNat:24711786,49.013266470200001,-123.573353000200001,Dermasterias imbricata,yes,shunted to adjacent intertidal,5429079.796,458056.746
+iNat:24713910,48.872355823500001,-123.310671514000006,Dermasterias imbricata,no,"location appears accurate; intertidal life; Bellhouse Park",5413312.864,477218.706
+iNat:24743608,48.871856481099996,-123.312739910000005,Dermasterias imbricata,yes,"location appears mostly accurate; shunted to nearby intertidal",5413231.026,477058.771
+iNat:25199526,48.872393583899999,-123.310500858500006,Dermasterias imbricata,no,"location appears accurate; intertidal life; Bellhouse Park",5413317.011,477231.237
+iNat:26649383,48.896054999999997,-123.336692999999997,Dermasterias imbricata,no,"location appears accurate; intertidal species",5415955.450,475322.237
+iNat:44275646,48.999434185900000,-123.574265607800001,Dermasterias imbricata,yes,"moved to north Galiano shoreline; Dionisio among the most likely localities",5429087.431,458056.787
+iNat:57225195,49.013113333299998,-123.572158333299996,Dermasterias imbricata,no,"record accurate; Dionisio shoreline",5429071.221,458161.979
+iNat:2976203,48.940210999999998,-123.502679000000001,Pycnopodia helianthoides,yes,shunted to adjacent waters in Retreat Cove,5420942.862,463212.819
+iNat:12684294,48.940707187900003,-123.504685163500000,Pycnopodia helianthoides,yes,shunted to adjacent waters in Retreat Cove,5421047.084,463047.437
+iNat:41390561,48.897878666200000,-123.402753421100002,Pycnopodia helianthoides,yes,"location appears mostly accurate; shunted to nearby intertidal Montague Harbour",5416138.523,470502.093
+iNat:4015173,48.977738299899997,-123.565658563000000,Solaster stimpsoni,yes,moved to Spanish Hills,5427054.446,457251.770
+iNat:2975842,48.940210999999998,-123.502679000000001,Mesocentrotus franciscanus,yes,shunted to adjacent waters in Retreat Cove,5420949.102,463209.699
+iNat:2975853,48.940210999999998,-123.502679000000001,Mesocentrotus franciscanus,yes,shunted to adjacent waters in Retreat Cove,5420947.854,463209.699
+iNat:2975872,48.940210999999998,-123.502679000000001,Mesocentrotus franciscanus,yes,shunted to adjacent waters in Retreat Cove,5420945.358,463212.819
+iNat:2975984,48.940210999999998,-123.502679000000001,Mesocentrotus franciscanus,yes,shunted to adjacent waters in Retreat Cove,5420942.237,463214.068
+iNat:18992768,48.897815132799998,-123.401883220200006,Strongylocentrotus droebachiensis,yes,"location appears mostly accurate; shunted slightly into adjacent intertidal Montague Harbour",5416154.913,470550.169
+iNat:7660496,48.940241399999998,-123.504348500000006,Apostichopus californicus,yes,shunted to adjacent waters in Retreat Cove,5420889.190,463039.324
+iNat:7674352,48.941001287100001,-123.505329608699995,Apostichopus californicus,yes,shunted to adjacent waters in Retreat Cove,5421060.814,463000.007
+iNat:24540273,48.900232315099998,-123.406848907500006,Apostichopus californicus,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416458.004,470149.709
+iNat:24689677,48.900140520000001,-123.406839730000002,Apostichopus californicus,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416465.139,470145.428
+iNat:25478089,48.900221628200001,-123.406878747199997,Apostichopus californicus,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416470.134,470144.714
+iNat:29349475,48.865983999999997,-123.349647000000004,Apostichopus californicus,no,"record appears accurate; intertidal species",5412616.962,474357.414
+iNat:3701139,48.894800381200000,-123.409445285800004,Cucumaria miniata,yes,"record appears mostly accurate; shunted into nearby intertidal on Grey Peninsula",5415833.381,469980.742
+iNat:5704333,48.867988333299998,-123.387016666700006,Cucumaria miniata,no,"record appears accurate; intertidal / shoreline bluff at Phillimore Point",5412853.039,471617.917
+iNat:28034680,48.861903333299999,-123.320633333299995,Cucumaria miniata,no,"record appears accurate; intertidal species",5412153.971,476483.317
+iNat:44275645,48.999434185900000,-123.574265607800001,Cucumaria miniata,yes,"moved to north end shoreline; Dionisio among the most likely localities",5429090.013,458053.430
+CMN:CMNI 1989-0211,49.009999999999998,-123.579999999999998,Corella willmeriana,yes,moved offshore Virago Point,5428786.221,457006.430
+iNat:2976148,48.940210999999998,-123.502679000000001,Cnemidocarpa finmarkiensis,yes,shunted to adjacent waters in Retreat Cove,5420942.862,463212.195
+iNat:7659298,48.940241399999998,-123.504348500000006,Cnemidocarpa finmarkiensis,yes,shunted to adjacent waters in Retreat Cove,5420890.438,463041.820
+iNat:2976049,48.940210999999998,-123.502679000000001,Jordania zonope,yes,shunted to adjacent waters in Retreat Cove,5420943.486,463209.075
+iNat:2976356,48.940210999999998,-123.502679000000001,Jordania zonope,yes,shunted to adjacent waters in Retreat Cove,5420943.486,463214.068
+iNat:2976649,48.940210999999998,-123.502679000000001,Jordania zonope,yes,shunted to adjacent waters in Retreat Cove,5420945.358,463209.075
+iNat:2975837,48.940210999999998,-123.502679000000001,Urticina grebelnyi,yes,shunted to adjacent waters in Retreat Cove,5420940.989,463212.819
+iNat:6388837,48.868000000000002,-123.385413333299994,Urticina grebelnyi,yes,shunted to adjacent intertidal,5412845.741,471704.520
+iNat:2976318,48.940210999999998,-123.502679000000001,Urticina clandestina,yes,shunted to adjacent waters in Retreat Cove,5420938.493,463215.316
+iNat:2976389,48.940210999999998,-123.502679000000001,Urticina clandestina,yes,shunted to adjacent waters in Retreat Cove,5420929.132,463210.323
+iNat:33479377,48.884620666499998,-123.390487670900001,Halosydna brevisetosa,no,"location appears accurate; intertidal species",5414703.231,471372.862
+iNat:7674532,48.940198045899997,-123.503297139799997,Bugulina californica,yes,shunted to adjacent waters in Retreat Cove,5420962.832,463182.239
+iNat:38869458,48.876636666700001,-123.317336666700001,Diaulula odonoghuei,no,"record appears accurate; intertidal life; Sturdies Bay",5413790.752,476731.942
+iNat:14385957,48.940555284200002,-123.503191743299993,Aeolidia papillosa,yes,shunted to adjacent waters in Retreat Cove,5420982.179,463162.893
+iNat:2976002,48.940210999999998,-123.502679000000001,Glebocarcinus oregonensis,yes,shunted to adjacent waters in Retreat Cove,5420942.862,463212.819
+iNat:4021646,48.877776193999999,-123.397493362399999,Pugettia producta,yes,"location mostly accurate; shunted to nearby waters",5413927.000,470899.023
+iNat:6391051,48.961398425399999,-123.546495437600001,Pugettia producta,yes,shunted to adjacent intertidal,5423249.879,459908.622
+iNat:24689699,48.900197110000001,-123.406798210000005,Pugettia producta,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416467.280,470144.714
+iNat:25199621,48.900216682900002,-123.406901545899998,Pugettia producta,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416462.999,470145.428
+iNat:25199636,48.900221292900000,-123.406978156500003,Pugettia producta,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416464.426,470147.568
+iNat:25199659,48.900235081100000,-123.406924260899999,Pugettia producta,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416470.847,470143.287
+iNat:2976672,48.940210999999998,-123.502679000000001,Pugettia gracilis,yes,shunted to adjacent waters in Retreat Cove,5420942.237,463211.571
+iNat:24545711,48.900119662300000,-123.406961560200003,Pugettia gracilis,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416470.134,470144.001
+iNat:25199642,48.900291239900000,-123.406795011900002,Pugettia gracilis,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416464.426,470146.141
+iNat:26605467,48.884399414100002,-123.391197204600005,Petrolisthes eriomerus,yes,shunted slightly into nearby intertidal,5414700.819,471318.650
+iNat:2580675,48.930000000000000,-123.475857000000005,Balanus glandula,yes,"location appears mostly accurate; shunted slightly into nearby intertidal",5419733.029,465131.536
+iNat:2599301,48.929729000000002,-123.475943000000001,Balanus glandula,yes,"record appears mostly accurate; shunted slightly into nearby intertidal",5419731.286,465152.453
+iNat:6425239,48.900696847399999,-123.336124417999997,Balanus glandula,no,"location appears accurate; intertidal species",5416471.267,475366.192
+iNat:24672700,48.899708333299998,-123.407150000000001,Balanus glandula,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416416.621,470112.606
+iNat:24689097,48.872218310000001,-123.310913119999995,Balanus glandula,no,"location appears accurate; intertidal life; Bellhouse Park",5413297.650,477200.927
+iNat:24690312,48.963663888900001,-123.514908333299999,Balanus glandula,yes,"location apparently accurate; shunted slightly into intertidal",5423557.555,462320.142
+iNat:24697554,48.872630555599997,-123.310730555600003,Balanus glandula,no,"location appears accurate; intertidal life; Bellhouse Park",5413343.422,477214.501
+iNat:24713858,48.871487584000000,-123.311109719900003,Balanus glandula,no,"record appears accurate; intertidal species; Bellhouse Park",5413216.480,477186.178
+iNat:24920148,48.963539279099997,-123.514839839299995,Balanus glandula,yes,"location apparently accurate; shunted slightly into intertidal",5423527.500,462329.229
+iNat:25048251,48.872258333300003,-123.310775000000007,Balanus glandula,no,"location appears accurate; intertidal life; Bellhouse Park",5413302.058,477211.073
+iNat:25199551,48.872367935299998,-123.310662712999999,Balanus glandula,no,"location appears accurate; intertidal life; Bellhouse Park",5413314.208,477219.357
+iNat:38469017,48.895546828599997,-123.410567868100003,Balanus glandula,yes,"record appears mostly accurate; shunted into nearby intertidal on Grey Peninsula",5415933.334,469879.857
+iNat:49173401,48.897321669999997,-123.403000000000006,Balanus glandula,no,"location appears accurate; intertidal Montague Harbour",5416119.896,470463.052
+iNat:4052034,48.941531694299997,-123.500690453199994,Eupentacta quinquesemita,yes,shunted to nearby waters in Retreat Cove,5421026.005,463311.948
+iNat:2580652,48.930000000000000,-123.475857000000005,Anoplarchus purpurescens,yes,"location appears mostly accurate; shunted slightly into nearby intertidal",5419730.850,465131.100
+iNat:3734809,48.929412999999997,-123.475513000000007,Anoplarchus purpurescens,no,"location appears accurate; intertidal species",5419717.969,465170.711
+iNat:6967289,48.940241399999998,-123.504348500000006,Anoplarchus purpurescens,yes,shunted to adjacent waters in Retreat Cove,5420889.814,463041.196
+iNat:4015148,48.938734799999999,-123.496964500000004,Apodichthys flavidus,yes,shunted to nearby waters in Retreat Cove,5420868.818,463270.096
+RBCM:981-00064-001,49.006667000000000,-123.575000000000003,Isodictya rigida,yes,moved offshore north end of Galiano Island,5429069.322,457674.257
+iNat:2975879,48.940210999999998,-123.502679000000001,Pteraster tesselatus,yes,shunted to adjacent waters in Retreat Cove,5420940.365,463214.068
+iNat:16014197,48.900570000000002,-123.406883333300001,Cymatogaster aggregata,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416487.971,470154.704
+iNat:52839383,48.900420312500003,-123.407147213100004,Cymatogaster aggregata,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416469.420,470150.422
+iNat:2976021,48.940210999999998,-123.502679000000001,Sebastes maliger,yes,shunted to adjacent waters in Retreat Cove,5420943.486,463212.819
+iNat:2976114,48.940210999999998,-123.502679000000001,Sebastes maliger,yes,shunted to adjacent waters in Retreat Cove,5420939.117,463212.819
+iNat:24768697,49.013660535500001,-123.572752186200006,Schizoporella japonica,no,"record accurate; Dionisio shoreline",5429132.378,458119.014
+iNat:7673052,48.940264861400003,-123.504283189700004,Tonicella lineata,yes,shunted to adjacent waters in Retreat Cove,5420892.935,463035.579
+iNat:7673054,48.939827933899998,-123.503811120899996,Tonicella lineata,yes,shunted to adjacent waters in Retreat Cove,5420855.490,463097.364
+RBCM:002-00070-003,48.873888999999998,-123.318611000000004,Tonicella lineata,!,"this record should be removed; Mayne Island record",5413485.704,476637.225
+iNat:43253008,48.866213612800003,-123.340137748600000,Cryptochiton stelleri,no,"record appears accurate; intertidal species",5412639.325,475054.921
+iNat:3707781,48.938734799999999,-123.496964500000004,Doris odhneri,yes,shunted to adjacent waters in Retreat Cove,5420874.130,463267.440
+iNat:45278748,48.877222222199997,-123.318333333300004,Embiotoca lateralis,no,"annoyingly, this is accurate; an osprey dropped a perch inland, near the Galiano Inn",5413856.149,476659.136
+iNat:2975888,48.940210999999998,-123.502679000000001,Asemichthys taylori,yes,shunted to adjacent waters in Retreat Cove,5420947.854,463201.586
+iNat:25199623,48.900200044800002,-123.406867850699996,Oregonia gracilis,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416459.431,470146.141
+iNat:25199648,48.900245181300001,-123.406852679400004,Oregonia gracilis,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416466.566,470151.136
+iNat:2975819,48.940210999999998,-123.502679000000001,Henricia leviuscula,yes,shunted to adjacent waters in Retreat Cove,5420940.989,463212.195
+iNat:2976109,48.940210999999998,-123.502679000000001,Henricia leviuscula,yes,shunted to adjacent waters in Retreat Cove,5420941.613,463210.947
+iNat:2976124,48.940210999999998,-123.502679000000001,Ceratostoma foliatum,yes,shunted to adjacent waters in Retreat Cove,5420943.486,463208.451
+iNat:2976638,48.940210999999998,-123.502679000000001,Ceratostoma foliatum,yes,shunted to adjacent waters in Retreat Cove,5420944.734,463209.075
+iNat:24771931,48.884619698300000,-123.321132231099995,Ceratostoma foliatum,no,"location appears accurate; intertidal species",5414679.335,476457.387
+iNat:3706255,48.940241399999998,-123.504348500000006,Pandalus danae,yes,shunted to adjacent waters in Retreat Cove,5420888.566,463040.572
+iNat:2976525,48.940210999999998,-123.502679000000001,Enophrys bison,yes,shunted to adjacent waters in Retreat Cove,5420940.989,463209.075
+iNat:3706256,48.940241399999998,-123.504348500000006,Enophrys bison,yes,shunted to adjacent waters in Retreat Cove,5420889.814,463038.700
+iNat:2975914,48.940210999999998,-123.502679000000001,Leucilla nuttingi,yes,shunted to adjacent waters in Retreat Cove,5420935.997,463210.947
+iNat:24541621,48.900259137200003,-123.406827449800005,Calliostoma ligatum,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416460.145,470150.422
+iNat:2976038,48.940210999999998,-123.502679000000001,Cadlina luteomarginata,yes,shunted to adjacent waters in Retreat Cove,5420939.741,463207.203
+iNat:2976072,48.940210999999998,-123.502679000000001,Cadlina luteomarginata,yes,shunted to adjacent waters in Retreat Cove,5420949.727,463192.849
+iNat:2975867,48.940210999999998,-123.502679000000001,Craniella villosa,yes,shunted to adjacent waters in Retreat Cove,5420942.862,463210.323
+iNat:3705553,48.940327816200003,-123.503365516700001,Triopha modesta,yes,shunted to adjacent waters in Retreat Cove,5420969.697,463178.495
+iNat:2976615,48.940210999999998,-123.502679000000001,Himatina trophina,yes,shunted to adjacent waters in Retreat Cove,5420944.734,463210.947
+iNat:2580645,48.930000000000000,-123.475857000000005,Anthopleura elegantissima,yes,"location appears mostly accurate; shunted slightly into nearby intertidal",5419733.900,465129.793
+iNat:2599298,48.929729000000002,-123.475943000000001,Anthopleura elegantissima,yes,"record appears mostly accurate; shunted slightly into nearby intertidal",5419731.286,465153.760
+iNat:3328198,48.877755999999998,-123.316641000000004,Anthopleura elegantissima,no,"record appears accurate; intertidal life; Sturdies Bay",5413914.967,476783.468
+iNat:3706035,48.940241399999998,-123.504348500000006,Anthopleura elegantissima,yes,shunted to adjacent waters in Retreat Cove,5420890.438,463039.948
+iNat:3734802,48.929412999999997,-123.475513000000007,Anthopleura elegantissima,no,"record appears accurate; intertidal species",5419717.969,465170.711
+iNat:24711797,49.013266470200001,-123.573353000200001,Anthopleura elegantissima,yes,shunted to adjacent intertidal,5429079.796,458057.261
+iNat:24768184,48.868127777799998,-123.387163888900005,Anthopleura elegantissima,no,"record appears accurate; intertidal / shoreline bluff at Phillimore Point",5412868.595,471607.199
+iNat:43555559,48.865720133600000,-123.349909339400000,Anthopleura elegantissima,no,"record appears accurate; intertidal species",5412587.719,474338.039
+iNat:2976292,48.940210999999998,-123.502679000000001,Tritonia festiva,yes,shunted to adjacent waters in Retreat Cove,5420945.982,463210.323
+iNat:2976426,48.940210999999998,-123.502679000000001,Tritonia festiva,yes,shunted to adjacent waters in Retreat Cove,5420947.854,463213.444
+iNat:7674548,48.940241399999998,-123.504348500000006,Antiopella fusca,yes,shunted to adjacent waters in Retreat Cove,5420889.814,463044.317
+iNat:4833849,49.014257999999998,-123.573876999999996,Eumetopias jubatus,no,"record accurate; Dionisio shoreline",5429199.416,458037.267
+iNat:16407423,48.942716297600001,-123.495031854199993,Eumetopias jubatus,?,coordinate obscured?,5421205.939,463750.677
+iNat:36169878,48.863453329999999,-123.313283330000004,Eumetopias jubatus,yes,"record appears mostly accurate; shunted to nearby offshore waters",5412321.577,477046.653
+iNat:2599327,48.929729000000002,-123.475943000000001,Cancer productus,yes,"record appears mostly accurate; shunted slightly into nearby intertidal",5419733.029,465152.453
+iNat:2976310,48.940210999999998,-123.502679000000001,Cancer productus,yes,shunted to adjacent waters in Retreat Cove,5420941.613,463214.068
+iNat:4017054,48.899957999999998,-123.407754999999995,Cancer productus,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416423.042,470111.179
+iNat:7674353,48.940691214499999,-123.505372524099997,Cancer productus,yes,shunted to adjacent waters in Retreat Cove,5420965.329,462957.569
+iNat:11578309,48.863053333300002,-123.373504999999994,Cancer productus,yes,shunted to adjacent shoreline,5412232.920,472590.729
+iNat:19608684,49.011644269700000,-123.585335500499994,Cancer productus,yes,shunted to adjacent intertidal,5429000.574,457157.322
+iNat:24677475,48.899391666699998,-123.407516666700005,Cancer productus,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416363.821,470112.606
+iNat:24694096,48.964580555600001,-123.516769444399998,Cancer productus,yes,shunted to adjacent intertidal,5423475.079,462358.584
+iNat:24708510,48.872251384899997,-123.310658438199994,Cancer productus,no,"location appears accurate; intertidal life; Bellhouse Park",5413301.251,477219.617
+iNat:25199510,48.872331348300001,-123.310898495999993,Cancer productus,yes,"record appears mostly accurate; shunted to nearby intertidal Bellhouse Park",5413294.397,477212.596
+iNat:54592244,48.886948587100001,-123.331390618499995,Syngnathus leptorhynchus,yes,"record appears more or less correct; shunted slightly toward intertidal zone",5414941.447,475706.461
+iNat:7647295,48.940902999999999,-123.505700000000004,Nanomia bijuga,yes,shunted to adjacent waters in Retreat Cove,5421010.263,462948.207
+RBCM:002-00070-001,48.873888999999998,-123.318611000000004,Lepidozona mertensii,!,"this record should be removed; Mayne Island record",5413485.704,476637.225
+iNat:24697545,48.872627777799998,-123.310555555600004,Semibalanus cariosus,no,"location appears accurate; intertidal life; Bellhouse Park",5413343.061,477227.333
+iNat:24708471,48.872415628299997,-123.310510581499997,Semibalanus cariosus,no,"location appears accurate; intertidal life; Bellhouse Park",5413319.464,477230.534
+iNat:24710961,48.871709285300000,-123.310255855400001,Semibalanus cariosus,no,"record appears accurate; intertidal species; Bellhouse Park",5413240.869,477248.893
+iNat:24714333,49.013559231499997,-123.573290058900000,Semibalanus cariosus,yes,shunted to nearby intertidal,5429108.378,458043.065
+iNat:24768145,48.859634191200001,-123.352670349500002,Semibalanus cariosus,no,"record appears mostly accurate; intertidal species",5411912.126,474132.414
+iNat:24920201,48.963878452800003,-123.514769347500007,Semibalanus cariosus,no,"location appears accurate; intertidal species",5423568.007,462321.320
+iNat:7674356,48.940719403000003,-123.504900455300003,Oligocottus maculosus,yes,shunted to adjacent waters in Retreat Cove,5421049.580,463031.835
+iNat:12970657,48.940210715500001,-123.502759873700001,Oligocottus maculosus,yes,shunted to adjacent waters in Retreat Cove,5420957.840,463187.856
+iNat:24714313,49.013559231499997,-123.573290058900000,Oligocottus maculosus,maybe,"can't tell if I changed this one or not; check",5429108.822,458043.509
+iNat:24870160,48.964284999999997,-123.515371666700005,Oligocottus maculosus,no,"location appears accurate; intertidal species",5423613.499,462277.540
+iNat:24873236,48.896678333300002,-123.406323333299994,Oligocottus maculosus,no,"record appears accurate; tidal mud flats",5416049.677,470219.094
+iNat:37085444,48.899175949300002,-123.339340145500003,Oligocottus maculosus,no,"location appears accurate; intertidal species",5416303.247,475129.765
+iNat:55386056,48.960296999999997,-123.508955000000000,Oligocottus maculosus,no,"location appears accurate; intertidal species",5423167.011,462744.233
+CMN:CMNFI 1985-0088.4,48.880000000000003,-123.329999999999998,Oligocottus maculosus,yes,"location highly inaccurate; moved to adjacent offshore waters southwest of Galiano Island, as specified in CMN metadata",5412656.300,471686.566
+iNat:2976276,48.940210999999998,-123.502679000000001,Acanthodoris nanaimoensis,yes,shunted to adjacent waters in Retreat Cove,5420940.989,463210.947
+iNat:3705621,48.938734799999999,-123.496964500000004,Melibe leonina,yes,shunted to adjacent waters in Retreat Cove,5420860.849,463260.799
+iNat:24532981,48.900237679500002,-123.406924009299999,Melibe leonina,yes,"record mostly appears accurate; shunted slightly into nearby waters",5416455.150,470145.428
+iNat:25199633,48.900150004799997,-123.406994249799993,Melibe leonina,yes,"record mostly appears accurate; shunted slightly into nearby waters",5416465.139,470142.574
+RBCM:975-00224-004,48.901667000000003,-123.408332999999999,Melanochlamys diomedea,yes,"record mostly appears accurate; shunted slightly into nearby waters",5416595.711,470076.218
+iNat:4021641,48.879248054700000,-123.404445648199996,Pagurus granosimanus,no,"location appears accurate; intertidal species",5414111.346,470346.411
+iNat:13029356,48.940544713300000,-123.503299031699996,Pagurus granosimanus,yes,shunted to adjacent waters in Retreat Cove,5420989.044,463154.780
+iNat:2975940,48.940210999999998,-123.502679000000001,Virgularia,yes,shunted to adjacent waters in Retreat Cove,5420943.486,463212.195
+iNat:3515341,48.897851413300003,-123.338710658300002,Cyanea ferruginea,no,"location appears accurate; Galiano shoreline",5416155.801,475175.244
+iNat:4030052,48.963821572500002,-123.551087379500004,Cyanea ferruginea,yes,shunted to adjacent intertidal,5423569.363,459655.077
+iNat:29685247,48.899891666700000,-123.407486666699995,Cyanea ferruginea,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416417.334,470117.601
+iNat:41570521,48.862445637900002,-123.323777707900007,Cyanea ferruginea,yes,"record appears mostly accurate; shunted to nearby intertidal",5412179.787,476253.636
+iNat:3706338,48.940241399999998,-123.504348500000006,Aurelia labiata,yes,shunted to adjacent waters in Retreat Cove,5420892.311,463038.700
+iNat:2975918,48.940210999999998,-123.502679000000001,Armina californica,yes,shunted to adjacent waters in Retreat Cove,5420949.102,463209.075
+iNat:24714422,48.899332142200002,-123.407653882000005,Armina californica,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416353.832,470108.325
+RBCM:975-00224-003,48.901667000000003,-123.408332999999999,Armina californica,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416601.419,470069.082
+iNat:3910088,48.868538087399997,-123.387107849100005,Metacarcinus gracilis,yes,shunted to adjacent intertidal,5412891.471,471609.106
+iNat:4015105,48.938734799999999,-123.496964500000004,Pleuronichthys coenosus,yes,shunted to adjacent waters in Retreat Cove,5420886.083,463272.752
+iNat:7674351,48.940437517200003,-123.505544185500000,Myxicola,yes,shunted to adjacent waters in Retreat Cove,5420947.230,462972.547
+iNat:2976031,48.940210999999998,-123.502679000000001,Chlamys hastata,yes,shunted to adjacent waters in Retreat Cove,5420942.237,463211.571
+iNat:45568647,48.890472419900000,-123.316166674300007,Mopalia hindsii,no,"location appears accurate; intertidal species",5415328.415,476824.123
+iNat:2635143,48.920330999999997,-123.450632999999996,Clinocardium nuttallii,maybe,"can't tell if I changed this one or not yet; check",5418697.280,466987.073
+iNat:3910099,48.868707462499998,-123.387193679800006,Clinocardium nuttallii,yes,shunted to adjacent intertidal,5412895.363,471594.839
+iNat:13974257,48.865857625499999,-123.350120566800001,Clinocardium nuttallii,yes,"record appears mostly accurate; shunted slightly into intertidal",5412589.995,474346.481
+iNat:24553831,48.900228390000002,-123.406937260000007,Clinocardium nuttallii,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416470.847,470144.714
+iNat:49173281,48.897496468500002,-123.403316493199995,Clinocardium nuttallii,no,"location appears accurate; intertidal Montague Harbour",5416139.450,470439.958
+iNat:3910100,48.868707462499998,-123.387193679800006,Saxidomus gigantea,yes,shunted to adjacent intertidal,5412896.984,471592.893
+iNat:19651746,48.942795838800002,-123.513710461599999,Saxidomus gigantea,yes,"location appears mostly accurate; shunted slightly into intertidal",5421217.301,462378.463
+iNat:24539940,48.901192545900003,-123.407224416700004,Saxidomus gigantea,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416538.631,470136.152
+iNat:37085382,48.899166579099997,-123.339215330900004,Saxidomus gigantea,no,"location appears accurate; intertidal species",5416302.164,475138.908
+iNat:7673055,48.939771555800000,-123.503467798100004,Onchidoris bilamellata,yes,shunted to adjacent waters in Retreat Cove,5420846.128,463130.440
+iNat:24714305,49.013559231499997,-123.573290058900000,Onchidoris bilamellata,yes,shunted to adjacent intertidal,5429108.378,458043.065
+RBCM:002-00070-002,48.873888999999998,-123.318611000000004,Lepidozona interstincta,!,This record should be removed (Mayne Island record),5413485.704,476637.225
+iNat:4004998,49.012836999999998,-123.576096000000007,Lottia scutum,maybe,"can't tell if I changed this one or not; check",5429042.681,457873.812
+iNat:2976683,48.940210999999998,-123.502679000000001,Liparis pulchellus,yes,shunted to adjacent waters in Retreat Cove,5420945.982,463209.699
+iNat:7238958,48.940241399999998,-123.504348500000006,Odontopyxis trispinosa,yes,shunted to nearby intertidal,5420889.814,463039.948
+iNat:7247400,48.940241399999998,-123.504348500000006,Odontopyxis trispinosa,yes,shunted to adjacent waters in Retreat Cove,5420890.438,463042.444
+iNat:24535513,48.900200128599998,-123.406902551700000,Arctonoe pulchra,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416463.712,470141.147
+iNat:2976378,48.940210999999998,-123.502679000000001,Anthopleura artemisia,yes,shunted to adjacent waters in Retreat Cove,5420948.478,463210.323
+iNat:2976540,48.940210999999998,-123.502679000000001,Anthopleura artemisia,yes,shunted to adjacent waters in Retreat Cove,5420940.989,463212.195
+iNat:3325207,48.877650000000003,-123.316501000000002,Anthopleura artemisia,no,"record appears accurate; intertidal life; Sturdies Bay",5413903.141,476793.684
+iNat:3910091,48.868538087399997,-123.387107849100005,Anthopleura artemisia,yes,shunted to adjacent intertidal,5412891.147,471607.485
+iNat:24237919,48.904828825099997,-123.344899769999998,Anthopleura artemisia,no,"location appears accurate; intertidal species",5416933.471,474725.151
+iNat:24518546,48.872337341300003,-123.310745358500000,Anthopleura artemisia,no,"location appears accurate; intertidal life; Bellhouse Park",5413310.832,477213.283
+iNat:24689042,48.872382590000001,-123.310726979999998,Anthopleura artemisia,no,"location appears accurate; intertidal life; Bellhouse Park",5413315.856,477214.651
+iNat:24713902,48.872317392399999,-123.310684757399997,Anthopleura artemisia,no,"location appears accurate; intertidal life; Bellhouse Park",5413308.596,477217.717
+iNat:24714310,49.013559231499997,-123.573290058900000,Anthopleura artemisia,yes,shunted to adjacent intertidal,5429109.710,458043.065
+iNat:24714367,48.872570986900001,-123.310530362799994,Anthopleura artemisia,no,"location appears accurate; intertidal life; Bellhouse Park",5413336.740,477229.154
+iNat:24771925,48.884619698300000,-123.321132231099995,Anthopleura artemisia,no,"location appears accurate; intertidal species",5414679.335,476457.387
+iNat:24941638,48.964723390600000,-123.516010120600001,Anthopleura artemisia,no,"location appears accurate; intertidal species",5423662.550,462231.140
+iNat:26683726,48.872369189200001,-123.311037267800003,Anthopleura artemisia,yes,"record appears mostly accurate; shunted to nearby intertidal Bellhouse Park",5413292.782,477213.673
+iNat:38737601,48.929225000000002,-123.468133333300003,Anthopleura artemisia,yes,"location highly inaccurate; moved to nearby cove at Millard Learning Centre, the most likely place where it was observed",5419730.987,465163.573
+iNat:44950135,48.909039999999997,-123.367999999999995,Anthopleura artemisia,no,"location appears accurate; intertidal species",5417409.535,473034.596
+iNat:3706339,48.940256169900003,-123.504247426500001,Neoturris breviconis,yes,shunted to adjacent waters in Retreat Cove,5420886.694,463041.820
+iNat:24771932,48.884619698300000,-123.321132231099995,Neoturris breviconis,no,"location appears accurate; intertidal species",5414679.335,476457.387
+iNat:24701214,48.898933333300000,-123.407738888899999,Leukoma staminea,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416310.308,470099.050
+iNat:25657024,48.899650000000001,-123.407647222199998,Leukoma staminea,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416386.653,470109.752
+iNat:4021642,48.879248054700000,-123.405990600600006,Lophopanopeus bellus,yes,shunted to nearby bay where this species was documented (I recall this personally),5414099.214,470349.227
+iNat:2565228,48.931184000000002,-123.481178000000000,Phoca vitulina richardii,yes,shunted to shoreline,5419885.751,464740.972
+iNat:5646953,48.906620825200001,-123.358011245699998,Phoca vitulina richardii,no,"location appears accurate; shoreline seal",5417137.117,473765.259
+iNat:7580656,48.885984000000001,-123.413805699999998,Phoca vitulina richardii,yes,shunted to adjacent shoreline,5414695.821,469477.106
+iNat:10714107,48.860638888899999,-123.360458333300002,Phoca vitulina richardii,yes,shunted to adjacent shoreline,5411936.012,473561.721
+iNat:18987230,48.926917942199999,-123.419210083099998,Phoca vitulina richardii,yes,shunted to adjacent shoreline,5419448.271,469307.393
+iNat:20313581,48.862661727000003,-123.350231700300000,Phoca vitulina richardii,no,"record appears mostly accurate; shoreline seal",5412247.848,474312.832
+iNat:24702030,48.872428333300000,-123.310680000000005,Phoca vitulina richardii,no,"location appears accurate; shoreline seal; Bellhouse Park",5413320.927,477218.117
+iNat:24708396,48.872497058500002,-123.310673022800003,Phoca vitulina richardii,no,"location appears accurate; shoreline seal; Bellhouse Park",5413328.565,477218.660
+iNat:24714323,49.013559231499997,-123.573290058900000,Phoca vitulina richardii,yes,shunted to nearby offshore waters,5429113.260,458019.546
+iNat:24714546,48.872627899999998,-123.310559615599999,Phoca vitulina richardii,no,"location appears accurate; shoreline seal; Bellhouse Park",5413343.076,477227.035
+iNat:24857240,48.862479999999998,-123.350250000000003,Phoca vitulina richardii,no,"record appears mostly accurate; shoreline seal",5412227.653,474311.397
+iNat:24870119,48.964024999999999,-123.514963333300003,Phoca vitulina richardii,no,"location appears accurate; intertidal species",5423584.394,462307.231
+iNat:41387284,49.010164438200000,-123.569318766099997,Phoca vitulina richardii,no,record accurate,5428741.847,458367.157
+iNat:59082575,49.013335014500001,-123.573211257500006,Phoca vitulina richardii,yes,shunted to adjacent intertidal,5429099.504,458130.085
+iNat:24533137,48.900259137200003,-123.406918644900003,Telmessus cheiragonus,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416463.712,470141.147
+iNat:25199635,48.900276403900001,-123.406915040800001,Telmessus cheiragonus,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416469.420,470144.001
+iNat:2580662,48.930000000000000,-123.475857000000005,Chthamalus dalli,yes,"location appears mostly accurate; shunted slightly into nearby intertidal",5419735.208,465131.536
+iNat:24520358,48.871495127700001,-123.310933113100006,Chthamalus dalli,no,"record appears accurate; intertidal species; Bellhouse Park",5413217.266,477199.132
+iNat:24697681,48.871566666699998,-123.310363888900000,Chthamalus dalli,no,"record appears accurate; intertidal species; Bellhouse Park",5413225.048,477240.906
+iNat:24941597,48.964156522499998,-123.515133038299993,Chthamalus dalli,no,"location appears accurate; intertidal species",5423599.099,462294.909
+iNat:24539923,48.901144266099998,-123.407219052299993,Nucella ostrina,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416535.063,470147.568
+iNat:24768141,48.859713333300000,-123.352810000000005,Nucella ostrina,no,"record appears mostly accurate; intertidal species",5411920.971,474122.212
+iNat:2976644,48.940210999999998,-123.502679000000001,Bolinopsis infundibulum,yes,shunted to adjacent waters in Retreat Cove,5420940.365,463214.068
+iNat:4014973,48.883333000000000,-123.383332999999993,Phoronis ijimai,yes,shunted to adjacent intertidal Montague Harbour,5414827.200,471409.822
+iNat:21351486,49.012744062899998,-123.573049541100005,Metacarcinus magister,no,"record accurate; Dionisio beach",5429030.663,458096.501
+iNat:16144794,48.894188333300001,-123.336096666700001,Hexagrammos stelleri,no,"location appears accurate; intertidal species",5415747.752,475365.028
+iNat:7674347,48.940241399999998,-123.504348500000006,Tubulanus polymorphus,yes,shunted to adjacent waters in Retreat Cove,5420887.318,463043.068
+iNat:6371640,48.867896666699998,-123.386894999999996,Mopalia muscosa,no,"record appears accurate; intertidal / shoreline bluff at Phillimore Point",5412842.803,471626.788
+iNat:24771939,48.884619698300000,-123.321132231099995,Mopalia muscosa,no,"location appears accurate; intertidal species",5414679.335,476457.387
+iNat:49173181,48.897514931400003,-123.402614214899998,Mopalia muscosa,no,"location appears accurate; intertidal Montague Harbour",5416141.229,470491.441
+iNat:4032541,48.938734799999999,-123.496964500000004,Pholis laeta,yes,shunted to nearby waters in Retreat Cove,5420862.434,463273.681
+iNat:12970650,48.940907091000000,-123.504085421300005,Pholis laeta,yes,shunted to adjacent waters in Retreat Cove,5421029.609,463097.364
+iNat:4005328,49.012456999999998,-123.573724999999996,Macoma nasuta,no,"location appears accurate; on shoreline at Montague",5428999.125,458046.868
+iNat:25577910,48.964199999999998,-123.515236111099995,Porichthys notatus,no,"location appears accurate; intertidal species",5423603.983,462287.398
+iNat:3706257,48.940241399999998,-123.504348500000006,Nautichthys oculofasciatus,yes,shunted to adjacent waters in Retreat Cove,5420887.318,463039.324
+iNat:2975951,48.940210999999998,-123.502679000000001,Tritonia tetraquetra,yes,shunted to adjacent waters in Retreat Cove,5420945.358,463212.819
+iNat:3971319,48.911285999999997,-123.382386999999994,Pagurus hirsutiusculus,yes,"location appears mostly accurate; shunted to nearby intertidal",5417716.438,471994.790
+CMN:CMNFI 1985-0088.3,48.880000000000003,-123.329999999999998,Leptocottus armatus,yes,"location highly inaccurate; moved to adjacent offshore waters southwest of Galiano Island, as specified in CMN metadata",5412635.456,471613.610
+iNat:24541707,48.900222569999997,-123.406918559999994,Pentidotea resecata,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416468.707,470149.709
+iNat:24714393,48.899367406800003,-123.407617814100007,Pentidotea resecata,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416353.832,470113.320
+CMN:CMNFI 1985-0088.1,48.880000000000003,-123.329999999999998,Parophrys vetulus,yes,"location highly inaccurate; moved to adjacent offshore waters southwest of Galiano Island, as specified in CMN metadata",5412708.411,471603.188
+iNat:12970653,48.940372800699997,-123.503307044400003,Gadus macrocephalus,yes,shunted to adjacent waters in Retreat Cove,5420974.690,463174.126
+iNat:30280099,48.885053333300000,-123.321494999999999,Neotrypaea californiensis,no,"location appears accurate; intertidal species",5414727.652,476430.996
+iNat:2583362,48.967979999999997,-123.521476000000007,Lontra canadensis,no,"location appears accurate; otter on shoreline",5424027.300,461833.557
+iNat:2635114,48.920327999999998,-123.450580000000002,Lontra canadensis,no,"location accurate; river otter on shoreline",5418696.923,466990.954
+iNat:2635258,48.920358000000000,-123.450698000000003,Lontra canadensis,no,"location accurate; river otter on shoreline",5418700.309,466982.329
+iNat:2635269,48.920358000000000,-123.450698000000003,Lontra canadensis,no,"location accurate; river otter on shoreline",5418700.309,466982.329
+iNat:2635275,48.920358000000000,-123.450698000000003,Lontra canadensis,no,"location accurate; river otter on shoreline",5418700.309,466982.329
+iNat:2635284,48.920358000000000,-123.450698000000003,Lontra canadensis,no,"location accurate; river otter on shoreline",5418700.309,466982.329
+iNat:2929506,48.897472000000000,-123.343968000000004,Lontra canadensis,yes,"location highly inaccurate; moved to adjacent shoreline",5416090.048,475186.916
+iNat:4124479,48.894917900000003,-123.349671999999998,Lontra canadensis,yes,"location highly inaccurate; shunted into nearby waters in the neighbourhood of the observer",5416538.683,475077.356
+iNat:6611338,48.927904962299998,-123.448047637900004,Lontra canadensis,no,"location appears accurate; inland river otter; not so surprising",5419538.107,467181.437
+iNat:7580929,48.942798000000003,-123.462981999999997,Lontra canadensis,yes,shunted to nearby shoreline,5421350.638,466118.660
+iNat:7581543,48.880183175299997,-123.322713375099994,Lontra canadensis,yes,"location appears mostly correct; shunted slightly toward intertidal",5414186.650,476339.379
+iNat:19963152,48.943765760799998,-123.515974896800003,Lontra canadensis,maybe,"location appears accurate; can't tell if I changed this or not; check",5421315.677,462212.024
+iNat:24748307,49.013491548899999,-123.573181326599993,Lontra canadensis,yes,shunted to adjacent intertidal,5429115.695,458125.104
+iNat:29303229,48.976636666700003,-123.566108333299994,Lontra canadensis,no,"locality appears accurate; otter on shoreline",5425012.997,458574.136
+iNat:51552255,48.871552314799999,-123.312255213399993,Lontra canadensis,yes,"location appears mostly accurate; shunted to nearby shoreline Bellhouse Park",5413213.209,477103.752
+iNat:55386053,48.959997999999999,-123.508722000000006,Lontra canadensis,no,"location appears accurate; otter on shoreline",5423133.658,462761.066
+iNat:2580668,48.930000000000000,-123.475857000000005,Mytilus edulis,yes,"location appears mostly accurate; shunted slightly into nearby intertidal",5419732.593,465132.843
+iNat:2599512,48.929560000000002,-123.475943000000001,Mytilus edulis,no,"record appears accurate; intertidal species",5419734.507,465139.317
+iNat:3910095,48.868707462499998,-123.387193679800006,Mytilus edulis,yes,shunted to adjacent intertidal,5412895.363,471593.866
+iNat:3910098,48.868707462499998,-123.387193679800006,Mytilus edulis,yes,shunted to adjacent intertidal,5412897.632,471594.190
+iNat:3971265,48.911285999999997,-123.382386999999994,Mytilus edulis,yes,"location appears mostly accurate; shunted to nearby intertidal",5417713.059,471995.212
+iNat:6482410,48.871734182399997,-123.310793301999993,Mytilus edulis,yes,"record appears mostly accurate; shunted to nearby intertidal Bellhouse Park",5413211.763,477213.673
+iNat:19886416,48.897945000000000,-123.400238333299995,Mytilus edulis,yes,"location appears mostly accurate; shunted into adjacent intertidal Montague Harbour",5416164.615,470669.539
+iNat:24518428,48.872340899999998,-123.310745710000006,Mytilus edulis,no,"location appears accurate; intertidal life; Bellhouse Park",5413311.228,477213.259
+iNat:24540235,48.901154169999998,-123.407030829999997,Mytilus edulis,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416530.782,470146.855
+iNat:24672703,48.900019444400002,-123.407355555600006,Mytilus edulis,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416428.037,470121.882
+iNat:24688997,48.872314690000003,-123.310653970000004,Mytilus edulis,no,"location appears accurate; intertidal life; Bellhouse Park",5413308.287,477219.974
+iNat:24697546,48.872630555599997,-123.310555555600004,Mytilus edulis,no,"location appears accurate; intertidal life; Bellhouse Park",5413343.370,477227.334
+iNat:24697674,48.871752777799998,-123.310316666700004,Mytilus edulis,no,"record appears accurate; intertidal species; Bellhouse Park",5413245.722,477244.453
+iNat:24701253,48.896855555599998,-123.406319444399998,Mytilus edulis,no,"record appears accurate; tidal mud flats",5416069.376,470219.484
+iNat:24708433,48.872464159499998,-123.310532290599994,Mytilus edulis,no,"location appears accurate; intertidal life; Bellhouse Park",5413324.866,477228.964
+iNat:24708760,48.872363333300001,-123.310710000000000,Mytilus edulis,no,"location appears accurate; intertidal life; Bellhouse Park",5413313.711,477215.887
+iNat:24711793,49.013266470200001,-123.573353000200001,Mytilus edulis,yes,shunted to adjacent intertidal,5429080.311,458057.777
+iNat:24714434,48.872556318599997,-123.310596412199999,Mytilus edulis,no,"location appears accurate; intertidal life; Bellhouse Park",5413335.129,477224.304
+iNat:24715035,48.872358882800000,-123.310665478999994,Mytilus edulis,no,"location appears accurate; intertidal life; Bellhouse Park",5413313.203,477219.150
+iNat:24768137,48.859776666700000,-123.352249999999998,Mytilus edulis,no,"record appears mostly accurate; intertidal species",5411927.821,474163.319
+iNat:24920197,48.963735122300001,-123.514748560399994,Mytilus edulis,no,"location appears accurate; intertidal species",5423552.063,462322.733
+iNat:24941466,48.963559647099999,-123.514775214799997,Mytilus edulis,no,"location appears accurate; intertidal species",5423532.570,462320.650
+iNat:25199518,48.872319990800001,-123.310615020000000,Mytilus edulis,no,"location appears accurate; intertidal life; Bellhouse Park",5413308.864,477222.832
+iNat:25480327,48.871476666699998,-123.310538333300002,Mytilus edulis,no,"record appears accurate; intertidal species; Bellhouse Park",5413215.095,477228.073
+iNat:25595442,48.963733333299999,-123.514708333300007,Mytilus edulis,no,"location appears accurate; intertidal species",5423551.845,462325.676
+iNat:49173353,48.897463330000001,-123.403283329999994,Mytilus edulis,no,"location appears accurate; intertidal Montague Harbour",5416135.753,470442.369
+iNat:3652962,48.897694999999999,-123.406377000000006,Hemigrapsus oregonensis,no,"location appears accurate; mud flat Montague",5416162.713,470215.765
+iNat:3734868,48.929412999999997,-123.475513000000007,Hemigrapsus oregonensis,no,"record appears accurate; intertidal species",5419717.969,465170.711
+iNat:3910086,48.868538087399997,-123.387107849100005,Hemigrapsus oregonensis,yes,shunted to adjacent intertidal,5412892.444,471608.782
+iNat:5620552,48.885262997700003,-123.321211337999998,Hemigrapsus oregonensis,no,"location appears accurate; intertidal species",5414750.871,476451.890
+iNat:14276713,48.894140187700003,-123.407079287000002,Hemigrapsus oregonensis,no,"location appears accurate; intertidal species",5415767.826,470162.177
+iNat:23263482,48.887203401000001,-123.388754893200002,Hemigrapsus oregonensis,no,"location appears accurate; intertidal species",5414989.684,471501.361
+iNat:24689120,48.871873809999997,-123.310542200000000,Hemigrapsus oregonensis,no,"record appears accurate; intertidal species; Bellhouse Park",5413259.244,477227.970
+iNat:24694078,48.963897222200004,-123.514808333299996,Hemigrapsus oregonensis,no,"location appears accurate; intertidal species",5423570.113,462318.480
+iNat:24701248,48.896847222200002,-123.406250000000000,Hemigrapsus oregonensis,no,"record appears accurate; tidal mud flats",5416068.422,470224.569
+iNat:24711782,49.013266470200001,-123.573353000200001,Hemigrapsus oregonensis,yes,shunted to adjacent intertidal,5429079.796,458058.293
+iNat:24768182,48.868119444400001,-123.387202777799999,Hemigrapsus oregonensis,no,"record appears accurate; intertidal / shoreline bluff",5412867.683,471604.343
+iNat:3706277,48.940241399999998,-123.504348500000006,Berthella chacei,yes,shunted to adjacent waters in Retreat Cove,5420888.566,463039.948
+iNat:2976349,48.940210999999998,-123.502679000000001,Didemnum,yes,shunted to adjacent waters in Retreat Cove,5420944.110,463212.195
+iNat:5676723,48.868786666699997,-123.385628333300005,Orcinus orca,yes,"record mostly accurate; shunted to nearby offshore waters",5412753.371,471650.515
+iNat:16335612,48.882234888699998,-123.333611850699995,Orcinus orca,yes,"location highly inaccurate; uncertain; moved to nearby offshore waters in Strait of Georgia, near Whaler Bay, though orcas are not commonly seen here",5416041.875,475914.720
+iNat:17772045,48.923647000000003,-123.441472000000005,Orcinus orca,yes,"location highly inaccurate; likely observed in Active Pass; coordinates not actually obscured on iNaturalist",5411957.326,474705.940
+iNat:17772046,48.923647000000003,-123.441472000000005,Orcinus orca,yes,"location highly inaccurate; likely observed in Active Pass; coordinates not actually obscured on iNaturalist",5411846.605,474721.757
+iNat:28673874,48.907607928200001,-123.397692304700001,Orcinus orca,yes,"location highly inaccurate; moved to Active Pass, where orcas are commonly observed; coordinates did not appear to be obscured on iNat",5411661.011,477410.800
+BCCSN:620,48.868200000000002,-123.311000000000007,Orcinus orca,yes,"location appears mostly accurate; moved offshore",5412764.148,477339.369
+iNat:3706321,48.940241399999998,-123.504348500000006,Gonionemus vertens,yes,shunted to adjacent waters in Retreat Cove,5420891.063,463039.324
+iNat:3707748,48.940241399999998,-123.504348500000006,Polycera zosterae,yes,shunted to adjacent waters in Retreat Cove,5420890.438,463039.324
+iNat:3735052,48.929412999999997,-123.475513000000007,Lottia persona,no,"record appears accurate; intertidal species",5419717.969,465170.711
+iNat:4005039,49.012836999999998,-123.576096000000007,Lottia persona,no,"record accurate; Dionisio shoreline",5429042.681,457873.812
+iNat:38778846,48.882419198199997,-123.316436024300003,Lottia persona,no,"location appears accurate; intertidal species",5414433.278,476800.654
+iNat:49173378,48.897470816499997,-123.403110143500001,Lottia persona,no,"location appears accurate; intertidal Montague Harbour",5416136.518,470455.067
+iNat:3735167,48.929412999999997,-123.475513000000007,Neostylidium eschrichtii,no,"record appears accurate; intertidal species",5419717.969,465170.711
+iNat:3910079,48.868538087399997,-123.387107849100005,Magallana gigas,yes,shunted to adjacent intertidal,5412890.823,471604.567
+iNat:3910087,48.868538087399997,-123.387107849100005,Magallana gigas,yes,shunted to adjacent intertidal,5412888.553,471608.782
+iNat:17905844,48.970688333299996,-123.559455000000000,Magallana gigas,yes,"record fairly accurate; shunted slightly into intertidal",5424341.743,459044.416
+iNat:24672782,48.899902777800001,-123.407416666700001,Magallana gigas,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416424.469,470117.601
+iNat:24701255,48.896847222200002,-123.406263888900000,Magallana gigas,no,"record appears accurate; tidal mud flats",5416068.428,470223.551
+iNat:24771935,48.884619698300000,-123.321132231099995,Magallana gigas,no,"location appears accurate; intertidal species",5414679.335,476457.387
+iNat:25657032,48.896477777800001,-123.406083333300003,Magallana gigas,no,"record appears accurate; tidal mud flats",5416027.288,470236.566
+iNat:38469142,48.895394107500003,-123.410180642699999,Magallana gigas,yes,"record appears mostly accurate; shunted into nearby intertidal on Grey Peninsula",5415900.363,469925.480
+iNat:3910084,48.868538087399997,-123.387107849100005,Mya arenaria,yes,shunted to adjacent intertidal,5412891.147,471606.512
+iNat:3934324,48.990463140499998,-123.579104728999994,Mya arenaria,yes,"record mostly appears accurate; shunted slightly to adjacent intertidal",5426542.652,457631.059
+iNat:24701258,48.896705555600001,-123.405997222200000,Mya arenaria,no,"record appears accurate; tidal mud flats",5416052.575,470243.012
+iNat:3952115,48.894719000000002,-123.336574999999996,Nuttallia obscurata,no,"location appears accurate; intertidal species",5415806.898,475330.229
+iNat:4005286,49.012456999999998,-123.573724999999996,Nuttallia obscurata,no,"record accurate; Dionisio beach",5428999.125,458046.868
+iNat:37085381,48.899166579099997,-123.339215330900004,Nuttallia obscurata,no,"location appears accurate; intertidal species",5416302.164,475138.908
+iNat:3971332,48.911285999999997,-123.382386999999994,Littorina scutulata,yes,"location appears mostly accurate; shunted to nearby intertidal",5417713.481,471998.592
+iNat:5108046,48.898129571799998,-123.408050537099996,Littorina scutulata,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416229.235,470074.709
+iNat:25480325,48.871498333300003,-123.310566666699998,Littorina scutulata,no,"record appears accurate; intertidal species; Bellhouse Park",5413217.512,477226.005
+iNat:37085712,48.899657169999998,-123.341342992500003,Littorina scutulata,no,"location appears accurate; intertidal species",5416357.398,474983.217
+iNat:49173446,48.897469035900002,-123.403768405799994,Littorina scutulata,no,"location appears accurate; intertidal Montague Harbour",5416136.576,470406.820
+iNat:4004964,49.012343999999999,-123.573521000000000,Ruditapes philippinarum,no,"record accurate; Dionisio beach",5428986.450,458061.691
+iNat:25655210,48.896722222199998,-123.405944444400006,Ruditapes philippinarum,no,"record appears accurate; tidal mud flats",5416054.407,470246.890
+iNat:55327616,48.960003000000000,-123.508525000000006,Ruditapes philippinarum,no,"location appears accurate; intertidal species",5423134.118,462775.491
+iNat:56194863,48.896569444400001,-123.405963888900004,Ruditapes philippinarum,no,"record appears accurate; tidal mud flats",5416037.432,470245.374
+Gal-Salm:8,48.976615289999998,-123.558385000000001,Gasterosteus aculeatus,no,"location accurate; salmonid in stream",5425006.436,459139.283
+Gal-Salm:9,48.976796030000003,-123.558357000000001,Gasterosteus aculeatus,no,"location accurate; salmonid in stream",5425026.513,459141.480
+Gal-Salm:10,48.978680539999999,-123.557805000000002,Gasterosteus aculeatus,no,"location accurate; salmonid in stream",5425235.706,459183.412
+Gal-Salm:11,48.978765520000003,-123.557389999999998,Gasterosteus aculeatus,no,"location accurate; salmonid in stream",5425244.930,459213.848
+iNat:4017005,48.898175999999999,-123.407838999999996,Myosotella myosotis,yes,"record mostly appears accurate; shunted slightly into nearby saline salt marsh",5416222.420,470097.103
+iNat:4017022,48.899957999999998,-123.407787999999996,Lottia digitalis,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416415.194,470104.758
+iNat:24518704,48.872342705699999,-123.310686349899996,Lottia digitalis,no,"location appears accurate; intertidal life; Bellhouse Park",5413311.411,477217.612
+iNat:6425061,48.872082300000002,-123.312289199999995,Hemigrapsus nudus,yes,"location appears mostly accurate; shunted to nearby intertidal",5413223.738,477081.675
+iNat:7423062,48.899646758999999,-123.341728210400007,Hemigrapsus nudus,no,"location appears accurate; intertidal species",5416356.367,474954.979
+iNat:7580852,48.899850507200000,-123.341864347500007,Hemigrapsus nudus,no,"location appears accurate; intertidal species",5416379.061,474945.103
+iNat:24521850,48.872449500000002,-123.314959200000004,Hemigrapsus nudus,yes,"record accuracy poor; highly likely to have been observed on the shoreline of Bellhouse Park",5413279.706,477222.138
+iNat:24666640,48.964066666699999,-123.515136111100006,Hemigrapsus nudus,no,"location appears accurate; intertidal species",5423589.111,462294.616
+iNat:24698156,48.962963333300003,-123.514471666700004,Hemigrapsus nudus,yes,"location apparently accurate; shunted slightly to intertidal",5423480.670,462354.391
+iNat:24711796,49.013266470200001,-123.573353000200001,Hemigrapsus nudus,yes,shunted to adjacent intertidal,5429079.796,458057.777
+iNat:32125274,48.871463333299999,-123.310554999999994,Hemigrapsus nudus,no,"record appears accurate; intertidal species; Bellhouse Park",5413213.618,477226.845
+iNat:4031847,48.938734799999999,-123.496964500000004,Tonicella undocaerulea,yes,shunted to nearby waters in Retreat Cove,5420881.617,463283.272
+iNat:24533497,48.900243043899998,-123.406999111199994,Caprella mutica,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416456.577,470143.287
+iNat:4052412,48.940241000000000,-123.504347999999993,Stomotoca atra,yes,shunted to adjacent waters in Retreat Cove,5420892.311,463041.820
+iNat:5185500,48.893841081700003,-123.404102325400004,Littorina sitkana,yes,"location appears mostly accurate; shunted to nearby intertidal on Grey Peninsula",5415707.448,470428.504
+iNat:25597353,48.964644444400001,-123.515922222200004,Littorina sitkana,no,"location appears accurate; intertidal species",5423653.730,462237.514
+iNat:25597355,48.964144444399999,-123.515258333299997,Littorina sitkana,no,"location appears accurate; intertidal species",5423597.818,462285.729
+iNat:5516564,48.914420000000000,-123.388566999999995,Traskorchestia traskiana,no,"location appears accurate; intertidal species",5418015.092,471530.597
+iNat:5620541,48.885262997700003,-123.321211337999998,Pentidotea wosnesenskii,no,"location appears accurate; intertidal species",5414750.871,476451.890
+iNat:6047530,48.904561617200002,-123.413457870499997,Pentidotea wosnesenskii,no,"location appears accurate; intertidal species",5416928.825,469700.945
+iNat:24697895,48.964263333300003,-123.515183333300001,Pentidotea wosnesenskii,no,"location appears accurate; intertidal species",5423610.997,462291.308
+iNat:24711790,49.013266470200001,-123.573353000200001,Pentidotea wosnesenskii,yes,shunted to adjacent intertidal,5429080.311,458056.230
+iNat:24771930,48.884619698300000,-123.321132231099995,Pentidotea wosnesenskii,no,"location appears accurate; intertidal species",5414679.335,476457.387
+iNat:31205703,48.905663333299998,-123.350966666700003,Pentidotea wosnesenskii,no,"location appears accurate; intertidal species",5417028.272,474280.988
+iNat:42682071,48.878355555600002,-123.317055555600007,Pentidotea wosnesenskii,yes,"location mostly accurate; moved to adjacent intertidal Studies Bay",5413900.458,476784.416
+CMN:CMNC 1982-0567,49.009999999999998,-123.579999999999998,Pentidotea wosnesenskii,yes,moved offshore Virago Point,5428778.962,456999.171
+CMN:CMNC 1982-0571,48.880000000000003,-123.319999999999993,Pentidotea wosnesenskii,yes,"location adjusted to precisely the area specified in CMN metadata; intertidal, west of Sturdies Bay ferry dock",5413896.633,476775.617
+iNat:5646967,48.906352850899999,-123.356981277499997,Lottia pelta,no,"location appears accurate; intertidal species",5417106.973,473840.595
+iNat:24771927,48.884619698300000,-123.321132231099995,Lottia pelta,no,"location appears accurate; intertidal species",5414679.335,476457.387
+iNat:6391046,48.962074664299998,-123.547010421799996,Aequorea victoria,yes,shunted to adjacent shoreline waters,5423331.354,459842.749
+iNat:6485976,48.926343403099999,-123.418068252500007,Neovison vison,yes,"location appears mostly accurate; shunted to nearby shoreline",5419387.077,469390.898
+iNat:24957462,48.917511666700001,-123.396225000000001,Neovison vison,no,"location appears accurate; shoreline mink",5418361.669,470971.306
+iNat:28673317,48.882263899999998,-123.351001100000005,Megaptera novaeangliae,yes,"location highly inaccurate; most likely observed in Active Pass",5411886.702,474600.415
+iNat:7674348,48.941142228600000,-123.504986286000005,Alia carinata,yes,shunted to adjacent waters in Retreat Cove,5421052.700,463021.849
+iNat:7674355,48.941226793299997,-123.505458354799998,Heptacarpus brevirostris,yes,shunted to adjacent waters in Retreat Cove,5421061.438,462986.277
+CMN:CMNC 2004-3237,49.009999999999998,-123.579999999999998,Heptacarpus brevirostris,yes,moved offshore Virago Point,5428789.851,457006.430
+iNat:13026269,48.940431958799998,-123.503921304200006,Crangon,yes,shunted to adjacent waters in Retreat Cove,5421023.369,463121.703
+iNat:14385958,48.940382342200003,-123.504541621800001,Aeolidia loui,yes,shunted to adjacent waters in Retreat Cove,5420906.665,463018.729
+iNat:15038969,48.900555555600000,-123.407072222200000,Megalorchestia pugettensis,yes,"record mostly appears accurate; shunted slightly into nearby waters",5416482.263,470153.990
+iNat:15156184,48.917018081999998,-123.394953142999995,Diadumene lineata,no,"location appears accurate; intertidal species",5418306.315,471064.201
+iNat:24689379,48.871507520000002,-123.311488380000000,Diadumene lineata,no,"record appears accurate; intertidal species; Bellhouse Park",5413218.810,477158.420
+iNat:24708097,48.871517968399999,-123.311479613299994,Diadumene lineata,no,"record appears accurate; intertidal species; Bellhouse Park",5413219.969,477159.067
+iNat:24714413,48.871601191200000,-123.311999232000005,Diadumene lineata,yes,"location appears mostly accurate; shunted to nearby intertidal Bellhouse Park",5413209.209,477122.547
+iNat:24743607,48.871856481099996,-123.312739910000005,Diadumene lineata,yes,"location appears mostly accurate; shunted to nearby intertidal",5413232.587,477058.250
+iNat:32125269,48.871513333300001,-123.311553333299997,Diadumene lineata,no,"record appears accurate; intertidal species; Bellhouse Park",5413219.476,477153.659
+iNat:16620434,48.983209869900001,-123.555567755100000,Pectinatella magnifica,no,"freshwater species; remove from dataset",5425738.005,459350.802
+iNat:16620436,48.983211014100000,-123.555567889200006,Pectinatella magnifica,no,"freshwater species; remove from dataset",5425738.132,459350.793
+iNat:19886394,48.897846666699998,-123.400396666700004,Balanus crenatus,yes,"location appears mostly accurate; shunted into adjacent intertidal Montague Harbour",5416163.974,470653.943
+iNat:24541323,48.900173306500001,-123.406918644900003,Platynereis bicanaliculata,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416464.426,470148.282
+iNat:25199628,48.900144347000001,-123.407050995299997,Platynereis bicanaliculata,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416461.572,470145.428
+CMN:CMNC 1987-0202,48.880000000000003,-123.319999999999993,Gnorimosphaeroma oregonense,yes,"location adjusted to precisely the area specified in CMN metadata; intertidal, west of Sturdies Bay ferry dock",5413891.694,476785.495
+CMN:CMNC 1987-0215,48.880000000000003,-123.319999999999993,Gnorimosphaeroma oregonense,yes,"location adjusted to precisely the area specified in CMN metadata; intertidal, west of Sturdies Bay ferry dock",5413891.694,476794.139
+iNat:25655199,48.896080555600001,-123.405905555600000,Batillaria attramentaria,no,"record appears accurate; tidal mud flats",5415983.063,470249.360
+iNat:56194856,48.896947222199998,-123.405761111100006,Batillaria attramentaria,no,"record appears accurate; tidal mud flats",5416079.347,470260.461
+iNat:37294883,48.885008313100002,-123.321696571999993,Clione limacina,no,"location appears accurate; observed in intertidal zone",5414722.710,476416.197
+iNat:55397670,48.949500654600001,-123.484155271500001,Platichthys stellatus,no,"location appears accurate; shoreline observation",5421954.981,464551.931
+CMN:CMNFI 1985-0088.2,48.880000000000003,-123.329999999999998,Platichthys stellatus,yes,"location highly inaccurate; moved to adjacent offshore waters southwest of Galiano Island, as specified in CMN metadata",5412593.767,471665.721
+iNat:58218778,48.871104575200000,-123.389186201499996,Leuckartiara longicalcar,yes,"record mostly accurate; shunted to nearby waters in Montague Harbour",5413324.715,471430.437
+RBCM:975-00224-007,48.901667000000003,-123.408332999999999,Amphiodia periercta,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416599.279,470071.936
+RBCM:991-00066-002,48.933332999999998,-123.450000000000003,Tonicella,yes,"very old record; highly inaccurate / uncertain georeferencing; moved to adjacent waters so that it is not landlocked",5418969.430,466433.636
+RBCM:975-00224-005,48.901667000000003,-123.408332999999999,Antiopella,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416602.846,470069.082
+RBCM:975-00224-002,48.901667000000003,-123.408332999999999,Amphissa,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416594.284,470076.931
+RBCM:991-00066-001,48.933332999999998,-123.450000000000003,Lepidochitona,yes,"very old record; highly inaccurate / uncertain georeferencing; moved to adjacent waters so that it is not landlocked",5418962.858,466459.924
+RBCM:975-00224-001,48.901667000000003,-123.408332999999999,Nassarius,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416593.571,470076.218
+RBCM:989-00041-001,49.009999999999998,-123.583332999999996,Metridium,yes,shunted to nearby intertidal,5428891.791,457283.519
+RBCM:975-00224-006,48.901667000000003,-123.408332999999999,Cumanotus fernaldi,yes,"record mostly appears accurate; shunted slightly into nearby waters at Montague beach",5416597.852,470072.650
+CMN:CMNC 2004-0232,48.880000000000003,-123.319999999999993,Gnathopleustes pachychaetus,yes,"location adjusted to precisely the area specified in CMN metadata; intertidal, west of Sturdies Bay ferry dock",5413890.512,476775.522
+CMN:CMNC 2006-0611,49.009999999999998,-123.579999999999998,Desdimelita californica,yes,moved offshore Virago Point,5428793.480,456988.283
+CMN:CMNC 2007-0102,49.009999999999998,-123.579999999999998,Desdimelita microdentata,yes,moved offshore Virago Point,5428793.480,456991.912
+Gal-Salm:0,48.942045190000002,-123.500449000000003,Oncorhynchus kisutch,no,"record accurate; salmonid in stream",5421133.934,463353.510
+Gal-Salm:1,48.878418170000003,-123.350193000000004,Oncorhynchus clarkii,no,"location accurate; salmonid in stream",5413999.360,474323.734
+Gal-Salm:2,48.878396819999999,-123.350015999999997,Oncorhynchus clarkii,no,"location accurate; salmonid in stream",5413996.927,474336.701
+Gal-Salm:3,48.878518540000002,-123.350780000000000,Oncorhynchus clarkii,no,"location accurate; salmonid in stream",5414010.716,474280.747
+Gal-Salm:4,48.879002999999997,-123.354600000000005,Oncorhynchus clarkii,no,"location accurate; salmonid in stream",5414065.868,474000.915
+Gal-Salm:5,48.879010960000002,-123.354389999999995,Oncorhynchus clarkii,no,"location accurate; salmonid in stream",5414066.681,474016.316
+Gal-Salm:6,48.879057910000000,-123.353350000000006,Oncorhynchus clarkii,no,"location accurate; salmonid in stream",5414071.546,474092.593
+Gal-Salm:7,48.974327850000002,-123.559995999999998,Oncorhynchus clarkii,no,"location accurate; salmonid in stream",5424753.023,459019.521

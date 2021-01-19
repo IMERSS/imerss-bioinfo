@@ -19,8 +19,13 @@ hortis.datasetIdFromObs = function (obsId) {
     return obsId.substring(0, colpos);
 };
 
+hortis.equalCoordinate = function (a, b) {
+    // 6 decimals is a common standard - about 10cm accuracy, e.g. RBCM truncated to this
+    return Math.abs(a - b) < 1e-6;
+}
+
 hortis.equalCoordinates = function (lat1, long1, lat2, long2) {
-    return fluid.model.isSameValue(lat1, lat2) && fluid.model.isSameValue(long1, long2);
+    return hortis.equalCoordinate(lat1, lat2) && hortis.equalCoordinate(long1, long2);
 };
 
 hortis.matchOnePatchRow = function (patchRow, obsRow) {
