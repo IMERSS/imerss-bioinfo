@@ -4,7 +4,7 @@
         "dateObserved": "DATE_COLLECTED",
         "latitude": "LAT_DD",
         "longitude": "LONG_DD",
-        "placeName": "PLACE_COLLECTED",
+        "placeName": "SITE_DESC",
         "catalogueNumber": "ID_NUMBER"
     },
     "datasetId": "CMN",

@@ -59,7 +59,7 @@ resultsPromise.then(function (results) {
 // fluid.setLogging(true);
 
 hortis.enqueueAncestry = function (doc, queue) {
-    var ancestours = hortis.iNatTaxa.parentTaxaIds(doc).reverse();
+    var ancestours = hortis.iNat.parentTaxaIds(doc).reverse();
     var elements = ancestours.map(function (oneAnc) {
         return {id: oneAnc};
     });
@@ -88,7 +88,7 @@ hortis.queueFetchWork = function (queue) {
     var oneWork = function () {
         if (that.queue.length) {
             var head = that.queue.shift();
-            var filename = hortis.iNatTaxa.filenameFromTaxonId(taxonAPIFileBase, head.id);
+            var filename = hortis.iNat.filenameFromTaxonId(taxonAPIFileBase, head.id);
             var doc;
             if (that.cache[filename] || fs.existsSync(filename)) {
                 hortis.noteSkip(that, "File " + filename + " exists, skipping");

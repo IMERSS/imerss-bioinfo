@@ -1,5 +1,6 @@
 {
     "columns": {
+        "id": "id",
         "dateObserved": "observed_on",
         "observer": "user_login",
         "iNaturalistObsLink": "url",
@@ -12,5 +13,5 @@
     },
     "datasetId": "iNat",
     "datasetClass": "citizen",
-    "observationId": "hortis.iNaturalistObsFromUrl(%iNaturalistObsLink)"
+    "observationId": "%id"
 }

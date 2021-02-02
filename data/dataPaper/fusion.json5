@@ -2,7 +2,7 @@
     datasets: {
         PMLS: {
             name: "Pacific Marine Life Survey Dive Records (1968-2019)",
-            input: "%bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2020-09-18.csv",
+            input: "%bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2021-01-26.csv",
             map: "%bagatelle/data/Galiano PMLS/PMLS-map.json",
             outMap: "%bagatelle/data/Galiano PMLS/PMLS-out-map.json",
             colour: "#931362"
@@ -46,7 +46,7 @@
         },
         CHU: {
             name: "Jackson Chu's ROV Surveys (2018-2019)",
-            input: "%bagatelle/data/Chu/CHU_2010_ROV_Marine_occurrence_records_2020_10_07.csv",
+            input: "%bagatelle/data/Chu/CHU_2010_ROV_Marine_occurrence_records_2020_10_07_unscrambled.csv",
             map: "%bagatelle/data/Chu/Chu-map.json",
             outMap: "%bagatelle/data/Chu/Chu-out-map.json",
             colour: "#f7a329"

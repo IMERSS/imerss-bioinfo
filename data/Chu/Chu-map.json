@@ -7,5 +7,5 @@
     },
     "datasetId": "CHU",
     "datasetClass": "naturalist",
-    "observationId": "%rowNumber"
+    "observationId": "%id"
 }

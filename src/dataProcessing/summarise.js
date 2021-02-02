@@ -11,7 +11,8 @@ fluid.defaults("hortis.summarise", {
     summarise: true,
     members: {
         uniqueRows: {},
-        discardedRows: {}
+        discardedRows: {},
+        withoutCoords: 0
     },
     fields: {
         date: "dateObserved",
@@ -72,6 +73,9 @@ hortis.summarise.storeRow = function (that, row) {
             fluid.set(existing, [coordsField, obsId], coords);
             row.latitude = coords[0];
             row.longitude = coords[1];
+        } else {
+            ++that.withoutCoords;
+            console.log("Row without coords ", row);
         }
     }
 };

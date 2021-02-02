@@ -20,7 +20,7 @@ fluid.defaults("hortis.iNatTaxa", {
         taxaByName: {},
         taxaByNameAndRank: {},
         taxaById: {},
-        completionPromise: "@expand:hortis.iNatTaxa.indexTaxa({that}, {taxaReader}.completionPromise)"
+        completionPromise: "@expand:hortis.iNat.indexTaxa({that}, {taxaReader}.completionPromise)"
     },
     components: {
         taxaReader: {
@@ -32,11 +32,11 @@ fluid.defaults("hortis.iNatTaxa", {
         }
     },
     listeners: {
-        "onCreate.bindCompletion": "hortis.iNatTaxa.bindCompletion"
+        "onCreate.bindCompletion": "hortis.iNat.bindCompletion"
     }
 });
 
-hortis.iNatTaxa.bindCompletion = function (that) {
+hortis.iNat.bindCompletion = function (that) {
     // silly function which will be unnecessary once we have FLUID-4883 "latched events"
     that.completionPromise.then(function (index) {
         that.events.onIndexed.fire(index);
@@ -45,7 +45,7 @@ hortis.iNatTaxa.bindCompletion = function (that) {
     });
 }
 
-hortis.iNatTaxa.indexTaxa = function (that, taxaPromise) {
+hortis.iNat.indexTaxa = function (that, taxaPromise) {
     var togo = fluid.promise();
     taxaPromise.then(function (taxaData) {
         taxaData.rows.forEach(function (taxon) {

@@ -3,13 +3,13 @@
 "use strict";
 
 var fluid = require("infusion");
-var fs = require("fs");
 
 fluid.require("%bagatelle");
 
 var minimist = require("minimist");
 
 require("./dataProcessing/readJSON.js");
+require("./dataProcessing/writeJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
 require("./dataProcessing/writeCSV.js");
@@ -400,19 +400,19 @@ hortis.applyPatches = function (resolved, patches) {
     });
 };
 
+// Summarise really means "Input was obs"
 hortis.resolveAndFilter = function (that, observations, filters, outMap, summarise) {
-    var togo = {};
+    var resolved = {};
     var outrows = hortis.resolveObservationTaxa(that, observations, outMap);
 
-    var summarisedRows = hortis.doSummarise(outrows, outMap, summarise);
-    filters = filters || {};
-    var filterCount = Object.keys(filters).length;
-    togo.summarisedRows = hortis.applyFilters(summarisedRows, filters, filterCount);
+    resolved.filters = filters || {};
+    resolved.filterCount = Object.keys(filters).length;
 
     if (summarise) {
-        togo.obsRows = hortis.applyFilters(outrows, filters, filterCount);
+        resolved.obsRows = hortis.applyFilters(outrows, resolved.filters, resolved.filterCount);
     }
-    return togo;
+
+    return resolved;
 };
 
 hortis.writeReintegratedObservations = function (resolved, fileName, outMapFileName) {
@@ -422,17 +422,10 @@ hortis.writeReintegratedObservations = function (resolved, fileName, outMapFileN
         hortis.writeCSV(reintegratedObsFile, resolved.combinedObsOutMap.columns, resolved.obsRows, fluid.promise());
 
         var combinedObsOutMapFilename = hortis.obsifyFilename(outMapFileName);
-        hortis.writeJSONOutput(combinedObsOutMapFilename, resolved.combinedObsOutMap);
+        hortis.writeJSONSync(combinedObsOutMapFilename, resolved.combinedObsOutMap);
     }
     hortis.writeCSV(fileName, resolved.combinedOutMap.columns, resolved.summarisedRows, fluid.promise());
-    hortis.writeJSONOutput(outMapFileName, resolved.combinedOutMap);
-};
-
-hortis.writeJSONOutput = function (inFilename, doc) {
-    var filename = fluid.module.resolvePath(inFilename);
-    var formatted = JSON.stringify(doc, null, 4) + "\n";
-    fs.writeFileSync(filename, formatted);
-    console.log("Written " + formatted.length + " bytes to " + filename);
+    hortis.writeJSONSync(outMapFileName, resolved.combinedOutMap);
 };
 
 hortis.writeResolutionFile = function (that) {
@@ -477,12 +470,18 @@ hortis.settleStructure(dataPromises).then(function (data) {
 
     var resolved = hortis.resolveAndFilter(that, flatObs, fusion.filters, combinedOutMap, summarise);
 
+    resolved.combinedOutMap = combinedOutMap;
+    resolved.combinedObsOutMap = hortis.combineMaps([hortis.commonObsOutMap].concat(outMaps), true);
+
     hortis.applyPatches(resolved, data.patches);
+
+    if (summarise) {
+        resolved.summarisedRows = hortis.doSummarise(resolved.obsRows, combinedOutMap, true);
+        // resolved.summarisedRows = hortis.applyFilters(summarisedRows, resolved.filters, resolved.filterCount);
+    }
 
     var reintegratedFilename = parsedArgs.dry ? "reintegrated.csv" : fluid.module.resolvePath(fusion.output);
 
-    resolved.combinedOutMap = combinedOutMap;
-    resolved.combinedObsOutMap = hortis.combineMaps([hortis.commonObsOutMap].concat(outMaps), true);
 
     hortis.writeReintegratedObservations(resolved, reintegratedFilename, fusion.combinedOutMap);
 

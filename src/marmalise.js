@@ -105,14 +105,14 @@ hortis.storeAtPath = function (treeBuilder, path, row) {
 hortis.loadCachedTaxonDoc = function (treeBuilder, id) {
     var existing = treeBuilder.taxonCache[id];
     if (!existing) {
-        existing = treeBuilder.taxonCache[id] = hortis.iNatTaxa.loadTaxonDoc(treeBuilder.options.taxonAPIFileBase, id);
+        existing = treeBuilder.taxonCache[id] = hortis.iNat.loadTaxonDoc(treeBuilder.options.taxonAPIFileBase, id);
     }
     return existing;
 };
 
 hortis.taxaToPathiNat = function (treeBuilder, row) {
     var baseDoc = hortis.loadCachedTaxonDoc(treeBuilder, row.iNaturalistTaxonId);
-    var parentTaxaIds = hortis.iNatTaxa.parentTaxaIds(baseDoc);
+    var parentTaxaIds = hortis.iNat.parentTaxaIds(baseDoc);
     var ancestourDocs = parentTaxaIds.map(function (id) {
         return hortis.loadCachedTaxonDoc(treeBuilder, id);
     });

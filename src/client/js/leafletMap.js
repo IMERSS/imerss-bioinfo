@@ -659,14 +659,23 @@ hortis.quantiser.datasetToSummary = function (that, dataset, squareSide) {
 };
 
 hortis.quantiser.indexTree = function (that, latResolution, squareSide) {
+    var nocoords = 0;
+    var withcoords = 0;
     that.flatTree.forEach(function (row) {
         if (row.coords) {
             var coords = JSON.parse(row.coords);
             fluid.each(coords, function (coord, obsId) {
+                ++withcoords;
                 that.indexObs(coord, obsId, row.id);
             });
+        } else {
+            if (row.children.length === 0) {
+                console.log("No coords: ", row);
+                ++nocoords;
+            }
         }
     });
+    console.log("Total coordinate count: " + withcoords);
 
     fluid.each(that.datasets, function (dataset) {
         that.datasetToSummary(dataset, squareSide);

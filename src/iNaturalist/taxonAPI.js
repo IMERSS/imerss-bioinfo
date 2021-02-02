@@ -5,17 +5,17 @@
 var fluid = require("infusion");
 var hortis = fluid.registerNamespace("hortis");
 
-fluid.registerNamespace("hortis.iNatTaxa");
+fluid.registerNamespace("hortis.iNat");
 
-hortis.iNatTaxa.filenameFromTaxonId = function (taxonAPIFileBase, id) {
+hortis.iNat.filenameFromTaxonId = function (taxonAPIFileBase, id) {
     return taxonAPIFileBase + "/" + id + ".json";
 };
 
-hortis.iNatTaxa.loadTaxonDoc = function (taxonAPIFileBase, id) {
-    var filename = hortis.iNatTaxa.filenameFromTaxonId(taxonAPIFileBase, id);
+hortis.iNat.loadTaxonDoc = function (taxonAPIFileBase, id) {
+    var filename = hortis.iNat.filenameFromTaxonId(taxonAPIFileBase, id);
     return hortis.readJSONSync(filename);
 };
 
-hortis.iNatTaxa.parentTaxaIds = function (taxonDoc) {
+hortis.iNat.parentTaxaIds = function (taxonDoc) {
     return taxonDoc.ancestry ? taxonDoc.ancestry.split("/") : [];
 };
