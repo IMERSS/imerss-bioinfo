@@ -1,5 +1,6 @@
 {
     "columns": {
+        "id": "id",
         "taxonName": "Species",
         "dateObserved": "Date",
         "latitude": "Latitude",

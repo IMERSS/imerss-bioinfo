@@ -406,17 +406,21 @@ hortis.resolveAndFilter = function (that, observations, filters, outMap, summari
     var outrows = hortis.resolveObservationTaxa(that, observations, outMap);
 
     resolved.filters = filters || {};
-    resolved.filterCount = Object.keys(filters).length;
+    resolved.filterCount = Object.keys(resolved.filters).length;
+
+    var filtered = hortis.applyFilters(outrows, resolved.filters, resolved.filterCount);
 
     if (summarise) {
-        resolved.obsRows = hortis.applyFilters(outrows, resolved.filters, resolved.filterCount);
+        resolved.obsRows = filtered;
+    } else {
+        resolved.summarisedRows = filtered;
     }
 
     return resolved;
 };
 
 hortis.writeReintegratedObservations = function (resolved, fileName, outMapFileName) {
-    // If we've been asked to summarise, also output obs since we must at least have input obs! "Not summarising" is probably an obsolete workflow
+    // If we've been asked to summarise, also output obs since we must have input obs. Summarise means "input was obs"
     if (resolved.obsRows) {
         var reintegratedObsFile = hortis.obsifyFilename(fileName);
         hortis.writeCSV(reintegratedObsFile, resolved.combinedObsOutMap.columns, resolved.obsRows, fluid.promise());
@@ -473,15 +477,12 @@ hortis.settleStructure(dataPromises).then(function (data) {
     resolved.combinedOutMap = combinedOutMap;
     resolved.combinedObsOutMap = hortis.combineMaps([hortis.commonObsOutMap].concat(outMaps), true);
 
-    hortis.applyPatches(resolved, data.patches);
-
     if (summarise) {
+        hortis.applyPatches(resolved, data.patches);
         resolved.summarisedRows = hortis.doSummarise(resolved.obsRows, combinedOutMap, true);
-        // resolved.summarisedRows = hortis.applyFilters(summarisedRows, resolved.filters, resolved.filterCount);
     }
 
     var reintegratedFilename = parsedArgs.dry ? "reintegrated.csv" : fluid.module.resolvePath(fusion.output);
-
 
     hortis.writeReintegratedObservations(resolved, reintegratedFilename, fusion.combinedOutMap);
 

@@ -12,7 +12,13 @@ require("./iNaturalist/obsAPI.js");
 
 var hortis = fluid.registerNamespace("hortis");
 
-var source = hortis.iNat.obsSource();
+var jwt = hortis.readJSONSync("jwt.json", "reading JWT token file");
+
+var source = hortis.iNat.obsSource({
+    headers: {
+        Authorization: "Bearer " + jwt.api_token
+    }
+});
 
 fluid.setLogging(true);
 
@@ -30,7 +36,7 @@ hortis.logObsResponse = function (data) {
 
 hortis.writeObs = function (filename, rows) {
     var headers = Object.keys(rows[0]);
-    hortis.writeCSV("obsoutput.csv", headers, rows, fluid.promise());
+    hortis.writeCSV(filename, headers, rows, fluid.promise());
 };
 
 hortis.applyResponse = function (data) {

@@ -17,7 +17,8 @@ fluid.defaults("hortis.iNat.obsSource", {
         }
     },
     paramMap: {
-        place_id: 94935,
+//        place_id: 94935,
+        project_id: 5799,
         taxon_id: 1,
         quality_grade: "research",
         order: "asc",
@@ -54,24 +55,31 @@ hortis.iNat.obsMap = {
     "user_login": "user.login",
     "user_name": "user.name",
     "quality_grade": "quality_grade",
+    "coordinates_obscured": "obscured",
     "image_url": "observation_photos.0.photo.url", // replace "small" with "medium"
-    "latitude": "location.0",
-    "longitude": "location.1",
+//    "latitude": "location.0",
+//    "longitude": "location.1",
     "positional_accuracy": "positional_accuracy",
-    "private_latitude": "private_latitude", // we hope
-    "private_longitude": "private_longitude",
+//    "private_latitude": "private_location[0]",
+//    "private_longitude": "private_location[1]",
     "scientific_name": "taxon.name",
     "common_name": "taxon.preferred_common_name",
     "taxon_id": "taxon.id"
+};
+
+hortis.applyLocation = function (oneResult, row, prefix) {
+    var key = prefix + "location";
+    var location = typeof(oneResult[key]) === "string" ? oneResult[key].split(",") : [];
+    row[prefix + "latitude"] = location[0];
+    row[prefix + "longitude"] = location[1];
 };
 
 hortis.resultToRow = function (oneResult) {
     var row = fluid.transform(hortis.iNat.obsMap, function (value) {
         return fluid.get(oneResult, value);
     });
-    var location = typeof(oneResult.location) === "string" ? oneResult.location.split(",") : []
-    row.latitude = location[0];
-    row.longitude = location[1];
+    hortis.applyLocation(oneResult, row, "");
+    hortis.applyLocation(oneResult, row, "private_");
     return row;
 };
 
