@@ -104,17 +104,17 @@
         },
         iNaturalistTaxonId: "525797",
     },
-    Chaetopterus: {
+    "Chaetopterus variopedatus": {
         taxonNames: {
             "U-shaped parchment tubeworm": {
                 type: "commonName",
             },
-            "Chaeopterus species complex": {
-                resolvedBy: "AB",
-                notes: "misspelling in obs record",
+            "Chaetopterus": {
+                resolvedBy: "AS",
+                notes: "PMLS records Chaetopterus complex but Leslie has indicated this is the Chaetopterus variopedatus complex.",
             },
         },
-        iNaturalistTaxonId: "171303",
+        iNaturalistTaxonId: "216631",
     },
     Corallinoideae: {
         taxonNames: {
@@ -135,6 +135,7 @@
             "Flabellina verrucosa": {
                 resolvedBy: "AB",
                 oldiNaturalistTaxonId: "50461",
+                notes: "Swap is now inactive, since verrucosa -> pseudoverrucosa in PMLS of 2021-2-24"
             },
         },
         iNaturalistTaxonId: "633193",
@@ -838,18 +839,6 @@
             },
         },
         iNaturalistTaxonId: "886884"
-    },
-    "Chaetopterus": {
-        taxonNames: {
-            "Parchment Tubeworms": {
-                type: "commonName",
-            },
-            "Chaeopterus": {
-                notes: "Misspelling in PMLS",
-                resolvedBy: "AB",
-            },
-        },
-        iNaturalistTaxonId: "171303"
     },
     "Leptasterias hexactis": {
         taxonNames: {
@@ -2119,5 +2108,59 @@
             },
         },
         iNaturalistTaxonId: "247194"
+    },
+    "Peltodoris lentiginosa": {
+        taxonNames: {
+            "Diaulula lentiginosa": {
+                resolvedBy: "AB",
+                notes: "Unaccepted name appearing in Jackson Chu's dives",
+                oldiNaturalistTaxonId: "513834"
+            },
+        },
+        iNaturalistTaxonId: "568137"
+    },
+    // Late-adding PMLS swap
+    "Coryphella pseudoverrucosa": {
+        taxonNames: {
+            "red-gilled nudibranch": {
+                type: "commonName",
+            },
+            "Flabellina pseudoverrucosa": {
+                resolvedBy: "AB",
+                notes: "Replaces earlier swap for C. verrucosa"
+            },
+        },
+        iNaturalistTaxonId: "622832",
+    },
+    // Final round 8 swaps
+    "Eulalia": {
+        taxonNames: {
+            "Eumida": {
+                resolvedBy: "AS",
+                notes: "Leslie's recommendation: Eumida was moved to subgenus Eumida (Eulalia) and is now genus Eulalia",
+                oldiNaturalistTaxonId: "345515"
+            },
+        },
+        iNaturalistTaxonId: "347275"
+    },
+    "Zelentia nepunicea": {
+        taxonNames: {
+            "Zelentia pustulata": {
+                resolvedBy: "AS",
+                notes: "It is an example of a specimen collected from Galiano Island which served to prove that the species formerly known worldwide as Cuthona pustulata is now known as Zelentia pustulata and limited to the Atlantic while the species in the Salish Sea is a different species now known as Zelentia nepunicea. The specimen collected on Galiano Island was designated the holotype of the species.",
+                oldiNaturalistTaxonId: "564602"
+            },
+        },
+        iNaturalistTaxonId: "1128352"
+    },
+    "Coanicardita ventricosa": {
+        taxonNames: {
+            "Cyclocardia ventricosa": {
+                resolvedBy: "AB",
+                notes: "RBCM name unaccepted in WoRMS",
+                oldiNaturalistTaxonId: "492137"
+            },
+        },
+        iNaturalistTaxonId: "1223439"
     },
 }

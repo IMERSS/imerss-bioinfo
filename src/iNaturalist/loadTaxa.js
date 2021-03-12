@@ -8,7 +8,7 @@ var hortis = fluid.registerNamespace("hortis");
 require("../dataProcessing/readCSV.js");
 require("../dataProcessing/readCSVwithMap.js");
 
-fluid.defaults("hortis.iNatTaxa", {
+fluid.defaults("hortis.iNat.taxa", {
     gradeNames: "fluid.component",
     mapFile: "data/iNaturalist/iNaturalist-taxa-map.json",
     inputFile: "data/iNaturalist/iNaturalist-taxa.csv",
@@ -20,23 +20,23 @@ fluid.defaults("hortis.iNatTaxa", {
         taxaByName: {},
         taxaByNameAndRank: {},
         taxaById: {},
-        completionPromise: "@expand:hortis.iNat.indexTaxa({that}, {taxaReader}.completionPromise)"
+        completionPromise: "@expand:hortis.iNatTaxa.indexTaxa({that}, {taxaReader}.completionPromise)"
     },
     components: {
         taxaReader: {
             type: "hortis.csvReaderWithMap",
             options: {
-                mapColumns: "{iNatTaxa}.taxaMap.columns",
-                inputFile: "{iNatTaxa}.options.inputFile"
+                mapColumns: "{taxa}.taxaMap.columns",
+                inputFile: "{taxa}.options.inputFile"
             }
         }
     },
     listeners: {
-        "onCreate.bindCompletion": "hortis.iNat.bindCompletion"
+        "onCreate.bindCompletion": "hortis.iNat.taxa.bindCompletion"
     }
 });
 
-hortis.iNat.bindCompletion = function (that) {
+hortis.iNat.taxa.bindCompletion = function (that) {
     // silly function which will be unnecessary once we have FLUID-4883 "latched events"
     that.completionPromise.then(function (index) {
         that.events.onIndexed.fire(index);
@@ -45,7 +45,7 @@ hortis.iNat.bindCompletion = function (that) {
     });
 }
 
-hortis.iNat.indexTaxa = function (that, taxaPromise) {
+hortis.iNat.taxa.index = function (that, taxaPromise) {
     var togo = fluid.promise();
     taxaPromise.then(function (taxaData) {
         taxaData.rows.forEach(function (taxon) {

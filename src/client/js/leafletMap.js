@@ -585,7 +585,7 @@ fluid.defaults("hortis.quantiser", {
             target: "indexVersion",
             singleTransform: {
                 type: "fluid.transforms.free",
-                args: ["{that}", "{that}.model.latResolution", "{that}.model.squareSide"],
+                args: ["{that}", "{that}.model.latResolution", "{that}.model.squareSide",],
                 func: "hortis.quantiser.indexTree"
             }
         }
