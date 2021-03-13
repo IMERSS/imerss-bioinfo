@@ -103,15 +103,35 @@ hortis.getXetthecumProps = function (obsRows) {
     return filtered;
 };
 
+fluid.registerNamespace("hortis.filters");
+
+hortis.filters.Xetthecum = {
+    filter: function (rows) {
+        var newRows = hortis.getXetthecumProps(pkg.rows);
+    },
+    extraProps: Xetthecum_extract_props
+};
+
+hortis.filters.Galiano = {
+    filter: function (rows) {
+        return rows.filter(function (row) {
+            row.point = [hortis.parseFloat(row.longitude), hortis.parseFloat(row.latitude)];
+            return hortis.intersectsAnyFeature(Galiano_island, row);
+        });
+    },
+    extraProps: []
+};
+
+var activeFilter = 
+    // hortis.filters.Xetthecum;
+    hortis.filters.Galiano;
+
 reader.completionPromise.then(function () {
     var obsRows = reader.rows;
     console.log("Matching against " + obsRows.length + " observations");
 
-    var filtered = hortis.getXetthecumProps(obsRows);
-/*    var filtered = obsRows.filter(function (row) {
-        return hortis.intersectsAnyFeature(Galiano_island, row);
-    });
-*/
+    var filtered = activeFilter.filter(obsRows); 
+    
     var mapped = filtered.map(function (row) {
         var outRow = {
             observationId: row.observationId,
@@ -119,11 +139,11 @@ reader.completionPromise.then(function () {
             longitude: row.point[0],
             iNaturalistTaxonName: row.iNaturalistTaxonName
         };
-        Xetthecum_extract_props.forEach(function (prop) {
+        activeFilter.extraProps.forEach(function (prop) {
             outRow[prop] = row[prop];
         });
         return outRow;
     });
     var completion = fluid.promise();
-    hortis.writeCSV(fluid.module.resolvePath(outputFile), ["observationId", "latitude", "longitude", "iNaturalistTaxonName"].concat(Xetthecum_extract_props), mapped, completion);
+    hortis.writeCSV(fluid.module.resolvePath(outputFile), ["observationId", "latitude", "longitude", "iNaturalistTaxonName"].concat(activeFilter.extraProps), mapped, completion);
 });

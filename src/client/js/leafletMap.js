@@ -585,7 +585,7 @@ fluid.defaults("hortis.quantiser", {
             target: "indexVersion",
             singleTransform: {
                 type: "fluid.transforms.free",
-                args: ["{that}", "{that}.model.latResolution", "{that}.model.squareSide",],
+                args: ["{that}", "{that}.model.latResolution", "{that}.model.longResolution", "{that}.model.squareSide", "{that}.model.indexVersion"],
                 func: "hortis.quantiser.indexTree"
             }
         }
@@ -601,7 +601,7 @@ fluid.defaults("hortis.quantiser", {
     },
     invokers: {
         datasetToSummary: "hortis.quantiser.datasetToSummary({that}, {arguments}.0, {arguments}.1)", // bucket - will be modified
-        indexObs: "hortis.quantiser.indexObs({that}, {arguments}.0, {arguments}.1, {arguments}.2)" // coord, obsId, id
+        indexObs: "hortis.quantiser.indexObs({that}, {arguments}.0, {arguments}.1, {arguments}.2, {arguments}.3, {arguments}.4)" // coord, obsId, id, latRes, longRes
     }
 });
 
@@ -630,8 +630,8 @@ hortis.localIdFromObs = function (obsId) {
     return obsId.substring(colpos + 1);
 };
 
-hortis.quantiser.indexObs = function (that, coord, obsId, rowId) {
-    var coordIndex = hortis.quantiser.coordToIndex(coord, that.model.latResolution, that.model.longResolution);
+hortis.quantiser.indexObs = function (that, coord, obsId, rowId, latResolution, longResolution) {
+    var coordIndex = hortis.quantiser.coordToIndex(coord, latResolution, longResolution);
     var datasetId = hortis.datasetIdFromObs(obsId);
     var dataset = that.datasets[datasetId];
     if (!dataset) {
@@ -658,7 +658,7 @@ hortis.quantiser.datasetToSummary = function (that, dataset, squareSide) {
     dataset.area = (Object.keys(dataset.buckets).length * squareArea).toFixed(2);
 };
 
-hortis.quantiser.indexTree = function (that, latResolution, squareSide) {
+hortis.quantiser.indexTree = function (that, latResolution, longResolution, squareSide, indexVersion) {
     var nocoords = 0;
     var withcoords = 0;
     that.flatTree.forEach(function (row) {
@@ -666,7 +666,7 @@ hortis.quantiser.indexTree = function (that, latResolution, squareSide) {
             var coords = JSON.parse(row.coords);
             fluid.each(coords, function (coord, obsId) {
                 ++withcoords;
-                that.indexObs(coord, obsId, row.id);
+                that.indexObs(coord, obsId, row.id, latResolution, longResolution);
             });
         } else {
             if (row.children.length === 0) {
@@ -681,5 +681,5 @@ hortis.quantiser.indexTree = function (that, latResolution, squareSide) {
         that.datasetToSummary(dataset, squareSide);
     });
 
-    return that.model.indexVersion + 1;
+    return indexVersion + 1;
 };
