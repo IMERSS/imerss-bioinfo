@@ -53,10 +53,20 @@
         }
     },
     patches: {
+        Deprivatise: {
+            processor: "hortis.deprivatise"
+        },
         PhaseICoordinates: {
-            input: "%bagatelle/data/dataPaper/Corrected_georeferencing_marine_animal_occurrence_records_corrected_2021-01-13.csv",
+            type: "hortis.pipe.CSVInput",
+            input: "%bagatelle/data/dataPaper/Corrected_georeferencing_marine_animal_occurrence_records_corrected_2021-01-13-plus-round-8.csv",
             map: "%bagatelle/data/dataPaper/correctedGeoreferencing-map.json",
             processor: "hortis.processCoordinatePatch"
+        },
+        GalianoRegion: {
+            type: "hortis.pipe.JSONInput",
+            input: "%bagatelle/data/Galiano/Galiano_Island_Project_Boundary_Chu_final_2021-02-23.json",
+            processor: "hortis.processRegionFilter",
+            logRejection: true
         }
     },
     summarise: true,

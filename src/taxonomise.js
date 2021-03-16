@@ -15,6 +15,7 @@ require("./dataProcessing/readCSVwithMap.js");
 require("./dataProcessing/writeCSV.js");
 require("./dataProcessing/summarise.js");
 require("./dataProcessing/coordinatePatch.js");
+require("./geom/geoJSON.js");
 require("./utils/utils.js");
 require("./utils/settleStructure.js");
 require("./iNaturalist/iNatUrls.js");
@@ -199,7 +200,23 @@ hortis.oneDatasetToLoadable = function (dataset) {
     };
 };
 
-hortis.onePatchToLoadable = function (patch) {
+// These are not functions, but they are not components
+fluid.defaults("hortis.pipe.CSVInput", {
+    gradeNames: "fluid.component",
+    loader: "hortis.pipe.loadCSVInputPipe"
+});
+
+fluid.defaults("hortis.pipe.JSONInput", {
+    gradeNames: "fluid.component",
+    loader: "hortis.pipe.loadJSONInputPipe"
+});
+
+fluid.defaults("hortis.pipe.contextInput", {
+    gradeNames: "fluid.component",
+    loader: "hortis.pipe.loadContextInputPipe"
+});
+
+hortis.pipe.loadCSVInputPipe = function (patch) {
     hortis.resolvePaths(patch, ["map", "input"]);
     var map = hortis.readJSONSync(patch.map, "reading patch map file");
     var patchData = hortis.csvReaderWithMap({
@@ -208,9 +225,30 @@ hortis.onePatchToLoadable = function (patch) {
     }).completionPromise;
     return {
         patchData: patchData,
-        processor: patch.processor,
         map: map
     };
+};
+
+hortis.pipe.loadJSONInputPipe = function (patch) {
+    hortis.resolvePaths(patch, ["input"]);
+    return {
+        patchData: hortis.readJSONSync(patch.input)
+    };
+};
+
+hortis.pipe.loadContextInputPipe = function (patch) {
+    hortis.resolvePaths(patch, ["input"]);
+    fluid.loadInContext(patch.input, true);
+    return {
+        patchData: fluid.getGlobalValue(patch.globalName)
+    };
+};
+
+hortis.onePatchToLoadable = function (patch) {
+    var defaults = fluid.defaults(patch.type);
+    var loaded = defaults ? fluid.invokeGlobalFunction(defaults.loader, [patch]) : {};
+    Object.assign(patch, loaded);
+    return patch;
 };
 
 hortis.fusionToLoadable = function (fusion, taxaMap) {
@@ -226,6 +264,13 @@ hortis.fusionToLoadable = function (fusion, taxaMap) {
             mapColumns: taxaMap.columns
         }).completionPromise
     };
+};
+
+hortis.deprivatise = function (resolved) {
+    resolved.obsRows.forEach(function (row) {
+        row.latitude = row.privateLatitude || row.latitude;
+        row.longitude = row.privateLongitude || row.longitude;
+    });
 };
 
 var dataPromises = hortis.fusionToLoadable(fusion, taxaMap);

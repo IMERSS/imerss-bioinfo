@@ -4,6 +4,8 @@
 
 var fluid = require("infusion");
 
+require("../lib/point-in-polygon.js");
+
 var hortis = fluid.registerNamespace("hortis");
 
 hortis.countTrue = function (array) {
@@ -37,11 +39,49 @@ hortis.intersectsFeature = function (feature, mappedRow) {
             if (geometry.type === "MultiLineString") {
                 intersects = intersectPolygon(coords);
             } else {
-                intersects = coords.find(function (polyPolygon) {
+                intersects = coords.some(function (polyPolygon) {
                     return intersectPolygon(polyPolygon);
                 });
             }
             return intersects;
         }
     }
+};
+
+hortis.intersectsAnyFeature = function (features, row) {
+    var intersects = features.map(function (feature) {
+        return hortis.intersectsFeature(feature, row);
+    });
+    var intersectCount = hortis.countTrue(intersects);
+    return intersectCount > 0;
+};
+
+hortis.makeFeatureRowFilter = function (feature, options) {
+    options = options || {};
+    return function (rows) {
+        var rejections = 0;
+        var togo = rows.filter(function (row) {
+            row.point = [hortis.parseFloat(row.longitude), hortis.parseFloat(row.latitude)];
+            var accept = hortis.intersectsAnyFeature(feature, row);
+            if (!accept) {
+                ++ rejections;
+                if (options.logRejection) {
+                    var tolog = fluid.filterKeys(row, ["iNaturalistTaxonName", "observationId", "placeName", "latitude", "longitude"]);
+                    console.log("Rejecting observation ", tolog, " as lying outside polygon " + options.featureName);
+                }
+            }
+            return accept;
+        });
+        console.log("Rejecting " + rejections + " observations as lying outside polygon " + options.featureName);
+        return togo;
+    };
+};
+
+hortis.processRegionFilter = function (resolved, patch, key) {
+    var filter = hortis.makeFeatureRowFilter(patch.patchData.features, {
+        logRejection: patch.logRejection,
+        featureName: key
+    });
+    // TODO: MATT-based immutable filtering!
+    resolved.obsRows = filter(resolved.obsRows);
 };

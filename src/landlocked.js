@@ -22,7 +22,7 @@ fluid.setLogging(true);
 fluid.loadInContext(fluid.module.resolvePath("%bagatelle/data/Galiano/Galiano_map_0.js"), true);  // produces json_Galiano_map_0
 fluid.loadInContext(fluid.module.resolvePath("%bagatelle/data/Xetthecum/Site_class_4.js"), true); // produces json_Site_Class_4
 fluid.loadInContext(fluid.module.resolvePath("%bagatelle/data/Xetthecum/Trincomali_2.js"), true); // produces json_Trincomali_2
-var xetthecum_boundary = hortis.readJSONSync(fluid.module.resolvePath("%bagatelle/data/Xetthecum/Xetthecum_Project_Boundary_WGS_84.geojson"), "Xetthecum boundary");
+// var xetthecum_boundary = hortis.readJSONSync(fluid.module.resolvePath("%bagatelle/data/Xetthecum/Xetthecum_Project_Boundary_WGS_84.geojson"), "Xetthecum boundary");
 
 var parsedArgs = minimist(process.argv.slice(2));
 
@@ -43,14 +43,6 @@ var Trincomali = fluid.global.json_Trincomali_2.features;
 
 var Xetthecum_extract_props = ["CLASS", "SUB_CLASS"];
 var Xetthecum_id_prop = "fid";
-
-hortis.intersectsAnyFeature = function (features, row) {
-    var intersects = features.map(function (feature) {
-        return hortis.intersectsFeature(feature, row);
-    });
-    var intersectCount = hortis.countTrue(intersects);
-    return intersectCount > 0;
-};
 
 hortis.findFeatureProperties = function (allFeatures, row, properties, idprop) {
     var features = allFeatures.filter(function (feature) {
@@ -103,26 +95,22 @@ hortis.getXetthecumProps = function (obsRows) {
     return filtered;
 };
 
+// NB: These are not (yet) the same as "filters" in "taxonomise"
 fluid.registerNamespace("hortis.filters");
 
 hortis.filters.Xetthecum = {
     filter: function (rows) {
-        var newRows = hortis.getXetthecumProps(pkg.rows);
+        return hortis.getXetthecumProps(rows);
     },
     extraProps: Xetthecum_extract_props
 };
 
 hortis.filters.Galiano = {
-    filter: function (rows) {
-        return rows.filter(function (row) {
-            row.point = [hortis.parseFloat(row.longitude), hortis.parseFloat(row.latitude)];
-            return hortis.intersectsAnyFeature(Galiano_island, row);
-        });
-    },
+    filter: hortis.makeFeatureRowFilter(Galiano_island),
     extraProps: []
 };
 
-var activeFilter = 
+var activeFilter =
     // hortis.filters.Xetthecum;
     hortis.filters.Galiano;
 
@@ -130,8 +118,8 @@ reader.completionPromise.then(function () {
     var obsRows = reader.rows;
     console.log("Matching against " + obsRows.length + " observations");
 
-    var filtered = activeFilter.filter(obsRows); 
-    
+    var filtered = activeFilter.filter(obsRows);
+
     var mapped = filtered.map(function (row) {
         var outRow = {
             observationId: row.observationId,

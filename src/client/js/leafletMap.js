@@ -22,8 +22,7 @@ fluid.defaults("hortis.leafletMap", {
         mapBlockTooltipId: null
     },
     events: {
-        buildMap: null,
-        createDatasetControl: null
+        buildMap: null
     },
     markup: {
         tooltip: "<div class=\"fld-bagatelle-map-tooltip\"></div>",
@@ -41,11 +40,6 @@ fluid.defaults("hortis.leafletMap", {
         drawGrid: {
             path: ["indexVersion", "datasetEnabled"],
             func: "{that}.drawGrid"
-        },
-        renderDatasetControls: {
-            path: ["indexVersion", "datasetEnabled"],
-            func: "hortis.renderDatasetControls",
-            args: ["{that}", "{that}.options.datasets", "{that}.quantiser.datasets"]
         },
         updateTooltip: {
             path: ["mapBlockTooltipId", "indexVersion", "datasetEnabled"],
@@ -66,6 +60,13 @@ fluid.defaults("hortis.leafletMap", {
             args: ["{that}", "{change}.value"]
         }
     },
+    modelRelay: {
+        renderDatasetControls: {
+            target: "datasetControls",
+            func: "hortis.renderDatasetControls",
+            args: ["{that}.model.datasetEnabled", "{that}.quantiser.model.squareSide", "{that}.options.datasets", "{that}.quantiser", "{that}.model.indexVersion"]
+        }
+    },
     invokers: {
         drawGrid: "hortis.leafletMap.drawGrid({that}, {that}.quantiser, {that}.model.datasetEnabled)"
     },
@@ -78,9 +79,13 @@ fluid.defaults("hortis.leafletMap", {
             }
         },
         datasetControls: {
-            createOnEvent: "createDatasetControl",
-            type: "{arguments}.0",
-            options: "{arguments}.1"
+            sources: "{that}.model.datasetControls",
+            type: "{source}.type",
+            options: {
+                model: {
+                    datasetControl: "{source}"
+                }
+            }
         }
     },
     mapOptions: {
@@ -124,6 +129,7 @@ hortis.intersect = function (target, source) {
 hortis.combineDatasets = function (enabledList, quantiserDatasets) {
     var intersect;
     var union = {
+        obsCount: 0,
         buckets: {},
         byTaxonId: {}
     };
@@ -140,6 +146,7 @@ hortis.combineDatasets = function (enabledList, quantiserDatasets) {
         }
         fluid.extend(union.buckets, dataset.buckets);
         fluid.extend(union.byTaxonId, dataset.byTaxonId);
+        union.obsCount += dataset.totalCount;
     });
     return {
         intersect: intersect,
@@ -147,45 +154,43 @@ hortis.combineDatasets = function (enabledList, quantiserDatasets) {
     };
 };
 
-hortis.renderDatasetControls = function (map, datasets, quantiserDatasets) {
-    var controls = fluid.queryIoCSelector(map, "hortis.datasetControlBase");
-    controls.forEach(function (control) {
-        control.destroy();
-    });
-    map.events.createDatasetControl.fire("hortis.datasetControlHeader");
+hortis.renderDatasetControls = function (datasetEnabled, squareSide, datasets, quantiser, indexVersion) {
+    console.log("renderDatasetControls executing for indexVersion " + indexVersion);
+    var togo = [{
+        type: "hortis.datasetControlHeader"
+    }];
+
     fluid.each(datasets, function (dataset, datasetId) {
-        map.events.createDatasetControl.fire("hortis.datasetControl", {
+        togo.push({
+            type: "hortis.datasetControl",
             datasetId: datasetId,
             dataset: dataset,
-            quantiserDataset: quantiserDatasets[datasetId]
+            quantiserDataset: quantiser.datasets[datasetId]
         });
     });
-    var enabledList = [];
-    // TODO: can't use fluid.transforms.setMembershipToArray because of its onerous requirements, particularly for "options" structure
-    fluid.each(map.model.datasetEnabled, function (value, key) {
-        if (value) {
-            enabledList.push(key);
-        }
-    });
+    var enabledList = fluid.transforms.setMembershipToArray(datasetEnabled);
+
     var createFooter = function (prefix, dataset) {
         if (prefix) {
-            map.quantiser.datasetToSummary(dataset, map.quantiser.model.squareSide);
+            hortis.quantiser.datasetToSummary(dataset, squareSide);
+            dataset.obsCount = (prefix === "Union" ? dataset.obsCount : "");
         } else {
-            dataset.taxaCount = dataset.area = "";
+            dataset.taxaCount = dataset.area = dataset.obsCount = "";
         }
-        map.events.createDatasetControl.fire("hortis.datasetControlFooter", fluid.extend({
+        togo.push(fluid.extend({
+            type: "hortis.datasetControlFooter",
             text: prefix ? prefix + " of " + enabledList.length + " datasets" : ""
-        }, dataset
-        ));
+        }, dataset));
     };
-    if (enabledList.length > 1) {
-        var combinedDatasets = hortis.combineDatasets(enabledList, quantiserDatasets);
+    if (enabledList.length > 1 && Object.keys(quantiser.datasets).length > 0) { // TODO: Ensure that relay pulls quantiser on startup!
+        var combinedDatasets = hortis.combineDatasets(enabledList, quantiser.datasets);
         createFooter("Intersection", combinedDatasets.intersect);
         createFooter("Union", combinedDatasets.union);
     } else {
         createFooter("", {});
         createFooter("", {});
     }
+    return togo;
 };
 
 fluid.defaults("hortis.geoJSONMapLayer", {
@@ -261,6 +266,7 @@ fluid.defaults("hortis.datasetControl", {
         enable: ".fld-bagatelle-dataset-checkbox",
         name: ".fld-bagatelle-dataset-name"
     },
+    datasetId: "{source}.datasetId", // Stupid, creates circularity if we try to resolve model segment from model on line 274
     model: {
         datasetEnabled: true
     },
@@ -270,16 +276,12 @@ fluid.defaults("hortis.datasetControl", {
             source: {
                 context: "hortis.leafletMap",
                 segs: ["datasetEnabled", "{that}.options.datasetId"]
-            },
-            singleTransform: {
-                type: "fluid.transforms.identity"
             }
         }
     },
     invokers: {
-        renderMarkup: "hortis.datasetControl.renderMarkup({that}.options.markup, false, {that}.options.dataset, {that}.options.quantiserDataset)"
+        renderMarkup: "hortis.datasetControl.renderMarkup({that}.options.markup, false, {that}.model.dataset, {quantiser}.datasets, {that}.options.datasetId)"
     },
-    // dataset, datasetId, quantiserDataset
     markup: {
         container: "<tr class=\"fld-bagatelle-dataset-control\">" +
                  "<td fl-bagatelle-dataset-legend-column><span class=\"fld-bagatelle-dataset-legend\"></span></td>" +
@@ -296,16 +298,17 @@ fluid.defaults("hortis.datasetControl", {
 fluid.defaults("hortis.datasetControlFooter", {
     gradeNames: "hortis.datasetControlBase",
     markup: {
-        container: "<tr><td></td><td></td><td class=\"fld-bagatelle-dataset-footer\">%text</td><td></td><td>%taxaCount</td><td>%area</td></tr>"
+        container: "<tr><td></td><td></td><td class=\"fld-bagatelle-dataset-footer\">%text</td><td>%obsCount</td><td>%taxaCount</td><td>%area</td></tr>"
     },
     // text
     invokers: {
         renderMarkup: {
             funcName: "fluid.stringTemplate",
             args: ["{that}.options.markup.container", {
-                text: "{that}.options.text",
-                taxaCount: "{that}.options.taxaCount",
-                area: "{that}.options.area"
+                text: "{that}.model.datasetControl.text",
+                obsCount: "{that}.model.datasetControl.obsCount",
+                taxaCount: "{that}.model.datasetControl.taxaCount",
+                area: "{that}.model.datasetControl.area"
             }]
         }
     }
@@ -337,7 +340,9 @@ hortis.datasetControl.renderExtraColumns = function (markup, isHeader, dataset, 
     return Object.values(extraColumns).join("\n");
 };
 
-hortis.datasetControl.renderMarkup = function (markup, isHeader, dataset, quantiserDataset) {
+hortis.datasetControl.renderMarkup = function (markup, isHeader, dataset, quantiserDatasets, datasetId) {
+    // Whilst we believe we have stuck this into the "source" model, it never actually arrives in the parent relay before rendering starts
+    var quantiserDataset = quantiserDatasets && quantiserDatasets[datasetId];
     var extraColumns = hortis.datasetControl.renderExtraColumns(markup.cell, isHeader, dataset, quantiserDataset);
     return fluid.stringTemplate(markup.container, {
         extraColumns: extraColumns
@@ -345,8 +350,9 @@ hortis.datasetControl.renderMarkup = function (markup, isHeader, dataset, quanti
 };
 
 hortis.datasetControl.renderDom = function (that) {
-    that.locate("legend").css("background-color", that.options.dataset.colour);
-    that.locate("name").text(that.options.dataset.name);
+    var dataset = that.model.datasetControl.dataset;
+    that.locate("legend").css("background-color", dataset.colour);
+    that.locate("name").text(dataset.name);
     var checkbox = that.locate("enable");
     checkbox.prop("checked", that.model.datasetEnabled);
     checkbox.change(function () {
@@ -600,7 +606,7 @@ fluid.defaults("hortis.quantiser", {
         indexUpdated: null
     },
     invokers: {
-        datasetToSummary: "hortis.quantiser.datasetToSummary({that}, {arguments}.0, {arguments}.1)", // bucket - will be modified
+        datasetToSummary: "hortis.quantiser.datasetToSummary({arguments}.0, {arguments}.1)", // bucket - will be modified
         indexObs: "hortis.quantiser.indexObs({that}, {arguments}.0, {arguments}.1, {arguments}.2, {arguments}.3, {arguments}.4)" // coord, obsId, id, latRes, longRes
     }
 });
@@ -652,7 +658,7 @@ hortis.quantiser.indexObs = function (that, coord, obsId, rowId, latResolution, 
     bucketTaxa.push(obsId);
 };
 
-hortis.quantiser.datasetToSummary = function (that, dataset, squareSide) {
+hortis.quantiser.datasetToSummary = function (dataset, squareSide) {
     var squareArea = squareSide * squareSide / (1000 * 1000);
     dataset.taxaCount = Object.keys(dataset.byTaxonId).length;
     dataset.area = (Object.keys(dataset.buckets).length * squareArea).toFixed(2);
