@@ -9,7 +9,7 @@ require("../lib/point-in-polygon.js");
 var hortis = fluid.registerNamespace("hortis");
 
 hortis.countTrue = function (array) {
-    return array.reduce( function(a, c) {return a + c;}, 0);
+    return array.reduce(function (a, c) {return a + c;}, 0);
 };
 
 hortis.intersections = 0;
@@ -64,7 +64,7 @@ hortis.makeFeatureRowFilter = function (feature, options) {
             row.point = [hortis.parseFloat(row.longitude), hortis.parseFloat(row.latitude)];
             var accept = hortis.intersectsAnyFeature(feature, row);
             if (!accept) {
-                ++ rejections;
+                ++rejections;
                 if (options.logRejection) {
                     var tolog = fluid.filterKeys(row, ["iNaturalistTaxonName", "observationId", "placeName", "latitude", "longitude"]);
                     console.log("Rejecting observation ", tolog, " as lying outside polygon " + options.featureName);

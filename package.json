@@ -3,12 +3,16 @@
     "description": "Import species and observation data and display in a sunburst partition layout",
     "version": "0.0.1",
     "author": "Antranig Basman",
+    "scripts": {
+        "lint": "fluid-lint-all"
+    },
     "dependencies": {
         "infusion": "3.0.0-dev.20210312T233557Z.0b016a6dc.FLUID-6580",
         "kettle": "2.2.0",
         "csv-parser": "2.3.2",
         "event-stream": "4.0.1",
         "csv-writer": "1.6.0",
+        "exceljs": "4.2.1",
         "glob": "7.1.6",
         "minimist": "1.2.5",
         "lz4": "0.6.3",
@@ -16,11 +20,11 @@
         "accessible-autocomplete": "2.0.2"
     },
     "devDependencies": {
-        "eslint-config-fluid": "1.4.0",
         "uglify-js": "3.9.1",
-        "gpii-grunt-lint-all": "1.0.7",
         "fs-extra": "9.0.0",
-        "grunt": "1.1.0"
+        "eslint": "7.17.0",
+        "eslint-config-fluid": "2.0.0",
+        "fluid-lint-all": "1.0.0"
     },
     "repository": {
         "type": "git",

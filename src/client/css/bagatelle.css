@@ -48,9 +48,11 @@
    border-collapse: collapse;
 }
 
-//.fld-bagatelle-taxonDisplay tr {
-//   border-bottom: 1px solid #eee;
-//}
+/*
+.fld-bagatelle-taxonDisplay tr {
+   border-bottom: 1px solid #eee;
+}
+*/
 
 .fld-bagatelle-taxonDisplay tr:nth-child(even) {
    background: #eee;

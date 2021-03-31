@@ -1,0 +1,108 @@
+{
+    "inputFile": "%bagatelle/data/dataPaper-in/reintegrated.csv",
+    "inputFileMap": "%bagatelle/data/dataPaper-in/combinedOutMap.json",
+    "columns": {
+        "iNaturalistTaxonId": "Taxon_Local_ID",
+        "kingdom": "Kingdom",
+        "subkingdom": "Subkingdom", // missing
+        "phylum": "Phylum",
+        "subphylum": "Subphylum",
+        "superclass": "Superclass",
+        "class": "Class",
+        "subclass": "Subclass",
+        "superorder": "Superorder",
+        "order": "Order",
+        "suborder": "Suborder",
+        "infraorder": "Infraorder", // missing
+        "superfamily": "Superfamily",
+        "family": "Family",
+        "subfamily": "Subfamily",
+        "tribe": "Tribe",
+        "subtribe": "Subtribe",
+        "genus": "Genus",
+        "subgenus": "Subgenus", // missing
+        "species": "Species",
+        "variety": "Variety", // missing
+        "form": "Form", // missing
+        // All missing from here
+        "authority": "Authorship",
+        "nomenclature": "Nomenclature",
+        "feedsOn": "Feeds on",
+        "symbioticWith": "symbioticWith",
+        "parasiteOf": "parasiteOf",
+        "hostOf": "Host of",
+        "nativeStatus": "Native Status",
+        "conservationStatus": "Conservation Status",
+        "distribution": "Distribution",
+        "horizon": "Horizon",
+        // End missing
+        "notes": "Notes"
+    },
+    outputDir: "%bagatelle/data/dataPaper-in/arphified",
+    files: {
+        Porifera: {
+            field: "phylum",
+            equals: "Porifera"
+        },
+        Cnidaria: {
+            field: "phylum",
+            equals: "Cnidaria"
+        },
+        Ctenophora: {
+            field: "phylum",
+            equals: "Ctenophora"
+        },
+        Nemertea: {
+            field: "phylum",
+            equals: "Nemertea"
+        },
+        Platyhelminthes: {
+            field: "phylum",
+            equals: "Platyhelminthes"
+        },
+        Chaetognatha: {
+            field: "phylum",
+            equals: "Chaetognatha"
+        },
+        Mollusca: {
+            field: "phylum",
+            equals: "Mollusca"
+        },
+        Annelida: {
+            field: "phylum",
+            equals: "Annelida"
+        },
+        Sipuncula: {
+            field: "phylum",
+            equals: "Sipuncula"
+        },
+        Arthropoda: {
+            field: "phylum",
+            equals: "Arthropoda"
+        },
+        Entoprocta: {
+            field: "phylum",
+            equals: "Entoprocta"
+        },
+        Brachiopoda: {
+            field: "phylum",
+            equals: "Brachiopoda"
+        },
+        Bryozoa: {
+            field: "phylum",
+            equals: "Bryozoa"
+        },
+        Phoronida: {
+            field: "phylum",
+            equals: "Phoronida"
+        },
+        Echinodermata: {
+            field: "phylum",
+            equals: "Echinodermata"
+        },
+        Chordata: {
+            field: "phylum",
+            equals: "Chordata"
+        }
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "sources": {
+        "md": ["./*.md"],
+        "css": ["./thing.css", "./thing1.css", "./thing2.css"],
+        "js": ["src/**/*.js", "!src/lib/*.js", "!src/auxBuild/*.js", "./*.js"],
+        "json": ["./*.json", "src/**/*.json"]
+    },
+    "eslint": {
+        "js": {
+            "excludes": ["src/lib/**/*.js"],
+            "options": {
+            }
+        }
+    },
+    "markdownlint": {
+        "options": {
+            "config": {
+                "single-h1": false
+            }
+        }
+    },
+    "lintspaces": {
+        "newlines": {
+            "excludes": ["*"]
+        }
+    },
+    "stylelint": {
+        "options": {
+            "rules": {
+                "order/properties-alphabetical-order": false
+            }
+        }
+    }
+}

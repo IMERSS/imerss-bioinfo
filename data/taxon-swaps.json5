@@ -2163,4 +2163,14 @@
         },
         iNaturalistTaxonId: "1223439"
     },
+    "Solmundaegina nematophora": {
+        taxonNames: {
+            "Aegina citrea": {
+                resolvedBy: "Claudia E. Mills",
+                notes: "PMLS swap: \"Everything from surface waters in the Salish Sea is this Solmudaegina nematophora.\"",
+                oldiNaturalistTaxonId: "256077"
+            },
+        },
+        iNaturalistTaxonId: "1156476"
+    }
 }

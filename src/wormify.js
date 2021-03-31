@@ -124,7 +124,6 @@ hortis.queueFetchWork = function (queue) {
         }
     };
     var nextWork = function () {
-//        hortis.logWork(that);
         setTimeout(oneWork, 1000);
     };
     nextWork();

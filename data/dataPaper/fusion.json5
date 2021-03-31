@@ -9,7 +9,7 @@
         },
         iNat: {
             name: "Galiano iNaturalist Marine Observations (2005-2021)",
-            input: "%bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_03_12.csv",
+            input: "%bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_03_31.csv",
             map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
             outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99"

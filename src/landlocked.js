@@ -58,7 +58,7 @@ hortis.findFeatureProperties = function (allFeatures, row, properties, idprop) {
         var keys = Object.keys(hash);
         if (keys.length > 1) {
             console.log("Warning: row ", row, " matched multiple features with ids ", fluid.getMembers(features, idprop),
-               " with mismatching values for property " + properties[index] + ": values were ", keys);
+                " with mismatching values for property " + properties[index] + ": values were ", keys);
         }
         return keys[0];
     });

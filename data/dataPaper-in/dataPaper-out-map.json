@@ -10,7 +10,8 @@
         "observer": "Observer",
         "documenting": "Documenting",
         "iNaturalistTaxonName": "iNaturalist taxon name",
-        "iNaturalistTaxonId": "iNaturalist taxon ID"
+        "iNaturalistTaxonId": "iNaturalist taxon ID",
+        "notes": "Notes"
     },
     "counts": {
         "undocumentedCount": {

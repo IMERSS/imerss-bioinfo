@@ -43,7 +43,7 @@ hortis.iNat.taxa.bindCompletion = function (that) {
     }, function (err) {
         fluid.fail("Error indexing taxa: ", err);
     });
-}
+};
 
 hortis.iNat.taxa.index = function (that, taxaPromise) {
     var togo = fluid.promise();
@@ -56,7 +56,7 @@ hortis.iNat.taxa.index = function (that, taxaPromise) {
         togo.resolve({
             taxaByName: that.taxaByName,
             taxaById: that.taxaById
-        })
+        });
     });
     return togo;
 };

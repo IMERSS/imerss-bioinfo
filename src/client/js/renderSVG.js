@@ -66,10 +66,10 @@ hortis.segmentPath = function (startAngle, endAngle, innerRadius, outerRadius) {
         lfa = (+((endAngle - startAngle) >= Math.PI)).toString();
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Arcs
     return hortis.emitPath(["M", cs * i, " ", ss * i,
-            "A", i, " ", i, " 0 ", lfa, " 0 ", ce * i, " ", se * i,
-            "L", ce * o, " ", se * o,
-            "A", o, " ", o, " 0 ", lfa, " 1 ", cs * o, " ", ss * o,
-            "Z"]);
+        "A", i, " ", i, " 0 ", lfa, " 0 ", ce * i, " ", se * i,
+        "L", ce * o, " ", se * o,
+        "A", o, " ", o, " 0 ", lfa, " 1 ", cs * o, " ", ss * o,
+        "Z"]);
 };
 
 hortis.linearTextPath = function (leftAngle, rightAngle, innerRadius, outerRadius) {

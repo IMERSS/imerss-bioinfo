@@ -68,9 +68,9 @@ fs.createReadStream("data/iNaturalist/iNaturalist-taxa.csv", {flags: "r"})
         allLines.push(row);
         ++lines;
     })
-).on("end", function () {
-    console.log("Read " + lines + " lines in " + (Date.now() - now) + "ms");
-});
+    ).on("end", function () {
+        console.log("Read " + lines + " lines in " + (Date.now() - now) + "ms");
+    });
 
 
 

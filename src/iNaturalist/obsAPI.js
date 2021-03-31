@@ -17,7 +17,7 @@ fluid.defaults("hortis.iNat.obsSource", {
         }
     },
     paramMap: {
-//        place_id: 94935,
+        // place_id: 94935,
         project_id: 5799,
         taxon_id: 1,
         quality_grade: "research",
@@ -29,7 +29,6 @@ fluid.defaults("hortis.iNat.obsSource", {
 });
 
 hortis.paramsToSearch = function (params) {
-    var search = "";
     var encoded = fluid.hashToArray(fluid.transform(params, function (value, key) {
         return encodeURIComponent(key) + "=" + encodeURIComponent(value);
     }));
@@ -37,16 +36,16 @@ hortis.paramsToSearch = function (params) {
 };
 
 hortis.resolveUrl = function (url, paramMap, directModel) {
-    var params = fluid.transform(paramMap, function (value, key) {
+    var params = fluid.transform(paramMap, function (value) {
         var path = typeof(value) === "string" && value.startsWith("%") ? value.substring(1) : null;
         var paramValue = path ? fluid.get(directModel, path) : value;
         // TODO: Encode arrays as CSV here
         return fluid.isValue(paramValue) ? paramValue : fluid.NO_VALUE;
     });
-    var url = new fluid.resourceLoader.UrlClass(url);
-    
-    url.search = hortis.paramsToSearch(params);
-    return url.toString();
+    var urlObj = new fluid.resourceLoader.UrlClass(url);
+
+    urlObj.search = hortis.paramsToSearch(params);
+    return urlObj.toString();
 };
 
 hortis.iNat.obsMap = {
@@ -57,11 +56,11 @@ hortis.iNat.obsMap = {
     "quality_grade": "quality_grade",
     "coordinates_obscured": "obscured",
     "image_url": "observation_photos.0.photo.url", // replace "small" with "medium"
-//    "latitude": "location.0",
-//    "longitude": "location.1",
+    // "latitude": "location.0",
+    // "longitude": "location.1",
     "positional_accuracy": "positional_accuracy",
-//    "private_latitude": "private_location[0]",
-//    "private_longitude": "private_location[1]",
+    // "private_latitude": "private_location[0]",
+    // "private_longitude": "private_location[1]",
     "scientific_name": "taxon.name",
     "common_name": "taxon.preferred_common_name",
     "taxon_id": "taxon.id"
@@ -83,7 +82,7 @@ hortis.resultToRow = function (oneResult) {
     return row;
 };
 
-hortis.pushResultRows = function (rows, response) { 
+hortis.pushResultRows = function (rows, response) {
     response.results.forEach(function (oneResult) {
         var row = hortis.resultToRow(oneResult);
         if (oneResult.geoprivacy !== null || oneResult.obscured !== false) {

@@ -271,6 +271,15 @@ fluid.defaults("hortis.datasetControl", {
         datasetEnabled: true
     },
     modelRelay: {
+        checkbox: { // TODO: avoid the footgun where the user has not written "value" on the checkbox markup
+            source: "dom.enable.value",
+            target: "datasetEnabled"
+        },
+        name: {
+            source: "datasetControl.dataset.name",
+            target: "dom.name.text"
+        },
+        // TODO: bind legend using integral style
         datasetEnabled: {
             target: "datasetEnabled",
             source: {
@@ -285,7 +294,7 @@ fluid.defaults("hortis.datasetControl", {
     markup: {
         container: "<tr class=\"fld-bagatelle-dataset-control\">" +
                  "<td fl-bagatelle-dataset-legend-column><span class=\"fld-bagatelle-dataset-legend\"></span></td>" +
-                 "<td fl-bagatelle-dataset-checkbox-column><input class=\"fld-bagatelle-dataset-checkbox\" type=\"checkbox\"/></td>" +
+                 "<td fl-bagatelle-dataset-checkbox-column><input class=\"fld-bagatelle-dataset-checkbox\" type=\"checkbox\" value=\"true\"/></td>" +
                  "<td fl-bagatelle-dataset-name-column><span class=\"fld-bagatelle-dataset-name\"></span></td>" +
                  "%extraColumns</tr>",
         cell: "<td class=\"%columnClass\">%text</td>"
@@ -297,19 +306,31 @@ fluid.defaults("hortis.datasetControl", {
 
 fluid.defaults("hortis.datasetControlFooter", {
     gradeNames: "hortis.datasetControlBase",
-    markup: {
-        container: "<tr><td></td><td></td><td class=\"fld-bagatelle-dataset-footer\">%text</td><td>%obsCount</td><td>%taxaCount</td><td>%area</td></tr>"
+    selectors: {
+        text: ".fl-bagatelle-dataset-text",
+        obsCount: ".fl-bagatelle-dataset-obs",
+        taxaCount: ".fl-bagatelle-dataset-taxa",
+        area: ".fl-bagatelle-dataset-area"
     },
-    // text
-    invokers: {
-        renderMarkup: {
-            funcName: "fluid.stringTemplate",
-            args: ["{that}.options.markup.container", {
-                text: "{that}.model.datasetControl.text",
-                obsCount: "{that}.model.datasetControl.obsCount",
-                taxaCount: "{that}.model.datasetControl.taxaCount",
-                area: "{that}.model.datasetControl.area"
-            }]
+    markup: {
+        container: "<tr><td></td><td></td><td class=\"fl-bagatelle-dataset-text\"></td><td class=\"fl-bagatelle-dataset-obs\"></td><td class=\"fl-bagatelle-dataset-taxa\"></td><td class=\"fl-bagatelle-dataset-area\"></td></tr>"
+    },
+    modelRelay: {
+        text: {
+            source: "datasetControl.text",
+            target: "dom.text.text"
+        },
+        obsCount: {
+            source: "datasetControl.obsCount",
+            target: "dom.obsCount.text"
+        },
+        taxaCount: {
+            source: "datasetControl.taxaCount",
+            target: "dom.taxaCount.text"
+        },
+        area: {
+            source: "datasetControl.area",
+            target: "dom.area.text"
         }
     }
 });
@@ -352,13 +373,7 @@ hortis.datasetControl.renderMarkup = function (markup, isHeader, dataset, quanti
 hortis.datasetControl.renderDom = function (that) {
     var dataset = that.model.datasetControl.dataset;
     that.locate("legend").css("background-color", dataset.colour);
-    that.locate("name").text(dataset.name);
-    var checkbox = that.locate("enable");
-    checkbox.prop("checked", that.model.datasetEnabled);
-    checkbox.change(function () {
-        var newState = checkbox.prop("checked");
-        that.applier.change("datasetEnabled", newState);
-    });
+    // TODO: let renderer bind to https://developer.mozilla.org/en-US/docs/Web/API/ElementCSSInlineStyle/style
 };
 
 hortis.leafletMap.tooltipRow = function (map, key, value) {
@@ -410,8 +425,6 @@ hortis.leafletMap.updateTooltip = function (map, key) {
         var lng0 = p[0][1], lng1 = p[1][1];
         dumpRow("Latitude", c(lat0) + " to " + c(lat1));
         dumpRow("Longitude", c(lng0) + " to " + c(lng1));
-//        dumpRow("Dimensions", ((lat1 - lat0) * hortis.latitudeLength(lat0)).toFixed(0) + "m x " +
-//            ((lng1 - lng0) * hortis.longitudeLength(lat0)).toFixed(0) + "m");
         if (bucket.count < 5 && map.options.showObsListInTooltip) {
             var obs = fluid.flatten(Object.values(bucket.byTaxonId));
             var obsString = fluid.transform(obs, hortis.leafletMap.renderObsId).join("<br/>");
@@ -598,8 +611,8 @@ fluid.defaults("hortis.quantiser", {
     },
     members: {
         datasets: {
-           // hash of datasetId to {maxCount, buckets}
-           // where buckets is hash of id to {count, byId}
+            // hash of datasetId to {maxCount, buckets}
+            // where buckets is hash of id to {count, byId}
         }
     },
     events: {
@@ -681,7 +694,7 @@ hortis.quantiser.indexTree = function (that, latResolution, longResolution, squa
             }
         }
     });
-    console.log("Total coordinate count: " + withcoords);
+    console.log("Total coordinate count: " + withcoords + " without coords " + nocoords);
 
     fluid.each(that.datasets, function (dataset) {
         that.datasetToSummary(dataset, squareSide);

@@ -25,7 +25,8 @@
         "collection": "Collection/List",
         "firstObserved": "First Observed",
         "observer": "Observer",
-        "documenting": "Documenting"
+        "documenting": "Documenting",
+        "notes": "Notes"
     },
     "counts": {
         "undocumentedCount": {

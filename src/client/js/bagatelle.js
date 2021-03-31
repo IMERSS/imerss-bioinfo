@@ -172,7 +172,7 @@ fluid.defaults("hortis.sunburst", {
     },
     zoomDuration: 1250,
     scaleConfig: {
-      // original settings 1 and 12
+        // original settings 1 and 12
         innerDepth: 1 / 22,
         outerDepth: 13 / 22,
         rootRadii: [3 / 22,
