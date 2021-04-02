@@ -26,7 +26,8 @@
         "firstObserved": "First Observed",
         "observer": "Observer",
         "documenting": "Documenting",
-        "notes": "Notes"
+        "notes": "Notes",
+        "criticalNotes": "Critical Notes"
     },
     "counts": {
         "undocumentedCount": {

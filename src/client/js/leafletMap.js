@@ -678,23 +678,28 @@ hortis.quantiser.datasetToSummary = function (dataset, squareSide) {
 };
 
 hortis.quantiser.indexTree = function (that, latResolution, longResolution, squareSide, indexVersion) {
-    var nocoords = 0;
     var withcoords = 0;
-    that.flatTree.forEach(function (row) {
+    for (var i = that.flatTree.length - 1; i >= 0; --i) {
+        var row = that.flatTree[i];
         if (row.coords) {
             var coords = JSON.parse(row.coords);
             fluid.each(coords, function (coord, obsId) {
                 ++withcoords;
                 that.indexObs(coord, obsId, row.id, latResolution, longResolution);
             });
+            row.ownCoordCount = Object.keys(coords).length;
+
         } else {
-            if (row.children.length === 0) {
-                console.log("No coords: ", row);
-                ++nocoords;
-            }
+            row.ownCoordCount = 0;
         }
-    });
-    console.log("Total coordinate count: " + withcoords + " without coords " + nocoords);
+        var childCoordCount = row.children.reduce(function (acc, child) {
+            return acc + child.observationCount;
+        }, 0);
+        if (childCoordCount + row.ownCoordCount !== row.observationCount) {
+            debugger;
+        }
+    };
+    console.log("Total coordinate count: " + withcoords );
 
     fluid.each(that.datasets, function (dataset) {
         that.datasetToSummary(dataset, squareSide);

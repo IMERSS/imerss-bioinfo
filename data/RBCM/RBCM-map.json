@@ -1,6 +1,7 @@
 {
     "columns": {
         "catalogueNumber": "catalogNumber",
+        "gbifID": "gbifID",
         "taxonName": "scientificName",
         "dateObserved": "eventDate",
         "observer": "recordedBy",
@@ -10,5 +11,5 @@
     },
     "datasetId": "RBCM",
     "datasetClass": "naturalist",
-    "observationId": "%catalogueNumber"
+    "observationId": "%gbifID"
 }

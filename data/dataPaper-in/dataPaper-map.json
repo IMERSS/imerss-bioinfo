@@ -12,7 +12,8 @@
         "documenting": "iNat Observation",
         "iNaturalistLink": "iNaturalist Link",
         "upstreamID": "ID",
-        "notes": "Notes"
+        "notes": "Notes",
+        "criticalNotes": "Critical Notes"
     },
     "datasetId": "DATA",
     "datasetClass": "naturalist",

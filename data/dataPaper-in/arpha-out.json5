@@ -36,7 +36,7 @@
         "distribution": "Distribution",
         "horizon": "Horizon",
         // End missing
-        "notes": "Notes"
+        "criticalNotes": "Notes"
     },
     outputDir: "%bagatelle/data/dataPaper-in/arphified",
     files: {

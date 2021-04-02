@@ -11,7 +11,8 @@
         "documenting": "Documenting",
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
-        "notes": "Notes"
+        "notes": "Notes",
+        "criticalNotes": "Critical Notes"
     },
     "counts": {
         "undocumentedCount": {
