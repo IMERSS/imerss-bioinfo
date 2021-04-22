@@ -12,6 +12,7 @@
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
         "notes": "Notes",
+        "origin": "Origin",
         "criticalNotes": "Critical Notes"
     },
     "counts": {

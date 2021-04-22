@@ -31,12 +31,55 @@ var reader = hortis.csvReaderWithMap({
 var outputDir = fluid.module.resolvePath(pipeline.outputDir);
 fs.mkdirSync(outputDir, { recursive: true });
 
+hortis.genusEx = /\((.*)\)/;
+
+hortis.normalise = function (str) {
+    return str.replace(/\s+/g, " ").trim();
+};
+
+hortis.extractGenus = function (name, obj) {
+    var matches = hortis.genusEx.exec(name);
+    var togo;
+    if (matches) {
+        obj.Subgenus = matches[1];
+        togo = name.replace(hortis.genusEx, "");
+    } else {
+        togo = name;
+    }
+    return hortis.normalise(togo);
+};
+
+hortis.extractSsp = function (name, obj) {
+    var words = name.split(" ");
+    
+    if (words.length === 3) {
+        var maybeSsp = words[2];
+        if (maybeSsp.startsWith("complex")
+            || maybeSsp.startsWith("agg")
+            || maybeSsp.startsWith("s.lat.")
+            || words[1].startsWith("cf")) {
+            obj.Species = words[1] + " " + maybeSsp;
+        } else {
+            obj.Species = words[1];
+            obj.Subspecies = maybeSsp;
+        }
+    } else if (words.length === 2) {
+        obj.Species = words[1];
+    } else {
+        fluid.fail("Unexpected species name " + name);
+    }
+};
+
 hortis.unmapColumns = function (rows, columns) {
     return fluid.transform(rows, function (row) {
         var togo = {};
         fluid.each(columns, function (target, source) {
             togo[target] = row[source] || "";
         });
+        if (row.species !== "" || row.genus !== "") {
+            var degenified = hortis.extractGenus(row.taxonName, togo);
+            hortis.extractSsp(degenified, togo);
+        }
         return togo;
     });
 };
@@ -60,7 +103,12 @@ hortis.writeExcel = function (rows, key, outputDir) {
         });
     });
     var filename = outputDir + "/" + key + ".xlsx";
-    return workbook.xlsx.writeFile(filename);
+    var togo = workbook.xlsx.writeFile(filename);
+    togo.then(function () {
+        var stats = fs.statSync(filename);
+        console.log("Written " + stats.size + " bytes to " + filename);
+    });
+    return togo;
 };
 
 reader.completionPromise.then(function () {
@@ -79,10 +127,7 @@ reader.completionPromise.then(function () {
         return remapped;
     });
     fluid.each(outs, function (rows, key) {
-        var promise = hortis.writeExcel(rows, key, outputDir);
-        promise.then(function (res) {
-            console.log("Write of " + key + " yielded ",res);
-        });
+        hortis.writeExcel(rows, key, outputDir);
     });
     console.log("Total extracted rows: " + fluid.flatten(Object.values(outs)).length);
 }, function (err) {

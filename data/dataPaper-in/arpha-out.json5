@@ -20,8 +20,9 @@
         "tribe": "Tribe",
         "subtribe": "Subtribe",
         "genus": "Genus",
-        "subgenus": "Subgenus", // missing
+        "subgenus": "Subgenus", // filled in conditionally
         "species": "Species",
+        "subspecies": "Subspecies", // filled in conditionally
         "variety": "Variety", // missing
         "form": "Form", // missing
         // All missing from here
@@ -31,7 +32,7 @@
         "symbioticWith": "symbioticWith",
         "parasiteOf": "parasiteOf",
         "hostOf": "Host of",
-        "nativeStatus": "Native Status",
+        "origin": "Native Status",
         "conservationStatus": "Conservation Status",
         "distribution": "Distribution",
         "horizon": "Horizon",

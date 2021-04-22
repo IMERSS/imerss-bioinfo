@@ -1723,7 +1723,7 @@
                 notes: "Changed name to correspond with taxon on iNat - Revisit"
             }
         },
-        iNaturalistTaxonId: "127798"
+        iNaturalistTaxonId: "801700"
     },
     "Lomatium grayi": {
         taxonNames: {
@@ -2172,5 +2172,23 @@
             },
         },
         iNaturalistTaxonId: "1156476"
+    }, // Two weird entries that I found dirty in working copy on laptop
+    "Ochlerotatus caspius dorsalis": {
+        taxonNames: {
+            "Ochlerotatus dorsalis": {
+                resolvedBy: "AS",
+                notes: "Near as I can tell this should be regarded as Ochlerotatus dorsalis so I have retained it as is in the list for now"
+            }
+        },
+        iNaturalistTaxonId: "312917"
+    },
+    "Perideridia gairdneri": {
+        taxonNames: {
+            "Perideridia montana": {
+                resolvedBy: "AS",
+                notes: "Though iNat synonymizes these taxa, we recognize Perideridia montana, so I have retained this name on our list."
+            }
+        },
+        iNaturalistTaxonId: "78434"
     }
 }

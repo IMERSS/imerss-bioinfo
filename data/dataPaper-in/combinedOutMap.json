@@ -27,6 +27,7 @@
         "observer": "Observer",
         "documenting": "Documenting",
         "notes": "Notes",
+        "origin": "Origin",
         "criticalNotes": "Critical Notes"
     },
     "counts": {

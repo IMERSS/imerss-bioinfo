@@ -9,6 +9,7 @@
         "collection": "Collection/List",
         "firstObserved": "First Observed",
         "observer": "Observer",
+        "origin": "Origin",
         "documenting": "iNat Observation",
         "iNaturalistLink": "iNaturalist Link",
         "upstreamID": "ID",
