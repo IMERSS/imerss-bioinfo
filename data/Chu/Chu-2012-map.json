@@ -1,0 +1,15 @@
+{
+    "columns": {
+        "id": "%Nudibranch_number",
+        "taxonName": "%2020_ID",
+        "dateObserved": "%date",
+        "latitude": "%lat",
+        "longitude": "%long",
+        "recordedBy": "Jackson Chu",
+        "catalogNumber": "%Nudibranch_number",        
+        "depth": "%depthM"
+    },
+    "datasetId": "CHU2012",
+    "datasetClass": "naturalist",
+    "observationId": "%id"
+}

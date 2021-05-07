@@ -3,8 +3,9 @@
         "taxonName": "Taxon name",
         "dateObserved": "Date observed",
         "description": "Description",
-        "placeName": "Place name",
+        "locality": "Place name",
         "commonName": "Common name",
-        "observer": "Observer name"
+        "recordedBy": "Recorded by",
+        "eventRemarks": "Event Remarks"
     }
 }

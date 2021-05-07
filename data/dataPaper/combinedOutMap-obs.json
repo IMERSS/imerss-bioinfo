@@ -23,10 +23,18 @@
         "taxonName": "Taxon name",
         "dateObserved": "Date observed",
         "description": "Description",
-        "placeName": "Place name",
+        "locality": "Place name",
         "commonName": "Common name",
-        "observer": "Observer name",
-        "observerName": "Observer name",
-        "iNaturalistObsLink": "Observation"
+        "recordedBy": "Recorded by",
+        "eventRemarks": "Event Remarks",
+        "placeName": "Place name",
+        "individualCount": "Individual count",
+        "depth": "Depth",
+        "catalogNumber": "Catalog Number",
+        "confidence": "Confidence",
+        "sex": "Sex",
+        "fieldNumber": "Field number",
+        "coordinatesCorrected": "Coordinates Corrected",
+        "coordinatesCorrectedNote": "Coordinates Corrected Note"
     }
 }

@@ -1,13 +1,16 @@
 {
     "columns": {
-        "catalogueNumber": "catalogNumber",
-        "gbifID": "gbifID",
-        "taxonName": "scientificName",
-        "dateObserved": "eventDate",
-        "observer": "recordedBy",
-        "placeName": "locality",
-        "latitude": "decimalLatitude",
-        "longitude": "decimalLongitude"
+        "catalogNumber": "%catalogNumber",
+        "gbifID": "%gbifID",
+        "gbifOccurrenceID": "%occurrenceID",
+        "taxonName": "%scientificName",
+        "dateObserved": "%eventDate",
+        "recordedBy": "%recordedBy",
+        "locality": "%locality",
+        "latitude": "%decimalLatitude",
+        "longitude": "%decimalLongitude",
+        "individualCount": "%individualCount",
+        "depth": "%depth"
     },
     "datasetId": "RBCM",
     "datasetClass": "naturalist",

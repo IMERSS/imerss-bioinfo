@@ -1,0 +1,23 @@
+Reef,Nudibranch_number,Dive,date,timestamp,lat,long,depthM,Substrate,lengthcm,Notes,2020_ID
+Galiano,1,R1112,2007-10-23,23:42:53,48.907861,-123.319344,86.72,A. vastus,na,2020 - Appended record,Diaulula lentiginosa
+Galiano,2,R1282,2009-10-03,3:07:44,48.910605,-123.324038,92.53,A. vastus,10.26,,
+Galiano,3,R1282,2009-10-03,3:13:47,48.910355,-123.32471,93.15,A. vastus,na,,
+Galiano,4,R1282,2009-10-03,3:13:47,48.910355,-123.32471,93.15,A. vastus,10.03,,
+Galiano,5,R1282,2009-10-03,3:13:47,48.910355,-123.32471,93.15,A. vastus,11.28,,
+Galiano,6,R1282,2009-10-03,3:13:47,48.910355,-123.32471,93.15,A. vastus,13.25,,
+Galiano,7,R1282,2009-10-03,3:20:14,48.91083,-123.324409,91.05,A. vastus,11.41,,
+Galiano,8,R1282,2009-10-03,3:25:56,48.910807,-123.324404,89.37,A. vastus,18.52,,
+Galiano,9,R1282,2009-10-03,3:25:56,48.910807,-123.324404,89.37,A. vastus,22.22,mating with 9,
+Galiano,10,R1282,2009-10-03,3:25:56,48.910807,-123.324404,89.37,A. vastus,13.17,mating with 10,
+Galiano,11,R1282,2009-10-03,4:01:35,48.911407,-123.325251,90.2,A. vastus,9.97,mating with 11,
+Galiano,12,R1282,2009-10-03,4:01:35,48.911407,-123.325251,90.2,A. vastus,10.3,mating with 12,
+Galiano,13,R1282,2009-10-03,9:08:58,48.910897,-123.324592,89.05,A. vastus,10.02,,
+Galiano,14,R1282,2009-10-03,9:08:58,48.910897,-123.324592,89.05,A. vastus,13.49,,
+Galiano,15,R1283,2009-10-03,16:28:36,48.91182,-123.325755,93.81,dead sponge,14.42,sampled,Diaulula lentiginosa
+Galiano,16,R1283,2009-10-03,16:28:36,48.91182,-123.325755,93.81,dead sponge,10.51,sampled,Diaulula lentiginosa
+Galiano,17,R1283,2009-10-03,17:06:21,48.911385,-123.325208,89.06,A. vastus,16.4,"mating with 17, sampled",Diaulula lentiginosa
+Galiano,18,R1283,2009-10-03,17:06:21,48.911385,-123.325208,89.06,A. vastus,15.81,"mating with 18, sampled",Diaulula lentiginosa
+Galiano,19,R1511,2011-11-03,22:58:17,48.9105217,-123.324,94.79,A. vastus,na,2020 - Appended record,Diaulula lentiginosa
+Galiano,20,R1511,2011-11-03,23:05:22,48.9106717,-123.3241783,91.34,A. vastus,na,2020 - Appended record,Diaulula lentiginosa
+Galiano,21,R1511,2011-11-04,0:05:02,48.9109417,-123.32468,88.15,A. vastus,na,2020 - Appended record,Doris odhneri
+Galiano,22,R1511,2011-11-04,0:46:44,48.911095,-123.32504,86.93,A. vastus,na,2020 - Appended record,Doris odhneri

@@ -1,10 +1,14 @@
 {
     "columns": {
-        "taxonName": "Taxon",
-        "commonName": "Common Name",
-        "dateObserved": "Date",
-        "latitude": "LatitudeDD",
-        "longitude": "LongitudeDD"
+        "taxonName": "%ScientificName",
+        "commonName": "%SpeciesName",
+        "dateObserved": "!Date(MM/DD/YY,%Date)",
+        "latitude": "%LatitudeDD",
+        "longitude": "%LongitudeDD",
+        "catalogNumber": "%SightingsID",
+        "confidence": "%Confidence",
+        "recordedBy": "anonymous",
+        "individualCount": "%GroupSize"
     },
     "datasetId": "BCCSN",
     "datasetClass": "naturalist",

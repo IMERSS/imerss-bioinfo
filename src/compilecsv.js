@@ -27,9 +27,11 @@ var map = hortis.readJSONSync(fluid.module.resolvePath(mapFile), "reading map fi
 var files = glob.sync(fluid.module.resolvePath(inputFile));
 
 var readers = files.map(function (oneFile) {
-    return hortis.csvReaderWithMap({
-        inputFile: oneFile,
-        mapColumns: map.columns
+    // TODO: Worry if the schemas of the CSV files diverge - we stopped using the map file since we don't want
+    // its conversion, but we do want to verify the headers
+    // We probably want to grab the "onHeaders.validateHeaders" listener from csvReaderWithMap
+    return hortis.csvReaderWithoutMap({
+        inputFile: oneFile
     });
 });
 
@@ -39,7 +41,7 @@ fluid.promise.sequence(promises).then(function () {
     console.log("Loaded " + readers.length + " CSV files");
     var allRows = fluid.flatten(fluid.getMembers(readers, "rows"));
     var togo = fluid.promise();
-    hortis.writeCSV(fluid.module.resolvePath(outputFile), map.columns, allRows, togo);
+    hortis.writeCSV(fluid.module.resolvePath(outputFile), Object.keys(allRows[0]), allRows, togo);
 }, function (err) {
     console.log("Error ", err);
 });

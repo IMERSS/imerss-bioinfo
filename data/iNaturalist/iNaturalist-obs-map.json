@@ -1,15 +1,15 @@
 {
     "columns": {
-        "id": "id",
-        "dateObserved": "observed_on",
-        "observer": "user_login",
-        "iNaturalistObsLink": "url",
-        "imageUrl": "image_url",
-        "latitude": "latitude",
-        "longitude": "longitude",
-        "privateLatitude": "private_latitude",
-        "privateLongitude": "private_longitude",
-        "taxonName": "scientific_name"
+        "id": "%id",
+        "dateObserved": "%observed_on",
+        "observer": "%user_login",
+        "iNaturalistObsLink": "%url",
+        "imageUrl": "%image_url",
+        "latitude": "%latitude",
+        "longitude": "%longitude",
+        "privateLatitude": "%private_latitude",
+        "privateLongitude": "%private_longitude",
+        "taxonName": "%scientific_name"
     },
     "datasetId": "iNat",
     "datasetClass": "citizen",

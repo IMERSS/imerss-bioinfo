@@ -2,7 +2,9 @@
     "columns": {
         "taxonName": "Taxon name",
         "dateObserved": "Date observed",
-        "placeName": "Place name",
-        "observer": "Observer name"
+        "locality": "Place name",
+        "recordedBy": "Recorded by",
+        "individualCount": "Individual count",
+        "depth": "Depth"
     }
 }

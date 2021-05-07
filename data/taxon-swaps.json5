@@ -41,6 +41,10 @@
                 resolvedBy: "AB",
                 oldiNaturalistTaxonId: "47460",
             },
+            "Antiopella fuscus": {
+                notes: "Misspelling in PMLS",
+                resolvedBy: "AB",
+            },
         },
         iNaturalistTaxonId: "886884",
     },
@@ -152,16 +156,18 @@
         },
         iNaturalistTaxonId: "496909",
     },
-    Didemnidae: {
+    "Didemnidae": {
         taxonNames: {
             "white glove leather": {
                 type: "commonName",
             },
-            "Didemnum/Trididemnum complex": {
+            "Didemnum/Trididemnum": {
                 resolvedBy: "AB",
-            },
+                notes: "PMLS resolution",
+                criticalNotes: "Didemnum spp. in our dive log data for Galiano Island is most likely via our Didemnun/Trididemnum category. This category has traditionally been used for encrusting whitish compound tunicate that often forms large sheets . We have followed this procedure based upon Gretchen Lambert's advice. An impossible task to go further in the field and without specimen sampling."
+            }
         },
-        iNaturalistTaxonId: "54931",
+        iNaturalistTaxonId: "54931"
     },
     Ectocarpales: {
         taxonNames: {
@@ -226,9 +232,16 @@
             "walleye pollock": {
                 type: "commonName",
             },
+            "Alaska Pollock": {
+                type: "commonName",
+            },
             "Theragra chalcogramma": {
                 resolvedBy: "AB",
                 oldiNaturalistTaxonId: "180034",
+            },
+            "Gadus chalcogramma": {
+                notes: "Misspelling in PMLS",
+                resolvedBy: "AB",
             },
         },
         iNaturalistTaxonId: "614161",
@@ -352,18 +365,23 @@
         },
         iNaturalistTaxonId: "63697",
     },
+
     "Mopalia kennerleyi": {
         taxonNames: {
             "northern hairy chiton": {
-                type: "commonName",
+                type: "commonName"
+            },
+            "Mopalia kennerelyi": {
+                resolvedBy: "AB",
+                notes: "Misspelling in PMLS"
             },
             "Mopalia kennerlyi": {
                 resolvedBy: "AB",
-                notes: "misspelling in obs record",
-            },
+                notes: "Misspelling in PMLS"
+            }            
         },
-        iNaturalistTaxonId: "360858",
-    },
+        iNaturalistTaxonId: "360858"
+    },    
     "Neoesperiopsis rigida": {
         taxonNames: {
             "orange finger sponge": {
@@ -443,6 +461,9 @@
                 resolvedBy: "AB",
                 notes: "misspelling in obs record",
             },
+            "Plocamium pacificum": {
+                resolvedBy: "AB",
+            }
         },
         iNaturalistTaxonId: "339051",
     },
@@ -699,14 +720,6 @@
         },
         iNaturalistTaxonId: "154195"
     },
-    "Plocamium cartilagineum pacificum": {
-        taxonNames: {
-            "Plocamium pacificum": {
-                resolvedBy: "AB",
-            },
-        },
-        iNaturalistTaxonId: "339051"
-    },
     "Potentilla anserina": {
         taxonNames: {
             "Common Silverweed": {
@@ -828,18 +841,6 @@
         },
         iNaturalistTaxonId: "485340"
     },
-    "Antiopella fusca": {
-        taxonNames: {
-            "White-and-Orange-Tipped Nudibranch": {
-                type: "commonName",
-            },
-            "Antiopella fuscus": {
-                notes: "Misspelling in PMLS",
-                resolvedBy: "AB",
-            },
-        },
-        iNaturalistTaxonId: "886884"
-    },
     "Leptasterias hexactis": {
         taxonNames: {
             "Six-rayed Star": {
@@ -883,18 +884,6 @@
             },
         },
         iNaturalistTaxonId: "552302"
-    },
-    "Gadus chalcogrammus": {
-        taxonNames: {
-            "Alaska Pollock": {
-                type: "commonName",
-            },
-            "Gadus chalcogramma": {
-                notes: "Misspelling in PMLS",
-                resolvedBy: "AB",
-            },
-        },
-        iNaturalistTaxonId: "614161"
     },
     "Halecium beanii": {
         taxonNames: {
@@ -1318,29 +1307,7 @@
         },
         iNaturalistTaxonId: "521233"
     },
-    "Mopalia kennerleyi": {
-        taxonNames: {
-            "Mopalia kennerelyi": {
-                resolvedBy: "AB",
-                notes: "Misspelling in PMLS"
-            },
-            "Mopalia kennerlyi": {
-                resolvedBy: "AB",
-                notes: "Misspelling in PMLS"
-            }            
-        },
-        iNaturalistTaxonId: "360858"
-    },
-    "Didemnidae": {
-        taxonNames: {
-            "Didemnum/Trididemnum": {
-                resolvedBy: "AB",
-                notes: "PMLS resolution",
-                criticalNotes: "Didemnum spp. in our dive log data for Galiano Island is most likely via our Didemnun/Trididemnum category. This category has traditionally been used for encrusting whitish compound tunicate that often forms large sheets . We have followed this procedure based upon Gretchen Lambert's advice. An impossible task to go further in the field and without specimen sampling."
-            }
-        },
-        iNaturalistTaxonId: "54931"
-    },  // From here WoL
+    // From here WoL
     "Ciliatocardium ciliatum": {
         taxonNames: {
             "Clinocardium ciliatum": {
@@ -2080,7 +2047,7 @@
         },
         iNaturalistTaxonId: "246116"
     },
-     // Begin **CHU** swaps here:    
+    // Begin **CHU** swaps here:    
     "Semisuberites cribrosa": {
         taxonNames: {
             "Stylissa stipitata": {
@@ -2101,13 +2068,23 @@
     },
     "Tetilla": {
         taxonNames: {
-            "Tetilla": {
+            "Tetilla": { // NB Plantae to Animalia
                 resolvedBy: "AB",
                 notes: "We need to somehow disambiguate incoming data, just do a swap for this CHU genus for now",
                 oldiNaturalistTaxonId: "772137"
             },
         },
         iNaturalistTaxonId: "247194"
+    },
+    "Corella": {
+        taxonNames: {
+            "Corella": { // NB Fungus to Animalia
+                resolvedBy: "AB",
+                notes: "Another ambiguous genus name, I imagine we need to be able to assign these kinds of swaps per dataset",
+                oldiNaturalistTaxonId: "1029604"
+            },
+        },
+        iNaturalistTaxonId: "347993"
     },
     "Peltodoris lentiginosa": {
         taxonNames: {

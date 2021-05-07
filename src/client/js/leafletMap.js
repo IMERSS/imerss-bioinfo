@@ -286,6 +286,10 @@ fluid.defaults("hortis.datasetControl", {
                 context: "hortis.leafletMap",
                 segs: ["datasetEnabled", "{that}.options.datasetId"]
             }
+        },
+        colour: {
+            source: "datasetControl.dataset.colour",
+            target: "dom.legend.style.backgroundColor"
         }
     },
     invokers: {
@@ -298,9 +302,6 @@ fluid.defaults("hortis.datasetControl", {
                  "<td fl-bagatelle-dataset-name-column><span class=\"fld-bagatelle-dataset-name\"></span></td>" +
                  "%extraColumns</tr>",
         cell: "<td class=\"%columnClass\">%text</td>"
-    },
-    listeners: {
-        "onCreate.renderDom": "hortis.datasetControl.renderDom"
     }
 });
 
@@ -368,12 +369,6 @@ hortis.datasetControl.renderMarkup = function (markup, isHeader, dataset, quanti
     return fluid.stringTemplate(markup.container, {
         extraColumns: extraColumns
     });
-};
-
-hortis.datasetControl.renderDom = function (that) {
-    var dataset = that.model.datasetControl.dataset;
-    that.locate("legend").css("background-color", dataset.colour);
-    // TODO: let renderer bind to https://developer.mozilla.org/en-US/docs/Web/API/ElementCSSInlineStyle/style
 };
 
 hortis.leafletMap.tooltipRow = function (map, key, value) {

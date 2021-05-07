@@ -7,12 +7,14 @@
         "lint": "fluid-lint-all"
     },
     "dependencies": {
-        "infusion": "3.0.0-dev.20210312T233557Z.0b016a6dc.FLUID-6580",
+        "infusion": "3.0.0-dev.20210421T131019Z.2d15978fb.FLUID-6580",
         "kettle": "2.2.0",
         "csv-parser": "2.3.2",
         "event-stream": "4.0.1",
         "csv-writer": "1.6.0",
         "exceljs": "4.2.1",
+        "moment": "2.29.1",
+        "jsep": "EricSmekens/jsep#25fcb53",
         "glob": "7.1.6",
         "minimist": "1.2.5",
         "lz4": "0.6.3",
@@ -24,7 +26,7 @@
         "fs-extra": "9.0.0",
         "eslint": "7.17.0",
         "eslint-config-fluid": "2.0.0",
-        "fluid-lint-all": "1.0.0"
+        "fluid-lint-all": "1.1.1"
     },
     "repository": {
         "type": "git",

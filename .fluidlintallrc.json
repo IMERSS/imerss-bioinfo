@@ -3,13 +3,17 @@
         "md": ["./*.md"],
         "css": ["./thing.css", "./thing1.css", "./thing2.css"],
         "js": ["src/**/*.js", "!src/lib/*.js", "!src/auxBuild/*.js", "./*.js"],
-        "json": ["./*.json", "src/**/*.json"]
+        "json": ["./*.json", "src/**/*.json"],
+        "json5": ["data/**/*.json5"]
     },
     "eslint": {
         "js": {
-            "excludes": ["src/lib/**/*.js"],
+            "excludes": ["src/lib/**/*.js", "data/**/*.json5"],
             "options": {
             }
+        },
+        "json": {
+            "excludes": ["data/**/*.json5"]
         }
     },
     "markdownlint": {
@@ -26,8 +30,10 @@
     },
     "stylelint": {
         "options": {
-            "rules": {
-                "order/properties-alphabetical-order": false
+            "config": {
+                "rules": {
+                    "order/properties-alphabeticl-order": false
+                }
             }
         }
     }

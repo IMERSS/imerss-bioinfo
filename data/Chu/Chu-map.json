@@ -1,12 +1,17 @@
 {
     "columns": {
-        "id": "id",
-        "taxonName": "Species",
-        "dateObserved": "Date",
-        "latitude": "Latitude",
-        "longitude": "Longitude"
+        "id": "%id",
+        "taxonName": "%Species",
+        "dateObserved": "%Date",
+        "latitude": "%Latitude",
+        "longitude": "%Longitude",
+        "recordedBy": "Jackson Chu",
+        "individualCount": "%Abundance",
+        "depth": "%bottomdepth_m",
+        "catalogNumber": "%id",
+        "fieldNumber": "Waypoint.or.Transect: %Waypoint.or.Transect"
     },
-    "datasetId": "CHU",
+    "datasetId": "CHU2010",
     "datasetClass": "naturalist",
     "observationId": "%id"
 }

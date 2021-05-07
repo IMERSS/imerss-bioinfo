@@ -501,7 +501,7 @@ RBCM:991-00066-002,48.933333,-123.45,Tonicella,yes,very old record; highly inacc
 iNat:3706037,48.8972060727,-123.398703573,Serpula columbiana,yes,moved to nearest waters,48.8970787648378,-123.398820140126
 iNat:62041869,48.8908422755,-123.3606152907,Pisaster ochraceus,yes,moved north to nearest shoreline,48.9066126130384,-123.359890965457
 iNat:68356745,48.8641666667,-123.3144444444,Dirona albolineata,yes,moved to nearest shoreline,48.86452188386,-123.313810999792
-RBCM:002-00070-001,48.8738886621929,-123.318670601233,Lepidozona mertensii,yes,"observation falls outside project area; moved to reef offshore Oyster Bay, Mayne Island, consistent with metadata in RBCM records",48.8663965164625,-123.275929524639
-RBCM:002-00070-002,48.8738589003002,-123.31848219042,Lepidozona interstincta,yes,"observation falls outside project area; moved to reef offshore Oyster Bay, Mayne Island, consistent with metadata in RBCM records",48.8663956636083,-123.275932134907
-RBCM:002-00070-003,48.8737978038064,-123.31867461493,Tonicella lineata,yes,"observation falls outside project area; moved to reef offshore Oyster Bay, Mayne Island, consistent with metadata in RBCM records",48.8663894120708,-123.27593136921
+RBCM:1898320334,48.873889,-123.318611,Lepidozona mertensii,yes,"observation falls outside project area; moved to reef offshore Oyster Bay, Mayne Island, consistent with metadata in RBCM records",48.8663965164625,-123.275929524639
+RBCM:1898319794,48.873889,-123.318611,Lepidozona interstincta,yes,"observation falls outside project area; moved to reef offshore Oyster Bay, Mayne Island, consistent with metadata in RBCM records",48.8663956636083,-123.275932134907
+RBCM:1898301747,48.873889,-123.318611,Tonicella lineata,yes,"observation falls outside project area; moved to reef offshore Oyster Bay, Mayne Island, consistent with metadata in RBCM records",48.8663894120708,-123.27593136921
 CMN:CMNI 2012-0102,40,-123.58,Mitrocoma cellularia,yes,"observation falls outside project area; CMN metadata states (between Galiano and Valdes Islands, SE of Nanaimo)",49.0119220145979,-123.590269088745

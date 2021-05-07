@@ -1,9 +1,13 @@
 {
     "columns": {
-        "taxonName": "SCIENTIFIC_NAME",
-        "commonName": "SPECIES",
-        "latitude": "Latitude",
-        "longitude": "Longitude"
+        "taxonName": "%SCIENTIFIC_NAME",
+        "dateObserved": "%DATE",
+        "commonName": "%SPECIES",
+        "latitude": "%Latitude",
+        "longitude": "%Longitude",
+        "recordedBy": "%OBSERVER",
+        "individualCount": "%TOTAL_CATC",
+        "fieldNumber": "%REACH_ID"
     },
     "datasetId": "Gal-Salm",
     "datasetClass": "naturalist",

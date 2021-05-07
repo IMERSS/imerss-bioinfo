@@ -97,7 +97,7 @@ hortis.matchCoordinatePatch = function (patchRow, obsRows, loc) {
 
 hortis.coordinatesOutMap = {
     columns: {
-        cooordinatesCorrected: "Coordinates Corrected",
+        coordinatesCorrected: "Coordinates Corrected",
         coordinatesCorrectedNote: "Coordinates Corrected Note"
     }
 };
@@ -135,17 +135,17 @@ hortis.processCoordinatePatch = function (resolved, patch, key) {
         if (match) {
             if (patchRow.corrected === "yes") {
                 expectCoordinates(false);
-                match.cooordinatesCorrected = "yes";
+                match.coordinatesCorrected = "yes";
             } else if (patchRow.corrected === "no") {
                 expectCoordinates(true);
-                match.cooordinatesCorrected = "no";
+                match.coordinatesCorrected = "no";
             } else {
                 console.log("Unexpected \"Corrected\" value " + patchRow.corrected + " for patch " + hortis.dumpPatchRow(patchRow, loc));
             }
             match.latitude = patchRow.latitudeOut;
             match.longitude = patchRow.longitudeOut;
-            match.coordinatesCorrectedNote = match.correction;
+            match.coordinatesCorrectedNote = patchRow.correction;
         }
     });
-    resolved.combinedObsOutMap = hortis.combineMaps(resolved.combinedObsOutMap, hortis.coordinatesOutMap);
+    resolved.combinedObsOutMap = hortis.combineMaps([resolved.combinedObsOutMap, hortis.coordinatesOutMap]);
 };

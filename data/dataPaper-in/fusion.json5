@@ -7,7 +7,7 @@
             map: "%bagatelle/data/dataPaper-in/dataPaper-map.json",
             outMap: "%bagatelle/data/dataPaper-in/dataPaper-out-map.json",
             colour: "#931362"
-        },
+        }
     },
     summarise: false,
     output: "%bagatelle/data/dataPaper-in/reintegrated.csv",

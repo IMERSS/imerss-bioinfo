@@ -181,7 +181,8 @@ hortis.oneDatasetToLoadable = function (dataset) {
     var map = hortis.readJSONSync(dataset.map, "reading Observations map file");
     var rawInput = hortis.csvReaderWithMap({
         inputFile: dataset.input,
-        mapColumns: map.columns
+        mapColumns: map.columns,
+        templateMap: true
     }).completionPromise;
     var parsedFilters = hortis.checkFilters(dataset.filters, map.columns);
     return {
