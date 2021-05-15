@@ -13,6 +13,8 @@ fluid.require("%bagatelle");
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
+require("./dataProcessing/readCSVwithoutMap.js");
+require("./dataProcessing/writeCSV.js");
 require("./expressions/expr.js");
 
 var hortis = fluid.registerNamespace("hortis");
@@ -21,6 +23,7 @@ fluid.setLogging(true);
 
 var parsedArgs = minimist(process.argv.slice(2));
 
+// Yes, if only it actually were a pipeline!
 var pipeline = hortis.readJSONSync(parsedArgs.pipeline || "data/dataPaper-in/arpha-out.json5");
 
 var summaryMap = hortis.readJSONSync(fluid.module.resolvePath(pipeline.summaryFileMap), "reading summary map file");
@@ -36,6 +39,13 @@ var obsReader = hortis.csvReaderWithMap({
     inputFile: fluid.module.resolvePath(pipeline.obsFile),
     mapColumns: obsMap.columns
 });
+
+var patchReader = pipeline.patchFile ? hortis.csvReaderWithoutMap({
+    inputFile: fluid.module.resolvePath(pipeline.patchFile)
+}) : {
+    completionPromise: fluid.promise().resolve([]),
+    rows: []
+};
 
 var outputDir = fluid.module.resolvePath(pipeline.outputDir);
 fs.mkdirSync(outputDir, { recursive: true });
@@ -108,11 +118,35 @@ hortis.datasetIdFromObs = function (obsId) {
     return obsId.substring(0, colpos);
 };
 
-hortis.mapMaterialsRows = function (rows, finalNameIndex, references, columns) {
+hortis.stashMismatchedRow = function (mismatches, patchIndex, obsRow, summaryRow) {
+    var key = obsRow.previousIdentifications + "|" + obsRow.scientificName;
+    var patchRow = patchIndex[key];
+    if (patchRow) {
+        if (patchRow.Disposition === "P") {
+            obsRow.scientificName = obsRow.previousIdentifications;
+        } else if (patchRow.Disposition === "S") {
+            var desp = obsRow.previousIdentifications.replace(" sp.", "");
+            obsRow.scientificName = desp + " sp.";
+        } else if (patchRow.Disposition === "X") {
+            console.log("!!! Unexpected use of patch with key " + key);
+        }
+    } else {
+        var existing = mismatches[key];
+        if (!existing) {
+            mismatches[key] = fluid.extend({
+                previousIdentifications: obsRow.previousIdentifications
+            }, summaryRow);
+            console.log("Stashing mismatched row ", mismatches[key]);
+        }
+    }
+};
+
+hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, columns) {
     return fluid.transform(rows, function (row) {
         var togo = {};
         var dataset = hortis.datasetIdFromObs(row.observationId);
-        row.scientificName = finalNameIndex[row.iNaturalistTaxonId];
+        var summaryRow = materialsMap.finalNameIndex[row.iNaturalistTaxonId];
+        row.scientificName = summaryRow ? summaryRow.taxonName : "";
         fluid.each(columns, function (template, target) {
             var outVal = "";
             if (template.startsWith("!references.")) {
@@ -129,11 +163,16 @@ hortis.mapMaterialsRows = function (rows, finalNameIndex, references, columns) {
             }
             togo[target] = outVal;
         });
-        
+
         if (row.coordinatesCorrected === "yes") {
             togo.georeferencedBy = "Andrew Simon";
             togo.georeferenceProtocol = "interpretation of locality, and/or inference based on local knowledge and species ecology";
             togo.georeferenceVerificationStatus = "corrected";
+            togo.georeferenceRemarks = row.coordinatesCorrectedNote;
+        }
+        // Note that previousIdentifications is taken from the row's own "taxonName" field from the original obs
+        if (togo.scientificName !== togo.previousIdentifications) {
+            hortis.stashMismatchedRow(materialsMap.mismatches, patchIndex, togo, summaryRow);
         }
         return togo;
     });
@@ -176,7 +215,15 @@ hortis.writeExcel = function (sheets, key, outputDir) {
 hortis.indexFinalNames = function (summaryRows) {
     var togo = {};
     summaryRows.forEach(function (row) {
-        togo[row.iNaturalistTaxonId] = row.taxonName;
+        togo[row.iNaturalistTaxonId] = row;
+    });
+    return togo;
+};
+
+hortis.indexPatchRows = function (patchRows) {
+    var togo = {};
+    patchRows.forEach(function (row) {
+        togo[row.previousIdentifications + "|" + row.taxonName] = row;
     });
     return togo;
 };
@@ -202,7 +249,7 @@ hortis.verifyCounts = function (name, rowCount, rows) {
     });
 };
 
-var completion = fluid.promise.sequence([summaryReader.completionPromise, obsReader.completionPromise]);
+var completion = fluid.promise.sequence([summaryReader.completionPromise, obsReader.completionPromise, patchReader.completionPromise]);
 
 completion.then(function () {
     var summaryRows = summaryReader.rows;
@@ -212,6 +259,13 @@ completion.then(function () {
     console.log("Obs Input: " + obsRows.length + " rows");
     var obsRowCount = fluid.generate(obsRows.length, 0);
     var finalNameIndex = hortis.indexFinalNames(summaryRows);
+    var patchRows = patchReader.rows;
+    console.log("Patch Input: " + patchRows.length + " rows");
+    var patchIndex = hortis.indexPatchRows(patchRows);
+    var materialsMap = {
+        finalNameIndex: finalNameIndex,
+        mismatches: {}
+    };
     var now = Date.now();
     var outs = fluid.transform(pipeline.files, function (rec, key) {
         var outSummaryRows = hortis.filterArphaRows(summaryRows, rec, summaryRowCount);
@@ -221,7 +275,7 @@ completion.then(function () {
 
         var outObsRows = hortis.filterArphaRows(obsRows, rec, obsRowCount);
         console.log("Extracted " + outObsRows.length + " obs rows via filter " + key);
-        var materialsRows = hortis.mapMaterialsRows(outObsRows, finalNameIndex, pipeline.references, pipeline.columns.Materials);
+        var materialsRows = hortis.mapMaterialsRows(outObsRows, patchIndex, materialsMap, pipeline.references, pipeline.columns.Materials);
 
         // console.log(remapped[0]);
         return {
@@ -233,6 +287,11 @@ completion.then(function () {
     console.log("Filtered obs in " + (Date.now() - now) + " ms");
     hortis.verifyCounts("summary", summaryRowCount, summaryRows);
     hortis.verifyCounts("obs", obsRowCount, obsRows);
+    var mismatches = Object.values(materialsMap.mismatches);
+    if (mismatches.length > 0) {
+        console.log("Writing " + mismatches.length + " mismatched rows to arphaMismatches.csv");
+        hortis.writeCSV("arphaMismatches.csv", ["previousIdentifications", "taxonName"].concat(Object.keys(fluid.censorKeys(summaryRows[0], ["taxonName"]))), mismatches, fluid.promise());
+    }
 
     fluid.each(outs, function (sheets, key) {
         hortis.writeExcel(sheets, key, outputDir);

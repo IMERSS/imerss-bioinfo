@@ -1,0 +1,13 @@
+REACH_ID,DATE,OBSERVER,CREEK_NAME,PRESENCE,SPECIES,SCIENTIFIC_NAME,TOTAL_CATC,SIZE,Latitude,Longitude
+GCR2,2000-01-01,Keith Erickson,Greig Creek,yes,coho,Oncorhynchus kisutch,1,"L= 125mm, W= 14gr",48.94204519,-123.500449
+MuCR3,2000-01-01,Keith Erickson,Murchison Creek,yes,cutthroat,Oncorhynchus clarkii,3,"L= 140mm, W= ? /  L= 190mm, W= ? / L=135mm, W= 14gr",48.87841817,-123.350193
+MuCR3,2000-01-01,Keith Erickson,Murchison Creek,yes,cutthroat,Oncorhynchus clarkii,3,"L= 110mm, W= 10gr / L= 110mm, W= 11gr / L= 135mm, W= ?",48.87839682,-123.350016
+MuCR3,2000-01-01,Keith Erickson,Murchison Creek,yes,cutthroat,Oncorhynchus clarkii,1,"L= 90mm, W= 4gr",48.87851854,-123.35078
+MuCR4,2000-01-01,Keith Erickson,Murchison Creek,yes,cutthroat,Oncorhynchus clarkii,2,"L= 140mm, W= 15gr+ / L= 105mm, W= 11gr",48.879003,-123.3546
+MuCR4,2000-01-01,Keith Erickson,Murchison Creek,yes,cutthroat,Oncorhynchus clarkii,1,"L= 140mm, W= 15gr+",48.87901096,-123.35439
+MuCR4,2000-01-01,Keith Erickson,Murchison Creek,yes,cutthroat,Oncorhynchus clarkii,1,"L= 150mm, W=15gr+",48.87905791,-123.35335
+JaCR4,2000-01-01,Keith Erickson,Jack Creek,yes,cutthroat,Oncorhynchus clarkii,1,"L= 65mm, W= 6gr",48.97432785,-123.559996
+JaCR5,2000-01-01,Keith Erickson,Jack Creek,yes,stickleback,Gasterosteus aculeatus,1,"L= 42mm, W= ?",48.97661529,-123.558385
+JaCR5,2000-01-01,Keith Erickson,Jack Creek,yes,stickleback,Gasterosteus aculeatus,2,L= 60mm  /  L= 41mm,48.97679603,-123.558357
+JaCR6,2000-01-01,Keith Erickson,Jack Creek,yes,stickleback,Gasterosteus aculeatus,1,L= 63mm,48.97868054,-123.557805
+JaCR6,2000-01-01,Keith Erickson,Jack Creek,yes,stickleback,Gasterosteus aculeatus,1,L= 40mm,48.97876552,-123.55739

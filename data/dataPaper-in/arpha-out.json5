@@ -3,6 +3,7 @@
     "summaryFileMap": "%bagatelle/data/dataPaper-in/combinedOutMap.json",
     "obsFile": "%bagatelle/data/dataPaper/reintegrated-obs.csv",
     "obsFileMap": "%bagatelle/data/dataPaper/combinedOutMap-obs.json",
+    "patchFile": "%bagatelle/data/dataPaper-in/arphaMismatches-2021-05-14-dispositions.csv",
     "references": {
         "CHU2010": {
             ref: "Chu JWF, Leys SP (2010) High resolution mapping of community structure in three glass sponge reefs (Porifera, Hexactinellida). Marine Ecology Progress Series 417: 97‑113. https://doi.org/10.7939/r36k3q",
@@ -84,7 +85,7 @@
             "occurrenceID": "${gbifOccurrenceID}",
             "catalogNumber": "${catalogNumber}",
             "occurrenceDetails": "",
-            "occurrenceRemarks": "Confidence: ${confidence}", // TODO: Remember to conditionalise this
+            "occurrenceRemarks": "Confidence: ${confidence}", // From code: Remember to conditionalise this
             "recordNumber": "",
             "recordedBy": "${recordedBy}",
             "individualID": "",
@@ -111,7 +112,7 @@
             "nameAccordingToID": "",
             "namePublishedInID": "",
             "taxonConceptID": "",
-            "scientificName": "${scientificName}", // TODO: synthesize this field by mapping based on checklist
+            "scientificName": "${scientificName}", // From code: synthesize this field by mapping based on checklist
             "acceptedNameUsage": "",
             "parentNameUsage": "",
             "originalNameUsage": "",
@@ -173,11 +174,11 @@
             "footprintWKT": "",
             "footprintSRS": "",
             "footprintSpatialFit": "",
-            "georeferencedBy": "${recordedBy}", // TODO: Requested AS if adjusted
-            "georeferenceProtocol": "", // TODO: Requested "interpretation of locality, and/or inference based on local knowledge and species ecology" if adjusted
+            "georeferencedBy": "${recordedBy}", // From code: Requested AS if adjusted
+            "georeferenceProtocol": "", // From code: Requested "interpretation of locality, and/or inference based on local knowledge and species ecology" if adjusted
             "georeferenceSources": "",
-            "georeferenceVerificationStatus": "", // TODO: "Indication of any corrected georeferencing" ??
-            "georeferenceRemarks": "${coordinatesCorrectedNote}", // TODO: My remarks on any corrected coordinates
+            "georeferenceVerificationStatus": "", // From code: "Indication of any corrected georeferencing" ??
+            "georeferenceRemarks": "", // From code: My remarks on any corrected coordinates
             "identificationID": "",
             "identifiedBy": "",
             "dateIdentified": "",
@@ -205,7 +206,7 @@
             "eventID": "",
             "samplingProtocol": "!references.samplingProtocol",
             "samplingEffort": "",
-            "eventDate": "!Date:YYYY-MM-DD", // TODO: Extract date part of ISOZ date - Luxon has dt.toISODate()
+            "eventDate": "!Date:YYYY-MM-DD",
             "eventTime": "", // TODO: Not requested but we could get it via toISOTime()
             "startDayOfYear": "",
             "endDayOfYear": "",
