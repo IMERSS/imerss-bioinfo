@@ -2147,6 +2147,10 @@
                 notes: "PMLS swap: \"Everything from surface waters in the Salish Sea is this Solmudaegina nematophora.\"",
                 oldiNaturalistTaxonId: "256077"
             },
+            "Solmudaegina nematophora": {
+                resolvedBy: "AB",
+                notes: "Remaining typo in PMLS data"
+            }
         },
         iNaturalistTaxonId: "1156476"
     }, // Two weird entries that I found dirty in working copy on laptop

@@ -52,7 +52,7 @@
             colour: "#f7a329"
         },
         CHU2012: {
-            name: "Jackson Chu's Dorid ROV Surveys (2009-2019)",
+            name: "Jackson Chu's Dorid ROV Surveys (2007-2011)",
             input: "%bagatelle/data/Chu/CHU_2012_dorids_catalogue_2020_10_08.csv",
             map: "%bagatelle/data/Chu/Chu-2012-map.json",
             outMap: "%bagatelle/data/Chu/Chu-2012-out-map.json",

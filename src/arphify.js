@@ -200,8 +200,9 @@ hortis.writeExcel = function (sheets, key, outputDir) {
     }
     var workbook = new ExcelJS.Workbook();
 
-    hortis.writeSheet(workbook, "Taxa", sheets.Taxa);
-    hortis.writeSheet(workbook, "Materials", sheets.Materials);
+    fluid.each(sheets, function (sheet, sheetName) {
+        hortis.writeSheet(workbook, sheetName, sheet);
+    });
 
     var filename = outputDir + "/" + key + ".xlsx";
     var togo = workbook.xlsx.writeFile(filename);
@@ -240,6 +241,16 @@ hortis.filterArphaRows = function (rows, rec, rowCount) {
     });
 };
 
+// Note - argument modified
+hortis.sortRows = function (rows, sortBy) {
+    var comparator = function (ra, rb) {
+        return fluid.find(sortBy, function (column) {
+            return ra[column] > rb[column] ? 1 : (ra[column] < rb[column] ? -1 : undefined); 
+        });
+    };
+    rows.sort(comparator);
+};
+
 hortis.verifyCounts = function (name, rowCount, rows) {
     rowCount.forEach(function (count, index) {
         if (count !== 1) {
@@ -271,16 +282,21 @@ completion.then(function () {
         var outSummaryRows = hortis.filterArphaRows(summaryRows, rec, summaryRowCount);
         console.log("Extracted " + outSummaryRows.length + " summary rows via filter " + key);
 
-        var taxaRows = hortis.mapTaxaRows(outSummaryRows, pipeline.columns.Taxa);
+        var Taxa = pipeline.sheets.Taxa;      
+        var taxaRows = hortis.mapTaxaRows(outSummaryRows, Taxa.columns);
+        hortis.sortRows(taxaRows, Taxa.sortBy);
 
         var outObsRows = hortis.filterArphaRows(obsRows, rec, obsRowCount);
         console.log("Extracted " + outObsRows.length + " obs rows via filter " + key);
-        var materialsRows = hortis.mapMaterialsRows(outObsRows, patchIndex, materialsMap, pipeline.references, pipeline.columns.Materials);
+        
+        var Materials = pipeline.sheets.Materials;
+        var materialsRows = hortis.mapMaterialsRows(outObsRows, patchIndex, materialsMap, pipeline.references, pipeline.sheets.Materials.columns);
+        hortis.sortRows(materialsRows, Materials.sortBy);
 
-        // console.log(remapped[0]);
         return {
             Taxa: taxaRows,
-            Materials: materialsRows
+            Materials: materialsRows,
+            ExternalLinks: [fluid.copy(pipeline.sheets.ExternalLinks.columns)]
         };
     });
     console.log("Total extracted obs rows: " + fluid.flatten(fluid.getMembers(outs, "Materials")).length);

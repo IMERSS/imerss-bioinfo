@@ -94,6 +94,7 @@ hortis.storeAtPath = function (treeBuilder, path, row) {
                 throw e;
             }
         }
+        // TODO: Is obs count bug related to absence of "else" here?
         ++node.childCount;
         fluid.each(counts, function (countDef, key) {
             node[key] += row[key];
