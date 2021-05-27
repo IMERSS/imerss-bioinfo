@@ -245,7 +245,7 @@ hortis.filterArphaRows = function (rows, rec, rowCount) {
 hortis.sortRows = function (rows, sortBy) {
     var comparator = function (ra, rb) {
         return fluid.find(sortBy, function (column) {
-            return ra[column] > rb[column] ? 1 : (ra[column] < rb[column] ? -1 : undefined); 
+            return ra[column] > rb[column] ? 1 : (ra[column] < rb[column] ? -1 : undefined);
         });
     };
     rows.sort(comparator);
@@ -282,13 +282,13 @@ completion.then(function () {
         var outSummaryRows = hortis.filterArphaRows(summaryRows, rec, summaryRowCount);
         console.log("Extracted " + outSummaryRows.length + " summary rows via filter " + key);
 
-        var Taxa = pipeline.sheets.Taxa;      
+        var Taxa = pipeline.sheets.Taxa;
         var taxaRows = hortis.mapTaxaRows(outSummaryRows, Taxa.columns);
         hortis.sortRows(taxaRows, Taxa.sortBy);
 
         var outObsRows = hortis.filterArphaRows(obsRows, rec, obsRowCount);
         console.log("Extracted " + outObsRows.length + " obs rows via filter " + key);
-        
+
         var Materials = pipeline.sheets.Materials;
         var materialsRows = hortis.mapMaterialsRows(outObsRows, patchIndex, materialsMap, pipeline.references, pipeline.sheets.Materials.columns);
         hortis.sortRows(materialsRows, Materials.sortBy);

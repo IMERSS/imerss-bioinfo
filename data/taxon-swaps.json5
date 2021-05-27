@@ -40,11 +40,7 @@
             "Janolus fuscus": {
                 resolvedBy: "AB",
                 oldiNaturalistTaxonId: "47460",
-            },
-            "Antiopella fuscus": {
-                notes: "Misspelling in PMLS",
-                resolvedBy: "AB",
-            },
+            }
         },
         iNaturalistTaxonId: "886884",
     },
@@ -238,11 +234,7 @@
             "Theragra chalcogramma": {
                 resolvedBy: "AB",
                 oldiNaturalistTaxonId: "180034",
-            },
-            "Gadus chalcogramma": {
-                notes: "Misspelling in PMLS",
-                resolvedBy: "AB",
-            },
+            }
         },
         iNaturalistTaxonId: "614161",
     },
@@ -287,11 +279,7 @@
             "Flabellina triophina": {
                 resolvedBy: "AB",
                 oldiNaturalistTaxonId: "50459",
-            },
-            "Himatina triophina": {
-                resolvedBy: "AB",
-                notes: "Misspelling in PMLS",
-            },
+            }
         },
         iNaturalistTaxonId: "633561",
     },
@@ -310,11 +298,7 @@
         taxonNames: {
             "transverse lamp shell": {
                 type: "commonName",
-            },
-            "Laqueus vancouverensis": {
-                resolvedBy: "AB",
-                notes: "misspelling in obs record",
-            },
+            }
         },
         iNaturalistTaxonId: "525797",
     },
@@ -365,20 +349,16 @@
         },
         iNaturalistTaxonId: "63697",
     },
-
     "Mopalia kennerleyi": {
         taxonNames: {
             "northern hairy chiton": {
                 type: "commonName"
             },
             "Mopalia kennerelyi": {
+                type: "typo",
                 resolvedBy: "AB",
-                notes: "Misspelling in PMLS"
-            },
-            "Mopalia kennerlyi": {
-                resolvedBy: "AB",
-                notes: "Misspelling in PMLS"
-            }            
+                notes: "Remnant spelling mistake in version 18 of PMLS catalogue"
+            }
         },
         iNaturalistTaxonId: "360858"
     },    
@@ -456,10 +436,6 @@
         taxonNames: {
             "sea braid": {
                 type: "commonName",
-            },
-            "Plocamium cartilageneum pacificum": {
-                resolvedBy: "AB",
-                notes: "misspelling in obs record",
             },
             "Plocamium pacificum": {
                 resolvedBy: "AB",
@@ -542,11 +518,7 @@
         taxonNames: {
             "checkered hairysnail": {
                 type: "commonName",
-            },
-            "Trichotropsis cancellata": {
-                resolvedBy: "AB",
-                notes: "misspelled in obs record",
-            },
+            }
         },
         iNaturalistTaxonId: "447177",
     },
@@ -830,10 +802,6 @@
             "Orange Bryozoan": {
                 type: "commonName",
             },
-            "Celleprina robersoniae": {
-                notes: "Misspelling in PMLS",
-                resolvedBy: "AB",
-            },
             "Celleporina robersoniae": {
                 notes: "Misspelling in Mayne",
                 resolvedBy: "AB",
@@ -867,51 +835,6 @@
         },
         iNaturalistTaxonId: "904312"
     },  
-    "Cyanea ferruginea": {
-        taxonNames: {
-            "Cyanea ferrugenia": {
-                notes: "Misspelling in PMLS",
-                resolvedBy: "AB",
-            },
-        },
-        iNaturalistTaxonId: "786996"
-    },
-    "Ericthonius rubricornis": {
-        taxonNames: {
-            "Erichthonius rubricornis": {
-                notes: "Misspelling in PMLS",
-                resolvedBy: "AB",
-            },
-        },
-        iNaturalistTaxonId: "552302"
-    },
-    "Halecium beanii": {
-        taxonNames: {
-            "Halecium beani": {
-                notes: "Misspelling in PMLS",
-                resolvedBy: "AB",
-            },
-        },
-        iNaturalistTaxonId: "668120"
-    },
-    "Halichondria sitiens": {
-        taxonNames: {
-            "Halicondria sitiens": {
-                notes: "Misspelling in PMLS",
-                resolvedBy: "AB",
-            },
-        },
-        iNaturalistTaxonId: "459775"
-    },
-    "Lepeophtheirus": {
-        taxonNames: {
-            "Lepeophtherius": {
-                notes: "Misspelling in PMLS",
-                resolvedBy: "AB",
-            },
-        },
-        iNaturalistTaxonId: "329133"
-    },
     "Oxydromus pugettensis": {
         taxonNames: {
             "Bat Star Worm": {
@@ -1353,15 +1276,6 @@
             }
         },
         iNaturalistTaxonId: "509660"
-    },
-    "Clinocardium nuttallii": {
-        taxonNames: {
-            "Clinocardium nuttalli": {
-                resolvedBy: "AB",
-                notes: "Misspelling in PMLS",
-            },
-        },
-        iNaturalistTaxonId: "69925"
     },
     "Compsomyax subdiaphana": {
         taxonNames: {
