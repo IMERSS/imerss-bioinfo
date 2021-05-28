@@ -278,6 +278,7 @@ completion.then(function () {
         mismatches: {}
     };
     var now = Date.now();
+    var allMaterials = [];
     var outs = fluid.transform(pipeline.files, function (rec, key) {
         var outSummaryRows = hortis.filterArphaRows(summaryRows, rec, summaryRowCount);
         console.log("Extracted " + outSummaryRows.length + " summary rows via filter " + key);
@@ -293,9 +294,12 @@ completion.then(function () {
         var materialsRows = hortis.mapMaterialsRows(outObsRows, patchIndex, materialsMap, pipeline.references, pipeline.sheets.Materials.columns);
         hortis.sortRows(materialsRows, Materials.sortBy);
 
+        // ARPHA can't actually accept this many Materials rows - we will export them to CSV instead
+        allMaterials = allMaterials.concat(materialsRows);
+
         return {
             Taxa: taxaRows,
-            Materials: materialsRows,
+            Materials: [fluid.copy(pipeline.sheets.Materials.columns)],
             ExternalLinks: [fluid.copy(pipeline.sheets.ExternalLinks.columns)]
         };
     });
@@ -308,6 +312,8 @@ completion.then(function () {
         console.log("Writing " + mismatches.length + " mismatched rows to arphaMismatches.csv");
         hortis.writeCSV("arphaMismatches.csv", ["previousIdentifications", "taxonName"].concat(Object.keys(fluid.censorKeys(summaryRows[0], ["taxonName"]))), mismatches, fluid.promise());
     }
+
+    hortis.writeCSV(outputDir + "/Materials.csv", Object.keys(allMaterials[0]), allMaterials, fluid.promise());
 
     fluid.each(outs, function (sheets, key) {
         hortis.writeExcel(sheets, key, outputDir);
