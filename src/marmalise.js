@@ -77,6 +77,14 @@ hortis.addTaxonInfo = function (row, fullRecord) {
     });
 };
 
+hortis.reverseMerge = function (target, source) {
+    fluid.each(source, function (value, key) {
+        if (!target[key]) {
+            target[key] = value;
+        }
+    });
+};
+
 hortis.storeAtPath = function (treeBuilder, path, row) {
     var counts = treeBuilder.map.counts;
     hortis.rowToTaxon(row, path.length, counts);
@@ -93,8 +101,9 @@ hortis.storeAtPath = function (treeBuilder, path, row) {
                 console.log("While storing row ", row);
                 throw e;
             }
+        } else if (last) { // Store any surplus fields, expecially include "coords" here otherwise they will be lost
+            hortis.reverseMerge(child, row);
         }
-        // TODO: Is obs count bug related to absence of "else" here?
         ++node.childCount;
         fluid.each(counts, function (countDef, key) {
             node[key] += row[key];
@@ -111,6 +120,11 @@ hortis.loadCachedTaxonDoc = function (treeBuilder, id) {
     return existing;
 };
 
+/** Produce a "path" holding each cached taxon doc from the supplied row from the root
+ * @param {TreeBuilder} treeBuilder - The treeBuilder instance
+ * @param {Row} row - An observation or summary row
+ * @return {TaxonDoc[]} Array of taxon docs starting at the root and ending at the row's doc
+ */
 hortis.taxaToPathiNat = function (treeBuilder, row) {
     var baseDoc = hortis.loadCachedTaxonDoc(treeBuilder, row.iNaturalistTaxonId);
     var parentTaxaIds = hortis.iNat.parentTaxaIds(baseDoc);

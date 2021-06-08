@@ -1,0 +1,102 @@
+{
+    "columns": {
+        "iNaturalistTaxonName": "iNaturalist taxon name",
+        "iNaturalistTaxonId": "iNaturalist taxon ID",
+        "observationCount": "Observation count",
+        "collection": "Collection/List",
+        "coords": "Coordinates",
+        "kingdom": "Kingdom",
+        "phylum": "Phylum",
+        "subphylum": "Subphylum",
+        "superclass": "Superclass",
+        "class": "Class",
+        "subclass": "Subclass",
+        "superorder": "Superorder",
+        "order": "Order",
+        "suborder": "Suborder",
+        "superfamily": "Superfamily",
+        "family": "Family",
+        "subfamily": "Subfamily",
+        "tribe": "Tribe",
+        "genus": "Genus",
+        "species": "Species",
+        "taxonName": "Taxon name",
+        "dateObserved": "Date observed",
+        "description": "Description",
+        "locality": "Place name",
+        "commonName": "Common name",
+        "recordedBy": "Recorded by",
+        "eventRemarks": "Event Remarks",
+        "placeName": "Place name",
+        "individualCount": "Individual count",
+        "depth": "Depth",
+        "catalogNumber": "Catalog Number",
+        "confidence": "Confidence",
+        "sex": "Sex",
+        "fieldNumber": "Field number"
+    },
+    "counts": {
+        "observationCount": {
+            "column": "observationCount",
+            "free": true
+        }
+    },
+    "datasets": {
+        "PMLS": {
+            "name": "Pacific Marine Life Survey Dive Records (1968-2019)",
+            "input": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2021-05-19.csv",
+            "map": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS-out-map.json",
+            "colour": "#931362"
+        },
+        "iNat": {
+            "name": "Galiano iNaturalist Marine Observations (2005-2021)",
+            "input": "E:/source/gits/bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_04_30.csv",
+            "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
+            "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
+            "colour": "#2C8C99"
+        },
+        "RBCM": {
+            "name": "Royal British Columbia Museum Voucher Specimens (1893-2011)",
+            "input": "E:/source/gits/bagatelle/data/RBCM/RBCM_GBIF_records_intersected_with_Galiano_polygon_2021_03_08_unscrewed.csv",
+            "map": "E:/source/gits/bagatelle/data/RBCM/RBCM-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/RBCM/RBCM-out-map.json",
+            "colour": "#29a329"
+        },
+        "BCCSN": {
+            "name": "British Columbia Cetacean Sightings Network (2001-2020)",
+            "input": "E:/source/gits/bagatelle/data/BCCSN/BC_Cetacean_Sightings_Network_Galiano_Catalogue_2021-01-29.csv",
+            "map": "E:/source/gits/bagatelle/data/BCCSN/BCCSN-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/BCCSN/BCCSN-out-map.json",
+            "colour": "#55a329"
+        },
+        "CMN": {
+            "name": "Canadian Museum of Nature via VertNet (1928-1982)",
+            "input": "E:/source/gits/bagatelle/data/CMN/CMN_Galiano_Island_Marine_fauna_2020_09_11.csv",
+            "map": "E:/source/gits/bagatelle/data/CMN/CMN-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/CMN/CMN-out-map.json",
+            "colour": "#a7a329"
+        },
+        "Gal-Salm": {
+            "name": "Galiano Salmonids (Erickson, 2000)",
+            "input": "E:/source/gits/bagatelle/data/Galiano Salmonids/Galiano_Salmonids_Erickson_2000_dated_2021-04-21.csv",
+            "map": "E:/source/gits/bagatelle/data/Galiano Salmonids/Gal-Salm-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Galiano Salmonids/Gal-Salm-out-map.json",
+            "colour": "#c7a329"
+        },
+        "CHU2010": {
+            "name": "Jackson Chu's Glass Sponge ROV Surveys (2008-2009)",
+            "input": "E:/source/gits/bagatelle/data/Chu/CHU_2010_ROV_Marine_occurrence_records_2020_10_07_unscrambled.csv",
+            "map": "E:/source/gits/bagatelle/data/Chu/Chu-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Chu/Chu-out-map.json",
+            "colour": "#f7a329"
+        },
+        "CHU2012": {
+            "name": "Jackson Chu's Dorid ROV Surveys (2007-2011)",
+            "input": "E:/source/gits/bagatelle/data/Chu/CHU_2012_dorids_catalogue_2020_10_08.csv",
+            "map": "E:/source/gits/bagatelle/data/Chu/Chu-2012-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Chu/Chu-2012-out-map.json",
+            "colour": "#f7a329"
+        }
+    }
+}

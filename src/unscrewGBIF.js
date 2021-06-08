@@ -14,6 +14,9 @@ var hortis = fluid.registerNamespace("hortis");
 
 fluid.setLogging(true);
 
+// Unscrew GBIF output by extracting back out into a stable field "scientificName" whatever is the most derived taxon name
+// held in any taxon field
+
 var parsedArgs = minimist(process.argv.slice(2));
 
 var outputFile = parsedArgs.o || "unscrewed.csv";

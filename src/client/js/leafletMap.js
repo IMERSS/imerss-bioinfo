@@ -687,12 +687,6 @@ hortis.quantiser.indexTree = function (that, latResolution, longResolution, squa
         } else {
             row.ownCoordCount = 0;
         }
-        var childCoordCount = row.children.reduce(function (acc, child) {
-            return acc + child.observationCount;
-        }, 0);
-        if (childCoordCount + row.ownCoordCount !== row.observationCount) {
-            debugger;
-        }
     };
     console.log("Total coordinate count: " + withcoords );
 

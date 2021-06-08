@@ -1,0 +1,315 @@
+{
+    "summaryFile": "%bagatelle/data/dataPaper-in/reintegrated.csv",
+    "summaryFileMap": "%bagatelle/data/dataPaper-in/combinedOutMap.json",
+    "obsFile": "%bagatelle/data/dataPaper/reintegrated-obs.csv",
+    "obsFileMap": "%bagatelle/data/dataPaper/combinedOutMap-obs.json",
+    "patchFile": "%bagatelle/data/dataPaper-in/arphaMismatches-2021-05-14-dispositions.csv",
+    "references": {
+        "CHU2010": {
+            ref: "Chu JWF, Leys SP (2010) High resolution mapping of community structure in three glass sponge reefs (Porifera, Hexactinellida). Marine Ecology Progress Series 417: 97‑113. https://doi.org/10.7939/r36k3q",
+            samplingProtocol: "ROV",
+            datasetName: "Chu & Leys (2010)",
+            basisOfRecord: "HumanObservation"
+        },
+        "CHU2012": {
+            ref: "Chu JWF, Leys SP (2012) The dorid nudibranchs Peltodoris lentiginosa and Archidoris odhneri as predators of glass sponges. Invertebrate Biology x (x): 1‑7. https://doi.org/10.5061/dryad.3tc7s",
+            samplingProtocol: "ROV",
+            datasetName: "Chu & Leys (2012)",
+            basisOfRecord: "HumanObservation"
+        },
+        "Gal-Salm": {
+            ref: "Erickson K (2000) 1999 / 2000 urban salmon habitat program final report. Galiano Conservancy Association, Galiano Island, BC. Unpublished report.",
+            samplingProtocol: "Systematic Survey",
+            datasetName: "Erickson (2000)",
+            basisOfRecord: "HumanObservation"
+        },
+        "iNat": {
+            institutionCode: "iNaturalist",
+            basisOfRecord: "HumanObservation"
+        },
+        "RBCM": {
+            institutionCode: "RBCM",
+            collectionCode: "Invertebrate Zoology",
+            basisOfRecord: "PreservedSpecimen"
+        },
+        "BCCSN": {
+            institutionCode: "BC Cetacean Sightings Network",
+            basisOfRecord: "HumanObservation"
+        },
+        "CMN": {
+            institutionCode: "CMN",
+            basisOfRecord: "PreservedSpecimen"
+        }
+    },
+    "sheets": {
+        "Taxa": {
+            "columns": {
+                "Taxon_Local_ID": "${iNaturalistTaxonId}",
+                "Kingdom": "${kingdom}",
+                "Subkingdom": "", // missing
+                "Phylum": "${phylum}",
+                "Subphylum": "${subphylum}",
+                "Superclass": "${superclass}",
+                "Class": "${class}",
+                "Subclass": "${subclass}",
+                "Superorder": "${superorder}",
+                "Order": "${order}",
+                "Suborder": "${suborder}",
+                "Infraorder": "", // missing
+                "Superfamily": "${superfamily}",
+                "Family": "${family}",
+                "Subfamily": "${subfamily}",
+                "Tribe": "${tribe}",
+                "Subtribe": "${subtribe}",
+                "Genus": "${genus}",
+                "Subgenus": "", // filled in conditionally
+                "Species": "${species}",
+                "Subspecies": "", // filled in conditionally
+                "Variety": "", // missing
+                "Form": "", // missing
+                "Authorship": "${authority}",
+                "Nomenclature": "",
+                "Feeds on": "",
+                "symbioticWith": "",
+                "parasiteOf": "",
+                "Host of": "",
+                "Native Status": "",
+                "Conservation Status": "",
+                "Distribution": "",
+                "Horizon": "",
+                // End missing
+                "Notes": "${criticalNotes}"
+            },
+            sortBy: ["Phylum", "Class", "Subclass", "Order", "Suborder", "Family", "Subfamily", "Genus", "Species"]
+        },
+        Materials: {
+            "columns": {
+                "Taxon_Local_ID": "${iNaturalistTaxonId}",
+                "typeStatus": "",
+                "occurrenceID": "${gbifOccurrenceID}",
+                "catalogNumber": "${catalogNumber}",
+                "occurrenceDetails": "",
+                "occurrenceRemarks": "Confidence: ${confidence}", // From code: Remember to conditionalise this
+                "recordNumber": "",
+                "recordedBy": "${recordedBy}",
+                "individualID": "",
+                "individualCount": "${individualCount}",
+                "sex": "${sex}",
+                "lifeStage": "",
+                "reproductiveCondition": "",
+                "behavior": "",
+                "establishmentMeans": "",
+                "occurrenceStatus": "PRESENT",
+                "preparations": "",
+                "disposition": "",
+                "otherCatalogNumbers": "",
+                "previousIdentifications": "${taxonName}",
+                "associatedMedia": "",
+                "associatedReferences": "!references.ref",
+                "associatedOccurrences": "",
+                "associatedSequences": "",
+                "taxonID": "iNaturalist:${iNaturalistTaxonId}",
+                "scientificNameID": "",
+                "acceptedNameUsageID": "",
+                "parentNameUsageID": "",
+                "originalNameUsageID": "",
+                "nameAccordingToID": "",
+                "namePublishedInID": "",
+                "taxonConceptID": "",
+                "scientificName": "${scientificName}", // From code: synthesize this field by mapping based on checklist
+                "acceptedNameUsage": "",
+                "parentNameUsage": "",
+                "originalNameUsage": "",
+                "nameAccordingTo": "",
+                "namePublishedIn": "",
+                "higherClassification": "",
+                "kingdom": "${kingdom}",
+                "phylum": "${phylum}",
+                "class": "${class}",
+                "order": "${order}",
+                "family": "${family}",
+                "genus": "${genus}",
+                "subgenus": "${subgenus}", // TODO: Lift this from checklist?
+                "specificEpithet": "",
+                "infraspecificEpithet": "",
+                "taxonRank": "",
+                "verbatimTaxonRank": "",
+                "scientificNameAuthorship": "",
+                "vernacularName": "",
+                "nomenclaturalCode": "",
+                "taxonomicStatus": "",
+                "nomenclaturalStatus": "",
+                "taxonRemarks": "",
+                "locationID": "",
+                "higherGeographyID": "",
+                "higherGeography": "",
+                "continent": "",
+                "waterBody": "",
+                "islandGroup": "",
+                "island": "Galiano Island",
+                "country": "Canada",
+                "countryCode": "CA",
+                "stateProvince": "British Columbia",
+                "county": "",
+                "municipality": "",
+                "locality": "${locality}",
+                "verbatimLocality": "",
+                "verbatimElevation": "",
+                "minimumElevationInMeters": "",
+                "maximumElevationInMeters": "",
+                "verbatimDepth": "${depth}",
+                "minimumDepthInMeters": "",
+                "maximumDepthInMeters": "", // TODO: Requested but ignored for now
+                "minimumDistanceAboveSurfaceInMeters": "",
+                "maximumDistanceAboveSurfaceInMeters": "",
+                "locationAccordingTo": "",
+                "locationRemarks": "",
+                "verbatimCoordinates": "",
+                "verbatimLatitude": "",
+                "verbatimLongitude": "",
+                "verbatimCoordinateSystem": "",
+                "verbatimSRS": "",
+                "decimalLatitude": "${latitude}",
+                "decimalLongitude": "${longitude}",
+                "geodeticDatum": "",
+                "coordinateUncertaintyInMeters": "",
+                "coordinatePrecision": "",
+                "pointRadiusSpatialFit": "",
+                "footprintWKT": "",
+                "footprintSRS": "",
+                "footprintSpatialFit": "",
+                "georeferencedBy": "${recordedBy}", // From code: Requested AS if adjusted
+                "georeferenceProtocol": "", // From code: Requested "interpretation of locality, and/or inference based on local knowledge and species ecology" if adjusted
+                "georeferenceSources": "",
+                "georeferenceVerificationStatus": "", // From code: "Indication of any corrected georeferencing" ??
+                "georeferenceRemarks": "", // From code: My remarks on any corrected coordinates
+                "identificationID": "",
+                "identifiedBy": "",
+                "dateIdentified": "",
+                "identificationReferences": "",
+                "identificationRemarks": "",
+                "identificationQualifier": "",
+                "geologicalContextID": "",
+                "earliestEonOrLowestEonothem": "",
+                "latestEonOrHighestEonothem": "",
+                "earliestEraOrLowestErathem": "",
+                "latestEraOrHighestErathem": "",
+                "earliestPeriodOrLowestSystem": "",
+                "latestPeriodOrHighestSystem": "",
+                "earliestEpochOrLowestSeries": "",
+                "latestEpochOrHighestSeries": "",
+                "earliestAgeOrLowestStage": "",
+                "latestAgeOrHighestStage": "",
+                "lowestBiostratigraphicZone": "",
+                "highestBiostratigraphicZone": "",
+                "lithostratigraphicTerms": "",
+                "group": "",
+                "formation": "",
+                "member": "",
+                "bed": "",
+                "eventID": "",
+                "samplingProtocol": "!references.samplingProtocol",
+                "samplingEffort": "",
+                "eventDate": "!Date:YYYY-MM-DD",
+                "eventTime": "", // TODO: Not requested but we could get it via toISOTime()
+                "startDayOfYear": "",
+                "endDayOfYear": "",
+                "year": "!Date:YYYY",
+                "month": "!Date:M",
+                "day": "!Date:D",
+                "verbatimEventDate": "",
+                "habitat": "",
+                "fieldNumber": "${fieldNumber}",
+                "fieldNotes": "${fieldNotes}",
+                "eventRemarks": "${eventRemarks}",
+                "type": "",
+                "modified": "",
+                "language": "",
+                "rights": "",
+                "rightsHolder": "",
+                "accessRights": "",
+                "bibliographicCitation": "!references.ref",
+                "institutionID": "",
+                "collectionID": "",
+                "datasetID": "",
+                "institutionCode": "!references.institutionCode",
+                "collectionCode": "!references.collectionCode",
+                "datasetName": "!references.datasetName",
+                "ownerInstitutionCode": "",
+                "basisOfRecord": "!references.basisOfRecord",
+                "informationWithheld": "",
+                "dataGeneralizations": "",
+                "dynamicProperties": "",
+                "source": ""
+            },
+            sortBy: ["phylum", "class", "order", "family", "genus", "scientificName", "eventDate"]
+        },
+        ExternalLinks: {
+            "columns": {
+                "Taxon_Local_ID": "",
+                "Link type": "",
+                "Link": ""
+            }
+        }
+    },
+    outputDir: "%bagatelle/data/dataPaper-in/arphified",
+    files: {
+        Porifera: {
+            filter: "phylum === 'Porifera'"
+        },
+        Cnidaria: {
+            filter: "phylum === 'Cnidaria'"
+        },
+        Ctenophora: {
+            filter: "phylum === 'Ctenophora'"
+        },
+        Nemertea: {
+            filter: "phylum === 'Nemertea'"
+        },
+        Platyhelminthes: {
+            filter: "phylum === 'Platyhelminthes'"
+        },
+        Chaetognatha: {
+            filter: "phylum === 'Chaetognatha'"
+        },
+        Mollusca: {
+            filter: "phylum === 'Mollusca'"
+        },
+        Annelida: {
+            filter: "phylum === 'Annelida'"
+        },
+        Sipuncula: {
+            filter: "phylum === 'Sipuncula'"
+        },
+        Arthropoda: {
+            filter: "phylum === 'Arthropoda'"
+        },
+        Entoprocta: {
+            filter: "phylum === 'Entoprocta'"
+        },
+        Brachiopoda: {
+            filter: "phylum === 'Brachiopoda'"
+        },
+        Bryozoa: {
+            filter: "phylum === 'Bryozoa'"
+        },
+        Phoronida: {
+            filter: "phylum === 'Phoronida'"
+        },
+        Echinodermata: {
+            filter: "phylum === 'Echinodermata'"
+        },
+        Mammalia: {
+            filter: "class === 'Mammalia'"
+        },
+        Tunicata: {
+            filter: "subphylum === 'Tunicata'"
+        },
+        Actinopterygii: {
+            filter: "class === 'Actinopterygii'"
+        },
+        Chondrichthyes: {
+            filter: "class === 'Elasmobranchii' || class === 'Holocephali'"
+        }
+    }
+}

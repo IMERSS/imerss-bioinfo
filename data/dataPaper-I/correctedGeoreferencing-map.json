@@ -1,0 +1,12 @@
+{
+    "columns": {
+        "id": "key",
+        "latitude": "latitude",
+        "longitude": "longitude",
+        "iNaturalistTaxonName": "iNaturalis",
+        "corrected": "Corrected",
+        "correction": "Correction",
+        "latitudeOut": "Lat_new",
+        "longitudeOut": "Long_new"
+    }
+}

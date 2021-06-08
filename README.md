@@ -11,15 +11,15 @@ All data is stored in CSV files in subdirectories under [data](data) although so
 variety of formats such as XLSX and PDF.
 
 Authoritative data resulting from the full reconciliation of upstream catalogues and curated summaries for the Galiano
-Data Paper vol 1: Marine Animalia is held in [data/dataPaper](data/dataPaper) and [data/dataPaper-in](data/dataPaper-in).
-In particular, the reconciled and normalised observation data is at [data/dataPaper/reintegrated-obs.csv](data/dataPaper/reintegrated-obs.csv),
-reconciled checklists derived from this data is at [/data/dataPaper/reintegrated.csv](/data/dataPaper/reintegrated.csv).
-The corresponding checklists derived from the curated summaries is at [/data/dataPaper-in/reintegrated.csv](/data/dataPaper-in/reintegrated.csv).
+Data Paper vol 1: Marine Animalia is held in [data/dataPaper-I](data/dataPaper-I) and [data/dataPaper-I-in](data/dataPaper-I-in).
+In particular, the reconciled and normalised observation data is at [data/dataPaper-I/reintegrated-obs.csv](data/dataPaper-I/reintegrated-obs.csv),
+reconciled checklists derived from this data is at [/data/dataPaper-I/reintegrated.csv](/data/dataPaper-I/reintegrated.csv).
+The corresponding checklists derived from the curated summaries is at [/data/dataPaper-I-in/reintegrated.csv](/data/dataPaper-I-in/reintegrated.csv).
 
 # Data Pipeline
 
 The full data pipeline for deriving the observation data and its checklists from the upstream raw catalogues is held at
-[/data/dataPaper/fusion.json5](/data/dataPaper/fusion.json5). This is stored in the [JSON5](https://json5.org/) format.
+[/data/dataPaper-I/fusion.json5](/data/dataPaper-I/fusion.json5). This is stored in the [JSON5](https://json5.org/) format.
 This file refers to the most up-to-date versions of the constituent catalogues in their various other subdirectories
 under [/data](/data).
 
@@ -52,7 +52,7 @@ rendering. Produces one or two `reintegrated` files combining the catalogues. Th
 normalisation, including normalising species names with respect to the internal ontology mapping file
 [taxon-swaps.json5](data/taxon-swaps.json5), filtering out unwanted taxa, georeferencing correction patches,
 and filtering with respect to a project boundary defined in GeoJSON. Details of all the capabilities of this
-"Swiss Army knife" data processor can be followed in the data paper fusion file [data/dataPaper/fusion.json5](data/dataPaper/fusion.json5).
+"Swiss Army knife" data processor can be followed in the data paper fusion file [data/dataPaper-I/fusion.json5](data/dataPaper-I/fusion.json5).
 
     inatObs.js
 
@@ -77,9 +77,9 @@ after casting out any records for genera which are trumped by a more specific sp
 
     arphify.js
 
-Given a pipeline specification such as the one in [data/dataPaper-in/arpha-out.json5], accepts both a normalised
-observation file such as [data/dataPaper/reintegrated-obs.csv](data/dataPaper/reintegrated-obs.csv) and a normalised
-curated summary file such as [/data/dataPaper-in/reintegrated.csv](/data/dataPaper-in/reintegrated.csv) and emits a
+Given a pipeline specification such as the one in [data/dataPaper-I-in/arpha-out.json5], accepts both a normalised
+observation file such as [data/dataPaper-I/reintegrated-obs.csv](data/dataPaper-I/reintegrated-obs.csv) and a normalised
+curated summary file such as [/data/dataPaper-I-in/reintegrated.csv](/data/dataPaper-I-in/reintegrated.csv) and emits a
 directory of XLSX spreadsheets in the form accepted by the [ARPHA writing tool](https://arpha.pensoft.net/) used for
 submission of biodiversity data papers.
 
@@ -96,7 +96,7 @@ such as github and Google Sheets.
 
 ## "Bagatelle" sunburst visualisation and map view
 
-Observation and checklist data derived from condensed summaries such as, e.g. [data/dataPaper/reintegrated.csv](data/dataPaper/reintegrated.csv)
+Observation and checklist data derived from condensed summaries such as, e.g. [data/dataPaper-I/reintegrated.csv](data/dataPaper-I/reintegrated.csv)
 is in a sunburst partition layout inspired by <https://bl.ocks.org/mbostock/4348373>,
 <https://www.jasondavies.com/coffee-wheel/>, as well as a map-based view rendered with [Leaflet](https://leafletjs.com/).
 
@@ -106,7 +106,7 @@ Data is compiled into a compressed JSON representation from CSV sources via a co
 
 To convert a CSV file, run `marmalise.js` e.g. via a line such as
 
-    node data/dataPaper/reintegrated.csv --map data/dataPaper/reintegrated-map.csv
+    node data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/reintegrated-map.csv
 
 By default this will produce a `Life.json.lz4` file which can be copied into a suitable location, e.g. in the </data>
 directories and then referred to in the JavaScript initialisation block seen, e.g. in the various [index.html](index.html)
