@@ -16,6 +16,7 @@ require("./dataProcessing/readCSVwithMap.js");
 require("./dataProcessing/readCSVwithoutMap.js");
 require("./dataProcessing/writeCSV.js");
 require("./expressions/expr.js");
+require("./utils/utils.js");
 
 var hortis = fluid.registerNamespace("hortis");
 
@@ -24,7 +25,7 @@ fluid.setLogging(true);
 var parsedArgs = minimist(process.argv.slice(2));
 
 // Yes, if only it actually were a pipeline!
-var pipeline = hortis.readJSONSync(parsedArgs.pipeline || "data/dataPaper-in/arpha-out.json5");
+var pipeline = hortis.readJSONSync(parsedArgs.pipeline || "data/dataPaper-I-in/arpha-out.json5");
 
 var summaryMap = hortis.readJSONSync(fluid.module.resolvePath(pipeline.summaryFileMap), "reading summary map file");
 
@@ -163,6 +164,10 @@ hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, 
             }
             togo[target] = outVal;
         });
+        if (row.individualCount && !hortis.isInteger(row.individualCount)) {
+            togo.occurrenceRemarks = "Count: " + row.individualCount;
+            togo.individualCount = "";
+        }
 
         if (row.coordinatesCorrected === "yes") {
             togo.georeferencedBy = "Andrew Simon";
@@ -260,6 +265,22 @@ hortis.verifyCounts = function (name, rowCount, rows) {
     });
 };
 
+hortis.eliminateEmptyColumns = function (rows) {
+    var hasValue = {};
+    rows.forEach(function (row) {
+        fluid.each(row, function (value, key) {
+            if (fluid.isValue(value) && value !== "") {
+                hasValue[key] = true;
+            }
+        });
+    });
+    var valueKeys = Object.keys(hasValue);
+    var togo = fluid.transform(rows, function (row) {
+        return fluid.filterKeys(row, valueKeys);
+    });
+    return togo;
+};
+
 var completion = fluid.promise.sequence([summaryReader.completionPromise, obsReader.completionPromise, patchReader.completionPromise]);
 
 completion.then(function () {
@@ -313,7 +334,8 @@ completion.then(function () {
         hortis.writeCSV("arphaMismatches.csv", ["previousIdentifications", "taxonName"].concat(Object.keys(fluid.censorKeys(summaryRows[0], ["taxonName"]))), mismatches, fluid.promise());
     }
 
-    hortis.writeCSV(outputDir + "/Materials.csv", Object.keys(allMaterials[0]), allMaterials, fluid.promise());
+    var filteredMaterials = hortis.eliminateEmptyColumns(allMaterials);
+    hortis.writeCSV(outputDir + "/Materials.csv", Object.keys(filteredMaterials[0]), filteredMaterials, fluid.promise());
 
     fluid.each(outs, function (sheets, key) {
         hortis.writeExcel(sheets, key, outputDir);

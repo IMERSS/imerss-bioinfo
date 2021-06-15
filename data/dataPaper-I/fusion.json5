@@ -9,7 +9,7 @@
         },
         iNat: {
             name: "Galiano iNaturalist Marine Observations (2005-2021)",
-            input: "%bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_04_30.csv",
+            input: "%bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_06_09.csv",
             map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
             outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99"
@@ -65,8 +65,8 @@
         },
         PhaseICoordinates: {
             type: "hortis.pipe.CSVInput",
-            input: "%bagatelle/data/dataPaper/Corrected_georeferencing_marine_animal_occurrence_records_corrected_2021-01-13-plus-round-8.csv",
-            map: "%bagatelle/data/dataPaper/correctedGeoreferencing-map.json",
+            input: "%bagatelle/data/dataPaper-I/Corrected_georeferencing_marine_animal_occurrence_records_corrected_2021-01-13-plus-round-8.csv",
+            map: "%bagatelle/data/dataPaper-I/correctedGeoreferencing-map.json",
             processor: "hortis.processCoordinatePatch"
         },
         GalianoRegion: {
@@ -77,8 +77,8 @@
         }
     },
     summarise: true,
-    output: "%bagatelle/data/dataPaper/reintegrated.csv",
-    combinedOutMap: "%bagatelle/data/dataPaper/combinedOutMap.json",
+    output: "%bagatelle/data/dataPaper-I/reintegrated.csv",
+    combinedOutMap: "%bagatelle/data/dataPaper-I/combinedOutMap.json",
     filters: {
         Plantae: {
             field: "kingdom", // Recall that these are before outMap is applied

@@ -30,6 +30,7 @@
         "placeName": "Place name",
         "individualCount": "Individual count",
         "depth": "Depth",
+        "gbifOccurrenceID": "gbifOccurrenceID",
         "catalogNumber": "Catalog Number",
         "confidence": "Confidence",
         "sex": "Sex",
@@ -51,7 +52,7 @@
         },
         "iNat": {
             "name": "Galiano iNaturalist Marine Observations (2005-2021)",
-            "input": "E:/source/gits/bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_04_30.csv",
+            "input": "E:/source/gits/bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_06_09.csv",
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99"

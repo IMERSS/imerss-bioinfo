@@ -5,6 +5,7 @@
         "locality": "Place name",
         "recordedBy": "Recorded by",
         "individualCount": "Individual count",
-        "depth": "Depth"
+        "depth": "Depth",
+        "gbifOccurrenceID": "gbifOccurrenceID"
     }
 }

@@ -1,9 +1,9 @@
 {
-    "summaryFile": "%bagatelle/data/dataPaper-in/reintegrated.csv",
-    "summaryFileMap": "%bagatelle/data/dataPaper-in/combinedOutMap.json",
-    "obsFile": "%bagatelle/data/dataPaper/reintegrated-obs.csv",
-    "obsFileMap": "%bagatelle/data/dataPaper/combinedOutMap-obs.json",
-    "patchFile": "%bagatelle/data/dataPaper-in/arphaMismatches-2021-05-14-dispositions.csv",
+    "summaryFile": "%bagatelle/data/dataPaper-I-in/reintegrated.csv",
+    "summaryFileMap": "%bagatelle/data/dataPaper-I-in/combinedOutMap.json",
+    "obsFile": "%bagatelle/data/dataPaper-I/reintegrated-obs.csv",
+    "obsFileMap": "%bagatelle/data/dataPaper-I/combinedOutMap-obs.json",
+    "patchFile": "%bagatelle/data/dataPaper-I-in/arphaMismatches-2021-05-14-dispositions.csv",
     "references": {
         "CHU2010": {
             ref: "Chu JWF, Leys SP (2010) High resolution mapping of community structure in three glass sponge reefs (Porifera, Hexactinellida). Marine Ecology Progress Series 417: 97‑113. https://doi.org/10.7939/r36k3q",
@@ -89,11 +89,11 @@
                 "occurrenceID": "${gbifOccurrenceID}",
                 "catalogNumber": "${catalogNumber}",
                 "occurrenceDetails": "",
-                "occurrenceRemarks": "Confidence: ${confidence}", // From code: Remember to conditionalise this
+                "occurrenceRemarks": "",
                 "recordNumber": "",
                 "recordedBy": "${recordedBy}",
                 "individualID": "",
-                "individualCount": "${individualCount}",
+                "individualCount": "${individualCount}", // Except for textual values which go into occurrenceRemarks
                 "sex": "${sex}",
                 "lifeStage": "",
                 "reproductiveCondition": "",
@@ -187,7 +187,7 @@
                 "identifiedBy": "",
                 "dateIdentified": "",
                 "identificationReferences": "",
-                "identificationRemarks": "",
+                "identificationRemarks": "Confidence: ${confidence}", // From code: Conditionalised by blatant special case - was occurrenceRemarks
                 "identificationQualifier": "",
                 "geologicalContextID": "",
                 "earliestEonOrLowestEonothem": "",
@@ -234,7 +234,7 @@
                 "datasetID": "",
                 "institutionCode": "!references.institutionCode",
                 "collectionCode": "!references.collectionCode",
-                "datasetName": "!references.datasetName",
+                "datasetName": "!references.datasetName", // TODO: This needs to be filled in universally
                 "ownerInstitutionCode": "",
                 "basisOfRecord": "!references.basisOfRecord",
                 "informationWithheld": "",
@@ -252,7 +252,7 @@
             }
         }
     },
-    outputDir: "%bagatelle/data/dataPaper-in/arphified",
+    outputDir: "%bagatelle/data/dataPaper-I-in/arphified",
     files: {
         Porifera: {
             filter: "phylum === 'Porifera'"

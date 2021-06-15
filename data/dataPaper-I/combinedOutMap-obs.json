@@ -30,6 +30,7 @@
         "placeName": "Place name",
         "individualCount": "Individual count",
         "depth": "Depth",
+        "gbifOccurrenceID": "gbifOccurrenceID",
         "catalogNumber": "Catalog Number",
         "confidence": "Confidence",
         "sex": "Sex",

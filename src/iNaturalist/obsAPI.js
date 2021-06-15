@@ -85,9 +85,6 @@ hortis.resultToRow = function (oneResult) {
 hortis.pushResultRows = function (rows, response) {
     response.results.forEach(function (oneResult) {
         var row = hortis.resultToRow(oneResult);
-        if (oneResult.geoprivacy !== null || oneResult.obscured !== false) {
-            console.log(oneResult);
-        }
         rows.push(row);
     });
 };
