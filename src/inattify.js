@@ -17,7 +17,7 @@ require("./dataProcessing/taxonScrape.js");
 require("./iNaturalist/taxonAPI.js");
 
 var hortis = fluid.registerNamespace("hortis");
-var taxonAPIFileBase = "e:/data/iNaturalist/taxonAPI";
+var taxonAPIFileBase = "data/iNaturalist/taxonAPI";
 
 var source = kettle.dataSource.URL({
     url: "https://www.inaturalist.org/taxa/%id.json",

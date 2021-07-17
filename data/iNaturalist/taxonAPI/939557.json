@@ -1,0 +1,71 @@
+{
+    "id": 939557,
+    "name": "Apomatus geniculatus",
+    "rank": "species",
+    "source_id": 17166,
+    "created_at": "2019-09-16T13:52:07.940Z",
+    "updated_at": "2019-09-26T17:28:09.180Z",
+    "iconic_taxon_id": 1,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 0,
+    "rank_level": 10,
+    "unique_name": "apomatus geniculatus",
+    "wikipedia_summary": null,
+    "wikipedia_title": "",
+    "ancestry": "48460/1/47491/47490/551647/551648/152937/49518/417218/375596",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "8251f08c-d9a7-4f9b-9159-52ad037fc6b2",
+    "default_name": {
+        "id": 1727740,
+        "name": "Apomatus geniculatus",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Animalia",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/animalia-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2019-09-16T13:52:07.940Z",
+    "updated_at_utc": "2019-09-26T17:28:09.180Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 1741299,
+            "name": "Apomatus geniculata",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 939557,
+            "created_at": "2019-09-26T17:28:09.176Z",
+            "updated_at": "2019-09-26T17:28:09.176Z",
+            "creator_id": null,
+            "position": 1
+        },
+        {
+            "id": 1727740,
+            "name": "Apomatus geniculatus",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 939557,
+            "created_at": "2019-09-16T13:52:07.940Z",
+            "updated_at": "2019-09-16T13:52:07.940Z",
+            "creator_id": 702203,
+            "position": 0
+        }
+    ],
+    "iconic_taxon": {
+        "id": 1,
+        "name": "Animalia"
+    }
+}

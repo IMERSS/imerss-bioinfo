@@ -179,6 +179,9 @@ hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, 
         if (togo.scientificName !== togo.previousIdentifications) {
             hortis.stashMismatchedRow(materialsMap.mismatches, patchIndex, togo, summaryRow);
         }
+        if (!togo.occurrenceID) {
+            togo.occurrenceID = "imerss.org:" + row.observationId;
+        }
         return togo;
     });
 };

@@ -1,0 +1,59 @@
+{
+    "id": 192679,
+    "name": "Crisiidae",
+    "rank": "family",
+    "source_id": 2,
+    "created_at": "2012-11-15T02:09:25.429Z",
+    "updated_at": "2018-12-31T06:27:57.097Z",
+    "iconic_taxon_id": 1,
+    "is_iconic": false,
+    "name_provider": "UBioNameProvider",
+    "observations_count": 14,
+    "listed_taxa_count": 1,
+    "rank_level": 30,
+    "unique_name": "crisiidae",
+    "wikipedia_summary": "<b>Crisiidae</b> is a family of bryozoans in the suborder Articulina.",
+    "wikipedia_title": "",
+    "ancestry": "48460/1/68104/128063/152929/841119",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "default_name": {
+        "id": 296732,
+        "name": "Crisiidae",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Animalia",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/animalia-75px-057784eeb6ea25a8c65477b98db675a1.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2012-11-15T02:09:25.429Z",
+    "updated_at_utc": "2018-12-31T06:27:57.097Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 296732,
+            "name": "Crisiidae",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 192679,
+            "created_at": "2012-11-15T02:09:25.429Z",
+            "updated_at": "2012-11-15T02:09:25.429Z",
+            "creator_id": null,
+            "position": 0
+        }
+    ],
+    "iconic_taxon": {
+        "id": 1,
+        "name": "Animalia"
+    }
+}

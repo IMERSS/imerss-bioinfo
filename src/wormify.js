@@ -20,7 +20,7 @@ require("./WoRMS/taxonAPI.js");
 fluid.setLogging(true);
 
 var hortis = fluid.registerNamespace("hortis");
-var taxonAPIFileBase = "e:/data/WoRMS/taxonAPI";
+var taxonAPIFileBase = "data/WoRMS/taxonAPI";
 
 var source = kettle.dataSource.URL({
     url: "https://www.marinespecies.org/rest/AphiaRecordsByName/%name?like=false&marine_only=false&offset=1",
@@ -31,10 +31,10 @@ var source = kettle.dataSource.URL({
 
 var parsedArgs = minimist(process.argv.slice(2));
 
-var mapFile = parsedArgs.map || "data/dataPaper-in/dataPaper-out-map.json";
+var mapFile = parsedArgs.map || "data/dataPaper-I-in/dataPaper-out-map.json";
 var map = hortis.readJSONSync(mapFile);
 
-var file = parsedArgs._[0] || "data/dataPaper-in/reintegrated.csv";
+var file = parsedArgs._[0] || "data/dataPaper-I-in/reintegrated.csv";
 var outFile = "reintegrated-WoRMS.csv";
 
 var resultsPromise = hortis.csvReaderWithMap({
@@ -93,21 +93,21 @@ hortis.queueFetchWork = function (queue) {
                 // hortis.enqueueAncestry(doc, that.queue);
                 fluid.invokeLater(oneWork);
             } else {
-                doc = source.get(head).then(function (doc) {
+                doc = source.get(head).then(function (docs) {
                     that.fetched.push(head);
-                    if (!doc || doc.length === 0) {
+                    if (!docs || docs.length === 0) {
                         console.log("Received no results for name " + head.name);
                         that.cache[name] = {
                             isError: true,
                             message: "Document not found"
                         };
                     } else {
-                        if (doc.length > 1) {
-                            console.log("Warning: received " + doc.length + " results for name " + head.name);
+                        if (docs.length > 1) {
+                            console.log("Warning: received " + docs.length + " results for name " + head.name);
                         }
                         // hortis.enqueueAncestry(doc, that.queue);
-                        hortis.writeTaxonDoc(filename, doc[0]);
-                        that.cache[name] = doc;
+                        hortis.writeTaxonDoc(filename, docs[0]);
+                        that.cache[name] = docs[0];
                     }
                     // that.completion.resolve(that.cache);
                     nextWork();

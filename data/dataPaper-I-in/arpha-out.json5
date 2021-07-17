@@ -33,12 +33,19 @@
             basisOfRecord: "PreservedSpecimen"
         },
         "BCCSN": {
-            institutionCode: "BC Cetacean Sightings Network",
+            institutionCode: "BCCSN",
+            datasetName: "British Columbia Cetacean Sightings Network Observations",
             basisOfRecord: "HumanObservation"
         },
         "CMN": {
             institutionCode: "CMN",
+            datasetName: "Canadian Museum of Nature Biological Specimens",
             basisOfRecord: "PreservedSpecimen"
+        },
+        "PMLS": {
+            institutionCode: "PMLS",
+            datasetName: "Pacific Marine Life Survey Dive Records",
+            basisOfRecord: "HumanObservation"
         }
     },
     "sheets": {

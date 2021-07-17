@@ -1,0 +1,59 @@
+{
+    "id": 423802,
+    "name": "Acantharea",
+    "rank": "class",
+    "source_id": 2,
+    "created_at": "2014-11-24T00:34:53.870Z",
+    "updated_at": "2018-08-27T23:12:30.023Z",
+    "iconic_taxon_id": 48222,
+    "is_iconic": false,
+    "name_provider": "UBioNameProvider",
+    "observations_count": 8,
+    "listed_taxa_count": 3,
+    "rank_level": 50,
+    "unique_name": "acantharea",
+    "wikipedia_summary": "The <b>Acantharea</b> (Acantharia) are a group of radiolarian protozoa, distinguished mainly by their skeletons.",
+    "wikipedia_title": "",
+    "ancestry": "48460/48222/211193",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": false,
+    "complete_rank": "",
+    "taxon_framework_relationship_id": null,
+    "default_name": {
+        "id": 653555,
+        "name": "Acantharea",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Chromista",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/chromista-75px-0711df42a8d4a3077217647f57649f50.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2014-11-24T00:34:53.870Z",
+    "updated_at_utc": "2018-08-27T23:12:30.023Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 653555,
+            "name": "Acantharea",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 423802,
+            "created_at": "2014-11-24T00:34:53.879Z",
+            "updated_at": "2014-11-24T00:34:53.879Z",
+            "creator_id": null,
+            "position": 0
+        }
+    ],
+    "iconic_taxon": {
+        "id": 48222,
+        "name": "Chromista"
+    }
+}

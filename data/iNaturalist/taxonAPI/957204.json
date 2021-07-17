@@ -1,0 +1,61 @@
+{
+    "id": 957204,
+    "name": "Ammophila strenua",
+    "rank": "species",
+    "source_id": 127,
+    "created_at": "2019-10-20T21:57:51.703Z",
+    "updated_at": "2019-10-22T13:52:47.717Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": "EolNameProvider",
+    "observations_count": 0,
+    "listed_taxa_count": 0,
+    "rank_level": 10,
+    "unique_name": "ammophila strenua",
+    "wikipedia_summary": null,
+    "wikipedia_title": "",
+    "ancestry": "48460/1/47120/372739/47158/184884/47201/124417/326777/47222/48742/334320/370786/83951",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "6e029baf-169a-41fc-9d97-2208854f3098",
+    "photos_locked": false,
+    "default_name": {
+        "id": 1762875,
+        "name": "Ammophila strenua",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2019-10-20T21:57:51.703Z",
+    "updated_at_utc": "2019-10-22T13:52:47.717Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 1762875,
+            "name": "Ammophila strenua",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 957204,
+            "created_at": "2019-10-20T21:57:51.715Z",
+            "updated_at": "2019-10-20T21:57:51.715Z",
+            "creator_id": null,
+            "position": 0
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

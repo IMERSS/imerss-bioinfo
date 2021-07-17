@@ -1,0 +1,61 @@
+{
+    "id": 532252,
+    "name": "Rinodina terricola",
+    "rank": "species",
+    "source_id": 11613,
+    "created_at": "2017-02-18T07:55:20.566Z",
+    "updated_at": "2017-02-18T07:55:21.300Z",
+    "iconic_taxon_id": 47170,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 0,
+    "rank_level": 10,
+    "unique_name": "rinodina terricola",
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/47170/48250/372740/54743/952186/372828/60717/123457",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "badac0d6-15cf-4c04-92e5-2c137b725e89",
+    "photos_locked": false,
+    "default_name": {
+        "id": 890778,
+        "name": "Rinodina terricola",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Fungi",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/fungi-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2017-02-18T07:55:20.566Z",
+    "updated_at_utc": "2017-02-18T07:55:21.300Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 890778,
+            "name": "Rinodina terricola",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 532252,
+            "created_at": "2017-02-18T07:55:20.566Z",
+            "updated_at": "2017-02-18T07:55:20.566Z",
+            "creator_id": 1,
+            "position": 0
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47170,
+        "name": "Fungi"
+    }
+}

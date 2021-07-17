@@ -1,0 +1,61 @@
+{
+    "id": 456993,
+    "name": "Macreurops",
+    "rank": "genus",
+    "source_id": 2,
+    "created_at": "2015-04-06T07:40:43.512Z",
+    "updated_at": "2017-12-02T01:03:10.162Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": "UBioNameProvider",
+    "observations_count": 0,
+    "listed_taxa_count": 0,
+    "rank_level": 20,
+    "unique_name": "macreurops",
+    "wikipedia_summary": "<i><b>Macreurops longicollis</b></i> is a species of beetles in the family Monotomidae, the only species in the genus <i><b>Macreurops</b></i>....",
+    "wikipedia_title": "",
+    "ancestry": "48460/1/47120/372739/47158/184884/47208/71130/372852/48485/174606/373411/489217",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "2a7c1505-dc13-4f52-bded-c49e161b2c72",
+    "photos_locked": false,
+    "default_name": {
+        "id": 718947,
+        "name": "Macreurops",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2015-04-06T07:40:43.512Z",
+    "updated_at_utc": "2017-12-02T01:03:10.162Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 718947,
+            "name": "Macreurops",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 456993,
+            "created_at": "2015-04-06T07:40:43.515Z",
+            "updated_at": "2015-04-06T07:40:43.515Z",
+            "creator_id": null,
+            "position": 0
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

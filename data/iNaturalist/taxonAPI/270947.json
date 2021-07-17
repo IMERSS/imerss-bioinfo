@@ -1,0 +1,59 @@
+{
+    "id": 270947,
+    "name": "Meleoma dolicharthra",
+    "rank": "species",
+    "source_id": 7830,
+    "created_at": "2013-04-29T15:02:48.262Z",
+    "updated_at": "2015-04-15T17:44:57.117Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 3,
+    "rank_level": 10,
+    "unique_name": "meleoma dolicharthra",
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47120/372739/47158/184884/48763/483236/52425/338941/209849/252667",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "default_name": {
+        "id": 386828,
+        "name": "Meleoma dolicharthra",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px-cc197e07ed5e0cb292d5ebe5e5eae8fa.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2013-04-29T15:02:48.262Z",
+    "updated_at_utc": "2015-04-15T17:44:57.117Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 386828,
+            "name": "Meleoma dolicharthra",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 270947,
+            "created_at": "2013-04-29T15:02:48.262Z",
+            "updated_at": "2013-04-29T15:02:48.262Z",
+            "creator_id": null,
+            "position": 0
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}
