@@ -5,6 +5,7 @@
         "description": "Description",
         "placeName": "Place name",
         "commonName": "Common name",
-        "recordedBy": "Recorded by"
+        "recordedBy": "Recorded by",
+        "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters"
     }
 }

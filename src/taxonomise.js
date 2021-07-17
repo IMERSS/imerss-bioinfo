@@ -202,18 +202,23 @@ hortis.oneDatasetToLoadable = function (dataset) {
 };
 
 // These are not functions, but they are not components
-fluid.defaults("hortis.pipe.CSVInput", {
+fluid.defaults("hortis.pipe", {
     gradeNames: "fluid.component",
+    loader: "fluid.identity"
+});
+
+fluid.defaults("hortis.pipe.CSVInput", {
+    gradeNames: "hortis.pipe",
     loader: "hortis.pipe.loadCSVInputPipe"
 });
 
 fluid.defaults("hortis.pipe.JSONInput", {
-    gradeNames: "fluid.component",
+    gradeNames: "hortis.pipe",
     loader: "hortis.pipe.loadJSONInputPipe"
 });
 
 fluid.defaults("hortis.pipe.contextInput", {
-    gradeNames: "fluid.component",
+    gradeNames: "hortis.pipe",
     loader: "hortis.pipe.loadContextInputPipe"
 });
 
@@ -271,6 +276,13 @@ hortis.deprivatise = function (resolved) {
     resolved.obsRows.forEach(function (row) {
         row.latitude = row.privateLatitude || row.latitude;
         row.longitude = row.privateLongitude || row.longitude;
+    });
+};
+
+hortis.roundCoordinates = function (resolved, patch) {
+    resolved.obsRows.forEach(function (row) {
+        row.latitude = hortis.roundDecimals(row.latitude, patch.places);
+        row.longitude = hortis.roundDecimals(row.longitude, patch.places);
     });
 };
 

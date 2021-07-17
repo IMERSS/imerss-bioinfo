@@ -28,6 +28,7 @@
         "recordedBy": "Recorded by",
         "eventRemarks": "Event Remarks",
         "placeName": "Place name",
+        "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters",
         "individualCount": "Individual count",
         "depth": "Depth",
         "gbifOccurrenceID": "gbifOccurrenceID",

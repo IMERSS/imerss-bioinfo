@@ -9,7 +9,8 @@
         "longitude": "%longitude",
         "privateLatitude": "%private_latitude",
         "privateLongitude": "%private_longitude",
-        "taxonName": "%scientific_name"
+        "taxonName": "%scientific_name",
+        "coordinateUncertaintyInMeters": "%positional_accuracy"
     },
     "datasetId": "iNat",
     "datasetClass": "citizen",

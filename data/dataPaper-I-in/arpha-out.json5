@@ -45,7 +45,8 @@
         "PMLS": {
             institutionCode: "PMLS",
             datasetName: "Pacific Marine Life Survey Dive Records",
-            basisOfRecord: "HumanObservation"
+            basisOfRecord: "HumanObservation",
+            coordinateUncertaintyInMeters: 500
         }
     },
     "sheets": {
@@ -179,7 +180,7 @@
                 "decimalLatitude": "${latitude}",
                 "decimalLongitude": "${longitude}",
                 "geodeticDatum": "",
-                "coordinateUncertaintyInMeters": "",
+                "coordinateUncertaintyInMeters": "${coordinateUncertaintyInMeters}",
                 "coordinatePrecision": "",
                 "pointRadiusSpatialFit": "",
                 "footprintWKT": "",

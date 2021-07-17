@@ -69,6 +69,11 @@
             map: "%bagatelle/data/dataPaper-I/correctedGeoreferencing-map.json",
             processor: "hortis.processCoordinatePatch"
         },
+        RoundCoordinates: {
+            type: "hortis.pipe",
+            processor: "hortis.roundCoordinates",
+            places: 6
+        },
         GalianoRegion: {
             type: "hortis.pipe.JSONInput",
             input: "%bagatelle/data/Galiano/Galiano_Island_Project_Boundary_Chu_final_2021-02-23.json",

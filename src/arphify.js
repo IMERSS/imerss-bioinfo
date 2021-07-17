@@ -148,16 +148,20 @@ hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, 
         var dataset = hortis.datasetIdFromObs(row.observationId);
         var summaryRow = materialsMap.finalNameIndex[row.iNaturalistTaxonId];
         row.scientificName = summaryRow ? summaryRow.taxonName : "";
+        var refBlock = references[dataset];
         fluid.each(columns, function (template, target) {
             var outVal = "";
+            if (refBlock && refBlock[target]) {
+                outVal = refBlock[target];
+            }
             if (template.startsWith("!references.")) {
                 var ref = template.substring("!references.".length);
-                outVal = fluid.getImmediate(references, [dataset, ref]) || "";
+                outVal = refBlock && refBlock[ref] || "";
             } else if (template.startsWith("!Date:")) {
                 var format = template.substring("!Date:".length);
                 outVal = moment.utc(row.dateObserved).format(format);
             } else {
-                outVal = hortis.stringTemplate(template, row);
+                outVal = hortis.stringTemplate(template, row) || outVal;
             }
             if (outVal === "Confidence: ") { // blatant special casing
                 outVal = "";

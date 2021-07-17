@@ -34,3 +34,12 @@ hortis.upgradeError = function (originError, whileMsg) {
     error.message = originError.message + whileMsg;
     return error;
 };
+
+hortis.roundDecimals = function (text, places) {
+    var parsed = hortis.parseFloat(text);
+    if (!isNaN(parsed)) {
+        return +parsed.toFixed(places);
+    } else {
+        return text;
+    }
+};
