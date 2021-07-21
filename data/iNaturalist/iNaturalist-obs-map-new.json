@@ -1,7 +1,7 @@
 {
     "columns": {
         "id": "%id",
-        "dateObserved": "%observed_on",
+        "dateObserved": "%time_observed_at",
         "observer": "%user_login",
         "recordedBy": "%user_name",
         "imageUrl": "%image_url",

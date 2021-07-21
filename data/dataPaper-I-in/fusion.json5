@@ -3,13 +3,14 @@
         Animalia: {
             name: "Animalia",
             datasetId: "DATA-Animalia",
-            input: "%bagatelle/data/dataPaper-in/Animalia.csv",
-            map: "%bagatelle/data/dataPaper-in/dataPaper-map.json",
-            outMap: "%bagatelle/data/dataPaper-in/dataPaper-out-map.json",
+            input: "%bagatelle/data/dataPaper-I-in/Animalia.csv",
+            map: "%bagatelle/data/dataPaper-I-in/dataPaper-map.json",
+            outMap: "%bagatelle/data/dataPaper-I-in/dataPaper-out-map.json",
             colour: "#931362"
         }
     },
     summarise: false,
-    output: "%bagatelle/data/dataPaper-in/reintegrated.csv",
-    combinedOutMap: "%bagatelle/data/dataPaper-in/combinedOutMap.json"
+    applySwaps: false,
+    output: "%bagatelle/data/dataPaper-I-in/reintegrated.csv",
+    combinedOutMap: "%bagatelle/data/dataPaper-I-in/combinedOutMap.json"
 }

@@ -50,6 +50,7 @@ hortis.resolveUrl = function (url, paramMap, directModel) {
 
 hortis.iNat.obsMap = {
     "id": "id",
+    "time_observed_at": "time_observed_at",
     "observed_on": "observed_on",
     "user_login": "user.login",
     "user_name": "user.name",
@@ -79,6 +80,7 @@ hortis.resultToRow = function (oneResult) {
     });
     hortis.applyLocation(oneResult, row, "");
     hortis.applyLocation(oneResult, row, "private_");
+    row.time_observed_at = row.time_observed_at || row.observed_on;
     return row;
 };
 

@@ -1,5 +1,6 @@
 {
     "columns": {
+        "id": "%ID",
         "taxonName": "%ScientificName",
         "commonName": "%SpeciesName",
         "dateObserved": "!Date(MM/DD/YY,%Date)",
@@ -12,5 +13,5 @@
     },
     "datasetId": "BCCSN",
     "datasetClass": "naturalist",
-    "observationId": "%rowNumber"
+    "observationId": "%id"
 }

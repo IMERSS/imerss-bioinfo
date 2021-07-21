@@ -9,7 +9,7 @@ var kettle = require("kettle");
 var fs = require("fs");
 fluid.require("%bagatelle");
 
-var baseDir = fluid.module.resolvePath("%bagatelle/data/dataPaper-in/Animalia/");
+var baseDir = fluid.module.resolvePath("%bagatelle/data/dataPaper-I-in/Animalia/");
 
 var dir = process.argv[2] || "e:/data/Google Drive/Galiano Data Paper 2021/Marine Life/Animalia";
 var source = kettle.dataSource.URL({

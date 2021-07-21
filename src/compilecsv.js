@@ -18,9 +18,9 @@ fluid.setLogging(true);
 
 var parsedArgs = minimist(process.argv.slice(2));
 
-var outputFile = parsedArgs.o || "%bagatelle/data/dataPaper-in/Animalia.csv";
-var inputFile = parsedArgs._[0] || "%bagatelle/data/dataPaper-in/Animalia/*.csv";
-var mapFile = parsedArgs.map || "%bagatelle/data/dataPaper-in/dataPaper-map.json";
+var outputFile = parsedArgs.o || "%bagatelle/data/dataPaper-I-in/Animalia.csv";
+var inputFile = parsedArgs._[0] || "%bagatelle/data/dataPaper-I-in/Animalia/*.csv";
+var mapFile = parsedArgs.map || "%bagatelle/data/dataPaper-I-in/dataPaper-map.json";
 
 var map = hortis.readJSONSync(fluid.module.resolvePath(mapFile), "reading map file");
 

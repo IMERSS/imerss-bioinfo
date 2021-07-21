@@ -4,7 +4,7 @@
 
 var fluid = require("infusion");
 var minimist = require("minimist");
-var moment = require("moment");
+var moment = require("moment-timezone");
 var ExcelJS = require("exceljs");
 var fs = require("fs");
 
@@ -23,6 +23,9 @@ var hortis = fluid.registerNamespace("hortis");
 fluid.setLogging(true);
 
 var parsedArgs = minimist(process.argv.slice(2));
+
+require("./WoRMS/taxonAPI.js");
+var WoRMSTaxonAPIFileBase = "data/WoRMS/taxonAPI";
 
 // Yes, if only it actually were a pipeline!
 var pipeline = hortis.readJSONSync(parsedArgs.pipeline || "data/dataPaper-I-in/arpha-out.json5");
@@ -57,11 +60,12 @@ hortis.normalise = function (str) {
     return str.replace(/\s+/g, " ").trim();
 };
 
-hortis.extractGenus = function (name, obj) {
+// Variant for summaries
+hortis.extractGenus = function (name, outRow) {
     var matches = hortis.genusEx.exec(name);
     var togo;
     if (matches) {
-        obj.Subgenus = matches[1];
+        outRow.Subgenus = matches[1];
         togo = name.replace(hortis.genusEx, "");
     } else {
         togo = name;
@@ -69,7 +73,63 @@ hortis.extractGenus = function (name, obj) {
     return hortis.normalise(togo);
 };
 
-hortis.extractSsp = function (name, obj) {
+// Variant for obs -> Darwin Core
+hortis.axeFromName = ["sp.", "ssp.", "spp."];
+
+hortis.qualForming = ["complex", "agg", "s.lat.", "cf", "sp.nov.", "var.", "sp.A", "sp.B"];
+
+hortis.extractSubgenus = function (seg, outRow) {
+    if (seg.startsWith("(") && seg.endsWith(")")) {
+        outRow.subgenus = seg.substring(1, seg.length - 1);
+        return 1;
+    } else {
+        return 0;
+    }
+};
+
+/*
+ * AS of 19/7/21
+ * so yes, in the 'qualifier' field I think the only relevant values from our dataset are: 'cf.', 'species complex', 'sp.A', and 'sp.B'
+ * in the 'identificationRemarks' field we will add the critical note
+ * so let's discard 'sp.' and 'spp.' from the catalogue
+ * we will only use it in the curated summary / checklists
+ */
+
+hortis.extractQualifier = function (name, outRow) {
+    var words = name.split(" ");
+    // Unconditionally axe sp/spp/ssp from all words
+    var useWords = words.filter(function (word) {
+        return !hortis.axeFromName.includes(word);
+    });
+
+    var bareWords = useWords.filter(function (word) {
+        return !hortis.qualForming.includes(word);
+    });
+
+    var sspPoint = 1 + hortis.extractSubgenus(bareWords[1] || "", outRow);
+
+    var lastBareWords = bareWords.slice(sspPoint);
+
+    outRow.genus = bareWords[0];
+
+    if (lastBareWords.length === 0) {
+        outRow.taxonRank = "genus";
+    } else if (lastBareWords.length === 1) {
+        outRow.specificEpithet = lastBareWords[0];
+        outRow.taxonRank = "species";
+    } else if (lastBareWords.length === 2) {
+        outRow.specificEpithet = lastBareWords[0];
+        outRow.infraspecificEpithet = lastBareWords[1];
+        outRow.taxonRank = "subspecies";
+    }
+
+    outRow.identificationQualifier = useWords.slice(1).join(" ");
+    outRow.scientificName = [outRow.genus, ...lastBareWords].join(" ");
+
+};
+
+// Variant for summaries
+hortis.extractSsp = function (name, outRow) {
     var words = name.split(" ");
 
     if (words.length === 3) {
@@ -78,26 +138,19 @@ hortis.extractSsp = function (name, obj) {
             || maybeSsp.startsWith("agg")
             || maybeSsp.startsWith("s.lat.")
             || words[1].startsWith("cf")) {
-            obj.Species = words[1] + " " + maybeSsp;
+            outRow.Species = words[1] + " " + maybeSsp;
         } else {
-            obj.Species = words[1];
-            obj.Subspecies = maybeSsp;
+            outRow.Species = words[1];
+            outRow.Subspecies = maybeSsp;
         }
     } else if (words.length === 2) {
-        obj.Species = words[1];
+        outRow.Species = words[1];
     } else {
         fluid.fail("Unexpected species name " + name);
     }
 };
 
-hortis.stringTemplateRegex = /\${([^\}]*)}/g;
-
-hortis.stringTemplate = function (template, vars) {
-    var replacer = function (all, match) {
-        return vars[match] || "";
-    };
-    return template.replace(hortis.stringTemplateRegex, replacer);
-};
+/* Accepts a row of a summary, and the column structure inside "Taxa" */
 
 hortis.mapTaxaRows = function (rows, columns) {
     return fluid.transform(rows, function (row) {
@@ -142,12 +195,89 @@ hortis.stashMismatchedRow = function (mismatches, patchIndex, obsRow, summaryRow
     }
 };
 
+hortis.badDates = {};
+
+hortis.formatDate = function (row, template) {
+    var togo = "";
+    var format = template.substring("!Date:".length);
+    // TODO: This should actually be applied in the data loader
+    var momentVal = moment.tz(row.dateObserved, "Canada/Pacific");
+    if (momentVal.isValid()) {
+        // RBCM records claim to have a time but they don't
+        var noTime = !row.dateObserved.includes("T") || row.dateObserved.includes("T00:00:00");
+        togo = noTime && format.includes("H") ? "" : momentVal.format(format);
+    } else {
+        var obsId = row.observationId;
+        if (!hortis.badDates[obsId]) {
+            console.log("WARNING: row " + row.observationId + " has invalid date " + row.dateObserved);
+        }
+        hortis.badDates[obsId] = true;
+    }
+    return togo;
+};
+
+// TODO: Of course we need to pipeline the whole of ARPHA export
+hortis.quantiseDepth = function (outRow, places) {
+    var depth = outRow.verbatimDepth;
+    if (depth === "o-86") {
+        outRow.verbatimDepth = "0-86";
+        outRow.minimumDepthInMeters = "0";
+        outRow.maximumDepthInMeters = "86";
+    } else {
+        var togo = hortis.roundDecimals(depth, places);
+        if (togo && isNaN(togo)) {
+            console.log("WARNING: row " + outRow.occurrenceID + " has invalid depth " + depth);
+        }
+        outRow.verbatimDepth = togo;
+    }
+};
+
+// Table of bad "count" entries from PMLS data
+hortis.badCountTable = {
+    "1 patc": "1 patch",
+    "1tiny":  "1 tiny",
+    "2 (pair0": "2",
+    "2 larg": "2 large",
+    "?": "",
+    "`": "",
+    "i": "",
+    "-": "",
+    "snall": "",
+    "present": "",
+    "NA": "",
+    "white and cream": ""
+};
+
+// Technical reviewer recommendation 4
+hortis.mapIndividualCount = function (outRow) {
+    var count = outRow.individualCount;
+    var lookup = hortis.badCountTable[count];
+    var mapped = lookup === undefined ? count : lookup;
+    if (mapped && !hortis.isInteger(mapped)) {
+        outRow.occurrenceRemarks = "Count: " + mapped;
+        outRow.individualCount = "";
+    } else {
+        outRow.individualCount = mapped;
+    }
+};
+
+hortis.normaliseRecorders = function (recordedBy) {
+    // Technical reviewer recommendation 5
+    var separators = recordedBy.replace("; ", " | ").trim();
+    // Technical reviewer recommendation 6
+    var togo = separators === "anonymous" ? "" : separators;
+    return togo;
+};
+
 hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, columns) {
     return fluid.transform(rows, function (row) {
         var togo = {};
         var dataset = hortis.datasetIdFromObs(row.observationId);
-        var summaryRow = materialsMap.finalNameIndex[row.iNaturalistTaxonId];
-        row.scientificName = summaryRow ? summaryRow.taxonName : "";
+        var summaryRow = materialsMap.summaryIndex[row.iNaturalistTaxonId];
+        var termMap = fluid.extend({}, row, {
+            summary: summaryRow
+        });
+        // row.scientificName = summaryRow ? summaryRow.taxonName : "";
         var refBlock = references[dataset];
         fluid.each(columns, function (template, target) {
             var outVal = "";
@@ -158,20 +288,20 @@ hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, 
                 var ref = template.substring("!references.".length);
                 outVal = refBlock && refBlock[ref] || "";
             } else if (template.startsWith("!Date:")) {
-                var format = template.substring("!Date:".length);
-                outVal = moment.utc(row.dateObserved).format(format);
+                outVal = hortis.formatDate(row, template);
             } else {
-                outVal = hortis.stringTemplate(template, row) || outVal;
+                outVal = hortis.stringTemplate(template, termMap) || outVal;
             }
             if (outVal === "Confidence: ") { // blatant special casing
                 outVal = "";
             }
             togo[target] = outVal;
         });
-        if (row.individualCount && !hortis.isInteger(row.individualCount)) {
-            togo.occurrenceRemarks = "Count: " + row.individualCount;
-            togo.individualCount = "";
+        if (!togo.occurrenceID) {
+            togo.occurrenceID = "imerss.org:" + row.observationId;
         }
+        hortis.quantiseDepth(togo, 2);
+        hortis.mapIndividualCount(togo);
 
         if (row.coordinatesCorrected === "yes") {
             togo.georeferencedBy = "Andrew Simon";
@@ -183,9 +313,14 @@ hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, 
         if (togo.scientificName !== togo.previousIdentifications) {
             hortis.stashMismatchedRow(materialsMap.mismatches, patchIndex, togo, summaryRow);
         }
-        if (!togo.occurrenceID) {
-            togo.occurrenceID = "imerss.org:" + row.observationId;
-        }
+        hortis.extractQualifier(togo.scientificName, togo);
+
+        var filename = hortis.WoRMSTaxa.filenameFromTaxonName(WoRMSTaxonAPIFileBase, row.iNaturalistTaxonName);
+        var wormsRec = hortis.readJSONSync(filename);
+        togo.taxonID = "WoRMS:" + wormsRec.AphiaID;
+
+        togo.recordedBy = hortis.normaliseRecorders(togo.recordedBy);
+        togo.georeferencedBy = hortis.normaliseRecorders(togo.georeferencedBy);
         return togo;
     });
 };
@@ -225,7 +360,7 @@ hortis.writeExcel = function (sheets, key, outputDir) {
     return togo;
 };
 
-hortis.indexFinalNames = function (summaryRows) {
+hortis.indexSummary = function (summaryRows) {
     var togo = {};
     summaryRows.forEach(function (row) {
         togo[row.iNaturalistTaxonId] = row;
@@ -297,12 +432,12 @@ completion.then(function () {
     var obsRows = obsReader.rows;
     console.log("Obs Input: " + obsRows.length + " rows");
     var obsRowCount = fluid.generate(obsRows.length, 0);
-    var finalNameIndex = hortis.indexFinalNames(summaryRows);
+    var summaryIndex = hortis.indexSummary(summaryRows);
     var patchRows = patchReader.rows;
     console.log("Patch Input: " + patchRows.length + " rows");
     var patchIndex = hortis.indexPatchRows(patchRows);
     var materialsMap = {
-        finalNameIndex: finalNameIndex,
+        summaryIndex: summaryIndex,
         mismatches: {}
     };
     var now = Date.now();
@@ -318,9 +453,7 @@ completion.then(function () {
         var outObsRows = hortis.filterArphaRows(obsRows, rec, obsRowCount);
         console.log("Extracted " + outObsRows.length + " obs rows via filter " + key);
 
-        var Materials = pipeline.sheets.Materials;
         var materialsRows = hortis.mapMaterialsRows(outObsRows, patchIndex, materialsMap, pipeline.references, pipeline.sheets.Materials.columns);
-        hortis.sortRows(materialsRows, Materials.sortBy);
 
         // ARPHA can't actually accept this many Materials rows - we will export them to CSV instead
         allMaterials = allMaterials.concat(materialsRows);
@@ -341,6 +474,7 @@ completion.then(function () {
         hortis.writeCSV("arphaMismatches.csv", ["previousIdentifications", "taxonName"].concat(Object.keys(fluid.censorKeys(summaryRows[0], ["taxonName"]))), mismatches, fluid.promise());
     }
 
+    hortis.sortRows(allMaterials, pipeline.sheets.Materials.sortBy);
     var filteredMaterials = hortis.eliminateEmptyColumns(allMaterials);
     hortis.writeCSV(outputDir + "/Materials.csv", Object.keys(filteredMaterials[0]), filteredMaterials, fluid.promise());
 

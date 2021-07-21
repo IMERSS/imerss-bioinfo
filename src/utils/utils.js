@@ -43,3 +43,13 @@ hortis.roundDecimals = function (text, places) {
         return text;
     }
 };
+
+hortis.stringTemplateRegex = /\${([^\}]*)}/g;
+
+hortis.stringTemplate = function (template, vars) {
+    var replacer = function (all, match) {
+        var segs = match.split(".");
+        return fluid.getImmediate(vars, segs) || "";
+    };
+    return template.replace(hortis.stringTemplateRegex, replacer);
+};

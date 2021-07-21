@@ -32,6 +32,9 @@ var parsedArgs = minimist(process.argv.slice(2));
 var taxaMap = hortis.readJSONSync("data/iNaturalist/iNaturalist-taxa-map.json", "reading iNaturalist taxa map file");
 var taxonResolveMap = hortis.readJSONSync("data/TaxonResolution-map.json", "reading taxon resolution map");
 var swaps = hortis.readJSONSync("data/taxon-swaps.json5", "reading taxon swaps file");
+if (!parsedArgs.fusion) {
+    fluid.fail("Missing argument --fusion");
+}
 var fusion = hortis.readJSONSync(parsedArgs.fusion);
 
 var discardRanksBelow = "genus"; // TODO: Make this an argument
@@ -377,7 +380,7 @@ hortis.isSelfUndetermined = function (name) {
 };
 
 // Side-effects: populates that.obsIdToTaxon, that.undetHash, that.undetKeys, that.discardedTaxa
-hortis.applyObservations = function (that, obsRows) {
+hortis.applyObservations = function (that, obsRows, applySwaps) {
     var identifiedTo = {}; // Two-level hash of {rank, obs index} to obs
     obsRows.forEach(function (obs) {
         var obsId = obs.observationId;
@@ -387,7 +390,7 @@ hortis.applyObservations = function (that, obsRows) {
         var san = hortis.sanitizeSpeciesName(obs.taxonName);
         var taxonLevel = "Undetermined";
         if (!hortis.isSelfUndetermined(san)) {
-            var invertedId = invertedSwaps[san];
+            var invertedId = applySwaps ? invertedSwaps[san] : null;
             var taxon = invertedId && that.taxaById[invertedId] || that.taxaHash[san];
             if (taxon) {
                 taxonLevel = taxon.taxonRank;
@@ -519,7 +522,7 @@ hortis.settleStructure(dataPromises).then(function (data) {
     var that = hortis.makeTaxonomiser(data, {
         discardRanksBelowIndex: discardRanksBelowIndex
     });
-    hortis.applyObservations(that, flatObs);
+    hortis.applyObservations(that, flatObs, fusion.applySwaps);
 
     var writeResolutionFile = parsedArgs.writeRes; // TODO: doesn't seem that this is read or modified any more
     if (writeResolutionFile) {

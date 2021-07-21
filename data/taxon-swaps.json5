@@ -249,16 +249,17 @@
         },
         iNaturalistTaxonId: "429951",
     },
-    "Henricia aspera": {
+    "Henricia aspera aspera": {
         taxonNames: {
             "ridged blood star": {
                 type: "commonName",
             },
             "Henricia aspera aspera": {
                 resolvedBy: "AB",
+                notes: "Added to iNat, swap pending update"
             },
         },
-        iNaturalistTaxonId: "293168",
+        iNaturalistTaxonId: "1265168",
     },
     "Henricia leviuscula": {
         taxonNames: {
@@ -1235,20 +1236,20 @@
         taxonNames: {
             "Clinocardium ciliatum": {
                 resolvedBy: "AB",
-                notes: "From WoL data",
+                notes: "Unaccepted synonym acc. WoRMS - but also note algorithmic blunder that ended up applying this to curated summaries too!",
                 oldiNaturalistTaxonId: "125365"
             }
         },
         iNaturalistTaxonId: "940646"
     },
-    "Ampelisca macrocephala unsocalae": {
+    "Ampelisca unsocalae": {
         taxonNames: {
             "Ampelisca unsocalae": {
                 resolvedBy: "AB",
-                notes: "This is not current in WoRMS, has been flagged in iNat but not yet acted on"
+                notes: "I have now fixed this in iNat by assigning id 1265117, swap is just pending update"
             }
         },
-        iNaturalistTaxonId: "313004"
+        iNaturalistTaxonId: "1265117"
     },
     "Antithamnionella pacifica": {
         taxonNames: {
@@ -1999,6 +2000,16 @@
             },
         },
         iNaturalistTaxonId: "347993"
+    },
+    "Chondracanthus": {
+        taxonNames: {
+            "Chondracanthus": { // NB Animalia to Plantae!
+                resolvedBy: "AB",
+                notes: "Yet another ambiguous genus name",
+                oldiNaturalistTaxonId: "497212"
+            },
+        },
+        iNaturalistTaxonId: "117813"
     },
     "Peltodoris lentiginosa": {
         taxonNames: {

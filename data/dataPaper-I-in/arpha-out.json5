@@ -9,13 +9,15 @@
             ref: "Chu JWF, Leys SP (2010) High resolution mapping of community structure in three glass sponge reefs (Porifera, Hexactinellida). Marine Ecology Progress Series 417: 97‑113. https://doi.org/10.7939/r36k3q",
             samplingProtocol: "ROV",
             datasetName: "Chu & Leys (2010)",
-            basisOfRecord: "HumanObservation"
+            basisOfRecord: "HumanObservation",
+            coordinateUncertaintyInMeters: 1
         },
         "CHU2012": {
             ref: "Chu JWF, Leys SP (2012) The dorid nudibranchs Peltodoris lentiginosa and Archidoris odhneri as predators of glass sponges. Invertebrate Biology x (x): 1‑7. https://doi.org/10.5061/dryad.3tc7s",
             samplingProtocol: "ROV",
             datasetName: "Chu & Leys (2012)",
-            basisOfRecord: "HumanObservation"
+            basisOfRecord: "HumanObservation",
+            coordinateUncertaintyInMeters: 1
         },
         "Gal-Salm": {
             ref: "Erickson K (2000) 1999 / 2000 urban salmon habitat program final report. Galiano Conservancy Association, Galiano Island, BC. Unpublished report.",
@@ -63,7 +65,7 @@
                 "Superorder": "${superorder}",
                 "Order": "${order}",
                 "Suborder": "${suborder}",
-                "Infraorder": "", // missing
+                "Infraorder": "${infraorder}", // TODO - get it back!
                 "Superfamily": "${superfamily}",
                 "Family": "${family}",
                 "Subfamily": "${subfamily}",
@@ -88,7 +90,7 @@
                 // End missing
                 "Notes": "${criticalNotes}"
             },
-            sortBy: ["Phylum", "Class", "Subclass", "Order", "Suborder", "Family", "Subfamily", "Genus", "Species"]
+            sortBy: ["Phylum", "Class", "Subclass", "Order", "Suborder", "Infraorder", "Superfamily", "Family", "Subfamily", "Genus", "Species"]
         },
         Materials: {
             "columns": {
@@ -116,7 +118,7 @@
                 "associatedReferences": "!references.ref",
                 "associatedOccurrences": "",
                 "associatedSequences": "",
-                "taxonID": "iNaturalist:${iNaturalistTaxonId}",
+                "taxonID": "iNaturalist:${iNaturalistTaxonId}", // Actually overridden by WoRMS ID
                 "scientificNameID": "",
                 "acceptedNameUsageID": "",
                 "parentNameUsageID": "",
@@ -124,7 +126,7 @@
                 "nameAccordingToID": "",
                 "namePublishedInID": "",
                 "taxonConceptID": "",
-                "scientificName": "${scientificName}", // From code: synthesize this field by mapping based on checklist
+                "scientificName": "${summary.taxonName}", // TODO: but no longer - should be next higher valid taxon acc. reviewer
                 "acceptedNameUsage": "",
                 "parentNameUsage": "",
                 "originalNameUsage": "",
@@ -135,6 +137,9 @@
                 "phylum": "${phylum}",
                 "class": "${class}",
                 "order": "${order}",
+                "suborder": "${suborder}", // NOTE! Not part of DwC!!
+                "infraorder": "${infraorder}", // NOTE! Not part of DwC!!
+                "superfamily": "${superfamily}", // NOTE! Not part of DwC!!
                 "family": "${family}",
                 "genus": "${genus}",
                 "subgenus": "${subgenus}", // TODO: Lift this from checklist?
@@ -142,7 +147,7 @@
                 "infraspecificEpithet": "",
                 "taxonRank": "",
                 "verbatimTaxonRank": "",
-                "scientificNameAuthorship": "",
+                "scientificNameAuthorship": "${summary.Author}",
                 "vernacularName": "",
                 "nomenclaturalCode": "",
                 "taxonomicStatus": "",
@@ -219,7 +224,7 @@
                 "samplingProtocol": "!references.samplingProtocol",
                 "samplingEffort": "",
                 "eventDate": "!Date:YYYY-MM-DD",
-                "eventTime": "", // TODO: Not requested but we could get it via toISOTime()
+                "eventTime": "!Date:HH:mm:ss", 
                 "startDayOfYear": "",
                 "endDayOfYear": "",
                 "year": "!Date:YYYY",
@@ -250,7 +255,7 @@
                 "dynamicProperties": "",
                 "source": ""
             },
-            sortBy: ["phylum", "class", "order", "family", "genus", "scientificName", "eventDate"]
+            sortBy: ["phylum", "class", "subclass", "order", "suborder", "infraorder", "superfamily", "family", "subfamily", "genus", "scientificName", "eventDate"]
         },
         ExternalLinks: {
             "columns": {

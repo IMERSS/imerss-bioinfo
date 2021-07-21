@@ -14,6 +14,7 @@
         "superorder": "Superorder",
         "order": "Order",
         "suborder": "Suborder",
+        "infraorder": "Infraorder",
         "superfamily": "Superfamily",
         "family": "Family",
         "subfamily": "Subfamily",
@@ -46,14 +47,14 @@
     "datasets": {
         "PMLS": {
             "name": "Pacific Marine Life Survey Dive Records (1968-2019)",
-            "input": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2021-05-19.csv",
+            "input": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2021-07-09.csv",
             "map": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS-map.json",
             "outMap": "E:/source/gits/bagatelle/data/Galiano PMLS/PMLS-out-map.json",
             "colour": "#931362"
         },
         "iNat": {
             "name": "Galiano iNaturalist Marine Observations (2005-2021)",
-            "input": "E:/source/gits/bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_06_09.csv",
+            "input": "E:/source/gits/bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_07_20.csv",
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99"

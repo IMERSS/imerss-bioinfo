@@ -14,6 +14,7 @@
         "csv-writer": "1.6.0",
         "exceljs": "4.2.1",
         "moment": "2.29.1",
+        "moment-timezone": "0.5.33",
         "jsep": "EricSmekens/jsep#25fcb53",
         "glob": "7.1.6",
         "minimist": "1.2.5",
