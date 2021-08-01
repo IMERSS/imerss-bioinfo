@@ -11,6 +11,10 @@ fluid.require("%bagatelle");
 
 var baseDir = fluid.module.resolvePath("%bagatelle/data/dataPaper-I-in/Animalia/");
 
+fs.mkdirSync(baseDir, {
+    recursive: true
+});
+
 var dir = process.argv[2] || "e:/data/Google Drive/Galiano Data Paper 2021/Marine Life/Animalia";
 var source = kettle.dataSource.URL({
     url: "https://docs.google.com/spreadsheets/d/%id/export?format=csv&id=%id&gid=0",
