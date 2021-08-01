@@ -76,7 +76,7 @@ hortis.extractGenus = function (name, outRow) {
 // Variant for obs -> Darwin Core
 hortis.axeFromName = ["sp.", "ssp.", "spp."];
 
-hortis.qualForming = ["complex", "agg", "s.lat.", "cf", "sp.nov.", "var.", "sp.A", "sp.B"];
+hortis.qualForming = ["complex", "agg", "s.lat.", "cf", "sp.nov.", "var.", "sp.A", "sp.B", "B"];
 
 hortis.extractSubgenus = function (seg, outRow) {
     if (seg.startsWith("(") && seg.endsWith(")")) {
@@ -89,7 +89,7 @@ hortis.extractSubgenus = function (seg, outRow) {
 
 /*
  * AS of 19/7/21
- * so yes, in the 'qualifier' field I think the only relevant values from our dataset are: 'cf.', 'species complex', 'sp.A', and 'sp.B'
+ * so yes, in the 'qualifier' field I think the only relevant values from our dataset are: 'cf', 'species complex', 'sp.A', and 'sp.B'
  * in the 'identificationRemarks' field we will add the critical note
  * so let's discard 'sp.' and 'spp.' from the catalogue
  * we will only use it in the curated summary / checklists
@@ -102,6 +102,7 @@ hortis.extractQualifier = function (name, outRow) {
         return !hortis.axeFromName.includes(word);
     });
 
+    // Filter out even qualifier-forming terms so that we can populate broken-out fields and scientificName
     var bareWords = useWords.filter(function (word) {
         return !hortis.qualForming.includes(word);
     });
@@ -123,7 +124,11 @@ hortis.extractQualifier = function (name, outRow) {
         outRow.taxonRank = "subspecies";
     }
 
-    outRow.identificationQualifier = useWords.slice(1).join(" ");
+    var qualPoint = useWords.findIndex(function (word) {
+        return hortis.qualForming.includes(word);
+    });
+
+    outRow.identificationQualifier = qualPoint === -1 ? "" : useWords.slice(qualPoint).join(" ");
     outRow.scientificName = [outRow.genus, ...lastBareWords].join(" ");
 
 };
@@ -314,6 +319,9 @@ hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, 
             hortis.stashMismatchedRow(materialsMap.mismatches, patchIndex, togo, summaryRow);
         }
         hortis.extractQualifier(togo.scientificName, togo);
+        if (summaryRow && summaryRow.criticalNotes) {
+            togo.identificationRemarks = summaryRow.criticalNotes;
+        }
 
         var filename = hortis.WoRMSTaxa.filenameFromTaxonName(WoRMSTaxonAPIFileBase, row.iNaturalistTaxonName);
         var wormsRec = hortis.readJSONSync(filename);
