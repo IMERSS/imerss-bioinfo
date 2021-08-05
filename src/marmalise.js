@@ -179,7 +179,7 @@ hortis.rootNode = function (map) {
 
 fluid.defaults("hortis.treeBuilder", {
     gradeNames: "fluid.component",
-    taxonAPIFileBase: "e:/data/iNaturalist/taxonAPI",
+    taxonAPIFileBase: "data/iNaturalist/taxonAPI",
     mapFile: "data/Galiano/Galiano-map.json",
     outputFile: "Life.json.lz4",
     inputFiles: [],
