@@ -216,6 +216,11 @@
             field: "family",
             equals: "Procyonidae",
             exclude: true
+        },
+        BadRBCMHemigrapsus: { // Review point 2 from technical reviewer
+            field: "gbifOccurrenceID",
+            equals: "49c162e1-b19e-499c-863a-7c3ae208f9ac",
+            exclude: true
         }
     }
 }

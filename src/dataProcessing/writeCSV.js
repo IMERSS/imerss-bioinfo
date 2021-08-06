@@ -13,6 +13,10 @@ require("./readCSVWithoutMap.js");
 hortis.writeCSV = function (fileName, headersOrMap, rows, completionPromise) {
     var isHeaders = fluid.isArrayable(headersOrMap);
     var headers = isHeaders ? headersOrMap : Object.values(headersOrMap);
+    var duplicates = hortis.findDuplicates(headers);
+    if (duplicates.length > 0) {
+        fluid.fail("Error in hortis.writeCSV: duplicate column names: ", duplicates.join(", "));
+    }
     var csvWriter = csvWriterModule.createArrayCsvWriter({
         header: headers,
         path: fileName

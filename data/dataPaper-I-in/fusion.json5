@@ -14,7 +14,7 @@
     // curated summaries will not be detected. However - these have all now
     // been corrected, and we have an architectural problem that taxa whose
     // names are ambiguous across kingdoms, e.g. Tetilla are currently
-    // being faultily correct by swaps. Therefore for final publication
+    // being faultily corrected by swaps. Therefore for final publication
     // this has to be set to true to avoid misidentifying these taxa.
     applySwaps: true,
     output: "%bagatelle/data/dataPaper-I-in/reintegrated.csv",

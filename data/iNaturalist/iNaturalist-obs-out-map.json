@@ -3,7 +3,6 @@
         "taxonName": "Taxon name",
         "dateObserved": "Date observed",
         "description": "Description",
-        "placeName": "Place name",
         "commonName": "Common name",
         "recordedBy": "Recorded by",
         "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters"

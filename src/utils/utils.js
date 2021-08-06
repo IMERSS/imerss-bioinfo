@@ -53,3 +53,9 @@ hortis.stringTemplate = function (template, vars) {
     };
     return template.replace(hortis.stringTemplateRegex, replacer);
 };
+
+hortis.findDuplicates = function (array) {
+    return array.filter(function (item, index) {
+        return array.indexOf(item) !== index;
+    });
+};
