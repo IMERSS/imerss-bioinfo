@@ -431,6 +431,42 @@ hortis.eliminateEmptyColumns = function (rows) {
     return togo;
 };
 
+hortis.checkDuplicates = function (rows) {
+    var columns = ["occurrenceID"];
+    var byDataset = {};
+    columns.forEach(function (column) {
+        console.log("Checking near duplicates by omitting column " + column);
+        var buckets = {};
+        var duplicates = 0;
+        rows.forEach(function (row) {
+            var filtered = fluid.censorKeys(row, [column]);
+            var omitted = row[column] || true;
+            var hash = Object.values(filtered).join("|");
+            var oldValue = buckets[hash];
+            if (oldValue) {
+                fluid.pushArray(byDataset, row.institutionCode, oldValue);
+                fluid.pushArray(byDataset, row.institutionCode, row);
+                fluid.log("ERROR: duplicate row with contents " + hash);
+                ++duplicates;
+            } else {
+                buckets[hash] = row;
+            }
+        });
+        if (duplicates) {
+            console.log("Found " + duplicates + " duplicates");
+        }
+    });
+    fluid.each(byDataset.iNaturalist, function (row) {
+        var id = row.occurrenceID;
+        var iNatObs = id.substring(id.lastIndexOf(":") + 1);
+        row.observationUrl = "https://www.inaturalist.org/observations/" + iNatObs;
+    });
+    fluid.each(byDataset, function (oneDataset, key) {
+        var outfile = "materials-duplicates-" + key + ".csv";
+        hortis.writeCSV(outfile, Object.keys(oneDataset[0]), oneDataset, fluid.promise());
+    });
+};
+
 var completion = fluid.promise.sequence([summaryReader.completionPromise, obsReader.completionPromise, patchReader.completionPromise]);
 
 completion.then(function () {
@@ -484,6 +520,7 @@ completion.then(function () {
 
     hortis.sortRows(allMaterials, pipeline.sheets.Materials.sortBy);
     var filteredMaterials = hortis.eliminateEmptyColumns(allMaterials);
+    hortis.checkDuplicates(filteredMaterials);
     hortis.writeCSV(outputDir + "/Materials.csv", Object.keys(filteredMaterials[0]), filteredMaterials, fluid.promise());
 
     fluid.each(outs, function (sheets, key) {
