@@ -9,6 +9,7 @@ var hortis = fluid.registerNamespace("hortis");
 
 require("./readCSVWithmap.js");
 require("./readCSVWithoutMap.js");
+require("../utils/utils.js");
 
 hortis.writeCSV = function (fileName, headersOrMap, rows, completionPromise) {
     var isHeaders = fluid.isArrayable(headersOrMap);

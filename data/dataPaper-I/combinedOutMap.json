@@ -53,7 +53,7 @@
         },
         "iNat": {
             "name": "Galiano iNaturalist Marine Observations (2005-2021)",
-            "input": "E:/source/gits/bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_07_20.csv",
+            "input": "E:/source/gits/bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_08_12.csv",
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99"

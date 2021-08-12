@@ -9,7 +9,7 @@
         },
         iNat: {
             name: "Galiano iNaturalist Marine Observations (2005-2021)",
-            input: "%bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_07_20.csv",
+            input: "%bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_08_12.csv",
             map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
             outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99"
@@ -220,6 +220,28 @@
         BadRBCMHemigrapsus: { // Review point 2 from technical reviewer
             field: "gbifOccurrenceID",
             equals: "49c162e1-b19e-499c-863a-7c3ae208f9ac",
+            exclude: true
+        },
+        iNatDup1: {
+            field: "id",
+            equals: "2854812",
+            exclude: true
+        },
+        iNatDup2: {
+            field: "id",
+            equals: "84943919",
+            exclude: true
+        },
+        // WARNING! PMLS has no unique ids. These are meant to hit two obs of Cadlina luteomarginata complex
+        // If PMLS is reissued the ids may need to be remapped by looking at materials-duplicates-PMLS.csv output by arphify.js
+        PMLSDup1: {
+            field: "observationId",
+            equals: "PMLS:3437",
+            exclude: true
+        },
+        PMLSDup2: {
+            field: "observationId",
+            equals: "PMLS:18231",
             exclude: true
         }
     }

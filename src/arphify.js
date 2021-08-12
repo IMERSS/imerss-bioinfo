@@ -133,6 +133,23 @@ hortis.extractQualifier = function (name, outRow) {
 
 };
 
+// Reviewer recommendation 7
+hortis.normaliseSex = function (outRow) {
+    var sexes = [];
+    var sex = outRow.sex;
+    if (sex.match(/(([^f][^e]|^)male)|M/)) {
+        sexes.push("male");
+    }
+    if (sex.match(/female|F/)) {
+        sexes.push("female");
+    }
+    var newSexes = sexes.join(", ");
+    if (sex !== newSexes) {
+        outRow.occurrenceRemarks = outRow.sex;
+        outRow.sex = newSexes;
+    }
+};
+
 // Variant for summaries
 hortis.extractSsp = function (name, outRow) {
     var words = name.split(" ");
@@ -319,13 +336,15 @@ hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, 
             hortis.stashMismatchedRow(materialsMap.mismatches, patchIndex, togo, summaryRow);
         }
         hortis.extractQualifier(togo.scientificName, togo);
+        hortis.normaliseSex(togo);
         if (summaryRow && summaryRow.criticalNotes) {
             togo.identificationRemarks = summaryRow.criticalNotes;
         }
 
-        var filename = hortis.WoRMSTaxa.filenameFromTaxonName(WoRMSTaxonAPIFileBase, row.iNaturalistTaxonName);
-        var wormsRec = hortis.readJSONSync(filename);
-        togo.taxonID = "WoRMS:" + wormsRec.AphiaID;
+        // var filename = hortis.WoRMSTaxa.filenameFromTaxonName(WoRMSTaxonAPIFileBase, row.iNaturalistTaxonName);
+        // var wormsRec = hortis.readJSONSync(filename);
+        // togo.taxonID = "WoRMS:" + wormsRec.AphiaID;
+        togo.taxonID = "iNaturalist:" + row.iNaturalistTaxonId;
 
         togo.recordedBy = hortis.normaliseRecorders(togo.recordedBy);
         togo.georeferencedBy = hortis.normaliseRecorders(togo.georeferencedBy);
@@ -434,9 +453,18 @@ hortis.eliminateEmptyColumns = function (rows) {
 hortis.checkDuplicates = function (rows) {
     var columns = ["occurrenceID"];
     var byDataset = {};
+
     columns.forEach(function (column) {
         console.log("Checking near duplicates by omitting column " + column);
         var buckets = {};
+        var emittedKeys = {};
+        var emitDuplicate = function (row) {
+            var key = row[column];
+            if (!emittedKeys[key]) {
+                fluid.pushArray(byDataset, row.institutionCode, row);
+                emittedKeys[key] = true;
+            }
+        };
         var duplicates = 0;
         rows.forEach(function (row) {
             var filtered = fluid.censorKeys(row, [column]);
@@ -444,9 +472,9 @@ hortis.checkDuplicates = function (rows) {
             var hash = Object.values(filtered).join("|");
             var oldValue = buckets[hash];
             if (oldValue) {
-                fluid.pushArray(byDataset, row.institutionCode, oldValue);
-                fluid.pushArray(byDataset, row.institutionCode, row);
-                fluid.log("ERROR: duplicate row with contents " + hash);
+                emitDuplicate(oldValue);
+                emitDuplicate(row);
+                fluid.log("ERROR: duplicate row with contents " + hash + " and key " + omitted);
                 ++duplicates;
             } else {
                 buckets[hash] = row;
