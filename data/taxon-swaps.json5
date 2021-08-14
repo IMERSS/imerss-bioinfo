@@ -1697,24 +1697,6 @@
         },
         iNaturalistTaxonId: "1118982"
     },
-    "Myxicola sp.B": {
-        taxonNames: {
-            "Myxicola infundibulum": {
-                resolvedBy: "AS",
-                notes: "Data Paper resolution round 1: 6. Leslie Harris, polychaete expert, remarks ... 'our NEP specimens are distinctly different both morphologically & genetically from infundibulum. All of the original specimens need to be re-examined so we can decide what name (or names) to use in the NEP'"
-            },
-        },
-        iNaturalistTaxonId: "49534"
-    },
-    "Myxicola sp.A": {
-        taxonNames: {
-            "Myxicola aesthetica": {
-                resolvedBy: "AS",
-                notes: "Data Paper resolution round 1: 6. Leslie Harris, polychaete expert, remarks ... 'our NEP specimens are distinctly different both morphologically & genetically from infundibulum. All of the original specimens need to be re-examined so we can decide what name (or names) to use in the NEP'"
-            },
-        },
-        iNaturalistTaxonId: "49534"
-    },
     "Phyllochaetopterus": {
         taxonNames: {
             "Phyllochaetopterus claparedii": {
@@ -2096,5 +2078,27 @@
             }
         },
         iNaturalistTaxonId: "78434"
+    },
+    // The two Myxicolas - we used to swap them in the other direction, but in the very final round of resolution we need to allocate
+    // distinct ids to them
+    "Myxicola aesthetica": {
+        taxonNames: {
+            "Myxicola sp.A": {
+                resolvedBy: "AS",
+                notes: "We map this backwards so that we can assign unique species ids to these observations",
+                criticalNotes: "Data Paper resolution round 1: 6. Leslie Harris, polychaete expert, remarks ... 'our NEP specimens are distinctly different both morphologically & genetically from infundibulum. All of the original specimens need to be re-examined so we can decide what name (or names) to use in the NEP'"
+            },
+        },
+        iNaturalistTaxonId: "492594"
+    },
+    "Myxicola infundibulum": {
+        taxonNames: {
+            "Myxicola sp.B": {
+                resolvedBy: "AS",
+                notes: "We map this backwards so that we can assign unique species ids to these observations",
+                criticalNotes: "Data Paper resolution round 1: 6. Leslie Harris, polychaete expert, remarks ... 'our NEP specimens are distinctly different both morphologically & genetically from infundibulum. All of the original specimens need to be re-examined so we can decide what name (or names) to use in the NEP'"
+            },
+        },
+        iNaturalistTaxonId: "49533"
     }
 }

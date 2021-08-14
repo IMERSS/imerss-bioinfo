@@ -293,9 +293,11 @@ var dataPromises = hortis.fusionToLoadable(fusion, taxaMap);
 
 hortis.sanitizeSpeciesName = function (name) {
     name = name.trim();
-    [" sp.", " spp.", "?", " etc.", " / "].forEach(function (toRemove) {
+    // Examples such as Blidingia spp., including Blidingia minima var. vexata
+    [" sp.", " spp.", "?", " / "].forEach(function (toRemove) {
         var index = name.indexOf(toRemove);
-        if (index !== -1) {
+        // Special exception to allow us to process Myxicola sp.A and sp.B
+        if (index !== -1 && !name.match(/sp\.[A-Z]/)) {
             name = name.substring(0, index);
         }
     });
