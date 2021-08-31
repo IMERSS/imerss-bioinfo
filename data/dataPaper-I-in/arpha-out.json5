@@ -94,7 +94,7 @@
         },
         Materials: {
             "columns": {
-                "Taxon_Local_ID": "${iNaturalistTaxonId}",
+//                "Taxon_Local_ID": "${iNaturalistTaxonId}",
                 "typeStatus": "",
                 "occurrenceID": "${gbifOccurrenceID}",
                 "catalogNumber": "${catalogNumber}",
@@ -137,9 +137,9 @@
                 "phylum": "${phylum}",
                 "class": "${class}",
                 "order": "${order}",
-                "suborder": "${suborder}", // NOTE! Not part of DwC!!
-                "infraorder": "${infraorder}", // NOTE! Not part of DwC!!
-                "superfamily": "${superfamily}", // NOTE! Not part of DwC!!
+//                "suborder": "${suborder}", // NOTE! Not part of DwC!!
+//                "infraorder": "${infraorder}", // NOTE! Not part of DwC!!
+//                "superfamily": "${superfamily}", // NOTE! Not part of DwC!!
                 "family": "${family}",
                 "genus": "${genus}",
                 "subgenus": "${subgenus}", // TODO: Lift this from checklist?
@@ -147,7 +147,7 @@
                 "infraspecificEpithet": "",
                 "taxonRank": "",
                 "verbatimTaxonRank": "",
-                "scientificNameAuthorship": "${summary.Author}",
+                "scientificNameAuthorship": "${summary.authority}",
                 "vernacularName": "",
                 "nomenclaturalCode": "",
                 "taxonomicStatus": "",

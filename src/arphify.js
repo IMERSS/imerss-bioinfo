@@ -434,7 +434,7 @@ hortis.verifyCounts = function (name, rowCount, rows) {
     });
 };
 
-hortis.eliminateEmptyColumns = function (rows) {
+hortis.eliminateEmptyColumns = function (rows, removeExtra) {
     var hasValue = {};
     rows.forEach(function (row) {
         fluid.each(row, function (value, key) {
