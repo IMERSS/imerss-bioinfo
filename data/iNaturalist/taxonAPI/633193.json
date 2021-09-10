@@ -4,14 +4,14 @@
     "rank": "species",
     "source_id": 8233,
     "created_at": "2018-02-05T17:56:41.066Z",
-    "updated_at": "2018-04-09T14:48:30.660Z",
+    "updated_at": "2020-03-10T18:54:06.374Z",
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 789,
-    "listed_taxa_count": 162,
+    "observations_count": 1068,
+    "listed_taxa_count": 248,
     "rank_level": 10,
-    "unique_name": "red-fingered coryphella",
+    "unique_name": "rotrückige fadenschnecke",
     "wikipedia_summary": "<i><b>Coryphella verrucosa</b></i>, is a species of sea slug, an aeolid nudibranch, a marine gastropod mollusc in the family Coryphellidae. It is found on either side of the northern part of the Atlantic Ocean.",
     "wikipedia_title": "",
     "ancestry": "48460/1/47115/47114/551391/775797/775799/775801/47113/801475/500752/870989/622831",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "bbe37803-e00b-4d6f-aba7-a0ab65ace032",
+    "photos_locked": false,
     "default_name": {
         "id": 1180041,
         "name": "Red-fingered Coryphella",
@@ -57,21 +59,23 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "d469ecb1-e221-41f1-b7ae-a2239107e987",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Tine Kinn Kvamme, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2018-02-05T17:56:41.066Z",
-    "updated_at_utc": "2018-04-09T14:48:30.660Z",
+    "updated_at_utc": "2020-03-10T18:54:06.374Z",
     "taxon_photos": [
         {
             "id": 360347,
             "taxon_id": 633193,
             "photo_id": 10702258,
-            "position": null,
+            "position": 0,
             "created_at": "2018-02-05T17:58:24.703Z",
-            "updated_at": "2018-02-05T17:58:24.703Z",
+            "updated_at": "2020-03-10T18:54:22.338Z",
             "photo": {
                 "id": 10702258,
                 "user_id": 23197,
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "d469ecb1-e221-41f1-b7ae-a2239107e987",
                 "license_code": "C",
                 "attribution": "(c) Tine Kinn Kvamme, all rights reserved",
                 "license_name": "Copyright",
@@ -100,9 +105,9 @@
             "id": 360348,
             "taxon_id": 633193,
             "photo_id": 10459112,
-            "position": null,
+            "position": 1,
             "created_at": "2018-02-05T17:58:24.791Z",
-            "updated_at": "2018-02-05T17:58:24.791Z",
+            "updated_at": "2020-03-10T18:54:22.340Z",
             "photo": {
                 "id": 10459112,
                 "user_id": 23197,
@@ -120,6 +125,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "0740db4a-3222-4e43-9567-ea6aabf97f7a",
                 "license_code": "C",
                 "attribution": "(c) Tine Kinn Kvamme, all rights reserved",
                 "license_name": "Copyright",
@@ -131,9 +137,9 @@
             "id": 360349,
             "taxon_id": 633193,
             "photo_id": 10707217,
-            "position": null,
+            "position": 2,
             "created_at": "2018-02-05T17:58:24.878Z",
-            "updated_at": "2018-02-05T17:58:24.878Z",
+            "updated_at": "2020-03-10T18:54:22.341Z",
             "photo": {
                 "id": 10707217,
                 "user_id": 23197,
@@ -151,6 +157,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "b6cbbb3f-4a9d-4d87-baa6-5d1cac6b3bc3",
                 "license_code": "C",
                 "attribution": "(c) Tine Kinn Kvamme, all rights reserved",
                 "license_name": "Copyright",
@@ -161,26 +168,28 @@
     ],
     "taxon_names": [
         {
-            "id": 1096915,
-            "name": "Coryphella verrucosa",
+            "id": 2218507,
+            "name": "Rotrückige Fadenschnecke",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "German",
             "taxon_id": 633193,
-            "created_at": "2018-02-05T17:56:41.066Z",
-            "updated_at": "2018-02-05T17:56:41.066Z",
-            "creator_id": 8882,
-            "position": 0
+            "created_at": "2020-08-29T17:32:14.689Z",
+            "updated_at": "2020-08-29T17:32:14.689Z",
+            "creator_id": 2174549,
+            "position": 8,
+            "parameterized_lexicon": "german"
         },
         {
-            "id": 1096916,
-            "name": "Flabellina verrucosa",
-            "is_valid": false,
-            "lexicon": "Scientific Names",
+            "id": 1946251,
+            "name": "Vårtborstnuding",
+            "is_valid": true,
+            "lexicon": "Swedish",
             "taxon_id": 633193,
-            "created_at": "2018-02-05T17:58:24.979Z",
-            "updated_at": "2018-02-05T17:58:24.979Z",
-            "creator_id": null,
-            "position": 1
+            "created_at": "2020-01-27T17:28:00.396Z",
+            "updated_at": "2020-01-27T17:28:00.396Z",
+            "creator_id": 1779660,
+            "position": 7,
+            "parameterized_lexicon": "swedish"
         },
         {
             "id": 1096917,
@@ -191,7 +200,8 @@
             "created_at": "2018-02-05T17:58:25.351Z",
             "updated_at": "2018-02-05T17:58:25.351Z",
             "creator_id": 237801,
-            "position": 2
+            "position": 2,
+            "parameterized_lexicon": "french"
         },
         {
             "id": 1180041,
@@ -202,18 +212,8 @@
             "created_at": "2018-04-09T14:48:07.935Z",
             "updated_at": "2018-04-09T14:48:07.935Z",
             "creator_id": 516268,
-            "position": 3
-        },
-        {
-            "id": 1180043,
-            "name": "Red-finger Flabellina",
-            "is_valid": true,
-            "lexicon": "English",
-            "taxon_id": 633193,
-            "created_at": "2018-04-09T14:48:22.310Z",
-            "updated_at": "2018-04-09T14:48:22.310Z",
-            "creator_id": 516268,
-            "position": 4
+            "position": 3,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 1180044,
@@ -224,7 +224,56 @@
             "created_at": "2018-04-09T14:48:30.656Z",
             "updated_at": "2018-04-09T14:48:30.656Z",
             "creator_id": 516268,
-            "position": 5
+            "position": 5,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 1841891,
+            "name": "flabelína bradavičnatá",
+            "is_valid": true,
+            "lexicon": "Czech",
+            "taxon_id": 633193,
+            "created_at": "2019-11-24T00:09:46.032Z",
+            "updated_at": "2019-11-24T00:09:46.032Z",
+            "creator_id": 1,
+            "position": 6,
+            "parameterized_lexicon": "czech"
+        },
+        {
+            "id": 1180043,
+            "name": "Red-finger Flabellina",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 633193,
+            "created_at": "2018-04-09T14:48:22.310Z",
+            "updated_at": "2018-04-09T14:48:22.310Z",
+            "creator_id": 516268,
+            "position": 4,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 1096915,
+            "name": "Coryphella verrucosa",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 633193,
+            "created_at": "2018-02-05T17:56:41.066Z",
+            "updated_at": "2018-02-05T17:56:41.066Z",
+            "creator_id": 8882,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 1096916,
+            "name": "Flabellina verrucosa",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 633193,
+            "created_at": "2018-02-05T17:58:24.979Z",
+            "updated_at": "2018-02-05T17:58:24.979Z",
+            "creator_id": null,
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

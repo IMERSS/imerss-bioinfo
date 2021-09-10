@@ -8,13 +8,13 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 16,
-    "listed_taxa_count": 0,
+    "observations_count": 11,
+    "listed_taxa_count": 1,
     "rank_level": 20,
     "unique_name": "ciliatocardium",
     "wikipedia_summary": null,
     "wikipedia_title": "",
-    "ancestry": "48460/1/47115/47584/372755/551316/551317/488959/461816/50597/871391",
+    "ancestry": "48460/1/47115/47584/1051154/1051155/551316/551317/488959/461816/50597/871391",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -23,6 +23,7 @@
     "complete_rank": null,
     "taxon_framework_relationship_id": 346892,
     "uuid": "cda265c6-3808-47f5-adfd-086a9dc79a43",
+    "photos_locked": false,
     "default_name": {
         "id": 1729691,
         "name": "Ciliatocardium",
@@ -50,7 +51,8 @@
             "created_at": "2019-09-17T19:25:34.717Z",
             "updated_at": "2019-09-17T19:25:34.717Z",
             "creator_id": 702203,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -4,12 +4,12 @@
     "rank": "species",
     "source_id": null,
     "created_at": "2015-01-30T21:16:39.945Z",
-    "updated_at": "2015-04-07T01:51:05.475Z",
+    "updated_at": "2020-05-28T05:47:16.941Z",
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 172,
-    "listed_taxa_count": 211,
+    "observations_count": 429,
+    "listed_taxa_count": 322,
     "rank_level": 10,
     "unique_name": "pygmy rock crab",
     "wikipedia_summary": "<i><b>Glebocarcinus oregonensis</b></i>, commonly known as the <b>pygmy rock crab</b>, is a species of crab found on the Pacific coast of North America.",
@@ -21,7 +21,9 @@
     "is_active": true,
     "complete": null,
     "complete_rank": null,
-    "taxon_framework_relationship_id": null,
+    "taxon_framework_relationship_id": 435293,
+    "uuid": "12f51f96-5f09-40cd-979f-bc0ad0bf4b76",
+    "photos_locked": false,
     "default_name": {
         "id": 723884,
         "name": "Pygmy Rock Crab",
@@ -57,13 +59,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "5b465291-d05f-47f1-831b-1beb42867712",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Wendy Feltham, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2015-01-30T21:16:39.945Z",
-    "updated_at_utc": "2015-04-07T01:51:05.475Z",
+    "updated_at_utc": "2020-05-28T05:47:16.941Z",
     "taxon_photos": [
         {
             "id": 325480,
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "5b465291-d05f-47f1-831b-1beb42867712",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -120,6 +125,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "39f04a27-676b-4c75-a12d-c30ee5b1e758",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -138,18 +144,8 @@
             "created_at": "2015-01-30T21:16:39.945Z",
             "updated_at": "2015-01-30T21:16:39.945Z",
             "creator_id": 22589,
-            "position": 0
-        },
-        {
-            "id": 685405,
-            "name": "Cancer oregonensis",
-            "is_valid": false,
-            "lexicon": "Scientific Names",
-            "taxon_id": 429951,
-            "created_at": "2015-03-20T19:28:35.713Z",
-            "updated_at": "2015-03-20T19:28:35.713Z",
-            "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 723884,
@@ -160,7 +156,20 @@
             "created_at": "2015-04-07T01:51:05.470Z",
             "updated_at": "2015-04-07T01:51:05.470Z",
             "creator_id": 477,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 685405,
+            "name": "Cancer oregonensis",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 429951,
+            "created_at": "2015-03-20T19:28:35.713Z",
+            "updated_at": "2015-03-20T19:28:35.713Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

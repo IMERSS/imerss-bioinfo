@@ -4,24 +4,26 @@
     "rank": "family",
     "source_id": 139,
     "created_at": "2015-04-07T03:29:04.454Z",
-    "updated_at": "2019-03-04T21:46:51.269Z",
+    "updated_at": "2020-01-09T02:13:47.564Z",
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 10,
-    "listed_taxa_count": 0,
+    "observations_count": 93,
+    "listed_taxa_count": 1,
     "rank_level": 30,
     "unique_name": "halipteridae",
     "wikipedia_summary": null,
     "wikipedia_title": null,
-    "ancestry": "48460/1/47534/47533/340493/52536/813986",
+    "ancestry": "48460/1/47534/47533/340493/52536/995115",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
     "is_active": true,
     "complete": null,
     "complete_rank": null,
-    "taxon_framework_relationship_id": 323835,
+    "taxon_framework_relationship_id": null,
+    "uuid": "03762ea4-9c22-4522-a16f-09a770b8ed17",
+    "photos_locked": false,
     "default_name": {
         "id": 724725,
         "name": "Halipteridae",
@@ -52,13 +54,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "eabc3823-5223-45cf-b2f8-140be2ee6263",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) rolandwirth, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2015-04-07T03:29:04.454Z",
-    "updated_at_utc": "2019-03-04T21:46:51.269Z",
+    "updated_at_utc": "2020-01-09T02:13:47.564Z",
     "taxon_photos": [
         {
             "id": 257277,
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "eabc3823-5223-45cf-b2f8-140be2ee6263",
                 "license_code": "C",
                 "attribution": "(c) rolandwirth, all rights reserved",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2101209,
+            "name": "オオヤナギウミエラ科",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 460073,
+            "created_at": "2020-05-29T21:27:28.355Z",
+            "updated_at": "2020-05-29T21:27:28.355Z",
+            "creator_id": 396468,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
             "id": 724725,
             "name": "Halipteridae",
             "is_valid": true,
@@ -102,7 +119,8 @@
             "created_at": "2015-04-07T03:29:04.454Z",
             "updated_at": "2015-04-07T03:29:04.454Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

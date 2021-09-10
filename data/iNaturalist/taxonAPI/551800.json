@@ -8,11 +8,11 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "EolNameProvider",
-    "observations_count": 18,
-    "listed_taxa_count": 8,
+    "observations_count": 86,
+    "listed_taxa_count": 10,
     "rank_level": 20,
     "unique_name": "bugulina",
-    "wikipedia_summary": null,
+    "wikipedia_summary": "<b>Bugulma</b> (Russian: Бугульма; Tatar: Бөгелмә) is a town in the Republic of Tatarstan, Russia. Population: 89,204 (2010 Census); 93,014 (2002 Census); 89,589 (1989 Census).",
     "wikipedia_title": null,
     "ancestry": "48460/1/68104/48394/152933/840943/840957/81638",
     "conservation_status": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "e70a8ae2-5bed-4dd8-9d3b-ca3268e06edc",
+    "photos_locked": false,
     "default_name": {
         "id": 930868,
         "name": "Bugulina",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "42579697-28d6-417b-82d1-9f2159ca6e0f",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Jer Thorp, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "42579697-28d6-417b-82d1-9f2159ca6e0f",
                 "license_code": "C",
                 "attribution": "(c) Jer Thorp, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2017-07-01T17:57:08.009Z",
             "updated_at": "2017-07-01T17:57:08.009Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -4,17 +4,17 @@
     "rank": "genus",
     "source_id": 139,
     "created_at": "2012-12-07T02:34:47.191Z",
-    "updated_at": "2012-12-07T02:34:48.208Z",
+    "updated_at": "2020-04-10T22:45:33.526Z",
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 17,
-    "listed_taxa_count": 5,
+    "observations_count": 36,
+    "listed_taxa_count": 6,
     "rank_level": 20,
     "unique_name": "antho",
     "wikipedia_summary": null,
     "wikipedia_title": null,
-    "ancestry": "48460/1/48824/57736/551714/63667/63668",
+    "ancestry": "48460/1/48824/57736/551714/63667/63668/1067099",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "9e9b02bd-e4ea-4d9d-88dc-69aff7331102",
+    "photos_locked": false,
     "default_name": {
         "id": 301828,
         "name": "Antho",
@@ -52,13 +54,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "b1845914-bc72-4854-bfd1-6a67446fd5a2",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2012-12-07T02:34:47.191Z",
-    "updated_at_utc": "2012-12-07T02:34:48.208Z",
+    "updated_at_utc": "2020-04-10T22:45:33.526Z",
     "taxon_photos": [
         {
             "id": 121984,
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "b1845914-bc72-4854-bfd1-6a67446fd5a2",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2012-12-07T02:34:47.191Z",
             "updated_at": "2012-12-07T02:34:47.191Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

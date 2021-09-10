@@ -5,10 +5,9 @@
         "dateObserved": "%Date",
         "latitude": "%Latitude",
         "longitude": "%Longitude",
-        "recordedBy": "Jackson Chu",
+        "recordedBy": "Jackson W.F. Chu",
         "individualCount": "%Abundance",
         "depth": "%bottomdepth_m",
-        "catalogNumber": "%id",
         "fieldNumber": "Waypoint.or.Transect: %Waypoint.or.Transect"
     },
     "datasetId": "CHU2010",

@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 11,
-    "listed_taxa_count": 61,
+    "observations_count": 39,
+    "listed_taxa_count": 100,
     "rank_level": 10,
     "unique_name": "twelve-tentacled parasitic anemone",
     "wikipedia_summary": "<i><b>Peachia quinquecapitata</b></i>, also known as the <b>twelve-tentacled parasitic anemone</b>, is a species of sea anemone in the family Haloclavidae. It is found in the Pacific Northwest. The larva is parasitic on certain species of Anthomedusae.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "339dee0d-b766-4a23-bb46-68cd131ac9b4",
+    "photos_locked": false,
     "default_name": {
         "id": 1269534,
         "name": "Twelve-tentacled Parasitic Anemone",
@@ -57,6 +59,8 @@
         "license": 0,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "http://farm4.staticflickr.com/3153/2635207948_40b7a6be4b_o.jpg",
+        "uuid": "f050e282-4c1e-4da0-80f5-b4c6107ea68d",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Minette Layne, all rights reserved, uploaded by Minette Layne",
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "http://farm4.staticflickr.com/3153/2635207948_40b7a6be4b_o.jpg",
+                "uuid": "f050e282-4c1e-4da0-80f5-b4c6107ea68d",
                 "license_code": "C",
                 "attribution": "(c) Minette Layne, all rights reserved, uploaded by Minette Layne",
                 "license_name": "Copyright",
@@ -99,15 +104,16 @@
     ],
     "taxon_names": [
         {
-            "id": 76538,
-            "name": "Peachia quinquecapitata",
-            "is_valid": true,
+            "id": 2048655,
+            "name": "Bicidium aequoreae",
+            "is_valid": false,
             "lexicon": "Scientific Names",
             "taxon_id": 47814,
-            "created_at": "2008-07-03T16:42:08.000Z",
-            "updated_at": "2008-07-03T16:42:08.000Z",
+            "created_at": "2020-04-19T08:57:33.601Z",
+            "updated_at": "2020-04-19T08:57:33.601Z",
             "creator_id": null,
-            "position": 0
+            "position": 2,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 1269534,
@@ -118,7 +124,20 @@
             "created_at": "2018-07-28T16:23:30.946Z",
             "updated_at": "2018-07-28T16:23:30.946Z",
             "creator_id": 516268,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 76538,
+            "name": "Peachia quinquecapitata",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 47814,
+            "created_at": "2008-07-03T16:42:08.000Z",
+            "updated_at": "2008-07-03T16:42:08.000Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -4,15 +4,15 @@
     "rank": "superfamily",
     "source_id": null,
     "created_at": "2018-11-20T17:52:17.377Z",
-    "updated_at": "2018-11-20T18:09:11.902Z",
+    "updated_at": "2020-02-26T19:50:38.407Z",
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 1114,
-    "listed_taxa_count": 0,
+    "observations_count": 1903,
+    "listed_taxa_count": 1,
     "rank_level": 33,
     "unique_name": "tritonioidea",
-    "wikipedia_summary": null,
+    "wikipedia_summary": "<b>Tritonioidea</b> is a superfamily of small sea slugs, nudibranchs, shell-less marine gastropod mollusks in the clade Dendronotida.",
     "wikipedia_title": null,
     "ancestry": "48460/1/47115/47114/551391/775797/775799/775801/47113/801475",
     "conservation_status": null,
@@ -21,7 +21,9 @@
     "is_active": true,
     "complete": null,
     "complete_rank": null,
-    "taxon_framework_relationship_id": 22041,
+    "taxon_framework_relationship_id": 413211,
+    "uuid": "65a1c8ca-76a1-4791-b6b8-68479b25df66",
+    "photos_locked": false,
     "default_name": {
         "id": 1406587,
         "name": "Tritonioidea",
@@ -52,13 +54,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "c428a406-2213-4a25-a571-d7436a1b7333",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) jento, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2018-11-20T17:52:17.377Z",
-    "updated_at_utc": "2018-11-20T18:09:11.902Z",
+    "updated_at_utc": "2020-02-26T19:50:38.407Z",
     "taxon_photos": [
         {
             "id": 507732,
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "c428a406-2213-4a25-a571-d7436a1b7333",
                 "license_code": "C",
                 "attribution": "(c) jento, all rights reserved",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2100750,
+            "name": "ホクヨウウミウシ上科",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 801499,
+            "created_at": "2020-05-29T21:25:34.380Z",
+            "updated_at": "2020-05-29T21:25:34.380Z",
+            "creator_id": 396468,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
             "id": 1406587,
             "name": "Tritonioidea",
             "is_valid": true,
@@ -102,7 +119,8 @@
             "created_at": "2018-11-20T17:52:17.377Z",
             "updated_at": "2018-11-20T17:52:17.377Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

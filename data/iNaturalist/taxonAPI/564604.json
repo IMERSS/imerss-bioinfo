@@ -8,7 +8,7 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 349,
+    "observations_count": 363,
     "listed_taxa_count": 1,
     "rank_level": 30,
     "unique_name": "cuthonellidae",
@@ -55,6 +55,7 @@
         "subtype": null,
         "native_original_image_url": null,
         "uuid": "fd8e0efd-56a9-4e21-9860-2ab271a0a6e7",
+        "license_code": "CC-BY-NC",
         "license_name": "Creative Commons Attribution-NonCommercial License",
         "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
         "attribution": "(c) Alison Young, some rights reserved (CC BY-NC)",
@@ -108,6 +109,18 @@
             "creator_id": 26610,
             "position": 0,
             "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2541365,
+            "name": "skönkamnudingar",
+            "is_valid": true,
+            "lexicon": "Swedish",
+            "taxon_id": 564604,
+            "created_at": "2021-05-08T02:06:13.260Z",
+            "updated_at": "2021-05-08T02:06:13.260Z",
+            "creator_id": 2566072,
+            "position": 1,
+            "parameterized_lexicon": "swedish"
         }
     ],
     "iconic_taxon": {

@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 225,
-    "listed_taxa_count": 1,
+    "observations_count": 504,
+    "listed_taxa_count": 17,
     "rank_level": 20,
     "unique_name": "cribrinopsis",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "8104e4ac-6a47-4644-b134-a84ccf56ef27",
+    "photos_locked": false,
     "default_name": {
         "id": 738855,
         "name": "Cribrinopsis",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "8b8111b0-9674-45ed-9888-3aa0500a16d4",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Alessandra, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "8b8111b0-9674-45ed-9888-3aa0500a16d4",
                 "license_code": "C",
                 "attribution": "(c) Alessandra, all rights reserved",
                 "license_name": "Copyright",
@@ -115,6 +120,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "8b8111b0-9674-45ed-9888-3aa0500a16d4",
                 "license_code": "C",
                 "attribution": "(c) Alessandra, all rights reserved",
                 "license_name": "Copyright",
@@ -133,7 +139,8 @@
             "created_at": "2015-05-30T05:26:56.555Z",
             "updated_at": "2015-05-30T05:26:56.555Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

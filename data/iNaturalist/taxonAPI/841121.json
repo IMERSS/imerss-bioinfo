@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 49,
-    "listed_taxa_count": 0,
+    "observations_count": 130,
+    "listed_taxa_count": 1,
     "rank_level": 37,
     "unique_name": "cerioporina",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "1eea7111-7d1d-4ff8-9f34-eb6788ae8ed1",
+    "photos_locked": false,
     "default_name": {
         "id": 1460928,
         "name": "Cerioporina",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "e8de19ea-4c46-49a1-b7ee-46dcb606c20a",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Phil Garner, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "e8de19ea-4c46-49a1-b7ee-46dcb606c20a",
                 "license_code": "C",
                 "attribution": "(c) Phil Garner, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2018-12-31T06:26:24.594Z",
             "updated_at": "2018-12-31T06:26:24.594Z",
             "creator_id": 550722,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

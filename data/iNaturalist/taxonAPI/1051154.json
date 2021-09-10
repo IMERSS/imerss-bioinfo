@@ -8,8 +8,8 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 92036,
-    "listed_taxa_count": 583,
+    "observations_count": 170481,
+    "listed_taxa_count": 866,
     "rank_level": 47,
     "unique_name": "autobranchia",
     "wikipedia_summary": null,
@@ -55,6 +55,7 @@
         "subtype": null,
         "native_original_image_url": null,
         "uuid": "05328773-a735-4a57-99dc-cb8686e59bb2",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Jackiie Pérez Cossío, all rights reserved",
@@ -98,18 +99,6 @@
     ],
     "taxon_names": [
         {
-            "id": 2008040,
-            "name": "Autobranchia",
-            "is_valid": true,
-            "lexicon": "Scientific Names",
-            "taxon_id": 1051154,
-            "created_at": "2020-03-24T05:48:30.893Z",
-            "updated_at": "2020-03-24T05:48:30.893Z",
-            "creator_id": 477,
-            "position": 0,
-            "parameterized_lexicon": "scientific-names"
-        },
-        {
             "id": 2070237,
             "name": "自鰓亜綱",
             "is_valid": true,
@@ -120,6 +109,18 @@
             "creator_id": 1878015,
             "position": 2,
             "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 2008040,
+            "name": "Autobranchia",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1051154,
+            "created_at": "2020-03-24T05:48:30.893Z",
+            "updated_at": "2020-03-24T05:48:30.893Z",
+            "creator_id": 477,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

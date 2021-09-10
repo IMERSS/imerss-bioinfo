@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 11,
-    "listed_taxa_count": 59,
+    "observations_count": 19,
+    "listed_taxa_count": 70,
     "rank_level": 10,
-    "unique_name": "Garveia annulata",
+    "unique_name": "garveia annulata",
     "wikipedia_summary": null,
     "wikipedia_title": null,
     "ancestry": "48460/1/47534/48921/551473/48922/813989/63663/63664",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "201c5c15-e582-48c0-9f31-c881fe2f7495",
+    "photos_locked": false,
     "default_name": {
         "id": 100233,
         "name": "Garveia annulata",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "824b33e1-de7b-4bec-84b3-0e0543abd820",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "824b33e1-de7b-4bec-84b3-0e0543abd820",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -115,6 +120,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "b09133fc-07ea-4e78-82ca-3f13726f8bfb",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -125,6 +131,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2106592,
+            "name": "オレンジスズヒドラ",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 63662,
+            "created_at": "2020-05-29T22:29:32.846Z",
+            "updated_at": "2020-05-29T22:29:32.846Z",
+            "creator_id": 396468,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
             "id": 100233,
             "name": "Garveia annulata",
             "is_valid": true,
@@ -133,7 +151,8 @@
             "created_at": "2010-11-07T06:09:16.000Z",
             "updated_at": "2010-11-07T06:09:16.000Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

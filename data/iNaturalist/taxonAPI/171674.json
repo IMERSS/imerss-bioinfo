@@ -8,13 +8,13 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 30,
-    "listed_taxa_count": 3,
+    "observations_count": 86,
+    "listed_taxa_count": 4,
     "rank_level": 20,
     "unique_name": "pentamera",
     "wikipedia_summary": null,
     "wikipedia_title": null,
-    "ancestry": "48460/1/47549/774753/47720/49482/171686",
+    "ancestry": "48460/1/47549/774753/47720/995100/49482/171686",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "5ed414a0-8ec7-4ad1-995a-ce9003d37b7a",
+    "photos_locked": false,
     "default_name": {
         "id": 273856,
         "name": "Pentamera",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "f2b06df1-10f9-49a3-91e8-93cc65adafda",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) fm5050, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "f2b06df1-10f9-49a3-91e8-93cc65adafda",
                 "license_code": "C",
                 "attribution": "(c) fm5050, all rights reserved",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2104263,
+            "name": "ペンタメラ属",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 171674,
+            "created_at": "2020-05-29T21:42:17.260Z",
+            "updated_at": "2020-05-29T21:42:17.260Z",
+            "creator_id": 396468,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
             "id": 273856,
             "name": "Pentamera",
             "is_valid": true,
@@ -102,7 +119,8 @@
             "created_at": "2012-10-23T01:49:21.998Z",
             "updated_at": "2012-10-23T01:49:21.998Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

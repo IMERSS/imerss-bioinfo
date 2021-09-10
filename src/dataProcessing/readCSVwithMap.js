@@ -28,6 +28,16 @@ hortis.templateMapField = function (data, template) {
         var format = match[1], smallTemplate = match[2];
         var value = fluid.stringTemplate(smallTemplate, data);
         return moment.utc(value, format).toISOString();
+    } else if (template.startsWith("@")) {
+        var rec = fluid.compactStringToRec(template.substring(1), "expander");
+        var func = fluid.getGlobalValue(rec.funcName);
+        if (!func) {
+            fluid.fail("Unable to look up " + rec.funcName + " as a global function");
+        }
+        var args = fluid.transform(rec.args, function (arg) {
+            return fluid.stringTemplate(arg, data);
+        });
+        return func.apply(null, args);
     } else {
         var togo = fluid.stringTemplate(template, data);
         if (togo.indexOf("%") !== -1) {

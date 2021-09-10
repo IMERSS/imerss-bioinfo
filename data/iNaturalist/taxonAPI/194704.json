@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 128,
-    "listed_taxa_count": 4,
+    "observations_count": 344,
+    "listed_taxa_count": 9,
     "rank_level": 30,
     "unique_name": "pterasteridae",
     "wikipedia_summary": "<b>Pterasteridae</b> is a family of sea stars in the order Velatida, consisting of eight genera.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 323749,
+    "uuid": "23ffcc2c-ed8a-4cec-ad03-a355f4be45a0",
+    "photos_locked": false,
     "default_name": {
         "id": 300016,
         "name": "Pterasteridae",
@@ -49,12 +51,14 @@
         "native_page_url": "http://www.flickr.com/photos/14233971@N04/8341191580/",
         "native_username": "maractwin",
         "native_realname": "Mark Rosenstein",
-        "license": 0,
+        "license": 1,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "http://farm9.staticflickr.com/8361/8341191580_88735e729c_o.jpg",
-        "license_name": "Copyright",
-        "license_url": "http://en.wikipedia.org/wiki/Copyright",
-        "attribution": "(c) Mark Rosenstein, all rights reserved",
+        "uuid": "061c8653-433c-42d7-8527-68a5069b2bf3",
+        "license_code": "CC-BY-NC-SA",
+        "license_name": "Creative Commons Attribution-NonCommercial-ShareAlike License",
+        "license_url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "attribution": "(c) Mark Rosenstein, some rights reserved (CC BY-NC-SA)",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2012-12-04T06:02:34.392Z",
@@ -81,18 +85,43 @@
                 "native_page_url": "http://www.flickr.com/photos/14233971@N04/8341191580/",
                 "native_username": "maractwin",
                 "native_realname": "Mark Rosenstein",
-                "license": 0,
+                "license": 1,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "http://farm9.staticflickr.com/8361/8341191580_88735e729c_o.jpg",
-                "license_code": "C",
-                "attribution": "(c) Mark Rosenstein, all rights reserved",
-                "license_name": "Copyright",
-                "license_url": "http://en.wikipedia.org/wiki/Copyright",
+                "uuid": "061c8653-433c-42d7-8527-68a5069b2bf3",
+                "license_code": "CC-BY-NC-SA",
+                "attribution": "(c) Mark Rosenstein, some rights reserved (CC BY-NC-SA)",
+                "license_name": "Creative Commons Attribution-NonCommercial-ShareAlike License",
+                "license_url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
                 "type": "LocalPhoto"
             }
         }
     ],
     "taxon_names": [
+        {
+            "id": 2336885,
+            "name": "knubbsjöstjärnor",
+            "is_valid": true,
+            "lexicon": "Swedish",
+            "taxon_id": 194704,
+            "created_at": "2020-12-10T20:00:11.775Z",
+            "updated_at": "2020-12-10T20:00:11.775Z",
+            "creator_id": 1891518,
+            "position": 2,
+            "parameterized_lexicon": "swedish"
+        },
+        {
+            "id": 2101290,
+            "name": "マクヒトデ科",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 194704,
+            "created_at": "2020-05-29T21:27:46.234Z",
+            "updated_at": "2020-05-29T21:27:46.234Z",
+            "creator_id": 396468,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
         {
             "id": 300016,
             "name": "Pterasteridae",
@@ -102,7 +131,8 @@
             "created_at": "2012-12-04T06:02:34.392Z",
             "updated_at": "2012-12-04T06:02:34.392Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

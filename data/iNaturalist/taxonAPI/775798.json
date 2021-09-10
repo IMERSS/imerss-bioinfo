@@ -4,14 +4,14 @@
     "rank": "subterclass",
     "source_id": null,
     "created_at": "2018-09-05T02:13:37.686Z",
-    "updated_at": "2019-07-02T14:29:27.697Z",
+    "updated_at": "2020-02-26T19:48:55.064Z",
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 390,
-    "listed_taxa_count": 1,
+    "observations_count": 1089,
+    "listed_taxa_count": 3,
     "rank_level": 44,
-    "unique_name": "acteonimorpha",
+    "unique_name": "捻螺形群準綱",
     "wikipedia_summary": null,
     "wikipedia_title": "",
     "ancestry": "48460/1/47115/47114/551391/775797",
@@ -21,7 +21,9 @@
     "is_active": true,
     "complete": null,
     "complete_rank": null,
-    "taxon_framework_relationship_id": 22483,
+    "taxon_framework_relationship_id": 413068,
+    "uuid": "6fd74415-09fc-485c-81d1-45afea0cb57f",
+    "photos_locked": false,
     "default_name": {
         "id": 1358837,
         "name": "Acteonimorpha",
@@ -52,13 +54,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "49fafaa2-e5f4-429e-bc83-3375adbf9807",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2018-09-05T02:13:37.686Z",
-    "updated_at_utc": "2019-07-02T14:29:27.697Z",
+    "updated_at_utc": "2020-02-26T19:48:55.064Z",
     "taxon_photos": [
         {
             "id": 456906,
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "49fafaa2-e5f4-429e-bc83-3375adbf9807",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2361015,
+            "name": "捻螺形群準綱",
+            "is_valid": true,
+            "lexicon": "Chinese (Traditional)",
+            "taxon_id": 775798,
+            "created_at": "2020-12-26T15:28:49.933Z",
+            "updated_at": "2020-12-26T15:30:05.323Z",
+            "creator_id": 1465242,
+            "position": 1,
+            "parameterized_lexicon": "chinese-traditional"
+        },
+        {
             "id": 1358837,
             "name": "Acteonimorpha",
             "is_valid": true,
@@ -102,7 +119,8 @@
             "created_at": "2018-09-05T02:13:37.686Z",
             "updated_at": "2018-09-05T02:13:37.686Z",
             "creator_id": 477,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

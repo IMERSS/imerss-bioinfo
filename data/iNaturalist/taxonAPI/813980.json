@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 324,
-    "listed_taxa_count": 5,
+    "observations_count": 803,
+    "listed_taxa_count": 26,
     "rank_level": 37,
-    "unique_name": "センナリスナギンチャク亜目",
+    "unique_name": "macrocnemina",
     "wikipedia_summary": null,
     "wikipedia_title": null,
     "ancestry": "48460/1/47534/47533/202756/51198",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 323875,
+    "uuid": "9e4f56b7-0e62-4885-841a-4f621625bf39",
+    "photos_locked": false,
     "default_name": {
         "id": 1424815,
         "name": "Macrocnemina",
@@ -49,12 +51,14 @@
         "native_page_url": "https://www.flickr.com/photos/jpsilva1971/6401568653/",
         "native_username": "Joao Pedro Silva",
         "native_realname": "João Pedro Silva",
-        "license": 0,
+        "license": 3,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "https://farm8.staticflickr.com/7162/6401568653_4a3d5567ce_b.jpg",
-        "license_name": "Copyright",
-        "license_url": "http://en.wikipedia.org/wiki/Copyright",
-        "attribution": "(c) João Pedro Silva, all rights reserved",
+        "uuid": "c7726d83-45e0-481e-a8d1-e1c7fc8b1b68",
+        "license_code": "CC-BY-NC-ND",
+        "license_name": "Creative Commons Attribution-NonCommercial-NoDerivs License",
+        "license_url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "attribution": "(c) João Pedro Silva, some rights reserved (CC BY-NC-ND)",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2018-12-08T07:17:19.449Z",
@@ -81,29 +85,19 @@
                 "native_page_url": "https://www.flickr.com/photos/jpsilva1971/6401568653/",
                 "native_username": "Joao Pedro Silva",
                 "native_realname": "João Pedro Silva",
-                "license": 0,
+                "license": 3,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "https://farm8.staticflickr.com/7162/6401568653_4a3d5567ce_b.jpg",
-                "license_code": "C",
-                "attribution": "(c) João Pedro Silva, all rights reserved",
-                "license_name": "Copyright",
-                "license_url": "http://en.wikipedia.org/wiki/Copyright",
+                "uuid": "c7726d83-45e0-481e-a8d1-e1c7fc8b1b68",
+                "license_code": "CC-BY-NC-ND",
+                "attribution": "(c) João Pedro Silva, some rights reserved (CC BY-NC-ND)",
+                "license_name": "Creative Commons Attribution-NonCommercial-NoDerivs License",
+                "license_url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
                 "type": "LocalPhoto"
             }
         }
     ],
     "taxon_names": [
-        {
-            "id": 1424815,
-            "name": "Macrocnemina",
-            "is_valid": true,
-            "lexicon": "Scientific Names",
-            "taxon_id": 813980,
-            "created_at": "2018-12-08T07:17:19.449Z",
-            "updated_at": "2018-12-08T07:17:19.449Z",
-            "creator_id": null,
-            "position": 0
-        },
         {
             "id": 1475089,
             "name": "センナリスナギンチャク亜目",
@@ -113,7 +107,32 @@
             "created_at": "2019-01-10T08:29:57.976Z",
             "updated_at": "2019-01-10T08:29:57.976Z",
             "creator_id": 1243007,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 2100674,
+            "name": "長膜亜目",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 813980,
+            "created_at": "2020-05-29T21:25:12.270Z",
+            "updated_at": "2020-05-29T21:25:12.270Z",
+            "creator_id": 396468,
+            "position": 2,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 1424815,
+            "name": "Macrocnemina",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 813980,
+            "created_at": "2018-12-08T07:17:19.449Z",
+            "updated_at": "2018-12-08T07:17:19.449Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

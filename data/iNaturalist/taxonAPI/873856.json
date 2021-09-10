@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "968a2ce5-cf22-4daa-a66c-54a77d246944",
+    "photos_locked": false,
     "default_name": {
         "id": 1531812,
         "name": "Xestospongia hispida",
@@ -32,7 +34,7 @@
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
     "common_name": null,
-    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/animalia-75px-057784eeb6ea25a8c65477b98db675a1.png",
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/animalia-75px.png",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": null,
@@ -49,7 +51,8 @@
             "created_at": "2019-03-14T01:52:40.066Z",
             "updated_at": "2019-03-14T01:52:40.066Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

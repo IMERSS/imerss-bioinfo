@@ -8,7 +8,7 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 2,
+    "observations_count": 9,
     "listed_taxa_count": 0,
     "rank_level": 20,
     "unique_name": "caulibugula",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "78282da2-cbd3-4ac6-80f3-988ce0628c16",
+    "photos_locked": false,
     "default_name": {
         "id": 654345,
         "name": "Caulibugula",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "715c3782-446f-4e7c-9d36-b1281eebb64f",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "715c3782-446f-4e7c-9d36-b1281eebb64f",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2014-12-03T18:56:38.474Z",
             "updated_at": "2014-12-03T18:56:38.474Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -5,8 +5,7 @@
         "dateObserved": "%date",
         "latitude": "%lat",
         "longitude": "%long",
-        "recordedBy": "Jackson Chu",
-        "catalogNumber": "%Nudibranch_number",        
+        "recordedBy": "Jackson W.F. Chu",
         "depth": "%depthM"
     },
     "datasetId": "CHU2012",

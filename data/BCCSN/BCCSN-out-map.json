@@ -6,6 +6,7 @@
         "catalogNumber": "CatalogNumber",
         "confidence": "Confidence",
         "recordedBy": "Recorded by",
-        "individualCount": "Individual count"
+        "individualCount": "Individual count",
+        "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters"
     }
 }

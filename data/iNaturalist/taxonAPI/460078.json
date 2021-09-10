@@ -8,13 +8,13 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 6,
-    "listed_taxa_count": 15,
+    "observations_count": 88,
+    "listed_taxa_count": 32,
     "rank_level": 10,
     "unique_name": "halipteris willemoesi",
     "wikipedia_summary": null,
     "wikipedia_title": null,
-    "ancestry": "48460/1/47534/47533/340493/52536/813986/460073/460072",
+    "ancestry": "48460/1/47534/47533/340493/52536/995115/460073/460072",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "3e4b436d-b016-47c7-8fe6-cbd4fbe68148",
+    "photos_locked": false,
     "default_name": {
         "id": 724732,
         "name": "Halipteris willemoesi",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "eabc3823-5223-45cf-b2f8-140be2ee6263",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) rolandwirth, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "eabc3823-5223-45cf-b2f8-140be2ee6263",
                 "license_code": "C",
                 "attribution": "(c) rolandwirth, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2015-04-07T03:30:05.229Z",
             "updated_at": "2015-04-07T03:30:05.229Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 409,
-    "listed_taxa_count": 7,
+    "observations_count": 970,
+    "listed_taxa_count": 19,
     "rank_level": 33,
     "unique_name": "buguloidea",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "f1e8acca-9a79-4bc2-8ea3-4741a15e6dfe",
+    "photos_locked": false,
     "default_name": {
         "id": 1460734,
         "name": "Buguloidea",
@@ -48,13 +50,15 @@
         "updated_at": "2018-10-03T04:21:17.957Z",
         "native_page_url": "https://www.inaturalist.org/photos/25980138",
         "native_username": "kevinckma",
-        "native_realname": "Kevin C.K. Ma",
+        "native_realname": "Kevin C. K. Ma",
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "b1330b45-4ffb-41f3-8a98-8d54a451d8f6",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
-        "attribution": "(c) Kevin C.K. Ma, all rights reserved",
+        "attribution": "(c) Kevin C. K. Ma, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2018-12-31T03:51:57.511Z",
@@ -80,12 +84,13 @@
                 "updated_at": "2018-10-03T04:21:17.957Z",
                 "native_page_url": "https://www.inaturalist.org/photos/25980138",
                 "native_username": "kevinckma",
-                "native_realname": "Kevin C.K. Ma",
+                "native_realname": "Kevin C. K. Ma",
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "b1330b45-4ffb-41f3-8a98-8d54a451d8f6",
                 "license_code": "C",
-                "attribution": "(c) Kevin C.K. Ma, all rights reserved",
+                "attribution": "(c) Kevin C. K. Ma, all rights reserved",
                 "license_name": "Copyright",
                 "license_url": "http://en.wikipedia.org/wiki/Copyright",
                 "type": "LocalPhoto"
@@ -102,7 +107,8 @@
             "created_at": "2018-12-31T03:51:57.511Z",
             "updated_at": "2018-12-31T03:51:57.511Z",
             "creator_id": 550722,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 44,
-    "listed_taxa_count": 88,
+    "observations_count": 110,
+    "listed_taxa_count": 126,
     "rank_level": 10,
     "unique_name": "wrinkled tunicate",
     "wikipedia_summary": "<i><b>Pyura haustor</b></i> is a species of sessile ascidian, or sea squirt, that lives in coastal waters in the northeastern Pacific Ocean, attached to rocks or artificial structures. Common names for this species include the <b>wrinkled seapump</b>, the <b>wrinkled sea squirt</b> and the <b>warty tunicate</b>.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 20428,
+    "uuid": "3b9acf0b-7100-4861-a272-ccff1cea91b3",
+    "photos_locked": false,
     "default_name": {
         "id": 1360300,
         "name": "Wrinkled Tunicate",
@@ -57,6 +59,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "66f91820-25b7-497c-b600-855a93d41bda",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Wendy Feltham, all rights reserved",
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "66f91820-25b7-497c-b600-855a93d41bda",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -107,23 +112,24 @@
                 "id": 4138924,
                 "user_id": 260561,
                 "native_photo_id": "4138924",
-                "square_url": "https://static.inaturalist.org/photos/4138924/square.JPG?1467243697",
-                "thumb_url": "https://static.inaturalist.org/photos/4138924/thumb.JPG?1467243697",
-                "small_url": "https://static.inaturalist.org/photos/4138924/small.JPG?1467243697",
-                "medium_url": "https://static.inaturalist.org/photos/4138924/medium.JPG?1467243697",
-                "large_url": "https://static.inaturalist.org/photos/4138924/large.JPG?1467243697",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/4138924/square.JPG?1467243697",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/4138924/thumb.JPG?1467243697",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/4138924/small.JPG?1467243697",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/4138924/medium.JPG?1467243697",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/4138924/large.JPG?1467243697",
                 "created_at": "2016-06-29T23:41:35.044Z",
                 "updated_at": "2016-06-29T23:41:39.598Z",
                 "native_page_url": "http://www.inaturalist.org/photos/4138924",
                 "native_username": "mckittre",
                 "native_realname": "Erin McKittrick",
-                "license": 2,
+                "license": 4,
                 "subtype": null,
                 "native_original_image_url": null,
-                "license_code": "CC-BY-NC",
-                "attribution": "(c) Erin McKittrick, some rights reserved (CC BY-NC)",
-                "license_name": "Creative Commons Attribution-NonCommercial License",
-                "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
+                "uuid": "312200f9-f26d-435e-a0dc-27a2d9996ff1",
+                "license_code": "CC-BY",
+                "attribution": "(c) Erin McKittrick, some rights reserved (CC BY)",
+                "license_name": "Creative Commons Attribution License",
+                "license_url": "http://creativecommons.org/licenses/by/4.0/",
                 "type": "LocalPhoto"
             }
         }
@@ -138,7 +144,8 @@
             "created_at": "2013-09-28T17:37:46.689Z",
             "updated_at": "2013-09-28T17:37:46.689Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 1360300,
@@ -149,7 +156,8 @@
             "created_at": "2018-09-06T17:02:12.057Z",
             "updated_at": "2018-09-06T17:02:25.534Z",
             "creator_id": 516268,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 1360301,
@@ -160,7 +168,8 @@
             "created_at": "2018-09-06T17:02:51.223Z",
             "updated_at": "2018-09-06T17:02:51.223Z",
             "creator_id": 516268,
-            "position": 2
+            "position": 2,
+            "parameterized_lexicon": "english"
         }
     ],
     "iconic_taxon": {

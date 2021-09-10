@@ -8,13 +8,13 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 19,
-    "listed_taxa_count": 32,
+    "observations_count": 94,
+    "listed_taxa_count": 72,
     "rank_level": 10,
-    "unique_name": "himatina trophina",
+    "unique_name": "predaceous aeolis",
     "wikipedia_summary": "The <b>predaceous aeolis</b> (<i>Himatina trophina</i>) is a species of sea slug, an aeolid nudibranch, a marine heterobranch mollusc in the family Coryphellidae. This species was commonly known as <i>Flabellina fusca</i>, a junior synonym.",
     "wikipedia_title": "",
-    "ancestry": "48460/1/47115/47114/551391/775797/775799/775801/47113/801475/500752/47173/633560",
+    "ancestry": "48460/1/47115/47114/551391/775797/775799/775801/47113/801475/500752/870989/633560",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -22,28 +22,35 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "3b64265d-2abd-446a-801c-7985b5c82b27",
+    "photos_locked": false,
     "default_name": {
-        "id": 1097639,
-        "name": "Himatina trophina",
+        "id": 2316538,
+        "name": "predaceous aeolis",
         "is_valid": true,
-        "lexicon": "Scientific Names"
+        "lexicon": "English"
     },
-    "photo_url": "https://static.inaturalist.org/photos/2520/square.jpg?1545348072",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/square.jpg?1545348072",
     "iconic_taxon_name": "Mollusca",
     "conservation_status_name": null,
-    "common_name": null,
-    "image_url": "https://static.inaturalist.org/photos/2520/square.jpg?1545348072",
+    "common_name": {
+        "id": 2316538,
+        "name": "predaceous aeolis",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/square.jpg?1545348072",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": {
         "id": 2520,
         "user_id": null,
         "native_photo_id": "1176989910",
-        "square_url": "https://static.inaturalist.org/photos/2520/square.jpg?1545348072",
-        "thumb_url": "https://static.inaturalist.org/photos/2520/thumb.jpg?1545348072",
-        "small_url": "https://static.inaturalist.org/photos/2520/small.jpg?1545348072",
-        "medium_url": "https://static.inaturalist.org/photos/2520/medium.jpg?1545348072",
-        "large_url": "https://static.inaturalist.org/photos/2520/large.jpg?1545348072",
+        "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/square.jpg?1545348072",
+        "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/thumb.jpg?1545348072",
+        "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/small.jpg?1545348072",
+        "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/medium.jpg?1545348072",
+        "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/large.jpg?1545348072",
         "created_at": "2009-03-20T02:47:04.000Z",
         "updated_at": "2018-12-20T23:21:13.261Z",
         "native_page_url": "http://www.flickr.com/photos/75525471@N00/1176989910",
@@ -52,6 +59,8 @@
         "license": 4,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "https://farm2.staticflickr.com/1238/1176989910_2c82ff49c9_o.jpg",
+        "uuid": "f7ac0089-452d-4b40-9365-f8229a7c1676",
+        "license_code": "CC-BY",
         "license_name": "Creative Commons Attribution License",
         "license_url": "http://creativecommons.org/licenses/by/4.0/",
         "attribution": "(c) Dan Hershman, some rights reserved (CC BY)",
@@ -71,11 +80,11 @@
                 "id": 2520,
                 "user_id": null,
                 "native_photo_id": "1176989910",
-                "square_url": "https://static.inaturalist.org/photos/2520/square.jpg?1545348072",
-                "thumb_url": "https://static.inaturalist.org/photos/2520/thumb.jpg?1545348072",
-                "small_url": "https://static.inaturalist.org/photos/2520/small.jpg?1545348072",
-                "medium_url": "https://static.inaturalist.org/photos/2520/medium.jpg?1545348072",
-                "large_url": "https://static.inaturalist.org/photos/2520/large.jpg?1545348072",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/square.jpg?1545348072",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/thumb.jpg?1545348072",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/small.jpg?1545348072",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/medium.jpg?1545348072",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2520/large.jpg?1545348072",
                 "created_at": "2009-03-20T02:47:04.000Z",
                 "updated_at": "2018-12-20T23:21:13.261Z",
                 "native_page_url": "http://www.flickr.com/photos/75525471@N00/1176989910",
@@ -84,6 +93,7 @@
                 "license": 4,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "https://farm2.staticflickr.com/1238/1176989910_2c82ff49c9_o.jpg",
+                "uuid": "f7ac0089-452d-4b40-9365-f8229a7c1676",
                 "license_code": "CC-BY",
                 "attribution": "(c) Dan Hershman, some rights reserved (CC BY)",
                 "license_name": "Creative Commons Attribution License",
@@ -94,6 +104,30 @@
     ],
     "taxon_names": [
         {
+            "id": 2261138,
+            "name": "Flabellina fusca",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 633561,
+            "created_at": "2020-10-05T23:36:16.705Z",
+            "updated_at": "2020-10-05T23:36:16.705Z",
+            "creator_id": null,
+            "position": 4,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2316538,
+            "name": "predaceous aeolis",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 633561,
+            "created_at": "2020-11-24T06:17:49.208Z",
+            "updated_at": "2020-11-24T06:17:49.208Z",
+            "creator_id": 517807,
+            "position": 5,
+            "parameterized_lexicon": "english"
+        },
+        {
             "id": 1097642,
             "name": "Coryphella fusca",
             "is_valid": false,
@@ -102,7 +136,8 @@
             "created_at": "2018-02-07T21:12:00.907Z",
             "updated_at": "2018-02-07T21:13:38.916Z",
             "creator_id": 10053,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 1097639,
@@ -113,7 +148,8 @@
             "created_at": "2018-02-07T20:50:32.155Z",
             "updated_at": "2018-02-07T20:50:32.155Z",
             "creator_id": 10053,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 1097645,
@@ -124,7 +160,8 @@
             "created_at": "2018-02-07T21:16:52.690Z",
             "updated_at": "2018-02-07T21:16:52.690Z",
             "creator_id": null,
-            "position": 2
+            "position": 2,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 1532469,
@@ -135,7 +172,8 @@
             "created_at": "2019-03-14T20:04:26.722Z",
             "updated_at": "2019-03-14T20:04:26.722Z",
             "creator_id": null,
-            "position": 3
+            "position": 3,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

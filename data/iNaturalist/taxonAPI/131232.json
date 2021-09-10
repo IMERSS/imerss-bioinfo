@@ -4,14 +4,14 @@
     "rank": "species",
     "source_id": 1,
     "created_at": "2012-06-21T23:23:25.480Z",
-    "updated_at": "2018-11-19T16:10:05.314Z",
+    "updated_at": "2020-03-10T04:05:24.158Z",
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 120,
-    "listed_taxa_count": 205,
+    "observations_count": 425,
+    "listed_taxa_count": 372,
     "rank_level": 10,
-    "unique_name": "pacific sea pork",
+    "unique_name": "aplidium de californie",
     "wikipedia_summary": "<i><b>Aplidium californicum</b></i> is a species of colonial sea squirt, a tunicate in the family Polyclinidae. It is commonly known as <b>sea pork</b>.",
     "wikipedia_title": null,
     "ancestry": "48460/1/2/130868/47811/541417/56052/56053",
@@ -21,7 +21,9 @@
     "is_active": true,
     "complete": null,
     "complete_rank": null,
-    "taxon_framework_relationship_id": 20422,
+    "taxon_framework_relationship_id": 416074,
+    "uuid": "bb4ecd65-ed52-4cfe-9c94-5537071f13e7",
+    "photos_locked": false,
     "default_name": {
         "id": 1359760,
         "name": "Pacific Sea Pork",
@@ -57,13 +59,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "c5fc850a-0c6f-4f35-a9ce-caf8365c9ec7",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) bloy3, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2012-06-21T23:23:25.480Z",
-    "updated_at_utc": "2018-11-19T16:10:05.314Z",
+    "updated_at_utc": "2020-03-10T04:05:24.158Z",
     "taxon_photos": [
         {
             "id": 457698,
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "c5fc850a-0c6f-4f35-a9ce-caf8365c9ec7",
                 "license_code": "C",
                 "attribution": "(c) bloy3, all rights reserved",
                 "license_name": "Copyright",
@@ -120,6 +125,7 @@
                 "license": 0,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "http://farm8.staticflickr.com/7104/7405620768_f83cb9f8b6_o.jpg",
+                "uuid": "93ee30ba-3b61-4d04-bf5d-b2c65dffeadc",
                 "license_code": "C",
                 "attribution": "(c) CAS Citizen Science, all rights reserved, uploaded by Cal Academy Citizen Science",
                 "license_name": "Copyright",
@@ -130,26 +136,16 @@
     ],
     "taxon_names": [
         {
-            "id": 227591,
-            "name": "Aplidium californicum",
+            "id": 2053455,
+            "name": "Aplidium de Californie",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "French",
             "taxon_id": 131232,
-            "created_at": "2012-06-21T23:23:25.532Z",
-            "updated_at": "2012-06-21T23:23:25.532Z",
-            "creator_id": null,
-            "position": 0
-        },
-        {
-            "id": 535646,
-            "name": "Amaroucium californicum",
-            "is_valid": false,
-            "lexicon": "Scientific Names",
-            "taxon_id": 131232,
-            "created_at": "2014-01-06T02:53:00.059Z",
-            "updated_at": "2014-01-06T02:53:00.059Z",
-            "creator_id": null,
-            "position": 0
+            "created_at": "2020-04-24T08:36:49.136Z",
+            "updated_at": "2020-04-24T08:36:49.136Z",
+            "creator_id": 782891,
+            "position": 4,
+            "parameterized_lexicon": "french"
         },
         {
             "id": 1359761,
@@ -160,7 +156,8 @@
             "created_at": "2018-09-06T03:05:27.933Z",
             "updated_at": "2018-09-06T03:05:27.933Z",
             "creator_id": 516268,
-            "position": 3
+            "position": 3,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 1359760,
@@ -171,7 +168,32 @@
             "created_at": "2018-09-06T03:05:16.664Z",
             "updated_at": "2018-09-06T03:05:16.664Z",
             "creator_id": 516268,
-            "position": 2
+            "position": 2,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 227591,
+            "name": "Aplidium californicum",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 131232,
+            "created_at": "2012-06-21T23:23:25.532Z",
+            "updated_at": "2012-06-21T23:23:25.532Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 535646,
+            "name": "Amaroucium californicum",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 131232,
+            "created_at": "2014-01-06T02:53:00.059Z",
+            "updated_at": "2014-01-06T02:53:00.059Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

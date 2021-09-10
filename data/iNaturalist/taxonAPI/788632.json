@@ -8,7 +8,7 @@
     "iconic_taxon_id": 47178,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 180,
+    "observations_count": 636,
     "listed_taxa_count": 0,
     "rank_level": 27,
     "unique_name": "clupeinae",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 66562,
+    "uuid": "97d83926-835d-473b-9698-e11df99109eb",
+    "photos_locked": false,
     "default_name": {
         "id": 1384533,
         "name": "Clupeinae",
@@ -49,12 +51,14 @@
         "native_page_url": "https://www.inaturalist.org/photos/22246421",
         "native_username": "jlayman",
         "native_realname": "Jonathan Layman",
-        "license": 0,
+        "license": 4,
         "subtype": null,
         "native_original_image_url": null,
-        "license_name": "Copyright",
-        "license_url": "http://en.wikipedia.org/wiki/Copyright",
-        "attribution": "(c) Jonathan Layman, all rights reserved",
+        "uuid": "94159cf9-98d1-459e-81df-e388269c9b8d",
+        "license_code": "CC-BY",
+        "license_name": "Creative Commons Attribution License",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "attribution": "(c) Jonathan Layman, some rights reserved (CC BY)",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2018-10-23T07:44:01.453Z",
@@ -81,18 +85,31 @@
                 "native_page_url": "https://www.inaturalist.org/photos/22246421",
                 "native_username": "jlayman",
                 "native_realname": "Jonathan Layman",
-                "license": 0,
+                "license": 4,
                 "subtype": null,
                 "native_original_image_url": null,
-                "license_code": "C",
-                "attribution": "(c) Jonathan Layman, all rights reserved",
-                "license_name": "Copyright",
-                "license_url": "http://en.wikipedia.org/wiki/Copyright",
+                "uuid": "94159cf9-98d1-459e-81df-e388269c9b8d",
+                "license_code": "CC-BY",
+                "attribution": "(c) Jonathan Layman, some rights reserved (CC BY)",
+                "license_name": "Creative Commons Attribution License",
+                "license_url": "http://creativecommons.org/licenses/by/4.0/",
                 "type": "LocalPhoto"
             }
         }
     ],
     "taxon_names": [
+        {
+            "id": 2101745,
+            "name": "ニシン亜科",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 788632,
+            "created_at": "2020-05-29T21:29:40.670Z",
+            "updated_at": "2020-05-29T21:29:40.670Z",
+            "creator_id": 396468,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
         {
             "id": 1384533,
             "name": "Clupeinae",
@@ -102,7 +119,8 @@
             "created_at": "2018-10-23T07:44:01.453Z",
             "updated_at": "2018-10-23T07:44:01.453Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

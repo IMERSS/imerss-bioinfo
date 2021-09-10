@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 49,
-    "listed_taxa_count": 3,
+    "observations_count": 111,
+    "listed_taxa_count": 5,
     "rank_level": 30,
     "unique_name": "Haloclavidae",
     "wikipedia_summary": "<b>Haloclavidae</b> is a family of sea anemones. Members of the family are found worldwide and many live largely buried in soft substrates with only their oral disc and tentacles protruding.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 324011,
+    "uuid": "e7f7ff53-8a8c-49e3-88d7-3ceefb734c7d",
+    "photos_locked": false,
     "default_name": {
         "id": 76540,
         "name": "Haloclavidae",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "http://farm4.staticflickr.com/3153/2635207948_40b7a6be4b_o.jpg",
+        "uuid": "f050e282-4c1e-4da0-80f5-b4c6107ea68d",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Minette Layne, all rights reserved, uploaded by Minette Layne",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "http://farm4.staticflickr.com/3153/2635207948_40b7a6be4b_o.jpg",
+                "uuid": "f050e282-4c1e-4da0-80f5-b4c6107ea68d",
                 "license_code": "C",
                 "attribution": "(c) Minette Layne, all rights reserved, uploaded by Minette Layne",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2008-07-03T16:42:08.000Z",
             "updated_at": "2008-07-03T16:42:08.000Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -8,8 +8,8 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 215,
-    "listed_taxa_count": 19,
+    "observations_count": 329,
+    "listed_taxa_count": 23,
     "rank_level": 37,
     "unique_name": "sea angels",
     "wikipedia_summary": "<b>Sea angels</b> (clade <b>Gymnosomata</b>) are a large group of extremely small, swimming sea slugs, not to be confused with Cnidarians (Jellies and other similar creatures), classified into six different families. They are pelagic opisthobranchs in the clade Gymnosomata within the larger clade Heterobranchia. Sea angels were previously referred to as a type of pteropod.",
@@ -60,6 +60,7 @@
         "subtype": null,
         "native_original_image_url": null,
         "uuid": "56f60827-f65d-45de-ab07-48f73373cfe4",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Shigeru Harazaki, all rights reserved",
@@ -103,40 +104,16 @@
     ],
     "taxon_names": [
         {
-            "id": 78556,
-            "name": "Gymnosomata",
+            "id": 2373152,
+            "name": "裸體亞目",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "Chinese (Traditional)",
             "taxon_id": 49153,
-            "created_at": "2009-01-18T22:29:40.000Z",
-            "updated_at": "2009-01-18T22:29:40.000Z",
-            "creator_id": null,
-            "position": 0,
-            "parameterized_lexicon": "scientific-names"
-        },
-        {
-            "id": 2100553,
-            "name": "裸殻翼足目",
-            "is_valid": true,
-            "lexicon": "Japanese",
-            "taxon_id": 49153,
-            "created_at": "2020-05-29T21:24:25.462Z",
-            "updated_at": "2020-05-29T21:24:25.462Z",
-            "creator_id": 396468,
-            "position": 4,
-            "parameterized_lexicon": "japanese"
-        },
-        {
-            "id": 87533,
-            "name": "Sea Angels",
-            "is_valid": true,
-            "lexicon": "English",
-            "taxon_id": 49153,
-            "created_at": "2010-01-30T06:29:46.000Z",
-            "updated_at": "2012-10-07T01:48:21.887Z",
-            "creator_id": 1,
-            "position": 0,
-            "parameterized_lexicon": "english"
+            "created_at": "2021-01-02T00:57:14.597Z",
+            "updated_at": "2021-01-02T00:57:14.597Z",
+            "creator_id": 1465242,
+            "position": 5,
+            "parameterized_lexicon": "chinese-traditional"
         },
         {
             "id": 738170,
@@ -161,6 +138,54 @@
             "creator_id": 1243007,
             "position": 3,
             "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 87533,
+            "name": "Sea Angels",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 49153,
+            "created_at": "2010-01-30T06:29:46.000Z",
+            "updated_at": "2012-10-07T01:48:21.887Z",
+            "creator_id": 1,
+            "position": 0,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 2100553,
+            "name": "裸殻翼足目",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 49153,
+            "created_at": "2020-05-29T21:24:25.462Z",
+            "updated_at": "2020-05-29T21:24:25.462Z",
+            "creator_id": 396468,
+            "position": 4,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 78556,
+            "name": "Gymnosomata",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 49153,
+            "created_at": "2009-01-18T22:29:40.000Z",
+            "updated_at": "2009-01-18T22:29:40.000Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2540591,
+            "name": "rovsimsnäckor",
+            "is_valid": true,
+            "lexicon": "Swedish",
+            "taxon_id": 49153,
+            "created_at": "2021-05-08T01:54:04.750Z",
+            "updated_at": "2021-05-08T01:54:04.750Z",
+            "creator_id": 2566072,
+            "position": 6,
+            "parameterized_lexicon": "swedish"
         }
     ],
     "iconic_taxon": {

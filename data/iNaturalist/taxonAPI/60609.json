@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 54,
-    "listed_taxa_count": 27,
+    "observations_count": 117,
+    "listed_taxa_count": 42,
     "rank_level": 20,
     "unique_name": "ハネガヤ属",
     "wikipedia_summary": "<i><b>Plumularia</b></i> is a genus of hydroids in the family Plumulariidae.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "fc73a2e9-f8d5-489e-b198-57dbe8eaa6a9",
+    "photos_locked": false,
     "default_name": {
         "id": 95834,
         "name": "Plumularia",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "985b8b45-7a49-465c-aa8e-972b88c5977b",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Wendy Feltham, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "985b8b45-7a49-465c-aa8e-972b88c5977b",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -115,6 +120,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "7a380b78-eb47-4baa-851e-7346ed52ce49",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -125,17 +131,6 @@
     ],
     "taxon_names": [
         {
-            "id": 95834,
-            "name": "Plumularia",
-            "is_valid": true,
-            "lexicon": "Scientific Names",
-            "taxon_id": 60609,
-            "created_at": "2010-05-17T01:03:41.000Z",
-            "updated_at": "2010-05-17T01:03:41.000Z",
-            "creator_id": null,
-            "position": 0
-        },
-        {
             "id": 1475092,
             "name": "ハネガヤ属",
             "is_valid": true,
@@ -144,7 +139,20 @@
             "created_at": "2019-01-10T08:40:05.406Z",
             "updated_at": "2019-01-10T08:40:05.406Z",
             "creator_id": 1243007,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 95834,
+            "name": "Plumularia",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 60609,
+            "created_at": "2010-05-17T01:03:41.000Z",
+            "updated_at": "2010-05-17T01:03:41.000Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

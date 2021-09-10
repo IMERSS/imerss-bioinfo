@@ -1,7 +1,7 @@
 {
     "sources": {
         "md": ["./*.md"],
-        "css": ["./thing.css", "./thing1.css", "./thing2.css"],
+        "css": ["src/**/*.css"],
         "js": ["src/**/*.js", "!src/lib/*.js", "!src/auxBuild/*.js", "./*.js"],
         "json": ["./*.json", "src/**/*.json"],
         "json5": ["data/**/*.json5"]
@@ -32,7 +32,7 @@
         "options": {
             "config": {
                 "rules": {
-                    "order/properties-alphabeticl-order": false
+                    "order/properties-alphabetical-order": false
                 }
             }
         }

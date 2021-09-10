@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 39,
-    "listed_taxa_count": 1,
+    "observations_count": 91,
+    "listed_taxa_count": 2,
     "rank_level": 30,
     "unique_name": "Acarnidae",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "2b6d9f96-4c8d-4eb1-acfe-43435edb06d3",
+    "photos_locked": false,
     "default_name": {
         "id": 100245,
         "name": "Acarnidae",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "https://farm8.staticflickr.com/7583/26787443682_a5267a7f45_o.jpg",
+        "uuid": "3afb09b8-0751-4506-9997-08c67e832896",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Thomas McElroy, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "https://farm8.staticflickr.com/7583/26787443682_a5267a7f45_o.jpg",
+                "uuid": "3afb09b8-0751-4506-9997-08c67e832896",
                 "license_code": "C",
                 "attribution": "(c) Thomas McElroy, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2010-11-07T06:55:39.000Z",
             "updated_at": "2010-11-07T06:55:39.000Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 115,
-    "listed_taxa_count": 4,
+    "observations_count": 392,
+    "listed_taxa_count": 5,
     "rank_level": 40,
     "unique_name": "淡水クラゲ目",
     "wikipedia_summary": "The <b>Limnomedusae</b> are an order of jellyfish in the class Hydrozoa.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 324024,
+    "uuid": "07f15c33-947b-4e84-99ea-e79a64bd2bab",
+    "photos_locked": false,
     "default_name": {
         "id": 253848,
         "name": "Limnomedusae",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "715fb387-5d3d-4d6a-8a96-e68f6a51b31d",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Owen Lockhart, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "715fb387-5d3d-4d6a-8a96-e68f6a51b31d",
                 "license_code": "C",
                 "attribution": "(c) Owen Lockhart, all rights reserved",
                 "license_name": "Copyright",
@@ -94,17 +99,6 @@
     ],
     "taxon_names": [
         {
-            "id": 253848,
-            "name": "Limnomedusae",
-            "is_valid": true,
-            "lexicon": "Scientific Names",
-            "taxon_id": 152821,
-            "created_at": "2012-09-14T22:23:27.571Z",
-            "updated_at": "2012-09-14T22:23:27.571Z",
-            "creator_id": null,
-            "position": 0
-        },
-        {
             "id": 1475070,
             "name": "淡水クラゲ目",
             "is_valid": true,
@@ -113,7 +107,20 @@
             "created_at": "2019-01-10T07:40:00.784Z",
             "updated_at": "2019-01-10T07:40:00.784Z",
             "creator_id": 1243007,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 253848,
+            "name": "Limnomedusae",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 152821,
+            "created_at": "2012-09-14T22:23:27.571Z",
+            "updated_at": "2012-09-14T22:23:27.571Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

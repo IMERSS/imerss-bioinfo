@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "EolNameProvider",
-    "observations_count": 35,
-    "listed_taxa_count": 78,
+    "observations_count": 64,
+    "listed_taxa_count": 103,
     "rank_level": 10,
     "unique_name": "schuchertinia milleri",
     "wikipedia_summary": "<i><b>Schuchertinia milleri</b></i>, commonly known as the <b>Miller hydractinia</b>, <b>hedgehog hydroid</b> or <b>snail fur</b>, is a small colonial hydroid in the family Hydractiniidae, found in the eastern Pacific Ocean. It forms mat-like colonies on rocks, or sometimes on the mollusc shells occupied by hermit crabs.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "a6f7652d-09f6-45c1-8549-970f1e181c83",
+    "photos_locked": false,
     "default_name": {
         "id": 1484479,
         "name": "Schuchertinia milleri",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "399c968b-4909-4a60-bda7-913054db91dd",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "399c968b-4909-4a60-bda7-913054db91dd",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2019-01-20T05:00:11.076Z",
             "updated_at": "2019-01-20T05:00:11.076Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 1502066,
@@ -113,7 +119,8 @@
             "created_at": "2019-02-09T22:57:34.584Z",
             "updated_at": "2019-02-09T22:57:34.584Z",
             "creator_id": null,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

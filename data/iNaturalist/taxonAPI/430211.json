@@ -8,13 +8,13 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 214,
-    "listed_taxa_count": 250,
+    "observations_count": 890,
+    "listed_taxa_count": 518,
     "rank_level": 10,
     "unique_name": "purple mahogany clam",
     "wikipedia_summary": "<i><b>Nuttallia obscurata</b></i>, common name the \"purple mahogany clam\", \"dark mahogany clam\", \"varnish clam\", or \"savory clam\", is a species of saltwater clam, a marine bivalve mollusk in the family Psammobiidae. This clam is native to Japan. It has been introduced in the North American coasts of the Eastern Pacific Ocean, in British Columbia, Washington and Oregon, where it is considered to be an invasive species; it is often harvested for food there.",
     "wikipedia_title": null,
-    "ancestry": "48460/1/47115/47584/372755/551316/551317/488959/59394/117631/117632",
+    "ancestry": "48460/1/47115/47584/1051154/1051155/551316/551317/488959/59394/117631/117632",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 327590,
+    "uuid": "925d22b9-9cd5-4e77-b0f0-4e7acfe933b9",
+    "photos_locked": false,
     "default_name": {
         "id": 763211,
         "name": "Purple Mahogany Clam",
@@ -52,11 +54,13 @@
         "created_at": "2015-11-24T05:49:05.267Z",
         "updated_at": "2015-11-24T05:49:31.039Z",
         "native_page_url": "http://www.inaturalist.org/photos/2694832",
-        "native_username": "tenthousand_hz_legend",
+        "native_username": "tenthousandhz",
         "native_realname": "Daniel Palmer",
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "2590c04f-a494-4184-ba84-2c8ed07cc831",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Daniel Palmer, all rights reserved",
@@ -84,11 +88,12 @@
                 "created_at": "2015-11-24T05:49:05.267Z",
                 "updated_at": "2015-11-24T05:49:31.039Z",
                 "native_page_url": "http://www.inaturalist.org/photos/2694832",
-                "native_username": "tenthousand_hz_legend",
+                "native_username": "tenthousandhz",
                 "native_realname": "Daniel Palmer",
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "2590c04f-a494-4184-ba84-2c8ed07cc831",
                 "license_code": "C",
                 "attribution": "(c) Daniel Palmer, all rights reserved",
                 "license_name": "Copyright",
@@ -115,11 +120,12 @@
                 "created_at": "2015-11-24T05:49:05.819Z",
                 "updated_at": "2015-11-24T05:49:44.928Z",
                 "native_page_url": "http://www.inaturalist.org/photos/2694833",
-                "native_username": "tenthousand_hz_legend",
+                "native_username": "tenthousandhz",
                 "native_realname": "Daniel Palmer",
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "472f9023-7266-4ac0-8855-ba7758adfa45",
                 "license_code": "C",
                 "attribution": "(c) Daniel Palmer, all rights reserved",
                 "license_name": "Copyright",
@@ -138,7 +144,20 @@
             "created_at": "2017-03-24T01:16:24.538Z",
             "updated_at": "2017-03-24T01:16:24.538Z",
             "creator_id": null,
-            "position": 4
+            "position": 4,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2527013,
+            "name": "Purple Varnish Clam",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 430211,
+            "created_at": "2021-05-01T16:44:17.917Z",
+            "updated_at": "2021-05-01T16:44:26.152Z",
+            "creator_id": 1772002,
+            "position": 6,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 763211,
@@ -149,7 +168,8 @@
             "created_at": "2015-10-19T18:33:43.337Z",
             "updated_at": "2015-12-09T20:41:52.893Z",
             "creator_id": 4918,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 763212,
@@ -160,7 +180,20 @@
             "created_at": "2015-10-19T18:34:03.623Z",
             "updated_at": "2015-12-09T20:42:56.133Z",
             "creator_id": 4918,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 2107076,
+            "name": "ワスレイソシジミ",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 430211,
+            "created_at": "2020-05-29T22:38:29.480Z",
+            "updated_at": "2020-05-29T22:38:29.480Z",
+            "creator_id": 396468,
+            "position": 5,
+            "parameterized_lexicon": "japanese"
         },
         {
             "id": 663637,
@@ -171,7 +204,8 @@
             "created_at": "2015-02-04T07:19:00.853Z",
             "updated_at": "2015-02-04T07:19:00.853Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 774720,
@@ -182,7 +216,8 @@
             "created_at": "2015-11-25T14:45:41.072Z",
             "updated_at": "2015-11-25T14:45:41.072Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

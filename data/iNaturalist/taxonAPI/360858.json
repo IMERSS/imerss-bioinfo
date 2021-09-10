@@ -8,13 +8,13 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 109,
-    "listed_taxa_count": 185,
+    "observations_count": 228,
+    "listed_taxa_count": 234,
     "rank_level": 10,
     "unique_name": "northern hairy chiton",
     "wikipedia_summary": null,
     "wikipedia_title": "",
-    "ancestry": "48460/1/47115/47429/47428/533431/372790/533483/47631/47630",
+    "ancestry": "48460/1/47115/47429/47428/533431/372790/533483/47631/1067211/47630",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "fbf8aa6f-f3ef-4c43-8c22-8bf2afc40f62",
+    "photos_locked": false,
     "default_name": {
         "id": 747858,
         "name": "Northern Hairy Chiton",
@@ -57,6 +59,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "0c6aca5e-17b3-462f-a760-91c064eb3387",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Wendy Feltham, all rights reserved",
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "0c6aca5e-17b3-462f-a760-91c064eb3387",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -107,7 +112,8 @@
             "created_at": "2014-06-29T02:58:17.130Z",
             "updated_at": "2014-06-29T02:58:17.130Z",
             "creator_id": 477,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 747858,
@@ -118,7 +124,8 @@
             "created_at": "2015-07-18T04:34:59.488Z",
             "updated_at": "2015-07-18T04:34:59.488Z",
             "creator_id": 26610,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
         }
     ],
     "iconic_taxon": {

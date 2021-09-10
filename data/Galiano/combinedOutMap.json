@@ -11,6 +11,7 @@
         "superorder": "Superorder",
         "order": "Order",
         "suborder": "Suborder",
+        "infraorder": "Infraorder",
         "superfamily": "Superfamily",
         "family": "Family",
         "subfamily": "Subfamily",

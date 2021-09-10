@@ -4,12 +4,12 @@
     "rank": "species",
     "source_id": 8,
     "created_at": "2015-04-07T02:21:58.241Z",
-    "updated_at": "2015-04-07T02:22:04.344Z",
+    "updated_at": "2020-06-09T04:29:00.674Z",
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 2,
-    "listed_taxa_count": 14,
+    "observations_count": 6,
+    "listed_taxa_count": 21,
     "rank_level": 10,
     "unique_name": "alaskan pink shrimp",
     "wikipedia_summary": null,
@@ -21,7 +21,9 @@
     "is_active": true,
     "complete": null,
     "complete_rank": null,
-    "taxon_framework_relationship_id": null,
+    "taxon_framework_relationship_id": 439245,
+    "uuid": "4534dcdd-4476-4f06-be25-5bf56ea812a2",
+    "photos_locked": false,
     "default_name": {
         "id": 724185,
         "name": "Alaskan Pink Shrimp",
@@ -57,13 +59,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "70b89da4-3328-48c6-9eba-c9a1781c43ba",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) rolandwirth, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2015-04-07T02:21:58.241Z",
-    "updated_at_utc": "2015-04-07T02:22:04.344Z",
+    "updated_at_utc": "2020-06-09T04:29:00.674Z",
     "taxon_photos": [
         {
             "id": 678005,
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "70b89da4-3328-48c6-9eba-c9a1781c43ba",
                 "license_code": "C",
                 "attribution": "(c) rolandwirth, all rights reserved",
                 "license_name": "Copyright",
@@ -99,17 +104,6 @@
     ],
     "taxon_names": [
         {
-            "id": 724184,
-            "name": "Pandalus eous",
-            "is_valid": true,
-            "lexicon": "Scientific Names",
-            "taxon_id": 459644,
-            "created_at": "2015-04-07T02:21:58.241Z",
-            "updated_at": "2015-04-07T02:21:58.241Z",
-            "creator_id": null,
-            "position": 0
-        },
-        {
             "id": 724185,
             "name": "Alaskan Pink Shrimp",
             "is_valid": true,
@@ -118,7 +112,32 @@
             "created_at": "2015-04-07T02:22:04.339Z",
             "updated_at": "2015-04-07T02:22:04.339Z",
             "creator_id": 477,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 2105655,
+            "name": "ホッコクアカエビ",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 459644,
+            "created_at": "2020-05-29T22:07:47.314Z",
+            "updated_at": "2020-05-29T22:07:47.314Z",
+            "creator_id": 396468,
+            "position": 2,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 724184,
+            "name": "Pandalus eous",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 459644,
+            "created_at": "2015-04-07T02:21:58.241Z",
+            "updated_at": "2015-04-07T02:21:58.241Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

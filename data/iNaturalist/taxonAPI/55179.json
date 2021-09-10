@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 402,
-    "listed_taxa_count": 64,
+    "observations_count": 857,
+    "listed_taxa_count": 85,
     "rank_level": 30,
-    "unique_name": "スナクモヒトデ科",
+    "unique_name": "long-armed burrowing brittle stars",
     "wikipedia_summary": "<b>Amphiuridae</b> (commonly called <b>long-armed burrowing brittle stars</b> or <b>burrowing brittle stars</b>) are a large family of brittle stars of the suborder Gnathophiurina. Some species are used to study echinoderm development (e.g. <i>Amphipholis kochii</i> and <i>Amphioplus abditus</i>) and bioluminescence (the dwarf brittle star, <i>Amphipholis squamata</i>).",
     "wikipedia_title": null,
     "ancestry": "48460/1/47549/481959/48836/774983/774984/774987/774991/814142/814160",
@@ -23,13 +23,14 @@
     "complete_rank": null,
     "taxon_framework_relationship_id": 365466,
     "uuid": "786f28ef-e542-4655-aa0d-ccfdf5088485",
+    "photos_locked": false,
     "default_name": {
         "id": 508528,
         "name": "Long-armed Burrowing Brittle Stars",
         "is_valid": true,
         "lexicon": "English"
     },
-    "photo_url": "https://static.inaturalist.org/photos/45317/square.jpg?1545415327",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/square.jpg?1545415327",
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
     "common_name": {
@@ -38,18 +39,18 @@
         "is_valid": true,
         "lexicon": "English"
     },
-    "image_url": "https://static.inaturalist.org/photos/45317/square.jpg?1545415327",
+    "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/square.jpg?1545415327",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": {
         "id": 45317,
         "user_id": null,
         "native_photo_id": "4861798223",
-        "square_url": "https://static.inaturalist.org/photos/45317/square.jpg?1545415327",
-        "thumb_url": "https://static.inaturalist.org/photos/45317/thumb.jpg?1545415327",
-        "small_url": "https://static.inaturalist.org/photos/45317/small.jpg?1545415327",
-        "medium_url": "https://static.inaturalist.org/photos/45317/medium.jpg?1545415327",
-        "large_url": "https://static.inaturalist.org/photos/45317/large.jpg?1545415327",
+        "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/square.jpg?1545415327",
+        "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/thumb.jpg?1545415327",
+        "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/small.jpg?1545415327",
+        "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/medium.jpg?1545415327",
+        "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/large.jpg?1545415327",
         "created_at": "2011-07-16T05:02:33.083Z",
         "updated_at": "2018-12-21T18:02:09.213Z",
         "native_page_url": "http://www.flickr.com/photos/82759070@N00/4861798223",
@@ -59,6 +60,7 @@
         "subtype": "FlickrPhoto",
         "native_original_image_url": "https://farm5.staticflickr.com/4075/4861798223_0f3b7e55f0_o.jpg",
         "uuid": "8d9f55ac-51b1-4860-9cce-91c1fedb4fb3",
+        "license_code": "CC-BY-NC",
         "license_name": "Creative Commons Attribution-NonCommercial License",
         "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
         "attribution": "(c) mykle hoban, some rights reserved (CC BY-NC)",
@@ -78,11 +80,11 @@
                 "id": 45317,
                 "user_id": null,
                 "native_photo_id": "4861798223",
-                "square_url": "https://static.inaturalist.org/photos/45317/square.jpg?1545415327",
-                "thumb_url": "https://static.inaturalist.org/photos/45317/thumb.jpg?1545415327",
-                "small_url": "https://static.inaturalist.org/photos/45317/small.jpg?1545415327",
-                "medium_url": "https://static.inaturalist.org/photos/45317/medium.jpg?1545415327",
-                "large_url": "https://static.inaturalist.org/photos/45317/large.jpg?1545415327",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/square.jpg?1545415327",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/thumb.jpg?1545415327",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/small.jpg?1545415327",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/medium.jpg?1545415327",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45317/large.jpg?1545415327",
                 "created_at": "2011-07-16T05:02:33.083Z",
                 "updated_at": "2018-12-21T18:02:09.213Z",
                 "native_page_url": "http://www.flickr.com/photos/82759070@N00/4861798223",
@@ -102,15 +104,16 @@
     ],
     "taxon_names": [
         {
-            "id": 87353,
-            "name": "Amphiuridae",
+            "id": 2336478,
+            "name": "trådormstjärnor",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "Swedish",
             "taxon_id": 55179,
-            "created_at": "2010-01-14T06:49:03.000Z",
-            "updated_at": "2010-01-14T06:49:03.000Z",
-            "creator_id": null,
-            "position": 0
+            "created_at": "2020-12-10T16:32:39.577Z",
+            "updated_at": "2020-12-10T16:32:39.577Z",
+            "creator_id": 1891518,
+            "position": 3,
+            "parameterized_lexicon": "swedish"
         },
         {
             "id": 508528,
@@ -121,7 +124,8 @@
             "created_at": "2013-08-07T09:29:55.997Z",
             "updated_at": "2014-04-23T04:13:16.293Z",
             "creator_id": 3403,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 1475014,
@@ -132,7 +136,20 @@
             "created_at": "2019-01-10T06:24:52.174Z",
             "updated_at": "2019-01-10T06:24:52.174Z",
             "creator_id": 1243007,
-            "position": 2
+            "position": 2,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 87353,
+            "name": "Amphiuridae",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 55179,
+            "created_at": "2010-01-14T06:49:03.000Z",
+            "updated_at": "2010-01-14T06:49:03.000Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 117,
-    "listed_taxa_count": 18,
+    "observations_count": 201,
+    "listed_taxa_count": 30,
     "rank_level": 30,
     "unique_name": "stylochidae",
     "wikipedia_summary": "<b>Stylochidae</b> is a family of Turbellarian Flatworms. It includes the species Stylochus zebra, which usually lives in shells occupied by the hermit crab Pagurus pollicaris, though it can sometimes be found free living on rocks and pilings.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "1f610b05-0532-4410-a0cf-747fc1e14716",
+    "photos_locked": false,
     "default_name": {
         "id": 90041,
         "name": "Stylochidae",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "http://farm9.staticflickr.com/8253/8687460064_c2e1df2024_o.jpg",
+        "uuid": "c7f4fba1-1602-4666-b210-3bdbd17fdb49",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Evergreengirl Garden, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "http://farm9.staticflickr.com/8253/8687460064_c2e1df2024_o.jpg",
+                "uuid": "c7f4fba1-1602-4666-b210-3bdbd17fdb49",
                 "license_code": "C",
                 "attribution": "(c) Evergreengirl Garden, all rights reserved",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2077981,
+            "name": "スチロヒラムシ科",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 56698,
+            "created_at": "2020-05-19T13:29:54.198Z",
+            "updated_at": "2020-05-19T13:29:54.198Z",
+            "creator_id": 1733420,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
             "id": 90041,
             "name": "Stylochidae",
             "is_valid": true,
@@ -102,7 +119,20 @@
             "created_at": "2010-03-06T03:56:41.000Z",
             "updated_at": "2010-03-06T03:56:41.000Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2209698,
+            "name": "柄渦蟲科",
+            "is_valid": true,
+            "lexicon": "Chinese (Traditional)",
+            "taxon_id": 56698,
+            "created_at": "2020-08-22T15:23:50.452Z",
+            "updated_at": "2020-08-22T15:23:50.452Z",
+            "creator_id": 24661,
+            "position": 2,
+            "parameterized_lexicon": "chinese-traditional"
         }
     ],
     "iconic_taxon": {

@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 1,
-    "listed_taxa_count": 3,
+    "observations_count": 3,
+    "listed_taxa_count": 6,
     "rank_level": 10,
     "unique_name": "pyura mirabilis",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 17361,
+    "uuid": "729af0f1-ade2-4190-802a-59aac8e19e9c",
+    "photos_locked": false,
     "default_name": {
         "id": 932769,
         "name": "Pyura mirabilis",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "https://farm4.staticflickr.com/3936/32971748843_97486f1b5b_o.jpg",
+        "uuid": "03d73051-1fd0-47b4-844c-872fd1c08638",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Southern California Marine Life, all rights reserved, uploaded by Phil Garner",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "https://farm4.staticflickr.com/3936/32971748843_97486f1b5b_o.jpg",
+                "uuid": "03d73051-1fd0-47b4-844c-872fd1c08638",
                 "license_code": "C",
                 "attribution": "(c) Southern California Marine Life, all rights reserved, uploaded by Phil Garner",
                 "license_name": "Copyright",
@@ -102,7 +107,20 @@
             "created_at": "2017-07-07T19:46:20.851Z",
             "updated_at": "2017-07-07T19:46:20.851Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2106061,
+            "name": "マクラボヤ",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 552416,
+            "created_at": "2020-05-29T22:17:09.623Z",
+            "updated_at": "2020-05-29T22:17:09.623Z",
+            "creator_id": 396468,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
         }
     ],
     "iconic_taxon": {

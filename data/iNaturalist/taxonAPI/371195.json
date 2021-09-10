@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 59,
-    "listed_taxa_count": 141,
+    "observations_count": 134,
+    "listed_taxa_count": 214,
     "rank_level": 10,
     "unique_name": "taylors social tunicate",
     "wikipedia_summary": null,
@@ -22,13 +22,15 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 17824,
+    "uuid": "40d275d0-93f3-4fd0-ab76-cfa270ef7a38",
+    "photos_locked": false,
     "default_name": {
         "id": 1359752,
         "name": "Taylor's Social Tunicate",
         "is_valid": true,
         "lexicon": "English"
     },
-    "photo_url": "https://static.inaturalist.org/photos/14650439/square.jpeg?1522505702",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/square.jpeg?1522505702",
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
     "common_name": {
@@ -37,18 +39,18 @@
         "is_valid": true,
         "lexicon": "English"
     },
-    "image_url": "https://static.inaturalist.org/photos/14650439/square.jpeg?1522505702",
+    "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/square.jpeg?1522505702",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": {
         "id": 14650439,
         "user_id": 216076,
         "native_photo_id": "14650439",
-        "square_url": "https://static.inaturalist.org/photos/14650439/square.jpeg?1522505702",
-        "thumb_url": "https://static.inaturalist.org/photos/14650439/thumb.jpeg?1522505702",
-        "small_url": "https://static.inaturalist.org/photos/14650439/small.jpeg?1522505702",
-        "medium_url": "https://static.inaturalist.org/photos/14650439/medium.jpeg?1522505702",
-        "large_url": "https://static.inaturalist.org/photos/14650439/large.jpeg?1522505702",
+        "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/square.jpeg?1522505702",
+        "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/thumb.jpeg?1522505702",
+        "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/small.jpeg?1522505702",
+        "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/medium.jpeg?1522505702",
+        "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/large.jpeg?1522505702",
         "created_at": "2018-03-31T14:15:06.235Z",
         "updated_at": "2018-03-31T14:15:06.235Z",
         "native_page_url": "https://www.inaturalist.org/photos/14650439",
@@ -57,6 +59,8 @@
         "license": 2,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "3c104873-6fa8-4fe8-86a0-d9086eec4e7f",
+        "license_code": "CC-BY-NC",
         "license_name": "Creative Commons Attribution-NonCommercial License",
         "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
         "attribution": "(c) Jeff Goddard, some rights reserved (CC BY-NC)",
@@ -76,11 +80,11 @@
                 "id": 14650439,
                 "user_id": 216076,
                 "native_photo_id": "14650439",
-                "square_url": "https://static.inaturalist.org/photos/14650439/square.jpeg?1522505702",
-                "thumb_url": "https://static.inaturalist.org/photos/14650439/thumb.jpeg?1522505702",
-                "small_url": "https://static.inaturalist.org/photos/14650439/small.jpeg?1522505702",
-                "medium_url": "https://static.inaturalist.org/photos/14650439/medium.jpeg?1522505702",
-                "large_url": "https://static.inaturalist.org/photos/14650439/large.jpeg?1522505702",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/square.jpeg?1522505702",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/thumb.jpeg?1522505702",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/small.jpeg?1522505702",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/medium.jpeg?1522505702",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14650439/large.jpeg?1522505702",
                 "created_at": "2018-03-31T14:15:06.235Z",
                 "updated_at": "2018-03-31T14:15:06.235Z",
                 "native_page_url": "https://www.inaturalist.org/photos/14650439",
@@ -89,6 +93,7 @@
                 "license": 2,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "3c104873-6fa8-4fe8-86a0-d9086eec4e7f",
                 "license_code": "CC-BY-NC",
                 "attribution": "(c) Jeff Goddard, some rights reserved (CC BY-NC)",
                 "license_name": "Creative Commons Attribution-NonCommercial License",
@@ -120,6 +125,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "e231a0df-4a87-4b3c-9cd4-e8df9e51aae1",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -138,7 +144,8 @@
             "created_at": "2014-09-18T23:40:48.688Z",
             "updated_at": "2014-09-18T23:40:48.688Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 1359752,
@@ -149,7 +156,8 @@
             "created_at": "2018-09-06T02:56:01.563Z",
             "updated_at": "2018-09-06T02:56:01.563Z",
             "creator_id": 516268,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 1359753,
@@ -160,7 +168,8 @@
             "created_at": "2018-09-06T02:56:34.422Z",
             "updated_at": "2018-09-06T02:56:34.422Z",
             "creator_id": 516268,
-            "position": 2
+            "position": 2,
+            "parameterized_lexicon": "english"
         }
     ],
     "iconic_taxon": {

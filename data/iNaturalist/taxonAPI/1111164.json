@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 4,
-    "listed_taxa_count": 21,
+    "observations_count": 10,
+    "listed_taxa_count": 25,
     "rank_level": 10,
     "unique_name": "pandalus lucidirimicolus",
     "wikipedia_summary": null,
@@ -25,15 +25,20 @@
     "uuid": "d0563668-eed8-400e-a012-84e120e19392",
     "photos_locked": false,
     "default_name": {
-        "id": 2169263,
-        "name": "Pandalus lucidirimicolus",
+        "id": 2432208,
+        "name": "Sparkling Shrimp",
         "is_valid": true,
-        "lexicon": "Scientific Names"
+        "lexicon": "English"
     },
     "photo_url": "https://static.inaturalist.org/photos/83910481/square.jpg?1594537586",
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
-    "common_name": null,
+    "common_name": {
+        "id": 2432208,
+        "name": "Sparkling Shrimp",
+        "is_valid": true,
+        "lexicon": "English"
+    },
     "image_url": "https://static.inaturalist.org/photos/83910481/square.jpg?1594537586",
     "taxon_range_kml_url": null,
     "html": null,
@@ -55,6 +60,7 @@
         "subtype": null,
         "native_original_image_url": null,
         "uuid": "4b4d9d7c-cfdf-4a52-9e19-0260ea0fa1c1",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Kieran Cox, all rights reserved",
@@ -98,6 +104,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2169263,
+            "name": "Pandalus lucidirimicolus",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1111164,
+            "created_at": "2020-07-13T03:10:20.148Z",
+            "updated_at": "2020-07-13T03:10:20.148Z",
+            "creator_id": 702203,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
             "id": 2169264,
             "name": "Pandalopsis lucidirimicola",
             "is_valid": false,
@@ -110,15 +128,27 @@
             "parameterized_lexicon": "scientific-names"
         },
         {
-            "id": 2169263,
-            "name": "Pandalus lucidirimicolus",
+            "id": 2432208,
+            "name": "Sparkling Shrimp",
             "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 1111164,
+            "created_at": "2021-02-16T05:36:54.805Z",
+            "updated_at": "2021-02-16T05:36:54.805Z",
+            "creator_id": null,
+            "position": 2,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 2432209,
+            "name": "Pandalus lucidirimicola",
+            "is_valid": false,
             "lexicon": "Scientific Names",
             "taxon_id": 1111164,
-            "created_at": "2020-07-13T03:10:20.148Z",
-            "updated_at": "2020-07-13T03:10:20.148Z",
-            "creator_id": 702203,
-            "position": 0,
+            "created_at": "2021-02-16T05:36:55.110Z",
+            "updated_at": "2021-02-16T05:36:55.110Z",
+            "creator_id": null,
+            "position": 3,
             "parameterized_lexicon": "scientific-names"
         }
     ],

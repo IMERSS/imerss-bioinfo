@@ -8,10 +8,10 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 1359,
+    "observations_count": 1706,
     "listed_taxa_count": 203,
     "rank_level": 30,
-    "unique_name": "lucine clams",
+    "unique_name": "满月蛤科",
     "wikipedia_summary": "<b>Lucinidae</b> is a family of saltwater clams, marine bivalve molluscs.",
     "wikipedia_title": null,
     "ancestry": "48460/1/47115/47584/1051154/1051155/551316/551317/775850/83708",
@@ -60,6 +60,7 @@
         "subtype": "FlickrPhoto",
         "native_original_image_url": "https://farm8.staticflickr.com/7507/15570579923_7914ca0a64_o.jpg",
         "uuid": "22759913-2456-4939-8631-4368841282bb",
+        "license_code": "CC-BY",
         "license_name": "Creative Commons Attribution License",
         "license_url": "http://creativecommons.org/licenses/by/4.0/",
         "attribution": "(c) James St. John, some rights reserved (CC BY)",
@@ -257,6 +258,18 @@
             "creator_id": null,
             "position": 0,
             "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2522513,
+            "name": "满月蛤科",
+            "is_valid": true,
+            "lexicon": "Chinese (Simplified)",
+            "taxon_id": 83709,
+            "created_at": "2021-04-23T12:06:29.445Z",
+            "updated_at": "2021-04-23T12:06:29.445Z",
+            "creator_id": 1151287,
+            "position": 5,
+            "parameterized_lexicon": "chinese-simplified"
         }
     ],
     "iconic_taxon": {

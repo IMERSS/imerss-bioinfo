@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 4,
-    "listed_taxa_count": 18,
+    "observations_count": 18,
+    "listed_taxa_count": 49,
     "rank_level": 10,
     "unique_name": "isodictya rigida",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "ff94648a-f89c-406a-bf15-51a36a296b6b",
+    "photos_locked": false,
     "default_name": {
         "id": 724464,
         "name": "Isodictya rigida",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "b4ed13b0-99aa-43a3-8c05-c6b22b0af537",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Heather Fulton-Bennett, all rights reserved",
@@ -84,8 +88,41 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "b4ed13b0-99aa-43a3-8c05-c6b22b0af537",
                 "license_code": "C",
                 "attribution": "(c) Heather Fulton-Bennett, all rights reserved",
+                "license_name": "Copyright",
+                "license_url": "http://en.wikipedia.org/wiki/Copyright",
+                "type": "LocalPhoto"
+            }
+        },
+        {
+            "id": 1079039,
+            "taxon_id": 459878,
+            "photo_id": 1614703,
+            "position": null,
+            "created_at": "2021-01-02T20:26:10.875Z",
+            "updated_at": "2021-01-02T20:26:10.875Z",
+            "photo": {
+                "id": 1614703,
+                "user_id": 27263,
+                "native_photo_id": "1614703",
+                "square_url": "https://static.inaturalist.org/photos/1614703/square.jpg?1426116214",
+                "thumb_url": "https://static.inaturalist.org/photos/1614703/thumb.jpg?1426116214",
+                "small_url": "https://static.inaturalist.org/photos/1614703/small.jpg?1426116214",
+                "medium_url": "https://static.inaturalist.org/photos/1614703/medium.jpg?1426116214",
+                "large_url": "https://static.inaturalist.org/photos/1614703/large.jpg?1426116214",
+                "created_at": "2015-03-11T23:23:21.546Z",
+                "updated_at": "2015-03-11T23:23:35.612Z",
+                "native_page_url": "http://www.inaturalist.org/photos/1614703",
+                "native_username": "wendy5",
+                "native_realname": "Wendy Feltham",
+                "license": 0,
+                "subtype": null,
+                "native_original_image_url": null,
+                "uuid": "792c134f-d564-4907-ac12-ca89dd908ac8",
+                "license_code": "C",
+                "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
                 "license_url": "http://en.wikipedia.org/wiki/Copyright",
                 "type": "LocalPhoto"
@@ -93,6 +130,30 @@
         }
     ],
     "taxon_names": [
+        {
+            "id": 2374486,
+            "name": "Neoesperiopsis rigida",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 459878,
+            "created_at": "2021-01-02T20:26:11.061Z",
+            "updated_at": "2021-01-02T20:26:11.061Z",
+            "creator_id": null,
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2374488,
+            "name": "Esperiopsis rigida",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 459878,
+            "created_at": "2021-01-02T20:27:26.748Z",
+            "updated_at": "2021-01-02T20:27:26.748Z",
+            "creator_id": 702203,
+            "position": 2,
+            "parameterized_lexicon": "scientific-names"
+        },
         {
             "id": 724464,
             "name": "Isodictya rigida",
@@ -102,7 +163,8 @@
             "created_at": "2015-04-07T02:59:28.606Z",
             "updated_at": "2015-04-07T02:59:28.606Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

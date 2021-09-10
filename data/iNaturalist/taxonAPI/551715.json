@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 443,
-    "listed_taxa_count": 3,
+    "observations_count": 1535,
+    "listed_taxa_count": 13,
     "rank_level": 47,
-    "unique_name": "keratosa",
+    "unique_name": "角质海绵亚纲",
     "wikipedia_summary": "<b>Keratosa</b>, the keratose sponges or horny sponges, is a subclass of demosponges.",
     "wikipedia_title": "",
     "ancestry": "48460/1/48824/57736",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 240,
+    "uuid": "3ed3c939-8fa5-469f-a29e-6e00fccc0275",
+    "photos_locked": false,
     "default_name": {
         "id": 930705,
         "name": "Keratosa",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "fec7e114-41d2-4e26-a95f-41ef54357fde",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Rosa Rodríguez, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "fec7e114-41d2-4e26-a95f-41ef54357fde",
                 "license_code": "C",
                 "attribution": "(c) Rosa Rodríguez, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,20 @@
             "created_at": "2017-07-01T00:34:24.000Z",
             "updated_at": "2017-07-01T00:34:24.000Z",
             "creator_id": 477,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2507450,
+            "name": "角质海绵亚纲",
+            "is_valid": true,
+            "lexicon": "Chinese (Simplified)",
+            "taxon_id": 551715,
+            "created_at": "2021-04-09T02:44:34.781Z",
+            "updated_at": "2021-04-09T02:44:34.781Z",
+            "creator_id": 1151287,
+            "position": 1,
+            "parameterized_lexicon": "chinese-simplified"
         }
     ],
     "iconic_taxon": {

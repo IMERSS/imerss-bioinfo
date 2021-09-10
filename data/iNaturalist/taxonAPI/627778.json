@@ -8,8 +8,8 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": "EolNameProvider",
-    "observations_count": 104,
-    "listed_taxa_count": 1,
+    "observations_count": 205,
+    "listed_taxa_count": 2,
     "rank_level": 33,
     "unique_name": "彎錦蛤總科",
     "wikipedia_summary": null,
@@ -23,6 +23,7 @@
     "complete_rank": null,
     "taxon_framework_relationship_id": 326078,
     "uuid": "06242e26-71d3-4caa-b341-97604643fab8",
+    "photos_locked": false,
     "default_name": {
         "id": 1087607,
         "name": "Nuculanoidea",
@@ -54,6 +55,7 @@
         "subtype": null,
         "native_original_image_url": null,
         "uuid": "a3517e14-dece-4809-a97f-87ecca6bf325",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Aleksander Golemaj, all rights reserved",
@@ -105,7 +107,8 @@
             "created_at": "2018-01-16T00:25:11.609Z",
             "updated_at": "2018-01-16T00:25:11.609Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 1570990,
@@ -116,7 +119,8 @@
             "created_at": "2019-05-10T09:34:39.128Z",
             "updated_at": "2019-05-10T09:34:39.128Z",
             "creator_id": 941465,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "chinese-traditional"
         }
     ],
     "iconic_taxon": {

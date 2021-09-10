@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 38,
-    "listed_taxa_count": 1,
+    "observations_count": 77,
+    "listed_taxa_count": 2,
     "rank_level": 20,
-    "unique_name": "Kaburakia",
+    "unique_name": "kaburakia",
     "wikipedia_summary": null,
     "wikipedia_title": null,
     "ancestry": "48460/1/52319/152105/52318/56708/713895/56698",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "07a1e4db-e99d-4978-bc74-90af16893560",
+    "photos_locked": false,
     "default_name": {
         "id": 90040,
         "name": "Kaburakia",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "http://farm9.staticflickr.com/8253/8687460064_c2e1df2024_o.jpg",
+        "uuid": "c7f4fba1-1602-4666-b210-3bdbd17fdb49",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Evergreengirl Garden, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "http://farm9.staticflickr.com/8253/8687460064_c2e1df2024_o.jpg",
+                "uuid": "c7f4fba1-1602-4666-b210-3bdbd17fdb49",
                 "license_code": "C",
                 "attribution": "(c) Evergreengirl Garden, all rights reserved",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2104407,
+            "name": "カブラキア属",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 56697,
+            "created_at": "2020-05-29T21:43:07.849Z",
+            "updated_at": "2020-05-29T21:43:07.849Z",
+            "creator_id": 396468,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
             "id": 90040,
             "name": "Kaburakia",
             "is_valid": true,
@@ -102,7 +119,8 @@
             "created_at": "2010-03-06T03:56:36.000Z",
             "updated_at": "2010-03-06T03:56:36.000Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

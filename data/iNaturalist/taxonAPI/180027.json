@@ -4,12 +4,12 @@
     "rank": "species",
     "source_id": 2,
     "created_at": "2012-11-02T23:27:12.509Z",
-    "updated_at": "2018-11-27T12:55:53.843Z",
+    "updated_at": "2019-11-24T03:10:30.598Z",
     "iconic_taxon_id": 47178,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 21,
-    "listed_taxa_count": 41,
+    "observations_count": 49,
+    "listed_taxa_count": 81,
     "rank_level": 10,
     "unique_name": "northern spearnose poacher",
     "wikipedia_summary": "The <b>northern spearnose poacher</b> (<i><b>Agonopsis vulsa</b></i>, also known as the <b>window-tailed sea-poacher</b> or the <b>windowtail poacher</b>) is a fish in the family Agonidae (poachers). It was described by David Starr Jordan and Charles Henry Gilbert in 1880, originally under the genus <i>Agonus</i>. It is a marine, temperate water-dwelling fish which is known from the eastern Pacific Ocean, including southeastern Alaska to southern California, USA. It dwells at a depth range of 0 t",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 62128,
+    "uuid": "857b0106-d761-48b0-813b-8676cacc8a5d",
+    "photos_locked": false,
     "default_name": {
         "id": 282541,
         "name": "Northern Spearnose Poacher",
@@ -57,13 +59,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "a4d6ae7f-4a4f-4db8-9874-84f4fed4c0bf",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) jessb14, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2012-11-02T23:27:12.509Z",
-    "updated_at_utc": "2018-11-27T12:55:53.843Z",
+    "updated_at_utc": "2019-11-24T03:10:30.598Z",
     "taxon_photos": [
         {
             "id": 498075,
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "a4d6ae7f-4a4f-4db8-9874-84f4fed4c0bf",
                 "license_code": "C",
                 "attribution": "(c) jessb14, all rights reserved",
                 "license_name": "Copyright",
@@ -120,6 +125,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "6322c90c-0ef2-4943-830a-3686db86638a",
                 "license_code": "C",
                 "attribution": "(c) bitsyblatt, all rights reserved, uploaded by bitsyblatt",
                 "license_name": "Copyright",
@@ -130,15 +136,16 @@
     ],
     "taxon_names": [
         {
-            "id": 282540,
-            "name": "Agonopsis vulsa",
+            "id": 1850613,
+            "name": "broník vulsa",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "Czech",
             "taxon_id": 180027,
-            "created_at": "2012-11-02T23:27:12.623Z",
-            "updated_at": "2012-11-02T23:27:12.623Z",
-            "creator_id": null,
-            "position": 0
+            "created_at": "2019-11-24T03:10:30.596Z",
+            "updated_at": "2019-11-24T03:10:30.596Z",
+            "creator_id": 1,
+            "position": 2,
+            "parameterized_lexicon": "czech"
         },
         {
             "id": 282541,
@@ -149,7 +156,20 @@
             "created_at": "2012-11-02T23:31:20.094Z",
             "updated_at": "2012-11-02T23:31:20.094Z",
             "creator_id": 477,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 282540,
+            "name": "Agonopsis vulsa",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 180027,
+            "created_at": "2012-11-02T23:27:12.623Z",
+            "updated_at": "2012-11-02T23:27:12.623Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

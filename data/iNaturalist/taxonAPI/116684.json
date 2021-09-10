@@ -8,10 +8,10 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 546,
-    "listed_taxa_count": 31,
+    "observations_count": 1057,
+    "listed_taxa_count": 51,
     "rank_level": 20,
-    "unique_name": "hornmouths",
+    "unique_name": "뿔고둥속",
     "wikipedia_summary": "<i><b>Ceratostoma</b></i>, common name the \"hornmouth\" snails, is a genus of medium to large predatory sea snails, marine gastropod mollusks in the family Muricidae, the rock snails.",
     "wikipedia_title": "",
     "ancestry": "48460/1/47115/47114/246139/48289/522864/50766/320904",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "9f40ae6c-22ff-4f05-9313-044cc0731a23",
+    "photos_locked": false,
     "default_name": {
         "id": 1597216,
         "name": "Hornmouths",
@@ -57,6 +59,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "c4a9693a-ffbc-40f2-aee3-b35367516295",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Janet Ellis, all rights reserved",
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "c4a9693a-ffbc-40f2-aee3-b35367516295",
                 "license_code": "C",
                 "attribution": "(c) Janet Ellis, all rights reserved",
                 "license_name": "Copyright",
@@ -99,15 +104,16 @@
     ],
     "taxon_names": [
         {
-            "id": 186975,
-            "name": "Ceratostoma",
+            "id": 1936455,
+            "name": "뿔고둥속",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "Korean",
             "taxon_id": 116684,
-            "created_at": "2011-08-07T20:08:57.126Z",
-            "updated_at": "2011-08-07T20:08:57.126Z",
-            "creator_id": null,
-            "position": 0
+            "created_at": "2020-01-21T10:59:31.702Z",
+            "updated_at": "2020-01-21T10:59:31.702Z",
+            "creator_id": 280,
+            "position": 2,
+            "parameterized_lexicon": "korean"
         },
         {
             "id": 1597216,
@@ -118,7 +124,20 @@
             "created_at": "2019-06-04T21:25:25.193Z",
             "updated_at": "2019-06-04T21:25:25.193Z",
             "creator_id": 516268,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 186975,
+            "name": "Ceratostoma",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 116684,
+            "created_at": "2011-08-07T20:08:57.126Z",
+            "updated_at": "2011-08-07T20:08:57.126Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

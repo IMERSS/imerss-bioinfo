@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 3047,
-    "listed_taxa_count": 2,
+    "observations_count": 6384,
+    "listed_taxa_count": 13,
     "rank_level": 37,
-    "unique_name": "有頭亜目ヒドラ亜目",
+    "unique_name": "頭螅水母亞目",
     "wikipedia_summary": "<b>Capitata</b> is a suborder of Hydrozoa, a class of marine invertebrates belonging to the phylum Cnidaria.",
     "wikipedia_title": null,
     "ancestry": "48460/1/47534/48921/551473/48922",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 324065,
+    "uuid": "5ae1414f-61f5-4a58-b8e6-48f5ed6b0fe1",
+    "photos_locked": false,
     "default_name": {
         "id": 1424823,
         "name": "Capitata",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "b2886790-3be0-480d-9941-4272323ab978",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Shigeru Harazaki, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "b2886790-3be0-480d-9941-4272323ab978",
                 "license_code": "C",
                 "attribution": "(c) Shigeru Harazaki, all rights reserved",
                 "license_name": "Copyright",
@@ -94,15 +99,28 @@
     ],
     "taxon_names": [
         {
-            "id": 1424823,
-            "name": "Capitata",
+            "id": 2271928,
+            "name": "头螅水母亚目",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "Chinese (Simplified)",
             "taxon_id": 813988,
-            "created_at": "2018-12-08T07:17:27.414Z",
-            "updated_at": "2018-12-08T07:17:27.414Z",
-            "creator_id": null,
-            "position": 0
+            "created_at": "2020-10-14T19:17:44.944Z",
+            "updated_at": "2020-10-14T19:17:44.944Z",
+            "creator_id": 1151287,
+            "position": 4,
+            "parameterized_lexicon": "chinese-simplified"
+        },
+        {
+            "id": 2366200,
+            "name": "頭螅水母亞目",
+            "is_valid": true,
+            "lexicon": "Chinese (Traditional)",
+            "taxon_id": 813988,
+            "created_at": "2020-12-29T10:47:07.264Z",
+            "updated_at": "2020-12-29T10:47:07.264Z",
+            "creator_id": 1465242,
+            "position": 5,
+            "parameterized_lexicon": "chinese-traditional"
         },
         {
             "id": 1470837,
@@ -113,7 +131,44 @@
             "created_at": "2019-01-07T07:25:00.673Z",
             "updated_at": "2019-01-28T03:37:18.210Z",
             "creator_id": 1243007,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 2100679,
+            "name": "有頭亜目",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 813988,
+            "created_at": "2020-05-29T21:25:13.256Z",
+            "updated_at": "2020-05-29T21:25:13.256Z",
+            "creator_id": 396468,
+            "position": 2,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 2111001,
+            "name": "ヒドラ亜目",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 813988,
+            "created_at": "2020-05-31T12:39:32.569Z",
+            "updated_at": "2020-05-31T12:39:32.569Z",
+            "creator_id": 396468,
+            "position": 3,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 1424823,
+            "name": "Capitata",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 813988,
+            "created_at": "2018-12-08T07:17:27.414Z",
+            "updated_at": "2018-12-08T07:17:27.414Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

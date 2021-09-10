@@ -8,7 +8,7 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 99,
+    "observations_count": 319,
     "listed_taxa_count": 0,
     "rank_level": 37,
     "unique_name": "alcyonidiina",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "5525695a-8405-4d19-9ec0-bdd490ef1929",
+    "photos_locked": false,
     "default_name": {
         "id": 1460897,
         "name": "Alcyonidiina",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "299b96f0-597c-4537-98d8-b7231d1be2af",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) wouterteunissen, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "299b96f0-597c-4537-98d8-b7231d1be2af",
                 "license_code": "C",
                 "attribution": "(c) wouterteunissen, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2018-12-31T05:49:18.116Z",
             "updated_at": "2018-12-31T05:49:18.116Z",
             "creator_id": 550722,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

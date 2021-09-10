@@ -8,13 +8,13 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 101,
-    "listed_taxa_count": 179,
+    "observations_count": 194,
+    "listed_taxa_count": 237,
     "rank_level": 10,
-    "unique_name": "clathria pennata",
+    "unique_name": "red velvet sponge",
     "wikipedia_summary": null,
     "wikipedia_title": null,
-    "ancestry": "48460/1/48824/57736/551714/63667/63668/63671",
+    "ancestry": "48460/1/48824/57736/551714/63667/63668/1067098/63671",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -22,16 +22,23 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "6ec8f515-f069-4078-8905-aade319b801a",
+    "photos_locked": false,
     "default_name": {
-        "id": 100243,
-        "name": "Clathria pennata",
+        "id": 1947458,
+        "name": "Red Velvet Sponge",
         "is_valid": true,
-        "lexicon": "Scientific Names"
+        "lexicon": "English"
     },
     "photo_url": "https://static.inaturalist.org/photos/1420097/square.JPG?1418507146",
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
-    "common_name": null,
+    "common_name": {
+        "id": 1947458,
+        "name": "Red Velvet Sponge",
+        "is_valid": true,
+        "lexicon": "English"
+    },
     "image_url": "https://static.inaturalist.org/photos/1420097/square.JPG?1418507146",
     "taxon_range_kml_url": null,
     "html": null,
@@ -52,6 +59,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "d87c2c8f-99c3-48ab-8a71-3333ad9c9fdf",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
@@ -64,9 +73,9 @@
             "id": 121986,
             "taxon_id": 63672,
             "photo_id": 1420097,
-            "position": null,
+            "position": 0,
             "created_at": "2014-12-13T21:46:02.995Z",
-            "updated_at": "2014-12-13T21:46:02.995Z",
+            "updated_at": "2019-11-27T19:12:39.830Z",
             "photo": {
                 "id": 1420097,
                 "user_id": 46856,
@@ -84,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "d87c2c8f-99c3-48ab-8a71-3333ad9c9fdf",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -92,12 +102,44 @@
             }
         },
         {
+            "id": 723340,
+            "taxon_id": 63672,
+            "photo_id": 57088358,
+            "position": 1,
+            "created_at": "2019-11-27T19:12:39.802Z",
+            "updated_at": "2019-11-27T19:12:39.802Z",
+            "photo": {
+                "id": 57088358,
+                "user_id": 764494,
+                "native_photo_id": "57088358",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/57088358/square.jpeg?1574881859",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/57088358/thumb.jpeg?1574881859",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/57088358/small.jpeg?1574881859",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/57088358/medium.jpeg?1574881859",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/57088358/large.jpeg?1574881859",
+                "created_at": "2019-11-27T19:11:01.145Z",
+                "updated_at": "2019-11-27T19:11:01.145Z",
+                "native_page_url": "https://www.inaturalist.org/photos/57088358",
+                "native_username": "tomleeturner",
+                "native_realname": "Tom Turner",
+                "license": 2,
+                "subtype": null,
+                "native_original_image_url": null,
+                "uuid": "180ac612-e7fe-47cf-a706-c20707ed1507",
+                "license_code": "CC-BY-NC",
+                "attribution": "(c) Tom Turner, some rights reserved (CC BY-NC)",
+                "license_name": "Creative Commons Attribution-NonCommercial License",
+                "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
+                "type": "LocalPhoto"
+            }
+        },
+        {
             "id": 615719,
             "taxon_id": 63672,
             "photo_id": 798855,
-            "position": null,
+            "position": 2,
             "created_at": "2019-07-02T21:20:47.106Z",
-            "updated_at": "2019-07-02T21:20:47.106Z",
+            "updated_at": "2019-11-27T19:12:39.832Z",
             "photo": {
                 "id": 798855,
                 "user_id": 27263,
@@ -115,15 +157,60 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "e180c245-47b1-4b50-ae65-c051fa82b031",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
                 "license_url": "http://en.wikipedia.org/wiki/Copyright",
                 "type": "LocalPhoto"
             }
+        },
+        {
+            "id": 723341,
+            "taxon_id": 63672,
+            "photo_id": 57088368,
+            "position": 3,
+            "created_at": "2019-11-27T19:12:39.806Z",
+            "updated_at": "2019-11-27T19:12:39.806Z",
+            "photo": {
+                "id": 57088368,
+                "user_id": 764494,
+                "native_photo_id": "57088368",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/57088368/square.jpeg?1574881869",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/57088368/thumb.jpeg?1574881869",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/57088368/small.jpeg?1574881869",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/57088368/medium.jpeg?1574881869",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/57088368/large.jpeg?1574881869",
+                "created_at": "2019-11-27T19:11:11.036Z",
+                "updated_at": "2019-11-27T19:11:11.036Z",
+                "native_page_url": "https://www.inaturalist.org/photos/57088368",
+                "native_username": "tomleeturner",
+                "native_realname": "Tom Turner",
+                "license": 2,
+                "subtype": null,
+                "native_original_image_url": null,
+                "uuid": "c9560867-2bdf-45b5-ae74-6939495aff85",
+                "license_code": "CC-BY-NC",
+                "attribution": "(c) Tom Turner, some rights reserved (CC BY-NC)",
+                "license_name": "Creative Commons Attribution-NonCommercial License",
+                "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
+                "type": "LocalPhoto"
+            }
         }
     ],
     "taxon_names": [
+        {
+            "id": 1947458,
+            "name": "Red Velvet Sponge",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 63672,
+            "created_at": "2020-01-28T04:03:01.044Z",
+            "updated_at": "2020-01-28T04:03:01.044Z",
+            "creator_id": 516268,
+            "position": 2,
+            "parameterized_lexicon": "english"
+        },
         {
             "id": 100243,
             "name": "Clathria pennata",
@@ -133,7 +220,8 @@
             "created_at": "2010-11-07T06:28:46.000Z",
             "updated_at": "2010-11-07T06:28:46.000Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 1617559,
@@ -144,7 +232,8 @@
             "created_at": "2019-07-02T21:20:47.197Z",
             "updated_at": "2019-07-02T21:20:47.197Z",
             "creator_id": null,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

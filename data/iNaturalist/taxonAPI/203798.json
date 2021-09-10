@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 64,
-    "listed_taxa_count": 23,
+    "observations_count": 128,
+    "listed_taxa_count": 30,
     "rank_level": 20,
-    "unique_name": "ウミヒドラ属",
+    "unique_name": "hydractinia",
     "wikipedia_summary": "<i><b>Hydractinia</b></i> is a genus of commensal athecate hydroids which belong to the family Hydractiniidae. <i>Hydratinia</i> species mostly live on hermit-crabbed marine gastropod shells.",
     "wikipedia_title": null,
     "ancestry": "48460/1/47534/48921/551473/48922/813989/203797",
@@ -22,21 +22,18 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "3ea6f0bb-4910-48ae-869b-5f81c32dee94",
+    "photos_locked": false,
     "default_name": {
-        "id": 862383,
-        "name": "Commensal hydroids",
+        "id": 315368,
+        "name": "Hydractinia",
         "is_valid": true,
-        "lexicon": "English"
+        "lexicon": "Scientific Names"
     },
     "photo_url": "https://static.inaturalist.org/photos/1397377/square.jpg?1417728423",
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
-    "common_name": {
-        "id": 862383,
-        "name": "Commensal hydroids",
-        "is_valid": true,
-        "lexicon": "English"
-    },
+    "common_name": null,
     "image_url": "https://static.inaturalist.org/photos/1397377/square.jpg?1417728423",
     "taxon_range_kml_url": null,
     "html": null,
@@ -57,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "399c968b-4909-4a60-bda7-913054db91dd",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
@@ -89,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "399c968b-4909-4a60-bda7-913054db91dd",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -99,28 +99,6 @@
     ],
     "taxon_names": [
         {
-            "id": 315368,
-            "name": "Hydractinia",
-            "is_valid": true,
-            "lexicon": "Scientific Names",
-            "taxon_id": 203798,
-            "created_at": "2013-01-26T06:12:25.625Z",
-            "updated_at": "2013-01-26T06:12:25.625Z",
-            "creator_id": null,
-            "position": 0
-        },
-        {
-            "id": 862383,
-            "name": "Commensal hydroids",
-            "is_valid": true,
-            "lexicon": "English",
-            "taxon_id": 203798,
-            "created_at": "2017-01-02T16:21:08.855Z",
-            "updated_at": "2017-01-02T16:21:08.855Z",
-            "creator_id": 50920,
-            "position": 1
-        },
-        {
             "id": 1476733,
             "name": "ウミヒドラ属",
             "is_valid": true,
@@ -129,7 +107,20 @@
             "created_at": "2019-01-12T02:14:14.538Z",
             "updated_at": "2019-01-12T02:14:14.538Z",
             "creator_id": 1243007,
-            "position": 2
+            "position": 2,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 315368,
+            "name": "Hydractinia",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 203798,
+            "created_at": "2013-01-26T06:12:25.625Z",
+            "updated_at": "2013-01-26T06:12:25.625Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

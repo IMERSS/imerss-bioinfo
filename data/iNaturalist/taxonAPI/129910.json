@@ -8,13 +8,13 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 282,
-    "listed_taxa_count": 495,
+    "observations_count": 558,
+    "listed_taxa_count": 678,
     "rank_level": 10,
     "unique_name": "little brown barnacle",
     "wikipedia_summary": null,
     "wikipedia_title": null,
-    "ancestry": "48460/1/47120/85493/473790/551290/144117/210289/464038/47662/49068/128744/128745/128743",
+    "ancestry": "48460/1/47120/85493/473790/1091452/144117/210289/464038/1091453/49068/128744/128745/1269639/128743",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "228e9cd3-8955-467c-9ec5-f8639d08de22",
+    "photos_locked": false,
     "default_name": {
         "id": 763223,
         "name": "Little Brown Barnacle",
@@ -57,6 +59,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "dd55bd94-9029-4cc3-aec1-03d3e6348545",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Amy Wolfrum, all rights reserved",
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "dd55bd94-9029-4cc3-aec1-03d3e6348545",
                 "license_code": "C",
                 "attribution": "(c) Amy Wolfrum, all rights reserved",
                 "license_name": "Copyright",
@@ -99,17 +104,6 @@
     ],
     "taxon_names": [
         {
-            "id": 225415,
-            "name": "Chthamalus dalli",
-            "is_valid": true,
-            "lexicon": "Scientific Names",
-            "taxon_id": 129910,
-            "created_at": "2012-06-08T15:57:29.798Z",
-            "updated_at": "2012-06-08T15:57:29.798Z",
-            "creator_id": null,
-            "position": 0
-        },
-        {
             "id": 763223,
             "name": "Little Brown Barnacle",
             "is_valid": true,
@@ -118,7 +112,32 @@
             "created_at": "2015-10-19T18:54:00.817Z",
             "updated_at": "2016-07-20T19:21:51.818Z",
             "creator_id": 4918,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 2105928,
+            "name": "キタイワフジツボ",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 129910,
+            "created_at": "2020-05-29T22:15:58.106Z",
+            "updated_at": "2020-05-29T22:15:58.106Z",
+            "creator_id": 396468,
+            "position": 2,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 225415,
+            "name": "Chthamalus dalli",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 129910,
+            "created_at": "2012-06-08T15:57:29.798Z",
+            "updated_at": "2012-06-08T15:57:29.798Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -9,7 +9,7 @@
     "is_iconic": false,
     "name_provider": "EolNameProvider",
     "observations_count": 0,
-    "listed_taxa_count": 0,
+    "listed_taxa_count": 1,
     "rank_level": 10,
     "unique_name": "ophiodermella fancherae",
     "wikipedia_summary": null,
@@ -23,6 +23,7 @@
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
     "uuid": "cd5d10c5-aef7-443a-8ff5-aa0860b5d809",
+    "photos_locked": false,
     "default_name": {
         "id": 1763127,
         "name": "Ophiodermella fancherae",
@@ -50,7 +51,8 @@
             "created_at": "2019-10-21T14:40:43.330Z",
             "updated_at": "2019-10-21T14:40:43.330Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

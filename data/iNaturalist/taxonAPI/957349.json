@@ -9,7 +9,7 @@
     "is_iconic": false,
     "name_provider": "EolNameProvider",
     "observations_count": 0,
-    "listed_taxa_count": 0,
+    "listed_taxa_count": 2,
     "rank_level": 10,
     "unique_name": "amphiodia periercta",
     "wikipedia_summary": null,
@@ -23,6 +23,7 @@
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
     "uuid": "d80ef5b2-23e9-431c-b8fe-17857f902ede",
+    "photos_locked": false,
     "default_name": {
         "id": 1763130,
         "name": "Amphiodia periercta",
@@ -50,7 +51,8 @@
             "created_at": "2019-10-21T14:47:05.707Z",
             "updated_at": "2019-10-21T14:47:05.707Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

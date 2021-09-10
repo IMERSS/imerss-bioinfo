@@ -8,8 +8,8 @@
     "iconic_taxon_id": 47178,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 54,
-    "listed_taxa_count": 3,
+    "observations_count": 145,
+    "listed_taxa_count": 4,
     "rank_level": 27,
     "unique_name": "agoninae",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 49714,
+    "uuid": "22b5d5e3-893e-4a92-b790-14b8e08da2a6",
+    "photos_locked": false,
     "default_name": {
         "id": 1384612,
         "name": "Agoninae",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "a4d6ae7f-4a4f-4db8-9874-84f4fed4c0bf",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) jessb14, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "a4d6ae7f-4a4f-4db8-9874-84f4fed4c0bf",
                 "license_code": "C",
                 "attribution": "(c) jessb14, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2018-10-23T07:45:33.570Z",
             "updated_at": "2018-10-23T07:45:33.570Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

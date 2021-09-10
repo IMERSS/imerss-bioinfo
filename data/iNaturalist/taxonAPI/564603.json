@@ -8,7 +8,7 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 268,
+    "observations_count": 336,
     "listed_taxa_count": 1,
     "rank_level": 30,
     "unique_name": "cuthonidae",
@@ -55,6 +55,7 @@
         "subtype": null,
         "native_original_image_url": null,
         "uuid": "a5fa374e-9c21-4fe7-81cf-cf653b75b852",
+        "license_code": "CC-BY-NC",
         "license_name": "Creative Commons Attribution-NonCommercial License",
         "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
         "attribution": "(c) jeffhamann, some rights reserved (CC BY-NC)",
@@ -120,6 +121,18 @@
             "creator_id": 396468,
             "position": 1,
             "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 2541364,
+            "name": "bredkamnudingar",
+            "is_valid": true,
+            "lexicon": "Swedish",
+            "taxon_id": 564603,
+            "created_at": "2021-05-08T02:06:12.921Z",
+            "updated_at": "2021-05-08T02:06:12.921Z",
+            "creator_id": 2566072,
+            "position": 2,
+            "parameterized_lexicon": "swedish"
         }
     ],
     "iconic_taxon": {

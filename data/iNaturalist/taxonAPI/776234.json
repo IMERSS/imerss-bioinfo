@@ -8,10 +8,10 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 39,
+    "observations_count": 130,
     "listed_taxa_count": 0,
     "rank_level": 27,
-    "unique_name": "velutininae",
+    "unique_name": "薄板螺亞科",
     "wikipedia_summary": null,
     "wikipedia_title": "",
     "ancestry": "48460/1/47115/47114/246139/85525/533752/245592",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "b0875199-3050-455d-b783-ad8edf654d1b",
+    "photos_locked": false,
     "default_name": {
         "id": 1359906,
         "name": "Velutininae",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "6cdef292-c5e7-4153-b541-bf718734114a",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "6cdef292-c5e7-4153-b541-bf718734114a",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2360676,
+            "name": "薄板螺亞科",
+            "is_valid": true,
+            "lexicon": "Chinese (Traditional)",
+            "taxon_id": 776234,
+            "created_at": "2020-12-26T08:20:56.041Z",
+            "updated_at": "2020-12-26T08:20:56.041Z",
+            "creator_id": 1465242,
+            "position": 1,
+            "parameterized_lexicon": "chinese-traditional"
+        },
+        {
             "id": 1359906,
             "name": "Velutininae",
             "is_valid": true,
@@ -102,7 +119,8 @@
             "created_at": "2018-09-06T06:23:47.551Z",
             "updated_at": "2018-09-06T06:23:47.551Z",
             "creator_id": 550722,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

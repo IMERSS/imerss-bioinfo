@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 2181,
-    "listed_taxa_count": 17,
+    "observations_count": 5506,
+    "listed_taxa_count": 35,
     "rank_level": 34.5,
-    "unique_name": "talitridira",
+    "unique_name": "跳蝦小目",
     "wikipedia_summary": null,
     "wikipedia_title": "",
     "ancestry": "48460/1/47120/85493/473790/47187/774775/144114/47628/869842/885300",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "593515c3-2579-4d10-8b4f-220b4ba87a1c",
+    "photos_locked": false,
     "default_name": {
         "id": 1553500,
         "name": "Talitridira",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "2ffc9a37-e96d-45bf-9fb7-06e2452a2921",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Libbi Wu, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "2ffc9a37-e96d-45bf-9fb7-06e2452a2921",
                 "license_code": "C",
                 "attribution": "(c) Libbi Wu, all rights reserved",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2294281,
+            "name": "跳蝦小目",
+            "is_valid": true,
+            "lexicon": "Chinese (Traditional)",
+            "taxon_id": 885301,
+            "created_at": "2020-11-06T14:56:45.340Z",
+            "updated_at": "2020-11-06T14:56:45.340Z",
+            "creator_id": 1583469,
+            "position": 1,
+            "parameterized_lexicon": "chinese-traditional"
+        },
+        {
             "id": 1553500,
             "name": "Talitridira",
             "is_valid": true,
@@ -102,7 +119,8 @@
             "created_at": "2019-04-24T19:24:03.796Z",
             "updated_at": "2019-04-24T19:24:03.796Z",
             "creator_id": 8882,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

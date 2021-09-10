@@ -8,7 +8,7 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 41,
+    "observations_count": 51,
     "listed_taxa_count": 110,
     "rank_level": 10,
     "unique_name": "äggbubblig sköldnuding",
@@ -55,6 +55,7 @@
         "subtype": null,
         "native_original_image_url": null,
         "uuid": "912a25c3-95c5-4ea2-b8f5-321274278e9b",
+        "license_code": "CC-BY-NC",
         "license_name": "Creative Commons Attribution-NonCommercial License",
         "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
         "attribution": "(c) Paul Norwood, some rights reserved (CC BY-NC)",
@@ -144,6 +145,18 @@
             "creator_id": null,
             "position": 0,
             "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2493591,
+            "name": "Adalaria",
+            "is_valid": true,
+            "lexicon": "Italian",
+            "taxon_id": 508396,
+            "created_at": "2021-03-27T17:08:37.997Z",
+            "updated_at": "2021-03-27T17:08:37.997Z",
+            "creator_id": 2744545,
+            "position": 4,
+            "parameterized_lexicon": "italian"
         }
     ],
     "iconic_taxon": {

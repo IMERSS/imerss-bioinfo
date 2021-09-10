@@ -8,10 +8,10 @@
     "iconic_taxon_id": 47178,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 157,
-    "listed_taxa_count": 2,
+    "observations_count": 566,
+    "listed_taxa_count": 9,
     "rank_level": 20,
-    "unique_name": "arenques",
+    "unique_name": "echte heringe",
     "wikipedia_summary": "<i><b>Clupea</b></i> is genus of planktivorous bony fish belonging to the family Clupeidae, commonly known as herrings. They are found in the shallow, temperate waters of the North Pacific and the North Atlantic oceans, including the Baltic Sea. Three species of <i>Clupea</i> are recognized. The main taxa, the Atlantic herring (<i>Clupea harengus</i>) and the Pacific herring (<i>Clupea pallasii</i>) may each be divided into subspecies. Herrings are forage fish moving in vast schools, coming in sp",
     "wikipedia_title": null,
     "ancestry": "48460/1/2/355675/47178/49235/49236/788632",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 69854,
+    "uuid": "12b2ab87-551a-4b55-bb5f-87140e2ab9cc",
+    "photos_locked": false,
     "default_name": {
         "id": 157761,
         "name": "Clupea",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "7c7b8d9a-723e-4a26-a8b3-3c8b6e253e8e",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) invertboy, all rights reserved, uploaded by Chris Brown",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "7c7b8d9a-723e-4a26-a8b3-3c8b6e253e8e",
                 "license_code": "C",
                 "attribution": "(c) invertboy, all rights reserved, uploaded by Chris Brown",
                 "license_name": "Copyright",
@@ -94,15 +99,16 @@
     ],
     "taxon_names": [
         {
-            "id": 157761,
-            "name": "Clupea",
+            "id": 2239001,
+            "name": "Echte Heringe",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "German",
             "taxon_id": 87532,
-            "created_at": "2011-08-04T06:23:53.271Z",
-            "updated_at": "2011-08-04T06:23:53.271Z",
-            "creator_id": null,
-            "position": 0
+            "created_at": "2020-09-17T18:33:48.368Z",
+            "updated_at": "2020-09-17T18:33:48.368Z",
+            "creator_id": 2174549,
+            "position": 4,
+            "parameterized_lexicon": "german"
         },
         {
             "id": 1214117,
@@ -113,7 +119,44 @@
             "created_at": "2018-05-26T04:43:32.500Z",
             "updated_at": "2018-05-26T04:43:32.500Z",
             "creator_id": 8233,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "spanish"
+        },
+        {
+            "id": 1967921,
+            "name": "sleď",
+            "is_valid": true,
+            "lexicon": "Czech",
+            "taxon_id": 87532,
+            "created_at": "2020-02-11T10:32:13.295Z",
+            "updated_at": "2020-02-11T10:32:13.295Z",
+            "creator_id": 1719032,
+            "position": 2,
+            "parameterized_lexicon": "czech"
+        },
+        {
+            "id": 2102799,
+            "name": "ニシン属",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 87532,
+            "created_at": "2020-05-29T21:36:10.451Z",
+            "updated_at": "2020-05-29T21:36:10.451Z",
+            "creator_id": 396468,
+            "position": 3,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 157761,
+            "name": "Clupea",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 87532,
+            "created_at": "2011-08-04T06:23:53.271Z",
+            "updated_at": "2011-08-04T06:23:53.271Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

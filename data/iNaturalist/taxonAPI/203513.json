@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 27,
-    "listed_taxa_count": 0,
+    "observations_count": 55,
+    "listed_taxa_count": 5,
     "rank_level": 30,
     "unique_name": "isodictyidae",
     "wikipedia_summary": "<b>Isodictyidae</b> is a family of marine demosponges.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "9b2e0433-af4d-4d7d-aff4-74bf1eb1e48d",
+    "photos_locked": false,
     "default_name": {
         "id": 315081,
         "name": "Isodictyidae",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "792c134f-d564-4907-ac12-ca89dd908ac8",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Wendy Feltham, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "792c134f-d564-4907-ac12-ca89dd908ac8",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2013-01-26T05:53:28.115Z",
             "updated_at": "2013-01-26T05:53:28.115Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

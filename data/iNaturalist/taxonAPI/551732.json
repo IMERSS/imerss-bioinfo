@@ -8,7 +8,7 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 52,
+    "observations_count": 125,
     "listed_taxa_count": 0,
     "rank_level": 37,
     "unique_name": "spirophorina",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "b839c758-26de-4cd3-a87f-2c1eec23b7fa",
+    "photos_locked": false,
     "default_name": {
         "id": 930729,
         "name": "Spirophorina",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "6d8dc4ee-7134-486f-bdf5-c04b22d8ee40",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Rosa Rodríguez, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "6d8dc4ee-7134-486f-bdf5-c04b22d8ee40",
                 "license_code": "C",
                 "attribution": "(c) Rosa Rodríguez, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2017-07-01T01:11:13.951Z",
             "updated_at": "2017-07-01T01:11:13.951Z",
             "creator_id": 477,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

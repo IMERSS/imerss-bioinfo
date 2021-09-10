@@ -67,7 +67,7 @@
         },
         "BCCSN": {
             "name": "British Columbia Cetacean Sightings Network (2001-2020)",
-            "input": "E:/source/gits/bagatelle/data/BCCSN/BC_Cetacean_Sightings_Network_Galiano_Catalogue_2021-01-29.csv",
+            "input": "E:/source/gits/bagatelle/data/BCCSN/BC_Cetacean_Sightings_Network_galiano_biodiversity_catalogue_2021_08_25_withTaxa.csv",
             "map": "E:/source/gits/bagatelle/data/BCCSN/BCCSN-map.json",
             "outMap": "E:/source/gits/bagatelle/data/BCCSN/BCCSN-out-map.json",
             "colour": "#55a329"

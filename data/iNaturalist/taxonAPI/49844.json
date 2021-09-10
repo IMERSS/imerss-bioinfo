@@ -4,12 +4,12 @@
     "rank": "genus",
     "source_id": 1,
     "created_at": "2009-02-25T07:24:51.000Z",
-    "updated_at": "2019-03-08T17:34:57.991Z",
+    "updated_at": "2019-11-23T08:05:42.241Z",
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 38,
-    "listed_taxa_count": 6,
+    "observations_count": 96,
+    "listed_taxa_count": 9,
     "rank_level": 20,
     "unique_name": "aglaja",
     "wikipedia_summary": "<b>Aglaja</b> may refer to:",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "215139ad-d391-4f68-9bb4-9b5b54507713",
+    "photos_locked": false,
     "default_name": {
         "id": 79594,
         "name": "Aglaja",
@@ -52,13 +54,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "c1725662-b4d7-473a-8e31-7dc68d61c41b",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2009-02-25T07:24:51.000Z",
-    "updated_at_utc": "2019-03-08T17:34:57.991Z",
+    "updated_at_utc": "2019-11-23T08:05:42.241Z",
     "taxon_photos": [
         {
             "id": 102534,
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "c1725662-b4d7-473a-8e31-7dc68d61c41b",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -94,26 +99,16 @@
     ],
     "taxon_names": [
         {
-            "id": 79594,
-            "name": "Aglaja",
+            "id": 1820505,
+            "name": "aglaja",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "Czech",
             "taxon_id": 49844,
-            "created_at": "2009-02-25T07:24:51.000Z",
-            "updated_at": "2009-02-25T07:24:51.000Z",
-            "creator_id": null,
-            "position": 0
-        },
-        {
-            "id": 1437273,
-            "name": "Doridium",
-            "is_valid": false,
-            "lexicon": "Scientific Names",
-            "taxon_id": 49844,
-            "created_at": "2018-12-14T08:11:22.361Z",
-            "updated_at": "2018-12-14T08:11:22.361Z",
-            "creator_id": 550722,
-            "position": 1
+            "created_at": "2019-11-23T08:05:42.238Z",
+            "updated_at": "2019-11-23T08:05:42.238Z",
+            "creator_id": 1,
+            "position": 4,
+            "parameterized_lexicon": "czech"
         },
         {
             "id": 1527501,
@@ -124,7 +119,8 @@
             "created_at": "2019-03-08T17:34:57.553Z",
             "updated_at": "2019-03-08T17:34:57.553Z",
             "creator_id": 1,
-            "position": 2
+            "position": 2,
+            "parameterized_lexicon": "japanese"
         },
         {
             "id": 1527502,
@@ -135,7 +131,32 @@
             "created_at": "2019-03-08T17:34:57.989Z",
             "updated_at": "2019-03-08T17:34:57.989Z",
             "creator_id": 1,
-            "position": 3
+            "position": 3,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 79594,
+            "name": "Aglaja",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 49844,
+            "created_at": "2009-02-25T07:24:51.000Z",
+            "updated_at": "2009-02-25T07:24:51.000Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 1437273,
+            "name": "Doridium",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 49844,
+            "created_at": "2018-12-14T08:11:22.361Z",
+            "updated_at": "2018-12-14T08:11:22.361Z",
+            "creator_id": 550722,
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

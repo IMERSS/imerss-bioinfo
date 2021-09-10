@@ -4,12 +4,12 @@
     "rank": "subphylum",
     "source_id": 127,
     "created_at": "2015-11-24T13:07:37.848Z",
-    "updated_at": "2019-03-25T14:13:50.335Z",
+    "updated_at": "2019-11-19T18:16:19.926Z",
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "EolNameProvider",
-    "observations_count": 37728,
-    "listed_taxa_count": 626,
+    "observations_count": 82558,
+    "listed_taxa_count": 960,
     "rank_level": 57,
     "unique_name": "sea stars and brittle stars",
     "wikipedia_summary": "The <b>Asterozoa</b> are a subphylum in the phylum Echinodermata. Characteristics include a star-shaped body and radially divergent axes of symmetry. The subphylum includes the two classes Asteroidea, the starfish, and Ophiuroidea, the brittle stars and basket stars, and the extinct order Somasteroidea.",
@@ -22,13 +22,15 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 323740,
+    "uuid": "f09b4045-1770-4a13-87b7-f045f0e4e4bb",
+    "photos_locked": false,
     "default_name": {
         "id": 852932,
         "name": "Sea Stars and Brittle Stars",
         "is_valid": true,
         "lexicon": "English"
     },
-    "photo_url": "https://static.inaturalist.org/photos/2658217/square.JPG?1447632674",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/square.JPG?1447632674",
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
     "common_name": {
@@ -37,18 +39,18 @@
         "is_valid": true,
         "lexicon": "English"
     },
-    "image_url": "https://static.inaturalist.org/photos/2658217/square.JPG?1447632674",
+    "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/square.JPG?1447632674",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": {
         "id": 2658217,
         "user_id": 55228,
         "native_photo_id": "2658217",
-        "square_url": "https://static.inaturalist.org/photos/2658217/square.JPG?1447632674",
-        "thumb_url": "https://static.inaturalist.org/photos/2658217/thumb.JPG?1447632674",
-        "small_url": "https://static.inaturalist.org/photos/2658217/small.JPG?1447632674",
-        "medium_url": "https://static.inaturalist.org/photos/2658217/medium.JPG?1447632674",
-        "large_url": "https://static.inaturalist.org/photos/2658217/large.JPG?1447632674",
+        "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/square.JPG?1447632674",
+        "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/thumb.JPG?1447632674",
+        "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/small.JPG?1447632674",
+        "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/medium.JPG?1447632674",
+        "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/large.JPG?1447632674",
         "created_at": "2015-11-16T00:10:55.929Z",
         "updated_at": "2015-11-16T00:11:18.722Z",
         "native_page_url": "http://www.inaturalist.org/photos/2658217",
@@ -57,13 +59,15 @@
         "license": 2,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "ef4055e2-68d0-4af2-90ef-a910bbc76406",
+        "license_code": "CC-BY-NC",
         "license_name": "Creative Commons Attribution-NonCommercial License",
         "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
         "attribution": "(c) John Slapcinsky, some rights reserved (CC BY-NC)",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2015-11-24T13:07:37.848Z",
-    "updated_at_utc": "2019-03-25T14:13:50.335Z",
+    "updated_at_utc": "2019-11-19T18:16:19.926Z",
     "taxon_photos": [
         {
             "id": 174384,
@@ -76,11 +80,11 @@
                 "id": 2658217,
                 "user_id": 55228,
                 "native_photo_id": "2658217",
-                "square_url": "https://static.inaturalist.org/photos/2658217/square.JPG?1447632674",
-                "thumb_url": "https://static.inaturalist.org/photos/2658217/thumb.JPG?1447632674",
-                "small_url": "https://static.inaturalist.org/photos/2658217/small.JPG?1447632674",
-                "medium_url": "https://static.inaturalist.org/photos/2658217/medium.JPG?1447632674",
-                "large_url": "https://static.inaturalist.org/photos/2658217/large.JPG?1447632674",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/square.JPG?1447632674",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/thumb.JPG?1447632674",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/small.JPG?1447632674",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/medium.JPG?1447632674",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2658217/large.JPG?1447632674",
                 "created_at": "2015-11-16T00:10:55.929Z",
                 "updated_at": "2015-11-16T00:11:18.722Z",
                 "native_page_url": "http://www.inaturalist.org/photos/2658217",
@@ -89,6 +93,7 @@
                 "license": 2,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "ef4055e2-68d0-4af2-90ef-a910bbc76406",
                 "license_code": "CC-BY-NC",
                 "attribution": "(c) John Slapcinsky, some rights reserved (CC BY-NC)",
                 "license_name": "Creative Commons Attribution-NonCommercial License",
@@ -99,37 +104,28 @@
     ],
     "taxon_names": [
         {
-            "id": 774489,
-            "name": "Asterozoa",
+            "id": 2286810,
+            "name": "Seesterne & Schlangensterne",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "German",
             "taxon_id": 481959,
-            "created_at": "2015-11-24T13:07:37.857Z",
-            "updated_at": "2015-11-24T13:07:37.857Z",
-            "creator_id": null,
-            "position": 0
+            "created_at": "2020-10-29T11:02:40.265Z",
+            "updated_at": "2020-10-29T11:02:40.265Z",
+            "creator_id": 5643,
+            "position": 23,
+            "parameterized_lexicon": "german"
         },
         {
-            "id": 852932,
-            "name": "Sea Stars and Brittle Stars",
+            "id": 2359147,
+            "name": "Asterozoo",
             "is_valid": true,
-            "lexicon": "English",
+            "lexicon": "Italian",
             "taxon_id": 481959,
-            "created_at": "2016-11-25T12:23:50.453Z",
-            "updated_at": "2016-12-19T18:01:19.426Z",
-            "creator_id": 3042,
-            "position": 1
-        },
-        {
-            "id": 951868,
-            "name": "Estrelas-do-mar e Ofiúros",
-            "is_valid": true,
-            "lexicon": "Portuguese",
-            "taxon_id": 481959,
-            "created_at": "2017-09-06T00:55:17.320Z",
-            "updated_at": "2017-09-06T00:55:17.320Z",
-            "creator_id": 541276,
-            "position": 3
+            "created_at": "2020-12-24T14:19:36.001Z",
+            "updated_at": "2020-12-24T14:19:36.001Z",
+            "creator_id": 2744545,
+            "position": 24,
+            "parameterized_lexicon": "italian"
         },
         {
             "id": 931834,
@@ -140,7 +136,8 @@
             "created_at": "2017-07-04T16:18:55.370Z",
             "updated_at": "2017-07-04T16:18:55.370Z",
             "creator_id": 8233,
-            "position": 2
+            "position": 2,
+            "parameterized_lexicon": "spanish"
         },
         {
             "id": 1093785,
@@ -151,7 +148,8 @@
             "created_at": "2018-01-29T09:50:46.370Z",
             "updated_at": "2018-01-29T09:50:46.370Z",
             "creator_id": 392090,
-            "position": 5
+            "position": 5,
+            "parameterized_lexicon": "hungarian"
         },
         {
             "id": 1093784,
@@ -162,18 +160,8 @@
             "created_at": "2018-01-29T09:50:10.579Z",
             "updated_at": "2018-01-29T09:50:10.579Z",
             "creator_id": 392090,
-            "position": 4
-        },
-        {
-            "id": 1093788,
-            "name": "Stelle marine",
-            "is_valid": true,
-            "lexicon": "Italiano",
-            "taxon_id": 481959,
-            "created_at": "2018-01-29T09:53:14.455Z",
-            "updated_at": "2018-01-29T09:53:14.455Z",
-            "creator_id": 392090,
-            "position": 8
+            "position": 4,
+            "parameterized_lexicon": "afrikaans"
         },
         {
             "id": 1093792,
@@ -184,7 +172,20 @@
             "created_at": "2018-01-29T09:55:36.488Z",
             "updated_at": "2018-01-29T09:55:36.488Z",
             "creator_id": 392090,
-            "position": 12
+            "position": 12,
+            "parameterized_lexicon": "lithuanian"
+        },
+        {
+            "id": 1093788,
+            "name": "Stelle marine",
+            "is_valid": true,
+            "lexicon": "Italiano",
+            "taxon_id": 481959,
+            "created_at": "2018-01-29T09:53:14.455Z",
+            "updated_at": "2018-01-29T09:53:14.455Z",
+            "creator_id": 392090,
+            "position": 8,
+            "parameterized_lexicon": "italiano"
         },
         {
             "id": 1093786,
@@ -195,18 +196,8 @@
             "created_at": "2018-01-29T09:51:30.350Z",
             "updated_at": "2018-01-29T09:51:30.350Z",
             "creator_id": 392090,
-            "position": 6
-        },
-        {
-            "id": 1093787,
-            "name": "Morske zvezde",
-            "is_valid": true,
-            "lexicon": "Slovenian",
-            "taxon_id": 481959,
-            "created_at": "2018-01-29T09:52:20.654Z",
-            "updated_at": "2018-01-29T09:52:20.654Z",
-            "creator_id": 392090,
-            "position": 7
+            "position": 6,
+            "parameterized_lexicon": "croatian"
         },
         {
             "id": 1093793,
@@ -217,18 +208,20 @@
             "created_at": "2018-01-29T09:56:08.287Z",
             "updated_at": "2018-01-29T09:56:08.287Z",
             "creator_id": 392090,
-            "position": 13
+            "position": 13,
+            "parameterized_lexicon": "latvian"
         },
         {
-            "id": 1093789,
-            "name": "Marstelo",
+            "id": 1093787,
+            "name": "Morske zvezde",
             "is_valid": true,
-            "lexicon": "Esperanto",
+            "lexicon": "Slovenian",
             "taxon_id": 481959,
-            "created_at": "2018-01-29T09:53:46.465Z",
-            "updated_at": "2018-01-29T09:53:46.465Z",
+            "created_at": "2018-01-29T09:52:20.654Z",
+            "updated_at": "2018-01-29T09:52:20.654Z",
             "creator_id": 392090,
-            "position": 9
+            "position": 7,
+            "parameterized_lexicon": "slovenian"
         },
         {
             "id": 1093790,
@@ -239,7 +232,8 @@
             "created_at": "2018-01-29T09:54:16.683Z",
             "updated_at": "2018-01-29T09:54:16.683Z",
             "creator_id": 392090,
-            "position": 10
+            "position": 10,
+            "parameterized_lexicon": "galician"
         },
         {
             "id": 1093791,
@@ -250,7 +244,8 @@
             "created_at": "2018-01-29T09:54:40.649Z",
             "updated_at": "2018-01-29T09:54:40.649Z",
             "creator_id": 392090,
-            "position": 11
+            "position": 11,
+            "parameterized_lexicon": "hebrew"
         },
         {
             "id": 1093794,
@@ -261,7 +256,8 @@
             "created_at": "2018-01-29T09:56:33.939Z",
             "updated_at": "2018-01-29T09:56:33.939Z",
             "creator_id": 392090,
-            "position": 14
+            "position": 14,
+            "parameterized_lexicon": "estonian"
         },
         {
             "id": 1093795,
@@ -272,7 +268,92 @@
             "created_at": "2018-01-29T09:57:03.930Z",
             "updated_at": "2018-01-29T09:57:03.930Z",
             "creator_id": 392090,
-            "position": 15
+            "position": 15,
+            "parameterized_lexicon": "russian"
+        },
+        {
+            "id": 1786797,
+            "name": "Asterozous",
+            "is_valid": true,
+            "lexicon": "Catalan",
+            "taxon_id": 481959,
+            "created_at": "2019-11-19T18:16:19.923Z",
+            "updated_at": "2019-11-19T18:16:19.923Z",
+            "creator_id": 2441832,
+            "position": 17,
+            "parameterized_lexicon": "catalan"
+        },
+        {
+            "id": 2042419,
+            "name": "星形動物亜門",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 481959,
+            "created_at": "2020-04-15T07:51:15.999Z",
+            "updated_at": "2020-04-15T07:51:15.999Z",
+            "creator_id": 1733420,
+            "position": 18,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 2058906,
+            "name": "Astérozoaires",
+            "is_valid": true,
+            "lexicon": "French",
+            "taxon_id": 481959,
+            "created_at": "2020-04-29T12:07:17.058Z",
+            "updated_at": "2020-04-29T12:07:17.058Z",
+            "creator_id": 782891,
+            "position": 19,
+            "parameterized_lexicon": "french"
+        },
+        {
+            "id": 2195658,
+            "name": "海星亚门",
+            "is_valid": true,
+            "lexicon": "Chinese (Simplified)",
+            "taxon_id": 481959,
+            "created_at": "2020-08-10T15:30:24.161Z",
+            "updated_at": "2020-08-10T15:30:24.161Z",
+            "creator_id": 1151287,
+            "position": 22,
+            "parameterized_lexicon": "chinese-simplified"
+        },
+        {
+            "id": 2187134,
+            "name": "Αστερόζωα",
+            "is_valid": true,
+            "lexicon": "Greek",
+            "taxon_id": 481959,
+            "created_at": "2020-08-02T20:10:06.299Z",
+            "updated_at": "2020-08-02T20:10:06.299Z",
+            "creator_id": 3181353,
+            "position": 21,
+            "parameterized_lexicon": "greek"
+        },
+        {
+            "id": 1093789,
+            "name": "Marstelo",
+            "is_valid": true,
+            "lexicon": "Esperanto",
+            "taxon_id": 481959,
+            "created_at": "2018-01-29T09:53:46.465Z",
+            "updated_at": "2018-01-29T09:53:46.465Z",
+            "creator_id": 392090,
+            "position": 9,
+            "parameterized_lexicon": "esperanto"
+        },
+        {
+            "id": 852932,
+            "name": "Sea Stars and Brittle Stars",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 481959,
+            "created_at": "2016-11-25T12:23:50.453Z",
+            "updated_at": "2016-12-19T18:01:19.426Z",
+            "creator_id": 3042,
+            "position": 1,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 1537067,
@@ -283,7 +364,56 @@
             "created_at": "2019-03-25T14:13:50.332Z",
             "updated_at": "2019-03-25T14:13:50.332Z",
             "creator_id": 516268,
-            "position": 16
+            "position": 16,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 774489,
+            "name": "Asterozoa",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 481959,
+            "created_at": "2015-11-24T13:07:37.857Z",
+            "updated_at": "2015-11-24T13:07:37.857Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2182190,
+            "name": "海星亞門",
+            "is_valid": true,
+            "lexicon": "Chinese (Traditional)",
+            "taxon_id": 481959,
+            "created_at": "2020-07-28T11:23:37.067Z",
+            "updated_at": "2020-07-28T11:23:37.067Z",
+            "creator_id": 1583469,
+            "position": 20,
+            "parameterized_lexicon": "chinese-traditional"
+        },
+        {
+            "id": 951868,
+            "name": "Estrelas-do-mar e Ofiúros",
+            "is_valid": true,
+            "lexicon": "Portuguese",
+            "taxon_id": 481959,
+            "created_at": "2017-09-06T00:55:17.320Z",
+            "updated_at": "2017-09-06T00:55:17.320Z",
+            "creator_id": 541276,
+            "position": 3,
+            "parameterized_lexicon": "portuguese"
+        },
+        {
+            "id": 2540692,
+            "name": "asterozoer",
+            "is_valid": true,
+            "lexicon": "Swedish",
+            "taxon_id": 481959,
+            "created_at": "2021-05-08T01:55:16.904Z",
+            "updated_at": "2021-05-08T01:55:16.904Z",
+            "creator_id": 2566072,
+            "position": 25,
+            "parameterized_lexicon": "swedish"
         }
     ],
     "iconic_taxon": {

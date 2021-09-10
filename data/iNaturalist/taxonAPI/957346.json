@@ -23,6 +23,7 @@
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
     "uuid": "b855c6b4-8f99-41f9-80cb-3faf7301f719",
+    "photos_locked": false,
     "default_name": {
         "id": 1763126,
         "name": "Rhabdus",
@@ -50,7 +51,8 @@
             "created_at": "2019-10-21T14:40:31.809Z",
             "updated_at": "2019-10-21T14:40:31.809Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

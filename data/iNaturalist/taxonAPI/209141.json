@@ -4,12 +4,12 @@
     "rank": "species",
     "source_id": 139,
     "created_at": "2013-03-06T22:45:39.320Z",
-    "updated_at": "2013-03-06T22:45:49.004Z",
+    "updated_at": "2019-11-23T03:05:26.730Z",
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 12,
-    "listed_taxa_count": 17,
+    "observations_count": 20,
+    "listed_taxa_count": 64,
     "rank_level": 10,
     "unique_name": "plumularia setacea",
     "wikipedia_summary": "The <b>plumed hydroid</b>, <i><b>Plumularia setacea</b></i>, also sometimes called the <b>little sea bristle</b>, is a colonial hydroid in the family Plumulariidae.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "4daabbe3-e0b8-4f6e-88eb-81c88554c995",
+    "photos_locked": false,
     "default_name": {
         "id": 322637,
         "name": "Plumularia setacea",
@@ -52,13 +54,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "203ab718-3355-4a80-9fa3-6ac8aa37b1f4",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Wendy Feltham, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2013-03-06T22:45:39.320Z",
-    "updated_at_utc": "2013-03-06T22:45:49.004Z",
+    "updated_at_utc": "2019-11-23T03:05:26.730Z",
     "taxon_photos": [
         {
             "id": 659713,
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "203ab718-3355-4a80-9fa3-6ac8aa37b1f4",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -115,6 +120,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "7a380b78-eb47-4baa-851e-7346ed52ce49",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -146,6 +152,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "da325322-a727-49ec-a25d-1b4d1cd7aa99",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -156,6 +163,18 @@
     ],
     "taxon_names": [
         {
+            "id": 1806406,
+            "name": "pohárovka štětinatá",
+            "is_valid": true,
+            "lexicon": "Czech",
+            "taxon_id": 209141,
+            "created_at": "2019-11-23T03:05:26.727Z",
+            "updated_at": "2019-11-23T03:05:26.727Z",
+            "creator_id": 1,
+            "position": 1,
+            "parameterized_lexicon": "czech"
+        },
+        {
             "id": 322637,
             "name": "Plumularia setacea",
             "is_valid": true,
@@ -164,7 +183,8 @@
             "created_at": "2013-03-06T22:45:39.354Z",
             "updated_at": "2013-03-06T22:45:39.354Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -4,24 +4,26 @@
     "rank": "species",
     "source_id": 139,
     "created_at": "2012-11-28T03:56:01.168Z",
-    "updated_at": "2015-04-07T02:18:43.607Z",
+    "updated_at": "2020-05-28T05:49:05.888Z",
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 22,
-    "listed_taxa_count": 67,
+    "observations_count": 72,
+    "listed_taxa_count": 104,
     "rank_level": 10,
     "unique_name": "granular claw crab",
     "wikipedia_summary": "<i><b>Oedignathus inermis</b></i> is a species of king crab found off the Pacific coasts of the United States and Canada, from California to Alaska, and disjunctly around the coasts of Japan. It is the only species in the genus <i><b>Oedignathus</b></i>, and is sometimes called the <i>granular claw crab</i>, <i>paxillose crab</i> or <i>tuberculate nestling lithode crab</i>.",
     "wikipedia_title": null,
-    "ancestry": "48460/1/47120/85493/473790/47187/774775/144113/47186/118451/123825/342931/47397/194569",
+    "ancestry": "48460/1/47120/85493/473790/47187/774775/144113/47186/118451/123825/342931/1028877/194569",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
     "is_active": true,
     "complete": null,
     "complete_rank": null,
-    "taxon_framework_relationship_id": null,
+    "taxon_framework_relationship_id": 435430,
+    "uuid": "1173464a-831f-48c5-9780-37ea56d989fc",
+    "photos_locked": false,
     "default_name": {
         "id": 724149,
         "name": "Granular Claw Crab",
@@ -57,13 +59,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "75dd7833-db31-45b6-9b96-5694b755e529",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Heather Fulton-Bennett, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2012-11-28T03:56:01.168Z",
-    "updated_at_utc": "2015-04-07T02:18:43.607Z",
+    "updated_at_utc": "2020-05-28T05:49:05.888Z",
     "taxon_photos": [
         {
             "id": 409136,
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "75dd7833-db31-45b6-9b96-5694b755e529",
                 "license_code": "C",
                 "attribution": "(c) Heather Fulton-Bennett, all rights reserved",
                 "license_name": "Copyright",
@@ -120,6 +125,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "48d330e8-22ba-4952-86b7-e35010d18b22",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -138,7 +144,8 @@
             "created_at": "2012-11-28T03:56:01.447Z",
             "updated_at": "2012-11-28T03:56:01.447Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 724149,
@@ -149,7 +156,20 @@
             "created_at": "2015-04-07T02:18:43.602Z",
             "updated_at": "2015-04-07T02:18:43.602Z",
             "creator_id": 477,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 2104994,
+            "name": "イボガニ",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 194566,
+            "created_at": "2020-05-29T21:51:30.376Z",
+            "updated_at": "2020-05-29T21:51:30.376Z",
+            "creator_id": 396468,
+            "position": 2,
+            "parameterized_lexicon": "japanese"
         }
     ],
     "iconic_taxon": {

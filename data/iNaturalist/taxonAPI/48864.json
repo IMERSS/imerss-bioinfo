@@ -8,7 +8,7 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 215,
+    "observations_count": 693,
     "listed_taxa_count": 2,
     "rank_level": 20,
     "unique_name": "giant octopuses",
@@ -22,13 +22,15 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 21020,
+    "uuid": "04cfe058-8b4a-4e17-abaf-1923f86ea063",
+    "photos_locked": false,
     "default_name": {
         "id": 961337,
         "name": "Giant Octopuses",
         "is_valid": true,
         "lexicon": "English"
     },
-    "photo_url": "https://static.inaturalist.org/photos/1045/square.jpg?1545367603",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/square.jpg?1545367603",
     "iconic_taxon_name": "Mollusca",
     "conservation_status_name": null,
     "common_name": {
@@ -37,18 +39,18 @@
         "is_valid": true,
         "lexicon": "English"
     },
-    "image_url": "https://static.inaturalist.org/photos/1045/square.jpg?1545367603",
+    "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/square.jpg?1545367603",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": {
         "id": 1045,
         "user_id": null,
         "native_photo_id": "2366838765",
-        "square_url": "https://static.inaturalist.org/photos/1045/square.jpg?1545367603",
-        "thumb_url": "https://static.inaturalist.org/photos/1045/thumb.jpg?1545367603",
-        "small_url": "https://static.inaturalist.org/photos/1045/small.jpg?1545367603",
-        "medium_url": "https://static.inaturalist.org/photos/1045/medium.jpg?1545367603",
-        "large_url": "https://static.inaturalist.org/photos/1045/large.jpg?1545367603",
+        "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/square.jpg?1545367603",
+        "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/thumb.jpg?1545367603",
+        "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/small.jpg?1545367603",
+        "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/medium.jpg?1545367603",
+        "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/large.jpg?1545367603",
         "created_at": "2008-12-19T22:26:33.000Z",
         "updated_at": "2018-12-21T04:46:45.452Z",
         "native_page_url": "http://www.flickr.com/photos/60717073@N00/2366838765",
@@ -57,6 +59,8 @@
         "license": 1,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "https://farm3.staticflickr.com/2068/2366838765_b26abdb14d_o.jpg",
+        "uuid": "feebbcd5-13eb-403b-976c-3e4d6b44142f",
+        "license_code": "CC-BY-NC-SA",
         "license_name": "Creative Commons Attribution-NonCommercial-ShareAlike License",
         "license_url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
         "attribution": "(c) John Carleton, some rights reserved (CC BY-NC-SA)",
@@ -76,11 +80,11 @@
                 "id": 1045,
                 "user_id": null,
                 "native_photo_id": "2366838765",
-                "square_url": "https://static.inaturalist.org/photos/1045/square.jpg?1545367603",
-                "thumb_url": "https://static.inaturalist.org/photos/1045/thumb.jpg?1545367603",
-                "small_url": "https://static.inaturalist.org/photos/1045/small.jpg?1545367603",
-                "medium_url": "https://static.inaturalist.org/photos/1045/medium.jpg?1545367603",
-                "large_url": "https://static.inaturalist.org/photos/1045/large.jpg?1545367603",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/square.jpg?1545367603",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/thumb.jpg?1545367603",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/small.jpg?1545367603",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/medium.jpg?1545367603",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1045/large.jpg?1545367603",
                 "created_at": "2008-12-19T22:26:33.000Z",
                 "updated_at": "2018-12-21T04:46:45.452Z",
                 "native_page_url": "http://www.flickr.com/photos/60717073@N00/2366838765",
@@ -89,6 +93,7 @@
                 "license": 1,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "https://farm3.staticflickr.com/2068/2366838765_b26abdb14d_o.jpg",
+                "uuid": "feebbcd5-13eb-403b-976c-3e4d6b44142f",
                 "license_code": "CC-BY-NC-SA",
                 "attribution": "(c) John Carleton, some rights reserved (CC BY-NC-SA)",
                 "license_name": "Creative Commons Attribution-NonCommercial-ShareAlike License",
@@ -99,17 +104,6 @@
     ],
     "taxon_names": [
         {
-            "id": 78098,
-            "name": "Enteroctopus",
-            "is_valid": true,
-            "lexicon": "Scientific Names",
-            "taxon_id": 48864,
-            "created_at": "2008-12-19T16:10:16.000Z",
-            "updated_at": "2008-12-19T16:10:16.000Z",
-            "creator_id": null,
-            "position": 0
-        },
-        {
             "id": 1376941,
             "name": "Reuzenkraken",
             "is_valid": true,
@@ -118,7 +112,8 @@
             "created_at": "2018-10-09T17:04:03.908Z",
             "updated_at": "2018-10-09T17:04:03.908Z",
             "creator_id": 516268,
-            "position": 5
+            "position": 5,
+            "parameterized_lexicon": "dutch"
         },
         {
             "id": 1376946,
@@ -129,7 +124,8 @@
             "created_at": "2018-10-09T17:05:46.882Z",
             "updated_at": "2018-10-09T17:05:46.882Z",
             "creator_id": 516268,
-            "position": 7
+            "position": 7,
+            "parameterized_lexicon": "german"
         },
         {
             "id": 1376950,
@@ -140,7 +136,8 @@
             "created_at": "2018-10-09T17:08:46.434Z",
             "updated_at": "2018-10-09T17:08:46.434Z",
             "creator_id": 516268,
-            "position": 9
+            "position": 9,
+            "parameterized_lexicon": "italian"
         },
         {
             "id": 1376955,
@@ -151,84 +148,8 @@
             "created_at": "2018-10-09T17:11:58.833Z",
             "updated_at": "2018-10-09T17:11:58.833Z",
             "creator_id": 516268,
-            "position": 11
-        },
-        {
-            "id": 961337,
-            "name": "Giant Octopuses",
-            "is_valid": true,
-            "lexicon": "English",
-            "taxon_id": 48864,
-            "created_at": "2017-09-29T14:42:56.221Z",
-            "updated_at": "2017-09-29T14:42:56.221Z",
-            "creator_id": 516268,
-            "position": 1
-        },
-        {
-            "id": 1376936,
-            "name": "Polvos gigantes",
-            "is_valid": true,
-            "lexicon": "Portuguese",
-            "taxon_id": 48864,
-            "created_at": "2018-10-09T16:56:48.172Z",
-            "updated_at": "2018-10-09T16:56:48.172Z",
-            "creator_id": 516268,
-            "position": 2
-        },
-        {
-            "id": 1376938,
-            "name": "أخطبوط عملاق",
-            "is_valid": true,
-            "lexicon": "Arabic",
-            "taxon_id": 48864,
-            "created_at": "2018-10-09T16:59:15.522Z",
-            "updated_at": "2018-10-09T16:59:15.522Z",
-            "creator_id": 516268,
-            "position": 3
-        },
-        {
-            "id": 1376939,
-            "name": "Pops gegants",
-            "is_valid": true,
-            "lexicon": "Catalan",
-            "taxon_id": 48864,
-            "created_at": "2018-10-09T16:59:55.972Z",
-            "updated_at": "2018-10-09T16:59:55.972Z",
-            "creator_id": 516268,
-            "position": 4
-        },
-        {
-            "id": 1376945,
-            "name": "Pieuvres géantes",
-            "is_valid": true,
-            "lexicon": "French",
-            "taxon_id": 48864,
-            "created_at": "2018-10-09T17:05:14.976Z",
-            "updated_at": "2018-10-09T17:05:14.976Z",
-            "creator_id": 516268,
-            "position": 6
-        },
-        {
-            "id": 1376949,
-            "name": "תמנון ענק",
-            "is_valid": true,
-            "lexicon": "Hebrew",
-            "taxon_id": 48864,
-            "created_at": "2018-10-09T17:07:38.241Z",
-            "updated_at": "2018-10-09T17:07:38.241Z",
-            "creator_id": 516268,
-            "position": 8
-        },
-        {
-            "id": 1376954,
-            "name": "ミズダコ属",
-            "is_valid": true,
-            "lexicon": "Japanese",
-            "taxon_id": 48864,
-            "created_at": "2018-10-09T17:10:54.751Z",
-            "updated_at": "2018-10-09T17:10:54.751Z",
-            "creator_id": 516268,
-            "position": 10
+            "position": 11,
+            "parameterized_lexicon": "korean"
         },
         {
             "id": 1376956,
@@ -239,7 +160,80 @@
             "created_at": "2018-10-09T17:13:42.762Z",
             "updated_at": "2018-10-09T17:13:42.762Z",
             "creator_id": 516268,
-            "position": 12
+            "position": 12,
+            "parameterized_lexicon": "russian"
+        },
+        {
+            "id": 1376954,
+            "name": "ミズダコ属",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 48864,
+            "created_at": "2018-10-09T17:10:54.751Z",
+            "updated_at": "2018-10-09T17:10:54.751Z",
+            "creator_id": 516268,
+            "position": 10,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 1376939,
+            "name": "Pops gegants",
+            "is_valid": true,
+            "lexicon": "Catalan",
+            "taxon_id": 48864,
+            "created_at": "2018-10-09T16:59:55.972Z",
+            "updated_at": "2018-10-09T16:59:55.972Z",
+            "creator_id": 516268,
+            "position": 4,
+            "parameterized_lexicon": "catalan"
+        },
+        {
+            "id": 1376949,
+            "name": "תמנון ענק",
+            "is_valid": true,
+            "lexicon": "Hebrew",
+            "taxon_id": 48864,
+            "created_at": "2018-10-09T17:07:38.241Z",
+            "updated_at": "2018-10-09T17:07:38.241Z",
+            "creator_id": 516268,
+            "position": 8,
+            "parameterized_lexicon": "hebrew"
+        },
+        {
+            "id": 1376938,
+            "name": "أخطبوط عملاق",
+            "is_valid": true,
+            "lexicon": "Arabic",
+            "taxon_id": 48864,
+            "created_at": "2018-10-09T16:59:15.522Z",
+            "updated_at": "2018-10-09T16:59:15.522Z",
+            "creator_id": 516268,
+            "position": 3,
+            "parameterized_lexicon": "arabic"
+        },
+        {
+            "id": 1376936,
+            "name": "Polvos gigantes",
+            "is_valid": true,
+            "lexicon": "Portuguese",
+            "taxon_id": 48864,
+            "created_at": "2018-10-09T16:56:48.172Z",
+            "updated_at": "2018-10-09T16:56:48.172Z",
+            "creator_id": 516268,
+            "position": 2,
+            "parameterized_lexicon": "portuguese"
+        },
+        {
+            "id": 1376945,
+            "name": "Pieuvres géantes",
+            "is_valid": true,
+            "lexicon": "French",
+            "taxon_id": 48864,
+            "created_at": "2018-10-09T17:05:14.976Z",
+            "updated_at": "2018-10-09T17:05:14.976Z",
+            "creator_id": 516268,
+            "position": 6,
+            "parameterized_lexicon": "french"
         },
         {
             "id": 1376958,
@@ -250,7 +244,32 @@
             "created_at": "2018-10-09T17:14:38.127Z",
             "updated_at": "2018-10-09T17:14:38.127Z",
             "creator_id": 516268,
-            "position": 13
+            "position": 13,
+            "parameterized_lexicon": "spanish"
+        },
+        {
+            "id": 961337,
+            "name": "Giant Octopuses",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 48864,
+            "created_at": "2017-09-29T14:42:56.221Z",
+            "updated_at": "2017-09-29T14:42:56.221Z",
+            "creator_id": 516268,
+            "position": 1,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 78098,
+            "name": "Enteroctopus",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 48864,
+            "created_at": "2008-12-19T16:10:16.000Z",
+            "updated_at": "2008-12-19T16:10:16.000Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -8,8 +8,8 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 232,
-    "listed_taxa_count": 6,
+    "observations_count": 398,
+    "listed_taxa_count": 32,
     "rank_level": 20,
     "unique_name": "paciocinebrina",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "dd24a879-629e-460a-b266-919f8f22a31a",
+    "photos_locked": false,
     "default_name": {
         "id": 1630713,
         "name": "Paciocinebrina",
@@ -49,12 +51,14 @@
         "native_page_url": "https://www.inaturalist.org/photos/11592721",
         "native_username": "tlawson",
         "native_realname": "Tom Lawson",
-        "license": 0,
+        "license": 3,
         "subtype": null,
         "native_original_image_url": null,
-        "license_name": "Copyright",
-        "license_url": "http://en.wikipedia.org/wiki/Copyright",
-        "attribution": "(c) Tom Lawson, all rights reserved",
+        "uuid": "4681f4a0-966a-4b42-a902-40ed64bc63d4",
+        "license_code": "CC-BY-NC-ND",
+        "license_name": "Creative Commons Attribution-NonCommercial-NoDerivs License",
+        "license_url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "attribution": "(c) Tom Lawson, some rights reserved (CC BY-NC-ND)",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2019-07-20T19:13:27.198Z",
@@ -81,13 +85,14 @@
                 "native_page_url": "https://www.inaturalist.org/photos/11592721",
                 "native_username": "tlawson",
                 "native_realname": "Tom Lawson",
-                "license": 0,
+                "license": 3,
                 "subtype": null,
                 "native_original_image_url": null,
-                "license_code": "C",
-                "attribution": "(c) Tom Lawson, all rights reserved",
-                "license_name": "Copyright",
-                "license_url": "http://en.wikipedia.org/wiki/Copyright",
+                "uuid": "4681f4a0-966a-4b42-a902-40ed64bc63d4",
+                "license_code": "CC-BY-NC-ND",
+                "attribution": "(c) Tom Lawson, some rights reserved (CC BY-NC-ND)",
+                "license_name": "Creative Commons Attribution-NonCommercial-NoDerivs License",
+                "license_url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
                 "type": "LocalPhoto"
             }
         }
@@ -102,7 +107,8 @@
             "created_at": "2019-07-20T19:13:27.198Z",
             "updated_at": "2019-07-20T19:13:27.198Z",
             "creator_id": 94012,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -8,13 +8,13 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 5,
-    "listed_taxa_count": 29,
+    "observations_count": 15,
+    "listed_taxa_count": 52,
     "rank_level": 10,
     "unique_name": "mopalia sinuata",
     "wikipedia_summary": null,
     "wikipedia_title": "",
-    "ancestry": "48460/1/47115/47429/47428/533431/372790/533483/47631/47630",
+    "ancestry": "48460/1/47115/47429/47428/533431/372790/533483/47631/1067211/47630",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "e8f6d823-cbcd-48e7-a61b-ac61e8592949",
+    "photos_locked": false,
     "default_name": {
         "id": 662896,
         "name": "Mopalia sinuata",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "7fc34c79-f45a-43f7-b9f5-17e18d2109e7",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Wendy Feltham, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "7fc34c79-f45a-43f7-b9f5-17e18d2109e7",
                 "license_code": "C",
                 "attribution": "(c) Wendy Feltham, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2015-01-30T04:30:18.544Z",
             "updated_at": "2015-01-30T04:30:18.544Z",
             "creator_id": 22589,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

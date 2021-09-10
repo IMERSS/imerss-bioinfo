@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "EolNameProvider",
-    "observations_count": 2410,
-    "listed_taxa_count": 27,
+    "observations_count": 5657,
+    "listed_taxa_count": 62,
     "rank_level": 37,
-    "unique_name": "ウミトサカ亜目",
+    "unique_name": "软珊瑚亚目",
     "wikipedia_summary": null,
     "wikipedia_title": "",
     "ancestry": "48460/1/47534/47533/340493/51015",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 324152,
+    "uuid": "a90a6b6a-69d0-4aa3-a693-c6a5a664cc29",
+    "photos_locked": false,
     "default_name": {
         "id": 1396671,
         "name": "Alcyoniina",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "34d424ac-742e-4959-b08c-e59c55178a0e",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Shigeru Harazaki, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "34d424ac-742e-4959-b08c-e59c55178a0e",
                 "license_code": "C",
                 "attribution": "(c) Shigeru Harazaki, all rights reserved",
                 "license_name": "Copyright",
@@ -94,15 +99,40 @@
     ],
     "taxon_names": [
         {
-            "id": 1396671,
-            "name": "Alcyoniina",
+            "id": 2365294,
+            "name": "软珊瑚亚目",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "Chinese (Simplified)",
             "taxon_id": 794408,
-            "created_at": "2018-11-10T10:08:34.084Z",
-            "updated_at": "2018-11-10T10:08:34.084Z",
-            "creator_id": null,
-            "position": 0
+            "created_at": "2020-12-29T05:29:10.584Z",
+            "updated_at": "2020-12-29T05:29:10.584Z",
+            "creator_id": 1151287,
+            "position": 3,
+            "parameterized_lexicon": "chinese-simplified"
+        },
+        {
+            "id": 2365295,
+            "name": "海鸡冠亚目",
+            "is_valid": true,
+            "lexicon": "Chinese (Simplified)",
+            "taxon_id": 794408,
+            "created_at": "2020-12-29T05:29:22.722Z",
+            "updated_at": "2020-12-29T05:29:22.722Z",
+            "creator_id": 1151287,
+            "position": 4,
+            "parameterized_lexicon": "chinese-simplified"
+        },
+        {
+            "id": 2360324,
+            "name": "軟珊瑚亞目",
+            "is_valid": true,
+            "lexicon": "Chinese (Traditional)",
+            "taxon_id": 794408,
+            "created_at": "2020-12-26T06:08:53.119Z",
+            "updated_at": "2020-12-26T06:08:53.119Z",
+            "creator_id": 1465242,
+            "position": 2,
+            "parameterized_lexicon": "chinese-traditional"
         },
         {
             "id": 1460152,
@@ -113,7 +143,20 @@
             "created_at": "2018-12-30T12:11:33.580Z",
             "updated_at": "2018-12-30T12:11:33.580Z",
             "creator_id": 1243007,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 1396671,
+            "name": "Alcyoniina",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 794408,
+            "created_at": "2018-11-10T10:08:34.084Z",
+            "updated_at": "2018-11-10T10:08:34.084Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

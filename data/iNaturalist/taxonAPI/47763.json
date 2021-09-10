@@ -8,8 +8,8 @@
     "iconic_taxon_id": 47178,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 1840,
-    "listed_taxa_count": 93,
+    "observations_count": 4856,
+    "listed_taxa_count": 159,
     "rank_level": 30,
     "unique_name": "rockfishes",
     "wikipedia_summary": "<b>Sebastidae</b> is a family of marine fish in the order Scorpaeniformes. Their common names include <b>rockfishes</b>, <b>rock perches</b>, <b>ocean perches</b>, <b>sea perches</b>, <b>thornyheads</b>, <b>scorpionfishes</b>, <b>sea ruffes</b> and <b>rockcods</b>. Despite the latter name, they are not closely related to the cods in the genus <i>Gadus</i>, nor the rock cod, <i>Lotella rhacina</i>.",
@@ -22,13 +22,15 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 66985,
+    "uuid": "5ae3a79f-f0e9-4334-8ca4-1b57e2f3a0c8",
+    "photos_locked": false,
     "default_name": {
         "id": 850655,
         "name": "Rockfishes",
         "is_valid": true,
         "lexicon": "English"
     },
-    "photo_url": "https://static.inaturalist.org/photos/20232/square.jpg?1545366579",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/square.jpg?1545366579",
     "iconic_taxon_name": "Actinopterygii",
     "conservation_status_name": null,
     "common_name": {
@@ -37,18 +39,18 @@
         "is_valid": true,
         "lexicon": "English"
     },
-    "image_url": "https://static.inaturalist.org/photos/20232/square.jpg?1545366579",
+    "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/square.jpg?1545366579",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": {
         "id": 20232,
         "user_id": null,
         "native_photo_id": "4734236493",
-        "square_url": "https://static.inaturalist.org/photos/20232/square.jpg?1545366579",
-        "thumb_url": "https://static.inaturalist.org/photos/20232/thumb.jpg?1545366579",
-        "small_url": "https://static.inaturalist.org/photos/20232/small.jpg?1545366579",
-        "medium_url": "https://static.inaturalist.org/photos/20232/medium.jpg?1545366579",
-        "large_url": "https://static.inaturalist.org/photos/20232/large.jpg?1545366579",
+        "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/square.jpg?1545366579",
+        "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/thumb.jpg?1545366579",
+        "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/small.jpg?1545366579",
+        "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/medium.jpg?1545366579",
+        "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/large.jpg?1545366579",
         "created_at": "2010-12-19T01:19:53.000Z",
         "updated_at": "2018-12-21T04:29:41.748Z",
         "native_page_url": "http://www.flickr.com/photos/51378257@N00/4734236493",
@@ -57,6 +59,8 @@
         "license": 2,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "https://farm2.staticflickr.com/1099/4734236493_c74c689564_o.jpg",
+        "uuid": "3a21c21b-f664-49f3-9833-b6e3364c9329",
+        "license_code": "CC-BY-NC",
         "license_name": "Creative Commons Attribution-NonCommercial License",
         "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
         "attribution": "(c) Travis, some rights reserved (CC BY-NC)",
@@ -76,11 +80,11 @@
                 "id": 20232,
                 "user_id": null,
                 "native_photo_id": "4734236493",
-                "square_url": "https://static.inaturalist.org/photos/20232/square.jpg?1545366579",
-                "thumb_url": "https://static.inaturalist.org/photos/20232/thumb.jpg?1545366579",
-                "small_url": "https://static.inaturalist.org/photos/20232/small.jpg?1545366579",
-                "medium_url": "https://static.inaturalist.org/photos/20232/medium.jpg?1545366579",
-                "large_url": "https://static.inaturalist.org/photos/20232/large.jpg?1545366579",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/square.jpg?1545366579",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/thumb.jpg?1545366579",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/small.jpg?1545366579",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/medium.jpg?1545366579",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/20232/large.jpg?1545366579",
                 "created_at": "2010-12-19T01:19:53.000Z",
                 "updated_at": "2018-12-21T04:29:41.748Z",
                 "native_page_url": "http://www.flickr.com/photos/51378257@N00/4734236493",
@@ -89,6 +93,7 @@
                 "license": 2,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "https://farm2.staticflickr.com/1099/4734236493_c74c689564_o.jpg",
+                "uuid": "3a21c21b-f664-49f3-9833-b6e3364c9329",
                 "license_code": "CC-BY-NC",
                 "attribution": "(c) Travis, some rights reserved (CC BY-NC)",
                 "license_name": "Creative Commons Attribution-NonCommercial License",
@@ -99,15 +104,40 @@
     ],
     "taxon_names": [
         {
-            "id": 76485,
-            "name": "Sebastidae",
+            "id": 2228437,
+            "name": "平鲉科",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "Chinese (Simplified)",
             "taxon_id": 47763,
-            "created_at": "2008-06-18T00:31:51.000Z",
-            "updated_at": "2008-06-18T00:31:51.000Z",
-            "creator_id": null,
-            "position": 0
+            "created_at": "2020-09-08T19:39:25.396Z",
+            "updated_at": "2020-09-08T19:39:25.396Z",
+            "creator_id": 1151287,
+            "position": 6,
+            "parameterized_lexicon": "chinese-simplified"
+        },
+        {
+            "id": 2344561,
+            "name": "平鮋科",
+            "is_valid": true,
+            "lexicon": "Chinese (Traditional)",
+            "taxon_id": 47763,
+            "created_at": "2020-12-15T19:00:47.006Z",
+            "updated_at": "2020-12-15T19:00:47.006Z",
+            "creator_id": 860319,
+            "position": 7,
+            "parameterized_lexicon": "chinese-traditional"
+        },
+        {
+            "id": 2065825,
+            "name": "볼락과",
+            "is_valid": true,
+            "lexicon": "Korean",
+            "taxon_id": 47763,
+            "created_at": "2020-05-07T01:43:32.591Z",
+            "updated_at": "2020-05-07T01:43:32.591Z",
+            "creator_id": 1016846,
+            "position": 5,
+            "parameterized_lexicon": "korean"
         },
         {
             "id": 850655,
@@ -118,7 +148,8 @@
             "created_at": "2016-11-14T22:48:16.284Z",
             "updated_at": "2016-11-14T22:48:16.284Z",
             "creator_id": 84719,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 850656,
@@ -129,7 +160,8 @@
             "created_at": "2016-11-14T22:48:27.046Z",
             "updated_at": "2016-11-14T22:48:27.046Z",
             "creator_id": 84719,
-            "position": 2
+            "position": 2,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 850657,
@@ -140,7 +172,8 @@
             "created_at": "2016-11-14T22:48:35.329Z",
             "updated_at": "2016-11-14T22:48:35.329Z",
             "creator_id": 84719,
-            "position": 3
+            "position": 3,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 1498570,
@@ -151,7 +184,56 @@
             "created_at": "2019-02-06T23:47:13.375Z",
             "updated_at": "2019-02-06T23:47:13.375Z",
             "creator_id": 1,
-            "position": 4
+            "position": 4,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 76485,
+            "name": "Sebastidae",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 47763,
+            "created_at": "2008-06-18T00:31:51.000Z",
+            "updated_at": "2008-06-18T00:31:51.000Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2490850,
+            "name": "Морские окуни",
+            "is_valid": true,
+            "lexicon": "Russian",
+            "taxon_id": 47763,
+            "created_at": "2021-03-24T21:33:42.890Z",
+            "updated_at": "2021-03-24T21:33:42.890Z",
+            "creator_id": 1981263,
+            "position": 9,
+            "parameterized_lexicon": "russian"
+        },
+        {
+            "id": 2481436,
+            "name": "Морськоокуневі",
+            "is_valid": true,
+            "lexicon": "Ukrainian",
+            "taxon_id": 47763,
+            "created_at": "2021-03-17T00:44:28.405Z",
+            "updated_at": "2021-03-17T00:44:28.405Z",
+            "creator_id": 1,
+            "position": 8,
+            "parameterized_lexicon": "ukrainian"
+        },
+        {
+            "id": 2540411,
+            "name": "kungsfiskar",
+            "is_valid": true,
+            "lexicon": "Swedish",
+            "taxon_id": 47763,
+            "created_at": "2021-05-08T01:52:13.993Z",
+            "updated_at": "2021-05-08T01:52:13.993Z",
+            "creator_id": 2566072,
+            "position": 10,
+            "parameterized_lexicon": "swedish"
         }
     ],
     "iconic_taxon": {

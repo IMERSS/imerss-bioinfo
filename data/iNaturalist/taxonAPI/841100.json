@@ -1,17 +1,17 @@
 {
     "id": 841100,
-    "name": "Alcyonidoidea",
+    "name": "Alcyonidioidea",
     "rank": "superfamily",
     "source_id": null,
     "created_at": "2018-12-31T05:56:19.220Z",
-    "updated_at": "2018-12-31T05:56:19.237Z",
+    "updated_at": "2020-04-08T19:08:54.826Z",
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 99,
-    "listed_taxa_count": 0,
+    "observations_count": 319,
+    "listed_taxa_count": 1,
     "rank_level": 33,
-    "unique_name": "alcyonidoidea",
+    "unique_name": "alcyonidioidea",
     "wikipedia_summary": null,
     "wikipedia_title": "",
     "ancestry": "48460/1/68104/48394/152934/841094",
@@ -22,9 +22,11 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "2ce492f1-1de1-4a3c-adac-c782581843b1",
+    "photos_locked": false,
     "default_name": {
         "id": 1460904,
-        "name": "Alcyonidoidea",
+        "name": "Alcyonidioidea",
         "is_valid": true,
         "lexicon": "Scientific Names"
     },
@@ -52,13 +54,15 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "299b96f0-597c-4537-98d8-b7231d1be2af",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) wouterteunissen, all rights reserved",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2018-12-31T05:56:19.220Z",
-    "updated_at_utc": "2018-12-31T05:56:19.237Z",
+    "updated_at_utc": "2020-04-08T19:08:54.826Z",
     "taxon_photos": [
         {
             "id": 536810,
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "299b96f0-597c-4537-98d8-b7231d1be2af",
                 "license_code": "C",
                 "attribution": "(c) wouterteunissen, all rights reserved",
                 "license_name": "Copyright",
@@ -95,14 +100,15 @@
     "taxon_names": [
         {
             "id": 1460904,
-            "name": "Alcyonidoidea",
+            "name": "Alcyonidioidea",
             "is_valid": true,
             "lexicon": "Scientific Names",
             "taxon_id": 841100,
             "created_at": "2018-12-31T05:56:19.220Z",
-            "updated_at": "2018-12-31T05:56:19.220Z",
+            "updated_at": "2020-04-08T19:09:06.268Z",
             "creator_id": 550722,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -27,7 +27,7 @@
         "fs-extra": "9.0.0",
         "eslint": "7.17.0",
         "eslint-config-fluid": "2.0.0",
-        "fluid-lint-all": "1.1.1"
+        "fluid-lint-all": "1.1.4"
     },
     "repository": {
         "type": "git",

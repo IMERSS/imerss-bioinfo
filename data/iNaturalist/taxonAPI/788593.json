@@ -8,10 +8,10 @@
     "iconic_taxon_id": 47178,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 205,
+    "observations_count": 834,
     "listed_taxa_count": 0,
     "rank_level": 27,
-    "unique_name": "ophiodontinae",
+    "unique_name": "蛇齒單線魚亞科",
     "wikipedia_summary": null,
     "wikipedia_title": null,
     "ancestry": "48460/1/2/355675/47178/47286/48454",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 66543,
+    "uuid": "08502826-2894-4a1d-91c1-57a3857ed797",
+    "photos_locked": false,
     "default_name": {
         "id": 1384494,
         "name": "Ophiodontinae",
@@ -32,7 +34,7 @@
     "iconic_taxon_name": "Actinopterygii",
     "conservation_status_name": null,
     "common_name": null,
-    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/actinopterygii-75px-e1fb22bcef463b550931dc6951974f30.png",
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/actinopterygii-75px.png",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": null,
@@ -40,6 +42,18 @@
     "updated_at_utc": "2018-11-27T13:32:45.740Z",
     "taxon_photos": [],
     "taxon_names": [
+        {
+            "id": 2345367,
+            "name": "蛇齒單線魚亞科",
+            "is_valid": true,
+            "lexicon": "Chinese (Traditional)",
+            "taxon_id": 788593,
+            "created_at": "2020-12-16T05:28:08.329Z",
+            "updated_at": "2020-12-16T05:28:08.329Z",
+            "creator_id": 860319,
+            "position": 1,
+            "parameterized_lexicon": "chinese-traditional"
+        },
         {
             "id": 1384494,
             "name": "Ophiodontinae",
@@ -49,7 +63,8 @@
             "created_at": "2018-10-23T07:43:11.796Z",
             "updated_at": "2018-10-23T07:43:11.796Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

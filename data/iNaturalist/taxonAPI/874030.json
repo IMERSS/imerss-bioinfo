@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 0,
-    "listed_taxa_count": 1,
+    "observations_count": 9,
+    "listed_taxa_count": 4,
     "rank_level": 10,
     "unique_name": "golfingia vulgaris",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "3ed67a72-167c-42fd-9468-9812e58b49d7",
+    "photos_locked": false,
     "default_name": {
         "id": 1532466,
         "name": "Golfingia vulgaris",
@@ -32,7 +34,7 @@
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
     "common_name": null,
-    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/animalia-75px-057784eeb6ea25a8c65477b98db675a1.png",
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/animalia-75px.png",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": null,
@@ -49,7 +51,32 @@
             "created_at": "2019-03-14T20:02:02.285Z",
             "updated_at": "2019-03-14T20:02:02.285Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2058567,
+            "name": "Golfingia commun",
+            "is_valid": true,
+            "lexicon": "French",
+            "taxon_id": 874030,
+            "created_at": "2020-04-29T09:00:19.089Z",
+            "updated_at": "2020-04-29T09:00:19.089Z",
+            "creator_id": 782891,
+            "position": 1,
+            "parameterized_lexicon": "french"
+        },
+        {
+            "id": 2537618,
+            "name": "dubbelstrumpa",
+            "is_valid": true,
+            "lexicon": "Swedish",
+            "taxon_id": 874030,
+            "created_at": "2021-05-08T01:18:32.688Z",
+            "updated_at": "2021-05-08T01:18:32.688Z",
+            "creator_id": 2566072,
+            "position": 2,
+            "parameterized_lexicon": "swedish"
         }
     ],
     "iconic_taxon": {

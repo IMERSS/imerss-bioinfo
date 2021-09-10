@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 37,
-    "listed_taxa_count": 77,
+    "observations_count": 156,
+    "listed_taxa_count": 132,
     "rank_level": 10,
     "unique_name": "slime star",
     "wikipedia_summary": "<i><b>Pteraster tesselatus</b></i>, the <b>slime star</b> or <b>cushion star</b>, is a species of starfish in the family Pterasteridae found in the North Pacific.",
@@ -22,13 +22,15 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "192c4819-76de-4695-95f1-b4d3cbcff829",
+    "photos_locked": false,
     "default_name": {
         "id": 763240,
         "name": "Slime Star",
         "is_valid": true,
         "lexicon": "English"
     },
-    "photo_url": "https://static.inaturalist.org/photos/2546339/square.jpg?1545605958",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/square.jpg?1545605958",
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
     "common_name": {
@@ -37,18 +39,18 @@
         "is_valid": true,
         "lexicon": "English"
     },
-    "image_url": "https://static.inaturalist.org/photos/2546339/square.jpg?1545605958",
+    "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/square.jpg?1545605958",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": {
         "id": 2546339,
         "user_id": null,
         "native_photo_id": "17271401531",
-        "square_url": "https://static.inaturalist.org/photos/2546339/square.jpg?1545605958",
-        "thumb_url": "https://static.inaturalist.org/photos/2546339/thumb.jpg?1545605958",
-        "small_url": "https://static.inaturalist.org/photos/2546339/small.jpg?1545605958",
-        "medium_url": "https://static.inaturalist.org/photos/2546339/medium.jpg?1545605958",
-        "large_url": "https://static.inaturalist.org/photos/2546339/large.jpg?1545605958",
+        "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/square.jpg?1545605958",
+        "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/thumb.jpg?1545605958",
+        "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/small.jpg?1545605958",
+        "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/medium.jpg?1545605958",
+        "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/large.jpg?1545605958",
         "created_at": "2015-10-19T19:31:59.570Z",
         "updated_at": "2018-12-23T22:59:21.122Z",
         "native_page_url": "https://www.flickr.com/photos/genkigecko/17271401531/",
@@ -57,6 +59,8 @@
         "license": 2,
         "subtype": "FlickrPhoto",
         "native_original_image_url": "https://farm9.staticflickr.com/8815/17271401531_2918498f56_o.jpg",
+        "uuid": "3bd9f760-3ff2-4dc3-8f76-7381f6ca6c41",
+        "license_code": "CC-BY-NC",
         "license_name": "Creative Commons Attribution-NonCommercial License",
         "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
         "attribution": "(c) Eva Funderburgh, some rights reserved (CC BY-NC)",
@@ -76,11 +80,11 @@
                 "id": 2546339,
                 "user_id": null,
                 "native_photo_id": "17271401531",
-                "square_url": "https://static.inaturalist.org/photos/2546339/square.jpg?1545605958",
-                "thumb_url": "https://static.inaturalist.org/photos/2546339/thumb.jpg?1545605958",
-                "small_url": "https://static.inaturalist.org/photos/2546339/small.jpg?1545605958",
-                "medium_url": "https://static.inaturalist.org/photos/2546339/medium.jpg?1545605958",
-                "large_url": "https://static.inaturalist.org/photos/2546339/large.jpg?1545605958",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/square.jpg?1545605958",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/thumb.jpg?1545605958",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/small.jpg?1545605958",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/medium.jpg?1545605958",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2546339/large.jpg?1545605958",
                 "created_at": "2015-10-19T19:31:59.570Z",
                 "updated_at": "2018-12-23T22:59:21.122Z",
                 "native_page_url": "https://www.flickr.com/photos/genkigecko/17271401531/",
@@ -89,6 +93,7 @@
                 "license": 2,
                 "subtype": "FlickrPhoto",
                 "native_original_image_url": "https://farm9.staticflickr.com/8815/17271401531_2918498f56_o.jpg",
+                "uuid": "3bd9f760-3ff2-4dc3-8f76-7381f6ca6c41",
                 "license_code": "CC-BY-NC",
                 "attribution": "(c) Eva Funderburgh, some rights reserved (CC BY-NC)",
                 "license_name": "Creative Commons Attribution-NonCommercial License",
@@ -99,15 +104,16 @@
     ],
     "taxon_names": [
         {
-            "id": 300013,
-            "name": "Pteraster tesselatus",
-            "is_valid": true,
+            "id": 2365404,
+            "name": "Pteraster reticulatus",
+            "is_valid": false,
             "lexicon": "Scientific Names",
             "taxon_id": 194701,
-            "created_at": "2012-12-04T06:02:21.152Z",
-            "updated_at": "2012-12-04T06:02:21.152Z",
+            "created_at": "2020-12-29T07:52:32.604Z",
+            "updated_at": "2020-12-29T07:52:32.604Z",
             "creator_id": null,
-            "position": 0
+            "position": 4,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 763240,
@@ -118,7 +124,8 @@
             "created_at": "2015-10-19T19:31:27.336Z",
             "updated_at": "2016-08-31T02:27:57.260Z",
             "creator_id": 4918,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 763241,
@@ -129,7 +136,32 @@
             "created_at": "2015-10-19T19:32:52.423Z",
             "updated_at": "2016-08-31T02:28:14.535Z",
             "creator_id": 4918,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 2106794,
+            "name": "カスリマクヒトデ",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 194701,
+            "created_at": "2020-05-29T22:31:46.811Z",
+            "updated_at": "2020-05-29T22:31:46.811Z",
+            "creator_id": 396468,
+            "position": 3,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 300013,
+            "name": "Pteraster tesselatus",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 194701,
+            "created_at": "2012-12-04T06:02:21.152Z",
+            "updated_at": "2012-12-04T06:02:21.152Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -8,7 +8,7 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 82,
+    "observations_count": 89,
     "listed_taxa_count": 172,
     "rank_level": 10,
     "unique_name": "british columbia aeolid",
@@ -60,6 +60,7 @@
         "subtype": "FlickrPhoto",
         "native_original_image_url": "https://farm4.staticflickr.com/3182/3495951094_8a23f8f7d0_o.jpg",
         "uuid": "7a1cc561-e38f-4b7d-8da4-bc15e52b05bd",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
@@ -289,6 +290,18 @@
             "creator_id": 26610,
             "position": 4,
             "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2509013,
+            "name": "Columbian Nudibranch",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 48973,
+            "created_at": "2021-04-10T14:28:52.333Z",
+            "updated_at": "2021-04-10T14:28:52.333Z",
+            "creator_id": 1653038,
+            "position": 5,
+            "parameterized_lexicon": "english"
         }
     ],
     "iconic_taxon": {

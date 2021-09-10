@@ -23,7 +23,8 @@
             ref: "Erickson K (2000) 1999 / 2000 urban salmon habitat program final report. Galiano Conservancy Association, Galiano Island, BC. Unpublished report.",
             samplingProtocol: "Systematic Survey",
             datasetName: "Erickson (2000)",
-            basisOfRecord: "HumanObservation"
+            basisOfRecord: "HumanObservation",
+            coordinateUncertaintyInMeters: 3
         },
         "iNat": {
             institutionCode: "iNaturalist",

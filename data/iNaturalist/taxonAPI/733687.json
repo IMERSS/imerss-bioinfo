@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 0,
-    "listed_taxa_count": 2,
+    "observations_count": 1,
+    "listed_taxa_count": 6,
     "rank_level": 10,
     "unique_name": "aphrodita negligens",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "e670c7f1-2d3c-4c10-ba6c-2eaa534fbf03",
+    "photos_locked": false,
     "default_name": {
         "id": 1242333,
         "name": "Aphrodita negligens",
@@ -32,7 +34,7 @@
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
     "common_name": null,
-    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/animalia-75px-057784eeb6ea25a8c65477b98db675a1.png",
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/animalia-75px.png",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": null,
@@ -40,6 +42,18 @@
     "updated_at_utc": "2018-06-19T20:00:38.292Z",
     "taxon_photos": [],
     "taxon_names": [
+        {
+            "id": 2104677,
+            "name": "テングコガネウロコムシ",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 733687,
+            "created_at": "2020-05-29T21:45:28.492Z",
+            "updated_at": "2020-05-29T21:45:28.492Z",
+            "creator_id": 396468,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
         {
             "id": 1242333,
             "name": "Aphrodita negligens",
@@ -49,7 +63,8 @@
             "created_at": "2018-06-19T20:00:37.058Z",
             "updated_at": "2018-06-19T20:00:37.058Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

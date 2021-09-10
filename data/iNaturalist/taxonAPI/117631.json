@@ -8,13 +8,13 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 600,
-    "listed_taxa_count": 19,
+    "observations_count": 2028,
+    "listed_taxa_count": 46,
     "rank_level": 30,
-    "unique_name": "シオサザナミガイ／リュウキュウマスオガイ科",
+    "unique_name": "紫雲蛤科",
     "wikipedia_summary": "The <b>Psammobiidae</b> or <b>sunset clams</b>, are a family of medium-sized saltwater clams, marine bivalve molluscs of the order Veneroida.",
     "wikipedia_title": "",
-    "ancestry": "48460/1/47115/47584/372755/551316/551317/488959/59394",
+    "ancestry": "48460/1/47115/47584/1051154/1051155/551316/551317/488959/59394",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 327606,
+    "uuid": "b12b469e-1eb6-4fa3-a357-8f3a5797c126",
+    "photos_locked": false,
     "default_name": {
         "id": 188049,
         "name": "Psammobiidae",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "86bd72db-1c31-41db-ae68-a02d5e49572b",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Rina Hart, all rights reserved, uploaded by Varina Ramdonee",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "86bd72db-1c31-41db-ae68-a02d5e49572b",
                 "license_code": "C",
                 "attribution": "(c) Rina Hart, all rights reserved, uploaded by Varina Ramdonee",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 1555752,
+            "name": "purpurovkovití",
+            "is_valid": true,
+            "lexicon": "Czech",
+            "taxon_id": 117631,
+            "created_at": "2019-04-25T00:25:07.943Z",
+            "updated_at": "2019-04-25T00:25:07.943Z",
+            "creator_id": 1,
+            "position": 1,
+            "parameterized_lexicon": "czech"
+        },
+        {
             "id": 1760721,
             "name": "シオサザナミガイ／リュウキュウマスオガイ科",
             "is_valid": true,
@@ -102,7 +119,32 @@
             "created_at": "2019-10-17T12:52:04.035Z",
             "updated_at": "2019-10-17T12:52:04.035Z",
             "creator_id": 1733420,
-            "position": 2
+            "position": 2,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 2101400,
+            "name": "シオサザナミガイ科",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 117631,
+            "created_at": "2020-05-29T21:28:10.154Z",
+            "updated_at": "2020-05-29T21:28:10.154Z",
+            "creator_id": 396468,
+            "position": 3,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 2101401,
+            "name": "リュウキュウマスオガイ科",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 117631,
+            "created_at": "2020-05-29T21:28:10.622Z",
+            "updated_at": "2020-05-29T21:28:10.622Z",
+            "creator_id": 396468,
+            "position": 4,
+            "parameterized_lexicon": "japanese"
         },
         {
             "id": 188049,
@@ -113,18 +155,20 @@
             "created_at": "2011-08-16T20:30:28.353Z",
             "updated_at": "2011-08-16T20:30:28.353Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
-            "id": 1555752,
-            "name": "purpurovkovití",
+            "id": 2172957,
+            "name": "紫雲蛤科",
             "is_valid": true,
-            "lexicon": "Czech",
+            "lexicon": "Chinese (Traditional)",
             "taxon_id": 117631,
-            "created_at": "2019-04-25T00:25:07.943Z",
-            "updated_at": "2019-04-25T00:25:07.943Z",
-            "creator_id": 1,
-            "position": 1
+            "created_at": "2020-07-17T16:07:21.098Z",
+            "updated_at": "2020-07-17T16:07:21.098Z",
+            "creator_id": 1583469,
+            "position": 5,
+            "parameterized_lexicon": "chinese-traditional"
         }
     ],
     "iconic_taxon": {

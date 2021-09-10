@@ -9,10 +9,10 @@
     "is_iconic": false,
     "name_provider": "EolNameProvider",
     "observations_count": 0,
-    "listed_taxa_count": 0,
+    "listed_taxa_count": 1,
     "rank_level": 10,
     "unique_name": "rhabdus rectius",
-    "wikipedia_summary": null,
+    "wikipedia_summary": "<i><b>Rhabdus rectius</b></i>, also known as a <b>straight tusk shell</b>, is a species of scaphopod, a small marine mollusc native to the coast of central California whose shell, like that of all the members of its order, resembles a tusk. Most members of the scaphopoda have shells that exhibit a noticeable and characteristic anterior curvature— the shell of <i>R. rectius</i>, however, is unusually straight, hence the Latin word \"rectius\" (literally, \"straight\") in its binomial designation. <i>R</i>",
     "wikipedia_title": null,
     "ancestry": "48460/1/47115/67990/70101/801640/957346",
     "conservation_status": null,
@@ -23,6 +23,7 @@
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
     "uuid": "2582f385-8e1d-4d03-bda5-01e847ec4625",
+    "photos_locked": false,
     "default_name": {
         "id": 1763125,
         "name": "Rhabdus rectius",
@@ -50,7 +51,8 @@
             "created_at": "2019-10-21T14:40:28.475Z",
             "updated_at": "2019-10-21T14:40:28.475Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

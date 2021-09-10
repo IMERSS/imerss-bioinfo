@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 306,
-    "listed_taxa_count": 2,
+    "observations_count": 1100,
+    "listed_taxa_count": 94,
     "rank_level": 40,
-    "unique_name": "dictyoceratida",
+    "unique_name": "网角目",
     "wikipedia_summary": "<b>Dictyoceratida</b> is an order of sponges in the subclass Ceractinomorpha containing five families. Along with the Dendroceratida, it is one of the two orders of demosponges that make up the keratose or \"horny\" sponges, in which a mineral skeleton is minimal or absent and a skeleton of organic fibers containing spongin, a collagen-like material, is present instead.",
     "wikipedia_title": null,
     "ancestry": "48460/1/48824/57736/551715",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 583,
+    "uuid": "98559535-93d0-41a5-ad04-b8b0f0865f1b",
+    "photos_locked": false,
     "default_name": {
         "id": 209389,
         "name": "Dictyoceratida",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "b0344e2c-a0a2-495d-af77-9be44dabf274",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) naturalist, all rights reserved, uploaded by naturalist",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "b0344e2c-a0a2-495d-af77-9be44dabf274",
                 "license_code": "C",
                 "attribution": "(c) naturalist, all rights reserved, uploaded by naturalist",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2100619,
+            "name": "網角質海綿目",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 118780,
+            "created_at": "2020-05-29T21:24:41.023Z",
+            "updated_at": "2020-05-29T21:24:41.023Z",
+            "creator_id": 396468,
+            "position": 2,
+            "parameterized_lexicon": "japanese"
+        },
+        {
             "id": 209389,
             "name": "Dictyoceratida",
             "is_valid": true,
@@ -102,7 +119,8 @@
             "created_at": "2011-08-24T02:54:53.385Z",
             "updated_at": "2011-08-24T02:54:53.385Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         },
         {
             "id": 930711,
@@ -113,7 +131,20 @@
             "created_at": "2017-07-01T00:54:59.802Z",
             "updated_at": "2017-07-01T00:54:59.802Z",
             "creator_id": null,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2507449,
+            "name": "网角目",
+            "is_valid": true,
+            "lexicon": "Chinese (Simplified)",
+            "taxon_id": 118780,
+            "created_at": "2021-04-09T02:41:40.996Z",
+            "updated_at": "2021-04-09T02:41:40.996Z",
+            "creator_id": 1151287,
+            "position": 3,
+            "parameterized_lexicon": "chinese-simplified"
         }
     ],
     "iconic_taxon": {

@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 453,
-    "listed_taxa_count": 27,
+    "observations_count": 1200,
+    "listed_taxa_count": 43,
     "rank_level": 40,
-    "unique_name": "Eunicida",
+    "unique_name": "矶沙蚕目",
     "wikipedia_summary": "<b>Eunicida</b> is an order of polychaete worms.",
     "wikipedia_title": null,
     "ancestry": "48460/1/47491/47490/551646",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 397,
+    "uuid": "5dcdfab2-cbbe-4d23-956d-5cf785a1cb29",
+    "photos_locked": false,
     "default_name": {
         "id": 155745,
         "name": "Eunicida",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "93011c29-3956-4304-bd9d-b3593fe03ce7",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Madeleine Hoke, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "93011c29-3956-4304-bd9d-b3593fe03ce7",
                 "license_code": "C",
                 "attribution": "(c) Madeleine Hoke, all rights reserved",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2077761,
+            "name": "イソメ目",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 85516,
+            "created_at": "2020-05-19T12:27:23.724Z",
+            "updated_at": "2020-05-19T12:27:23.724Z",
+            "creator_id": 1733420,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
             "id": 155745,
             "name": "Eunicida",
             "is_valid": true,
@@ -102,7 +119,20 @@
             "created_at": "2011-08-04T06:12:08.632Z",
             "updated_at": "2011-08-04T06:12:08.632Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2210588,
+            "name": "矶沙蚕目",
+            "is_valid": true,
+            "lexicon": "Chinese (Simplified)",
+            "taxon_id": 85516,
+            "created_at": "2020-08-23T17:43:17.637Z",
+            "updated_at": "2020-08-23T17:43:17.637Z",
+            "creator_id": 1151287,
+            "position": 2,
+            "parameterized_lexicon": "chinese-simplified"
         }
     ],
     "iconic_taxon": {

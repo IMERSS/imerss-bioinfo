@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 402,
-    "listed_taxa_count": 1,
+    "observations_count": 858,
+    "listed_taxa_count": 2,
     "rank_level": 33,
     "unique_name": "amphiuroidea",
     "wikipedia_summary": null,
@@ -23,6 +23,7 @@
     "complete_rank": null,
     "taxon_framework_relationship_id": 365466,
     "uuid": "7367062c-109a-4f21-8007-e04b1b8e26a3",
+    "photos_locked": false,
     "default_name": {
         "id": 1425022,
         "name": "Amphiuroidea",
@@ -54,6 +55,7 @@
         "subtype": null,
         "native_original_image_url": null,
         "uuid": "7cdc2a4d-607f-43f1-a397-649769ae0c8d",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) ignacio_ibanez, all rights reserved",
@@ -105,7 +107,8 @@
             "created_at": "2018-12-08T08:31:56.579Z",
             "updated_at": "2018-12-08T08:31:56.579Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

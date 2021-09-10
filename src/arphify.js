@@ -127,6 +127,9 @@ hortis.extractQualifier = function (name, outRow) {
     var qualPoint = useWords.findIndex(function (word) {
         return hortis.qualForming.includes(word);
     });
+    if (outRow.subgenus) {
+        lastBareWords.unshift("(" + outRow.subgenus + ")");
+    }
 
     outRow.identificationQualifier = qualPoint === -1 ? "" : useWords.slice(qualPoint).join(" ");
     outRow.scientificName = [outRow.genus, ...lastBareWords].join(" ");
@@ -283,12 +286,57 @@ hortis.mapIndividualCount = function (outRow) {
     }
 };
 
+// 2nd round reviewer recommendation 9
+hortis.correctUncertainty = function (outRow) {
+    var uncertainty = outRow.coordinateUncertaintyInMeters;
+    var val = hortis.parseFloat(uncertainty);
+    if (isNaN(val) || val < 1) {
+        outRow.coordinateUncertaintyInMeters = "";
+    }
+};
+
+// 2nd round reviewer recommendation 10
+hortis.correctLocalityTable = {
+    "e96b99b5-e978-49b0-a151-b5e5eb0f0981": "Trincomali Channel",
+    "29392e13-0c6b-4ea0-9c3d-bec39ae428a3": "Trincomali Channel",
+    "dfead0da-98f0-4ed1-b6c2-d270339704ee": "Trincomali Channel",
+    "f8ebf88e-6e0a-4a6e-a888-5f837d5326b6": "Trincomali Channel",
+    "0c5923fe-91e6-423e-bedf-1d46a0b89273": "Trincomali Channel"
+};
+
+hortis.correctLocality = function (outRow) {
+    var lookup = hortis.correctLocalityTable[outRow.occurrenceID];
+    if (lookup !== undefined) {
+        outRow.locality = lookup;
+    }
+};
+
+// 2nd round reviewer recommendation 11
+hortis.cleanIdRemarks = function (outRow) {
+    outRow.identificationRemarks = outRow.identificationRemarks.replace(/\"/g, "");
+};
+
 hortis.normaliseRecorders = function (recordedBy) {
     // Technical reviewer recommendation 5
     var separators = recordedBy.replace("; ", " | ").trim();
     // Technical reviewer recommendation 6
     var togo = separators === "anonymous" ? "" : separators;
     return togo;
+};
+
+// 2nd round reviewer recommendation 13
+hortis.badEventRemarksTable = {
+    "/": "",
+    "?": "",
+    "??": "",
+    "#NAME?": ""
+};
+
+hortis.cleanEventRemarks = function (outRow) {
+    var lookup = hortis.badEventRemarksTable[outRow.eventRemarks];
+    if (lookup != undefined) {
+        outRow.eventRemarks = lookup;
+    }
 };
 
 hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, columns) {
@@ -322,8 +370,6 @@ hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, 
         if (!togo.occurrenceID) {
             togo.occurrenceID = "imerss.org:" + row.observationId;
         }
-        hortis.quantiseDepth(togo, 2);
-        hortis.mapIndividualCount(togo);
 
         if (row.coordinatesCorrected === "yes") {
             togo.georeferencedBy = "Andrew Simon";
@@ -348,6 +394,13 @@ hortis.mapMaterialsRows = function (rows, patchIndex, materialsMap, references, 
 
         togo.recordedBy = hortis.normaliseRecorders(togo.recordedBy);
         togo.georeferencedBy = hortis.normaliseRecorders(togo.georeferencedBy);
+
+        hortis.quantiseDepth(togo, 2);
+        hortis.mapIndividualCount(togo);
+        hortis.correctUncertainty(togo);
+        hortis.correctLocality(togo);
+        hortis.cleanIdRemarks(togo);
+        hortis.cleanEventRemarks(togo);
         return togo;
     });
 };

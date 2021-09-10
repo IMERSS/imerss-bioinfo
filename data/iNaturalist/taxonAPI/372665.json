@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 11,
-    "listed_taxa_count": 32,
+    "observations_count": 21,
+    "listed_taxa_count": 45,
     "rank_level": 10,
     "unique_name": "perophora annectens",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 20511,
+    "uuid": "f65a881d-500e-4b69-9ced-366c0f07151d",
+    "photos_locked": false,
     "default_name": {
         "id": 593878,
         "name": "Perophora annectens",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "1bc48a8f-b9cd-4a1f-bb09-7c6c3c90204f",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "1bc48a8f-b9cd-4a1f-bb09-7c6c3c90204f",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2014-10-12T00:28:07.467Z",
             "updated_at": "2014-10-12T00:28:07.467Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

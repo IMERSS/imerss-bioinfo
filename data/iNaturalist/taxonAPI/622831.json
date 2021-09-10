@@ -8,8 +8,8 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 829,
-    "listed_taxa_count": 9,
+    "observations_count": 1224,
+    "listed_taxa_count": 26,
     "rank_level": 20,
     "unique_name": "ホッカイミノウミウシ属",
     "wikipedia_summary": "<i><b>Coryphella</b></i> is a genus of sea slugs, specifically aeolid nudibranchs, marine gastropod molluscs in the family Coryphellidae.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "ece20454-236a-47ae-9ad0-7d13826bbe16",
+    "photos_locked": false,
     "default_name": {
         "id": 1077185,
         "name": "Coryphella",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "cf938bb5-a199-4052-9b5b-453b223aeba5",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Phil Garner, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "cf938bb5-a199-4052-9b5b-453b223aeba5",
                 "license_code": "C",
                 "attribution": "(c) Phil Garner, all rights reserved",
                 "license_name": "Copyright",
@@ -94,17 +99,6 @@
     ],
     "taxon_names": [
         {
-            "id": 1077185,
-            "name": "Coryphella",
-            "is_valid": true,
-            "lexicon": "Scientific Names",
-            "taxon_id": 622831,
-            "created_at": "2017-12-26T10:27:14.622Z",
-            "updated_at": "2017-12-26T10:27:14.622Z",
-            "creator_id": 26473,
-            "position": 0
-        },
-        {
             "id": 1529190,
             "name": "ホッカイミノウミウシ属",
             "is_valid": true,
@@ -113,7 +107,20 @@
             "created_at": "2019-03-11T02:33:50.713Z",
             "updated_at": "2019-03-11T02:33:50.713Z",
             "creator_id": 1243007,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 1077185,
+            "name": "Coryphella",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 622831,
+            "created_at": "2017-12-26T10:27:14.622Z",
+            "updated_at": "2017-12-26T10:27:14.622Z",
+            "creator_id": 26473,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

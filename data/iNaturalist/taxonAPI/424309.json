@@ -8,7 +8,7 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 4,
+    "observations_count": 10,
     "listed_taxa_count": 1,
     "rank_level": 20,
     "unique_name": "thrombophyton",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "a17fdf4e-a33c-493e-86ff-5aa8e62d1177",
+    "photos_locked": false,
     "default_name": {
         "id": 654441,
         "name": "Thrombophyton",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "24994274-77f7-4406-a4f9-9cd58c58064f",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "24994274-77f7-4406-a4f9-9cd58c58064f",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -102,7 +107,8 @@
             "created_at": "2014-12-04T17:21:41.057Z",
             "updated_at": "2014-12-04T17:21:41.057Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

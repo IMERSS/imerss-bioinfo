@@ -8,10 +8,10 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "ColNameProvider",
-    "observations_count": 3030,
-    "listed_taxa_count": 692,
+    "observations_count": 7013,
+    "listed_taxa_count": 987,
     "rank_level": 40,
-    "unique_name": "sand dollars",
+    "unique_name": "楯形目（沙錢）",
     "wikipedia_summary": "The term <b>sand dollar</b> (also known as a <b>sea cookie</b> or <b>snapper biscuit</b> in New Zealand, or <b>pansy shell</b> in South Africa) refers to species of extremely flattened, burrowing sea urchins belonging to the order <b>Clypeasteroida</b>. Some species within the order, not quite as flat, are known as <b>sea biscuits</b>. Related animals include other sea urchins, sea cucumbers, and starfish.",
     "wikipedia_title": "",
     "ancestry": "48460/1/47549/774753/47548/475988/552152/774996",
@@ -22,13 +22,15 @@
     "complete": false,
     "complete_rank": "",
     "taxon_framework_relationship_id": 323729,
+    "uuid": "5c681f9f-e959-40be-9188-89e9a99bec6c",
+    "photos_locked": false,
     "default_name": {
         "id": 209053,
         "name": "Sand Dollars",
         "is_valid": true,
         "lexicon": "English"
     },
-    "photo_url": "https://static.inaturalist.org/photos/2984217/square.jpg?1454902135",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/square.jpg?1454902135",
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
     "common_name": {
@@ -37,29 +39,31 @@
         "is_valid": true,
         "lexicon": "English"
     },
-    "image_url": "https://static.inaturalist.org/photos/2984217/square.jpg?1454902135",
+    "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/square.jpg?1454902135",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": {
         "id": 2984217,
         "user_id": 3403,
         "native_photo_id": "https://picasaweb.google.com/data/entry/api/user/104623964081378888743/albumid/6248723572505476641/photoid/6248754099522307346",
-        "square_url": "https://static.inaturalist.org/photos/2984217/square.jpg?1454902135",
-        "thumb_url": "https://static.inaturalist.org/photos/2984217/thumb.jpg?1454902135",
-        "small_url": "https://static.inaturalist.org/photos/2984217/small.jpg?1454902135",
-        "medium_url": "https://static.inaturalist.org/photos/2984217/medium.jpg?1454902135",
-        "large_url": "https://static.inaturalist.org/photos/2984217/large.jpg?1454902135",
+        "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/square.jpg?1454902135",
+        "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/thumb.jpg?1454902135",
+        "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/small.jpg?1454902135",
+        "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/medium.jpg?1454902135",
+        "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/large.jpg?1454902135",
         "created_at": "2016-02-08T03:28:46.039Z",
         "updated_at": "2016-02-08T03:28:56.627Z",
         "native_page_url": "https://picasaweb.google.com/104623964081378888743/20160207MagicIsland#6248754099522307346",
         "native_username": "104623964081378888743",
         "native_realname": "David R",
-        "license": 3,
+        "license": 2,
         "subtype": "PicasaPhoto",
         "native_original_image_url": "https://lh3.googleusercontent.com/-J2fw47s4epw/VrgIvwbLBRI/AAAAAAAAq1g/cLNaob88uRE/P2070151.jpg",
-        "license_name": "Creative Commons Attribution-NonCommercial-NoDerivs License",
-        "license_url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
-        "attribution": "(c) David R, some rights reserved (CC BY-NC-ND)",
+        "uuid": "5e97dfed-fb7b-41cc-898c-4381b03080f0",
+        "license_code": "CC-BY-NC",
+        "license_name": "Creative Commons Attribution-NonCommercial License",
+        "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
+        "attribution": "(c) David R, some rights reserved (CC BY-NC)",
         "type": "LocalPhoto"
     },
     "created_at_utc": "2008-05-22T19:18:02.000Z",
@@ -76,49 +80,40 @@
                 "id": 2984217,
                 "user_id": 3403,
                 "native_photo_id": "https://picasaweb.google.com/data/entry/api/user/104623964081378888743/albumid/6248723572505476641/photoid/6248754099522307346",
-                "square_url": "https://static.inaturalist.org/photos/2984217/square.jpg?1454902135",
-                "thumb_url": "https://static.inaturalist.org/photos/2984217/thumb.jpg?1454902135",
-                "small_url": "https://static.inaturalist.org/photos/2984217/small.jpg?1454902135",
-                "medium_url": "https://static.inaturalist.org/photos/2984217/medium.jpg?1454902135",
-                "large_url": "https://static.inaturalist.org/photos/2984217/large.jpg?1454902135",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/square.jpg?1454902135",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/thumb.jpg?1454902135",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/small.jpg?1454902135",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/medium.jpg?1454902135",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2984217/large.jpg?1454902135",
                 "created_at": "2016-02-08T03:28:46.039Z",
                 "updated_at": "2016-02-08T03:28:56.627Z",
                 "native_page_url": "https://picasaweb.google.com/104623964081378888743/20160207MagicIsland#6248754099522307346",
                 "native_username": "104623964081378888743",
                 "native_realname": "David R",
-                "license": 3,
+                "license": 2,
                 "subtype": "PicasaPhoto",
                 "native_original_image_url": "https://lh3.googleusercontent.com/-J2fw47s4epw/VrgIvwbLBRI/AAAAAAAAq1g/cLNaob88uRE/P2070151.jpg",
-                "license_code": "CC-BY-NC-ND",
-                "attribution": "(c) David R, some rights reserved (CC BY-NC-ND)",
-                "license_name": "Creative Commons Attribution-NonCommercial-NoDerivs License",
-                "license_url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+                "uuid": "5e97dfed-fb7b-41cc-898c-4381b03080f0",
+                "license_code": "CC-BY-NC",
+                "attribution": "(c) David R, some rights reserved (CC BY-NC)",
+                "license_name": "Creative Commons Attribution-NonCommercial License",
+                "license_url": "http://creativecommons.org/licenses/by-nc/4.0/",
                 "type": "LocalPhoto"
             }
         }
     ],
     "taxon_names": [
         {
-            "id": 76236,
-            "name": "Clypeasteroida",
+            "id": 1945155,
+            "name": "Sanddollars",
             "is_valid": true,
-            "lexicon": "Scientific Names",
+            "lexicon": "German",
             "taxon_id": 47547,
-            "created_at": "2008-05-22T19:18:02.000Z",
-            "updated_at": "2008-05-22T19:18:02.000Z",
-            "creator_id": null,
-            "position": 0
-        },
-        {
-            "id": 209053,
-            "name": "Sand Dollars",
-            "is_valid": true,
-            "lexicon": "English",
-            "taxon_id": 47547,
-            "created_at": "2011-08-20T21:44:45.431Z",
-            "updated_at": "2013-01-03T07:25:41.845Z",
-            "creator_id": 516,
-            "position": 0
+            "created_at": "2020-01-26T23:37:46.042Z",
+            "updated_at": "2020-01-26T23:37:46.042Z",
+            "creator_id": 78075,
+            "position": 8,
+            "parameterized_lexicon": "german"
         },
         {
             "id": 960547,
@@ -129,7 +124,8 @@
             "created_at": "2017-09-27T02:55:57.061Z",
             "updated_at": "2017-09-27T02:55:57.061Z",
             "creator_id": 541276,
-            "position": 4
+            "position": 4,
+            "parameterized_lexicon": "portuguese"
         },
         {
             "id": 511261,
@@ -140,7 +136,8 @@
             "created_at": "2013-08-25T20:24:04.232Z",
             "updated_at": "2016-10-21T14:18:31.349Z",
             "creator_id": 1,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "spanish"
         },
         {
             "id": 792474,
@@ -151,7 +148,20 @@
             "created_at": "2016-03-05T02:24:40.132Z",
             "updated_at": "2016-03-05T02:24:40.132Z",
             "creator_id": 66245,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 1967172,
+            "name": "연잎성게목",
+            "is_valid": true,
+            "lexicon": "Korean",
+            "taxon_id": 47547,
+            "created_at": "2020-02-11T00:01:37.792Z",
+            "updated_at": "2020-02-11T00:01:37.792Z",
+            "creator_id": 280,
+            "position": 9,
+            "parameterized_lexicon": "korean"
         },
         {
             "id": 1527100,
@@ -162,7 +172,8 @@
             "created_at": "2019-03-07T19:05:36.608Z",
             "updated_at": "2019-03-07T19:05:36.608Z",
             "creator_id": 14295,
-            "position": 5
+            "position": 5,
+            "parameterized_lexicon": "spanish"
         },
         {
             "id": 1527103,
@@ -173,7 +184,8 @@
             "created_at": "2019-03-07T19:05:58.535Z",
             "updated_at": "2019-03-07T19:05:58.535Z",
             "creator_id": 14295,
-            "position": 6
+            "position": 6,
+            "parameterized_lexicon": "spanish"
         },
         {
             "id": 1527104,
@@ -184,7 +196,44 @@
             "created_at": "2019-03-07T19:06:26.832Z",
             "updated_at": "2019-03-07T19:06:26.832Z",
             "creator_id": 14295,
-            "position": 7
+            "position": 7,
+            "parameterized_lexicon": "spanish"
+        },
+        {
+            "id": 209053,
+            "name": "Sand Dollars",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 47547,
+            "created_at": "2011-08-20T21:44:45.431Z",
+            "updated_at": "2013-01-03T07:25:41.845Z",
+            "creator_id": 516,
+            "position": 0,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 76236,
+            "name": "Clypeasteroida",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 47547,
+            "created_at": "2008-05-22T19:18:02.000Z",
+            "updated_at": "2008-05-22T19:18:02.000Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2174811,
+            "name": "楯形目（沙錢）",
+            "is_valid": true,
+            "lexicon": "Chinese (Traditional)",
+            "taxon_id": 47547,
+            "created_at": "2020-07-20T03:06:42.185Z",
+            "updated_at": "2020-07-20T03:06:42.185Z",
+            "creator_id": 1465242,
+            "position": 10,
+            "parameterized_lexicon": "chinese-traditional"
         }
     ],
     "iconic_taxon": {

@@ -275,6 +275,16 @@ hortis.fusionToLoadable = function (fusion, taxaMap) {
     };
 };
 
+// Convert a BCCSN-style resolution 
+hortis.mapBCCSNResolution = function (resolution) {
+    var matches = resolution.trim().match(/([\d\.]+)(km|m)$/);
+    if (!matches) {
+        console.log("Warning: BCCSN resolution value " + resolution + " was not recognised");
+    } else {
+        return matches[1] * (matches[2] === "km" ? 1000 : 1);
+    }
+};
+
 hortis.deprivatise = function (resolved) {
     resolved.obsRows.forEach(function (row) {
         row.latitude = row.privateLatitude || row.latitude;
@@ -288,8 +298,6 @@ hortis.roundCoordinates = function (resolved, patch) {
         row.longitude = hortis.roundDecimals(row.longitude, patch.places);
     });
 };
-
-var dataPromises = hortis.fusionToLoadable(fusion, taxaMap);
 
 hortis.sanitizeSpeciesName = function (name) {
     name = name.trim();
@@ -511,6 +519,8 @@ hortis.obsifyFilename = function (filename) {
     var lastDot = filename.lastIndexOf(".");
     return filename.substring(0, lastDot) + "-obs" + filename.substring(lastDot);
 };
+
+var dataPromises = hortis.fusionToLoadable(fusion, taxaMap);
 
 hortis.settleStructure(dataPromises).then(function (data) {
     var summarise = parsedArgs.summarise || fusion.summarise;

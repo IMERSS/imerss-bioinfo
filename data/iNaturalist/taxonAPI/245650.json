@@ -8,10 +8,10 @@
     "iconic_taxon_id": 47115,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 2171,
+    "observations_count": 2626,
     "listed_taxa_count": 14,
     "rank_level": 30,
-    "unique_name": "豆豆科",
+    "unique_name": "dotidae",
     "wikipedia_summary": "<b>Dotidae</b> are a taxonomic family of small sea slugs, nudibranchs, shell-less marine gastropod molluscs formerly assigned to the order Opisthobranchia, but now considered to belong to the clade Dexiarchia. This family is unassigned to a superfamily.",
     "wikipedia_title": "",
     "ancestry": "48460/1/47115/47114/551391/775797/775799/775801/47113/801475/418414",
@@ -55,6 +55,7 @@
         "subtype": "FlickrPhoto",
         "native_original_image_url": "https://farm1.staticflickr.com/215/502724917_b31e063607_o.jpg",
         "uuid": "f71be95d-0efe-4297-85b9-2a2c39674988",
+        "license_code": "CC-BY-NC-SA",
         "license_name": "Creative Commons Attribution-NonCommercial-ShareAlike License",
         "license_url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
         "attribution": "(c) Ken-ichi Ueda, some rights reserved (CC BY-NC-SA)",
@@ -144,6 +145,18 @@
             "creator_id": 1064087,
             "position": 3,
             "parameterized_lexicon": "chinese-traditional"
+        },
+        {
+            "id": 2540020,
+            "name": "kottnudingar",
+            "is_valid": true,
+            "lexicon": "Swedish",
+            "taxon_id": 245650,
+            "created_at": "2021-05-08T01:48:33.132Z",
+            "updated_at": "2021-05-08T01:48:33.132Z",
+            "creator_id": 2566072,
+            "position": 4,
+            "parameterized_lexicon": "swedish"
         }
     ],
     "iconic_taxon": {

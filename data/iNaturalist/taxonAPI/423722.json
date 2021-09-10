@@ -8,7 +8,7 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 6,
+    "observations_count": 12,
     "listed_taxa_count": 1,
     "rank_level": 20,
     "unique_name": "lafoea",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "98acb2e9-f278-4a9c-a7ec-20e8b02610c8",
+    "photos_locked": false,
     "default_name": {
         "id": 653442,
         "name": "Lafoea",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "699630a2-d739-4a5f-b905-101939dd82e8",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Heather Hawk, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "699630a2-d739-4a5f-b905-101939dd82e8",
                 "license_code": "C",
                 "attribution": "(c) Heather Hawk, all rights reserved",
                 "license_name": "Copyright",
@@ -94,6 +99,18 @@
     ],
     "taxon_names": [
         {
+            "id": 2103998,
+            "name": "キセルガヤ属",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 423722,
+            "created_at": "2020-05-29T21:40:56.516Z",
+            "updated_at": "2020-05-29T21:40:56.516Z",
+            "creator_id": 396468,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
             "id": 653442,
             "name": "Lafoea",
             "is_valid": true,
@@ -102,7 +119,8 @@
             "created_at": "2014-11-22T23:46:05.097Z",
             "updated_at": "2014-11-22T23:46:05.097Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

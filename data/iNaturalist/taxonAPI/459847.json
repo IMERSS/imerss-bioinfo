@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 7,
-    "listed_taxa_count": 17,
+    "observations_count": 18,
+    "listed_taxa_count": 31,
     "rank_level": 10,
     "unique_name": "homaxinella amphispicula",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "e57c6758-afce-48a0-bf80-babb8b734fbd",
+    "photos_locked": false,
     "default_name": {
         "id": 724430,
         "name": "Homaxinella amphispicula",
@@ -48,10 +50,12 @@
         "updated_at": "2019-10-13T01:28:35.633Z",
         "native_page_url": "https://www.inaturalist.org/photos/53932173",
         "native_username": "laureljazzmin",
-        "native_realname": null,
+        "native_realname": "",
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "3a7ac760-3d4e-4d01-848d-fd40077cf3dd",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) laureljazzmin, all rights reserved",
@@ -80,10 +84,11 @@
                 "updated_at": "2019-10-13T01:28:35.633Z",
                 "native_page_url": "https://www.inaturalist.org/photos/53932173",
                 "native_username": "laureljazzmin",
-                "native_realname": null,
+                "native_realname": "",
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "3a7ac760-3d4e-4d01-848d-fd40077cf3dd",
                 "license_code": "C",
                 "attribution": "(c) laureljazzmin, all rights reserved",
                 "license_name": "Copyright",
@@ -94,6 +99,30 @@
     ],
     "taxon_names": [
         {
+            "id": 2369076,
+            "name": "Plicatellopsis amphispicula",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 459847,
+            "created_at": "2020-12-30T18:40:49.070Z",
+            "updated_at": "2020-12-30T18:40:49.070Z",
+            "creator_id": null,
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2369077,
+            "name": "Syringella amphispicula",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 459847,
+            "created_at": "2020-12-30T18:40:49.298Z",
+            "updated_at": "2020-12-30T18:40:49.298Z",
+            "creator_id": null,
+            "position": 2,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
             "id": 724430,
             "name": "Homaxinella amphispicula",
             "is_valid": true,
@@ -102,7 +131,8 @@
             "created_at": "2015-04-07T02:55:21.322Z",
             "updated_at": "2015-04-07T02:55:21.322Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 43,
-    "listed_taxa_count": 88,
+    "observations_count": 98,
+    "listed_taxa_count": 132,
     "rank_level": 10,
     "unique_name": "northern staghorn bryozoan",
     "wikipedia_summary": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "695d2633-63fb-4b67-805e-16cf96b9047b",
+    "photos_locked": false,
     "default_name": {
         "id": 763245,
         "name": "northern staghorn bryozoan",
@@ -57,6 +59,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "e8de19ea-4c46-49a1-b7ee-46dcb606c20a",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Phil Garner, all rights reserved",
@@ -89,6 +93,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "e8de19ea-4c46-49a1-b7ee-46dcb606c20a",
                 "license_code": "C",
                 "attribution": "(c) Phil Garner, all rights reserved",
                 "license_name": "Copyright",
@@ -107,11 +112,11 @@
                 "id": 7621399,
                 "user_id": 4862,
                 "native_photo_id": "7621399",
-                "square_url": "https://static.inaturalist.org/photos/7621399/square.jpg?1493933203",
-                "thumb_url": "https://static.inaturalist.org/photos/7621399/thumb.jpg?1493933203",
-                "small_url": "https://static.inaturalist.org/photos/7621399/small.jpg?1493933203",
-                "medium_url": "https://static.inaturalist.org/photos/7621399/medium.jpg?1493933203",
-                "large_url": "https://static.inaturalist.org/photos/7621399/large.jpg?1493933203",
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/7621399/square.jpg?1493933203",
+                "thumb_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/7621399/thumb.jpg?1493933203",
+                "small_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/7621399/small.jpg?1493933203",
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/7621399/medium.jpg?1493933203",
+                "large_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/7621399/large.jpg?1493933203",
                 "created_at": "2017-05-04T21:26:42.437Z",
                 "updated_at": "2017-05-04T21:26:44.588Z",
                 "native_page_url": "https://www.inaturalist.org/photos/7621399",
@@ -120,6 +125,7 @@
                 "license": 3,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "238c43ef-47c0-4b4f-aff3-4a0ef7b136a0",
                 "license_code": "CC-BY-NC-ND",
                 "attribution": "(c) Brenna Green, some rights reserved (CC BY-NC-ND)",
                 "license_name": "Creative Commons Attribution-NonCommercial-NoDerivs License",
@@ -138,7 +144,8 @@
             "created_at": "2015-10-19T19:39:28.714Z",
             "updated_at": "2015-10-19T19:39:28.714Z",
             "creator_id": 4918,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "english"
         },
         {
             "id": 738860,
@@ -149,7 +156,8 @@
             "created_at": "2015-05-30T05:28:30.756Z",
             "updated_at": "2015-05-30T05:28:30.756Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

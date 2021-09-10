@@ -8,8 +8,8 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": "UBioNameProvider",
-    "observations_count": 32,
-    "listed_taxa_count": 9,
+    "observations_count": 85,
+    "listed_taxa_count": 20,
     "rank_level": 30,
     "unique_name": "エダクラゲ科",
     "wikipedia_summary": "<b>Bougainvilliidae</b> is a family of marine hydroids in the class Hydrozoa. Members of the family are found worldwide. There are sixteen accepted genera and about ninety three species.",
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": 324074,
+    "uuid": "c9897d1e-30bf-476c-8dba-a89735d1d607",
+    "photos_locked": false,
     "default_name": {
         "id": 100234,
         "name": "Bougainvilliidae",
@@ -52,6 +54,8 @@
         "license": 0,
         "subtype": null,
         "native_original_image_url": null,
+        "uuid": "824b33e1-de7b-4bec-84b3-0e0543abd820",
+        "license_code": "C",
         "license_name": "Copyright",
         "license_url": "http://en.wikipedia.org/wiki/Copyright",
         "attribution": "(c) Gary McDonald, all rights reserved",
@@ -84,6 +88,7 @@
                 "license": 0,
                 "subtype": null,
                 "native_original_image_url": null,
+                "uuid": "824b33e1-de7b-4bec-84b3-0e0543abd820",
                 "license_code": "C",
                 "attribution": "(c) Gary McDonald, all rights reserved",
                 "license_name": "Copyright",
@@ -94,17 +99,6 @@
     ],
     "taxon_names": [
         {
-            "id": 100234,
-            "name": "Bougainvilliidae",
-            "is_valid": true,
-            "lexicon": "Scientific Names",
-            "taxon_id": 63663,
-            "created_at": "2010-11-07T06:09:25.000Z",
-            "updated_at": "2010-11-07T06:09:25.000Z",
-            "creator_id": null,
-            "position": 0
-        },
-        {
             "id": 1490086,
             "name": "エダクラゲ科",
             "is_valid": true,
@@ -113,7 +107,20 @@
             "created_at": "2019-01-28T03:50:58.771Z",
             "updated_at": "2019-01-28T03:50:58.771Z",
             "creator_id": 1243007,
-            "position": 1
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 100234,
+            "name": "Bougainvilliidae",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 63663,
+            "created_at": "2010-11-07T06:09:25.000Z",
+            "updated_at": "2010-11-07T06:09:25.000Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

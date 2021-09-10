@@ -9,12 +9,12 @@
     "is_iconic": false,
     "name_provider": "ColNameProvider",
     "observations_count": 0,
-    "listed_taxa_count": 1,
+    "listed_taxa_count": 2,
     "rank_level": 10,
     "unique_name": "mopalia phorminx",
     "wikipedia_summary": null,
     "wikipedia_title": null,
-    "ancestry": "48460/1/47115/47429/47428/533431/372790/533483/47631/47630",
+    "ancestry": "48460/1/47115/47429/47428/533431/372790/533483/47631/1067211/47630",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -23,6 +23,7 @@
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
     "uuid": "08c88f2f-bf05-4be9-8c93-c513ab6f4312",
+    "photos_locked": false,
     "default_name": {
         "id": 1869857,
         "name": "Mopalia phorminx",
@@ -50,7 +51,8 @@
             "created_at": "2019-12-12T16:29:55.130Z",
             "updated_at": "2019-12-12T16:29:55.130Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {

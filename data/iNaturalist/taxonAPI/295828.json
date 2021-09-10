@@ -8,13 +8,13 @@
     "iconic_taxon_id": 1,
     "is_iconic": false,
     "name_provider": null,
-    "observations_count": 0,
-    "listed_taxa_count": 7,
+    "observations_count": 3,
+    "listed_taxa_count": 8,
     "rank_level": 10,
     "unique_name": "photis brevipes",
     "wikipedia_summary": null,
     "wikipedia_title": null,
-    "ancestry": "48460/1/47120/85493/473790/47187/774775/144114/47628/869842/245460/248680",
+    "ancestry": "48460/1/47120/85493/473790/47187/774775/144114/47628/869842/983350/983351/983358/245460/248680",
     "conservation_status": null,
     "conservation_status_source_id": null,
     "conservation_status_source_identifier": null,
@@ -22,6 +22,8 @@
     "complete": null,
     "complete_rank": null,
     "taxon_framework_relationship_id": null,
+    "uuid": "b3a458cc-fefa-491b-9088-c85d52d8a3e2",
+    "photos_locked": false,
     "default_name": {
         "id": 411759,
         "name": "Photis brevipes",
@@ -32,7 +34,7 @@
     "iconic_taxon_name": "Animalia",
     "conservation_status_name": null,
     "common_name": null,
-    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/animalia-75px-057784eeb6ea25a8c65477b98db675a1.png",
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/animalia-75px.png",
     "taxon_range_kml_url": null,
     "html": null,
     "default_photo": null,
@@ -49,7 +51,8 @@
             "created_at": "2013-04-30T04:53:45.152Z",
             "updated_at": "2013-04-30T04:53:45.152Z",
             "creator_id": null,
-            "position": 0
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
         }
     ],
     "iconic_taxon": {
