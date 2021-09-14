@@ -74,9 +74,9 @@ hortis.extractGenus = function (name, outRow) {
 };
 
 // Variant for obs -> Darwin Core
-hortis.axeFromName = ["sp.", "ssp.", "spp."];
+hortis.axeFromName = ["sp.", "ssp.", "spp.", "complex", "sp.A", "sp.B", "B"];
 
-hortis.qualForming = ["complex", "agg", "s.lat.", "cf", "sp.nov.", "var.", "sp.A", "sp.B", "B"];
+hortis.qualForming = ["agg", "aff.", "s.lat.", "cf", "sp.nov.", "var."];
 
 hortis.extractSubgenus = function (seg, outRow) {
     if (seg.startsWith("(") && seg.endsWith(")")) {
