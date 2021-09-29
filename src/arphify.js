@@ -286,12 +286,31 @@ hortis.mapIndividualCount = function (outRow) {
     }
 };
 
-// 2nd round reviewer recommendation 9
+hortis.countDecimals = function (value) {
+    var string = value.toString();
+    var dotpos = string.indexOf(".");
+    return dotpos === -1 ? dotpos : string.length - 1 - dotpos;
+};
+
+
 hortis.correctUncertainty = function (outRow) {
+    // 2nd round reviewer recommendation 9
     var uncertainty = outRow.coordinateUncertaintyInMeters;
     var val = hortis.parseFloat(uncertainty);
     if (isNaN(val) || val < 1) {
         outRow.coordinateUncertaintyInMeters = "";
+    }
+    // 3rd round reviewer recommendation 3
+    if (!outRow.coordinateUncertaintyInMeters) {
+        var decimals = Math.min(hortis.countDecimals(outRow.decimalLatitude), hortis.countDecimals(outRow.decimalLongitude));
+        if (decimals === -1) {
+            console.log("ERROR: unable to find coordinate resolution for row without coordinate uncertainty ", outRow);
+        } else { // 2 -> 4, 3 -> 3, 4 -> 2, 5-> 2
+            var scale = Math.min(Math.max(6 - decimals, 2), 4);
+            outRow.coordinateUncertaintyInMeters = Math.pow(10, scale);
+            var comment = "coordinate uncertainty inferred from coordinate resolution";
+            outRow.georeferenceRemarks = outRow.georeferenceRemarks ? outRow.georeferenceRemarks + "; " + comment : comment;
+        }
     }
 };
 
@@ -334,7 +353,7 @@ hortis.badEventRemarksTable = {
 
 hortis.cleanEventRemarks = function (outRow) {
     var lookup = hortis.badEventRemarksTable[outRow.eventRemarks];
-    if (lookup != undefined) {
+    if (lookup !== undefined) {
         outRow.eventRemarks = lookup;
     }
 };
@@ -487,7 +506,7 @@ hortis.verifyCounts = function (name, rowCount, rows) {
     });
 };
 
-hortis.eliminateEmptyColumns = function (rows, removeExtra) {
+hortis.eliminateEmptyColumns = function (rows) {
     var hasValue = {};
     rows.forEach(function (row) {
         fluid.each(row, function (value, key) {
@@ -503,7 +522,7 @@ hortis.eliminateEmptyColumns = function (rows, removeExtra) {
     return togo;
 };
 
-hortis.checkDuplicates = function (rows) {
+hortis.checkDuplicates = function (rows, eliminate) {
     var columns = ["occurrenceID"];
     var byDataset = {};
 
@@ -518,6 +537,7 @@ hortis.checkDuplicates = function (rows) {
                 emittedKeys[key] = true;
             }
         };
+        var outRows = [];
         var duplicates = 0;
         rows.forEach(function (row) {
             var filtered = fluid.censorKeys(row, [column]);
@@ -531,10 +551,15 @@ hortis.checkDuplicates = function (rows) {
                 ++duplicates;
             } else {
                 buckets[hash] = row;
+                outRows.push(row);
             }
         });
         if (duplicates) {
             console.log("Found " + duplicates + " duplicates");
+        }
+        if (eliminate && rows.length !== outRows.length) {
+            console.log("After filtering duplicates, " + rows.length + " rows reduced to " + outRows.length);
+            rows = outRows;
         }
     });
     fluid.each(byDataset.iNaturalist, function (row) {
@@ -546,6 +571,7 @@ hortis.checkDuplicates = function (rows) {
         var outfile = "materials-duplicates-" + key + ".csv";
         hortis.writeCSV(outfile, Object.keys(oneDataset[0]), oneDataset, fluid.promise());
     });
+    return rows;
 };
 
 var completion = fluid.promise.sequence([summaryReader.completionPromise, obsReader.completionPromise, patchReader.completionPromise]);
@@ -601,7 +627,7 @@ completion.then(function () {
 
     hortis.sortRows(allMaterials, pipeline.sheets.Materials.sortBy);
     var filteredMaterials = hortis.eliminateEmptyColumns(allMaterials);
-    hortis.checkDuplicates(filteredMaterials);
+    filteredMaterials = hortis.checkDuplicates(filteredMaterials, true);
     hortis.writeCSV(outputDir + "/Materials.csv", Object.keys(filteredMaterials[0]), filteredMaterials, fluid.promise());
 
     fluid.each(outs, function (sheets, key) {

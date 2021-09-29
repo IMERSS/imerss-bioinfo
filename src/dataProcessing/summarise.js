@@ -28,8 +28,8 @@ fluid.defaults("hortis.summarise", {
 });
 
 hortis.summarise.parseCoordinates = function (row) {
-    var latitude = hortis.parseFloat(row.privateLatitude || row.latitude);
-    var longitude = hortis.parseFloat(row.privateLongitude || row.longitude);
+    var latitude = hortis.parseFloat(row.latitude);
+    var longitude = hortis.parseFloat(row.longitude);
     return !isNaN(latitude) && !isNaN(longitude) ? [latitude, longitude] : null;
 };
 

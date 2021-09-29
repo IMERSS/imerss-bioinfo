@@ -275,7 +275,7 @@ hortis.fusionToLoadable = function (fusion, taxaMap) {
     };
 };
 
-// Convert a BCCSN-style resolution 
+// Convert a BCCSN-style resolution to metres
 hortis.mapBCCSNResolution = function (resolution) {
     var matches = resolution.trim().match(/([\d\.]+)(km|m)$/);
     if (!matches) {
