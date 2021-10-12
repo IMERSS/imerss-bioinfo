@@ -3,6 +3,8 @@
 "use strict";
 
 var fluid = require("infusion");
+var minimist = require("minimist");
+var fs = require("fs");
 
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/writeJSON.js");
@@ -12,13 +14,41 @@ require("./iNaturalist/obsAPI.js");
 
 var hortis = fluid.registerNamespace("hortis");
 
+hortis.iNatProjects = {
+    GalianoData: {
+        paramMap: {
+            project_id: 5799,
+            taxon_id: 1
+        },
+        outputFile: "data/iNaturalist/Galiano_Catalogue_Animalia_%Date.csv"
+    },
+    Valdes: {
+        paramMap: {
+            project_id: 43522,
+            taxon_id: 48460 // Life
+        },
+        outputFile: "data/Valdes/iNaturalist_Catalogue_%Date.csv"
+    }
+};
+
+var parsedArgs = minimist(process.argv.slice(2));
+
+console.log("parsedArgs", parsedArgs);
+
+var projectArgs = hortis.iNatProjects[parsedArgs._[0] || "GalianoData"];
+
 var jwt = hortis.readJSONSync("jwt.json", "reading JWT token file");
 
 var source = hortis.iNat.obsSource({
     headers: {
         Authorization: "Bearer " + jwt.api_token
-    }
+    },
+    paramMap: projectArgs.paramMap
 });
+
+var fileVars = {
+    Date: new Date().toISOString().substring(0, 10).replaceAll("-", "_")
+};
 
 fluid.setLogging(true);
 
@@ -35,8 +65,10 @@ hortis.logObsResponse = function (data) {
 };
 
 hortis.writeObs = function (filename, rows) {
+    var togo = fluid.promise();
     var headers = Object.keys(rows[0]);
-    hortis.writeCSV(filename, headers, rows, fluid.promise());
+    hortis.writeCSV(filename, headers, rows, togo);
+    return togo;
 };
 
 hortis.applyResponse = function (data) {
@@ -51,7 +83,12 @@ hortis.applyResponse = function (data) {
             hortis.makeObsRequest(directModel);
         }, 1000);
     } else {
-        hortis.writeObs("obsoutput.csv", rows);
+        hortis.writeObs("obsoutput.csv", rows).then(function () {
+            var fileTarget = fluid.stringTemplate(projectArgs.outputFile, fileVars);
+            fs.copyFileSync("obsoutput.csv", fileTarget);
+            var stats = fs.statSync(fileTarget);
+            console.log("Written " + stats.size + " bytes to " + fileTarget);
+        });
     }
 };
 

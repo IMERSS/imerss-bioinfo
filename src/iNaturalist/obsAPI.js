@@ -18,8 +18,8 @@ fluid.defaults("hortis.iNat.obsSource", {
     },
     paramMap: {
         // place_id: 94935,
-        project_id: 5799,
-        taxon_id: 1,
+        // project_id: 5799,
+        // taxon_id: 1,
         quality_grade: "research",
         order: "asc",
         order_by: "id",

@@ -26,22 +26,14 @@
     font-size: 16px;
 }
 
-#content-area table td,
-#content-area table th,
-#content-area table tr,
-#main-content table.cart td,
-#main-content table.cart th,
-#main-content table.cart tr,
-table.cart td,
-table.cart th,
-table.cart tr {
-    padding: 0 5px;
-}
-
 table {
     border: none !important;
 }
 
 td {
     border: none !important;
+}
+
+#main-content .entry-content table td {
+    padding: 0px 5px;
 }

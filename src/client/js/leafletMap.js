@@ -31,7 +31,7 @@ fluid.defaults("hortis.leafletMap", {
         tooltipRow: "<tr><td class=\"fl-taxonDisplay-key\">%key: </td><td class=\"fl-taxonDisplay-value\">%value</td>",
         tooltipFooter: "</table>"
     },
-    fitBounds: [[48.855,-123.65],[49.005,-123.25]],
+    // fitBounds: [[48.855,-123.65],[49.005,-123.25]],
     listeners: {
         "buildMap.fitBounds": "hortis.leafletMap.fitBounds({that}.map, {that}.options.fitBounds)",
         "buildMap.createTooltip": "hortis.leafletMap.createTooltip({that}, {that}.options.markup)"
@@ -477,6 +477,12 @@ hortis.leafletMap.drawGrid = function (map, quantiser, datasetEnabled) {
     }
 };
 
+
+hortis.projectBounds = {
+    Galiano: [[48.855,-123.65],[49.005,-123.25]],
+    Valdes: [[49.000, -123.798],[49.144,-123.504]]
+};
+
 fluid.defaults("hortis.sunburstLoaderWithMap", {
     gradeNames: "hortis.sunburstLoader",
     selectors: {
@@ -485,6 +491,7 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
     events: {
         sunburstLoaded: null
     },
+    mapBounds: hortis.projectBounds.Galiano,
     markupTemplate: "%resourceBase/html/bagatelle-map.html",
     distributeOptions: {
         sunburstLoaded: {
@@ -503,6 +510,7 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
             createOnEvent: "sunburstLoaded",
             options: {
                 gradeNames: "hortis.mapWithSunburst",
+                fitBounds: "{hortis.configHolder}.options.mapBounds",
                 showObsListInTooltip: "{hortis.configHolder}.options.showObsListInTooltip"
             }
         }

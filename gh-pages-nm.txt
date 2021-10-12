@@ -1,4 +1,3 @@
-node_modules/infusion/src/lib/normalize/css/normalize.css
 node_modules/infusion/src/framework/core/css/fluid.css
 node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css
 node_modules/infusion/src/lib/jquery/core/js/jquery.js

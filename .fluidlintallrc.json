@@ -19,7 +19,8 @@
     "markdownlint": {
         "options": {
             "config": {
-                "single-h1": false
+                "single-h1": false,
+                "no-bare-urls": false
             }
         }
     },
