@@ -49,6 +49,13 @@
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99"
+        },
+        "Synth": {
+            "name": "Valdes Island Synthesized Datasets (1972-2018)",
+            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - Synthesized - 2021_10_13.csv",
+            "map": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-out-map.json",
+            "colour": "#29a329"
         }
     }
 }

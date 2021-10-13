@@ -1,0 +1,15 @@
+{
+    "columns": {
+        "taxonName": "%Taxon",
+        "dateObserved": "%Date",
+        "description": "%HabitatRemarks",
+        "placeName": "%LocationName",
+        "latitude": "%Latitude",
+        "longitude": "%Longitude",
+        "commonName": "%Common name",
+        "recordedBy": "%Collector/Observer"
+    },
+    "datasetId": "Synth",
+    "datasetClass": "citizen",
+    "observationId": "%rowNumber"
+}

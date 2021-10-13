@@ -34,7 +34,8 @@ fluid.defaults("hortis.leafletMap", {
     // fitBounds: [[48.855,-123.65],[49.005,-123.25]],
     listeners: {
         "buildMap.fitBounds": "hortis.leafletMap.fitBounds({that}.map, {that}.options.fitBounds)",
-        "buildMap.createTooltip": "hortis.leafletMap.createTooltip({that}, {that}.options.markup)"
+        "buildMap.createTooltip": "hortis.leafletMap.createTooltip({that}, {that}.options.markup)",
+        "buildMap.addTiles": "hortis.leafletMap.addTileLayer({that}.map, {that}.options.tileOptions)"
     },
     modelListeners: {
         drawGrid: {
@@ -111,6 +112,20 @@ fluid.defaults("hortis.leafletMap", {
     }
 });
 
+fluid.defaults("hortis.streetmapTiles", {
+    tileOptions: {
+        tileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        tileAttribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
+    }
+});
+
+hortis.leafletMap.addTileLayer = function (map, tileOptions) {
+    if (tileOptions && tileOptions.tileUrl) {
+        L.tileLayer(tileOptions.tileUrl, {
+            attribution: tileOptions.tileAttribution
+        }).addTo(map);
+    }
+};
 
 hortis.datasetEnabledModel = function (datasets) {
     return fluid.transform(datasets, function () {
@@ -492,6 +507,7 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
         sunburstLoaded: null
     },
     mapBounds: hortis.projectBounds.Galiano,
+    mapGrades: [],
     markupTemplate: "%resourceBase/html/bagatelle-map.html",
     distributeOptions: {
         sunburstLoaded: {
@@ -501,6 +517,10 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
         flatTree: {
             target: "{that quantiser}.options.members.flatTree",
             record: "@expand:fluid.identity({sunburst}.flatTree)"
+        },
+        mapGrades: {
+            target: "{that map}.options.gradeNames",
+            source: "{that}.options.mapGrades"
         }
     },
     components: {

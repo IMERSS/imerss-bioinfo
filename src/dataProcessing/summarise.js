@@ -75,7 +75,7 @@ hortis.summarise.storeRow = function (that, row) {
             row.longitude = coords[1];
         } else {
             ++that.withoutCoords;
-            console.log("Row without coords ", row);
+            console.log("Row without coords ", fluid.filterKeys(row, ["taxonName", "observationId"]));
         }
     }
 };

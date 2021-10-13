@@ -1,0 +1,62 @@
+{
+    "id": 498422,
+    "name": "Fucellia fucorum",
+    "rank": "species",
+    "source_id": 139,
+    "created_at": "2016-06-18T21:21:24.713Z",
+    "updated_at": "2016-06-18T21:21:28.323Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": "ColNameProvider",
+    "observations_count": 1,
+    "listed_taxa_count": 9,
+    "rank_level": 10,
+    "unique_name": "fucellia fucorum",
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47120/372739/47158/184884/47822/48091/372853/48089/342767/54992/49996/155489",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "e80db2a7-aa0e-457e-95ba-fed5504e75dd",
+    "photos_locked": false,
+    "default_name": {
+        "id": 813312,
+        "name": "Fucellia fucorum",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2016-06-18T21:21:24.713Z",
+    "updated_at_utc": "2016-06-18T21:21:28.323Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 813312,
+            "name": "Fucellia fucorum",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 498422,
+            "created_at": "2016-06-18T21:21:24.723Z",
+            "updated_at": "2016-06-18T21:21:24.723Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}
