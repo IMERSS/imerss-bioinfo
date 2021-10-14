@@ -50,12 +50,40 @@
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99"
         },
-        "Synth": {
-            "name": "Valdes Island Synthesized Datasets (1972-2018)",
-            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - Synthesized - 2021_10_13.csv",
+        "RBCM": {
+            "name": "Royal British Columbia Museum Valdes Island Voucher Specimens (1920-2018)",
+            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - RBCM - 2021_10_14.csv",
             "map": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-map.json",
             "outMap": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-out-map.json",
             "colour": "#29a329"
+        },
+        "UBC": {
+            "name": "University of British Columbia Valdes Island Collections (1905-2018)",
+            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - UBC - 2021_10_14.csv",
+            "map": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-out-map.json",
+            "colour": "#55a329"
+        },
+        "VIC": {
+            "name": "Valdes Island Conservancy Datasets (2014-2019)",
+            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - VIC - 2021_10_14.csv",
+            "map": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-out-map.json",
+            "colour": "#a7a329"
+        },
+        "CPNWH": {
+            "name": "Consortium of Pacific Northwest Herbaria Valdes Island Specimens (1998-2008)",
+            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - CPNWH - 2021_10_14.csv",
+            "map": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-out-map.json",
+            "colour": "#c7a329"
+        },
+        "ASIMON": {
+            "name": "Andrew Simon Valdes Island Species Inventory (2017-2018)",
+            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - ASIMON - 2021_10_14.csv",
+            "map": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-out-map.json",
+            "colour": "#f7a329"
         }
     }
 }

@@ -70,6 +70,7 @@
     margin: auto;
     display: table;
     padding: 2px;
+    font-size: 0.9rem;
 }
 
 .fld-bagatelle-dataset-controls td {

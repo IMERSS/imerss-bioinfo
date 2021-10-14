@@ -104,6 +104,7 @@ fluid.defaults("hortis.leafletMap", {
             type: "hortis.quantiser",
             options: {
                 baseLatitude: "{leafletMap}.options.fitBounds.0.0",
+                datasets: "{leafletMap}.options.datasets",
                 model: {
                     indexVersion: "{leafletMap}.model.indexVersion"
                 }
@@ -599,6 +600,10 @@ hortis.longToLat = function (lng, lat) {
     return lng * longLength / latLength;
 };
 
+hortis.quantiserDataset = function () {
+    return {maxCount: 0, totalCount: 0, buckets: {}, byTaxonId: {}};
+};
+
 fluid.defaults("hortis.quantiser", {
     gradeNames: "fluid.modelComponent",
     baseLatitude: 51,
@@ -627,7 +632,7 @@ fluid.defaults("hortis.quantiser", {
             target: "indexVersion",
             singleTransform: {
                 type: "fluid.transforms.free",
-                args: ["{that}", "{that}.model.latResolution", "{that}.model.longResolution", "{that}.model.squareSide", "{that}.model.indexVersion"],
+                args: ["{that}", "{that}.options.datasets", "{that}.model.latResolution", "{that}.model.longResolution", "{that}.model.squareSide", "{that}.model.indexVersion"],
                 func: "hortis.quantiser.indexTree"
             }
         }
@@ -677,8 +682,9 @@ hortis.quantiser.indexObs = function (that, coord, obsId, rowId, latResolution, 
     var datasetId = hortis.datasetIdFromObs(obsId);
     var dataset = that.datasets[datasetId];
     if (!dataset) {
-        that.datasets[datasetId] = dataset = {maxCount: 0, totalCount: 0, buckets: {}, byTaxonId: {}};
+        fluid.fail("Found observation with unknown dataset " + datasetId);
     }
+
     dataset.byTaxonId[rowId] = true;
     dataset.totalCount++;
     var bucket = dataset.buckets[coordIndex];
@@ -700,7 +706,8 @@ hortis.quantiser.datasetToSummary = function (dataset, squareSide) {
     dataset.area = (Object.keys(dataset.buckets).length * squareArea).toFixed(2);
 };
 
-hortis.quantiser.indexTree = function (that, latResolution, longResolution, squareSide, indexVersion) {
+hortis.quantiser.indexTree = function (that, datasets, latResolution, longResolution, squareSide, indexVersion) {
+    that.datasets = fluid.transform(datasets, hortis.quantiserDataset);
     var withcoords = 0;
     for (var i = that.flatTree.length - 1; i >= 0; --i) {
         var row = that.flatTree[i];

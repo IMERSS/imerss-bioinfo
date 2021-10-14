@@ -372,7 +372,7 @@ hortis.applyPhyloMap = function (phyloMap, rows, terms) {
 hortis.tooltipLookup = {
     iNaturalistTaxonName: "Taxon Name",
     lastCollected: "Last Collected",
-    firstObserved: "First Observed",
+    observed: "First Observed",
     observer: "Observer",
     placeName: "Place Name",
     observationCount: "Observation Count",
@@ -391,9 +391,9 @@ hortis.specialRows = {
         key: "Collected",
         value: [{collected: "%x"}, {collector: " by %x"}]
     },
-    observed: {
+    observed: { // TODO: We've lost Simonization - we'll have to restore it in order to get back meaning from these two rows
         key: "Observed",
-        value: [{firstObserved: "%x"}, {observer: " by %x"}]
+        value: [{dateObserved: "%x", date: true}, {recordedBy: " by %x"}]
     }
 };
 
@@ -408,11 +408,16 @@ hortis.dumpRow = function (key, value, markup) {
     }
 };
 
+hortis.renderDate = function (date) {
+    return new Date(date).toLocaleString();
+};
+
 hortis.renderSpecialRow = function (row, rowEntry, markup) {
     var values = rowEntry.value.map(function (oneEntry) {
         var key = Object.keys(oneEntry)[0];
+        var renderer = oneEntry.date ? hortis.renderDate : fluid.identity;
         return {
-            x: row[key],
+            x: renderer(row[key]),
             template: oneEntry[key]
         };
     });

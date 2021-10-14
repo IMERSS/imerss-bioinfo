@@ -1,0 +1,17 @@
+<link rel="stylesheet" type="text/css" href="/bagatelle-new/css/bagatelle-all.css" />
+
+<div class="fl-bagatelle-container">
+</div>
+<script src="/bagatelle-new/js/bagatelle-all.js"></script>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+<script>
+
+hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
+                mapGrades: ["hortis.streetmapTiles"],
+                resourceBase: "/bagatelle-new",
+                renderMarkup: true,
+                colourCount: "observationCount",
+                mapBounds: hortis.projectBounds.Valdes,
+                phyloMap: "%resourceBase/json/emptyPhyloMap.json",
+                vizFile: "/bagatelle-new/data/Valdes/Life.json.lz4"});
+</script>

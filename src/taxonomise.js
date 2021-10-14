@@ -178,10 +178,14 @@ hortis.resolvePaths = function (obj, pathKeys) {
     });
 };
 
-hortis.oneDatasetToLoadable = function (dataset) {
+hortis.oneDatasetToLoadable = function (dataset, key) {
     hortis.resolvePaths(dataset, ["map", "outMap", "input"]);
     // TODO: Turn this into a component with transform chain elements some day
     var map = hortis.readJSONSync(dataset.map, "reading Observations map file");
+    map.datasetId = key;
+    if (dataset.datasetClass) {
+        map.datasetClass = dataset.datasetClass;
+    }
     var rawInput = hortis.csvReaderWithMap({
         inputFile: dataset.input,
         mapColumns: map.columns,
@@ -262,8 +266,8 @@ hortis.onePatchToLoadable = function (patch) {
 
 hortis.fusionToLoadable = function (fusion, taxaMap) {
     return {
-        datasets: fluid.transform(fusion.datasets, function (dataset) {
-            return hortis.oneDatasetToLoadable(dataset);
+        datasets: fluid.transform(fusion.datasets, function (dataset, key) {
+            return hortis.oneDatasetToLoadable(dataset, key);
         }),
         patches: fluid.transform(fusion.patches, function (patch) {
             return hortis.onePatchToLoadable(patch);
