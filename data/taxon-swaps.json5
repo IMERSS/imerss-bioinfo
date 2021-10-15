@@ -2150,5 +2150,12 @@
         },
         iNaturalistTaxonId: "339051"
     },
-
+    "Clinocardium nuttallii": {
+        taxonNames: {
+            "Clinocardium nuttalli": {
+                resolvedBy: "AS"
+            }
+        },
+        iNaturalistTaxonId: "339051"
+    },
 }
