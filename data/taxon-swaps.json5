@@ -113,6 +113,10 @@
                 resolvedBy: "AS",
                 notes: "PMLS records Chaetopterus complex but Leslie has indicated this is the Chaetopterus variopedatus complex.",
             },
+            "Chaeopterus": {
+                resolvedBy: "AS",
+                notes: "Persistent PMLS typo in Valdes"
+            }
         },
         iNaturalistTaxonId: "216631",
     },
@@ -359,7 +363,12 @@
                 type: "typo",
                 resolvedBy: "AB",
                 notes: "Remnant spelling mistake in version 18 of PMLS catalogue"
-            }
+            },
+            "Mopalia kennerlyi": {
+                type: "typoe",
+                resolvedBy: "AB",
+                notes: "Yet another PMLS mispelling in Valdes"
+            },
         },
         iNaturalistTaxonId: "360858"
     },    
@@ -440,6 +449,9 @@
             },
             "Plocamium pacificum": {
                 resolvedBy: "AB",
+            },
+            "Plocamium cartilageneum pacificum": {
+                resolvedBy: "AS"
             }
         },
         iNaturalistTaxonId: "339051",
@@ -519,6 +531,10 @@
         taxonNames: {
             "checkered hairysnail": {
                 type: "commonName",
+            },
+            "Trichotropsis cancellata": {
+                type: "typo",
+                resolvedBy: "AS"
             }
         },
         iNaturalistTaxonId: "447177",
@@ -2100,5 +2116,39 @@
             },
         },
         iNaturalistTaxonId: "49533"
-    }
+    }, // Valdes Island normalisation - PMLS
+    "Isodictya rigida": {
+        taxonNames: {
+            "Amphilectus rigida": {
+                resolvedBy: "AS"
+            }
+        },
+        iNaturalistTaxonId: "459878"
+    },
+    "Laqueus vancouveriensis": {
+        taxonNames: {
+            "Laqueus vancouverensis": {
+                resolvedBy: "AS",
+                type: "typo"
+            }
+        },
+        iNaturalistTaxonId: "525797"
+    },
+    "Hedophyllum bongardianum": {
+        taxonNames: {
+            "Laminaria bongardiana": {
+                resolvedBy: "AS"
+            }
+        },
+        iNaturalistTaxonId: "1267794"
+    },
+    "Plocamium cartilagineum pacificum": {
+        taxonNames: {
+            "Plocamium cartilageneum pacificum": {
+                resolvedBy: "AS"
+            }
+        },
+        iNaturalistTaxonId: "339051"
+    },
+
 }

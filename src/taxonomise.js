@@ -318,9 +318,11 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace(" ssp.", "");
     name = name.replace(" subsp.", "");
     name = name.replace(" grp.", "");
+    name = name.replace(" grp", "");
     name = name.replace(" group", "");
     name = name.replace(" var.", "");
     name = name.replace(" ined.", "");
+    name = name.replace(" etc.", "");
     name = name.replace(" aff.", "");
     name = name.replace(" agg.", "");
     name = name.replace(" s.lat.", "");
@@ -390,7 +392,7 @@ hortis.makeTaxonomiser = function (data, options) {
 };
 
 hortis.isSelfUndetermined = function (name) {
-    return !name || name.includes("undetermined") || name.includes("various");
+    return !name || name.includes("undetermined") || name.includes("various") || name.includes("Various") || name.includes("filamentous");
 };
 
 // Side-effects: populates that.obsIdToTaxon, that.undetHash, that.undetKeys, that.discardedTaxa
