@@ -371,10 +371,6 @@ hortis.applyPhyloMap = function (phyloMap, rows, terms) {
 
 hortis.tooltipLookup = {
     iNaturalistTaxonName: "Taxon Name",
-    lastCollected: "Last Collected",
-    observed: "First Observed",
-    observer: "Observer",
-    placeName: "Place Name",
     observationCount: "Observation Count",
     iNaturalistObsLink: "Observation",
     taxonLink: "iNaturalist Taxon",
@@ -384,6 +380,13 @@ hortis.tooltipLookup = {
     taxonPic: "Taxon Picture",
     taxonPicDescription: "Taxon Picture Description",
     commonName: "Common Name"
+};
+
+hortis.obsToSummaryFields = {
+    recordedBy: "Reported By",
+    collection: "Source",
+    placeName: "Place Name",
+    timestamp: "Date Reported"
 };
 
 hortis.specialRows = {
@@ -412,20 +415,18 @@ hortis.renderDate = function (date) {
     return new Date(date).toLocaleString();
 };
 
-hortis.renderSpecialRow = function (row, rowEntry, markup) {
-    var values = rowEntry.value.map(function (oneEntry) {
-        var key = Object.keys(oneEntry)[0];
-        var renderer = oneEntry.date ? hortis.renderDate : fluid.identity;
-        return {
-            x: renderer(row[key]),
-            template: oneEntry[key]
-        };
-    });
-    var valueText = "";
-    values.forEach(function (oneValue) {
-        valueText += oneValue.x ? fluid.stringTemplate(oneValue.template, oneValue) : "";
-    });
-    return hortis.dumpRow(rowEntry.key, valueText, markup);
+hortis.renderObsBound = function (row, prefix, markup) {
+    var date = row[prefix + "Timestamp"];
+    if (date) {
+        var capPrefix = hortis.capitalize(prefix);
+        var recordedBy = row[prefix + "RecordedBy"];
+        var row1 = hortis.dumpRow(capPrefix + " Reported",
+            hortis.renderDate(row[prefix + "Timestamp"]) + (recordedBy ? " by " + recordedBy : ""), markup);
+        var row2 = hortis.dumpRow("Source", row[prefix + "Collection"], markup);
+        return row1 + row2;
+    } else {
+        return "";
+    }
 };
 
 hortis.renderTooltip = function (row, markup) {
@@ -457,7 +458,6 @@ hortis.renderTooltip = function (row, markup) {
         }
         dumpRow("taxonPicDescription", row.taxonPicDescription);
         dumpRow("species", row.childCount);
-        dumpRow("observationCount", row.observationCount);
     } else {
         if (row.iNaturalistTaxonImage && !row.obsPhotoLink) {
             dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage);
@@ -470,10 +470,9 @@ hortis.renderTooltip = function (row, markup) {
         hortis.commonFields.forEach(function (field) {
             dumpRow(field, row[field]);
         });
-        togo += hortis.renderSpecialRow(row, hortis.specialRows.collected, markup);
-        dumpRow("collection", row.collection);
-        dumpRow("reporting", row.reporting);
-        togo += hortis.renderSpecialRow(row, hortis.specialRows.observed, markup);
+        togo += hortis.renderObsBound(row, "first", markup);
+        togo += hortis.renderObsBound(row, "last", markup);
+
         if (row.iNaturalistObsLink) {
             dumpRow("iNaturalistObsLink", "<a href=\"" + row.iNaturalistObsLink + "\">" + row.iNaturalistObsLink + "</a>");
         }
@@ -481,12 +480,14 @@ hortis.renderTooltip = function (row, markup) {
         // See this nonsense: https://stackoverflow.com/questions/5843035/does-before-not-work-on-img-elements
             dumpImage("Observation photo", row.obsPhotoLink);
         }
+        /** Axed per AS email 16/10/21
         var iNatId = row.iNaturalistTaxonId;
         if (iNatId) {
             var taxonLink = "http://www.inaturalist.org/taxa/" + iNatId;
             dumpRow("taxonLink", "<a href=\"" + taxonLink + "\">" + taxonLink + "</a>");
-        }
+        }*/
     }
+    dumpRow("observationCount", row.observationCount);
     togo += markup.tooltipFooter;
     return togo;
 };

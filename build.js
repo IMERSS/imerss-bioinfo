@@ -118,10 +118,10 @@ var buildFromFiles = function (buildIndex, nodeFiles) {
         fs.ensureDirSync("build/js");
         fs.writeFileSync("build/js/bagatelle-all.js", minified.code, "utf8");
         fs.writeFileSync("build/js/bagatelle-all.js.map", minified.map);
-    
+
         var cssHash = filesToContentHash(allFiles, ".css");
         var cssConcat = String.prototype.concat.apply("", Object.values(cssHash));
-    
+
         fs.ensureDirSync("build/css");
         fs.writeFileSync("build/css/bagatelle-all.css", cssConcat);
         buildIndex.copy.forEach(function (oneCopy) {

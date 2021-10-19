@@ -54,6 +54,28 @@ hortis.baseCommonOutMap = fluid.freezeRecursive({
     }
 });
 
+hortis.obsToSummaryFields = {
+    recordedBy: "Reported By",
+    collection: "Source",
+    placeName: "Place Name",
+    timestamp: "Date Reported"
+};
+
+hortis.obsToSummaryColumns = function (fields) {
+    var togo = {};
+    var appendWith = function (prefix) {
+        var capPrefix = hortis.capitalize(prefix);
+        return function (value, key) {
+            var newKey = prefix + hortis.capitalize(key);
+            var newValue = capPrefix + " " + value;
+            togo[newKey] = newValue;
+        };
+    };
+    fluid.each(fields, appendWith("first"));
+    fluid.each(fields, appendWith("last"));
+    return togo;
+};
+
 hortis.baseSummariseCommonOutMap = hortis.combineMaps([hortis.baseCommonOutMap, {
     "counts": {
         "observationCount": {
@@ -63,7 +85,6 @@ hortis.baseSummariseCommonOutMap = hortis.combineMaps([hortis.baseCommonOutMap, 
     },
     "columns": {
         "observationCount": "Observation count",
-        "collection": "Collection/List",
         "coords": "Coordinates"
     }
 }]);
@@ -88,6 +109,8 @@ hortis.commonObsOutMap = hortis.combineMaps([hortis.commonOutMap, {
 
 hortis.summariseCommonOutMap = hortis.combineMaps([hortis.baseSummariseCommonOutMap, {
     columns: hortis.ranksToColumns(hortis.ranks)
+}, {
+    columns: hortis.obsToSummaryColumns(hortis.obsToSummaryFields)
 }]);
 
 hortis.invertSwaps = function (swaps) {
@@ -350,25 +373,20 @@ hortis.blankRow = function (row) {
     });
 };
 
-hortis.doSummarise = function (outrows, outMap, summarise) {
+hortis.renderDateBound = function (value) {
+    return Number.isFinite(value) ? new Date(value).toISOString() : "";
+};
+
+hortis.doSummarise = function (outrows, summarise) {
     var that = hortis.summarise({summarise: summarise});
     outrows.forEach(that.storeRow);
     that.destroy();
     if (summarise) {
         fluid.each(that.uniqueRows, function (row) {
             row.coords = row.coords && JSON.stringify(row.coords);
+            row.firstTimestamp = hortis.renderDateBound(row.firstTimestamp);
+            row.lastTimestamp = hortis.renderDateBound(row.lastTimestamp);
         });
-    } else if (Object.keys(that.discardedRows).length) {
-        var outDiscards = [];
-        console.log("Warning: the following rows were discarded as duplicates:");
-        fluid.each(that.discardedRows, function (discardedRows) {
-            outDiscards.push.apply(outDiscards, discardedRows);
-            outDiscards.push(hortis.blankRow(discardedRows[0]));
-        });
-        hortis.writeCSV("duplicates.csv", fluid.extend({}, outMap.columns, {
-            observationId: "Allocated ID"})
-        , outDiscards, fluid.promise());
-        console.log(outDiscards.length + " duplicate rows written to duplicates.csv");
     }
     return Object.values(that.uniqueRows);
 };
@@ -547,9 +565,12 @@ hortis.settleStructure(dataPromises).then(function (data) {
         hortis.writeResolutionFile(that);
     }
     var outMaps = Object.values(fluid.getMembers(datasets, "outMap"));
-    var combinedOutMap = hortis.combineMaps([summarise ? hortis.summariseCommonOutMap : hortis.commonOutMap].concat(outMaps).concat({
-        counts: fusion.counts
-    }), true);
+    var combinedOutMap = summarise ?
+        hortis.combineMaps([hortis.summariseCommonOutMap].concat({
+            counts: fusion.counts
+        }), true) : // This branch is not current
+        hortis.combineMaps([hortis.commonOutMap].concat(outMaps));
+
     combinedOutMap.datasets = fusion.datasets;
 
     var resolved = hortis.resolveAndFilter(that, flatObs, fusion.filters, combinedOutMap, summarise);
@@ -559,7 +580,7 @@ hortis.settleStructure(dataPromises).then(function (data) {
 
     if (summarise) {
         hortis.applyPatches(resolved, data.patches);
-        resolved.summarisedRows = hortis.doSummarise(resolved.obsRows, combinedOutMap, true);
+        resolved.summarisedRows = hortis.doSummarise(resolved.obsRows, true);
     }
 
     var reintegratedFilename = parsedArgs.dry ? "reintegrated.csv" : fluid.module.resolvePath(fusion.output);

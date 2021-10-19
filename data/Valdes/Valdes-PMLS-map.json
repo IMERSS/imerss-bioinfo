@@ -9,8 +9,7 @@
         "tags": "%Tags",
         "geoPrivacy": "%Geoprivacy",
         "maxDepth": "%Max. depth",
-        "bottomTime": "%Bottom time",
-        "commonName": "%Common name"
+        "bottomTime": "%Bottom time"
     },
     "datasetId": "PMLS",
     "datasetClass": "naturalist",

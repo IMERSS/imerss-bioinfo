@@ -23,7 +23,7 @@
         },
         UBC: {
             name: "University of British Columbia Valdes Island Collections (1905-2018)",
-            input: "%bagatelle/data/Valdes/Valdes Island - UBC - 2021_10_15.csv",
+            input: "%bagatelle/data/Valdes/Valdes Island - UBC - 2021_10_19.csv",
             map: "%bagatelle/data/Valdes/Valdes-synth-map.json",
             outMap: "%bagatelle/data/Valdes/Valdes-synth-out-map.json",
             colour: "#55a329"

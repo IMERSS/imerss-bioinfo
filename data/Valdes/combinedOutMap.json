@@ -3,7 +3,6 @@
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
         "observationCount": "Observation count",
-        "collection": "Collection/List",
         "coords": "Coordinates",
         "kingdom": "Kingdom",
         "phylum": "Phylum",
@@ -21,13 +20,14 @@
         "tribe": "Tribe",
         "genus": "Genus",
         "species": "Species",
-        "taxonName": "Taxon name",
-        "dateObserved": "Date observed",
-        "description": "Description",
-        "locality": "Place name",
-        "commonName": "Common name",
-        "recordedBy": "Recorded by",
-        "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters"
+        "firstRecordedBy": "First Reported By",
+        "firstCollection": "First Source",
+        "firstPlaceName": "First Place Name",
+        "firstTimestamp": "First Date Reported",
+        "lastRecordedBy": "Last Reported By",
+        "lastCollection": "Last Source",
+        "lastPlaceName": "Last Place Name",
+        "lastTimestamp": "Last Date Reported"
     },
     "counts": {
         "observationCount": {
@@ -59,7 +59,7 @@
         },
         "UBC": {
             "name": "University of British Columbia Valdes Island Collections (1905-2018)",
-            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - UBC - 2021_10_15.csv",
+            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - UBC - 2021_10_19.csv",
             "map": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-map.json",
             "outMap": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-out-map.json",
             "colour": "#55a329"

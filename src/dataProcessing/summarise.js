@@ -16,7 +16,6 @@ fluid.defaults("hortis.summarise", {
     },
     fields: {
         date: "dateObserved",
-        collection: "collection",
         unique: "iNaturalistTaxonName", // Field which identifies observations as being of the same taxon
         obsCount: "observationCount",
         obsId: "observationId",
@@ -33,36 +32,48 @@ hortis.summarise.parseCoordinates = function (row) {
     return !isNaN(latitude) && !isNaN(longitude) ? [latitude, longitude] : null;
 };
 
+hortis.summarise.copyObsFields = function (target, source, prefix, fields) {
+    fields.forEach(function (field) {
+        if (source[field]) {
+            var targetField = prefix + hortis.capitalize(field);
+            target[targetField] = source[field];
+        }
+    });
+};
+
+hortis.summarise.updateRowRange = function (that, summaryRow, obsRow) {
+    var obsCountField = that.options.fields.obsCount;
+    if (!summaryRow) {
+        summaryRow = fluid.filterKeys(obsRow, Object.keys(hortis.summariseCommonOutMap.columns));
+        summaryRow.firstTimestamp = Infinity;
+        summaryRow.lastTimestamp = -Infinity;
+        summaryRow[obsCountField] = 1;
+    } else {
+        summaryRow[obsCountField]++;
+    }
+    var fields = Object.keys(hortis.obsToSummaryFields);
+    if (obsRow.timestamp < summaryRow.firstTimestamp) {
+        hortis.summarise.copyObsFields(summaryRow, obsRow, "first", fields);
+    }
+
+    if (obsRow.timestamp > summaryRow.lastTimestamp) {
+        hortis.summarise.copyObsFields(summaryRow, obsRow, "last", fields);
+    }
+
+    return summaryRow;
+};
+
 hortis.summarise.storeRow = function (that, row) {
     var fields = that.options.fields;
-    var obsCountField = fields.obsCount;
     var coordsField = fields.coords;
-    var collectionField = fields.collection;
     row.timestamp = Date.parse(row[fields.date]);
     var uniqueVal = row[fields.unique];
     var existing = that.uniqueRows[uniqueVal];
-    if (existing) {
-        // TODO: This is an incomplete and ancient workflow - in practice to fully "Simonize" we should do this
-        // separately in the category of naturalist and citizen obs - but it would be better instead to do this
-        // as post-processing after the process of fusing obs. Also we would like to recover the ability to work
-        // on data which had already been summarised, although this is of low priority
-        if (row.timestamp < existing.timestamp) {
-            that.uniqueRows[uniqueVal] = row;
-            row[obsCountField] = existing[obsCountField];
-            row[coordsField] = existing[coordsField];
-            row[collectionField] = existing[collectionField];
-        } else {
-            var discardEntry = that.discardedRows[uniqueVal];
-            if (!discardEntry) {
-                that.discardedRows[uniqueVal] = discardEntry = [that.uniqueRows[uniqueVal]];
-            }
-            discardEntry.push(row);
-        }
-        that.uniqueRows[uniqueVal][obsCountField]++;
-    } else {
-        existing = that.uniqueRows[uniqueVal] = row;
-        row[obsCountField] = 1;
-    }
+
+    var summaryRow = hortis.summarise.updateRowRange(that, existing, row);
+
+    that.uniqueRows[uniqueVal] = summaryRow;
+
     if (that.options.summarise) {
         var obsId = row[fields.obsId];
         if (obsId === undefined) {
@@ -70,7 +81,7 @@ hortis.summarise.storeRow = function (that, row) {
         }
         var coords = hortis.summarise.parseCoordinates(row);
         if (coords) {
-            fluid.set(existing, [coordsField, obsId], coords);
+            fluid.set(summaryRow, [coordsField, obsId], coords);
             row.latitude = coords[0];
             row.longitude = coords[1];
         } else {
