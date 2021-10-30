@@ -16,6 +16,7 @@ fluid.defaults("hortis.summarise", {
     },
     fields: {
         date: "dateObserved",
+        dateResolution: "dateObservedResolution",
         unique: "iNaturalistTaxonName", // Field which identifies observations as being of the same taxon
         obsCount: "observationCount",
         obsId: "observationId",
@@ -26,9 +27,31 @@ fluid.defaults("hortis.summarise", {
     }
 });
 
+// Taken from https://stackoverflow.com/a/1140335 with several fixes
+hortis.summarise.convertDMStoDD = function (degrees, minutes, seconds, direction) {
+    var dd = +degrees + minutes/60 + seconds/(60*60);
+
+    if (direction == "S" || direction == "W") {
+        dd = -1 * Math.abs(dd);
+    }
+    return dd;
+}
+hortis.summarise.parseDMS = function (string) {
+    var parts = string.split(/[^\d\w]+/);
+    return hortis.summarise.convertDMStoDD(parts[0], parts[1], parts[2], parts[3]);
+};
+
+hortis.summarise.parseCoordinate = function (value) {
+    if (typeof(value) === "string" && value.match(/[NSEW]/)) {
+        return hortis.summarise.parseDMS(value);
+    } else {
+        return hortis.parseFloat(value);
+    }
+};
+
 hortis.summarise.parseCoordinates = function (row) {
-    var latitude = hortis.parseFloat(row.latitude);
-    var longitude = hortis.parseFloat(row.longitude);
+    var latitude = hortis.summarise.parseCoordinate(row.latitude);
+    var longitude = hortis.summarise.parseCoordinate(row.longitude);
     return !isNaN(latitude) && !isNaN(longitude) ? [latitude, longitude] : null;
 };
 

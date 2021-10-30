@@ -124,7 +124,7 @@
 
 .fl-bagatelle-highlightBlock {
     stroke: deepskyblue;
-    sroke-width: 4px;
+    stroke-width: 4px;
 }
 
 .fld-bagatelle-map-tooltip tr:nth-child(even) {
@@ -136,7 +136,7 @@
 }
 
 .fld-bagatelle-map-tooltip table {
-   border-collapse: collapse;
+    border-collapse: collapse;
 }
 
 .fl-bagatelle-imgLoadingOverlay:after {
@@ -169,4 +169,102 @@
 
 .autocomplete__menu {
     max-height: 600px;
+}
+
+.fld-bagatelle-tabs .ui-state-active.ui-tabs-tab {
+    background: #fff;
+}
+
+.fld-bagatelle-tabs .ui-state-active.ui-tabs-tab a {
+    background: #fff;
+    color: #444;
+}
+
+.flc-bagatelle-viz-dimens {
+    height: 800px;
+    width: 800px;
+}
+
+#fli-tab-checklist {
+    overflow-y: scroll;
+}
+
+.fld-bagatelle-checklist p {
+    display: inline;
+    padding: 1px;
+}
+
+.fld-bagatelle-checklist p:hover {
+    background: #dde;
+}
+
+.fld-bagatelle-checklist ul {
+    margin-block-start: 0px;
+    list-style-type: none;
+}
+
+.fld-bagatelle-checklist > ul {
+    padding: 0px;
+}
+
+.fld-bagatelle-checklist-up {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url(../img/up-arrow.png);
+    background-size: cover;
+    margin-left: -0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.fld-bagatelle-checklist-up:hover {
+    outline: 1px solid black;
+    outline-offset: 1px;
+}
+
+/* The checklist rank highlighting */
+
+.flc-checklist-rank-life {
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.flc-checklist-rank-kingdom {
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.flc-checklist-rank-phylum {
+    text-transform: uppercase;
+    font-size: 1.1em;
+}
+
+.flc-checklist-rank-class {
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-subclass {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-order {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-family {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-genus {
+    font-size: 1.0em;
+    font-style: italic;
+}
+
+.flc-checklist-rank-species {
+    font-size: 1.0em;
+    font-style: italic;
 }

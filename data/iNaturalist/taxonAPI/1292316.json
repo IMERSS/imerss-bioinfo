@@ -1,0 +1,62 @@
+{
+    "id": 1292316,
+    "name": "Neopelomyia",
+    "rank": "genus",
+    "source_id": null,
+    "created_at": "2021-10-15T06:22:09.968Z",
+    "updated_at": "2021-10-15T06:22:09.968Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 0,
+    "rank_level": 20,
+    "unique_name": "neopelomyia",
+    "wikipedia_summary": null,
+    "wikipedia_title": "",
+    "ancestry": "48460/1/47120/372739/47158/184884/47822/48091/372853/48089/48088/361261/203411/742842",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "f5287036-9ed8-44c6-997f-cd601ca4e565",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2717959,
+        "name": "Neopelomyia",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2021-10-15T06:22:09.968Z",
+    "updated_at_utc": "2021-10-15T06:22:09.968Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2717959,
+            "name": "Neopelomyia",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1292316,
+            "created_at": "2021-10-15T06:22:09.968Z",
+            "updated_at": "2021-10-15T06:22:09.968Z",
+            "creator_id": 37277,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

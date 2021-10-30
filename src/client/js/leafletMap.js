@@ -484,7 +484,8 @@ hortis.leafletMap.drawGrid = function (map, quantiser, datasetEnabled) {
             pane: "hortis-grid"
         }));
         map.gridGroup.addLayer(bucket.Lpolygon);
-        bucket.Lpolygon.on("mouseover", function () {
+        bucket.Lpolygon.on("click", function () {
+            console.log("Map clicked on key ", key);
             map.applier.change("mapBlockTooltipId", key);
         });
     });
@@ -566,6 +567,8 @@ hortis.mapBlockToFocusedTaxa = function (mapBlockTooltipId, map, sunburst) {
                 togo[taxonId] = true;
             });
         }
+    } else {
+        sunburst.applier.change("layoutId", sunburst.flatTree[0].id);
     }
     var trans = sunburst.applier.initiate();
     trans.change("rowFocus", null, "DELETE");

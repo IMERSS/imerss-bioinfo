@@ -6,7 +6,8 @@
         "placeName": "%LocationName",
         "latitude": "%Latitude",
         "longitude": "%Longitude",
-        "recordedBy": "%Collector/Observer"
+        "recordedBy": "%Collector/Observer",
+        "source": "%Source"
     },
     "datasetId": "Synth",
     "datasetClass": "citizen",

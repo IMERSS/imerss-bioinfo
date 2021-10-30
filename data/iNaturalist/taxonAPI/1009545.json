@@ -1,0 +1,62 @@
+{
+    "id": 1009545,
+    "name": "Hapleginella",
+    "rank": "genus",
+    "source_id": 139,
+    "created_at": "2020-01-18T16:25:30.384Z",
+    "updated_at": "2020-01-18T16:25:31.193Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": "ColNameProvider",
+    "observations_count": 0,
+    "listed_taxa_count": 0,
+    "rank_level": 20,
+    "unique_name": "hapleginella",
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47120/372739/47158/184884/47822/48091/372853/48089/48088/361261/127593",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "ee70ee8f-ef62-4b34-af16-cc67fe2a0582",
+    "photos_locked": false,
+    "default_name": {
+        "id": 1929307,
+        "name": "Hapleginella",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2020-01-18T16:25:30.384Z",
+    "updated_at_utc": "2020-01-18T16:25:31.193Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 1929307,
+            "name": "Hapleginella",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1009545,
+            "created_at": "2020-01-18T16:25:30.390Z",
+            "updated_at": "2020-01-18T16:25:30.390Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

@@ -20,7 +20,9 @@ var buildIndex = {
         "src/client/js/autocomplete.js",
         "src/client/js/colour.js",
         "src/client/js/leafletMap.js",
-        "src/client/js/renderSVG.js"
+        "src/client/js/renderSVG.js",
+        "src/client/js/tabs.js",
+        "src/client/js/checklist.js"
     ],
     codeHeader: "",
     codeFooter: "", // "\njQuery.noConflict()",
@@ -101,6 +103,7 @@ var computeAllFiles = function (buildIndex, nodeFiles) {
 
 var buildFromFiles = function (buildIndex, nodeFiles) {
     var allFiles = computeAllFiles(buildIndex, nodeFiles);
+    console.log("allFiles " + allFiles);
     nodeFiles.concat(buildIndex.localSource);
 
     var jsHash = filesToContentHash(allFiles, ".js");

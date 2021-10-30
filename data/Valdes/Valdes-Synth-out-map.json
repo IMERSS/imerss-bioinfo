@@ -3,6 +3,7 @@
         "taxonName": "Taxon name",
         "dateObserved": "Date observed",
         "description": "Description",
-        "locality": "Place name"
+        "locality": "Place name",
+        "source": "Source"
     }
 }

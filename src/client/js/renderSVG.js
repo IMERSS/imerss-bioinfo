@@ -10,6 +10,18 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 
 var hortis = fluid.registerNamespace("hortis");
 
+hortis.encodeHTML = function (str) {
+    return str.replace(/[&<>'"]/g, function (tag) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "'": "&#39;",
+            "\"": "&quot;"
+        }[tag];
+    });
+};
+
 hortis.renderSVGElement = function (markup, parentContainer) {
     // Approach taken from http://stackoverflow.com/a/36507333
     var container = $.parseXML(markup);

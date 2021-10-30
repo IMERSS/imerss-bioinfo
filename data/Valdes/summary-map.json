@@ -1,0 +1,8 @@
+{
+    "columns": {
+        "taxonName": "%iNaturalist taxon name"
+    },
+    "datasetId": "summary",
+    "datasetClass": "naturalist",
+    "observationId": "%rowNumber"
+}

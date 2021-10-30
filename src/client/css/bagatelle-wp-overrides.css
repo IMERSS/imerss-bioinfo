@@ -37,3 +37,7 @@ td {
 #main-content .entry-content table td {
     padding: 0px 5px;
 }
+
+.fl-bagatelle-container .fld-bagatelle-checklist ul {
+    padding-bottom: 0px;
+}

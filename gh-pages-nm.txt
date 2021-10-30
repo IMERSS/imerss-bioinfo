@@ -1,8 +1,15 @@
 node_modules/infusion/src/framework/core/css/fluid.css
+node_modules/infusion/src/lib/jquery/ui/css/default-theme/core.css
+node_modules/infusion/src/lib/jquery/ui/css/default-theme/tooltip.css
+node_modules/infusion/src/lib/jquery/ui/css/default-theme/theme.css
+node_modules/jquery-ui/themes/base/tabs.css
 node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css
 node_modules/infusion/src/lib/jquery/core/js/jquery.js
 node_modules/infusion/src/lib/jquery/ui/js/version.js
 node_modules/infusion/src/lib/jquery/ui/js/keycode.js
+node_modules/jquery-ui/ui/widget.js
+node_modules/jquery-ui/ui/unique-id.js
+node_modules/jquery-ui/ui/widgets/tabs.js
 node_modules/infusion/src/lib/fastXmlPull/js/fastXmlPull.js
 node_modules/infusion/src/framework/core/js/jquery.keyboard-a11y.js
 node_modules/infusion/src/framework/core/js/Fluid.js

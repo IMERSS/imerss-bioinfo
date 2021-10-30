@@ -2,6 +2,7 @@
     "columns": {
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
+        "taxonName": "Taxon name",
         "kingdom": "Kingdom",
         "phylum": "Phylum",
         "subphylum": "Subphylum",
@@ -21,12 +22,12 @@
         "observationId": "observationId",
         "latitude": "Latitude",
         "longitude": "Longitude",
-        "taxonName": "Taxon name",
         "dateObserved": "Date observed",
         "description": "Description",
         "locality": "Place name",
         "commonName": "Common name",
         "recordedBy": "Recorded by",
-        "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters"
+        "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters",
+        "source": "Source"
     }
 }

@@ -2156,6 +2156,114 @@
                 resolvedBy: "AS"
             }
         },
-        iNaturalistTaxonId: "339051"
+        iNaturalistTaxonId: "69925"
+    }, // Valdes curation below this point
+    "Prunus emarginata": {
+        taxonNames: {
+            "Prunus emarginata mollis": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "63905"
+    },
+    "Corallorhiza maculata maculata": {
+        taxonNames: {
+            "Corallorhiza maculata": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "80614"
+    },
+    "Amelanchier alnifolia semiintegrifolia": {
+        taxonNames: {
+            "Amelanchier alnifolia": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "80360"
+    },
+    "Pseudotsuga menziesii menziesii": {
+        taxonNames: {
+            "Pseudotsuga menziesii": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "63910"
+    },
+    "Achillea millefolium": {
+        taxonNames: {
+            "Achillea millefolium borealis": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "52821"
+    },
+    "Ardea herodias fannini": {
+        taxonNames: {
+            "Ardea herodias": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "236943"
+    },
+    "Odocoileus hemionus columbianus": {
+        taxonNames: {
+            "Odocoileus hemionus": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "42221"
+    },
+    "Calypso bulbosa occidentalis": {
+        taxonNames: {
+            "Calypso bulbosa": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "57724"
+    },
+    "Bombus vancouverensis vancouverensis": {
+        taxonNames: {
+            "Bombus vancouverensis": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "1020322"
+    },
+    "Mentha canadensis": {
+        taxonNames: {
+            "Mentha arvensis": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "1020322"
+    },
+    "Zygodon rupestris": {
+        taxonNames: {
+            "Zygodon viridissimus": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "981326"
+    },
+    "Equisetum telmateia braunii": {
+        taxonNames: {
+            "Equisetum telmateia": {
+                resolvedBy: "AS",
+                scope: "Valdes"
+            }
+        },
+        iNaturalistTaxonId: "57032"
     },
 }

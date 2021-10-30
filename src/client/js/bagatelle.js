@@ -132,8 +132,10 @@ fluid.defaults("hortis.sunburst", {
     gradeNames: ["fluid.newViewComponent"],
     selectors: {
         svg: ".flc-bagatelle-svg",
+        tabs: ".fld-bagatelle-tabs",
         taxonDisplay: ".fld-bagatelle-taxonDisplay",
         autocomplete: ".fld-bagatelle-autocomplete",
+        checklist: ".fld-bagatelle-checklist-holder",
         segment: ".fld-bagatelle-segment",
         label: ".fld-bagatelle-label",
         phyloPic: ".fld-bagatelle-phyloPic"
@@ -161,6 +163,26 @@ fluid.defaults("hortis.sunburst", {
                     query: "hortis.queryAutocomplete({sunburst}.flatTree, {arguments}.0, {arguments}.1)",
                     renderInputValue: "hortis.autocompleteInputForRow",
                     renderSuggestion: "hortis.autocompleteSuggestionForRow"
+                }
+            }
+        },
+        tabs: {
+            type: "hortis.tabs",
+            options: {
+                container: "{sunburst}.dom.tabs"
+            }
+        },
+        checklist: {
+            type: "hortis.checklist",
+            options: {
+                container: "{sunburst}.dom.checklist",
+                model: {
+                    layoutId: "{sunburst}.model.layoutId",
+                    hoverId: "{sunburst}.model.hoverId",
+                    isAtRoot: "{sunburst}.model.isAtRoot"
+                },
+                members: {
+                    index: "{sunburst}.index"
                 }
             }
         }
@@ -193,6 +215,13 @@ fluid.defaults("hortis.sunburst", {
         layoutId: null,
         hoverId: null,
         commonNames: true
+    },
+    modelRelay: {
+        isAtRoot: {
+             target: "isAtRoot",
+             func: "hortis.isAtRoot",
+             args: ["{that}", "{that}.model.layoutId"]
+        }
     },
     markup: {
         segmentHeader: "<g xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">",
@@ -526,7 +555,7 @@ hortis.updateTooltip = function (that, id) {
 };
 
 hortis.isAtRoot = function (that, layoutId) {
-    return (layoutId || that.model.layoutId) === that.flatTree[0].id;
+    return layoutId === that.flatTree[0].id;
 };
 
 hortis.bindMouse = function (that) {
@@ -903,7 +932,7 @@ hortis.attrsForRow = function (that, row) {
     var togo = {
         visibility: isVisible ? "visible" : "hidden",
         labelVisibility: isVisible && labelVisibility ? "visible" : "hidden",
-        label: label,
+        label: hortis.encodeHTML(label),
         phyloPicX: Math.cos(midAngle) * midRadius - radius,
         phyloPicY: -Math.sin(midAngle) * midRadius - radius,
         phyloPicUrl: row.phyloPicUrl,

@@ -50,10 +50,12 @@ hortis.combineMaps = function (maps, mutable) {
 hortis.baseCommonOutMap = fluid.freezeRecursive({
     "columns": {
         "iNaturalistTaxonName": "iNaturalist taxon name",
-        "iNaturalistTaxonId": "iNaturalist taxon ID"
+        "iNaturalistTaxonId": "iNaturalist taxon ID",
+        "taxonName": "Taxon name"
     }
 });
 
+// Fields which are transferred to "first" and "last" entries from observations to summaries
 hortis.obsToSummaryFields = {
     recordedBy: "Reported By",
     collection: "Source",
@@ -568,8 +570,8 @@ hortis.settleStructure(dataPromises).then(function (data) {
     var combinedOutMap = summarise ?
         hortis.combineMaps([hortis.summariseCommonOutMap].concat({
             counts: fusion.counts
-        }), true) : // This branch is not current
-        hortis.combineMaps([hortis.commonOutMap].concat(outMaps));
+        }), true) :
+        hortis.combineMaps([hortis.commonOutMap].concat(outMaps), true);
 
     combinedOutMap.datasets = fusion.datasets;
 

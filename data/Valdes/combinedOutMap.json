@@ -2,6 +2,7 @@
     "columns": {
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
+        "taxonName": "Taxon name",
         "observationCount": "Observation count",
         "coords": "Coordinates",
         "kingdom": "Kingdom",

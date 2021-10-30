@@ -3,8 +3,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="node_modules/infusion/src/lib/normalize/css/normalize.css" />
-        <link rel="stylesheet" href="node_modules/infusion/src/lib/jquery/ui/css/default-theme/jquery-ui.css"></script>
+        <link rel="stylesheet" href="node_modules/infusion/src/lib/jquery/ui/css/default-theme/core.css" />
+        <link rel="stylesheet" href="node_modules/infusion/src/lib/jquery/ui/css/default-theme/tooltip.css" />
+        <link rel="stylesheet" href="node_modules/infusion/src/lib/jquery/ui/css/default-theme/theme.css" />
+        <link rel="stylesheet" href="node_modules/jquery-ui/themes/base/tabs.css" />
+        <link rel="stylesheet" href="node_modules/infusion/src/lib/jquery/ui/css/default-theme/jquery-ui.css"/>
         <link rel="stylesheet" type="text/css" href="node_modules/infusion/src/framework/core/css/fluid.css" />
         <link rel="stylesheet" type="text/css" href="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
@@ -12,6 +15,9 @@
         <script src="node_modules/infusion/src/lib/jquery/core/js/jquery.js"></script>
         <script src="node_modules/infusion/src/lib/jquery/ui/js/version.js"></script>
         <script src="node_modules/infusion/src/lib/jquery/ui/js/keycode.js"></script>
+        <script src="node_modules/jquery-ui/ui/widget.js"></script>
+        <script src="node_modules/jquery-ui/ui/unique-id.js"></script>        
+        <script src="node_modules/jquery-ui/ui/widgets/tabs.js"></script>
 
         <script src="node_modules/infusion/src/lib/fastXmlPull/js/fastXmlPull.js"></script>
         <script src="node_modules/infusion/src/framework/core/js/jquery.keyboard-a11y.js"></script>
@@ -49,6 +55,9 @@
         <script src="src/client/js/bagatelle.js"></script>
         <script src="src/client/js/leafletMap.js"></script>
         <script src="src/client/js/autocomplete.js"></script>
+        <script src="src/client/js/tabs.js"></script>
+        <script src="src/client/js/checklist.js"></script>
+
 
         <title>Bagatelle: Valdes Island Map View</title>
     </head>
@@ -69,8 +78,26 @@
                 <div class="fld-bagatelle-autocomplete"></div>
             <tr>
             <td>
-            <svg width="800" height="800" viewBox="-1100 -1100 2200 2200" class="flc-bagatelle-svg">
-            </svg>
+            <div class="fld-bagatelle-tabs ui-tabs ui-widget ui-widget-content">
+                <ul class="ui-tabs-nav" role="tablist">
+                    <li class="ui-tabs-tab ui-tab ui-state-default ui-tabs-active">
+                        <a class="ui-tabs-anchor" href="#fli-tab-sunburst">Sunburst</a>
+                    </li>
+                    <li class="ui-tabs-tab ui-tab ui-state-default">
+                        <a class="ui-tabs-anchor" href="#fli-tab-checklist">Checklist</a>
+                    </li>
+                </ul>
+                <div id="fli-tab-sunburst" class="flc-bagatelle-viz-dimens">
+                    <svg width="800" height="800" viewBox="-1100 -1100 2200 2200" class="flc-bagatelle-svg">
+                    </svg>
+                </div>
+                <div id="fli-tab-checklist" class="flc-bagatelle-viz-dimens fld-bagatelle-checklist-holder" style="display:none">
+                    <div class="fld-bagatelle-checklist-up">
+                    </div>
+                    <div class="fld-bagatelle-checklist">
+                    </div>
+                </div>
+            </div>
             </td>
             <td class="fld-bagatelle-taxonDisplay">
             </td></tr>
