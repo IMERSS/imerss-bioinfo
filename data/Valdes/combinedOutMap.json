@@ -24,10 +24,12 @@
         "firstRecordedBy": "First Reported By",
         "firstCollection": "First Source",
         "firstPlaceName": "First Place Name",
+        "firstCatalogueNumber": "First Catalogue Number",
         "firstTimestamp": "First Date Reported",
         "lastRecordedBy": "Last Reported By",
         "lastCollection": "Last Source",
         "lastPlaceName": "Last Place Name",
+        "lastCatalogueNumber": "Last Catalogue Number",
         "lastTimestamp": "Last Date Reported"
     },
     "counts": {

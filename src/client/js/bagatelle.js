@@ -128,8 +128,29 @@ fluid.defaults("hortis.sunburstWithObsColour", {
     }
 });
 
+fluid.defaults("hortis.bagatelleTabs", {
+    gradeNames: "hortis.tabs",
+    tabIds: {
+        sunburst: "fli-tab-sunburst",
+        checklist: "fli-tab-checklist"
+    },
+    model: {
+        selectedTab: "sunburst"
+    }
+});
+
+// Holds model state shared with checklist and index
+fluid.defaults("hortis.layoutHolder", {
+    gradeNames: "fluid.modelComponent",
+    model: {
+        rowFocus: {},
+        layoutId: null,
+        hoverId: null
+    }
+});
+
 fluid.defaults("hortis.sunburst", {
-    gradeNames: ["fluid.newViewComponent"],
+    gradeNames: ["hortis.layoutHolder", "fluid.newViewComponent"],
     selectors: {
         svg: ".flc-bagatelle-svg",
         tabs: ".fld-bagatelle-tabs",
@@ -167,7 +188,7 @@ fluid.defaults("hortis.sunburst", {
             }
         },
         tabs: {
-            type: "hortis.tabs",
+            type: "hortis.bagatelleTabs",
             options: {
                 container: "{sunburst}.dom.tabs"
             }
@@ -175,15 +196,7 @@ fluid.defaults("hortis.sunburst", {
         checklist: {
             type: "hortis.checklist",
             options: {
-                container: "{sunburst}.dom.checklist",
-                model: {
-                    layoutId: "{sunburst}.model.layoutId",
-                    hoverId: "{sunburst}.model.hoverId",
-                    isAtRoot: "{sunburst}.model.isAtRoot"
-                },
-                members: {
-                    index: "{sunburst}.index"
-                }
+                container: "{sunburst}.dom.checklist"
             }
         }
     },
@@ -211,16 +224,19 @@ fluid.defaults("hortis.sunburst", {
             right: 0,
             radiusScale: []
         },
-        rowFocus: {},
-        layoutId: null,
-        hoverId: null,
+        visible: true,
         commonNames: true
     },
     modelRelay: {
         isAtRoot: {
-             target: "isAtRoot",
-             func: "hortis.isAtRoot",
-             args: ["{that}", "{that}.model.layoutId"]
+            target: "isAtRoot",
+            func: "hortis.isAtRoot",
+            args: ["{that}", "{that}.model.layoutId"]
+        },
+        visible: {
+            target: "visible",
+            func: tab => tab === "sunburst",
+            args: "{tabs}.model.selectedTab"
         }
     },
     markup: {
@@ -449,9 +465,12 @@ hortis.renderObsBound = function (row, prefix, markup) {
     if (date) {
         var capPrefix = hortis.capitalize(prefix);
         var recordedBy = row[prefix + "RecordedBy"];
+        var catalogueNumber = row[prefix + "CatalogueNumber"];
         var row1 = hortis.dumpRow(capPrefix + " Reported",
             hortis.renderDate(row[prefix + "Timestamp"]) + (recordedBy ? " by " + recordedBy : ""), markup);
-        var row2 = hortis.dumpRow("Source", row[prefix + "Collection"], markup);
+
+        var source = row[prefix + "Collection"] + (catalogueNumber ? " (" + catalogueNumber + ")" : "");
+        var row2 = hortis.dumpRow("Source", source, markup);
         return row1 + row2;
     } else {
         return "";
@@ -814,14 +833,17 @@ hortis.updateRowFocus = function (that, rowFocus) {
         }
         row.focusCount = focusCount;
     }
+    var target;
     if (focusAll) {
-        that.renderLight();
+        target = flatTree[0];
     } else {
         var parents = fluid.transform(rowFocus, function (troo, key) {
             return hortis.pathFromRoot(that.index[key]);
         });
         var lca = hortis.lcaRoot(parents);
-        var target = Object.keys(parents).length === 1 ? lca.parent : lca;
+        target = Object.keys(parents).length === 1 ? lca.parent : lca;
+    }
+    if (target.leftIndex !== undefined) { // Avoid trying to render before onCreate - TODO: reorganise "beginZoom"
         hortis.beginZoom(that, target);
     }
 };
@@ -836,6 +858,7 @@ hortis.elementToRow = function (that, element) {
     return that.index[id];
 };
 
+// TODO: Not very good, is it - we should update layoutId first so that we can keep any collateral state in sync
 hortis.beginZoom = function (that, row) {
     that.container.stop(true, true);
     var initialScale = fluid.copy(that.model.scale);
@@ -848,7 +871,7 @@ hortis.beginZoom = function (that, row) {
     that.render();
     that.container.animate({"zoomProgress": 1}, {
         easing: "swing",
-        duration: that.options.zoomDuration,
+        duration: that.model.visible ? that.options.zoomDuration : 0,
         step: function (zoomProgress) {
             var interpScale = hortis.interpolateModels(zoomProgress, initialScale, newBound.scale);
             that.applier.change("scale", interpScale);

@@ -28,6 +28,7 @@
         "commonName": "Common name",
         "recordedBy": "Recorded by",
         "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters",
-        "source": "Source"
+        "source": "Source",
+        "catalogueNumber": "CatalogueNumber"
     }
 }

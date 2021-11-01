@@ -4,6 +4,7 @@
         "dateObserved": "Date observed",
         "description": "Description",
         "locality": "Place name",
-        "source": "Source"
+        "source": "Source",
+        "catalogueNumber": "CatalogueNumber"
     }
 }

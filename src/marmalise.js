@@ -24,8 +24,7 @@ hortis.newTaxon = function (iNaturalistTaxonName, rank, depth, counts) {
         rank: rank,
         depth: depth,
         childCount: 0,
-        children: {},
-        layoutLeft: 0
+        children: {}
     };
     fluid.each(counts, function (oneCount, key) {
         togo[key] = 0;

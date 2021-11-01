@@ -22,10 +22,6 @@ fluid.defaults("hortis.tabs", {
     model: {
         selectedTab: null
     },
-    tabIds: {
-        sunburst: "fli-tab-sunburst",
-        checklist: "fli-tab-checklist"
-    },
     listeners: {
         "onCreate.initTabs": {
             "this": "{that}.container",
@@ -45,10 +41,13 @@ hortis.tabs.findTab = function (that, tabId) {
 };
 
 hortis.tabs.bindEvents = function (that) {
-    var tabs = that.container.tabs();
-    tabs.on("tabsactivate", function (event, ui) {
+    that.container.on("tabsactivate", function (event, ui) {
         var tabId = ui.newTab.find("a").attr("href").substring(1);
         var tab = hortis.tabs.findTab(that, tabId);
         that.applier.change("selectedTab", tab);
     });
+    var initialIndex = Object.keys(that.options.tabIds).indexOf(that.model.selectedTab);
+    if (initialIndex !== -1) {
+        that.container.tabs("option", "active", initialIndex);
+    }
 };

@@ -567,9 +567,8 @@ hortis.mapBlockToFocusedTaxa = function (mapBlockTooltipId, map, sunburst) {
                 togo[taxonId] = true;
             });
         }
-    } else {
-        sunburst.applier.change("layoutId", sunburst.flatTree[0].id);
     }
+    // As transaction to avoid triggering hortis.updateRowFocus twice which then invokes beginZoom
     var trans = sunburst.applier.initiate();
     trans.change("rowFocus", null, "DELETE");
     trans.change("rowFocus", togo);
@@ -665,9 +664,13 @@ hortis.quantiser.indexToCoord = function (index, latres, longres) {
 };
 
 hortis.quantiser.coordToIndex = function (coord, latres, longres) {
-    var lat = Math.floor(coord[0] / latres);
-    var lng = Math.floor(coord[1] / longres);
-    return lat + "|" + lng;
+    if (coord) {
+        var lat = Math.floor(coord[0] / latres);
+        var lng = Math.floor(coord[1] / longres);
+        return lat + "|" + lng;
+    } else {
+        return "null";
+    }
 };
 
 hortis.datasetIdFromObs = function (obsId) {
@@ -690,17 +693,19 @@ hortis.quantiser.indexObs = function (that, coord, obsId, rowId, latResolution, 
 
     dataset.byTaxonId[rowId] = true;
     dataset.totalCount++;
-    var bucket = dataset.buckets[coordIndex];
-    if (!bucket) {
-        bucket = dataset.buckets[coordIndex] = {count: 0, byTaxonId: {}};
+    if (coordIndex !== "null") {
+        var bucket = dataset.buckets[coordIndex];
+        if (!bucket) {
+            bucket = dataset.buckets[coordIndex] = {count: 0, byTaxonId: {}};
+        }
+        bucket.count++;
+        dataset.maxCount = Math.max(dataset.maxCount, bucket.count);
+        var bucketTaxa = bucket.byTaxonId[rowId];
+        if (!bucketTaxa) {
+            bucketTaxa = bucket.byTaxonId[rowId] = [];
+        }
+        bucketTaxa.push(obsId);
     }
-    bucket.count++;
-    dataset.maxCount = Math.max(dataset.maxCount, bucket.count);
-    var bucketTaxa = bucket.byTaxonId[rowId];
-    if (!bucketTaxa) {
-        bucketTaxa = bucket.byTaxonId[rowId] = [];
-    }
-    bucketTaxa.push(obsId);
 };
 
 hortis.quantiser.datasetToSummary = function (dataset, squareSide) {
@@ -711,22 +716,15 @@ hortis.quantiser.datasetToSummary = function (dataset, squareSide) {
 
 hortis.quantiser.indexTree = function (that, datasets, latResolution, longResolution, squareSide, indexVersion) {
     that.datasets = fluid.transform(datasets, hortis.quantiserDataset);
-    var withcoords = 0;
     for (var i = that.flatTree.length - 1; i >= 0; --i) {
         var row = that.flatTree[i];
         if (row.coords) {
             var coords = JSON.parse(row.coords);
             fluid.each(coords, function (coord, obsId) {
-                ++withcoords;
                 that.indexObs(coord, obsId, row.id, latResolution, longResolution);
             });
-            row.ownCoordCount = Object.keys(coords).length;
-
-        } else {
-            row.ownCoordCount = 0;
         }
     };
-    console.log("Total coordinate count: " + withcoords );
 
     fluid.each(that.datasets, function (dataset) {
         that.datasetToSummary(dataset, squareSide);

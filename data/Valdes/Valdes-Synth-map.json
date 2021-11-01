@@ -7,6 +7,7 @@
         "latitude": "%Latitude",
         "longitude": "%Longitude",
         "recordedBy": "%Collector/Observer",
+        "catalogueNumber": "%CatalogueNumber",
         "source": "%Source"
     },
     "datasetId": "Synth",
