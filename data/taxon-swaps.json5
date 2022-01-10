@@ -2276,4 +2276,14 @@
         },
         iNaturalistTaxonId: "1348712"
     },
+    "Balticina willemoesi": {
+        taxonNames: {
+            "Halipteris willemoesi": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "460078",
+                notes: "This has been swapped by hand 10/1/22 so that the data paper can be published - whilst it has already been swapped in iNaturalist we don't want to make a fresh download at this point" 
+            }
+        },
+        iNaturalistTaxonId: "1283181"
+    }
 }

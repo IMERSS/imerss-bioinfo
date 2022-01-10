@@ -37,7 +37,7 @@ if (!parsedArgs.fusion) {
 }
 var fusion = hortis.readJSONSync(parsedArgs.fusion);
 
-var discardRanksBelow = "genus"; // TODO: Make this an argument
+var discardRanksBelow = "class"; // TODO: Make this an argument
 // var discardRanksBelow = "species";
 var discardRanksBelowIndex = hortis.ranks.indexOf(discardRanksBelow);
 
