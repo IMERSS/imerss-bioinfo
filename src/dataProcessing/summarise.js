@@ -63,10 +63,8 @@ hortis.summarise.parseCoordinates = function (row) {
 
 hortis.summarise.copyObsFields = function (target, source, prefix, fields) {
     fields.forEach(function (field) {
-        if (source[field]) {
-            var targetField = prefix + hortis.capitalize(field);
-            target[targetField] = source[field];
-        }
+        var targetField = prefix + hortis.capitalize(field);
+        target[targetField] = source[field];
     });
 };
 

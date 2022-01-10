@@ -606,12 +606,12 @@ completion.then(function () {
 
         var materialsRows = hortis.mapMaterialsRows(outObsRows, patchIndex, materialsMap, pipeline.references, pipeline.sheets.Materials.columns);
 
-        // ARPHA can't actually accept this many Materials rows - we will export them to CSV instead
+        // This is the export file destined for GBIF
         allMaterials = allMaterials.concat(materialsRows);
 
         return {
             Taxa: taxaRows,
-            Materials: [fluid.copy(pipeline.sheets.Materials.columns)],
+            Materials: materialsRows,
             ExternalLinks: [fluid.copy(pipeline.sheets.ExternalLinks.columns)]
         };
     });

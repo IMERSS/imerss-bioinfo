@@ -2,7 +2,6 @@
     "columns": {
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
-        "collection": "Collection/List",
         "kingdom": "Kingdom",
         "phylum": "Phylum",
         "subphylum": "Subphylum",

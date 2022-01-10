@@ -190,7 +190,14 @@ fluid.defaults("hortis.sunburst", {
         tabs: {
             type: "hortis.bagatelleTabs",
             options: {
-                container: "{sunburst}.dom.tabs"
+                container: "{sunburst}.dom.tabs",
+                modelRelay: {
+                   sunburstVisible: {
+                        target: "{sunburst}.model.visible",
+                        func: tab => tab === "sunburst",
+                        args: "{tabs}.model.selectedTab"
+                    }           
+                }
             }
         },
         checklist: {
@@ -232,11 +239,6 @@ fluid.defaults("hortis.sunburst", {
             target: "isAtRoot",
             func: "hortis.isAtRoot",
             args: ["{that}", "{that}.model.layoutId"]
-        },
-        visible: {
-            target: "visible",
-            func: tab => tab === "sunburst",
-            args: "{tabs}.model.selectedTab"
         }
     },
     markup: {

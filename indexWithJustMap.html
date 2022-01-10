@@ -12,6 +12,8 @@
         <script src="node_modules/infusion/src/lib/jquery/core/js/jquery.js"></script>
         <script src="node_modules/infusion/src/lib/jquery/ui/js/version.js"></script>
         <script src="node_modules/infusion/src/lib/jquery/ui/js/keycode.js"></script>
+        <script src="node_modules/jquery-ui/ui/widget.js"></script>
+        <script src="node_modules/jquery-ui/ui/widgets/tabs.js"></script>
 
         <script src="node_modules/infusion/src/lib/fastXmlPull/js/fastXmlPull.js"></script>
         <script src="node_modules/infusion/src/framework/core/js/jquery.keyboard-a11y.js"></script>
@@ -49,6 +51,8 @@
         <script src="src/client/js/bagatelle.js"></script>
         <script src="src/client/js/leafletMap.js"></script>
         <script src="src/client/js/autocomplete.js"></script>
+        <script src="src/client/js/tabs.js"></script>
+        <script src="src/client/js/checklist.js"></script>
 
         <title>Bagatelle: Galiano Data Paper Preliminary Marine List</title>
     </head>
@@ -60,6 +64,7 @@
         </div>
         <script>
             hortis.mapLoaderWithoutSunburst(".fl-bagatelle-container", {
+                mapGrades: ["hortis.streetmapTiles"],
                 colourCount: "observationCount",
                 renderMarkup: true,
                 showObsListInTooltip: false,

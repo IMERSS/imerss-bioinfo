@@ -542,7 +542,27 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
 fluid.defaults("hortis.mapLoaderWithoutSunburst", {
     // TODO: Refactor this obvious insanity
     gradeNames: "hortis.sunburstLoaderWithMap",
-    markupTemplate: "%resourceBase/html/bagatelle-map-only.html"
+    markupTemplate: "%resourceBase/html/bagatelle-map-only.html",
+    components: {
+        sunburst: {
+            options: {
+                model: {
+                    visible: false
+                },
+                components: {
+                    autocomplete: {
+                        type: "fluid.emptySubcomponent"
+                    },
+                    tabs: {
+                        type: "fluid.emptySubcomponent"
+                    },
+                    checklist: {
+                        type: "fluid.emptySubcomponent"
+                    }
+                }
+            }
+        }
+    }
 });
 
 fluid.defaults("hortis.mapWithSunburst", {

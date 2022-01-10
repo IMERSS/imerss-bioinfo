@@ -2266,4 +2266,14 @@
         },
         iNaturalistTaxonId: "57032"
     },
+    "Onchidoris evincta": {
+        taxonNames: {
+            "Adalaria evincta": {
+                resolvedBy: "KF",
+                oldiNaturalistTaxonId: "897911",
+                notes: "Email of 24/12/21: I see that I made a mistake in my earlier email so it’s good that you got in touch again. The species in question is what is listed as Adalaria evincta (not proxima as I had said in my previous email. Adalaria proxima is a different species and it is still Adalaria proxima). "
+            }
+        },
+        iNaturalistTaxonId: "1348712"
+    },
 }

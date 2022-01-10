@@ -7,7 +7,7 @@
         "lint": "fluid-lint-all"
     },
     "dependencies": {
-        "infusion": "3.0.0-dev.20210421T131019Z.2d15978fb.FLUID-6580",
+        "infusion": "4.0.0-dev.20211216T180403Z.d5f6173fc.FLUID-6703",
         "kettle": "2.2.0",
         "csv-parser": "2.3.2",
         "event-stream": "4.0.1",
