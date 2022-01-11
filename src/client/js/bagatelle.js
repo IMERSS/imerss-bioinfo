@@ -192,11 +192,11 @@ fluid.defaults("hortis.sunburst", {
             options: {
                 container: "{sunburst}.dom.tabs",
                 modelRelay: {
-                   sunburstVisible: {
+                    sunburstVisible: {
                         target: "{sunburst}.model.visible",
                         func: tab => tab === "sunburst",
                         args: "{tabs}.model.selectedTab"
-                    }           
+                    }
                 }
             }
         },

@@ -13,6 +13,12 @@ require("./dataProcessing/writeCSV.js");
 
 var hortis = fluid.registerNamespace("hortis");
 
+hortis.ranks = fluid.freezeRecursive(require("../data/ranks.json"));
+// Map of taxon name to list of higher taxa
+hortis.higherTaxa = fluid.transform(fluid.arrayToHash(hortis.ranks), function (troo, rank) {
+    return hortis.ranks.slice(0, hortis.ranks.indexOf(rank));
+});
+
 fluid.setLogging(true);
 
 var parsedArgs = minimist(process.argv.slice(2));
@@ -50,14 +56,21 @@ hortis.reportExcess = function (names, hash, mapColumns, filename) {
     hortis.writeCSV(filename, map.columns, excessRows, fluid.promise());
 };
 
-hortis.castOutGenera = function (hash) {
+hortis.castOutOneHigherTaxa = function (hash, row, rank) {
+    if (row[rank]) {
+        hortis.higherTaxa[rank].forEach(function (higherRank) {
+            delete hash[row[higherRank]];
+        });
+    }
+};
+
+hortis.castOutHigherTaxa = function (hash) {
     console.log("Original size: " + Object.keys(hash).length);
     fluid.each(hash, function (row) {
-        if (row.species) {
-            delete hash[row.genus];
-        }
+        hortis.castOutOneHigherTaxa(hash, row, "species");
+        hortis.castOutOneHigherTaxa(hash, row, "genus");
     });
-    console.log("After casting out genera: " + Object.keys(hash).length);
+    console.log("After casting out higher taxa: " + Object.keys(hash).length);
 };
 
 fluid.promise.sequence(promises).then(function () {
@@ -73,7 +86,7 @@ fluid.promise.sequence(promises).then(function () {
         });
         return togo;
     });
-    hashes.forEach(hortis.castOutGenera);
+    hashes.forEach(hortis.castOutHigherTaxa);
     var onlyOne = hortis.findExcess(hashes[0], hashes[1]);
     hortis.reportExcess(onlyOne, hashes[0], map.columns, "excess1.csv");
     var onlyTwo = hortis.findExcess(hashes[1], hashes[0]);

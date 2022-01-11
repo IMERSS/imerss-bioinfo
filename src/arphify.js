@@ -20,6 +20,9 @@ require("./utils/utils.js");
 
 var hortis = fluid.registerNamespace("hortis");
 
+hortis.ranks = Object.freeze(require("../data/ranks.json"));
+hortis.reverseRanks = Object.freeze(fluid.makeArray(hortis.ranks).reverse());
+
 fluid.setLogging(true);
 
 var parsedArgs = minimist(process.argv.slice(2));
@@ -87,6 +90,12 @@ hortis.extractSubgenus = function (seg, outRow) {
     }
 };
 
+hortis.findRank = function (row, ranks) {
+    return ranks.find(function (rank) {
+        return !!row[rank];
+    });
+};
+
 /*
  * AS of 19/7/21
  * so yes, in the 'qualifier' field I think the only relevant values from our dataset are: 'cf', 'species complex', 'sp.A', and 'sp.B'
@@ -110,11 +119,14 @@ hortis.extractQualifier = function (name, outRow) {
     var sspPoint = 1 + hortis.extractSubgenus(bareWords[1] || "", outRow);
 
     var lastBareWords = bareWords.slice(sspPoint);
+    var rank = hortis.findRank(outRow, hortis.reverseRanks);
 
-    outRow.genus = bareWords[0];
+    if (rank === "genus") {
+        outRow.genus = bareWords[0];
+    }
 
     if (lastBareWords.length === 0) {
-        outRow.taxonRank = "genus";
+        outRow.taxonRank = rank;
     } else if (lastBareWords.length === 1) {
         outRow.specificEpithet = lastBareWords[0];
         outRow.taxonRank = "species";
