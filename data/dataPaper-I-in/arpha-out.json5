@@ -192,7 +192,7 @@
                 "footprintWKT": "",
                 "footprintSRS": "",
                 "footprintSpatialFit": "",
-                "georeferencedBy": "${recordedBy}", // From code: Requested AS if adjusted
+                "georeferencedBy": "", // From code: Requested AS if adjusted - as of 11/1/22 no longer source from ${recordedBy}
                 "georeferenceProtocol": "", // From code: Requested "interpretation of locality, and/or inference based on local knowledge and species ecology" if adjusted
                 "georeferenceSources": "",
                 "georeferenceVerificationStatus": "", // From code: "Indication of any corrected georeferencing" ??

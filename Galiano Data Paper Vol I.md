@@ -21,6 +21,11 @@ dependencies by running
 
 in the checkout directory.
 
+For full reproducibility, you may want to install versions of node and npm which match those which were current
+at the time of processing this data (January 2022), which are node version 14.x and npm version 6.x, although this
+should not make a difference to the run results assuming that changes in the node ecosystem have not occurred which
+are so substantial as to prevent the pipeline from running at all.
+
 ## Run forward synthesis from catalogues
 
 This step accepts all the raw upstream catalogues and synthesizes them into
@@ -55,7 +60,7 @@ Secondly, download the curated summaries from their folder in Google Sheets with
 
 where [data-paper-mapping] is the path on your file system where the data
 paper sheets have been mapped using the Google Drive desktop client. This
-client, now named "Google Backup and Sync" is currently available from
+client is currently available from
 https://www.google.com/intl/en-GB/drive/download/ . The curated summary
 files are available in the folder https://drive.google.com/drive/folders/14gItR0p_4wYo4K1__tyPYeIuc2yLr6l_ .
 Browse to this folder and add it to your Google Drive mapping.
@@ -86,8 +91,22 @@ backward analyses by running
     node src/compare.js data/dataPaper-I/reintegrated.csv data/dataPaper-I-in/reintegrated.csv
 
 This will produce scratch files excess1.csv and excess2.csv in the current directory
-listing the taxa which are in excess in each direction. The expectation is that
-excess1.csv is empty, and excess2.csv contains two entries:
+listing the taxa which are in excess in each direction.
+
+The expectation is that
+excess1.csv contains three lines, which all represent higher taxa which occur in observations which were elided from
+the critical summaries:
+
+* Pectinariidae
+* Thaliacea, a Tunicate whose presence is noted in the article text
+* Glyceridae
+
+These unreconciled taxa represent three higher order taxonomic groups that were identified only to class or family.
+Because this higher order taxonomic resolution would not add significant information to our assessment of the marine
+animal diversity represented around Galiano Island, these taxa were excluded from our critical summaries of unique
+taxa, though they do appear in the published catalogs.
+
+, and excess2.csv contains two entries:
 
 * Heterochone calyx, from the data of Jackson Chu for which there is no corresponding
 catalogue entry.
@@ -103,3 +122,7 @@ the ARPHA platform, and a Darwin Core formatted CSV observations file [Materials
 suitable for publication in GBIF. These are output into the directory
 [data/dataPaper-I-in/arphified](data/dataPaper-I-in/arphified). In addition there will be a scratch summary
 of potential taxon name mismatches in [arphaMismatches.csv](arphaMismatches.csv).
+
+## Generate rendered files suitable for producing map-based visualisation
+
+    node src/marmalise.js data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/reintegrated-map.csv

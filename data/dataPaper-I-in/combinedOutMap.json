@@ -43,9 +43,9 @@
         "Animalia": {
             "name": "Animalia",
             "datasetId": "DATA-Animalia",
-            "input": "E:/source/gits/bagatelle/data/dataPaper-I-in/Animalia.csv",
-            "map": "E:/source/gits/bagatelle/data/dataPaper-I-in/dataPaper-map.json",
-            "outMap": "E:/source/gits/bagatelle/data/dataPaper-I-in/dataPaper-out-map.json",
+            "input": "E:/Source/gits/bagatelle/data/dataPaper-I-in/Animalia.csv",
+            "map": "E:/Source/gits/bagatelle/data/dataPaper-I-in/dataPaper-map.json",
+            "outMap": "E:/Source/gits/bagatelle/data/dataPaper-I-in/dataPaper-out-map.json",
             "colour": "#931362"
         }
     }

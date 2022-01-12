@@ -106,7 +106,7 @@ Data is compiled into a compressed JSON representation from CSV sources via a co
 
 To convert a CSV file, run `marmalise.js` e.g. via a line such as
 
-    node data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/reintegrated-map.csv
+    node src/marmalise.js data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/combinedOutMap.json
 
 By default this will produce a `Life.json.lz4` file which can be copied into a suitable location, e.g. in the </data>
 directories and then referred to in the JavaScript initialisation block seen, e.g. in the various [index.html](index.html)

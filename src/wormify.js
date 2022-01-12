@@ -47,6 +47,7 @@ var outMapColumns = fluid.copy(map.columns);
 delete outMapColumns.authority;
 outMapColumns.authority = "Authority";
 outMapColumns.WoRMSAuthority = "WoRMS Authority";
+outMapColumns.mismatch = "Authority mismatch";
 
 
 resultsPromise.then(function (results) {
@@ -63,6 +64,7 @@ resultsPromise.then(function (results) {
             var newRow = fluid.copy(oneRow);
             var entry = cache[oneRow.iNaturalistTaxonName];
             newRow.WoRMSAuthority = entry ? (entry.authority ? entry.authority : entry.message) : "Internal error";
+            newRow.mismatch = newRow.WoRMSAuthority === newRow.authority ? "" : "x";
             return newRow;
         });
         hortis.writeCSV(outFile, outMapColumns, newRows, fluid.promise());
