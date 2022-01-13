@@ -1677,16 +1677,17 @@
         },
         iNaturalistTaxonId: "957355"
     },
-// This has now been adjusted back again in final round
-/*    "Spiochaetopterus costarum pottsi": {
+    "Spiochaetopterus costarum": {
         taxonNames: {
-            "Spiochaetopterus costarum": {
+            "Spiochaetopterus costarum pottsi": {
                 resolvedBy: "AS",
-                notes: "Data Paper resolution round 1: Records under the name of Spiochaetopterus costarum need to be adjusted in the PMLS database"
+                notes: "This is invalid according to WoRMS and now needs to be swapped away", 
+                olderNotes: "Data Paper resolution round 1: Records under the name of Spiochaetopterus costarum need to be adjusted in the PMLS database",
+                oldiNaturalistTaxonId: "552559"
             },
         },
-        iNaturalistTaxonId: "552559"
-    },*/
+        iNaturalistTaxonId: "130236"
+    },
     "Keenaea centifilosa": {
         taxonNames: {
             "Nemocardium centifilosum": {
