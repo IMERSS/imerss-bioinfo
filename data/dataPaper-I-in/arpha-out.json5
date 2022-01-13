@@ -78,7 +78,7 @@
                 "Subspecies": "", // filled in conditionally
                 "Variety": "", // missing
                 "Form": "", // missing
-                "Authorship": "${authority}",
+                "Authorship": "${authority}", // overridden by subtaxonAuthority in code
                 "Nomenclature": "",
                 "Feeds on": "",
                 "symbioticWith": "",

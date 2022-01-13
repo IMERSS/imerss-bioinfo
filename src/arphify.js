@@ -475,6 +475,9 @@ hortis.indexSummary = function (summaryRows) {
     var togo = {};
     summaryRows.forEach(function (row) {
         togo[row.iNaturalistTaxonId] = row;
+        if (row.subtaxonAuthority) { // All downstream steps expect only a single authority
+            row.authority = row.subtaxonAuthority;
+        }
     });
     return togo;
 };
@@ -595,7 +598,7 @@ completion.then(function () {
     var obsRows = obsReader.rows;
     console.log("Obs Input: " + obsRows.length + " rows");
     var obsRowCount = fluid.generate(obsRows.length, 0);
-    var summaryIndex = hortis.indexSummary(summaryRows);
+    var summaryIndex = hortis.indexSummary(summaryRows); // also overrides authority with subtaxonAuthority
     var patchRows = patchReader.rows;
     console.log("Patch Input: " + patchRows.length + " rows");
     var patchIndex = hortis.indexPatchRows(patchRows);

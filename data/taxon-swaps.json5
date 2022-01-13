@@ -1677,7 +1677,8 @@
         },
         iNaturalistTaxonId: "957355"
     },
-    "Spiochaetopterus costarum pottsi": {
+// This has now been adjusted back again in final round
+/*    "Spiochaetopterus costarum pottsi": {
         taxonNames: {
             "Spiochaetopterus costarum": {
                 resolvedBy: "AS",
@@ -1685,7 +1686,7 @@
             },
         },
         iNaturalistTaxonId: "552559"
-    },
+    },*/
     "Keenaea centifilosa": {
         taxonNames: {
             "Nemocardium centifilosum": {

@@ -20,6 +20,7 @@
         "genus": "Genus",
         "species": "Species",
         "authority": "Author",
+        "subtaxonAuthority": "Subtaxon Author",
         "commonName": "Common name",
         "collected": "Collected/Reported (y-m-d)",
         "collector": "Collector/Source",

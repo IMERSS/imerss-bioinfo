@@ -64,7 +64,8 @@ resultsPromise.then(function (results) {
             var newRow = fluid.copy(oneRow);
             var entry = cache[oneRow.iNaturalistTaxonName];
             newRow.WoRMSAuthority = entry ? (entry.authority ? entry.authority : entry.message) : "Internal error";
-            newRow.mismatch = newRow.WoRMSAuthority === newRow.authority ? "" : "x";
+            var authority = newRow.subtaxonAuthority || newRow.authority;
+            newRow.mismatch = newRow.WoRMSAuthority === authority ? "" : "x";
             return newRow;
         });
         hortis.writeCSV(outFile, outMapColumns, newRows, fluid.promise());
