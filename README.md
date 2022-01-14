@@ -89,6 +89,9 @@ A necessary prelude to the `marmalise.js` script described below which produces 
 and caches the iNaturalist taxon information data feeds from any taxa referenced in a `reintegrated.csv` file, whilst
 remaining within the iNaturalist API data rate limits.
 
+e.g. for the data paper you may run 
+    node src/inattify.js data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/combinedOutMap.json 
+
 We dream of turning these pipelines into easily usable pluralistic graphical pipelines deployed on public live infrastructure
 such as github and Google Sheets.
 
@@ -110,7 +113,7 @@ To convert a CSV file, run `marmalise.js` e.g. via a line such as
 
 By default this will produce a `Life.json.lz4` file which can be copied into a suitable location, e.g. in the </data>
 directories and then referred to in the JavaScript initialisation block seen, e.g. in the various [index.html](index.html)
-files in this root.
+files in this root. You can supply a "-o" option to output a file of a chosen name at a chosen path.
 
 To preview the web UI, host this project via some suitable static web server and then access its `index.html`.
 
