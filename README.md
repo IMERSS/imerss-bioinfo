@@ -11,10 +11,13 @@ All data is stored in CSV files in subdirectories under [data](data) although so
 variety of formats such as XLSX and PDF.
 
 Authoritative data resulting from the full reconciliation of upstream catalogues and curated summaries for the Galiano
-Data Paper vol 1: Marine Animalia is held in [data/dataPaper-I](data/dataPaper-I) and [data/dataPaper-I-in](data/dataPaper-I-in).
+Data Paper part 1: Marine Zoology is held in [data/dataPaper-I](data/dataPaper-I) and [data/dataPaper-I-in](data/dataPaper-I-in).
 In particular, the reconciled and normalised observation data is at [data/dataPaper-I/reintegrated-obs.csv](data/dataPaper-I/reintegrated-obs.csv),
 reconciled checklists derived from this data is at [/data/dataPaper-I/reintegrated.csv](/data/dataPaper-I/reintegrated.csv).
 The corresponding checklists derived from the curated summaries is at [/data/dataPaper-I-in/reintegrated.csv](/data/dataPaper-I-in/reintegrated.csv).
+
+Full intructions for running the data paper part I pipeline are held in [Galiano Data Paper Vol I.md](Galiano Data Paper Vol I.md),
+but here follows an overview of the scripts and overall installation instructions.
 
 # Data Pipeline
 
@@ -36,7 +39,7 @@ dependencies by running
 
 in the checkout directory.
 
-The scripts in [src](src) will then be ready to run via various `node` commands. These scripts are currently of a pretty
+The scripts in [src](src) will then be ready to run via various `node` commands. These scripts are currently of a 
 basic quality and not easily usable without being in close contact with members of the IMERSS BIWG team. Please join us
 in our [Matrix](https://matrix.org/) channels [IMERSS general](https://matrix.to/#/#imerss-general:matrix.org) and
 [IMERSS tech](https://matrix.to/#/#imerss-tech:matrix.org).
@@ -72,7 +75,7 @@ Given the folder of files output by `materialise.js`, combines them together - c
     compare.js
 
 Given the results of two `taxonomise.js` outputs as `reintegrated.csv` file checklists, compares them for any discrepancies,
-after casting out any records for genera which are trumped by a more specific species records. Outputs two CSV files
+after casting out any records for higher taxa which are trumped by a more specific species records. Outputs two CSV files
 `excess1.csv` and `excess2.csv`.
 
     arphify.js
@@ -91,6 +94,11 @@ remaining within the iNaturalist API data rate limits.
 
 e.g. for the data paper you may run 
     node src/inattify.js data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/combinedOutMap.json 
+
+
+    wormify.js
+    
+Accepts arguments as for 
 
 We dream of turning these pipelines into easily usable pluralistic graphical pipelines deployed on public live infrastructure
 such as github and Google Sheets.

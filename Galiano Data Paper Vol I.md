@@ -1,7 +1,7 @@
-# Galiano Data Paper Vol I - Marina Animalia
+# Galiano Data Paper Part I - Marine Zoology
 
 This file documents the full data pipeline necessary to reproduce the data
-pipeline responsible for exporting catalogue and summary data for Volume I
+pipeline responsible for exporting catalogue and summary data for Part I
 of the Galiano Data Paper, given the raw upstream catalogue data and curated
 summaries as input.
 
@@ -62,8 +62,8 @@ where [data-paper-mapping] is the path on your file system where the data
 paper sheets have been mapped using the Google Drive desktop client. This
 client is currently available from
 https://www.google.com/intl/en-GB/drive/download/ . The curated summary
-files are available in the folder https://drive.google.com/drive/folders/14gItR0p_4wYo4K1__tyPYeIuc2yLr6l_ .
-Browse to this folder and add it to your Google Drive mapping.
+files are available in the [Galiano Data Paper 2021 Marina Animalia](https://drive.google.com/drive/folders/14gItR0p_4wYo4K1__tyPYeIuc2yLr6l_)
+folder. Browse to this folder and add it to your Google Drive mapping.
 
 This step will download these summaries as CSV files into the directory
 [data/dataPaper-I-/in/Animalia](data/dataPaper-I-/in/Animalia).
@@ -113,6 +113,18 @@ catalogue entry.
 * Aglantha digitale, sourced from the primary literature from an 1861 observation
 by Alexander Agassiz.
 
+## Optional step - check taxon authorities in WoRMS
+
+The following line
+
+    node src/wormify node src/wormify.js data/dataPaper-I-in/reintegrated.csv --map data/dataPaper-I-in/dataPaper-out-map.json
+    
+will parse the curated summaries combined file and query the [WoRMS](https://www.marinespecies.org/) API for the
+authorities for each taxon. A scratch file `reintegrated-WoRMS.csv` will be output listing authorities from the
+curated files and from the API in parallel, as well as a `mismatch` column holding `x` if they mismatch. Mismatches
+are expected if i) the taxon is not resolved to species level and/or has a complex, cf., or aff. annotation or
+ii) there is a minor typo in the WoRMS authority as stored.
+
 ## Export summaries and catalogues for publication
 
     node src/arphify.js
@@ -125,4 +137,8 @@ of potential taxon name mismatches in [arphaMismatches.csv](arphaMismatches.csv)
 
 ## Generate rendered files suitable for producing map-based visualisation
 
-    node src/marmalise.js data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/reintegrated-map.csv
+    node src/marmalise.js data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/reintegrated-map.csv -o data/dataPaper-I/Life.json.lz4
+
+Outputs a `Life.json.jz4` suitable for being viewed by the map-based visualisation code as run from the driver
+[indexWithJustMap.html](indexWithJustMap.html).
+ 
