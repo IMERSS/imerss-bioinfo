@@ -47,7 +47,7 @@ in our [Matrix](https://matrix.org/) channels [IMERSS general](https://matrix.to
 More detailed documentation for these scripts will be forthcoming, but the principal ones involved in the data paper
 pipeline are:
 
-    taxonomise.js
+    taxonomise.js [obs or summary CSV file] [--map map JSON file] [-o output file]
 
 Main point of ingesting a collection of catalogues or summary in some CSV form. Accepts a "fusion" JSON5 file laying out
 all of the constituent catalogues files as CSV together with accompanying "map" files mapping columns for ingestion and
@@ -66,7 +66,8 @@ to form part of the input to `taxonomise.js`.
     materialise.js
 
 From the curated summaries end, downloads a collection of summaries mapping in a Google Sheets directory. Currently hardwired
-to download the "Animalia" at `Galiano Data Paper 2021/Marine Life/Animalia` in the author's drive mapping.
+to download the "Animalia" at [Galiano Data Paper 2021/Marine Life/Animalia](https://drive.google.com/drive/folders/14gItR0p_4wYo4K1__tyPYeIuc2yLr6l_)
+in the author's drive mapping.
 
     compile.js
 
@@ -84,7 +85,8 @@ Given a pipeline specification such as the one in [data/dataPaper-I-in/arpha-out
 observation file such as [data/dataPaper-I/reintegrated-obs.csv](data/dataPaper-I/reintegrated-obs.csv) and a normalised
 curated summary file such as [/data/dataPaper-I-in/reintegrated.csv](/data/dataPaper-I-in/reintegrated.csv) and emits a
 directory of XLSX spreadsheets in the form accepted by the [ARPHA writing tool](https://arpha.pensoft.net/) used for
-submission of biodiversity data papers.
+submission of biodiversity data papers as well as a Darwin Core CSV file
+[Materials.csv](data/dataPaper-I-In/arphified/Materials.csv) suitable for submission to GBIF.
 
     inattify.js
 
@@ -98,7 +100,9 @@ e.g. for the data paper you may run
 
     wormify.js
     
-Accepts arguments as for 
+Accepts arguments as for `taxonomise.js`. Produces a scratch `reintegrated-WoRMS.csv` file after downloading and
+caching WoRMS taxon files into [data/WoRMS](data/WoRMS) which compares the `authority` value listed against the
+one found in the WoRMS API.
 
 We dream of turning these pipelines into easily usable pluralistic graphical pipelines deployed on public live infrastructure
 such as github and Google Sheets.
@@ -121,11 +125,12 @@ To convert a CSV file, run `marmalise.js` e.g. via a line such as
 
 By default this will produce a `Life.json.lz4` file which can be copied into a suitable location, e.g. in the </data>
 directories and then referred to in the JavaScript initialisation block seen, e.g. in the various [index.html](index.html)
-files in this root. You can supply a "-o" option to output a file of a chosen name at a chosen path.
+files in this root. You can supply a `-o` option to output a file of a chosen name at a chosen path.
 
 To preview the web UI, host this project via some suitable static web server and then access its `index.html`.
 
-Condensed versions of the visualisation files can be output to the <build> directory via `node build.js`.
+Condensed versions of the visualisation source files suitable for production hosting (JS and CSS) can be output to the
+<build> directory via `node build.js`.
 
 You can see such visualisations running online at locations like
 
@@ -147,4 +152,4 @@ and injecting an initialisation block into the markup such as
 </script>
 ````
 
-together with references to the built files.
+together with `<script>` and `<style>` references to the built files.
