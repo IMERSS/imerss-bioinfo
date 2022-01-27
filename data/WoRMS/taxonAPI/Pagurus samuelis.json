@@ -17,13 +17,13 @@
     "order": "Decapoda",
     "family": "Paguridae",
     "genus": "Pagurus",
-    "citation": "Lemaitre, R.; McLaughlin, P. (2020). World Paguroidea & Lomisoidea database. Pagurus samuelis (Stimpson, 1857). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=366786 on 2020-10-04",
+    "citation": "Lemaitre, R.; McLaughlin, P. (2022). World Paguroidea & Lomisoidea Database. Pagurus samuelis (Stimpson, 1857). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=366786 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:366786",
     "isMarine": 1,
     "isBrackish": null,
-    "isFreshwater": null,
+    "isFreshwater": 0,
     "isTerrestrial": null,
     "isExtinct": 0,
     "match_type": "exact",
-    "modified": "2020-09-11T15:20:51.830Z"
+    "modified": "2021-12-23T13:51:13.393Z"
 }

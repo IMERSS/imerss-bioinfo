@@ -9,7 +9,7 @@
     "rank": "Species",
     "valid_AphiaID": 744396,
     "valid_name": "Antho (Plocamia) karykina",
-    "valid_authority": "(De Laubenfels, 1927)",
+    "valid_authority": "(de Laubenfels, 1927)",
     "parentNameUsageID": 131865,
     "kingdom": "Animalia",
     "phylum": "Porifera",
@@ -17,7 +17,7 @@
     "order": "Poecilosclerida",
     "family": "Microcionidae",
     "genus": "Antho",
-    "citation": "Van Soest, R.W.M.; Boury-Esnault, N.; Hooper, J.N.A.; Rützler, K.; de Voogd, N.J.; Alvarez, B.; Hajdu, E.; Pisera, A.B.; Manconi, R.; Schönberg, C.; Klautau, M.; Kelly, M.; Vacelet, J.; Dohrmann, M.; Díaz, M.-C.; Cárdenas, P.; Carballo, J.L.; Ríos, P.; Downey, R.; Morrow, C.C. (2020). World Porifera Database. Antho karykina (de Laubenfels, 1927). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=412846 on 2020-10-04",
+    "citation": "de Voogd, N.J.; Alvarez, B.; Boury-Esnault, N.; Carballo, J.L.; Cárdenas, P.; Díaz, M.-C.; Dohrmann, M.; Downey, R.; Hajdu, E.; Hooper, J.N.A.; Kelly, M.; Klautau, M.; Manconi, R.; Morrow, C.C. Pisera, A.B.; Ríos, P.; Rützler, K.; Schönberg, C.; Vacelet, J.; van Soest, R.W.M. (2022). World Porifera Database. Antho karykina (de Laubenfels, 1927). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=412846 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:412846",
     "isMarine": 1,
     "isBrackish": 0,
@@ -25,5 +25,5 @@
     "isTerrestrial": 0,
     "isExtinct": 0,
     "match_type": "exact",
-    "modified": "2013-11-19T13:48:49.533Z"
+    "modified": "2020-11-05T07:59:07.957Z"
 }

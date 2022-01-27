@@ -17,13 +17,13 @@
     "order": "Anthoathecata",
     "family": "Stylasteridae",
     "genus": "Stylantheca",
-    "citation": "Schuchert, P. (2020). World Hydrozoa Database. Stylantheca papillosa (Dall, 1884). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=291143 on 2020-10-04",
+    "citation": "Schuchert, P. (2022). World Hydrozoa Database. Stylantheca papillosa (Dall, 1884). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=291143 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:291143",
     "isMarine": 1,
     "isBrackish": null,
-    "isFreshwater": null,
+    "isFreshwater": 0,
     "isTerrestrial": 0,
     "isExtinct": null,
     "match_type": "exact",
-    "modified": "2010-09-30T14:45:18.117Z"
+    "modified": "2021-04-19T07:17:51.677Z"
 }

@@ -48,12 +48,11 @@ delete outMapColumns.authority;
 outMapColumns.authority = "Authority";
 outMapColumns.WoRMSAuthority = "WoRMS Authority";
 outMapColumns.mismatch = "Authority mismatch";
-
+outMapColumns.accepted = "WoRMS Accepted";
 
 resultsPromise.then(function (results) {
     var rows = results.rows;
     console.log("Got " + rows.length + " rows");
-    console.log(rows[0]);
 
     var queue = fluid.transform(rows, function (row) {
         return {name: row.iNaturalistTaxonName};
@@ -66,11 +65,31 @@ resultsPromise.then(function (results) {
             newRow.WoRMSAuthority = entry ? (entry.authority ? entry.authority : entry.message) : "Internal error";
             var authority = newRow.subtaxonAuthority || newRow.authority;
             newRow.mismatch = newRow.WoRMSAuthority === authority ? "" : "x";
+            newRow.accepted = entry && entry.status;
             return newRow;
         });
         hortis.writeCSV(outFile, outMapColumns, newRows, fluid.promise());
     });
 });
+
+// Values of "status" field in decreasing order of desirability
+hortis.WoRMSstatus = ["accepted", "unaccepted", "deleted"];
+
+hortis.WoRMSstatusIndex = function (status) {
+    var index = hortis.WoRMSstatus.indexOf(status);
+    return index === -1 ? hortis.WoRMSstatus.length : index;
+};
+
+hortis.findBestWoRMSDoc = function (docs) {
+    var byIndex = [];
+    fluid.each(docs, function (doc) {
+        var index = hortis.WoRMSstatusIndex(doc.status);
+        fluid.pushArray(byIndex, index, doc);
+    });
+    return byIndex.find(function (slot) {
+        return slot && slot.length > 0;
+    });
+};
 
 hortis.queueFetchWork = function (queue) {
     var that = {
@@ -98,19 +117,20 @@ hortis.queueFetchWork = function (queue) {
             } else {
                 doc = source.get(head).then(function (docs) {
                     that.fetched.push(head);
-                    if (!docs || docs.length === 0) {
+                    var sortedDocs = hortis.findBestWoRMSDoc(docs);
+                    if (!sortedDocs || sortedDocs.length === 0) {
                         console.log("Received no results for name " + head.name);
                         that.cache[name] = {
                             isError: true,
                             message: "Document not found"
                         };
                     } else {
-                        if (docs.length > 1) {
-                            console.log("Warning: received " + docs.length + " results for name " + head.name);
+                        if (sortedDocs.length > 1) {
+                            console.log("Warning: received " + sortedDocs.length + " equally good results for name " + head.name);
                         }
                         // hortis.enqueueAncestry(doc, that.queue);
-                        hortis.writeTaxonDoc(filename, docs[0]);
-                        that.cache[name] = docs[0];
+                        hortis.writeTaxonDoc(filename, sortedDocs[0]);
+                        that.cache[name] = sortedDocs[0];
                     }
                     // that.completion.resolve(that.cache);
                     nextWork();

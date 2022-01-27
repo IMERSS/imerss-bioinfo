@@ -2,14 +2,14 @@
     "AphiaID": 381984,
     "url": "https://www.marinespecies.org/aphia.php?p=taxdetails&id=381984",
     "scientificname": "Keenocardium blandum",
-    "authority": "(Gould, 1850)",
+    "authority": "(A. Gould, 1850)",
     "status": "accepted",
     "unacceptreason": null,
     "taxonRankID": 220,
     "rank": "Species",
     "valid_AphiaID": 381984,
     "valid_name": "Keenocardium blandum",
-    "valid_authority": "(Gould, 1850)",
+    "valid_authority": "(A. Gould, 1850)",
     "parentNameUsageID": 381983,
     "kingdom": "Animalia",
     "phylum": "Mollusca",
@@ -17,7 +17,7 @@
     "order": "Cardiida",
     "family": "Cardiidae",
     "genus": "Keenocardium",
-    "citation": "MolluscaBase eds. (2021). MolluscaBase. Keenocardium blandum (Gould, 1850). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=381984 on 2021-07-16",
+    "citation": "MolluscaBase eds. (2022). MolluscaBase. Keenocardium blandum (A. Gould, 1850). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=381984 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:381984",
     "isMarine": 1,
     "isBrackish": 0,
@@ -25,5 +25,5 @@
     "isTerrestrial": 0,
     "isExtinct": null,
     "match_type": "exact",
-    "modified": "2016-02-23T10:14:11.183Z"
+    "modified": "2021-11-09T23:41:15.423Z"
 }

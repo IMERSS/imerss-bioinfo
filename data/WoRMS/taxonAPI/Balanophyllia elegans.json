@@ -3,8 +3,8 @@
     "url": "https://www.marinespecies.org/aphia.php?p=taxdetails&id=1288908",
     "scientificname": "Balanophyllia elegans",
     "authority": "Verrill, 1864",
-    "status": "unaccepted",
-    "unacceptreason": "changed combination",
+    "status": "alternate representation",
+    "unacceptreason": null,
     "taxonRankID": 220,
     "rank": "Species",
     "valid_AphiaID": 286920,
@@ -17,7 +17,7 @@
     "order": "Scleractinia",
     "family": "Dendrophylliidae",
     "genus": "Balanophyllia",
-    "citation": "Hoeksema, B. W.; Cairns, S. (2020). World List of Scleractinia. Balanophyllia elegans Verrill, 1864. Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=1288908 on 2020-10-04",
+    "citation": "Hoeksema, B. W.; Cairns, S. (2022). World List of Scleractinia. Balanophyllia elegans Verrill, 1864. Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=1288908 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:1288908",
     "isMarine": 1,
     "isBrackish": 0,
@@ -25,5 +25,5 @@
     "isTerrestrial": 0,
     "isExtinct": null,
     "match_type": "exact",
-    "modified": "2018-08-06T19:16:27.920Z"
+    "modified": "2021-05-08T14:31:39.230Z"
 }

@@ -2,14 +2,14 @@
     "AphiaID": 164864,
     "url": "https://www.marinespecies.org/aphia.php?p=taxdetails&id=164864",
     "scientificname": "Aplysilla polyraphis",
-    "authority": "Laubenfels, 1930",
+    "authority": "de Laubenfels, 1930",
     "status": "accepted",
     "unacceptreason": null,
     "taxonRankID": 220,
     "rank": "Species",
     "valid_AphiaID": 164864,
     "valid_name": "Aplysilla polyraphis",
-    "valid_authority": "Laubenfels, 1930",
+    "valid_authority": "de Laubenfels, 1930",
     "parentNameUsageID": 131738,
     "kingdom": "Animalia",
     "phylum": "Porifera",
@@ -17,7 +17,7 @@
     "order": "Dendroceratida",
     "family": "Darwinellidae",
     "genus": "Aplysilla",
-    "citation": "Van Soest, R.W.M.; Boury-Esnault, N.; Hooper, J.N.A.; Rützler, K.; de Voogd, N.J.; Alvarez, B.; Hajdu, E.; Pisera, A.B.; Manconi, R.; Schönberg, C.; Klautau, M.; Kelly, M.; Vacelet, J.; Dohrmann, M.; Díaz, M.-C.; Cárdenas, P.; Carballo, J.L.; Ríos, P.; Downey, R.; Morrow, C.C. (2020). World Porifera Database. Aplysilla polyraphis Laubenfels, 1930. Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=164864 on 2020-10-04",
+    "citation": "de Voogd, N.J.; Alvarez, B.; Boury-Esnault, N.; Carballo, J.L.; Cárdenas, P.; Díaz, M.-C.; Dohrmann, M.; Downey, R.; Hajdu, E.; Hooper, J.N.A.; Kelly, M.; Klautau, M.; Manconi, R.; Morrow, C.C. Pisera, A.B.; Ríos, P.; Rützler, K.; Schönberg, C.; Vacelet, J.; van Soest, R.W.M. (2022). World Porifera Database. Aplysilla polyraphis de Laubenfels, 1930. Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=164864 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:164864",
     "isMarine": 1,
     "isBrackish": 0,
@@ -25,5 +25,5 @@
     "isTerrestrial": 0,
     "isExtinct": 0,
     "match_type": "exact",
-    "modified": "2019-01-29T08:22:22.150Z"
+    "modified": "2021-01-07T07:40:43.640Z"
 }

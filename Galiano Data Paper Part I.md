@@ -118,7 +118,7 @@ by Alexander Agassiz.
 The following line
 
     node src/wormify node src/wormify.js data/dataPaper-I-in/reintegrated.csv --map data/dataPaper-I-in/dataPaper-out-map.json
-    
+
 will parse the curated summaries combined file and query the [WoRMS](https://www.marinespecies.org/) API for the
 authorities for each taxon. A scratch file `reintegrated-WoRMS.csv` will be output listing authorities from the
 curated files and from the API in parallel, as well as a `mismatch` column holding `x` if they mismatch. Mismatches
@@ -141,4 +141,3 @@ of potential taxon name mismatches in [arphaMismatches.csv](arphaMismatches.csv)
 
 Outputs a `Life.json.jz4` suitable for being viewed by the map-based visualisation code as run from the driver
 [indexWithJustMap.html](indexWithJustMap.html).
- 

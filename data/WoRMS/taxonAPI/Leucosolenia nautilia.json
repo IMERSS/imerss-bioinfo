@@ -2,14 +2,14 @@
     "AphiaID": 164536,
     "url": "https://www.marinespecies.org/aphia.php?p=taxdetails&id=164536",
     "scientificname": "Leucosolenia nautilia",
-    "authority": "Laubenfels, 1930",
+    "authority": "de Laubenfels, 1930",
     "status": "accepted",
     "unacceptreason": null,
     "taxonRankID": 220,
     "rank": "Species",
     "valid_AphiaID": 164536,
     "valid_name": "Leucosolenia nautilia",
-    "valid_authority": "Laubenfels, 1930",
+    "valid_authority": "de Laubenfels, 1930",
     "parentNameUsageID": 131715,
     "kingdom": "Animalia",
     "phylum": "Porifera",
@@ -17,7 +17,7 @@
     "order": "Leucosolenida",
     "family": "Leucosoleniidae",
     "genus": "Leucosolenia",
-    "citation": "Van Soest, R.W.M.; Boury-Esnault, N.; Hooper, J.N.A.; Rützler, K.; de Voogd, N.J.; Alvarez, B.; Hajdu, E.; Pisera, A.B.; Manconi, R.; Schönberg, C.; Klautau, M.; Kelly, M.; Vacelet, J.; Dohrmann, M.; Díaz, M.-C.; Cárdenas, P.; Carballo, J.L.; Ríos, P.; Downey, R.; Morrow, C.C. (2020). World Porifera Database. Leucosolenia nautilia Laubenfels, 1930. Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=164536 on 2020-10-04",
+    "citation": "de Voogd, N.J.; Alvarez, B.; Boury-Esnault, N.; Carballo, J.L.; Cárdenas, P.; Díaz, M.-C.; Dohrmann, M.; Downey, R.; Hajdu, E.; Hooper, J.N.A.; Kelly, M.; Klautau, M.; Manconi, R.; Morrow, C.C. Pisera, A.B.; Ríos, P.; Rützler, K.; Schönberg, C.; Vacelet, J.; van Soest, R.W.M. (2022). World Porifera Database. Leucosolenia nautilia de Laubenfels, 1930. Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=164536 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:164536",
     "isMarine": 1,
     "isBrackish": 0,
@@ -25,5 +25,5 @@
     "isTerrestrial": 0,
     "isExtinct": 0,
     "match_type": "exact",
-    "modified": "2019-08-25T07:18:49.783Z"
+    "modified": "2021-01-03T12:22:47.393Z"
 }

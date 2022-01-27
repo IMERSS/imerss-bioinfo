@@ -17,7 +17,7 @@
     "order": "Trochida",
     "family": "Calliostomatidae",
     "genus": "Calliostoma",
-    "citation": "MolluscaBase eds. (2020). MolluscaBase. Calliostoma ligatum (Gould, 1849). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=580412 on 2020-10-04",
+    "citation": "MolluscaBase eds. (2022). MolluscaBase. Calliostoma ligatum (Gould, 1849). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=580412 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:580412",
     "isMarine": 1,
     "isBrackish": 0,
@@ -25,5 +25,5 @@
     "isTerrestrial": 0,
     "isExtinct": null,
     "match_type": "exact",
-    "modified": "2019-02-03T03:46:32.897Z"
+    "modified": "2021-01-08T14:33:11.650Z"
 }

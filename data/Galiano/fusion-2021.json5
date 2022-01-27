@@ -34,6 +34,7 @@
         }
     },
     summarise: false,
-    output: "%bagatelle/Galiano/reintegrated.csv",
+    applySwaps: true,
+    output: "%bagatelle/data/Galiano/reintegrated.csv",
     combinedOutMap: "%bagatelle/data/Galiano/combinedOutMap.json"
 }

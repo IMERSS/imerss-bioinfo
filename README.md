@@ -16,8 +16,9 @@ In particular, the reconciled and normalised observation data is at [data/dataPa
 reconciled checklists derived from this data is at [/data/dataPaper-I/reintegrated.csv](/data/dataPaper-I/reintegrated.csv).
 The corresponding checklists derived from the curated summaries is at [/data/dataPaper-I-in/reintegrated.csv](/data/dataPaper-I-in/reintegrated.csv).
 
-Full intructions for running the data paper part I pipeline are held in [Galiano Data Paper Vol I.md](Galiano Data Paper Vol I.md),
-but here follows an overview of the scripts and overall installation instructions.
+Full intructions for running the data paper part I pipeline are held in
+[Galiano Data Paper Vol I.md](Galiano Data Paper Vol I.md), but here follows an overview of the scripts and overall
+installation instructions.
 
 # Data Pipeline
 
@@ -39,7 +40,7 @@ dependencies by running
 
 in the checkout directory.
 
-The scripts in [src](src) will then be ready to run via various `node` commands. These scripts are currently of a 
+The scripts in [src](src) will then be ready to run via various `node` commands. These scripts are currently of a
 basic quality and not easily usable without being in close contact with members of the IMERSS BIWG team. Please join us
 in our [Matrix](https://matrix.org/) channels [IMERSS general](https://matrix.to/#/#imerss-general:matrix.org) and
 [IMERSS tech](https://matrix.to/#/#imerss-tech:matrix.org).
@@ -94,12 +95,13 @@ A necessary prelude to the `marmalise.js` script described below which produces 
 and caches the iNaturalist taxon information data feeds from any taxa referenced in a `reintegrated.csv` file, whilst
 remaining within the iNaturalist API data rate limits.
 
-e.g. for the data paper you may run 
-    node src/inattify.js data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/combinedOutMap.json 
+e.g. for the data paper you may run
+
+    node src/inattify.js data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/combinedOutMap.json
 
 
     wormify.js
-    
+
 Accepts arguments as for `taxonomise.js`. Produces a scratch `reintegrated-WoRMS.csv` file after downloading and
 caching WoRMS taxon files into [data/WoRMS](data/WoRMS) which compares the `authority` value listed against the
 one found in the WoRMS API.

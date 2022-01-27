@@ -17,13 +17,13 @@
     "order": "Littorinimorpha",
     "family": "Velutinidae",
     "genus": "Marsenina",
-    "citation": "MolluscaBase eds. (2020). MolluscaBase. Marsenina stearnsii (Dall, 1871). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=580686 on 2020-10-04",
+    "citation": "MolluscaBase eds. (2022). MolluscaBase. Marsenina stearnsii (Dall, 1871). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=580686 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:580686",
     "isMarine": 1,
-    "isBrackish": null,
-    "isFreshwater": null,
-    "isTerrestrial": null,
+    "isBrackish": 0,
+    "isFreshwater": 0,
+    "isTerrestrial": 0,
     "isExtinct": null,
     "match_type": "exact",
-    "modified": "2011-09-24T22:42:09.090Z"
+    "modified": "2021-10-30T08:58:30.533Z"
 }

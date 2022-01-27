@@ -17,13 +17,13 @@
     "order": "Siphonophorae",
     "family": "Agalmatidae",
     "genus": "Nanomia",
-    "citation": "Schuchert, P. (2020). World Hydrozoa Database. Nanomia bijuga (Delle Chiaje, 1844). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=135495 on 2020-10-04",
+    "citation": "Schuchert, P. (2022). World Hydrozoa Database. Nanomia bijuga (Delle Chiaje, 1844). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=135495 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:135495",
     "isMarine": 1,
-    "isBrackish": 1,
-    "isFreshwater": 1,
-    "isTerrestrial": 1,
+    "isBrackish": 0,
+    "isFreshwater": 0,
+    "isTerrestrial": 0,
     "isExtinct": 0,
     "match_type": "exact",
-    "modified": "2014-01-17T11:20:36.150Z"
+    "modified": "2021-03-31T08:10:16.420Z"
 }

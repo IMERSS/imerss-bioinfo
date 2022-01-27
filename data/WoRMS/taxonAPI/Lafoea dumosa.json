@@ -17,13 +17,13 @@
     "order": "Leptothecata",
     "family": "Lafoeidae",
     "genus": "Lafoea",
-    "citation": "Schuchert, P. (2020). World Hydrozoa Database. Lafoea dumosa (Fleming, 1820). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=117702 on 2020-10-04",
+    "citation": "Schuchert, P. (2022). World Hydrozoa Database. Lafoea dumosa (Fleming, 1820). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=117702 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:117702",
     "isMarine": 1,
     "isBrackish": null,
     "isFreshwater": 0,
     "isTerrestrial": 0,
-    "isExtinct": null,
+    "isExtinct": 0,
     "match_type": "exact",
-    "modified": "2011-04-01T05:55:24.773Z"
+    "modified": "2020-11-05T18:37:51.150Z"
 }

@@ -17,13 +17,13 @@
     "order": "Pectinida",
     "family": "Pectinidae",
     "genus": "Chlamys",
-    "citation": "MolluscaBase eds. (2020). MolluscaBase. Chlamys rubida (Hinds, 1845). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=254460 on 2020-10-04",
+    "citation": "MolluscaBase eds. (2022). MolluscaBase. Chlamys rubida (Hinds, 1845). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=254460 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:254460",
     "isMarine": 1,
-    "isBrackish": null,
-    "isFreshwater": null,
-    "isTerrestrial": null,
+    "isBrackish": 0,
+    "isFreshwater": 0,
+    "isTerrestrial": 0,
     "isExtinct": null,
     "match_type": "exact",
-    "modified": "2009-04-20T11:37:21.287Z"
+    "modified": "2021-02-12T09:34:29.367Z"
 }

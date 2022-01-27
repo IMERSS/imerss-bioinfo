@@ -2273,7 +2273,7 @@
             "Adalaria evincta": {
                 resolvedBy: "KF",
                 oldiNaturalistTaxonId: "897911",
-                notes: "Email of 24/12/21: I see that I made a mistake in my earlier email so it’s good that you got in touch again. The species in question is what is listed as Adalaria evincta (not proxima as I had said in my previous email. Adalaria proxima is a different species and it is still Adalaria proxima). "
+                notes: "Email of 24/12/21: I see that I made a mistake in my earlier email so it's good that you got in touch again. The species in question is what is listed as Adalaria evincta (not proxima as I had said in my previous email. Adalaria proxima is a different species and it is still Adalaria proxima). "
             }
         },
         iNaturalistTaxonId: "1348712"
@@ -2287,5 +2287,45 @@
             }
         },
         iNaturalistTaxonId: "1283181"
-    }
+    }, // post-final updates to data paper following drift in taxonomy during the time the paper was being prepared
+    "Haliclona": {
+        taxonNames: {
+            "Adocia": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "464717",
+                notes: "26/1/22 email: Adocia has been synonymized with Haliclona (Haliclona). Andy et al. had recognized Adocia sp. and Haliclona sp. as distinctive, but because of the low level of confidence we have here, we can't keep Adocia even though it is apparently a different thing that what we are listing as Haliclona sp." 
+            }
+        },
+        iNaturalistTaxonId: "1227087"
+    },
+    "Lepeta concentrica": {
+        taxonNames: {
+            "Cryptobranchia concentrica": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "541593",
+                notes: "26/1/22 email: C. concentrica is an unaccepted synonym. I updated the curated summary. Can you please execute a taxon swap throughout our dataset(s)? Thanks" 
+            }
+        },
+        iNaturalistTaxonId: "1240081"
+    },
+    "Petaloconchus compactus": {
+        taxonNames: {
+            "Vermetus compactus": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "873857",
+                notes: "Unaccepted acc. WoRMS" 
+            }
+        },
+        iNaturalistTaxonId: "883089"
+    },
+    "Yoldia hyperborea": {
+        taxonNames: {
+            "Yoldia amygdalea": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "957338",
+                notes: "I have added a critical annotation under Yoldia hyperborea in our curated summary for Mollusca, and deleted the report of Y. amygdala. Can you please execute a taxon swap throughout our dataset(s)? Thanks",
+            }
+        },
+        iNaturalistTaxonId: "996928"
+    },
 }

@@ -17,13 +17,13 @@
     "order": "Decapoda",
     "family": "Lithodidae",
     "genus": "Lopholithodes",
-    "citation": "WoRMS (2021). Lopholithodes foraminatus (Stimpson, 1859). Accessed at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=378125 on 2021-07-16",
+    "citation": "WoRMS (2022). Lopholithodes foraminatus (Stimpson, 1859). Accessed at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=378125 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:378125",
     "isMarine": 1,
-    "isBrackish": null,
-    "isFreshwater": null,
-    "isTerrestrial": null,
-    "isExtinct": null,
+    "isBrackish": 0,
+    "isFreshwater": 0,
+    "isTerrestrial": 0,
+    "isExtinct": 0,
     "match_type": "exact",
-    "modified": "2013-04-12T07:17:17.693Z"
+    "modified": "2021-12-03T11:58:14.513Z"
 }

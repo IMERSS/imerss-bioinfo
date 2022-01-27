@@ -17,13 +17,13 @@
     "order": "Decapoda",
     "family": "Paguridae",
     "genus": "Pagurus",
-    "citation": "Lemaitre, R.; McLaughlin, P. (2020). World Paguroidea & Lomisoidea database. Pagurus armatus (Dana, 1851). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=366655 on 2020-10-04",
+    "citation": "Lemaitre, R.; McLaughlin, P. (2022). World Paguroidea & Lomisoidea Database. Pagurus armatus (Dana, 1851). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=366655 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:366655",
     "isMarine": 1,
     "isBrackish": null,
-    "isFreshwater": null,
-    "isTerrestrial": null,
-    "isExtinct": null,
+    "isFreshwater": 0,
+    "isTerrestrial": 0,
+    "isExtinct": 0,
     "match_type": "exact",
-    "modified": "2008-08-25T19:49:04.027Z"
+    "modified": "2022-01-03T12:53:18.607Z"
 }

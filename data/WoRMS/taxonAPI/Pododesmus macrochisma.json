@@ -17,13 +17,13 @@
     "order": "Pectinida",
     "family": "Anomiidae",
     "genus": "Pododesmus",
-    "citation": "MolluscaBase eds. (2020). MolluscaBase. Pododesmus macrochisma (Deshayes, 1839). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=758426 on 2020-10-04",
+    "citation": "MolluscaBase eds. (2022). MolluscaBase. Pododesmus macrochisma (Deshayes, 1839). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=758426 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:758426",
     "isMarine": 1,
-    "isBrackish": null,
-    "isFreshwater": null,
-    "isTerrestrial": null,
+    "isBrackish": 0,
+    "isFreshwater": 0,
+    "isTerrestrial": 0,
     "isExtinct": null,
     "match_type": "exact",
-    "modified": "2014-03-17T14:09:57.777Z"
+    "modified": "2021-10-23T08:30:05.590Z"
 }

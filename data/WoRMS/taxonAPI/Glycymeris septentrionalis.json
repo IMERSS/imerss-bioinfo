@@ -17,13 +17,13 @@
     "order": "Arcida",
     "family": "Glycymerididae",
     "genus": "Glycymeris",
-    "citation": "MolluscaBase eds. (2020). MolluscaBase. Glycymeris septentrionalis (Middendorff, 1849). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=504512 on 2020-10-04",
+    "citation": "MolluscaBase eds. (2022). MolluscaBase. Glycymeris septentrionalis (Middendorff, 1849). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=504512 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:504512",
     "isMarine": 1,
-    "isBrackish": null,
-    "isFreshwater": null,
-    "isTerrestrial": null,
+    "isBrackish": 0,
+    "isFreshwater": 0,
+    "isTerrestrial": 0,
     "isExtinct": null,
     "match_type": "exact",
-    "modified": "2010-09-15T11:43:10.727Z"
+    "modified": "2020-10-23T20:53:35.430Z"
 }

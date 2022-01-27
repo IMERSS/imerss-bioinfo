@@ -17,13 +17,13 @@
     "order": "Decapoda",
     "family": "Paguridae",
     "genus": "Pagurus",
-    "citation": "Lemaitre, R.; McLaughlin, P. (2020). World Paguroidea & Lomisoidea database. Pagurus granosimanus (Stimpson, 1859). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=366694 on 2020-10-04",
+    "citation": "Lemaitre, R.; McLaughlin, P. (2022). World Paguroidea & Lomisoidea Database. Pagurus granosimanus (Stimpson, 1859). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=366694 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:366694",
     "isMarine": 1,
     "isBrackish": null,
     "isFreshwater": null,
     "isTerrestrial": null,
-    "isExtinct": null,
+    "isExtinct": 0,
     "match_type": "exact",
-    "modified": "2008-08-25T19:49:04.027Z"
+    "modified": "2021-01-07T09:46:43.603Z"
 }

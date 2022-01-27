@@ -17,13 +17,13 @@
     "order": "[unassigned] Caenogastropoda",
     "family": "Cerithiidae",
     "genus": "Neostylidium",
-    "citation": "MolluscaBase eds. (2020). MolluscaBase. Neostylidium eschrichtii (Middendorff, 1849). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=744620 on 2020-10-04",
+    "citation": "MolluscaBase eds. (2022). MolluscaBase. Neostylidium eschrichtii (Middendorff, 1849). Accessed through: World Register of Marine Species at: https://www.marinespecies.org/aphia.php?p=taxdetails&id=744620 on 2022-01-27",
     "lsid": "urn:lsid:marinespecies.org:taxname:744620",
     "isMarine": 1,
-    "isBrackish": null,
-    "isFreshwater": null,
-    "isTerrestrial": null,
+    "isBrackish": 0,
+    "isFreshwater": 0,
+    "isTerrestrial": 0,
     "isExtinct": null,
     "match_type": "exact",
-    "modified": "2013-11-24T12:11:36.340Z"
+    "modified": "2020-10-21T19:01:49.503Z"
 }
