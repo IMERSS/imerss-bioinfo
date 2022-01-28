@@ -243,6 +243,11 @@
             field: "observationId",
             equals: "PMLS:18231",
             exclude: true
-        }
+        },
+        Adocia: { // Donna Gibbs has requested this PMLS record be deleted as it is now undeterminable
+            field: "genus",
+            equals: "Adocia",
+            exclude: true
+        },
     }
 }

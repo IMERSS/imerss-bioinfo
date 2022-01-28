@@ -354,7 +354,7 @@
         },
         iNaturalistTaxonId: "63697",
     },
-    "Mopalia kennerleyi": {
+    "Mopalia ciliata": {
         taxonNames: {
             "northern hairy chiton": {
                 type: "commonName"
@@ -365,12 +365,17 @@
                 notes: "Remnant spelling mistake in version 18 of PMLS catalogue"
             },
             "Mopalia kennerlyi": {
-                type: "typoe",
+                type: "typo",
                 resolvedBy: "AB",
                 notes: "Yet another PMLS mispelling in Valdes"
             },
+            "Mopalia kennerleyi": {
+                resolvedBy: "AS",
+                notes: "And the whole thing is gone",
+                oldiNaturalistTaxonId: "360858"
+            }
         },
-        iNaturalistTaxonId: "360858"
+        iNaturalistTaxonId: "117634"
     },    
     "Neoesperiopsis rigida": {
         taxonNames: {
@@ -2288,7 +2293,7 @@
         },
         iNaturalistTaxonId: "1283181"
     }, // post-final updates to data paper following drift in taxonomy during the time the paper was being prepared
-    "Haliclona": {
+/*    "Haliclona": {
         taxonNames: {
             "Adocia": {
                 resolvedBy: "AS",
@@ -2297,7 +2302,7 @@
             }
         },
         iNaturalistTaxonId: "1227087"
-    },
+    },*/
     "Lepeta concentrica": {
         taxonNames: {
             "Cryptobranchia concentrica": {
@@ -2323,9 +2328,49 @@
             "Yoldia amygdalea": {
                 resolvedBy: "AS",
                 oldiNaturalistTaxonId: "957338",
-                notes: "I have added a critical annotation under Yoldia hyperborea in our curated summary for Mollusca, and deleted the report of Y. amygdala. Can you please execute a taxon swap throughout our dataset(s)? Thanks",
+                notes: "I have added a critical annotation under Yoldia hyperborea in our curated summary for Mollusca, and deleted the report of Y. amygdala. Can you please execute a taxon swap throughout our dataset(s)? Thanks"
             }
         },
         iNaturalistTaxonId: "996928"
     },
+    "Amphisbetia greenei": {
+        taxonNames: {
+            "Abietinaria greenei": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "429858",
+                notes: "Unaccepted acc. WoRMS"
+            }
+        },
+        iNaturalistTaxonId: "1353331"
+    },
+    "Thuiaria": {
+        taxonNames: {
+            "Selaginopsis": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "701033",
+                notes: "Andy Lamb et al. recognize Selaginopsis sp. (fish-bone hydroid) in addition to Thuiaria spp. (embedded sea fir hydroids). However, Selaginopsis is now unaccepted (WoRMS Editorial Board 2022), so our report of Selaginopsis sp. has been collapsed into Thuiaria spp."
+            }
+        },
+        iNaturalistTaxonId: "514521"
+    },
+    "Tripoplax trifida": {
+        taxonNames: {
+            "Lepidozona trifida": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "500743",
+                notes: "Unaccepted acc. WoRMS 2014"
+            }
+        },
+        iNaturalistTaxonId: "1174737"
+    },
+    "Amathia": {
+        taxonNames: {
+            "Bowerbankia": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "345483",
+                notes: "Unaccepted acc. WoRMS 2015"
+            }
+        },
+        iNaturalistTaxonId: "195986"
+    }
 }

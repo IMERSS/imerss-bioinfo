@@ -1,0 +1,3 @@
+Data sourced from Google Sheet at https://docs.google.com/spreadsheets/d/1gsTubPfxhXa0VyOYHC_PzlvIKD8s8qcOgq6r582IvAk/edit#gid=0
+Named Biodiversity Galiano Island Species List 2021
+Four tabs are exported separately as Animalia-2021.csv, Bacteria-2021.csv, Fungi-2021.csv, Plantae-2021.csv
