@@ -121,7 +121,7 @@ hortis.extractQualifier = function (name, outRow) {
     var lastBareWords = bareWords.slice(sspPoint);
     var rank = hortis.findRank(outRow, hortis.reverseRanks);
 
-    if (rank === "genus") {
+    if (rank === "genus" || rank === "species") {
         outRow.genus = bareWords[0];
     }
 
@@ -187,49 +187,10 @@ hortis.extractSsp = function (name, outRow) {
     }
 };
 
-/* Accepts a row of a summary, and the column structure inside "Taxa" */
-
-hortis.mapTaxaRows = function (rows, columns) {
-    return fluid.transform(rows, function (row) {
-        var togo = {};
-        fluid.each(columns, function (template, target) {
-            togo[target] = hortis.stringTemplate(template, row);
-        });
-        if (row.species !== "" || row.genus !== "") {
-            var degenified = hortis.extractGenus(row.taxonName, togo);
-            hortis.extractSsp(degenified, togo);
-        }
-        return togo;
-    });
-};
-
 // Also in coordinatePatch.js, leafletMap.js
 hortis.datasetIdFromObs = function (obsId) {
     var colpos = obsId.indexOf(":");
     return obsId.substring(0, colpos);
-};
-
-hortis.stashMismatchedRow = function (mismatches, patchIndex, obsRow, summaryRow) {
-    var key = obsRow.previousIdentifications + "|" + obsRow.scientificName;
-    var patchRow = patchIndex[key];
-    if (patchRow) {
-        if (patchRow.Disposition === "P") {
-            obsRow.scientificName = obsRow.previousIdentifications;
-        } else if (patchRow.Disposition === "S") {
-            var desp = obsRow.previousIdentifications.replace(" sp.", "");
-            obsRow.scientificName = desp + " sp.";
-        } else if (patchRow.Disposition === "X") {
-            console.log("!!! Unexpected use of patch with key " + key);
-        }
-    } else {
-        var existing = mismatches[key];
-        if (!existing) {
-            mismatches[key] = fluid.extend({
-                previousIdentifications: obsRow.previousIdentifications
-            }, summaryRow);
-            console.log("Stashing mismatched row ", mismatches[key]);
-        }
-    }
 };
 
 hortis.badDates = {};
@@ -367,6 +328,54 @@ hortis.cleanEventRemarks = function (outRow) {
     var lookup = hortis.badEventRemarksTable[outRow.eventRemarks];
     if (lookup !== undefined) {
         outRow.eventRemarks = lookup;
+    }
+};
+
+/* Accepts a row of a summary, and the column structure inside "Taxa" */
+
+hortis.mapTaxaRows = function (rows, columns, materialsMap) {
+    return fluid.transform(rows, function (row) {
+        var summaryRow = materialsMap.summaryIndex[row.iNaturalistTaxonId];
+        var togo = {};
+        fluid.each(columns, function (template, target) {
+            togo[target] = hortis.stringTemplate(template, row);
+        });
+        if (row.species !== "" || row.genus !== "") {
+            var degenified = hortis.extractGenus(row.taxonName, togo);
+            hortis.extractSsp(degenified, togo);
+        }
+        if (summaryRow) {
+            // Account for observations which have been hacked by assigning them to proxy iNat taxa - in theory we should
+            // copy more fields but we have managed to assign these to, e.g. proxies in the same family
+            var proxySummary = fluid.copy(summaryRow);
+            // Replicate this piece of workflow from mapMaterialsRows
+            hortis.extractQualifier(summaryRow.taxonName, proxySummary);
+            togo.Genus = proxySummary.genus;
+        }
+        return togo;
+    });
+};
+
+hortis.stashMismatchedRow = function (mismatches, patchIndex, obsRow, summaryRow) {
+    var key = obsRow.previousIdentifications + "|" + obsRow.scientificName;
+    var patchRow = patchIndex[key];
+    if (patchRow) {
+        if (patchRow.Disposition === "P") {
+            obsRow.scientificName = obsRow.previousIdentifications;
+        } else if (patchRow.Disposition === "S") {
+            var desp = obsRow.previousIdentifications.replace(" sp.", "");
+            obsRow.scientificName = desp + " sp.";
+        } else if (patchRow.Disposition === "X") {
+            console.log("!!! Unexpected use of patch with key " + key);
+        }
+    } else {
+        var existing = mismatches[key];
+        if (!existing) {
+            mismatches[key] = fluid.extend({
+                previousIdentifications: obsRow.previousIdentifications
+            }, summaryRow);
+            console.log("Stashing mismatched row ", mismatches[key]);
+        }
     }
 };
 
@@ -613,7 +622,7 @@ completion.then(function () {
         console.log("Extracted " + outSummaryRows.length + " summary rows via filter " + key);
 
         var Taxa = pipeline.sheets.Taxa;
-        var taxaRows = hortis.mapTaxaRows(outSummaryRows, Taxa.columns);
+        var taxaRows = hortis.mapTaxaRows(outSummaryRows, Taxa.columns, materialsMap);
         hortis.sortRows(taxaRows, Taxa.sortBy);
 
         var outObsRows = hortis.filterArphaRows(obsRows, rec, obsRowCount);

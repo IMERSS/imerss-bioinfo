@@ -1236,14 +1236,6 @@
         },
         iNaturalistTaxonId: "202294"
     },
-    "Haliclona": {
-        taxonNames: {
-            "Reniera": {
-                resolvedBy: "AB",
-            }
-        },
-        iNaturalistTaxonId: "129864"
-    },
     "Membraneis challengeri": {
         taxonNames: {
             "Tropidoneis antarctica": {
@@ -2123,7 +2115,43 @@
             },
         },
         iNaturalistTaxonId: "49533"
-    }, // Valdes Island normalisation - PMLS
+    },
+    // The two Haliclonas - these have been edited in the incoming dataset to correspond to these swaps which assign them synthetic ids within the iNat taxonomy so they may
+    // correspond with the summaries
+    "Reniera": {
+        taxonNames: {
+            "Haliclona sp.1": {
+                resolvedBy: "AB",
+                notes: "Whilst Reniera is unaccepted in WoRMS, it is currently accepted in iNat (31/1/22) and we are using it as proxy for one of the two Haliclona sp.nov. for the data paper"
+            }
+        },
+        iNaturalistTaxonId: "1227076"
+    },
+    "Adocia": {
+        taxonNames: {
+            "Haliclona sp.2": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "464717",
+                notes: "26/1/22 email: Adocia has been synonymized with Haliclona (Haliclona). Andy et al. had recognized Adocia sp. and Haliclona sp. as distinctive, but because of the low level of confidence we have here, we can't keep Adocia even though it is apparently a different thing that what we are listing as Haliclona sp." 
+            }
+        },
+        iNaturalistTaxonId: "1227087"
+    },
+    // Thuiaria sp.1 which appears as Selaginopsis in PMLS and Thuiaria sp.1 in curated summaries - we assign them both to Geminella as a proxy iNat taxon in the same family so they may correspond
+    "Geminella": {
+        taxonNames: {
+            "Selaginopsis": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "701033",
+                notes: "Andy Lamb et al. recognize Selaginopsis sp. (fish-bone hydroid) in addition to Thuiaria spp. (embedded sea fir hydroids). However, Selaginopsis is now unaccepted (WoRMS Editorial Board 2022), so our report of Selaginopsis sp. has been assigned as Thuiaria sp.1"
+            },
+            "Thuiaria sp.1": {
+                resolvedBy: "AB"
+            }
+        },
+        iNaturalistTaxonId: "468278"
+    },
+    // Valdes Island normalisation - PMLS
     "Isodictya rigida": {
         taxonNames: {
             "Amphilectus rigida": {
@@ -2293,16 +2321,6 @@
         },
         iNaturalistTaxonId: "1283181"
     }, // post-final updates to data paper following drift in taxonomy during the time the paper was being prepared
-/*    "Haliclona": {
-        taxonNames: {
-            "Adocia": {
-                resolvedBy: "AS",
-                oldiNaturalistTaxonId: "464717",
-                notes: "26/1/22 email: Adocia has been synonymized with Haliclona (Haliclona). Andy et al. had recognized Adocia sp. and Haliclona sp. as distinctive, but because of the low level of confidence we have here, we can't keep Adocia even though it is apparently a different thing that what we are listing as Haliclona sp." 
-            }
-        },
-        iNaturalistTaxonId: "1227087"
-    },*/
     "Lepeta concentrica": {
         taxonNames: {
             "Cryptobranchia concentrica": {
@@ -2342,16 +2360,6 @@
             }
         },
         iNaturalistTaxonId: "1353331"
-    },
-    "Thuiaria": {
-        taxonNames: {
-            "Selaginopsis": {
-                resolvedBy: "AS",
-                oldiNaturalistTaxonId: "701033",
-                notes: "Andy Lamb et al. recognize Selaginopsis sp. (fish-bone hydroid) in addition to Thuiaria spp. (embedded sea fir hydroids). However, Selaginopsis is now unaccepted (WoRMS Editorial Board 2022), so our report of Selaginopsis sp. has been collapsed into Thuiaria spp."
-            }
-        },
-        iNaturalistTaxonId: "514521"
     },
     "Tripoplax trifida": {
         taxonNames: {

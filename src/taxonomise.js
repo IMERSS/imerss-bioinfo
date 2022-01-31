@@ -334,8 +334,8 @@ hortis.sanitizeSpeciesName = function (name) {
     // Examples such as Blidingia spp., including Blidingia minima var. vexata
     [" sp.", " spp.", "?", " / "].forEach(function (toRemove) {
         var index = name.indexOf(toRemove);
-        // Special exception to allow us to process Myxicola sp.A and sp.B
-        if (index !== -1 && !name.match(/sp\.[A-Z]/)) {
+        // Special exception to allow us to process Myxicola sp.A and sp.B, as well as Haliclona sp.1 and sp.2 etc.
+        if (index !== -1 && !name.match(/sp\.[A-Z0-9]/)) {
             name = name.substring(0, index);
         }
     });

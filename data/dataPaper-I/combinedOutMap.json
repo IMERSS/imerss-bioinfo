@@ -41,7 +41,7 @@
     "datasets": {
         "PMLS": {
             "name": "Pacific Marine Life Survey Dive Records (1968-2019)",
-            "input": "E:/Source/gits/bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2021-07-27.csv",
+            "input": "E:/Source/gits/bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2021-07-27-dataPaper.csv",
             "map": "E:/Source/gits/bagatelle/data/Galiano PMLS/PMLS-map.json",
             "outMap": "E:/Source/gits/bagatelle/data/Galiano PMLS/PMLS-out-map.json",
             "colour": "#931362"

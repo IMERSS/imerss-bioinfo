@@ -78,7 +78,7 @@
                 "Subspecies": "", // filled in conditionally
                 "Variety": "", // missing
                 "Form": "", // missing
-                "Authorship": "${authority}", // overridden by subtaxonAuthority in code
+                "Authorship": "${authority}", // overridden by subtaxonAuthority in code - hortis.indexSummary
                 "Nomenclature": "",
                 "Feeds on": "",
                 "symbioticWith": "",

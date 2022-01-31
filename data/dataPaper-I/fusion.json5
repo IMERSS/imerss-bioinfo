@@ -2,7 +2,7 @@
     datasets: {
         PMLS: {
             name: "Pacific Marine Life Survey Dive Records (1968-2019)",
-            input: "%bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2021-07-27.csv",
+            input: "%bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2021-07-27-dataPaper.csv",
             map: "%bagatelle/data/Galiano PMLS/PMLS-map.json",
             outMap: "%bagatelle/data/Galiano PMLS/PMLS-out-map.json",
             colour: "#931362"
@@ -244,10 +244,10 @@
             equals: "PMLS:18231",
             exclude: true
         },
-        Adocia: { // Donna Gibbs has requested this PMLS record be deleted as it is now undeterminable
+/*        Adocia: { // Donna Gibbs has requested this PMLS record be deleted as it is now undeterminable
             field: "genus",
             equals: "Adocia",
             exclude: true
-        },
+        },*/
     }
 }
