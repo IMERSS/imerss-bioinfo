@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="css/bagatelle-all.css" />
+        <script src="../node_modules/infusion/src/lib/jquery/core/js/jquery.js"></script>
+        <script src="js/bagatelle-all.js"></script>
+        <script src="data/Galiano/Galiano_map_0.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+        <title>Galiano Data Paper Part I - Marine List: Map View</title>
+    </head>
+
+    <body>
+        <style>
+            .fl-bagatelle-obs-count-column, .fl-bagatelle-dataset-obs {
+                display: none;
+            }
+            .fl-bagatelle-taxa-count-column, .fl-bagatelle-dataset-taxa {
+                display: none;
+            }            
+            .fl-bagatelle-area-column, .fl-bagatelle-dataset-area {
+                display: none;
+            }
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
+
+        <h2>Galiano Data Paper Part I - Marine List: Map View</h2>
+        <div class="fl-bagatelle-container">
+
+        </div>
+        <script>
+            hortis.mapLoaderWithoutSunburst(".fl-bagatelle-container", {
+                mapGrades: ["hortis.streetmapTiles"],
+                resourceBase: ".",
+                colourCount: "observationCount",
+                renderMarkup: true,
+                showObsListInTooltip: false,
+                geoJSONMapLayers: [json_Galiano_map_0],
+                vizFile: "data/dataPaper-I/Life.json.lz4"});
+        </script>
+    </body>
+</html>

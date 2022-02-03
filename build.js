@@ -43,7 +43,10 @@ var buildIndex = {
         dest: "build/html/bagatelle-map-only.html"
     }, {
         src: "src/buildTest/index.html",
-        dest: "build/index.html"
+        dest: "build/dataPaperSunburstAndMap.html"
+    },  {
+        src: "src/buildTest/Data Paper Part I Visualisation.html",
+        dest: "build/Data Paper Part I Visualisation.html"
     }, {
         src: "data/dataPaper-I/Life.json.lz4",
         dest: "build/data/dataPaper-I/Life.json.lz4"
