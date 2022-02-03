@@ -27,6 +27,9 @@ var buildIndex = {
     codeHeader: "",
     codeFooter: "", // "\njQuery.noConflict()",
     copy: [{
+        src: "node_modules/infusion/src/lib/jquery/core/js/jquery.js",
+        dest: "build/js/jquery.js"
+    }, {
         src: "src/client/img",
         dest: "build/img"
     }, {
