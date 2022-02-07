@@ -140,7 +140,7 @@ of potential taxon name mismatches in [arphaMismatches.csv](arphaMismatches.csv)
 Firstly to cache any necessarily results from the iNaturalist API,
 
     node src/inattify.js data/dataPaper-I-in/reintegrated.csv --map data/dataPaper-I-in/dataPaper-out-map.json
-    
+
 Secondly, to generate the visualisation file,
 
     node src/marmalise.js data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/combinedOutMap.json -o data/dataPaper-I/Life.json.lz4

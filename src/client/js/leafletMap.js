@@ -120,6 +120,13 @@ fluid.defaults("hortis.streetmapTiles", {
     }
 });
 
+fluid.defaults("hortis.GBIFTiles", {
+    tileOptions: {
+        tileUrl: "https://tile.gbif.org/3857/omt/{z}/{x}/{y}@1x.png?style=gbif-classic",
+        tileAttribution: "&copy <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors, © <a href=\"https://openmaptiles.org/\">OpenMapTiles</a>, <a href=\"/citation-guidelines\">GBIF</a>"
+    }
+});
+
 hortis.leafletMap.addTileLayer = function (map, tileOptions) {
     if (tileOptions && tileOptions.tileUrl) {
         L.tileLayer(tileOptions.tileUrl, {
@@ -496,8 +503,9 @@ hortis.leafletMap.drawGrid = function (map, quantiser, datasetEnabled) {
 
 
 hortis.projectBounds = {
-    Galiano: [[48.855,-123.65],[49.005,-123.25]],
-    Valdes: [[49.000, -123.798],[49.144,-123.504]]
+    Galiano: [[48.855, -123.65],[49.005, -123.25]],
+    Valdes: [[49.000, -123.798],[49.144, -123.504]],
+    Xetthecum: [[48.9325, -123.5236],[48.9515, -123.4681]]
 };
 
 fluid.defaults("hortis.sunburstLoaderWithMap", {
