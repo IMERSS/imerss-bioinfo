@@ -47,9 +47,12 @@ var buildIndex = {
     }, {
         src: "src/buildSource/dataPaperSunburstAndMap.html",
         dest: "build/dataPaperSunburstAndMap.html"
-    },  {
+    }, {
         src: "src/buildSource/Data Paper Part I Visualisation.html",
         dest: "build/Data Paper Part I Visualisation.html"
+    }, {
+        src: "src/buildSource/Valdes Island Map View.html",
+        dest: "build/Valdes Island Map View.html"
     }, {
         src: "data/dataPaper-I/Life.json.lz4",
         dest: "build/data/dataPaper-I/Life.json.lz4"
