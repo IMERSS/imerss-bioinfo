@@ -9,8 +9,7 @@ fluid.defaults("hortis.leafletMap", {
     selectors: {
         datasetControls: ".fld-bagatelle-dataset-controls",
         map: ".fld-bagatelle-map",
-        tooltip: ".fld-bagatelle-map-tooltip",
-        grid: ".fld-bagatelle-map-grid"
+        tooltip: ".fld-bagatelle-map-tooltip"
     },
     members: {
         map: "@expand:L.map({that}.dom.map.0, {that}.options.mapOptions)"
@@ -38,10 +37,6 @@ fluid.defaults("hortis.leafletMap", {
         "buildMap.addTiles": "hortis.leafletMap.addTileLayer({that}.map, {that}.options.tileOptions)"
     },
     modelListeners: {
-        drawGrid: {
-            path: ["indexVersion", "datasetEnabled"],
-            func: "{that}.drawGrid"
-        },
         updateTooltip: {
             path: ["mapBlockTooltipId", "indexVersion", "datasetEnabled"],
             priority: "after:drawGrid",
@@ -68,9 +63,6 @@ fluid.defaults("hortis.leafletMap", {
             args: ["{that}.model.datasetEnabled", "{that}.quantiser.model.squareSide", "{that}.options.datasets", "{that}.quantiser", "{that}.model.indexVersion"]
         }
     },
-    invokers: {
-        drawGrid: "hortis.leafletMap.drawGrid({that}, {that}.quantiser, {that}.model.datasetEnabled)"
-    },
     dynamicComponents: {
         geoJSONLayers: {
             sources: "{that}.options.geoJSONMapLayers",
@@ -91,11 +83,6 @@ fluid.defaults("hortis.leafletMap", {
     },
     mapOptions: {
         zoomSnap: 0.1
-    },
-    gridStyle: {
-        color: "black",
-        weight: 2.0,
-        fillOpacity: 1
     },
     heatLow: "#ffffff",
     // heatHigh: "#ff0000",
@@ -243,23 +230,12 @@ hortis.leafletMap.createTooltip = function (that, markup) {
     var tooltip = $(markup.tooltip).appendTo(that.container);
     tooltip.hide();
     that.map.createPane("hortis-tooltip", tooltip[0]);
-    that.map.createPane("hortis-grid");
-    that.gridGroup = L.layerGroup({pane: "hortis-grid"}).addTo(that.map);
     var container = that.map.getContainer();
     $(container).on("click", function (event) {
         if (event.target === container) {
             that.applier.change("mapBlockTooltipId", null);
         }
     });
-};
-
-hortis.rectFromCorner = function (tl, latres, longres) {
-    return [
-        [tl[0], tl[1]],
-        [tl[0], tl[1] + longres],
-        [tl[0] + latres, tl[1] + longres],
-        [tl[0] + latres, tl[1]]
-    ];
 };
 
 fluid.defaults("hortis.datasetControlBase", {

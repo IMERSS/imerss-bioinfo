@@ -215,7 +215,7 @@ hortis.oneDatasetToLoadable = function (dataset, key) {
     var rawInput = hortis.csvReaderWithMap({
         inputFile: dataset.input,
         mapColumns: map.columns,
-        templateMap: true
+        templateMap: dataset.templateMap === false ? false : true
     }).completionPromise;
     var parsedFilters = hortis.checkFilters(dataset.filters, map.columns);
     return {
@@ -315,6 +315,8 @@ hortis.mapBCCSNResolution = function (resolution) {
     }
 };
 
+// Some commonly used filters - split off into a proper infrastructure
+
 hortis.deprivatise = function (resolved) {
     resolved.obsRows.forEach(function (row) {
         row.latitude = row.privateLatitude || row.latitude;
@@ -327,6 +329,18 @@ hortis.roundCoordinates = function (resolved, patch) {
         row.latitude = hortis.roundDecimals(row.latitude, patch.places);
         row.longitude = hortis.roundDecimals(row.longitude, patch.places);
     });
+};
+
+hortis.deduplicateById = function (resolved, patch) {
+    var idField = patch.idField;
+    var usedIds = {};
+    var filteredObsRows = resolved.obsRows.filter(function (row) {
+        var id = row[idField];
+        var used = usedIds[id];
+        usedIds[id] = true;
+        return !used;
+    });
+    resolved.obsRows = filteredObsRows;
 };
 
 hortis.sanitizeSpeciesName = function (name) {

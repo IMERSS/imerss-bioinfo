@@ -1,0 +1,86 @@
+{
+    defaultColor: [35,35,35],
+    baseDirectory: "%bagatelle/data/Xetthecum/qgis2web_2022_02_12-21_38_21_508226/data",
+    regions: {
+        Anthropogenic: {
+            classes: {
+                RW: {
+                    label: "Rural",
+                    fillColor: [151,139,1],
+                },
+                DP: { // Developed, exposed soil, Developed, road surface
+                    label: "Developed",
+                    fillColor: [150,150,150]
+                },
+                AG: { // Agricultural, cultivated field
+                    label: "Agricultural",
+                    fillColor: [252,253,191]
+                }
+            }
+        },
+        "Woodlands and rock outcrops": {
+            classes: {
+                WD: {
+                    label: "Woodland",
+                    fillColor: [105,7,39]
+                },
+                CL: { // Coastal bluff
+                    label: "Rock outcrop",
+                    fillColor: [104,104,104]
+                }
+            }
+        },
+        Forests: {
+            classes: {
+                MF: { // Mature conifer forest, Mature mixed forest
+                    label: "Mature forest",
+                    fillColor: [0,64,0]
+                },
+                YF: { // Young conifer forest, Young mixed forest, Young broadleaf forest
+                    label: "Young forest",
+                    fillColor: [0,159,15]
+                },
+                PS: { // Coniferous pole sapling, broadleaf pole sapling
+                    label: "Pole sapling",
+                    fillColor: [77,175,74]
+                },
+                RH: { // Clearcut, variable retention,
+                    label: "Recently harvested",
+                    fillColor: [88,198,84]
+                }
+            }
+        },
+        Freshwater: {
+            classes: {
+                LC: { // Laughlin Lake, Pond
+                    label: "Lacustrine",
+                    fillColor: [55,126,184]
+                },
+                WN: { // Shallow water, Marsh
+                    label: "Wetland",
+                    fillColor: [54,60,184]
+                },
+                ST: { // Davidson Creek, Greig creek, Note: these are all MultiLineString
+                    label: "Streams",
+                    color: [72,123,182]
+                },
+                RI: { // Fen
+                    label: "Riparian",
+                    fillColor: [14,44,49]
+                }
+            }
+        },
+        Marine: {
+            classes: {
+                MAR: { // Dock, Subtidal
+                    label: "Marine",
+                    fillColor: [5,29,90]
+                },
+                LT: { // Shoreline
+                    label: "Littoral",
+                    fillColor: [39,92,132]
+                }
+            }
+        }
+    }
+}

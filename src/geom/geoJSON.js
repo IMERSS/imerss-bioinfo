@@ -56,6 +56,10 @@ hortis.intersectsAnyFeature = function (features, row) {
     return intersectCount > 0;
 };
 
+hortis.rowToLoggable = function (row) {
+    return fluid.filterKeys(row, ["iNaturalistTaxonName", "observationId", "placeName", "latitude", "longitude"]);
+};
+
 hortis.makeFeatureRowFilter = function (feature, options) {
     options = options || {};
     return function (rows) {
@@ -66,7 +70,7 @@ hortis.makeFeatureRowFilter = function (feature, options) {
             if (!accept) {
                 ++rejections;
                 if (options.logRejection) {
-                    var tolog = fluid.filterKeys(row, ["iNaturalistTaxonName", "observationId", "placeName", "latitude", "longitude"]);
+                    var tolog = hortis.rowToLoggable(row);
                     console.log("Rejecting observation ", tolog, " as lying outside polygon " + options.featureName);
                 }
             }
@@ -84,4 +88,32 @@ hortis.processRegionFilter = function (resolved, patch, key) {
     });
     // TODO: MATT-based immutable filtering!
     resolved.obsRows = filter(resolved.obsRows);
+};
+
+hortis.processAssignFeature = function (resolved, patch) {
+    var extraCols = {};
+    var features = patch.patchData.features;
+    resolved.obsRows.forEach(function (row) {
+        row.point = [hortis.parseFloat(row.longitude), hortis.parseFloat(row.latitude)];
+        var intersects = features.filter(function (feature) {
+            return hortis.intersectsFeature(feature, row);
+        });
+        if (intersects.length === 0) {
+            console.log("Warning: row ", hortis.rowToLoggable(row), " did not intersect any feature");
+        } else {
+            if (intersects.length > 1) {
+                var allProps = fluid.getMembers(intersects, "properties");
+                console.log("Warning: row ", hortis.rowToLoggable(row), " intersected multiple features: ", allProps);
+            }
+            var props = intersects[0].properties;
+            fluid.extend(row, props);
+            fluid.extend(extraCols, props);
+        }
+    });
+    var extraOutMap = {
+        columns: fluid.transform(extraCols, function (junk, key) {
+            return key;
+        })
+    };
+    resolved.combinedObsOutMap = hortis.combineMaps([resolved.combinedObsOutMap, extraOutMap], true);
 };

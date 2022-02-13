@@ -181,8 +181,8 @@
 }
 
 .flc-bagatelle-viz-dimens {
-    height: 800px;
-    width: 800px;
+    min-height: 800px;
+    min-width: 800px;
 }
 
 #fli-tab-checklist {

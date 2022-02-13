@@ -28,6 +28,13 @@ hortis.iNatProjects = {
             taxon_id: 48460 // Life
         },
         outputFile: "data/Valdes/iNaturalist_Catalogue_%Date.csv"
+    },
+    Xetthecum: {
+        paramMap: {
+            project_id: "xetthecum",
+            taxon_id: 48460 // Life
+        },
+        outputFile: "data/Xetthecum/iNaturalist_Catalogue_%Date.csv"
     }
 };
 
@@ -93,6 +100,7 @@ hortis.applyResponse = function (data) {
 };
 
 hortis.makeObsRequest = function (directModel) {
+    console.log("Making request ", directModel);
     var promise = source.get(directModel);
 
     promise.then(function (data) {
