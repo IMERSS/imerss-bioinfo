@@ -93,6 +93,7 @@ hortis.processRegionFilter = function (resolved, patch, key) {
 hortis.processAssignFeature = function (resolved, patch) {
     var extraCols = {};
     var features = patch.patchData.features;
+    var last = Date.now();
     resolved.obsRows.forEach(function (row) {
         row.point = [hortis.parseFloat(row.longitude), hortis.parseFloat(row.latitude)];
         var intersects = features.filter(function (feature) {
@@ -110,6 +111,7 @@ hortis.processAssignFeature = function (resolved, patch) {
             fluid.extend(extraCols, props);
         }
     });
+    console.log("Intersected " + resolved.obsRows.length + " observations in " + (Date.now() - last) + " ms");
     var extraOutMap = {
         columns: fluid.transform(extraCols, function (junk, key) {
             return key;

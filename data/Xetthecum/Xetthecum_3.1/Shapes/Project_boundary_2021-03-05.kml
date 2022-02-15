@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Project_boundary_2021_03_05" id="Project_boundary_2021_03_05">
+	<SimpleField name="id" type="float"></SimpleField>
+</Schema>
+<Folder><name>Project_boundary_2021_03_05</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-123.51846073821,48.9514538122403 -123.490964580188,48.9514680453201 -123.490686837345,48.9365790604239 -123.493981152342,48.9365811452418 -123.518478336336,48.9364963614494 -123.51846073821,48.9514538122403</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+</Folder>
+</Document></kml>

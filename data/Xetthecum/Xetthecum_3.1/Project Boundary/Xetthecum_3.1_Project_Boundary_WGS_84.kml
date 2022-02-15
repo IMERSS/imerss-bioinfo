@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Xetthecum_3" id="Xetthecum_3">
+	<SimpleField name="FID" type="int"></SimpleField>
+</Schema>
+<Folder><name>Xetthecum_3</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Xetthecum_3">
+		<SimpleData name="FID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-123.518197490644,48.9367276700436 -123.518348304525,48.9512914606035 -123.491060935932,48.9514108522108 -123.490918060535,48.936847000795 -123.518197490644,48.9367276700436</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+</Folder>
+</Document></kml>

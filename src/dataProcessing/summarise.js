@@ -13,6 +13,8 @@ fluid.defaults("hortis.summarise", {
         uniqueRows: {},
         discardedRows: {}
     },
+    summaryOutMapExtraColumns: { // TODO: In case we need an obs file with, e.g. Hulq names - propagate this through from fusion
+    },
     fields: {
         date: "dateObserved",
         dateResolution: "dateObservedResolution",
@@ -71,7 +73,9 @@ hortis.summarise.copyObsFields = function (target, source, prefix, fields) {
 hortis.summarise.updateRowRange = function (that, summaryRow, obsRow) {
     var obsCountField = that.options.fields.obsCount;
     if (!summaryRow) {
-        summaryRow = fluid.filterKeys(obsRow, Object.keys(hortis.summariseCommonOutMap.columns));
+        var commonKeys = Object.keys(hortis.summariseCommonOutMap.columns);
+        var extraKeys = Object.keys(that.options.summaryOutMapExtraColumns);
+        summaryRow = fluid.filterKeys(obsRow, commonKeys.concat(extraKeys));
         summaryRow.firstTimestamp = Infinity;
         summaryRow.lastTimestamp = -Infinity;
         summaryRow[obsCountField] = 1;

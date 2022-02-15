@@ -101,6 +101,7 @@
 .fld-bagatelle-map-holder {
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
+    --bagatelle-stroke-width: 2;
 }
 
 .fld-bagatelle-dataset-name {
@@ -109,6 +110,13 @@
 
 .fld-bagatelle-map-grid {
     z-index: 750;
+}
+
+.fld-bagatelle-map-region {
+    stroke-width: var(--bagatelle-stroke-width);
+    stroke: black;
+    stroke-opacity: 1;
+    fill-opacity: 1;
 }
 
 .fld-bagatelle-map-tooltip {

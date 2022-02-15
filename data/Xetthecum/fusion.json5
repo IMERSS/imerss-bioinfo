@@ -45,7 +45,18 @@
             type: "hortis.pipe.JSONInput",
             input: "%bagatelle/data/Xetthecum/flatFeatures.json",
             processor: "hortis.processAssignFeature"
-        }
+        },
+    },
+    summaryPatches: {
+        AssignHulqNames: {
+            type: "hortis.pipe.CSVInput",
+            input: "%bagatelle/data/Xetthecum/Culturally_significant_species_synthesized_Thom_2011_&_Turner_2014.csv",
+            map: "%bagatelle/data/Xetthecum/Culturally_significant-map.json",
+            processor: "hortis.xetthecum.assignHulqNames"
+        },
+    },
+    summaryOutMapExtraColumns: {
+        // TODO: In case we want an obs file with these fields
     },
     summarise: true,
     applySwaps: true, // TODO: Naturally, should be an actual pipeline element

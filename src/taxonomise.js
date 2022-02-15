@@ -20,6 +20,8 @@ require("./utils/utils.js");
 require("./utils/settleStructure.js");
 require("./iNaturalist/iNatUrls.js");
 
+require("./xetthecum/xetthecumFilters.js"); // TODO: Bundle into open pipeline system when we can move to it
+
 fluid.setLogging(true);
 fluid.defeatLogging = true;
 
@@ -296,6 +298,9 @@ hortis.fusionToLoadable = function (fusion, taxaMap) {
             return hortis.oneDatasetToLoadable(dataset, key);
         }),
         patches: fluid.transform(fusion.patches, function (patch) {
+            return hortis.onePatchToLoadable(patch);
+        }),
+        summaryPatches: fluid.transform(fusion.summaryPatches, function (patch) {
             return hortis.onePatchToLoadable(patch);
         }),
         taxa: hortis.csvReaderWithMap({
@@ -598,6 +603,7 @@ hortis.settleStructure(dataPromises).then(function (data) {
     if (summarise) {
         hortis.applyPatches(resolved, data.patches);
         resolved.summarisedRows = hortis.doSummarise(resolved.obsRows, true);
+        hortis.applyPatches(resolved, data.summaryPatches);
     }
 
     var reintegratedFilename = parsedArgs.dry ? "reintegrated.csv" : fluid.module.resolvePath(fusion.output);

@@ -20,6 +20,8 @@ var buildIndex = {
         "src/client/js/autocomplete.js",
         "src/client/js/colour.js",
         "src/client/js/leafletMap.js",
+        "src/client/js/datasetControls.js",
+        "src/client/js/leafletMapWithGrid.js",
         "src/client/js/renderSVG.js",
         "src/client/js/tabs.js",
         "src/client/js/checklist.js"

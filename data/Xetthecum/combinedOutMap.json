@@ -30,7 +30,15 @@
         "lastCollection": "Last Source",
         "lastPlaceName": "Last Place Name",
         "lastCatalogueNumber": "Last Catalogue Number",
-        "lastTimestamp": "Last Date Reported"
+        "lastTimestamp": "Last Date Reported",
+        "foodValue": "Food Value",
+        "medicinalValue": "Medicinal Value",
+        "spiritualValue": "Spiritual Value",
+        "materialValue": "Material Value",
+        "tradeValue": "Trade Value",
+        "indicatorValue": "Indicator Value",
+        "hulqName": "Hulquminum Name",
+        "hulqAuth": "Hulquminum Authority"
     },
     "counts": {
         "observationCount": {

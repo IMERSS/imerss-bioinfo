@@ -1,0 +1,24 @@
+Hulquminum Ecosystem Guide: From https://docs.google.com/spreadsheets/d/1EVi-hxqB5JxrP7_HMeSiQ2N55ETAkopt58Ei8D0OfGw/edit#gid=0
+
+Culturally Significant Species: From https://docs.google.com/spreadsheets/d/1c2aJosx35RhudJa1_rdtE7qgiRlNoB-jwJOSmI55iaI/edit#gid=0
+AS 13/2/22: for names, G H I in descending rank order of priority
+
+I am still not sure whether we will be able to use the content from X
+It should theoretically be OK, as long as the source was cited... but apparently the Hul'qumi'num Treat Group has stopped publishing this text
+it may not be wise for us to use it
+I think that perhaps the best thing we could do is to note the values as symbolized in Y through AD
+
+Columns Y through AD
+the values are ascribed in a binary 1/0
+Md = medicinal
+Fd = Food
+Sp = Spiritual
+Mt = Material
+Tr = Trade
+Id = Indicator
+
+cultural indicator species
+things like....
+When the Salmonberry bird sings, the salmonberries ripen
+and not long thereafter the sockeye salmon begin their run in the Fraser River
+they are cultural / phenological indicators
