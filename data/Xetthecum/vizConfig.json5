@@ -1,0 +1,10 @@
+{
+    featuresFile: "%bagatelle/data/Xetthecum/flatFeatures.json",
+    obsFile: "%bagatelle/data/Xetthecum/reintegrated-obs.csv",
+    obsMapFile: "%bagatelle/data/Xetthecum/combinedOutMap-obs.json",
+    outputFile: "%bagatelle/data/Xetthecum/Life.json.lz4",
+    inputFiles: ["%bagatelle/data/Xetthecum/reintegrated.csv"],
+    mapFile: "%bagatelle/data/Xetthecum/combinedOutMap.json",
+    regionField: "region",
+    obsIdField: "observationId"
+}

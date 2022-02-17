@@ -429,24 +429,6 @@ hortis.tooltipLookup = {
     commonName: "Common Name"
 };
 
-hortis.obsToSummaryFields = {
-    recordedBy: "Reported By",
-    collection: "Source",
-    placeName: "Place Name",
-    timestamp: "Date Reported"
-};
-
-hortis.specialRows = {
-    collected: {
-        key: "Collected",
-        value: [{collected: "%x"}, {collector: " by %x"}]
-    },
-    observed: { // TODO: We've lost Simonization - we'll have to restore it in order to get back meaning from these two rows
-        key: "Observed",
-        value: [{dateObserved: "%x", date: true}, {recordedBy: " by %x"}]
-    }
-};
-
 hortis.commonFields = ["wikipediaSummary", "commonName"];
 
 hortis.dumpRow = function (key, value, markup) {
@@ -479,6 +461,24 @@ hortis.renderObsBound = function (row, prefix, markup) {
     }
 };
 
+hortis.hulqValues = ["food", "medicinal", "spiritual", "material", "trade", "indicator"];
+
+hortis.dumpHulqName = function (row, markup) {
+    var nameRow = fluid.stringTemplate(markup.tooltipRow, {
+        key: "Hul'qumi'num name",
+        value: row.hulqName + " " + row.hulqAuth
+    });
+    var values = hortis.hulqValues.filter(function (value) {
+        return row[value + "Value"] === "1"
+    }).map(hortis.capitalize);
+    
+    var valueRow = fluid.stringTemplate(markup.tooltipRow, {
+        key: "Cultural values",
+        value: values.join(", ")
+    });
+    return nameRow + valueRow;
+};
+
 hortis.renderTooltip = function (row, markup) {
     if (!row) {
         return null;
@@ -494,6 +494,11 @@ hortis.renderTooltip = function (row, markup) {
         togo += hortis.dumpRow(keyName, "<div><img height=\"150\" width=\"150\" class=\"fl-bagatelle-photo\" src=\"" + url + "\"/></div>", markup);
     };
     if (row.rank) {
+        if (row.iNaturalistTaxonImage && !row.taxonPic) {
+            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage);
+        } else if (row.taxonPic) {
+            dumpImage("taxonPic", row.taxonPic);
+        }
         if (row.phyloPicUrl) {
             dumpPhyloPic("phyloPic", row.phyloPicUrl);
         }
@@ -501,11 +506,6 @@ hortis.renderTooltip = function (row, markup) {
         hortis.commonFields.forEach(function (field) {
             dumpRow(field, row[field]);
         });
-        if (row.iNaturalistTaxonImage && !row.taxonPic) {
-            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage);
-        } else if (row.taxonPic) {
-            dumpImage("taxonPic", row.taxonPic);
-        }
         dumpRow("taxonPicDescription", row.taxonPicDescription);
         dumpRow("species", row.childCount);
     } else {
@@ -517,6 +517,10 @@ hortis.renderTooltip = function (row, markup) {
         } else {
             dumpRow("iNaturalistTaxonName", row.iNaturalistTaxonName);
         }
+        if (row.hulqName) { // wot no polymorphism?
+            togo += hortis.dumpHulqName(row, markup);
+        }
+
         hortis.commonFields.forEach(function (field) {
             dumpRow(field, row[field]);
         });

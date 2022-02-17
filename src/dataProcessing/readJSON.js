@@ -17,3 +17,7 @@ hortis.readJSONSync = function (fileName, message) {
     });
     return togo;
 };
+
+hortis.readModuleJSONSync = function (fileName, message) {
+    return hortis.readJSONSync(fluid.module.resolvePath(fileName), message);
+};

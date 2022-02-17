@@ -22,6 +22,7 @@ var buildIndex = {
         "src/client/js/leafletMap.js",
         "src/client/js/datasetControls.js",
         "src/client/js/leafletMapWithGrid.js",
+        "src/client/js/leafletMapWithRegions.js",
         "src/client/js/renderSVG.js",
         "src/client/js/tabs.js",
         "src/client/js/checklist.js"
@@ -56,6 +57,9 @@ var buildIndex = {
         src: "src/buildSource/Valdes Island Map View.html",
         dest: "build/Valdes Island Map View.html"
     }, {
+        src: "src/buildSource/Xetthecum.html",
+        dest: "build/Xetthecum.html"
+    }, {
         src: "data/dataPaper-I/Life.json.lz4",
         dest: "build/data/dataPaper-I/Life.json.lz4"
     },  {
@@ -70,6 +74,9 @@ var buildIndex = {
     }, {
         src: "data/Galiano WoL/Life.json.lz4",
         dest: "build/data/Galiano WoL/Life.json.lz4"
+    }, {
+        src: "data/Xetthecum/Life.json.lz4",
+        dest: "build/data/Xetthecum/Life.json.lz4"
     }]
 };
 

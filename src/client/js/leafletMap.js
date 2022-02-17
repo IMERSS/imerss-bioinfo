@@ -5,7 +5,7 @@
 var hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.leafletMap", {
-    gradeNames: "fluid.viewComponent",
+    gradeNames: ["fluid.viewComponent", "{sunburstLoader}.options.mapFlavourGrade"], // Not a distribution because of FLUID-5836
     selectors: {
         map: ".fld-bagatelle-map",
         tooltip: ".fld-bagatelle-map-tooltip"
@@ -43,26 +43,6 @@ fluid.defaults("hortis.leafletMap", {
         // Perhaps this will one day be a "materialiser registration" and we will instead call applier.pullModel("zoom")
         acquireZoom: "hortis.leafletMap.acquireZoom({that})",
         fitBounds: "hortis.leafletMap.fitBounds({that}, {arguments}.0, {arguments}.1)"
-    },
-    modelListeners: {
-        updateTooltip: {
-            path: ["mapBlockTooltipId", "indexVersion", "datasetEnabled"],
-            priority: "after:drawGrid",
-            excludeSource: "init",
-            func: "hortis.leafletMap.updateTooltip",
-            args: ["{that}", "{that}.model.mapBlockTooltipId"]
-        },
-        updateTooltipHighlight: {
-            path: "mapBlockTooltipId",
-            excludeSource: "init",
-            func: "hortis.leafletMap.updateTooltipHighlight",
-            args: ["{that}", "{change}.oldValue"]
-        },
-        drawScale: {
-            path: "{quantiser}.model.squareSide",
-            func: "hortis.leafletMap.drawScale",
-            args: ["{that}", "{change}.value"]
-        }
     },
     dynamicComponents: {
         geoJSONLayers: { // Dumb, "global" geoJSON layers that are not interactive. Only historical example is json_Galiano_map_0, as per qgis2web exports
@@ -150,86 +130,28 @@ hortis.leafletMap.createTooltip = function (that, markup) {
     tooltip.hide();
     that.map.createPane("hortis-tooltip", tooltip[0]);
     var container = that.map.getContainer();
+    var clearMapSelection = function () {
+        that.applier.change("mapBlockTooltipId", null);
+    };
     $(container).on("click", function (event) {
         if (event.target === container) {
-            that.applier.change("mapBlockTooltipId", null);
+            clearMapSelection();
+        }
+    });
+    $(document).on("click", function (event) {
+        var closest = event.target.closest(".fld-bagatelle-nodismiss-map");
+        // Mysteriously SVG paths are not in the document
+        if (!closest && event.target.closest("body")) {
+            clearMapSelection();
         }
     });
 };
 
-hortis.leafletMap.tooltipRow = function (map, key, value) {
-    return fluid.stringTemplate(map.options.markup.tooltipRow, {key: key, value: value});
-};
-
-hortis.leafletMap.renderObsId = function (obsId) {
-    var dataset = hortis.datasetIdFromObs(obsId);
-    if (dataset === "iNat") {
-        var localId = hortis.localIdFromObs(obsId);
-        return fluid.stringTemplate("iNaturalist: <a target=\"_blank\" href=\"https://www.inaturalist.org/observations/%obsId\">%obsId</a>", {
-            obsId: localId
-        });
-    } else {
-        return obsId;
-    }
-};
-
-// TODO: Design fault, only responsible for REMOVING highlight, adding of highlight occurs in updateTooltip
-hortis.leafletMap.updateTooltipHighlight = function (map, oldKey) {
-    if (oldKey) {
-        var oldBucket = map.toPlot[oldKey];
-        if (oldBucket) {
-            var element = oldBucket.Lpolygon.getElement();
-            element.classList.remove("fl-bagatelle-highlightBlock");
-        }
-    }
-};
-
-hortis.leafletMap.drawScale = function (map, squareSide) {
-    var dimText = squareSide.toFixed(0) + "m";
-    map.container.find(".leaflet-bottom.leaflet-left").text("Block size: " + dimText + " x " + dimText);
-};
-
-hortis.leafletMap.updateTooltip = function (map, key) {
-    var tooltip = map.locate("tooltip");
-    var bucket = map.toPlot[key];
-    if (bucket) {
-        var text = map.options.markup.tooltipHeader;
-        var dumpRow = function (key, value) {
-            text += hortis.leafletMap.tooltipRow(map, key, value);
-        };
-        var c = function (value) {
-            return value.toFixed(3);
-        };
-        dumpRow("Observation Count", bucket.count);
-        dumpRow("Species Richness", Object.values(bucket.byTaxonId).length);
-        var p = bucket.polygon;
-        var lat0 = p[0][0], lat1 = p[2][0];
-        var lng0 = p[0][1], lng1 = p[1][1];
-        dumpRow("Latitude", c(lat0) + " to " + c(lat1));
-        dumpRow("Longitude", c(lng0) + " to " + c(lng1));
-        if (bucket.count < 5 && map.options.showObsListInTooltip) {
-            var obs = fluid.flatten(Object.values(bucket.byTaxonId));
-            var obsString = fluid.transform(obs, hortis.leafletMap.renderObsId).join("<br/>");
-            dumpRow("Observations", obsString);
-        }
-        text += map.options.markup.tooltipFooter;
-        tooltip[0].innerHTML = text;
-        tooltip.show();
-        var element = bucket.Lpolygon.getElement();
-        element.classList.add("fl-bagatelle-highlightBlock");
-        var parent = element.parentNode;
-        parent.insertBefore(element, null);
-    } else {
-        tooltip.hide();
-    }
-};
-
-
 
 hortis.projectBounds = {
-    Galiano: [[48.855, -123.65],[49.005, -123.25]],
-    Valdes: [[49.000, -123.798],[49.144, -123.504]],
-    Xetthecum: [[48.9325, -123.5236],[48.9515, -123.4681]]
+    Galiano: [[48.855, -123.65], [49.005, -123.25]],
+    Valdes: [[49.000, -123.798], [49.144, -123.504]],
+    Xetthecum: [[48.9365, -123.5185], [48.9515, -123.4942]]
 };
 
 fluid.defaults("hortis.sunburstLoaderWithMap", {
@@ -256,10 +178,6 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
         mapGrades: {
             target: "{that map}.options.gradeNames",
             source: "{that}.options.mapGrades"
-        },
-        mapFlavourGrade: {
-            target: "{that map}.options.gradeNames",
-            source: "{that}.options.mapFlavourGrade"
         }
     },
     components: {

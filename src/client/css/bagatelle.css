@@ -4,7 +4,7 @@
 }
 
 .fld-bagatelle-segment.fl-bagatelle-layoutRoot {
-    stroke-width: 2.5px;
+    stroke-width: 3.5px;
 }
 
 .fld-bagatelle-labelPath {
@@ -37,6 +37,8 @@
 .fl-taxonDisplay-key {
     width: 12em;
     padding-right: 10px;
+    font-weight: bold;
+    padding: 2px;
 }
 
 .fl-taxonDisplay-value {
@@ -135,6 +137,14 @@
     stroke-width: 4px;
 }
 
+.fl-bagatelle-selected-region {
+    fill-opacity: 1;
+}
+
+.fl-bagatelle-unselected-region {
+    fill-opacity: 0.25;
+}
+
 .fld-bagatelle-map-tooltip tr:nth-child(even) {
     background: #eee;
 }
@@ -189,8 +199,8 @@
 }
 
 .flc-bagatelle-viz-dimens {
-    min-height: 800px;
-    min-width: 800px;
+    height: 800px;
+    width: 800px;
 }
 
 #fli-tab-checklist {

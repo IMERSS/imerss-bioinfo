@@ -19,6 +19,24 @@ fluid.defaults("hortis.leafletMap.withGrid", {
             path: "zoom",
             listener: "hortis.leafletMap.updateOutlineWidth",
             args: ["{change}.value", "{that}.options.baseZoomForOutline", "{that}.container.0"]
+        },
+        drawScale: {
+            path: "{quantiser}.model.squareSide",
+            func: "hortis.leafletMap.drawScale",
+            args: ["{that}", "{change}.value"]
+        },
+        updateTooltip: {
+            path: ["mapBlockTooltipId", "indexVersion", "datasetEnabled"],
+            priority: "after:drawGrid",
+            excludeSource: "init",
+            func: "hortis.leafletMap.withGrid.updateTooltip",
+            args: ["{that}", "{that}.model.mapBlockTooltipId"]
+        },
+        updateTooltipHighlight: {
+            path: "mapBlockTooltipId",
+            excludeSource: "init",
+            func: "hortis.leafletMap.withGrid.updateTooltipHighlight",
+            args: ["{that}", "{change}.oldValue"]
         }
     },
     invokers: {
@@ -72,6 +90,11 @@ hortis.leafletMap.withGrid.addGrid = function (that) {
     that.gridGroup = L.layerGroup({pane: "hortis-grid"}).addTo(that.map);
 };
 
+hortis.leafletMap.drawScale = function (map, squareSide) {
+    var dimText = squareSide.toFixed(0) + "m";
+    map.container.find(".leaflet-bottom.leaflet-left").text("Block size: " + dimText + " x " + dimText);
+};
+
 hortis.rectFromCorner = function (tl, latres, longres) {
     return [
         [tl[0], tl[1]],
@@ -117,8 +140,71 @@ hortis.leafletMap.drawGrid = function (map, quantiser, datasetEnabled) {
             map.applier.change("mapBlockTooltipId", key);
         });
     });
+    // Deal with overall loss of a block through not appearing in dataset selection
     if (!toPlot[map.model.mapBlockTooltipId]) {
         map.applier.change("mapBlockTooltipId", null);
+    }
+};
+
+hortis.leafletMap.tooltipRow = function (map, key, value) {
+    return fluid.stringTemplate(map.options.markup.tooltipRow, {key: key, value: value});
+};
+
+hortis.leafletMap.renderObsId = function (obsId) {
+    var dataset = hortis.datasetIdFromObs(obsId);
+    if (dataset === "iNat") {
+        var localId = hortis.localIdFromObs(obsId);
+        return fluid.stringTemplate("iNaturalist: <a target=\"_blank\" href=\"https://www.inaturalist.org/observations/%obsId\">%obsId</a>", {
+            obsId: localId
+        });
+    } else {
+        return obsId;
+    }
+};
+
+// TODO: Design fault, only responsible for REMOVING highlight, adding of highlight occurs in updateTooltip
+hortis.leafletMap.withGrid.updateTooltipHighlight = function (map, oldKey) {
+    if (oldKey) {
+        var oldBucket = map.toPlot[oldKey];
+        if (oldBucket) {
+            var element = oldBucket.Lpolygon.getElement();
+            element.classList.remove("fl-bagatelle-highlightBlock");
+        }
+    }
+};
+
+hortis.leafletMap.withGrid.updateTooltip = function (map, key) {
+    var tooltip = map.locate("tooltip");
+    var bucket = map.toPlot[key];
+    if (bucket) {
+        var text = map.options.markup.tooltipHeader;
+        var dumpRow = function (key, value) {
+            text += hortis.leafletMap.tooltipRow(map, key, value);
+        };
+        var c = function (value) {
+            return value.toFixed(3);
+        };
+        dumpRow("Observation Count", bucket.count);
+        dumpRow("Species Richness", Object.values(bucket.byTaxonId).length);
+        var p = bucket.polygon;
+        var lat0 = p[0][0], lat1 = p[2][0];
+        var lng0 = p[0][1], lng1 = p[1][1];
+        dumpRow("Latitude", c(lat0) + " to " + c(lat1));
+        dumpRow("Longitude", c(lng0) + " to " + c(lng1));
+        if (bucket.count < 5 && map.options.showObsListInTooltip) {
+            var obs = fluid.flatten(Object.values(bucket.byTaxonId));
+            var obsString = fluid.transform(obs, hortis.leafletMap.renderObsId).join("<br/>");
+            dumpRow("Observations", obsString);
+        }
+        text += map.options.markup.tooltipFooter;
+        tooltip[0].innerHTML = text;
+        tooltip.show();
+        var element = bucket.Lpolygon.getElement();
+        element.classList.add("fl-bagatelle-highlightBlock");
+        var parent = element.parentNode;
+        parent.insertBefore(element, null);
+    } else {
+        tooltip.hide();
     }
 };
 

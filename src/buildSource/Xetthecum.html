@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="css/bagatelle-all.css" />
+        <script src="js/jquery.js"></script>
+        <script src="js/bagatelle-all.js"></script>
+        <script src="data/Galiano/Galiano_map_0.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
+
+        <title>Xetthecum Ecocultural Mapping</title>
+    </head>
+
+    <body>
+        <h2>Xetthecum Ecocultural Mapping</h2>
+        <div class="fl-bagatelle-container">
+        </div>
+        <script>
+            hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
+                mapGrades: ["hortis.GBIFTiles"],
+                mapFlavourGrade: "hortis.leafletMap.withRegions",
+                resourceBase: ".",
+                mapBounds: hortis.projectBounds.Xetthecum,
+                phyloMap: "%resourceBase/json/kingdomPhyloMap.json",
+                colourCount: "observationCount",
+                renderMarkup: true,
+                vizFile: "data/Xetthecum/Life.json.lz4"});
+        </script>
+    </body>
+</html>
