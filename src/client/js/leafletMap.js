@@ -4,6 +4,18 @@
 
 var hortis = fluid.registerNamespace("hortis");
 
+// Workaround taken from https://github.com/Leaflet/Leaflet/issues/4745 to prevent coordinates being rounded to
+// integers during rendering
+L.Map.include({
+    latLngToLayerPoint: function (latlng) {
+        var projectedPoint = this.project(L.latLng(latlng));
+        var togo = projectedPoint._subtract(this.getPixelOrigin());
+        togo.x = fluid.roundToDecimal(togo.x, 3);
+        togo.y = fluid.roundToDecimal(togo.y, 3);
+        return togo;
+    }
+});
+
 fluid.defaults("hortis.leafletMap", {
     gradeNames: ["fluid.viewComponent", "{sunburstLoader}.options.mapFlavourGrade"], // Not a distribution because of FLUID-5836
     selectors: {

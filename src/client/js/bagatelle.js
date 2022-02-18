@@ -469,9 +469,9 @@ hortis.dumpHulqName = function (row, markup) {
         value: row.hulqName + " " + row.hulqAuth
     });
     var values = hortis.hulqValues.filter(function (value) {
-        return row[value + "Value"] === "1"
+        return row[value + "Value"] === "1";
     }).map(hortis.capitalize);
-    
+
     var valueRow = fluid.stringTemplate(markup.tooltipRow, {
         key: "Cultural values",
         value: values.join(", ")
