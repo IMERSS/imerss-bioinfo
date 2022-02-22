@@ -68,8 +68,14 @@ hortis.addStyle = function (text) {
 };
 
 hortis.leafletMap.withRegions.drawRegions = function (map) {
+    var normalise = function (str) {
+        return str.toLowerCase().replace(/ /g, "-");
+    };
     var regionClass = function (region) {
-        return "fld-bagatelle-region-" + region;
+        return "fld-bagatelle-region-" + normalise(region);
+    };
+    var classClass = function (label) {
+        return "fld-bagatelle-class-" + normalise(label);
     };
 
     map.regionGroup.clearLayers();
@@ -89,7 +95,7 @@ hortis.leafletMap.withRegions.drawRegions = function (map) {
                 color: fluid.colour.arrayToString(clazz.color)
             }
         };
-        options.className = regionClass(region);
+        options.className = regionClass(region) + " " + classClass(clazz.label) + " fld-bagatelle-region";
         var Lpolygon = L.geoJSON(feature, options);
         map.regionGroup.addLayer(Lpolygon);
 

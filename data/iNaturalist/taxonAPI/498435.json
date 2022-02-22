@@ -1,0 +1,62 @@
+{
+    "id": 498435,
+    "name": "Delphacodes lutulentella",
+    "rank": "species",
+    "source_id": 139,
+    "created_at": "2016-06-18T21:24:59.692Z",
+    "updated_at": "2016-06-18T21:25:23.452Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": "ColNameProvider",
+    "observations_count": 0,
+    "listed_taxa_count": 4,
+    "rank_level": 10,
+    "unique_name": "delphacodes lutulentella",
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47120/372739/47158/184884/47744/125816/372860/52073/123608/460738/518002/148055",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "72ee67c5-776d-494b-90c2-0dac9674aece",
+    "photos_locked": false,
+    "default_name": {
+        "id": 813330,
+        "name": "Delphacodes lutulentella",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2016-06-18T21:24:59.692Z",
+    "updated_at_utc": "2016-06-18T21:25:23.452Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 813330,
+            "name": "Delphacodes lutulentella",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 498435,
+            "created_at": "2016-06-18T21:24:59.704Z",
+            "updated_at": "2016-06-18T21:24:59.704Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

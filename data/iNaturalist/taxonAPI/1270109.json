@@ -1,0 +1,62 @@
+{
+    "id": 1270109,
+    "name": "Asterionellopsidaceae",
+    "rank": "family",
+    "source_id": 26252,
+    "created_at": "2021-08-05T23:48:04.260Z",
+    "updated_at": "2021-08-05T23:48:04.260Z",
+    "iconic_taxon_id": 48222,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 36,
+    "listed_taxa_count": 0,
+    "rank_level": 30,
+    "unique_name": "asterionellopsidaceae",
+    "wikipedia_summary": "<b>Asterionellopsidaceae</b> is a family of diatoms belonging to the order Rhaphoneidales.",
+    "wikipedia_title": "",
+    "ancestry": "48460/48222/48221/123880/1268183/1268184",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "a0bc25e1-fdf6-4189-9778-be98ae7c4c4e",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2634945,
+        "name": "Asterionellopsidaceae",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Chromista",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/chromista-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2021-08-05T23:48:04.260Z",
+    "updated_at_utc": "2021-08-05T23:48:04.260Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2634945,
+            "name": "Asterionellopsidaceae",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1270109,
+            "created_at": "2021-08-05T23:48:04.260Z",
+            "updated_at": "2021-08-05T23:48:04.260Z",
+            "creator_id": 527710,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 48222,
+        "name": "Chromista"
+    }
+}

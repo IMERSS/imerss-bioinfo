@@ -1,0 +1,5 @@
+{
+    outputFile: "%bagatelle/data/Galiano/Galiano-Life.json.lz4",
+    inputFiles: ["%bagatelle/data/Galiano/reintegrated.csv"],
+    mapFile: "%bagatelle/data/Galiano/combinedOutMap.json",
+}

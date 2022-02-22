@@ -1,0 +1,62 @@
+{
+    "id": 865801,
+    "name": "Gloiocladia fryeana",
+    "rank": "species",
+    "source_id": 127,
+    "created_at": "2019-02-16T04:59:45.234Z",
+    "updated_at": "2019-02-16T04:59:46.950Z",
+    "iconic_taxon_id": 47126,
+    "is_iconic": false,
+    "name_provider": "EolNameProvider",
+    "observations_count": 2,
+    "listed_taxa_count": 3,
+    "rank_level": 10,
+    "unique_name": "gloiocladia fryeana",
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/47126/57774/1360860/57775/1051024/131330/330795/330793",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "c1a436d0-83a0-41b9-9595-3d28b77b7f00",
+    "photos_locked": false,
+    "default_name": {
+        "id": 1507701,
+        "name": "Gloiocladia fryeana",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Plantae",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/plantae-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2019-02-16T04:59:45.234Z",
+    "updated_at_utc": "2019-02-16T04:59:46.950Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 1507701,
+            "name": "Gloiocladia fryeana",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 865801,
+            "created_at": "2019-02-16T04:59:45.251Z",
+            "updated_at": "2019-02-16T04:59:45.251Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47126,
+        "name": "Plantae"
+    }
+}

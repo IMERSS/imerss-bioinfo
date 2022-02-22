@@ -1,0 +1,62 @@
+{
+    "id": 1269702,
+    "name": "Amphitetras",
+    "rank": "genus",
+    "source_id": 26252,
+    "created_at": "2021-08-04T16:07:38.332Z",
+    "updated_at": "2021-08-04T16:07:38.332Z",
+    "iconic_taxon_id": 48222,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 0,
+    "rank_level": 20,
+    "unique_name": "amphitetras",
+    "wikipedia_summary": null,
+    "wikipedia_title": "",
+    "ancestry": "48460/48222/48221/123880/1268257/1268258/1269701",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "05dbc891-c741-42c6-8477-01669c1b7f9d",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2633831,
+        "name": "Amphitetras",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Chromista",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/chromista-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2021-08-04T16:07:38.332Z",
+    "updated_at_utc": "2021-08-04T16:07:38.332Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2633831,
+            "name": "Amphitetras",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1269702,
+            "created_at": "2021-08-04T16:07:38.332Z",
+            "updated_at": "2021-08-04T16:07:38.332Z",
+            "creator_id": 527710,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 48222,
+        "name": "Chromista"
+    }
+}

@@ -1,0 +1,62 @@
+{
+    "id": 521013,
+    "name": "Challengeridae",
+    "rank": "family",
+    "source_id": 127,
+    "created_at": "2016-12-27T07:10:21.713Z",
+    "updated_at": "2016-12-27T07:10:22.018Z",
+    "iconic_taxon_id": 48222,
+    "is_iconic": false,
+    "name_provider": "EolNameProvider",
+    "observations_count": 1,
+    "listed_taxa_count": 1,
+    "rank_level": 30,
+    "unique_name": "challengeridae",
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/48222/792746/152010/152411",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "5d5924d5-8ae8-42b7-9e60-f32a9eecda6e",
+    "photos_locked": false,
+    "default_name": {
+        "id": 860621,
+        "name": "Challengeridae",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Chromista",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/chromista-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2016-12-27T07:10:21.713Z",
+    "updated_at_utc": "2016-12-27T07:10:22.018Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 860621,
+            "name": "Challengeridae",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 521013,
+            "created_at": "2016-12-27T07:10:21.713Z",
+            "updated_at": "2016-12-27T07:10:21.713Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 48222,
+        "name": "Chromista"
+    }
+}

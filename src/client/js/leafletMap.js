@@ -206,6 +206,28 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
     }
 });
 
+fluid.defaults("hortis.svgPatternLoader", {
+    svgPatterns: "%resourceBase/html/xetthecum-patterns.html",
+    resources: {
+        svgPatterns: {
+            url: "{that}.options.svgPatterns",
+            dataType: "text"
+        }
+    },
+    listeners: {
+        "onResourcesLoaded.injectPatterns": {
+            funcName: "hortis.injectSvgPatterns",
+            args: ["{svgPatternLoader}.resources.svgPatterns.resourceText", "{that}.options.resourceBase", "{that}.container"]
+        }
+    }
+});
+
+hortis.injectSvgPatterns = function (patternText, resourceBase, container) {
+    var expanded = patternText.replace(/%resourceBase/g, resourceBase);
+    var patterns = $(expanded);
+    container.append(patterns);
+};
+
 fluid.defaults("hortis.mapLoaderWithoutSunburst", {
     // TODO: Refactor this obvious insanity
     gradeNames: "hortis.sunburstLoaderWithMap",

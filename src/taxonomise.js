@@ -371,6 +371,7 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace(" aff.", "");
     name = name.replace(" agg.", "");
     name = name.replace(" s.lat.", "");
+    name = name.replace(" f.", "");
     name = name.replace(" species complex", "");
     name = name.replace(" complex", "");
     name = name.replace(" cf ", " ");

@@ -45,6 +45,17 @@
     width: 100%;
 }
 
+.fl-taxonDisplay-expand {
+    width: 2rem;
+    background-size: 2rem;
+    height: 1rem;
+    background-image: url("../img/Arrow-down.svg");
+    cursor: pointer;
+    float: right;
+    /* From https://codepen.io/sosuke/pen/Pjoqqp */
+    filter: invert(57%) sepia(0%) saturate(6%) hue-rotate(187deg) brightness(94%) contrast(88%);
+}
+
 .fld-bagatelle-taxonDisplay table {
    border: 1px solid #aaa;
    border-collapse: collapse;

@@ -39,14 +39,23 @@ var buildIndex = {
         src: "src/client/json",
         dest: "build/json"
     }, {
+        src: "src/client/css/xetthecum.css",
+        dest: "build/css/xetthecum.css"
+    }, {
         src: "src/client/html/bagatelle.html",
         dest: "build/html/bagatelle.html"
-    },  {
+    }, {
         src: "src/client/html/bagatelle-map.html",
         dest: "build/html/bagatelle-map.html"
-    },  {
+    }, {
         src: "src/client/html/bagatelle-map-only.html",
         dest: "build/html/bagatelle-map-only.html"
+    }, {
+        src: "src/client/html/xetthecum-patterns.html",
+        dest: "build/html/xetthecum-patterns.html"
+    }, {
+        src: "src/buildSource/Galiano Life List.html",
+        dest: "build/Galiano Life List.html"
     }, {
         src: "src/buildSource/dataPaperSunburstAndMap.html",
         dest: "build/dataPaperSunburstAndMap.html"

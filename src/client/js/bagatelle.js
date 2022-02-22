@@ -131,11 +131,11 @@ fluid.defaults("hortis.sunburstWithObsColour", {
 fluid.defaults("hortis.bagatelleTabs", {
     gradeNames: "hortis.tabs",
     tabIds: {
-        sunburst: "fli-tab-sunburst",
-        checklist: "fli-tab-checklist"
+        checklist: "fli-tab-checklist",
+        sunburst: "fli-tab-sunburst"
     },
     model: {
-        selectedTab: "sunburst"
+        selectedTab: "checklist"
     }
 });
 
@@ -231,7 +231,7 @@ fluid.defaults("hortis.sunburst", {
             right: 0,
             radiusScale: []
         },
-        visible: true,
+        visible: false,
         commonNames: true
     },
     modelRelay: {
@@ -450,8 +450,10 @@ hortis.renderObsBound = function (row, prefix, markup) {
         var capPrefix = hortis.capitalize(prefix);
         var recordedBy = row[prefix + "RecordedBy"];
         var catalogueNumber = row[prefix + "CatalogueNumber"];
-        var row1 = hortis.dumpRow(capPrefix + " Reported",
-            hortis.renderDate(row[prefix + "Timestamp"]) + (recordedBy ? " by " + recordedBy : ""), markup);
+        var value = hortis.renderDate(row[prefix + "Timestamp"]) + (recordedBy ? " by " + recordedBy : "");
+        var button = "<span class=\"fl-taxonDisplay-expand\"></span>";
+
+        var row1 = hortis.dumpRow(capPrefix + " Reported", value + button, markup);
 
         var source = row[prefix + "Collection"] + (catalogueNumber ? " (" + catalogueNumber + ")" : "");
         var row2 = hortis.dumpRow("Source", source, markup);

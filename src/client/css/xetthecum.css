@@ -1,0 +1,34 @@
+.fld-bagatelle-map {
+    width: 1024px;
+    height: 800px;
+}
+
+.fld-bagatelle-class-marine {
+    fill: url(#marine);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-class-lacustrine {
+    fill: url(#lacustrine);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-class-recently-harvested {
+    fill: url(#recently-harvested);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-class-pole-sapling {
+    fill: url(#pole-sapling);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-class-young-forest {
+    fill: url(#young-forest);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-class-mature-forest {
+    fill: url(#mature-forest);
+    background-repeat: repeat;
+}

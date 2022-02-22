@@ -49,6 +49,7 @@
         <script src="src/lib/jquery.binarytransport.js"></script>
 
         <link rel="stylesheet" type="text/css" href="src/client/css/bagatelle.css"/>
+        <link rel="stylesheet" type="text/css" href="src/client/css/xetthecum.css"/>
 
         <script src="src/client/js/colour.js"></script>
         <script src="src/client/js/renderSVG.js"></script>
@@ -76,6 +77,7 @@
         </div>
         <script>
             hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
+                gradeNames: "hortis.svgPatternLoader",
                 mapGrades: ["hortis.GBIFTiles"],
                 mapFlavourGrade: "hortis.leafletMap.withRegions",
                 renderMarkup: true,

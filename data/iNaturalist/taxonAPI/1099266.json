@@ -1,0 +1,62 @@
+{
+    "id": 1099266,
+    "name": "Proctotrupes bistriatus",
+    "rank": "species",
+    "source_id": null,
+    "created_at": "2020-06-16T05:04:00.139Z",
+    "updated_at": "2020-06-16T05:04:00.139Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 0,
+    "rank_level": 10,
+    "unique_name": "proctotrupes bistriatus",
+    "wikipedia_summary": null,
+    "wikipedia_title": "",
+    "ancestry": "48460/1/47120/372739/47158/184884/47201/124417/981280/342818/203200/938034/250223",
+    "conservation_status": null,
+    "conservation_status_source_id": null,
+    "conservation_status_source_identifier": null,
+    "is_active": true,
+    "complete": null,
+    "complete_rank": null,
+    "taxon_framework_relationship_id": null,
+    "uuid": "d9fec68d-6f1b-47a0-96e5-beb465304008",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2135582,
+        "name": "Proctotrupes bistriatus",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2020-06-16T05:04:00.139Z",
+    "updated_at_utc": "2020-06-16T05:04:00.139Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2135582,
+            "name": "Proctotrupes bistriatus",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1099266,
+            "created_at": "2020-06-16T05:04:00.139Z",
+            "updated_at": "2020-06-16T05:04:00.139Z",
+            "creator_id": 37277,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}
