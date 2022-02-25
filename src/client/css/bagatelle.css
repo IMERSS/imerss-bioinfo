@@ -13,7 +13,7 @@
 }
 
 .flc-bagatelle-svg {
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .fld-bagatelle-map {
@@ -25,18 +25,51 @@
     cursor: pointer;
 }
 
-.fld-bagatelle-taxonDisplay > div {
-    float: right;
-    width: 500px;
+.fld-bagatelle-back {
+    border: 2px solid black;
+    display: inline;
+    padding: 5px 15px 5px 15px;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 1.5rem;
+    user-select: none;
+}
+
+.fld-bagatelle-back:hover:not([aria-disabled="true"]) {
+    background: #ccc;
+}
+
+.fld-bagatelle-back:not([aria-disabled="true"]) {
+    cursor: pointer;
+}
+
+.fld-bagatelle-back[aria-disabled="true"] {
+    opacity: 0.2;
+    cursor: default;
+}
+
+.fld-bagatelle-taxonDisplay {
+    height: 800px;
+    border: black solid 2px;
     display: flex;
-    align-items: center;
-    height: 0px;
-    overflow:visible;
+    overflow-y: scroll;
+}
+
+.fl-taxonDisplay-row {
+    padding: 10px 8px 6px 8px;
+    border-bottom: #ccc 2px solid;
+    width: 480px; /* 500px for image minus width of margin - obviously rather unacceptable */
+}
+
+.fl-taxonDisplay-runon-header.fl-taxonDisplay-expanded {
+    border-bottom: none;
+    padding-bottom: 0px;
 }
 
 .fl-taxonDisplay-key {
     width: 12em;
-    padding-right: 10px;
+    margin-right: 4px;
     font-weight: bold;
     padding: 2px;
 }
@@ -56,27 +89,53 @@
     filter: invert(57%) sepia(0%) saturate(6%) hue-rotate(187deg) brightness(94%) contrast(88%);
 }
 
-.fld-bagatelle-taxonDisplay table {
-   border: 1px solid #aaa;
-   border-collapse: collapse;
+.fl-taxonDisplay-unexpanded {
+    background-image: url("../img/Arrow-down.svg");
 }
 
-/*
-.fld-bagatelle-taxonDisplay tr {
-   border-bottom: 1px solid #eee;
-}
-*/
-
-.fld-bagatelle-taxonDisplay tr:nth-child(even) {
-   background: #eee;
+.fl-taxonDisplay-expanded {
+    background-image: url("../img/Arrow-up.svg");
 }
 
-.fld-bagatelle-taxonDisplay tr:nth-child(odd) {
-   background: #fff;
+.fld-taxonDisplay-expandable-remainder {
+    display: none;
+    padding-left: 20px;
+    width: 468px; /* Todo all these calculations relative to width */
 }
 
-.fld-bagatelle-taxonDisplay tr:last-child {
-    border: none;
+.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder {
+    padding-left: 8px; /* Back to value in fl-taxonDisplay-row */
+    width: 480px;
+}
+
+.fl-taxonDisplay-runon-remainder .fl-taxonDisplay-key {
+    padding: 0px;
+    margin: 0px;
+}
+
+.fl-taxonDisplay-image-holder {
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.fl-taxonDisplay-iNat-extern {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    background: #ddd;
+    padding: 4px;
+    padding-left: 6px;
+    color: black;
+}
+
+.fl-external-link {
+    width: 1rem;
+    height: 0.9rem;
+    display: inline-block;
+    background-image: url("../img/external-link.svg");
+    background-repeat: no-repeat;
+    background-size: 0.9rem;
+    margin-left: 8px;
 }
 
 .fld-bagatelle-dataset-controls {
@@ -168,22 +227,22 @@
     border-collapse: collapse;
 }
 
-.fl-bagatelle-imgLoadingOverlay:after {
-    content: "";
-    position: absolute;
-    background-image: url(../img/loading-icon.gif);
-    background-repeat: no-repeat;
-    background-position: center center;
-    height: 300px;
-    width: 400px;
-}
-
 .fl-bagatelle-photo {
-    width: 400px;
+    width: 500px;
+    height: 400px;
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat;
 }
 
-.fl-bagatelle-imgLoading {
-    min-height: 300px;
+.fl-bagatelle-tooltip .fl-bagatelle-photo {
+    width: 250px;
+    height: 200px;
+}
+
+.fl-bagatelle-tooltip div.fl-text {
+    max-width: 250px;
+    margin-top: 0.5rem;
 }
 
 .fld-bagatelle-autocomplete {
@@ -194,6 +253,11 @@
 
 .flc-bagatelle-autocomplete-row {
     text-align: center;
+}
+
+.flc-bagatelle-autocomplete-row label {
+    font-size: 1.3rem;
+    font-weight: bold;
 }
 
 .autocomplete__menu {
@@ -216,6 +280,10 @@
 
 #fli-tab-checklist {
     overflow-y: scroll;
+}
+
+#fli-tab-sunburst: {
+    position: relative;
 }
 
 .fld-bagatelle-checklist p {

@@ -9,8 +9,9 @@ node_modules/infusion/src/lib/jquery/ui/js/version.js
 node_modules/infusion/src/lib/jquery/ui/js/keycode.js
 node_modules/jquery-ui/ui/widget.js
 node_modules/jquery-ui/ui/unique-id.js
+node_modules/jquery-ui/ui/position.js
 node_modules/jquery-ui/ui/widgets/tabs.js
-node_modules/infusion/src/lib/fastXmlPull/js/fastXmlPull.js
+node_modules/jquery-ui/ui/widgets/tooltip.js
 node_modules/infusion/src/framework/core/js/jquery.keyboard-a11y.js
 node_modules/infusion/src/framework/core/js/Fluid.js
 node_modules/infusion/src/framework/core/js/FluidPromises.js
@@ -28,6 +29,4 @@ node_modules/infusion/src/framework/core/js/NewViewSupport.js
 node_modules/infusion/src/framework/core/js/DataSource.js
 node_modules/infusion/src/framework/core/js/ResourceLoader.js
 node_modules/infusion/src/framework/core/js/ResourceLoader-browser.js
-node_modules/infusion/src/framework/renderer/js/fluidParser.js
-node_modules/infusion/src/components/tooltip/js/Tooltip.js
 node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js

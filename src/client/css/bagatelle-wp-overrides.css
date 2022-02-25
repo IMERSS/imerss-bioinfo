@@ -18,19 +18,11 @@
     line-height: 1.4em;
 }
 
-.fld-bagatelle-taxonDisplay {
-    font-size: 14px;
-}
-
 .fld-bagatelle-dataset-controls {
     font-size: 16px;
 }
 
 table {
-    border: none !important;
-}
-
-td {
     border: none !important;
 }
 

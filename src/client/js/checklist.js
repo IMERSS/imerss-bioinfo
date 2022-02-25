@@ -100,28 +100,26 @@ fluid.defaults("hortis.checklist", {
 hortis.checklist.focusedColour = fluid.colour.hexToArray("#333");
 hortis.checklist.unfocusedColour = fluid.colour.hexToArray("#ccc");
 
-hortis.checklist.moveUp = function (that) {
-    var layoutId = that.model.layoutId;
-    var row = layoutId ? that.index[layoutId] : null;
+hortis.checklist.moveUp = function (layoutHolder) {
+    var layoutId = layoutHolder.model.layoutId;
+    var row = layoutId ? layoutHolder.index[layoutId] : null;
     var parentId = row && row.parent && row.parent.id;
-    that.applier.change("layoutId", parentId);
+    layoutHolder.changeLayoutId(parentId);
 };
 
 hortis.checklist.bindHover = function (that, layoutHolder) {
     var hoverable = that.options.selectors.hoverable;
-    that.container.on("mouseenter", hoverable, function () {
-        window.clearTimeout(that.leaveTimeout);
+    that.container.on("mouseenter", hoverable, function (e) {
         var id = this.dataset.rowId;
+        layoutHolder.mouseEvent = e;
         layoutHolder.applier.change("hoverId", id);
     });
     that.container.on("mouseleave", hoverable, function () {
-        that.leaveTimeout = window.setTimeout(function () {
-            layoutHolder.applier.change("hoverId", null);
-        }, 50);
+        layoutHolder.applier.change("hoverId", null);
     });
     that.container.on("click", hoverable, function () {
         var id = this.dataset.rowId;
-        layoutHolder.applier.change("layoutId", id);
+        layoutHolder.changeLayoutId(id);
     });
 };
 

@@ -142,17 +142,23 @@ fluid.defaults("hortis.bagatelleTabs", {
 // Holds model state shared with checklist and index
 fluid.defaults("hortis.layoutHolder", {
     gradeNames: "fluid.modelComponent",
+    members: {
+        taxonHistory: []
+    },
     model: {
         rowFocus: {},
         layoutId: null,
-        hoverId: null
+        selectedId: null,
+        hoverId: null,
+        historyIndex: 0
     }
 });
 
 fluid.defaults("hortis.sunburst", {
-    gradeNames: ["hortis.layoutHolder", "fluid.newViewComponent"],
+    gradeNames: ["hortis.layoutHolder", "fluid.viewComponent"],
     selectors: {
         svg: ".flc-bagatelle-svg",
+        back: ".fld-bagatelle-back",
         tabs: ".fld-bagatelle-tabs",
         taxonDisplay: ".fld-bagatelle-taxonDisplay",
         autocomplete: ".fld-bagatelle-autocomplete",
@@ -231,6 +237,11 @@ fluid.defaults("hortis.sunburst", {
             right: 0,
             radiusScale: []
         },
+        // From layoutHolder base grade:
+        // layoutId: id of segment at layout root
+        // hoverId: id of segment being hovered, giving rise to tooltip
+        // selectedId: id of row for taxon display
+        // rowFocus: {} - rows "focused" as a result of, e.g. map
         visible: false,
         commonNames: true
     },
@@ -239,6 +250,11 @@ fluid.defaults("hortis.sunburst", {
             target: "isAtRoot",
             func: "hortis.isAtRoot",
             args: ["{that}", "{that}.model.layoutId"]
+        },
+        backEnabled: {
+            target: "dom.back.attr.aria-disabled",
+            func: index => index < 2,
+            args: "{that}.model.historyIndex"
         }
     },
     markup: {
@@ -250,9 +266,9 @@ fluid.defaults("hortis.sunburst", {
             + "<textPath xlink:href=\"#%labelPathId\" startOffset=\"50%\" style=\"text-anchor: middle\">%label</textPath></text>",
         phyloPic: "<image id=\"%phyloPicId\" class=\"%phyloPicClass fl-bagatelle-clickable\" xlink:href=\"%phyloPicUrl\" height=\"%diameter\" width=\"%diameter\" x=\"%phyloPicX\" y=\"%phyloPicY\" />",
         segmentFooter: "</g>",
-        tooltipHeader: "<div><table>",
-        tooltipRow: "<tr><td class=\"fl-taxonDisplay-key\">%key: </td><td class=\"fl-taxonDisplay-value\">%value</td>",
-        tooltipFooter: "</table></div>"
+        taxonDisplayHeader: "<div>",
+        taxonDisplayRow: "<div %rootAttrs><span class=\"fl-taxonDisplay-key\">%key</span><span class=\"fl-taxonDisplay-value\">%value</span></div>",
+        taxonDisplayFooter: "</div>"
     },
     invokers: {
         render: "hortis.render({that})",
@@ -261,6 +277,8 @@ fluid.defaults("hortis.sunburst", {
         angleScale: "hortis.angleScale({arguments}.0, {that}.model.scale)",
         elementToRow: "hortis.elementToRow({that}, {arguments}.0)",
         segmentClicked: "hortis.segmentClicked({that}, {arguments}.0)",
+        //                                             layoutId,      noHistory
+        changeLayoutId: "hortis.changeLayoutId({that}, {arguments}.0, {arguments}.1)",
         fillColourForRow: "hortis.undocColourForRow({that}.options.parsedColours, {arguments}.0)",
         getMousable: "hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label, {that}.options.selectors.phyloPic)"
     },
@@ -268,6 +286,11 @@ fluid.defaults("hortis.sunburst", {
         scale: {
             excludeSource: "init",
             func: "{that}.renderLight"
+        },
+        selectedId: {
+            excludeSource: "init",
+            funcName: "hortis.updateTaxonDisplay",
+            args: ["{that}", "{change}.value"]
         },
         hoverId: {
             excludeSource: "init",
@@ -277,6 +300,11 @@ fluid.defaults("hortis.sunburst", {
         rowFocus: {
             funcName: "hortis.updateRowFocus",
             args: ["{that}", "{change}.value"]
+        },
+        backClick: {
+            path: "dom.back.click",
+            funcName: "hortis.backTaxon",
+            args: ["{that}"]
         }
     },
     listeners: {
@@ -303,8 +331,12 @@ fluid.defaults("hortis.sunburst", {
             func: "{that}.render",
             priority: "after:computeInitialScale"
         },
-        "onCreate.bindMouse": {
-            funcName: "hortis.bindMouse",
+        "onCreate.bindSunburstMouse": {
+            funcName: "hortis.bindSunburstMouse",
+            args: ["{that}"]
+        },
+        "onCreate.bindRowExpander": {
+            funcName: "hortis.bindRowExpander",
             args: ["{that}"]
         }
     },
@@ -348,28 +380,8 @@ hortis.queryAutocomplete = function (flatTree, query, callback) {
 
 hortis.confirmAutocomplete = function (that, row) {
     if (row) { // on blur it may send nothing
-        var zoomTo = row.children.length > 0 ? row : row.parent;
-        var zoomAction = hortis.beginZoom(that, zoomTo);
-        zoomAction.then(function () {
-            hortis.updateTooltip(that, row.id);
-        });
+        that.changeLayoutId(row.id);
     }
-};
-
-// Lifted from Infusion Tooltip.js
-hortis.isInDocument = function (node) {
-    var dokkument = fluid.getDocument(node),
-        container = node[0];
-    // jQuery UI framework will throw a fit if we have instantiated a widget on a DOM element and then
-    // removed it from the DOM. This apparently can't be detected via the jQuery UI API itself.
-    return $.contains(dokkument, container) || dokkument === container;
-};
-
-hortis.imageLoaded = function (element) {
-    $(element).removeClass("fl-bagatelle-imgLoading");
-    var parent = $(element).closest("div");
-    var overlay = parent.find(".fl-bagatelle-imgLoadingOverlay");
-    overlay.remove();
 };
 
 hortis.rowToPhyloIndex = function (row) {
@@ -414,36 +426,39 @@ hortis.applyPhyloMap = function (phyloMap, rows, terms) {
     });
 };
 
-// hortis.tooltipFields = ["species", "iNaturalistTaxonName", "commonName", "reporting", "lastCollected", "collector", "collection", "observer", "firstObserved", "placeName"];
-
-hortis.tooltipLookup = {
-    iNaturalistTaxonName: "Taxon Name",
-    observationCount: "Observation Count",
-    iNaturalistObsLink: "Observation",
-    taxonLink: "iNaturalist Taxon",
+hortis.taxonDisplayLookup = {
+    iNaturalistTaxonName: "Taxon Name:",
+    observationCount: "Observation Count:",
+    iNaturalistObsLink: "Observation:",
+    taxonLink: "iNaturalist Taxon:",
     wikipediaSummary: "Wikipedia Summary",
-    iNaturalistTaxonImage: "iNaturalist Taxon Image",
-    phyloPic: "Taxon Icon",
-    taxonPic: "Taxon Picture",
-    taxonPicDescription: "Taxon Picture Description",
-    commonName: "Common Name"
+    iNaturalistTaxonImage: "iNaturalist Taxon Image:",
+    phyloPic: "Taxon Icon:",
+    taxonPic: "Taxon Picture:",
+    taxonPicDescription: "Taxon Picture Description:",
+    commonName: "Common Name:"
 };
 
 hortis.commonFields = ["wikipediaSummary", "commonName"];
 
-hortis.dumpRow = function (key, value, markup) {
+hortis.dumpRow = function (key, value, markup, extraClazz) {
     if (value) {
-        var keyName = hortis.tooltipLookup[key] || hortis.capitalize(key);
-        return fluid.stringTemplate(markup.tooltipRow, {key: keyName, value: value});
+        var keyName = key ? (hortis.taxonDisplayLookup[key] || hortis.capitalize(key) + ":") : "";
+        var clazz = "fl-taxonDisplay-row " + (extraClazz || "");
+        return fluid.stringTemplate(markup.taxonDisplayRow, {key: keyName, value: value, rootAttrs: "class=\"" + clazz + "\""});
     } else {
         return "";
     }
 };
 
 hortis.renderDate = function (date) {
-    return new Date(date).toLocaleString();
+    return new Date(date).toISOString().substring(0, 10);
 };
 
+hortis.expandButtonMarkup = "<span class=\"fl-taxonDisplay-expand fl-taxonDisplay-unexpanded\"></span>";
+
+// Render a set of fields derived from an "observation range" - group of fields prefixed by "first" and "last"
+// including date/time/recordedBy/collection
 hortis.renderObsBound = function (row, prefix, markup) {
     var date = row[prefix + "Timestamp"];
     if (date) {
@@ -451,12 +466,11 @@ hortis.renderObsBound = function (row, prefix, markup) {
         var recordedBy = row[prefix + "RecordedBy"];
         var catalogueNumber = row[prefix + "CatalogueNumber"];
         var value = hortis.renderDate(row[prefix + "Timestamp"]) + (recordedBy ? " by " + recordedBy : "");
-        var button = "<span class=\"fl-taxonDisplay-expand\"></span>";
 
-        var row1 = hortis.dumpRow(capPrefix + " Reported", value + button, markup);
+        var row1 = hortis.dumpRow(capPrefix + " Reported", value + hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header");
 
         var source = row[prefix + "Collection"] + (catalogueNumber ? " (" + catalogueNumber + ")" : "");
-        var row2 = hortis.dumpRow("Source", source, markup);
+        var row2 = hortis.dumpRow("Source", source, markup, "fld-taxonDisplay-expandable-remainder");
         return row1 + row2;
     } else {
         return "";
@@ -466,38 +480,58 @@ hortis.renderObsBound = function (row, prefix, markup) {
 hortis.hulqValues = ["food", "medicinal", "spiritual", "material", "trade", "indicator"];
 
 hortis.dumpHulqName = function (row, markup) {
-    var nameRow = fluid.stringTemplate(markup.tooltipRow, {
-        key: "Hul'qumi'num name",
-        value: row.hulqName + " " + row.hulqAuth
-    });
+    var nameRow = hortis.dumpRow("Hul'qumi'num name", row.hulqName + " " + row.hulqAuth, markup); 
+
     var values = hortis.hulqValues.filter(function (value) {
         return row[value + "Value"] === "1";
     }).map(hortis.capitalize);
 
-    var valueRow = fluid.stringTemplate(markup.tooltipRow, {
-        key: "Cultural values",
-        value: values.join(", ")
-    });
+    var valueRow = hortis.dumpRow("Cultural values", values.join(", "), markup);
     return nameRow + valueRow;
 };
 
-hortis.renderTooltip = function (row, markup) {
+hortis.iNatExtern = "<a href=\"%iNatLink\" target=\"_blank\" class=\"fl-taxonDisplay-iNat-extern\">iNaturalist<span class=\"fl-external-link\"></span></a>";
+
+hortis.imageTemplate =
+    "<div class=\"fl-taxonDisplay-image-holder\">" +
+        "<div class=\"fl-bagatelle-photo\" style=\"background-image: url(%imgUrl)\"/>" +
+        "%iNatExtern" +
+    "</div></div>";
+
+hortis.idToTaxonLink = function (taxonId) {
+    return "https://www.inaturalist.org/taxa/" + taxonId;
+};
+
+hortis.renderTaxonDisplay = function (row, markup) {
     if (!row) {
         return null;
     }
-    var togo = markup.tooltipHeader;
+    var togo = markup.taxonDisplayHeader;
     var dumpRow = function (keyName, value) {
-        togo += hortis.dumpRow(keyName, value, markup);
+        if (keyName === "wikipediaSummary" && value) {
+            var row1 = hortis.dumpRow("Wikipedia Summary", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header fl-taxonDisplay-runon-header");
+            var row2 = hortis.dumpRow("", value, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder");
+            togo += row1 + row2;
+        } else {
+            togo += hortis.dumpRow(keyName, value, markup);
+        }
     };
-    var dumpImage = function (keyName, url) {
-        togo += hortis.dumpRow(keyName, "<div><span class=\"fl-bagatelle-imgLoadingOverlay\"></span><img onload=\"hortis.imageLoaded(this)\" class=\"fl-bagatelle-photo fl-bagatelle-imgLoading\" src=\"" + url + "\"/></div>", markup);
+    var dumpImage = function (keyName, url, taxonId) {
+        var imageMarkup = fluid.stringTemplate(hortis.imageTemplate, {
+            imgUrl: url,
+            iNatExtern: taxonId ? fluid.stringTemplate(hortis.iNatExtern, {
+                iNatLink: hortis.idToTaxonLink(taxonId)
+            }) : ""
+        });
+        // TODO: key name is currently ignored - other types of images, e.g. phylopics, and obs images, can't be distinguished
+        togo += imageMarkup;
     };
     var dumpPhyloPic = function (keyName, url) {
         togo += hortis.dumpRow(keyName, "<div><img height=\"150\" width=\"150\" class=\"fl-bagatelle-photo\" src=\"" + url + "\"/></div>", markup);
     };
     if (row.rank) {
         if (row.iNaturalistTaxonImage && !row.taxonPic) {
-            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage);
+            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage, row.iNaturalistTaxonId);
         } else if (row.taxonPic) {
             dumpImage("taxonPic", row.taxonPic);
         }
@@ -512,7 +546,7 @@ hortis.renderTooltip = function (row, markup) {
         dumpRow("species", row.childCount);
     } else {
         if (row.iNaturalistTaxonImage && !row.obsPhotoLink) {
-            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage);
+            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage, row.iNaturalistTaxonId);
         }
         if (row.species) {
             dumpRow("species", row.species + (row.authority ? (" " + row.authority) : ""));
@@ -544,48 +578,109 @@ hortis.renderTooltip = function (row, markup) {
         }*/
     }
     dumpRow("observationCount", row.observationCount);
-    togo += markup.tooltipFooter;
+    togo += markup.taxonDisplayFooter;
     return togo;
 };
 
-hortis.updateTooltip = function (that, id) {
-    var content = id ? hortis.renderTooltip(that.index[id], that.options.markup) : null;
+hortis.bindRowExpander = function () {
+    $(document).on("click", ".fl-taxonDisplay-expand", function (e) {
+        var target = $(e.target);
+        target.toggleClass("fl-taxonDisplay-expanded");
+        target.toggleClass("fl-taxonDisplay-unexpanded");
+        var showing = target.hasClass("fl-taxonDisplay-expanded");
+        var header = target.closest(".fld-taxonDisplay-expandable-header");
+        header.toggleClass("fl-taxonDisplay-expanded", showing);
+        var siblings = header.parent().children();
+        var ownIndex = header.index();
+        var next = $(siblings[ownIndex + 1]);
+        if (next.hasClass("fld-taxonDisplay-expandable-remainder")) { // sanity check, we should not render ones without this
+            next[showing ? "show" : "hide"]();
+        }
+    });
+};
+
+hortis.updateTaxonDisplay = function (that, id) {
+    var content = id ? hortis.renderTaxonDisplay(that.index[id], that.options.markup) : null;
     var taxonDisplay = that.locate("taxonDisplay");
     if (content) {
         taxonDisplay.empty();
         taxonDisplay.html(content);
     }
-/*
-    if (that.tooltipTarget) {
-        if (hortis.isInDocument(that.tooltipTarget)) {
-            that.tooltipTarget.tooltip("destroy");
+};
+
+hortis.tooltipTemplate = "<div class=\"fl-bagatelle-tooltip\">" +
+    "<div class=\"fl-bagatelle-photo\" style=\"background-image: url(%imgUrl)\"></div>" +
+    "<div class=\"fl-text\"><b>%taxonRank:</b> %taxonNames</div>" +
+    "<div class=\"fl-text\"><b>Select for more info</b></div>" +
+    "</div>";
+
+hortis.renderTooltip = function (row) {
+    var terms = {
+        imgUrl: row.iNaturalistTaxonImage || ""
+    };
+    if (row.rank) {
+        terms.taxonRank = hortis.capitalize(row.rank);
+    } else {
+        terms.taxonRank = "Species";
+    }
+    var names = [row.iNaturalistTaxonName, row.commonName, row.hulqName].filter(name => name);
+    terms.taxonNames = names.join(" / ");
+    return fluid.stringTemplate(hortis.tooltipTemplate, terms);
+};
+
+
+// Lifted from Infusion Tooltip.js
+hortis.isInDocument = function (node) {
+    var dokkument = fluid.getDocument(node),
+        container = node[0];
+    // jQuery UI framework will throw a fit if we have instantiated a widget on a DOM element and then
+    // removed it from the DOM. This apparently can't be detected via the jQuery UI API itself.
+    return $.contains(dokkument, container) || dokkument === container;
+};
+
+hortis.clearAllTooltips = function (that) {
+    hortis.clearTooltip(that);
+    $(".ui-tooltip").remove();
+    that.applier.change("hoverId", null);
+};
+
+hortis.clearTooltip = function (that) {
+    var tooltipTarget = that.tooltipTarget;
+    if (tooltipTarget) {
+        that.tooltipTarget = null;
+        if (hortis.isInDocument(tooltipTarget)) {
+            console.log("Cleared tooltip");
+            tooltipTarget.tooltip("destroy");
         } else {
             console.log("Tooltip target lost from document");
+            hortis.clearAllTooltips(that);
         }
-        that.tooltipTarget = null;
     }
+};
+
+hortis.updateTooltip = function (that, id) {
+    var content = id ? hortis.renderTooltip(that.index[id], that.options.markup) : null;
     var target = $(that.mouseEvent.target);
+
+    hortis.clearTooltip(that);
+
     if (content) {
-        console.log("Opening tooltip");
+        console.log("Opening tooltip for node " + id);
         target.tooltip({
             items: target
         });
         target.tooltip("option", "content", content || "");
+        target.tooltip("option", "track", true);
         target.tooltip("open", that.mouseEvent);
         that.tooltipTarget = target;
-    } else {
-        if (that.tooltipTarget) {
-            that.tooltipTarget.tooltip("destroy");
-            that.tooltipTarget = null;
-        }
-    }*/
+    }
 };
 
 hortis.isAtRoot = function (that, layoutId) {
     return layoutId === that.flatTree[0].id;
 };
 
-hortis.bindMouse = function (that) {
+hortis.bindSunburstMouse = function (that) {
     var svg = that.locate("svg");
     // var mousable = that.options.selectors.mousable;
     var mousable = that.getMousable();
@@ -598,16 +693,12 @@ hortis.bindMouse = function (that) {
         that.segmentClicked(row);
     });
     svg.on("mouseenter", mousable, function (e) {
-        window.clearTimeout(that.leaveTimeout);
         var id = hortis.elementToId(this);
         that.mouseEvent = e;
         that.applier.change("hoverId", id);
     });
-    svg.on("mouseleave", mousable, function (e) {
-        that.leaveTimeout = window.setTimeout(function () {
-            that.mouseEvent = e;
-            that.applier.change("hoverId", null);
-        }, 50);
+    svg.on("mouseleave", mousable, function () {
+        that.applier.change("hoverId", null);
     });
 };
 
@@ -708,10 +799,10 @@ hortis.isClickable = function (row) {
     return row.children.length > 0 || row.iNaturalistLink || row.iNaturalistTaxonId;
 };
 
-hortis.elementClass = function (row, isLayoutRoot, styles, baseStyle) {
+hortis.elementClass = function (row, isSelected, styles, baseStyle) {
     return styles[baseStyle]
         + (hortis.isClickable(row) ? " " + styles.clickable : "")
-        + (isLayoutRoot ? " " + styles.layoutRoot : "");
+        + (isSelected ? " " + styles.layoutRoot : "");
 };
 
 hortis.elementStyle = function (attrs, elementType) {
@@ -732,12 +823,12 @@ hortis.renderLight = function (that) {
         if (that.visMap[index] || that.oldVisMap && that.oldVisMap[index]) {
             var attrs = hortis.attrsForRow(that, row);
             attrs.fillColour = that.fillColourForRow(row);
-            var isLayoutRoot = row.id === that.model.layoutId;
+            var isSelected = row.id === that.model.selectedId;
             var segment = fluid.byId("hortis-segment:" + row.id);
             if (segment) {
                 segment.setAttribute("d", attrs.path);
                 segment.setAttribute("visibility", attrs.visibility);
-                segment.setAttribute("class", hortis.elementClass(row, isLayoutRoot, that.options.styles, "segment"));
+                segment.setAttribute("class", hortis.elementClass(row, isSelected, that.options.styles, "segment"));
                 segment.setAttribute("style", hortis.elementStyle(attrs, "segment"));
             }
             var labelPath = fluid.byId("hortis-labelPath:" + row.id);
@@ -748,7 +839,7 @@ hortis.renderLight = function (that) {
             var label = fluid.byId("hortis-label:" + row.id);
             if (label) {
                 label.setAttribute("visibility", attrs.labelVisibility);
-                label.setAttribute("class", hortis.elementClass(row, isLayoutRoot, that.options.styles, "label"));
+                label.setAttribute("class", hortis.elementClass(row, isSelected, that.options.styles, "label"));
                 label.setAttribute("style", hortis.elementStyle(attrs, "label"));
             }
             var pic = fluid.byId("hortis-phyloPic:" + row.id);
@@ -851,8 +942,8 @@ hortis.updateRowFocus = function (that, rowFocus) {
         var lca = hortis.lcaRoot(parents);
         target = Object.keys(parents).length === 1 ? lca.parent : lca;
     }
-    if (target.leftIndex !== undefined) { // Avoid trying to render before onCreate - TODO: reorganise "beginZoom"
-        hortis.beginZoom(that, target);
+    if (target.leftIndex !== undefined) { // Avoid trying to render before onCreate
+        that.changeLayoutId(target.id);
     }
 };
 
@@ -866,11 +957,39 @@ hortis.elementToRow = function (that, element) {
     return that.index[id];
 };
 
+hortis.backTaxon = function (that) {
+    if (that.model.historyIndex > 1) {
+        that.applier.change("historyIndex", that.model.historyIndex - 1);
+        that.changeLayoutId(that.taxonHistory[that.model.historyIndex - 1], true);
+    }
+};
+
+hortis.changeLayoutId = function (that, layoutId, noHistory) {
+    that.applier.change("selectedId", layoutId);
+    if (!noHistory) {
+        that.taxonHistory[that.model.historyIndex] = layoutId;
+        that.applier.change("historyIndex", that.model.historyIndex + 1);
+    }
+    var row = that.index[layoutId];
+    if (row.children.length === 0) {
+        layoutId = row.parent.id;
+    }
+    if (layoutId !== that.model.layoutId) {
+        if (!that.model.layoutId) { // Can't render without some initial valid layout
+            that.applier.change("layoutId", layoutId);
+        } else {
+            return hortis.beginZoom(that, layoutId);
+        }
+    }
+    return fluid.promise().resolve();
+};
+
 // TODO: Not very good, is it - we should update layoutId first so that we can keep any collateral state in sync
-hortis.beginZoom = function (that, row) {
+hortis.beginZoom = function (that, rowId) {
     that.container.stop(true, true);
+    hortis.clearAllTooltips(that);
     var initialScale = fluid.copy(that.model.scale);
-    var newBound = hortis.boundNodes(that, row.id);
+    var newBound = hortis.boundNodes(that, rowId);
     newBound.scale.zoomProgress = 1;
     console.log("Begin zoom");
     var togo = fluid.promise();
@@ -888,7 +1007,7 @@ hortis.beginZoom = function (that, row) {
             console.log("Zoom complete");
             delete that.oldVisMap;
             that.container[0].zoomProgress = 0;
-            that.applier.change("layoutId", row.id);
+            that.applier.change("layoutId", rowId);
             that.applier.change("scale.zoomProgress", 0); // TODO: suppress render here
             that.render();
             togo.resolve();
@@ -898,15 +1017,7 @@ hortis.beginZoom = function (that, row) {
 };
 
 hortis.segmentClicked = function (that, row) {
-    if (row.children.length > 0) {
-        hortis.beginZoom(that, row);
-    } else {
-        if (row.iNaturalistLink) {
-            window.open(row.iNaturalistLink);
-        } else if (row.iNaturalistTaxonId) {
-            window.open("http://www.inaturalist.org/taxa/" + row.iNaturalistTaxonId);
-        }
-    }
+    that.changeLayoutId(row.id);
 };
 
 hortis.nameOverrides = {
@@ -959,7 +1070,7 @@ hortis.attrsForRow = function (that, row) {
         // Note that 1e-5 will be too small!
         leftAngle += 1e-4;
     }
-    var labelVisibility = isOuterSegment ? outerLength > 35 : outerLength > label.length * 16; // TODO: make a guess of this factor from font size (e.g. 2/3 of it)
+    var labelVisibility = isOuterSegment ? outerLength > 45 : outerLength > label.length * 22; // TODO: make a guess of this factor from font size (e.g. 2/3 of it)
     var togo = {
         visibility: isVisible ? "visible" : "hidden",
         labelVisibility: isVisible && labelVisibility ? "visible" : "hidden",
@@ -992,16 +1103,16 @@ hortis.attrsForRow = function (that, row) {
 };
 
 hortis.renderSegment = function (that, row) {
-    var isLayoutRoot = row.id === that.model.layoutId;
+    var isSelected = row.id === that.model.selectedId;
     var terms = $.extend({
         id: "hortis-segment:" + row.id,
         labelPathId: "hortis-labelPath:" + row.id,
         labelId: "hortis-label:" + row.id,
         phyloPicId: "hortis-phyloPic:" + row.id,
-        clazz: hortis.elementClass(row, isLayoutRoot, that.options.styles, "segment"),
+        clazz: hortis.elementClass(row, isSelected, that.options.styles, "segment"),
         labelPathClass: that.options.styles.labelPath,
         phyloPicClass: that.options.styles.phyloPic,
-        labelClass: hortis.elementClass(row, isLayoutRoot, that.options.styles, "label"),
+        labelClass: hortis.elementClass(row, isSelected, that.options.styles, "label"),
         fillColour: that.fillColourForRow(row)
     }, hortis.attrsForRow(that, row));
     terms.style = hortis.elementStyle(terms, "segment");
@@ -1096,20 +1207,15 @@ hortis.doInitialQuery = function (that) {
     var storeQueryResult = function (result) {
         togo = result[0];
     };
-    if (that.options.queryOnStartup) {
-        hortis.queryAutocomplete(that.flatTree, that.options.queryOnStartup, storeQueryResult);
-    }
-    if (that.options.selectOnStartup) {
-        hortis.queryAutocomplete(that.flatTree, that.options.selectOnStartup, function (result) {
-            hortis.updateTooltip(that, result[0].id);
-        });
+    // These used to be different but are now the same since we no longer select taxon on hover. Should be able to axe "selectOnStartup" as disused
+    var toSelect = that.options.queryOnStartup || that.options.selectOnStartup;
+    if (toSelect) {
+        hortis.queryAutocomplete(that.flatTree, toSelect, storeQueryResult);
     }
     return togo;
 };
 
 hortis.computeInitialScale = function (that) {
     var root = hortis.doInitialQuery(that);
-    that.applier.change("", {
-        layoutId: root.id
-    });
+    that.changeLayoutId(root.id);
 };
