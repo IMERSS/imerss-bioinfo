@@ -5,3 +5,5 @@ https://github.com/pierrec/node-lz4 since
  
 There is a sign we could revisit this at some point and produce a smaller and more reproducible decoder by mashing
 together the 3 files in "Benzinga's" https://github.com/Benzinga/lz4js
+
+Better notion: Move to standard zlib operated by pako https://github.com/nodeca/pako

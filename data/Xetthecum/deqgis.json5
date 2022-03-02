@@ -6,15 +6,15 @@
             classes: {
                 RW: {
                     label: "Rural",
-                    fillColor: [151,139,1],
+                    fillColor: [84,76,54],
                 },
                 DP: { // Developed, exposed soil, Developed, road surface
                     label: "Developed",
-                    fillColor: [150,150,150]
+                    fillColor: [127,119,85]
                 },
                 AG: { // Agricultural, cultivated field
                     label: "Agricultural",
-                    fillColor: [252,253,191]
+                    fillColor: [186,177,140]
                 }
             }
         },
@@ -22,11 +22,11 @@
             classes: {
                 WD: {
                     label: "Woodland",
-                    fillColor: [105,7,39]
+                    fillColor: [191,103,58]
                 },
                 CL: { // Coastal bluff
                     label: "Rock outcrop",
-                    fillColor: [104,104,104]
+                    fillColor: [170,167,165]
                 }
             }
         },
@@ -78,7 +78,7 @@
                 },
                 LT: { // Shoreline
                     label: "Littoral",
-                    fillColor: [39,92,132]
+                    fillColor: [100,175,164]
                 }
             }
         }

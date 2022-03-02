@@ -1,7 +1,7 @@
 {
     datasets: {
         dataPaper: {
-            name: "Galiano Data Paper Part I - Marine Observations (1968-2019)",
+            name: "Galiano Data Paper Part I - Marine Observations (1968-2021)",
             input: "%bagatelle/data/dataPaper-I/reintegrated-obs.csv",
             map: "%bagatelle/data/dataPaper-I/combinedOutMap-obs.json",
             templateMap: false,
@@ -9,12 +9,19 @@
             colour: "#931362"
         },
         iNat: {
-            name: "Xetthecum iNaturalist Observations (2005-2021)",
-            input: "%bagatelle/data/Xetthecum/iNaturalist_Catalogue_2022_02_13.csv",
+            name: "Xetthecum iNaturalist Observations (2005-2022)",
+            input: "%bagatelle/data/Xetthecum/iNaturalist_Catalogue_2022_02_28.csv",
             map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
             outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99"
-        }
+        },
+        Hunterston: {
+            name: "Hunterston Farm Stewardship Report: A Review of the 2010 BioBlitz (2010)",
+            input: "%bagatelle/data/Xetthecum/Hunterston_Farms_Bioblitz_2010_coordinates_corrected_mismatches_reconciled.csv",
+            map: "%bagatelle/data/Xetthecum/hunterston-map.json",
+            outMap: "%bagatelle/data/Xetthecum/hunterston-out-map.json",
+            colour: "#55a329"
+        },
     },
     patches: {
         Deduplicate: {

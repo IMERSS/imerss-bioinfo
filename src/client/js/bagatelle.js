@@ -480,7 +480,7 @@ hortis.renderObsBound = function (row, prefix, markup) {
 hortis.hulqValues = ["food", "medicinal", "spiritual", "material", "trade", "indicator"];
 
 hortis.dumpHulqName = function (row, markup) {
-    var nameRow = hortis.dumpRow("Hul'qumi'num name", row.hulqName + " " + row.hulqAuth, markup); 
+    var nameRow = hortis.dumpRow("Hul'qumi'num name", row.hulqName + " " + row.hulqAuth, markup);
 
     var values = hortis.hulqValues.filter(function (value) {
         return row[value + "Value"] === "1";

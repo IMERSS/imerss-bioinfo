@@ -3,45 +3,45 @@
         "RW": {
             "label": "Rural",
             "fillColor": [
-                151,
-                139,
-                1
+                84,
+                76,
+                54
             ],
             "region": "Anthropogenic"
         },
         "DP": {
             "label": "Developed",
             "fillColor": [
-                150,
-                150,
-                150
+                127,
+                119,
+                85
             ],
             "region": "Anthropogenic"
         },
         "AG": {
             "label": "Agricultural",
             "fillColor": [
-                252,
-                253,
-                191
+                186,
+                177,
+                140
             ],
             "region": "Anthropogenic"
         },
         "WD": {
             "label": "Woodland",
             "fillColor": [
-                105,
-                7,
-                39
+                191,
+                103,
+                58
             ],
             "region": "Woodlands and rock outcrops"
         },
         "CL": {
             "label": "Rock outcrop",
             "fillColor": [
-                104,
-                104,
-                104
+                170,
+                167,
+                165
             ],
             "region": "Woodlands and rock outcrops"
         },
@@ -129,9 +129,9 @@
         "LT": {
             "label": "Littoral",
             "fillColor": [
-                39,
-                92,
-                132
+                100,
+                175,
+                164
             ],
             "region": "Marine"
         }
