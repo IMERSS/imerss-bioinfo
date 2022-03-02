@@ -1,3 +1,18 @@
+.fl-bagatelle-map-and-taxa {
+    display: flex;
+    flex-direction: column;
+}
+
+.fl-bagatelle-tabs-and-search {
+    display: flex;
+    flex-direction: column;
+}
+
+.fl-bagatelle-taxa {
+    display: flex;
+    flex-direction: row;
+}
+
 .fld-bagatelle-segment {
     stroke: #444;
     stroke-width: 1px;
@@ -16,9 +31,21 @@
     font-size: 40px;
 }
 
+.fl-bagatelle-left-column {
+    width: 1024px;
+}
+
+.fl-bagatelle-right-column {
+    /* Roughly agree with taxon display - 480px plus scroll bar and change */
+    width: calc(480px + 3rem);
+}
+
 .fld-bagatelle-map {
-    width: 800px;
-    height: 600px;
+    height: 800px;
+}
+
+.flc-bagatelle-viz-dimens {
+    height: calc(800px + 1rem);
 }
 
 .fl-bagatelle-clickable {
@@ -51,7 +78,8 @@
 }
 
 .fld-bagatelle-taxonDisplay {
-    height: 800px;
+    margin-top: 4.4rem;
+    height: calc(800px + 6rem); /* Viz dimens plus tab height */
     border: black solid 2px;
     display: flex;
     overflow-y: scroll;
@@ -140,7 +168,6 @@
 }
 
 .fld-bagatelle-dataset-controls {
-    margin: auto;
     display: table;
     padding: 2px;
     font-size: 0.9rem;
@@ -173,6 +200,9 @@
 
 .fld-bagatelle-map-holder {
     font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     position: relative;
     --bagatelle-stroke-width: 2;
 }
@@ -254,6 +284,8 @@
 
 .flc-bagatelle-autocomplete-row {
     text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .flc-bagatelle-autocomplete-row label {
@@ -272,11 +304,6 @@
 .fld-bagatelle-tabs .ui-state-active.ui-tabs-tab a {
     background: #fff;
     color: #444;
-}
-
-.flc-bagatelle-viz-dimens {
-    height: 800px;
-    width: 800px;
 }
 
 #fli-tab-checklist {
