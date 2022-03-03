@@ -163,7 +163,7 @@ hortis.leafletMap.createTooltip = function (that, markup) {
 hortis.projectBounds = {
     Galiano: [[48.855, -123.65], [49.005, -123.25]],
     Valdes: [[49.000, -123.798], [49.144, -123.504]],
-    Xetthecum: [[48.9365, -123.5185], [48.9515, -123.4942]]
+    Xetthecum: [[48.93713, -123.5110], [48.9511, -123.4980]]
 };
 
 fluid.defaults("hortis.sunburstLoaderWithMap", {
@@ -206,6 +206,7 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
     }
 });
 
+// Mixin grade for sunburstLoader, currently used in Xetthecum driver
 fluid.defaults("hortis.svgPatternLoader", {
     svgPatterns: "%resourceBase/html/xetthecum-patterns.html",
     resources: {

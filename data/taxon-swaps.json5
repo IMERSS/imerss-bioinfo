@@ -2380,5 +2380,15 @@
             }
         },
         iNaturalistTaxonId: "195986"
-    } 
+    },
+    "Polychaeta": {
+        taxonNames: {
+            "Polychaeta": {
+                resolvedBy: "AS",
+                oldiNaturalistTaxonId: "124519",
+                notes: "Bodged swap to account for strange Hunterston obs which otherwise end up accounted as an insect"
+            }
+        },
+        iNaturalistTaxonId: "47490"
+    }
 }

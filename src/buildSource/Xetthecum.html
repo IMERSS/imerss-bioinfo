@@ -20,12 +20,12 @@
     </head>
 
     <body>
-        <h2>Xetthecum Ecocultural Mapping</h2>
+        <h2 class="fl-xetthecum-banner">Xetthecum <button class="fl-xetthecum-audio" type="button"></button></h2>
         <div class="fl-bagatelle-container">
         </div>
         <script>
             hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
-                gradeNames: "hortis.svgPatternLoader",
+                gradeNames: ["hortis.svgPatternLoader", "hortis.xetthecumSunburstLoader"],
                 mapGrades: ["hortis.GBIFTiles"],
                 mapFlavourGrade: "hortis.leafletMap.withRegions",
                 resourceBase: ".",

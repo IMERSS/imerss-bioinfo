@@ -59,6 +59,7 @@
         <script src="src/client/js/autocomplete.js"></script>
         <script src="src/client/js/tabs.js"></script>
         <script src="src/client/js/checklist.js"></script>
+        <script src="src/client/js/xetthecum.js"></script>
 
         <style>
             body {
@@ -66,16 +67,16 @@
             }
         </style>
 
-        <title>Bagatelle: Xetthecum Map View</title>
+        <title>Xetthecum Map View</title>
     </head>
 
     <body>
-        <h2>Bagatelle: Xetthecum Map View</h2>
+        <h2 class="fl-xetthecum-banner">Xetthecum <button class="fl-xetthecum-audio" type="button"></button></h2>
         <div class="fl-bagatelle-container">
         </div>
         <script>
             hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
-                gradeNames: "hortis.svgPatternLoader",
+                gradeNames: ["hortis.svgPatternLoader", "hortis.xetthecumSunburstLoader"],
                 mapGrades: ["hortis.GBIFTiles"],
                 mapFlavourGrade: "hortis.leafletMap.withRegions",
                 renderMarkup: true,

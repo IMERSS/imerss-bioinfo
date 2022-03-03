@@ -44,3 +44,5 @@ Once I correct those names, I will send you and updated dataset and we can then 
 5) Finalize / integrated biodiversity dataset for the Xetthecum project
 
 Hunterston_Farms_Bioblitz_2010_coordinates_corrected_mismatches_reconciled.csv - in email of 1/3/22
+
+Species_media: From https://docs.google.com/spreadsheets/d/1Cd08WfCf7-wAk_OpkgDgeONKSkyPMirbfKHR6JM2BLQ/edit#gid=0

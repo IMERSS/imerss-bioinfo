@@ -13,6 +13,11 @@
     background-repeat: repeat;
 }
 
+.fld-bagatelle-class-riparian {
+    fill: url(#riparian);
+    background-repeat: repeat;
+}
+
 .fld-bagatelle-class-recently-harvested {
     fill: url(#recently-harvested);
     background-repeat: repeat;
@@ -31,4 +36,45 @@
 .fld-bagatelle-class-mature-forest {
     fill: url(#mature-forest);
     background-repeat: repeat;
+}
+
+
+
+.fl-xetthecum-banner {
+    background: #EDEFE9;
+    margin: 0px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1.5rem;
+    font-size: 2.5rem;
+}
+
+#fli-tab-sunburst, #fli-tab-checklist {
+    background: #DEE0B0;
+}
+
+.fld-bagatelle-tabs .ui-state-active.ui-tabs-active a {
+    background: #DEE0B0;
+}
+
+.fld-bagatelle-tabs .ui-state-active.ui-tabs-tab {
+    background: #DEE0B0;
+}
+
+.fl-xetthecum-audio {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding-bottom: 0.4rem;
+    margin-left: 1rem;
+    border: none;
+    background: none;
+    background-image: url(../img/audio.svg);
+    background-size: 2.5rem;
+    background-position: center center; 
+    background-repeat: no-repeat;
+}
+
+.fl-xetthecum-audio:hover {
+    outline: 1px solid black;
+    outline-offset: 1px;
 }

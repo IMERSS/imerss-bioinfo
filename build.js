@@ -25,7 +25,8 @@ var buildIndex = {
         "src/client/js/leafletMapWithRegions.js",
         "src/client/js/renderSVG.js",
         "src/client/js/tabs.js",
-        "src/client/js/checklist.js"
+        "src/client/js/checklist.js",
+        "src/client/js/xetthecum.js"
     ],
     codeHeader: "",
     codeFooter: "", // "\njQuery.noConflict()",

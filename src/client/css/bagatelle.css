@@ -48,6 +48,26 @@
     height: calc(800px + 1rem);
 }
 
+
+.fl-bagatelle-panel {
+    position: relative;
+}
+
+.fld-bagatelle-panel-label {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.7rem;
+    top: 1rem;
+}
+
+#fli-tab-checklist .fld-bagatelle-panel-label {
+    right: 1.5rem;
+}
+
+#fli-tab-sunburst .fld-bagatelle-panel-label {
+    left: 1rem;
+}
+
 .fl-bagatelle-clickable {
     cursor: pointer;
 }

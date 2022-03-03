@@ -62,7 +62,7 @@ hortis.generateChecklist = function (element, rootId, index) {
 };
 
 fluid.defaults("hortis.checklist", {
-    gradeNames: ["fluid.viewComponent"],
+    gradeNames: ["hortis.withPanelLabel", "fluid.viewComponent"],
     selectors: {
         hoverable: "p",
         checklist: ".fld-bagatelle-checklist",

@@ -154,9 +154,28 @@ fluid.defaults("hortis.layoutHolder", {
     }
 });
 
-fluid.defaults("hortis.sunburst", {
-    gradeNames: ["hortis.layoutHolder", "fluid.viewComponent"],
+fluid.defaults("hortis.withPanelLabel", {
+    gradeNames: "fluid.viewComponent",
     selectors: {
+        panelLabel: ".fld-bagatelle-panel-label"
+    },
+    model: {
+        panelLabel: ""
+    },
+    modelRelay: {
+        panelLabel: {
+            source: "panelLabel",
+            target: "dom.panelLabel.text"
+        }
+    }
+});
+
+// Note that sunburst's container is the overall fl-bagatelle-container, all of its contents related to the
+// sunburst itself really need to be demoted
+fluid.defaults("hortis.sunburst", {
+    gradeNames: ["hortis.layoutHolder", "hortis.withPanelLabel", "fluid.viewComponent"],
+    selectors: {
+        panelLabel: "#fli-tab-sunburst .fld-bagatelle-panel-label", // irregularity due to faulty container level
         svg: ".flc-bagatelle-svg",
         back: ".fld-bagatelle-back",
         tabs: ".fld-bagatelle-tabs",
@@ -480,7 +499,7 @@ hortis.renderObsBound = function (row, prefix, markup) {
 hortis.hulqValues = ["food", "medicinal", "spiritual", "material", "trade", "indicator"];
 
 hortis.dumpHulqName = function (row, markup) {
-    var nameRow = hortis.dumpRow("Hul'qumi'num name", row.hulqName + " " + row.hulqAuth, markup);
+    var nameRow = hortis.dumpRow("Hul'qumi'num name", row.hulqName, markup);
 
     var values = hortis.hulqValues.filter(function (value) {
         return row[value + "Value"] === "1";
