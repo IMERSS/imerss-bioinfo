@@ -61,6 +61,12 @@
             map: "%bagatelle/data/Xetthecum/Culturally_significant-map.json",
             processor: "hortis.xetthecum.assignHulqNames"
         },
+        AssignHulqMedia: {
+            type: "hortis.pipe.CSVInput",
+            input: "%bagatelle/data/Xetthecum/Species_media.csv",
+            map: "%bagatelle/data/Xetthecum/Species_media-map.json",
+            processor: "hortis.xetthecum.assignHulqMedia"
+        },
     },
     summaryOutMapExtraColumns: {
         // TODO: In case we want an obs file with these fields

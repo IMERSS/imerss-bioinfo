@@ -108,7 +108,11 @@ hortis.combineSelectors = function () {
 hortis.sunburstLoader.renderMarkup = function (container, template, renderMarkup, terms) {
     if (renderMarkup) {
         var rendered = fluid.stringTemplate(template, terms);
-        container.html(rendered);
+        var fragment = document.createRange().createContextualFragment(rendered);
+        var root = fragment.firstElementChild;
+        while (root.firstChild) {
+            container[0].appendChild(root.firstChild);
+        }
     }
 };
 
@@ -496,10 +500,20 @@ hortis.renderObsBound = function (row, prefix, markup) {
     }
 };
 
+hortis.drivePlayer = "<iframe frameborder=\"0\" width=\"360\" height=\"55\" src=\"%url\"></iframe>";
+
+hortis.driveToPreview = function (url) {
+    var lastSlash = url.lastIndexOf("/");
+    return url.substring(0, lastSlash) + "/preview";
+};
+
 hortis.hulqValues = ["food", "medicinal", "spiritual", "material", "trade", "indicator"];
 
 hortis.dumpHulqName = function (row, markup) {
-    var nameRow = hortis.dumpRow("Hul'qumi'num name", row.hulqName, markup);
+    var player = row.audioLink ? fluid.stringTemplate(hortis.drivePlayer, {
+        url: hortis.driveToPreview(row.audioLink)
+    }) : "";
+    var nameRow = hortis.dumpRow("Hul'qumi'num name", row.hulqName + player, markup);
 
     var values = hortis.hulqValues.filter(function (value) {
         return row[value + "Value"] === "1";
@@ -510,6 +524,8 @@ hortis.dumpHulqName = function (row, markup) {
 };
 
 hortis.iNatExtern = "<a href=\"%iNatLink\" target=\"_blank\" class=\"fl-taxonDisplay-iNat-extern\">iNaturalist<span class=\"fl-external-link\"></span></a>";
+
+
 
 hortis.imageTemplate =
     "<div class=\"fl-taxonDisplay-image-holder\">" +

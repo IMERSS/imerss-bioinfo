@@ -2,138 +2,173 @@
     "classes": {
         "RW": {
             "label": "Rural",
+            "legendLabel": "Rural",
+            "order": 14,
+            "endGroup": true,
             "fillColor": [
                 84,
                 76,
                 54
             ],
-            "region": "Anthropogenic"
+            "community": "Anthropogenic"
         },
         "DP": {
             "label": "Developed",
+            "legendLabel": "Developed",
+            "order": 13,
             "fillColor": [
-                127,
-                119,
-                85
+                114,
+                108,
+                84
             ],
-            "region": "Anthropogenic"
+            "community": "Anthropogenic"
         },
         "AG": {
             "label": "Agricultural",
+            "legendLabel": "Agricultural",
+            "order": 12,
             "fillColor": [
                 186,
                 177,
                 140
             ],
-            "region": "Anthropogenic"
+            "community": "Anthropogenic"
         },
         "WD": {
             "label": "Woodland",
+            "legendLabel": "Woodlands",
+            "order": 11,
+            "endGroup": true,
             "fillColor": [
                 191,
                 103,
                 58
             ],
-            "region": "Woodlands and rock outcrops"
+            "community": "Woodlands and rock outcrops"
         },
         "CL": {
             "label": "Rock outcrop",
+            "legendLabel": "Rock outcrops",
+            "order": 10,
+            "endGroup": true,
             "fillColor": [
-                170,
-                167,
-                165
+                117,
+                117,
+                117
             ],
-            "region": "Woodlands and rock outcrops"
+            "community": "Woodlands and rock outcrops"
         },
         "MF": {
             "label": "Mature forest",
+            "legendLabel": "Forests: mature conifer",
+            "order": 9,
+            "endGroup": true,
             "fillColor": [
-                0,
-                64,
-                0
+                23,
+                80,
+                18
             ],
-            "region": "Forests"
+            "community": "Forests"
         },
         "YF": {
             "label": "Young forest",
+            "legendLabel": "Forests: young",
+            "order": 8,
             "fillColor": [
-                0,
-                159,
-                15
+                91,
+                122,
+                82
             ],
-            "region": "Forests"
+            "community": "Forests"
         },
         "PS": {
             "label": "Pole sapling",
+            "legendLabel": "Forests: pole sapling",
+            "order": 7,
             "fillColor": [
-                77,
-                175,
-                74
+                144,
+                166,
+                138
             ],
-            "region": "Forests"
+            "community": "Forests"
         },
         "RH": {
             "label": "Recently harvested",
+            "order": 6,
+            "legendLabel": "Forests: recently harvested",
             "fillColor": [
-                88,
-                198,
-                84
+                188,
+                201,
+                184
             ],
-            "region": "Forests"
+            "community": "Forests"
         },
         "LC": {
             "label": "Lacustrine",
+            "legendLabel": "Freshwater: lacustrine",
+            "order": 5,
             "fillColor": [
-                55,
-                126,
-                184
+                0,
+                133,
+                188
             ],
-            "region": "Freshwater"
+            "community": "Freshwater"
         },
         "WN": {
             "label": "Wetland",
+            "legendLabel": "Freshwater: wetland",
+            "order": 4,
             "fillColor": [
-                54,
-                60,
-                184
+                52,
+                153,
+                198
             ],
-            "region": "Freshwater"
+            "community": "Freshwater"
         },
         "ST": {
-            "label": "Streams",
+            "label": "Stream",
+            "legendLabel": "Freshwater: stream",
+            "order": 3,
             "color": [
-                72,
-                123,
-                182
+                52,
+                153,
+                198
             ],
-            "region": "Freshwater"
+            "community": "Freshwater"
         },
         "RI": {
             "label": "Riparian",
+            "legendLabel": "Freshwater: riparian",
+            "order": 2,
             "fillColor": [
-                14,
-                44,
-                49
+                100,
+                195,
+                221
             ],
-            "region": "Freshwater"
+            "community": "Freshwater"
         },
         "MAR": {
             "label": "Marine",
+            "legendLabel": "Marine: offshore",
+            "order": 1,
+            "endGroup": true,
             "fillColor": [
-                5,
-                29,
-                90
+                34,
+                122,
+                113
             ],
-            "region": "Marine"
+            "community": "Marine"
         },
         "LT": {
             "label": "Littoral",
+            "legendLabel": "Marine: littoral",
+            "order": 0,
             "fillColor": [
                 100,
                 175,
                 164
             ],
-            "region": "Marine"
+            "community": "Marine"
         }
     },
     "features": [
@@ -148,7 +183,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -259,7 +294,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -370,7 +405,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -453,7 +488,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -628,7 +663,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -759,7 +794,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -1086,7 +1121,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -1261,7 +1296,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -1344,7 +1379,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -1471,7 +1506,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -1574,7 +1609,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -1757,7 +1792,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Agricultural, cultivated field",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -1952,7 +1987,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Agricultural, cultivated field",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -2391,7 +2426,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Agricultural, cultivated field",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -2458,7 +2493,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Agricultural, cultivated field",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -2689,7 +2724,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Agricultural, cultivated field",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -2880,7 +2915,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Agricultural, cultivated field",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -2943,7 +2978,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Agricultural, cultivated field",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -3506,7 +3541,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Agricultural, cultivated field",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -3821,7 +3856,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -3940,7 +3975,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -4099,7 +4134,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -4378,7 +4413,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -4745,7 +4780,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -4900,7 +4935,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -5011,7 +5046,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -5302,7 +5337,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Agricultural, cultivated field",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -5497,7 +5532,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Agricultural, cultivated field",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -5672,7 +5707,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -5743,7 +5778,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -5838,7 +5873,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -6129,7 +6164,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -6300,7 +6335,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -6715,7 +6750,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -6894,7 +6929,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -7021,7 +7056,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -7156,7 +7191,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -7231,7 +7266,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -7294,7 +7329,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -7473,7 +7508,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -7536,7 +7571,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -7671,7 +7706,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -7746,7 +7781,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -7845,7 +7880,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -7968,7 +8003,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -8063,7 +8098,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -8162,7 +8197,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -8249,7 +8284,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, abandoned gravel pit",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -8360,7 +8395,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, abandoned gravel pit",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -8443,7 +8478,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, active gravel pit",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -8566,7 +8601,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, active gravel pit",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -8637,7 +8672,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -8920,7 +8955,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -9227,7 +9262,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -9358,7 +9393,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -9473,7 +9508,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, exposed soil",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -9604,7 +9639,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -9647,7 +9682,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -9694,7 +9729,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -9969,7 +10004,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -10048,7 +10083,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -10267,7 +10302,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -10678,7 +10713,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -11241,7 +11276,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -11468,7 +11503,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, unpaved road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -12195,7 +12230,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, unpaved road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -12742,7 +12777,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, unpaved road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -12985,7 +13020,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, unpaved road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -13352,7 +13387,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, unpaved road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -13455,7 +13490,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, unpaved road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -14590,7 +14625,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, unpaved road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -17381,7 +17416,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, unpaved road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -17732,7 +17767,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, unpaved road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -17799,7 +17834,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Retreat Cove Rd",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -18762,7 +18797,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Cottage Way",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -20765,7 +20800,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Porlier Pass Drive",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -22584,7 +22619,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Vineyard Way",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -23411,7 +23446,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "McCoskrie",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -23838,7 +23873,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Developed, road surface",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -24201,7 +24236,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -24332,7 +24367,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -24671,7 +24706,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -24746,7 +24781,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -24897,7 +24932,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -25000,7 +25035,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -25063,7 +25098,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -25154,7 +25189,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -25253,7 +25288,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -25412,7 +25447,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -25767,7 +25802,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -26014,7 +26049,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -26093,7 +26128,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Rural",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -26228,7 +26263,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Agricultural, cultivated field",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -26667,7 +26702,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -26826,7 +26861,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -27097,7 +27132,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Clearcut, variable retention",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -27144,7 +27179,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -27459,7 +27494,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -27542,7 +27577,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Clearcut, variable retention",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -27629,7 +27664,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -28344,7 +28379,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -28575,7 +28610,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -28762,7 +28797,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -28997,7 +29032,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -29168,7 +29203,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -29475,7 +29510,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -29836,7 +29871,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -29991,7 +30026,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -30294,7 +30329,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -30373,7 +30408,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -30600,7 +30635,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -30703,7 +30738,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -30838,7 +30873,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -31093,7 +31128,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -31220,7 +31255,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -31451,7 +31486,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -32030,7 +32065,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -32153,7 +32188,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -32612,7 +32647,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mixed pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -32995,7 +33030,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Broadleaf pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -33570,7 +33605,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mixed pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -33821,7 +33856,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -34024,7 +34059,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -34231,7 +34266,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mixed pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -34378,7 +34413,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -34549,7 +34584,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Coniferous pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -34588,7 +34623,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -34747,7 +34782,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -35030,7 +35065,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -35173,7 +35208,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Coniferous pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -35300,7 +35335,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -35451,7 +35486,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -35678,7 +35713,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -35877,7 +35912,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -36164,7 +36199,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -36383,7 +36418,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -36778,7 +36813,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -37445,7 +37480,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -38076,7 +38111,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -38543,7 +38578,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -38702,7 +38737,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mixed pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -38781,7 +38816,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -38912,7 +38947,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Clearcut, variable retention",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -39203,7 +39238,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Clearcut, variable retention",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -39306,7 +39341,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Clearcut, variable retention",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -39533,7 +39568,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Clearcut, variable retention",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -39668,7 +39703,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Clearcut, variable retention",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -39739,7 +39774,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Clearcut, variable retention",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -39802,7 +39837,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -40413,7 +40448,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Coniferous pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -40672,7 +40707,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Coniferous pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -40971,7 +41006,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Broadleaf pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -41110,7 +41145,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -41345,7 +41380,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -41512,7 +41547,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -41991,7 +42026,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -42098,7 +42133,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -42237,7 +42272,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -42360,7 +42395,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -42447,7 +42482,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -42766,7 +42801,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -42889,7 +42924,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -43928,7 +43963,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -44275,7 +44310,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -44558,7 +44593,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -44825,7 +44860,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -44940,7 +44975,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -45315,7 +45350,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -45688,7 +45723,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -45859,7 +45894,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -46234,7 +46269,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -46585,7 +46620,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -47152,7 +47187,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -47223,7 +47258,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -47506,7 +47541,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -47705,7 +47740,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -48012,7 +48047,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -48211,7 +48246,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -48546,7 +48581,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -48909,7 +48944,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -49160,7 +49195,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -49755,7 +49790,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -49814,7 +49849,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -50029,7 +50064,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -50136,7 +50171,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -50379,7 +50414,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Coniferous pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -50910,7 +50945,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Coniferous pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -52749,7 +52784,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Coniferous pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -53096,7 +53131,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Broadleaf pole sapling",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -53659,7 +53694,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -53778,7 +53813,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -53893,7 +53928,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young broadleaf forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -54020,7 +54055,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -54707,7 +54742,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -55254,7 +55289,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -55413,7 +55448,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -55484,7 +55519,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -55675,7 +55710,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Mature conifer forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -55782,7 +55817,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Clearcut, variable retention",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -56089,7 +56124,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Clearcut, variable retention",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -56472,7 +56507,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -56667,7 +56702,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Young mixed forest",
                 "LABEL_HULQ": null,
-                "region": "Forests"
+                "communities": "Forests"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -56962,7 +56997,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Laughlin Lake",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -57521,7 +57556,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Pond",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -57728,7 +57763,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Riparian",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -57827,7 +57862,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Fen",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -57954,7 +57989,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Fen",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -58097,7 +58132,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Shallow water",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -58180,7 +58215,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Shallow water",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -58271,7 +58306,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Fen",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -58706,7 +58741,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Fen",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -59069,7 +59104,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Fen",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -59696,7 +59731,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Fen",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -59775,7 +59810,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Marsh",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -59866,7 +59901,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Shallow water",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -59981,7 +60016,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Dock",
                 "LABEL_HULQ": null,
-                "region": "Marine"
+                "communities": "Marine"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -60032,7 +60067,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Dock",
                 "LABEL_HULQ": null,
-                "region": "Marine"
+                "communities": "Marine"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -60091,7 +60126,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Dock",
                 "LABEL_HULQ": null,
-                "region": "Marine"
+                "communities": "Marine"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -60146,7 +60181,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Subtidal",
                 "LABEL_HULQ": null,
-                "region": "Marine"
+                "communities": "Marine"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -61359,7 +61394,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Shoreline",
                 "LABEL_HULQ": null,
-                "region": "Marine"
+                "communities": "Marine"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -62834,7 +62869,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Shoreline",
                 "LABEL_HULQ": null,
-                "region": "Marine"
+                "communities": "Marine"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -63433,7 +63468,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Shoreline",
                 "LABEL_HULQ": null,
-                "region": "Marine"
+                "communities": "Marine"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -63472,7 +63507,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Shoreline",
                 "LABEL_HULQ": null,
-                "region": "Marine"
+                "communities": "Marine"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -63517,7 +63552,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Davidson Creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -63572,7 +63607,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Greig creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -63797,7 +63832,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Greig creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -63840,7 +63875,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Greig creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -63931,7 +63966,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Greig creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -64202,7 +64237,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Greig creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -64273,7 +64308,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Greig creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -64416,7 +64451,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Davidson Creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -64663,7 +64698,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Davidson Creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -64742,7 +64777,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Davidson Creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -64961,7 +64996,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Greig creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -65056,7 +65091,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Greig creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -65123,7 +65158,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Greig creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -65154,7 +65189,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Greig creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -65201,7 +65236,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Canal",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -65308,7 +65343,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Canal",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -65347,7 +65382,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Canal",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -65386,7 +65421,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Canal",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -65425,7 +65460,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Canal",
                 "LABEL_HULQ": null,
-                "region": "Anthropogenic"
+                "communities": "Anthropogenic"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -65472,7 +65507,7 @@
                 "COMM_HULQ": null,
                 "LABEL": "Greig creek",
                 "LABEL_HULQ": null,
-                "region": "Freshwater"
+                "communities": "Freshwater"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -65500,7 +65535,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Woodland",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -66026,7 +66061,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Woodland",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -66120,7 +66155,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Woodland",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -66182,7 +66217,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Woodland",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -66444,7 +66479,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Woodland",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -66658,7 +66693,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Woodland",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -66808,7 +66843,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Coastal bluff",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -66950,7 +66985,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Coastal bluff",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -67120,7 +67155,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Coastal bluff",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -67198,7 +67233,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Coastal bluff",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -67296,7 +67331,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Coastal bluff",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -67478,7 +67513,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Coastal bluff",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -67616,7 +67651,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Coastal bluff",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -67922,7 +67957,7 @@
                 "COMMUNITY": "Woodlands and rock outcrops",
                 "COMM_HULQ": null,
                 "LABEL": "Coastal bluff",
-                "region": "Woodlands and rock outcrops"
+                "communities": "Woodlands and rock outcrops"
             },
             "geometry": {
                 "type": "MultiPolygon",

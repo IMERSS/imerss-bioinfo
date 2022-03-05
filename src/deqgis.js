@@ -31,11 +31,11 @@ console.log("Got data files ", dataFiles);
 
 var features = [];
 
-hortis.indexRegions = function (regions) {
+hortis.indexCommunities = function (communities) {
     var classes = {};
-    fluid.each(regions, function (region, regionKey) {
-        fluid.each(region.classes, function (clazz, classKey) {
-            clazz.region = regionKey;
+    fluid.each(communities, function (community, communityKey) {
+        fluid.each(community.classes, function (clazz, classKey) {
+            clazz.community = communityKey;
             classes[classKey] = clazz;
         });
     });
@@ -48,12 +48,12 @@ hortis.indexOneFeature = function (dataFileName, feature, features, classes) {
     if (!clazz) {
         console.log("Warning: unknown feature with name " + classname + " in file " + dataFileName);
     } else {
-        feature.properties.region = clazz.region;
+        feature.properties.communities = clazz.community;
         features.push(feature);
     }
 };
 
-var classes = hortis.indexRegions(config.regions);
+var classes = hortis.indexCommunities(config.communities);
 
 dataFiles.forEach(function (dataFileName) {
     var string = fs.readFileSync(dataFileName, "utf8");

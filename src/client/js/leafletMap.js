@@ -17,7 +17,7 @@ L.Map.include({
 });
 
 fluid.defaults("hortis.leafletMap", {
-    gradeNames: ["fluid.viewComponent", "{sunburstLoader}.options.mapFlavourGrade"], // Not a distribution because of FLUID-5836
+    gradeNames: ["fluid.viewComponent", "hortis.withPanelLabel", "{sunburstLoader}.options.mapFlavourGrade"], // Not a distribution because of FLUID-5836
     selectors: {
         map: ".fld-bagatelle-map",
         tooltip: ".fld-bagatelle-map-tooltip"
@@ -35,7 +35,8 @@ fluid.defaults("hortis.leafletMap", {
         mapBlockTooltipId: null
     },
     events: {
-        buildMap: null
+        buildMap: null,
+        clearMapSelection: null
     },
     markup: {
         tooltip: "<div class=\"fld-bagatelle-map-tooltip\"></div>",
@@ -49,7 +50,11 @@ fluid.defaults("hortis.leafletMap", {
         "buildMap.bindZoom": "hortis.leafletMap.bindZoom({that})",
         "buildMap.fitBounds": "hortis.leafletMap.fitBounds({that}, {that}.options.fitBounds)",
         "buildMap.createTooltip": "hortis.leafletMap.createTooltip({that}, {that}.options.markup)",
-        "buildMap.addTiles": "hortis.leafletMap.addTileLayer({that}.map, {that}.options.tileOptions)"
+        "buildMap.addTiles": "hortis.leafletMap.addTileLayer({that}.map, {that}.options.tileOptions)",
+        "clearMapSelection.mapBlock": {
+            changePath: "mapBlockTooltipId",
+            value: null
+        }
     },
     invokers: {
         // Perhaps this will one day be a "materialiser registration" and we will instead call applier.pullModel("zoom")
@@ -142,19 +147,16 @@ hortis.leafletMap.createTooltip = function (that, markup) {
     tooltip.hide();
     that.map.createPane("hortis-tooltip", tooltip[0]);
     var container = that.map.getContainer();
-    var clearMapSelection = function () {
-        that.applier.change("mapBlockTooltipId", null);
-    };
     $(container).on("click", function (event) {
         if (event.target === container) {
-            clearMapSelection();
+            that.events.clearMapSelection.fire();
         }
     });
     $(document).on("click", function (event) {
         var closest = event.target.closest(".fld-bagatelle-nodismiss-map");
         // Mysteriously SVG paths are not in the document
         if (!closest && event.target.closest("body")) {
-            clearMapSelection();
+            that.events.clearMapSelection.fire();
         }
     });
 };

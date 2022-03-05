@@ -64,48 +64,11 @@
     <body>
         <h2>Bagatelle: Galiano Web of Life Preliminary Marine List</h2>
         <div class="fl-bagatelle-container">
-        <div class="fl-bagatelle-taxa">
-
-            <div class="fl-bagatelle-tabs-and-search">
-
-                <div class="flc-bagatelle-autocomplete-row"><td>
-                    <label for="fli-bagatelle-autocomplete">Search Species: </label>
-                    <div class="fld-bagatelle-autocomplete"></div>
-                </div>
-                
-                <div class="fld-bagatelle-tabs ui-tabs ui-widget ui-widget-content fld-bagatelle-left-column">
-                    <ul class="ui-tabs-nav" role="tablist">
-                        <li class="ui-tabs-tab ui-tab ui-state-default ui-tabs-active">
-                            <a class="ui-tabs-anchor" href="#fli-tab-checklist">Species Checklist</a>
-                        </li>
-                        <li class="ui-tabs-tab ui-tab ui-state-default">
-                            <a class="ui-tabs-anchor" href="#fli-tab-sunburst">Web of Life</a>
-                        </li>
-                    </ul>
-                    <div id="fli-tab-sunburst">
-                        <svg width="1000" height="800" viewBox="-1100 -1100 2200 2200" class="flc-bagatelle-svg">
-                        </svg>
-                        <div class="fld-bagatelle-back" title="Go to previous selected taxon" alt="Go to previous selected taxon">&lt; Back
-                        </div>
-                    </div>
-                    <div id="fli-tab-checklist" class="flc-bagatelle-viz-dimens fld-bagatelle-checklist-holder" style="display:none">
-                        <div class="fld-bagatelle-checklist-up" title="Go to parent taxon" alt="Go to parent taxon">
-                        </div>
-                        <div class="fld-bagatelle-checklist">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="fld-bagatelle-taxonDisplay">
-                <div class="fl-taxonDisplay-row"></div>
-            </div>
-         
-        </div>
         </div>
         <script>
             hortis.sunburstLoader(".fl-bagatelle-container", {
                 colourCount: "undocumentedCount",
+                renderMarkup: true,
                 selectOnStartup: "Life",
                 vizFile: "data/Galiano/Galiano-Life.json.lz4",
                 phyloMap: "%resourceBase/json/emptyPhyloMap.json",

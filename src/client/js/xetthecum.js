@@ -12,6 +12,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 fluid.defaults("hortis.xetthecumSunburstLoader", {
     gradeNames: "fluid.viewComponent",
     bioPanelLabel: "Biodiversity Data",
+    mapPanelLabel: "Ecological Habitat",
     distributeOptions: {
         sunburstLabel: {
             target: "{that hortis.sunburst}.options.model.panelLabel",
@@ -20,6 +21,14 @@ fluid.defaults("hortis.xetthecumSunburstLoader", {
         checklistLabel: {
             target: "{that hortis.checklist}.options.model.panelLabel",
             source: "{that}.options.bioPanelLabel"
+        },
+        mapLabel: {
+            target: "{that hortis.leafletMap}.options.model.panelLabel",
+            source: "{that}.options.mapPanelLabel"
+        },
+        outerPanelSelector: {
+            target: "{that hortis.sunburst}.options.selectors.mapOuterPanel",
+            record: ".fld-bagatelle-map-outer-panel"
         }
     }
 });

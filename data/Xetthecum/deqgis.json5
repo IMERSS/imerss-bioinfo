@@ -1,19 +1,26 @@
 {
     defaultColor: [35,35,35],
     baseDirectory: "%bagatelle/data/Xetthecum/qgis2web_2022_02_12-21_38_21_508226/data",
-    regions: {
+    communities: {
         Anthropogenic: {
             classes: {
                 RW: {
                     label: "Rural",
+                    legendLabel: "Rural",
+                    order: 14,
+                    endGroup: true,
                     fillColor: [84,76,54],
                 },
                 DP: { // Developed, exposed soil, Developed, road surface
                     label: "Developed",
-                    fillColor: [127,119,85]
+                    legendLabel: "Developed",
+                    order: 13,
+                    fillColor: [114,108,84]
                 },
                 AG: { // Agricultural, cultivated field
                     label: "Agricultural",
+                    legendLabel: "Agricultural",
+                    order: 12,
                     fillColor: [186,177,140]
                 }
             }
@@ -22,11 +29,17 @@
             classes: {
                 WD: {
                     label: "Woodland",
+                    legendLabel: "Woodlands",
+                    order: 11,
+                    endGroup: true,
                     fillColor: [191,103,58]
                 },
                 CL: { // Coastal bluff
                     label: "Rock outcrop",
-                    fillColor: [170,167,165]
+                    legendLabel: "Rock outcrops",
+                    order: 10,
+                    endGroup: true,
+                    fillColor: [117,117,117]
                 }
             }
         },
@@ -34,19 +47,28 @@
             classes: {
                 MF: { // Mature conifer forest, Mature mixed forest
                     label: "Mature forest",
-                    fillColor: [0,64,0]
+                    legendLabel: "Forests: mature conifer",
+                    order: 9,
+                    endGroup: true,
+                    fillColor: [23,80,18]
                 },
                 YF: { // Young conifer forest, Young mixed forest, Young broadleaf forest
                     label: "Young forest",
-                    fillColor: [0,159,15]
+                    legendLabel: "Forests: young",
+                    order: 8,
+                    fillColor: [91,122,82]
                 },
                 PS: { // Coniferous pole sapling, broadleaf pole sapling
                     label: "Pole sapling",
-                    fillColor: [77,175,74]
+                    legendLabel: "Forests: pole sapling",
+                    order: 7,
+                    fillColor: [144,166,138]
                 },
                 RH: { // Clearcut, variable retention,
                     label: "Recently harvested",
-                    fillColor: [88,198,84]
+                    order: 6,
+                    legendLabel: "Forests: recently harvested",
+                    fillColor: [188,201,184]
                 }
             }
         },
@@ -54,19 +76,28 @@
             classes: {
                 LC: { // Laughlin Lake, Pond
                     label: "Lacustrine",
-                    fillColor: [55,126,184]
+                    legendLabel: "Freshwater: lacustrine",
+                    order: 5,
+                    endGroup: true,
+                    fillColor: [0,133,188]
                 },
                 WN: { // Shallow water, Marsh
                     label: "Wetland",
-                    fillColor: [54,60,184]
+                    legendLabel: "Freshwater: wetland",
+                    order: 4,
+                    fillColor: [52,153,198]
                 },
                 ST: { // Davidson Creek, Greig creek, Note: these are all MultiLineString
-                    label: "Streams",
-                    color: [72,123,182]
+                    label: "Stream",
+                    legendLabel: "Freshwater: stream",
+                    order: 3,
+                    color: [52,153,198]
                 },
                 RI: { // Fen
                     label: "Riparian",
-                    fillColor: [14,44,49]
+                    legendLabel: "Freshwater: riparian",
+                    order: 2,
+                    fillColor: [100,195,221]
                 }
             }
         },
@@ -74,10 +105,15 @@
             classes: {
                 MAR: { // Dock, Subtidal
                     label: "Marine",
-                    fillColor: [5,29,90]
+                    legendLabel: "Marine: offshore",
+                    order: 1,
+                    endGroup: true,
+                    fillColor: [34,122,113]
                 },
                 LT: { // Shoreline
                     label: "Littoral",
+                    legendLabel: "Marine: littoral",
+                    order: 0,
                     fillColor: [100,175,164]
                 }
             }

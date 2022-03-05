@@ -46,6 +46,6 @@
         "COMM_HULQ": "COMM_HULQ",
         "LABEL": "LABEL",
         "LABEL_HULQ": "LABEL_HULQ",
-        "region": "region"
+        "communities": "communities"
     }
 }

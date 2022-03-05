@@ -55,6 +55,9 @@ var buildIndex = {
         src: "src/client/html/xetthecum-patterns.html",
         dest: "build/html/xetthecum-patterns.html"
     }, {
+        src: "src/client/html/bagatelle-map-xetthecum.html",
+        dest: "build/html/bagatelle-map-xetthecum.html"
+    }, {
         src: "src/buildSource/Galiano Life List.html",
         dest: "build/Galiano Life List.html"
     }, {

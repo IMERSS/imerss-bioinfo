@@ -38,7 +38,8 @@
         "tradeValue": "Trade Value",
         "indicatorValue": "Indicator Value",
         "hulqName": "Hulquminum Name",
-        "hulqAuth": "Hulquminum Authority"
+        "hulqAuth": "Hulquminum Authority",
+        "audioLink": "Audio Link"
     },
     "counts": {
         "observationCount": {

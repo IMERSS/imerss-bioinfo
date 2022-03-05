@@ -38,6 +38,12 @@ hortis.xetthecum.extraOutMap = {
     }
 };
 
+hortis.xetthecum.mediaOutMap = {
+    columns: {
+        "audioLink": "Audio Link"
+    }
+};
+
 hortis.xetthecum.chooseName = function (target, hulqRow) {
     var bestRec = hortis.xetthecum.names.find(function (rec) {
         return !!hulqRow[rec.field];
@@ -49,6 +55,16 @@ hortis.xetthecum.chooseName = function (target, hulqRow) {
     } else {
         return false;
     }
+};
+
+hortis.xetthecum.summariseUnseen = function (byTaxon, usedTaxa, message) {
+    var unseen = [];
+    fluid.each(byTaxon, function (value, key) {
+        if (!usedTaxa[key]) {
+            unseen.push(key);
+        }
+    });
+    console.log("The following ", unseen.length, " taxa with " + message + " were not observed:\n" + unseen.join("\n"));
 };
 
 hortis.xetthecum.assignHulqNames = function (resolved, patch) {
@@ -84,13 +100,27 @@ hortis.xetthecum.assignHulqNames = function (resolved, patch) {
         }
     });
     console.log("Matched " + hits + " taxa with Hul'qumi'num names");
-    var unseen = [];
-    fluid.each(byTaxon, function (value, key) {
-        if (!usedTaxa[key]) {
-            unseen.push(key);
-        }
-    });
-    console.log("The following ", unseen.length, " taxa with Hul'qumi'num records were not observed: ", unseen.join("\n"));
+
+    hortis.xetthecum.summariseUnseen(byTaxon, usedTaxa, "Hul'qumi'num name records");
     hortis.writeCSV("hulq-mismatches.csv", ["taxon", "found"], withoutHulq, fluid.promise());
     resolved.combinedOutMap = hortis.combineMaps([resolved.combinedOutMap, hortis.xetthecum.valueOutMap, hortis.xetthecum.extraOutMap]);
+};
+
+hortis.xetthecum.assignHulqMedia = function (resolved, patch) {
+    var byTaxon = {};
+    var usedTaxa = {};
+    patch.patchData.rows.forEach(function (row) {
+        var sanitized = hortis.sanitizeSpeciesName(row.scientificName);
+        byTaxon[sanitized] = row;
+    });
+    resolved.summarisedRows.forEach(function (row) {
+        var taxon = row.iNaturalistTaxonName;
+        var hulqRow = byTaxon[taxon];
+        if (hulqRow) {
+            usedTaxa[taxon] = true;
+            row.audioLink = hulqRow.audioLink;
+        }
+    });
+    resolved.combinedOutMap = hortis.combineMaps([resolved.combinedOutMap, hortis.xetthecum.mediaOutMap]);
+    hortis.xetthecum.summariseUnseen(byTaxon, usedTaxa, "Hul'qumi'num media data");
 };

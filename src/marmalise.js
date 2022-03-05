@@ -215,34 +215,48 @@ hortis.indexRegions = function (treeBuilder) {
     treeBuilder.summaryRows.forEach(function (row) {
         summaryById[row.iNaturalistTaxonId] = row;
     });
-    var regions = {};
-    fluid.each(features.classes, function (clazz) {
-        regions[clazz.region] = {
+    var communities = {};
+    var classes = {};
+    fluid.each(features.classes, function (clazz, classKey) {
+        communities[clazz.community] = {
             count: 0,
             byTaxonId: {}
         };
+        classes[classKey] = {
+            count: 0,
+            byTaxonId: {}
+        }
     });
-    var options = treeBuilder.options;
-    treeBuilder.obs.rows.forEach(function (row) {
-        var obsId = row[options.obsIdField];
-        var summaryRow = summaryById[row.iNaturalistTaxonId];
-        if (summaryRow) {
-            var taxonId = summaryRow.id;
-            var regionName = row[options.regionField];
-            var region = regions[regionName];
+    var applyObs = function (container, key, taxonId, obsId) {
+        if (key) {
+            var region = container[key];
+            if (!region) {
+                fluid.fail("Unknown region key ", key, " in container with keys ", Object.keys(container).join(", "));
+            }
             var bucketTaxa = region.byTaxonId[taxonId]; // TODO: use fluid.pushArray?
             if (!bucketTaxa) {
                 bucketTaxa = region.byTaxonId[taxonId] = [];
             }
             bucketTaxa.push(obsId);
             ++region.count;
+        }
+    }
+    var options = treeBuilder.options;
+    treeBuilder.obs.rows.forEach(function (row) {
+        var obsId = row[options.obsIdField];
+        var summaryRow = summaryById[row.iNaturalistTaxonId];
+        if (summaryRow) {
+            var taxonId = summaryRow.id;
+            applyObs(communities, row.COMMUNITY, taxonId, obsId);
+            applyObs(classes, row.CLASS, taxonId, obsId);
+
         } else {
             console.log("Warning: row with iNaturalistTaxonId " + row.iNaturalistTaxonId + " did not correspond to row in summary: ", row);
         }
     });
     return {
-        regions: regions,
-        classes: features.classes,
+        communities: communities,
+        classes: fluid.extend(true, {}, features.classes, classes),
         features: features.features
     };
 };
