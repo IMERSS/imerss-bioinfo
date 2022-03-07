@@ -107,6 +107,7 @@
             "label": "Lacustrine",
             "legendLabel": "Freshwater: lacustrine",
             "order": 5,
+            "endGroup": true,
             "fillColor": [
                 0,
                 133,

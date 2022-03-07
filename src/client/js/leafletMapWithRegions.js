@@ -7,7 +7,7 @@ var hortis = fluid.registerNamespace("hortis");
 fluid.defaults("hortis.leafletMap.withRegions", {
     selectors: {
         legendKeys: ".fld-bagatelle-map-legend-keys",
-        infoPanel: ".fld-bagatelle-infoPanel",
+        infoPanel: ".fld-bagatelle-infoPanel"
     },
     modelListeners: {
         selectedRegions: {
@@ -50,8 +50,8 @@ fluid.defaults("hortis.leafletMap.withRegions", {
 });
 
 hortis.leafletMap.outerPanelTemplate = "<div class=\"fld-bagatelle-panel-label\">Ecological Habitat</div>" +
-   "<div class=\"fld-bagatelle-map-community\">%community</div>" + 
-   "<div class=\"fld-bagatelle-map-class\">%clazz</div>"
+   "<div class=\"fld-bagatelle-map-community\">%community</div>" +
+   "<div class=\"fld-bagatelle-map-class\">%clazz</div>";
 
 
 hortis.leafletMap.renderMapOuterPanel = function (map) {
@@ -102,8 +102,8 @@ fluid.defaults("hortis.legendKey", {
                 segs: ["selectedRegions", "{that}.options.clazz.key"]
             },
             target: "selected"
-        },
-/*        selectedStyle: { // We can't write this or its modelListener equivalent because of BUG!
+        }
+        /* selectedStyle: { // We can't write this or its modelListener equivalent because of BUG!
             source: "selected",
             target: {
                 segs: ["dom", "container", "class", "fld-bagatelle-selected"]

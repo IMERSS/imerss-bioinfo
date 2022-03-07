@@ -225,7 +225,7 @@ hortis.indexRegions = function (treeBuilder) {
         classes[classKey] = {
             count: 0,
             byTaxonId: {}
-        }
+        };
     });
     var applyObs = function (container, key, taxonId, obsId) {
         if (key) {
@@ -240,7 +240,7 @@ hortis.indexRegions = function (treeBuilder) {
             bucketTaxa.push(obsId);
             ++region.count;
         }
-    }
+    };
     var options = treeBuilder.options;
     treeBuilder.obs.rows.forEach(function (row) {
         var obsId = row[options.obsIdField];

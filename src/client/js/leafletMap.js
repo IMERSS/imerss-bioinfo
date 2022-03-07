@@ -17,7 +17,7 @@ L.Map.include({
 });
 
 fluid.defaults("hortis.leafletMap", {
-    gradeNames: ["fluid.viewComponent", "hortis.withPanelLabel", "{sunburstLoader}.options.mapFlavourGrade"], // Not a distribution because of FLUID-5836
+    gradeNames: ["fluid.viewComponent", "{sunburstLoader}.options.mapFlavourGrade"], // Not a distribution because of FLUID-5836
     selectors: {
         map: ".fld-bagatelle-map",
         tooltip: ".fld-bagatelle-map-tooltip"

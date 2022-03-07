@@ -17,7 +17,7 @@
         },
         Hunterston: {
             name: "Hunterston Farm Stewardship Report: A Review of the 2010 BioBlitz (2010)",
-            input: "%bagatelle/data/Xetthecum/Hunterston_Farms_Bioblitz_2010_coordinates_corrected_mismatches_reconciled.csv",
+            input: "%bagatelle/data/Xetthecum/Hunterston_Farms_Bioblitz_2010_coordinates_corrected_mismatches_reconciled_2022-03-06.csv",
             map: "%bagatelle/data/Xetthecum/hunterston-map.json",
             outMap: "%bagatelle/data/Xetthecum/hunterston-out-map.json",
             colour: "#55a329"

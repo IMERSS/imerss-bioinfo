@@ -70,14 +70,6 @@
     top: 1rem;
 }
 
-#fli-tab-checklist .fld-bagatelle-panel-label {
-    right: 1.5rem;
-}
-
-#fli-tab-sunburst .fld-bagatelle-panel-label {
-    left: 1rem;
-}
-
 .fl-bagatelle-clickable {
     cursor: pointer;
 }
@@ -336,7 +328,7 @@
     color: #444;
 }
 
-#fli-tab-checklist {
+.fld-bagatelle-checklist-holder {
     overflow-y: scroll;
 }
 

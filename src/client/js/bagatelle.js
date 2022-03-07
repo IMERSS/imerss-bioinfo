@@ -454,15 +454,15 @@ hortis.taxonDisplayLookup = {
     observationCount: "Observation Count:",
     iNaturalistObsLink: "Observation:",
     taxonLink: "iNaturalist Taxon:",
+    commonName: "Common Name:",
     wikipediaSummary: "Wikipedia Summary",
     iNaturalistTaxonImage: "iNaturalist Taxon Image:",
     phyloPic: "Taxon Icon:",
     taxonPic: "Taxon Picture:",
-    taxonPicDescription: "Taxon Picture Description:",
-    commonName: "Common Name:"
+    taxonPicDescription: "Taxon Picture Description:"
 };
 
-hortis.commonFields = ["wikipediaSummary", "commonName"];
+hortis.commonFields = ["commonName", "wikipediaSummary"];
 
 hortis.dumpRow = function (key, value, markup, extraClazz) {
     if (value) {

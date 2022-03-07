@@ -55,7 +55,7 @@
 }
 
 .fl-bagatelle-container {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 
 .fld-bagatelle-map-holder {
@@ -152,8 +152,49 @@
     height: 500px;
 }
 
+.fld-bagatelle-tabs {
+    position: relative;
+}
+
+.flc-bagatelle-autocomplete-row {
+    position: absolute;
+    top: 3rem;
+    left: 8rem;
+    z-index: 999;
+}
+
+#fli-bagatelle-autocomplete {
+    background: white;
+}
+
 #fli-tab-sunburst, #fli-tab-checklist {
     background: var(--bagatelle-eco-colour);
+}
+
+#fli-tab-sunburst {
+    padding-top: 4rem;
+}
+
+.fl-bagatelle-checklist-spacer {
+    height: 4rem;
+}
+
+/* We've inserted the "spacer" between the real panel and the contents so it can scroll independently of the
+ * autocomplete */
+#fli-tab-checklist.ui-tabs-panel {
+    padding: 0px;
+}
+
+.fld-bagatelle-checklist-holder {
+    padding: 1em 1.4em;
+}
+
+.fld-bagatelle-panel-label {
+    right: 1.5rem;
+}
+
+#fli-tab-sunburst {
+    padding-top: 3rem;
 }
 
 .fld-bagatelle-taxonDisplay {
@@ -166,6 +207,11 @@
 
 .fld-bagatelle-tabs .ui-state-active.ui-tabs-tab {
     background: var(--bagatelle-eco-colour);
+}
+
+.ui-widget-header { /* Override theme to avoid clutter in tab top */
+    background: none;
+    border: none;
 }
 
 .fl-xetthecum-audio {
