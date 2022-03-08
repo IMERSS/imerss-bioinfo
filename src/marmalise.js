@@ -134,7 +134,7 @@ hortis.taxaToPathiNat = function (treeBuilder, row) {
         return hortis.loadCachedTaxonDoc(treeBuilder, id);
     });
     var rankDocs = ancestourDocs.filter(function (oneDoc) {
-        return hortis.ranks.includes(oneDoc.rank);
+        return treeBuilder.options.vizRanks.includes(oneDoc.rank);
     });
     return rankDocs.concat([baseDoc]);
 };
@@ -179,6 +179,12 @@ hortis.rootNode = function (map) {
     return hortis.newTaxon("Life", "life", 0, map.counts);
 };
 
+hortis.filterVizRanks = function (skipRanks) {
+    return hortis.ranks.filter(function (rank) {
+        return !skipRanks.includes(rank);
+    });
+};
+
 fluid.defaults("hortis.treeBuilder", {
     gradeNames: "fluid.component",
     taxonAPIFileBase: "data/iNaturalist/taxonAPI",
@@ -187,6 +193,7 @@ fluid.defaults("hortis.treeBuilder", {
     featureFile: "",
     regionField: null, obsIdField: null,
     inputFiles: [],
+    vizRanks: "@expand:hortis.filterVizRanks({that}.options.skipRanks)",
     members: {
         // Mutable tree to which each file contributes its taxa
         tree: "@expand:hortis.rootNode({that}.map)",
@@ -314,6 +321,7 @@ var parsedArgs = minimist(process.argv.slice(2));
 var options = parsedArgs.config ? hortis.readJSONSync(parsedArgs.config) : {
     mapFile: parsedArgs.map,
     obsFile: parsedArgs.obsFile,
+    skipRanks: [],
     obsMapFile: parsedArgs.obsMapFile,
     featuresFile: parsedArgs.featuresFile,
     outputFile: parsedArgs.o || parsedArgs.output,

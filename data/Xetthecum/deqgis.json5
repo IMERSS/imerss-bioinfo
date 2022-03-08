@@ -38,7 +38,6 @@
                     label: "Rock outcrop",
                     legendLabel: "Rock outcrops",
                     order: 10,
-                    endGroup: true,
                     fillColor: [117,117,117]
                 }
             }

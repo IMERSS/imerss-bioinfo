@@ -6,8 +6,7 @@ var hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.leafletMap.withRegions", {
     selectors: {
-        legendKeys: ".fld-bagatelle-map-legend-keys",
-        infoPanel: ".fld-bagatelle-infoPanel"
+        legendKeys: ".fld-bagatelle-map-legend-keys"
     },
     modelListeners: {
         selectedRegions: {
@@ -27,16 +26,17 @@ fluid.defaults("hortis.leafletMap.withRegions", {
         communities: "{sunburst}.viz.communities",
         toPlot: "{sunburst}.viz.communities", // For general contract of hortis.mapBlockToFocusedTaxa - rename this field, e.g. selectableRegions
         regions: "{sunburst}.viz.classes",
-        outerPanel: "{sunburst}.dom.mapOuterPanel",
-        taxonDisplay: "{sunburst}.dom.taxonDisplay"
+        outerPanel: "{sunburst}.dom.mapOuterPanel"
     },
     listeners: {
         "buildMap.addRegions": "hortis.leafletMap.withRegions.addRegions({that})",
         "buildMap.drawRegions": "hortis.leafletMap.withRegions.drawRegions({that})",
-        "clearMapSelection.regions": "hortis.clearSelectedRegions({that})"
+        "clearMapSelection.regions": "hortis.clearSelectedRegions({that})",
+        //                                                                          class,       community
+        "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)"
     },
-    invokers: {                                                 // class,       community
-        selectRegion: "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)"
+    events: {
+        selectRegion: null
     },
     dynamicComponents: {
         legendKeys: {
@@ -49,7 +49,9 @@ fluid.defaults("hortis.leafletMap.withRegions", {
     }
 });
 
-hortis.leafletMap.outerPanelTemplate = "<div class=\"fld-bagatelle-panel-label\">Ecological Habitat</div>" +
+hortis.leafletMap.outerPanelTemplate =
+   "<div class=\"fld-bagatelle-community-label\">Community</div>" +
+   "<div class=\"fl-bagatelle-photo\" style=\"background-image: url(%imgUrl)\"></div>" +
    "<div class=\"fld-bagatelle-map-community\">%community</div>" +
    "<div class=\"fld-bagatelle-map-class\">%clazz</div>";
 
@@ -66,14 +68,10 @@ hortis.leafletMap.regionSelection = function (map, className, community) {
     map.applier.change("mapBlockTooltipId", community);
     map.applier.change("selectedRegions", hortis.leafletMap.withRegions.selectedRegions(className, map.classes));
     map.outerPanel.html(hortis.leafletMap.renderMapOuterPanel(map));
-    map.outerPanel.show();
-    map.taxonDisplay.hide();
 };
 
 hortis.clearSelectedRegions = function (map) {
     map.applier.change("selectedRegions", hortis.leafletMap.withRegions.selectedRegions(null, map.classes));
-    map.outerPanel.hide();
-    map.taxonDisplay.show();
 };
 
 
@@ -118,7 +116,7 @@ fluid.defaults("hortis.legendKey", {
         },
         click: {
             path: "dom.container.click",
-            listener: "{leafletMap}.selectRegion",
+            listener: "{leafletMap}.events.selectRegion.fire",
             args: ["{that}.options.clazz.key", "{that}.options.clazz.community"]
         }
     },
@@ -165,8 +163,9 @@ hortis.leafletMap.withRegions.showSelectedRegions = function (map, selectedRegio
     var style = map.container[0].style;
     var noSelection = map.model.mapBlockTooltipId === null;
     Object.keys(map.regions).forEach(function (key) {
+        var lineFeature = map.classes[key].color;
         style.setProperty(hortis.regionOpacity(key), selectedRegions[key] || noSelection ? "1.0" : "0.11");
-        style.setProperty(hortis.regionBorder(key), selectedRegions[key] ? "#FEF410" : "none");
+        style.setProperty(hortis.regionBorder(key), selectedRegions[key] ? "#FEF410" : (lineFeature ? fluid.colour.arrayToString(lineFeature) : "none"));
     });
 };
 
@@ -193,6 +192,7 @@ hortis.leafletMap.withRegions.drawRegions = function (map) {
     var regionClass = function (clazz) {
         return "fld-bagatelle-region-" + hortis.normaliseToClass(map.classes[clazz].label);
     };
+    map.applier.change("selectedRegions", hortis.leafletMap.withRegions.selectedRegions(null, map.classes));
 
     map.regionGroup.clearLayers();
 
@@ -206,7 +206,8 @@ hortis.leafletMap.withRegions.drawRegions = function (map) {
             stroke: "yellow" // Leaflet doesn't listen to weight if there is no initial stroke
         } : {
             style: {
-                color: fluid.colour.arrayToString(clazz.color)
+                color: fluid.colour.arrayToString(clazz.color),
+                weight: 3
             }
         };
         options.className = regionClass(className) + " fld-bagatelle-region";
@@ -215,7 +216,7 @@ hortis.leafletMap.withRegions.drawRegions = function (map) {
 
         Lpolygon.on("click", function () {
             console.log("Map clicked on community ", community, " region ", className);
-            map.selectRegion(className, community);
+            map.events.selectRegion.fire(className, community);
         });
         return {
             Lpolygon: Lpolygon,

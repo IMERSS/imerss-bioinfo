@@ -27,6 +27,9 @@ hortis.checklistItem = function (entry, index) {
     if (record.commonName) {
         name += " - <p " + styleprop + rowid + " class=\"flc-checklist-common-name\">" + record.commonName + "</p>";
     }
+    if (record.hulqName) {
+        name += " - <p " + styleprop + rowid + " class=\"flc-checklist-hulq-name\"><em>" + record.hulqName + "</em></p>";
+    }
     var subList = hortis.checklistList(entry.children, index);
     var footer = "</li>";
     return header + name + subList + footer;
@@ -104,7 +107,7 @@ hortis.checklist.moveUp = function (layoutHolder) {
     var layoutId = layoutHolder.model.layoutId;
     var row = layoutId ? layoutHolder.index[layoutId] : null;
     var parentId = row && row.parent && row.parent.id;
-    layoutHolder.changeLayoutId(parentId);
+    layoutHolder.events.changeLayoutId.fire(parentId);
 };
 
 hortis.checklist.bindHover = function (that, layoutHolder) {
@@ -119,7 +122,7 @@ hortis.checklist.bindHover = function (that, layoutHolder) {
     });
     that.container.on("click", hoverable, function () {
         var id = this.dataset.rowId;
-        layoutHolder.changeLayoutId(id);
+        layoutHolder.events.changeLayoutId.fire(id);
     });
 };
 

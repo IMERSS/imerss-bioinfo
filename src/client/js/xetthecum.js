@@ -9,6 +9,8 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 
 "use strict";
 
+var hortis = fluid.registerNamespace("hortis");
+
 fluid.defaults("hortis.xetthecumSunburstLoader", {
     gradeNames: "fluid.viewComponent",
     bioPanelLabel: "Biodiversity",
@@ -33,6 +35,71 @@ fluid.defaults("hortis.xetthecumSunburstLoader", {
         outerPanelSelector: {
             target: "{that hortis.sunburst}.options.selectors.mapOuterPanel",
             record: ".fld-bagatelle-map-outer-panel"
+        }
+    },
+    components: {
+        infoPanelManager: {
+            type: "hortis.infoPanelManager",
+            container: "{sunburstLoader}.container",
+            createOnEvent: "sunburstLoaded",
+            options: {
+                listeners: { // Another one for the reuse failure up to 5.x - we have to put these here because of createOnEvent
+                    "{hortis.leafletMap}.events.selectRegion": {
+                        namespace: "updateInfoPanel",
+                        changePath: "{infoPanelManager}.model.visiblePanel",
+                        value: "map"
+                    },
+                    // TODO: Horrid notational problem here - can't duplicate key in JSON and can't put namespace in it
+                    "{sunburst}.events.changeLayoutId": [{
+                        namespace: "clearMapSelection",
+                        listener: "hortis.clearMapSelectionConditionally",
+                        args: ["{hortis.leafletMap}", "{arguments}.0", "{arguments}.1"]
+                    }, {
+                        namespace: "changeLayoutId",
+                        changePath: "{infoPanelManager}.model.visiblePanel",
+                        value: "taxa"
+                    }]
+                }
+            }
+        }
+    }
+});
+
+hortis.clearMapSelectionConditionally = function (map, layoutId, source) {
+    if (source !== "rowFocus") {
+        map.events.clearMapSelection.fire();
+    }
+};
+
+fluid.defaults("hortis.infoPanelManager", {
+    gradeNames: "fluid.viewComponent",
+    selectors: {
+        map: ".fld-bagatelle-map-outer-panel-wrapper",
+        taxa: ".fld-bagatelle-taxonDisplay-wrapper"
+    },
+    panels: {
+        map: true,
+        taxa: true
+    },
+    model: {
+        visiblePanel: "taxa",
+        visiblePanels: {}
+    },
+    modelRelay: {
+        visiblePanels: {
+            target: "visiblePanels",
+            func: (panel, panels) => {
+                return fluid.transform(panels, (troo, thisPanel) => panel === thisPanel);
+            },
+            args: ["{that}.model.visiblePanel", "{that}.options.panels"]
+        },
+        visibleMap: {
+            target: "dom.map.visible",
+            source: "visiblePanels.map"
+        },
+        visibleTaxa: {
+            target: "dom.taxa.visible",
+            source: "visiblePanels.taxa"
         }
     }
 });

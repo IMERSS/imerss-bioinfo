@@ -77,12 +77,16 @@
 
 .fld-bagatelle-map-outer-panel {
     background: var(--bagatelle-map-colour);
-    padding: 2rem;
+    padding: 1rem 1rem 1rem 1rem;
+    margin: 1px; /* Fight strange layout bug on Chrome 76 */
 }
 
-.fld-bagatelle-map-outer-panel .fld-bagatelle-panel-label {
-    position: unset;
-    padding-bottom: 1.5rem;
+.fld-bagatelle-infoPanel {
+    margin-left: 2.5rem;
+}
+
+.fld-bagatelle-infoPanel .fld-bagatelle-panel-label {
+    padding: 1rem 2rem 0.5rem 1rem;
 }
 
 .fld-bagatelle-map-community {
@@ -185,12 +189,31 @@
     padding: 0px;
 }
 
+.ui-tabs .ui-tabs-panel {
+    border-bottom: 2px solid #4F5346;
+    border-left: 2px solid #4F5346;
+    border-right: 2px solid #4F5346;
+    border-top: 2px solid #4F5346;
+    margin: 1px;
+}
+
 .fld-bagatelle-checklist-holder {
     padding: 1em 1.4em;
 }
 
-.fld-bagatelle-panel-label {
+.flc-checklist-hulq-name {
+    font-weight: bolder;
+}
+
+.fl-bagatelle-taxa .fld-bagatelle-panel-label {
+    position: absolute;
     right: 1.5rem;
+}
+
+.fld-bagatelle-panel-label {
+    font-weight: bold;
+    font-size: 1.7rem;
+    top: 1rem;
 }
 
 #fli-tab-sunburst {
@@ -198,6 +221,11 @@
 }
 
 .fld-bagatelle-taxonDisplay {
+    border: none;
+}
+
+
+.fld-bagatelle-taxonDisplay-wrapper {
     background: var(--bagatelle-eco-colour);
 }
 
@@ -209,8 +237,20 @@
     background: var(--bagatelle-eco-colour);
 }
 
+.fld-bagatelle-map-outer-panel-wrapper {
+    background: var(--bagatelle-map-colour);
+}
+
 .ui-widget-header { /* Override theme to avoid clutter in tab top */
     background: none;
+    border: none;
+}
+
+.ui-widget-content {
+    border: none;
+}
+
+.ui-widget.ui-widget-content {
     border: none;
 }
 

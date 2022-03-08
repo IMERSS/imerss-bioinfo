@@ -20,7 +20,7 @@ fluid.defaults("hortis.configHolder", {
 });
 
 fluid.defaults("hortis.sunburstLoader", {
-    gradeNames: ["fluid.newViewComponent", "fluid.resourceLoader", "hortis.configHolder"],
+    gradeNames: ["fluid.viewComponent", "fluid.resourceLoader", "hortis.configHolder"],
     sunburstPixels: 1002,
     markupTemplate: "%resourceBase/html/bagatelle.html",
     phyloMap: "%resourceBase/json/phyloMap.json",
@@ -293,6 +293,9 @@ fluid.defaults("hortis.sunburst", {
         taxonDisplayRow: "<div %rootAttrs><span class=\"fl-taxonDisplay-key\">%key</span><span class=\"fl-taxonDisplay-value\">%value</span></div>",
         taxonDisplayFooter: "</div>"
     },
+    events: {
+        changeLayoutId: null
+    },
     invokers: {
         render: "hortis.render({that})",
         renderLight: "hortis.renderLight({that})",
@@ -300,8 +303,6 @@ fluid.defaults("hortis.sunburst", {
         angleScale: "hortis.angleScale({arguments}.0, {that}.model.scale)",
         elementToRow: "hortis.elementToRow({that}, {arguments}.0)",
         segmentClicked: "hortis.segmentClicked({that}, {arguments}.0)",
-        //                                             layoutId,      noHistory
-        changeLayoutId: "hortis.changeLayoutId({that}, {arguments}.0, {arguments}.1)",
         fillColourForRow: "hortis.undocColourForRow({that}.options.parsedColours, {arguments}.0)",
         getMousable: "hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label, {that}.options.selectors.phyloPic)"
     },
@@ -361,7 +362,10 @@ fluid.defaults("hortis.sunburst", {
         "onCreate.bindRowExpander": {
             funcName: "hortis.bindRowExpander",
             args: ["{that}"]
-        }
+        },
+        // Naturally in "future Infusion" this would be a single chain event with beginZoom as the last listener
+        //                                                            layoutId,      noHistory
+        "changeLayoutId.updateModel": "hortis.changeLayoutId({that}, {arguments}.0, {arguments}.1)"
     },
     members: {
         visMap: [], // array of visibility aligned with flatTree
@@ -403,7 +407,7 @@ hortis.queryAutocomplete = function (flatTree, query, callback) {
 
 hortis.confirmAutocomplete = function (that, row) {
     if (row) { // on blur it may send nothing
-        that.changeLayoutId(row.id);
+        that.events.changeLayoutId.fire(row.id);
     }
 };
 
@@ -978,7 +982,9 @@ hortis.updateRowFocus = function (that, rowFocus) {
         target = Object.keys(parents).length === 1 ? lca.parent : lca;
     }
     if (target.leftIndex !== undefined) { // Avoid trying to render before onCreate
-        that.changeLayoutId(target.id);
+        // We signal this to regions - need to avoid mutual action of resetting map and taxa, and we assume that
+        // map is the only source of updateRowFocus
+        that.events.changeLayoutId.fire(target.id, "rowFocus");
     }
 };
 
@@ -995,7 +1001,7 @@ hortis.elementToRow = function (that, element) {
 hortis.backTaxon = function (that) {
     if (that.model.historyIndex > 1) {
         that.applier.change("historyIndex", that.model.historyIndex - 1);
-        that.changeLayoutId(that.taxonHistory[that.model.historyIndex - 1], true);
+        that.events.changeLayoutId.fire(that.taxonHistory[that.model.historyIndex - 1], true);
     }
 };
 
@@ -1019,7 +1025,8 @@ hortis.changeLayoutId = function (that, layoutId, noHistory) {
     return fluid.promise().resolve();
 };
 
-// TODO: Not very good, is it - we should update layoutId first so that we can keep any collateral state in sync
+// TODO: Consider whether we should always update layoutId at the start of the interaction in case there's any
+// collateral state that depends on this. Note that we defeat async interaction when sunburst is not visible
 hortis.beginZoom = function (that, rowId) {
     that.container.stop(true, true);
     hortis.clearAllTooltips(that);
@@ -1052,7 +1059,7 @@ hortis.beginZoom = function (that, rowId) {
 };
 
 hortis.segmentClicked = function (that, row) {
-    that.changeLayoutId(row.id);
+    that.events.changeLayoutId.fire(row.id);
 };
 
 hortis.nameOverrides = {
@@ -1252,5 +1259,5 @@ hortis.doInitialQuery = function (that) {
 
 hortis.computeInitialScale = function (that) {
     var root = hortis.doInitialQuery(that);
-    that.changeLayoutId(root.id);
+    that.events.changeLayoutId.fire(root.id);
 };
