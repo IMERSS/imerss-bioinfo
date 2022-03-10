@@ -4,6 +4,10 @@
   --bagatelle-map-colour: #DDE8C8; 
 }
 
+body {
+    margin: 0px;
+}
+
 .fld-bagatelle-region-marine {
     fill: url(#marine);
     background-repeat: repeat;
@@ -44,18 +48,143 @@
     background-repeat: repeat;
 }
 
+.fl-bagatelle-cultural-values {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fl-bagatelle-cultural-value {
+    width: 108px;
+    height: 108px;
+    padding: 0.7rem;
+    background-repeat: no-repeat;
+    background-size: 108px;
+}
+
+.fld-bagatelle-value-food {
+    background-image: url(../img/Xetthecum/food.svg);
+}
+
+.fld-bagatelle-value-medicinal {
+    background-image: url(../img/Xetthecum/medicinal.svg);
+}
+
+.fld-bagatelle-value-spiritual {
+    background-image: url(../img/Xetthecum/spiritual.svg);
+}
+
+.fld-bagatelle-value-material {
+    background-image: url(../img/Xetthecum/material.svg);
+}
+
+.fld-bagatelle-value-trade {
+    background-image: url(../img/Xetthecum/trade.svg);
+}
+
+.fld-bagatelle-value-indicator {
+    background-image: url(../img/Xetthecum/indicator.svg);
+}
+
+.fld-bagatelle-value-missing {
+    background-image: url(../img/Xetthecum/missing-value.svg);
+}
+
 
 .fl-xetthecum-banner {
     background: #EDEFE9;
     margin: 0px;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
     padding-left: 1.5rem;
     font-size: 2.5rem;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
+.fld-bagatelle-banner-marine {
+    background-image: url(../img/Xetthecum/Marine_banner.jpg);
+}
+
+.fld-bagatelle-banner-freshwater {
+    background-image: url(../img/Xetthecum/Freshwater_banner.jpg);
+    color: white;
+}
+
+.fld-bagatelle-banner-forests {
+    background-image: url(../img/Xetthecum/Forests_banner.jpg);
+    color: white;
+}
+
+.fld-bagatelle-banner-woodlands-and-rock-outcrops {
+    background-image: url(../img/Xetthecum/Woodland_banner.jpg);
+    color: white;
+}
+
+.fld-bagatelle-banner-anthropogenic {
+    background-image: url(../img/Xetthecum/Anthropogenic_banner.jpg);
+}
+
+
+.fld-bagatelle-class-image-littoral {
+    background-image: url(../img/Xetthecum/Intertidal.jpg);
+}
+
+.fld-bagatelle-class-image-marine {
+    background-image: url(../img/Xetthecum/Subtidal.jpg);
+}
+
+.fld-bagatelle-class-image-pole-sapling {
+    background-image: url(../img/Xetthecum/Conifer_Pole_Sapling.jpg);
+}
+
+.fld-bagatelle-class-image-mature-forest {
+    background-image: url(../img/Xetthecum/Mature_Conifer_Forest.jpg);
+}
+
+.fld-bagatelle-class-image-young-forest {
+    background-image: url(../img/Xetthecum/Young_Mixed_Forest.jpg);
+}
+
+.fld-bagatelle-class-image-wetland {
+    background-image: url(../img/Xetthecum/Wetland.jpg);
+}
+
+.fld-bagatelle-class-image-lacustrine {
+    background-image: url(../img/Xetthecum/Laughlin_Lake.jpg);
+}
+
+.fld-bagatelle-class-image-stream {
+    background-image: url(../img/Xetthecum/Greig_Creek.jpg);
+}
+
+.fld-bagatelle-class-image-riparian {
+    background-image: url(../img/Xetthecum/Riparian.jpg);
+}
+
+.fld-bagatelle-class-image-rock-outcrop {
+    background-image: url(../img/Xetthecum/Coastal_Bluffs.jpg);
+}
+
+.fld-bagatelle-class-image-woodland {
+    background-image: url(../img/Xetthecum/Woodland.jpg);
+}
+
+.fld-bagatelle-class-image-agricultural {
+    background-image: url(../img/Xetthecum/Agricultural.jpg);
+}
+
+.fld-bagatelle-class-image-developed {
+    background-image: url(../img/Xetthecum/Developed.jpg);
+}
+
+.fld-bagatelle-class-image-rural {
+    background-image: url(../img/Xetthecum/Rural.jpg);
+}
+
+
 .fl-bagatelle-container {
-    margin-top: 1.5rem;
+    margin: 1.5rem 0.5rem 0.5rem 0.5rem;
 }
 
 .fld-bagatelle-map-holder {
@@ -90,14 +219,29 @@
 }
 
 .fld-bagatelle-map-community {
-    font-size: 2rem;
+    font-size: 1.7rem;
     padding-bottom: 1rem;
 }
 
 .fld-bagatelle-map-class {
     font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
+
+.fld-bagatelle-map-class-tagline {
+    font-size: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.fld-bagatelle-map-class-se-col {
+    font-weight: bold;
+}
+
+.fld-bagatelle-map-class-se-val {
+    padding-bottom: 0.5rem;
+    text-indent: 1rem;
+}
 
 .fl-bagatelle-map-info-panel {
     width: 20rem;
@@ -197,6 +341,15 @@
     margin: 1px;
 }
 
+.ui-tabs {
+    padding: 0px;
+}
+
+/** Temporary until we can use ordinary 3px border on tabs **/
+.fld-bagatelle-tabs {
+    width: 1031px;
+}
+
 .fld-bagatelle-checklist-holder {
     padding: 1em 1.4em;
 }
@@ -222,8 +375,38 @@
 
 .fld-bagatelle-taxonDisplay {
     border: none;
+    height: 1200px;
 }
 
+.fl-taxonDisplay-row {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.fl-taxonDisplay-rank .fl-taxonDisplay-key {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-left: 0px;
+    padding-bottom: 5px;
+}
+
+.fl-taxonDisplay-rank span {
+    display: inline-block
+}
+
+
+.fl-bagatelle-right-column {
+    width: calc(480px + 6rem);
+}
+
+.fl-bagatelle-photo {
+    width: calc(448px + 6rem);
+}
+
+.fld-bagatelle-map-outer-panel .fl-bagatelle-photo {
+    width: calc(441px + 6rem);
+    margin-bottom: 1rem;
+}
 
 .fld-bagatelle-taxonDisplay-wrapper {
     background: var(--bagatelle-eco-colour);
@@ -267,7 +450,20 @@
     background-repeat: no-repeat;
 }
 
-.fl-xetthecum-audio:hover {
+.fl-xetthecum-small-audio {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding-bottom: 0.2rem;
+    margin-left: 0.5rem;
+    border: none;
+    background: none;
+    background-image: url(../img/audio.svg);
+    background-size: 1.5rem;
+    background-position: center center; 
+    background-repeat: no-repeat;
+}
+
+.fl-xetthecum-audio:hover, .fl-xetthecum-small-audio:hover {
     outline: 1px solid black;
     outline-offset: 1px;
 }

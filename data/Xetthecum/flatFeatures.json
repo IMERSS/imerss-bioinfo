@@ -1,95 +1,143 @@
 {
+    "communities": {
+        "Marine": {
+            "banner": true,
+            "classes": {
+                "LT": {},
+                "MAR": {}
+            }
+        },
+        "Freshwater": {
+            "classes": {
+                "RI": {},
+                "ST": {},
+                "WN": {},
+                "LC": {}
+            }
+        },
+        "Forests": {
+            "banner": true,
+            "classes": {
+                "RH": {},
+                "PS": {},
+                "YF": {},
+                "MF": {}
+            }
+        },
+        "Woodlands and rock outcrops": {
+            "banner": true,
+            "classes": {
+                "CL": {},
+                "WD": {}
+            }
+        },
+        "Anthropogenic": {
+            "banner": true,
+            "classes": {
+                "AG": {},
+                "DP": {},
+                "RW": {}
+            }
+        }
+    },
     "classes": {
-        "RW": {
-            "label": "Rural",
-            "legendLabel": "Rural",
-            "order": 14,
+        "LT": {
+            "label": "Littoral",
+            "legendLabel": "Marine: littoral",
+            "hasImage": true,
+            "order": 0,
+            "fillColor": [
+                100,
+                175,
+                164
+            ],
+            "community": "Marine"
+        },
+        "MAR": {
+            "label": "Marine",
+            "legendLabel": "Marine: offshore",
+            "hasImage": true,
+            "order": 1,
             "endGroup": true,
             "fillColor": [
-                84,
-                76,
-                54
-            ],
-            "community": "Anthropogenic"
-        },
-        "DP": {
-            "label": "Developed",
-            "legendLabel": "Developed",
-            "order": 13,
-            "fillColor": [
-                114,
-                108,
-                84
-            ],
-            "community": "Anthropogenic"
-        },
-        "AG": {
-            "label": "Agricultural",
-            "legendLabel": "Agricultural",
-            "order": 12,
-            "fillColor": [
-                186,
-                177,
-                140
-            ],
-            "community": "Anthropogenic"
-        },
-        "WD": {
-            "label": "Woodland",
-            "legendLabel": "Woodlands",
-            "order": 11,
-            "endGroup": true,
-            "fillColor": [
-                191,
-                103,
-                58
-            ],
-            "community": "Woodlands and rock outcrops"
-        },
-        "CL": {
-            "label": "Rock outcrop",
-            "legendLabel": "Rock outcrops",
-            "order": 10,
-            "fillColor": [
-                117,
-                117,
-                117
-            ],
-            "community": "Woodlands and rock outcrops"
-        },
-        "MF": {
-            "label": "Mature forest",
-            "legendLabel": "Forests: mature conifer",
-            "order": 9,
-            "endGroup": true,
-            "fillColor": [
-                23,
-                80,
-                18
-            ],
-            "community": "Forests"
-        },
-        "YF": {
-            "label": "Young forest",
-            "legendLabel": "Forests: young",
-            "order": 8,
-            "fillColor": [
-                91,
+                34,
                 122,
-                82
+                113
             ],
-            "community": "Forests"
+            "community": "Marine"
         },
-        "PS": {
-            "label": "Pole sapling",
-            "legendLabel": "Forests: pole sapling",
-            "order": 7,
+        "RI": {
+            "label": "Riparian",
+            "legendLabel": "Freshwater: riparian",
+            "hasImage": true,
+            "order": 2,
             "fillColor": [
-                144,
-                166,
-                138
+                100,
+                195,
+                221
             ],
-            "community": "Forests"
+            "community": "Freshwater",
+            "sE-Tagline": "Dynamic Systems on the Edge",
+            "sE-What": "Riparian ecosystems occur along the edges of water bodies. The moist soils found in riparian ecosystems support plant communities distinct from those of surrounding upland areas. Riparian ecosystems vary in size, terrain and vegetation, ranging from gravel bars to old growth forest ravines. Due to seasonal changes in water levels, riparian ecosystems are highly dynamic.",
+            "sE-Where": "Riparian ecosystems occur along the margins of streams, rivers, ponds, marshes and lakes. Though large water bodies have extensive riparian ecosystems, the relatively dry climate of the Gulf Islands has resulted in smaller stream systems with narrower riparian ecosystems.",
+            "sE-Importance": "Despite their small size, riparian ecosystems support an exceptionally high number of species because they include three critical habitat components needed by wildlife—water, shelter and food. Riparian ecosystems form valuable corridors for wildlife and humans alike, with many trail systems following these areas of remnant vegetation. Riparian ecosystems serve as natural water filtration systems and help regulate the flow of water—a function vital to the islands’ sometimes dry climate.",
+            "sE-Protection": "Protecting riparian ecosystems from increased run-off, sediment loading and contaminants prevents erosion, flashfloods and maintains habitat and the quality of adjoining freshwater ecosystems. • Create and maintain a vegetated buffer to protect against outside disturbance • Limit human and domestic animal access to reduce damage to riparian soils and vegetation • Retain features such as snags, logs and downed trees • Allow natural disturbances to occur, such as flooding and channel changes, and restrict human interferences such as hard bank reinforcements and infilling • Restrict nearby pesticide, fertilizer or other chemical use",
+            "sE-Source": "A Sensitive Ecosystem Guide for Islands Trust Area Property Owners"
+        },
+        "ST": {
+            "label": "Stream",
+            "legendLabel": "Freshwater: stream",
+            "hasImage": true,
+            "order": 3,
+            "color": [
+                52,
+                153,
+                198
+            ],
+            "community": "Freshwater",
+            "sE-Tagline": "Water for Life",
+            "sE-What": "Freshwater ecosystems include lakes and ponds. They generally have areas with little or no floating vegetation and are deeper than two metres. Freshwater ecosystems form complex relationships with the riparian ecosystems found along their shorelines.",
+            "sE-Where": "Freshwater ecosystems are not specific to terrain or elevation and are found in various environments throughout the Islands Trust Area. The water levels of freshwater ecosystems can be influenced by groundwater, precipitation, stream flow and evaporation.",
+            "sE-Importance": "Freshwater ecosystems serve a vital role in the lives of humans and animals as a source of drinking water. They also provide breeding habitat for insects, amphibians, fish, and invertebrates. These ecosystems serve as a rich source of nutrients for aquatic and terrestrial inhabitants alike.",
+            "sE-Protection": "Protecting the quality and quantity of water feeding into freshwater ecosystems means protecting drinking water and habitat for humans and other species. • Restrict nearby pesticide, fertilizer or manure use to decrease algae blooms • Create and retain a vegetated buffer around water bodies to prevent erosion and filter run-off • Restrict recreational, livestock and pet access to limit water contamination and habitat destruction • Limit human impacts on the watersheds feeding freshwater ecosystems",
+            "sE-Source": "A Sensitive Ecosystem Guide for Islands Trust Area Property Owners"
+        },
+        "WN": {
+            "label": "Wetland",
+            "legendLabel": "Freshwater: wetland",
+            "hasImage": true,
+            "order": 4,
+            "fillColor": [
+                52,
+                153,
+                198
+            ],
+            "community": "Freshwater",
+            "sE-Tagline": "Vital Natural Services",
+            "sE-What": "Wetland ecosystems feature moisture-dependent plants that thrive in an environment where water remains at or above the surface of the soil during most of the year. The type of wetland can vary between bog, fen, marsh, swamp and estuarine wetland (where fresh and salt water mix) and can be flooded year-round or seasonally. Wetlands rely on a delicate balance between water and plant life.",
+            "sE-Where": "Wetland ecosystems occur in areas of flooding, fluctuating water tables, poor drainage or tidal influences, including agricultural lands that flood seasonally.",
+            "sE-Importance": "There are very few wetlands in the islands and they are precious. They serve as water filtration systems, removing toxins and sediments from run-off. They capture and store water, aiding in ground water recharge and flood control. Wetland ecosystems provide key breeding and feeding areas for birds, insects and amphibians and exhibit high rates of biodiversity. Seasonally flooded agricultural fields are vital additions to dwindling natural wetland and riparian habitats and play a critical role as wintering stopover areas for migratory birds.",
+            "sE-Protection": "Healthy wetlands provide clean, filtered water, flood control and wildlife habitat. • Avoid infilling, draining or ditching wetlands • Create and retain a vegetated buffer around wetlands and associated riparian ecosystems to protect hydrology systems • Prevent disturbance of nesting or breeding areas by humans, livestock or pets, especially between March and August • Restrict nearby pesticide, fertilizer or other chemical use",
+            "sE-Source": "A Sensitive Ecosystem Guide for Islands Trust Area Property Owners"
+        },
+        "LC": {
+            "label": "Lacustrine",
+            "legendLabel": "Freshwater: lacustrine",
+            "hasImage": true,
+            "order": 5,
+            "endGroup": true,
+            "fillColor": [
+                0,
+                133,
+                188
+            ],
+            "community": "Freshwater",
+            "sE-Tagline": "Water for Life",
+            "sE-What": "Freshwater ecosystems include lakes and ponds. They generally have areas with little or no floating vegetation and are deeper than two metres. Freshwater ecosystems form complex relationships with the riparian ecosystems found along their shorelines.",
+            "sE-Where": "Freshwater ecosystems are not specific to terrain or elevation and are found in various environments throughout the Islands Trust Area. The water levels of freshwater ecosystems can be influenced by groundwater, precipitation, stream flow and evaporation.",
+            "sE-Importance": "Freshwater ecosystems serve a vital role in the lives of humans and animals as a source of drinking water. They also provide breeding habitat for insects, amphibians, fish, and invertebrates. These ecosystems serve as a rich source of nutrients for aquatic and terrestrial inhabitants alike.",
+            "sE-Protection": "Protecting the quality and quantity of water feeding into freshwater ecosystems means protecting drinking water and habitat for humans and other species. • Restrict nearby pesticide, fertilizer or manure use to decrease algae blooms • Create and retain a vegetated buffer around water bodies to prevent erosion and filter run-off • Restrict recreational, livestock and pet access to limit water contamination and habitat destruction • Limit human impacts on the watersheds feeding freshwater ecosystems",
+            "sE-Source": "A Sensitive Ecosystem Guide for Islands Trust Area Property Owners"
         },
         "RH": {
             "label": "Recently harvested",
@@ -102,73 +150,122 @@
             ],
             "community": "Forests"
         },
-        "LC": {
-            "label": "Lacustrine",
-            "legendLabel": "Freshwater: lacustrine",
-            "order": 5,
-            "endGroup": true,
+        "PS": {
+            "label": "Pole sapling",
+            "legendLabel": "Forests: pole sapling",
+            "hasImage": true,
+            "order": 7,
             "fillColor": [
-                0,
-                133,
-                188
+                144,
+                166,
+                138
             ],
-            "community": "Freshwater"
+            "community": "Forests"
         },
-        "WN": {
-            "label": "Wetland",
-            "legendLabel": "Freshwater: wetland",
-            "order": 4,
+        "YF": {
+            "label": "Young forest",
+            "legendLabel": "Forests: young",
+            "hasImage": true,
+            "order": 8,
             "fillColor": [
-                52,
-                153,
-                198
-            ],
-            "community": "Freshwater"
-        },
-        "ST": {
-            "label": "Stream",
-            "legendLabel": "Freshwater: stream",
-            "order": 3,
-            "color": [
-                52,
-                153,
-                198
-            ],
-            "community": "Freshwater"
-        },
-        "RI": {
-            "label": "Riparian",
-            "legendLabel": "Freshwater: riparian",
-            "order": 2,
-            "fillColor": [
-                100,
-                195,
-                221
-            ],
-            "community": "Freshwater"
-        },
-        "MAR": {
-            "label": "Marine",
-            "legendLabel": "Marine: offshore",
-            "order": 1,
-            "endGroup": true,
-            "fillColor": [
-                34,
+                91,
                 122,
-                113
+                82
             ],
-            "community": "Marine"
+            "community": "Forests"
         },
-        "LT": {
-            "label": "Littoral",
-            "legendLabel": "Marine: littoral",
-            "order": 0,
+        "MF": {
+            "label": "Mature forest",
+            "legendLabel": "Forests: mature conifer",
+            "hasImage": true,
+            "order": 9,
+            "endGroup": true,
             "fillColor": [
-                100,
-                175,
-                164
+                23,
+                80,
+                18
             ],
-            "community": "Marine"
+            "community": "Forests",
+            "sE-Tagline": "Our Future Old Forests",
+            "sE-What": "Mature forest ecosystems are conifer-dominated dry to moist forest stands, usually 80 to 250 years old. Some stands may include deciduous tree species making up 25% of the canopy cover.",
+            "sE-Where": "Mature forest ecosystems are often found in areas surrounding or bordering other sensitive ecosystems such as old forests and wetlands. Mature forests serve as buffers for these sensitive ecosystems while providing habitat for a variety of plant and animal species.",
+            "sE-Importance": "The biodiversity values of the mature forest ecosystem type increase with age, meaning that a forest will be able to sustain a greater variety and number of plants and animals as time progresses. In addition, mature forest stands serve as buffers and corridors between different sensitive ecosystems, protect micro-habitats, and allow forest dwelling species to move freely and safely between the various habitats. They also play an important role in the capture and storage of carbon dioxide and the fight against climate change.",
+            "sE-Protection": "How can we protect Mature Forest Ecosystems? If conserved, mature forest ecosystems have the potential to become the old forest ecosystems of the future. • Maintain the largest possible patches of mature forest • Allow succession, natural disturbance and decay to occur • Restrict access by vehicles and livestock • Control invasive species",
+            "sE-Source": "A Sensitive Ecosystem Guide for Islands Trust Area Property Owners"
+        },
+        "CL": {
+            "label": "Rock outcrop",
+            "legendLabel": "Rock outcrops",
+            "hasImage": true,
+            "order": 10,
+            "fillColor": [
+                117,
+                117,
+                117
+            ],
+            "community": "Woodlands and rock outcrops",
+            "sE-Tagline": "Dynamic Vertical Systems",
+            "sE-What": "Cliff ecosystems are steep slopes, often with exposed bedrock. Very little soil accumulates in these ecosystems and only exceptionally hardy trees and plants maintain a precarious grip.",
+            "sE-Where": "Cliff ecosystems are regionally rare, making up less than 0.1% of the landscape in the Islands Trust Area. Cliff ecosystems occur both inland and along coastal areas. Inland cliffs occur where mass erosion events have taken place, often where soil drainage is rapid. Coastal cliffs occur near shorelines with powerful wind, heat and wave influences.",
+            "sE-Importance": "Cliff ledges and fissures offer isolated habitat protected from predators, making cliffs choice nesting sites for a variety of birds. Crevices are used by roosting bats, while deeper crevices serve as shelter and overwintering areas for snakes and lizards. Cliffs contribute to the scenic beauty of the Islands Trust Area, attracting visitors and boaters who may contribute to local economies. Cliffs also offer spectacular waterfront views, creating recreational opportunities on land, often leading to their degradation by development, trails and introduced species.",
+            "sE-Protection": "Cliff ecosystems and the rare habitat they support need protection from soil compaction and erosion. • Prevent disturbance of nesting or breeding areas—especially from March to August. Loud noises or venturing too close to nesting locations can cause birds to abandon eggs • Control invasive species such as Scotch broom, while limiting disturbance to soil by leaving root systems • Create a barrier or vegetated buffer around cliffs to limit human and domestic animal access",
+            "sE-Source": "A Sensitive Ecosystem Guide for Islands Trust Area Property Owners"
+        },
+        "WD": {
+            "label": "Woodland",
+            "legendLabel": "Woodlands",
+            "hasImage": true,
+            "order": 11,
+            "endGroup": true,
+            "fillColor": [
+                191,
+                103,
+                58
+            ],
+            "community": "Woodlands and rock outcrops",
+            "sE-Tagline": "Supporting Diversity on Dry Soils",
+            "sE-What": "Woodland ecosystems are dry and open forests dominated by a mix of deciduous and coniferous tree species. Arbutus, Douglas-fir and Garry oak dominated woodlands are among the most sensitive and biologically diverse woodland ecosystems in the islands Trust Area.",
+            "sE-Where": "Woodland ecosystems are generally restricted to south-facing slopes and ridges with shallow soils and bedrock outcroppings. Woodland ecosystems exist in areas with dry conditions that prevent the development of dense forests.",
+            "sE-Importance": "Woodland ecosystems provide habitat for a wide variety of plants, insects, reptiles and birds. Garry oak woodlands, for example, support the highest plant species diversity of any terrestrial ecosystem in British Columbia. Woodland ecosystems commonly occur with herbaceous and cliff ecosystems, thus enriching the diversity of an entire area and increasing connectivity between these other sensitive ecosystems. Ecologists hypothesize that woodland ecosystems are likely to survive as our climate changes, due to this ecosystem’s ability to exist in dry conditions. Retaining woodlands is important for the survival of many species during this climatic transition period.",
+            "sE-Protection": "Woodland ecosystems are fragmented and rare, nationally, provincially and regionally. Because they support a high number of at-risk species, the loss of each woodland ecosystem has devastating effects on the Province’s biodiversity and may affect the ability of our area to adapt to climate change. • Limit access and avoid development to prevent vegetation damage • Actively control invasive species to reduce competition with rare native species • Prevent livestock grazing to avoid soil compaction and erosion • Consider re-introducing managed fire to the ecosystem to reduce non-native species",
+            "sE-Source": "A Sensitive Ecosystem Guide for Islands Trust Area Property Owners"
+        },
+        "AG": {
+            "label": "Agricultural",
+            "legendLabel": "Agricultural",
+            "hasImage": true,
+            "order": 12,
+            "fillColor": [
+                186,
+                177,
+                140
+            ],
+            "community": "Anthropogenic"
+        },
+        "DP": {
+            "label": "Developed",
+            "legendLabel": "Developed",
+            "hasImage": true,
+            "order": 13,
+            "fillColor": [
+                114,
+                108,
+                84
+            ],
+            "community": "Anthropogenic"
+        },
+        "RW": {
+            "label": "Rural",
+            "legendLabel": "Rural",
+            "hasImage": true,
+            "order": 14,
+            "endGroup": true,
+            "fillColor": [
+                84,
+                76,
+                54
+            ],
+            "community": "Anthropogenic"
         }
     },
     "features": [

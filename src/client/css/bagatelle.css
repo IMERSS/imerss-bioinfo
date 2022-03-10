@@ -111,6 +111,14 @@
     padding-bottom: 0px;
 }
 
+.fl-taxonDisplay-empty-header {
+    border-bottom: none;
+}
+  
+.fl-taxonDisplay-empty-row .fl-taxonDisplay-key {
+    display: none;
+} 
+
 .fl-taxonDisplay-key {
     width: 12em;
     margin-right: 4px;

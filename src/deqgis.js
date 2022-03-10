@@ -11,6 +11,8 @@ fluid.require("%bagatelle");
 
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/writeJSON.js");
+require("./dataProcessing/readCSV.js");
+require("./dataProcessing/readCSVWithoutMap.js");
 
 var hortis = fluid.registerNamespace("hortis");
 
@@ -29,6 +31,27 @@ var dataFiles = glob.sync(baseDir + "/*.js");
 
 console.log("Got data files ", dataFiles);
 
+hortis.seColumns = ["Tagline", "What", "Where", "Importance", "Protection", "Source"];
+
+hortis.applySensitiveEcosystems = function (togo, rows) {
+    rows.forEach(function (row, index) {
+        var clazz = row.CLASS;
+        if (togo.classes[clazz]) {
+            hortis.seColumns.forEach(function (column) {
+                var cell = row[column];
+                if (cell) {
+                    togo.classes[clazz]["sE-" + column] = cell;
+                }
+                else {
+                    console.log("Warnings: Sensitive ecosystems column " + column + " did not match row " + index, row);
+                }
+            });
+        } else {
+            console.log("Warning: Sensitive ecosystems column " + clazz + " did not match any from QGIS");
+        }
+    });
+};
+
 var features = [];
 
 hortis.indexCommunities = function (communities) {
@@ -40,6 +63,16 @@ hortis.indexCommunities = function (communities) {
         });
     });
     return classes;
+};
+
+hortis.filterCommunities = function (communities) {
+    return fluid.transform(communities, function (community) {
+        return fluid.extend(fluid.censorKeys(community, ["classes"]), {
+            classes: fluid.transform(community.classes, function () {
+                return {};
+            })
+        });
+    });
 };
 
 hortis.indexOneFeature = function (dataFileName, feature, features, classes) {
@@ -55,20 +88,38 @@ hortis.indexOneFeature = function (dataFileName, feature, features, classes) {
 
 var classes = hortis.indexCommunities(config.communities);
 
-dataFiles.forEach(function (dataFileName) {
-    var string = fs.readFileSync(dataFileName, "utf8");
-    var firstp = string.indexOf("{");
-    var lastp = string.lastIndexOf("}");
-    var data = JSON.parse(string.substring(firstp, lastp + 1));
-    console.log("Processing qgis2web data with name " + data.name);
-    data.features.forEach(function (feature) {
-        hortis.indexOneFeature(dataFileName, feature, features, classes);
+var CSVs = fluid.transform(config.CSVs, function (oneFile) {
+    return hortis.csvReaderWithoutMap({
+        inputFile: fluid.module.resolvePath(oneFile.path)
     });
 });
 
-var togo = {
-    classes: classes,
-    features: features
-};
+var promises = Object.values(fluid.getMembers(CSVs, "completionPromise"));
 
-hortis.writeJSONSync(outputFile, togo);
+fluid.promise.sequence(promises).then(function () {
+    console.log("Loaded " + Object.keys(CSVs).length + " CSV files");
+    var allRows = fluid.getMembers(CSVs, "rows");
+
+    dataFiles.forEach(function (dataFileName) {
+        var string = fs.readFileSync(dataFileName, "utf8");
+        var firstp = string.indexOf("{");
+        var lastp = string.lastIndexOf("}");
+        var data = JSON.parse(string.substring(firstp, lastp + 1));
+        console.log("Processing qgis2web data with name " + data.name);
+        data.features.forEach(function (feature) {
+            hortis.indexOneFeature(dataFileName, feature, features, classes);
+        });
+    });
+
+    var togo = {
+        communities: hortis.filterCommunities(config.communities),
+        classes: classes,
+        features: features
+    };
+
+    if (allRows.sensitiveEcosystems) {
+        hortis.applySensitiveEcosystems(togo, allRows.sensitiveEcosystems);
+    }
+
+    hortis.writeJSONSync(outputFile, togo);
+});

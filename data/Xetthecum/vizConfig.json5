@@ -6,6 +6,6 @@
     inputFiles: ["%bagatelle/data/Xetthecum/reintegrated.csv"],
     mapFile: "%bagatelle/data/Xetthecum/combinedOutMap.json",
     regionField: "region",
-    skipRanks: ["subclass", "suborder", "superfamily", "subfamily", "subphylum", "tribe", "genus"],
+    skipRanks: ["subclass", "suborder", "superfamily", "subfamily", "tribe", "genus"],
     obsIdField: "observationId"
 }

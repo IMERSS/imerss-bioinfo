@@ -17,7 +17,8 @@ fluid.defaults("hortis.leafletMap.withRegions", {
     },
     legendKey: "@expand:hortis.leafletMap.renderLegendKey({that}.classes)",
     model: {
-        // selectedRegions: currently regionKey -> boolean, will be classKey -> boolean
+        // selectedRegions: classKey -> boolean
+        // selectedCommunities: communityKey -> boolean
         selectionRoute: "map" // either "map" or "taxa"
     },
     members: {
@@ -38,6 +39,17 @@ fluid.defaults("hortis.leafletMap.withRegions", {
     events: {
         selectRegion: null
     },
+    components: {
+        bannerManager: {
+            type: "hortis.bannerManager",
+            container: "body",
+            options: {
+                model: {
+                    selectedCommunities: "{hortis.leafletMap}.model.selectedCommunities"
+                }
+            }
+        }
+    },
     dynamicComponents: {
         legendKeys: {
             sources: "{that}.options.legendKey",
@@ -49,29 +61,79 @@ fluid.defaults("hortis.leafletMap.withRegions", {
     }
 });
 
-hortis.leafletMap.outerPanelTemplate =
-   "<div class=\"fld-bagatelle-community-label\">Community</div>" +
-   "<div class=\"fl-bagatelle-photo\" style=\"background-image: url(%imgUrl)\"></div>" +
-   "<div class=\"fld-bagatelle-map-community\">%community</div>" +
-   "<div class=\"fld-bagatelle-map-class\">%clazz</div>";
+fluid.defaults("hortis.bannerManager", {
+    gradeNames: "fluid.viewComponent",
+    selectors: {
+        banner: ".fl-xetthecum-banner"
+    },
+    modelListeners: {
+        "selectedCommunities.*": {
+            func: "hortis.bannerManager.toggleClass",
+            args: ["{that}.dom.banner", "{change}.value", "{change}.path"]
+        }
+    }
+});
+
+hortis.normaliseToClass = function (str) {
+    return str.toLowerCase().replace(/ /g, "-");
+};
+
+hortis.bannerManager.toggleClass = function (banner, state, path) {
+    var community = fluid.peek(path);
+    banner.toggleClass("fld-bagatelle-banner-" + hortis.normaliseToClass(community), state);
+};
+
+hortis.leafletMap.seColumns = ["What", "Where", "Importance", "Protection", "Source"];
+
+
+hortis.leafletMap.outerPanelPhoto = "<div class=\"fl-bagatelle-photo %photoClass\"></div>";
+
+hortis.leafletMap.outerPanelMiddle =
+   "<div class=\"fld-bagatelle-map-community\">Community:<br/> %community / Hul'qumi'num<button class=\"fl-xetthecum-small-audio\" type=\"button\"></button></div>" +
+   "<div class=\"fld-bagatelle-map-class\">%clazz / Hul'qumi'num<button class=\"fl-xetthecum-small-audio\" type=\"button\"></button></div>";
 
 
 hortis.leafletMap.renderMapOuterPanel = function (map) {
     var selectedClazz = fluid.keyForValue(map.model.selectedRegions, true);
-    return fluid.stringTemplate(hortis.leafletMap.outerPanelTemplate, {
+    var clazz = map.classes[selectedClazz];
+    var topPanel = "";
+    if (clazz.hasImage) {
+        topPanel += fluid.stringTemplate(hortis.leafletMap.outerPanelPhoto, {
+            photoClass: "fld-bagatelle-class-image-" + hortis.normaliseToClass(clazz.label)
+        });
+    }
+    topPanel += fluid.stringTemplate(hortis.leafletMap.outerPanelMiddle, {
         community: map.model.mapBlockTooltipId,
-        clazz: map.classes[selectedClazz].legendLabel
+        clazz: clazz.label
+    });
+    var bottomPanel = "";
+    if (clazz["sE-Tagline"]) {
+        bottomPanel += "<div class=\"fld-bagatelle-map-class-tagline\">" + clazz["sE-Tagline"] + "</div>";
+        hortis.leafletMap.seColumns.forEach(function (col) {
+            bottomPanel += "<div class=\"fld-bagatelle-map-class-se-col\">" + col + ": </div>";
+            bottomPanel += "<div class=\"fld-bagatelle-map-class-se-val\">" + clazz["sE-" + col] + "</div>";
+        });
+    }
+    return topPanel + bottomPanel;
+};
+
+hortis.leafletMap.withRegions.selectedRegions = function (selectedRegion, regions) {
+    return fluid.transform(regions, function (junk, key) {
+    // Note simplest way to avoid highlighting all when there is no map selection is to say none are selected
+        return selectedRegion ? key === selectedRegion : false;
     });
 };
 
 hortis.leafletMap.regionSelection = function (map, className, community) {
     map.applier.change("mapBlockTooltipId", community);
     map.applier.change("selectedRegions", hortis.leafletMap.withRegions.selectedRegions(className, map.classes));
+    map.applier.change("selectedCommunities", hortis.leafletMap.withRegions.selectedRegions(community, map.communities));
     map.outerPanel.html(hortis.leafletMap.renderMapOuterPanel(map));
 };
 
 hortis.clearSelectedRegions = function (map) {
     map.applier.change("selectedRegions", hortis.leafletMap.withRegions.selectedRegions(null, map.classes));
+    map.applier.change("selectedCommunities", hortis.leafletMap.withRegions.selectedRegions(null, map.communities));
 };
 
 
@@ -130,10 +192,6 @@ hortis.toggleClass = function (element, clazz, value) {
     element.toggleClass(clazz, value);
 };
 
-hortis.normaliseToClass = function (str) {
-    return str.toLowerCase().replace(/ /g, "-");
-};
-
 hortis.fillColorToStyle = function (fillColor) {
     return {
         fillColor: fluid.colour.arrayToString(fillColor),
@@ -164,15 +222,8 @@ hortis.leafletMap.withRegions.showSelectedRegions = function (map, selectedRegio
     var noSelection = map.model.mapBlockTooltipId === null;
     Object.keys(map.regions).forEach(function (key) {
         var lineFeature = map.classes[key].color;
-        style.setProperty(hortis.regionOpacity(key), selectedRegions[key] || noSelection ? "1.0" : "0.11");
+        style.setProperty(hortis.regionOpacity(key), selectedRegions[key] || noSelection ? "1.0" : "0.4");
         style.setProperty(hortis.regionBorder(key), selectedRegions[key] ? "#FEF410" : (lineFeature ? fluid.colour.arrayToString(lineFeature) : "none"));
-    });
-};
-
-hortis.leafletMap.withRegions.selectedRegions = function (selectedRegion, regions) {
-    return fluid.transform(regions, function (junk, key) {
-    // Note simplest way to avoid highlighting all when there is no map selection is to say none are selected
-        return selectedRegion ? key === selectedRegion : false;
     });
 };
 

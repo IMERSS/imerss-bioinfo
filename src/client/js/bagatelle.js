@@ -470,7 +470,7 @@ hortis.commonFields = ["commonName", "wikipediaSummary"];
 
 hortis.dumpRow = function (key, value, markup, extraClazz) {
     if (value) {
-        var keyName = key ? (hortis.taxonDisplayLookup[key] || hortis.capitalize(key) + ":") : "";
+        var keyName = key ? (hortis.taxonDisplayLookup[key] || hortis.capitalize(key)) : "";
         var clazz = "fl-taxonDisplay-row " + (extraClazz || "");
         return fluid.stringTemplate(markup.taxonDisplayRow, {key: keyName, value: value, rootAttrs: "class=\"" + clazz + "\""});
     } else {
@@ -484,6 +484,12 @@ hortis.renderDate = function (date) {
 
 hortis.expandButtonMarkup = "<span class=\"fl-taxonDisplay-expand fl-taxonDisplay-unexpanded\"></span>";
 
+hortis.sourceTable = { // TODO: get this from marmalised.json but the names currently there are too long
+    iNat: "iNaturalist",
+    dataPaper: "Pacific Marine Life Surveys, Royal British Columbia Museum, Canadian Museum of Nature, Erickson, Chu and Leys",
+    Hunterson: "Hunterson Farms BioBlitz 2010"  
+};
+
 // Render a set of fields derived from an "observation range" - group of fields prefixed by "first" and "last"
 // including date/time/recordedBy/collection
 hortis.renderObsBound = function (row, prefix, markup) {
@@ -494,10 +500,14 @@ hortis.renderObsBound = function (row, prefix, markup) {
         var catalogueNumber = row[prefix + "CatalogueNumber"];
         var value = hortis.renderDate(row[prefix + "Timestamp"]) + (recordedBy ? " by " + recordedBy : "");
 
-        var row1 = hortis.dumpRow(capPrefix + " Reported", value + hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header");
+        var row1 = hortis.dumpRow(capPrefix + " Reported:", value + hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header");
+        
+        var collection = row[prefix + "Collection"];
+        var renderedCollection = hortis.sourceTable[collection] || collection; 
 
-        var source = row[prefix + "Collection"] + (catalogueNumber ? " (" + catalogueNumber + ")" : "");
-        var row2 = hortis.dumpRow("Source", source, markup, "fld-taxonDisplay-expandable-remainder");
+        var source = renderedCollection + (catalogueNumber ? " (" + catalogueNumber + ")" : "");
+        
+        var row2 = hortis.dumpRow("Source:", source, markup, "fld-taxonDisplay-expandable-remainder");
         return row1 + row2;
     } else {
         return "";
@@ -513,18 +523,34 @@ hortis.driveToPreview = function (url) {
 
 hortis.hulqValues = ["food", "medicinal", "spiritual", "material", "trade", "indicator"];
 
+hortis.hulqValueItem = "<div role=\"img\" aria-label=\"%label\" title=\"%label\" class=\"fld-bagatelle-value-%img fl-bagatelle-cultural-value\"></div>";
+
+hortis.hulqValueBlock = "<div class=\"fl-bagatelle-cultural-values\">%valueBlocks</div>";
+
 hortis.dumpHulqName = function (row, markup) {
     var player = row.audioLink ? fluid.stringTemplate(hortis.drivePlayer, {
         url: hortis.driveToPreview(row.audioLink)
     }) : "";
     var nameRow = hortis.dumpRow("Hul'qumi'num name", row.hulqName + player, markup);
+    return nameRow;
+};
 
-    var values = hortis.hulqValues.filter(function (value) {
-        return row[value + "Value"] === "1";
-    }).map(hortis.capitalize);
+hortis.dumpHulqValues = function (row, markup) {
+    var valueBlocks = hortis.hulqValues.map(function (value) {
+        return row[value + "Value"] === "1" ? value : "missing";
+    }).map(function (img, index) {
+        return fluid.stringTemplate(hortis.hulqValueItem, {
+            img: img,
+            label: hortis.hulqValues[index]
+        });
+    });
+    var valueBlock = fluid.stringTemplate(hortis.hulqValueBlock, {
+        valueBlocks: valueBlocks.join("\n")
+    });
 
-    var valueRow = hortis.dumpRow("Cultural values", values.join(", "), markup);
-    return nameRow + valueRow;
+    var valueRow1 = hortis.dumpRow("Cultural values", " ", markup, "fl-taxonDisplay-empty-header");
+    var valueRow2 = hortis.dumpRow("", valueBlock, markup, "fl-taxonDisplay-empty-row");
+    return valueRow1 + valueRow2;
 };
 
 hortis.iNatExtern = "<a href=\"%iNatLink\" target=\"_blank\" class=\"fl-taxonDisplay-iNat-extern\">iNaturalist<span class=\"fl-external-link\"></span></a>";
@@ -546,13 +572,13 @@ hortis.renderTaxonDisplay = function (row, markup) {
         return null;
     }
     var togo = markup.taxonDisplayHeader;
-    var dumpRow = function (keyName, value) {
+    var dumpRow = function (keyName, value, extraClazz) {
         if (keyName === "wikipediaSummary" && value) {
             var row1 = hortis.dumpRow("Wikipedia Summary", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header fl-taxonDisplay-runon-header");
             var row2 = hortis.dumpRow("", value, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder");
             togo += row1 + row2;
         } else {
-            togo += hortis.dumpRow(keyName, value, markup);
+            togo += hortis.dumpRow(keyName, value, markup, extraClazz);
         }
     };
     var dumpImage = function (keyName, url, taxonId) {
@@ -577,7 +603,7 @@ hortis.renderTaxonDisplay = function (row, markup) {
         if (row.phyloPicUrl) {
             dumpPhyloPic("phyloPic", row.phyloPicUrl);
         }
-        dumpRow(row.rank, row.iNaturalistTaxonName);
+        dumpRow(row.rank, row.iNaturalistTaxonName, "fl-taxonDisplay-rank");
         hortis.commonFields.forEach(function (field) {
             dumpRow(field, row[field]);
         });
@@ -588,17 +614,21 @@ hortis.renderTaxonDisplay = function (row, markup) {
             dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage, row.iNaturalistTaxonId);
         }
         if (row.species) {
-            dumpRow("species", row.species + (row.authority ? (" " + row.authority) : ""));
+            dumpRow("species", row.species + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank");
         } else {
             dumpRow("iNaturalistTaxonName", row.iNaturalistTaxonName);
         }
         if (row.hulqName) { // wot no polymorphism?
             togo += hortis.dumpHulqName(row, markup);
         }
+        dumpRow("commonName", row.commonName);
 
-        hortis.commonFields.forEach(function (field) {
-            dumpRow(field, row[field]);
-        });
+        if (row.hulqName) { // wot no polymorphism?
+            togo += hortis.dumpHulqValues(row, markup);
+        }
+
+        dumpRow("wikipediaSummary", row.wikipediaSummary);
+
         togo += hortis.renderObsBound(row, "first", markup);
         togo += hortis.renderObsBound(row, "last", markup);
 
@@ -1068,6 +1098,9 @@ hortis.nameOverrides = {
 
 hortis.labelForRow = function (row, commonNames) {
     var name = commonNames && row.commonName ? row.commonName : row.iNaturalistTaxonName;
+    if (row.hulqName) {
+        name += " - " + row.hulqName;
+    }
     name = hortis.nameOverrides[row.iNaturalistTaxonName] || name;
     return hortis.capitalize(name);
     // return row.rank ? (row.rank === "Life" ? "Life" : row.rank + ": " + name) : name;

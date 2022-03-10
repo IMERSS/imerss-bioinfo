@@ -222,13 +222,13 @@ hortis.indexRegions = function (treeBuilder) {
     treeBuilder.summaryRows.forEach(function (row) {
         summaryById[row.iNaturalistTaxonId] = row;
     });
-    var communities = {};
+    var communities = fluid.transform(features.communities, function (community) {
+        community.count = 0;
+        community.byTaxonId = {};
+        return community;
+    });
     var classes = {};
     fluid.each(features.classes, function (clazz, classKey) {
-        communities[clazz.community] = {
-            count: 0,
-            byTaxonId: {}
-        };
         classes[classKey] = {
             count: 0,
             byTaxonId: {}
