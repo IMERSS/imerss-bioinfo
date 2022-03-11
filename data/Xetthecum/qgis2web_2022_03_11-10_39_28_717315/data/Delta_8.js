@@ -1,0 +1,1 @@
+var json_Delta_8 = {"type":"FeatureCollection","name":"Delta_8","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"COMMUNITY":null,"COMM_HULQ":null,"LABEL":"Delta","LABEL_HULQ":null},"geometry":{"type":"Point","coordinates":[-123.501755449491355,48.941375538269106]}}]}

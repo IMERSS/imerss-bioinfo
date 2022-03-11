@@ -255,7 +255,7 @@ hortis.indexRegions = function (treeBuilder) {
         if (summaryRow) {
             var taxonId = summaryRow.id;
             applyObs(communities, row.COMMUNITY, taxonId, obsId);
-            applyObs(classes, row.CLASS, taxonId, obsId);
+            applyObs(classes, row.clazz, taxonId, obsId);
 
         } else {
             console.log("Warning: row with iNaturalistTaxonId " + row.iNaturalistTaxonId + " did not correspond to row in summary: ", row);

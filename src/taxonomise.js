@@ -63,6 +63,7 @@ hortis.obsToSummaryFields = {
     collection: "Source",
     placeName: "Place Name",
     catalogueNumber: "Catalogue Number",
+    observationId: "observationId",
     timestamp: "Date Reported"
 };
 

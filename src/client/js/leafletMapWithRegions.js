@@ -9,13 +9,19 @@ fluid.defaults("hortis.leafletMap.withRegions", {
         legendKeys: ".fld-bagatelle-map-legend-keys"
     },
     modelListeners: {
-        selectedRegions: {
+        selectedRegions: [{
+            namespace: "map",
             path: "selectedRegions",
             func: "hortis.leafletMap.withRegions.showSelectedRegions",
             args: ["{that}", "{change}.value"]
-        }
+        }, {
+            namespace: "legend",
+            path: "selectedRegions.*",
+            func: "hortis.legendKey.selectRegion",
+            args: ["{that}", "{change}.value", "{change}.path"]
+        }]
     },
-    legendKey: "@expand:hortis.leafletMap.renderLegendKey({that}.classes)",
+    // legendKey: "@expand:hortis.leafletMap.renderLegendKey({that}.classes)",
     model: {
         // selectedRegions: classKey -> boolean
         // selectedCommunities: communityKey -> boolean
@@ -32,6 +38,7 @@ fluid.defaults("hortis.leafletMap.withRegions", {
     listeners: {
         "buildMap.addRegions": "hortis.leafletMap.withRegions.addRegions({that})",
         "buildMap.drawRegions": "hortis.leafletMap.withRegions.drawRegions({that})",
+        "buildMap.drawLegend": "hortis.legendKey.drawLegend({that})",
         "clearMapSelection.regions": "hortis.clearSelectedRegions({that})",
         //                                                                          class,       community
         "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)"
@@ -49,17 +56,69 @@ fluid.defaults("hortis.leafletMap.withRegions", {
                 }
             }
         }
-    },
-    dynamicComponents: {
-        legendKeys: {
-            sources: "{that}.options.legendKey",
-            type: "hortis.legendKey",
-            options: {
-                clazz: "{source}"
-            }
-        }
     }
 });
+
+fluid.registerNamespace("hortis.legendKey");
+
+hortis.legendKey.rowTemplate = "<div class=\"fld-bagatelle-legend-row\ %rowClass\">" +
+            "<span class=\"fld-bagatelle-legend-icon\"></span>" +
+            "<span class=\"fld-bagatelle-legend-preview %previewClass\" style=\"%previewStyle\"></span>" +
+            "<span class=\"fld-bagatelle-legend-label\">%keyLabel</span>" +
+            "</div>";
+
+hortis.legendKey.blockTemplate = "<div class=\"fld-bagatelle-legend-block\"><span class=\"fld-bagatelle-legend-block-name\">%community</span>%rows</div>";
+
+hortis.legendKey.renderMarkup = function (markup, clazz, className) {
+    var style = hortis.fillColorToStyle(clazz.fillColor || clazz.color);
+    var normal = hortis.normaliseToClass(className);
+    return fluid.stringTemplate(markup, {
+        rowClass: "fld-bagatelle-legend-row-" + normal,
+        previewClass: "fld-bagatelle-class-" + normal,
+        previewStyle: "background-color: " + style.fillColor,
+        keyLabel: className
+    });
+};
+
+hortis.legendKey.drawLegend = function (map) {
+    var blocks = fluid.transform(map.communities, function (community, key) {
+        var clazzRows = fluid.transform(community.classes, function (troo, className) {
+            return hortis.legendKey.renderMarkup(hortis.legendKey.rowTemplate, map.classes[className], className);
+        });
+        return fluid.stringTemplate(hortis.legendKey.blockTemplate, {
+            community: key,
+            rows: Object.values(clazzRows).join("\n")
+        });
+    });
+    var markup = Object.values(blocks).join("\n");
+    var legendKeys = map.locate("legendKeys");
+    legendKeys.html(markup);
+    map.clazzToLegendNodes = fluid.transform(map.classes, function (troo, className) {
+        var rowSel = ".fld-bagatelle-legend-row-" + hortis.normaliseToClass(className);
+        var row = legendKeys.find(rowSel);
+        row.click(function () {
+            map.events.selectRegion.fire(className, map.classes[className].community);
+        });
+    });
+};
+
+hortis.toggleClass = function (element, clazz, value) {
+    element.toggleClass(clazz, value);
+};
+
+hortis.legendKey.selectRegion = function (map, value, path) {
+    var className = fluid.peek(path);
+    var row = map.locate("legendKeys").find(".fld-bagatelle-legend-row-" + hortis.normaliseToClass(className));
+    row.toggleClass("fld-bagatelle-selected", value);
+};
+
+hortis.fillColorToStyle = function (fillColor) {
+    return {
+        fillColor: fluid.colour.arrayToString(fillColor),
+        fillOpacity: 1
+    };
+};
+
 
 fluid.defaults("hortis.bannerManager", {
     gradeNames: "fluid.viewComponent",
@@ -89,8 +148,8 @@ hortis.leafletMap.seColumns = ["What", "Where", "Importance", "Protection", "Sou
 hortis.leafletMap.outerPanelPhoto = "<div class=\"fl-bagatelle-photo %photoClass\"></div>";
 
 hortis.leafletMap.outerPanelMiddle =
-   "<div class=\"fld-bagatelle-map-community\">Community:<br/> %community / Hul'qumi'num<button class=\"fl-xetthecum-small-audio\" type=\"button\"></button></div>" +
-   "<div class=\"fld-bagatelle-map-class\">%clazz / Hul'qumi'num<button class=\"fl-xetthecum-small-audio\" type=\"button\"></button></div>";
+   "<div class=\"fld-bagatelle-map-community\">Community:<br/> %community</div>" +
+   "<div class=\"fld-bagatelle-map-class\">%clazz</div>";
 
 
 hortis.leafletMap.renderMapOuterPanel = function (map) {
@@ -99,12 +158,12 @@ hortis.leafletMap.renderMapOuterPanel = function (map) {
     var topPanel = "";
     if (clazz.hasImage) {
         topPanel += fluid.stringTemplate(hortis.leafletMap.outerPanelPhoto, {
-            photoClass: "fld-bagatelle-class-image-" + hortis.normaliseToClass(clazz.label)
+            photoClass: "fld-bagatelle-class-image-" + hortis.normaliseToClass(selectedClazz)
         });
     }
     topPanel += fluid.stringTemplate(hortis.leafletMap.outerPanelMiddle, {
         community: map.model.mapBlockTooltipId,
-        clazz: clazz.label
+        clazz: selectedClazz
     });
     var bottomPanel = "";
     if (clazz["sE-Tagline"]) {
@@ -137,84 +196,12 @@ hortis.clearSelectedRegions = function (map) {
 };
 
 
-hortis.leafletMap.renderLegendKey = function (classes) {
-    var array = fluid.hashToArray(classes, "key");
-    array.sort(function (a, b) {
-        return a.order - b.order;
-    });
-    return array;
-};
-
-fluid.defaults("hortis.legendKey", {
-    gradeNames: "fluid.containerRenderingView",
-    parentContainer: "{leafletMap}.dom.legendKeys",
-    markup: {
-        container: "<div class=\"fld-bagatelle-legend-row %rowClass\">" +
-            "<span class=\"fld-bagatelle-legend-icon\"></span>" +
-            "<span class=\"fld-bagatelle-legend-preview %previewClass\" style=\"%previewStyle\"></span>" +
-            "<span class=\"fld-bagatelle-legend-label\">%keyLabel</span>" +
-            "</div>"
-    },
-    modelRelay: {
-        selected: {
-            source: {
-                context: "hortis.leafletMap.withRegions",
-                segs: ["selectedRegions", "{that}.options.clazz.key"]
-            },
-            target: "selected"
-        }
-        /* selectedStyle: { // We can't write this or its modelListener equivalent because of BUG!
-            source: "selected",
-            target: {
-                segs: ["dom", "container", "class", "fld-bagatelle-selected"]
-            },
-        }*/
-    },
-    modelListeners: {
-        selectedToStyle: {
-            path: "selected",
-            listener: "hortis.toggleClass",
-            args: ["{that}.container", "fld-bagatelle-selected", "{change}.value"]
-        },
-        click: {
-            path: "dom.container.click",
-            listener: "{leafletMap}.events.selectRegion.fire",
-            args: ["{that}.options.clazz.key", "{that}.options.clazz.community"]
-        }
-    },
-
-    invokers: {
-        renderMarkup: "hortis.legendKey.renderMarkup({that}.options.markup, {that}.options.clazz)"
-    }
-});
-
-hortis.toggleClass = function (element, clazz, value) {
-    element.toggleClass(clazz, value);
-};
-
-hortis.fillColorToStyle = function (fillColor) {
-    return {
-        fillColor: fluid.colour.arrayToString(fillColor),
-        fillOpacity: 1
-    };
-};
-
-hortis.legendKey.renderMarkup = function (markup, clazz) {
-    var style = hortis.fillColorToStyle(clazz.fillColor || clazz.color);
-    return fluid.stringTemplate(markup.container, {
-        rowClass: clazz.endGroup ? "fl-bagatelle-legend-end-group" : "",
-        previewClass: "fld-bagatelle-class-" + hortis.normaliseToClass(clazz.key),
-        previewStyle: "background-color: " + style.fillColor,
-        keyLabel: clazz.legendLabel
-    });
-};
-
 hortis.regionOpacity = function (region) {
-    return "--bagatelle-" + region + "-opacity";
+    return "--bagatelle-" + hortis.normaliseToClass(region) + "-opacity";
 };
 
 hortis.regionBorder = function (region) {
-    return "--bagatelle-" + region + "-stroke";
+    return "--bagatelle-" + hortis.normaliseToClass(region) + "-stroke";
 };
 
 hortis.leafletMap.withRegions.showSelectedRegions = function (map, selectedRegions) {
@@ -240,15 +227,15 @@ hortis.addStyle = function (text) {
 };
 
 hortis.leafletMap.withRegions.drawRegions = function (map) {
-    var regionClass = function (clazz) {
-        return "fld-bagatelle-region-" + hortis.normaliseToClass(map.classes[clazz].label);
+    var regionClass = function (className) {
+        return "fld-bagatelle-region-" + hortis.normaliseToClass(className);
     };
     map.applier.change("selectedRegions", hortis.leafletMap.withRegions.selectedRegions(null, map.classes));
 
     map.regionGroup.clearLayers();
 
     map.liveFeatures = map.features.map(function (feature) {
-        var className = feature.properties.CLASS;
+        var className = feature.properties.clazz;
         var community = feature.properties.COMMUNITY;
         var clazz = map.classes[className];
         var options = clazz.fillColor ? {

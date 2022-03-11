@@ -1,6 +1,7 @@
 {
     defaultColor: [35,35,35],
-    baseDirectory: "%bagatelle/data/Xetthecum/qgis2web_2022_02_12-21_38_21_508226/data",
+    //baseDirectory: "%bagatelle/data/Xetthecum/qgis2web_2022_02_12-21_38_21_508226/data",
+    baseDirectory: "%bagatelle/data/Xetthecum/qgis2web_2022_03_11-10_39_28_717315/data",
     CSVs: {
         sensitiveEcosystems: {
             path: "%bagatelle/data/Xetthecum/Sensitive Ecosystems.csv"
@@ -10,52 +11,45 @@
         Marine: {
             banner: true,
             classes: {
-                LT: { // Shoreline
-                    label: "Littoral",
-                    legendLabel: "Marine: littoral",
+                "Shoreline": { // Shoreline
                     hasImage: true,
-                    order: 0,
                     fillColor: [100,175,164]
                 },
-                MAR: { // Dock, Subtidal
-                    label: "Marine",
-                    legendLabel: "Marine: offshore",
+                "Subtidal": { // Dock, Subtidal
                     hasImage: true,
-                    order: 1,
-                    endGroup: true,
                     fillColor: [34,122,113]
+                },
+                "Eelgrass Beds": {
+                    fillColor: [77,175,84],
+                },
+                "Dock": {
+                    fillColor: [127,127,127] 
                 }
             }
         },
         Freshwater: {
+            banner: true,
             classes: {
-                RI: { // Fen
-                    label: "Riparian",
-                    legendLabel: "Freshwater: riparian",
+                "Riparian": { // Fen
                     hasImage: true,
-                    order: 2,
                     fillColor: [100,195,221]
                 },
-                ST: { // Davidson Creek, Greig creek, Note: these are all MultiLineString
-                    label: "Stream",
-                    legendLabel: "Freshwater: stream",
+                "Wetland": { // Shallow water, Marsh
                     hasImage: true,
-                    order: 3,
-                    color: [52,153,198]
-                },
-                WN: { // Shallow water, Marsh
-                    label: "Wetland",
-                    legendLabel: "Freshwater: wetland",
-                    hasImage: true,
-                    order: 4,
                     fillColor: [52,153,198]
                 },
-                LC: { // Laughlin Lake, Pond
-                    label: "Lacustrine",
-                    legendLabel: "Freshwater: lacustrine",
+                "Greig Creek": {
                     hasImage: true,
-                    order: 5,
-                    endGroup: true,
+                    color: [52,153,198]
+                },
+                "Davidson Creek": {
+                    color: [52,153,198]
+                },
+                "Laughlin Lake": {
+                    hasImage: true,
+                    fillColor: [0,133,188]
+                },
+                "Pond": {
                     fillColor: [0,133,188]
                 }
             }
@@ -63,32 +57,19 @@
         Forests: {
             banner: true,
             classes: {
-                RH: { // Clearcut, variable retention,
-                    label: "Recently harvested",
-                    order: 6,
-                    legendLabel: "Forests: recently harvested",
+                "Clearcut": { // Clearcut, variable retention, Recently harvested
                     fillColor: [188,201,184]
                 },
-                PS: { // Coniferous pole sapling, broadleaf pole sapling
-                    label: "Pole sapling",
-                    legendLabel: "Forests: pole sapling",
+                "Pole Sapling": { // Coniferous pole sapling, broadleaf pole sapling
                     hasImage: true,
-                    order: 7,
                     fillColor: [144,166,138]
                 },
-                YF: { // Young conifer forest, Young mixed forest, Young broadleaf forest
-                    label: "Young forest",
-                    legendLabel: "Forests: young",
+                "Young Forest": { // Young conifer forest, Young mixed forest, Young broadleaf forest
                     hasImage: true,
-                    order: 8,
                     fillColor: [91,122,82]
                 },
-                MF: { // Mature conifer forest, Mature mixed forest
-                    label: "Mature forest",
-                    legendLabel: "Forests: mature conifer",
+                "Mature Forest": { // Mature conifer forest, Mature mixed forest
                     hasImage: true,
-                    order: 9,
-                    endGroup: true,
                     fillColor: [23,80,18]
                 }
             }
@@ -96,19 +77,12 @@
         "Woodlands and rock outcrops": {
             banner: true,
             classes: {
-                CL: { // Coastal bluff
-                    label: "Rock outcrop",
-                    legendLabel: "Rock outcrops",
+                "Coastal Bluff": { // Coastal bluff
                     hasImage: true,
-                    order: 10,
                     fillColor: [117,117,117]
                 },
-                WD: {
-                    label: "Woodland",
-                    legendLabel: "Woodlands",
+                "Woodland": {
                     hasImage: true,
-                    order: 11,
-                    endGroup: true,
                     fillColor: [191,103,58]
                 }
             }
@@ -116,27 +90,23 @@
         Anthropogenic: {
             banner: true,
             classes: {
-                AG: { // Agricultural, cultivated field
-                    label: "Agricultural",
-                    legendLabel: "Agricultural",
+                "Agricultural": { // Agricultural, cultivated field
                     hasImage: true,
-                    order: 12,
                     fillColor: [186,177,140]
                 },
-                DP: { // Developed, exposed soil, Developed, road surface
-                    label: "Developed",
-                    legendLabel: "Developed",
+                "Developed": { // Developed, exposed soil, Developed, road surface
                     hasImage: true,
-                    order: 13,
                     fillColor: [114,108,84]
                 },
-                RW: {
-                    label: "Rural",
-                    legendLabel: "Rural",
+                "Rural": {
                     hasImage: true,
-                    order: 14,
-                    endGroup: true,
                     fillColor: [84,76,54],
+                },
+                "Road": {
+                    fillColor: [127,127,127],
+                },
+                "Canal": {
+                    color: [52,153,198]
                 }
             }
         }

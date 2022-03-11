@@ -1,5 +1,5 @@
 :root {
-  --bagatelle-map-width: 700px;
+  --bagatelle-map-width: 500px;
   --bagatelle-eco-colour: #DEE0B0;
   --bagatelle-map-colour: #DDE8C8; 
 }
@@ -8,12 +8,12 @@ body {
     margin: 0px;
 }
 
-.fld-bagatelle-region-marine {
+.fld-bagatelle-region-subtidal {
     fill: url(#marine);
     background-repeat: repeat;
 }
 
-.fld-bagatelle-region-lacustrine {
+.fld-bagatelle-region-lake-laughlin-lake {
     fill: url(#lacustrine);
     background-repeat: repeat;
 }
@@ -23,7 +23,7 @@ body {
     background-repeat: repeat;
 }
 
-.fld-bagatelle-region-recently-harvested {
+.fld-bagatelle-region-clearcut {
     fill: url(#recently-harvested);
     background-repeat: repeat;
 }
@@ -47,6 +47,7 @@ body {
     fill: url(#woodland);
     background-repeat: repeat;
 }
+
 
 .fl-bagatelle-cultural-values {
     display: flex;
@@ -126,11 +127,11 @@ body {
 }
 
 
-.fld-bagatelle-class-image-littoral {
+.fld-bagatelle-class-image-shoreline {
     background-image: url(../img/Xetthecum/Intertidal.jpg);
 }
 
-.fld-bagatelle-class-image-marine {
+.fld-bagatelle-class-image-subtidal {
     background-image: url(../img/Xetthecum/Subtidal.jpg);
 }
 
@@ -150,11 +151,11 @@ body {
     background-image: url(../img/Xetthecum/Wetland.jpg);
 }
 
-.fld-bagatelle-class-image-lacustrine {
+.fld-bagatelle-class-image-laughlin-lake {
     background-image: url(../img/Xetthecum/Laughlin_Lake.jpg);
 }
 
-.fld-bagatelle-class-image-stream {
+.fld-bagatelle-class-image-greig-creek {
     background-image: url(../img/Xetthecum/Greig_Creek.jpg);
 }
 
@@ -162,7 +163,7 @@ body {
     background-image: url(../img/Xetthecum/Riparian.jpg);
 }
 
-.fld-bagatelle-class-image-rock-outcrop {
+.fld-bagatelle-class-image-coastal-bluff {
     background-image: url(../img/Xetthecum/Coastal_Bluffs.jpg);
 }
 
@@ -244,7 +245,8 @@ body {
 }
 
 .fl-bagatelle-map-info-panel {
-    width: 20rem;
+    width: 28rem;
+    margin-left: 2rem;
 }
 
 .fld-bagatelle-map-legend > span {
@@ -254,9 +256,24 @@ body {
     margin-bottom: 0.4rem;
 }
 
-.fl-bagatelle-legend-end-group {
-    margin-bottom: 0.7rem;
+.fld-bagatelle-map-legend-keys {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 500px;
 }
+
+.fld-bagatelle-legend-block {
+}
+
+.fld-bagatelle-legend-block-name {
+    margin-top: 0.7rem;
+    display: inline-block;
+    width: 8rem;
+    text-indent: -1rem;
+    padding-left: 1.5rem;
+}
+
 
 .fld-bagatelle-legend-row {
     padding: 2px;
@@ -293,11 +310,13 @@ body {
 .fld-bagatelle-legend-label {
     display: inline-block;
     font-size: 0.9rem;
-    width: 13rem;
+    width: 8rem;
+    position: relative;
+    top: -2px;
 }
 
 .fld-bagatelle-map {
-    height: 500px;
+    height: 450px;
 }
 
 .fld-bagatelle-tabs {

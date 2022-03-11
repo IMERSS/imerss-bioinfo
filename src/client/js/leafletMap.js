@@ -281,9 +281,9 @@ hortis.mapBlockToFocusedTaxa = function (mapBlockTooltipId, map, sunburst) {
         }
     }
     // As transaction to avoid triggering hortis.updateRowFocus twice which then invokes beginZoom
-    var trans = sunburst.applier.initiate();
-    trans.change("rowFocus", null, "DELETE");
-    trans.change("rowFocus", togo);
+    var trans = sunburst.applier.initiate("map");
+    trans.change("rowFocus", null, "DELETE", "map");
+    trans.change("rowFocus", togo, null, "map");
     trans.commit();
 };
 

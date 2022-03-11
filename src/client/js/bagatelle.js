@@ -323,7 +323,7 @@ fluid.defaults("hortis.sunburst", {
         },
         rowFocus: {
             funcName: "hortis.updateRowFocus",
-            args: ["{that}", "{change}.value"]
+            args: ["{that}", "{change}.value", "{change}.transaction"]
         },
         backClick: {
             path: "dom.back.click",
@@ -486,8 +486,19 @@ hortis.expandButtonMarkup = "<span class=\"fl-taxonDisplay-expand fl-taxonDispla
 
 hortis.sourceTable = { // TODO: get this from marmalised.json but the names currently there are too long
     iNat: "iNaturalist",
-    dataPaper: "Pacific Marine Life Surveys, Royal British Columbia Museum, Canadian Museum of Nature, Erickson, Chu and Leys",
-    Hunterson: "Hunterson Farms BioBlitz 2010"  
+    PMLS: "Pacific Marine Life Surveys",
+    RBCM: "Royal British Columbia Museum",
+    CMN: "Canadian Museum of Nature",
+    BCCSN: "British Columbia Cetacean Sightings Network",
+    "Gal-Salm": "Erickson",
+    CHU2010: "Chu and Leys (2010)",
+    CHU2012: "Chu and Leys (2020)",
+    Hunterson: "Hunterson Farms BioBlitz 2010"
+};
+
+hortis.sourceFromId = function (obsId) {
+    var colpos = obsId.indexOf(":");
+    return colpos === -1 ? null : obsId.substring(0, colpos);
 };
 
 // Render a set of fields derived from an "observation range" - group of fields prefixed by "first" and "last"
@@ -501,12 +512,13 @@ hortis.renderObsBound = function (row, prefix, markup) {
         var value = hortis.renderDate(row[prefix + "Timestamp"]) + (recordedBy ? " by " + recordedBy : "");
 
         var row1 = hortis.dumpRow(capPrefix + " Reported:", value + hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header");
-        
+
         var collection = row[prefix + "Collection"];
-        var renderedCollection = hortis.sourceTable[collection] || collection; 
+        var obsIdCollection = hortis.sourceFromId(row[prefix + "ObservationId"]);
+        var renderedCollection = hortis.sourceTable[obsIdCollection || collection] || collection;
 
         var source = renderedCollection + (catalogueNumber ? " (" + catalogueNumber + ")" : "");
-        
+
         var row2 = hortis.dumpRow("Source:", source, markup, "fld-taxonDisplay-expandable-remainder");
         return row1 + row2;
     } else {
@@ -986,7 +998,7 @@ hortis.lcaRoot = function (parents) {
     return lcaRoot;
 };
 
-hortis.updateRowFocus = function (that, rowFocus) {
+hortis.updateRowFocus = function (that, rowFocus, transaction) {
     var flatTree = that.flatTree;
     var focusAll = $.isEmptyObject(rowFocus);
     for (var i = flatTree.length - 1; i >= 0; --i) {
@@ -1014,7 +1026,9 @@ hortis.updateRowFocus = function (that, rowFocus) {
     if (target.leftIndex !== undefined) { // Avoid trying to render before onCreate
         // We signal this to regions - need to avoid mutual action of resetting map and taxa, and we assume that
         // map is the only source of updateRowFocus
-        that.events.changeLayoutId.fire(target.id, "rowFocus");
+        if (!transaction.fullSources.map) {
+            that.events.changeLayoutId.fire(target.id, "rowFocus");
+        }
     }
 };
 
@@ -1036,6 +1050,7 @@ hortis.backTaxon = function (that) {
 };
 
 hortis.changeLayoutId = function (that, layoutId, noHistory) {
+    console.log("changeLayoutId to layoutId ", layoutId);
     that.applier.change("selectedId", layoutId);
     if (!noHistory) {
         that.taxonHistory[that.model.historyIndex] = layoutId;
@@ -1063,7 +1078,7 @@ hortis.beginZoom = function (that, rowId) {
     var initialScale = fluid.copy(that.model.scale);
     var newBound = hortis.boundNodes(that, rowId);
     newBound.scale.zoomProgress = 1;
-    console.log("Begin zoom");
+    console.log("Begin zoom to rowId " + rowId);
     var togo = fluid.promise();
     that.oldVisMap = that.visMap;
     that.visMap = newBound.visMap;

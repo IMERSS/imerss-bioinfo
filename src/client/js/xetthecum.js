@@ -66,6 +66,7 @@ fluid.defaults("hortis.xetthecumSunburstLoader", {
 });
 
 hortis.clearMapSelectionConditionally = function (map, layoutId, source) {
+    console.log("ClearMapSelectionConditionally with layoutId ", layoutId, " source " + source);
     if (source !== "rowFocus") {
         map.events.clearMapSelection.fire();
     }

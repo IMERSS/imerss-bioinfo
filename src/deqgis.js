@@ -35,20 +35,22 @@ hortis.seColumns = ["Tagline", "What", "Where", "Importance", "Protection", "Sou
 
 hortis.applySensitiveEcosystems = function (togo, rows) {
     rows.forEach(function (row, index) {
-        var clazz = row.CLASS;
-        if (togo.classes[clazz]) {
-            hortis.seColumns.forEach(function (column) {
-                var cell = row[column];
-                if (cell) {
-                    togo.classes[clazz]["sE-" + column] = cell;
-                }
-                else {
-                    console.log("Warnings: Sensitive ecosystems column " + column + " did not match row " + index, row);
-                }
-            });
-        } else {
-            console.log("Warning: Sensitive ecosystems column " + clazz + " did not match any from QGIS");
-        }
+        var labels = row.LABELS.split(",").map(s => s.trim());
+        labels.forEach(function (clazz) {
+            if (togo.classes[clazz]) {
+                hortis.seColumns.forEach(function (column) {
+                    var cell = row[column];
+                    if (cell) {
+                        togo.classes[clazz]["sE-" + column] = cell;
+                    }
+                    else {
+                        console.log("Warnings: Sensitive ecosystems column " + column + " did not match row " + index, row);
+                    }
+                });
+            } else if (clazz) {
+                console.log("Warning: Sensitive ecosystems column " + clazz + " did not match any from QGIS");
+            }
+        });
     });
 };
 
@@ -75,13 +77,17 @@ hortis.filterCommunities = function (communities) {
     });
 };
 
+var labels = {};
+
 hortis.indexOneFeature = function (dataFileName, feature, features, classes) {
-    var classname = feature.properties.CLASS;
+    var classname = feature.properties.LEGEND_LAB || feature.properties.LABEL;
+    fluid.set(labels, [feature.properties.COMMUNITY, classname], true);
+
+    feature.properties.clazz = classname;
     var clazz = classes[classname];
     if (!clazz) {
         console.log("Warning: unknown feature with name " + classname + " in file " + dataFileName);
     } else {
-        feature.properties.communities = clazz.community;
         features.push(feature);
     }
 };
@@ -121,5 +127,6 @@ fluid.promise.sequence(promises).then(function () {
         hortis.applySensitiveEcosystems(togo, allRows.sensitiveEcosystems);
     }
 
+    console.log("Encountered feature hierarchy: ", JSON.stringify(labels, null, 2));
     hortis.writeJSONSync(outputFile, togo);
 });

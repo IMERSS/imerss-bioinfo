@@ -46,6 +46,8 @@
         "COMM_HULQ": "COMM_HULQ",
         "LABEL": "LABEL",
         "LABEL_HULQ": "LABEL_HULQ",
-        "communities": "communities"
+        "LABEL_LAB": "LABEL_LAB",
+        "clazz": "clazz",
+        "LEGEND_LAB": "LEGEND_LAB"
     }
 }
