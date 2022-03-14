@@ -1,0 +1,12 @@
+{
+    "columns": {
+        "id": "observatio",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "iNaturalistTaxonName": "iNaturalis",
+        "corrected": "Corrected",
+        "correction": "GEOREFNOTE",
+        "latitudeOut": "LatCorrect",
+        "longitudeOut": "LongCorrec"
+    }
+}

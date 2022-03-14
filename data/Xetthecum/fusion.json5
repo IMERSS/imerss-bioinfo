@@ -31,12 +31,12 @@
         Deprivatise: {
             processor: "hortis.deprivatise"
         },
-/*        PhaseICoordinates: {
+        CorrectCoordinates: {
             type: "hortis.pipe.CSVInput",
-            input: "%bagatelle/data/dataPaper-I/Corrected_georeferencing_marine_animal_occurrence_records_corrected_2021-01-13-plus-round-8.csv",
-            map: "%bagatelle/data/dataPaper-I/correctedGeoreferencing-map.json",
+            input: "%bagatelle/data/Xetthecum/Biodiversity_data_integrated_Xetthecum_3.3_obs_georeferencing_corrected_2022-03-09.csv",
+            map: "%bagatelle/data/Xetthecum/correctedGeoreferencing-map.json",
             processor: "hortis.processCoordinatePatch"
-        },*/
+        },
         RoundCoordinates: {
             type: "hortis.pipe",
             processor: "hortis.roundCoordinates",
