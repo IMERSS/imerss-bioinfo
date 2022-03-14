@@ -497,7 +497,7 @@ hortis.sourceTable = { // TODO: get this from marmalised.json but the names curr
 };
 
 hortis.sourceFromId = function (obsId) {
-    var colpos = obsId.indexOf(":");
+    var colpos = obsId ? obsId.indexOf(":") : -1;
     return colpos === -1 ? null : obsId.substring(0, colpos);
 };
 
