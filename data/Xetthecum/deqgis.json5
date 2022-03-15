@@ -10,6 +10,9 @@
     communities: {
         Marine: {
             banner: true,
+            hulqName: "Hwuiumqa'",
+            hulqMeaning: "saltwater",
+            hulqSource: "Thiyuas",
             classes: {
                 "Shoreline": { // Shoreline
                     hasImage: true,
@@ -29,6 +32,9 @@
         },
         Freshwater: {
             banner: true,
+            hulqName: "Tl'elhumqa'",
+            hulqMeaning: "freshwater",
+            hulqSource: "Thiyuas",
             classes: {
                 "Riparian": { // Fen
                     hasImage: true,
@@ -39,15 +45,24 @@
                     fillColor: [52,153,198]
                 },
                 "Greig Creek": {
+                    color: [52,153,198],
                     hasImage: true,
-                    color: [52,153,198]
+                    hulqName: "Hwtalonēts",
+                    hulqMeaning: "Mom called the bottom of the creek: \"base of creek\"; \"base of creek or river\"",
+                    hulqSource: "Thiyuas"
                 },
                 "Davidson Creek": {
-                    color: [52,153,198]
+                    color: [52,153,198],
+                    hulqName: "Qwuawum",
+                    hulqMeaning: "creek",
+                    hulqSource: "Thiyuas"
                 },
                 "Laughlin Lake": {
                     hasImage: true,
-                    fillColor: [0,133,188]
+                    fillColor: [0,133,188],
+                    hulqName: "Xatsa'",
+                    hulqMeaning: "lake",
+                    hulqSource: "Thiyuas",
                 },
                 "Pond": {
                     fillColor: [0,133,188]
@@ -56,6 +71,9 @@
         },
         Forests: {
             banner: true,
+            hulqName: "Thuthiqut",
+            hulqMeaning: "forest",
+            hulqSource: "Thiyuas",
             classes: {
                 "Clearcut": { // Clearcut, variable retention, Recently harvested
                     fillColor: [188,201,184]
@@ -76,6 +94,9 @@
         },
         "Woodlands and rock outcrops": {
             banner: true,
+            hulqName: "Shthuliim",
+            hulqMeaning: "“a beautiful meadow with cushions for your feet made of moss, tender growth, grass…”",
+            hulqSource: "Thiyuas",
             classes: {
                 "Coastal Bluff": { // Coastal bluff
                     hasImage: true,

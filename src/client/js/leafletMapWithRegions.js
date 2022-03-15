@@ -144,13 +144,20 @@ hortis.bannerManager.toggleClass = function (banner, state, path) {
 
 hortis.leafletMap.seColumns = ["What", "Where", "Importance", "Protection", "Source"];
 
+hortis.leafletMap.hulqNameTemplate = " / <span aria-label=\"%label\" title=\"%label\" class=\"fl-bagatelle-hulq-name\">%hulqName</span>";
 
 hortis.leafletMap.outerPanelPhoto = "<div class=\"fl-bagatelle-photo %photoClass\"></div>";
 
-hortis.leafletMap.outerPanelMiddle =
-   "<div class=\"fld-bagatelle-map-community\">Community:<br/> %community</div>" +
-   "<div class=\"fld-bagatelle-map-class\">%clazz</div>";
+hortis.leafletMap.outerPanelCommunity = "<div class=\"fld-bagatelle-map-community\">Community:<br/>%community%hulqBlock</div>";
+hortis.leafletMap.outerPanelClass = "<div class=\"fld-bagatelle-map-class\">%clazz%hulqBlock</div>";
 
+
+hortis.leafletMap.renderHulqName = function (row) {
+    return fluid.stringTemplate(hortis.leafletMap.hulqNameTemplate, {
+        hulqName: row.hulqName,
+        label: "Meaning: " + row.hulqMeaning + " Source: " + row.hulqSource
+    });
+};
 
 hortis.leafletMap.renderMapOuterPanel = function (map) {
     var selectedClazz = fluid.keyForValue(map.model.selectedRegions, true);
@@ -161,9 +168,15 @@ hortis.leafletMap.renderMapOuterPanel = function (map) {
             photoClass: "fld-bagatelle-class-image-" + hortis.normaliseToClass(selectedClazz)
         });
     }
-    topPanel += fluid.stringTemplate(hortis.leafletMap.outerPanelMiddle, {
+    var communityName = map.model.mapBlockTooltipId;
+    var community = map.communities[communityName];
+    topPanel += fluid.stringTemplate(hortis.leafletMap.outerPanelCommunity, {
         community: map.model.mapBlockTooltipId,
-        clazz: selectedClazz
+        hulqBlock: community.hulqName ? hortis.leafletMap.renderHulqName(community) : ""
+    });
+    topPanel += fluid.stringTemplate(hortis.leafletMap.outerPanelClass, {
+        clazz: selectedClazz,
+        hulqBlock: clazz.hulqName ? hortis.leafletMap.renderHulqName(clazz) : ""
     });
     var bottomPanel = "";
     if (clazz["sE-Tagline"]) {

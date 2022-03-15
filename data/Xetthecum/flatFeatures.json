@@ -2,6 +2,9 @@
     "communities": {
         "Marine": {
             "banner": true,
+            "hulqName": "Hwuiumqa'",
+            "hulqMeaning": "saltwater",
+            "hulqSource": "Thiyuas",
             "classes": {
                 "Shoreline": {},
                 "Subtidal": {},
@@ -11,6 +14,9 @@
         },
         "Freshwater": {
             "banner": true,
+            "hulqName": "Tl'elhumqa'",
+            "hulqMeaning": "freshwater",
+            "hulqSource": "Thiyuas",
             "classes": {
                 "Riparian": {},
                 "Wetland": {},
@@ -22,6 +28,9 @@
         },
         "Forests": {
             "banner": true,
+            "hulqName": "Thuthiqut",
+            "hulqMeaning": "forest",
+            "hulqSource": "Thiyuas",
             "classes": {
                 "Clearcut": {},
                 "Pole Sapling": {},
@@ -31,6 +40,9 @@
         },
         "Woodlands and rock outcrops": {
             "banner": true,
+            "hulqName": "Shthuliim",
+            "hulqMeaning": "“a beautiful meadow with cushions for your feet made of moss, tender growth, grass…”",
+            "hulqSource": "Thiyuas",
             "classes": {
                 "Coastal Bluff": {},
                 "Woodland": {}
@@ -113,12 +125,15 @@
             "sE-Source": "A Sensitive Ecosystem Guide for Islands Trust Area Property Owners"
         },
         "Greig Creek": {
-            "hasImage": true,
             "color": [
                 52,
                 153,
                 198
             ],
+            "hasImage": true,
+            "hulqName": "Hwtalonēts",
+            "hulqMeaning": "Mom called the bottom of the creek: \"base of creek\"; \"base of creek or river\"",
+            "hulqSource": "Thiyuas",
             "community": "Freshwater",
             "sE-Tagline": "Water for Life",
             "sE-What": "Freshwater ecosystems include lakes and ponds. They generally have areas with little or no floating vegetation and are deeper than two metres. Freshwater ecosystems form complex relationships with the riparian ecosystems found along their shorelines.",
@@ -133,6 +148,9 @@
                 153,
                 198
             ],
+            "hulqName": "Qwuawum",
+            "hulqMeaning": "creek",
+            "hulqSource": "Thiyuas",
             "community": "Freshwater",
             "sE-Tagline": "Water for Life",
             "sE-What": "Freshwater ecosystems include lakes and ponds. They generally have areas with little or no floating vegetation and are deeper than two metres. Freshwater ecosystems form complex relationships with the riparian ecosystems found along their shorelines.",
@@ -148,6 +166,9 @@
                 133,
                 188
             ],
+            "hulqName": "Xatsa'",
+            "hulqMeaning": "lake",
+            "hulqSource": "Thiyuas",
             "community": "Freshwater",
             "sE-Tagline": "Water for Life",
             "sE-What": "Freshwater ecosystems include lakes and ponds. They generally have areas with little or no floating vegetation and are deeper than two metres. Freshwater ecosystems form complex relationships with the riparian ecosystems found along their shorelines.",
@@ -157,7 +178,6 @@
             "sE-Source": "A Sensitive Ecosystem Guide for Islands Trust Area Property Owners"
         },
         "Pond": {
-            "hasImage": true,
             "fillColor": [
                 0,
                 133,
