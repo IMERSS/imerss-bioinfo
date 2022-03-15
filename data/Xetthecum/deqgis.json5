@@ -23,10 +23,12 @@
                     fillColor: [34,122,113]
                 },
                 "Eelgrass Beds": {
-                    fillColor: [77,175,84],
+                    hasImage: true,
+                    fillColor: [77,175,84]
                 },
                 "Dock": {
-                    fillColor: [127,127,127] 
+                    hasImage: true,
+                    fillColor: [127,127,127],
                 }
             }
         },
@@ -124,7 +126,8 @@
                     fillColor: [84,76,54],
                 },
                 "Road": {
-                    fillColor: [127,127,127],
+                    hasImage: true,
+                    fillColor: [127,127,127]
                 },
                 "Canal": {
                     color: [52,153,198]

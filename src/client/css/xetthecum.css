@@ -144,7 +144,7 @@ body {
 }
 
 .fld-bagatelle-class-image-young-forest {
-    background-image: url(../img/Xetthecum/Young_Mixed_Forest.jpg);
+    background-image: url(../img/Xetthecum/Young_Conifer_Forest.jpg);
 }
 
 .fld-bagatelle-class-image-wetland {
@@ -181,6 +181,18 @@ body {
 
 .fld-bagatelle-class-image-rural {
     background-image: url(../img/Xetthecum/Rural.jpg);
+}
+
+.fld-bagatelle-class-image-road {
+    background-image: url(../img/Xetthecum/Porlier_Pass_Road.jpg);
+}
+
+.fld-bagatelle-class-image-dock {
+    background-image: url(../img/Xetthecum/Dock.jpg);
+}
+
+.fld-bagatelle-class-image-eelgrass-beds {
+    background-image: url(../img/Xetthecum/Eelgrass.jpg);
 }
 
 

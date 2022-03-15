@@ -50,3 +50,6 @@ Species_media: From https://docs.google.com/spreadsheets/d/1Cd08WfCf7-wAk_OpkgDg
 Sensitive Ecosystems: From https://docs.google.com/spreadsheets/d/1NhAluTzHCgybddexacFDygkOnV72VVPLFGaOjpCQqys/edit#gid=0
 
 Hul'qumi'num_Landscape: From https://docs.google.com/spreadsheets/d/1I80sGKPn1eu3x0mHr5fmLDoDE-VBt0MHpaDY6defGew/edit#gid=0
+
+Community/Class images: From https://drive.google.com/drive/folders/1B51_hHiMmXCiIsfMt5YH1EA01OP8DMNI "Images"
+Linkages in https://docs.google.com/spreadsheets/d/1ZxWVokPunoXQ8b7go67uezJpB0FyrYzUdJ1znD-d7XU/edit#gid=0 "Labels"

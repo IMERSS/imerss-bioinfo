@@ -79,6 +79,7 @@
             "community": "Marine"
         },
         "Eelgrass Beds": {
+            "hasImage": true,
             "fillColor": [
                 77,
                 175,
@@ -87,6 +88,7 @@
             "community": "Marine"
         },
         "Dock": {
+            "hasImage": true,
             "fillColor": [
                 127,
                 127,
@@ -290,6 +292,7 @@
             "community": "Anthropogenic"
         },
         "Road": {
+            "hasImage": true,
             "fillColor": [
                 127,
                 127,
