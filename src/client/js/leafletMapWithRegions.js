@@ -211,7 +211,7 @@ hortis.leafletMap.renderMapOuterPanel = function (map) {
     if (community.culturalValues) {
         var cultureBlock =
             hortis.convertTaxonLinks(hortis.textToMarkup(community.culturalValues)) +
-            "<div class=\"fld-bagatelle-map-class-se-col\">Sources:</div>" +
+            "<br/><br/><div class=\"fld-bagatelle-map-class-se-col\">Sources:</div>" +
             hortis.textToMarkup(community.culturalValuesSources);
         var allCultureBlock = fluid.stringTemplate(hortis.leafletMap.outerPanelBlock, {
             blockName: "Cultural Values",
