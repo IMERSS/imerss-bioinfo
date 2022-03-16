@@ -41,7 +41,8 @@ fluid.defaults("hortis.leafletMap.withRegions", {
         "buildMap.drawLegend": "hortis.legendKey.drawLegend({that})",
         "clearMapSelection.regions": "hortis.clearSelectedRegions({that})",
         //                                                                          class,       community
-        "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)"
+        "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)",
+        "onCreate.listenTaxonLinks": "hortis.listenTaxonLinks({sunburst})"
     },
     events: {
         selectRegion: null
@@ -151,11 +152,39 @@ hortis.leafletMap.outerPanelPhoto = "<div class=\"fl-bagatelle-photo %photoClass
 hortis.leafletMap.outerPanelCommunity = "<div class=\"fld-bagatelle-map-community\">Community:<br/>%community%hulqBlock</div>";
 hortis.leafletMap.outerPanelClass = "<div class=\"fld-bagatelle-map-class\">%clazz%hulqBlock</div>";
 
+hortis.leafletMap.outerPanelBlock =
+    "<div class=\"fld-bagatelle-map-panel-block fld-taxonDisplay-expandable-header fl-taxonDisplay-runon-header\">%blockName" + hortis.expandButtonMarkup + "</div>" +
+    "<div class=\"fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder\">%block</div>";
+
 
 hortis.leafletMap.renderHulqName = function (row) {
     return fluid.stringTemplate(hortis.leafletMap.hulqNameTemplate, {
         hulqName: row.hulqName,
-        label: "Meaning: " + row.hulqMeaning + " Source: " + row.hulqSource
+        label: "Meaning: " + hortis.encodeHTML(row.hulqMeaning) + " Source: " + hortis.encodeHTML(row.hulqSource)
+    });
+};
+
+hortis.textToMarkup = function (text) {
+    return hortis.encodeHTML(text).replace(/\n/g, "<br/>");
+};
+
+hortis.convertTaxonLinks = function (text) {
+    return text.replace(/\[([^\[]+)\]\(([^\)]*)\)/gm, function (match, p1, p2) {
+        return "<a class=\"fld-bagatelle-taxon-link\" href=\"" + p2 + "\">" + p1 + "</a>";
+    });
+};
+
+hortis.listenTaxonLinks = function (sunburst) {
+    $(document).on("click", ".fld-bagatelle-taxon-link", function (e) {
+        var target = e.target.getAttribute("href");
+        e.preventDefault();
+        console.log("Got click target ", target);
+        if (target.startsWith("#taxon:")) {
+            var targetTaxon = target.substring("#taxon:".length);
+            sunburst.autocomplete.query(targetTaxon, function (rows) {
+                hortis.confirmAutocomplete(sunburst, rows[0]);
+            });
+        }
     });
 };
 
@@ -179,12 +208,28 @@ hortis.leafletMap.renderMapOuterPanel = function (map) {
         hulqBlock: clazz.hulqName ? hortis.leafletMap.renderHulqName(clazz) : ""
     });
     var bottomPanel = "";
-    if (clazz["sE-Tagline"]) {
-        bottomPanel += "<div class=\"fld-bagatelle-map-class-tagline\">" + clazz["sE-Tagline"] + "</div>";
-        hortis.leafletMap.seColumns.forEach(function (col) {
-            bottomPanel += "<div class=\"fld-bagatelle-map-class-se-col\">" + col + ": </div>";
-            bottomPanel += "<div class=\"fld-bagatelle-map-class-se-val\">" + clazz["sE-" + col] + "</div>";
+    if (community.culturalValues) {
+        var cultureBlock =
+            hortis.convertTaxonLinks(hortis.textToMarkup(community.culturalValues)) +
+            "<div class=\"fld-bagatelle-map-class-se-col\">Sources:</div>" +
+            hortis.textToMarkup(community.culturalValuesSources);
+        var allCultureBlock = fluid.stringTemplate(hortis.leafletMap.outerPanelBlock, {
+            blockName: "Cultural Values",
+            block: cultureBlock
         });
+        bottomPanel += allCultureBlock;
+    }
+    if (clazz["sE-Tagline"]) {
+        var ecoBlock = "<div class=\"fld-bagatelle-map-class-tagline\">" + clazz["sE-Tagline"] + "</div>";
+        hortis.leafletMap.seColumns.forEach(function (col) {
+            ecoBlock += "<div class=\"fld-bagatelle-map-class-se-col\">" + col + ": </div>";
+            ecoBlock += "<div class=\"fld-bagatelle-map-class-se-val\">" + clazz["sE-" + col] + "</div>";
+        });
+        var allEcoBlock = fluid.stringTemplate(hortis.leafletMap.outerPanelBlock, {
+            blockName: "Ecological Values",
+            block: ecoBlock
+        });
+        bottomPanel += allEcoBlock;
     }
     return topPanel + bottomPanel;
 };

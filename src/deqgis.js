@@ -54,6 +54,19 @@ hortis.applySensitiveEcosystems = function (togo, rows) {
     });
 };
 
+hortis.applyCulturalValues = function (togo, rows) {
+    rows.forEach(function (row) {
+        var communityName = row.COMMUNITIES;
+        if (togo.communities[communityName]) {
+            var community = togo.communities[communityName];
+            community.culturalValues = row["CULTURAL VALUES"];
+            community.culturalValuesSources = row.SOURCES;
+        } else {
+            console.log("Warning: Cultural values column " + communityName + " did not match any from QGIS");
+        }
+    });
+};
+
 var features = [];
 
 hortis.indexCommunities = function (communities) {
@@ -125,6 +138,9 @@ fluid.promise.sequence(promises).then(function () {
 
     if (allRows.sensitiveEcosystems) {
         hortis.applySensitiveEcosystems(togo, allRows.sensitiveEcosystems);
+    }
+    if (allRows.culturalValues) {
+        hortis.applyCulturalValues(togo, allRows.culturalValues);
     }
 
     console.log("Encountered feature hierarchy: ", JSON.stringify(labels, null, 2));

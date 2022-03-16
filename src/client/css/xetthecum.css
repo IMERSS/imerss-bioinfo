@@ -241,6 +241,14 @@ body {
     margin-bottom: 1rem;
 }
 
+.fld-bagatelle-map-panel-block {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: #ccc 2px solid;
+}
 
 .fld-bagatelle-map-class-tagline {
     font-size: 1.5rem;

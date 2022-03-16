@@ -493,7 +493,7 @@ hortis.sourceTable = { // TODO: get this from marmalised.json but the names curr
     "Gal-Salm": "Erickson",
     CHU2010: "Chu and Leys (2010)",
     CHU2012: "Chu and Leys (2020)",
-    Hunterson: "Hunterson Farms BioBlitz 2010"
+    Hunterston: "Hunterston Farms BioBlitz 2010"
 };
 
 hortis.sourceFromId = function (obsId) {

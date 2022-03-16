@@ -5,6 +5,9 @@
     CSVs: {
         sensitiveEcosystems: {
             path: "%bagatelle/data/Xetthecum/Sensitive Ecosystems.csv"
+        },
+        culturalValues: {
+            path: "%bagatelle/data/Xetthecum/Up-Close_Landscapes_Resynthesized_Indigenous_perspectives.csv"
         }
     },
     communities: {
