@@ -193,6 +193,7 @@ fluid.defaults("hortis.treeBuilder", {
     featureFile: "",
     regionField: null, obsIdField: null,
     inputFiles: [],
+    skipRanks: [],
     vizRanks: "@expand:hortis.filterVizRanks({that}.options.skipRanks)",
     members: {
         // Mutable tree to which each file contributes its taxa

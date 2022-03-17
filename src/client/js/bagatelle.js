@@ -516,7 +516,7 @@ hortis.renderObsBound = function (row, prefix, markup) {
         var catalogueNumber = row[prefix + "CatalogueNumber"];
         var value = hortis.renderDate(row[prefix + "Timestamp"]) + (recordedBy ? " by " + recordedBy : "");
 
-        var row1 = hortis.dumpRow(capPrefix + " Reported:", value, markup);
+        var row1 = hortis.dumpRow(capPrefix + (prefix === "since" ? " Observed:" : " Reported:"), value, markup);
 
         var collection = row[prefix + "Collection"];
         var obsIdCollection = hortis.sourceFromId(row[prefix + "ObservationId"]);
@@ -650,6 +650,7 @@ hortis.renderTaxonDisplay = function (row, markup) {
 
         obsPanel += hortis.renderObsBound(row, "first", markup);
         obsPanel += hortis.renderObsBound(row, "last", markup);
+        obsPanel += hortis.renderObsBound(row, "since", markup);
 
         if (row.iNaturalistObsLink) {
             obsPanel += hortis.dumpRow("iNaturalistObsLink", "<a href=\"" + row.iNaturalistObsLink + "\">" + row.iNaturalistObsLink + "</a>", markup);
