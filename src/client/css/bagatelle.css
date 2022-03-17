@@ -106,6 +106,27 @@
     width: 480px; /* 500px for image minus width of margin - obviously rather unacceptable */
 }
 
+/* unindent nested rows a bit */
+.fl-taxonDisplay-row .fl-taxonDisplay-row {
+    margin-left: -0.5rem;
+}
+
+.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder :last-child {
+    margin-bottom: -0.2rem;
+}
+
+.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder :first-child {
+    margin-top: -0.5rem;
+}
+
+.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder.fl-taxonDisplay-row {
+    border-bottom: none;
+}
+
+.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder .fl-taxonDisplay-row .fl-taxonDisplay-key {
+    margin-left: 1rem;
+}
+
 .fl-taxonDisplay-runon-header.fl-taxonDisplay-expanded {
     border-bottom: none;
     padding-bottom: 0px;
@@ -160,7 +181,7 @@
     width: 480px;
 }
 
-.fl-taxonDisplay-runon-remainder .fl-taxonDisplay-key {
+.fl-taxonDisplay-runon-remainder > .fl-taxonDisplay-key {
     padding: 0px;
     margin: 0px;
 }

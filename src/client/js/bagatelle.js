@@ -311,11 +311,16 @@ fluid.defaults("hortis.sunburst", {
             excludeSource: "init",
             func: "{that}.renderLight"
         },
-        selectedId: {
+        selectedId: [{
+            namespace: "updateTaxonDisplay",
             excludeSource: "init",
             funcName: "hortis.updateTaxonDisplay",
             args: ["{that}", "{change}.value"]
-        },
+        }, {
+            namespace: "renderLight",
+            excludeSource: "init",
+            func: "{that}.renderLight"
+        }],
         hoverId: {
             excludeSource: "init",
             funcName: "hortis.updateTooltip",
@@ -511,7 +516,7 @@ hortis.renderObsBound = function (row, prefix, markup) {
         var catalogueNumber = row[prefix + "CatalogueNumber"];
         var value = hortis.renderDate(row[prefix + "Timestamp"]) + (recordedBy ? " by " + recordedBy : "");
 
-        var row1 = hortis.dumpRow(capPrefix + " Reported:", value + hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header");
+        var row1 = hortis.dumpRow(capPrefix + " Reported:", value, markup);
 
         var collection = row[prefix + "Collection"];
         var obsIdCollection = hortis.sourceFromId(row[prefix + "ObservationId"]);
@@ -519,7 +524,7 @@ hortis.renderObsBound = function (row, prefix, markup) {
 
         var source = renderedCollection + (catalogueNumber ? " (" + catalogueNumber + ")" : "");
 
-        var row2 = hortis.dumpRow("Source:", source, markup, "fld-taxonDisplay-expandable-remainder");
+        var row2 = hortis.dumpRow("Source:", source, markup);
         return row1 + row2;
     } else {
         return "";
@@ -621,6 +626,7 @@ hortis.renderTaxonDisplay = function (row, markup) {
         });
         dumpRow("taxonPicDescription", row.taxonPicDescription);
         dumpRow("species", row.childCount);
+        dumpRow("observationCount", row.observationCount);
     } else {
         if (row.iNaturalistTaxonImage && !row.obsPhotoLink) {
             dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage, row.iNaturalistTaxonId);
@@ -640,17 +646,23 @@ hortis.renderTaxonDisplay = function (row, markup) {
         }
 
         dumpRow("wikipediaSummary", row.wikipediaSummary);
+        var obsPanel = "";
 
-        togo += hortis.renderObsBound(row, "first", markup);
-        togo += hortis.renderObsBound(row, "last", markup);
+        obsPanel += hortis.renderObsBound(row, "first", markup);
+        obsPanel += hortis.renderObsBound(row, "last", markup);
 
         if (row.iNaturalistObsLink) {
-            dumpRow("iNaturalistObsLink", "<a href=\"" + row.iNaturalistObsLink + "\">" + row.iNaturalistObsLink + "</a>");
+            obsPanel += hortis.dumpRow("iNaturalistObsLink", "<a href=\"" + row.iNaturalistObsLink + "\">" + row.iNaturalistObsLink + "</a>", markup);
         }
+        obsPanel += hortis.dumpRow("observationCount", row.observationCount, markup);
+        togo += hortis.dumpRow("Observation Data", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header");
+        togo += hortis.dumpRow("", obsPanel, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder");
+
         if (row.obsPhotoLink) {
         // See this nonsense: https://stackoverflow.com/questions/5843035/does-before-not-work-on-img-elements
             dumpImage("Observation photo", row.obsPhotoLink);
         }
+
         /** Axed per AS email 16/10/21
         var iNatId = row.iNaturalistTaxonId;
         if (iNatId) {
@@ -658,7 +670,7 @@ hortis.renderTaxonDisplay = function (row, markup) {
             dumpRow("taxonLink", "<a href=\"" + taxonLink + "\">" + taxonLink + "</a>");
         }*/
     }
-    dumpRow("observationCount", row.observationCount);
+
     togo += markup.taxonDisplayFooter;
     return togo;
 };
@@ -1026,7 +1038,7 @@ hortis.updateRowFocus = function (that, rowFocus, transaction) {
     if (target.leftIndex !== undefined) { // Avoid trying to render before onCreate
         // We signal this to regions - need to avoid mutual action of resetting map and taxa, and we assume that
         // map is the only source of updateRowFocus
-        if (!transaction.fullSources.map) {
+        if (!transaction.fullSources.map || !focusAll) {
             that.events.changeLayoutId.fire(target.id, "rowFocus");
         }
     }
@@ -1058,7 +1070,7 @@ hortis.changeLayoutId = function (that, layoutId, noHistory) {
     }
     var row = that.index[layoutId];
     if (row.children.length === 0) {
-        layoutId = row.parent.id;
+        layoutId = that.model.layoutId;
     }
     if (layoutId !== that.model.layoutId) {
         if (!that.model.layoutId) { // Can't render without some initial valid layout
