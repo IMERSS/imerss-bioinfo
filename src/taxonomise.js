@@ -605,8 +605,8 @@ hortis.settleStructure(dataPromises).then(function (data) {
     if (summarise) {
         hortis.applyPatches(resolved, data.patches);
         resolved.summarisedRows = hortis.doSummarise(resolved.obsRows, true);
-        hortis.applyPatches(resolved, data.summaryPatches);
     }
+    hortis.applyPatches(resolved, data.summaryPatches);
 
     var reintegratedFilename = parsedArgs.dry ? "reintegrated.csv" : fluid.module.resolvePath(fusion.output);
 

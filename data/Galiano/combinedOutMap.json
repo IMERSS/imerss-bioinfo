@@ -29,7 +29,15 @@
         "sinceTimestamp": "First Observed",
         "sinceRecordedBy": "Observer",
         "sinceCollection": "sinceCollection",
-        "documenting": "Documenting"
+        "documenting": "Documenting",
+        "foodValue": "Food Value",
+        "medicinalValue": "Medicinal Value",
+        "spiritualValue": "Spiritual Value",
+        "materialValue": "Material Value",
+        "tradeValue": "Trade Value",
+        "indicatorValue": "Indicator Value",
+        "hulqName": "Hulquminum Name",
+        "hulqAuth": "Hulquminum Authority"
     },
     "counts": {
         "undocumentedCount": {

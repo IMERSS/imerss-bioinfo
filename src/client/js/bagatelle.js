@@ -71,6 +71,7 @@ fluid.defaults("hortis.sunburstLoader", {
                 container: "{sunburstLoader}.container",
                 gradeNames: "{sunburstLoader}.resolveColourStrategy",
                 colourCount: "{sunburstLoader}.options.colourCount",
+                culturalValues: "{sunburstLoader}.options.culturalValues",
                 queryOnStartup: "{sunburstLoader}.options.queryOnStartup",
                 selectOnStartup: "{sunburstLoader}.options.selectOnStartup",
                 members: {
@@ -254,6 +255,7 @@ fluid.defaults("hortis.sunburst", {
     },
     parsedColours: "@expand:hortis.parseColours({that}.options.colours)",
     colourCount: "undocumentedCount",
+    culturalValues: true,
     model: {
         scale: {
             left: 0,
@@ -584,7 +586,7 @@ hortis.idToTaxonLink = function (taxonId) {
     return "https://www.inaturalist.org/taxa/" + taxonId;
 };
 
-hortis.renderTaxonDisplay = function (row, markup) {
+hortis.renderTaxonDisplay = function (row, markup, options) {
     if (!row) {
         return null;
     }
@@ -641,7 +643,7 @@ hortis.renderTaxonDisplay = function (row, markup) {
         }
         dumpRow("commonName", row.commonName);
 
-        if (row.hulqName) { // wot no polymorphism?
+        if (row.hulqName && options.culturalValues) { // wot no polymorphism?
             togo += hortis.dumpHulqValues(row, markup);
         }
 
@@ -694,7 +696,7 @@ hortis.bindRowExpander = function () {
 };
 
 hortis.updateTaxonDisplay = function (that, id) {
-    var content = id ? hortis.renderTaxonDisplay(that.index[id], that.options.markup) : null;
+    var content = id ? hortis.renderTaxonDisplay(that.index[id], that.options.markup, that.options) : null;
     var taxonDisplay = that.locate("taxonDisplay");
     if (content) {
         taxonDisplay.empty();

@@ -49,48 +49,6 @@ body {
 }
 
 
-.fl-bagatelle-cultural-values {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.fl-bagatelle-cultural-value {
-    width: 108px;
-    height: 108px;
-    padding: 0.7rem;
-    background-repeat: no-repeat;
-    background-size: 108px;
-}
-
-.fld-bagatelle-value-food {
-    background-image: url(../img/Xetthecum/food.svg);
-}
-
-.fld-bagatelle-value-medicinal {
-    background-image: url(../img/Xetthecum/medicinal.svg);
-}
-
-.fld-bagatelle-value-spiritual {
-    background-image: url(../img/Xetthecum/spiritual.svg);
-}
-
-.fld-bagatelle-value-material {
-    background-image: url(../img/Xetthecum/material.svg);
-}
-
-.fld-bagatelle-value-trade {
-    background-image: url(../img/Xetthecum/trade.svg);
-}
-
-.fld-bagatelle-value-indicator {
-    background-image: url(../img/Xetthecum/indicator.svg);
-}
-
-.fld-bagatelle-value-missing {
-    background-image: url(../img/Xetthecum/missing-value.svg);
-}
-
-
 .fl-xetthecum-banner {
     background: #EDEFE9;
     margin: 0px;

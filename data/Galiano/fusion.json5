@@ -33,6 +33,14 @@
             colour: "#931362"
         }
     },
+    summaryPatches: {
+        AssignHulqNames: {
+            type: "hortis.pipe.CSVInput",
+            input: "%bagatelle/data/Xetthecum/Culturally_significant_species_synthesized_Thom_2011_Turner_2014_&_Luschim_2021.csv",
+            map: "%bagatelle/data/Xetthecum/Culturally_significant-map.json",
+            processor: "hortis.xetthecum.assignHulqNames"
+        }
+    },
     summarise: false,
     output: "%bagatelle/reintegrated.csv",
     combinedOutMap: "%bagatelle/data/Galiano/combinedOutMap.json"
