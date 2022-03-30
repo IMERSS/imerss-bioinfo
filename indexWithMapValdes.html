@@ -51,6 +51,8 @@
         <script src="src/lib/jquery.binarytransport.js"></script>
 
         <link rel="stylesheet" type="text/css" href="src/client/css/bagatelle.css"/>
+        <link rel="stylesheet" type="text/css" href="src/client/css/xetthecum-shared.css"/>
+        <link rel="stylesheet" type="text/css" href="src/client/css/xetthecum-external.css"/>
 
         <script src="src/client/js/colour.js"></script>
         <script src="src/client/js/renderSVG.js"></script>
@@ -62,17 +64,23 @@
         <script src="src/client/js/tabs.js"></script>
         <script src="src/client/js/checklist.js"></script>
 
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
 
-        <title>Bagatelle: Valdes Island Map View</title>
+        <title>Valdes Island Map View</title>
     </head>
 
     <body>
-        <h2>Bagatelle: Valdes Island Map View</h2>
+        <h2 class="fl-xetthecum-banner">Valdes Island Map View</h2>
         <div class="fl-bagatelle-container">
         </div>
         <script>
             hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
                 mapGrades: ["hortis.streetmapTiles"],
+                markupTemplate: "%resourceBase/html/bagatelle-map-xetthecum.html",
                 renderMarkup: true,
                 mapBounds: hortis.projectBounds.Valdes,
                 phyloMap: "%resourceBase/json/kingdomPhyloMap.json",

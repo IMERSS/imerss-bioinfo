@@ -93,7 +93,6 @@
 }
 
 .fld-bagatelle-taxonDisplay {
-    margin-top: 4.4rem;
     height: calc(800px + 6rem); /* Viz dimens plus tab height */
     border: black solid 2px;
     display: flex;

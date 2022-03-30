@@ -1,0 +1,70 @@
+:root {
+  --bagatelle-map-width: 500px;
+  --bagatelle-eco-colour: #DEE0B0;
+  --bagatelle-map-colour: #DDE8C8; 
+}
+
+body {
+    margin: 0px;
+}
+
+.fl-xetthecum-banner {
+    background: #EDEFE9;
+    margin: 0px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    font-size: 2.5rem;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.fl-bagatelle-container {
+    margin: 1.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.fld-bagatelle-map-holder {
+    background: var(--bagatelle-map-colour);
+}
+
+.fl-bagatelle-map-panel {
+    padding: 1rem 0rem 2rem 2rem;
+}
+
+.fl-bagatelle-map-panel .fld-bagatelle-panel-label {
+    position: unset;
+    padding-bottom: 1.5rem;
+}
+
+.fld-bagatelle-map {
+    height: 450px;
+}
+
+#fli-tab-sunburst, #fli-tab-checklist {
+    background: var(--bagatelle-eco-colour);
+}
+
+#fli-tab-checklist.ui-tabs-panel {
+    padding: 0px;
+}
+
+.fld-bagatelle-taxonDisplay-wrapper {
+    background: var(--bagatelle-eco-colour);
+}
+
+.fld-bagatelle-tabs .ui-state-active.ui-tabs-active a {
+    background: var(--bagatelle-eco-colour);
+}
+
+.fld-bagatelle-tabs .ui-state-active.ui-tabs-tab {
+    background: var(--bagatelle-eco-colour);
+}
+
+.fld-bagatelle-map-outer-panel-wrapper {
+    background: var(--bagatelle-map-colour);
+}
+
+.fld-bagatelle-checklist-holder {
+    padding: 1em 1.4em;
+}

@@ -43,6 +43,12 @@ var buildIndex = {
         src: "src/client/css/xetthecum.css",
         dest: "build/css/xetthecum.css"
     }, {
+        src: "src/client/css/xetthecum-shared.css",
+        dest: "build/css/xetthecum-shared.css"
+    }, {
+        src: "src/client/css/xetthecum-external.css",
+        dest: "build/css/xetthecum-external.css"
+    }, {
         src: "src/client/html/bagatelle.html",
         dest: "build/html/bagatelle.html"
     }, {

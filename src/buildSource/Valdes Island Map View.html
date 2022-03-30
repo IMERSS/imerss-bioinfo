@@ -4,6 +4,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
         <link rel="stylesheet" type="text/css" href="css/bagatelle-all.css" />
+        <link rel="stylesheet" type="text/css" href="css/xetthecum-shared.css" />
+        <link rel="stylesheet" type="text/css" href="css/xetthecum-external.css" />
         <script src="js/jquery.js"></script>
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
         <script src="js/bagatelle-all.js"></script>
@@ -19,12 +21,13 @@
     </head>
 
     <body>
-        <h2>Valdes Island Map View</h2>
+        <h2 class="fl-xetthecum-banner">Valdes Island Map View</h2>
         <div class="fl-bagatelle-container">
         </div>
         <script>
             hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
                 mapGrades: ["hortis.GBIFTiles"],
+                markupTemplate: "%resourceBase/html/bagatelle-map-xetthecum.html",
                 resourceBase: ".",
                 mapBounds: hortis.projectBounds.Valdes,
                 phyloMap: "%resourceBase/json/kingdomPhyloMap.json",

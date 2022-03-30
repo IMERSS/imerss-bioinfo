@@ -1,0 +1,19 @@
+:root {
+  --bagatelle-map-width: 800px;
+}
+
+.fld-bagatelle-panel-label {
+    display: none;
+}
+
+.fl-bagatelle-map-info-panel {
+    display: none;
+}
+
+.fl-bagatelle-left-column {
+    width: 900px;
+}
+
+.flc-bagatelle-svg {
+    margin-left: -80px;
+}
