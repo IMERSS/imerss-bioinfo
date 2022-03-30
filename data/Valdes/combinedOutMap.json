@@ -25,12 +25,22 @@
         "firstCollection": "First Source",
         "firstPlaceName": "First Place Name",
         "firstCatalogueNumber": "First Catalogue Number",
+        "firstObservationId": "First observationId",
         "firstTimestamp": "First Date Reported",
         "lastRecordedBy": "Last Reported By",
         "lastCollection": "Last Source",
         "lastPlaceName": "Last Place Name",
         "lastCatalogueNumber": "Last Catalogue Number",
-        "lastTimestamp": "Last Date Reported"
+        "lastObservationId": "Last observationId",
+        "lastTimestamp": "Last Date Reported",
+        "foodValue": "Food Value",
+        "medicinalValue": "Medicinal Value",
+        "spiritualValue": "Spiritual Value",
+        "materialValue": "Material Value",
+        "tradeValue": "Trade Value",
+        "indicatorValue": "Indicator Value",
+        "hulqName": "Hulquminum Name",
+        "hulqAuth": "Hulquminum Authority"
     },
     "counts": {
         "observationCount": {

@@ -59,6 +59,14 @@
             logRejection: true
         }
 */  },
+    summaryPatches: {
+        AssignHulqNames: {
+            type: "hortis.pipe.CSVInput",
+            input: "%bagatelle/data/Xetthecum/Culturally_significant_species_synthesized_Thom_2011_Turner_2014_&_Luschim_2021.csv",
+            map: "%bagatelle/data/Xetthecum/Culturally_significant-map.json",
+            processor: "hortis.xetthecum.assignHulqNames"
+        }
+    },
     summarise: true,
     applySwaps: true, // TODO: Naturally, should be an actual pipeline element
     output: "%bagatelle/data/Valdes/reintegrated.csv",
