@@ -12,7 +12,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 var hortis = fluid.registerNamespace("hortis");
 
 
-hortis.checklistItem = function (entry, index) {
+hortis.checklistItem = function (entry) {
     var record = entry.row;
     // var focusProp = record.focusCount / record.childCount;
     // var interp = fluid.colour.interpolate(focusProp, hortis.checklist.unfocusedColour, hortis.checklist.focusedColour);
@@ -30,24 +30,25 @@ hortis.checklistItem = function (entry, index) {
     if (record.hulqName) {
         name += " - <p " + styleprop + rowid + " class=\"flc-checklist-hulq-name\"><em>" + record.hulqName + "</em></p>";
     }
-    var subList = hortis.checklistList(entry.children, index);
+    var subList = hortis.checklistList(entry.children);
     var footer = "</li>";
     return header + name + subList + footer;
 };
 
-hortis.checklistList = function (entries, index) {
+hortis.checklistList = function (entries) {
     return entries.length ?
         "<ul>" + entries.map(function (entry) {
-            return hortis.checklistItem(entry, index);
+            return hortis.checklistItem(entry);
         }).join("") + "</ul>" : "";
 };
 
-hortis.filterChecklist = function (rows, index) {
-    var togo = fluid.transform(rows, function (row) {
-        if (row.focusCount > 0) {
+// Accepts entries and returns entries
+hortis.filterFocused = function (entries) {
+    var togo = fluid.transform(entries, function (entry) {
+        if (entry.row.focusCount > 0) {
             return {
-                row: row,
-                children: hortis.filterChecklist(row.children, index)
+                row: entry.row,
+                children: hortis.filterFocused(entry.children)
             };
         } else {
             return fluid.NO_VALUE;
@@ -56,16 +57,35 @@ hortis.filterChecklist = function (rows, index) {
     return togo;
 };
 
-hortis.generateChecklist = function (element, rootId, index) {
+// Accepts a rows structure and returns "entries"
+hortis.filterRanks = function (rows, filterRanks) {
+    var togo = [];
+    fluid.each(rows, function (row) {
+        if (!filterRanks || filterRanks.includes(row.rank) || row.species) {
+            togo.push({
+                row: row,
+                children: hortis.filterRanks(row.children, filterRanks)
+            });
+        } else {
+            var dChildren = hortis.filterRanks(row.children, filterRanks);
+            Array.prototype.push.apply(togo, dChildren);
+        }
+    });
+    return togo;
+};
+
+hortis.generateChecklist = function (element, rootId, index, filterRanks) {
     console.log("Generating checklist for id " + rootId);
     var rootChildren = rootId ? [index[rootId]] : [];
-    var filtered = hortis.filterChecklist(rootChildren);
-    var markup = hortis.checklistList(filtered, index);
+    var filteredRanks = hortis.filterRanks(rootChildren, filterRanks);
+    var filteredFocus = hortis.filterFocused(filteredRanks);
+    var markup = hortis.checklistList(filteredFocus, index);
     element[0].innerHTML = markup;
 };
 
 fluid.defaults("hortis.checklist", {
     gradeNames: ["hortis.withPanelLabel", "fluid.viewComponent"],
+    filterRanks: false,
     selectors: {
         hoverable: "p",
         checklist: ".fld-bagatelle-checklist",
@@ -74,7 +94,8 @@ fluid.defaults("hortis.checklist", {
     invokers: {
         generateChecklist: {
             funcName: "hortis.generateChecklist",
-            args: ["{that}.dom.checklist", "{layoutHolder}.model.layoutId", "{layoutHolder}.index"]
+            args: ["{that}.dom.checklist", "{layoutHolder}.model.layoutId",
+                "{layoutHolder}.index", "{that}.options.filterRanks"]
         }
     },
     modelListeners: {

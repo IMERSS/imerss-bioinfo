@@ -394,7 +394,7 @@
     color: #444;
 }
 
-.fld-bagatelle-checklist-holder {
+.fl-bagatelle-checklist-holder {
     overflow-y: scroll;
 }
 
@@ -414,6 +414,14 @@
 .fld-bagatelle-checklist ul {
     margin-block-start: 0px;
     list-style-type: none;
+}
+
+.fl-bagatelle-checklist-no-indent ul {
+    padding-inline-start: 0px;
+}
+
+.fl-bagatelle-checklist-no-indent .flc-checklist-rank-species {
+    padding-left: 40px;
 }
 
 .fld-bagatelle-checklist > ul {

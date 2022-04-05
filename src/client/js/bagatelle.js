@@ -187,6 +187,7 @@ fluid.defaults("hortis.sunburst", {
         taxonDisplay: ".fld-bagatelle-taxonDisplay",
         autocomplete: ".fld-bagatelle-autocomplete",
         checklist: ".fld-bagatelle-checklist-holder",
+        simpleChecklist: ".fld-bagatelle-simple-checklist-holder",
         segment: ".fld-bagatelle-segment",
         label: ".fld-bagatelle-label",
         phyloPic: ".fld-bagatelle-phyloPic"
@@ -234,6 +235,13 @@ fluid.defaults("hortis.sunburst", {
             type: "hortis.checklist",
             options: {
                 container: "{sunburst}.dom.checklist"
+            }
+        },
+        simpleChecklist: {
+            type: "hortis.checklist",
+            options: {
+                container: "{sunburst}.dom.simpleChecklist",
+                filterRanks: ["phylum", "class", "order", "species"]
             }
         }
     },
@@ -499,7 +507,7 @@ hortis.sourceTable = { // TODO: get this from marmalised.json but the names curr
     BCCSN: "British Columbia Cetacean Sightings Network",
     "Gal-Salm": "Erickson",
     CHU2010: "Chu and Leys (2010)",
-    CHU2012: "Chu and Leys (2020)",
+    CHU2012: "Chu and Leys (2012)",
     Hunterston: "Hunterston Farms BioBlitz 2010"
 };
 

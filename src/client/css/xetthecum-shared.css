@@ -54,11 +54,11 @@ body {
     border: none;
 }
 
-#fli-tab-sunburst, #fli-tab-checklist {
+#fli-tab-sunburst, #fli-tab-checklist, #fli-tab-simple-checklist {
     background: var(--bagatelle-eco-colour);
 }
 
-#fli-tab-checklist.ui-tabs-panel {
+#fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
     padding: 0px;
 }
 
@@ -78,6 +78,6 @@ body {
     background: var(--bagatelle-map-colour);
 }
 
-.fld-bagatelle-checklist-holder {
+.fl-bagatelle-checklist-holder {
     padding: 1em 1.4em;
 }

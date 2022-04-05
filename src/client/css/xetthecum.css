@@ -312,7 +312,7 @@ body {
     background: white;
 }
 
-#fli-tab-sunburst, #fli-tab-checklist {
+#fli-tab-sunburst, #fli-tab-checklist, #fli-tab-simple-checklist {
     background: var(--bagatelle-eco-colour);
 }
 
@@ -326,7 +326,7 @@ body {
 
 /* We've inserted the "spacer" between the real panel and the contents so it can scroll independently of the
  * autocomplete */
-#fli-tab-checklist.ui-tabs-panel {
+#fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
     padding: 0px;
 }
 
@@ -347,7 +347,7 @@ body {
     width: 1031px;
 }
 
-.fld-bagatelle-checklist-holder {
+.fl-bagatelle-checklist-holder {
     padding: 1em 1.4em;
 }
 
