@@ -41,6 +41,19 @@ body {
     height: 450px;
 }
 
+.ui-widget-header { /* Override theme to avoid clutter in tab top */
+    background: none;
+    border: none;
+}
+
+.ui-widget-content {
+    border: none;
+}
+
+.ui-widget.ui-widget-content {
+    border: none;
+}
+
 #fli-tab-sunburst, #fli-tab-checklist {
     background: var(--bagatelle-eco-colour);
 }

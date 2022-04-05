@@ -627,14 +627,14 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
             dumpRow(field, row[field]);
         });
         dumpRow("taxonPicDescription", row.taxonPicDescription);
-        dumpRow("species", row.childCount);
+        dumpRow("Species:", row.childCount);
         dumpRow("observationCount", row.observationCount);
     } else {
         if (row.iNaturalistTaxonImage && !row.obsPhotoLink) {
             dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage, row.iNaturalistTaxonId);
         }
         if (row.species) {
-            dumpRow("species", row.species + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank");
+            dumpRow("Species:", row.species + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank");
         } else {
             dumpRow("iNaturalistTaxonName", row.iNaturalistTaxonName);
         }
