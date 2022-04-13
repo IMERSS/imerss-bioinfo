@@ -13,7 +13,6 @@ var buildIndex = {
     ],
     localSource: [
         "src/client/css/bagatelle.css",
-        "src/client/css/bagatelle-wp-overrides.css",
         "src/auxBuild/restoreJQuery.js",
         "src/lib/lz4.js",
         "src/client/js/bagatelle.js",
@@ -39,6 +38,9 @@ var buildIndex = {
     }, {
         src: "src/client/json",
         dest: "build/json"
+    }, {
+        src: "src/client/css/bagatelle-wp-overrides.css",
+        dest: "build/css/bagatelle-wp-overrides.css"
     }, {
         src: "src/client/css/xetthecum.css",
         dest: "build/css/xetthecum.css"

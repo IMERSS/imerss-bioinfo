@@ -143,7 +143,7 @@ hortis.leafletMap.fitBounds = function (map, fitBounds) {
 };
 
 hortis.leafletMap.createTooltip = function (that, markup) {
-    var tooltip = $(markup.tooltip).appendTo(that.container);
+    var tooltip = $(markup.tooltip).appendTo(that.locate("map"));
     tooltip.hide();
     that.map.createPane("hortis-tooltip", tooltip[0]);
     var container = that.map.getContainer();

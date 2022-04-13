@@ -41,6 +41,7 @@
     align-items: center;
 }
 
-.fl-bagatelle-obs-count-column, .fl-bagatelle-taxa-count-column {
+tr:first-child .fl-bagatelle-obs-count-column, 
+tr:first-child .fl-bagatelle-taxa-count-column {
     font-size: smaller;
 }

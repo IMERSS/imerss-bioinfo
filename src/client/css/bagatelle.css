@@ -318,8 +318,8 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    width: 20rem;
-    font-size: 0.9rem;
+    width: 12rem;
+    font-size: small;
     background-color: white;
     border: 1px solid black;
 }

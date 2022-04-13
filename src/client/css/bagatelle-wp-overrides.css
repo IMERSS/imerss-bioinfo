@@ -35,3 +35,7 @@ table {
 .fl-bagatelle-container .fld-bagatelle-checklist ul {
     padding-bottom: 0px;
 }
+
+.fld-bagatelle-taxonDisplay {
+    background: white;
+}
