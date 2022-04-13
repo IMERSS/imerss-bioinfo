@@ -7,9 +7,13 @@ var hortis = fluid.registerNamespace("hortis");
 fluid.defaults("hortis.leafletMap.withGrid", {
     selectors: {
         grid: ".fld-bagatelle-map-grid",
-        datasetControls: ".fld-bagatelle-dataset-controls"
+        datasetControls: ".fld-bagatelle-dataset-controls",
+        datasetsLabel: ".fld-bagatelle-datasets-label"
     },
     baseZoomForOutline: 11.9,
+    model: {
+        datasetsLabel: "Data Sources:"
+    },
     modelListeners: {
         drawGrid: {
             path: ["indexVersion", "datasetEnabled"],
@@ -53,6 +57,10 @@ fluid.defaults("hortis.leafletMap.withGrid", {
             target: "datasetControls",
             func: "hortis.renderDatasetControls",
             args: ["{that}.model.datasetEnabled", "{that}.quantiser.model.squareSide", "{that}.options.datasets", "{that}.quantiser", "{that}.model.indexVersion"]
+        },
+        datasetsLabel: {
+            source: "datasetsLabel",
+            target: "dom.datasetsLabel.text"
         }
     },
     components: {

@@ -1,5 +1,5 @@
 :root {
-  --bagatelle-map-width: 1024px;
+  --bagatelle-map-width: 800px;
 }
 
 .fl-bagatelle-container {
@@ -50,7 +50,7 @@
 }
 
 .fld-bagatelle-map {
-    height: 700px;
+    height: 500px;
     width: var(--bagatelle-map-width);
 }
 
@@ -252,8 +252,11 @@
     background-image: url(../img/Xetthecum/missing-value.svg);
 }
 
-
-
+.fld-bagatelle-datasets-label {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding-left: 2rem;
+}
 
 .fld-bagatelle-dataset-controls {
     display: table;

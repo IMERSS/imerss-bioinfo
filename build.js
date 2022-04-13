@@ -73,8 +73,8 @@ var buildIndex = {
         src: "src/buildSource/Data Paper Part I Visualisation.html",
         dest: "build/Data Paper Part I Visualisation.html"
     }, {
-        src: "src/buildSource/Valdes Island Map View.html",
-        dest: "build/Valdes Island Map View.html"
+        src: "src/buildSource/Valdes Island Biodiversity.html",
+        dest: "build/Valdes Island Biodiversity.html"
     }, {
         src: "src/buildSource/Xetthecum.html",
         dest: "build/Xetthecum.html"

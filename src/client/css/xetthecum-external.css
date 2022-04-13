@@ -1,5 +1,13 @@
+/* This is currently used primarily for Valdes map view which has dataset
+   controls but also Xetthecum-style panels
+ */
+
 :root {
-  --bagatelle-map-width: 800px;
+  --bagatelle-map-width: 500px;
+}
+
+.fld-bagatelle-map {
+    height: 350px;
 }
 
 .fld-bagatelle-panel-label {
@@ -26,4 +34,13 @@
 .fld-bagatelle-taxonDisplay-wrapper {
     position: sticky;
     top: 0;
+}
+
+.fl-bagatelle-map-panel {
+    display: flex;
+    align-items: center;
+}
+
+.fl-bagatelle-obs-count-column, .fl-bagatelle-taxa-count-column {
+    font-size: smaller;
 }

@@ -154,7 +154,7 @@ fluid.defaults("hortis.datasetControlFooter", {
         area: ".fl-bagatelle-dataset-area"
     },
     markup: {
-        container: "<tr><td></td><td></td><td class=\"fl-bagatelle-dataset-text\"></td><td class=\"fl-bagatelle-dataset-obs\"></td><td class=\"fl-bagatelle-dataset-taxa\"></td><td class=\"fl-bagatelle-dataset-area\"></td></tr>"
+        container: "<tr><td></td><td></td><td class=\"fl-bagatelle-dataset-text\"></td><td class=\"fl-bagatelle-dataset-obs\"></td><td class=\"fl-bagatelle-dataset-taxa\"></td></tr>"
     },
     modelRelay: {
         text: {
@@ -168,28 +168,28 @@ fluid.defaults("hortis.datasetControlFooter", {
         taxaCount: {
             source: "datasetControl.taxaCount",
             target: "dom.taxaCount.text"
-        },
+        }/*,
         area: {
             source: "datasetControl.area",
             target: "dom.area.text"
-        }
+        }*/
     }
 });
 
 
 hortis.datasetControl.columnNames = {
     totalCount: {
-        name: "Obs count",
+        name: "Observations",
         clazz: "fl-bagatelle-obs-count-column"
     },
     taxaCount: {
-        name: "Richness",
+        name: "Taxa",
         clazz: "fl-bagatelle-taxa-count-column"
-    },
+    }/*,
     area: {
         name: "Area (km²)",
         clazz: "fl-bagatelle-area-column"
-    }
+    }*/
 };
 
 hortis.datasetControl.renderExtraColumns = function (markup, isHeader, dataset, quantiserDataset) {
