@@ -58,10 +58,6 @@ body {
     background: var(--bagatelle-eco-colour);
 }
 
-#fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
-    padding: 0px;
-}
-
 .fld-bagatelle-taxonDisplay-wrapper {
     background: var(--bagatelle-eco-colour);
 }
@@ -76,8 +72,4 @@ body {
 
 .fld-bagatelle-map-outer-panel-wrapper {
     background: var(--bagatelle-map-colour);
-}
-
-.fl-bagatelle-checklist-holder {
-    padding: 1em 1.4em;
 }

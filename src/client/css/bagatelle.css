@@ -388,6 +388,10 @@
     max-height: 600px;
 }
 
+#fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
+    padding: 0px;
+}
+
 .fld-bagatelle-tabs .ui-state-active.ui-tabs-tab {
     background: #fff;
 }
@@ -399,6 +403,7 @@
 
 .fl-bagatelle-checklist-holder {
     overflow-y: scroll;
+    padding: 1em 1.4em;
 }
 
 #fli-tab-sunburst {
