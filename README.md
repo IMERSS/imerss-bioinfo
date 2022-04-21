@@ -17,7 +17,7 @@ reconciled checklists derived from this data is at [/data/dataPaper-I/reintegrat
 The corresponding checklists derived from the curated summaries is at [/data/dataPaper-I-in/reintegrated.csv](/data/dataPaper-I-in/reintegrated.csv).
 
 Full intructions for running the data paper part I pipeline are held in
-[Galiano Data Paper Vol I.md](Galiano Data Paper Vol I.md), but here follows an overview of the scripts and overall
+[Galiano Data Paper Vol I.md](Galiano%20Data%20Paper%20Vol%20I.md), but here follows an overview of the scripts and overall
 installation instructions.
 
 # Data Pipeline

@@ -379,7 +379,7 @@ fluid.defaults("hortis.sunburst", {
             args: ["{that}"]
         },
         // Naturally in "future Infusion" this would be a single chain event with beginZoom as the last listener
-        //                                                            layoutId,      noHistory
+        //                                                            layoutId,      source
         "changeLayoutId.updateModel": "hortis.changeLayoutId({that}, {arguments}.0, {arguments}.1)"
     },
     members: {
@@ -521,7 +521,7 @@ hortis.sourceFromId = function (obsId) {
 hortis.renderObsBound = function (row, prefix, markup) {
     var date = row[prefix + "Timestamp"];
     if (date) {
-        var capPrefix = hortis.capitalize(prefix);
+        var capPrefix = prefix === "since" ? "" : hortis.capitalize(prefix);
         var recordedBy = row[prefix + "RecordedBy"];
         var catalogueNumber = row[prefix + "CatalogueNumber"];
         var value = hortis.renderDate(row[prefix + "Timestamp"]) + (recordedBy ? " by " + recordedBy : "");
@@ -1072,9 +1072,10 @@ hortis.backTaxon = function (that) {
     }
 };
 
-hortis.changeLayoutId = function (that, layoutId, noHistory) {
+hortis.changeLayoutId = function (that, layoutId, source) {
     console.log("changeLayoutId to layoutId ", layoutId);
     that.applier.change("selectedId", layoutId);
+    var noHistory = !!source;
     if (!noHistory) {
         that.taxonHistory[that.model.historyIndex] = layoutId;
         that.applier.change("historyIndex", that.model.historyIndex + 1);
@@ -1083,7 +1084,7 @@ hortis.changeLayoutId = function (that, layoutId, noHistory) {
     if (row.children.length === 0) {
         layoutId = that.model.layoutId;
     }
-    if (layoutId !== that.model.layoutId) {
+    if (layoutId !== that.model.layoutId || source) {
         if (!that.model.layoutId) { // Can't render without some initial valid layout
             that.applier.change("layoutId", layoutId);
         } else {

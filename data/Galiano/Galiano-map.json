@@ -9,6 +9,7 @@
         "firstTimestamp": "%Collected/Reported (y-m-d)",
         "firstRecordedBy": "%Collector/Source",
         "firstCollection": "%Collection/List",
+        "firstCatalogueNumber": "%Accession Number",
         "sinceTimestamp": "%First Documented",
         "sinceRecordedBy": "%Documenter",
         "sinceCollection": "iNat",

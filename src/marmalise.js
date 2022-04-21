@@ -119,6 +119,11 @@ hortis.loadCachedTaxonDoc = function (treeBuilder, id) {
     if (!existing) {
         existing = treeBuilder.taxonCache[id] = hortis.iNat.loadTaxonDoc(treeBuilder.options.taxonAPIFileBase, id);
     }
+    // This otherwise causes rank to be "undefined" in the interface - AS report 18/4/22
+    // Not sure what to do about this long-term
+    if (existing.rank === "complex") {
+        existing.rank = "species";
+    }
     return existing;
 };
 

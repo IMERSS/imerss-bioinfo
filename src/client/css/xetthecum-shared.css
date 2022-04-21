@@ -41,6 +41,11 @@ body {
     height: 450px;
 }
 
+.fld-bagatelle-taxonDisplay {
+    margin-top: 0px;
+    width: auto;
+}
+
 .ui-widget-header { /* Override theme to avoid clutter in tab top */
     background: none;
     border: none;

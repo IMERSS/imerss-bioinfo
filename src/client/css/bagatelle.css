@@ -94,15 +94,22 @@
 
 .fld-bagatelle-taxonDisplay {
     height: calc(800px + 6rem); /* Viz dimens plus tab height */
+    width: 480px;
     border: black solid 2px;
     display: flex;
     overflow-y: scroll;
+    min-width: 320px;
+}
+
+.fld-bagatelle-taxonDisplay > div {
+    width: 100%
 }
 
 .fl-taxonDisplay-row {
     padding: 10px 8px 6px 8px;
     border-bottom: #ccc 2px solid;
-    width: 480px; /* 500px for image minus width of margin - obviously rather unacceptable */
+    width: auto;
+    min-width: 320px;
 }
 
 /* unindent nested rows a bit */
@@ -172,12 +179,10 @@
 .fld-taxonDisplay-expandable-remainder {
     display: none;
     padding-left: 20px;
-    width: 468px; /* Todo all these calculations relative to width */
 }
 
 .fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder {
     padding-left: 8px; /* Back to value in fl-taxonDisplay-row */
-    width: 480px;
 }
 
 .fl-taxonDisplay-runon-remainder > .fl-taxonDisplay-key {
@@ -350,7 +355,8 @@
 }
 
 .fl-bagatelle-photo {
-    width: 500px;
+    width: auto;
+    min-width: 320px;
     height: 400px;
     background-size: cover; 
     background-position: center center; 
@@ -360,6 +366,7 @@
 .fl-bagatelle-tooltip .fl-bagatelle-photo {
     width: 250px;
     height: 200px;
+    min-width: auto;
 }
 
 .fl-bagatelle-tooltip div.fl-text {

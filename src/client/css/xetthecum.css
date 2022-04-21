@@ -392,22 +392,25 @@ body {
     display: inline-block
 }
 
-
 .fl-bagatelle-right-column {
-    width: calc(480px + 6rem);
+    width: 544px;
 }
 
+/*
 .fl-bagatelle-photo {
     width: calc(448px + 6rem);
 }
+*/
 
 .fld-bagatelle-map-outer-panel .fl-bagatelle-photo {
-    width: calc(441px + 6rem);
+    margin-left: -1rem;
+    margin-right: -1rem;
     margin-bottom: 1rem;
 }
 
 .fld-bagatelle-taxonDisplay-wrapper {
     background: var(--bagatelle-eco-colour);
+    width: 500px;
 }
 
 .fld-bagatelle-tabs .ui-state-active.ui-tabs-active a {
@@ -420,6 +423,7 @@ body {
 
 .fld-bagatelle-map-outer-panel-wrapper {
     background: var(--bagatelle-map-colour);
+    width: 500px;
 }
 
 .ui-widget-header { /* Override theme to avoid clutter in tab top */
@@ -473,6 +477,7 @@ body {
 
 .fld-bagatelle-taxonDisplay {
     margin-top: 0px;
+    width: auto;
 }
 /*
 on .ui-tabs .ui-tabs-nav li.ui-tabs-active
