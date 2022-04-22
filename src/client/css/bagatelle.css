@@ -10,6 +10,7 @@
 .fl-bagatelle-map-and-taxa {
     display: flex;
     flex-direction: column;
+    margin-right: 0.75rem;
 }
 
 .fl-bagatelle-tabs-and-search {
@@ -183,6 +184,7 @@
 
 .fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder {
     padding-left: 8px; /* Back to value in fl-taxonDisplay-row */
+    padding-right: 0px; /* Avoid right gap */
 }
 
 .fl-taxonDisplay-runon-remainder > .fl-taxonDisplay-key {
@@ -267,6 +269,10 @@
     display: table;
     padding: 2px;
     font-size: 0.9rem;
+}
+
+.fl-bagatelle-dataset-taxa {
+    min-width: 2rem;
 }
 
 .fld-bagatelle-dataset-controls td {
