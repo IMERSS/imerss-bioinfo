@@ -39,6 +39,9 @@ var buildIndex = {
         src: "src/client/json",
         dest: "build/json"
     }, {
+        src: "src/client/html",
+        dest: "build/html"
+    }, {
         src: "src/client/css/bagatelle-wp-overrides.css",
         dest: "build/css/bagatelle-wp-overrides.css"
     }, {
@@ -50,21 +53,6 @@ var buildIndex = {
     }, {
         src: "src/client/css/xetthecum-external.css",
         dest: "build/css/xetthecum-external.css"
-    }, {
-        src: "src/client/html/bagatelle.html",
-        dest: "build/html/bagatelle.html"
-    }, {
-        src: "src/client/html/bagatelle-map.html",
-        dest: "build/html/bagatelle-map.html"
-    }, {
-        src: "src/client/html/bagatelle-map-only.html",
-        dest: "build/html/bagatelle-map-only.html"
-    }, {
-        src: "src/client/html/xetthecum-patterns.html",
-        dest: "build/html/xetthecum-patterns.html"
-    }, {
-        src: "src/client/html/bagatelle-map-xetthecum.html",
-        dest: "build/html/bagatelle-map-xetthecum.html"
     }, {
         src: "src/buildSource/Galiano Life List.html",
         dest: "build/Galiano Life List.html"
@@ -80,6 +68,9 @@ var buildIndex = {
     }, {
         src: "src/buildSource/Xetthecum.html",
         dest: "build/Xetthecum.html"
+    }, {
+        src: "src/buildSource/index.html",
+        dest: "build/index.html"
     }, {
         src: "data/dataPaper-I/Life.json.lz4",
         dest: "build/data/dataPaper-I/Life.json.lz4"

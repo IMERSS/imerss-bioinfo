@@ -1,5 +1,6 @@
 :root {
   --bagatelle-map-width: 800px;
+  --bagatelle-sun-height: 815px;
 }
 
 .fl-bagatelle-container {
@@ -39,6 +40,8 @@
 
 .flc-bagatelle-svg {
     font-size: 40px;
+    max-height: calc(var(--bagatelle-sun-height) + 2rem);
+    margin-top: -1rem;
 }
 
 .fl-bagatelle-left-column {
@@ -56,9 +59,8 @@
 }
 
 .flc-bagatelle-viz-dimens {
-    height: calc(800px + 1rem);
+    height: var(--bagatelle-sun-height);
 }
-
 
 .fl-bagatelle-panel {
     position: relative;

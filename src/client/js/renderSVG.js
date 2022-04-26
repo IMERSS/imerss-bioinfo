@@ -34,7 +34,7 @@ hortis.renderNumber = function (number) {
     if (Math.abs(number) < 1e-5) {
         return "0";
     } else {
-        return number.toFixed(6);
+        return number.toFixed(3);
     }
 };
 

@@ -68,3 +68,14 @@ table {
 .fl-taxonDisplay-expand {
     margin-top: 2px;
 }
+
+/** Bizarre rules for "page" type entries **/
+
+#main-content#main-content .et_pb_row {
+    width: 100%;
+}
+  
+#left-area ul, .entry-content ul {
+    list-style-type: none;
+    padding: 0px;
+}
