@@ -479,6 +479,14 @@ body {
     margin-top: 0px;
     width: auto;
 }
+
+.fl-taxonDisplay-wikipediaSummary {
+    display: block;
+    margin-left: 2.5rem;
+    margin-right: 1rem;
+    width: auto;
+}
+
 /*
 on .ui-tabs .ui-tabs-nav li.ui-tabs-active
 will move it down so that it can overwrite border

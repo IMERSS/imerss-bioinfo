@@ -300,7 +300,7 @@ fluid.defaults("hortis.sunburst", {
         phyloPic: "<image id=\"%phyloPicId\" class=\"%phyloPicClass fl-bagatelle-clickable\" xlink:href=\"%phyloPicUrl\" height=\"%diameter\" width=\"%diameter\" x=\"%phyloPicX\" y=\"%phyloPicY\" />",
         segmentFooter: "</g>",
         taxonDisplayHeader: "<div>",
-        taxonDisplayRow: "<div %rootAttrs><span class=\"fl-taxonDisplay-key\">%key</span><span class=\"fl-taxonDisplay-value\">%value</span></div>",
+        taxonDisplayRow: "<div %rootAttrs><span class=\"fl-taxonDisplay-key\">%key</span><span class=\"fl-taxonDisplay-value %valueClazz\">%value</span></div>",
         taxonDisplayFooter: "</div>"
     },
     events: {
@@ -483,11 +483,17 @@ hortis.taxonDisplayLookup = {
 
 hortis.commonFields = ["commonName", "wikipediaSummary"];
 
-hortis.dumpRow = function (key, value, markup, extraClazz) {
+hortis.dumpRow = function (key, value, markup, extraClazz, valueClazz) {
     if (value) {
         var keyName = key ? (hortis.taxonDisplayLookup[key] || hortis.capitalize(key)) : "";
         var clazz = "fl-taxonDisplay-row " + (extraClazz || "");
-        return fluid.stringTemplate(markup.taxonDisplayRow, {key: keyName, value: value, rootAttrs: "class=\"" + clazz + "\""});
+        valueClazz = valueClazz || "";
+        return fluid.stringTemplate(markup.taxonDisplayRow, {
+            key: keyName, 
+            value: value, 
+            rootAttrs: "class=\"" + clazz + "\"",
+            valueClazz: valueClazz
+        });
     } else {
         return "";
     }
@@ -602,7 +608,7 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
     var dumpRow = function (keyName, value, extraClazz) {
         if (keyName === "wikipediaSummary" && value) {
             var row1 = hortis.dumpRow("Wikipedia Summary", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header fl-taxonDisplay-runon-header");
-            var row2 = hortis.dumpRow("", value, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder");
+            var row2 = hortis.dumpRow("", value, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder", "fl-taxonDisplay-wikipediaSummary");
             togo += row1 + row2;
         } else {
             togo += hortis.dumpRow(keyName, value, markup, extraClazz);
