@@ -1,0 +1,121 @@
+{
+    "id": 1370755,
+    "name": "Sorex navigator",
+    "rank": "species",
+    "source_id": null,
+    "created_at": "2022-03-29T21:52:31.431Z",
+    "updated_at": "2022-03-29T22:03:07.109Z",
+    "iconic_taxon_id": 40151,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 5,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/2/355675/40151/848317/848320/848324/533971/46341/542443/846395/46342",
+    "is_active": true,
+    "taxon_framework_relationship_id": 605316,
+    "uuid": "b9dd557d-6b60-45e9-8211-1b954222ab10",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2934162,
+        "name": "Glacier Bay Water Shrew",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Mammalia",
+    "conservation_status_name": "data_deficient",
+    "common_name": {
+        "id": 2934162,
+        "name": "Glacier Bay Water Shrew",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/mammalia-75px.png",
+    "taxon_range_kml_url": "/attachments/taxon_ranges/50033.kml?1648625872",
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2022-03-29T21:52:31.431Z",
+    "updated_at_utc": "2022-03-29T22:03:07.109Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2934160,
+            "name": "Musaraña acuática de la Bahía Glacier",
+            "is_valid": true,
+            "lexicon": "Spanish",
+            "taxon_id": 1370755,
+            "created_at": "2022-03-29T22:13:09.312Z",
+            "updated_at": "2022-03-29T22:13:09.312Z",
+            "creator_id": null,
+            "position": 1,
+            "parameterized_lexicon": "spanish"
+        },
+        {
+            "id": 2934161,
+            "name": "rejsek aljašský",
+            "is_valid": true,
+            "lexicon": "Czech",
+            "taxon_id": 1370755,
+            "created_at": "2022-03-29T22:13:09.380Z",
+            "updated_at": "2022-03-29T22:13:09.380Z",
+            "creator_id": null,
+            "position": 2,
+            "parameterized_lexicon": "czech"
+        },
+        {
+            "id": 2934069,
+            "name": "Sorex navigator",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1370755,
+            "created_at": "2022-03-29T21:52:31.431Z",
+            "updated_at": "2022-03-29T21:52:31.431Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2934162,
+            "name": "Glacier Bay Water Shrew",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 1370755,
+            "created_at": "2022-03-29T22:13:09.437Z",
+            "updated_at": "2022-03-29T22:13:09.437Z",
+            "creator_id": null,
+            "position": 3,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 2934163,
+            "name": "Sorex alaskanus",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1370755,
+            "created_at": "2022-03-29T22:13:09.498Z",
+            "updated_at": "2022-03-29T22:13:09.498Z",
+            "creator_id": null,
+            "position": 4,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2934164,
+            "name": "alaskanpäästäinen",
+            "is_valid": true,
+            "lexicon": "Finnish",
+            "taxon_id": 1370755,
+            "created_at": "2022-03-29T22:13:09.641Z",
+            "updated_at": "2022-03-29T22:13:09.641Z",
+            "creator_id": null,
+            "position": 5,
+            "parameterized_lexicon": "finnish"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 40151,
+        "name": "Mammalia"
+    }
+}

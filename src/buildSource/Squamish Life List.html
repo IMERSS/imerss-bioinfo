@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="css/bagatelle-all.css" />
+        <script src="js/jquery.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <script src="js/bagatelle-all.js"></script>
+        <script src="data/Galiano/Galiano_map_0.js"></script>
+
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
+
+        <title>Life List | Biodiversity Squamish</title>
+    </head>
+
+    <body>
+        <h2>The Flora and Fauna of Atl'ka7tsem/Howe Sound, British Columbia</h2>
+        <div class="fl-bagatelle-container">
+        </div>
+        <div style="padding: 1rem">
+<strong>Last updated December 2021.</strong>
+Note: this visualization is based on a working species list and may contain some errors and redundancies.
+As a work in progress it is continually subject to review with assistance from various taxonomic authorities.
+Please contact the project curator if you identify any errors.
+</div>
+        <script>
+            hortis.sunburstLoader(".fl-bagatelle-container", {
+                resourceBase: ".",
+                renderMarkup: true,
+                colourCount: "undocumentedCount",
+                culturalValues: false,
+                vizFile: "data/Squamish/Squamish-Life.json.lz4",
+                phyloMap: "%resourceBase/json/emptyPhyloMap.json",
+                commonNames: false
+            });
+        </script>
+    </body>
+</html>

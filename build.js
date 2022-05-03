@@ -57,6 +57,9 @@ var buildIndex = {
         src: "src/buildSource/Galiano Life List.html",
         dest: "build/Galiano Life List.html"
     }, {
+        src: "src/buildSource/Squamish Life List.html",
+        dest: "build/Squamish Life List.html"
+    }, {
         src: "src/buildSource/dataPaperSunburstAndMap.html",
         dest: "build/dataPaperSunburstAndMap.html"
     }, {
@@ -89,6 +92,9 @@ var buildIndex = {
     }, {
         src: "data/Xetthecum/Life.json.lz4",
         dest: "build/data/Xetthecum/Life.json.lz4"
+    }, {
+        src: "data/Squamish/Squamish-Life.json.lz4",
+        dest: "build/data/Squamish/Squamish-Life.json.lz4"
     }]
 };
 

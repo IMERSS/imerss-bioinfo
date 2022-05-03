@@ -1,0 +1,56 @@
+{
+    "id": 230898,
+    "name": "Sigara lineata",
+    "rank": "species",
+    "source_id": 149,
+    "created_at": "2013-03-28T09:47:44.296Z",
+    "updated_at": "2022-03-18T14:55:39.110Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 3,
+    "listed_taxa_count": 8,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47120/372739/47158/184884/47744/61267/116696/84736/84735/461187/366567/211532/1366020",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "8a39a8b7-7d83-4a37-9677-ef977c6a6060",
+    "photos_locked": false,
+    "default_name": {
+        "id": 345423,
+        "name": "Sigara lineata",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2013-03-28T09:47:44.296Z",
+    "updated_at_utc": "2022-03-18T14:55:39.110Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 345423,
+            "name": "Sigara lineata",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 230898,
+            "created_at": "2013-03-28T09:47:44.296Z",
+            "updated_at": "2013-03-28T09:47:44.296Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

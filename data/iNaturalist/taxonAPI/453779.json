@@ -1,0 +1,56 @@
+{
+    "id": 453779,
+    "name": "Anthocoris tomentosus",
+    "rank": "species",
+    "source_id": 8,
+    "created_at": "2015-04-05T21:57:06.024Z",
+    "updated_at": "2015-04-05T21:57:07.284Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 1,
+    "listed_taxa_count": 4,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47120/372739/47158/184884/47744/61267/372850/53668/174592/506041/506046/203222",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "5e314d8b-8453-42e1-bc06-292834117f46",
+    "photos_locked": false,
+    "default_name": {
+        "id": 713329,
+        "name": "Anthocoris tomentosus",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2015-04-05T21:57:06.024Z",
+    "updated_at_utc": "2015-04-05T21:57:07.284Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 713329,
+            "name": "Anthocoris tomentosus",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 453779,
+            "created_at": "2015-04-05T21:57:06.024Z",
+            "updated_at": "2015-04-05T21:57:06.024Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

@@ -1,0 +1,73 @@
+{
+    "id": 78646,
+    "name": "Poa lettermanii",
+    "rank": "species",
+    "source_id": null,
+    "created_at": "2011-05-13T21:44:54.000Z",
+    "updated_at": "2020-08-11T22:27:37.241Z",
+    "iconic_taxon_id": 47126,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 2,
+    "listed_taxa_count": 24,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": "",
+    "ancestry": "48460/47126/211194/47125/47163/47162/47434/514989/552962/1138145/52809",
+    "is_active": true,
+    "taxon_framework_relationship_id": 228893,
+    "uuid": "9f9c74b7-052a-4fcb-9e2e-337f87af9740",
+    "photos_locked": false,
+    "default_name": {
+        "id": 147589,
+        "name": "letterman's blue grass",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Plantae",
+    "conservation_status_name": null,
+    "common_name": {
+        "id": 147589,
+        "name": "letterman's blue grass",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/plantae-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2011-05-13T21:44:54.000Z",
+    "updated_at_utc": "2020-08-11T22:27:37.241Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 147589,
+            "name": "letterman's blue grass",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 78646,
+            "created_at": "2011-05-18T03:20:29.000Z",
+            "updated_at": "2011-05-18T03:20:29.000Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 122477,
+            "name": "Poa lettermanii",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 78646,
+            "created_at": "2011-05-13T21:44:54.000Z",
+            "updated_at": "2011-05-13T21:44:54.000Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47126,
+        "name": "Plantae"
+    }
+}

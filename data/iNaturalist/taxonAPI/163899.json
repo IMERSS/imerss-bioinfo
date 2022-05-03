@@ -1,0 +1,92 @@
+{
+    "id": 163899,
+    "name": "Hygrohypnum styriacum",
+    "rank": "species",
+    "source_id": 149,
+    "created_at": "2012-10-22T21:51:00.950Z",
+    "updated_at": "2019-06-01T01:03:09.196Z",
+    "iconic_taxon_id": 47126,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 3,
+    "listed_taxa_count": 13,
+    "rank_level": 10,
+    "wikipedia_summary": "<i><b>Hygrohypnum styriacum</b></i>, commonly known as <b>snow brook-moss</b> or <b>hygrohypnum moss</b> is a species of moss found in the Northern Hemisphere.",
+    "wikipedia_title": null,
+    "ancestry": "48460/47126/311249/48372/67858/129777/157632",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "be26f5e8-29be-4162-962c-91ffa657de8a",
+    "photos_locked": false,
+    "default_name": {
+        "id": 266074,
+        "name": "Hygrohypnum styriacum",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Plantae",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/plantae-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2012-10-22T21:51:00.950Z",
+    "updated_at_utc": "2019-06-01T01:03:09.196Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 1585392,
+            "name": "broddbekkemose",
+            "is_valid": true,
+            "lexicon": "Norwegian",
+            "taxon_id": 163899,
+            "created_at": "2019-06-01T01:03:09.193Z",
+            "updated_at": "2019-06-01T01:03:09.193Z",
+            "creator_id": 1,
+            "position": 1,
+            "parameterized_lexicon": "norwegian"
+        },
+        {
+            "id": 266074,
+            "name": "Hygrohypnum styriacum",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 163899,
+            "created_at": "2012-10-22T21:51:00.950Z",
+            "updated_at": "2012-10-22T21:51:00.950Z",
+            "creator_id": 477,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2530267,
+            "name": "uddbäckmossa",
+            "is_valid": true,
+            "lexicon": "Swedish",
+            "taxon_id": 163899,
+            "created_at": "2021-05-07T23:48:10.873Z",
+            "updated_at": "2021-05-07T23:48:10.873Z",
+            "creator_id": 2566072,
+            "position": 2,
+            "parameterized_lexicon": "swedish"
+        },
+        {
+            "id": 2690944,
+            "name": "moczarnik styryjski",
+            "is_valid": true,
+            "lexicon": "Polish",
+            "taxon_id": 163899,
+            "created_at": "2021-09-24T13:01:43.357Z",
+            "updated_at": "2021-09-24T13:01:43.357Z",
+            "creator_id": 4210390,
+            "position": 3,
+            "parameterized_lexicon": "polish"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47126,
+        "name": "Plantae"
+    }
+}

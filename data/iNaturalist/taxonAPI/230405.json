@@ -1,0 +1,68 @@
+{
+    "id": 230405,
+    "name": "Saprinus oregonensis",
+    "rank": "species",
+    "source_id": 149,
+    "created_at": "2013-03-28T09:38:26.146Z",
+    "updated_at": "2015-05-20T16:00:51.350Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 10,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47120/372739/47158/184884/47208/71130/372870/68870/68869/450972/211670",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "4121b247-c0df-4a21-83cf-9b254bc6759d",
+    "photos_locked": false,
+    "default_name": {
+        "id": 344930,
+        "name": "Saprinus oregonensis",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2013-03-28T09:38:26.146Z",
+    "updated_at_utc": "2015-05-20T16:00:51.350Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 493712,
+            "name": "Escarabajo payaso",
+            "is_valid": true,
+            "lexicon": "Spanish",
+            "taxon_id": 230405,
+            "created_at": "2013-06-20T01:41:25.964Z",
+            "updated_at": "2013-06-20T01:41:25.964Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "spanish"
+        },
+        {
+            "id": 344930,
+            "name": "Saprinus oregonensis",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 230405,
+            "created_at": "2013-03-28T09:38:26.146Z",
+            "updated_at": "2013-03-28T09:38:26.146Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

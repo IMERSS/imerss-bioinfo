@@ -1,0 +1,73 @@
+{
+    "id": 1330128,
+    "name": "Apamea sordens",
+    "rank": "complex",
+    "source_id": null,
+    "created_at": "2021-12-11T15:05:26.666Z",
+    "updated_at": "2021-12-11T15:06:06.373Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 399,
+    "listed_taxa_count": 0,
+    "rank_level": 11,
+    "wikipedia_summary": "<i><b>Apamea sordens</b></i>, the <b>rustic shoulder-knot</b> or <b>bordered apamea</b>, is a moth of the family Noctuidae. The species was first described by Johann Siegfried Hufnagel in 1766. It is distributed throughout Europe, east across the Palearctic to Central Asia and to China and Japan. It also occurs in North America (Labrador to Virginia, west across Canada, south to Minnesota).",
+    "wikipedia_title": "",
+    "ancestry": "48460/1/47120/372739/47158/184884/47157/47607/48670/122224/122727/81987/1330111",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "3f56683e-2b30-43aa-8dcf-c0f91d73cc16",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2827568,
+        "name": "Bordered Apamea Moth and Close Allies",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": {
+        "id": 2827568,
+        "name": "Bordered Apamea Moth and Close Allies",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2021-12-11T15:05:26.666Z",
+    "updated_at_utc": "2021-12-11T15:06:06.373Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2827566,
+            "name": "Apamea sordens",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1330128,
+            "created_at": "2021-12-11T15:05:26.666Z",
+            "updated_at": "2021-12-11T15:05:26.666Z",
+            "creator_id": 17932,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2827568,
+            "name": "Bordered Apamea Moth and Close Allies",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 1330128,
+            "created_at": "2021-12-11T15:06:37.909Z",
+            "updated_at": "2021-12-11T15:06:37.909Z",
+            "creator_id": 17932,
+            "position": 1,
+            "parameterized_lexicon": "english"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

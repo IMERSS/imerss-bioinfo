@@ -1,0 +1,68 @@
+{
+    "id": 1122133,
+    "name": "Sciuro-hypnum reflexum reflexum",
+    "rank": "variety",
+    "source_id": null,
+    "created_at": "2020-08-19T11:39:45.299Z",
+    "updated_at": "2020-08-19T11:39:46.782Z",
+    "iconic_taxon_id": 47126,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 3,
+    "rank_level": 5,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/47126/311249/48372/67858/67859/156138/818534",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "ccd45281-682e-4a37-af48-589ff4b3f9e6",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2204837,
+        "name": "Sciuro-hypnum reflexum reflexum",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Plantae",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/plantae-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2020-08-19T11:39:45.299Z",
+    "updated_at_utc": "2020-08-19T11:39:46.782Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2204837,
+            "name": "Sciuro-hypnum reflexum reflexum",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1122133,
+            "created_at": "2020-08-19T11:39:45.299Z",
+            "updated_at": "2020-08-19T11:39:45.299Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2204838,
+            "name": "Brachythecium reflexum reflexum",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1122133,
+            "created_at": "2020-08-19T11:39:46.925Z",
+            "updated_at": "2020-08-19T11:39:46.925Z",
+            "creator_id": null,
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47126,
+        "name": "Plantae"
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "id": 457205,
+    "name": "Xestobium abietis",
+    "rank": "species",
+    "source_id": 8,
+    "created_at": "2015-04-06T08:08:59.892Z",
+    "updated_at": "2015-04-15T17:45:51.528Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 1,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47120/372739/47158/184884/47208/71130/372844/47496/82167/373423/1189233/178618",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "48217597-439e-4181-800f-df6b890dccd4",
+    "photos_locked": false,
+    "default_name": {
+        "id": 719375,
+        "name": "Xestobium abietis",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2015-04-06T08:08:59.892Z",
+    "updated_at_utc": "2015-04-15T17:45:51.528Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 719375,
+            "name": "Xestobium abietis",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 457205,
+            "created_at": "2015-04-06T08:08:59.892Z",
+            "updated_at": "2015-04-06T08:08:59.892Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

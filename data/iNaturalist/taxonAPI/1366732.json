@@ -1,0 +1,56 @@
+{
+    "id": 1366732,
+    "name": "Laccaria laccata",
+    "rank": "complex",
+    "source_id": 9178,
+    "created_at": "2022-03-21T16:23:40.389Z",
+    "updated_at": "2022-03-21T16:23:40.389Z",
+    "iconic_taxon_id": 47170,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 5,
+    "listed_taxa_count": 0,
+    "rank_level": 11,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/47170/47169/492000/50814/1094814/47167/785517/351075/54895",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "555c872d-7805-4f20-a5f0-9c1549ba6fb4",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2922989,
+        "name": "Laccaria laccata",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Fungi",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/fungi-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2022-03-21T16:23:40.389Z",
+    "updated_at_utc": "2022-03-21T16:23:40.389Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2922989,
+            "name": "Laccaria laccata",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1366732,
+            "created_at": "2022-03-21T16:23:40.389Z",
+            "updated_at": "2022-03-21T16:23:40.389Z",
+            "creator_id": 18795,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47170,
+        "name": "Fungi"
+    }
+}

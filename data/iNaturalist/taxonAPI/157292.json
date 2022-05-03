@@ -1,0 +1,68 @@
+{
+    "id": 157292,
+    "name": "Gollania",
+    "rank": "genus",
+    "source_id": 139,
+    "created_at": "2012-10-22T03:16:55.091Z",
+    "updated_at": "2012-10-22T03:16:59.881Z",
+    "iconic_taxon_id": 47126,
+    "is_iconic": false,
+    "name_provider": "ColNameProvider",
+    "observations_count": 0,
+    "listed_taxa_count": 1,
+    "rank_level": 20,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/47126/311249/48372/67858/123496",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "a27a2a30-8261-4876-9137-896e5035ff25",
+    "photos_locked": false,
+    "default_name": {
+        "id": 259393,
+        "name": "Gollania",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Plantae",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/plantae-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2012-10-22T03:16:55.091Z",
+    "updated_at_utc": "2012-10-22T03:16:59.881Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2255104,
+            "name": "사슴뿔이끼속",
+            "is_valid": true,
+            "lexicon": "Korean",
+            "taxon_id": 157292,
+            "created_at": "2020-09-29T22:35:28.250Z",
+            "updated_at": "2020-09-29T22:35:28.250Z",
+            "creator_id": 280,
+            "position": 1,
+            "parameterized_lexicon": "korean"
+        },
+        {
+            "id": 259393,
+            "name": "Gollania",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 157292,
+            "created_at": "2012-10-22T03:16:55.124Z",
+            "updated_at": "2012-10-22T03:16:55.124Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47126,
+        "name": "Plantae"
+    }
+}

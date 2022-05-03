@@ -1,0 +1,56 @@
+{
+    "id": 1105937,
+    "name": "Agapetinae",
+    "rank": "subfamily",
+    "source_id": 12484,
+    "created_at": "2020-07-03T12:49:23.804Z",
+    "updated_at": "2020-07-03T12:50:22.791Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": "EolNameProvider",
+    "observations_count": 32,
+    "listed_taxa_count": 0,
+    "rank_level": 27,
+    "wikipedia_summary": null,
+    "wikipedia_title": "",
+    "ancestry": "48460/1/47120/372739/47158/184884/62164/372842/172830/172831",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "1e830079-cbe4-4f5b-9224-ae3fd9e97a06",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2156728,
+        "name": "Agapetinae",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2020-07-03T12:49:23.804Z",
+    "updated_at_utc": "2020-07-03T12:50:22.791Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2156728,
+            "name": "Agapetinae",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1105937,
+            "created_at": "2020-07-03T12:49:23.815Z",
+            "updated_at": "2020-07-03T12:49:23.815Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

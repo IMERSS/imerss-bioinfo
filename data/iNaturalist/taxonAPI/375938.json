@@ -1,0 +1,56 @@
+{
+    "id": 375938,
+    "name": "Chaetosiphon",
+    "rank": "genus",
+    "source_id": null,
+    "created_at": "2012-06-13T22:45:59.797Z",
+    "updated_at": "2014-10-12T23:20:30.359Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 6,
+    "listed_taxa_count": 5,
+    "rank_level": 20,
+    "wikipedia_summary": "<b>Chaetosiphon</b> may refer to:",
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47120/372739/47158/184884/47744/334037/901813/52380/52381/194066/373734",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "744a58dd-7b37-4c93-845b-0eed63bfdef5",
+    "photos_locked": false,
+    "default_name": {
+        "id": 597253,
+        "name": "Chaetosiphon",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2012-06-13T22:45:59.797Z",
+    "updated_at_utc": "2014-10-12T23:20:30.359Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 597253,
+            "name": "Chaetosiphon",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 375938,
+            "created_at": "2012-06-13T22:45:59.797Z",
+            "updated_at": "2014-10-12T23:20:30.245Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

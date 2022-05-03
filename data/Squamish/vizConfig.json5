@@ -1,0 +1,5 @@
+{
+    outputFile: "%bagatelle/data/Squamish/Squamish-Life.json.lz4",
+    inputFiles: ["%bagatelle/data/Squamish/reintegrated.csv"],
+    mapFile: "%bagatelle/data/Squamish/combinedOutMap.json"
+}

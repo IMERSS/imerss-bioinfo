@@ -1,0 +1,73 @@
+{
+    "id": 454988,
+    "name": "Wesmaelius involutus",
+    "rank": "species",
+    "source_id": 8,
+    "created_at": "2015-04-06T01:52:17.154Z",
+    "updated_at": "2015-04-06T01:52:18.447Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 3,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47120/372739/47158/184884/48763/483236/118993/712312/252925",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "34861756-8203-4776-bfdf-619cfea259b3",
+    "photos_locked": false,
+    "default_name": {
+        "id": 714837,
+        "name": "Veiled Bruine Lacewing",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": {
+        "id": 714837,
+        "name": "Veiled Bruine Lacewing",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2015-04-06T01:52:17.154Z",
+    "updated_at_utc": "2015-04-06T01:52:18.447Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 714837,
+            "name": "Veiled Bruine Lacewing",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 454988,
+            "created_at": "2015-04-06T01:52:26.238Z",
+            "updated_at": "2015-04-06T01:52:26.238Z",
+            "creator_id": 477,
+            "position": 0,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 714836,
+            "name": "Wesmaelius involutus",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 454988,
+            "created_at": "2015-04-06T01:52:17.154Z",
+            "updated_at": "2015-04-06T01:52:17.154Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

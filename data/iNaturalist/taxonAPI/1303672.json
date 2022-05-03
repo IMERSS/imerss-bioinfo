@@ -1,0 +1,56 @@
+{
+    "id": 1303672,
+    "name": "Apodichthyinae",
+    "rank": "subfamily",
+    "source_id": null,
+    "created_at": "2021-11-05T05:02:53.034Z",
+    "updated_at": "2021-11-05T06:42:42.852Z",
+    "iconic_taxon_id": 47178,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 348,
+    "listed_taxa_count": 0,
+    "rank_level": 27,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/2/355675/47178/47233/1303564/62607",
+    "is_active": true,
+    "taxon_framework_relationship_id": 580699,
+    "uuid": "ee0d8bec-944d-436f-9f3e-5067605e7a82",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2772542,
+        "name": "Apodichthyinae",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Actinopterygii",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/actinopterygii-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2021-11-05T05:02:53.034Z",
+    "updated_at_utc": "2021-11-05T06:42:42.852Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2772542,
+            "name": "Apodichthyinae",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1303672,
+            "created_at": "2021-11-05T05:02:53.034Z",
+            "updated_at": "2021-11-05T05:02:53.034Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47178,
+        "name": "Actinopterygii"
+    }
+}

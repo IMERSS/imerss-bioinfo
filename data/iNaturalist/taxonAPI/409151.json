@@ -1,0 +1,68 @@
+{
+    "id": 409151,
+    "name": "Tomopteris septentrionalis",
+    "rank": "species",
+    "source_id": null,
+    "created_at": "2012-06-14T00:04:38.810Z",
+    "updated_at": "2021-11-02T23:31:17.815Z",
+    "iconic_taxon_id": 1,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 2,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47491/47490/551646/67314/195012/194976",
+    "is_active": true,
+    "taxon_framework_relationship_id": 573232,
+    "uuid": "b963b7ae-e46a-4a74-a4fe-de4e8c4ea3c5",
+    "photos_locked": false,
+    "default_name": {
+        "id": 630485,
+        "name": "Tomopteris septentrionalis",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Animalia",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/animalia-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2012-06-14T00:04:38.810Z",
+    "updated_at_utc": "2021-11-02T23:31:17.815Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2104763,
+            "name": "オナシオヨギゴカイ",
+            "is_valid": true,
+            "lexicon": "Japanese",
+            "taxon_id": 409151,
+            "created_at": "2020-05-29T21:47:51.215Z",
+            "updated_at": "2020-05-29T21:47:51.215Z",
+            "creator_id": 396468,
+            "position": 1,
+            "parameterized_lexicon": "japanese"
+        },
+        {
+            "id": 630485,
+            "name": "Tomopteris septentrionalis",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 409151,
+            "created_at": "2012-06-14T00:04:38.810Z",
+            "updated_at": "2014-10-13T01:01:56.214Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 1,
+        "name": "Animalia"
+    }
+}

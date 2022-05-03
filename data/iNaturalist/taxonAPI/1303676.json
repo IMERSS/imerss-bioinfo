@@ -1,0 +1,56 @@
+{
+    "id": 1303676,
+    "name": "Atheresthinae",
+    "rank": "subfamily",
+    "source_id": null,
+    "created_at": "2021-11-05T05:02:57.361Z",
+    "updated_at": "2021-11-05T06:42:46.410Z",
+    "iconic_taxon_id": 47178,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 26,
+    "listed_taxa_count": 0,
+    "rank_level": 27,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/2/355675/47178/1303727/1303751/47525",
+    "is_active": true,
+    "taxon_framework_relationship_id": 580704,
+    "uuid": "32c7332b-1bae-4aa1-b4d1-fb2074b9a2df",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2772546,
+        "name": "Atheresthinae",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Actinopterygii",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/actinopterygii-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2021-11-05T05:02:57.361Z",
+    "updated_at_utc": "2021-11-05T06:42:46.410Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2772546,
+            "name": "Atheresthinae",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1303676,
+            "created_at": "2021-11-05T05:02:57.361Z",
+            "updated_at": "2021-11-05T05:02:57.361Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47178,
+        "name": "Actinopterygii"
+    }
+}

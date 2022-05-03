@@ -1,0 +1,97 @@
+{
+    "id": 225980,
+    "name": "Nodobryoria oregana",
+    "rank": "species",
+    "source_id": 149,
+    "created_at": "2013-03-28T08:11:53.688Z",
+    "updated_at": "2015-05-11T11:45:51.270Z",
+    "iconic_taxon_id": 47170,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 2,
+    "listed_taxa_count": 28,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/47170/48250/372740/54743/952186/48327/54321/1094690/175525",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "7a85c64f-b3db-4f27-abd2-8660c0a4c21d",
+    "photos_locked": false,
+    "default_name": {
+        "id": 1941838,
+        "name": "witch's hair lichen",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Fungi",
+    "conservation_status_name": null,
+    "common_name": {
+        "id": 1941838,
+        "name": "witch's hair lichen",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/fungi-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2013-03-28T08:11:53.688Z",
+    "updated_at_utc": "2015-05-11T11:45:51.270Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 1941838,
+            "name": "witch's hair lichen",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 225980,
+            "created_at": "2020-01-23T14:22:46.417Z",
+            "updated_at": "2020-01-23T14:22:46.417Z",
+            "creator_id": null,
+            "position": 3,
+            "parameterized_lexicon": "english"
+        },
+        {
+            "id": 340505,
+            "name": "Nodobryoria oregana",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 225980,
+            "created_at": "2013-03-28T08:11:53.688Z",
+            "updated_at": "2013-03-28T08:11:53.688Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 732330,
+            "name": "Alectoria oregana",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 225980,
+            "created_at": "2015-05-11T11:45:51.047Z",
+            "updated_at": "2015-05-11T11:45:51.047Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 732331,
+            "name": "Bryoria oregana",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 225980,
+            "created_at": "2015-05-11T11:45:51.264Z",
+            "updated_at": "2015-05-11T11:45:51.264Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47170,
+        "name": "Fungi"
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "id": 163025,
+    "name": "Fissidens ventricosus",
+    "rank": "species",
+    "source_id": 149,
+    "created_at": "2012-10-22T21:39:56.803Z",
+    "updated_at": "2015-04-03T22:53:46.488Z",
+    "iconic_taxon_id": 47126,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 2,
+    "listed_taxa_count": 7,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/47126/311249/48372/67877/55338/55339",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "0c6b7535-a7eb-4b6c-8221-98d740ed01cb",
+    "photos_locked": false,
+    "default_name": {
+        "id": 265200,
+        "name": "Fissidens ventricosus",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Plantae",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/plantae-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2012-10-22T21:39:56.803Z",
+    "updated_at_utc": "2015-04-03T22:53:46.488Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 265200,
+            "name": "Fissidens ventricosus",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 163025,
+            "created_at": "2012-10-22T21:39:56.803Z",
+            "updated_at": "2012-10-22T21:39:56.803Z",
+            "creator_id": 477,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47126,
+        "name": "Plantae"
+    }
+}

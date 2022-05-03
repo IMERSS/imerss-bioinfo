@@ -1,0 +1,80 @@
+{
+    "id": 1338302,
+    "name": "Eupithecia annulata",
+    "rank": "section",
+    "source_id": null,
+    "created_at": "2021-12-21T12:57:13.638Z",
+    "updated_at": "2021-12-21T12:58:43.661Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 139,
+    "listed_taxa_count": 0,
+    "rank_level": 13,
+    "wikipedia_summary": "<i><b>Eupithecia annulata</b></i>, the <b>larch pug moth</b>, is a moth in the family Geometridae. The species was first described by George Duryea Hulst in 1896. It is found in North America from British Columbia north to the Yukon, east to Newfoundland and Labrador and south to California and Colorado.",
+    "wikipedia_title": "",
+    "ancestry": "48460/1/47120/372739/47158/184884/47157/49531/49530/123032/123039/123096",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "4758c1d0-3e3a-42f3-b5fc-da70a1e5e8d7",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2843369,
+        "name": "Eupithecia annulata",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2021-12-21T12:57:13.638Z",
+    "updated_at_utc": "2021-12-21T12:58:43.661Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2843369,
+            "name": "Eupithecia annulata",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1338302,
+            "created_at": "2021-12-21T12:57:13.638Z",
+            "updated_at": "2021-12-21T12:57:13.638Z",
+            "creator_id": 17932,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2843371,
+            "name": "Eupithecia filmata group",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1338302,
+            "created_at": "2021-12-21T12:58:31.334Z",
+            "updated_at": "2021-12-21T12:58:31.334Z",
+            "creator_id": 17932,
+            "position": 2,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2843370,
+            "name": "Eupithecia annulata group",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1338302,
+            "created_at": "2021-12-21T12:57:24.040Z",
+            "updated_at": "2021-12-21T12:57:24.040Z",
+            "creator_id": 17932,
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

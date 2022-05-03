@@ -1,29 +1,23 @@
 {
     "columns": {
-        "taxonName": "Taxon",
-        "author": "Author",
-        "commonName": "Common Name",
-        "origin": "Origin",
-        "status": "Status",
-        "reporting": "Reporting",
-        "collected": "Last Collected/Reported (y-m-d)",
-        "collector": "Collector/Source",
-        "collection": "Collection/List",
-        "firstObserved": "First Documented",
-        "observer": "Documenter",
-        "accessionNumber": "Catalogue Number",
-        "iNaturalistObsLink": "iNaturalist Link",
-        "upstreamID": "ID",
-        "obsPhotoLink": "iNaturalist photo",
-        "notes": "Notes"
-    },
-    "counts": {
-        "undocumentedCount": {
-            "column": "iNaturalistObsLink",
-            "equals": ""
-        }
+        "taxonName": "%Taxon",
+        "authority": "%Author",
+        "commonName": "%Common Name",
+        "origin": "%Origin",
+        "status": "%Status",
+        "reporting": "%Reporting",
+        "firstTimestamp": "%Last Collected/Reported (y-m-d)",
+        "firstRecordedBy": "%Collector/Source",
+        "firstCollection": "%Collection/List",
+        "firstCatalogueNumber": "%Catalogue Number",
+        "sinceTimestamp": "%First Documented",
+        "sinceRecordedBy": "%Documenter",
+        "sinceCollection": "iNat",
+        "documenting": "%Documented in iNaturalist",
+        "iNaturalistObsLink": "%iNaturalist Link",
+        "notes": "%Notes"
     },
     "datasetId": "SQUAMISH",
     "datasetClass": "naturalist",
-    "observationId": "%rowNumber"
+    "observationId": "%datasetId:%rowNumber"
 }

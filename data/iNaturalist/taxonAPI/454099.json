@@ -1,0 +1,56 @@
+{
+    "id": 454099,
+    "name": "Salda obscura",
+    "rank": "species",
+    "source_id": 8,
+    "created_at": "2015-04-05T22:57:39.897Z",
+    "updated_at": "2015-04-05T22:57:41.040Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 4,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/1/47120/372739/47158/184884/47744/61267/372863/135297/135298/451518",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "1bdb7da0-41bd-4678-a051-9203775db6bb",
+    "photos_locked": false,
+    "default_name": {
+        "id": 713649,
+        "name": "Salda obscura",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2015-04-05T22:57:39.897Z",
+    "updated_at_utc": "2015-04-05T22:57:41.040Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 713649,
+            "name": "Salda obscura",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 454099,
+            "created_at": "2015-04-05T22:57:39.897Z",
+            "updated_at": "2015-04-05T22:57:39.897Z",
+            "creator_id": null,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}

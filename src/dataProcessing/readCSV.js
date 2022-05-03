@@ -5,6 +5,7 @@
 var fluid = require("infusion");
 var csvModule = require("csv-parser");
 var fs = require("fs");
+var removeBOM = require("remove-bom-stream");
 
 var hortis = fluid.registerNamespace("hortis");
 
@@ -84,8 +85,9 @@ fluid.defaults("hortis.csvFileReader", {
 });
 
 hortis.csvFileReader.openFileStream = function (that) {
-    that.rowStream = fs.createReadStream(that.options.inputFile).pipe(
-        csvModule(that.options.csvOptions)
+    that.rowStream = fs.createReadStream(that.options.inputFile)
+        .pipe(removeBOM("utf-8"))
+        .pipe(csvModule(that.options.csvOptions)
     );
 };
 

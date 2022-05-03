@@ -1,0 +1,92 @@
+{
+    "id": 1155356,
+    "name": "Marsupella aquatica",
+    "rank": "species",
+    "source_id": 22797,
+    "created_at": "2020-12-02T17:10:06.689Z",
+    "updated_at": "2020-12-02T17:11:54.607Z",
+    "iconic_taxon_id": 47126,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 0,
+    "listed_taxa_count": 13,
+    "rank_level": 10,
+    "wikipedia_summary": null,
+    "wikipedia_title": "",
+    "ancestry": "48460/47126/64615/67852/55253/67847/67848",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "22829586-c06f-464b-bf18-70d5db205380",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2326608,
+        "name": "Marsupella aquatica",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Plantae",
+    "conservation_status_name": "vulnerable",
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/plantae-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2020-12-02T17:10:06.689Z",
+    "updated_at_utc": "2020-12-02T17:11:54.607Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2326608,
+            "name": "Marsupella aquatica",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1155356,
+            "created_at": "2020-12-02T17:10:06.689Z",
+            "updated_at": "2020-12-02T17:10:06.689Z",
+            "creator_id": 2926001,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2326610,
+            "name": "Marsupella emarginata aquatica",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1155356,
+            "created_at": "2020-12-02T17:11:54.885Z",
+            "updated_at": "2020-12-02T17:11:54.885Z",
+            "creator_id": null,
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2557901,
+            "name": "marsupelle aquatique",
+            "is_valid": true,
+            "lexicon": "French",
+            "taxon_id": 1155356,
+            "created_at": "2021-05-30T18:08:37.767Z",
+            "updated_at": "2021-05-30T18:08:37.767Z",
+            "creator_id": 572540,
+            "position": 2,
+            "parameterized_lexicon": "french"
+        },
+        {
+            "id": 2932406,
+            "name": "miechrza wodna",
+            "is_valid": true,
+            "lexicon": "Polish",
+            "taxon_id": 1155356,
+            "created_at": "2022-03-28T12:14:34.180Z",
+            "updated_at": "2022-03-28T12:14:34.180Z",
+            "creator_id": 4210390,
+            "position": 3,
+            "parameterized_lexicon": "polish"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47126,
+        "name": "Plantae"
+    }
+}

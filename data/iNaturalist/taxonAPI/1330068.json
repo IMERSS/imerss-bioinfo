@@ -1,0 +1,109 @@
+{
+    "id": 1330068,
+    "name": "Apamea unanimis",
+    "rank": "section",
+    "source_id": null,
+    "created_at": "2021-12-11T14:40:53.508Z",
+    "updated_at": "2021-12-11T14:42:01.515Z",
+    "iconic_taxon_id": 47158,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 376,
+    "listed_taxa_count": 0,
+    "rank_level": 13,
+    "wikipedia_summary": "<i><b>Apamea unanimis</b></i>, the <b>small clouded brindle</b>, is a moth of the family Noctuidae. The species was first described by Jacob Hübner in 1813. It is native to Europe, Turkey, Azerbaijan, and western Siberia. It has been introduced in North America and can now be found in Ontario, Quebec, New Brunswick, New York, Michigan, and Wisconsin.",
+    "wikipedia_title": "",
+    "ancestry": "48460/1/47120/372739/47158/184884/47157/47607/48670/122224/122727/81987",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "85509c34-42e7-494e-9dda-8b08c5399e78",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2827510,
+        "name": "Small Clouded Brindle and Allies",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Insecta",
+    "conservation_status_name": null,
+    "common_name": {
+        "id": 2827510,
+        "name": "Small Clouded Brindle and Allies",
+        "is_valid": true,
+        "lexicon": "English"
+    },
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/insecta-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2021-12-11T14:40:53.508Z",
+    "updated_at_utc": "2021-12-11T14:42:01.515Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2827483,
+            "name": "Apamea unanimis",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1330068,
+            "created_at": "2021-12-11T14:40:53.508Z",
+            "updated_at": "2021-12-11T14:40:53.508Z",
+            "creator_id": 17932,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2827486,
+            "name": "Apamea unanimis group",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1330068,
+            "created_at": "2021-12-11T14:41:09.197Z",
+            "updated_at": "2021-12-11T14:41:09.197Z",
+            "creator_id": 17932,
+            "position": 1,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2827506,
+            "name": "Apamea illyria",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1330068,
+            "created_at": "2021-12-11T14:49:14.266Z",
+            "updated_at": "2021-12-11T14:49:14.266Z",
+            "creator_id": 17932,
+            "position": 2,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2827507,
+            "name": "Apamea illyria group",
+            "is_valid": false,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1330068,
+            "created_at": "2021-12-11T14:49:27.225Z",
+            "updated_at": "2021-12-11T14:49:27.225Z",
+            "creator_id": 17932,
+            "position": 3,
+            "parameterized_lexicon": "scientific-names"
+        },
+        {
+            "id": 2827510,
+            "name": "Small Clouded Brindle and Allies",
+            "is_valid": true,
+            "lexicon": "English",
+            "taxon_id": 1330068,
+            "created_at": "2021-12-11T14:49:59.008Z",
+            "updated_at": "2021-12-11T14:49:59.008Z",
+            "creator_id": 17932,
+            "position": 4,
+            "parameterized_lexicon": "english"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47158,
+        "name": "Insecta"
+    }
+}
