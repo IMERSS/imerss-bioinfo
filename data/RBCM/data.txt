@@ -1,9 +1,0 @@
-RBCM_records_Galiano_2019-10-25.csv
-Sourced from "RBCM_records_Galiano_2019-10-25.xlsx" at https://docs.google.com/spreadsheets/d/1YWa0OOv2OZQRZh1zmCSyytvX_de__39r/edit#gid=168249592
-
-RBCM_GBIF_records_intersected_with_Galiano_polygon_2020_09_29.tsv
-Sourced from GBIF.org (29 September 2020) GBIF Occurrence Download https://doi.org/10.15468/dl.7yh35f
-
-RBCM_GBIF_records_intersected_with_Galiano_polygon_2021_01_18.tsv
-Sourced from GBIF.org (18 January 2021) GBIF Occurrence Download https://doi.org/10.15468/dl.evn8yh
-Polygon used is %bagatelle/data/Galiano/Galiano-boundary-2021-01-18.json

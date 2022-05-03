@@ -1,5 +1,0 @@
-Data in this directory is licenced under a Creative Commons Attribution-NonCommercial 2.0 Generic (CC BY-NC 2.0)
-licence, as described at https://creativecommons.org/licenses/by-nc/2.0/
-
-This data is a cache of queries made to the iNaturalist platform hosted at https://www.inaturalist.org/ .
-This is an incomplete and necessarily stale representation of data held there.

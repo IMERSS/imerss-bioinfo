@@ -1,9 +1,0 @@
-{
-    "columns": {
-        "taxonName": "Taxon name",
-        "commonName": "Common name",
-        "recordedBy": "Recorded by",
-        "individualCount": "Individual count",
-        "fieldNumber": "Field number"
-    }
-}

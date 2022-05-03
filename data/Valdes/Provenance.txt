@@ -1,7 +1,0 @@
-Taken from Google Drive folder https://drive.google.com/drive/folders/1Q05UOp_KqBxy95zuY_2BB-BKdlP7rXF7 - 
-Salish Sea Biodiversity/Biodiversity Data/Valdes Island
-
-Specifically, datasets with "Valdes-Synth-map.json" maping are taken
-from https://docs.google.com/spreadsheets/d/1JqZcsSj-BESCqKShKxL0u1w74GbtrqSnZFmCpMwahrQ/edit#gid=0
-
-Salish Sea Biodiversity/Biodiversity Data/Valdes Island/DATA/SYNTHESIZED/Synthesized

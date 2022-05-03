@@ -1,5 +1,0 @@
-{
-    outputFile: "%bagatelle/data/Valdes/Life.json.lz4",
-    inputFiles: ["%bagatelle/data/Valdes/reintegrated.csv"],
-    mapFile: "%bagatelle/data/Valdes/combinedOutMap.json",
-}

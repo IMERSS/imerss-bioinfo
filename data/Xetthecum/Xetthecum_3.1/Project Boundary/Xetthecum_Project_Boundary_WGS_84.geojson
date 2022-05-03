@@ -1,8 +1,0 @@
-{
-"type": "FeatureCollection",
-"name": "Xetthecum_Project_Boundary",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "id": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ -123.518460738210166, 48.951453812240317 ], [ -123.494231663682726, 48.951469241394655 ], [ -123.493981152342272, 48.936581145241796 ], [ -123.518478336335534, 48.936496361449421 ], [ -123.518460738210166, 48.951453812240317 ] ] ] ] } }
-]
-}

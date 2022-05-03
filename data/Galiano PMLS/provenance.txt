@@ -1,9 +1,0 @@
-Files as accepted by email from Pacific Marine Life Surveys as a dump of their database, with the exception of
-PMLS_Records_Galiano_2021-07-27-dataPaper.csv which consists of PMLS_Records_Galiano_2021-07-27.csv
-with the following substitutions
-
-
-"Haliclona (Haliclona) sp.nov." replaced by "Haliclona (Haliclona) sp.1" (prior to 2021/1/1 this was reported as "Reniera sp. nov.")
-"Adocia sp." replaced by "Haliclona (Haliclona) sp.2"
-
-
