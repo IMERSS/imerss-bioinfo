@@ -31,70 +31,70 @@ var buildIndex = {
     codeFooter: "", // "\njQuery.noConflict()",
     copy: [{
         src: "node_modules/infusion/src/lib/jquery/core/js/jquery.js",
-        dest: "build/js/jquery.js"
+        dest: "docs/js/jquery.js"
     }, {
         src: "src/client/img",
-        dest: "build/img"
+        dest: "docs/img"
     }, {
         src: "src/client/json",
-        dest: "build/json"
+        dest: "docs/json"
     }, {
         src: "src/client/html",
-        dest: "build/html"
+        dest: "docs/html"
     }, {
         src: "src/client/css/bagatelle-wp-overrides.css",
-        dest: "build/css/bagatelle-wp-overrides.css"
+        dest: "docs/css/bagatelle-wp-overrides.css"
     }, {
         src: "src/client/css/xetthecum.css",
-        dest: "build/css/xetthecum.css"
+        dest: "docs/css/xetthecum.css"
     }, {
         src: "src/client/css/xetthecum-shared.css",
-        dest: "build/css/xetthecum-shared.css"
+        dest: "docs/css/xetthecum-shared.css"
     }, {
         src: "src/client/css/xetthecum-external.css",
-        dest: "build/css/xetthecum-external.css"
+        dest: "docs/css/xetthecum-external.css"
     }, {
         src: "src/buildSource/Galiano Life List.html",
-        dest: "build/Galiano Life List.html"
+        dest: "docs/Galiano Life List.html"
     }, {
         src: "src/buildSource/Squamish Life List.html",
-        dest: "build/Squamish Life List.html"
+        dest: "docs/Squamish Life List.html"
     }, {
         src: "src/buildSource/dataPaperSunburstAndMap.html",
-        dest: "build/dataPaperSunburstAndMap.html"
+        dest: "docs/dataPaperSunburstAndMap.html"
     }, {
         src: "src/buildSource/Data Paper Part I Visualisation.html",
-        dest: "build/Data Paper Part I Visualisation.html"
+        dest: "docs/Data Paper Part I Visualisation.html"
     }, {
         src: "src/buildSource/Valdes Island Biodiversity.html",
-        dest: "build/Valdes Island Biodiversity.html"
+        dest: "docs/Valdes Island Biodiversity.html"
     }, {
         src: "src/buildSource/Xetthecum.html",
-        dest: "build/Xetthecum.html"
+        dest: "docs/Xetthecum.html"
     }, {
         src: "src/buildSource/index.html",
-        dest: "build/index.html"
+        dest: "docs/index.html"
     }, {
         src: "data/dataPaper-I/Life.json.lz4",
-        dest: "build/data/dataPaper-I/Life.json.lz4"
+        dest: "docs/data/dataPaper-I/Life.json.lz4"
     },  {
         src: "data/Valdes/Life.json.lz4",
-        dest: "build/data/Valdes/Life.json.lz4"
+        dest: "docs/data/Valdes/Life.json.lz4"
     },  {
         src: "data/Galiano/Galiano-Life.json.lz4",
-        dest: "build/data/Galiano/Galiano-Life.json.lz4"
+        dest: "docs/data/Galiano/Galiano-Life.json.lz4"
     }, {
         src: "data/Galiano/Galiano_map_0.js",
-        dest: "build/data/Galiano/Galiano_map_0.js"
+        dest: "docs/data/Galiano/Galiano_map_0.js"
     }, {
         src: "data/Galiano WoL/Life.json.lz4",
-        dest: "build/data/Galiano WoL/Life.json.lz4"
+        dest: "docs/data/Galiano WoL/Life.json.lz4"
     }, {
         src: "data/Xetthecum/Life.json.lz4",
-        dest: "build/data/Xetthecum/Life.json.lz4"
+        dest: "docs/data/Xetthecum/Life.json.lz4"
     }, {
         src: "data/Squamish/Squamish-Life.json.lz4",
-        dest: "build/data/Squamish/Squamish-Life.json.lz4"
+        dest: "docs/data/Squamish/Squamish-Life.json.lz4"
     }]
 };
 
@@ -153,20 +153,20 @@ var buildFromFiles = function (buildIndex, nodeFiles) {
         }
     });
     promise.then(function (minified) {
-        fs.removeSync("build");
-        fs.ensureDirSync("build/js");
-        fs.writeFileSync("build/js/bagatelle-all.js", minified.code, "utf8");
-        fs.writeFileSync("build/js/bagatelle-all.js.map", minified.map);
+        fs.removeSync("docs");
+        fs.ensureDirSync("docs/js");
+        fs.writeFileSync("docs/js/bagatelle-all.js", minified.code, "utf8");
+        fs.writeFileSync("docs/js/bagatelle-all.js.map", minified.map);
 
         var cssHash = filesToContentHash(allFiles, ".css");
         var cssConcat = String.prototype.concat.apply("", Object.values(cssHash));
 
-        fs.ensureDirSync("build/css");
-        fs.writeFileSync("build/css/bagatelle-all.css", cssConcat);
+        fs.ensureDirSync("docs/css");
+        fs.writeFileSync("docs/css/bagatelle-all.css", cssConcat);
         buildIndex.copy.forEach(function (oneCopy) {
             fs.copySync(oneCopy.src, oneCopy.dest);
         });
-        fluid.log("Copied " + (buildIndex.copy.length + 3) + " files to " + fs.realpathSync("build"));
+        fluid.log("Copied " + (buildIndex.copy.length + 3) + " files to " + fs.realpathSync("docs"));
     });
 };
 
