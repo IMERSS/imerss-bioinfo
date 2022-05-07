@@ -489,8 +489,8 @@ hortis.dumpRow = function (key, value, markup, extraClazz, valueClazz) {
         var clazz = "fl-taxonDisplay-row " + (extraClazz || "");
         valueClazz = valueClazz || "";
         return fluid.stringTemplate(markup.taxonDisplayRow, {
-            key: keyName, 
-            value: value, 
+            key: keyName,
+            value: value,
             rootAttrs: "class=\"" + clazz + "\"",
             valueClazz: valueClazz
         });
