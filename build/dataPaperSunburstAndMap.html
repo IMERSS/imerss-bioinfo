@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="css/bagatelle-all.css" />
+        <script src="js/jquery.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <script src="js/bagatelle-all.js"></script>
+        <script src="data/Galiano/Galiano_map_0.js"></script>
+        <title>Galiano Data Paper Part I - Map View</title>
+    </head>
+
+    <body>
+        <h2>Galiano Data Paper Part I - Map View</h2>
+        <div class="fl-bagatelle-container">
+        </div>
+        <script>
+            hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
+                mapGrades: ["hortis.GBIFTiles"],
+                resourceBase: ".",
+                renderMarkup: true,
+                colourCount: "observationCount",
+                geoJSONMapLayers: [json_Galiano_map_0],
+                phyloMap: "%resourceBase/json/emptyPhyloMap.json",
+                vizFile: "data/dataPaper-I/Life.json.lz4"});
+        </script>
+    </body>
+</html>
+        

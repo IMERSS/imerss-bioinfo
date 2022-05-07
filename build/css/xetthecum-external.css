@@ -1,0 +1,47 @@
+/* This is currently used primarily for Valdes map view which has dataset
+   controls but also Xetthecum-style panels
+ */
+
+:root {
+  --bagatelle-map-width: 500px;
+}
+
+.fld-bagatelle-map {
+    height: 350px;
+}
+
+.fld-bagatelle-panel-label {
+    display: none;
+}
+
+.fl-bagatelle-map-info-panel {
+    display: none;
+}
+
+.fl-bagatelle-left-column {
+    width: 900px;
+}
+
+.flc-bagatelle-svg {
+    margin-left: -80px;
+}
+
+.fld-bagatelle-taxonDisplay {
+    min-height: 800px;
+    height: auto;
+}
+
+.fld-bagatelle-taxonDisplay-wrapper {
+    position: sticky;
+    top: 0;
+}
+
+.fl-bagatelle-map-panel {
+    display: flex;
+    align-items: center;
+}
+
+tr:first-child .fl-bagatelle-obs-count-column, 
+tr:first-child .fl-bagatelle-taxa-count-column {
+    font-size: smaller;
+}

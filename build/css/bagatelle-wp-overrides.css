@@ -1,0 +1,81 @@
+#sidebar {
+    display: none;
+}
+
+.et_boxed_layout #page-container,
+.et_fixed_nav.et_boxed_layout #page-container #top-header,
+.et_fixed_nav.et_boxed_layout #page-container #main-header,
+.et_boxed_layout #page-container .container,
+.et_boxed_layout #page-container .et_pb_row {
+    max-width: 2600px;
+}
+
+#main-content .container::before {
+    content: none;
+}
+
+
+.fl-bagatelle-container {
+    line-height: 1.4em;
+    margin: 0 1rem 0 1rem;
+}
+
+
+.fld-bagatelle-dataset-controls {
+    font-size: 16px;
+}
+
+table {
+    border: none !important;
+}
+
+#main-content .entry-content table td {
+    padding: 0px 5px;
+}
+
+.fl-bagatelle-container .fld-bagatelle-checklist ul {
+    padding-bottom: 0px;
+}
+
+.fld-bagatelle-taxonDisplay {
+    background: white;
+    width: 35%;
+    display: block; /* Without this, contents overflow with our extra margins */
+}
+
+.fl-bagatelle-taxa {
+    width: 100%;
+}
+
+.fl-bagatelle-tabs-and-search {
+    width: 65%;
+    margin-right: 1rem;
+}
+
+.fl-bagatelle-left-column {
+    width: auto;
+}
+
+.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder {
+    width: auto;
+    padding-right: 0px;
+}
+
+#fli-tab-sunburst {
+    max-width: 850px;
+}
+
+.fl-taxonDisplay-expand {
+    margin-top: 2px;
+}
+
+/** Bizarre rules for "page" type entries **/
+
+#main-content#main-content .et_pb_row {
+    width: 100%;
+}
+  
+#left-area ul, .entry-content ul {
+    list-style-type: none;
+    padding: 0px;
+}

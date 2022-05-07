@@ -1,0 +1,506 @@
+:root {
+  --bagatelle-map-width: 500px;
+  --bagatelle-eco-colour: #DEE0B0;
+  --bagatelle-map-colour: #DDE8C8; 
+}
+
+body {
+    margin: 0px;
+}
+
+.fld-bagatelle-region-subtidal {
+    fill: url(#marine);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-region-lake-laughlin-lake {
+    fill: url(#lacustrine);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-region-wetland {
+    fill: url(#wetland);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-region-clearcut {
+    fill: url(#recently-harvested);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-region-pole-sapling {
+    fill: url(#pole-sapling);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-region-young-forest {
+    fill: url(#young-forest);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-region-mature-forest {
+    fill: url(#mature-forest);
+    background-repeat: repeat;
+}
+
+.fld-bagatelle-region-woodland {
+    fill: url(#woodland);
+    background-repeat: repeat;
+}
+
+
+.fl-xetthecum-banner {
+    background: #EDEFE9;
+    margin: 0px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    font-size: 2.5rem;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.fld-bagatelle-banner-marine {
+    background-image: url(../img/Xetthecum/Marine_banner.jpg);
+}
+
+.fld-bagatelle-banner-freshwater {
+    background-image: url(../img/Xetthecum/Freshwater_banner.jpg);
+    color: white;
+}
+
+.fld-bagatelle-banner-forests {
+    background-image: url(../img/Xetthecum/Forests_banner.jpg);
+    color: white;
+}
+
+.fld-bagatelle-banner-woodlands-and-rock-outcrops {
+    background-image: url(../img/Xetthecum/Woodland_banner.jpg);
+    color: white;
+}
+
+.fld-bagatelle-banner-anthropogenic {
+    background-image: url(../img/Xetthecum/Anthropogenic_banner.jpg);
+}
+
+
+.fld-bagatelle-class-image-shoreline {
+    background-image: url(../img/Xetthecum/Intertidal.jpg);
+}
+
+.fld-bagatelle-class-image-subtidal {
+    background-image: url(../img/Xetthecum/Subtidal.jpg);
+}
+
+.fld-bagatelle-class-image-pole-sapling {
+    background-image: url(../img/Xetthecum/Conifer_Pole_Sapling.jpg);
+}
+
+.fld-bagatelle-class-image-mature-forest {
+    background-image: url(../img/Xetthecum/Mature_Conifer_Forest.jpg);
+}
+
+.fld-bagatelle-class-image-young-forest {
+    background-image: url(../img/Xetthecum/Young_Conifer_Forest.jpg);
+}
+
+.fld-bagatelle-class-image-wetland {
+    background-image: url(../img/Xetthecum/Wetland.jpg);
+}
+
+.fld-bagatelle-class-image-laughlin-lake {
+    background-image: url(../img/Xetthecum/Laughlin_Lake.jpg);
+}
+
+.fld-bagatelle-class-image-greig-creek {
+    background-image: url(../img/Xetthecum/Greig_Creek.jpg);
+}
+
+.fld-bagatelle-class-image-riparian {
+    background-image: url(../img/Xetthecum/Riparian.jpg);
+}
+
+.fld-bagatelle-class-image-coastal-bluff {
+    background-image: url(../img/Xetthecum/Coastal_Bluffs.jpg);
+}
+
+.fld-bagatelle-class-image-woodland {
+    background-image: url(../img/Xetthecum/Woodland.jpg);
+}
+
+.fld-bagatelle-class-image-agricultural {
+    background-image: url(../img/Xetthecum/Agricultural.jpg);
+}
+
+.fld-bagatelle-class-image-developed {
+    background-image: url(../img/Xetthecum/Developed.jpg);
+}
+
+.fld-bagatelle-class-image-rural {
+    background-image: url(../img/Xetthecum/Rural.jpg);
+}
+
+.fld-bagatelle-class-image-road {
+    background-image: url(../img/Xetthecum/Porlier_Pass_Road.jpg);
+}
+
+.fld-bagatelle-class-image-dock {
+    background-image: url(../img/Xetthecum/Dock.jpg);
+}
+
+.fld-bagatelle-class-image-eelgrass-beds {
+    background-image: url(../img/Xetthecum/Eelgrass.jpg);
+}
+
+
+.fl-bagatelle-container {
+    margin: 1.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.fld-bagatelle-map-holder {
+    background: var(--bagatelle-map-colour);
+}
+
+.fl-bagatelle-active-panel {
+    border: 3px solid #4F5346;
+}
+
+.fl-bagatelle-map-panel {
+    padding: 1rem 0rem 2rem 2rem;
+}
+
+.fl-bagatelle-map-panel .fld-bagatelle-panel-label {
+    position: unset;
+    padding-bottom: 1.5rem;
+}
+
+.fld-bagatelle-map-outer-panel {
+    background: var(--bagatelle-map-colour);
+    padding: 1rem 1rem 1rem 1rem;
+    margin: 1px; /* Fight strange layout bug on Chrome 76 */
+}
+
+.fld-bagatelle-infoPanel {
+    margin-left: 2.5rem;
+}
+
+.fld-bagatelle-infoPanel .fld-bagatelle-panel-label {
+    padding: 1rem 2rem 0.5rem 1rem;
+}
+
+.fld-bagatelle-map-community {
+    font-size: 1.7rem;
+    padding-bottom: 1rem;
+}
+
+.fld-bagatelle-map-class {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.fld-bagatelle-map-panel-block {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: #ccc 2px solid;
+}
+
+.fld-bagatelle-map-class-tagline {
+    font-size: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.fld-bagatelle-map-class-se-col {
+    font-weight: bold;
+}
+
+.fld-bagatelle-map-class-se-val {
+    padding-bottom: 0.5rem;
+    text-indent: 1rem;
+}
+
+.fl-bagatelle-map-info-panel {
+    width: 28rem;
+    margin-left: 2rem;
+}
+
+.fld-bagatelle-map-legend > span {
+    display: inline-block;
+    font-size: 1.3rem;
+    margin-left: 2rem;
+    margin-bottom: 0.4rem;
+}
+
+.fld-bagatelle-map-legend-keys {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 500px;
+}
+
+.fld-bagatelle-legend-block {
+}
+
+.fld-bagatelle-legend-block-name {
+    margin-top: 0.7rem;
+    display: inline-block;
+    width: 8rem;
+    text-indent: -1rem;
+    padding-left: 1.5rem;
+}
+
+
+.fld-bagatelle-legend-row {
+    padding: 2px;
+}
+
+.fld-bagatelle-legend-row.fld-bagatelle-selected {
+    background: #FCFF63;
+}
+
+
+.fld-bagatelle-legend-icon {
+    display: inline-block;
+    width: 2rem;
+    height: 1rem;
+}
+
+.fld-bagatelle-legend-row.fld-bagatelle-selected .fld-bagatelle-legend-icon {
+    background-image: url(../img/selected-tick.svg);
+    background-size: 1rem;
+    background-position: center center; 
+    background-repeat: no-repeat;
+}
+
+.fld-bagatelle-legend-preview {
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 1px solid #353030;
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
+}
+
+.fld-bagatelle-legend-label {
+    display: inline-block;
+    font-size: 0.9rem;
+    width: 8rem;
+    position: relative;
+    top: -2px;
+}
+
+.fld-bagatelle-map {
+    height: 450px;
+}
+
+.fld-bagatelle-tabs {
+    position: relative;
+}
+
+.flc-bagatelle-autocomplete-row {
+    position: absolute;
+    top: 3rem;
+    left: 8rem;
+    z-index: 999;
+}
+
+#fli-bagatelle-autocomplete {
+    background: white;
+}
+
+#fli-tab-sunburst, #fli-tab-checklist, #fli-tab-simple-checklist {
+    background: var(--bagatelle-eco-colour);
+}
+
+#fli-tab-sunburst {
+    padding-top: 4rem;
+}
+
+.fl-bagatelle-checklist-spacer {
+    height: 4rem;
+}
+
+/* We've inserted the "spacer" between the real panel and the contents so it can scroll independently of the
+ * autocomplete */
+#fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
+    padding: 0px;
+}
+
+.ui-tabs .ui-tabs-panel {
+    border-bottom: 2px solid #4F5346;
+    border-left: 2px solid #4F5346;
+    border-right: 2px solid #4F5346;
+    border-top: 2px solid #4F5346;
+    margin: 1px;
+}
+
+.ui-tabs {
+    padding: 0px;
+}
+
+/** Temporary until we can use ordinary 3px border on tabs **/
+.fld-bagatelle-tabs {
+    width: 1031px;
+}
+
+.fl-bagatelle-checklist-holder {
+    padding: 1em 1.4em;
+}
+
+.flc-checklist-hulq-name {
+    font-weight: bolder;
+}
+
+.fl-bagatelle-taxa .fld-bagatelle-panel-label {
+    position: absolute;
+    right: 1.5rem;
+}
+
+.fld-bagatelle-panel-label {
+    font-weight: bold;
+    font-size: 1.7rem;
+    top: 1rem;
+}
+
+#fli-tab-sunburst {
+    padding-top: 3rem;
+}
+
+.fld-bagatelle-taxonDisplay {
+    margin-top: 4.4rem;
+    border: none;
+    height: 1200px;
+}
+
+.fl-taxonDisplay-row {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.fl-taxonDisplay-rank .fl-taxonDisplay-key {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-left: 0px;
+    padding-bottom: 5px;
+}
+
+.fl-taxonDisplay-rank span {
+    display: inline-block
+}
+
+.fl-bagatelle-right-column {
+    width: 544px;
+}
+
+/*
+.fl-bagatelle-photo {
+    width: calc(448px + 6rem);
+}
+*/
+
+.fld-bagatelle-map-outer-panel .fl-bagatelle-photo {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-bottom: 1rem;
+}
+
+.fld-bagatelle-taxonDisplay-wrapper {
+    background: var(--bagatelle-eco-colour);
+    width: 500px;
+}
+
+.fld-bagatelle-tabs .ui-state-active.ui-tabs-active a {
+    background: var(--bagatelle-eco-colour);
+}
+
+.fld-bagatelle-tabs .ui-state-active.ui-tabs-tab {
+    background: var(--bagatelle-eco-colour);
+}
+
+.fld-bagatelle-map-outer-panel-wrapper {
+    background: var(--bagatelle-map-colour);
+    width: 500px;
+}
+
+.ui-widget-header { /* Override theme to avoid clutter in tab top */
+    background: none;
+    border: none;
+}
+
+.ui-widget-content {
+    border: none;
+}
+
+.ui-widget.ui-widget-content {
+    border: none;
+}
+
+.fl-xetthecum-audio {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding-bottom: 0.4rem;
+    margin-left: 1rem;
+    border: none;
+    background: none;
+    background-image: url(../img/audio.svg);
+    background-size: 2.5rem;
+    background-position: center center; 
+    background-repeat: no-repeat;
+}
+
+.fl-xetthecum-small-audio {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding-bottom: 0.2rem;
+    margin-left: 0.5rem;
+    border: none;
+    background: none;
+    background-image: url(../img/audio.svg);
+    background-size: 1.5rem;
+    background-position: center center; 
+    background-repeat: no-repeat;
+}
+
+.fl-xetthecum-audio:hover, .fl-xetthecum-small-audio:hover {
+    outline: 1px solid black;
+    outline-offset: 1px;
+}
+
+.fl-taxonDisplay-value iframe {
+    margin-top: 5px;
+}
+
+
+.fld-bagatelle-taxonDisplay {
+    margin-top: 0px;
+    width: auto;
+}
+
+.fl-taxonDisplay-wikipediaSummary {
+    display: block;
+    margin-left: 2.5rem;
+    margin-right: 1rem;
+    width: auto;
+}
+
+/*
+on .ui-tabs .ui-tabs-nav li.ui-tabs-active
+will move it down so that it can overwrite border
+
+    z-index: 999;
+    position: relative;
+    top: 3px;
+
+and then e.g. on the tab #fli-tab-checklist
+    border: 2px dashed black;
+
+To straighten out first tab:
+
+.ui-tabs .ui-tabs-nav
+padding: 0
+
+*/

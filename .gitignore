@@ -1,6 +1,4 @@
-node_modules
 .project
+.settings
 package-lock.json
-build
-/node_modules
 /node_modules

@@ -1,0 +1,80 @@
+:root {
+  --bagatelle-map-width: 500px;
+  --bagatelle-eco-colour: #DEE0B0;
+  --bagatelle-map-colour: #DDE8C8; 
+}
+
+body {
+    margin: 0px;
+}
+
+.fl-xetthecum-banner {
+    background: #EDEFE9;
+    margin: 0px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    font-size: 2.5rem;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.fl-bagatelle-container {
+    margin: 1.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.fld-bagatelle-map-holder {
+    background: var(--bagatelle-map-colour);
+}
+
+.fl-bagatelle-map-panel {
+    padding: 1rem 0rem 2rem 2rem;
+}
+
+.fl-bagatelle-map-panel .fld-bagatelle-panel-label {
+    position: unset;
+    padding-bottom: 1.5rem;
+}
+
+.fld-bagatelle-map {
+    height: 450px;
+}
+
+.fld-bagatelle-taxonDisplay {
+    margin-top: 0px;
+    width: auto;
+}
+
+.ui-widget-header { /* Override theme to avoid clutter in tab top */
+    background: none;
+    border: none;
+}
+
+.ui-widget-content {
+    border: none;
+}
+
+.ui-widget.ui-widget-content {
+    border: none;
+}
+
+#fli-tab-sunburst, #fli-tab-checklist, #fli-tab-simple-checklist {
+    background: var(--bagatelle-eco-colour);
+}
+
+.fld-bagatelle-taxonDisplay-wrapper {
+    background: var(--bagatelle-eco-colour);
+}
+
+.fld-bagatelle-tabs .ui-state-active.ui-tabs-active a {
+    background: var(--bagatelle-eco-colour);
+}
+
+.fld-bagatelle-tabs .ui-state-active.ui-tabs-tab {
+    background: var(--bagatelle-eco-colour);
+}
+
+.fld-bagatelle-map-outer-panel-wrapper {
+    background: var(--bagatelle-map-colour);
+}

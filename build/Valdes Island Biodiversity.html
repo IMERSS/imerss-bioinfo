@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="css/bagatelle-all.css" />
+        <link rel="stylesheet" type="text/css" href="css/xetthecum-shared.css" />
+        <link rel="stylesheet" type="text/css" href="css/xetthecum-external.css" />
+        <script src="js/jquery.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <script src="js/bagatelle-all.js"></script>
+        <script src="data/Galiano/Galiano_map_0.js"></script>
+
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
+
+        <title>Valdes Island Biodiversity</title>
+    </head>
+
+    <body>
+        <h2 class="fl-xetthecum-banner">Valdes Island Biodiversity</h2>
+        <div class="fl-bagatelle-container">
+        </div>
+        <script>
+            hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
+                mapGrades: ["hortis.GBIFTiles"],
+                markupTemplate: "%resourceBase/html/bagatelle-map-xetthecum.html",
+                resourceBase: ".",
+                mapBounds: hortis.projectBounds.Valdes,
+                phyloMap: "%resourceBase/json/kingdomPhyloMap.json",
+                colourCount: "observationCount",
+                culturalValues: false,
+                renderMarkup: true,
+                vizFile: "data/Valdes/Life.json.lz4"});
+        </script>
+        <div style="padding: 1rem; float: right;">Open source framework created by <a href="https://imerss.org/">IMERSS</a>,
+        code available on <a href="https://github.com/IMERSS/imerss-bioinfo">GitHub</a>
+        </div>
+    </body>
+</html>
