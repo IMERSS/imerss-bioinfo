@@ -276,7 +276,7 @@
         },
         iNaturalistTaxonId: "47664",
     },
-    "Himatina trophina": {
+    "Coryphella trophina": {
         taxonNames: {
             "red flabellina": {
                 type: "commonName",
@@ -284,9 +284,13 @@
             "Flabellina triophina": {
                 resolvedBy: "AB",
                 oldiNaturalistTaxonId: "50459",
+            },
+            "Himatina trophina": {
+                resolvedBy: "AB",
+                oldiNaturalistTaxonId: "633561",
             }
         },
-        iNaturalistTaxonId: "633561",
+        iNaturalistTaxonId: "1376715",
     },
     "Integripelta bilabiata": {
         taxonNames: {
@@ -2390,5 +2394,60 @@
             }
         },
         iNaturalistTaxonId: "47490"
-    }
+    },
+    /** Galiano 2022 swaps from here **/
+    "Amanita gemmata": {
+        taxonNames: {
+            "Amanita gemmata": {
+                resolvedBy: "AS",
+                notes: "Amanita gemmata is almost certainly distinct from Amanita muscaria but it has been subsumed into Amanita muscaria for now. I would prefer that we retain Amanita gemmata on our list. We can either suppress it from the visualization or else keep it in there and just not map it with the iNat content."
+            }
+        },
+        iNaturalistTaxonId: "48460"
+    },
+    "Buellia fecunda": {
+        taxonNames: {
+            "Buellia fecunda": {
+                resolvedBy: "AS",
+                notes: "This is an unpublished taxon which iNat won't recognize. We want to keep it on our list as is, but either suppress it or display it without mapped iNat content on the viz." 
+            }
+        },
+        iNaturalistTaxonId: "48460"
+    },
+    "Eremocoris elegantulus": {
+        taxonNames: {
+            "Eremocoris elegantulus": {
+                resolvedBy: "AS",
+                notes: "Either undescribed or an obscure species that isn't yet registered on iNat (the latter is likely the case). We can either drop it from the viz or else include it without iNat content; it should stay on our list, though."
+            }
+        },
+        iNaturalistTaxonId: "48460"
+    },
+    "Morchella conica": {
+        taxonNames: {
+            "Morchella conica": {
+                resolvedBy: "AS",
+                notes: "Retain but drop from viz (or keep without mapping with iNat); see my notes on the spreadsheet I sent you re: how I previously addressed this one."
+            }
+        },
+        iNaturalistTaxonId: "48460"
+    },
+    "Morchella elata": {
+        taxonNames: {
+            "Morchella elata": {
+                resolvedBy: "AS",
+                notes: "Retain but drop from viz (or keep without mapping with iNat); see my notes on the spreadsheet I sent you re: how I previously addressed this one."
+            }
+        },
+        iNaturalistTaxonId: "48460"
+    },
+    "Ramalina neopacifica": {
+        taxonNames: {
+            "Ramalina neopacifica": {
+                resolvedBy: "AS",
+                notes: "Unpublished taxon: either drop from viz or allow it to appear without iNat content; we need to retain it as is on our list."
+            }
+        },
+        iNaturalistTaxonId: "48460"
+    },
 }
