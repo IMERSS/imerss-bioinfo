@@ -1,0 +1,56 @@
+{
+    "id": 1366741,
+    "name": "Lepiota clypeolaria",
+    "rank": "complex",
+    "source_id": 9178,
+    "created_at": "2022-03-21T16:44:00.352Z",
+    "updated_at": "2022-03-21T16:44:00.352Z",
+    "iconic_taxon_id": 47170,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 3,
+    "listed_taxa_count": 0,
+    "rank_level": 11,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/47170/47169/492000/50814/1094814/47167/785517/1181093/58695",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "2dbd4f03-2603-4895-b5fb-09fc1250a54e",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2923027,
+        "name": "Lepiota clypeolaria",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Fungi",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/fungi-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2022-03-21T16:44:00.352Z",
+    "updated_at_utc": "2022-03-21T16:44:00.352Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2923027,
+            "name": "Lepiota clypeolaria",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1366741,
+            "created_at": "2022-03-21T16:44:00.352Z",
+            "updated_at": "2022-03-21T16:44:00.352Z",
+            "creator_id": 18795,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47170,
+        "name": "Fungi"
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "id": 1366605,
+    "name": "Inocybe flocculosa",
+    "rank": "complex",
+    "source_id": 9178,
+    "created_at": "2022-03-20T22:56:12.823Z",
+    "updated_at": "2022-03-20T22:56:12.823Z",
+    "iconic_taxon_id": 47170,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 1,
+    "listed_taxa_count": 0,
+    "rank_level": 11,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/47170/47169/492000/50814/1094814/47167/785517/55574/58679",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "667e80bc-5a95-4555-bce2-cd82fb0a4a3d",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2922423,
+        "name": "Inocybe flocculosa",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Fungi",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/fungi-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2022-03-20T22:56:12.823Z",
+    "updated_at_utc": "2022-03-20T22:56:12.823Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2922423,
+            "name": "Inocybe flocculosa",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1366605,
+            "created_at": "2022-03-20T22:56:12.823Z",
+            "updated_at": "2022-03-20T22:56:12.823Z",
+            "creator_id": 18795,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47170,
+        "name": "Fungi"
+    }
+}

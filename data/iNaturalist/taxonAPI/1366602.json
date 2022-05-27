@@ -1,0 +1,56 @@
+{
+    "id": 1366602,
+    "name": "Inosperma calamistratum",
+    "rank": "complex",
+    "source_id": 9178,
+    "created_at": "2022-03-20T22:53:53.184Z",
+    "updated_at": "2022-03-20T22:53:53.184Z",
+    "iconic_taxon_id": 47170,
+    "is_iconic": false,
+    "name_provider": null,
+    "observations_count": 2,
+    "listed_taxa_count": 0,
+    "rank_level": 11,
+    "wikipedia_summary": null,
+    "wikipedia_title": null,
+    "ancestry": "48460/47170/47169/492000/50814/1094814/47167/785517/55574/1090285",
+    "is_active": true,
+    "taxon_framework_relationship_id": null,
+    "uuid": "1109653a-563e-404a-986a-3a9a0e77712b",
+    "photos_locked": false,
+    "default_name": {
+        "id": 2922420,
+        "name": "Inosperma calamistratum",
+        "is_valid": true,
+        "lexicon": "Scientific Names"
+    },
+    "photo_url": null,
+    "iconic_taxon_name": "Fungi",
+    "conservation_status_name": null,
+    "common_name": null,
+    "image_url": "https://www.inaturalist.org/assets/iconic_taxa/fungi-75px.png",
+    "taxon_range_kml_url": null,
+    "html": null,
+    "default_photo": null,
+    "created_at_utc": "2022-03-20T22:53:53.184Z",
+    "updated_at_utc": "2022-03-20T22:53:53.184Z",
+    "taxon_photos": [],
+    "taxon_names": [
+        {
+            "id": 2922420,
+            "name": "Inosperma calamistratum",
+            "is_valid": true,
+            "lexicon": "Scientific Names",
+            "taxon_id": 1366602,
+            "created_at": "2022-03-20T22:53:53.184Z",
+            "updated_at": "2022-03-20T22:53:53.184Z",
+            "creator_id": 18795,
+            "position": 0,
+            "parameterized_lexicon": "scientific-names"
+        }
+    ],
+    "iconic_taxon": {
+        "id": 47170,
+        "name": "Fungi"
+    }
+}
