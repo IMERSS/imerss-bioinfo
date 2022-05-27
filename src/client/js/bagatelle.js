@@ -212,7 +212,9 @@ fluid.defaults("hortis.sunburst", {
                     onConfirm: "hortis.confirmAutocomplete({sunburst}, {arguments}.0)"
                 },
                 invokers: {
-                    query: "hortis.queryAutocomplete({sunburst}.flatTree, {arguments}.0, {arguments}.1)",
+                    //                                                   query,         callback
+                    query: "hortis.queryAutocomplete({that}.lookupTaxon, {arguments}.0, {arguments}.1)",
+                    lookupTaxon: "{sunburst}.lookupTaxon({arguments}.0, {that}.options.maxSuggestions)",
                     renderInputValue: "hortis.autocompleteInputForRow",
                     renderSuggestion: "hortis.autocompleteSuggestionForRow"
                 }
@@ -314,7 +316,8 @@ fluid.defaults("hortis.sunburst", {
         elementToRow: "hortis.elementToRow({that}, {arguments}.0)",
         segmentClicked: "hortis.segmentClicked({that}, {arguments}.0)",
         fillColourForRow: "hortis.undocColourForRow({that}.options.parsedColours, {arguments}.0)",
-        getMousable: "hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label, {that}.options.selectors.phyloPic)"
+        getMousable: "hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label, {that}.options.selectors.phyloPic)",
+        lookupTaxon: "hortis.lookupTaxon({that}.flatTree, {arguments}.0, {arguments}.1)"
     },
     modelListeners: {
         scale: {
@@ -404,7 +407,8 @@ hortis.autocompleteSuggestionForRow = function (row) {
     return hortis.autocompleteInputForRow(row) + (row.childCount > 1 ? " (" + row.childCount + " species)" : "");
 };
 
-hortis.queryAutocomplete = function (flatTree, query, callback) {
+hortis.lookupTaxon = function (flatTree, query, maxSuggestions) {
+    maxSuggestions = maxSuggestions || 1;
     var output = [];
     query = query.toLowerCase();
     for (var i = 0; i < flatTree.length; ++i) {
@@ -413,10 +417,15 @@ hortis.queryAutocomplete = function (flatTree, query, callback) {
         if (display.toLowerCase().indexOf(query) !== -1) {
             output.push(row);
         }
-        if (output.length >= 20) {
+        if (output.length >= maxSuggestions) {
             break;
         }
     };
+    return maxSuggestions === 1 ? output[0] : output;
+};
+
+hortis.queryAutocomplete = function (lookupTaxon, query, callback) {
+    var output = lookupTaxon(query);
     callback(output);
 };
 
@@ -721,7 +730,6 @@ hortis.updateTaxonDisplay = function (that, id) {
 hortis.tooltipTemplate = "<div class=\"fl-bagatelle-tooltip\">" +
     "<div class=\"fl-bagatelle-photo\" style=\"background-image: url(%imgUrl)\"></div>" +
     "<div class=\"fl-text\"><b>%taxonRank:</b> %taxonNames</div>" +
-    "<div class=\"fl-text\"><b>Select for more info</b></div>" +
     "</div>";
 
 hortis.renderTooltip = function (row) {
@@ -783,6 +791,8 @@ hortis.updateTooltip = function (that, id) {
         target.tooltip("option", "track", true);
         target.tooltip("open", that.mouseEvent);
         that.tooltipTarget = target;
+    } else {
+        that.mouseEvent = null;
     }
 };
 

@@ -174,17 +174,39 @@ hortis.convertTaxonLinks = function (text) {
     });
 };
 
+hortis.linkToTaxon = function (sunburst, taxonLink) {
+    var targetTaxon = taxonLink.substring("#taxon:".length);
+    return sunburst.lookupTaxon(targetTaxon);
+};
+
+// Accepts mouse event and function accepting row
+hortis.withTaxonLink = function (sunburst, e, func) {
+    var target = e.target.getAttribute("href");
+    e.preventDefault();
+    console.log("Got event target ", target);
+    if (target.startsWith("#taxon:")) {
+        var row = hortis.linkToTaxon(sunburst, target);
+        if (row) {
+            func(row);
+        }
+    }
+};
+
 hortis.listenTaxonLinks = function (sunburst) {
     $(document).on("click", ".fld-bagatelle-taxon-link", function (e) {
-        var target = e.target.getAttribute("href");
-        e.preventDefault();
-        console.log("Got click target ", target);
-        if (target.startsWith("#taxon:")) {
-            var targetTaxon = target.substring("#taxon:".length);
-            sunburst.autocomplete.query(targetTaxon, function (rows) {
-                hortis.confirmAutocomplete(sunburst, rows[0]);
-            });
-        }
+        hortis.withTaxonLink(sunburst, e, function (row) {
+            sunburst.events.changeLayoutId.fire(row.id);
+        });
+    });
+
+    $(document).on("mouseenter", ".fld-bagatelle-taxon-link", function (e) {
+        hortis.withTaxonLink(sunburst, e, function (row) {
+            sunburst.mouseEvent = e;
+            sunburst.applier.change("hoverId", row.id);
+        });
+    });
+    $(document).on("mouseleave", ".fld-bagatelle-taxon-link", function () {
+        sunburst.applier.change("hoverId", null);
     });
 };
 

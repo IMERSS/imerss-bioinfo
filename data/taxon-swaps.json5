@@ -2403,7 +2403,7 @@
                 notes: "Amanita gemmata is almost certainly distinct from Amanita muscaria but it has been subsumed into Amanita muscaria for now. I would prefer that we retain Amanita gemmata on our list. We can either suppress it from the visualization or else keep it in there and just not map it with the iNat content."
             }
         },
-        iNaturalistTaxonId: "48460"
+        iNaturalistTaxonId: "48460" // Life
     },
     "Buellia fecunda": {
         taxonNames: {
@@ -2421,7 +2421,7 @@
                 notes: "Either undescribed or an obscure species that isn't yet registered on iNat (the latter is likely the case). We can either drop it from the viz or else include it without iNat content; it should stay on our list, though."
             }
         },
-        iNaturalistTaxonId: "48460"
+        iNaturalistTaxonId: "48460" // Life
     },
     "Morchella conica": {
         taxonNames: {
@@ -2430,7 +2430,7 @@
                 notes: "Retain but drop from viz (or keep without mapping with iNat); see my notes on the spreadsheet I sent you re: how I previously addressed this one."
             }
         },
-        iNaturalistTaxonId: "48460"
+        iNaturalistTaxonId: "48460" // Life
     },
     "Morchella elata": {
         taxonNames: {
@@ -2439,7 +2439,7 @@
                 notes: "Retain but drop from viz (or keep without mapping with iNat); see my notes on the spreadsheet I sent you re: how I previously addressed this one."
             }
         },
-        iNaturalistTaxonId: "48460"
+        iNaturalistTaxonId: "48460" // Life
     },
     "Ramalina neopacifica": {
         taxonNames: {
@@ -2448,6 +2448,17 @@
                 notes: "Unpublished taxon: either drop from viz or allow it to appear without iNat content; we need to retain it as is on our list."
             }
         },
-        iNaturalistTaxonId: "48460"
+        iNaturalistTaxonId: "48460" // Life
+    },
+    "Pinus contorta contorta": {
+        taxonNames: {
+            "Pinus contorta": {
+                resolvedBy: "AS",
+                notes: "GChat message of 2022-05-25: Our local species is the nominate variety Pinus contorta var contorta - the viz should only list Pinus contorta var contorta, in general, where a subspecies or variety occurs in the dataset, we should only report those infrataxa",
+                oldiNaturalistTaxonId: "48934",
+                scope: "Galiano"
+            }
+        },
+        iNaturalistTaxonId: "80130"
     },
 }

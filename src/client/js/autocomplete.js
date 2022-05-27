@@ -21,6 +21,7 @@ fluid.defaults("hortis.autocomplete", {
     events: {
         onConfirm: null
     },
+    maxSuggestions: 20,
     invokers: {
         query: "hortis.autocomplete.emptyQuery",
         renderSuggestion: "fluid.identity",
