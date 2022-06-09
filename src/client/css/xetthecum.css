@@ -388,7 +388,7 @@ body {
     border-bottom: none;
 }
 
-.fl-taxonDisplay-row .fl-taxonDisplay-row:not(:last-child) {
+.fl-taxonDisplay-row .fl-taxonDisplay-row {
     border-bottom: none;
 }
 
