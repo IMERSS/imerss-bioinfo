@@ -377,8 +377,24 @@ body {
 }
 
 .fl-taxonDisplay-row {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-bottom: #888 1px solid;
+}
+
+.fl-taxonDisplay-row.fl-taxonDisplay-expanded {
+    border-bottom: none;
+}
+
+.fl-taxonDisplay-row .fl-taxonDisplay-row:not(:last-child) {
+    border-bottom: none;
+}
+
+/** Undo this insane rule from bagatelle.css - this whole system needs to be rewritten **/
+.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder.fl-taxonDisplay-row {
+    border-bottom: #888 1px solid;
 }
 
 .fl-taxonDisplay-rank .fl-taxonDisplay-key {

@@ -565,7 +565,7 @@ hortis.driveToPreview = function (url) {
 
 hortis.hulqValues = ["food", "medicinal", "spiritual", "material", "trade", "indicator"];
 
-hortis.hulqValueItem = "<div role=\"img\" aria-label=\"%label\" title=\"%label\" class=\"fld-bagatelle-value-%img fl-bagatelle-cultural-value\"></div>";
+hortis.hulqValueItem = "<div class=\"fl-bagatelle-cultural-value\"><div role=\"img\" class=\"fld-bagatelle-value-%img fl-bagatelle-cultural-value-img\"></div><div class=\"fld-bagatelle-cultural-value-text\">%label</div></div>";
 
 hortis.hulqValueBlock = "<div class=\"fl-bagatelle-cultural-values\">%valueBlocks</div>";
 

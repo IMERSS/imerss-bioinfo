@@ -922,9 +922,21 @@ a.ui-button:active,
 }
 
 .fl-bagatelle-cultural-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.fld-bagatelle-cultural-value-text {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 0.2rem;
+}
+
+.fl-bagatelle-cultural-value-img {
     width: 108px;
     height: 108px;
-    padding: 0.7rem;
     background-repeat: no-repeat;
     background-size: 108px;
 }
