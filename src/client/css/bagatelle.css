@@ -446,6 +446,10 @@
     background: #dde;
 }
 
+.fl-checklist-selected {
+    outline: 2px solid black;
+}
+
 .fld-bagatelle-checklist ul {
     margin-block-start: 0px;
     list-style-type: none;

@@ -12,7 +12,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 var hortis = fluid.registerNamespace("hortis");
 
 
-hortis.checklistItem = function (entry) {
+hortis.checklistItem = function (entry, selectedId) {
     var record = entry.row;
     // var focusProp = record.focusCount / record.childCount;
     // var interp = fluid.colour.interpolate(focusProp, hortis.checklist.unfocusedColour, hortis.checklist.focusedColour);
@@ -21,7 +21,8 @@ hortis.checklistItem = function (entry) {
     var rowid = " data-row-id=\"" + record.id + "\"";
 
     var rank = record.species ? "species" : record.rank;
-    var header = "<li>";
+    var selectedClass = rank === "species" && record.id === selectedId ? " class=\"fl-checklist-selected\"" : "";
+    var header = "<li " + selectedClass + ">";
     var name = "<p " + styleprop + rowid + " class=\"flc-checklist-rank-" +
         rank + "\">" + hortis.encodeHTML(record.iNaturalistTaxonName) + "</p>";
     if (record.commonName) {
@@ -35,11 +36,28 @@ hortis.checklistItem = function (entry) {
     return header + name + subList + footer;
 };
 
-hortis.checklistList = function (entries) {
+hortis.checklistList = function (entries, selectedId) {
     return entries.length ?
         "<ul>" + entries.map(function (entry) {
-            return hortis.checklistItem(entry);
+            return hortis.checklistItem(entry, selectedId);
         }).join("") + "</ul>" : "";
+};
+
+hortis.checklistRowForId = function (that, id) {
+    return that.container.find("[data-row-id=" + id + "]").closest("li");
+};
+
+// Note that we can't test on layoutId since it is updated asynchronously and in a complex way in hortis.changeLayoutId
+// This is the kind of logic that, in the end, makes us want to render with something like Preact
+// Could we return component-like things backed by markup snippets? Rather than JSX, use relay-like notation?
+hortis.updateChecklistSelection = function (that, newSelectedId, oldSelectedId, index) {
+    var oldSelected = hortis.checklistRowForId(that, oldSelectedId);
+    oldSelected.removeClass("fl-checklist-selected");
+    var row = index[newSelectedId];
+    if (row && row.species) {
+        var newSelected = hortis.checklistRowForId(that, newSelectedId);
+        newSelected.addClass("fl-checklist-selected");
+    }
 };
 
 // Accepts entries and returns entries
@@ -57,11 +75,18 @@ hortis.filterFocused = function (entries) {
     return togo;
 };
 
+hortis.acceptChecklistRow = function (row, filterRanks) {
+    var acceptBasic = !filterRanks || filterRanks.includes(row.rank) || row.species;
+    // Special request from AS - suppress any checklist entry at species level if there are any ssp
+    var rejectSpecies = row.rank === "species" && row.children.length > 0;
+    return acceptBasic && !rejectSpecies;
+};
+
 // Accepts a rows structure and returns "entries"
 hortis.filterRanks = function (rows, filterRanks) {
     var togo = [];
     fluid.each(rows, function (row) {
-        if (!filterRanks || filterRanks.includes(row.rank) || row.species) {
+        if (hortis.acceptChecklistRow(row, filterRanks)) {
             togo.push({
                 row: row,
                 children: hortis.filterRanks(row.children, filterRanks)
@@ -74,12 +99,12 @@ hortis.filterRanks = function (rows, filterRanks) {
     return togo;
 };
 
-hortis.generateChecklist = function (element, rootId, index, filterRanks) {
+hortis.generateChecklist = function (element, rootId, selectedId, index, filterRanks) {
     console.log("Generating checklist for id " + rootId);
     var rootChildren = rootId ? [index[rootId]] : [];
     var filteredRanks = hortis.filterRanks(rootChildren, filterRanks);
     var filteredFocus = hortis.filterFocused(filteredRanks);
-    var markup = hortis.checklistList(filteredFocus, index);
+    var markup = hortis.checklistList(filteredFocus, selectedId);
     element[0].innerHTML = markup;
 };
 
@@ -94,11 +119,16 @@ fluid.defaults("hortis.checklist", {
     invokers: {
         generateChecklist: {
             funcName: "hortis.generateChecklist",
-            args: ["{that}.dom.checklist", "{layoutHolder}.model.layoutId",
+            args: ["{that}.dom.checklist", "{layoutHolder}.model.layoutId", "{layoutHolder}.model.selectedId",
                 "{layoutHolder}.index", "{that}.options.filterRanks"]
         }
     },
     modelListeners: {
+        updateSelected: {
+            path: ["{layoutHolder}.model.selectedId"],
+            args: ["{that}", "{change}.value", "{change}.oldValue", "{layoutHolder}.index"],
+            func: "hortis.updateChecklistSelection"
+        },
         generateChecklist: {
             path: ["{layoutHolder}.model.layoutId", "{layoutHolder}.model.rowFocus"],
             func: "{that}.generateChecklist"

@@ -431,7 +431,7 @@ hortis.queryAutocomplete = function (lookupTaxon, query, callback) {
 
 hortis.confirmAutocomplete = function (that, row) {
     if (row) { // on blur it may send nothing
-        that.events.changeLayoutId.fire(row.id);
+        that.events.changeLayoutId.fire(row.id, "autocomplete");
     }
 };
 
@@ -1084,21 +1084,21 @@ hortis.elementToRow = function (that, element) {
 hortis.backTaxon = function (that) {
     if (that.model.historyIndex > 1) {
         that.applier.change("historyIndex", that.model.historyIndex - 1);
-        that.events.changeLayoutId.fire(that.taxonHistory[that.model.historyIndex - 1], true);
+        that.events.changeLayoutId.fire(that.taxonHistory[that.model.historyIndex - 1], "history");
     }
 };
 
 hortis.changeLayoutId = function (that, layoutId, source) {
     console.log("changeLayoutId to layoutId ", layoutId);
     that.applier.change("selectedId", layoutId);
-    var noHistory = !!source;
-    if (!noHistory) {
+    if (source !== "history") {
         that.taxonHistory[that.model.historyIndex] = layoutId;
         that.applier.change("historyIndex", that.model.historyIndex + 1);
     }
     var row = that.index[layoutId];
     if (row.children.length === 0) {
-        layoutId = that.model.layoutId;
+        // Don't change layout parent if the taxon selected by direct manipulation
+        layoutId = source === "autocomplete" ? row.parent.id : that.model.layoutId;
     }
     if (layoutId !== that.model.layoutId || source) {
         if (!that.model.layoutId) { // Can't render without some initial valid layout
@@ -1333,16 +1333,9 @@ hortis.computeMaxDepth = function (flatTree) {
 };
 
 hortis.doInitialQuery = function (that) {
-    var togo = that.flatTree[0];
-    var storeQueryResult = function (result) {
-        togo = result[0];
-    };
     // These used to be different but are now the same since we no longer select taxon on hover. Should be able to axe "selectOnStartup" as disused
     var toSelect = that.options.queryOnStartup || that.options.selectOnStartup;
-    if (toSelect) {
-        hortis.queryAutocomplete(that.flatTree, toSelect, storeQueryResult);
-    }
-    return togo;
+    return toSelect ? that.lookupTaxon(toSelect) : that.flatTree[0];
 };
 
 hortis.computeInitialScale = function (that) {
