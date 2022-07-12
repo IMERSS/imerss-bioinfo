@@ -2,7 +2,7 @@
     "sources": {
         "md": ["./*.md"],
         "css": ["src/**/*.css"],
-        "js": ["src/**/*.js", "!src/lib/*.js", "!src/auxBuild/*.js", "./*.js"],
+        "js": ["src/**/*.js", "test/**/*.js", "!src/lib/*.js", "!src/auxBuild/*.js", "./*.js"],
         "json": ["./*.json", "src/**/*.json"],
         "json5": ["data/**/*.json5"]
     },

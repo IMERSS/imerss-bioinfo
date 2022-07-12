@@ -17,6 +17,7 @@ fluid.defaults("hortis.iNat.taxa", {
     },
     members: {
         taxaMap: "@expand:hortis.readJSONSync({that}.options.mapFile, reading iNaturalist taxa map file)",
+        // Note: these indexes by name don't seem to be used
         taxaByName: {},
         taxaByNameAndRank: {},
         taxaById: {},
