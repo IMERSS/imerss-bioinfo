@@ -1,0 +1,61 @@
+{
+    "total_results":1,
+    "page":1,
+    "per_page":30,
+    "results":[
+        {
+            "observations_count":11,
+            "taxon_schemes_count":1,
+            "ancestry":"48460/1/47115/47114/551391/775797/775799/775801/47113/801475/500752/603234/603236",
+            "is_active":true,
+            "flag_counts":{
+                "unresolved":0,
+                "resolved":0
+            },
+            "wikipedia_url":"https://en.wikipedia.org/wiki/Ziminella_japonica",
+            "current_synonymous_taxon_ids":null,
+            "iconic_taxon_id":47115,
+            "rank_level":10,
+            "taxon_changes_count":1,
+            "atlas_id":null,
+            "complete_species_count":null,
+            "parent_id":603236,
+            "name":"Ziminella japonica",
+            "rank":"species",
+            "extinct":false,
+            "id":877359,
+            "default_photo":{
+                "square_url":"https://inaturalist-open-data.s3.amazonaws.com/photos/88409951/square.jpeg",
+                "attribution":"(c) Sara Thiebaud, some rights reserved (CC BY-NC)",
+                "flags":[
+                ],
+                "medium_url":"https://inaturalist-open-data.s3.amazonaws.com/photos/88409951/medium.jpeg",
+                "id":88409951,
+                "license_code":"cc-by-nc",
+                "original_dimensions":{
+                    "width":1886,
+                    "height":1084
+                },
+                "url":"https://inaturalist-open-data.s3.amazonaws.com/photos/88409951/square.jpeg"
+            },
+            "ancestor_ids":[
+                48460,
+                1,
+                47115,
+                47114,
+                551391,
+                775797,
+                775799,
+                775801,
+                47113,
+                801475,
+                500752,
+                603234,
+                603236,
+                877359
+            ],
+            "matched_term":"Flabellina japonica",
+            "iconic_taxon_name":"Mollusca"
+        }
+    ]
+}

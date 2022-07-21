@@ -37,9 +37,6 @@ fluid.defaults("hortis.iNatAPILimiter", {
 
 hortis.iNatAPILimiter();
 
-// Note that the taxon API at https://www.inaturalist.org/taxa/877359.json , e.g gives different results to the
-// "modern" one at https://api.inaturalist.org/v1/taxa/877359
-
 fluid.defaults("hortis.withINatRateLimit", {
     listeners: {
         "onRead.rateLimitBefore": {
@@ -53,7 +50,10 @@ fluid.defaults("hortis.withINatRateLimit", {
     }
 });
 
-// The former will return alternate names in the "taxon_names" block and the latter does not.
+// Note that the taxon API at https://www.inaturalist.org/taxa/877359.json , e.g gives different results to the
+// "modern" one at https://api.inaturalist.org/v1/taxa/877359
+// The former will return alternate names in the "taxon_names" block and the latter does not. But the former can
+// only accept exact ids.
 
 fluid.defaults("hortis.iNatTaxonById", {
     gradeNames: ["kettle.dataSource.URL", "hortis.withINatRateLimit"],
@@ -70,3 +70,49 @@ fluid.defaults("hortis.iNatTaxonByName", {
         name: "%name"
     }
 });
+
+fluid.defaults("hortis.iNatTaxonAPISource", {
+    gradeNames: ["fluid.dataSource", "fluid.dataSource.noencoding"],
+    components: {
+        byId: {
+            type: "hortis.iNatTaxonById"
+        },
+        byName: {
+            type: "hortis.iNatTaxonByName"
+        }
+    },
+    listeners: {
+        "onRead.impl": {
+            func: "hortis.iNatTaxonAPISource.impl",
+            args: ["{that}", "{arguments}.0"]
+        }
+    }
+});
+
+hortis.iNatTaxonAPISource.impl = async function (that, query) {
+    if (query.id) {
+        var byId = await that.byId.get(query);
+    } else if (query.name) {
+        var byName = await that.byName.get(query);
+        if (byName.results.length === 0) {
+            return null;
+        } else {
+            var record = byName.results[0];
+            var togo = fluid.filterKeys(record, ["name", "rank", "id"]);
+            // TODO: This should really hit the cached dataSource first
+            var byIdBack = await that.byId.get({id: togo.id});
+            var nameRecord = byIdBack.taxon_names.find(function (nameRec) {
+                return nameRec.name === query.name;
+            });
+            var nameStatus;
+            if (nameRecord) {
+                fluid.extend(togo, fluid.filterKeys(nameRecord, ["is_valid", "lexicon", "created_at", "updated_at"]));
+                nameStatus = nameRecord.is_valid ? "accepted" : "unaccepted";
+            } else {
+                nameStatus = "invalid";
+            }
+            togo.nameStatus = nameStatus;
+            // TODO: We are here
+        }
+    }
+};

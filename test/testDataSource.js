@@ -76,7 +76,7 @@ hortis.tests.retryResponses = {
 };
 
 fluid.defaults("hortis.tests.retryingMockDataSource", {
-    gradeNames: "fluid.dataSource.retrying",
+    gradeNames: ["fluid.dataSource.retrying", "fluid.dataSource.noencoding"],
     members: {
         index: 0
     },
@@ -85,11 +85,6 @@ fluid.defaults("hortis.tests.retryingMockDataSource", {
         "onRead.impl": {
             funcName: "hortis.tests.retryingMockDataSource.impl",
             args: ["{that}"]
-        }
-    },
-    components: {
-        encoding: {
-            type: "fluid.dataSource.encoding.none"
         }
     }
 });

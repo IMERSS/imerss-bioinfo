@@ -4,6 +4,14 @@
 
 var fluid = require("infusion");
 
+fluid.defaults("fluid.dataSource.noencoding", {
+    components: {
+        encoding: {
+            type: "fluid.dataSource.encoding.none"
+        }
+    }
+});
+
 fluid.defaults("fluid.dataSource.retrying", {
     gradeNames: "fluid.dataSource",
     retryInterval: 1000,
