@@ -2,19 +2,22 @@
 
 "use strict";
 
-var fluid = require("infusion");
-var hortis = fluid.registerNamespace("hortis");
+const fluid = require("infusion");
+const hortis = fluid.registerNamespace("hortis");
 
-var level = require("level");
+const level = require("level");
 
 fluid.registerNamespace("hortis.iNat");
+
+require("../utils/dataSource.js");
+require("kettle"); // for kettle.dataSource.URL
 
 hortis.iNat.filenameFromTaxonId = function (taxonAPIFileBase, id) {
     return taxonAPIFileBase + "/" + id + ".json";
 };
 
 hortis.iNat.loadTaxonDoc = function (taxonAPIFileBase, id) {
-    var filename = hortis.iNat.filenameFromTaxonId(taxonAPIFileBase, id);
+    const filename = hortis.iNat.filenameFromTaxonId(taxonAPIFileBase, id);
     return hortis.readJSONSync(filename);
 };
 
@@ -31,12 +34,15 @@ hortis.iNat.nameToKey = function (name) {
 };
 
 fluid.defaults("hortis.iNatAPILimiter", {
-    gradeNames: ["fluid.rateLimiter", "fluid.resolveRootSingle"],
+    gradeNames: ["fluid.dataSource.rateLimiter", "fluid.resolveRootSingle"],
     singleRootType: "hortis.iNatAPILimiter"
 });
 
+// Create a singleton rate limiter to ensure that all requests against the real iNaturalist API are rate-limited
+// regardless of source
 hortis.iNatAPILimiter();
 
+// A mixin for any dataSource which will rate limit its requests against the singleton iNaturalist rate limiter
 fluid.defaults("hortis.withINatRateLimit", {
     listeners: {
         "onRead.rateLimitBefore": {
@@ -84,35 +90,119 @@ fluid.defaults("hortis.iNatTaxonAPISource", {
     listeners: {
         "onRead.impl": {
             func: "hortis.iNatTaxonAPISource.impl",
-            args: ["{that}", "{arguments}.0"]
+            args: ["{that}", "{arguments}.0", "{arguments}.1"]
         }
     }
 });
 
-hortis.iNatTaxonAPISource.impl = async function (that, query) {
+
+/** Accepts queries either by name or by id, forwarding to the two raw API sources which are attached.
+ * In the case of a by id query, it is sent direct.
+ * In the case of a by name query, we look at the first result in the list and attempt to look it up by id and then
+ * look at the "taxon_names" entries which account for iNat's alternate names. If we find it there, we can decide
+ * that the entry is either "accepted" (if iNat says is_valid), "unaccepted" (if not is_valid)
+ * or "invalid" if it is not there, because iNat has returned the result as a partial or fuzzy name match.
+ * @param {Component} that - The iNatTaxonAPISource component
+ * @param {Object} options - The DataSource chain options, including the query in "directModel"
+ * @return {Promise<Object>} A promise for the document as returned from the API
+ */
+hortis.iNatTaxonAPISource.impl = async function (that, payload, options) {
+    var query = options.directModel;
+    var doc;
     if (query.id) {
-        var byId = await that.byId.get(query);
+        doc = await that.byId.get(query);
     } else if (query.name) {
         var byName = await that.byName.get(query);
         if (byName.results.length === 0) {
             return null;
         } else {
             var record = byName.results[0];
-            var togo = fluid.filterKeys(record, ["name", "rank", "id"]);
+            doc = fluid.filterKeys(record, ["name", "rank", "id"]);
             // TODO: This should really hit the cached dataSource first
-            var byIdBack = await that.byId.get({id: togo.id});
+            var byIdBack = await that.byId.get({id: doc.id});
             var nameRecord = byIdBack.taxon_names.find(function (nameRec) {
                 return nameRec.name === query.name;
             });
             var nameStatus;
             if (nameRecord) {
-                fluid.extend(togo, fluid.filterKeys(nameRecord, ["is_valid", "lexicon", "created_at", "updated_at"]));
+                fluid.extend(doc, fluid.filterKeys(nameRecord, ["is_valid", "lexicon", "created_at", "updated_at"]));
                 nameStatus = nameRecord.is_valid ? "accepted" : "unaccepted";
             } else {
                 nameStatus = "invalid";
             }
-            togo.nameStatus = nameStatus;
-            // TODO: We are here
+            doc.nameStatus = nameStatus;
         }
+    }
+    var togo = {
+        fetched_at: new Date().toISOString(),
+        doc: doc
+    };
+    return togo;
+};
+
+
+fluid.defaults("hortis.levelDBSource", {
+    gradeNames: ["fluid.dataSource", "fluid.dataSource.writable"],
+    dbFile: "%bagatelle/data/iNaturalist/taxa.ldb",
+    members: {
+        level: "@expand:hortis.levelDBSource.openDB({that}.options.dbFile)",
+    },
+    invokers: {
+        encodeKey: "fluid.notImplemented"
+    },
+    listeners: {
+        "onRead.impl": {
+            func: "hortis.levelDBSource.read",
+            args: ["{that}", "{arguments}.0"]
+        },
+        "onWrite.impl": {
+            func: "hortis.levelDBSource.write",
+            args: ["{that}", "{arguments}.0", "{arguments}.1"]
+        }
+    }
+});
+
+hortis.levelDBSource.read = function (that, value, options) {
+    var key = options.directModel;
+    var flatKey = that.encodeKey(key);
+    return that.level.get(flatKey);
+};
+
+hortis.levelDBSource.write = function (that, value, options) {
+    var key = options.directModel;
+    var flatKey = that.encodeKey(key);
+    return that.level.put(flatKey, value);
+};
+
+hortis.levelDBSource.openDB = function (dbFile) {
+    return new level.Level(fluid.module.resolvePath(dbFile), {
+        createIfMissing: true
+    });
+};
+
+fluid.defaults("hortis.iNatTaxonAPI.dbSource", {
+    gradeNames: "hortis.levelDBSource",
+    invokers: {
+        encodeKey: "hortis.iNatTaxonAPI.encodeKey({arguments}.0)"
+    }
+});
+
+hortis.iNatTaxonAPI.padId = function (id) {
+    return id.padStart(8, "0");
+};
+
+hortis.iNatTaxonAPI.encodeKey = function (key) {
+    var keys = Object.keys(key);
+    if (keys.length !== 1) {
+        fluid.fail("Expected exactly one key in key structure, instead received " + keys.length + " for ", keys);
+    }
+    var oneKey = keys[0];
+    var value = key[oneKey];
+    if (oneKey === "id") {
+        return "id:iNat:" + hortis.iNatTaxonAPI.padId("" + value);
+    } else if (oneKey === "name") {
+        return "name:iNat:" + value;
+    } else {
+        fluid.fail("Unexpected key in key structure " + oneKey);
     }
 };
