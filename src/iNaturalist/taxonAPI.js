@@ -5,11 +5,10 @@
 const fluid = require("infusion");
 const hortis = fluid.registerNamespace("hortis");
 
-const level = require("level");
-
 fluid.registerNamespace("hortis.iNat");
 
 require("../utils/dataSource.js");
+require("../dataProcessing/sqlite.js");
 require("kettle"); // for kettle.dataSource.URL
 
 hortis.iNat.filenameFromTaxonId = function (taxonAPIFileBase, id) {
@@ -95,6 +94,42 @@ fluid.defaults("hortis.iNatTaxonAPISource", {
     }
 });
 
+fluid.defaults("hortis.cachedApiSource", {
+    gradeNames: ["fluid.dataSource", "fluid.dataSource.noencoding"],
+    refreshInDays: 7,
+    /*
+    components: {
+        apiSource,
+        dbSource
+    }
+    */
+    listeners: {
+        "onRead.impl": {
+            func: "hortis.cachedApiSource.read",
+            args: ["{that}", "{arguments}.0", "{arguments}.1"]
+        }
+    }
+});
+
+
+hortis.cachedApiSource.read = function (that, payload, options) {
+
+};
+
+fluid.defaults("hortis.cachediNatTaxonById", {
+    gradeNames: "hortis.cachedApiSource",
+
+    components: {
+        apiSource: {
+            type: "hortis.iNatTaxonById"
+        },
+        dbSource: {
+            type: "hortis.iNatTaxonAPI.byIdDBSource"
+        }
+    },
+
+});
+
 
 /** Accepts queries either by name or by id, forwarding to the two raw API sources which are attached.
  * In the case of a by id query, it is sent direct.
@@ -103,27 +138,28 @@ fluid.defaults("hortis.iNatTaxonAPISource", {
  * that the entry is either "accepted" (if iNat says is_valid), "unaccepted" (if not is_valid)
  * or "invalid" if it is not there, because iNat has returned the result as a partial or fuzzy name match.
  * @param {Component} that - The iNatTaxonAPISource component
+ * @param {Object} payload - The payload being transformed
  * @param {Object} options - The DataSource chain options, including the query in "directModel"
  * @return {Promise<Object>} A promise for the document as returned from the API
  */
 hortis.iNatTaxonAPISource.impl = async function (that, payload, options) {
-    var query = options.directModel;
-    var doc;
+    const query = options.directModel;
+    let doc;
     if (query.id) {
         doc = await that.byId.get(query);
     } else if (query.name) {
-        var byName = await that.byName.get(query);
+        const byName = await that.byName.get(query);
         if (byName.results.length === 0) {
             return null;
         } else {
-            var record = byName.results[0];
+            const record = byName.results[0];
             doc = fluid.filterKeys(record, ["name", "rank", "id"]);
             // TODO: This should really hit the cached dataSource first
-            var byIdBack = await that.byId.get({id: doc.id});
-            var nameRecord = byIdBack.taxon_names.find(function (nameRec) {
+            const byIdBack = await that.byId.get({id: doc.id});
+            const nameRecord = byIdBack.taxon_names.find(function (nameRec) {
                 return nameRec.name === query.name;
             });
-            var nameStatus;
+            let nameStatus;
             if (nameRecord) {
                 fluid.extend(doc, fluid.filterKeys(nameRecord, ["is_valid", "lexicon", "created_at", "updated_at"]));
                 nameStatus = nameRecord.is_valid ? "accepted" : "unaccepted";
@@ -133,76 +169,81 @@ hortis.iNatTaxonAPISource.impl = async function (that, payload, options) {
             doc.nameStatus = nameStatus;
         }
     }
-    var togo = {
+    const togo = {
         fetched_at: new Date().toISOString(),
         doc: doc
     };
     return togo;
 };
 
-
-fluid.defaults("hortis.levelDBSource", {
-    gradeNames: ["fluid.dataSource", "fluid.dataSource.writable"],
-    dbFile: "%bagatelle/data/iNaturalist/taxa.ldb",
-    members: {
-        level: "@expand:hortis.levelDBSource.openDB({that}.options.dbFile)",
-    },
+fluid.defaults("fluid.dataSource.listable", {
     invokers: {
-        encodeKey: "fluid.notImplemented"
+        list: "fluid.notImplemented"
+    }
+});
+
+fluid.defaults("hortis.iNatTaxonAPI.byIdDBSource", {
+    gradeNames: ["hortis.listableSqliteSource"],
+    createString: "CREATE TABLE IF NOT EXISTS iNatTaxaId (id INTEGER PRIMARY KEY, fetched_at TEXT, doc BLOB)",
+    columnCodecs: {
+        doc: "zlib"
     },
-    listeners: {
-        "onRead.impl": {
-            func: "hortis.levelDBSource.read",
-            args: ["{that}", "{arguments}.0"]
+    readQuery: {
+        query: "SELECT id, fetched_at, doc from iNatTaxaId WHERE id = ?",
+        args: ["%id"]
+    },
+    writeQuery: {
+        query: "INSERT OR REPLACE INTO iNatTaxaId (id, fetched_at, doc) VALUES ($id, $fetched_at, $doc)",
+        args: {
+            $id: "%id",
+            $fetched_at: "%fetched_at",
+            $doc: "%doc"
+        }
+    },
+    listQuery: {
+        query: "SELECT id from iNatTaxaId"
+    }
+});
+
+fluid.defaults("hortis.iNatTaxonAPI.byNameDBSource", {
+    gradeNames: ["hortis.listableSqliteSource"],
+    createString: "CREATE TABLE IF NOT EXISTS iNatTaxaName (name TEXT PRIMARY KEY, fetched_at TEXT, doc BLOB)",
+    columnCodecs: {
+        doc: "zlib"
+    },
+    readQuery: {
+        query: "SELECT name, fetched_at, doc from iNatTaxaName WHERE name = ?",
+        args: ["%name"]
+    },
+    writeQuery: {
+        query: "INSERT OR REPLACE INTO iNatTaxaId (name, fetched_at, doc) VALUES ($name, $fetched_at, $doc)",
+        args: {
+            $name: "%name",
+            $fetched_at: "%fetched_at",
+            $doc: "%doc"
+        }
+    },
+    listQuery: {
+        query: "SELECT name from iNatTaxaName"
+    }
+});
+
+fluid.defaults("hortis.iNatTaxonAPI.dbTaxonAPIs", {
+    gradeNames: "fluid.modelComponent",
+    components: {
+        db: {
+            type: "hortis.sqliteDB",
+            options: {
+                dbFile: "%bagatelle/data/iNaturalist/taxa.db/taxa.sqlite3"
+            }
         },
-        "onWrite.impl": {
-            func: "hortis.levelDBSource.write",
-            args: ["{that}", "{arguments}.0", "{arguments}.1"]
+        byId: {
+            type: "hortis.iNatTaxonAPI.byIdDBSource"
+        },
+        byName: {
+            type: "hortis.iNatTaxonAPI.byNameDBSource"
         }
     }
 });
 
-hortis.levelDBSource.read = function (that, value, options) {
-    var key = options.directModel;
-    var flatKey = that.encodeKey(key);
-    return that.level.get(flatKey);
-};
-
-hortis.levelDBSource.write = function (that, value, options) {
-    var key = options.directModel;
-    var flatKey = that.encodeKey(key);
-    return that.level.put(flatKey, value);
-};
-
-hortis.levelDBSource.openDB = function (dbFile) {
-    return new level.Level(fluid.module.resolvePath(dbFile), {
-        createIfMissing: true
-    });
-};
-
-fluid.defaults("hortis.iNatTaxonAPI.dbSource", {
-    gradeNames: "hortis.levelDBSource",
-    invokers: {
-        encodeKey: "hortis.iNatTaxonAPI.encodeKey({arguments}.0)"
-    }
-});
-
-hortis.iNatTaxonAPI.padId = function (id) {
-    return id.padStart(8, "0");
-};
-
-hortis.iNatTaxonAPI.encodeKey = function (key) {
-    var keys = Object.keys(key);
-    if (keys.length !== 1) {
-        fluid.fail("Expected exactly one key in key structure, instead received " + keys.length + " for ", keys);
-    }
-    var oneKey = keys[0];
-    var value = key[oneKey];
-    if (oneKey === "id") {
-        return "id:iNat:" + hortis.iNatTaxonAPI.padId("" + value);
-    } else if (oneKey === "name") {
-        return "name:iNat:" + value;
-    } else {
-        fluid.fail("Unexpected key in key structure " + oneKey);
-    }
-};
+// Plan in the end is for multitaxonomy source which federates ids as "id:iNat:", names as "name:iNat:"

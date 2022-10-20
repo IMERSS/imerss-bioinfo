@@ -2,16 +2,16 @@
 
 "use strict";
 
-var fluid = require("infusion");
+const fluid = require("infusion");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 require("../src/iNaturalist/taxonAPI.js");
 
-var source = hortis.iNatTaxonAPISource();
+const source = hortis.iNatTaxonAPISource();
 
-var testSource = async function () {
-    var result = await source.get({name: "Flabellina japonica"});
+const testSource = async function () {
+    const result = await source.get({name: "Flabellina japonica"});
     console.log(result);
 };
 

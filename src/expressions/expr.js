@@ -2,11 +2,11 @@
 
 "use strict";
 
-var fluid = require("infusion");
+const fluid = require("infusion");
 
-var Jsep = require("./jsep.js");
+const Jsep = require("./jsep.js");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 fluid.registerNamespace("hortis.expr");
 
@@ -34,12 +34,12 @@ hortis.expr.evaluate = function (node, scope) {
             fluid.fail("Name " + node.name + " is not found in scope - possible values are " + Object.keys(scope).join(", "));
         }
     } else if (node.type === "BinaryExpression") {
-        var opfunc = hortis.expr.binops[node.operator];
+        const opfunc = hortis.expr.binops[node.operator];
         if (!opfunc) {
             fluid.fail("Unknown binary operator " + node.operator + " - possible values are " + Object.keys(hortis.expr.binops).join(", "));
         }
-        var left = hortis.expr.evaluate(node.left, scope);
-        var right = hortis.expr.evaluate(node.right, scope);
+        const left = hortis.expr.evaluate(node.left, scope);
+        const right = hortis.expr.evaluate(node.right, scope);
         return opfunc(left, right);
     } else {
         fluid.fail("Unknown node type " + node.type);

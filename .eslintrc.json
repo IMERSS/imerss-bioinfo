@@ -9,7 +9,6 @@
     "rules": {
         "strict": ["error", "global"],
         "no-loop-func": 0,
-        "no-console": 0,
-        "dot-notation": [2, { "allowKeywords": true }]
+        "no-console": 0
     }
 }

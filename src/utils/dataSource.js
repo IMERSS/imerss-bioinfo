@@ -2,7 +2,7 @@
 
 "use strict";
 
-var fluid = require("infusion");
+const fluid = require("infusion");
 
 fluid.defaults("fluid.dataSource.noencoding", {
     components: {
@@ -25,19 +25,19 @@ fluid.defaults("fluid.dataSource.retrying", {
 });
 
 fluid.promise.delay = function (delay) {
-    var togo = fluid.promise();
+    const togo = fluid.promise();
     setTimeout(togo.resolve, delay);
     return togo;
 };
 
 fluid.dataSource.retrying.get = async function (that, directModel, directOptions) {
-    var underlyingGet = function () {
+    const underlyingGet = function () {
         return fluid.dataSource.get(that, directModel, directOptions);
     };
-    var err = null;
-    for (var i = 0; i < that.options.retries; ++i) {
+    let err = null;
+    for (let i = 0; i < that.options.retries; ++i) {
         try {
-            var payload = await underlyingGet();
+            const payload = await underlyingGet();
             return payload;
         } catch (e) {
             fluid.log("Got exception ", e.message , " from dataSource, retry " + (i + 1) + "/" + that.options.retries);
@@ -73,13 +73,13 @@ fluid.defaults("fluid.dataSource.rateLimiter", {
 });
 
 fluid.dataSource.rateLimiter.next = function (that) {
-    var resolve = function (toResolve) {
+    const now = Date.now();
+    const resolve = function (toResolve) {
         that.lastFired = now;
         toResolve.resolve(toResolve.payload);
     };
 
-    var now = Date.now();
-    var uncess = that.lastFired + that.options.rateLimit - now;
+    const uncess = that.lastFired + that.options.rateLimit - now;
     fluid.log("lastFired is " + that.lastFired);
     fluid.log("uncess is " + uncess);
     if (!that.pending && that.queue.length > 0) {
@@ -89,14 +89,14 @@ fluid.dataSource.rateLimiter.next = function (that) {
                 that.next();
             }, uncess);
         } else {
-            var top = that.queue.shift();
+            const top = that.queue.shift();
             resolve(top);
         }
     }
 };
 
 fluid.dataSource.rateLimiter.requestStart = function (that, payload) {
-    var togo = fluid.promise();
+    const togo = fluid.promise();
     togo.payload = payload;
     that.queue.push(togo);
     that.next();

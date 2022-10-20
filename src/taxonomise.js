@@ -2,11 +2,11 @@
 /* eslint dot-notation: "off"*/
 "use strict";
 
-var fluid = require("infusion");
+const fluid = require("infusion");
 
 fluid.require("%bagatelle");
 
-var minimist = require("minimist");
+const minimist = require("minimist");
 
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/writeJSON.js");
@@ -199,7 +199,7 @@ hortis.applyFilters = function (obsRows, filters, filterCount) {
 
 hortis.resolvePaths = function (obj, pathKeys) {
     pathKeys.forEach(function (pathKey) {
-        var path = obj[pathKey];
+        const path = obj[pathKey];
         if (!path) {
             fluid.fail("Dataset record ", obj, " is missing required member " + pathKey);
         }
@@ -260,8 +260,8 @@ fluid.defaults("hortis.pipe.contextInput", {
 
 hortis.pipe.loadCSVInputPipe = function (patch) {
     hortis.resolvePaths(patch, ["map", "input"]);
-    var map = hortis.readJSONSync(patch.map, "reading patch map file");
-    var patchData = hortis.csvReaderWithMap({
+    const map = hortis.readJSONSync(patch.map, "reading patch map file");
+    const patchData = hortis.csvReaderWithMap({
         inputFile: patch.input,
         mapColumns: map.columns
     }).completionPromise;
