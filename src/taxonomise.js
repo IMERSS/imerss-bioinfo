@@ -349,38 +349,6 @@ hortis.deduplicateById = function (resolved, patch) {
     resolved.obsRows = filteredObsRows;
 };
 
-hortis.sanitizeSpeciesName = function (name) {
-    name = name.trim();
-    // Examples such as Blidingia spp., including Blidingia minima var. vexata
-    [" sp.", " spp.", "?", " / "].forEach(function (toRemove) {
-        var index = name.indexOf(toRemove);
-        // Special exception to allow us to process Myxicola sp.A and sp.B, as well as Haliclona sp.1 and sp.2 etc.
-        if (index !== -1 && !name.match(/sp\.[A-Z0-9]/)) {
-            name = name.substring(0, index);
-        }
-    });
-    name = name.replace("�", "ue");
-    name = name.replace(/ (\(.*\))/g, "");
-    name = name.replace(" ssp.", "");
-    name = name.replace(" subsp.", "");
-    name = name.replace(" grp.", "");
-    name = name.replace(" grp", "");
-    name = name.replace(" group", "");
-    name = name.replace(" var.", "");
-    name = name.replace(" ined.", "");
-    name = name.replace(" etc.", "");
-    name = name.replace(" aff.", "");
-    name = name.replace(" agg.", "");
-    name = name.replace(" s.lat.", "");
-    name = name.replace(" f.", "");
-    name = name.replace(" species complex", "");
-    name = name.replace(" complex", "");
-    name = name.replace(" cf ", " ");
-    name = name.replace(" ?", " ");
-    name = name.replace(" x ", " × ");
-    return name;
-};
-
 hortis.resolveTaxa = function (target, taxaById, taxonId, columns) {
     var taxon = taxaById[taxonId];
     while (taxon.parentNameUsageId) {

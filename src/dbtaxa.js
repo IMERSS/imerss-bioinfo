@@ -14,6 +14,13 @@ const taxonAPIFileBase = "data/iNaturalist/taxonAPI";
 
 const hortis = fluid.registerNamespace("hortis");
 
+const taxonAPIs = hortis.iNatTaxonAPI.dbTaxonAPIs();
+taxonAPIs.events.onCreate.then((function (taxonAPIs) {
+    return traverseDB(taxonAPIs.byId, taxonAPIs.db);
+}), function (err) {
+    console.log("Got error instantiating APIs ", err);
+});
+
 const now = Date.now();
 
 const dataFiles = glob.sync(taxonAPIFileBase + "/*.json");
@@ -26,45 +33,55 @@ hortis.idFromFilename = function (filename) {
     return filename.substring(lastslash + 1, lastdot);
 };
 
-hortis.padTaxonId = function (id) {
-    return id.padStart(8, "0");
-};
+async function traverseDB(source, db) {
 
-const source = hortis.iNatTaxonAPI.dbSource();
-
-async function traverseDB() {
-
+    console.log("Beginning insert");
     const beforeWrite = Date.now();
 
     const writeAll = async function (dataFiles) {
+        await db.beginTransaction();
         for (let i = 0; i < dataFiles.length; ++i) {
             const dataFile = dataFiles[i];
             const contents = hortis.readJSONSync(dataFile);
             const stats = fs.statSync(dataFile);
-            const toWrite = {
-                fetched_at: stats.mtime.toISOString(),
+            const fetched_at = stats.mtime.toISOString();
+            await source.set({id: contents.id}, {
+                id: contents.id,
+                fetched_at: fetched_at,
                 doc: contents
-            };
-            await source.set({id: contents.id}, toWrite);
+            });
             if (i % 1000 === 0) {
                 process.stdout.write(i + " ... ");
             }
         }
+        await db.endTransaction();
     };
 
-    await writeAll(dataFiles);
+    try {
+        await writeAll(dataFiles);
+    } catch (err) {
+        console.log("Error writing files ", err);
+        throw err;
+    }
 
     console.log("\nWritten " + dataFiles.length + " taxon files in " + (Date.now() - beforeWrite) + "ms");
+
+    const allIds = await source.list();
+
+    console.log("Got " + allIds.length + " ids: ", allIds[0]);
+
+    const beforeRead = Date.now();
 
     const readAll = async function () {
         let index = 0;
         let first = true;
-        const db = source.level;
-        for await (const key of db.keys()) {
+        for (const {id: key} of allIds) {
+
             if (index % 100 === 0) {
                 process.stdout.write("\"" + key + "\" ");
             }
-            const doc = JSON.parse(await db.get(key));
+            const row = await source.get({id: key});
+            const doc = row.doc;
             if (first) {
                 console.log("First doc: ", doc);
                 first = false;
@@ -74,8 +91,6 @@ async function traverseDB() {
     };
 
     await readAll();
-}
+    console.log("\nRead " + allIds.length + " taxon files in " + (Date.now() - beforeRead) + "ms");
 
-traverseDB().catch(function (err) {
-    console.log("Error traversing database ", err);
-});
+}
