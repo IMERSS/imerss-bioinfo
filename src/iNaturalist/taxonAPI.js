@@ -9,13 +9,16 @@ const moment = require("moment");
 fluid.registerNamespace("hortis.iNat");
 
 require("../utils/dataSource.js");
+require("../utils/utils.js");
 require("../dataProcessing/sqlite.js");
 require("kettle"); // for kettle.dataSource.URL
+
+hortis.ranks = fluid.freezeRecursive(fluid.require("%bagatelle/data/ranks.json"));
 
 hortis.sanitizeSpeciesName = function (name) {
     name = name.trim();
     // Examples such as Blidingia spp., including Blidingia minima var. vexata
-    [" sp.", " spp.", "?", " / ", " x"].forEach(function (toRemove) {
+    [" sp.", " spp.", "?", " / ", " x "].forEach(function (toRemove) {
         const index = name.indexOf(toRemove);
         // Special exception to allow us to process Myxicola sp.A and sp.B, as well as Haliclona sp.1 and sp.2 etc.
         if (index !== -1 && !name.match(/sp\.[A-Z0-9]/)) {
@@ -54,7 +57,7 @@ hortis.iNat.loadTaxonDoc = function (taxonAPIFileBase, id) {
 };
 
 hortis.iNat.parentTaxaIds = function (taxonDoc) {
-    return taxonDoc.ancestry ? taxonDoc.ancestry.split("/") : [];
+    return taxonDoc.ancestry ? taxonDoc.ancestry.split("/").reverse() : [];
 };
 
 fluid.defaults("hortis.iNatAPILimiter", {
@@ -108,12 +111,13 @@ fluid.defaults("hortis.cachedApiSource", {
     gradeNames: ["fluid.dataSource", "fluid.dataSource.noencoding"],
     refreshInDays: 7,
     disableCache: false,
-    /*
     components: {
-        apiSource,
-        dbSource
-    }
-    */
+        inMemorySource: {
+            type: "fluid.inMemoryCachedSource"
+        }
+        //apiSource,
+        //dbSource
+    },
     invokers: {
         // accepts "payload", "live" in order to convert API document to DB form
         upgradeLiveDocument: "fluid.notImplemented"
@@ -128,23 +132,29 @@ fluid.defaults("hortis.cachedApiSource", {
 
 hortis.cachedApiSource.read = async function (that, payload, options) {
     const query = options.directModel;
-    const cached = await that.dbSource.get(query);
-    console.log("cachedAPISource got cached document ", cached);
-    if (cached && !that.options.disableCache) {
-        const staleness = Date.now() - Date.parse(cached.fetched_at);
-        if (staleness < that.options.refreshInDays * hortis.DAY_IN_MS) {
-            console.log("Staleness is " + moment.duration(staleness).humanize() + " so returning cached document");
-            return cached;
+    const firstLevel = await that.inMemorySource.get(query);
+    if (firstLevel) {
+        console.log("Hit first level cache for ", query);
+        return firstLevel;
+    } else {
+        const cached = await that.dbSource.get(query);
+        if (cached && !that.options.disableCache) {
+            const staleness = Date.now() - Date.parse(cached.fetched_at);
+            if (staleness < that.options.refreshInDays * hortis.DAY_IN_MS) {
+                console.log("Staleness is " + moment.duration(staleness).humanize() + " so returning cached document");
+                await that.inMemorySource.set(query, cached);
+                return cached;
+            }
         }
-    }
-    const live = await that.apiSource.get(query);
-    if (live) {
-        const toWrite = await that.upgradeLiveDocument(query, live);
-        console.log("cachedApiSource got ", toWrite);
-        if (toWrite) {
-            await that.dbSource.set(query, toWrite);
+        const live = await that.apiSource.get(query);
+        if (live) {
+            const toWrite = await that.upgradeLiveDocument(query, live);
+            if (toWrite) {
+                await that.dbSource.set(query, toWrite);
+                await that.inMemorySource.set(query, toWrite);
+            }
+            return toWrite;
         }
-        return toWrite;
     }
 };
 
@@ -354,4 +364,45 @@ fluid.defaults("hortis.iNatTaxonAPI.dbTaxonAPIs", {
     }
 });
 
+hortis.extractSpeciesName = function (name) {
+    const words = name.split(" ");
+    return words[1];
+};
+
 // Plan in the end is for multitaxonomy source which federates ids as "id:iNat:", names as "name:iNat:"
+
+/** Return ancestry documents starting from the specified taxon and continuing up the hierarchy to the root. Note that a
+ * rank of "complex" will be considered to be "species".
+ * @param {String} id - The id of the taxon for which ancestry is required
+ * @param {fluid.dataSource} byIdSource - The dataSource serving taxon documents by ID
+ * @return {Promise<Array<Object>>} - A promise for an array of taxon documents, with the taxon document for which the
+ * id was specified in the first element
+ */
+hortis.iNat.getAncestry = async function (id, byIdSource) {
+    const baseDoc = await byIdSource.get({id: id});
+    const parentIds = hortis.iNat.parentTaxaIds(baseDoc.doc);
+    // TODO: Should not really be parallel
+    const allDocs = await Promise.all(parentIds.map(async id => byIdSource.get({id: id})));
+    return [baseDoc, ...allDocs];
+};
+
+hortis.iNat.getRanks = async function (id, rankTarget, byIdSource) {
+    const allDocs = await hortis.iNat.getAncestry(id, byIdSource);
+    const indexed = {};
+    allDocs.forEach(function (doc) {
+        const docRank = doc.doc.rank;
+        const rank = hortis.capitalize(docRank === "complex" ? "species" : docRank);
+        indexed[rank] = rank === "Species" ? hortis.extractSpeciesName(doc.doc.name) : doc.doc.name;
+    });
+    console.log("Got ranks ", Object.keys(indexed));
+    hortis.ranks.forEach(function (lowRank) {
+        const rank = hortis.capitalize(lowRank);
+        if (rank in rankTarget) {
+            const thisRank = indexed[rank];
+            if (thisRank && rankTarget[rank] !== thisRank) {
+                console.log("Replacing " + rank + " " + rankTarget[rank] + " with " + thisRank);
+            }
+            rankTarget[rank] = thisRank || "";
+        }
+    });
+};

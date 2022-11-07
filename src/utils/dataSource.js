@@ -80,8 +80,6 @@ fluid.dataSource.rateLimiter.next = function (that) {
     };
 
     const uncess = that.lastFired + that.options.rateLimit - now;
-    fluid.log("lastFired is " + that.lastFired);
-    fluid.log("uncess is " + uncess);
     if (!that.pending && that.queue.length > 0) {
         if (uncess > 0) {
             that.pending = setTimeout(function () {
@@ -122,3 +120,43 @@ fluid.defaults("fluid.dataSource.withRateLimiter", {
         }
     }
 });
+
+fluid.defaults("fluid.inMemoryCachedSource", {
+    gradeNames: ["fluid.dataSource", "fluid.dataSource.noencoding", "fluid.dataSource.writable"],
+    members: {
+        cache: {}
+    },
+    listeners: {
+        "onRead.impl": {
+            func: "fluid.inMemoryCachedSource.read",
+            args: ["{that}", "{arguments}.0", "{arguments}.1"]
+        },
+        "onWrite.impl": {
+            func: "fluid.inMemoryCachedSource.write",
+            args: ["{that}", "{arguments}.0", "{arguments}.1"]
+        }
+    }
+});
+
+fluid.inMemoryCachedSource.toCacheKey = function (directModel) {
+    if (fluid.isPrimitive(directModel)) {
+        return directModel.toString();
+    } else {
+        let togo = "";
+        for (const key in directModel) {
+            togo += key + "|" + directModel[key] + "|";
+        }
+        return togo;
+    }
+};
+
+fluid.inMemoryCachedSource.read = function (that, payload, options) {
+    const key = fluid.inMemoryCachedSource.toCacheKey(options.directModel);
+    return that.cache[key];
+};
+
+fluid.inMemoryCachedSource.write = function (that, payload, options) {
+    const key = fluid.inMemoryCachedSource.toCacheKey(options.directModel);
+    that.cache[key] = payload;
+    return payload;
+};

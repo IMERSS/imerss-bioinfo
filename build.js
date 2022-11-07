@@ -1,13 +1,13 @@
 /* eslint-env node */
 "use strict";
 
-var readline = require("readline"),
+const readline = require("readline"),
     fs = require("fs-extra");
 
-var fluid = require("infusion");
-var terser = require("terser");
+const fluid = require("infusion");
+const terser = require("terser");
 
-var buildIndex = {
+const buildIndex = {
     excludes: [
         "jquery.js"
     ],
@@ -77,10 +77,10 @@ var buildIndex = {
     }, {
         src: "data/dataPaper-I/Life.json.lz4",
         dest: "docs/data/dataPaper-I/Life.json.lz4"
-    },  {
+    }, {
         src: "data/Valdes/Life.json.lz4",
         dest: "docs/data/Valdes/Life.json.lz4"
-    },  {
+    }, {
         src: "data/Galiano/Galiano-Life.json.lz4",
         dest: "docs/data/Galiano/Galiano-Life.json.lz4"
     }, {
@@ -99,10 +99,10 @@ var buildIndex = {
 };
 
 
-var readLines = function (filename) {
-    var lines = [];
-    var togo = fluid.promise();
-    var rl = readline.createInterface({
+const readLines = function (filename) {
+    const lines = [];
+    const togo = fluid.promise();
+    const rl = readline.createInterface({
         input: fs.createReadStream(filename),
         terminal: false
     });
@@ -118,18 +118,18 @@ var readLines = function (filename) {
     return togo;
 };
 
-var filesToContentHash = function (allFiles, extension) {
-    var extFiles = allFiles.filter(function (file) {
+const filesToContentHash = function (allFiles, extension) {
+    const extFiles = allFiles.filter(function (file) {
         return file.endsWith(extension);
     });
-    var hash = fluid.transform(fluid.arrayToHash(extFiles), function (troo, filename) {
+    const hash = fluid.transform(fluid.arrayToHash(extFiles), function (troo, filename) {
         return fs.readFileSync(filename, "utf8");
     });
     return hash;
 };
 
-var computeAllFiles = function (buildIndex, nodeFiles) {
-    var withExcludes = nodeFiles.filter(function (oneFile) {
+const computeAllFiles = function (buildIndex, nodeFiles) {
+    const withExcludes = nodeFiles.filter(function (oneFile) {
         return !buildIndex.excludes.some(function (oneExclude) {
             return oneFile.indexOf(oneExclude) !== -1;
         });
@@ -137,15 +137,15 @@ var computeAllFiles = function (buildIndex, nodeFiles) {
     return withExcludes.concat(buildIndex.localSource);
 };
 
-var buildFromFiles = function (buildIndex, nodeFiles) {
-    var allFiles = computeAllFiles(buildIndex, nodeFiles);
+const buildFromFiles = function (buildIndex, nodeFiles) {
+    const allFiles = computeAllFiles(buildIndex, nodeFiles);
     console.log("allFiles " + allFiles);
     nodeFiles.concat(buildIndex.localSource);
 
-    var jsHash = filesToContentHash(allFiles, ".js");
-    var fullJsHash = fluid.extend({header: buildIndex.codeHeader}, jsHash, {footer: buildIndex.codeFooter});
+    const jsHash = filesToContentHash(allFiles, ".js");
+    const fullJsHash = fluid.extend({header: buildIndex.codeHeader}, jsHash, {footer: buildIndex.codeFooter});
     fluid.log("Minifying " + Object.keys(fullJsHash).length + " JS files ... ");
-    var promise = terser.minify(fullJsHash, {
+    const promise = terser.minify(fullJsHash, {
         mangle: false,
         sourceMap: {
             filename: "bagatelle.js",
@@ -158,8 +158,8 @@ var buildFromFiles = function (buildIndex, nodeFiles) {
         fs.writeFileSync("docs/js/bagatelle-all.js", minified.code, "utf8");
         fs.writeFileSync("docs/js/bagatelle-all.js.map", minified.map);
 
-        var cssHash = filesToContentHash(allFiles, ".css");
-        var cssConcat = String.prototype.concat.apply("", Object.values(cssHash));
+        const cssHash = filesToContentHash(allFiles, ".css");
+        const cssConcat = String.prototype.concat.apply("", Object.values(cssHash));
 
         fs.ensureDirSync("docs/css");
         fs.writeFileSync("docs/css/bagatelle-all.css", cssConcat);
@@ -172,7 +172,7 @@ var buildFromFiles = function (buildIndex, nodeFiles) {
 
 fluid.setLogging(true);
 
-var linesPromise = readLines("gh-pages-nm.txt");
+const linesPromise = readLines("gh-pages-nm.txt");
 
 linesPromise.then(function (lines) {
     buildFromFiles(buildIndex, lines);

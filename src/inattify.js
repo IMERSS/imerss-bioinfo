@@ -2,10 +2,10 @@
 
 "use strict";
 
-var fluid = require("infusion");
-var fs = require("fs");
-var kettle = require("kettle");
-var minimist = require("minimist");
+const fluid = require("infusion");
+const fs = require("fs");
+const kettle = require("kettle");
+const minimist = require("minimist");
 
 require("./utils/utils.js");
 require("./utils/settleStructure.js");
@@ -16,41 +16,41 @@ require("./dataProcessing/taxonScrape.js");
 
 require("./iNaturalist/taxonAPI.js");
 
-var hortis = fluid.registerNamespace("hortis");
-var taxonAPIFileBase = "data/iNaturalist/taxonAPI";
+const hortis = fluid.registerNamespace("hortis");
+const taxonAPIFileBase = "data/iNaturalist/taxonAPI";
 
-var source = kettle.dataSource.URL({
+const source = kettle.dataSource.URL({
     url: "https://www.inaturalist.org/taxa/%id.json",
     termMap: {
         id: "%id"
     }
 });
 
-var parsedArgs = minimist(process.argv.slice(2));
+const parsedArgs = minimist(process.argv.slice(2));
 
-var mapFile = parsedArgs.map || "data/Galiano WoL/Galiano-data-out-map.json";
-var map = hortis.readJSONSync(mapFile);
+const mapFile = parsedArgs.map || "data/Galiano WoL/Galiano-data-out-map.json";
+const map = hortis.readJSONSync(mapFile);
 
-var files = parsedArgs._;
+const files = parsedArgs._;
 
-var readFiles = files.map(function (file) {
+const readFiles = files.map(function (file) {
     return hortis.csvReaderWithMap({
         inputFile: file,
         mapColumns: map.columns
     }).completionPromise;
 });
 
-var resultsPromise = hortis.settleStructure(readFiles);
+const resultsPromise = hortis.settleStructure(readFiles);
 
 resultsPromise.then(function (results) {
-    var allRows = fluid.flatten(fluid.transform(results, function (oneResult) {
+    const allRows = fluid.flatten(fluid.transform(results, function (oneResult) {
         return oneResult.rows;
     }));
 
     console.log("Got " + allRows.length + " rows");
 
     console.log(allRows[0]);
-    var queue = fluid.transform(allRows, function (row) {
+    const queue = fluid.transform(allRows, function (row) {
         return {id: row.iNaturalistTaxonId};
     });
     hortis.queueFetchWork(queue);
@@ -59,8 +59,8 @@ resultsPromise.then(function (results) {
 // fluid.setLogging(true);
 
 hortis.enqueueAncestry = function (doc, queue) {
-    var ancestours = hortis.iNat.parentTaxaIds(doc).reverse();
-    var elements = ancestours.map(function (oneAnc) {
+    const ancestours = hortis.iNat.parentTaxaIds(doc);
+    const elements = ancestours.map(function (oneAnc) {
         return {id: oneAnc};
     });
     queue.unshift.apply(queue, elements);
@@ -79,17 +79,21 @@ hortis.noteSkip = function (that, message) {
 };
 
 hortis.queueFetchWork = function (queue) {
-    var that = {
+    const nextWork = function () {
+        hortis.logWork(that);
+        setTimeout(oneWork, 1000);
+    };
+    const that = {
         queue: queue,
         cache: {},
         skipCount: 0,
         fetched: []
     };
-    var oneWork = function () {
+    const oneWork = function () {
         if (that.queue.length) {
-            var head = that.queue.shift();
-            var filename = hortis.iNat.filenameFromTaxonId(taxonAPIFileBase, head.id);
-            var doc;
+            const head = that.queue.shift();
+            const filename = hortis.iNat.filenameFromTaxonId(taxonAPIFileBase, head.id);
+            let doc;
             if (that.cache[filename] || fs.existsSync(filename)) {
                 hortis.noteSkip(that, "File " + filename + " exists, skipping");
                 doc = that.cache[filename];
@@ -111,10 +115,6 @@ hortis.queueFetchWork = function (queue) {
                 });
             }
         }
-    };
-    var nextWork = function () {
-        hortis.logWork(that);
-        setTimeout(oneWork, 1000);
     };
     nextWork();
 };

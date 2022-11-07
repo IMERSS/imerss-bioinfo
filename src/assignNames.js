@@ -20,10 +20,7 @@ fluid.setLogging(true);
 const parsedArgs = minimist(process.argv.slice(2));
 
 const outputFile = parsedArgs.o || "assigned.csv";
-const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%bagatelle/data/Galiano 2022/Tracheophyta_review_summary_reviewed_2022-10-20.csv");
-//const mapFile = parsedArgs.map || "%bagatelle/data/dataPaper-I-in/dataPaper-map.json";
-
-//var map = hortis.readJSONSync(fluid.module.resolvePath(mapFile), "reading map file");
+const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%bagatelle/data/Galiano 2022/Tracheophyta_review_summary_reviewed_2022-10-29.csv");
 
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile
@@ -44,6 +41,7 @@ Promise.all([reader.completionPromise, source.events.onCreate]).then(async funct
             row["Name Status"] = looked.doc.nameStatus;
             row["Referred iNaturalist Id"] = looked.doc.id;
             row["Referred iNaturalist Name"] = looked.doc.name;
+            await hortis.iNat.getRanks(looked.doc.id, row, source.byId);
         } else {
             row["Name Status"] = "unknown";
         }

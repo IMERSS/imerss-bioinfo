@@ -25,27 +25,25 @@ require("./xetthecum/xetthecumFilters.js"); // TODO: Bundle into open pipeline s
 fluid.setLogging(true);
 fluid.defeatLogging = true;
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
-hortis.ranks = fluid.freezeRecursive(require("../data/ranks.json"));
+const parsedArgs = minimist(process.argv.slice(2));
 
-var parsedArgs = minimist(process.argv.slice(2));
-
-var taxaMap = hortis.readJSONSync("data/iNaturalist/iNaturalist-taxa-map.json", "reading iNaturalist taxa map file");
-var taxonResolveMap = hortis.readJSONSync("data/TaxonResolution-map.json", "reading taxon resolution map");
-var swaps = hortis.readJSONSync("data/taxon-swaps.json5", "reading taxon swaps file");
+const taxaMap = hortis.readJSONSync("data/iNaturalist/iNaturalist-taxa-map.json", "reading iNaturalist taxa map file");
+const taxonResolveMap = hortis.readJSONSync("data/TaxonResolution-map.json", "reading taxon resolution map");
+const swaps = hortis.readJSONSync("data/taxon-swaps.json5", "reading taxon swaps file");
 if (!parsedArgs.fusion) {
     fluid.fail("Missing argument --fusion");
 }
-var fusion = hortis.readJSONSync(parsedArgs.fusion);
+const fusion = hortis.readJSONSync(parsedArgs.fusion);
 
-var discardRanksBelow = "class"; // TODO: Make this an argument
+const discardRanksBelow = "class"; // TODO: Make this an argument
 // var discardRanksBelow = "species";
-var discardRanksBelowIndex = hortis.ranks.indexOf(discardRanksBelow);
+const discardRanksBelowIndex = hortis.ranks.indexOf(discardRanksBelow);
 
 hortis.combineMaps = function (maps, mutable) {
-    var extendArgs = [true, {}].concat(maps);
-    var extended = fluid.extend.apply(null, extendArgs);
+    const extendArgs = [true, {}].concat(maps);
+    const extended = fluid.extend.apply(null, extendArgs);
     return mutable ? extended : fluid.freezeRecursive(extended);
 };
 
@@ -68,12 +66,12 @@ hortis.obsToSummaryFields = {
 };
 
 hortis.obsToSummaryColumns = function (fields) {
-    var togo = {};
-    var appendWith = function (prefix) {
-        var capPrefix = hortis.capitalize(prefix);
+    const togo = {};
+    const appendWith = function (prefix) {
+        const capPrefix = hortis.capitalize(prefix);
         return function (value, key) {
-            var newKey = prefix + hortis.capitalize(key);
-            var newValue = capPrefix + " " + value;
+            const newKey = prefix + hortis.capitalize(key);
+            const newValue = capPrefix + " " + value;
             togo[newKey] = newValue;
         };
     };
@@ -120,9 +118,9 @@ hortis.summariseCommonOutMap = hortis.combineMaps([hortis.baseSummariseCommonOut
 }]);
 
 hortis.invertSwaps = function (swaps) {
-    var invertedSwaps = {};
+    const invertedSwaps = {};
     fluid.each(swaps, function (value, resolvedTaxon) {
-        var iNaturalistTaxonId = value.iNaturalistTaxonId;
+        const iNaturalistTaxonId = value.iNaturalistTaxonId;
         if (!iNaturalistTaxonId) {
             fluid.fail("Swap with name " + resolvedTaxon + " does not have iNaturalistTaxonId");
         }
@@ -135,7 +133,7 @@ hortis.invertSwaps = function (swaps) {
     return invertedSwaps;
 };
 
-var invertedSwaps = hortis.invertSwaps(swaps);
+const invertedSwaps = hortis.invertSwaps(swaps);
 
 hortis.checkFilters = function (filters, mapColumns) {
     fluid.each(filters, function (oneFilter) {
@@ -148,16 +146,16 @@ hortis.checkFilters = function (filters, mapColumns) {
 
 hortis.makeObsIdGenerator = function (idField, dataset) {
     if (idField.includes("(")) {
-        var parsed = fluid.compactStringToRec(idField, "idGenerator");
+        const parsed = fluid.compactStringToRec(idField, "idGenerator");
         return function (obsRow) {
-            var expandArgs = fluid.transform(parsed.args, function (arg) {
+            const expandArgs = fluid.transform(parsed.args, function (arg) {
                 return fluid.stringTemplate(arg, obsRow);
             });
             return fluid.invokeGlobalFunction(parsed.funcName, expandArgs);
         };
     } else { // It must be a simple reference
         return function (obsRow, rowNumber) {
-            var terms = fluid.extend({}, obsRow, {rowNumber: rowNumber}, dataset);
+            const terms = fluid.extend({}, obsRow, {rowNumber: rowNumber}, dataset);
             return fluid.stringTemplate(idField, terms);
         };
     }
@@ -165,9 +163,9 @@ hortis.makeObsIdGenerator = function (idField, dataset) {
 
 hortis.assignObsIds = function (rows, map, dataset) {
     if (map.observationId) {
-        var idGenerator = hortis.makeObsIdGenerator(map.observationId, dataset);
+        const idGenerator = hortis.makeObsIdGenerator(map.observationId, dataset);
         rows.forEach(function (row, index) {
-            var id = map.datasetId + ":" + idGenerator(row, index);
+            const id = map.datasetId + ":" + idGenerator(row, index);
             row.observationId = id;
         });
     }
@@ -179,11 +177,11 @@ hortis.assignObsIds = function (rows, map, dataset) {
 };
 
 hortis.applyFilters = function (obsRows, filters, filterCount) {
-    var origRows = obsRows.length;
+    const origRows = obsRows.length;
     obsRows = obsRows.filter(function (row) {
-        var pass = Object.values(filters).reduce(function (pass, filter) {
-            var element = row[filter.field];
-            var match = element === filter.equals;
+        const pass = Object.values(filters).reduce(function (pass, filter) {
+            const element = row[filter.field];
+            const match = element === filter.equals;
             if (match) {
                 pass = filter.exclude ? !match : match;
             }
@@ -210,23 +208,23 @@ hortis.resolvePaths = function (obj, pathKeys) {
 hortis.oneDatasetToLoadable = function (dataset, key) {
     hortis.resolvePaths(dataset, ["map", "outMap", "input"]);
     // TODO: Turn this into a component with transform chain elements some day
-    var map = hortis.readJSONSync(dataset.map, "reading Observations map file");
+    const map = hortis.readJSONSync(dataset.map, "reading Observations map file");
     map.datasetId = key;
     if (dataset.datasetClass) {
         map.datasetClass = dataset.datasetClass;
     }
-    var rawInput = hortis.csvReaderWithMap({
+    const rawInput = hortis.csvReaderWithMap({
         inputFile: dataset.input,
         mapColumns: map.columns,
         templateMap: dataset.templateMap === false ? false : true
     }).completionPromise;
-    var parsedFilters = hortis.checkFilters(dataset.filters, map.columns);
+    const parsedFilters = hortis.checkFilters(dataset.filters, map.columns);
     return {
         rawInput: rawInput,
         obsRows: fluid.promise.map(rawInput, function (data) {
-            var rowsWithId = hortis.assignObsIds(data.rows, map, dataset);
-            var filterCount = Object.keys(parsedFilters).length;
-            var filteredRows = hortis.applyFilters(rowsWithId, parsedFilters, filterCount);
+            const rowsWithId = hortis.assignObsIds(data.rows, map, dataset);
+            const filterCount = Object.keys(parsedFilters).length;
+            const filteredRows = hortis.applyFilters(rowsWithId, parsedFilters, filterCount);
             if (filterCount > 0) {
                 console.log("Pre-filtered observations to list of " + filteredRows.length + " with " + filterCount + " filters");
             }
@@ -287,8 +285,8 @@ hortis.pipe.loadContextInputPipe = function (patch) {
 };
 
 hortis.onePatchToLoadable = function (patch) {
-    var defaults = fluid.defaults(patch.type);
-    var loaded = defaults ? fluid.invokeGlobalFunction(defaults.loader, [patch]) : {};
+    const defaults = fluid.defaults(patch.type);
+    const loaded = defaults ? fluid.invokeGlobalFunction(defaults.loader, [patch]) : {};
     Object.assign(patch, loaded);
     return patch;
 };
@@ -313,7 +311,7 @@ hortis.fusionToLoadable = function (fusion, taxaMap) {
 
 // Convert a BCCSN-style resolution to metres
 hortis.mapBCCSNResolution = function (resolution) {
-    var matches = resolution.trim().match(/([\d\.]+)(km|m)$/);
+    const matches = resolution.trim().match(/([\d\.]+)(km|m)$/);
     if (!matches) {
         console.log("Warning: BCCSN resolution value " + resolution + " was not recognised");
     } else {
@@ -338,9 +336,9 @@ hortis.roundCoordinates = function (resolved, patch) {
 };
 
 hortis.deduplicateById = function (resolved, patch) {
-    var idField = patch.idField;
-    var usedIds = {};
-    var filteredObsRows = resolved.obsRows.filter(function (row) {
+    const idField = patch.idField;
+    const usedIds = {};
+    const filteredObsRows = resolved.obsRows.filter(function (row) {
         var id = row[idField];
         var used = usedIds[id];
         usedIds[id] = true;
@@ -350,7 +348,7 @@ hortis.deduplicateById = function (resolved, patch) {
 };
 
 hortis.resolveTaxa = function (target, taxaById, taxonId, columns) {
-    var taxon = taxaById[taxonId];
+    let taxon = taxaById[taxonId];
     while (taxon.parentNameUsageId) {
         if (columns[taxon.taxonRank]) {
             target[taxon.taxonRank] = taxon.scientificName;

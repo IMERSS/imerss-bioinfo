@@ -2,9 +2,9 @@
 
 "use strict";
 
-var fluid = require("infusion");
+const fluid = require("infusion");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 hortis.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -30,13 +30,13 @@ hortis.isInteger = function isNumeric(value) {
  * @return {Object} The rejected payload formed by shallow cloning the supplied argument (if it is not an `Error`) and suffixing its `message` member
  */
 hortis.upgradeError = function (originError, whileMsg) {
-    var error = originError instanceof Error ? originError : fluid.extend({}, originError);
+    const error = originError instanceof Error ? originError : fluid.extend({}, originError);
     error.message = originError.message + whileMsg;
     return error;
 };
 
 hortis.roundDecimals = function (text, places) {
-    var parsed = hortis.parseFloat(text);
+    const parsed = hortis.parseFloat(text);
     if (!isNaN(parsed)) {
         return +parsed.toFixed(places);
     } else {
@@ -47,8 +47,8 @@ hortis.roundDecimals = function (text, places) {
 hortis.stringTemplateRegex = /\${([^\}]*)}/g;
 
 hortis.stringTemplate = function (template, vars) {
-    var replacer = function (all, match) {
-        var segs = match.split(".");
+    const replacer = function (all, match) {
+        const segs = match.split(".");
         return fluid.getImmediate(vars, segs) || "";
     };
     return template.replace(hortis.stringTemplateRegex, replacer);

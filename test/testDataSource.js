@@ -107,7 +107,7 @@ fluid.each(hortis.tests.retryResponses, function (value, key) {
         const checkResponse = function (type, payload) {
             jqUnit.assertEquals("Expected response type", value.expected.type, type);
             jqUnit.assertDeepEq("Expected response payload", value.expected.payload, payload);
-            var delay = (Date.now() - now);
+            const delay = (Date.now() - now);
             jqUnit.assertTrue("Response at expected time", delay > value.expected.minTime);
             jqUnit.start();
         };
@@ -164,4 +164,19 @@ jqUnit.asyncTest("Test of rate limiting data source: ", function () {
         }
         jqUnit.start();
     });
+});
+
+
+jqUnit.asyncTest("Test of in memory caching data source: ", async function () {
+    const dataSource = fluid.inMemoryCachedSource();
+    const key = {id: 1};
+    const firstResponse = await dataSource.get(key);
+    jqUnit.assertUndefined("No initial contents", firstResponse);
+    const doc = {
+        name: "Veronica peregrina xalapensis"
+    };
+    await dataSource.set(key, doc);
+    const secondResponse = await dataSource.get(key);
+    jqUnit.assertDeepEq("Stored contents", doc, secondResponse);
+    jqUnit.start();
 });
