@@ -2,12 +2,12 @@
 
 "use strict";
 
-var fluid = require("infusion");
+const fluid = require("infusion");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 hortis.iNaturalistObsFromUrl = function (url) {
-    var lastSlashPos = url.lastIndexOf("/");
+    const lastSlashPos = url.lastIndexOf("/");
     return url.substring(lastSlashPos + 1);
 };
 

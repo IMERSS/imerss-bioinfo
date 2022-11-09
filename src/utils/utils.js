@@ -59,3 +59,13 @@ hortis.findDuplicates = function (array) {
         return array.indexOf(item) !== index;
     });
 };
+
+// Taken from https://stackoverflow.com/a/64909887
+hortis.asyncMap = async function (arr, fn) {
+    const result = [];
+    for (let idx = 0; idx < arr.length; ++idx) {
+        const cur = arr[idx];
+        result.push(await fn(cur, idx, arr));
+    }
+    return result;
+};

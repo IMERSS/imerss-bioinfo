@@ -303,14 +303,6 @@
         },
         iNaturalistTaxonId: "334556",
     },
-    "Laqueus vancouveriensis": {
-        taxonNames: {
-            "transverse lamp shell": {
-                type: "commonName",
-            }
-        },
-        iNaturalistTaxonId: "525797",
-    },
     "Lottia scutum": {
         taxonNames: {
             "plate limpet": {
@@ -460,7 +452,8 @@
                 resolvedBy: "AB",
             },
             "Plocamium cartilageneum pacificum": {
-                resolvedBy: "AS"
+                resolvedBy: "AS",
+                scope: "typo"
             }
         },
         iNaturalistTaxonId: "339051",
@@ -1402,15 +1395,6 @@
             }
         },
         iNaturalistTaxonId: "957342"
-    },
-    "Yoldia hyperborea": {
-        taxonNames: {
-            "Yoldia hyperborea limatuloides": {
-                resolvedBy: "AB",
-                notes: "Unaccepted acc. WoRMS, has been corrected in data paper",
-            }
-        },
-        iNaturalistTaxonId: "996928"
     }, // From here main Galiano checklist
     "Acronicta insita": {
         taxonNames: {
@@ -1810,16 +1794,6 @@
         },
         iNaturalistTaxonId: "1118981"
     },
-    "Isodictya rigida": {
-        taxonNames: {
-            "Neoesperiopsis rigida": {
-                resolvedBy: "AS",
-                notes: "Data Paper resolution round 1: Listed as Isodictya rigida; reported as Amphilectus rigida (GBIF); as Neoesperiopsis rigida (RBCM)",
-                oldiNaturalistTaxonId: "367052",
-            },
-        },
-        iNaturalistTaxonId: "459878"
-    },
     "Bugulina californica": {
         taxonNames: {
             "Bugula californica": {
@@ -2158,6 +2132,11 @@
     // Valdes Island normalisation - PMLS
     "Isodictya rigida": {
         taxonNames: {
+            "Neoesperiopsis rigida": {
+                resolvedBy: "AS",
+                notes: "Data Paper resolution round 1: Listed as Isodictya rigida; reported as Amphilectus rigida (GBIF); as Neoesperiopsis rigida (RBCM)",
+                oldiNaturalistTaxonId: "367052",
+            },
             "Amphilectus rigida": {
                 resolvedBy: "AS"
             }
@@ -2180,14 +2159,6 @@
             }
         },
         iNaturalistTaxonId: "1267794"
-    },
-    "Plocamium cartilagineum pacificum": {
-        taxonNames: {
-            "Plocamium cartilageneum pacificum": {
-                resolvedBy: "AS"
-            }
-        },
-        iNaturalistTaxonId: "339051"
     },
     "Clinocardium nuttallii": {
         taxonNames: {
@@ -2315,6 +2286,14 @@
         },
         iNaturalistTaxonId: "1348712"
     },
+    "Aplysilla polyraphis": { // Last remaining mismatch in PMLS Valdes data - name is unaccepted on WoRMS and iNat, will add swaps there
+        taxonNames: {
+            "Chelonaplysilla polyraphis": {
+                resolvedBy: "AB",
+            }
+        },
+        iNaturalistTaxonId: "213993"
+    },
     "Balticina willemoesi": {
         taxonNames: {
             "Halipteris willemoesi": {
@@ -2347,6 +2326,10 @@
     },
     "Yoldia hyperborea": {
         taxonNames: {
+            "Yoldia hyperborea limatuloides": {
+                resolvedBy: "AB",
+                notes: "Unaccepted acc. WoRMS, has been corrected in data paper",
+            },
             "Yoldia amygdalea": {
                 resolvedBy: "AS",
                 oldiNaturalistTaxonId: "957338",

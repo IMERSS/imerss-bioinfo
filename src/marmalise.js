@@ -2,23 +2,23 @@
 
 "use strict";
 
-var fluid = require("infusion");
-var minimist = require("minimist");
-var fs = require("fs");
+const fluid = require("infusion");
+const minimist = require("minimist");
+const fs = require("fs");
 
+require("./utils/utils.js");
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
 require("./dataProcessing/LZ4.js");
-require("./iNaturalist/loadTaxa.js");
 require("./iNaturalist/taxonAPI.js");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 hortis.ranks = fluid.freezeRecursive(require("../data/ranks.json"));
 
 hortis.newTaxon = function (iNaturalistTaxonName, rank, depth, counts) {
-    var togo = {
+    const togo = {
         iNaturalistTaxonName: iNaturalistTaxonName,
         id: fluid.allocateGuid(),
         rank: rank,
@@ -34,7 +34,7 @@ hortis.newTaxon = function (iNaturalistTaxonName, rank, depth, counts) {
 
 hortis.addCounts = function (row, counts) {
     fluid.each(counts, function (countDef, key) {
-        var countField = row[countDef.column];
+        const countField = row[countDef.column];
         row[key] = countDef.free ? Number(countField) : (countField === countDef.equals ? 1 : 0);
     });
 };
@@ -42,7 +42,7 @@ hortis.addCounts = function (row, counts) {
 hortis.cleanRow = function (row) {
     fluid.each(row, function (value, key) {
         if (typeof(value) === "string") {
-            var trimmed = value.trim();
+            const trimmed = value.trim();
             if (trimmed === "" || trimmed === "—") { // Note funny AS hyphen in here
                 delete row[key];
             } else {
@@ -69,7 +69,7 @@ hortis.fullRecordTransform = {
 
 hortis.addTaxonInfo = function (row, fullRecord) {
     fluid.each(hortis.fullRecordTransform, function (path, target) {
-        var source = fluid.get(fullRecord, path);
+        const source = fluid.get(fullRecord, path);
         if (row[target] === undefined) {
             row[target] = source;
         }
@@ -85,13 +85,13 @@ hortis.reverseMerge = function (target, source) {
 };
 
 hortis.storeAtPath = function (treeBuilder, path, row) {
-    var counts = treeBuilder.map.counts;
+    const counts = treeBuilder.map.counts;
     hortis.rowToTaxon(row, path.length, counts);
-    var node = treeBuilder.tree;
+    let node = treeBuilder.tree;
     path.forEach(function (doc, index) {
-        var last = index === path.length - 1;
-        var name = doc.name;
-        var child = node.children[name];
+        const last = index === path.length - 1;
+        const name = doc.name;
+        let child = node.children[name];
         if (!child) {
             child = node.children[name] = (last ? row : hortis.newTaxon(name, doc.rank, index + 1, counts));
             try {
@@ -113,9 +113,9 @@ hortis.storeAtPath = function (treeBuilder, path, row) {
         node = child;
     });
 };
-
+/*
 hortis.loadCachedTaxonDoc = function (treeBuilder, id) {
-    var existing = treeBuilder.taxonCache[id];
+    let existing = treeBuilder.taxonCache[id];
     if (!existing) {
         existing = treeBuilder.taxonCache[id] = hortis.iNat.loadTaxonDoc(treeBuilder.options.taxonAPIFileBase, id);
     }
@@ -126,39 +126,41 @@ hortis.loadCachedTaxonDoc = function (treeBuilder, id) {
     }
     return existing;
 };
+ */
 
 /** Produce a "path" holding each cached taxon doc from the supplied row from the root
  * @param {TreeBuilder} treeBuilder - The treeBuilder instance
  * @param {Row} row - An observation or summary row
- * @return {TaxonDoc[]} Array of taxon docs starting at the root and ending at the row's doc
+ * @return {Promise<TaxonDoc[]>} Array of taxon docs starting at the root and ending at the row's doc
  */
-hortis.taxaToPathiNat = function (treeBuilder, row) {
-    var baseDoc = hortis.loadCachedTaxonDoc(treeBuilder, row.iNaturalistTaxonId);
-    var parentTaxaIds = hortis.iNat.parentTaxaIds(baseDoc);
-    var ancestourDocs = parentTaxaIds.map(function (id) {
-        return hortis.loadCachedTaxonDoc(treeBuilder, id);
-    });
-    var rankDocs = ancestourDocs.filter(function (oneDoc) {
+hortis.taxaToPathiNat = async function (treeBuilder, row) {
+    const baseDoc = (await treeBuilder.taxonSource.get({id: row.iNaturalistTaxonId})).doc;
+    const parentTaxaIds = hortis.iNat.parentTaxaIds(baseDoc);
+    const ancestourDocs = await Promise.all(parentTaxaIds.map(async function (id) {
+        return (await treeBuilder.taxonSource.get({id: id})).doc;
+    }));
+    const rankDocs = ancestourDocs.filter(function (oneDoc) {
         return treeBuilder.options.vizRanks.includes(oneDoc.rank);
     });
     return rankDocs.concat([baseDoc]);
 };
 
 
-hortis.applyRowsToTree = function (treeBuilder, rows) {
-    rows.forEach(function (row, index) {
-        if (index % 100 === 0) {
-            process.stdout.write(index + " ... ");
+hortis.applyRowsToTree = async function (treeBuilder, rows) {
+    for (let i = 0; i < rows.length; ++i) {
+        const row = rows[i];
+        if (i % 100 === 0) {
+            process.stdout.write(i + " ... ");
         }
         hortis.cleanRow(row);
-        var path = hortis.taxaToPathiNat(treeBuilder, row);
+        const path = await hortis.taxaToPathiNat(treeBuilder, row);
         treeBuilder.storeAtPath(path, row);
-    });
+    }
     console.log("");
 };
 
 hortis.flattenChildren = function (root) {
-    var children = [];
+    const children = [];
     fluid.each(root.children, function (value) {
         children.push(hortis.flattenChildren(value));
     });
@@ -175,7 +177,7 @@ hortis.parseCounts = function (counts) {
 };
 
 hortis.loadMapWithCounts = function (mapFile) {
-    var map = hortis.readJSONSync(fluid.module.resolvePath(mapFile));
+    const map = hortis.readJSONSync(fluid.module.resolvePath(mapFile));
     hortis.parseCounts(map.counts);
     return map;
 };
@@ -215,6 +217,11 @@ fluid.defaults("hortis.treeBuilder", {
     },
     listeners: {
         "onCreate.marmalise": "hortis.marmalise({that})"
+    },
+    components: {
+        taxonSource: {
+            type: "hortis.iNatTaxonSource"
+        }
     }
 });
 
@@ -223,30 +230,30 @@ hortis.filterDataset = function (dataset) {
 };
 
 hortis.indexRegions = function (treeBuilder) {
-    var features = treeBuilder.features;
-    var summaryById = {};
+    const features = treeBuilder.features;
+    const summaryById = {};
     treeBuilder.summaryRows.forEach(function (row) {
         summaryById[row.iNaturalistTaxonId] = row;
     });
-    var communities = fluid.transform(features.communities, function (community) {
+    const communities = fluid.transform(features.communities, function (community) {
         community.count = 0;
         community.byTaxonId = {};
         return community;
     });
-    var classes = {};
+    const classes = {};
     fluid.each(features.classes, function (clazz, classKey) {
         classes[classKey] = {
             count: 0,
             byTaxonId: {}
         };
     });
-    var applyObs = function (container, key, taxonId, obsId) {
+    const applyObs = function (container, key, taxonId, obsId) {
         if (key) {
-            var region = container[key];
+            const region = container[key];
             if (!region) {
                 fluid.fail("Unknown region key ", key, " in container with keys ", Object.keys(container).join(", "));
             }
-            var bucketTaxa = region.byTaxonId[taxonId]; // TODO: use fluid.pushArray?
+            let bucketTaxa = region.byTaxonId[taxonId]; // TODO: use fluid.pushArray?
             if (!bucketTaxa) {
                 bucketTaxa = region.byTaxonId[taxonId] = [];
             }
@@ -254,12 +261,12 @@ hortis.indexRegions = function (treeBuilder) {
             ++region.count;
         }
     };
-    var options = treeBuilder.options;
+    const options = treeBuilder.options;
     treeBuilder.obs.rows.forEach(function (row) {
-        var obsId = row[options.obsIdField];
-        var summaryRow = summaryById[row.iNaturalistTaxonId];
+        const obsId = row[options.obsIdField];
+        const summaryRow = summaryById[row.iNaturalistTaxonId];
         if (summaryRow) {
-            var taxonId = summaryRow.id;
+            const taxonId = summaryRow.id;
             applyObs(communities, row.COMMUNITY, taxonId, obsId);
             applyObs(classes, row.clazz, taxonId, obsId);
 
@@ -274,57 +281,46 @@ hortis.indexRegions = function (treeBuilder) {
     };
 };
 
-hortis.marmalise = function (treeBuilder) {
-    var options = treeBuilder.options;
-    var results = options.inputFiles.map(function (fileName) {
-        var togo = fluid.promise();
-        var result = hortis.csvReaderWithMap({
+hortis.marmalise = async function (treeBuilder) {
+    const options = treeBuilder.options;
+    await hortis.asyncMap(options.inputFiles, async function (fileName) {
+        const result = await hortis.csvReaderWithMap({
             inputFile: fluid.module.resolvePath(fileName),
             mapColumns: treeBuilder.map.columns
         }).completionPromise;
-        result.then(function (result) {
-            // console.log(JSON.stringify(result.rows[0], null, 2));
-            console.log("Applying " + result.rows.length + " rows from " + fileName);
-            treeBuilder.summaryRows = result.rows;
-            treeBuilder.applyRowsToTree(fileName, result.rows);
-            togo.resolve();
-        }, fluid.fail);
-        return togo;
+        // console.log(JSON.stringify(result.rows[0], null, 2));
+        console.log("Applying " + result.rows.length + " rows from " + fileName);
+        treeBuilder.summaryRows = result.rows;
+        await treeBuilder.applyRowsToTree(fileName, result.rows);
     });
     if (options.featuresFile) {
         fluid.expect("viz config file", options, ["obsFile", "obsMapFile", "regionField", "obsIdField"]);
         treeBuilder.features = hortis.readModuleJSONSync(options.featuresFile);
-        var obsMap = hortis.readModuleJSONSync(options.obsMapFile);
-        var obsResult = hortis.csvReaderWithMap({
+        const obsMap = hortis.readModuleJSONSync(options.obsMapFile);
+        const obs = await hortis.csvReaderWithMap({
             inputFile: fluid.module.resolvePath(options.obsFile),
             mapColumns: obsMap.columns
         }).completionPromise;
-        obsResult.then(function (obs) {
-            console.log("Read " + obs.rows.length + " observation rows from " + options.obsFile);
-            treeBuilder.obs = obs;
-        }, fluid.fail);
-        results.push(obsResult);
+        console.log("Read " + obs.rows.length + " observation rows from " + options.obsFile);
+        treeBuilder.obs = obs;
     }
 
-    var fullResult = fluid.promise.sequence(results);
-    fullResult.then(function () {
-        hortis.flattenChildren(treeBuilder.tree);
-        var output = {
-            datasets: fluid.transform(treeBuilder.map.datasets, hortis.filterDataset),
-            tree: treeBuilder.tree
-        };
-        var extraOutput = options.featuresFile ? hortis.indexRegions(treeBuilder) : {};
-        var fullOutput = fluid.extend(output, extraOutput);
-        fs.writeFileSync("marmalised.json", JSON.stringify(fullOutput, null, 4) + "\n");
-        var text = JSON.stringify(fullOutput);
-        hortis.writeLZ4File(text, fluid.module.resolvePath(treeBuilder.options.outputFile));
-    });
+    hortis.flattenChildren(treeBuilder.tree);
+    const output = {
+        datasets: fluid.transform(treeBuilder.map.datasets, hortis.filterDataset),
+        tree: treeBuilder.tree
+    };
+    const extraOutput = options.featuresFile ? hortis.indexRegions(treeBuilder) : {};
+    const fullOutput = fluid.extend(output, extraOutput);
+    fs.writeFileSync("marmalised.json", JSON.stringify(fullOutput, null, 4) + "\n");
+    const text = JSON.stringify(fullOutput);
+    hortis.writeLZ4File(text, fluid.module.resolvePath(treeBuilder.options.outputFile));
 };
 
 
-var parsedArgs = minimist(process.argv.slice(2));
+const parsedArgs = minimist(process.argv.slice(2));
 
-var options = parsedArgs.config ? hortis.readJSONSync(parsedArgs.config) : {
+const options = parsedArgs.config ? hortis.readJSONSync(parsedArgs.config) : {
     mapFile: parsedArgs.map,
     obsFile: parsedArgs.obsFile,
     skipRanks: [],

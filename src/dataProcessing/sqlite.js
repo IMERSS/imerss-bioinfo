@@ -13,13 +13,17 @@ fluid.registerNamespace("hortis.codecs.zlib");
 
 hortis.codecs.zlib.encode = function (obj) {
     const string = JSON.stringify(obj);
-    const togo = pako.deflate(string);
+    const togo = string === undefined ? undefined : pako.deflate(string);
     return togo;
 };
 
 hortis.codecs.zlib.decode = function (buffer) {
-    const string = pako.inflate(buffer, { to: "string" });
-    return JSON.parse(string);
+    if (!buffer) {
+        return buffer;
+    } else {
+        const string = pako.inflate(buffer, {to: "string"});
+        return JSON.parse(string);
+    }
 };
 
 fluid.defaults("hortis.sqliteDB", {

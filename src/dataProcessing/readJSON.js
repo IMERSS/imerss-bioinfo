@@ -2,14 +2,14 @@
 
 "use strict";
 
-var fluid = require("infusion");
-var kettle = require("kettle");
+const fluid = require("infusion");
+const kettle = require("kettle");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 hortis.readJSONSync = function (fileName, message) {
-    var promise = kettle.JSON.readFileSync(fileName, message + " " + fileName);
-    var togo;
+    const promise = kettle.JSON.readFileSync(fileName, message + " " + fileName);
+    let togo;
     promise.then(function (parsed) {
         togo = parsed;
     }, function (err) {

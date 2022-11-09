@@ -14,23 +14,23 @@
             outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99"
         },
-        RBCM: {
+        RBCM: { // Taken from https://docs.google.com/spreadsheets/d/1ui0lnOTwJDSGMTHHlFW6zRL8fjM0giOgha2G_lS3T28/edit#gid=0
             name: "Royal BC Museum (1920-2018)",
-            input: "%bagatelle/data/Valdes/Valdes Island - RBCM - 2022_04_13.csv",
+            input: "%bagatelle/data/Valdes/Valdes Island - RBCM - 2022_09_11.csv",
             map: "%bagatelle/data/Valdes/Valdes-synth-map.json",
             outMap: "%bagatelle/data/Valdes/Valdes-synth-out-map.json",
             colour: "#29a329"
         },
-        UBC: {
+        UBC: { // Taken from https://docs.google.com/spreadsheets/d/1g6bAGtIT-8XhSg4IVPykEFkm73zMgHHZogGnzkt9msc/edit#gid=0
             name: "UBC Beaty Biodiversity Museum (1905-2018)",
-            input: "%bagatelle/data/Valdes/Valdes Island - UBC - 2022_04_13.csv",
+            input: "%bagatelle/data/Valdes/Valdes Island - UBC - 2022_09_11.csv",
             map: "%bagatelle/data/Valdes/Valdes-synth-map.json",
             outMap: "%bagatelle/data/Valdes/Valdes-synth-out-map.json",
             colour: "#55a329"
         },
-        VIC: {
+        VIC: { // Taken from https://docs.google.com/spreadsheets/d/1KU-aY4F5Y19OcmZAWZxrVXTed-W7E7N8gou1MTThYHg/edit#gid=0
             name: "Valdes Island Conservancy Surveys (2014-2019)",
-            input: "%bagatelle/data/Valdes/Valdes Island - VIC - 2022_04_13.csv",
+            input: "%bagatelle/data/Valdes/Valdes Island - VIC - 2022_09_11.csv",
             map: "%bagatelle/data/Valdes/Valdes-synth-map.json",
             outMap: "%bagatelle/data/Valdes/Valdes-synth-out-map.json",
             colour: "#a7a329"

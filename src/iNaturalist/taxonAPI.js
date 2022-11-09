@@ -130,31 +130,37 @@ fluid.defaults("hortis.cachedApiSource", {
     }
 });
 
+hortis.readNoValue = function (value) {
+    return value === fluid.NO_VALUE ? undefined : value;
+};
+
+hortis.writeNoValue = function (value) {
+    return value === undefined ? fluid.NO_VALUE : value;
+};
+
 hortis.cachedApiSource.read = async function (that, payload, options) {
     const query = options.directModel;
     const firstLevel = await that.inMemorySource.get(query);
     if (firstLevel) {
-        console.log("Hit first level cache for ", query);
-        return firstLevel;
+        return hortis.readNoValue(firstLevel);
     } else {
         const cached = await that.dbSource.get(query);
         if (cached && !that.options.disableCache) {
             const staleness = Date.now() - Date.parse(cached.fetched_at);
             if (staleness < that.options.refreshInDays * hortis.DAY_IN_MS) {
-                console.log("Staleness is " + moment.duration(staleness).humanize() + " so returning cached document");
-                await that.inMemorySource.set(query, cached);
+//                console.log("Staleness is " + moment.duration(staleness).humanize() + " so returning cached document");
+                await that.inMemorySource.set(hortis.writeNoValue(query), cached);
                 return cached;
             }
         }
         const live = await that.apiSource.get(query);
-        if (live) {
-            const toWrite = await that.upgradeLiveDocument(query, live);
-            if (toWrite) {
-                await that.dbSource.set(query, toWrite);
-                await that.inMemorySource.set(query, toWrite);
-            }
-            return toWrite;
+        const toWrite = await that.upgradeLiveDocument(query, live);
+        if (live) { // Only write to db if we got live
+            await that.dbSource.set(query, toWrite);
         }
+        // Always write to top-level cache
+        await that.inMemorySource.set(hortis.writeNoValue(query), toWrite);
+        return toWrite;
     }
 };
 
@@ -206,9 +212,11 @@ hortis.bestNameMatch = function (results, query) {
 
 hortis.cachediNatTaxonByName.upgradeLiveDocument = async function (byIdSource, query, live) {
     console.log("upgradeLive given ", live);
-    if (live.results.length === 0) {
-        return null;
-    } else {
+    const togo = {
+        name: query.name,
+        fetched_at: new Date().toISOString()
+    };
+    if (live && live.results.length > 0) {
         const record = hortis.bestNameMatch(live.results, query);
         const doc = fluid.filterKeys(record, ["name", "rank", "id"]);
 
@@ -225,25 +233,45 @@ hortis.cachediNatTaxonByName.upgradeLiveDocument = async function (byIdSource, q
         }
         doc.nameStatus = nameStatus;
         console.log("Filtered byName document to ", doc);
-        const togo = {
-            name: query.name,
-            fetched_at: new Date().toISOString(),
-            doc: doc
-        };
+        togo.doc = doc;
         console.log("About to write ", togo);
         return togo;
     }
+    return togo;
 };
+
+hortis.iNat.jwtDistribution = function (jwt) {
+    return jwt ? "hortis.iNat.distributeJWT" : [];
+};
+
+hortis.iNat.computeHeaders = function (jwt) {
+    return {
+        Authorization: "Bearer " + jwt.api_token
+    };
+};
+
+fluid.defaults("hortis.iNat.distributeJWT", {
+    jwtHeaders: "@expand:hortis.iNat.computeHeaders({that}.options.jwt)",
+    distributeOptions: {
+        distributeJWT: {
+            target: "{that kettle.dataSource.URL}.options.headers",
+            source: "{that}.options.jwtHeaders"
+        }
+    }
+});
 
 // The top-level overall cached iNaturalist taxon source
 fluid.defaults("hortis.iNatTaxonSource", {
-    gradeNames: ["fluid.dataSource", "fluid.dataSource.noencoding"],
+    gradeNames: ["fluid.dataSource", "fluid.dataSource.noencoding", "{that}.jwtDistribution"],
     disableCache: false,
     distributeOptions: {
         disableCache: {
             source: "{that}.options.disableCache",
             target: "{that hortis.cachedApiSource}.options.disableCache"
         }
+    },
+    invokers: {
+        jwtDistribution: "hortis.iNat.jwtDistribution({that}.options.jwt)"
     },
     components: {
         db: {
@@ -386,7 +414,17 @@ hortis.iNat.getAncestry = async function (id, byIdSource) {
     return [baseDoc, ...allDocs];
 };
 
-hortis.iNat.getRanks = async function (id, rankTarget, byIdSource) {
+/**
+ * Resolve the higher taxon ranks of a taxon into a supplied structure, given a taxon Id
+ * @param {String} id - The id of the taxon whose ranks are to be fetched
+ * @param {Object} rankTarget - The structure to receive the ranks. If `fields` is not set, any existing rank fields
+ * in this structure will be overwritten - otherwise just the fields listed in `fields` will be overwritten
+ * @param {fluid.dataSource} byIdSource - The taxon source
+ * @param {Array<String>} [fields] - [optional] If supplied, only the taxa whose keys are listed in this structure will be
+ * fetched into `rankTarget` - these are uncapitalized
+ * @return {Promise<Object>} The structure `rankTarget` with higher taxa filled in
+ */
+hortis.iNat.getRanks = async function (id, rankTarget, byIdSource, fields) {
     const allDocs = await hortis.iNat.getAncestry(id, byIdSource);
     const indexed = {};
     allDocs.forEach(function (doc) {
@@ -394,15 +432,16 @@ hortis.iNat.getRanks = async function (id, rankTarget, byIdSource) {
         const rank = hortis.capitalize(docRank === "complex" ? "species" : docRank);
         indexed[rank] = rank === "Species" ? hortis.extractSpeciesName(doc.doc.name) : doc.doc.name;
     });
-    console.log("Got ranks ", Object.keys(indexed));
+    // console.log("Got ranks ", Object.keys(indexed));
     hortis.ranks.forEach(function (lowRank) {
         const rank = hortis.capitalize(lowRank);
-        if (rank in rankTarget) {
+        const targetRank = fields ? lowRank : rank;
+        if (fields && fields.includes(targetRank) || targetRank in rankTarget) {
             const thisRank = indexed[rank];
-            if (thisRank && rankTarget[rank] !== thisRank) {
-                console.log("Replacing " + rank + " " + rankTarget[rank] + " with " + thisRank);
+            if (thisRank && rankTarget[targetRank] !== thisRank) {
+                // console.log("Replacing " + targetRank + " " + rankTarget[targetRank] + " with " + thisRank);
             }
-            rankTarget[rank] = thisRank || "";
+            rankTarget[targetRank] = thisRank || "";
         }
     });
 };

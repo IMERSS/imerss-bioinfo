@@ -20,10 +20,12 @@ const source = hortis.iNatTaxonSource({
 // Abies grandis - test how we extract species name from document - led to including species in first place
 // Achillea millefolium complex - Convert rank of "complex" to "species" as per AS
 // Adenocaulon bicolor - test retrieving subclass
+// Balanus glandula/Balanus crenatus - test caching of missing values
+// {id: 47429}
 
 const testSource = async function () {
     try {
-        const query = "Adenocaulon bicolor";
+        const query = "Balanus glandula/Balanus crenatus";
         const sane = hortis.sanitizeSpeciesName(query);
         const result = await source.get({name: sane});
         console.log(result);

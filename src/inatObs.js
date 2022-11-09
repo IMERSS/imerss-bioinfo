@@ -2,9 +2,9 @@
 
 "use strict";
 
-var fluid = require("infusion");
-var minimist = require("minimist");
-var fs = require("fs");
+const fluid = require("infusion");
+const minimist = require("minimist");
+const fs = require("fs");
 
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/writeJSON.js");
@@ -12,7 +12,7 @@ require("./dataProcessing/writeCSV.js");
 
 require("./iNaturalist/obsAPI.js");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 hortis.iNatProjects = {
     GalianoData: {
@@ -38,42 +38,42 @@ hortis.iNatProjects = {
     }
 };
 
-var parsedArgs = minimist(process.argv.slice(2));
+const parsedArgs = minimist(process.argv.slice(2));
 
 console.log("parsedArgs", parsedArgs);
 
-var projectArgs = hortis.iNatProjects[parsedArgs._[0] || "GalianoData"];
+const projectArgs = hortis.iNatProjects[parsedArgs._[0] || "GalianoData"];
 
-var jwt = hortis.readJSONSync("jwt.json", "reading JWT token file");
+const jwt = hortis.readJSONSync("jwt.json", "reading JWT token file");
 
-var source = hortis.iNat.obsSource({
+const source = hortis.iNat.obsSource({
     headers: {
         Authorization: "Bearer " + jwt.api_token
     },
     paramMap: projectArgs.paramMap
 });
 
-var fileVars = {
+const fileVars = {
     Date: new Date().toISOString().substring(0, 10).replaceAll("-", "_")
 };
 
 fluid.setLogging(true);
 
-var rows = [];
+const rows = [];
 
-var directModel = {
+const directModel = {
     per_page: 200
 };
 
 hortis.logObsResponse = function (data) {
-    var tolog = Object.assign({}, data);
+    const tolog = Object.assign({}, data);
     tolog.results = "[ " + data.results.length + " ]";
     fluid.log("Got response " + JSON.stringify(tolog, null, 4));
 };
 
 hortis.writeObs = function (filename, rows) {
-    var togo = fluid.promise();
-    var headers = Object.keys(rows[0]);
+    const togo = fluid.promise();
+    const headers = Object.keys(rows[0]);
     hortis.writeCSV(filename, headers, rows, togo);
     return togo;
 };
@@ -83,7 +83,7 @@ hortis.applyResponse = function (data) {
     hortis.writeJSONSync("obsoutput.json", data);
     if (data.results.length > 0) {
         hortis.pushResultRows(rows, data);
-        var lastId = fluid.peek(rows).id;
+        const lastId = fluid.peek(rows).id;
         console.log("got last id " + lastId);
         directModel.id_above = lastId;
         setTimeout(function () {
@@ -91,9 +91,9 @@ hortis.applyResponse = function (data) {
         }, 1000);
     } else {
         hortis.writeObs("obsoutput.csv", rows).then(function () {
-            var fileTarget = fluid.stringTemplate(projectArgs.outputFile, fileVars);
+            const fileTarget = fluid.stringTemplate(projectArgs.outputFile, fileVars);
             fs.copyFileSync("obsoutput.csv", fileTarget);
-            var stats = fs.statSync(fileTarget);
+            const stats = fs.statSync(fileTarget);
             console.log("Written " + stats.size + " bytes to " + fileTarget);
         });
     }
@@ -101,7 +101,7 @@ hortis.applyResponse = function (data) {
 
 hortis.makeObsRequest = function (directModel) {
     console.log("Making request ", directModel);
-    var promise = source.get(directModel);
+    const promise = source.get(directModel);
 
     promise.then(function (data) {
         hortis.applyResponse(data);

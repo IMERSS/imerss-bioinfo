@@ -2,8 +2,8 @@
 
 "use strict";
 
-var fluid = require("infusion");
-var hortis = fluid.registerNamespace("hortis");
+const fluid = require("infusion");
+const hortis = fluid.registerNamespace("hortis");
 
 fluid.registerNamespace("hortis.WoRMSTaxa");
 

@@ -3,8 +3,8 @@
 
 "use strict";
 
-var fluid = require("infusion");
-var hortis = fluid.registerNamespace("hortis");
+const fluid = require("infusion");
+const hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.iNat.obsSource", {
     gradeNames: "kettle.dataSource.URL",
@@ -29,20 +29,20 @@ fluid.defaults("hortis.iNat.obsSource", {
 });
 
 hortis.paramsToSearch = function (params) {
-    var encoded = fluid.hashToArray(fluid.transform(params, function (value, key) {
+    const encoded = fluid.hashToArray(fluid.transform(params, function (value, key) {
         return encodeURIComponent(key) + "=" + encodeURIComponent(value);
     }));
     return encoded.join("&");
 };
 
 hortis.resolveUrl = function (url, paramMap, directModel) {
-    var params = fluid.transform(paramMap, function (value) {
-        var path = typeof(value) === "string" && value.startsWith("%") ? value.substring(1) : null;
-        var paramValue = path ? fluid.get(directModel, path) : value;
+    const params = fluid.transform(paramMap, function (value) {
+        const path = typeof (value) === "string" && value.startsWith("%") ? value.substring(1) : null;
+        const paramValue = path ? fluid.get(directModel, path) : value;
         // TODO: Encode arrays as CSV here
         return fluid.isValue(paramValue) ? paramValue : fluid.NO_VALUE;
     });
-    var urlObj = new fluid.resourceLoader.UrlClass(url);
+    const urlObj = new fluid.resourceLoader.UrlClass(url);
 
     urlObj.search = hortis.paramsToSearch(params);
     return urlObj.toString();
@@ -68,14 +68,14 @@ hortis.iNat.obsMap = {
 };
 
 hortis.applyLocation = function (oneResult, row, prefix) {
-    var key = prefix + "location";
-    var location = typeof(oneResult[key]) === "string" ? oneResult[key].split(",") : [];
+    const key = prefix + "location";
+    const location = typeof(oneResult[key]) === "string" ? oneResult[key].split(",") : [];
     row[prefix + "latitude"] = location[0];
     row[prefix + "longitude"] = location[1];
 };
 
 hortis.resultToRow = function (oneResult) {
-    var row = fluid.transform(hortis.iNat.obsMap, function (value) {
+    const row = fluid.transform(hortis.iNat.obsMap, function (value) {
         return fluid.get(oneResult, value);
     });
     hortis.applyLocation(oneResult, row, "");
@@ -86,7 +86,7 @@ hortis.resultToRow = function (oneResult) {
 
 hortis.pushResultRows = function (rows, response) {
     response.results.forEach(function (oneResult) {
-        var row = hortis.resultToRow(oneResult);
+        const row = hortis.resultToRow(oneResult);
         rows.push(row);
     });
 };

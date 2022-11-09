@@ -12,6 +12,16 @@ fluid.defaults("fluid.dataSource.noencoding", {
     }
 });
 
+// Patch this from Kettle DataSource to interpret iNat errors which have
+fluid.extractHtmlError = function (received) {
+    const preMatches = /<pre>(.*)<\/pre>/gm.exec(received);
+    if (preMatches) {
+        return preMatches[1];
+    }
+    const titleMatches = /<title>(.*)<\/title>/gm.exec(received);
+    return titleMatches ? titleMatches[1] : received;
+};
+
 fluid.defaults("fluid.dataSource.retrying", {
     gradeNames: "fluid.dataSource",
     retryInterval: 1000,
@@ -44,7 +54,7 @@ fluid.dataSource.retrying.get = async function (that, directModel, directOptions
             err = e;
             await fluid.promise.delay(that.options.retryInterval);
         }
-    };
+    }
     throw err;
 };
 
