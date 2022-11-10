@@ -62,6 +62,7 @@ hortis.iNat.parentTaxaIds = function (taxonDoc) {
 
 fluid.defaults("hortis.iNatAPILimiter", {
     gradeNames: ["fluid.dataSource.rateLimiter", "fluid.resolveRootSingle"],
+    rateLimit: 1500,
     singleRootType: "hortis.iNatAPILimiter"
 });
 
@@ -148,9 +149,10 @@ hortis.cachedApiSource.read = async function (that, payload, options) {
         if (cached && !that.options.disableCache) {
             const staleness = Date.now() - Date.parse(cached.fetched_at);
             if (staleness < that.options.refreshInDays * hortis.DAY_IN_MS) {
-//                console.log("Staleness is " + moment.duration(staleness).humanize() + " so returning cached document");
                 await that.inMemorySource.set(hortis.writeNoValue(query), cached);
                 return cached;
+            } else {
+                console.log("Staleness is " + moment.duration(staleness).humanize() + " so fetching live document");
             }
         }
         const live = await that.apiSource.get(query);

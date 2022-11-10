@@ -90,6 +90,7 @@ fluid.dataSource.rateLimiter.next = function (that) {
     };
 
     const uncess = that.lastFired + that.options.rateLimit - now;
+    console.log("rateLimit: " + that.options.rateLimit + " uncess " + uncess);
     if (!that.pending && that.queue.length > 0) {
         if (uncess > 0) {
             that.pending = setTimeout(function () {

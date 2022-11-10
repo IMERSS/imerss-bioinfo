@@ -9,7 +9,7 @@
         },
         iNat: {
             name: "iNaturalist (2013-2021)",
-            input: "%bagatelle/data/Valdes/iNaturalist_Catalogue_2021_10_12.csv",
+            input: "%bagatelle/data/Valdes/iNaturalist_Catalogue_2022_11_10.csv",
             map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
             outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99"
