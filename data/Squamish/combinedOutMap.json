@@ -46,7 +46,7 @@
         "Animalia": {
             "name": "Animalia",
             "datasetId": "SQU-Animalia",
-            "input": "E:/source/gits/bagatelle/data/Squamish/sources/Animalia-2021.csv",
+            "input": "E:/source/gits/bagatelle/data/Squamish/sources/Animalia-2022.csv",
             "map": "E:/source/gits/bagatelle/data/Squamish/Squamish-map.json",
             "outMap": "E:/source/gits/bagatelle/data/Squamish/Squamish-out-map.json",
             "colour": "#931362"
@@ -54,7 +54,7 @@
         "Fungi": {
             "name": "Fungi, Lichens & Protozoa",
             "datasetId": "SQU-Fungi",
-            "input": "E:/source/gits/bagatelle/data/Squamish/sources/Fungi-2021.csv",
+            "input": "E:/source/gits/bagatelle/data/Squamish/sources/Fungi-2022.csv",
             "map": "E:/source/gits/bagatelle/data/Squamish/Squamish-map.json",
             "outMap": "E:/source/gits/bagatelle/data/Squamish/Squamish-out-map.json",
             "colour": "#931362"
@@ -62,7 +62,7 @@
         "Plantae": {
             "name": "Plantae & Chromista",
             "datasetId": "SQU-Plantae",
-            "input": "E:/source/gits/bagatelle/data/Squamish/sources/Plantae-2021.csv",
+            "input": "E:/source/gits/bagatelle/data/Squamish/sources/Plantae-2022.csv",
             "map": "E:/source/gits/bagatelle/data/Squamish/Squamish-map.json",
             "outMap": "E:/source/gits/bagatelle/data/Squamish/Squamish-out-map.json",
             "colour": "#931362"

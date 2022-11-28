@@ -37,7 +37,7 @@ hortis.paramsToSearch = function (params) {
 
 hortis.resolveUrl = function (url, paramMap, directModel) {
     const params = fluid.transform(paramMap, function (value) {
-        const path = typeof (value) === "string" && value.startsWith("%") ? value.substring(1) : null;
+        const path = typeof(value) === "string" && value.startsWith("%") ? value.substring(1) : null;
         const paramValue = path ? fluid.get(directModel, path) : value;
         // TODO: Encode arrays as CSV here
         return fluid.isValue(paramValue) ? paramValue : fluid.NO_VALUE;

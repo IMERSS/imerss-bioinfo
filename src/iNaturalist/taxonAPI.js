@@ -110,7 +110,7 @@ hortis.DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 fluid.defaults("hortis.cachedApiSource", {
     gradeNames: ["fluid.dataSource", "fluid.dataSource.noencoding"],
-    refreshInDays: 7,
+    refreshInDays: 31,
     disableCache: false,
     components: {
         inMemorySource: {

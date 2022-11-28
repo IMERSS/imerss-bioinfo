@@ -135,7 +135,7 @@ hortis.loadCachedTaxonDoc = function (treeBuilder, id) {
  */
 hortis.taxaToPathiNat = async function (treeBuilder, row) {
     const baseDoc = (await treeBuilder.taxonSource.get({id: row.iNaturalistTaxonId})).doc;
-    const parentTaxaIds = hortis.iNat.parentTaxaIds(baseDoc);
+    const parentTaxaIds = hortis.iNat.parentTaxaIds(baseDoc).reverse();
     const ancestourDocs = await Promise.all(parentTaxaIds.map(async function (id) {
         return (await treeBuilder.taxonSource.get({id: id})).doc;
     }));
