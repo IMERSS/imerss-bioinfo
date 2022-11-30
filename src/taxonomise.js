@@ -176,7 +176,7 @@ hortis.assignObsIds = function (rows, map, dataset) {
     if (map.observationId) {
         const idGenerator = hortis.makeObsIdGenerator(map.observationId, dataset);
         rows.forEach(function (row, index) {
-            const id = map.datasetId + ":" + idGenerator(row, index);
+            const id = idGenerator(row, index);
             row.observationId = id;
         });
     }

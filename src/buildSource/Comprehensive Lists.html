@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="css/bagatelle-all.css" />
+        <script src="js/jquery.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <script src="js/bagatelle-all.js"></script>
+
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
+
+        <title>Comprehensive Lists</title>
+    </head>
+
+    <body>
+        <h2>Comprehensive Lists</h2>
+        <div class="fl-bagatelle-container">
+        </div>
+        <div style="padding: 1rem">
+<strong>Last updated November 2022.</strong>
+Note: this visualization is based on a working species list and may contain some errors and redundancies.
+As a work in progress it is continually subject to review with assistance from various taxonomic authorities.
+Please contact the project curator if you identify any errors.
+</div>
+        <script>
+            hortis.sunburstLoader(".fl-bagatelle-container", {
+                resourceBase: ".",
+                renderMarkup: true,
+                colourCount: "undocumentedCount",
+                culturalValues: false,
+                vizFile: "data/Comprehensive Lists/Comp-Life.json.lz4",
+                phyloMap: "%resourceBase/json/emptyPhyloMap.json",
+                commonNames: false
+            });
+        </script>
+    </body>
+</html>

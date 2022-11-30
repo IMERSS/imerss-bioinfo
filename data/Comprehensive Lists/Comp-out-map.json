@@ -1,0 +1,17 @@
+{
+    "columns": {
+        "taxonName": "Taxon name",
+        "area": "area",
+        "HJ_comment": "HJ_comment",
+        "FPNW_note": "FPNW_note",
+        "critical_comments": "critical_comments",
+        "reviewed": "reviewed",
+        "observationId": "id"
+    },
+    "counts": {
+        "undocumentedCount": {
+            "column": "documenting",
+            "equals": "undocumented"
+        }
+    }
+}

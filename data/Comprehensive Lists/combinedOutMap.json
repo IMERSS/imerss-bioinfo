@@ -1,0 +1,69 @@
+{
+    "columns": {
+        "iNaturalistTaxonName": "iNaturalist taxon name",
+        "iNaturalistTaxonId": "iNaturalist taxon ID",
+        "taxonName": "Taxon name",
+        "kingdom": "Kingdom",
+        "phylum": "Phylum",
+        "subphylum": "Subphylum",
+        "superclass": "Superclass",
+        "class": "Class",
+        "subclass": "Subclass",
+        "superorder": "Superorder",
+        "order": "Order",
+        "suborder": "Suborder",
+        "infraorder": "Infraorder",
+        "superfamily": "Superfamily",
+        "family": "Family",
+        "subfamily": "Subfamily",
+        "tribe": "Tribe",
+        "genus": "Genus",
+        "species": "Species",
+        "area": "area",
+        "HJ_comment": "HJ_comment",
+        "FPNW_note": "FPNW_note",
+        "critical_comments": "critical_comments",
+        "reviewed": "reviewed",
+        "observationId": "id"
+    },
+    "counts": {
+        "undocumentedCount": {
+            "column": "documenting",
+            "equals": "undocumented"
+        }
+    },
+    "datasets": {
+        "Saanich": {
+            "name": "Saanich Peninsula Plant List",
+            "datasetId": "COMP-Saanich",
+            "input": "E:/source/gits/bagatelle/data/Comprehensive Lists/Saanich_Peninsula_Plant_List_2021-11-19.csv",
+            "map": "E:/source/gits/bagatelle/data/Comprehensive Lists/Comp-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Comprehensive Lists/Comp-out-map.json",
+            "colour": "#931362"
+        },
+        "OuterGulf": {
+            "name": "Outer Gulf Island Plant List",
+            "datasetId": "COMP-OuterGulf",
+            "input": "E:/source/gits/bagatelle/data/Comprehensive Lists/Outer_Gulf_Island_Plant_List_2021-11-19.csv",
+            "map": "E:/source/gits/bagatelle/data/Comprehensive Lists/Comp-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Comprehensive Lists/Comp-out-map.json",
+            "colour": "#931362"
+        },
+        "SanJuan": {
+            "name": "San Juan Islands Plant List",
+            "datasetId": "COMP-Saanich",
+            "input": "E:/source/gits/bagatelle/data/Comprehensive Lists/San_Juan_Islands_Plant_List_2021-11-19.csv",
+            "map": "E:/source/gits/bagatelle/data/Comprehensive Lists/Comp-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Comprehensive Lists/Comp-out-map.json",
+            "colour": "#931362"
+        },
+        "SaltSpring": {
+            "name": "Salt Spring Island Plant List",
+            "datasetId": "COMP-SaltSpring",
+            "input": "E:/source/gits/bagatelle/data/Comprehensive Lists/Salt_Spring_Island_Plant_List_2021-11-19.csv",
+            "map": "E:/source/gits/bagatelle/data/Comprehensive Lists/Comp-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Comprehensive Lists/Comp-out-map.json",
+            "colour": "#931362"
+        }
+    }
+}

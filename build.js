@@ -57,6 +57,9 @@ const buildIndex = {
         src: "src/buildSource/Galiano Life List.html",
         dest: "docs/Galiano Life List.html"
     }, {
+        src: "src/buildSource/Comprehensive Lists.html",
+        dest: "docs/Comprehensive Lists.html"
+    }, {
         src: "src/buildSource/Squamish Life List.html",
         dest: "docs/Squamish Life List.html"
     }, {
@@ -83,6 +86,9 @@ const buildIndex = {
     }, {
         src: "data/Galiano/Galiano-Life.json.lz4",
         dest: "docs/data/Galiano/Galiano-Life.json.lz4"
+    }, {
+        src: "data/Comprehensive Lists/Comp-Life.json.lz4",
+        dest: "docs/data/Comprehensive Lists/Comp-Life.json.lz4"
     }, {
         src: "data/Galiano/Galiano_map_0.js",
         dest: "docs/data/Galiano/Galiano_map_0.js"

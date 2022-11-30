@@ -1,0 +1,5 @@
+{
+    outputFile: "%bagatelle/data/Comprehensive Lists/Comp-Life.json.lz4",
+    inputFiles: ["%bagatelle/data/Comprehensive Lists/reintegrated.csv"],
+    mapFile: "%bagatelle/data/Comprehensive Lists/combinedOutMap.json",
+}

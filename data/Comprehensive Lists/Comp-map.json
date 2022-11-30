@@ -1,0 +1,13 @@
+{
+    "columns": {
+        "taxonName": "%TaxonName",
+        "area": "%area",
+        "HJ_comment": "%HJ_comment",
+        "FPNW_note": "%FPNW_note",
+        "critical_comments": "%critical_comments",
+        "reviewed": "%reviewed"
+    },
+    "datasetId": "COMP",
+    "datasetClass": "naturalist",
+    "observationId": "%datasetId:%rowNumber"
+}
