@@ -1,0 +1,15 @@
+{
+    "columns": {
+        "taxonName": "Taxon name",
+        "Infra taxa": "Infra taxa",
+        "Habitat": "Habitat",
+        "Islands": "Islands",
+        "observationId": "id"
+    },
+    "counts": {
+        "undocumentedCount": {
+            "column": "documenting",
+            "equals": "undocumented"
+        }
+    }
+}

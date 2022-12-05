@@ -1,0 +1,1006 @@
+iNaturalist taxon name,iNaturalist taxon ID,Taxon name,Kingdom,Phylum,Subphylum,Superclass,Class,Subclass,Superorder,Order,Suborder,Infraorder,Superfamily,Family,Subfamily,Tribe,Genus,Species,Infra taxa,Habitat,Islands,id
+Sambucus cerulea,143799,Sambucus cerulea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Viburnaceae,,,Sambucus,cerulea,,Forest,1,DUN:0
+Sambucus racemosa,57824,Sambucus racemosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Viburnaceae,,,Sambucus,racemosa,var. arborescens,Forest,50,DUN:1
+Alisma triviale,61167,Alisma triviale,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Alismataceae,,,Alisma,triviale,,Wetland,1,DUN:2
+Amaranthus blitoides,58774,Amaranthus blitoides,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Amaranthoideae,,Amaranthus,blitoides,,Open,1,DUN:3
+Amaranthus powellii,75398,Amaranthus powellii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Amaranthoideae,,Amaranthus,hybridus,,Open,1,DUN:4
+Atriplex dioica,75701,Atriplex dioica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Chenopodioideae,Atripliceae,Atriplex,dioica,,Shoreline,87,DUN:5
+Atriplex gmelinii,75705,Atriplex gmelinii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Chenopodioideae,Atripliceae,Atriplex,gmelinii,var. gmelinii,Shoreline,26,DUN:6
+Atriplex littoralis,159077,Atriplex littoralis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Chenopodioideae,Atripliceae,Atriplex,littoralis,,Shoreline,1,DUN:7
+Atriplex patula,60175,Atriplex patula,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Chenopodioideae,Atripliceae,Atriplex,patula,,Shoreline,5,DUN:8
+Atriplex prostrata,60176,Atriplex prostrata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Chenopodioideae,Atripliceae,Atriplex,prostrata,,Shoreline,40,DUN:9
+Chenopodiastrum murale,514012,Chenopodiastrum murale,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Chenopodioideae,Atripliceae,Chenopodiastrum,murale,,Open,1,DUN:10
+Chenopodium berlandieri,58879,Chenopodium berlandieri,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Chenopodioideae,Chenopodieae,Chenopodium,berlandieri,var. zschackei,Shoreline,19,DUN:11
+Chenopodium leptophyllum,76278,Chenopodium leptophyllum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Chenopodioideae,Chenopodieae,Chenopodium,leptophyllum,var. leptophyllum,Open,1,DUN:12
+Oxybasis rubra,931679,Oxybasis rubra,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Chenopodioideae,Atripliceae,Oxybasis,rubra,,Shoreline,2,DUN:14
+Salicornia depressa,78930,Salicornia depressa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Salicornioideae,Salicornieae,Salicornia,depressa,,Shoreline,3,DUN:15
+Salicornia pacifica,78931,Salicornia pacifica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Salicornioideae,Salicornieae,Salicornia,pacifica,,Shoreline,54,DUN:16
+Salicornia pacifica,78931,Sarcocornia pacifica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Amaranthaceae,Salicornioideae,Salicornieae,Salicornia,pacifica,,Shoreline,5,DUN:17
+Allium acuminatum,59782,Allium acuminatum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Amaryllidaceae,Allioideae,Allieae,Allium,acuminatum,,Open,97,DUN:18
+Allium amplectens,60267,Allium amplectens,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Amaryllidaceae,Allioideae,Allieae,Allium,amplectens,,Open,2,DUN:19
+Allium cernuum,116364,Allium cernuum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Amaryllidaceae,Allioideae,Allieae,Allium,cernuum,,Shoreline,74,DUN:20
+Allium sativum,75363,Allium sativum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Amaryllidaceae,Allioideae,Allieae,Allium,sativum,,Open,2,DUN:21
+Allium vineale,75371,Allium vineale,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Amaryllidaceae,Allioideae,Allieae,Allium,vineale,,Open,2,DUN:22
+Narcissus poeticus,61334,Narcissus poeticus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Amaryllidaceae,Amaryllidoideae,Narcisseae,Narcissus,poeticus,,Open,5,DUN:23
+Narcissus pseudonarcissus,55848,Narcissus pseudonarcissus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Amaryllidaceae,Amaryllidoideae,Narcisseae,Narcissus,pseudonarcissus,,Forest,8,DUN:24
+Angelica genuflexa,75450,Angelica genuflexa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Selineae,Angelica,genuflexa,,Wetland,1,DUN:25
+Angelica lucida,75453,Angelica lucida,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Selineae,Angelica,lucida,,Shoreline,2,DUN:26
+Anthriscus caucalis,52846,Anthriscus caucalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Scandiceae,Anthriscus,caucalis,,Open,20,DUN:27
+Carum carvi,160162,Carum carvi,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Careae,Carum,carvi,,Open,1,DUN:28
+Cicuta douglasii,76338,Cicuta douglasii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Oenantheae,Cicuta,douglasii,,Wetland,2,DUN:29
+Conioselinum gmelinii,160830,Conioselinum pacificum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,,Conioselinum,gmelinii,,Wetland,30,DUN:30
+Conium maculatum,52998,Conium maculatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Smyrnieae,Conium,maculatum,,Open,3,DUN:31
+Daucus carota,76610,Daucus carota,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Scandiceae,Daucus,carota,,Open,6,DUN:32
+Daucus pusillus,56726,Daucus pusillus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Scandiceae,Daucus,pusillus,,Open,20,DUN:33
+Foeniculum vulgare,53052,Foeniculum vulgare,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Apieae,Foeniculum,vulgare,,Open,3,DUN:34
+Glehnia littoralis leiocarpa,79928,Glehnia leiocarpa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Selineae,Glehnia,littoralis,,Shoreline,1,DUN:35
+Heracleum mantegazzianum,130228,Heracleum mantegazzianum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Tordylieae,Heracleum,mantegazzianum,,Forest,3,DUN:36
+Heracleum maximum,53094,Heracleum maximum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Tordylieae,Heracleum,maximum,,Open,21,DUN:37
+Lilaeopsis occidentalis,77742,Lilaeopsis occidentalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Oenantheae,Lilaeopsis,occidentalis,,Shoreline,2,DUN:38
+Lomatium nudicaule,77818,Lomatium nudicaule,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Selineae,Lomatium,nudicaule,,Open,43,DUN:39
+Lomatium utriculatum,56827,Lomatium utriculatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Selineae,Lomatium,utriculatum,,Open,29,DUN:40
+Oenanthe sarmentosa,60127,Oenanthe sarmentosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Oenantheae,Oenanthe,sarmentosa,,Wetland,12,DUN:41
+Osmorhiza berteroi,53166,Osmorhiza berteroi,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Scandiceae,Osmorhiza,berteroi,,Forest,29,DUN:42
+Osmorhiza purpurea,78296,Osmorhiza purpurea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Scandiceae,Osmorhiza,purpurea,,Forest,4,DUN:43
+Perideridia gairdneri,78434,Perideridia montana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Oenantheae,Perideridia,gairdneri,,Open,5,DUN:44
+Petrosedum erectum,1286732,Petrosedum erectum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Crassulaceae,Sempervivoideae,Semperviveae,Petrosedum,erectum,,Shoreline,1,DUN:45
+Petroselinum crispum,78465,Petroselinum crispum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Apieae,Petroselinum,crispum,,Open,2,DUN:46
+Pimpinella saxifraga,166880,Pimpinella saxifraga,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Pimpinelleae,Pimpinella,saxifraga,ssp. nigra,Open,1,DUN:47
+Sanicula bipinnatifida,56840,Sanicula bipinnatifida,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Saniculoideae,Saniculeae,Sanicula,bipinnatifida,,Open,12,DUN:48
+Sanicula crassicaulis,53201,Sanicula crassicaulis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Saniculoideae,Saniculeae,Sanicula,crassicaulis,var. crassicaulis,Open,78,DUN:49
+Sium suave,79131,Sium suave,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Oenantheae,Sium,suave,,Wetland,1,DUN:50
+Torilis arvensis,56846,Torilis arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Scandiceae,Torilis,arvensis,ssp. arvensis,Open,7,DUN:51
+Yabea microcarpa,56847,Yabea microcarpa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Apiaceae,Apioideae,Scandiceae,Yabea,microcarpa,,Wetland,1,DUN:52
+Apocynum androsaemifolium,47359,Apocynum androsaemifolium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Apocynaceae,Apocynoideae,Apocyneae,Apocynum,androsaemifolium,,Open,2,DUN:53
+Vinca major,53326,Vinca major,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Apocynaceae,Rauvolfioideae,Vinceae,Vinca,major,,Forest,5,DUN:54
+Vinca minor,55844,Vinca minor,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Apocynaceae,Rauvolfioideae,Vinceae,Vinca,minor,,Forest,1,DUN:55
+Ilex aquifolium,53856,Ilex aquifolium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Aquifoliales,,,,Aquifoliaceae,,,Ilex,aquifolium,,Open,24,DUN:56
+Arum italicum,61168,Arum italicum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Araceae,Aroideae,Areae,Arum,italicum,,Forest,3,DUN:57
+Lemna minor,54518,Lemna minor,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Araceae,Lemnoideae,,Lemna,minor,,Wetland,2,DUN:58
+Lemna trisulca,77655,Lemna trisulca,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Araceae,Lemnoideae,,Lemna,trisulca,,Wetland,3,DUN:59
+Lemna turionifera,77656,Lemna turionifera,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Araceae,Lemnoideae,,Lemna,turionifera,,Wetland,8,DUN:60
+Lysichiton americanus,48537,Lysichiton americanus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Araceae,Orontioideae,,Lysichiton,americanus,,Wetland,5,DUN:61
+Spirodela polyrhiza,57867,Spirodela polyrhiza,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Araceae,Lemnoideae,,Spirodela,polyrhiza,,Wetland,3,DUN:62
+Wolffia borealis,79526,Wolffia borealis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Araceae,Lemnoideae,,Wolffia,borealis,,Wetland,2,DUN:63
+Wolffia columbiana,79528,Wolffia columbiana,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Araceae,Lemnoideae,,Wolffia,columbiana,,Wetland,2,DUN:64
+Hedera helix,55882,Hedera helix,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Araliaceae,,,Hedera,helix,,Forest,8,DUN:65
+Hedera hibernica,163549,Hedera hibernica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Apiales,,,,Araliaceae,,,Hedera,hibernica,,Forest,21,DUN:66
+Asarum caudatum,52858,Asarum caudatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Piperales,,,,Aristolochiaceae,Asaroideae,,Asarum,caudatum,,Forest,2,DUN:67
+Asparagus officinalis,60265,Asparagus officinalis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Asparagoideae,,Asparagus,officinalis,,Open,5,DUN:68
+Brodiaea coronaria,57126,Brodiaea coronaria,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Brodiaeoideae,,Brodiaea,coronaria,,Open,62,DUN:69
+Brodiaea coronaria rosea,863714,Brodiaea rosea,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Brodiaeoideae,,Brodiaea,coronaria,var. rosea,Open,5,DUN:70
+Camassia leichtlinii,62218,Camassia leichtlinii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Agavoideae,,Camassia,leichtlinii,ssp. suksdorfii,Open,95,DUN:71
+Camassia quamash,62220,Camassia quamash,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Agavoideae,,Camassia,quamash,ssp. maxima,Open,15,DUN:72
+Dichelostemma congestum,56593,Dichelostemma congestum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Brodiaeoideae,,Dichelostemma,congestum,,Open,1,DUN:73
+Maianthemum dilatatum,63939,Maianthemum dilatatum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Nolinoideae,Polygonateae,Maianthemum,dilatatum,,Forest,16,DUN:75
+Maianthemum racemosum,51062,Maianthemum racemosum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Nolinoideae,Polygonateae,Maianthemum,racemosum,ssp. amplexicaule,Forest,16,DUN:76
+Maianthemum stellatum,53268,Maianthemum stellatum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Nolinoideae,Polygonateae,Maianthemum,stellatum,,Forest,7,DUN:77
+Muscari armeniacum,57847,Muscari armeniacum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Scilloideae,,Muscari,armeniacum,,Open,2,DUN:78
+Ornithogalum umbellatum,1125873,Ornithogalum umbellatum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Scilloideae,,Ornithogalum,umbellatum,,Open,1,DUN:79
+Scilla forbesii,68357,Scilla forbesii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Scilloideae,Hyacintheae,Scilla,forbesii,,Open,1,DUN:80
+Triteleia grandiflora,79452,Triteleia grandiflora,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Brodiaeoideae,,Triteleia,grandiflora,var. howellii,Open,10,DUN:81
+Triteleia hyacinthina,57132,Triteleia hyacinthina,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Asparagaceae,Brodiaeoideae,,Triteleia,hyacinthina,,Open,23,DUN:82
+Asplenium trichomanes,75609,Asplenium trichomanes,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Aspleniinae,,,Aspleniaceae,,,Asplenium,trichomanes,ssp. trichomanes,Open,4,DUN:83
+Achillea millefolium,1105043,Achillea millefolium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Achillea,millefolium,,Open,107,DUN:84
+Adenocaulon bicolor,56854,Adenocaulon bicolor,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Mutisioideae,Mutisieae,Adenocaulon,bicolor,,Forest,9,DUN:85
+Agoseris grandiflora,52828,Agoseris grandiflora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Agoseris,grandiflora,"ssp. grandiflora, ssp. leptophylla",Open,20,DUN:86
+Agoseris heterophylla,56856,Agoseris heterophylla,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Agoseris,heterophylla,var. heterophylla,Open,3,DUN:87
+Ambrosia chamissonis,71135,Ambrosia chamissonis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Heliantheae,Ambrosia,chamissonis,,Shoreline,38,DUN:88
+Anaphalis margaritacea,52833,Anaphalis margaritacea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Gnaphalieae,Anaphalis,margaritacea,,Open,12,DUN:89
+Anisocarpus madioides,53137,Anisocarpus madioides,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Madieae,Anisocarpus,madioides,,Forest,20,DUN:90
+Antennaria racemosa,75469,Antennaria racemosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Gnaphalieae,Antennaria,racemosa,,Open,1,DUN:91
+Anthemis cotula,52841,Anthemis cotula,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Anthemis,cotula,,Open,2,DUN:92
+Arctium minus,59570,Arctium minus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Arctium,minus,,Open,4,DUN:93
+Artemisia campestris,127960,Artemisia campestris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Artemisia,campestris,var. scouleriana,Open,17,DUN:94
+Artemisia suksdorfii,75597,Artemisia suksdorfii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Artemisia,suksdorfii,,Open,5,DUN:95
+Artemisia vulgaris,52856,Artemisia vulgaris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Artemisia,vulgaris,,Open,1,DUN:96
+Bellis perennis,55563,Bellis perennis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Astereae,Bellis,perennis,,Open,23,DUN:97
+Bidens beckii,204252,Bidens beckii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Coreopsideae,Bidens,beckii,,Wetland,1,DUN:98
+Bidens frondosa,51712,Bidens frondosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Coreopsideae,Bidens,frondosa,,Shoreline,1,DUN:99
+Calendula officinalis,75931,Calendula officinalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Calenduleae,Calendula,officinalis,,Open,1,DUN:100
+Carduus nutans,76007,Carduus nutans,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Carduus,nutans,,Open,1,DUN:101
+Centaurea cyanus,933404,Centaurea cyanus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Centaurea,cyanus,,Open,2,DUN:102
+Centaurea diffusa,76210,Centaurea diffusa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Centaurea,diffusa,,Open,1,DUN:103
+Centaurea gerstlaueri,925004,Centaurea gerstlaueri,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Centaurea,gerstlaueri,,Open,3,DUN:104
+Centaurea jacea,55713,Centaurea jacea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Centaurea,jacea,,Open,2,DUN:105
+Centaurea melitensis,57922,Centaurea melitensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Centaurea,melitensis,,Open,2,DUN:106
+Centaurea montana,48984,Centaurea montana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Centaurea,montana,,Open,1,DUN:107
+Centaurea stoebe,76214,Centaurea stoebe,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Centaurea,stoebe,ssp. australis,Open,3,DUN:108
+Centaurea varnensis,521773,Centaurea varnensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Centaurea,varnensis,,Open,1,DUN:109
+Cichorium intybus,52913,Cichorium intybus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Cichorium,intybus,,Open,2,DUN:110
+Cirsium arvense,60132,Cirsium arvense,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Cirsium,arvense,,Open,32,DUN:111
+Cirsium brevistylum,52993,Cirsium brevistylum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Cirsium,brevistylum,,Forest,7,DUN:112
+Cirsium vulgare,52989,Cirsium vulgare,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Carduoideae,Cardueae,Cirsium,vulgare,,Open,67,DUN:113
+Erigeron canadensis,76907,Conyza canadensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Astereae,Erigeron,canadensis,,Open,3,DUN:114
+Coreopsis grandiflora,128825,Coreopsis grandiflora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Coreopsideae,Coreopsis,grandiflora,,Open,1,DUN:115
+Coreopsis lanceolata,76444,Coreopsis lanceolata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Coreopsideae,Coreopsis,lanceolata,,Open,2,DUN:116
+Cotula coronopifolia,58812,Cotula coronopifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Cotula,coronopifolia,,Shoreline,2,DUN:117
+Crepis capillaris,54050,Crepis capillaris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Crepis,capillaris,,Open,10,DUN:118
+Crepis nicaeensis,161119,Crepis nicaeensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Crepis,nicaeensis,,Open,1,DUN:119
+Crocidium multicaule,57524,Crocidium multicaule,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Senecioneae,Crocidium,multicaule,,Open,2,DUN:120
+Erigeron philadelphicus,67820,Erigeron philadelphicus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Astereae,Erigeron,philadelphicus,,Forest,1,DUN:121
+Erigeron speciosus,84732,Erigeron speciosus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Astereae,Erigeron,speciosus,,Open,1,DUN:122
+Eriophyllum lanatum,77049,Eriophyllum lanatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Madieae,Eriophyllum,lanatum,"var. lanatum, var. leucophyllum",Open,33,DUN:123
+Filago arvensis,634692,Filago arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Gnaphalieae,Filago,arvensis,,Open,1,DUN:124
+Filago germanica,634625,Filago vulgaris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Gnaphalieae,Filago,germanica,,Open,4,DUN:125
+Gamochaeta ustulata,77224,Gamochaeta ustulata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Gnaphalieae,Gamochaeta,ustulata,,Open,26,DUN:126
+Gnaphalium palustre,57980,Gnaphalium palustre,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Gnaphalieae,Gnaphalium,palustre,,Open,4,DUN:127
+Gnaphalium uliginosum,136366,Gnaphalium uliginosum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Gnaphalieae,Gnaphalium,uliginosum,,Open,4,DUN:128
+Grindelia integrifolia,124526,Grindelia integrifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Astereae,Grindelia,integrifolia,,Shoreline,143,DUN:129
+Hemizonella minima,77367,Hemizonella minima,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Madieae,Hemizonella,minima,,Open,1,DUN:130
+Hieracium albiflorum,63937,Hieracium albiflorum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Hieracium,albiflorum,,Forest,31,DUN:131
+Pilosella aurantiaca,711103,Hieracium aurantiacum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Pilosella,aurantiaca,,Open,2,DUN:132
+Pilosella caespitosa,711086,Hieracium caespitosum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Pilosella,caespitosa,,Open,2,DUN:133
+Pilosella flagellaris,569962,Hieracium flagellare,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Pilosella,flagellaris,,Open,1,DUN:134
+Pilosella stoloniflora,1132151,Hieracium stoloniflorum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Pilosella,stoloniflora,,Open,1,DUN:135
+Hypochaeris glabra,53103,Hypochaeris glabra,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Hypochaeris,glabra,,Open,24,DUN:136
+Hypochaeris radicata,53104,Hypochaeris radicata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Hypochaeris,radicata,,Open,88,DUN:137
+Jacobaea maritima,357682,Jacobaea maritima,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Senecioneae,Jacobaea,maritima,,Open,1,DUN:138
+Jacobaea maritima,357682,Jacobaea maritima,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Senecioneae,Jacobaea,maritima,,Open,1,DUN:139
+Jacobaea vulgaris,62498,Jacobaea vulgaris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Senecioneae,Jacobaea,vulgaris,,Open,14,DUN:140
+Jaumea carnosa,60969,Jaumea carnosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Tageteae,Jaumea,carnosa,,Shoreline,4,DUN:141
+Lactuca ludoviciana,53111,Lactuca ludoviciana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Lactuca,ludoviciana,,Open,1,DUN:142
+Lactuca serriola,53107,Lactuca serriola,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Lactuca,serriola,,Open,9,DUN:143
+Lapsana communis,55981,Lapsana communis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Lapsana,communis,,Open,13,DUN:144
+Scorzoneroides autumnalis,204167,Leontodon autumnalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Scorzoneroides,autumnalis,,Open,4,DUN:145
+Leontodon saxatilis,60973,Leontodon saxatilis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Leontodon,saxatilis,ssp. saxatilis,Open,4,DUN:146
+Leucanthemum maximum,77719,Leucanthemum maximum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Leucanthemum,vulgare,,Open,1,DUN:147
+Leucanthemum vulgare,1404861,Leucanthemum vulgare,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Leucanthemum,vulgare,,Open,7,DUN:148
+Logfia minima,204350,Logfia minima,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Gnaphalieae,Logfia,minima,,Open,2,DUN:149
+Madia exigua,56971,Madia exigua,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Madieae,Madia,exigua,,Open,4,DUN:150
+Madia glomerata,77923,Madia glomerata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Madieae,Madia,glomerata,,Open,1,DUN:151
+Madia gracilis,53135,Madia gracilis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Madieae,Madia,gracilis,,Open,9,DUN:152
+Madia sativa,53143,Madia sativa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Madieae,Madia,sativa,,Open,5,DUN:153
+Matricaria discoidea,52992,Matricaria discoidea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Matricaria,discoidea,,Open,6,DUN:154
+Mauranthemum paludosum,77968,Mauranthemum paludosum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Mauranthemum,paludosum,,Open,1,DUN:155
+Microseris bigelovii,60977,Microseris bigelovii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Microseris,bigelovii,,Open,2,DUN:156
+Mycelis muralis,48543,Mycelis muralis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Mycelis,muralis,,Forest,28,DUN:157
+Packera indecora,78322,Packera indecora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Senecioneae,Packera,indecora,,Open,1,DUN:158
+Packera macounii,78325,Packera macounii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Senecioneae,Packera,macounii,,Open,4,DUN:159
+Petasites frigidus,55780,Petasites frigidus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Senecioneae,Petasites,frigidus,var. palmatus,Wetland,1,DUN:160
+Pseudognaphalium stramineum,53089,Pseudognaphalium stramineum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Gnaphalieae,Pseudognaphalium,stramineum,,Open,6,DUN:161
+Pseudognaphalium thermale,78765,Pseudognaphalium thermale,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Gnaphalieae,Pseudognaphalium,thermale,,Open,6,DUN:162
+Psilocarphus tenellus,53188,Psilocarphus tenellus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Gnaphalieae,Psilocarphus,tenellus,,Open,1,DUN:163
+Senecio sylvaticus,53210,Senecio sylvaticus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Senecioneae,Senecio,sylvaticus,,Open,12,DUN:164
+Senecio vulgaris,53211,Senecio vulgaris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Senecioneae,Senecio,vulgaris,,Open,60,DUN:165
+Sericocarpus rigidus,168858,Sericocarpus rigidus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Astereae,Sericocarpus,rigidus,,Open,1,DUN:166
+Solidago elongata,79150,Solidago elongata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Astereae,Solidago,elongata,,Open,2,DUN:167
+Solidago lepida,79152,Solidago lepida,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Astereae,Solidago,lepida,var. salebrosa,Open,12,DUN:168
+Solidago simplex,126653,Solidago simplex,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Astereae,Solidago,simplex,"var. nana, var. simplex",Open,2,DUN:169
+Soliva sessilis,60150,Soliva sessilis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Soliva,sessilis,,Open,12,DUN:170
+Sonchus arvensis,79156,Sonchus arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Sonchus,arvensis,ssp. arvensis,Open,16,DUN:171
+Sonchus asper,53269,Sonchus asper,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Sonchus,asper,ssp. asper,Open,71,DUN:172
+Sonchus oleraceus,53294,Sonchus oleraceus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Sonchus,oleraceus,,Open,102,DUN:173
+Symphyotrichum boreale,169452,Symphyotrichum boreale,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Astereae,Symphyotrichum,boreale,,Wetland,1,DUN:174
+Symphyotrichum subspicatum,79303,Symphyotrichum subspicatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Astereae,Symphyotrichum,subspicatum,,Open,6,DUN:175
+Tanacetum balsamita,181875,Tanacetum balsamita,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Tanacetum,balsamita,,Open,1,DUN:176
+Tanacetum parthenium,54520,Tanacetum parthenium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Tanacetum,parthenium,,Open,2,DUN:177
+Tanacetum vulgare,55971,Tanacetum vulgare,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Tanacetum,vulgare,,Open,3,DUN:178
+Taraxacum erythrospermum,79317,Taraxacum erythrospermum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Taraxacum,erythrospermum,,Open,14,DUN:179
+Taraxacum officinale,47602,Taraxacum officinale,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Taraxacum,officinale,,Open,68,DUN:180
+Tragopogon dubius,54143,Tragopogon dubius,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Tragopogon,dubius,,Open,4,DUN:181
+Tragopogon porrifolius,54141,Tragopogon porrifolius,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Tragopogon,porrifolius,,Open,4,DUN:182
+Tragopogon pratensis,79385,Tragopogon pratensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Cichorioideae,Cichorieae,Tragopogon,pratensis,,Open,1,DUN:183
+Tripleurospermum inodorum,79441,Tripleurospermum inodorum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Asteraceae,Asteroideae,Anthemideae,Tripleurospermum,inodorum,,Open,4,DUN:184
+Athyrium filix-femina,52669,Athyrium filix-femina,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Aspleniinae,,,Athyriaceae,,,Athyrium,filix-femina,ssp. cyclosorum,Forest,19,DUN:185
+Berberis aquifolium,126887,Berberis aquifolium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Berberidaceae,Berberidoideae,Berberideae,Berberis,aquifolium,,Open,87,DUN:186
+Berberis nervosa,75756,Berberis nervosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Berberidaceae,Berberidoideae,Berberideae,Berberis,nervosa,,Forest,20,DUN:187
+Alnus rubra,56034,Alnus rubra,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fagales,,,,Betulaceae,,,Alnus,rubra,,Forest,18,DUN:188
+Alnus alnobetula,868167,Alnus viridis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fagales,,,,Betulaceae,,,Alnus,alnobetula,ssp. sinuata,Forest,8,DUN:189
+Betula papyrifera,49883,Betula papyrifera,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fagales,,,,Betulaceae,,,Betula,papyrifera,,Forest,5,DUN:190
+Betula pendula,83992,Betula pendula,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fagales,,,,Betulaceae,,,Betula,pendula,,Forest,1,DUN:191
+Corylus cornuta,53374,Corylus cornuta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fagales,,,,Betulaceae,,,Corylus,cornuta,ssp. californica,Forest,3,DUN:192
+Struthiopteris spicant,774894,Struthiopteris spicant,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Aspleniinae,,,Blechnaceae,,,Struthiopteris,spicant,,Forest,5,DUN:193
+Amsinckia menziesii intermedia,49141,Amsinckia intermedia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Cynoglossoideae,Cynoglosseae,Amsinckia,menziesii,,Open,3,DUN:194
+Amsinckia menziesii,55436,Amsinckia menziesii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Cynoglossoideae,Cynoglosseae,Amsinckia,menziesii,,Open,12,DUN:195
+Amsinckia spectabilis,71045,Amsinckia spectabilis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Cynoglossoideae,Cynoglosseae,Amsinckia,spectabilis,var. spectabilis,Open,5,DUN:196
+Anchusa azurea,75429,Anchusa azurea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Boraginoideae,Boragineae,Anchusa,azurea,,Open,2,DUN:197
+Anchusa officinalis,75430,Anchusa officinalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Boraginoideae,Boragineae,Anchusa,officinalis,,Open,1,DUN:198
+Borago officinalis,52287,Borago officinalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Boraginoideae,Boragineae,Borago,officinalis,,Open,1,DUN:199
+Buglossoides arvensis,135229,Buglossoides arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Boraginoideae,Lithospermeae,Buglossoides,arvensis,,Open,1,DUN:200
+Anchusa arvensis,62200,Lycopsis arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Boraginoideae,Boragineae,Anchusa,arvensis,,Open,1,DUN:201
+Myosotis arvensis,51726,Myosotis arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Cynoglossoideae,Myosotideae,Myosotis,arvensis,,Open,4,DUN:202
+Myosotis discolor,70265,Myosotis discolor,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Cynoglossoideae,Myosotideae,Myosotis,discolor,,Open,43,DUN:203
+Myosotis latifolia,49132,Myosotis latifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Cynoglossoideae,Myosotideae,Myosotis,latifolia,,Open,1,DUN:204
+Myosotis laxa,78150,Myosotis laxa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Cynoglossoideae,Myosotideae,Myosotis,laxa,,Wetland,4,DUN:205
+Myosotis stricta,127196,Myosotis stricta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Cynoglossoideae,Myosotideae,Myosotis,stricta,,Open,12,DUN:206
+Myosotis sylvatica,55826,Myosotis sylvatica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Cynoglossoideae,Myosotideae,Myosotis,sylvatica,,Forest,1,DUN:207
+Pentaglottis sempervirens,166466,Pentaglottis sempervirens,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Boraginoideae,Boragineae,Pentaglottis,sempervirens,,Forest,1,DUN:208
+Plagiobothrys scouleri,166953,Plagiobothrys scouleri,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Cynoglossoideae,Cynoglosseae,Plagiobothrys,scouleri,,Shoreline,28,DUN:209
+Plagiobothrys tenellus,58066,Plagiobothrys tenellus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Cynoglossoideae,Cynoglosseae,Plagiobothrys,tenellus,,Open,4,DUN:210
+Symphytum officinale,1247945,Symphytum officinale,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Boraginoideae,Boragineae,Symphytum,officinale,,Open,1,DUN:211
+Symphytum × uplandicum,181924,Symphytum uplandicum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Boraginoideae,Boragineae,Symphytum,officinale,,Open,1,DUN:212
+Alliaria petiolata,56061,Alliaria petiolata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Thlaspideae,Alliaria,petiolata,,Forest,2,DUN:213
+Arabidopsis thaliana,55021,Arabidopsis thaliana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Camelineae,Arabidopsis,thaliana,,Open,8,DUN:214
+Arabis caucasica,158480,Arabis caucasica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Arabideae,Arabis,caucasica,,Open,1,DUN:215
+Arabis eschscholtziana,75494,Arabis eschscholtziana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Arabideae,Arabis,eschscholtziana,,Open,23,DUN:216
+Aubrieta deltoidea,75721,Aubrieta deltoidea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Arabideae,Aubrieta,deltoidea,,Open,1,DUN:217
+Barbarea orthoceras,52976,Barbarea orthoceras,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Cardamineae,Barbarea,orthoceras,,Open,15,DUN:218
+Barbarea vulgaris,56126,Barbarea vulgaris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Cardamineae,Barbarea,vulgaris,,Open,1,DUN:219
+Brassica juncea,64241,Brassica juncea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Brassiceae,Brassica,juncea,,Open,4,DUN:220
+Brassica nigra,53112,Brassica nigra,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Brassiceae,Brassica,nigra,,Open,3,DUN:221
+Brassica rapa,53271,Brassica rapa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Brassiceae,Brassica,rapa,,Open,4,DUN:222
+Cakile edentula,52162,Cakile edentula,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Brassiceae,Cakile,edentula,var. edentula,Shoreline,17,DUN:223
+Cakile maritima,60982,Cakile maritima,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Brassiceae,Cakile,maritima,ssp. maritima,Shoreline,44,DUN:224
+Camelina microcarpa,75970,Camelina microcarpa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Camelineae,Camelina,microcarpa,,Open,1,DUN:225
+Capsella bursa-pastoris,56121,Capsella bursa-pastoris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Camelineae,Capsella,bursa-pastoris,,Open,10,DUN:226
+Cardamine flexuosa,69636,Cardamine flexuosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Cardamineae,Cardamine,flexuosa,,Forest,6,DUN:227
+Cardamine hirsuta,55829,Cardamine hirsuta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Cardamineae,Cardamine,hirsuta,,Open,66,DUN:228
+Cardamine nuttallii,76002,Cardamine nuttallii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Cardamineae,Cardamine,nuttallii,,Forest,2,DUN:229
+Cardamine occidentalis,76003,Cardamine occidentalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Cardamineae,Cardamine,occidentalis,,Wetland,2,DUN:230
+Cardamine oligosperma,52981,Cardamine oligosperma,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Cardamineae,Cardamine,oligosperma,,Forest,50,DUN:231
+Cardamine pensylvanica,76005,Cardamine pensylvanica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Cardamineae,Cardamine,pensylvanica,,Forest,4,DUN:232
+Draba verna,55823,Draba verna,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Arabideae,Draba,verna,,Open,30,DUN:233
+Erysimum cheiri,1337867,Erysimum cheiri,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Erysimeae,Erysimum,cheiri,,Open,1,DUN:234
+Hesperis matronalis,47697,Hesperis matronalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Hesperideae,Hesperis,matronalis,,Open,2,DUN:235
+Hornungia procumbens,77452,Hornungia procumbens,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Descurainieae,Hornungia,procumbens,,Shoreline,11,DUN:236
+Lepidium campestre,77663,Lepidium campestre,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Lepidieae,Lepidium,campestre,,Open,1,DUN:237
+Lepidium densiflorum,77666,Lepidium densiflorum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Lepidieae,Lepidium,densiflorum,,Open,3,DUN:238
+Lepidium didymum,60987,Lepidium didymum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Lepidieae,Lepidium,didymum,,Open,1,DUN:239
+Lepidium draba,63352,Lepidium draba,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Lepidieae,Lepidium,draba,,Open,1,DUN:240
+Lepidium heterophyllum,77669,Lepidium heterophyllum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Lepidieae,Lepidium,heterophyllum,,Open,1,DUN:241
+Lepidium latifolium,60153,Lepidium latifolium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Lepidieae,Lepidium,latifolium,,Open,1,DUN:242
+Lepidium oxycarpum,60155,Lepidium oxycarpum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Lepidieae,Lepidium,oxycarpum,,Shoreline,2,DUN:243
+Lepidium perfoliatum,77672,Lepidium perfoliatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Lepidieae,Lepidium,perfoliatum,,Open,1,DUN:244
+Lepidium virginicum,77676,Lepidium virginicum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Lepidieae,Lepidium,virginicum,ssp. menziesii,Shoreline,72,DUN:245
+Lobularia maritima,56992,Lobularia maritima,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Anastaticeae,Lobularia,maritima,,Open,2,DUN:246
+Lunaria annua,55886,Lunaria annua,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Biscutelleae,Lunaria,annua,,Forest,3,DUN:247
+Nasturtium officinale,78174,Nasturtium officinale,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Cardamineae,Nasturtium,officinale,,Wetland,2,DUN:248
+Raphanus raphanistrum,55411,Raphanus raphanistrum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Brassiceae,Raphanus,raphanistrum,,Open,3,DUN:249
+Raphanus sativus,55410,Raphanus sativus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Brassiceae,Raphanus,sativus,,Open,2,DUN:250
+Rorippa curvisiliqua,58866,Rorippa curvisiliqua,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Cardamineae,Rorippa,curvisiliqua,,Wetland,2,DUN:251
+Rorippa palustris,64162,Rorippa palustris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Cardamineae,Rorippa,palustris,ssp. palustris,Wetland,1,DUN:252
+Sinapis arvensis,53264,Sinapis arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Brassiceae,Sinapis,arvensis,,Open,3,DUN:253
+Sisymbrium altissimum,56996,Sisymbrium altissimum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Sisymbrieae,Sisymbrium,altissimum,,Open,1,DUN:254
+Sisymbrium officinale,53266,Sisymbrium officinale,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Sisymbrieae,Sisymbrium,officinale,,Open,3,DUN:255
+Teesdalia nudicaulis,79325,Teesdalia nudicaulis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Iberideae,Teesdalia,nudicaulis,,Open,5,DUN:256
+Thlaspi arvense,79358,Thlaspi arvense,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Thlaspideae,Thlaspi,arvense,,Open,1,DUN:257
+Turritis glabra,79460,Turritis glabra,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Brassicales,,,,Brassicaceae,,Turritideae,Turritis,glabra,,Open,49,DUN:258
+Buddleja davidii,75916,Buddleja davidii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Scrophulariaceae,,Buddlejeae,Buddleja,davidii,,Open,1,DUN:259
+Brasenia schreberi,75867,Brasenia schreberi,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Nymphaeales,,,,Cabombaceae,,,Brasenia,schreberi,,Wetland,2,DUN:260
+Opuntia fragilis,62474,Opuntia fragilis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Cactaceae,Opuntioideae,Opuntieae,Opuntia,fragilis,,Shoreline,27,DUN:261
+Campanula medium,159761,Campanula medium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Campanulaceae,Campanuloideae,,Campanula,medium,,Open,2,DUN:262
+Campanula persicifolia,159764,Campanula persicifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Campanulaceae,Campanuloideae,,Campanula,persicifolia,,Open,1,DUN:263
+Campanula rapunculoides,85321,Campanula rapunculoides,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Campanulaceae,Campanuloideae,,Campanula,rapunculoides,,Open,1,DUN:264
+Campanula rotundifolia,984576,Campanula rotundifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Campanulaceae,Campanuloideae,,Campanula,rotundifolia,,Open,14,DUN:265
+Campanula scouleri,75991,Campanula scouleri,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Campanulaceae,Campanuloideae,,Campanula,scouleri,,Forest,4,DUN:266
+Githopsis specularioides,58867,Githopsis specularioides,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Campanulaceae,Campanuloideae,,Githopsis,specularioides,,Open,1,DUN:267
+Lobelia dortmanna,62352,Lobelia dortmanna,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Campanulaceae,Lobelioideae,,Lobelia,dortmanna,,Wetland,1,DUN:268
+Triodanis perfoliata,64293,Triodanis perfoliata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Campanulaceae,Campanuloideae,,Triodanis,perfoliata,,Wetland,6,DUN:269
+Lonicera ciliosa,77832,Lonicera ciliosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Caprifoliaceae,Caprifolioideae,,Lonicera,ciliosa,,Forest,52,DUN:270
+Lonicera hispidula,53416,Lonicera hispidula,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Caprifoliaceae,Caprifolioideae,,Lonicera,hispidula,,Forest,56,DUN:271
+Lonicera involucrata,60881,Lonicera involucrata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Caprifoliaceae,Caprifolioideae,,Lonicera,involucrata,var. involucrata,Forest,9,DUN:272
+Symphoricarpos albus,48523,Symphoricarpos albus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Caprifoliaceae,Caprifolioideae,,Symphoricarpos,albus,var. laevigatus,Forest,94,DUN:273
+Agrostemma githago,75310,Agrostemma githago,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Caryophylloideae,Sileneae,Agrostemma,githago,,Open,1,DUN:274
+Arenaria serpyllifolia,75553,Arenaria serpyllifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Arenarieae,Arenaria,serpyllifolia,var. serpylilfolia,Open,5,DUN:275
+Cerastium arvense,50851,Cerastium arvense,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Alsineae,Cerastium,arvense,ssp. strictum,Open,106,DUN:276
+Cerastium fontanum,53307,Cerastium fontanum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Alsineae,Cerastium,fontanum,ssp. vulgare,Open,12,DUN:277
+Cerastium glomeratum,52973,Cerastium glomeratum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Alsineae,Cerastium,glomeratum,,Open,82,DUN:278
+Cerastium pumilum,160341,Cerastium pumilum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Alsineae,Cerastium,pumilum,,Open,71,DUN:279
+Cerastium semidecandrum,160343,Cerastium semidecandrum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Alsineae,Cerastium,semidecandrum,,Open,47,DUN:280
+Cerastium tomentosum,160347,Cerastium tomentosum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Alsineae,Cerastium,tomentosum,,Open,1,DUN:281
+Dianthus armeria,64541,Dianthus armeria,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Caryophylloideae,Caryophylleae,Dianthus,armeria,ssp. armeria,Open,5,DUN:282
+Dianthus barbatus,60015,Dianthus barbatus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Caryophylleae,Dianthus,barbatus,ssp. barbatus,Open,1,DUN:283
+Holosteum umbellatum,77429,Holosteum umbellatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Alsineae,Holosteum,umbellatum,ssp. umbellatum,Open,2,DUN:284
+Honckenya peploides,129446,Honckenya peploides,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sclerantheae,Honckenya,peploides,ssp. major,Shoreline,11,DUN:285
+Silene coronaria,485191,Lychnis coronaria,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Caryophylloideae,Sileneae,Silene,coronaria,,Open,4,DUN:286
+Moehringia macrophylla,61884,Moehringia macrophylla,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Arenarieae,Moehringia,macrophylla,,Forest,5,DUN:287
+Moenchia erecta,78088,Moenchia erecta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Alsineae,Moenchia,erecta,,Open,2,DUN:288
+Sabulina macra,836878,Sabulina macra,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sagineae,Sabulina,macra,,Open,17,DUN:289
+Sagina apetala,56998,Sagina apetala,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sagineae,Sagina,apetala,,Shoreline,17,DUN:290
+Sagina decumbens,57004,Sagina decumbens,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sagineae,Sagina,decumbens,ssp. occidentalis,Shoreline,88,DUN:291
+Sagina maxima,78922,Sagina maxima,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sagineae,Sagina,maxima,ssp. crassicaulis,Shoreline,31,DUN:292
+Sagina procumbens,55667,Sagina procumbens,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sagineae,Sagina,procumbens,,Shoreline,12,DUN:293
+Scleranthus annuus,61935,Scleranthus annuus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sclerantheae,Scleranthus,annuus,,Open,1,DUN:294
+Silene antirrhina,58780,Silene antirrhina,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Caryophylloideae,Sileneae,Silene,antirrhina,,Open,16,DUN:295
+Silene douglasii,62696,Silene douglasii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Caryophylloideae,Sileneae,Silene,douglasii,,Open,1,DUN:296
+Silene gallica,53212,Silene gallica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Caryophylloideae,Sileneae,Silene,gallica,,Open,28,DUN:297
+Silene latifolia,79109,Silene latifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Caryophylloideae,Sileneae,Silene,latifolia,,Open,2,DUN:298
+Silene menziesii,79111,Silene menziesii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Caryophylloideae,Sileneae,Silene,menziesii,,Forest,12,DUN:299
+Silene scouleri,59789,Silene scouleri,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Caryophylloideae,Sileneae,Silene,scouleri,ssp. scouleri,Open,5,DUN:300
+Spergula arvensis,57005,Spergula arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sperguleae,Spergula,arvensis,,Shoreline,2,DUN:301
+Spergularia canadensis,79168,Spergularia canadensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sperguleae,Spergularia,canadensis,var. occidentalis,Shoreline,7,DUN:302
+Spergularia macrotheca,61472,Spergularia macrotheca,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sperguleae,Spergularia,macrotheca,var. macrotheca,Shoreline,55,DUN:303
+Spergularia rubra,55730,Spergularia rubra,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sperguleae,Spergularia,rubra,,Shoreline,35,DUN:304
+Spergularia marina,79169,Spergularia salina,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Sperguleae,Spergularia,marina,,Shoreline,7,DUN:305
+Stellaria borealis,79199,Stellaria borealis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Alsineae,Stellaria,borealis,"ssp. borealis, ssp. sitchana",Wetland,6,DUN:306
+Stellaria crispa,79201,Stellaria crispa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Alsineae,Stellaria,crispa,,Forest,10,DUN:307
+Stellaria graminea,61948,Stellaria graminea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Alsineae,Stellaria,graminea,,Open,1,DUN:308
+Stellaria longifolia,79202,Stellaria longifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Alsineae,Stellaria,longifolia,,Wetland,2,DUN:309
+Stellaria longipes,79203,Stellaria longipes,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Alsineae,Stellaria,longipes,ssp. longipes,Wetland,2,DUN:310
+Stellaria media,1087592,Stellaria media,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Alsineae,Stellaria,media,,Open,86,DUN:311
+Stellaria nitens,57007,Stellaria nitens,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,Alsinoideae,Alsineae,Stellaria,nitens,,Open,14,DUN:312
+Stellaria apetala,867483,Stellaria pallida,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Alsineae,Stellaria,media,,Open,21,DUN:313
+Vaccaria hispanica,79469,Vaccaria hispanica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Caryophyllaceae,,Caryophylleae,Vaccaria,hispanica,,Open,1,DUN:314
+Paxistima myrsinites,63893,Paxistima myrsinites,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Celastrales,,,,Celastraceae,,,Paxistima,myrsinites,,Forest,21,DUN:315
+Ceratophyllum demersum,60997,Ceratophyllum demersum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ceratophyllales,,,,Ceratophyllaceae,,,Ceratophyllum,demersum,,Wetland,5,DUN:316
+Calystegia × lucana,336675,Calystegia lucana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Solanales,,,,Convolvulaceae,Convolvuloideae,Convolvuleae,Calystegia,,,Open,1,DUN:317
+Calystegia sepium,57481,Calystegia sepium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Solanales,,,,Convolvulaceae,Convolvuloideae,Convolvuleae,Calystegia,sepium,,Shoreline,4,DUN:318
+Calystegia soldanella,60880,Calystegia soldanella,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Solanales,,,,Convolvulaceae,Convolvuloideae,Convolvuleae,Calystegia,soldanella,,Shoreline,1,DUN:319
+Convolvulus arvensis,53021,Convolvulus arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Solanales,,,,Convolvulaceae,Convolvuloideae,Convolvuleae,Convolvulus,arvensis,,Open,3,DUN:320
+Cuscuta epithymum,56933,Cuscuta epithymum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Solanales,,,,Convolvulaceae,,Cuscuteae,Cuscuta,epithymum,var. epithymum,Shoreline,1,DUN:321
+Cuscuta pacifica,76553,Cuscuta pacifica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Solanales,,,,Convolvulaceae,,Cuscuteae,Cuscuta,pacifica,var. pacifica,Shoreline,8,DUN:322
+Cornus sericea occidentalis,53366,Cornus occidentalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Cornales,,,,Cornaceae,,,Cornus,sericea,,Forest,2,DUN:323
+Cornus sericea,53387,Cornus stolonifera,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Cornales,,,,Cornaceae,,,Cornus,sericea,,Forest,3,DUN:324
+Cornus unalaschkensis,1096279,Cornus unalaschkensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Cornales,,,,Cornaceae,,,Cornus,unalaschkensis,,Forest,2,DUN:325
+Crassula connata,57016,Crassula connata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Crassulaceae,Crassuloideae,,Crassula,connata,,Shoreline,2,DUN:326
+Crassula tillaea,58883,Crassula tillaea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Crassulaceae,Crassuloideae,,Crassula,tillaea,,Shoreline,9,DUN:327
+Sedum acre,55734,Sedum acre,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Crassulaceae,Sempervivoideae,Sedeae,Sedum,acre,,Shoreline,3,DUN:328
+Sedum album,79025,Sedum album,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Crassulaceae,Sempervivoideae,Sedeae,Sedum,album,,Shoreline,9,DUN:329
+Sedum divergens,61155,Sedum divergens,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Crassulaceae,Sempervivoideae,Sedeae,Sedum,divergens,,Open,1,DUN:330
+Sedum lanceolatum,79026,Sedum lanceolatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Crassulaceae,Sempervivoideae,Sedeae,Sedum,lanceolatum,,Shoreline,93,DUN:331
+Sedum oreganum,79030,Sedum oreganum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Crassulaceae,Sempervivoideae,Sedeae,Sedum,oreganum,,Open,2,DUN:332
+Sedum spathulifolium,58886,Sedum spathulifolium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Crassulaceae,Sempervivoideae,Sedeae,Sedum,spathulifolium,,Shoreline,79,DUN:333
+Marah oregana,77960,Marah oregana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Cucurbitales,,,,Cucurbitaceae,,Sicyoeae,Marah,oregana,,Open,5,DUN:334
+Juniperus scopulorum,135883,Juniperus scopulorum,Plantae,Tracheophyta,,,Pinopsida,,,Pinales,,,,Cupressaceae,Cupressoideae,,Juniperus,scopulorum,,Open,61,DUN:335
+Thuja plicata,48252,Thuja plicata,Plantae,Tracheophyta,,,Pinopsida,,,Pinales,,,,Cupressaceae,Cupressoideae,,Thuja,plicata,,Forest,24,DUN:336
+Bolboschoenus maritimus,58345,Bolboschoenus maritimus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Fuireneae,Bolboschoenus,maritimus,ssp. paludosus,Wetland,8,DUN:337
+Carex aquatilis,76013,Carex aquatilis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,aquatilis,"var. aquatilis, var. dives",Wetland,4,DUN:338
+Carex arcta,76014,Carex arcta,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,arcta,,Wetland,3,DUN:339
+Carex aurea,76017,Carex aurea,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,aurea,,Wetland,3,DUN:340
+Carex canescens,76023,Carex canescens,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,canescens,,Wetland,2,DUN:341
+Carex canescens,76023,Carex canescens,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,canescens,,Wetland,2,DUN:342
+Carex cusickii,76028,Carex cusickii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,cusickii,,Wetland,4,DUN:343
+Carex densa,61177,Carex densa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,densa,,Open,1,DUN:344
+Carex echinata,76035,Carex echinata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,echinata,"ssp. echinata, ssp. phyllomanica",Wetland,2,DUN:345
+Carex exsiccata,76036,Carex exsiccata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,exsiccata,,Wetland,5,DUN:346
+Carex hendersonii,76048,Carex hendersonii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,hendersonii,,Wetland,4,DUN:347
+Carex hoodii,76051,Carex hoodii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,hoodii,,Open,1,DUN:348
+Carex inops,76056,Carex inops,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,inops,ssp. Inops,Open,17,DUN:349
+Carex interior,76058,Carex interior,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,interior,,Wetland,2,DUN:350
+Carex kelloggii,290553,Carex kelloggii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,kelloggii,"var. impressa, var. kelloggii, var. limnophila",Wetland,5,DUN:351
+Carex laeviculmis,76062,Carex laeviculmis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,laeviculmis,,Wetland,1,DUN:352
+Carex lasiocarpa,76063,Carex lasiocarpa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,lasiocarpa,,Wetland,1,DUN:353
+Carex leporina,76067,Carex leporina,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,leporina,,Wetland,2,DUN:354
+Carex leptalea,76069,Carex leptalea,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,leptalea,,Wetland,2,DUN:355
+Carex leptopoda,76070,Carex leptopoda,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,leptopoda,,Forest,17,DUN:356
+Carex leptopoda,76070,Carex leptopoda,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,leptopoda,,Forest,17,DUN:357
+Carex lyngbyei,76076,Carex lyngbyei,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,lyngbyei,,Shoreline,15,DUN:358
+Carex macrocephala,160006,Carex macrocephala,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,macrocephala,,Shoreline,5,DUN:359
+Carex obnupta,61000,Carex obnupta,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,obnupta,,Wetland,12,DUN:360
+Carex pachystachya,76089,Carex pachystachya,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,pachystachya,,Wetland,7,DUN:361
+Carex pansa,76090,Carex pansa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,pansa,,Open,3,DUN:362
+Carex pauciflora,62577,Carex pauciflora,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,pauciflora,,Open,1,DUN:363
+Carex pendula,49365,Carex pendula,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,pendula,,Forest,1,DUN:364
+Carex praticola,76095,Carex praticola,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,praticola,,Open,2,DUN:365
+Carex rossii,76099,Carex rossii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,rossii,,Open,13,DUN:366
+Carex stipata,76114,Carex stipata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,stipata,var. stipata,Wetland,3,DUN:367
+Carex subbracteata,64315,Carex subbracteata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,subbracteata,,Wetland,1,DUN:368
+Carex tumulicola,64183,Carex tumulicola,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,tumulicola,,Open,3,DUN:369
+Carex unilateralis,76123,Carex unilateralis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,unilateralis,,Wetland,1,DUN:370
+Carex utriculata,76124,Carex utriculata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,utriculata,,Wetland,6,DUN:371
+Carex vesicaria,76127,Carex vesicaria,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,vesicaria,var. major,Wetland,2,DUN:372
+Carex viridula,76128,Carex viridula,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,flava,var. viridula,Shoreline,3,DUN:373
+Carex vulpinoidea,68052,Carex vulpinoidea,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,vulpinoidea,,Open,1,DUN:374
+Carex zikae,494316,Carex zikae,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Cariceae,Carex,zikae,,Open,9,DUN:375
+Dulichium arundinaceum,76745,Dulichium arundinaceum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Dulichieae,Dulichium,arundinaceum,,Wetland,4,DUN:376
+Eleocharis acicularis,57020,Eleocharis acicularis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Eleocharideae,Eleocharis,acicularis,,Wetland,1,DUN:377
+Eleocharis macrostachya,59064,Eleocharis macrostachya,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Eleocharideae,Eleocharis,palustris,,Wetland,4,DUN:378
+Eleocharis obtusa,76779,Eleocharis obtusa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Eleocharideae,Eleocharis,obtusa,,Wetland,1,DUN:379
+Eleocharis palustris,1419558,Eleocharis palustris,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Eleocharideae,Eleocharis,palustris,,Wetland,7,DUN:380
+Eleocharis parvula,76783,Eleocharis parvula,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Eleocharideae,Eleocharis,parvula,,Wetland,1,DUN:381
+Eriophorum chamissonis,162678,Eriophorum chamissonis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Scirpeae,Eriophorum,chamissonis,,Wetland,1,DUN:382
+Eriophorum gracile,77045,Eriophorum gracile,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Scirpeae,Eriophorum,gracile,,Wetland,1,DUN:383
+Rhynchospora alba,57862,Rhynchospora alba,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Rhynchosporeae,Rhynchospora,alba,,Wetland,1,DUN:384
+Schoenoplectus acutus,59205,Schoenoplectus acutus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Fuireneae,Schoenoplectus,acutus,,Wetland,6,DUN:385
+Schoenoplectus americanus,59066,Schoenoplectus americanus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Fuireneae,Schoenoplectus,americanus,,Shoreline,2,DUN:386
+Schoenoplectus subterminalis,78997,Schoenoplectus subterminalis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Fuireneae,Schoenoplectus,subterminalis,,Wetland,1,DUN:387
+Schoenoplectus tabernaemontani,78998,Schoenoplectus tabernaemontani,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Fuireneae,Schoenoplectus,tabernaemontani,,Wetland,3,DUN:388
+Scirpus atrocinctus,168640,Scirpus atrocinctus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Scirpeae,Scirpus,atrocinctus,,Wetland,1,DUN:389
+Scirpus cyperinus,79002,Scirpus cyperinus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Scirpeae,Scirpus,cyperinus,,Wetland,1,DUN:390
+Scirpus microcarpus,59068,Scirpus microcarpus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Cyperaceae,Cyperoideae,Scirpeae,Scirpus,microcarpus,,Wetland,5,DUN:391
+Cystopteris fragilis,58755,Cystopteris fragilis,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Aspleniinae,,,Cystopteridaceae,,,Cystopteris,fragilis,,Forest,7,DUN:392
+Pteridium aquilinum,52681,Pteridium aquilinum,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Dennstaedtiineae,,,Dennstaedtiaceae,,,Pteridium,aquilinum,var. pubescens,Forest,30,DUN:393
+Dipsacus fullonum,56002,Dipsacus fullonum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Caprifoliaceae,Dipsacoideae,,Dipsacus,fullonum,,Open,5,DUN:394
+Drosera rotundifolia,52658,Drosera rotundifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Droseraceae,,,Drosera,rotundifolia,,Wetland,3,DUN:395
+Dryopteris arguta,52671,Dryopteris arguta,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Polypodiineae,,,Dryopteridaceae,Dryopteridoideae,,Dryopteris,arguta,,Forest,1,DUN:396
+Dryopteris expansa,64055,Dryopteris expansa,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Polypodiineae,,,Dryopteridaceae,Dryopteridoideae,,Dryopteris,expansa,,Forest,14,DUN:397
+Polystichum munitum,47751,Polystichum munitum,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Polypodiineae,,,Dryopteridaceae,Dryopteridoideae,,Polystichum,munitum,,Forest,50,DUN:398
+Elaeagnus umbellata,64697,Elaeagnus umbellata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Elaeagnaceae,,,Elaeagnus,umbellata,,Open,1,DUN:399
+Shepherdia canadensis,79072,Shepherdia canadensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Elaeagnaceae,,,Shepherdia,canadensis,,Forest,21,DUN:400
+Equisetum arvense,52724,Equisetum arvense,Plantae,Tracheophyta,,,Polypodiopsida,Equisetidae,,Equisetales,,,,Equisetaceae,,,Equisetum,arvense,,Open,13,DUN:401
+Equisetum × ferrissii,181476,Equisetum ferrissii,Plantae,Tracheophyta,,,Polypodiopsida,Equisetidae,,Equisetales,,,,Equisetaceae,,,Equisetum,,,Open,1,DUN:402
+Equisetum fluviatile,47745,Equisetum fluviatile,Plantae,Tracheophyta,,,Polypodiopsida,Equisetidae,,Equisetales,,,,Equisetaceae,,,Equisetum,fluviatile,,Wetland,3,DUN:403
+Equisetum hyemale,52673,Equisetum hyemale,Plantae,Tracheophyta,,,Polypodiopsida,Equisetidae,,Equisetales,,,,Equisetaceae,,,Equisetum,hyemale,ssp. affine,Wetland,9,DUN:404
+Equisetum palustre,76846,Equisetum palustre,Plantae,Tracheophyta,,,Polypodiopsida,Equisetidae,,Equisetales,,,,Equisetaceae,,,Equisetum,palustre,,Wetland,5,DUN:405
+Equisetum telmateia braunii,57032,Equisetum telmateia,Plantae,Tracheophyta,,,Polypodiopsida,Equisetidae,,Equisetales,,,,Equisetaceae,,,Equisetum,telmateia,ssp. braunii,Wetland,13,DUN:406
+Allotropa virgata,62481,Allotropa virgata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Allotropa,virgata,,Forest,2,DUN:407
+Arbutus menziesii,51046,Arbutus menziesii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Arbutoideae,,Arbutus,menziesii,,Forest,62,DUN:408
+Arctostaphylos columbiana,75505,Arctostaphylos columbiana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Arbutoideae,,Arctostaphylos,columbiana,,Open,2,DUN:409
+Arctostaphylos × media,181436,Arctostaphylos media,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Arbutoideae,,Arctostaphylos,,,Open,1,DUN:410
+Arctostaphylos uva-ursi,68049,Arctostaphylos uva-ursi,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Arbutoideae,,Arctostaphylos,uva-ursi,,Open,7,DUN:411
+Chimaphila menziesii,62238,Chimaphila menziesii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Chimaphila,menziesii,,Forest,3,DUN:412
+Chimaphila umbellata,62236,Chimaphila umbellata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Chimaphila,umbellata,ssp. umellata,Forest,4,DUN:413
+Gaultheria shallon,48441,Gaultheria shallon,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Vaccinioideae,Gaultherieae,Gaultheria,shallon,,Forest,37,DUN:414
+Kalmia microphylla,67810,Kalmia microphylla,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Ericoideae,Phyllodoceae,Kalmia,microphylla,var. occidentalis,Wetland,3,DUN:415
+Moneses uniflora,60376,Moneses uniflora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Moneses,uniflora,,Forest,1,DUN:416
+Monotropa hypopitys,59986,Monotropa hypopitys,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Monotropa,hypopitys,,Forest,2,DUN:417
+Monotropa uniflora,49477,Monotropa uniflora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Monotropa,uniflora,,Forest,13,DUN:418
+Orthilia secunda,78288,Orthilia secunda,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Orthilia,secunda,,Forest,2,DUN:419
+Pterospora andromedea,52118,Pterospora andromedea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Pterospora,andromedea,,Forest,2,DUN:420
+Pyrola aphylla,630966,Pyrola aphylla,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Pyrola,aphylla,,Forest,1,DUN:421
+Pyrola asarifolia,78793,Pyrola asarifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Pyrola,asarifolia,"ssp. asarifolia, ssp. bracteata",Forest,4,DUN:422
+Pyrola chlorantha,63802,Pyrola chlorantha,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Pyrola,chlorantha,,Forest,2,DUN:423
+Pyrola dentata,707672,Pyrola dentata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Pyrola,dentata,,Forest,1,DUN:424
+Pyrola minor,78794,Pyrola minor,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Pyrola,minor,,Forest,1,DUN:425
+Pyrola picta,62239,Pyrola picta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Monotropoideae,,Pyrola,picta,,Forest,3,DUN:426
+Rhododendron columbianum,78847,Rhododendron columbianum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Ericoideae,Rhodoreae,Rhododendron,columbianum,,Forest,1,DUN:427
+Rhododendron groenlandicum,180413,Rhododendron groenlandicum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Ericoideae,Rhodoreae,Rhododendron,groenlandicum,,Forest,5,DUN:428
+Rhododendron macrophyllum,57360,Rhododendron macrophyllum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Ericoideae,Rhodoreae,Rhododendron,macrophyllum,,Forest,1,DUN:429
+Vaccinium cespitosum,79470,Vaccinium cespitosum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Vaccinioideae,Vaccinieae,Vaccinium,cespitosum,,Forest,1,DUN:430
+Vaccinium ovatum,48349,Vaccinium ovatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Vaccinioideae,Vaccinieae,Vaccinium,ovatum,,Forest,4,DUN:431
+Vaccinium oxycoccos,126560,Vaccinium oxycoccos,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Vaccinioideae,Vaccinieae,Vaccinium,oxycoccos,,Forest,2,DUN:432
+Vaccinium parvifolium,48354,Vaccinium parvifolium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Vaccinioideae,Vaccinieae,Vaccinium,parvifolium,,Forest,21,DUN:433
+Vaccinium uliginosum,64714,Vaccinium uliginosum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Ericaceae,Vaccinioideae,Vaccinieae,Vaccinium,uliginosum,,Forest,1,DUN:434
+Euphorbia characias,181594,Euphorbia characias,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Euphorbiaceae,Euphorbioideae,Euphorbieae,Euphorbia,characias,,Open,1,DUN:435
+Euphorbia cyparissias,55766,Euphorbia cyparissias,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Euphorbiaceae,Euphorbioideae,Euphorbieae,Euphorbia,cyparissias,,Open,4,DUN:436
+Euphorbia myrsinites,82511,Euphorbia myrsinites,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Euphorbiaceae,Euphorbioideae,Euphorbieae,Euphorbia,myrsinites,,Open,1,DUN:438
+Euphorbia peplus,57036,Euphorbia peplus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Euphorbiaceae,Euphorbioideae,Euphorbieae,Euphorbia,peplus,,Open,3,DUN:439
+Acmispon americanus,57049,Acmispon americanus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Loteae,Acmispon,americanus,var. americanus,Open,4,DUN:440
+Acmispon denticulatus,60194,Acmispon denticulatus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Loteae,Acmispon,denticulatus,,Open,10,DUN:441
+Acmispon parviflorus,57048,Acmispon parviflorus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Loteae,Acmispon,parviflorus,,Open,17,DUN:442
+Cytisus scoparius,48538,Cytisus scoparius,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Genisteae,Cytisus,scoparius,,Open,8,DUN:443
+Lathyrus aphaca,57311,Lathyrus aphaca,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Lathyrus,aphaca,,Open,1,DUN:445
+Lathyrus japonicus,77638,Lathyrus japonicus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Lathyrus,japonicus,,Shoreline,57,DUN:446
+Lathyrus latifolius,61009,Lathyrus latifolius,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Lathyrus,latifolius,,Open,4,DUN:447
+Lathyrus littoralis,61005,Lathyrus littoralis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Lathyrus,littoralis,,Shoreline,1,DUN:448
+Lathyrus nevadensis,77640,Lathyrus nevadensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Lathyrus,nevadensis,var. nevadensis,Forest,47,DUN:449
+Lathyrus palustris,77642,Lathyrus palustris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Lathyrus,palustris,,Shoreline,5,DUN:450
+Lathyrus sylvestris,82740,Lathyrus sylvestris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Lathyrus,sylvestris,,Open,1,DUN:451
+Lotus corniculatus,47435,Lotus corniculatus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Loteae,Lotus,corniculatus,,Open,8,DUN:452
+Lotus tenuis,77838,Lotus tenuis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Loteae,Lotus,tenuis,,Open,2,DUN:453
+Lupinus arboreus,61010,Lupinus arboreus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Genisteae,Lupinus,arboreus,,Open,4,DUN:454
+Lupinus bicolor,50614,Lupinus bicolor,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Genisteae,Lupinus,bicolor,,Open,15,DUN:455
+Lupinus latifolius,67379,Lupinus latifolius,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Genisteae,Lupinus,latifolius,var. latifolius,Open,2,DUN:456
+Lupinus littoralis,77872,Lupinus littoralis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Genisteae,Lupinus,littoralis,var. littoralis,Open,2,DUN:457
+Lupinus microcarpus,57069,Lupinus microcarpus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Genisteae,Lupinus,microcarpus,var. microcarpus,Open,7,DUN:458
+Lupinus pachylobus,50613,Lupinus pachylobus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Genisteae,Lupinus,pachylobus,,Open,1,DUN:459
+Lupinus rivularis,77887,Lupinus rivularis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Genisteae,Lupinus,rivularis,,Open,1,DUN:460
+Medicago arabica,61012,Medicago arabica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Medicago,arabica,,Open,1,DUN:461
+Medicago lupulina,57056,Medicago lupulina,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Medicago,lupulina,,Open,7,DUN:462
+Medicago sativa,1093263,Medicago sativa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Medicago,sativa,,Open,2,DUN:463
+Melilotus albus,58907,Melilotus albus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Melilotus,albus,,Open,2,DUN:464
+Melilotus officinalis,57066,Melilotus officinalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Melilotus,officinalis,,Open,2,DUN:465
+Oxytropis campestris,154238,Oxytropis campestris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Galegeae,Oxytropis,campestris,var. spicata,Shoreline,3,DUN:466
+Pisum sativum,54522,Pisum sativum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Pisum,sativum,,Open,1,DUN:467
+Rupertia physodes,53198,Rupertia physodes,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Psoraleeae,Rupertia,physodes,,Open,2,DUN:468
+Trifolium arvense,79408,Trifolium arvense,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,arvense,,Open,2,DUN:469
+Trifolium campestre,57076,Trifolium campestre,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,campestre,,Open,8,DUN:470
+Trifolium depauperatum,58164,Trifolium depauperatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,depauperatum,,Open,1,DUN:471
+Trifolium dichotomum,61179,Trifolium dichotomum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,dichotomum,,Open,8,DUN:472
+Trifolium dubium,53313,Trifolium dubium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,dubium,,Open,50,DUN:473
+Trifolium fragiferum,58167,Trifolium fragiferum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,fragiferum,,Open,1,DUN:474
+Trifolium hybridum,61824,Trifolium hybridum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,hybridum,,Open,1,DUN:475
+Trifolium incarnatum,64268,Trifolium incarnatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,incarnatum,,Open,2,DUN:476
+Trifolium microcephalum,58911,Trifolium microcephalum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,microcephalum,,Open,58,DUN:477
+Trifolium microdon,57079,Trifolium microdon,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,microdon,,Open,53,DUN:478
+Trifolium oliganthum,71122,Trifolium oliganthum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,oliganthum,,Open,43,DUN:479
+Trifolium pratense,51875,Trifolium pratense,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,pratense,,Open,14,DUN:480
+Trifolium repens,55745,Trifolium repens,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,repens,,Open,17,DUN:481
+Trifolium retusum,79430,Trifolium retusum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,retusum,,Open,1,DUN:482
+Trifolium striatum,79432,Trifolium striatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,striatum,,Open,1,DUN:483
+Trifolium subterraneum,60201,Trifolium subterraneum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,subterraneum,,Open,17,DUN:484
+Trifolium suffocatum,338471,Trifolium suffocatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,suffocatum,,Open,2,DUN:485
+Trifolium variegatum,57080,Trifolium variegatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,variegatum,,Open,40,DUN:486
+Trifolium willdenovii,57081,Trifolium willdenovii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,willdenovii,,Open,87,DUN:487
+Trifolium wormskioldii,71146,Trifolium wormskioldii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Trifolieae,Trifolium,wormskioldii,,Open,2,DUN:488
+Ulex europaeus,51751,Ulex europaeus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Genisteae,Ulex,europaeus,,Open,1,DUN:489
+Vicia americana,53320,Vicia americana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Vicia,americana,var. americana,Forest,76,DUN:490
+Vicia cracca,52471,Vicia cracca,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Vicia,cracca,,Open,2,DUN:491
+Vicia hirsuta,56188,Vicia hirsuta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Vicia,hirsuta,,Open,57,DUN:492
+Vicia lathyroides,79503,Vicia lathyroides,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Vicia,lathyroides,,Open,1,DUN:493
+Vicia nigricans,170213,Vicia nigricans,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Vicia,nigricans,var. gigantea,Forest,32,DUN:494
+Vicia sativa,53324,Vicia sativa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Vicia,sativa,"var. angustifolia, var. sativa",Open,71,DUN:495
+Vicia tetrasperma,57310,Vicia tetrasperma,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Vicia,tetrasperma,,Open,1,DUN:496
+Vicia villosa,57317,Vicia villosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fabales,,,,Fabaceae,Faboideae,Fabeae,Vicia,villosa,var. glabrescens,Open,4,DUN:497
+Quercus garryana,68632,Quercus garryana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Fagales,,,,Fagaceae,,,Quercus,garryana,var. garryana,Open,38,DUN:498
+Centaurium erythraea,56236,Centaurium erythraea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Gentianaceae,,Chironieae,Centaurium,erythraea,,Open,5,DUN:499
+Centaurium pulchellum,76217,Centaurium pulchellum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Gentianaceae,,Chironieae,Centaurium,pulchellum,,Open,1,DUN:500
+Gentianella amarella,60389,Gentianella amarella,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Gentianaceae,,Gentianeae,Gentianella,amarella,ssp. acuta,Wetland,3,DUN:501
+Erodium cicutarium,47687,Erodium cicutarium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Geraniales,,,,Geraniaceae,,,Erodium,cicutarium,ssp. cicutarium,Open,26,DUN:502
+Geranium bicknellii,77251,Geranium bicknellii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Geraniales,,,,Geraniaceae,,,Geranium,bicknellii,,Forest,1,DUN:503
+Geranium carolinianum,58917,Geranium carolinianum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Geraniales,,,,Geraniaceae,,,Geranium,carolinianum,,Forest,5,DUN:504
+Geranium dissectum,53075,Geranium dissectum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Geraniales,,,,Geraniaceae,,,Geranium,dissectum,,Open,23,DUN:505
+Geranium lucidum,77255,Geranium lucidum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Geraniales,,,,Geraniaceae,,,Geranium,lucidum,,Open,2,DUN:506
+Geranium molle,1178020,Geranium molle,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Geraniales,,,,Geraniaceae,,,Geranium,molle,,Open,99,DUN:507
+Geranium pusillum,60204,Geranium pusillum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Geraniales,,,,Geraniaceae,,,Geranium,pusillum,,Open,2,DUN:508
+Geranium robertianum,55925,Geranium robertianum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Geraniales,,,,Geraniaceae,,,Geranium,robertianum,,Forest,6,DUN:509
+Ribes divaricatum,53448,Ribes divaricatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Grossulariaceae,,,Ribes,divaricatum,var. divaricatum,Forest,63,DUN:510
+Ribes lacustre,78858,Ribes lacustre,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Grossulariaceae,,,Ribes,lacustre,,Forest,10,DUN:511
+Ribes sanguineum,53435,Ribes sanguineum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Grossulariaceae,,,Ribes,sanguineum,var. sanguineum,Forest,54,DUN:512
+Myriophyllum sibiricum,61034,Myriophyllum sibiricum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Haloragaceae,,,Myriophyllum,sibiricum,,Wetland,4,DUN:513
+Myriophyllum verticillatum,78158,Myriophyllum verticillatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Haloragaceae,,,Myriophyllum,verticillatum,,Wetland,3,DUN:514
+Philadelphus lewisii,62223,Philadelphus lewisii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Cornales,,,,Hydrangeaceae,,,Philadelphus,lewisii,,Forest,7,DUN:515
+Egeria densa,60465,Egeria densa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Hydrocharitaceae,,,Egeria,densa,,Wetland,1,DUN:516
+Elodea canadensis,76793,Elodea canadensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Hydrocharitaceae,,,Elodea,canadensis,,Wetland,3,DUN:517
+Najas canadensis,1303961,Najas canadensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Hydrocharitaceae,,,Najas,canadensis,,Wetland,1,DUN:518
+Najas flexilis,78160,Najas flexilis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Hydrocharitaceae,,,Najas,flexilis,,Wetland,3,DUN:519
+Nemophila parviflora,57353,Nemophila parviflora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Hydrophylloideae,,Nemophila,parviflora,"var. parviflora, var. austiniae",Forest,14,DUN:520
+Nemophila pedunculata,55461,Nemophila pedunculata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Hydrophylloideae,,Nemophila,pedunculata,,Forest,1,DUN:521
+Phacelia linearis,78499,Phacelia linearis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Boraginales,,,,Boraginaceae,Hydrophylloideae,,Phacelia,linearis,,Open,1,DUN:522
+Hypericum anagalloides,61032,Hypericum anagalloides,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Hypericaceae,,Hypericeae,Hypericum,anagalloides,,Wetland,3,DUN:523
+Hypericum calycinum,77481,Hypericum calycinum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Hypericaceae,,Hypericeae,Hypericum,calycinum,,Open,1,DUN:524
+Hypericum perforatum,56077,Hypericum perforatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Hypericaceae,,Hypericeae,Hypericum,perforatum,,Open,7,DUN:525
+Hypericum scouleri,77484,Hypericum scouleri,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Hypericaceae,,Hypericeae,Hypericum,scouleri,,Wetland,2,DUN:526
+Crocus × stellaris,487126,Crocus stellaris,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Iridaceae,Crocoideae,Croceae,Crocus,,,Open,1,DUN:527
+Iris foetidissima,64331,Iris foetidissima,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Iridaceae,Iridoideae,Irideae,Iris,foetidissima,,Open,2,DUN:528
+Iris × germanica,709635,Iris germanica,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Iridaceae,Iridoideae,Irideae,Iris,,,Open,7,DUN:529
+Iris pseudacorus,47779,Iris pseudacorus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Iridaceae,Iridoideae,Irideae,Iris,pseudacorus,,Wetland,6,DUN:530
+Olsynium douglasii,78257,Olsynium douglasii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Iridaceae,Iridoideae,Sisyrinchieae,Olsynium,douglasii,var. douglasii,Open,6,DUN:531
+Sisyrinchium californicum,60550,Sisyrinchium californicum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Iridaceae,Iridoideae,Sisyrinchieae,Sisyrinchium,californicum,,Open,1,DUN:532
+Sisyrinchium idahoense,79129,Sisyrinchium idahoense,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Iridaceae,Iridoideae,Sisyrinchieae,Sisyrinchium,idahoense,"var. macounii, var. segetum",Open,8,DUN:533
+Isoetes nuttallii,63827,Isoetes nuttallii,Plantae,Tracheophyta,,,Lycopodiopsida,,,Isoetales,,,,Isoetaceae,,,Isoetes,nuttallii,,Wetland,1,DUN:534
+Isoetes occidentalis,77514,Isoetes occidentalis,Plantae,Tracheophyta,,,Lycopodiopsida,,,Isoetales,,,,Isoetaceae,,,Isoetes,occidentalis,,Wetland,1,DUN:535
+Juncus acuminatus,77549,Juncus acuminatus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,acuminatus,,Wetland,4,DUN:536
+Juncus alpinoarticulatus,164252,Juncus alpinoarticulatus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,alpinoarticulatus,,Wetland,1,DUN:537
+Juncus articulatus,77552,Juncus articulatus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,articulatus,ssp. articulata,Wetland,4,DUN:538
+Juncus balticus,58347,Juncus balticus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,balticus,ssp. ater,Shoreline,19,DUN:539
+Juncus bolanderi,77553,Juncus bolanderi,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,bolanderi,,Shoreline,1,DUN:540
+Juncus breweri,77555,Juncus breweri,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,breweri,,Shoreline,2,DUN:541
+Juncus bufonius,57107,Juncus bufonius,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,bufonius,var. bufonius,Shoreline,23,DUN:542
+Juncus effusus,56153,Juncus effusus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,effusus,"ssp. pacificus, ssp. effusus",Shoreline,13,DUN:543
+Juncus ensifolius,77569,Juncus ensifolius,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,ensifolius,,Wetland,7,DUN:544
+Juncus gerardi,320881,Juncus gerardi,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,gerardi,ssp. gerardi,Shoreline,3,DUN:545
+Juncus hesperius,77574,Juncus hesperius,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,hesperius,,Wetland,8,DUN:546
+Juncus occidentalis,61826,Juncus occidentalis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,occidentalis,,Wetland,2,DUN:547
+Juncus tenuis,69930,Juncus tenuis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Juncus,tenuis,,Wetland,3,DUN:548
+Luzula comosa,57111,Luzula comosa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Luzula,comosa,var. laxa,Open,24,DUN:549
+Luzula macrantha,890625,Luzula macrantha,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Luzula,macrantha,,Open,10,DUN:550
+Luzula multiflora,164948,Luzula multiflora,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Luzula,multiflora,,Open,2,DUN:551
+Luzula parviflora,77897,Luzula parviflora,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Luzula,parviflora,,Forest,2,DUN:552
+Luzula subsessilis,77901,Luzula subsessilis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Juncaceae,,,Luzula,subsessilis,,Open,58,DUN:553
+Triglochin concinna,79435,Triglochin concinna,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Juncaginaceae,,,Triglochin,concinna,,Wetland,1,DUN:554
+Triglochin maritima,60264,Triglochin maritima,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Juncaginaceae,,,Triglochin,maritima,,Wetland,10,DUN:555
+Ajuga reptans,56099,Ajuga reptans,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Ajugoideae,,Ajuga,reptans,,Forest,4,DUN:556
+Clinopodium douglasii,53203,Clinopodium douglasii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Clinopodium,douglasii,,Forest,34,DUN:557
+Glechoma hederacea,55830,Glechoma hederacea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Glechoma,hederacea,,Forest,2,DUN:558
+Lamium galeobdolon,204339,Lamiastrum galeobdolon,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Lamioideae,Lamieae,Lamium,galeobdolon,ssp. argentatum,Forest,3,DUN:559
+Lamium amplexicaule,55459,Lamium amplexicaule,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Lamioideae,Lamieae,Lamium,amplexicaule,,Open,5,DUN:560
+Lamium purpureum hybridum,801700,Lamium hybridum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Lamioideae,Lamieae,Lamium,purpureum,,Open,1,DUN:561
+Lamium purpureum,55851,Lamium purpureum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Lamioideae,Lamieae,Lamium,purpureum,,Open,14,DUN:562
+Lycopus americanus,60206,Lycopus americanus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Lycopus,americanus,,Wetland,1,DUN:563
+Lycopus europaeus,133036,Lycopus europaeus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Lycopus,europaeus,,Wetland,2,DUN:564
+Lycopus uniflorus,77915,Lycopus uniflorus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Lycopus,uniflorus,,Wetland,5,DUN:565
+Marrubium vulgare,54605,Marrubium vulgare,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Lamioideae,Marrubieae,Marrubium,vulgare,,Open,7,DUN:566
+Melissa officinalis,59901,Melissa officinalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Melissa,officinalis,,Open,1,DUN:567
+Mentha canadensis,77991,Mentha canadensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Mentha,canadensis,,Wetland,5,DUN:568
+Mentha × piperita,181525,Mentha piperita,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Mentha,,,Open,1,DUN:569
+Mentha pulegium,57116,Mentha pulegium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Mentha,pulegium,,Open,1,DUN:570
+Mentha × rotundifolia,181920,Mentha rotundifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Mentha,,,Open,1,DUN:571
+Nepeta cataria,48622,Nepeta cataria,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Nepeta,cataria,,Open,2,DUN:572
+Prunella vulgaris,52764,Prunella vulgaris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Prunella,vulgaris,"var. lanceolata, var. vulgaris",Open,11,DUN:573
+Clinopodium douglasii,53203,Satureja douglasii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Clinopodium,douglasii,,Forest,36,DUN:574
+Scutellaria galericulata,79016,Scutellaria galericulata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Scutellarioideae,,Scutellaria,galericulata,,Wetland,2,DUN:575
+Stachys chamissonis cooleyae,52627,Stachys cooleyae,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Lamioideae,Stachydeae,Stachys,chamissonis,,Forest,5,DUN:576
+Stachys mexicana,79191,Stachys mexicana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Lamioideae,Stachydeae,Stachys,mexicana,,Forest,1,DUN:577
+Thymus pulegioides,169753,Thymus pulegioides,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lamiaceae,Nepetoideae,Mentheae,Thymus,pulegioides,,Open,1,DUN:578
+Utricularia gibba,79464,Utricularia gibba,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lentibulariaceae,,,Utricularia,gibba,,Wetland,1,DUN:579
+Utricularia minor,79466,Utricularia minor,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lentibulariaceae,,,Utricularia,minor,,Wetland,1,DUN:580
+Utricularia vulgaris,154150,Utricularia vulgaris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Lentibulariaceae,,,Utricularia,vulgaris,ssp. macrohiza,Wetland,4,DUN:581
+Erythronium oregonum,59520,Erythronium oregonum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Liliales,,,,Liliaceae,Lilioideae,Lilieae,Erythronium,oregonum,ssp. oregonum,Forest,32,DUN:582
+Fritillaria affinis,50618,Fritillaria affinis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Liliales,,,,Liliaceae,Lilioideae,Lilieae,Fritillaria,affinis,,Open,86,DUN:583
+Lilium columbianum,77744,Lilium columbianum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Liliales,,,,Liliaceae,Lilioideae,Lilieae,Lilium,columbianum,,Forest,19,DUN:584
+Prosartes hookeri,51071,Prosartes hookeri,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Liliales,,,,Liliaceae,Streptopoideae,,Prosartes,hookeri,,Forest,1,DUN:585
+Tulipa,55800,Tulipa sp.,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Liliales,,,,Liliaceae,Lilioideae,Lilieae,Tulipa,,,Open,1,DUN:586
+Linnaea borealis,77780,Linnaea borealis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Caprifoliaceae,Linnaeoideae,,Linnaea,borealis,ssp. longiflora,Forest,9,DUN:587
+Lycopodium clavatum,77914,Lycopodium clavatum,Plantae,Tracheophyta,,,Lycopodiopsida,,,Lycopodiales,,,,Lycopodiaceae,Lycopodioideae,,Lycopodium,clavatum,,Wetland,2,DUN:588
+Lythrum salicaria,61321,Lythrum salicaria,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Lythraceae,,,Lythrum,salicaria,,Wetland,4,DUN:589
+Alcea rosea,62205,Alcea rosea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malvales,,,,Malvaceae,Malvoideae,Malveae,Alcea,rosea,,Open,1,DUN:590
+Malva neglecta,77952,Malva neglecta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malvales,,,,Malvaceae,Malvoideae,Malveae,Malva,neglecta,,Open,1,DUN:591
+Malva sylvestris,56162,Malva sylvestris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malvales,,,,Malvaceae,Malvoideae,Malveae,Malva,sylvestris,,Open,1,DUN:592
+Sidalcea hendersonii,168942,Sidalcea hendersonii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malvales,,,,Malvaceae,Malvoideae,Malveae,Sidalcea,hendersonii,,Shoreline,2,DUN:593
+Toxicoscordion venenosum,59087,Toxicoscordion venenosum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Liliales,,,,Melanthiaceae,,Melanthieae,Toxicoscordion,venenosum,var. venenosum,Open,61,DUN:594
+Menyanthes trifoliata,78016,Menyanthes trifoliata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Asterales,,,,Menyanthaceae,,,Menyanthes,trifoliata,,Wetland,2,DUN:595
+Calandrinia ciliata,489239,Calandrinia ciliata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Montiaceae,,,Calandrinia,ciliata,,Shoreline,27,DUN:596
+Claytonia exigua,57233,Claytonia exigua,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Montiaceae,,,Claytonia,exigua,"ssp. exigua, ssp. glauca",Shoreline,30,DUN:597
+Claytonia parviflora,58294,Claytonia parviflora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Montiaceae,,,Claytonia,parviflora,,Open,21,DUN:598
+Claytonia perfoliata,52994,Claytonia perfoliata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Montiaceae,,,Claytonia,perfoliata,,Forest,91,DUN:599
+Claytonia rubra,64184,Claytonia rubra,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Montiaceae,,,Claytonia,rubra,,Shoreline,75,DUN:600
+Claytonia sibirica,55767,Claytonia sibirica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Montiaceae,,,Claytonia,sibirica,,Forest,7,DUN:601
+Montia dichotoma,78119,Montia dichotoma,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Montiaceae,,,Montia,dichotoma,,Open,2,DUN:602
+Montia fontana,58990,Montia fontana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Montiaceae,,,Montia,fontana,,Shoreline,16,DUN:603
+Montia howellii,78121,Montia howellii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Montiaceae,,,Montia,howellii,,Shoreline,2,DUN:604
+Montia linearis,78122,Montia linearis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Montiaceae,,,Montia,linearis,,Open,6,DUN:605
+Montia parvifolia,78123,Montia parvifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Montiaceae,,,Montia,parvifolia,,Open,21,DUN:606
+Abronia latifolia,52618,Abronia latifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Nyctaginaceae,,,Abronia,latifolia,,Shoreline,3,DUN:607
+Nuphar polysepala,78234,Nuphar polysepala,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Nymphaeales,,,,Nymphaeaceae,,,Nuphar,polysepala,,Wetland,6,DUN:608
+Nymphaea odorata,51119,Nymphaea odorata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Nymphaeales,,,,Nymphaeaceae,,,Nymphaea,odorata,,Wetland,2,DUN:609
+Solanum americanum,59035,Solanum americanum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Solanales,,,,Solanaceae,Solanoideae,Solaneae,Solanum,nigrum,,Open,1,DUN:610
+Ligustrum vulgare,119805,Ligustrum vulgare,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Oleaceae,,,Ligustrum,vulgare,,Forest,1,DUN:611
+Camissonia contorta,58216,Camissonia contorta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Camissonia,contorta,,Open,1,DUN:612
+Chamaenerion angustifolium,564969,Chamaenerion angustifolium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Chamaenerion,angustifolium,,Open,26,DUN:613
+Circaea alpina,76342,Circaea alpina,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Circaea,alpina,ssp. pacifica,Forest,6,DUN:614
+Clarkia amoena,61048,Clarkia amoena,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Clarkia,amoena,,Open,11,DUN:615
+Clarkia gracilis,61895,Clarkia gracilis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Clarkia,gracilis,ssp. gracilis,Open,2,DUN:616
+Epilobium anagallidifolium,76826,Epilobium anagallidifolium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Epilobium,anagallidifolium,,Forest,1,DUN:617
+Epilobium brachycarpum,52971,Epilobium brachycarpum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Epilobium,brachycarpum,,Open,14,DUN:618
+Epilobium ciliatum,53050,Epilobium ciliatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Epilobium,ciliatum,,Open,27,DUN:619
+Epilobium densiflorum,57149,Epilobium densiflorum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Epilobium,densiflorum,,Wetland,2,DUN:620
+Epilobium glandulosum,1319405,Epilobium glandulosum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Epilobium,glandulosum,,Open,2,DUN:621
+Epilobium hirsutum,84517,Epilobium hirsutum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Epilobium,hirsutum,,Open,2,DUN:622
+Epilobium lactiflorum,76834,Epilobium lactiflorum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Epilobium,lactiflorum,,Open,1,DUN:623
+Epilobium leptophyllum,76835,Epilobium leptophyllum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Epilobium,leptophyllum,,Wetland,2,DUN:624
+Epilobium minutum,57150,Epilobium minutum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Epilobium,minutum,,Open,28,DUN:625
+Epilobium palustre,76841,Epilobium palustre,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Epilobium,palustre,,Wetland,1,DUN:626
+Epilobium torreyi,58949,Epilobium torreyi,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Epilobium,torreyi,,Wetland,1,DUN:627
+Ludwigia palustris,60221,Ludwigia palustris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Ludwigia,palustris,,Wetland,3,DUN:628
+Oenothera glazioviana,62208,Oenothera glazioviana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Myrtales,,,,Onagraceae,,,Oenothera,glazioviana,,Open,1,DUN:629
+Botrypus virginianus,75855,Botrypus virginianus,Plantae,Tracheophyta,,,Polypodiopsida,Ophioglossidae,,Ophioglossales,,,,Ophioglossaceae,Botrychioideae,,Botrypus,virginianus,,Forest,1,DUN:630
+Ophioglossum pusillum,59889,Ophioglossum pusillum,Plantae,Tracheophyta,,,Polypodiopsida,Ophioglossidae,,Ophioglossales,,,,Ophioglossaceae,Ophioglossoideae,,Ophioglossum,pusillum,,Forest,1,DUN:631
+Sceptridium multifidum,78990,Sceptridium multifidum,Plantae,Tracheophyta,,,Polypodiopsida,Ophioglossidae,,Ophioglossales,,,,Ophioglossaceae,Botrychioideae,,Sceptridium,multifidum,,Forest,6,DUN:632
+Calypso bulbosa occidentalis,57724,Calypso bulbosa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Epidendroideae,Calypsoeae,Calypso,bulbosa,var. occidentalis,Forest,19,DUN:633
+Cephalanthera austiniae,50706,Cephalanthera austiniae,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Epidendroideae,Neottieae,Cephalanthera,austiniae,,Forest,3,DUN:634
+Corallorhiza maculata maculata,80614,Corallorhiza maculata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Epidendroideae,Calypsoeae,Corallorhiza,maculata,"var. maculata, var. occidentalis",Forest,21,DUN:635
+Corallorhiza mertensiana,49444,Corallorhiza mertensiana,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Epidendroideae,Calypsoeae,Corallorhiza,mertensiana,,Forest,3,DUN:636
+Corallorhiza striata,50708,Corallorhiza striata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Epidendroideae,Calypsoeae,Corallorhiza,striata,var. striata,Forest,4,DUN:637
+Epipactis helleborine,50717,Epipactis helleborine,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Epidendroideae,Neottieae,Epipactis,helleborine,,Forest,12,DUN:638
+Goodyera oblongifolia,50719,Goodyera oblongifolia,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Orchidoideae,Cranichideae,Goodyera,oblongifolia,,Forest,29,DUN:639
+Neottia banksiana,131227,Neottia banksiana,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Epidendroideae,Neottieae,Neottia,banksiana,,Forest,2,DUN:640
+Neottia convallarioides,131229,Neottia convallarioides,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Epidendroideae,Neottieae,Neottia,convallarioides,,Forest,1,DUN:641
+Neottia cordata,204364,Neottia cordata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Epidendroideae,Neottieae,Neottia,cordata,,Forest,7,DUN:642
+Platanthera dilatata,78623,Platanthera dilatata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Orchidoideae,Orchideae,Platanthera,dilatata,"var. albiflora, var. leucostachys",Forest,3,DUN:643
+Platanthera elegans,840641,Platanthera elegans,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Orchidoideae,Orchideae,Platanthera,elegans,ssp. elegans,Open,43,DUN:644
+Platanthera elongata,551466,Platanthera elongata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Orchidoideae,Orchideae,Platanthera,elongata,,Forest,4,DUN:645
+Platanthera orbiculata,131218,Platanthera orbiculata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Orchidoideae,Orchideae,Platanthera,orbiculata,,Forest,2,DUN:646
+Platanthera stricta,50739,Platanthera stricta,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Orchidoideae,Orchideae,Platanthera,stricta,,Forest,1,DUN:647
+Platanthera transversa,355392,Platanthera transversa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Orchidoideae,Orchideae,Platanthera,transversa,,Forest,6,DUN:648
+Platanthera unalascensis,840638,Platanthera unalascensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Orchidoideae,Orchideae,Platanthera,unalascensis,,Forest,10,DUN:649
+Spiranthes romanzoffiana,50743,Spiranthes romanzoffiana,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Asparagales,,,,Orchidaceae,Orchidoideae,Cranichideae,Spiranthes,romanzoffiana,,Open,8,DUN:650
+Aphyllon californicum,802458,Aphyllon californicum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Orobancheae,Aphyllon,californicum,ssp. californicum,Open,33,DUN:651
+Aphyllon purpureum,739040,Aphyllon purpureum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Orobancheae,Aphyllon,purpureum,,Open,29,DUN:652
+Bellardia viscosa,537967,Bellardia viscosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Rhinantheae,Bellardia,viscosa,,Open,3,DUN:653
+Castilleja attenuata,49341,Castilleja attenuata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Pedicularideae,Castilleja,attenuata,,Open,10,DUN:654
+Castilleja hispida,128204,Castilleja hispida,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Pedicularideae,Castilleja,hispida,var. hispida,Open,47,DUN:655
+Castilleja levisecta,128077,Castilleja levisecta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Pedicularideae,Castilleja,levisecta,,Open,2,DUN:656
+Castilleja victoriae,160227,Castilleja victoriae,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Pedicularideae,Castilleja,victoriae,,Open,1,DUN:657
+Euphrasia nemorosa,118893,Euphrasia nemorosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Rhinantheae,Euphrasia,nemorosa,,Open,3,DUN:658
+Kopsiopsis hookeri,77611,Kopsiopsis hookeri,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Orobancheae,Kopsiopsis,hookeri,,Forest,2,DUN:659
+Orthocarpus bracteosus,78289,Orthocarpus bracteosus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Pedicularideae,Orthocarpus,bracteosus,,Open,1,DUN:660
+Rhinanthus minor,61470,Rhinanthus minor,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Rhinantheae,Rhinanthus,minor,,Open,1,DUN:661
+Triphysaria pusilla,57276,Triphysaria pusilla,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Orobanchaceae,,Pedicularideae,Triphysaria,pusilla,,Open,35,DUN:662
+Oxalis corniculata,53168,Oxalis corniculata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Oxalidales,,,,Oxalidaceae,,,Oxalis,corniculata,,Open,1,DUN:663
+Pseudofumaria lutea,130800,Corydalis lutea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Papaveraceae,Fumarioideae,,Pseudofumaria,lutea,,Forest,1,DUN:664
+Dicentra formosa,51048,Dicentra formosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Papaveraceae,Fumarioideae,,Dicentra,formosa,ssp. formosa,Forest,2,DUN:665
+Eschscholzia californica,48225,Eschscholzia californica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Papaveraceae,Papaveroideae,,Eschscholzia,californica,ssp. californica,Open,9,DUN:666
+Fumaria officinalis,53785,Fumaria officinalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Papaveraceae,Fumarioideae,,Fumaria,officinalis,,Open,1,DUN:667
+Meconella oregana,77970,Meconella oregana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Papaveraceae,Papaveroideae,,Meconella,oregana,,Open,2,DUN:668
+Papaver rhoeas,54404,Papaver rhoeas,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Papaveraceae,Papaveroideae,,Papaver,rhoeas,,Open,1,DUN:669
+Papaver somniferum,78346,Papaver somniferum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Papaveraceae,Papaveroideae,,Papaver,somniferum,,Open,2,DUN:670
+Erythranthe alsinoides,771843,Erythranthe alsinoides,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Phrymaceae,,,Erythranthe,alsinoides,,Forest,26,DUN:671
+Erythranthe guttata,470643,Erythranthe guttata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Phrymaceae,,,Erythranthe,guttata,,Forest,21,DUN:672
+Erythranthe microphylla,453717,Erythranthe microphylla,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Phrymaceae,,,Erythranthe,microphylla,,Forest,6,DUN:673
+Erythranthe moschata,453644,Erythranthe moschata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Phrymaceae,,,Erythranthe,moschata,,Forest,2,DUN:674
+Erythranthe nasuta,545973,Erythranthe nasuta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Phrymaceae,,,Erythranthe,nasuta,,Forest,23,DUN:675
+Erythranthe ptilota,771908,Erythranthe ptilota,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Phrymaceae,,,Erythranthe,ptilota,,Forest,1,DUN:676
+Abies grandis,63690,Abies grandis,Plantae,Tracheophyta,,,Pinopsida,,,Pinales,,,,Pinaceae,,,Abies,grandis,,Forest,34,DUN:677
+Picea sitchensis,68131,Picea sitchensis,Plantae,Tracheophyta,,,Pinopsida,,,Pinales,,,,Pinaceae,,,Picea,sitchensis,,Forest,18,DUN:678
+Pinus contorta contorta,80130,Pinus contorta,Plantae,Tracheophyta,,,Pinopsida,,,Pinales,,,,Pinaceae,,,Pinus,contorta,"var. contorta, var. latifolia",Forest,27,DUN:679
+Pinus monticola,68084,Pinus monticola,Plantae,Tracheophyta,,,Pinopsida,,,Pinales,,,,Pinaceae,,,Pinus,monticola,,Forest,2,DUN:680
+Pseudotsuga menziesii menziesii,63910,Pseudotsuga menziesii,Plantae,Tracheophyta,,,Pinopsida,,,Pinales,,,,Pinaceae,,,Pseudotsuga,menziesii,var. menziesii,Forest,75,DUN:681
+Tsuga heterophylla,48254,Tsuga heterophylla,Plantae,Tracheophyta,,,Pinopsida,,,Pinales,,,,Pinaceae,,,Tsuga,heterophylla,,Forest,16,DUN:682
+Antirrhinum majus,1229777,Antirrhinum majus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Antirrhineae,Antirrhinum,majus,,Open,2,DUN:683
+Callitriche heterophylla,75935,Callitriche heterophylla,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Callitricheae,Callitriche,heterophylla,var. bolanderi,Wetland,2,DUN:684
+Callitriche palustris,75937,Callitriche palustris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Callitricheae,Callitriche,palustris,,Wetland,2,DUN:685
+Collinsia grandiflora,76409,Collinsia grandiflora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Cheloneae,Collinsia,grandiflora,,Open,25,DUN:686
+Collinsia parviflora,59013,Collinsia parviflora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Cheloneae,Collinsia,parviflora,,Open,84,DUN:687
+Cymbalaria muralis,55727,Cymbalaria muralis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Antirrhineae,Cymbalaria,muralis,ssp. muralis,Open,2,DUN:688
+Digitalis purpurea,53983,Digitalis purpurea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Digitalideae,Digitalis,purpurea,var. purpurea,Open,12,DUN:689
+Hippuris vulgaris,77422,Hippuris vulgaris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Callitricheae,Hippuris,vulgaris,,Wetland,5,DUN:690
+Linaria dalmatica,77776,Linaria dalmatica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Antirrhineae,Linaria,dalmatica,ssp. dalmatica,Open,2,DUN:691
+Linaria purpurea,77778,Linaria purpurea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Antirrhineae,Linaria,purpurea,,Open,1,DUN:692
+Linaria vulgaris,50790,Linaria vulgaris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Antirrhineae,Linaria,vulgaris,,Open,1,DUN:693
+Nuttallanthus texanus,78235,Nuttallanthus texanus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Antirrhineae,Nuttallanthus,texanus,,Open,1,DUN:694
+Plantago elongata,58229,Plantago elongata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Plantagineae,Plantago,elongata,,Shoreline,29,DUN:695
+Plantago lanceolata,53178,Plantago lanceolata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Plantagineae,Plantago,lanceolata,,Open,73,DUN:696
+Plantago major,58961,Plantago major,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Plantagineae,Plantago,major,,Open,11,DUN:697
+Plantago maritima,68543,Plantago maritima,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Plantagineae,Plantago,maritima,,Shoreline,107,DUN:698
+Veronica americana,57277,Veronica americana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Veroniceae,Veronica,americana,,Wetland,7,DUN:699
+Veronica arvensis,55748,Veronica arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Veroniceae,Veronica,arvensis,,Open,66,DUN:700
+Veronica chamaedrys,51610,Veronica chamaedrys,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Veroniceae,Veronica,chamaedrys,,Open,1,DUN:701
+Veronica filiformis,55825,Veronica filiformis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Veroniceae,Veronica,filiformis,,Open,1,DUN:702
+Veronica officinalis,129020,Veronica officinalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Veroniceae,Veronica,officinalis,,Open,5,DUN:703
+Veronica peregrina,60317,Veronica peregrina,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Veroniceae,Veronica,peregrina,var. xalapensis,Wetland,5,DUN:704
+Veronica persica,55666,Veronica persica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Veroniceae,Veronica,persica,,Open,1,DUN:705
+Veronica scutellata,61112,Veronica scutellata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Veroniceae,Veronica,scutellata,,Wetland,4,DUN:706
+Veronica serpyllifolia,55749,Veronica serpyllifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Plantaginaceae,,Veroniceae,Veronica,serpyllifolia,"var. humifusa, var. serpyllifolia",Wetland,11,DUN:707
+Armeria maritima,60476,Armeria maritima,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Plumbaginaceae,,,Armeria,maritima,ssp. californica,Shoreline,42,DUN:708
+Eriocoma lemmonii,1220721,Achnatherum lemmonii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Stipeae,Eriocoma,lemmonii,ssp. lemmonii,Open,6,DUN:709
+Eriocoma nelsonii,1221562,Achnatherum nelsonii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Stipeae,Eriocoma,nelsonii,ssp. dorei,Open,2,DUN:710
+Agrostis capillaris,75312,Agrostis capillaris,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Agrostis,capillaris,,Open,9,DUN:711
+Agrostis exarata,59088,Agrostis exarata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Agrostis,exarata,,Shoreline,28,DUN:712
+Agrostis gigantea,75314,Agrostis gigantea,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Agrostis,gigantea,,Open,6,DUN:713
+Agrostis microphylla,60277,Agrostis microphylla,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Agrostis,microphylla,,Wetland,1,DUN:714
+Agrostis pallens,52692,Agrostis pallens,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Agrostis,pallens,,Open,6,DUN:715
+Agrostis scabra,75319,Agrostis scabra,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Agrostis,scabra,,Open,4,DUN:716
+Agrostis stolonifera,69931,Agrostis stolonifera,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Agrostis,stolonifera,,Open,18,DUN:717
+Aira caryophyllea,52694,Aira caryophyllea,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Aira,caryophyllea,var. caryophyllea,Open,106,DUN:718
+Aira praecox,61058,Aira praecox,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Aira,praecox,,Open,123,DUN:719
+Alopecurus aequalis,75381,Alopecurus aequalis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Alopecurus,aequalis,var. aequalis,Wetland,4,DUN:720
+Alopecurus geniculatus,71140,Alopecurus geniculatus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Alopecurus,geniculatus,,Wetland,4,DUN:721
+Alopecurus pratensis,71141,Alopecurus pratensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Alopecurus,pratensis,,Open,5,DUN:722
+Anthoxanthum odoratum,75475,Anthoxanthum odoratum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Anthoxanthum,odoratum,,Open,25,DUN:723
+Arrhenatherum elatius,75583,Arrhenatherum elatius,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Arrhenatherum,elatius,"var. bulbosum, var. elatius",Open,4,DUN:724
+Avena barbata,52696,Avena barbata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Avena,barbata,,Open,4,DUN:725
+Avena fatua,52698,Avena fatua,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Avena,fatua,,Open,2,DUN:726
+Avena sativa,57156,Avena sativa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Avena,sativa,,Open,1,DUN:727
+Bromus commutatus,75900,Bromus commutatus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Bromeae,Bromus,commutatus,,Open,4,DUN:728
+Bromus diandrus,52702,Bromus diandrus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Bromeae,Bromus,diandrus,,Open,106,DUN:729
+Bromus hordeaceus,52703,Bromus hordeaceus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Bromeae,Bromus,hordeaceus,,Open,124,DUN:730
+Bromus pacificus,159470,Bromus pacificus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Bromeae,Bromus,pacificus,,Forest,30,DUN:731
+Bromus sitchensis,75912,Bromus sitchensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Bromeae,Bromus,sitchensis,"var. carinatus, var. marginatus, var. sitchensis",Forest,104,DUN:732
+Bromus sterilis,57163,Bromus sterilis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Bromeae,Bromus,sterilis,,Open,77,DUN:733
+Bromus tectorum,58369,Bromus tectorum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Bromeae,Bromus,tectorum,,Open,60,DUN:734
+Bromus vulgaris,75915,Bromus vulgaris,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Bromeae,Bromus,vulgaris,,Forest,16,DUN:735
+Calamagrostis canadensis,75925,Calamagrostis canadensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Calamagrostis,canadensis,,Wetland,1,DUN:736
+Calamagrostis stricta,75930,Calamagrostis stricta,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Calamagrostis,stricta,ssp. inexpansa,Wetland,1,DUN:737
+Cynosurus cristatus,76581,Cynosurus cristatus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Cynosurus,cristatus,,Open,6,DUN:738
+Cynosurus echinatus,47695,Cynosurus echinatus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Cynosurus,echinatus,,Open,26,DUN:739
+Dactylis glomerata,52720,Dactylis glomerata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Dactylis,glomerata,,Open,72,DUN:740
+Danthonia californica,57165,Danthonia californica,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Danthonioideae,Danthonieae,Danthonia,californica,,Open,13,DUN:741
+Danthonia spicata,130174,Danthonia spicata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Danthonioideae,Danthonieae,Danthonia,spicata,,Open,1,DUN:742
+Deschampsia cespitosa,76639,Deschampsia caespitosa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Deschampsia,cespitosa,,Wetland,4,DUN:743
+Deschampsia danthonioides,57164,Deschampsia danthonioides,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Deschampsia,danthonioides,,Wetland,1,DUN:744
+Deschampsia elongata,52722,Deschampsia elongata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Deschampsia,elongata,,Wetland,3,DUN:745
+Distichlis spicata,58372,Distichlis spicata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Chloridoideae,Cynodonteae,Distichlis,spicata,,Shoreline,68,DUN:746
+Elymus elymoides,58376,Elymus elymoides,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Elymus,elymoides,ssp. brevifolius,Open,1,DUN:747
+Elymus glaucus,52791,Elymus glaucus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Elymus,glaucus,ssp. glaucus,Open,90,DUN:748
+Elymus repens,60284,Elymus repens,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Elymus,repens,,Open,12,DUN:749
+Elymus trachycaulus,61202,Elymus trachycaulus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Elymus,trachycaulus,ssp. trachycaulus,Open,13,DUN:750
+Festuca occidentalis,59091,Festuca occidentalis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Festuca,occidentalis,,Forest,38,DUN:751
+Festuca roemeri,162962,Festuca roemeri,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Festuca,roemeri,var. roemeri,Open,14,DUN:752
+Festuca rubra,61061,Festuca rubra,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Festuca,rubra,,Open,141,DUN:753
+Festuca subulata,77145,Festuca subulata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Festuca,subulata,,Forest,4,DUN:754
+Festuca subuliflora,77146,Festuca subuliflora,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Festuca,subuliflora,,Forest,7,DUN:755
+Festuca trachyphylla,77148,Festuca trachyphylla,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Festuca,trachyphylla,,Open,1,DUN:756
+Glyceria borealis,77287,Glyceria borealis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Meliceae,Glyceria,borealis,,Wetland,3,DUN:757
+Glyceria elata,77289,Glyceria elata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Meliceae,Glyceria,elata,,Wetland,2,DUN:758
+Glyceria × occidentalis,181916,Glyceria occidentalis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Meliceae,Glyceria,,,Wetland,1,DUN:759
+Holcus lanatus,52793,Holcus lanatus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Holcus,lanatus,,Open,78,DUN:760
+Holcus mollis,77427,Holcus mollis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Holcus,mollis,ssp. mollis,Open,1,DUN:761
+Hordeum brachyantherum,57173,Hordeum brachyantherum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Hordeum,brachyantherum,,Shoreline,43,DUN:762
+Hordeum depressum,58378,Hordeum depressum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Hordeum,depressum,,Shoreline,6,DUN:763
+Hordeum jubatum,60287,Hordeum jubatum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Hordeum,jubatum,ssp. Intermedium,Shoreline,4,DUN:764
+Hordeum marinum,57181,Hordeum marinum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Hordeum,marinum,ssp. gussoneanum,Shoreline,1,DUN:765
+Hordeum murinum,52796,Hordeum murinum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Hordeum,murinum,"ssp. glaucum, ssp. leporinum, ssp. murinum",Shoreline,66,DUN:766
+Koeleria macrantha,57183,Koeleria macrantha,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Koeleria,macrantha,,Open,61,DUN:767
+Leersia oryzoides,64177,Leersia oryzoides,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Oryzoideae,Oryzeae,Leersia,oryzoides,,Wetland,1,DUN:768
+Leymus mollis,61067,Leymus mollis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Leymus,mollis,ssp. mollis,Shoreline,66,DUN:769
+Leymus × vancouverensis,170839,Leymus vancouverensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Leymus,,,Shoreline,1,DUN:770
+Lolium multiflorum,68479,Lolium multiflorum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Lolium,multiflorum,,Open,3,DUN:771
+Lolium perenne,52801,Lolium perenne,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Lolium,perenne,,Open,19,DUN:772
+Melica subulata,77986,Melica subulata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Meliceae,Melica,subulata,,Forest,38,DUN:773
+Panicum miliaceum,78340,Panicum miliaceum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Panicoideae,Paniceae,Panicum,miliaceum,ssp. millaceum,Open,1,DUN:774
+Phalaris arundinacea,63337,Phalaris arundinacea,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Phalaris,arundinacea,,Open,10,DUN:775
+Phleum pratense,57190,Phleum pratense,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Phleum,pratense,,Open,6,DUN:776
+Poa annua,52808,Poa annua,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Poa,annua,,Open,98,DUN:777
+Poa bulbosa,58382,Poa bulbosa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Poa,bulbosa,ssp. vivipara,Open,26,DUN:778
+Poa compressa,78636,Poa compressa,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Poa,compressa,,Open,43,DUN:779
+Poa confinis,78637,Poa confinis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Poa,confinis,,Shoreline,12,DUN:780
+Poa howellii,52812,Poa howellii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Poa,howellii,,Forest,2,DUN:781
+Poa infirma,78642,Poa infirma,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Poa,infirma,,Shoreline,1,DUN:782
+Poa palustris,78650,Poa palustris,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Poa,palustris,,Open,3,DUN:783
+Poa pratensis,60307,Poa pratensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Poa,pratensis,,Open,80,DUN:784
+Poa secunda,57198,Poa secunda,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Poa,secunda,ssp. secunda,Open,5,DUN:785
+Poa trivialis,78657,Poa trivialis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Poa,trivialis,,Open,5,DUN:786
+Polypogon monspeliensis,57197,Polypogon monspeliensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Polypogon,monspeliensis,,Shoreline,10,DUN:787
+Puccinellia nutkaensis,78783,Puccinellia nutkaensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Puccinellia,nutkaensis,,Shoreline,91,DUN:788
+Puccinellia nuttalliana,60309,Puccinellia nuttalliana,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Puccinellia,nuttalliana,,Shoreline,5,DUN:789
+Puccinellia pumila,78785,Puccinellia pumila,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Puccinellia,pumila,,Shoreline,1,DUN:790
+Lolium arundinaceum,164708,Schedonorus arundinaceus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Lolium,arundinaceum,,Open,30,DUN:791
+Lolium pratense,866252,Schedonorus pratensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Lolium,pratense,,Open,2,DUN:792
+Secale cereale,79021,Secale cereale,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Secale,cereale,,Open,1,DUN:793
+Setaria pumila,48688,Setaria pumila,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Panicoideae,Paniceae,Setaria,pumila,,Open,1,DUN:794
+Thinopyrum obtusiflorum,1301269,Thinopyrum ponticum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Triticeae,Thinopyrum,obtusiflorum,,Open,1,DUN:795
+Torreyochloa pallida,79374,Torreyochloa pallida,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Torreyochloa,pallida,var. pauciflora,Wetland,8,DUN:796
+Trisetum canescens,64229,Trisetum canescens,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Trisetum,canescens,,Forest,17,DUN:797
+Trisetum cernuum,79444,Trisetum cernuum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Trisetum,cernuum,,Forest,10,DUN:798
+Festuca bromoides,77136,Vulpia bromoides,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Festuca,bromoides,,Open,107,DUN:799
+Festuca microstachys,77138,Vulpia microstachys,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Festuca,microstachys,var. pauciflora,Forest,10,DUN:800
+Festuca myuros,77140,Vulpia myuros,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Poaceae,Pooideae,Poeae,Festuca,myuros,,Open,88,DUN:801
+Collomia grandiflora,61871,Collomia grandiflora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Polemoniaceae,,,Collomia,grandiflora,,Open,1,DUN:802
+Collomia heterophylla,52996,Collomia heterophylla,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Polemoniaceae,,,Collomia,heterophylla,,Forest,5,DUN:803
+Collomia linearis,76416,Collomia linearis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Polemoniaceae,,,Collomia,linearis,,Open,1,DUN:804
+Gilia capitata,57793,Gilia capitata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Polemoniaceae,,,Gilia,capitata,,Open,1,DUN:805
+Leptosiphon bicolor,64245,Leptosiphon bicolor,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Polemoniaceae,,,Leptosiphon,bicolor,,Open,3,DUN:806
+Leptosiphon minimus,77693,Leptosiphon minimus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Polemoniaceae,,,Leptosiphon,minimus,,Open,6,DUN:807
+Microsteris gracilis,61210,Microsteris gracilis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Polemoniaceae,,,Microsteris,gracilis,,Open,1,DUN:808
+Navarretia intertexta,60225,Navarretia intertexta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Polemoniaceae,,,Navarretia,intertexta,,Open,3,DUN:809
+Navarretia squarrosa,53157,Navarretia squarrosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Polemoniaceae,,,Navarretia,squarrosa,,Open,3,DUN:810
+Polemonium pulcherrimum,78668,Polemonium pulcherrimum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Polemoniaceae,,,Polemonium,pulcherrimum,var. pulcherrimum,Open,2,DUN:811
+Reynoutria × bohemica,850784,Fallopia bohemica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Polygoneae,Reynoutria,,,Open,3,DUN:812
+Fallopia convolvulus,77129,Fallopia convolvulus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Polygoneae,Fallopia,convolvulus,,Open,2,DUN:813
+Reynoutria japonica,914922,Fallopia japonica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Polygoneae,Reynoutria,japonica,,Open,2,DUN:814
+Persicaria amphibia,78450,Persicaria amphibia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Persicarieae,Persicaria,amphibia,,Wetland,5,DUN:815
+Persicaria hydropiper,78452,Persicaria hydropiper,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Persicarieae,Persicaria,hydropiper,,Wetland,1,DUN:816
+Persicaria maculosa,56166,Persicaria maculosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Persicarieae,Persicaria,maculosa,,Open,2,DUN:817
+Polygonum aviculare,1290817,Polygonum aviculare,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Polygoneae,Polygonum,aviculare,"ssp. aviculare, ssp.buxiforme, ssp. depressum",Shoreline,56,DUN:818
+Polygonum douglasii,78682,Polygonum douglasii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Polygoneae,Polygonum,douglasii,,Shoreline,4,DUN:819
+Polygonum erectum,167240,Polygonum erectum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Polygoneae,Polygonum,erectum,,Shoreline,1,DUN:820
+Polygonum fowleri,78683,Polygonum fowleri,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Polygoneae,Polygonum,fowleri,ssp. fowleri,Shoreline,6,DUN:821
+Polygonum minimum,78686,Polygonum minimum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Polygoneae,Polygonum,minimum,,Open,1,DUN:822
+Polygonum nuttallii,1413102,Polygonum nuttallii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Polygoneae,Polygonum,nuttallii,,Open,2,DUN:823
+Polygonum paronychia,60734,Polygonum paronychia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Polygoneae,Polygonum,paronychia,,Shoreline,1,DUN:824
+Polygonum spergulariiforme,78692,Polygonum spergulariiforme,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Polygoneae,Polygonum,spergulariiforme,,Shoreline,68,DUN:825
+Rumex acetosella,53195,Rumex acetosella,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Rumiceae,Rumex,acetosella,,Open,78,DUN:826
+Rumex conglomeratus,57215,Rumex conglomeratus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Rumiceae,Rumex,conglomeratus,,Shoreline,6,DUN:827
+Rumex crispus,53197,Rumex crispus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Rumiceae,Rumex,crispus,,Shoreline,28,DUN:828
+Rumex maritimus,168242,Rumex maritimus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Rumiceae,Rumex,maritimus,ssp. fueginus,Shoreline,3,DUN:829
+Rumex obtusifolius,63371,Rumex obtusifolius,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Rumiceae,Rumex,obtusifolius,,Shoreline,5,DUN:830
+Rumex occidentalis,61086,Rumex occidentalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Rumiceae,Rumex,occidentalis,var. occidentalis,Shoreline,11,DUN:831
+Rumex salicifolius,60233,Rumex salicifolius,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Caryophyllales,,,,Polygonaceae,Polygonoideae,Rumiceae,Rumex,salicifolius,"var. transitorius, var. triangulivalvis",Shoreline,22,DUN:832
+Polypodium amorphum,123832,Polypodium amorphum,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Polypodiineae,,,Polypodiaceae,Polypodioideae,,Polypodium,amorphum,,Forest,3,DUN:833
+Polypodium glycyrrhiza,55104,Polypodium glycyrrhiza,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Polypodiineae,,,Polypodiaceae,Polypodioideae,,Polypodium,glycyrrhiza,,Open,86,DUN:834
+Potamogeton amplifolius,78705,Potamogeton amplifolius,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,amplifolius,,Wetland,2,DUN:835
+Potamogeton berchtoldii,78706,Potamogeton berchtoldii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,berchtoldii,,Wetland,1,DUN:836
+Potamogeton crispus,78707,Potamogeton crispus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,crispus,,Wetland,1,DUN:837
+Potamogeton epihydrus,78709,Potamogeton epihydrus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,epihydrus,,Wetland,2,DUN:838
+Potamogeton foliosus,59107,Potamogeton foliosus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,foliosus,,Wetland,3,DUN:839
+Potamogeton friesii,167322,Potamogeton friesii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,friesii,,Wetland,2,DUN:840
+Potamogeton gramineus,78710,Potamogeton gramineus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,gramineus,,Wetland,3,DUN:841
+Potamogeton illinoensis,78711,Potamogeton illinoensis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,illinoensis,,Wetland,1,DUN:842
+Potamogeton natans,78712,Potamogeton natans,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,natans,,Wetland,4,DUN:843
+Potamogeton obtusifolius,167326,Potamogeton obtusifolius,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,obtusifolius,,Wetland,2,DUN:844
+Potamogeton praelongus,78713,Potamogeton praelongus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,praelongus,,Wetland,4,DUN:845
+Potamogeton pusillus,78714,Potamogeton pusillus,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,pusillus,,Wetland,1,DUN:846
+Potamogeton richardsonii,78715,Potamogeton richardsonii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,richardsonii,,Wetland,2,DUN:847
+Potamogeton robbinsii,78716,Potamogeton robbinsii,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,robbinsii,,Wetland,2,DUN:848
+Potamogeton zosteriformis,78717,Potamogeton zosteriformis,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Potamogeton,zosteriformis,,Wetland,4,DUN:849
+Stuckenia pectinata,64239,Stuckenia pectinata,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Potamogetonaceae,,,Stuckenia,pectinata,,Wetland,2,DUN:850
+Cyclamen hederifolium,127355,Cyclamen hederifolium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Primulaceae,Myrsinoideae,,Cyclamen,hederifolium,,Forest,1,DUN:851
+Primula hendersonii,487175,Dodecatheon hendersonii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Primulaceae,Primuloideae,Primuleae,Primula,hendersonii,,Open,3,DUN:852
+Primula pauciflora,498086,Dodecatheon pulchellum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Primulaceae,Primuloideae,Primuleae,Primula,pauciflora,var. pulchellum,Open,18,DUN:853
+Lysimachia arvensis,791928,Lysimachia arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Primulaceae,Myrsinoideae,,Lysimachia,arvensis,,Open,6,DUN:854
+Lysimachia europaea,716947,Lysimachia europaea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Primulaceae,Myrsinoideae,,Lysimachia,europaea,,Forest,4,DUN:855
+Lysimachia latifolia,496537,Lysimachia latifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Primulaceae,Myrsinoideae,,Lysimachia,latifolia,,Forest,36,DUN:856
+Lysimachia maritima,204175,Lysimachia maritima,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Primulaceae,Myrsinoideae,,Lysimachia,maritima,,Forest,2,DUN:857
+Lysimachia nummularia,51809,Lysimachia nummularia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Primulaceae,Myrsinoideae,,Lysimachia,nummularia,,Forest,1,DUN:858
+Lysimachia thyrsiflora,77917,Lysimachia thyrsiflora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ericales,,,,Primulaceae,Myrsinoideae,,Lysimachia,thyrsiflora,,Forest,2,DUN:859
+Adiantum aleuticum,52667,Adiantum aleuticum,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Pteridineae,,,Pteridaceae,Vittarioideae,,Adiantum,aleuticum,var. aleuticum,Forest,5,DUN:860
+Aspidotis densa,63868,Aspidotis densa,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Pteridineae,,,Pteridaceae,Cheilanthoideae,,Aspidotis,densa,,Open,7,DUN:861
+Cryptogramma acrostichoides,76536,Cryptogramma acrostichoides,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Pteridineae,,,Pteridaceae,Cryptogrammoideae,,Cryptogramma,acrostichoides,,Forest,4,DUN:862
+Pentagramma triangularis,52676,Pentagramma triangularis,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Pteridineae,,,Pteridaceae,Cheilanthoideae,,Pentagramma,triangularis,,Forest,17,DUN:863
+Anemonoides grayi,950609,Anemone lyallii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Anemoneae,Anemonoides,quinquefolia,,Open,2,DUN:864
+Aquilegia formosa,48244,Aquilegia formosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Thalictroideae,,Aquilegia,formosa,var. formosa,Open,7,DUN:865
+Aquilegia vulgaris,1042772,Aquilegia vulgaris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Thalictroideae,,Aquilegia,vulgaris,,Open,3,DUN:866
+Clematis vitalba,160697,Clematis vitalba,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Anemoneae,Clematis,vitalba,,Open,4,DUN:867
+Consolida regalis,147325,Delphinium consolida,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Delphinieae,Consolida,regalis,,Open,1,DUN:868
+Delphinium menziesii,153479,Delphinium menziesii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Delphinieae,Delphinium,menziesii,,Open,12,DUN:869
+Ficaria verna,204321,Ficaria verna,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ficaria,verna,,Open,2,DUN:870
+Halerpestes cymbalaria,941891,Halerpestes cymbalaria,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Halerpestes,cymbalaria,,Shoreline,2,DUN:871
+Helleborus foetidus,55827,Helleborus foetidus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Helleboreae,Helleborus,foetidus,,Forest,2,DUN:872
+Myosurus minimus,58306,Myosurus minimus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Myosurus,minimus,,Open,28,DUN:873
+Ranunculus acris,56064,Ranunculus acris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ranunculus,acris,,Open,4,DUN:874
+Ranunculus aquatilis,78817,Ranunculus aquatilis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ranunculus,aquatilis,var. diffusus,Wetland,2,DUN:875
+Ranunculus californicus,52173,Ranunculus californicus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ranunculus,californicus,,Open,10,DUN:876
+Ranunculus californicus,52173,Ranunculus californicus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ranunculus,californicus,,Open,8,DUN:877
+Ranunculus flammula,67826,Ranunculus flammula,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ranunculus,flammula,"var. ovalis, var. reptans",Wetland,3,DUN:878
+Ranunculus macounii,78828,Ranunculus macounii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ranunculus,macounii,,Wetland,2,DUN:879
+Ranunculus occidentalis,68057,Ranunculus occidentalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ranunculus,occidentalis,var. occidentalis,Open,52,DUN:880
+Ranunculus repens,48229,Ranunculus repens,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ranunculus,repens,,Open,8,DUN:881
+Ranunculus sardous,78832,Ranunculus sardous,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ranunculus,sardous,,Open,1,DUN:882
+Ranunculus sceleratus,59301,Ranunculus sceleratus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ranunculus,sceleratus,var. multifidus,Wetland,2,DUN:883
+Ranunculus uncinatus,63898,Ranunculus uncinatus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Ranunculales,,,,Ranunculaceae,Ranunculoideae,Ranunculeae,Ranunculus,uncinatus,,Forest,12,DUN:884
+Frangula purshiana,77156,Frangula purshiana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rhamnaceae,,Rhamneae,Frangula,purshiana,,Forest,3,DUN:885
+Amelanchier alnifolia semiintegrifolia,80360,Amelanchier alnifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Amelanchier,alnifolia,,Forest,77,DUN:886
+Alchemilla arvensis,866483,Aphanes arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Alchemilla,arvensis,,Open,22,DUN:887
+Alchemilla australis,1363874,Aphanes australis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Alchemilla,australis,,Open,40,DUN:888
+Alchemilla arvensis,866483,Aphanes occidentalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Alchemilla,arvensis,,Open,42,DUN:889
+Comarum palustre,62213,Comarum palustre,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Comarum,palustre,,Wetland,3,DUN:890
+Cotoneaster dielsianus,498529,Cotoneaster dielsianus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Cotoneaster,dielsianus,,Open,4,DUN:891
+Cotoneaster franchetii,1319212,Cotoneaster franchetii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Cotoneaster,franchetii,,Open,3,DUN:892
+Cotoneaster horizontalis,53771,Cotoneaster horizontalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Cotoneaster,horizontalis,,Open,6,DUN:893
+Cotoneaster coriaceus,411074,Cotoneaster lacteus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Cotoneaster,coriaceus,,Open,1,DUN:894
+Cotoneaster rehderi,160951,Cotoneaster rehderi,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Cotoneaster,rehderi,,Open,1,DUN:895
+Cotoneaster simonsii,76461,Cotoneaster simonsii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Cotoneaster,simonsii,,Open,3,DUN:896
+Crataegus douglasii,76469,Crataegus douglasii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Crataegus,douglasii,,Forest,4,DUN:897
+Crataegus gaylussacia,76470,Crataegus gaylussacia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Crataegus,gaylussacia,,Forest,2,DUN:898
+Crataegus monogyna,51147,Crataegus monogyna,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Crataegus,monogyna,var. monogyna,Open,20,DUN:899
+Drymocallis glandulosa,76716,Drymocallis glandulosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Drymocallis,glandulosa,ssp. glandulosa,Open,1,DUN:900
+Fragaria chiloensis,55367,Fragaria chiloensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Fragaria,chiloensis,,Shoreline,6,DUN:901
+Fragaria vesca,50298,Fragaria vesca,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Fragaria,vesca,ssp. californica,Forest,31,DUN:902
+Fragaria virginiana,77155,Fragaria virginiana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Fragaria,virginiana,ssp. glauca,Open,35,DUN:903
+Geum macrophyllum,77266,Geum macrophyllum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Colurieae,Geum,macrophyllum,,Forest,13,DUN:904
+Holodiscus discolor,53414,Holodiscus discolor,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Spiraeeae,Holodiscus,discolor,var. discolor,Forest,76,DUN:905
+Malus domestica,469472,Malus domestica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Malus,domestica,,Open,17,DUN:906
+Malus fusca,77948,Malus fusca,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Malus,fusca,,Forest,42,DUN:907
+Oemleria cerasiformis,53419,Oemleria cerasiformis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Exochordeae,Oemleria,cerasiformis,,Forest,7,DUN:909
+Physocarpus capitatus,57249,Physocarpus capitatus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Neillieae,Physocarpus,capitatus,,Forest,3,DUN:910
+Argentina anserina,158615,Potentilla anserina,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Argentina,anserina,"ssp. anserina, ssp. pacifica",Wetland,24,DUN:911
+Potentilla argentea,124552,Potentilla argentea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Potentilla,argentea,,Open,1,DUN:912
+Potentilla gracilis,78728,Potentilla gracilis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Potentilla,gracilis,,Open,1,DUN:913
+Potentilla recta,62211,Potentilla recta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Potentilleae,Potentilla,recta,,Open,2,DUN:914
+Sanguisorba minor,55736,Poterium sanguisorba,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Agrimonieae,Sanguisorba,minor,var. polygamum,Open,1,DUN:915
+Prunus avium,61964,Prunus avium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Amygdaleae,Prunus,avium,,Open,10,DUN:916
+Prunus cerasifera,55837,Prunus cerasifera,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Amygdaleae,Prunus,cerasifera,,Open,7,DUN:917
+Prunus cerasus,68763,Prunus cerasus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Amygdaleae,Prunus,cerasus,,Open,3,DUN:918
+Prunus domestica,63735,Prunus domestica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Amygdaleae,Prunus,domestica,,Open,6,DUN:919
+Prunus emarginata,63905,Prunus emarginata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Amygdaleae,Prunus,emarginata,,Forest,39,DUN:920
+Prunus laurocerasus,61432,Prunus laurocerasus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Amygdaleae,Prunus,laurocerasus,,Open,2,DUN:921
+Prunus lusitanica,127529,Prunus lusitanica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Amygdaleae,Prunus,lusitanica,,Open,1,DUN:922
+Prunus mahaleb,126808,Prunus mahaleb,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Amygdaleae,Prunus,mahaleb,,Open,6,DUN:923
+Prunus × pugetensis,170971,Prunus pugetensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Amygdaleae,Prunus,,,Open,1,DUN:924
+Prunus virginiana,54835,Prunus virginiana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Amygdaleae,Prunus,virginiana,,Forest,10,DUN:925
+Pyracantha coccinea,57254,Pyracantha coccinea,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Pyracantha,coccinea,,Open,2,DUN:926
+Pyrus communis,63951,Pyrus communis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Pyrus,communis,,Open,9,DUN:927
+Pyrus nivalis,485304,Pyrus nivalis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Pyrus,nivalis,,Open,1,DUN:928
+Rosa canina,1125370,Rosa canina,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Roseae,Rosa,canina,,Open,2,DUN:929
+Rosa gymnocarpa,53441,Rosa gymnocarpa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Roseae,Rosa,gymnocarpa,ssp. gymnocarpa,Forest,38,DUN:930
+Rosa nutkana,78883,Rosa nutkana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Roseae,Rosa,nutkana,ssp. nutkana,Open,106,DUN:931
+Rosa pisocarpa,78885,Rosa pisocarpa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Roseae,Rosa,pisocarpa,var. pisocarpa,Forest,2,DUN:932
+Rosa rubiginosa,1150845,Rosa rubiginosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Roseae,Rosa,rubiginosa,,Open,7,DUN:933
+Rosa rugosa,83653,Rosa rugosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Roseae,Rosa,rugosa,,Open,2,DUN:934
+Rubus bifrons,168025,Rubus bifrons,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Rubeae,Rubus,fruticosus,,Open,41,DUN:935
+Rubus laciniatus,78891,Rubus laciniatus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Rubeae,Rubus,fruticosus,,Open,14,DUN:936
+Rubus leucodermis,63960,Rubus leucodermis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Rubeae,Rubus,leucodermis,,Forest,13,DUN:937
+Rubus parviflorus,51646,Rubus nutkanus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Rubeae,Rubus,parviflorus,,Forest,19,DUN:938
+Rubus spectabilis,47543,Rubus spectabilis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Rubeae,Rubus,spectabilis,,Forest,20,DUN:939
+Rubus ursinus,53445,Rubus ursinus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Rosoideae,Rubeae,Rubus,ursinus,,Open,82,DUN:940
+Sorbaria kirilowii,363705,Sorbaria kirilowii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Sorbarieae,Sorbaria,kirilowii,,Forest,1,DUN:941
+Sorbus aucuparia,56063,Sorbus aucuparia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Sorbus,aucuparia,,Open,9,DUN:942
+Hedlundia hybrida,1277875,Sorbus hybrida,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Hedlundia,hybrida,,Open,1,DUN:943
+Scandosorbus intermedia,1277895,Sorbus intermedia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Maleae,Scandosorbus,intermedia,,Open,7,DUN:944
+Spiraea douglasii,62493,Spiraea douglasii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Rosaceae,Amygdaloideae,Spiraeeae,Spiraea,douglasii,,Wetland,8,DUN:945
+Galium aparine,1403902,Galium aparine,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Rubiaceae,Rubioideae,Rubieae,Galium,aparine,,Forest,95,DUN:946
+Galium boreale,77188,Galium boreale,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Rubiaceae,Rubioideae,Rubieae,Galium,boreale,,Forest,2,DUN:947
+Galium divaricatum,77193,Galium divaricatum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Rubiaceae,Rubioideae,Rubieae,Galium,divaricatum,,Open,2,DUN:948
+Galium murale,59005,Galium murale,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Rubiaceae,Rubioideae,Rubieae,Galium,murale,,Open,2,DUN:949
+Galium odoratum,56065,Galium odoratum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Rubiaceae,Rubioideae,Rubieae,Galium,odoratum,,Forest,3,DUN:950
+Galium palustre,163184,Galium palustre,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Rubiaceae,Rubioideae,Rubieae,Galium,palustre,,Forest,2,DUN:951
+Galium trifidum,77216,Galium trifidum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Rubiaceae,Rubioideae,Rubieae,Galium,trifidum,,Forest,5,DUN:952
+Galium triflorum,53065,Galium triflorum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Rubiaceae,Rubioideae,Rubieae,Galium,triflorum,,Forest,18,DUN:953
+Sherardia arvensis,47691,Sherardia arvensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Gentianales,,,,Rubiaceae,Rubioideae,Rubieae,Sherardia,arvensis,,Open,8,DUN:954
+Ruppia maritima,61090,Ruppia maritima,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Alismatales,,,,Ruppiaceae,,,Ruppia,maritima,,Shoreline,3,DUN:955
+Populus alba,47570,Populus alba,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Salicaceae,,,Populus,alba,,Open,2,DUN:956
+Populus tremuloides,54840,Populus tremuloides,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Salicaceae,,,Populus,tremuloides,,Forest,8,DUN:957
+Populus trichocarpa,78699,Populus trichocarpa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Salicaceae,,,Populus,trichocarpa,,Forest,7,DUN:958
+Salix geyeriana,78940,Salix geyeriana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Salicaceae,,,Salix,geyeriana,,Wetland,1,DUN:959
+Salix hookeriana,78941,Salix hookeriana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Salicaceae,,,Salix,hookeriana,,Wetland,8,DUN:960
+Salix lasiandra,78943,Salix lasiandra,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Salicaceae,,,Salix,lasiandra,var. lasiandra,Wetland,10,DUN:961
+Salix prolixa,78952,Salix prolixa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Salicaceae,,,Salix,prolixa,,Wetland,2,DUN:962
+Salix scouleriana,71076,Salix scouleriana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Salicaceae,,,Salix,scouleriana,,Forest,47,DUN:963
+Salix sitchensis,61100,Salix sitchensis,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Salicaceae,,,Salix,sitchensis,,Wetland,7,DUN:964
+Arceuthobium tsugense,158563,Arceuthobium tsugense,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Santalales,,,,Santalaceae,,Visceae,Arceuthobium,tsugense,ssp. contortae,Forest,3,DUN:965
+Acer glabrum,63078,Acer glabrum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Sapindales,,,,Sapindaceae,,,Acer,glabrum,ssp. douglasii,Forest,22,DUN:966
+Acer macrophyllum,48227,Acer macrophyllum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Sapindales,,,,Sapindaceae,,,Acer,macrophyllum,,Forest,24,DUN:967
+Heuchera micrantha,51274,Heuchera micrantha,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Saxifragaceae,,Heuchereae,Heuchera,micrantha,var. diversifolia,Forest,75,DUN:968
+Lithophragma glabrum,77789,Lithophragma glabrum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Saxifragaceae,,Heuchereae,Lithophragma,glabrum,,Open,2,DUN:969
+Lithophragma parviflorum,77791,Lithophragma parviflorum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Saxifragaceae,,Heuchereae,Lithophragma,parviflorum,,Open,40,DUN:970
+Micranthes integrifolia,78027,Micranthes integrifolia,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Saxifragaceae,,Micrantheae,Micranthes,integrifolia,,Open,19,DUN:971
+Micranthes rufidula,357949,Micranthes rufidula,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Saxifragaceae,,Micrantheae,Micranthes,rufidula,,Open,1,DUN:972
+Saxifraga bronchialis austromontana,238406,Saxifraga austromontana,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Saxifragaceae,,Saxifrageae,Saxifraga,bronchialis,,Open,4,DUN:973
+Saxifraga cespitosa,78985,Saxifraga cespitosa,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Saxifragaceae,,Saxifrageae,Saxifraga,cespitosa,,Shoreline,42,DUN:974
+Tellima grandiflora,51655,Tellima grandiflora,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Saxifragaceae,,Heuchereae,Tellima,grandiflora,,Forest,18,DUN:975
+Tiarella trifoliata,51643,Tiarella trifoliata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Saxifragales,,,,Saxifragaceae,,Heuchereae,Tiarella,trifoliata,"var. laciniata, var.  trifoliata, var. unifoliata",Forest,11,DUN:976
+Verbascum blattaria,59028,Verbascum blattaria,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Scrophulariaceae,,Scrophularieae,Verbascum,blattaria,,Open,1,DUN:977
+Verbascum thapsus,59029,Verbascum thapsus,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Lamiales,,,,Scrophulariaceae,,Scrophularieae,Verbascum,thapsus,,Open,10,DUN:978
+Selaginella wallacei,63875,Selaginella wallacei,Plantae,Tracheophyta,,,Lycopodiopsida,,,Selaginellales,,,,Selaginellaceae,,,Selaginella,wallacei,,Open,78,DUN:979
+Solanum dulcamara,55620,Solanum dulcamara,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Solanales,,,,Solanaceae,Solanoideae,Solaneae,Solanum,dulcamara,,Open,5,DUN:980
+Solanum physalifolium,79142,Solanum physalifolium,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Solanales,,,,Solanaceae,Solanoideae,Solaneae,Solanum,physalifolium,,Open,1,DUN:981
+Solanum triflorum,79144,Solanum triflorum,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Solanales,,,,Solanaceae,Solanoideae,Solaneae,Solanum,triflorum,,Open,1,DUN:982
+Taxus brevifolia,55209,Taxus brevifolia,Plantae,Tracheophyta,,,Pinopsida,,,Pinales,,,,Taxaceae,,,Taxus,brevifolia,,Forest,30,DUN:983
+Daphne laureola,127391,Daphne laureola,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malvales,,,,Thymelaeaceae,,,Daphne,laureola,,Open,13,DUN:984
+Sparganium angustifolium,79161,Sparganium angustifolium,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Typhaceae,,,Sparganium,angustifolium,,Wetland,4,DUN:985
+Sparganium emersum,62575,Sparganium emersum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Typhaceae,,,Sparganium,emersum,,Wetland,2,DUN:986
+Sparganium eurycarpum,63348,Sparganium eurycarpum,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Typhaceae,,,Sparganium,eurycarpum,,Wetland,1,DUN:987
+Typha angustifolia,60316,Typha angustifolia,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Typhaceae,,,Typha,angustifolia,,Wetland,3,DUN:988
+Typha latifolia,48685,Typha latifolia,Plantae,Tracheophyta,Angiospermae,,Liliopsida,,,Poales,,,,Typhaceae,,,Typha,latifolia,,Wetland,9,DUN:989
+Ulmus minor,79461,Ulmus procera,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Ulmaceae,,,Ulmus,minor,,Forest,3,DUN:990
+Urtica dioica,51884,Urtica dioica,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Urticaceae,,,Urtica,dioica,ssp. gracilis,Forest,38,DUN:991
+Urtica urens,53315,Urtica urens,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Rosales,,,,Urticaceae,,,Urtica,urens,,Open,1,DUN:992
+Centranthus ruber,57283,Centranthus ruber,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Caprifoliaceae,Valerianoideae,,Centranthus,ruber,,Open,1,DUN:993
+Plectritis congesta brachystemon,57787,Plectritis brachystemon,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Caprifoliaceae,Valerianoideae,,Plectritis,congesta,,Open,3,DUN:994
+Plectritis congesta,57786,Plectritis congesta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Caprifoliaceae,Valerianoideae,,Plectritis,congesta,,Open,68,DUN:995
+Valeriana sitchensis scouleri,80266,Valeriana scouleri,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Caprifoliaceae,Valerianoideae,,Valeriana,sitchensis,,Forest,3,DUN:996
+Valerianella locusta,55752,Valerianella locusta,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Dipsacales,,,,Caprifoliaceae,Valerianoideae,,Valerianella,locusta,,Open,4,DUN:997
+Viola adunca,53328,Viola adunca,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Violaceae,,,Viola,adunca,,Open,3,DUN:998
+Viola glabella,71113,Viola glabella,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Violaceae,,,Viola,glabella,,Forest,2,DUN:999
+Viola howellii,79510,Viola howellii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Violaceae,,,Viola,howellii,,Forest,2,DUN:1000
+Viola langsdorffii,79511,Viola langsdorffii,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Violaceae,,,Viola,langsdorffii,,Wetland,1,DUN:1001
+Viola macloskeyi,55632,Viola macloskeyi,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Violaceae,,,Viola,macloskeyi,,Wetland,1,DUN:1002
+Viola odorata,55845,Viola odorata,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Violaceae,,,Viola,odorata,,Forest,1,DUN:1003
+Viola palustris,79514,Viola palustris,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Violaceae,,,Viola,palustris,,Wetland,1,DUN:1004
+Viola sempervirens,55342,Viola sempervirens,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Malpighiales,,,,Violaceae,,,Viola,sempervirens,,Forest,2,DUN:1005
+Vitis labrusca,68053,Vitis labrusca,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Vitales,,,,Vitaceae,,,Vitis,labrusca,,Forest,2,DUN:1006
+Vitis vinifera,79519,Vitis vinifera,Plantae,Tracheophyta,Angiospermae,,Magnoliopsida,,,Vitales,,,,Vitaceae,,,Vitis,vinifera,,Open,1,DUN:1007
+Woodsia oregana,79532,Woodsia oregana,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Aspleniinae,,,Woodsiaceae,,,Woodsia,oregana,ssp. oregana,Forest,1,DUN:1008
+Woodsia scopulina,79534,Woodsia scopulina,Plantae,Tracheophyta,,,Polypodiopsida,Polypodiidae,,Polypodiales,Aspleniinae,,,Woodsiaceae,,,Woodsia,scopulina,"ssp. laurentiana, ssp. scopulina",Forest,3,DUN:1009

@@ -6,7 +6,6 @@ const fluid = require("infusion");
 const minimist = require("minimist");
 fluid.require("%bagatelle");
 
-require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
 require("./dataProcessing/writeCSV.js");
@@ -27,6 +26,8 @@ const reader = hortis.csvReaderWithoutMap({
 });
 
 const source = hortis.iNatTaxonSource();
+
+// One-off script to update taxonomies and iNaturalist ids from files produced in Andrew's 2022 run of Galiano data
 
 Promise.all([reader.completionPromise, source.events.onCreate]).then(async function () {
     const mapped = [];

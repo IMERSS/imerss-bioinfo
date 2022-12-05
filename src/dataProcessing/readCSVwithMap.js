@@ -3,7 +3,7 @@
 "use strict";
 
 var fluid = require("infusion");
-var moment = require("moment");
+var moment = require("moment"); // Horrid - required to apply template parsing to Date fields
 
 var hortis = fluid.registerNamespace("hortis");
 

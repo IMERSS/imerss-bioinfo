@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="andrewdfsimon.github.io" />
     <orderEntry type="module" module-name="knitting-data-communities" />
+    <orderEntry type="module" module-name="maxwell" />
   </component>
 </module>

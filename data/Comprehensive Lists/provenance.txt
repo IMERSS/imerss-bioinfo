@@ -1,0 +1,10 @@
+Outer_Gulf_Island_Plant_List_2021-11-19.csv
+San_Juan_Islands_Plant_List_2021-11-19.csv
+Saanich_Peninsula_Plant_List_2021-11-19.csv
+Salt_Spring_Island_Plant_List_2021-11-19.csv
+
+Taken from main folder in https://drive.google.com/drive/folders/1vYBc-wfIZneH_Gbu_x6nzLDqvy2Es9nn
+Salish Sea Biodiversity > Janszen Legacy Project > Atlas > Species Lists > Comprehensive_Lists 
+
+Taken from folder https://drive.google.com/drive/folders/1LIDYASrz2wxY2N6CAEQ8AeqC1JeZA92i 
+Salish Sea Biodiversity > Janszen Legacy Project > Atlas > Species Lists > Comprehensive_Lists > San_Juans_Martin_&_Dunwiddie

@@ -1,0 +1,16 @@
+{
+    datasets: {
+        Dunwiddie: {
+            name: "San Juan Dunwiddie List",
+            datasetId: "DUN",
+            input: "%bagatelle/data/Comprehensive Lists/San_Juan_Dunwiddie_List.csv",
+            map: "%bagatelle/data/Comprehensive Lists/Dun-map.json",
+            outMap: "%bagatelle/data/Comprehensive Lists/Dun-out-map.json",
+            colour: "#931362"
+        }
+    },
+    summarise: false,
+    applySwaps: true,
+    output: "%bagatelle/data/Comprehensive Lists/reintegrated-Dunwiddie.csv",
+    combinedOutMap: "%bagatelle/data/Comprehensive Lists/combinedOutMap.json"
+}
