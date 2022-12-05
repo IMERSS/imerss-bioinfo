@@ -1,6 +1,7 @@
 {
     "columns": {
         "taxonName": "%taxonName",
+        "authority": "%authority",
         "Infra taxa": "%Infra taxa",
         "Habitat": "%Habitat",
         "Islands": "%Islands"
