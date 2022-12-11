@@ -18,7 +18,7 @@
         },
         SanJuan: {
             name: "San Juan Islands Plant List",
-            datasetId: "COMP-Saanich",
+            datasetId: "COMP-SanJuan",
             input: "%bagatelle/data/Comprehensive Lists/San_Juan_Islands_Plant_List_2021-11-19.csv",
             map: "%bagatelle/data/Comprehensive Lists/Comp-map.json",
             outMap: "%bagatelle/data/Comprehensive Lists/Comp-out-map.json",

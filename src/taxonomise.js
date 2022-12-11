@@ -431,6 +431,10 @@ hortis.applyObservations = async function (that, obsRows, applySwaps) {
             const taxon = invertedId && await that.source.get({id: invertedId}) || await that.source.get({name: san});
             if (taxon && taxon.doc) {
                 taxonLevel = taxon.doc.rank;
+                const existing = that.obsIdToTaxon[obsId];
+                if (existing) {
+                    fluid.fail("Error in dataset configuration - observation id " + obsId + " has previously been used to resolve taxon ", existing);
+                }
                 that.obsIdToTaxon[obsId] = taxon;
             }
         }

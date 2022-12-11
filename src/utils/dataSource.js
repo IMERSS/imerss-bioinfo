@@ -90,7 +90,7 @@ fluid.dataSource.rateLimiter.next = function (that) {
     };
 
     const uncess = that.lastFired + that.options.rateLimit - now;
-    console.log("rateLimit: " + that.options.rateLimit + " uncess " + uncess);
+    // console.log("rateLimit: " + that.options.rateLimit + " uncess " + uncess);
     if (!that.pending && that.queue.length > 0) {
         if (uncess > 0) {
             that.pending = setTimeout(function () {
@@ -113,7 +113,7 @@ fluid.dataSource.rateLimiter.requestStart = function (that, payload) {
 };
 
 fluid.dataSource.rateLimiter.requestEnd = function (that, payload) {
-    fluid.log("requestEnd");
+//    fluid.log("requestEnd");
     that.next();
     return payload;
 };

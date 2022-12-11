@@ -2,12 +2,12 @@
 
 "use strict";
 
-var fluid = require("infusion");
-var csvModule = require("csv-parser");
-var fs = require("fs");
-var removeBOM = require("remove-bom-stream");
+const fluid = require("infusion");
+const csvModule = require("csv-parser");
+const fs = require("fs");
+const removeBOM = require("remove-bom-stream");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.csvReader", {
     gradeNames: "fluid.component",
@@ -56,7 +56,7 @@ hortis.csvReader.rejector = function (that, error) {
 };
 
 hortis.csvReader.bindStream = function (that) {
-    var now = Date.now();
+    const now = Date.now();
     that.rowStream.on("data", function (data) {
         that.events.onRow.fire(data);
     });

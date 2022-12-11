@@ -2,10 +2,10 @@
 
 "use strict";
 
-var fluid = require("infusion");
-var moment = require("moment"); // Horrid - required to apply template parsing to Date fields
+const fluid = require("infusion");
+const moment = require("moment"); // Horrid - required to apply template parsing to Date fields
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.csvReaderWithMap", {
     gradeNames: ["hortis.csvFileReader", "hortis.storingCSVReader"],
@@ -22,43 +22,43 @@ fluid.defaults("hortis.csvReaderWithMap", {
     }
 });
 
-hortis.templateMapField = function (data, template) {
+hortis.templateMapField = function (that, data, template) {
     if (template.startsWith("!Date")) {
-        var match = template.match(/!Date\((.*),(.*)\)/);
-        var format = match[1], smallTemplate = match[2];
-        var value = fluid.stringTemplate(smallTemplate, data);
+        const match = template.match(/!Date\((.*),(.*)\)/);
+        const format = match[1], smallTemplate = match[2];
+        const value = fluid.stringTemplate(smallTemplate, data);
         return moment.utc(value, format).toISOString();
     } else if (template.startsWith("@")) {
-        var rec = fluid.compactStringToRec(template.substring(1), "expander");
-        var func = fluid.getGlobalValue(rec.funcName);
+        const rec = fluid.compactStringToRec(template.substring(1), "expander");
+        const func = fluid.getGlobalValue(rec.funcName);
         if (!func) {
             fluid.fail("Unable to look up " + rec.funcName + " as a global function");
         }
-        var args = fluid.transform(rec.args, function (arg) {
+        const args = fluid.transform(rec.args, function (arg) {
             return fluid.stringTemplate(arg, data);
         });
         return func.apply(null, args);
     } else {
-        var togo = fluid.stringTemplate(template, data);
-        if (togo.indexOf("%") !== -1) {
-            console.log("Warning: value " + template + " did not match a column in the data");
-        }
+        const warnFunc = function (key) {
+            console.log("Warning: template key %" + key + " did not match a column in the data for file " + that.options.inputFile);
+        };
+        const togo = fluid.stringTemplateWarn(template, data, warnFunc);
         return togo;
     }
 };
 
 // Speed on taxa - 500ms on IoC dispatch, 1300ms on mapping
-hortis.mapRow = function (data, mapColumns, templateMap, index) {
-    var togo = {};
+hortis.mapRow = function (that, data, mapColumns, templateMap, index) {
+    const togo = {};
     fluid.each(mapColumns, function (label, key) {
-        togo[key] = templateMap ? hortis.templateMapField(data, label) : data[label];
+        togo[key] = templateMap ? hortis.templateMapField(that, data, label) : data[label];
     });
     togo.index = index;
     return togo;
 };
 
 hortis.storeRow = function (that, row) {
-    var mappedRow = hortis.mapRow(row, that.options.mapColumns, that.options.templateMap, that.rows.length + 1);
+    const mappedRow = hortis.mapRow(that, row, that.options.mapColumns, that.options.templateMap, that.rows.length + 1);
     that.rows.push(mappedRow);
 };
 
@@ -66,10 +66,10 @@ hortis.validateHeaders = function (mapColumns, templateMap, headers, onError) {
     if (!mapColumns || mapColumns.length === 0) {
         fluid.fail("Error in csvReaderWithMap - no mapColumns were supplied");
     }
-    var headerHash = fluid.arrayToHash(headers);
+    const headerHash = fluid.arrayToHash(headers);
     fluid.each(mapColumns, function (label) {
         if (templateMap) {
-            var interp = fluid.stringTemplate(label, headerHash);
+            const interp = fluid.stringTemplate(label, headerHash);
             if (interp.indexOf("%") !== -1) {
                 onError.fire("Error in headers - template " + label + " did not match headers");
             }
@@ -83,7 +83,7 @@ hortis.validateHeaders = function (mapColumns, templateMap, headers, onError) {
 
 // Used in writeCSV
 hortis.mapToArray = function (row, map) {
-    var keys = Object.keys(map);
+    const keys = Object.keys(map);
     return keys.map(function (header) {
         return row[header];
     });

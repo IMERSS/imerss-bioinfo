@@ -46,12 +46,33 @@ hortis.roundDecimals = function (text, places) {
 
 hortis.stringTemplateRegex = /\${([^\}]*)}/g;
 
-hortis.stringTemplate = function (template, vars) {
+// Template values with a ${key} syntax using a straightforward regex strategy and optional warning for missing values
+hortis.stringTemplate = function (template, vars, warnFunc) {
     const replacer = function (all, match) {
         const segs = match.split(".");
-        return fluid.getImmediate(vars, segs) || "";
+        const fetched = fluid.getImmediate(vars, segs);
+        if (warnFunc && fetched === undefined) {
+            warnFunc(match);
+        }
+        return fetched || "";
     };
     return template.replace(hortis.stringTemplateRegex, replacer);
+};
+
+// Template values with a %key syntax and optional warning for missing values
+fluid.stringTemplateWarn = function (template, values, warnFunc) {
+    let keys = Object.keys(values);
+    keys = keys.sort(fluid.compareStringLength());
+    for (let i = 0; i < keys.length; ++i) {
+        const key = keys[i];
+        const templatePlaceholder = "%" + key;
+        const replacementValue = values[key];
+        if (warnFunc && replacementValue === undefined) {
+            warnFunc(key);
+        }
+        template = template.replaceAll(templatePlaceholder, replacementValue);
+    }
+    return template;
 };
 
 hortis.findDuplicates = function (array) {
