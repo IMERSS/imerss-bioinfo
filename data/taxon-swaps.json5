@@ -2443,5 +2443,35 @@
             }
         },
         iNaturalistTaxonId: "80130"
+    }, /** Comprehensive Lists (Janszen) swaps from here **/
+    "Carex lyngbyei": {
+        taxonNames: {
+            "Carex lyngbyei cryptocarpa": {
+                resolvedBy: "AS",
+                notes: "FPNW2 name retained in Janszen list; mapped with Carex lyngbyei on iNat",
+                scope: "FPNW2"
+            }
+        },
+        iNaturalistTaxonId: "76076"
     },
+    "Viola praemorsa praemorsa": {
+        taxonNames: {
+            "Viola nuttallii praemorsa": {
+                resolvedBy: "AS",
+                notes: "Synonym - Taxon mapped with iNat name Viola praemorsa",
+                scope: "FPNW2"
+            }
+        },
+        iNaturalistTaxonId: "80276"
+    },
+    "Agrostis humilis": {
+        taxonNames: {
+            "Podagrostis thurberiana": {
+                resolvedBy: "AS",
+                notes: "Synonym - Taxon mapped with iNat name Agrostis humilis",
+                scope: "FPNW2"
+            }
+        },
+        iNaturalistTaxonId: "75316"
+    }
 }
