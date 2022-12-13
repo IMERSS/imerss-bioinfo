@@ -31,7 +31,6 @@ reader.completionPromise.then(async function () {
         console.log("Processing row ", i);
         const row = reader.rows[i];
         const taxon = row["Full Species"];
-        delete row["Full Species"];
         const parsed = taxon.split(" ");
         row.taxonName = parsed[0] + " " + parsed[1];
         row.authority = parsed.slice(2).join(" ");
