@@ -30,27 +30,37 @@ const source = hortis.iNatTaxonSource();
 
 // One-off script to update taxonomies and iNaturalist ids from files produced in Andrew's 2022 run of Galiano data
 
+hortis.applyName = async function (row, taxon) {
+    const saneName = hortis.sanitizeSpeciesName(taxon);
+    const looked = await source.get({name: saneName});
+    console.log("Got document ", looked);
+    if (looked && looked.doc) {
+        row["Name Status"] = looked.doc.nameStatus;
+        row["Referred iNaturalist Id"] = looked.doc.id;
+        row["Referred iNaturalist Name"] = looked.doc.name;
+        await hortis.iNat.getRanks(looked.doc.id, row, source.byId, hortis.ranks);
+    } else {
+        row["Name Status"] = "unknown";
+    }
+    if (row.ID) {
+        const lookedId = await source.get({id: row.ID});
+        row["Indexed iNaturalist Name"] = lookedId ? lookedId.doc.name : "unknown";
+    }
+};
+
 Promise.all([reader.completionPromise, source.events.onCreate]).then(async function () {
     const mapped = [];
     for (let i = 0; i < reader.rows.length; ++i) {
         console.log("Processing row ", i);
         const row = reader.rows[i];
-        const taxon = row["taxonName"]; // Taxon for AS reviewed data
-        const saneName = hortis.sanitizeSpeciesName(taxon);
-        const looked = await source.get({name: saneName});
-        console.log("Got document ", looked);
-        if (looked && looked.doc) {
-            row["Name Status"] = looked.doc.nameStatus;
-            row["Referred iNaturalist Id"] = looked.doc.id;
-            row["Referred iNaturalist Name"] = looked.doc.name;
-            await hortis.iNat.getRanks(looked.doc.id, row, source.byId, hortis.ranks);
-        } else {
-            row["Name Status"] = "unknown";
+        // const taxon = row["taxonName"]; // Taxon for AS reviewed data
+        if (row.infraTaxonName) {
+            await hortis.applyName(row, row.infraTaxonName);
         }
-        if (row.ID) {
-            const lookedId = await source.get({id: row.ID});
-            row["Indexed iNaturalist Name"] = lookedId ? lookedId.doc.name : "unknown";
+        if (!row.infraTaxonName || row["Name Status"] === "unknown") {
+            await hortis.applyName(row, row.taxonName);
         }
+
         mapped.push(row);
     }
     hortis.writeCSV(fluid.module.resolvePath(outputFile), Object.keys(mapped[0]), mapped, fluid.promise());

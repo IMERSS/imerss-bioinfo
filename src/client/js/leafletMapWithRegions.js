@@ -2,7 +2,7 @@
 
 "use strict";
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.leafletMap.withRegions", {
     selectors: {
@@ -42,7 +42,8 @@ fluid.defaults("hortis.leafletMap.withRegions", {
         "clearMapSelection.regions": "hortis.clearSelectedRegions({that})",
         //                                                                          class,       community
         "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)",
-        "onCreate.listenTaxonLinks": "hortis.listenTaxonLinks({sunburst})"
+        "onCreate.listenTaxonLinks": "hortis.listenTaxonLinks({sunburst})",
+        "onCreate.validateTaxonLinks": "hortis.validateTaxonLinks({that])"
     },
     events: {
         selectRegion: null
@@ -71,8 +72,8 @@ hortis.legendKey.rowTemplate = "<div class=\"fld-bagatelle-legend-row\ %rowClass
 hortis.legendKey.blockTemplate = "<div class=\"fld-bagatelle-legend-block\"><span class=\"fld-bagatelle-legend-block-name\">%community</span>%rows</div>";
 
 hortis.legendKey.renderMarkup = function (markup, clazz, className) {
-    var style = hortis.fillColorToStyle(clazz.fillColor || clazz.color);
-    var normal = hortis.normaliseToClass(className);
+    const style = hortis.fillColorToStyle(clazz.fillColor || clazz.color);
+    const normal = hortis.normaliseToClass(className);
     return fluid.stringTemplate(markup, {
         rowClass: "fld-bagatelle-legend-row-" + normal,
         previewClass: "fld-bagatelle-class-" + normal,
@@ -82,8 +83,8 @@ hortis.legendKey.renderMarkup = function (markup, clazz, className) {
 };
 
 hortis.legendKey.drawLegend = function (map) {
-    var blocks = fluid.transform(map.communities, function (community, key) {
-        var clazzRows = fluid.transform(community.classes, function (troo, className) {
+    const blocks = fluid.transform(map.communities, function (community, key) {
+        const clazzRows = fluid.transform(community.classes, function (troo, className) {
             return hortis.legendKey.renderMarkup(hortis.legendKey.rowTemplate, map.classes[className], className);
         });
         return fluid.stringTemplate(hortis.legendKey.blockTemplate, {
@@ -91,12 +92,12 @@ hortis.legendKey.drawLegend = function (map) {
             rows: Object.values(clazzRows).join("\n")
         });
     });
-    var markup = Object.values(blocks).join("\n");
-    var legendKeys = map.locate("legendKeys");
+    const markup = Object.values(blocks).join("\n");
+    const legendKeys = map.locate("legendKeys");
     legendKeys.html(markup);
     map.clazzToLegendNodes = fluid.transform(map.classes, function (troo, className) {
-        var rowSel = ".fld-bagatelle-legend-row-" + hortis.normaliseToClass(className);
-        var row = legendKeys.find(rowSel);
+        const rowSel = ".fld-bagatelle-legend-row-" + hortis.normaliseToClass(className);
+        const row = legendKeys.find(rowSel);
         row.click(function () {
             map.events.selectRegion.fire(className, map.classes[className].community);
         });
@@ -108,8 +109,8 @@ hortis.toggleClass = function (element, clazz, value) {
 };
 
 hortis.legendKey.selectRegion = function (map, value, path) {
-    var className = fluid.peek(path);
-    var row = map.locate("legendKeys").find(".fld-bagatelle-legend-row-" + hortis.normaliseToClass(className));
+    const className = fluid.peek(path);
+    const row = map.locate("legendKeys").find(".fld-bagatelle-legend-row-" + hortis.normaliseToClass(className));
     row.toggleClass("fld-bagatelle-selected", value);
 };
 
@@ -139,7 +140,7 @@ hortis.normaliseToClass = function (str) {
 };
 
 hortis.bannerManager.toggleClass = function (banner, state, path) {
-    var community = fluid.peek(path);
+    const community = fluid.peek(path);
     banner.toggleClass("fld-bagatelle-banner-" + hortis.normaliseToClass(community), state);
 };
 
@@ -168,24 +169,32 @@ hortis.textToMarkup = function (text) {
     return hortis.encodeHTML(text).replace(/\n/g, "<br/>");
 };
 
+hortis.taxonLinkRegex = /\[([^\[]+)\]\(([^\)]*)\)/gm;
+
 hortis.convertTaxonLinks = function (text) {
-    return text.replace(/\[([^\[]+)\]\(([^\)]*)\)/gm, function (match, p1, p2) {
+    return text.replace(hortis.taxonLinkRegex, function (match, p1, p2) {
         return "<a class=\"fld-bagatelle-taxon-link\" href=\"" + p2 + "\">" + p1 + "</a>";
     });
 };
 
 hortis.linkToTaxon = function (sunburst, taxonLink) {
-    var targetTaxon = taxonLink.substring("#taxon:".length);
+    const targetTaxon = taxonLink.substring("#taxon:".length);
     return sunburst.lookupTaxon(targetTaxon);
+};
+
+hortis.validateTaxonLinks = function (map) {
+    fluid.each(map.communities, function (community, key) {
+        console.log("Validating community key ", key);
+    });
 };
 
 // Accepts mouse event and function accepting row
 hortis.withTaxonLink = function (sunburst, e, func) {
-    var target = e.target.getAttribute("href");
+    const target = e.target.getAttribute("href");
     e.preventDefault();
     console.log("Got event target ", target);
     if (target.startsWith("#taxon:")) {
-        var row = hortis.linkToTaxon(sunburst, target);
+        const row = hortis.linkToTaxon(sunburst, target);
         if (row) {
             func(row);
         }
@@ -211,16 +220,16 @@ hortis.listenTaxonLinks = function (sunburst) {
 };
 
 hortis.leafletMap.renderMapOuterPanel = function (map) {
-    var selectedClazz = fluid.keyForValue(map.model.selectedRegions, true);
-    var clazz = map.classes[selectedClazz];
-    var topPanel = "";
+    const selectedClazz = fluid.keyForValue(map.model.selectedRegions, true);
+    const clazz = map.classes[selectedClazz];
+    let topPanel = "";
     if (clazz.hasImage) {
         topPanel += fluid.stringTemplate(hortis.leafletMap.outerPanelPhoto, {
             photoClass: "fld-bagatelle-class-image-" + hortis.normaliseToClass(selectedClazz)
         });
     }
-    var communityName = map.model.mapBlockTooltipId;
-    var community = map.communities[communityName];
+    const communityName = map.model.mapBlockTooltipId;
+    const community = map.communities[communityName];
     topPanel += fluid.stringTemplate(hortis.leafletMap.outerPanelCommunity, {
         community: map.model.mapBlockTooltipId,
         hulqBlock: community.hulqName ? hortis.leafletMap.renderHulqName(community) : ""
@@ -229,25 +238,25 @@ hortis.leafletMap.renderMapOuterPanel = function (map) {
         clazz: selectedClazz,
         hulqBlock: clazz.hulqName ? hortis.leafletMap.renderHulqName(clazz) : ""
     });
-    var bottomPanel = "";
+    let bottomPanel = "";
     if (community.culturalValues) {
-        var cultureBlock =
+        const cultureBlock =
             hortis.convertTaxonLinks(hortis.textToMarkup(community.culturalValues)) +
             "<br/><br/><div class=\"fld-bagatelle-map-class-se-col\">Sources:</div>" +
             hortis.textToMarkup(community.culturalValuesSources);
-        var allCultureBlock = fluid.stringTemplate(hortis.leafletMap.outerPanelBlock, {
+        const allCultureBlock = fluid.stringTemplate(hortis.leafletMap.outerPanelBlock, {
             blockName: "Cultural Values",
             block: cultureBlock
         });
         bottomPanel += allCultureBlock;
     }
     if (clazz["sE-Tagline"]) {
-        var ecoBlock = "<div class=\"fld-bagatelle-map-class-tagline\">" + clazz["sE-Tagline"] + "</div>";
+        let ecoBlock = "<div class=\"fld-bagatelle-map-class-tagline\">" + clazz["sE-Tagline"] + "</div>";
         hortis.leafletMap.seColumns.forEach(function (col) {
             ecoBlock += "<div class=\"fld-bagatelle-map-class-se-col\">" + col + ": </div>";
             ecoBlock += "<div class=\"fld-bagatelle-map-class-se-val\">" + clazz["sE-" + col] + "</div>";
         });
-        var allEcoBlock = fluid.stringTemplate(hortis.leafletMap.outerPanelBlock, {
+        const allEcoBlock = fluid.stringTemplate(hortis.leafletMap.outerPanelBlock, {
             blockName: "Ecological Values",
             block: ecoBlock
         });
@@ -285,10 +294,10 @@ hortis.regionBorder = function (region) {
 };
 
 hortis.leafletMap.withRegions.showSelectedRegions = function (map, selectedRegions) {
-    var style = map.container[0].style;
-    var noSelection = map.model.mapBlockTooltipId === null;
+    const style = map.container[0].style;
+    const noSelection = map.model.mapBlockTooltipId === null;
     Object.keys(map.regions).forEach(function (key) {
-        var lineFeature = map.classes[key].color;
+        const lineFeature = map.classes[key].color;
         style.setProperty(hortis.regionOpacity(key), selectedRegions[key] || noSelection ? "1.0" : "0.4");
         style.setProperty(hortis.regionBorder(key), selectedRegions[key] ? "#FEF410" : (lineFeature ? fluid.colour.arrayToString(lineFeature) : "none"));
     });
@@ -300,14 +309,14 @@ hortis.leafletMap.withRegions.addRegions = function (that) {
 };
 
 hortis.addStyle = function (text) {
-    var style = document.createElement("style");
+    const style = document.createElement("style");
     style.type = "text/css";
     style.innerText = text;
     document.getElementsByTagName("head")[0].appendChild(style);
 };
 
 hortis.leafletMap.withRegions.drawRegions = function (map) {
-    var regionClass = function (className) {
+    const regionClass = function (className) {
         return "fld-bagatelle-region-" + hortis.normaliseToClass(className);
     };
     map.applier.change("selectedRegions", hortis.leafletMap.withRegions.selectedRegions(null, map.classes));
@@ -315,10 +324,10 @@ hortis.leafletMap.withRegions.drawRegions = function (map) {
     map.regionGroup.clearLayers();
 
     map.liveFeatures = map.features.map(function (feature) {
-        var className = feature.properties.clazz;
-        var community = feature.properties.COMMUNITY;
-        var clazz = map.classes[className];
-        var options = clazz.fillColor ? {
+        const className = feature.properties.clazz;
+        const community = feature.properties.COMMUNITY;
+        const clazz = map.classes[className];
+        const options = clazz.fillColor ? {
             style: hortis.fillColorToStyle(clazz.fillColor),
             weight: 3,
             stroke: "yellow" // Leaflet doesn't listen to weight if there is no initial stroke
@@ -329,7 +338,7 @@ hortis.leafletMap.withRegions.drawRegions = function (map) {
             }
         };
         options.className = regionClass(className) + " fld-bagatelle-region";
-        var Lpolygon = L.geoJSON(feature, options);
+        const Lpolygon = L.geoJSON(feature, options);
         map.regionGroup.addLayer(Lpolygon);
 
         Lpolygon.on("click", function () {
@@ -341,11 +350,11 @@ hortis.leafletMap.withRegions.drawRegions = function (map) {
             properties: feature.properties
         };
     });
-    var highlightStyle = Object.keys(map.regions).map(function (key) {
+    const highlightStyle = Object.keys(map.regions).map(function (key) {
         return "." + regionClass(key) + " {\n" +
-           "  fill-opacity: var(" + hortis.regionOpacity(key) + ");\n" +
-           "  stroke: var(" + hortis.regionBorder(key) + ");\n" +
-           "}\n";
+            "  fill-opacity: var(" + hortis.regionOpacity(key) + ");\n" +
+            "  stroke: var(" + hortis.regionBorder(key) + ");\n" +
+            "}\n";
     });
     hortis.addStyle(highlightStyle.join("\n"));
 };

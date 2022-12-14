@@ -33,6 +33,12 @@ reader.completionPromise.then(async function () {
         const taxon = row["Full Species"];
         const parsed = taxon.split(" ");
         row.taxonName = parsed[0] + " " + parsed[1];
+        const infra = row["Infra taxa"];
+        if (infra) {
+            row.infraTaxonName = row.taxonName + " " + infra;
+        } else {
+            row.infraTaxonName = "";
+        }
         row.authority = parsed.slice(2).join(" ");
         mapped.push(row);
     }
