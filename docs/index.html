@@ -27,8 +27,11 @@
             .float img:hover {
                 opacity: 0.5;
             }
-            h3 {
+            h2, h3 {
                 clear: both;
+            }
+            h2 {
+                border-bottom: 0.3125rem solid #fdcc70;
             }
             p {
                 margin-block-start: 0.25rem;
@@ -43,7 +46,7 @@
         <div class="banner">
             <a href="http://imerss.org"><img src="img/Arachnoidiscus_schmidtii_web_1-2-scaled.webp"/></a>
         </div>
-        <h2>IMERSS Biodiversity Visualisations Mini-Portal</h2>
+        <h1>IMERSS Biodiversity Visualisations Mini-Portal</h1>
         <p style="margin-bottom:3rem">
         <a href="http://imerss.org">IMERSS</a>, the Institute for Multidisciplinary Ecological Research in the Salish Sea,
         is building a federated collection of datasets on biodiversity for localities in the area, together with
@@ -53,6 +56,12 @@
         map-based or non map-based data, with the ability to weave content from artists, designers and local communities
         into the presentation.
         </p>
+        <h2 id="core">Visualisations using core biodiversity framework</h2>
+        Despite their diversity, all of the visualisations in this section use a common codebase, presenting either checklists or catalogues
+        of biodiversity observations in various forms: Different kinds of hierarchical text-based summaries, a circular "starburst"
+        visualisation optionally together with map-based plots of observations and controls for filtering based on datasets.
+        All data underlying and code implementing these visualisations is hosted in the
+        <a href="https://github.com/IMERSS/imerss-bioinfo">IMERSS Bioinformatics Working Group repository</a> on GitHub.
 
         <h3 id="galiano">Galiano Life List</h3>
         <div class="float">
@@ -174,8 +183,42 @@
         <a href="https://github.com/IMERSS/imerss-bioinfo/raw/main/data/Xetthecum/provenance.txt">provenance.txt</a>.
         </p>
         
-        <h3>Bioinformatics Working Group Repository</h3>
-        All data underlying and code implementing the above visualisations is hosted in the 
-        <a href="https://github.com/IMERSS/imerss-bioinfo">IMERSS Bioinformatics Working Group repository</a> on GitHub. 
+        <h2>Components from Ben Keen</h2>
+        Kindly contributed to IMERSS by <a href="https://github.com/benkeen">Ben Keen</a> are components for working with species checklists and
+        presenting observations reported to <a href="https://www.inaturalist.org/">iNaturalist</a>.
+        <h3>iNaturalist observations widget</h3>
+        <div class="float">
+            <a href="https://bcleps.weebly.com/inat.html"><img src="img/thumbs/BCLeps.jpg"></a>
+        </div>
+        Some prebuilt <a href=https://reactjs.org/">React</a> components to display iNaturalist data on your own sites.
+        The original goal was to provide
+        add an interactive page to the <a href="https://bcleps.weebly.com/inat.html">BC Lepidoptera website</a> so
+        visitors could see some high-level information about
+        lepidoptera (butterflies and moths) spotted in British Columbia. But the code was written to allow it to be
+        re-used by any website and for any taxon or place. Code for these components is housed in the
+        <a href="https://github.com/IMERSS/inat-components">IMERSS inat-components</a> repository.
+
+        <h3>Checklist generator</h3>
+        <div class="float">
+            <a href="https://imerss.github.io/checklist-generator/"><img src="img/thumbs/Checklist.jpg"></a>
+        </div>
+        A simple tool that converts a CSV file into a checklist of rows, grouped by hierarchy. See the <a href="https://imerss.github.io/checklist-generator/">live site</a>
+        for an explanation of the functionality. Code for this component is housed in the <a href="https://github.com/IMERSS/checklist-generator">IMERSS checklist-generator</a>
+        repository.
+
+        <h2>Maxwell Creek watershed project</h2>
+        <div class="float">
+            <a href="https://imerss.github.io/maxwell/R-Markdown-Background-Rewoven.html"><img src="img/thumbs/Maxwell.jpg"></a>
+        </div>
+        We emphasise helping different communities working with data in formats they are comfortable with,
+        with tools they are familiar with, even if these differ from professional norms in other communities.
+        An example of this is the <a href="https://transitionsaltspring.com/maxwell-creek-watershed-project/">Maxwell Creek Watershed Project</a>
+        project undertaken with <a href="https://transitionsaltspring.com/">Transition Salt Spring</a>
+        which empowers naturalists with moderate technical skills to edit documents in simply structured
+        <a href="https://rmarkdown.rstudio.com/">R Markdown</a> format, of which the web output is then rewoven into an
+        interactive <a href="https://imerss.github.io/maxwell/R-Markdown-Background-Rewoven.html">scrollytelling interface</a>. These documents are hosted in
+        <a href="https://pages.github.com/">GitHub pages</a> where any member may easily update and republish their documents without needing to consult a technician.
+        Currently this project does not share any implementation with the <a href="#core">core visualisation framework</a> but
+        it is expected they will converge in time.
     </body>
 </html>

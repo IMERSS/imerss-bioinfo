@@ -2,8 +2,13 @@
 
 This repository houses the working data of the [IMERSS](https://imerss.org/) [biodiversity informatics working group](https://imerss.org/2019/01/01/biodiversity-informatics-working-group/)
 together with algorithms for transforming, reconciling and projecting observation and checklist data into formats
-suitable for publication, submission to global authorities such as GBIF, as well as map-based and graphical
-visualisations.
+suitable for publication, submission to global authorities such as [GBIF](https://www.gbif.org/), as well as
+map-based and graphical visualisations.
+
+# Mini-portal
+
+A [mini-portal](https://imerss.github.io/imerss-bioinfo/) presenting a showcase of the latest versions of all of
+IMERSS' user-facing visualisations is available in [GitHub Pages](https://imerss.github.io/imerss-bioinfo/).
 
 # Data Archive
 
@@ -22,10 +27,12 @@ installation instructions.
 
 # Data Pipeline
 
-The full data pipeline for deriving the observation data and its checklists from the upstream raw catalogues is held at
-[/data/dataPaper-I/fusion.json5](/data/dataPaper-I/fusion.json5). This is stored in the [JSON5](https://json5.org/) format.
+The full data pipeline for deriving the observation data and its checklists from the upstream raw catalogues for
+the data paper is held at [/data/dataPaper-I/fusion.json5](/data/dataPaper-I/fusion.json5). This is stored in
+the [JSON5](https://json5.org/) format.
 This file refers to the most up-to-date versions of the constituent catalogues in their various other subdirectories
-under [/data](/data).
+under [/data](/data). Many of these subdirectories contain their own "fusion" files for producing other summaries
+and visualisations as seen in the [mini-portal](https://imerss.github.io/imerss-bioinfo/).
 
 All of the code operating the data pipelines is written in JavaScript running either in [node.js](http://nodejs.org) or
 the browser.
@@ -88,17 +95,6 @@ curated summary file such as [/data/dataPaper-I-in/reintegrated.csv](/data/dataP
 directory of XLSX spreadsheets in the form accepted by the [ARPHA writing tool](https://arpha.pensoft.net/) used for
 submission of biodiversity data papers as well as a Darwin Core CSV file
 [Materials.csv](data/dataPaper-I-In/arphified/Materials.csv) suitable for submission to GBIF.
-
-    inattify.js
-
-A necessary prelude to the `marmalise.js` script described below which produces a compressed visualisation file. This downloads
-and caches the iNaturalist taxon information data feeds from any taxa referenced in a `reintegrated.csv` file, whilst
-remaining within the iNaturalist API data rate limits.
-
-e.g. for the data paper you may run
-
-    node src/inattify.js data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/combinedOutMap.json
-
 
     wormify.js
 
