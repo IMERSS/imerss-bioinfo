@@ -1,0 +1,14 @@
+{
+    "columns": {
+        "catalogueNumber": "%catalogNumber",
+        "taxonName": "%scientificName",
+        "dateObserved": "%eventDate",
+        "recordedBy": "%recordedBy",
+        "placeName": "%locality",
+        "latitude": "%decimalLatitude",
+        "longitude": "%decimalLongitude"
+    },
+    "datasetId": "VASC",
+    "datasetClass": "naturalist",
+    "observationId": "%rowNumber"
+}

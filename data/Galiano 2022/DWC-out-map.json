@@ -1,0 +1,10 @@
+{
+    "columns": {
+        "taxonName": "Taxon name",
+        "catalogueNumber": "catalogNumber",
+        "dateObserved": "Date observed",
+        "placeName": "Place name",
+        "recordedBy": "Recorded by",
+        "id": "id"
+    }
+}

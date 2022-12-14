@@ -2,9 +2,9 @@
 
 "use strict";
 
-var fluid = require("infusion");
+const fluid = require("infusion");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.summarise", {
     gradeNames: "fluid.component",
@@ -33,7 +33,7 @@ fluid.defaults("hortis.summarise", {
 
 // Taken from https://stackoverflow.com/a/1140335 with several fixes
 hortis.summarise.convertDMStoDD = function (degrees, minutes, seconds, direction) {
-    var dd = +degrees + minutes / 60 + seconds / (60 * 60);
+    let dd = +degrees + minutes / 60 + seconds / (60 * 60);
 
     if (direction === "S" || direction === "W") {
         dd = -1 * Math.abs(dd);
@@ -42,7 +42,7 @@ hortis.summarise.convertDMStoDD = function (degrees, minutes, seconds, direction
 };
 
 hortis.summarise.parseDMS = function (string) {
-    var parts = string.split(/[^\d\w]+/);
+    const parts = string.split(/[^\d\w]+/);
     return hortis.summarise.convertDMStoDD(parts[0], parts[1], parts[2], parts[3]);
 };
 
@@ -55,26 +55,26 @@ hortis.summarise.parseCoordinate = function (value) {
 };
 
 hortis.summarise.parseCoordinates = function (row) {
-    var round = function (coord) {
+    const round = function (coord) {
         return +hortis.roundDecimals(coord, 6);
     };
-    var latitude = hortis.summarise.parseCoordinate(row.latitude);
-    var longitude = hortis.summarise.parseCoordinate(row.longitude);
+    const latitude = hortis.summarise.parseCoordinate(row.latitude);
+    const longitude = hortis.summarise.parseCoordinate(row.longitude);
     return !isNaN(latitude) && !isNaN(longitude) ? [round(latitude), round(longitude)] : null;
 };
 
 hortis.summarise.copyObsFields = function (target, source, prefix, fields) {
     fields.forEach(function (field) {
-        var targetField = prefix + hortis.capitalize(field);
+        const targetField = prefix + hortis.capitalize(field);
         target[targetField] = source[field];
     });
 };
 
 hortis.summarise.updateRowRange = function (that, summaryRow, obsRow) {
-    var obsCountField = that.options.fields.obsCount;
+    const obsCountField = that.options.fields.obsCount;
     if (!summaryRow) {
-        var commonKeys = Object.keys(hortis.summariseCommonOutMap.columns);
-        var extraKeys = Object.keys(that.options.summaryOutMapExtraColumns);
+        const commonKeys = Object.keys(hortis.summariseCommonOutMap.columns);
+        const extraKeys = Object.keys(that.options.summaryOutMapExtraColumns);
         summaryRow = fluid.filterKeys(obsRow, commonKeys.concat(extraKeys));
         summaryRow.firstTimestamp = Infinity;
         summaryRow.lastTimestamp = -Infinity;
@@ -82,7 +82,7 @@ hortis.summarise.updateRowRange = function (that, summaryRow, obsRow) {
     } else {
         summaryRow[obsCountField]++;
     }
-    var fields = Object.keys(hortis.obsToSummaryFields);
+    const fields = Object.keys(hortis.obsToSummaryFields);
     if (obsRow.timestamp < summaryRow.firstTimestamp) {
         hortis.summarise.copyObsFields(summaryRow, obsRow, "first", fields);
     }
@@ -95,13 +95,13 @@ hortis.summarise.updateRowRange = function (that, summaryRow, obsRow) {
 };
 
 hortis.summarise.storeRow = function (that, row) {
-    var fields = that.options.fields;
-    var coordsField = fields.coords;
+    const fields = that.options.fields;
+    const coordsField = fields.coords;
     row.timestamp = Date.parse(row[fields.date]);
-    var uniqueVal = row[fields.unique];
+    const uniqueVal = row[fields.unique];
     var existing = that.uniqueRows[uniqueVal];
 
-    var summaryRow = hortis.summarise.updateRowRange(that, existing, row);
+    const summaryRow = hortis.summarise.updateRowRange(that, existing, row);
 
     that.uniqueRows[uniqueVal] = summaryRow;
 
@@ -112,7 +112,7 @@ hortis.summarise.storeRow = function (that, row) {
         }
         // TODO: Wrong place for this logic - these should be parsed as part of main filtering workflow, and before
         // hortis.roundCoordinates
-        var coords = hortis.summarise.parseCoordinates(row);
+        const coords = hortis.summarise.parseCoordinates(row);
         fluid.set(summaryRow, [coordsField, obsId], coords);
         if (coords) {
             row.latitude = coords[0];

@@ -1,1 +1,2 @@
 From https://raw.githubusercontent.com/IMERSS/adfsimon-bioinfo/main/Biodiversity_Galiano/2022/2_review/Plantae_et_Chromista/vascular_plants/summary/Tracheophyta_review_summary_reviewed_2022-10-20.csv
+From https://raw.githubusercontent.com/IMERSS/adfsimon-bioinfo/main/Biodiversity_Galiano/2022/4_consolidate_records/Plantae_et_Chromista/vascular_plants/synthesized/Galiano_Island_vascular_plant_records_consolidated.csv

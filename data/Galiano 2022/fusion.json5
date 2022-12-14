@@ -1,0 +1,19 @@
+{
+    datasets: {
+        VASC: {
+            name: "Vascular Plants",
+            input: "%bagatelle/data/Galiano 2022/Galiano_Island_vascular_plant_records_consolidated.csv",
+            map: "%bagatelle/data/Galiano 2022/DWC-map.json",
+            outMap: "%bagatelle/data/Galiano 2022/DWC-out-map.json",
+            colour: "#931362"
+        }
+    },
+    patches: {
+    },
+    summarise: true,
+    applySwaps: true, // TODO: Naturally, should be an actual pipeline element
+    output: "%bagatelle/data/Galiano 2022/reintegrated.csv",
+    combinedOutMap: "%bagatelle/data/Galiano 2022/combinedOutMap.json",
+    filters: {
+    }
+}
