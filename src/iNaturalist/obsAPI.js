@@ -92,3 +92,59 @@ hortis.pushResultRows = function (rows, response) {
 };
 
 // var obsURL = "https://api.inaturalist.org/v1/observations?place_id=94935&taxon_id=1&quality_grade=research&order=asc&order_by=id";
+
+
+fluid.defaults("hortis.iNatObsById", {
+    gradeNames: ["kettle.dataSource.URL", "hortis.withINatRateLimit"],
+    url: "https://api.inaturalist.org/v1/observations/%id",
+    termMap: {
+        id: "%id"
+    }
+});
+
+fluid.defaults("hortis.cachediNatObsById", {
+    gradeNames: "hortis.cachedApiSource",
+    components: {
+        apiSource: {
+            type: "hortis.iNatObsById"
+        },
+        dbSource: {
+            type: "hortis.iNatObsAPI.byIdDBSource"
+        }
+    },
+    invokers: {
+        upgradeLiveDocument: "hortis.cachediNatObsById.upgradeLiveDocument"
+    }
+});
+
+hortis.cachediNatObsById.upgradeLiveDocument = function (query, live) {
+    return {
+        fetched_at: new Date().toISOString(),
+        id: query.id,
+        doc: live
+    };
+};
+
+
+fluid.defaults("hortis.iNatObsAPI.byIdDBSource", {
+    gradeNames: ["hortis.listableSqliteSource"],
+    createString: "CREATE TABLE IF NOT EXISTS iNatObsId (id INTEGER PRIMARY KEY, fetched_at TEXT, doc BLOB)",
+    columnCodecs: {
+        doc: "zlib"
+    },
+    readQuery: {
+        query: "SELECT id, fetched_at, doc from iNatObsId WHERE id = ?",
+        args: ["%id"]
+    },
+    writeQuery: {
+        query: "INSERT OR REPLACE INTO iNatObsId (id, fetched_at, doc) VALUES ($id, $fetched_at, $doc)",
+        args: {
+            $id: "%id",
+            $fetched_at: "%fetched_at",
+            $doc: "%doc"
+        }
+    },
+    listQuery: {
+        query: "SELECT id from iNatObsId"
+    }
+});

@@ -11,6 +11,7 @@ fluid.registerNamespace("hortis.iNat");
 require("../utils/dataSource.js");
 require("../utils/utils.js");
 require("../dataProcessing/sqlite.js");
+require("./obsAPI.js");
 require("kettle"); // for kettle.dataSource.URL
 
 hortis.ranks = fluid.freezeRecursive(fluid.require("%bagatelle/data/ranks.json"));
@@ -62,7 +63,7 @@ hortis.iNat.parentTaxaIds = function (taxonDoc) {
 
 fluid.defaults("hortis.iNatAPILimiter", {
     gradeNames: ["fluid.dataSource.rateLimiter", "fluid.resolveRootSingle"],
-    rateLimit: 1400,
+    rateLimit: 1300,
     singleRootType: "hortis.iNatAPILimiter"
 });
 
@@ -213,7 +214,7 @@ hortis.bestNameMatch = function (results, query) {
 };
 
 hortis.cachediNatTaxonByName.upgradeLiveDocument = async function (byIdSource, query, live) {
-    console.log("upgradeLive given ", live);
+    console.log("upgradeLive byName given ", live);
     const togo = {
         name: query.name,
         fetched_at: new Date().toISOString()
@@ -262,7 +263,7 @@ fluid.defaults("hortis.iNat.distributeJWT", {
     }
 });
 
-// The top-level overall cached iNaturalist taxon source
+// The top-level overall cached iNaturalist taxon and obs source
 fluid.defaults("hortis.iNatTaxonSource", {
     gradeNames: ["fluid.dataSource", "fluid.dataSource.noencoding", "{that}.jwtDistribution"],
     disableCache: false,
@@ -292,6 +293,9 @@ fluid.defaults("hortis.iNatTaxonSource", {
                     byIdSource: "{hortis.cachediNatTaxonById}"
                 }
             }
+        },
+        obsById: {
+            type: "hortis.cachediNatObsById"
         }
     },
     listeners: {
@@ -320,6 +324,8 @@ hortis.iNatTaxonSource.read = async function (that, payload, options) {
         doc = await that.byId.get(query);
     } else if (query.name) {
         doc = await that.byName.get(query);
+    } else if (query.obsId) {
+        doc = await that.obsById.get({id: query.obsId});
     }
     return doc;
 };

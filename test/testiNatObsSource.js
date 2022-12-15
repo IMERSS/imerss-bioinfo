@@ -26,24 +26,12 @@ const source = hortis.iNatTaxonSource({
 
 const testSource = async function () {
     try {
-        const query = "Balanus glandula/Balanus crenatus";
-        const sane = hortis.sanitizeSpeciesName(query);
-        const result = await source.get({name: sane});
-        console.log(result);
-        // const parents = await hortis.iNat.getAncestry(result.doc.id, source.byId);
-        // console.log(parents);
-        const rankTarget = {
-            Kingdom: "",
-            Phylum: "",
-            Subclass: "Magnoliidae", // test overriding
-            Order: "",
-            Genus: "",
-            Species: ""
-        };
-        await hortis.iNat.getRanks(result.doc.id, rankTarget, source.byId);
-        console.log(rankTarget);
+        const result = await source.get({obsId: 86945066});
+        console.log("Got result ", result);
+        console.log("Got taxon name ", result.doc.results[0].taxon.name);
+
     } catch (e) {
-        console.log("Error fetching ancestry ", e);
+        console.log("Error fetching observation ", e);
     }
 };
 

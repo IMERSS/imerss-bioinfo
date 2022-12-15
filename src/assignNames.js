@@ -19,8 +19,10 @@ fluid.setLogging(true);
 const parsedArgs = minimist(process.argv.slice(2));
 
 const outputFile = parsedArgs.o || "assigned.csv";
+// fluid.module.resolvePath("%bagatelle/data/Comprehensive Lists/San_Juan_Dunwiddie_List.csv");
 // fluid.module.resolvePath("%bagatelle/data/Galiano 2022/Tracheophyta_review_summary_reviewed_2022-10-29.csv")
-const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%bagatelle/data/Comprehensive Lists/San_Juan_Dunwiddie_List.csv");
+// fluid.module.resolvePath("%bagatelle/data/Squamish/Tracheophyta_review_summary_2022-12-14.csv")
+const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%bagatelle/data/Squamish/Tracheophyta_review_summary_2022-12-14.csv");
 
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile
@@ -38,13 +40,34 @@ hortis.applyName = async function (row, taxon) {
         row["Name Status"] = looked.doc.nameStatus;
         row["Referred iNaturalist Id"] = looked.doc.id;
         row["Referred iNaturalist Name"] = looked.doc.name;
-        await hortis.iNat.getRanks(looked.doc.id, row, source.byId, hortis.ranks);
+        await hortis.iNat.getRanks(looked.doc.id, row, source.byId /*, hortis.ranks*/); // uncomment for Dunwiddie
     } else {
         row["Name Status"] = "unknown";
     }
-    if (row.ID) {
-        const lookedId = await source.get({id: row.ID});
-        row["Indexed iNaturalist Name"] = lookedId ? lookedId.doc.name : "unknown";
+    if (row.ID && row.ID > 0) {
+        try {
+            const lookedId = await source.get({id: row.ID});
+            row["Indexed iNaturalist Name"] = lookedId ? lookedId.doc.name : "unknown";
+        } catch (e) {
+            console.log("Got error: ", e);
+            row["Indexed iNaturalist Name"] = "error";
+            if (e.statusCode !== 404) {
+                throw e;
+            }
+        }
+    }
+    const obsLink = row["iNaturalist Link"];
+    if (obsLink) {
+        const slashPos = obsLink.lastIndexOf("/");
+        const obsId = obsLink.substring(slashPos + 1);
+        row["Observation Taxon Name"] = "error";
+        if (+obsId > 0) {
+            const obs = await source.get({obsId: obsId});
+            if (obs.doc.results.length === 1) {
+                const name = obs.doc.results[0].taxon.name;
+                row["Observation Taxon Name"] = name;
+            }
+        }
     }
 };
 
@@ -58,7 +81,7 @@ Promise.all([reader.completionPromise, source.events.onCreate]).then(async funct
             await hortis.applyName(row, row.infraTaxonName);
         }
         if (!row.infraTaxonName || row["Name Status"] === "unknown") {
-            await hortis.applyName(row, row.taxonName);
+            await hortis.applyName(row, row.Taxon); // taxonName for Dunwiddie data
         }
 
         mapped.push(row);
