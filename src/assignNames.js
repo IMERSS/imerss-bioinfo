@@ -22,7 +22,8 @@ const outputFile = parsedArgs.o || "assigned.csv";
 // fluid.module.resolvePath("%bagatelle/data/Comprehensive Lists/San_Juan_Dunwiddie_List.csv");
 // fluid.module.resolvePath("%bagatelle/data/Galiano 2022/Tracheophyta_review_summary_reviewed_2022-10-29.csv")
 // fluid.module.resolvePath("%bagatelle/data/Squamish/Tracheophyta_review_summary_2022-12-14.csv")
-const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%bagatelle/data/Squamish/Tracheophyta_review_summary_2022-12-14.csv");
+// fluid.module.resolvePath("%bagatelle/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv")
+const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%bagatelle/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv");
 
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile
@@ -81,7 +82,7 @@ Promise.all([reader.completionPromise, source.events.onCreate]).then(async funct
             await hortis.applyName(row, row.infraTaxonName);
         }
         if (!row.infraTaxonName || row["Name Status"] === "unknown") {
-            await hortis.applyName(row, row.Taxon); // taxonName for Dunwiddie data
+            await hortis.applyName(row, row.taxonName); // taxonName for Dunwiddie data
         }
 
         mapped.push(row);
