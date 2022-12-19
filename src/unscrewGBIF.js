@@ -25,14 +25,18 @@ const inputFile = parsedArgs._[0] || "%bagatelle/data/RBCM/RBCM_GBIF_records_int
 const input = hortis.csvReaderWithoutMap({
     inputFile: fluid.module.resolvePath(inputFile),
     csvOptions: {
-        separator: "\t"
+//        separator: "\t" // TODO: remember to put this back for real GBIF
     }
 });
 input.completionPromise.then(function () {
     const rows = input.rows.map(function (row) {
-        row.scientificName = row.species || row.genus || row.family || row.order || row["class"] || row.phylum || row.kingdom;
+        row.taxonName = row.species || row.genus || row.family || row.order || row["class"] || row.phylum || row.kingdom;
+        const infra = row["infraspecificEpithet"];
+        if (infra) {
+            row.infraTaxonName += row.taxonName + " " + infra;
+        }
         return row;
     });
     const completion = fluid.promise();
-    hortis.writeCSV(fluid.module.resolvePath(outputFile), input.headers, rows, completion);
+    hortis.writeCSV(fluid.module.resolvePath(outputFile), Object.keys(rows[0]), rows, completion);
 });
