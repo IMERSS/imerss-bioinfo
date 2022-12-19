@@ -34,7 +34,8 @@ input.completionPromise.then(function () {
         row.infraTaxonName = "";
         const infra = row["infraspecificEpithet"];
         if (infra) {
-            row.infraTaxonName += row.taxonName + " " + infra;
+            const rank = row.taxonRank === "VARIETY" ? " var. " : " ssp. ";
+            row.infraTaxonName += row.taxonName + rank + infra;
         }
         return row;
     });
