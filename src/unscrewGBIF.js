@@ -31,6 +31,7 @@ const input = hortis.csvReaderWithoutMap({
 input.completionPromise.then(function () {
     const rows = input.rows.map(function (row) {
         row.taxonName = row.species || row.genus || row.family || row.order || row["class"] || row.phylum || row.kingdom;
+        row.infraTaxonName = "";
         const infra = row["infraspecificEpithet"];
         if (infra) {
             row.infraTaxonName += row.taxonName + " " + infra;
