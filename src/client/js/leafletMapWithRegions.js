@@ -44,7 +44,7 @@ fluid.defaults("hortis.leafletMap.withRegions", {
         //                                                                          class,       community
         "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)",
         "onCreate.listenTaxonLinks": "hortis.listenTaxonLinks({sunburst})",
-        "onCreate.validateTaxonLinks": "hortis.validateTaxonLinks({that])"
+        "onCreate.validateTaxonLinks": "hortis.validateTaxonLinks({sunburst}, {that})"
     },
     events: {
         selectRegion: null
@@ -183,9 +183,20 @@ hortis.linkToTaxon = function (sunburst, taxonLink) {
     return sunburst.lookupTaxon(targetTaxon);
 };
 
-hortis.validateTaxonLinks = function (map) {
+hortis.validateTaxonLinks = function (sunburst, map) {
     fluid.each(map.communities, function (community, key) {
-        console.log("Validating community key ", key);
+        const text = community.culturalValues;
+        let match;
+        do { // Ridiculous syntax from https://stackoverflow.com/a/6323598
+            match = hortis.taxonLinkRegex.exec(text);
+            if (match) {
+                const taxonLink = match[2];
+                const taxon = hortis.linkToTaxon(sunburst, taxonLink);
+                if (!taxon) {
+                    console.log("Failed to look up taxon " + taxonLink + " for community key " + key);
+                }
+            }
+        } while (match);
     });
 };
 

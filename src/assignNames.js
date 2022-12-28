@@ -36,7 +36,7 @@ const source = hortis.iNatTaxonSource();
 hortis.applyName = async function (row, taxon) {
     const saneName = hortis.sanitizeSpeciesName(taxon);
     const looked = await source.get({name: saneName});
-//    console.log("Got document ", looked);
+    //    console.log("Got document ", looked);
     if (looked && looked.doc) {
         row["Name Status"] = looked.doc.nameStatus;
         row["Referred iNaturalist Id"] = looked.doc.id;

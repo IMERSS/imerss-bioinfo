@@ -2,9 +2,9 @@
 
 "use strict";
 
-var fluid = require("infusion");
-var fs = require("fs");
-var minimist = require("minimist");
+const fluid = require("infusion");
+const fs = require("fs");
+const minimist = require("minimist");
 var glob = require("glob");
 
 fluid.require("%bagatelle");
@@ -14,20 +14,20 @@ require("./dataProcessing/writeJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVWithoutMap.js");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 fluid.setLogging(true);
 
-var parsedArgs = minimist(process.argv.slice(2));
+const parsedArgs = minimist(process.argv.slice(2));
 
-var inputFile = parsedArgs._[0] || "%bagatelle/data/Xetthecum/deqgis.json5";
-var outputFile = fluid.module.resolvePath(parsedArgs.o || "%bagatelle/data/Xetthecum/flatFeatures.json");
+const inputFile = parsedArgs._[0] || "%bagatelle/data/Xetthecum/deqgis.json5";
+const outputFile = fluid.module.resolvePath(parsedArgs.o || "%bagatelle/data/Xetthecum/flatFeatures.json");
 
-var config = hortis.readJSONSync(fluid.module.resolvePath(inputFile));
+const config = hortis.readJSONSync(fluid.module.resolvePath(inputFile));
 
-var baseDir = fluid.module.resolvePath(config.baseDirectory);
+const baseDir = fluid.module.resolvePath(config.baseDirectory);
 
-var dataFiles = glob.sync(baseDir + "/*.js");
+const dataFiles = glob.sync(baseDir + "/*.js");
 
 console.log("Got data files ", dataFiles);
 
@@ -35,11 +35,11 @@ hortis.seColumns = ["Tagline", "What", "Where", "Importance", "Protection", "Sou
 
 hortis.applySensitiveEcosystems = function (togo, rows) {
     rows.forEach(function (row, index) {
-        var labels = row.LABELS.split(",").map(s => s.trim());
+        const labels = row.LABELS.split(",").map(s => s.trim());
         labels.forEach(function (clazz) {
             if (togo.classes[clazz]) {
                 hortis.seColumns.forEach(function (column) {
-                    var cell = row[column];
+                    const cell = row[column];
                     if (cell) {
                         togo.classes[clazz]["sE-" + column] = cell;
                     }
@@ -56,9 +56,9 @@ hortis.applySensitiveEcosystems = function (togo, rows) {
 
 hortis.applyCulturalValues = function (togo, rows) {
     rows.forEach(function (row) {
-        var communityName = row.COMMUNITIES;
+        const communityName = row.COMMUNITIES;
         if (togo.communities[communityName]) {
-            var community = togo.communities[communityName];
+            const community = togo.communities[communityName];
             community.culturalValues = row["CULTURAL VALUES"];
             community.culturalValuesSources = row.SOURCES;
         } else {
@@ -67,10 +67,10 @@ hortis.applyCulturalValues = function (togo, rows) {
     });
 };
 
-var features = [];
+const features = [];
 
 hortis.indexCommunities = function (communities) {
-    var classes = {};
+    const classes = {};
     fluid.each(communities, function (community, communityKey) {
         fluid.each(community.classes, function (clazz, classKey) {
             clazz.community = communityKey;
@@ -90,7 +90,7 @@ hortis.filterCommunities = function (communities) {
     });
 };
 
-var labels = {};
+const labels = {};
 
 hortis.indexOneFeature = function (dataFileName, feature, features, classes) {
     var classname = feature.properties.LEGEND_LAB || feature.properties.LABEL;
@@ -105,32 +105,32 @@ hortis.indexOneFeature = function (dataFileName, feature, features, classes) {
     }
 };
 
-var classes = hortis.indexCommunities(config.communities);
+const classes = hortis.indexCommunities(config.communities);
 
-var CSVs = fluid.transform(config.CSVs, function (oneFile) {
+const CSVs = fluid.transform(config.CSVs, function (oneFile) {
     return hortis.csvReaderWithoutMap({
         inputFile: fluid.module.resolvePath(oneFile.path)
     });
 });
 
-var promises = Object.values(fluid.getMembers(CSVs, "completionPromise"));
+const promises = Object.values(fluid.getMembers(CSVs, "completionPromise"));
 
 fluid.promise.sequence(promises).then(function () {
     console.log("Loaded " + Object.keys(CSVs).length + " CSV files");
-    var allRows = fluid.getMembers(CSVs, "rows");
+    const allRows = fluid.getMembers(CSVs, "rows");
 
     dataFiles.forEach(function (dataFileName) {
-        var string = fs.readFileSync(dataFileName, "utf8");
-        var firstp = string.indexOf("{");
-        var lastp = string.lastIndexOf("}");
-        var data = JSON.parse(string.substring(firstp, lastp + 1));
+        const string = fs.readFileSync(dataFileName, "utf8");
+        const firstp = string.indexOf("{");
+        const lastp = string.lastIndexOf("}");
+        const data = JSON.parse(string.substring(firstp, lastp + 1));
         console.log("Processing qgis2web data with name " + data.name);
         data.features.forEach(function (feature) {
             hortis.indexOneFeature(dataFileName, feature, features, classes);
         });
     });
 
-    var togo = {
+    const togo = {
         communities: hortis.filterCommunities(config.communities),
         classes: classes,
         features: features
