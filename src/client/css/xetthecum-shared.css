@@ -5,12 +5,12 @@
 }
 
 body {
-    margin: 0px;
+    margin: 0;
 }
 
 .fl-xetthecum-banner {
     background: #EDEFE9;
-    margin: 0px;
+    margin: 0;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     padding-left: 1.5rem;
@@ -42,7 +42,7 @@ body {
 }
 
 .fld-bagatelle-taxonDisplay {
-    margin-top: 0px;
+    margin-top: 0;
     width: auto;
 }
 

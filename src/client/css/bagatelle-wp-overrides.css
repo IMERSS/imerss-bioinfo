@@ -30,11 +30,11 @@ table {
 }
 
 #main-content .entry-content table td {
-    padding: 0px 5px;
+    padding: 0 5px;
 }
 
 .fl-bagatelle-container .fld-bagatelle-checklist ul {
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 .fld-bagatelle-taxonDisplay {
@@ -58,7 +58,7 @@ table {
 
 .fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder {
     width: auto;
-    padding-right: 0px;
+    padding-right: 0;
 }
 
 #fli-tab-sunburst {
