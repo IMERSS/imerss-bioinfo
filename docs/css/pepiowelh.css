@@ -1,0 +1,67 @@
+.fl-bagatelle-datasets {
+    display: none;
+    width: 0;
+}
+
+.fl-bagatelle-left-column {
+    flex: 1 1 0;
+    width: unset;
+}
+
+.fld-bagatelle-map {
+    height: 100%;
+    max-height: 40rem;
+    min-width: 30rem;
+}
+
+.fl-bagatelle-map-and-taxa {
+    flex-direction: row;
+}
+
+.fld-bagatelle-tabs {
+    display: none;
+}
+
+.fl-bagatelle-tabs-and-search {
+    padding: 2rem;
+}
+
+.fl-bagatelle-container {
+    display: block;
+}
+
+.fld-bagatelle-map-holder {
+    flex: 1 1 0;
+    margin-bottom: 7.5%;
+    margin-top: 7.5%;
+}
+
+.leaflet-tile-pane {
+    opacity: 0.8;
+}
+
+.flc-bagatelle-viz-dimens {
+    height: revert;
+    max-height: 40rem;
+}
+
+.fl-banner {
+    display: flex;
+    align-items: center;
+}
+
+.fl-banner span {
+    padding-left: 3rem;
+}
+
+.fld-bagatelle-we-overlay {
+    position: absolute;
+    cursor: pointer;
+    height: 110%;
+    width: 110%;
+    background: no-repeat url("../img/Pepiowelh/BlackNoWe2-wb-bb.png");
+    background-size: contain;
+    z-index: 999;
+    opacity: 1;
+    transition: opacity 2s;
+}

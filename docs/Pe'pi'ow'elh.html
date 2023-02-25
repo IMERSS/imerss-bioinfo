@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="css/bagatelle-all.css" />
+        <link rel="stylesheet" type="text/css" href="css/pepiowelh.css" />
+        <script src="js/jquery.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <script src="js/bagatelle-all.js"></script>
+
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                margin: 1rem;
+            }
+            .logo {
+                height: 10rem;
+                margin-left: 5rem;
+                top: 1.5rem;
+            }
+        </style>
+
+        <title>Pe'pi'ow'elh (English Camp) Biodiversity</title>
+    </head>
+
+    <body>
+    <h2 class="fl-banner">
+        <a href="https://www.whiteswanenvironmental.org/"><img src="img/Pepiowelh/BlackNoWe2.png" class="logo"></a>
+        <span>Pe'pi'ow'elh (English Camp) Biodiversity</span></h2>
+
+        <p>The ancestral village site of Pe’pi’ow’elh (now known as English Camp) has an archeological history showing a 600-800 ft longhouse.
+            Given the rich ecocultural heritage of this region, the naturalist Caleb Kennerly, of the Northwest Boundary Survey, observed
+            that early settlers encountered “thriving villages'' along the shorelines of American and English Camps, as well as elsewhere in
+            the San Juan archipelago. He considered San Juan Island as "perhaps the best fishing grounds on Puget Sound,"
+            where "numerous bands of Indians… plied reef nets".
+
+            This region supports <a href="https://www.whiteswanenvironmental.org/digital-ecocultural-mapping.html">digital ecocultural mapping</a>
+            performed together with <a href="https://www.whiteswanenvironmental.org/">Whiteswan Environmental</a>.
+
+        </p>
+
+        <p>This project includes citizen science data sourced from <a href="https://www.inaturalist.org/">iNaturalist</a>.
+        </p>
+        <p>The data underlying this vizualisation was last updated on 24th February 2023.
+        </p>
+
+        <div class="fl-bagatelle-container">
+        </div>
+        <script>
+            hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
+                resourceBase: ".",
+                mapGrades: ["hortis.MtbTiles", "hortis.leafletMapWithWE"],
+                markupTemplate: "%resourceBase/html/bagatelle-map-pepi.html",
+                mapBounds: hortis.projectBounds.SalishSea,
+                phyloMap: "%resourceBase/json/kingdomPhyloMap.json",
+                colourCount: "observationCount",
+                culturalValues: false,
+                renderMarkup: true,
+                gridResolution: 0.001,
+                initialTab: "sunburst",
+                vizFile: "data/Pepiowelh/Life.json.lz4"});
+        </script>
+        <div style="padding: 1rem; float: right;">Open source framework created by <a href="https://imerss.org/">IMERSS</a>,
+        code available on <a href="https://github.com/IMERSS/imerss-bioinfo">GitHub</a>
+        </div>
+    </body>
+</html>

@@ -834,7 +834,7 @@ a.ui-button:active,
 
 .fl-taxonDisplay-runon-header.fl-taxonDisplay-expanded {
     border-bottom: none;
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 .fl-taxonDisplay-empty-header {
@@ -882,12 +882,12 @@ a.ui-button:active,
 
 .fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder {
     padding-left: 8px; /* Back to value in fl-taxonDisplay-row */
-    padding-right: 0px; /* Avoid right gap */
+    padding-right: 0; /* Avoid right gap */
 }
 
 .fl-taxonDisplay-runon-remainder > .fl-taxonDisplay-key {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
 }
 
 .fl-taxonDisplay-image-holder {
@@ -995,7 +995,7 @@ a.ui-button:active,
     display: inline-block;
     width: 1.5rem;
     height: 1.5rem;
-    border: 1px block;
+    border: 1px solid black;
     background-color: red;
     vertical-align: middle;
     margin: 2px;
@@ -1112,7 +1112,7 @@ a.ui-button:active,
 }
 
 #fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
-    padding: 0px;
+    padding: 0;
 }
 
 .fld-bagatelle-tabs .ui-state-active.ui-tabs-tab {
@@ -1147,12 +1147,12 @@ a.ui-button:active,
 }
 
 .fld-bagatelle-checklist ul {
-    margin-block-start: 0px;
+    margin-block-start: 0;
     list-style-type: none;
 }
 
 .fl-bagatelle-checklist-no-indent ul {
-    padding-inline-start: 0px;
+    padding-inline-start: 0;
 }
 
 .fl-bagatelle-checklist-no-indent .flc-checklist-rank-species {
@@ -1160,7 +1160,7 @@ a.ui-button:active,
 }
 
 .fld-bagatelle-checklist > ul {
-    padding: 0px;
+    padding: 0;
 }
 
 .fld-bagatelle-checklist-up {

@@ -35,6 +35,13 @@ hortis.iNatProjects = {
             taxon_id: 48460 // Life
         },
         outputFile: "data/Xetthecum/iNaturalist_Catalogue_%Date.csv"
+    },
+    Pepiowelh: {
+        paramMap: {
+            project_id: "pe-pi-ow-elh",
+            taxon_id: 48460 // Life
+        },
+        outputFile: "data/Pepiowelh/iNaturalist_Catalogue_%Date.csv"
     }
 };
 

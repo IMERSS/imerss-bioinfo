@@ -54,6 +54,9 @@ const buildIndex = {
         src: "src/client/css/xetthecum-external.css",
         dest: "docs/css/xetthecum-external.css"
     }, {
+        src: "src/client/css/pepiowelh.css",
+        dest: "docs/css/pepiowelh.css"
+    }, {
         src: "src/buildSource/Galiano Life List.html",
         dest: "docs/Galiano Life List.html"
     }, {
@@ -74,6 +77,9 @@ const buildIndex = {
     }, {
         src: "src/buildSource/Xetthecum.html",
         dest: "docs/Xetthecum.html"
+    }, {
+        src: "src/buildSource/Pe'pi'ow'elh.html",
+        dest: "docs/Pe'pi'ow'elh.html"
     }, {
         src: "src/buildSource/index.html",
         dest: "docs/index.html"
@@ -101,6 +107,9 @@ const buildIndex = {
     }, {
         src: "data/Squamish/Squamish-Life.json.lz4",
         dest: "docs/data/Squamish/Squamish-Life.json.lz4"
+    }, {
+        src: "data/Pepiowelh/Life.json.lz4",
+        dest: "docs/data/Pepiowelh/Life.json.lz4"
     }]
 };
 

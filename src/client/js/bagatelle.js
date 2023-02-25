@@ -28,6 +28,18 @@ fluid.defaults("hortis.sunburstLoader", {
     queryOnStartup: "",
     selectOnStartup: "",
     showObsListInTooltip: true,
+    gridResolution: undefined,
+    initialTab: "checklist",
+    distributeOptions: {
+        gridResolution: {
+            source: "{that}.options.gridResolution",
+            target: "{that hortis.quantiser}.options.model.longResolution"
+        },
+        initialTab: {
+            source: "{that}.options.initialTab",
+            target: "{that hortis.bagatelleTabs}.options.model.selectedTab"
+        }
+    },
     resourceOptions: {
         terms: {
             resourceBase: "{that}.options.resourceBase"
@@ -137,11 +149,12 @@ fluid.defaults("hortis.sunburstWithObsColour", {
 fluid.defaults("hortis.bagatelleTabs", {
     gradeNames: "hortis.tabs",
     tabIds: {
+        simpleChecklist: "fli-tab-simple-checklist",
         checklist: "fli-tab-checklist",
         sunburst: "fli-tab-sunburst"
     },
     model: {
-        selectedTab: "checklist"
+        // selectedTab: "checklist"
     }
 });
 

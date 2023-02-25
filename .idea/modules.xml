@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Salish-Sea-Community-Directory/.idea/Salish-Sea-Community-Directory.iml" filepath="$PROJECT_DIR$/../Salish-Sea-Community-Directory/.idea/Salish-Sea-Community-Directory.iml" />
       <module fileurl="file://$PROJECT_DIR$/../adfsimon-bioinfo/.idea/adfsimon-bioinfo.iml" filepath="$PROJECT_DIR$/../adfsimon-bioinfo/.idea/adfsimon-bioinfo.iml" />
       <module fileurl="file://$PROJECT_DIR$/../andrewdfsimon.github.io/.idea/andrewdfsimon.github.io.iml" filepath="$PROJECT_DIR$/../andrewdfsimon.github.io/.idea/andrewdfsimon.github.io.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/bagatelle.iml" filepath="$PROJECT_DIR$/.idea/bagatelle.iml" />

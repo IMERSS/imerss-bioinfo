@@ -2,6 +2,7 @@
 
 "use strict";
 
+// noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.leafletMap.withGrid", {

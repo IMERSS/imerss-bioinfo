@@ -13,17 +13,17 @@ var hortis = fluid.registerNamespace("hortis");
 
 
 hortis.checklistItem = function (entry, selectedId) {
-    var record = entry.row;
+    const record = entry.row;
     // var focusProp = record.focusCount / record.childCount;
     // var interp = fluid.colour.interpolate(focusProp, hortis.checklist.unfocusedColour, hortis.checklist.focusedColour);
     // var styleprop = "style=\"color: " + fluid.colour.arrayToString(interp) + "\"";
-    var styleprop = "";
-    var rowid = " data-row-id=\"" + record.id + "\"";
+    const styleprop = "";
+    const rowid = " data-row-id=\"" + record.id + "\"";
 
-    var rank = record.species ? "species" : record.rank;
-    var selectedClass = rank === "species" && record.id === selectedId ? " class=\"fl-checklist-selected\"" : "";
-    var header = "<li " + selectedClass + ">";
-    var name = "<p " + styleprop + rowid + " class=\"flc-checklist-rank-" +
+    const rank = record.species ? "species" : record.rank;
+    const selectedClass = rank === "species" && record.id === selectedId ? " class=\"fl-checklist-selected\"" : "";
+    const header = "<li " + selectedClass + ">";
+    let name = "<p " + styleprop + rowid + " class=\"flc-checklist-rank-" +
         rank + "\">" + hortis.encodeHTML(record.iNaturalistTaxonName) + "</p>";
     if (record.commonName) {
         name += " - <p " + styleprop + rowid + " class=\"flc-checklist-common-name\">" + record.commonName + "</p>";
@@ -31,8 +31,8 @@ hortis.checklistItem = function (entry, selectedId) {
     if (record.hulqName) {
         name += " - <p " + styleprop + rowid + " class=\"flc-checklist-hulq-name\"><em>" + record.hulqName + "</em></p>";
     }
-    var subList = hortis.checklistList(entry.children);
-    var footer = "</li>";
+    const subList = hortis.checklistList(entry.children);
+    const footer = "</li>";
     return header + name + subList + footer;
 };
 
@@ -51,18 +51,18 @@ hortis.checklistRowForId = function (that, id) {
 // This is the kind of logic that, in the end, makes us want to render with something like Preact
 // Could we return component-like things backed by markup snippets? Rather than JSX, use relay-like notation?
 hortis.updateChecklistSelection = function (that, newSelectedId, oldSelectedId, index) {
-    var oldSelected = hortis.checklistRowForId(that, oldSelectedId);
+    const oldSelected = hortis.checklistRowForId(that, oldSelectedId);
     oldSelected.removeClass("fl-checklist-selected");
-    var row = index[newSelectedId];
+    const row = index[newSelectedId];
     if (row && row.species) {
-        var newSelected = hortis.checklistRowForId(that, newSelectedId);
+        const newSelected = hortis.checklistRowForId(that, newSelectedId);
         newSelected.addClass("fl-checklist-selected");
     }
 };
 
 // Accepts entries and returns entries
 hortis.filterFocused = function (entries) {
-    var togo = fluid.transform(entries, function (entry) {
+    const togo = fluid.transform(entries, function (entry) {
         if (entry.row.focusCount > 0) {
             return {
                 row: entry.row,
@@ -76,15 +76,15 @@ hortis.filterFocused = function (entries) {
 };
 
 hortis.acceptChecklistRow = function (row, filterRanks) {
-    var acceptBasic = !filterRanks || filterRanks.includes(row.rank) || row.species;
+    const acceptBasic = !filterRanks || filterRanks.includes(row.rank) || row.species;
     // Special request from AS - suppress any checklist entry at species level if there are any ssp
-    var rejectSpecies = row.rank === "species" && row.children.length > 0;
+    const rejectSpecies = row.rank === "species" && row.children.length > 0;
     return acceptBasic && !rejectSpecies;
 };
 
 // Accepts a rows structure and returns "entries"
 hortis.filterRanks = function (rows, filterRanks) {
-    var togo = [];
+    const togo = [];
     fluid.each(rows, function (row) {
         if (hortis.acceptChecklistRow(row, filterRanks)) {
             togo.push({
@@ -92,7 +92,7 @@ hortis.filterRanks = function (rows, filterRanks) {
                 children: hortis.filterRanks(row.children, filterRanks)
             });
         } else {
-            var dChildren = hortis.filterRanks(row.children, filterRanks);
+            const dChildren = hortis.filterRanks(row.children, filterRanks);
             Array.prototype.push.apply(togo, dChildren);
         }
     });
@@ -101,10 +101,10 @@ hortis.filterRanks = function (rows, filterRanks) {
 
 hortis.generateChecklist = function (element, rootId, selectedId, index, filterRanks) {
     console.log("Generating checklist for id " + rootId);
-    var rootChildren = rootId ? [index[rootId]] : [];
-    var filteredRanks = hortis.filterRanks(rootChildren, filterRanks);
-    var filteredFocus = hortis.filterFocused(filteredRanks);
-    var markup = hortis.checklistList(filteredFocus, selectedId);
+    const rootChildren = rootId ? [index[rootId]] : [];
+    const filteredRanks = hortis.filterRanks(rootChildren, filterRanks);
+    const filteredFocus = hortis.filterFocused(filteredRanks);
+    const markup = hortis.checklistList(filteredFocus, selectedId);
     element[0].innerHTML = markup;
 };
 
@@ -155,16 +155,16 @@ hortis.checklist.focusedColour = fluid.colour.hexToArray("#333");
 hortis.checklist.unfocusedColour = fluid.colour.hexToArray("#ccc");
 
 hortis.checklist.moveUp = function (layoutHolder) {
-    var layoutId = layoutHolder.model.layoutId;
-    var row = layoutId ? layoutHolder.index[layoutId] : null;
-    var parentId = row && row.parent && row.parent.id;
+    const layoutId = layoutHolder.model.layoutId;
+    const row = layoutId ? layoutHolder.index[layoutId] : null;
+    const parentId = row && row.parent && row.parent.id;
     layoutHolder.events.changeLayoutId.fire(parentId);
 };
 
 hortis.checklist.bindHover = function (that, layoutHolder) {
-    var hoverable = that.options.selectors.hoverable;
+    const hoverable = that.options.selectors.hoverable;
     that.container.on("mouseenter", hoverable, function (e) {
-        var id = this.dataset.rowId;
+        const id = this.dataset.rowId;
         layoutHolder.mouseEvent = e;
         layoutHolder.applier.change("hoverId", id);
     });
@@ -172,7 +172,7 @@ hortis.checklist.bindHover = function (that, layoutHolder) {
         layoutHolder.applier.change("hoverId", null);
     });
     that.container.on("click", hoverable, function () {
-        var id = this.dataset.rowId;
+        const id = this.dataset.rowId;
         layoutHolder.events.changeLayoutId.fire(id);
     });
 };

@@ -5,7 +5,7 @@
 }
 
 body {
-    margin: 0px;
+    margin: 0;
 }
 
 .fld-bagatelle-region-subtidal {
@@ -50,14 +50,13 @@ body {
 
 
 .fl-xetthecum-banner {
-    background: #EDEFE9;
-    margin: 0px;
+    margin: 0;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     padding-left: 1.5rem;
     font-size: 2.5rem;
     display: flex;
-    background-repeat: no-repeat;
+    background: #EDEFE9 no-repeat;
     background-size: cover;
 }
 
@@ -183,6 +182,12 @@ body {
 
 .fld-bagatelle-infoPanel {
     margin-left: 2.5rem;
+}
+
+/* Very odd that this doesn't work on the panel itself */
+.fld-bagatelle-infoPanel > * {
+    position: sticky;
+    top: 0;
 }
 
 .fld-bagatelle-infoPanel .fld-bagatelle-panel-label {
@@ -327,7 +332,7 @@ body {
 /* We've inserted the "spacer" between the real panel and the contents so it can scroll independently of the
  * autocomplete */
 #fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
-    padding: 0px;
+    padding: 0;
 }
 
 .ui-tabs .ui-tabs-panel {
@@ -339,7 +344,7 @@ body {
 }
 
 .ui-tabs {
-    padding: 0px;
+    padding: 0;
 }
 
 /** Temporary until we can use ordinary 3px border on tabs **/
@@ -373,7 +378,6 @@ body {
 .fld-bagatelle-taxonDisplay {
     margin-top: 4.4rem;
     border: none;
-    height: 1200px;
 }
 
 .fl-taxonDisplay-row {
@@ -400,7 +404,7 @@ body {
 .fl-taxonDisplay-rank .fl-taxonDisplay-key {
     font-size: 1.5rem;
     font-weight: bold;
-    padding-left: 0px;
+    padding-left: 0;
     padding-bottom: 5px;
 }
 
@@ -464,7 +468,7 @@ body {
     background: none;
     background-image: url(../img/audio.svg);
     background-size: 2.5rem;
-    background-position: center center; 
+    background-position: center center;
     background-repeat: no-repeat;
 }
 
@@ -492,7 +496,7 @@ body {
 
 
 .fld-bagatelle-taxonDisplay {
-    margin-top: 0px;
+    margin-top: 0;
     width: auto;
 }
 

@@ -42,11 +42,11 @@ hortis.tabs.findTab = function (that, tabId) {
 
 hortis.tabs.bindEvents = function (that) {
     that.container.on("tabsactivate", function (event, ui) {
-        var tabId = ui.newTab.find("a").attr("href").substring(1);
-        var tab = hortis.tabs.findTab(that, tabId);
+        const tabId = ui.newTab.find("a").attr("href").substring(1);
+        const tab = hortis.tabs.findTab(that, tabId);
         that.applier.change("selectedTab", tab);
     });
-    var initialIndex = Object.keys(that.options.tabIds).indexOf(that.model.selectedTab);
+    const initialIndex = Object.keys(that.options.tabIds).indexOf(that.model.selectedTab);
     if (initialIndex !== -1) {
         that.container.tabs("option", "active", initialIndex);
     }

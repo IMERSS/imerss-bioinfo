@@ -173,8 +173,12 @@ hortis.makeObsIdGenerator = function (idField, dataset) {
 };
 
 hortis.assignObsIds = function (rows, map, dataset) {
-    if (map.observationId) {
-        const idGenerator = hortis.makeObsIdGenerator(map.observationId, dataset);
+    const observationId = dataset.observationId || map.observationId;
+    if (observationId) {
+        // Note that leafletMapWithGrid expects datasets to be resolvable from prefix so that dataset controls can be operated
+        // This implies that we need local control over allocation of these in the fusion file and not always take it from the
+        // map file
+        const idGenerator = hortis.makeObsIdGenerator(observationId, dataset);
         rows.forEach(function (row, index) {
             const id = idGenerator(row, index);
             row.observationId = id;

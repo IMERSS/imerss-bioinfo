@@ -2,14 +2,15 @@
 
 "use strict";
 
+// noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
 
 // Workaround taken from https://github.com/Leaflet/Leaflet/issues/4745 to prevent coordinates being rounded to
 // integers during rendering
 L.Map.include({
     latLngToLayerPoint: function (latlng) {
-        var projectedPoint = this.project(L.latLng(latlng));
-        var togo = projectedPoint._subtract(this.getPixelOrigin());
+        const projectedPoint = this.project(L.latLng(latlng));
+        const togo = projectedPoint._subtract(this.getPixelOrigin());
         togo.x = fluid.roundToDecimal(togo.x, 3);
         togo.y = fluid.roundToDecimal(togo.y, 3);
         return togo;
@@ -77,15 +78,36 @@ fluid.defaults("hortis.leafletMap", {
     // heatHigh: "#ff0000",
 });
 
+fluid.defaults("hortis.leafletMapWithWE", {
+    selectors: {
+        WEOverlay: ".fld-bagatelle-we-overlay"
+    },
+    listeners: {
+        "buildMap.bindWEClick": "hortis.leafletMap.bindWEClick({that})"
+    }
+});
+
+hortis.leafletMap.bindWEClick = function (map) {
+    const overlay = map.locate("WEOverlay");
+    overlay.click(function () {
+        map.map.flyToBounds(hortis.projectBounds.Pepiowelh, {duration: 2});
+        overlay.css("opacity", 0);
+        overlay.css("pointer-events", "none");
+    });
+};
+
 hortis.leafletMap.acquireZoom = function (map) {
     map.applier.change("zoom", map.map.getZoom());
 };
 
 hortis.leafletMap.bindZoom = function (map) {
-    var leafletMap = map.map;
+    const leafletMap = map.map;
     // Note that we can't apply the change at startup because of FLUID-5498
     leafletMap.on("zoomend", function () {
         map.acquireZoom();
+    });
+    leafletMap.on("moveend", function () {
+        console.log("Bounds now ", leafletMap.getBounds());
     });
 };
 
@@ -101,6 +123,13 @@ fluid.defaults("hortis.GBIFTiles", {
     tileOptions: {
         tileUrl: "https://tile.gbif.org/3857/omt/{z}/{x}/{y}@1x.png?style=gbif-classic",
         tileAttribution: "&copy <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors, © <a href=\"https://openmaptiles.org/\">OpenMapTiles</a>, <a href=\"/citation-guidelines\">GBIF</a>"
+    }
+});
+
+fluid.defaults("hortis.MtbTiles", {
+    tileOptions: {
+        tileUrl: "http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png",
+        tileAttribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors &amp; USGS"
     }
 });
 
@@ -143,17 +172,17 @@ hortis.leafletMap.fitBounds = function (map, fitBounds) {
 };
 
 hortis.leafletMap.createTooltip = function (that, markup) {
-    var tooltip = $(markup.tooltip).appendTo(that.locate("map"));
+    const tooltip = $(markup.tooltip).appendTo(that.locate("map"));
     tooltip.hide();
     that.map.createPane("hortis-tooltip", tooltip[0]);
-    var container = that.map.getContainer();
+    const container = that.map.getContainer();
     $(container).on("click", function (event) {
         if (event.target === container) {
             that.events.clearMapSelection.fire();
         }
     });
     $(document).on("click", function (event) {
-        var closest = event.target.closest(".fld-bagatelle-nodismiss-map");
+        const closest = event.target.closest(".fld-bagatelle-nodismiss-map");
         // Mysteriously SVG paths are not in the document
         if (!closest && event.target.closest("body")) {
             that.events.clearMapSelection.fire();
@@ -165,7 +194,9 @@ hortis.leafletMap.createTooltip = function (that, markup) {
 hortis.projectBounds = {
     Galiano: [[48.855, -123.65], [49.005, -123.25]],
     Valdes: [[49.000, -123.798], [49.144, -123.504]],
-    Xetthecum: [[48.93713, -123.5110], [48.9511, -123.4980]]
+    Xetthecum: [[48.93713, -123.5110], [48.9511, -123.4980]],
+    Pepiowelh: [[48.5650, -123.1575], [48.5980, -123.1266]],
+    SalishSea: [[47.568, -124.200], [49.134, -122.059]]
 };
 
 fluid.defaults("hortis.sunburstLoaderWithMap", {
@@ -226,8 +257,8 @@ fluid.defaults("hortis.svgPatternLoader", {
 });
 
 hortis.injectSvgPatterns = function (patternText, resourceBase, container) {
-    var expanded = patternText.replace(/%resourceBase/g, resourceBase);
-    var patterns = $(expanded);
+    const expanded = patternText.replace(/%resourceBase/g, resourceBase);
+    const patterns = $(expanded);
     container.append(patterns);
 };
 
@@ -271,9 +302,9 @@ fluid.defaults("hortis.mapWithSunburst", {
 
 // Can't use modelRelay because of https://issues.fluidproject.org/browse/FLUID-6208
 hortis.mapBlockToFocusedTaxa = function (mapBlockTooltipId, map, sunburst) {
-    var togo = {};
+    const togo = {};
     if (mapBlockTooltipId) {
-        var bucket = map.toPlot[mapBlockTooltipId];
+        const bucket = map.toPlot[mapBlockTooltipId];
         if (bucket) {
             fluid.each(bucket.byTaxonId, function (obs, taxonId) {
                 togo[taxonId] = true;
@@ -281,7 +312,7 @@ hortis.mapBlockToFocusedTaxa = function (mapBlockTooltipId, map, sunburst) {
         }
     }
     // As transaction to avoid triggering hortis.updateRowFocus twice which then invokes beginZoom
-    var trans = sunburst.applier.initiate("map");
+    const trans = sunburst.applier.initiate("map");
     trans.change("rowFocus", null, "DELETE", "map");
     trans.change("rowFocus", togo, null, "map");
     trans.commit();
@@ -295,22 +326,22 @@ hortis.WGS84e2 = (hortis.WGS84a * hortis.WGS84a - hortis.WGS84b * hortis.WGS84b)
 /** Length in metres for a degree of longitude at given latitude **/
 
 hortis.longitudeLength = function (latitude) {
-    var latrad = Math.PI * latitude / 180;
-    var sinrad = Math.sin(latrad);
+    const latrad = Math.PI * latitude / 180;
+    const sinrad = Math.sin(latrad);
     return Math.PI * hortis.WGS84a * Math.cos(latrad) / (180 * Math.sqrt(1 - hortis.WGS84e2 * sinrad * sinrad));
 };
 
 /** Length in metres for a degree of latitude at given latitude **/
 
 hortis.latitudeLength = function (latitude) {
-    var latrad = Math.PI * latitude / 180;
-    var sinrad = Math.sin(latrad);
+    const latrad = Math.PI * latitude / 180;
+    const sinrad = Math.sin(latrad);
     return Math.PI * hortis.WGS84a * (1 - hortis.WGS84e2) / (180 * Math.pow(1 - hortis.WGS84e2 * sinrad * sinrad, 1.5));
 };
 
 hortis.longToLat = function (lng, lat) {
-    var longLength = hortis.longitudeLength(lat);
-    var latLength = hortis.latitudeLength(lat);
+    const longLength = hortis.longitudeLength(lat);
+    const latLength = hortis.latitudeLength(lat);
     return lng * longLength / latLength;
 };
 

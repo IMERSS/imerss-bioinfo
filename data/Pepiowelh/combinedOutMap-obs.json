@@ -1,0 +1,31 @@
+{
+    "columns": {
+        "iNaturalistTaxonName": "iNaturalist taxon name",
+        "iNaturalistTaxonId": "iNaturalist taxon ID",
+        "taxonName": "Taxon name",
+        "kingdom": "Kingdom",
+        "phylum": "Phylum",
+        "subphylum": "Subphylum",
+        "superclass": "Superclass",
+        "class": "Class",
+        "subclass": "Subclass",
+        "superorder": "Superorder",
+        "order": "Order",
+        "suborder": "Suborder",
+        "infraorder": "Infraorder",
+        "superfamily": "Superfamily",
+        "family": "Family",
+        "subfamily": "Subfamily",
+        "tribe": "Tribe",
+        "genus": "Genus",
+        "species": "Species",
+        "observationId": "observationId",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "dateObserved": "Date observed",
+        "description": "Description",
+        "commonName": "Common name",
+        "recordedBy": "Recorded by",
+        "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters"
+    }
+}

@@ -1,0 +1,28 @@
+{
+    datasets: {
+        iNat: {
+            name: "iNaturalist (2014-2023)",
+            input: "%bagatelle/data/Pepiowelh/iNaturalist_Catalogue_2023_02_24.csv",
+            map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
+            outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
+            colour: "#2C8C99",
+            observationId: "iNat:%id"
+        }
+    },
+    patches: {
+        Deprivatise: {
+            processor: "hortis.deprivatise"
+        },
+        RoundCoordinates: {
+            type: "hortis.pipe",
+            processor: "hortis.roundCoordinates",
+            places: 6
+        }
+    },
+    summarise: true,
+    applySwaps: false, // TODO: Naturally, should be an actual pipeline element
+    output: "%bagatelle/data/Pepiowelh/reintegrated.csv",
+    combinedOutMap: "%bagatelle/data/Pepiowelh/combinedOutMap.json",
+    filters: {
+    }
+}
