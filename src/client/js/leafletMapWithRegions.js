@@ -22,10 +22,14 @@ fluid.defaults("hortis.leafletMap.withRegions", {
             args: ["{that}", "{change}.value", "{change}.path"]
         }]
     },
+    // See notes about this field in leafletMap
+    selectionTransactionSource: "map",
     // legendKey: "@expand:hortis.leafletMap.renderLegendKey({that}.classes)",
     model: {
+        // From leafletMap parent grade mapBlockTooltipId: string
         // selectedRegions: classKey -> boolean
         // selectedCommunities: communityKey -> boolean
+        // TODO: apparently this field is now disused
         selectionRoute: "map" // either "map" or "taxa"
     },
     members: {

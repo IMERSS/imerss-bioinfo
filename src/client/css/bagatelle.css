@@ -435,6 +435,7 @@
 
 #fli-tab-sunburst {
     position: relative;
+    user-select: none;
 }
 
 .fld-bagatelle-checklist p {

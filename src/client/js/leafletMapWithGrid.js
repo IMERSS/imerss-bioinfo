@@ -90,7 +90,7 @@ fluid.defaults("hortis.leafletMap.withGrid", {
 });
 
 hortis.leafletMap.updateOutlineWidth = function (zoom, baseZoom, container) {
-    var relativeZoom = Math.min(1, Math.pow(2, 2 * (zoom - baseZoom)));
+    const relativeZoom = Math.min(1, Math.pow(2, 2 * (zoom - baseZoom)));
     container.style.setProperty("--bagatelle-stroke-width", 2 * relativeZoom);
 };
 
@@ -100,7 +100,7 @@ hortis.leafletMap.withGrid.addGrid = function (that) {
 };
 
 hortis.leafletMap.drawScale = function (map, squareSide) {
-    var dimText = squareSide.toFixed(0) + "m";
+    const dimText = squareSide.toFixed(0) + "m";
     map.container.find(".leaflet-bottom.leaflet-left").text("Block size: " + dimText + " x " + dimText);
 };
 
@@ -116,18 +116,18 @@ hortis.rectFromCorner = function (tl, latres, longres) {
 hortis.leafletMap.drawGrid = function (map, quantiser, datasetEnabled) {
     map.gridGroup.clearLayers();
 
-    var latres = quantiser.model.latResolution, longres = quantiser.model.longResolution;
-    var heatLow = fluid.colour.hexToArray(map.options.heatLow);
-    var toPlot = map.toPlot = {};
+    const latres = quantiser.model.latResolution, longres = quantiser.model.longResolution;
+    const heatLow = fluid.colour.hexToArray(map.options.heatLow);
+    const toPlot = map.toPlot = {};
     fluid.each(quantiser.datasets, function (dataset, datasetId) {
         if (datasetEnabled[datasetId]) {
-            var mapDataset = map.options.datasets[datasetId];
-            var heatHigh = fluid.colour.hexToArray(mapDataset.colour);
+            const mapDataset = map.options.datasets[datasetId];
+            const heatHigh = fluid.colour.hexToArray(mapDataset.colour);
             fluid.each(dataset.buckets, function (bucket, key) {
-                var prop = Math.pow(bucket.count / dataset.maxCount, 0.25);
-                var fillColour = fluid.colour.interpolate(prop, heatLow, heatHigh);
+                const prop = Math.pow(bucket.count / dataset.maxCount, 0.25);
+                const fillColour = fluid.colour.interpolate(prop, heatLow, heatHigh);
                 fluid.model.setSimple(toPlot, [key, "colours", datasetId], fillColour);
-                var plotBucket = toPlot[key];
+                const plotBucket = toPlot[key];
                 plotBucket.count = plotBucket.count || 0;
                 plotBucket.count += bucket.count;
                 plotBucket.byTaxonId = fluid.extend({}, plotBucket.byTaxonId, bucket.byTaxonId);
@@ -135,9 +135,9 @@ hortis.leafletMap.drawGrid = function (map, quantiser, datasetEnabled) {
         }
     });
     fluid.each(toPlot, function (bucket, key) {
-        var colours = fluid.values(bucket.colours);
-        var colour = fluid.colour.average(colours);
-        var topLeft = hortis.quantiser.indexToCoord(key, latres, longres);
+        const colours = fluid.values(bucket.colours);
+        const colour = fluid.colour.average(colours);
+        const topLeft = hortis.quantiser.indexToCoord(key, latres, longres);
         bucket.polygon = hortis.rectFromCorner(topLeft, latres, longres);
         bucket.Lpolygon = L.polygon(bucket.polygon, fluid.extend({}, map.options.gridStyle, {
             fillColor: fluid.colour.arrayToString(colour),
@@ -159,58 +159,49 @@ hortis.leafletMap.tooltipRow = function (map, key, value) {
     return fluid.stringTemplate(map.options.markup.tooltipRow, {key: key, value: value});
 };
 
-hortis.leafletMap.renderObsId = function (obsId) {
-    var dataset = hortis.datasetIdFromObs(obsId);
-    if (dataset === "iNat") {
-        var localId = hortis.localIdFromObs(obsId);
-        return fluid.stringTemplate("iNaturalist: <a target=\"_blank\" href=\"https://www.inaturalist.org/observations/%obsId\">%obsId</a>", {
-            obsId: localId
-        });
-    } else {
-        return obsId;
-    }
-};
-
 // TODO: Design fault, only responsible for REMOVING highlight, adding of highlight occurs in updateTooltip
 hortis.leafletMap.withGrid.updateTooltipHighlight = function (map, oldKey) {
     if (oldKey) {
-        var oldBucket = map.toPlot[oldKey];
+        const oldBucket = map.toPlot[oldKey];
         if (oldBucket) {
-            var element = oldBucket.Lpolygon.getElement();
+            const element = oldBucket.Lpolygon.getElement();
             element.classList.remove("fl-bagatelle-highlightBlock");
         }
     }
 };
 
+// It is called "tooltip" but actually it is a popup panel activated on click
 hortis.leafletMap.withGrid.updateTooltip = function (map, key) {
-    var tooltip = map.locate("tooltip");
-    var bucket = map.toPlot[key];
+    const tooltip = map.locate("tooltip");
+    const bucket = map.toPlot[key];
     if (bucket) {
-        var text = map.options.markup.tooltipHeader;
-        var dumpRow = function (key, value) {
+        let text = map.options.markup.tooltipHeader;
+        const dumpRow = function (key, value) {
             text += hortis.leafletMap.tooltipRow(map, key, value);
         };
-        var c = function (value) {
-            return value.toFixed(3);
+        const resolution = map.quantiser.model.longResolution;
+        const dp = Math.max(3, 1 - Math.log10(resolution));
+        const c = function (value) {
+            return value.toFixed(dp);
         };
         dumpRow("Observation Count", bucket.count);
         dumpRow("Species Richness", Object.values(bucket.byTaxonId).length);
-        var p = bucket.polygon;
-        var lat0 = p[0][0], lat1 = p[2][0];
-        var lng0 = p[0][1], lng1 = p[1][1];
+        const p = bucket.polygon;
+        const lat0 = p[0][0], lat1 = p[2][0];
+        const lng0 = p[0][1], lng1 = p[1][1];
         dumpRow("Latitude", c(lat0) + " to " + c(lat1));
         dumpRow("Longitude", c(lng0) + " to " + c(lng1));
         if (bucket.count < 5 && map.options.showObsListInTooltip) {
-            var obs = fluid.flatten(Object.values(bucket.byTaxonId));
-            var obsString = fluid.transform(obs, hortis.leafletMap.renderObsId).join("<br/>");
+            const obs = fluid.flatten(Object.values(bucket.byTaxonId));
+            const obsString = fluid.transform(obs, hortis.renderObsId).map(s => "iNaturalist: " + s).join("<br/>");
             dumpRow("Observations", obsString);
         }
         text += map.options.markup.tooltipFooter;
         tooltip[0].innerHTML = text;
         tooltip.show();
-        var element = bucket.Lpolygon.getElement();
+        const element = bucket.Lpolygon.getElement();
         element.classList.add("fl-bagatelle-highlightBlock");
-        var parent = element.parentNode;
+        const parent = element.parentNode;
         parent.insertBefore(element, null);
     } else {
         tooltip.hide();
@@ -271,14 +262,14 @@ hortis.quantiser.squareSide = function (baseLatitude, latResolution) {
 };
 
 hortis.quantiser.indexToCoord = function (index, latres, longres) {
-    var coords = index.split("|");
+    const coords = index.split("|");
     return [coords[0] * latres, coords[1] * longres];
 };
 
 hortis.quantiser.coordToIndex = function (coord, latres, longres) {
     if (coord) {
-        var lat = Math.floor(coord[0] / latres);
-        var lng = Math.floor(coord[1] / longres);
+        const lat = Math.floor(coord[0] / latres);
+        const lng = Math.floor(coord[1] / longres);
         return lat + "|" + lng;
     } else {
         return "null";
@@ -286,19 +277,19 @@ hortis.quantiser.coordToIndex = function (coord, latres, longres) {
 };
 
 hortis.datasetIdFromObs = function (obsId) {
-    var colpos = obsId.indexOf(":");
+    const colpos = obsId.indexOf(":");
     return obsId.substring(0, colpos);
 };
 
 hortis.localIdFromObs = function (obsId) {
-    var colpos = obsId.indexOf(":");
+    const colpos = obsId.indexOf(":");
     return obsId.substring(colpos + 1);
 };
 
 hortis.quantiser.indexObs = function (that, coord, obsId, rowId, latResolution, longResolution) {
-    var coordIndex = hortis.quantiser.coordToIndex(coord, latResolution, longResolution);
-    var datasetId = hortis.datasetIdFromObs(obsId);
-    var dataset = that.datasets[datasetId];
+    const coordIndex = hortis.quantiser.coordToIndex(coord, latResolution, longResolution);
+    const datasetId = hortis.datasetIdFromObs(obsId);
+    const dataset = that.datasets[datasetId];
     if (!dataset) {
         fluid.fail("Found observation with unknown dataset " + datasetId);
     }
@@ -306,13 +297,13 @@ hortis.quantiser.indexObs = function (that, coord, obsId, rowId, latResolution, 
     dataset.byTaxonId[rowId] = true;
     dataset.totalCount++;
     if (coordIndex !== "null") {
-        var bucket = dataset.buckets[coordIndex];
+        let bucket = dataset.buckets[coordIndex];
         if (!bucket) {
             bucket = dataset.buckets[coordIndex] = {count: 0, byTaxonId: {}};
         }
         bucket.count++;
         dataset.maxCount = Math.max(dataset.maxCount, bucket.count);
-        var bucketTaxa = bucket.byTaxonId[rowId]; // TODO: use fluid.pushArray?
+        let bucketTaxa = bucket.byTaxonId[rowId]; // TODO: use fluid.pushArray?
         if (!bucketTaxa) {
             bucketTaxa = bucket.byTaxonId[rowId] = [];
         }
@@ -321,17 +312,17 @@ hortis.quantiser.indexObs = function (that, coord, obsId, rowId, latResolution, 
 };
 
 hortis.quantiser.datasetToSummary = function (dataset, squareSide) {
-    var squareArea = squareSide * squareSide / (1000 * 1000);
+    const squareArea = squareSide * squareSide / (1000 * 1000);
     dataset.taxaCount = Object.keys(dataset.byTaxonId).length;
     dataset.area = (Object.keys(dataset.buckets).length * squareArea).toFixed(2);
 };
 
 hortis.quantiser.indexTree = function (that, datasets, latResolution, longResolution, squareSide, indexVersion) {
     that.datasets = fluid.transform(datasets, hortis.quantiserDataset);
-    for (var i = that.flatTree.length - 1; i >= 0; --i) {
-        var row = that.flatTree[i];
+    for (let i = that.flatTree.length - 1; i >= 0; --i) {
+        const row = that.flatTree[i];
         if (row.coords) {
-            var coords = JSON.parse(row.coords);
+            const coords = JSON.parse(row.coords);
             fluid.each(coords, function (coord, obsId) {
                 that.indexObs(coord, obsId, row.id, latResolution, longResolution);
             });

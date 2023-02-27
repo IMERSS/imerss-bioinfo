@@ -15,6 +15,9 @@ fs.mkdirSync(baseDir, {
     recursive: true
 });
 
+// Used during preparation of data paper to materialise an entire folder full of Google Sheets as CSV.
+// Will need to updated to use Google Sheets API directrly and not rely on a Google Drive mapping
+
 var dir = process.argv[2] || "e:/data/Google Drive/Galiano Data Paper 2021/Marine Life/Animalia";
 var source = kettle.dataSource.URL({
     url: "https://docs.google.com/spreadsheets/d/%id/export?format=csv&id=%id&gid=0",

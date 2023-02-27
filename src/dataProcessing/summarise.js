@@ -99,14 +99,14 @@ hortis.summarise.storeRow = function (that, row) {
     const coordsField = fields.coords;
     row.timestamp = Date.parse(row[fields.date]);
     const uniqueVal = row[fields.unique];
-    var existing = that.uniqueRows[uniqueVal];
+    const existing = that.uniqueRows[uniqueVal];
 
     const summaryRow = hortis.summarise.updateRowRange(that, existing, row);
 
     that.uniqueRows[uniqueVal] = summaryRow;
 
     if (that.options.summarise) {
-        var obsId = row[fields.obsId];
+        const obsId = row[fields.obsId];
         if (obsId === undefined) {
             fluid.fail("Unable to find unique observation field for row ", row);
         }

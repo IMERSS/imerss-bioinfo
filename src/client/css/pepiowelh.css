@@ -34,6 +34,10 @@
     flex: 1 1 0;
     margin-bottom: 7.5%;
     margin-top: 7.5%;
+    /* To ensure map does not peep out behind WE logo - revisit later */
+    max-height: 490px;
+    max-width: 550px
+;
 }
 
 .leaflet-tile-pane {
@@ -57,11 +61,16 @@
 .fld-bagatelle-we-overlay {
     position: absolute;
     cursor: pointer;
-    height: 110%;
-    width: 110%;
+    height: 120%;
+    width: 120%;
     background: no-repeat url("../img/Pepiowelh/BlackNoWe2-wb-bb.png");
     background-size: contain;
     z-index: 999;
     opacity: 1;
     transition: opacity 2s;
+}
+
+.fl-bagatelle-taxa {
+    /** Ensure that WE logo pops under taxa to the right */
+    z-index: 1000;
 }

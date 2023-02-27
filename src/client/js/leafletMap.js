@@ -29,10 +29,15 @@ fluid.defaults("hortis.leafletMap", {
         map: "@expand:L.map({that}.dom.map.0, {that}.options.mapOptions)"
     },
     datasets: {},
+    // Needs to be parameterised since leafletMapWithRegions and leafletMapWithGrid have different update semantics -
+    // regions is prone to an update cycle when clearing the selection and grid is not. Need to review this semantic
+    // carefully between the two variants
+    selectionTransactionSource: null,
     model: {
         mapInitialised: "@expand:{that}.events.buildMap.fire()",
         // zoom: Number (0 - whole world -> 18 - maximal zoom)
         datasetEnabled: "@expand:hortis.datasetEnabledModel({that}.options.datasets)",
+        // Terrible name which needs to be reviewed - common between map variants indicating "selected region"
         mapBlockTooltipId: null
     },
     events: {
@@ -311,10 +316,11 @@ hortis.mapBlockToFocusedTaxa = function (mapBlockTooltipId, map, sunburst) {
             });
         }
     }
+    const source = map.options.selectionTransactionSource;
     // As transaction to avoid triggering hortis.updateRowFocus twice which then invokes beginZoom
-    const trans = sunburst.applier.initiate("map");
-    trans.change("rowFocus", null, "DELETE", "map");
-    trans.change("rowFocus", togo, null, "map");
+    const trans = sunburst.applier.initiate(source);
+    trans.change("rowFocus", null, "DELETE", source);
+    trans.change("rowFocus", togo, null, source);
     trans.commit();
 };
 

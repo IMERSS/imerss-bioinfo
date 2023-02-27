@@ -29,11 +29,16 @@ fluid.defaults("hortis.sunburstLoader", {
     selectOnStartup: "",
     showObsListInTooltip: true,
     gridResolution: undefined,
+    friendlyNames: undefined,
     initialTab: "checklist",
     distributeOptions: {
         gridResolution: {
             source: "{that}.options.gridResolution",
             target: "{that hortis.quantiser}.options.model.longResolution"
+        },
+        friendlyNames: {
+            source: "{that}.options.friendlyNames",
+            target: "{that hortis.sunburst}.options.friendlyNames"
         },
         initialTab: {
             source: "{that}.options.initialTab",
@@ -280,6 +285,8 @@ fluid.defaults("hortis.sunburst", {
     parsedColours: "@expand:hortis.parseColours({that}.options.colours)",
     colourCount: "undocumentedCount",
     culturalValues: true,
+    // Use public-friendly names such as "species" rather than "taxon"
+    friendlyNames: false,
     suppressObsAuthors: false,
     model: {
         scale: {
@@ -505,11 +512,17 @@ hortis.taxonDisplayLookup = {
     taxonPicDescription: "Taxon Picture Description:"
 };
 
+hortis.friendlyDisplayLookup = {
+    ...hortis.taxonDisplayLookup,
+    iNaturalistTaxonName: "Species:"
+};
+
 hortis.commonFields = ["commonName", "wikipediaSummary"];
 
-hortis.dumpRow = function (key, value, markup, extraClazz, valueClazz) {
+hortis.dumpRow = function (key, value, markup, extraClazz, valueClazz, options) {
     if (value) {
-        const keyName = key ? (hortis.taxonDisplayLookup[key] || hortis.capitalize(key)) : "";
+        const toLook = options?.friendlyNames ? hortis.friendlyDisplayLookup : hortis.taxonDisplayLookup;
+        const keyName = key ? (toLook[key] || hortis.capitalize(key)) : "";
         const clazz = "fl-taxonDisplay-row " + (extraClazz || "");
         valueClazz = valueClazz || "";
         return fluid.stringTemplate(markup.taxonDisplayRow, {
@@ -541,9 +554,25 @@ hortis.sourceTable = { // TODO: get this from marmalised.json but the names curr
     Hunterston: "Hunterston Farms BioBlitz 2010"
 };
 
+/** Decode data collection from an observation id from a colon-separated prefix
+ * @param {String} obsId - The observation id to be decoded
+ * @return {String|Null} The observation's collection if the observation id was qualified with a prefix, else null
+ */
 hortis.sourceFromId = function (obsId) {
     const colpos = obsId ? obsId.indexOf(":") : -1;
     return colpos === -1 ? null : obsId.substring(0, colpos);
+};
+
+hortis.renderObsId = function (obsId) {
+    const dataset = hortis.datasetIdFromObs(obsId);
+    if (dataset === "iNat") {
+        const localId = hortis.localIdFromObs(obsId);
+        return fluid.stringTemplate("<a target=\"_blank\" href=\"https://www.inaturalist.org/observations/%obsId\">%obsId</a>", {
+            obsId: localId
+        });
+    } else {
+        return obsId;
+    }
 };
 
 // Render a set of fields derived from an "observation range" - group of fields prefixed by "first" and "last"
@@ -558,13 +587,19 @@ hortis.renderObsBound = function (row, prefix, markup, options) {
 
         const row1 = hortis.dumpRow(capPrefix + (prefix === "since" ? " Observed:" : " Reported:"), value, markup);
 
+        const obsId = row[prefix + "ObservationId"];
+
         const collection = row[prefix + "Collection"];
         const obsIdCollection = hortis.sourceFromId(row[prefix + "ObservationId"]);
         const renderedCollection = hortis.sourceTable[obsIdCollection || collection] || collection;
 
-        const source = renderedCollection + (catalogueNumber ? " (" + catalogueNumber + ")" : "");
+        let source = renderedCollection + (catalogueNumber ? " (" + catalogueNumber + ")" : "");
+        if (obsId && obsIdCollection === "iNat") {
+            source += " observation " + hortis.renderObsId(obsId);
+        }
 
         const row2 = hortis.dumpRow("Source:", source, markup);
+
         return row1 + row2;
     } else {
         return "";
@@ -629,13 +664,13 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         return null;
     }
     let togo = markup.taxonDisplayHeader;
-    const dumpRow = function (keyName, value, extraClazz) {
+    const dumpRow = function (keyName, value, extraClazz, options) {
         if (keyName === "wikipediaSummary" && value) {
             const row1 = hortis.dumpRow("Wikipedia Summary", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header fl-taxonDisplay-runon-header");
             const row2 = hortis.dumpRow("", value, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder", "fl-taxonDisplay-wikipediaSummary");
             togo += row1 + row2;
         } else {
-            togo += hortis.dumpRow(keyName, value, markup, extraClazz);
+            togo += hortis.dumpRow(keyName, value, markup, extraClazz, undefined, options);
         }
     };
     const dumpImage = function (keyName, url, taxonId) {
@@ -672,9 +707,11 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
             dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage, row.iNaturalistTaxonId);
         }
         if (row.species) {
-            dumpRow("Species:", row.species + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank");
-        } else {
-            dumpRow("iNaturalistTaxonName", row.iNaturalistTaxonName);
+            // Used to read:
+            // dumpRow("Species:", row.species + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank");
+            // "species" now just holdes raw species name. In the long term we should support our own normalised species name
+            // composed of taxon and infrataxon name but this is at least now complete and agrees with what is shown in the tooltip
+            dumpRow("iNaturalistTaxonName", row.iNaturalistTaxonName + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank", options);
         }
         if (row.hulqName) { // wot no polymorphism?
             togo += hortis.dumpHulqName(row, markup);
@@ -1080,6 +1117,7 @@ hortis.updateRowFocus = function (that, rowFocus, transaction) {
     if (target.leftIndex !== undefined) { // Avoid trying to render before onCreate
         // We signal this to regions - need to avoid mutual action of resetting map and taxa, and we assume that
         // map is the only source of updateRowFocus
+        // TODO: Used to read || !focusAll - try to recall why, perhaps wrt. Xetthecum
         if (!transaction.fullSources.map || !focusAll) {
             that.events.changeLayoutId.fire(target.id, "rowFocus");
         }

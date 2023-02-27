@@ -17,6 +17,8 @@ var hortis = fluid.registerNamespace("hortis");
 var taxonResolveMap = hortis.readJSONSync("data/TaxonResolution-map.json", "reading taxon resolution map");
 var swaps = hortis.readJSONSync("data/taxon-swaps.json5", "reading taxon swaps file");
 
+// Long disused script to output a taxon-swaps JSON5 file given a CSV taxon resolution file
+
 hortis.copyCSVProps = function (props, target, source) {
     props.forEach(function (prop) {
         if (fluid.isValue(source[prop]) && source[prop] !== "") {
