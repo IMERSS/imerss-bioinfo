@@ -1,0 +1,9 @@
+First round of exports GBIF_2022_Plantae_DwC taken from 
+adfsimon-bioinfo/tree/main/Howe_Sound/4_consolidate_records/Records/Raw/GBIF_2022_Plantae.csv
+
+Tracheophyta_review_summary_2022-12-14 taken from 
+adfsimon-bioinfo/Howe_Sound/2_review/Plantae_et_Chromista/vascular_plants/summaries/Tracheophyta_review_summary_2022-12-14.csv
+
+Second round 
+
+adfsimon-bioinfo/blob/main/Howe_Sound/4_consolidate_records/Records/Digitized/DwC/AHSBR_CNABH_data_spatial_query_2023-03-03_DwC.csv

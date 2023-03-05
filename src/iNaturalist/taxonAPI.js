@@ -443,11 +443,14 @@ hortis.iNat.getRanks = async function (id, rankTarget, byIdSource, fields) {
     // console.log("Got ranks ", Object.keys(indexed));
     hortis.ranks.forEach(function (lowRank) {
         const rank = hortis.capitalize(lowRank);
-        const targetRank = fields ? lowRank : rank;
+        let targetRank = fields ? lowRank : rank;
+        if (lowRank in rankTarget) {
+            targetRank = lowRank;
+        }
         if (fields && fields.includes(targetRank) || targetRank in rankTarget) {
             const thisRank = indexed[rank];
             if (thisRank && rankTarget[targetRank] !== thisRank) {
-                // console.log("Replacing " + targetRank + " " + rankTarget[targetRank] + " with " + thisRank);
+                console.log("Replacing " + targetRank + " " + rankTarget[targetRank] + " with " + thisRank);
             }
             rankTarget[targetRank] = thisRank || "";
         }

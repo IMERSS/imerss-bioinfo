@@ -23,7 +23,8 @@ const outputFile = parsedArgs.o || "assigned.csv";
 // fluid.module.resolvePath("%bagatelle/data/Galiano 2022/Tracheophyta_review_summary_reviewed_2022-10-29.csv")
 // fluid.module.resolvePath("%bagatelle/data/Squamish/Tracheophyta_review_summary_2022-12-14.csv")
 // fluid.module.resolvePath("%bagatelle/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv")
-const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%bagatelle/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv");
+// fluid.module.resolvePath("%bagatelle/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv")
+const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%bagatelle/data/Howe Sound/AHSBR_CNALH_data_spatial_query_2023-03-03_DwC.csv");
 
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile
@@ -72,6 +73,17 @@ hortis.applyName = async function (row, taxon) {
     }
 };
 
+hortis.unscrewGBIFName = function (name) {
+    const words = name.split(" ");
+    let outWords = words;
+    if (words.length > 2) {
+        if (words[3] !== "var." && words[3] !== "subsp.") {
+            outWords = words.slice(0, 2);
+        }
+    }
+    return outWords.join(" ");
+};
+
 Promise.all([reader.completionPromise, source.events.onCreate]).then(async function () {
     const mapped = [];
     for (let i = 0; i < reader.rows.length; ++i) {
@@ -82,7 +94,7 @@ Promise.all([reader.completionPromise, source.events.onCreate]).then(async funct
             await hortis.applyName(row, row.infraTaxonName);
         }
         if (!row.infraTaxonName || row["Name Status"] === "unknown") {
-            await hortis.applyName(row, row.taxonName); // taxonName for Dunwiddie data
+            await hortis.applyName(row, hortis.unscrewGBIFName(row.scientificName)); // taxonName for Dunwiddie data, scientificName for DwC
         }
 
         mapped.push(row);

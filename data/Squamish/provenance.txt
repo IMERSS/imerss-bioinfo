@@ -1,5 +1,3 @@
 2021 A´tl’ka7tsem-Howe Sound Biosphere Region Dataset taken from http://cloud.squamishenvironment.ca:1080/products/files/doceditor.aspx?fileid=4274&doc=RlRVRDlGZ29XRjBCTzBSRXpaaUtDbHhZYkE2OHhhMnUzRHpwWVBBVzU5RT0_IjQyNzQi0 linked from https://www.squamishenvironment.ca/projects/biodiversity-squamish/ circulated in email of 2022/4/24 from judithhholm@gmail.com
 
 More recent exports were taken from adfsimon-bioinfo/Howe_Sound/4_consolidate_records/Records/2021 Átl’ka7tsem-Howe Sound Biosphere Region Dataset.xlsx on 27/11/22 but this spreadsheet is now gone.
-
-Most recent exports taken from adfsimon-bioinfo/Howe_Sound/2_review/Plantae_et_Chromista/vascular_plants/summaries/Tracheophyta_review_summary_2022-12-14.csv
