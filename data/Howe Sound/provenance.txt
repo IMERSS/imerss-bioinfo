@@ -7,3 +7,7 @@ adfsimon-bioinfo/Howe_Sound/2_review/Plantae_et_Chromista/vascular_plants/summar
 Second round 
 
 adfsimon-bioinfo/blob/main/Howe_Sound/4_consolidate_records/Records/Digitized/DwC/AHSBR_CNABH_data_spatial_query_2023-03-03_DwC.csv
+
+BEC vignette taken from 
+
+IMERSS/howe-sound-mapping/blob/main/tabular_data/1km_gridded_vascular_plant_records_2022-12-24_WGS84.csv

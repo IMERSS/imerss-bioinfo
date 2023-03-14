@@ -3,7 +3,7 @@
 "use strict";
 
 // This script is now obsoleted by the new-style "taxonomise.js" using taxonAPI.js to cache results within the SQLite database
-// %bagatelle/data/iNaturalist/taxa.db/taxa.sqlite3 - will be kept for a while for reference purposes
+// %imerss-bioinfo/data/iNaturalist/taxa.db/taxa.sqlite3 - will be kept for a while for reference purposes
 
 const fluid = require("infusion");
 const fs = require("fs");

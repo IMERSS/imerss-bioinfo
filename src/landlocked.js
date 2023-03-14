@@ -4,7 +4,7 @@
 
 var fluid = require("infusion");
 var minimist = require("minimist");
-fluid.require("%bagatelle");
+fluid.require("%imerss-bioinfo");
 
 require("./utils/utils.js");
 require("./dataProcessing/readJSON.js");
@@ -19,16 +19,16 @@ var hortis = fluid.registerNamespace("hortis");
 
 fluid.setLogging(true);
 
-fluid.loadInContext(fluid.module.resolvePath("%bagatelle/data/Galiano/Galiano_map_0.js"), true);  // produces json_Galiano_map_0
-fluid.loadInContext(fluid.module.resolvePath("%bagatelle/data/Xetthecum/Site_class_4.js"), true); // produces json_Site_Class_4
-fluid.loadInContext(fluid.module.resolvePath("%bagatelle/data/Xetthecum/Trincomali_2.js"), true); // produces json_Trincomali_2
-// var xetthecum_boundary = hortis.readJSONSync(fluid.module.resolvePath("%bagatelle/data/Xetthecum/Xetthecum_Project_Boundary_WGS_84.geojson"), "Xetthecum boundary");
+fluid.loadInContext(fluid.module.resolvePath("%imerss-bioinfo/data/Galiano/Galiano_map_0.js"), true);  // produces json_Galiano_map_0
+fluid.loadInContext(fluid.module.resolvePath("%imerss-bioinfo/data/Xetthecum/Site_class_4.js"), true); // produces json_Site_Class_4
+fluid.loadInContext(fluid.module.resolvePath("%imerss-bioinfo/data/Xetthecum/Trincomali_2.js"), true); // produces json_Trincomali_2
+// var xetthecum_boundary = hortis.readJSONSync(fluid.module.resolvePath("%imerss-bioinfo/data/Xetthecum/Xetthecum_Project_Boundary_WGS_84.geojson"), "Xetthecum boundary");
 
 var parsedArgs = minimist(process.argv.slice(2));
 
 var outputFile = parsedArgs.o || "landlocked.csv";
-var inputFile = parsedArgs._[0] || "%bagatelle/data/dataPaper/reintegrated-obs.csv";
-var mapFile = parsedArgs.map || "%bagatelle/data/dataPaper/combinedOutMap-obs.json";
+var inputFile = parsedArgs._[0] || "%imerss-bioinfo/data/dataPaper/reintegrated-obs.csv";
+var mapFile = parsedArgs.map || "%imerss-bioinfo/data/dataPaper/combinedOutMap-obs.json";
 
 var map = hortis.readJSONSync(fluid.module.resolvePath(mapFile), "reading map file");
 

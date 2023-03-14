@@ -1,5 +1,5 @@
 {
-    outputFile: "%bagatelle/data/Valdes/Life.json.lz4",
-    inputFiles: ["%bagatelle/data/Valdes/reintegrated.csv"],
-    mapFile: "%bagatelle/data/Valdes/combinedOutMap.json",
+    outputFile: "%imerss-bioinfo/data/Valdes/Life.json.lz4",
+    inputFiles: ["%imerss-bioinfo/data/Valdes/reintegrated.csv"],
+    mapFile: "%imerss-bioinfo/data/Valdes/combinedOutMap.json",
 }

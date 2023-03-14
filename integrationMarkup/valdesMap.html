@@ -1,17 +1,17 @@
-<link rel="stylesheet" type="text/css" href="/bagatelle-new/css/bagatelle-all.css" />
+<link rel="stylesheet" type="text/css" href="/imerss-new/css/imerss-viz-all.css" />
 
-<div class="fl-bagatelle-container">
+<div class="fl-imerss-container">
 </div>
-<script src="/bagatelle-new/js/bagatelle-all.js"></script>
+<script src="/imerss-new/js/imerss-viz-all.js"></script>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 <script>
 
-hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
+hortis.sunburstLoaderWithMap(".fl-imerss-container", {
                 mapGrades: ["hortis.streetmapTiles"],
-                resourceBase: "/bagatelle-new",
+                resourceBase: "/imerss-new",
                 renderMarkup: true,
                 colourCount: "observationCount",
                 mapBounds: hortis.projectBounds.Valdes,
                 phyloMap: "%resourceBase/json/kingdomPhyloMap.json",
-                vizFile: "/bagatelle-new/data/Valdes/Life.json.lz4"});
+                vizFile: "/imerss-new/data/Valdes/Life.json.lz4"});
 </script>

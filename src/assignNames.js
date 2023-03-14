@@ -4,7 +4,7 @@
 
 const fluid = require("infusion");
 const minimist = require("minimist");
-fluid.require("%bagatelle");
+fluid.require("%imerss-bioinfo");
 
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
@@ -19,12 +19,12 @@ fluid.setLogging(true);
 const parsedArgs = minimist(process.argv.slice(2));
 
 const outputFile = parsedArgs.o || "assigned.csv";
-// fluid.module.resolvePath("%bagatelle/data/Comprehensive Lists/San_Juan_Dunwiddie_List.csv");
-// fluid.module.resolvePath("%bagatelle/data/Galiano 2022/Tracheophyta_review_summary_reviewed_2022-10-29.csv")
-// fluid.module.resolvePath("%bagatelle/data/Squamish/Tracheophyta_review_summary_2022-12-14.csv")
-// fluid.module.resolvePath("%bagatelle/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv")
-// fluid.module.resolvePath("%bagatelle/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv")
-const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%bagatelle/data/Howe Sound/AHSBR_CNALH_data_spatial_query_2023-03-03_DwC.csv");
+// fluid.module.resolvePath("%imerss-bioinfo/data/Comprehensive Lists/San_Juan_Dunwiddie_List.csv");
+// fluid.module.resolvePath("%imerss-bioinfo/data/Galiano 2022/Tracheophyta_review_summary_reviewed_2022-10-29.csv")
+// fluid.module.resolvePath("%imerss-bioinfo/data/Squamish/Tracheophyta_review_summary_2022-12-14.csv")
+// fluid.module.resolvePath("%imerss-bioinfo/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv")
+// fluid.module.resolvePath("%imerss-bioinfo/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv")
+const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/Howe Sound/AHSBR_CNALH_data_spatial_query_2023-03-03_DwC.csv");
 
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile

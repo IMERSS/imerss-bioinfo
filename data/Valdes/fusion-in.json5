@@ -2,16 +2,16 @@
     datasets: {
         summary: {
             name: "Valdes Island Curated Summary",
-            input: "%bagatelle/data/Valdes/VIC_Biodiversity_Data_Summary - 2021_10_27.csv",
-            map: "%bagatelle/data/Valdes/summary-map.json",
-            outMap: "%bagatelle/data/Valdes/summary-out-map.json",
+            input: "%imerss-bioinfo/data/Valdes/VIC_Biodiversity_Data_Summary - 2021_10_27.csv",
+            map: "%imerss-bioinfo/data/Valdes/summary-map.json",
+            outMap: "%imerss-bioinfo/data/Valdes/summary-out-map.json",
             colour: "#931362"
         }
     },
     summarise: false,
     applySwaps: false, // TODO: Naturally, should be an actual pipeline element
-    output: "%bagatelle/data/Valdes/reintegrated-in.csv",
-    combinedOutMap: "%bagatelle/data/Valdes/combinedOutMap-in.json",
+    output: "%imerss-bioinfo/data/Valdes/reintegrated-in.csv",
+    combinedOutMap: "%imerss-bioinfo/data/Valdes/combinedOutMap-in.json",
     filters: {
     }
 }

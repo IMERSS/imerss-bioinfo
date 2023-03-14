@@ -12,10 +12,10 @@ const buildIndex = {
         "jquery.js"
     ],
     localSource: [
-        "src/client/css/bagatelle.css",
+        "src/client/css/imerss-viz.css",
         "src/auxBuild/restoreJQuery.js",
         "src/lib/lz4.js",
-        "src/client/js/bagatelle.js",
+        "src/client/js/imerss-viz.js",
         "src/client/js/autocomplete.js",
         "src/client/js/colour.js",
         "src/client/js/leafletMap.js",
@@ -42,8 +42,8 @@ const buildIndex = {
         src: "src/client/html",
         dest: "docs/html"
     }, {
-        src: "src/client/css/bagatelle-wp-overrides.css",
-        dest: "docs/css/bagatelle-wp-overrides.css"
+        src: "src/client/css/imerss-viz-wp-overrides.css",
+        dest: "docs/css/imerss-viz-wp-overrides.css"
     }, {
         src: "src/client/css/xetthecum.css",
         dest: "docs/css/xetthecum.css"
@@ -163,21 +163,21 @@ const buildFromFiles = function (buildIndex, nodeFiles) {
     const promise = terser.minify(fullJsHash, {
         mangle: false,
         sourceMap: {
-            filename: "bagatelle.js",
-            url: "bagatelle.js.map"
+            filename: "imerss-viz.js",
+            url: "imerss-viz.js.map"
         }
     });
     promise.then(function (minified) {
         fs.removeSync("docs");
         fs.ensureDirSync("docs/js");
-        fs.writeFileSync("docs/js/bagatelle-all.js", minified.code, "utf8");
-        fs.writeFileSync("docs/js/bagatelle-all.js.map", minified.map);
+        fs.writeFileSync("docs/js/imerss-viz-all.js", minified.code, "utf8");
+        fs.writeFileSync("docs/js/imerss-viz-all.js.map", minified.map);
 
         const cssHash = filesToContentHash(allFiles, ".css");
         const cssConcat = String.prototype.concat.apply("", Object.values(cssHash));
 
         fs.ensureDirSync("docs/css");
-        fs.writeFileSync("docs/css/bagatelle-all.css", cssConcat);
+        fs.writeFileSync("docs/css/imerss-viz-all.css", cssConcat);
         buildIndex.copy.forEach(function (oneCopy) {
             fs.copySync(oneCopy.src, oneCopy.dest);
         });

@@ -41,58 +41,58 @@
     "datasets": {
         "PMLS": {
             "name": "Pacific Marine Life Surveys (1968-2019)",
-            "input": "E:/Source/gits/bagatelle/data/Galiano PMLS/PMLS_Records_Galiano_2021-07-27-dataPaper.csv",
-            "map": "E:/Source/gits/bagatelle/data/Galiano PMLS/PMLS-map.json",
-            "outMap": "E:/Source/gits/bagatelle/data/Galiano PMLS/PMLS-out-map.json",
+            "input": "E:/Source/gits/imerss/data/Galiano PMLS/PMLS_Records_Galiano_2021-07-27-dataPaper.csv",
+            "map": "E:/Source/gits/imerss/data/Galiano PMLS/PMLS-map.json",
+            "outMap": "E:/Source/gits/imerss/data/Galiano PMLS/PMLS-out-map.json",
             "colour": "#931362"
         },
         "iNat": {
             "name": "iNaturalist (2005-2021)",
-            "input": "E:/Source/gits/bagatelle/data/iNaturalist/Galiano_Catalogue_Animalia_2021_08_12.csv",
-            "map": "E:/Source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
-            "outMap": "E:/Source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
+            "input": "E:/Source/gits/imerss/data/iNaturalist/Galiano_Catalogue_Animalia_2021_08_12.csv",
+            "map": "E:/Source/gits/imerss/data/iNaturalist/iNaturalist-obs-map-new.json",
+            "outMap": "E:/Source/gits/imerss/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99"
         },
         "RBCM": {
             "name": "Royal British Columbia Museum (1893-2011)",
-            "input": "E:/Source/gits/bagatelle/data/RBCM/RBCM_GBIF_records_intersected_with_Galiano_polygon_2021_03_08_unscrewed.csv",
-            "map": "E:/Source/gits/bagatelle/data/RBCM/RBCM-map.json",
-            "outMap": "E:/Source/gits/bagatelle/data/RBCM/RBCM-out-map.json",
+            "input": "E:/Source/gits/imerss/data/RBCM/RBCM_GBIF_records_intersected_with_Galiano_polygon_2021_03_08_unscrewed.csv",
+            "map": "E:/Source/gits/imerss/data/RBCM/RBCM-map.json",
+            "outMap": "E:/Source/gits/imerss/data/RBCM/RBCM-out-map.json",
             "colour": "#29a329"
         },
         "BCCSN": {
             "name": "British Columbia Cetacean Sightings Network (2001-2020)",
-            "input": "E:/Source/gits/bagatelle/data/BCCSN/BC_Cetacean_Sightings_Network_galiano_biodiversity_catalogue_2021_08_25_withTaxa.csv",
-            "map": "E:/Source/gits/bagatelle/data/BCCSN/BCCSN-map.json",
-            "outMap": "E:/Source/gits/bagatelle/data/BCCSN/BCCSN-out-map.json",
+            "input": "E:/Source/gits/imerss/data/BCCSN/BC_Cetacean_Sightings_Network_galiano_biodiversity_catalogue_2021_08_25_withTaxa.csv",
+            "map": "E:/Source/gits/imerss/data/BCCSN/BCCSN-map.json",
+            "outMap": "E:/Source/gits/imerss/data/BCCSN/BCCSN-out-map.json",
             "colour": "#55a329"
         },
         "CMN": {
             "name": "Canadian Museum of Nature (1928-1982)",
-            "input": "E:/Source/gits/bagatelle/data/CMN/CMN_Galiano_Island_Marine_fauna_2020_09_11.csv",
-            "map": "E:/Source/gits/bagatelle/data/CMN/CMN-map.json",
-            "outMap": "E:/Source/gits/bagatelle/data/CMN/CMN-out-map.json",
+            "input": "E:/Source/gits/imerss/data/CMN/CMN_Galiano_Island_Marine_fauna_2020_09_11.csv",
+            "map": "E:/Source/gits/imerss/data/CMN/CMN-map.json",
+            "outMap": "E:/Source/gits/imerss/data/CMN/CMN-out-map.json",
             "colour": "#a7a329"
         },
         "Gal-Salm": {
             "name": "Erickson (2000)",
-            "input": "E:/Source/gits/bagatelle/data/Galiano Salmonids/Galiano_Salmonids_Erickson_2000_dated_2021-04-21.csv",
-            "map": "E:/Source/gits/bagatelle/data/Galiano Salmonids/Gal-Salm-map.json",
-            "outMap": "E:/Source/gits/bagatelle/data/Galiano Salmonids/Gal-Salm-out-map.json",
+            "input": "E:/Source/gits/imerss/data/Galiano Salmonids/Galiano_Salmonids_Erickson_2000_dated_2021-04-21.csv",
+            "map": "E:/Source/gits/imerss/data/Galiano Salmonids/Gal-Salm-map.json",
+            "outMap": "E:/Source/gits/imerss/data/Galiano Salmonids/Gal-Salm-out-map.json",
             "colour": "#c7a329"
         },
         "CHU2010": {
             "name": "Chu and Leys (2010)",
-            "input": "E:/Source/gits/bagatelle/data/Chu/CHU_2010_ROV_Marine_occurrence_records_2020_10_07_unscrambled.csv",
-            "map": "E:/Source/gits/bagatelle/data/Chu/Chu-map.json",
-            "outMap": "E:/Source/gits/bagatelle/data/Chu/Chu-out-map.json",
+            "input": "E:/Source/gits/imerss/data/Chu/CHU_2010_ROV_Marine_occurrence_records_2020_10_07_unscrambled.csv",
+            "map": "E:/Source/gits/imerss/data/Chu/Chu-map.json",
+            "outMap": "E:/Source/gits/imerss/data/Chu/Chu-out-map.json",
             "colour": "#f7a329"
         },
         "CHU2012": {
             "name": "Chu and Leys (2012)",
-            "input": "E:/Source/gits/bagatelle/data/Chu/CHU_2012_dorids_catalogue_2020_10_08.csv",
-            "map": "E:/Source/gits/bagatelle/data/Chu/Chu-2012-map.json",
-            "outMap": "E:/Source/gits/bagatelle/data/Chu/Chu-2012-out-map.json",
+            "input": "E:/Source/gits/imerss/data/Chu/CHU_2012_dorids_catalogue_2020_10_08.csv",
+            "map": "E:/Source/gits/imerss/data/Chu/Chu-2012-map.json",
+            "outMap": "E:/Source/gits/imerss/data/Chu/Chu-2012-out-map.json",
             "colour": "#f7a329"
         }
     }

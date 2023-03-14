@@ -1,49 +1,49 @@
 :root {
-  --bagatelle-map-width: 500px;
-  --bagatelle-eco-colour: #DEE0B0;
-  --bagatelle-map-colour: #DDE8C8; 
+  --imerss-map-width: 500px;
+  --imerss-eco-colour: #DEE0B0;
+  --imerss-map-colour: #DDE8C8;
 }
 
 body {
     margin: 0;
 }
 
-.fld-bagatelle-region-subtidal {
+.fld-imerss-region-subtidal {
     fill: url(#marine);
     background-repeat: repeat;
 }
 
-.fld-bagatelle-region-lake-laughlin-lake {
+.fld-imerss-region-lake-laughlin-lake {
     fill: url(#lacustrine);
     background-repeat: repeat;
 }
 
-.fld-bagatelle-region-wetland {
+.fld-imerss-region-wetland {
     fill: url(#wetland);
     background-repeat: repeat;
 }
 
-.fld-bagatelle-region-clearcut {
+.fld-imerss-region-clearcut {
     fill: url(#recently-harvested);
     background-repeat: repeat;
 }
 
-.fld-bagatelle-region-pole-sapling {
+.fld-imerss-region-pole-sapling {
     fill: url(#pole-sapling);
     background-repeat: repeat;
 }
 
-.fld-bagatelle-region-young-forest {
+.fld-imerss-region-young-forest {
     fill: url(#young-forest);
     background-repeat: repeat;
 }
 
-.fld-bagatelle-region-mature-forest {
+.fld-imerss-region-mature-forest {
     fill: url(#mature-forest);
     background-repeat: repeat;
 }
 
-.fld-bagatelle-region-woodland {
+.fld-imerss-region-woodland {
     fill: url(#woodland);
     background-repeat: repeat;
 }
@@ -60,151 +60,151 @@ body {
     background-size: cover;
 }
 
-.fld-bagatelle-banner-marine {
+.fld-imerss-banner-marine {
     background-image: url(../img/Xetthecum/Marine_banner.jpg);
 }
 
-.fld-bagatelle-banner-freshwater {
+.fld-imerss-banner-freshwater {
     background-image: url(../img/Xetthecum/Freshwater_banner.jpg);
     color: white;
 }
 
-.fld-bagatelle-banner-forests {
+.fld-imerss-banner-forests {
     background-image: url(../img/Xetthecum/Forests_banner.jpg);
     color: white;
 }
 
-.fld-bagatelle-banner-woodlands-and-rock-outcrops {
+.fld-imerss-banner-woodlands-and-rock-outcrops {
     background-image: url(../img/Xetthecum/Woodland_banner.jpg);
     color: white;
 }
 
-.fld-bagatelle-banner-anthropogenic {
+.fld-imerss-banner-anthropogenic {
     background-image: url(../img/Xetthecum/Anthropogenic_banner.jpg);
 }
 
 
-.fld-bagatelle-class-image-shoreline {
+.fld-imerss-class-image-shoreline {
     background-image: url(../img/Xetthecum/Intertidal.jpg);
 }
 
-.fld-bagatelle-class-image-subtidal {
+.fld-imerss-class-image-subtidal {
     background-image: url(../img/Xetthecum/Subtidal.jpg);
 }
 
-.fld-bagatelle-class-image-pole-sapling {
+.fld-imerss-class-image-pole-sapling {
     background-image: url(../img/Xetthecum/Conifer_Pole_Sapling.jpg);
 }
 
-.fld-bagatelle-class-image-mature-forest {
+.fld-imerss-class-image-mature-forest {
     background-image: url(../img/Xetthecum/Mature_Conifer_Forest.jpg);
 }
 
-.fld-bagatelle-class-image-young-forest {
+.fld-imerss-class-image-young-forest {
     background-image: url(../img/Xetthecum/Young_Conifer_Forest.jpg);
 }
 
-.fld-bagatelle-class-image-wetland {
+.fld-imerss-class-image-wetland {
     background-image: url(../img/Xetthecum/Wetland.jpg);
 }
 
-.fld-bagatelle-class-image-laughlin-lake {
+.fld-imerss-class-image-laughlin-lake {
     background-image: url(../img/Xetthecum/Laughlin_Lake.jpg);
 }
 
-.fld-bagatelle-class-image-greig-creek {
+.fld-imerss-class-image-greig-creek {
     background-image: url(../img/Xetthecum/Greig_Creek.jpg);
 }
 
-.fld-bagatelle-class-image-riparian {
+.fld-imerss-class-image-riparian {
     background-image: url(../img/Xetthecum/Riparian.jpg);
 }
 
-.fld-bagatelle-class-image-coastal-bluff {
+.fld-imerss-class-image-coastal-bluff {
     background-image: url(../img/Xetthecum/Coastal_Bluffs.jpg);
 }
 
-.fld-bagatelle-class-image-woodland {
+.fld-imerss-class-image-woodland {
     background-image: url(../img/Xetthecum/Woodland.jpg);
 }
 
-.fld-bagatelle-class-image-agricultural {
+.fld-imerss-class-image-agricultural {
     background-image: url(../img/Xetthecum/Agricultural.jpg);
 }
 
-.fld-bagatelle-class-image-developed {
+.fld-imerss-class-image-developed {
     background-image: url(../img/Xetthecum/Developed.jpg);
 }
 
-.fld-bagatelle-class-image-rural {
+.fld-imerss-class-image-rural {
     background-image: url(../img/Xetthecum/Rural.jpg);
 }
 
-.fld-bagatelle-class-image-road {
+.fld-imerss-class-image-road {
     background-image: url(../img/Xetthecum/Porlier_Pass_Road.jpg);
 }
 
-.fld-bagatelle-class-image-dock {
+.fld-imerss-class-image-dock {
     background-image: url(../img/Xetthecum/Dock.jpg);
 }
 
-.fld-bagatelle-class-image-eelgrass-beds {
+.fld-imerss-class-image-eelgrass-beds {
     background-image: url(../img/Xetthecum/Eelgrass.jpg);
 }
 
 
-.fl-bagatelle-container {
+.fl-imerss-container {
     margin: 1.5rem 0.5rem 0.5rem 0.5rem;
 }
 
-.fld-bagatelle-map-holder {
-    background: var(--bagatelle-map-colour);
+.fld-imerss-map-holder {
+    background: var(--imerss-map-colour);
 }
 
-.fl-bagatelle-active-panel {
+.fl-imerss-active-panel {
     border: 3px solid #4F5346;
 }
 
-.fl-bagatelle-map-panel {
+.fl-imerss-map-panel {
     padding: 1rem 0rem 2rem 2rem;
 }
 
-.fl-bagatelle-map-panel .fld-bagatelle-panel-label {
+.fl-imerss-map-panel .fld-imerss-panel-label {
     position: unset;
     padding-bottom: 1.5rem;
 }
 
-.fld-bagatelle-map-outer-panel {
-    background: var(--bagatelle-map-colour);
+.fld-imerss-map-outer-panel {
+    background: var(--imerss-map-colour);
     padding: 1rem 1rem 1rem 1rem;
     margin: 1px; /* Fight strange layout bug on Chrome 76 */
 }
 
-.fld-bagatelle-infoPanel {
+.fld-imerss-infoPanel {
     margin-left: 2.5rem;
 }
 
 /* Very odd that this doesn't work on the panel itself */
-.fld-bagatelle-infoPanel > * {
+.fld-imerss-infoPanel > * {
     position: sticky;
     top: 0;
 }
 
-.fld-bagatelle-infoPanel .fld-bagatelle-panel-label {
+.fld-imerss-infoPanel .fld-imerss-panel-label {
     padding: 1rem 2rem 0.5rem 1rem;
 }
 
-.fld-bagatelle-map-community {
+.fld-imerss-map-community {
     font-size: 1.7rem;
     padding-bottom: 1rem;
 }
 
-.fld-bagatelle-map-class {
+.fld-imerss-map-class {
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
-.fld-bagatelle-map-panel-block {
+.fld-imerss-map-panel-block {
     font-size: 1.5rem;
     margin-top: 0.5rem;
     padding-top: 0.5rem;
@@ -213,43 +213,43 @@ body {
     border-bottom: #ccc 2px solid;
 }
 
-.fld-bagatelle-map-class-tagline {
+.fld-imerss-map-class-tagline {
     font-size: 1.5rem;
     padding-bottom: 0.5rem;
 }
 
-.fld-bagatelle-map-class-se-col {
+.fld-imerss-map-class-se-col {
     font-weight: bold;
 }
 
-.fld-bagatelle-map-class-se-val {
+.fld-imerss-map-class-se-val {
     padding-bottom: 0.5rem;
     text-indent: 1rem;
 }
 
-.fl-bagatelle-map-info-panel {
+.fl-imerss-map-info-panel {
     width: 28rem;
     margin-left: 2rem;
 }
 
-.fld-bagatelle-map-legend > span {
+.fld-imerss-map-legend > span {
     display: inline-block;
     font-size: 1.3rem;
     margin-left: 2rem;
     margin-bottom: 0.4rem;
 }
 
-.fld-bagatelle-map-legend-keys {
+.fld-imerss-map-legend-keys {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     height: 500px;
 }
 
-.fld-bagatelle-legend-block {
+.fld-imerss-legend-block {
 }
 
-.fld-bagatelle-legend-block-name {
+.fld-imerss-legend-block-name {
     margin-top: 0.7rem;
     display: inline-block;
     width: 8rem;
@@ -258,29 +258,29 @@ body {
 }
 
 
-.fld-bagatelle-legend-row {
+.fld-imerss-legend-row {
     padding: 2px;
 }
 
-.fld-bagatelle-legend-row.fld-bagatelle-selected {
+.fld-imerss-legend-row.fld-imerss-selected {
     background: #FCFF63;
 }
 
 
-.fld-bagatelle-legend-icon {
+.fld-imerss-legend-icon {
     display: inline-block;
     width: 2rem;
     height: 1rem;
 }
 
-.fld-bagatelle-legend-row.fld-bagatelle-selected .fld-bagatelle-legend-icon {
+.fld-imerss-legend-row.fld-imerss-selected .fld-imerss-legend-icon {
     background-image: url(../img/selected-tick.svg);
     background-size: 1rem;
     background-position: center center; 
     background-repeat: no-repeat;
 }
 
-.fld-bagatelle-legend-preview {
+.fld-imerss-legend-preview {
     display: inline-block;
     width: 1.2rem;
     height: 1.2rem;
@@ -290,7 +290,7 @@ body {
     top: 3px;
 }
 
-.fld-bagatelle-legend-label {
+.fld-imerss-legend-label {
     display: inline-block;
     font-size: 0.9rem;
     width: 8rem;
@@ -298,34 +298,34 @@ body {
     top: -2px;
 }
 
-.fld-bagatelle-map {
+.fld-imerss-map {
     height: 450px;
 }
 
-.fld-bagatelle-tabs {
+.fld-imerss-tabs {
     position: relative;
 }
 
-.flc-bagatelle-autocomplete-row {
+.flc-imerss-autocomplete-row {
     position: absolute;
     top: 3rem;
     left: 8rem;
     z-index: 999;
 }
 
-#fli-bagatelle-autocomplete {
+#fli-imerss-autocomplete {
     background: white;
 }
 
 #fli-tab-sunburst, #fli-tab-checklist, #fli-tab-simple-checklist {
-    background: var(--bagatelle-eco-colour);
+    background: var(--imerss-eco-colour);
 }
 
 #fli-tab-sunburst {
     padding-top: 4rem;
 }
 
-.fl-bagatelle-checklist-spacer {
+.fl-imerss-checklist-spacer {
     height: 4rem;
 }
 
@@ -348,11 +348,11 @@ body {
 }
 
 /** Temporary until we can use ordinary 3px border on tabs **/
-.fld-bagatelle-tabs {
+.fld-imerss-tabs {
     width: 1031px;
 }
 
-.fl-bagatelle-checklist-holder {
+.fl-imerss-checklist-holder {
     padding: 1em 1.4em;
 }
 
@@ -360,12 +360,12 @@ body {
     font-weight: bolder;
 }
 
-.fl-bagatelle-taxa .fld-bagatelle-panel-label {
+.fl-imerss-taxa .fld-imerss-panel-label {
     position: absolute;
     right: 1.5rem;
 }
 
-.fld-bagatelle-panel-label {
+.fld-imerss-panel-label {
     font-weight: bold;
     font-size: 1.7rem;
     top: 1rem;
@@ -375,7 +375,7 @@ body {
     padding-top: 3rem;
 }
 
-.fld-bagatelle-taxonDisplay {
+.fld-imerss-taxonDisplay {
     margin-top: 4.4rem;
     border: none;
 }
@@ -396,7 +396,7 @@ body {
     border-bottom: none;
 }
 
-/** Undo this insane rule from bagatelle.css - this whole system needs to be rewritten **/
+/** Undo this insane rule from imerss-viz.css - this whole system needs to be rewritten **/
 .fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder.fl-taxonDisplay-row {
     border-bottom: #888 1px solid;
 }
@@ -412,37 +412,37 @@ body {
     display: inline-block
 }
 
-.fl-bagatelle-right-column {
+.fl-imerss-right-column {
     width: 544px;
 }
 
 /*
-.fl-bagatelle-photo {
+.fl-imerss-photo {
     width: calc(448px + 6rem);
 }
 */
 
-.fld-bagatelle-map-outer-panel .fl-bagatelle-photo {
+.fld-imerss-map-outer-panel .fl-imerss-photo {
     margin-left: -1rem;
     margin-right: -1rem;
     margin-bottom: 1rem;
 }
 
-.fld-bagatelle-taxonDisplay-wrapper {
-    background: var(--bagatelle-eco-colour);
+.fld-imerss-taxonDisplay-wrapper {
+    background: var(--imerss-eco-colour);
     width: 500px;
 }
 
-.fld-bagatelle-tabs .ui-state-active.ui-tabs-active a {
-    background: var(--bagatelle-eco-colour);
+.fld-imerss-tabs .ui-state-active.ui-tabs-active a {
+    background: var(--imerss-eco-colour);
 }
 
-.fld-bagatelle-tabs .ui-state-active.ui-tabs-tab {
-    background: var(--bagatelle-eco-colour);
+.fld-imerss-tabs .ui-state-active.ui-tabs-tab {
+    background: var(--imerss-eco-colour);
 }
 
-.fld-bagatelle-map-outer-panel-wrapper {
-    background: var(--bagatelle-map-colour);
+.fld-imerss-map-outer-panel-wrapper {
+    background: var(--imerss-map-colour);
     width: 500px;
 }
 
@@ -495,7 +495,7 @@ body {
 }
 
 
-.fld-bagatelle-taxonDisplay {
+.fld-imerss-taxonDisplay {
     margin-top: 0;
     width: auto;
 }

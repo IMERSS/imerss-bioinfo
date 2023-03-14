@@ -17,7 +17,7 @@ var protected_areas = require("../data/Galiano/Protected_Areas_2013_2.json");
 
 var map = require("../data/iNaturalist-obs-map.json");
 
-var completionPromise = hortis.bagatelle.csvReader({
+var completionPromise = hortis.imerss.csvReader({
     inputFile: "data/Galiano/observations-iNat.csv",
     mapColumns: map.columns
 }).completionPromise;

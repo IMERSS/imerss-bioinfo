@@ -1,20 +1,20 @@
-<link rel="stylesheet" type="text/css" href="/bagatelle-new/css/bagatelle-all.css" />
+<link rel="stylesheet" type="text/css" href="/imerss-new/css/imerss-viz-all.css" />
 <style>
 #main-content .entry-content table td {
     padding: 0px 5px;
 }
 </style>
-<div class="fl-bagatelle-container">
+<div class="fl-imerss-container">
 </div>
-<script src="/bagatelle-new/js/bagatelle-all.js"></script>
-<script src="/bagatelle-new/data/Galiano/Galiano_map_0.js"></script>
+<script src="/imerss-new/js/imerss-viz-all.js"></script>
+<script src="/imerss-new/data/Galiano/Galiano_map_0.js"></script>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 <script>
 
-hortis.sunburstLoaderWithMap(".fl-bagatelle-container", {
-                resourceBase: "/bagatelle-new",
+hortis.sunburstLoaderWithMap(".fl-imerss-container", {
+                resourceBase: "/imerss-new",
                 renderMarkup: true,
                 colourCount: "observationCount",
                 geoJSONMapLayers: [json_Galiano_map_0],
-                vizFile: "/bagatelle-new/data/dataPaper/Life.json.lz4"});
+                vizFile: "/imerss-new/data/dataPaper/Life.json.lz4"});
 </script>

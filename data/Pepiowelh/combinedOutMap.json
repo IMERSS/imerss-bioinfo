@@ -43,9 +43,9 @@
     "datasets": {
         "iNat": {
             "name": "iNaturalist (2014-2023)",
-            "input": "E:/source/gits/bagatelle/data/Pepiowelh/iNaturalist_Catalogue_2023_02_24.csv",
-            "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
-            "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
+            "input": "E:/source/gits/imerss/data/Pepiowelh/iNaturalist_Catalogue_2023_02_24.csv",
+            "map": "E:/source/gits/imerss/data/iNaturalist/iNaturalist-obs-map-new.json",
+            "outMap": "E:/source/gits/imerss/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99",
             "observationId": "iNat:%id"
         }

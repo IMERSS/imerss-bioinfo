@@ -1,13 +1,13 @@
 {
     defaultColor: [35,35,35],
-    //baseDirectory: "%bagatelle/data/Xetthecum/qgis2web_2022_02_12-21_38_21_508226/data",
-    baseDirectory: "%bagatelle/data/Xetthecum/qgis2web_2022_03_11-10_39_28_717315/data",
+    //baseDirectory: "%imerss-bioinfo/data/Xetthecum/qgis2web_2022_02_12-21_38_21_508226/data",
+    baseDirectory: "%imerss-bioinfo/data/Xetthecum/qgis2web_2022_03_11-10_39_28_717315/data",
     CSVs: {
         sensitiveEcosystems: {
-            path: "%bagatelle/data/Xetthecum/Sensitive Ecosystems.csv"
+            path: "%imerss-bioinfo/data/Xetthecum/Sensitive Ecosystems.csv"
         },
         culturalValues: {
-            path: "%bagatelle/data/Xetthecum/Up-Close_Landscapes_Resynthesized_Indigenous_perspectives.csv"
+            path: "%imerss-bioinfo/data/Xetthecum/Up-Close_Landscapes_Resynthesized_Indigenous_perspectives.csv"
         }
     },
     communities: {

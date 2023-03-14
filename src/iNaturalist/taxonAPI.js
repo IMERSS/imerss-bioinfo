@@ -14,7 +14,7 @@ require("../dataProcessing/sqlite.js");
 require("./obsAPI.js");
 require("kettle"); // for kettle.dataSource.URL
 
-hortis.ranks = fluid.freezeRecursive(fluid.require("%bagatelle/data/ranks.json"));
+hortis.ranks = fluid.freezeRecursive(fluid.require("%imerss-bioinfo/data/ranks.json"));
 
 hortis.sanitizeSpeciesName = function (name) {
     name = name.trim();
@@ -39,6 +39,7 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace(" aff.", "");
     name = name.replace(" agg.", "");
     name = name.replace(" s.lat.", "");
+    name = name.replace(" s. lat.", "");
     name = name.replace(" f.", "");
     name = name.replace(" species complex", "");
     name = name.replace(" complex", "");
@@ -280,7 +281,7 @@ fluid.defaults("hortis.iNatTaxonSource", {
         db: {
             type: "hortis.sqliteDB",
             options: {
-                dbFile: "%bagatelle/data/iNaturalist/taxa.db/taxa.sqlite3"
+                dbFile: "%imerss-bioinfo/data/iNaturalist/taxa.db/taxa.sqlite3"
             }
         },
         byId: {
@@ -388,7 +389,7 @@ fluid.defaults("hortis.iNatTaxonAPI.dbTaxonAPIs", {
         db: {
             type: "hortis.sqliteDB",
             options: {
-                dbFile: "%bagatelle/data/iNaturalist/taxa.db/taxa.sqlite3"
+                dbFile: "%imerss-bioinfo/data/iNaturalist/taxa.db/taxa.sqlite3"
             }
         },
         byId: {
@@ -449,8 +450,9 @@ hortis.iNat.getRanks = async function (id, rankTarget, byIdSource, fields) {
         }
         if (fields && fields.includes(targetRank) || targetRank in rankTarget) {
             const thisRank = indexed[rank];
-            if (thisRank && rankTarget[targetRank] !== thisRank) {
-                console.log("Replacing " + targetRank + " " + rankTarget[targetRank] + " with " + thisRank);
+            const oldTarget = rankTarget[targetRank];
+            if (thisRank && oldTarget && oldTarget !== thisRank) {
+                console.log("Replacing " + targetRank + " " + oldTarget + " with " + thisRank + " for taxon " + rankTarget.taxonName);
             }
             rankTarget[targetRank] = thisRank || "";
         }

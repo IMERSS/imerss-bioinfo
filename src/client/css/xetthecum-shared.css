@@ -1,7 +1,7 @@
 :root {
-  --bagatelle-map-width: 500px;
-  --bagatelle-eco-colour: #DEE0B0;
-  --bagatelle-map-colour: #DDE8C8; 
+  --imerss-map-width: 500px;
+  --imerss-eco-colour: #DEE0B0;
+  --imerss-map-colour: #DDE8C8;
 }
 
 body {
@@ -20,28 +20,28 @@ body {
     background-size: cover;
 }
 
-.fl-bagatelle-container {
+.fl-imerss-container {
     margin: 1.5rem 0.5rem 0.5rem 0.5rem;
 }
 
-.fld-bagatelle-map-holder {
-    background: var(--bagatelle-map-colour);
+.fld-imerss-map-holder {
+    background: var(--imerss-map-colour);
 }
 
-.fl-bagatelle-map-panel {
+.fl-imerss-map-panel {
     padding: 1rem 0rem 2rem 2rem;
 }
 
-.fl-bagatelle-map-panel .fld-bagatelle-panel-label {
+.fl-imerss-map-panel .fld-imerss-panel-label {
     position: unset;
     padding-bottom: 1.5rem;
 }
 
-.fld-bagatelle-map {
+.fld-imerss-map {
     height: 450px;
 }
 
-.fld-bagatelle-taxonDisplay {
+.fld-imerss-taxonDisplay {
     margin-top: 0;
     width: auto;
 }
@@ -60,21 +60,21 @@ body {
 }
 
 #fli-tab-sunburst, #fli-tab-checklist, #fli-tab-simple-checklist {
-    background: var(--bagatelle-eco-colour);
+    background: var(--imerss-eco-colour);
 }
 
-.fld-bagatelle-taxonDisplay-wrapper {
-    background: var(--bagatelle-eco-colour);
+.fld-imerss-taxonDisplay-wrapper {
+    background: var(--imerss-eco-colour);
 }
 
-.fld-bagatelle-tabs .ui-state-active.ui-tabs-active a {
-    background: var(--bagatelle-eco-colour);
+.fld-imerss-tabs .ui-state-active.ui-tabs-active a {
+    background: var(--imerss-eco-colour);
 }
 
-.fld-bagatelle-tabs .ui-state-active.ui-tabs-tab {
-    background: var(--bagatelle-eco-colour);
+.fld-imerss-tabs .ui-state-active.ui-tabs-tab {
+    background: var(--imerss-eco-colour);
 }
 
-.fld-bagatelle-map-outer-panel-wrapper {
-    background: var(--bagatelle-map-colour);
+.fld-imerss-map-outer-panel-wrapper {
+    background: var(--imerss-map-colour);
 }

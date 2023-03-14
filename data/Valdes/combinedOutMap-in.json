@@ -29,9 +29,9 @@
     "datasets": {
         "summary": {
             "name": "Valdes Island Curated Summary",
-            "input": "E:/source/gits/bagatelle/data/Valdes/VIC_Biodiversity_Data_Summary - 2021_10_27.csv",
-            "map": "E:/source/gits/bagatelle/data/Valdes/summary-map.json",
-            "outMap": "E:/source/gits/bagatelle/data/Valdes/summary-out-map.json",
+            "input": "E:/source/gits/imerss/data/Valdes/VIC_Biodiversity_Data_Summary - 2021_10_27.csv",
+            "map": "E:/source/gits/imerss/data/Valdes/summary-map.json",
+            "outMap": "E:/source/gits/imerss/data/Valdes/summary-out-map.json",
             "colour": "#931362"
         }
     }

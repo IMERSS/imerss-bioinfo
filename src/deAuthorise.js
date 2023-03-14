@@ -4,7 +4,7 @@
 
 const fluid = require("infusion");
 const minimist = require("minimist");
-fluid.require("%bagatelle");
+fluid.require("%imerss-bioinfo");
 
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
@@ -14,12 +14,12 @@ const hortis = fluid.registerNamespace("hortis");
 
 fluid.setLogging(true);
 
-// old one "%bagatelle/data/Comprehensive Lists/sji_master_flora.csv"); used Full Species
+// old one "%imerss-bioinfo/data/Comprehensive Lists/sji_master_flora.csv"); used Full Species
 
 const parsedArgs = minimist(process.argv.slice(2));
 
 const outputFile = parsedArgs.o || "deauthorized.csv";
-const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%bagatelle/data/Squamish/GBIF_2022_Plantae_DwC.csv");
+const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/Squamish/GBIF_2022_Plantae_DwC.csv");
 
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile

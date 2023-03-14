@@ -65,7 +65,7 @@ hortis.updateSwaps = function (data) {
     }));
 };
 
-hortis.bagatelle.csvReader({
+hortis.imerss.csvReader({
     inputFile: process.argv[2] || "data/Valdes/Valdes Marine Dives Taxon Resolution.csv",
     mapColumns: taxonResolveMap.columns
 }).completionPromise.then(hortis.updateSwaps);

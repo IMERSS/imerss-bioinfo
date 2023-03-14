@@ -1,10 +1,12 @@
 {
-    featuresFile: "%bagatelle/data/Xetthecum/flatFeatures.json",
-    obsFile: "%bagatelle/data/Xetthecum/reintegrated-obs.csv",
-    obsMapFile: "%bagatelle/data/Xetthecum/combinedOutMap-obs.json",
-    outputFile: "%bagatelle/data/Xetthecum/Life.json.lz4",
-    inputFiles: ["%bagatelle/data/Xetthecum/reintegrated.csv"],
-    mapFile: "%bagatelle/data/Xetthecum/combinedOutMap.json",
+    // This special field marks out for region processing and then also takes in the obs file
+    featuresFile: "%imerss-bioinfo/data/Xetthecum/flatFeatures.json",
+    obsFile: "%imerss-bioinfo/data/Xetthecum/reintegrated-obs.csv",
+    obsMapFile: "%imerss-bioinfo/data/Xetthecum/combinedOutMap-obs.json",
+    outputFile: "%imerss-bioinfo/data/Xetthecum/Life.json.lz4",
+    inputFiles: ["%imerss-bioinfo/data/Xetthecum/reintegrated.csv"],
+    mapFile: "%imerss-bioinfo/data/Xetthecum/combinedOutMap.json",
+    // TODO: This field appears unused
     regionField: "region",
     skipRanks: ["subclass", "suborder", "superfamily", "subfamily", "tribe", "genus"],
     obsIdField: "observationId"

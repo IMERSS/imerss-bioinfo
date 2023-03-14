@@ -107,7 +107,7 @@ such as github and Google Sheets.
 
 # Visualisations
 
-## "Bagatelle" sunburst visualisation and map view
+## Sunburst visualisation and map view
 
 Observation and checklist data derived from condensed summaries such as, e.g. [data/dataPaper-I/reintegrated.csv](data/dataPaper-I/reintegrated.csv)
 is in a sunburst partition layout inspired by <https://bl.ocks.org/mbostock/4348373>,
@@ -133,14 +133,17 @@ Condensed versions of the visualisation source files suitable for production hos
 You can see such visualisations running online at locations like
 
 https://biogaliano.org/map-prototype/
+
 https://biogaliano.org/galiano-data-paper-map-view/
+
+And also a gallery in our [visualisations mini-portal](https://imerss.github.io/imerss-bioinfo/).
 
 These visualisations are entirely static and so easy to host at any kind of site simply by uploading a folder of files
 and injecting an initialisation block into the markup such as
 
 ````html
 <script>
-    hortis.sunburstLoader(".fl-bagatelle-container", {
+    hortis.sunburstLoader(".fl-imerss-container", {
         colourCount: "undocumentedCount",
         selectOnStartup: "Life",
         vizFile: "data/Galiano/Galiano-Life.json.lz4",

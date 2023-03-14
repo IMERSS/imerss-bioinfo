@@ -5,9 +5,9 @@
 const fluid = require("infusion");
 const fs = require("fs");
 const minimist = require("minimist");
-var glob = require("glob");
+const glob = require("glob");
 
-fluid.require("%bagatelle");
+fluid.require("%imerss-bioinfo");
 
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/writeJSON.js");
@@ -20,8 +20,8 @@ fluid.setLogging(true);
 
 const parsedArgs = minimist(process.argv.slice(2));
 
-const inputFile = parsedArgs._[0] || "%bagatelle/data/Xetthecum/deqgis.json5";
-const outputFile = fluid.module.resolvePath(parsedArgs.o || "%bagatelle/data/Xetthecum/flatFeatures.json");
+const inputFile = parsedArgs._[0] || "%imerss-bioinfo/data/Xetthecum/deqgis.json5";
+const outputFile = fluid.module.resolvePath(parsedArgs.o || "%imerss-bioinfo/data/Xetthecum/flatFeatures.json");
 
 const config = hortis.readJSONSync(fluid.module.resolvePath(inputFile));
 
@@ -93,11 +93,11 @@ hortis.filterCommunities = function (communities) {
 const labels = {};
 
 hortis.indexOneFeature = function (dataFileName, feature, features, classes) {
-    var classname = feature.properties.LEGEND_LAB || feature.properties.LABEL;
+    const classname = feature.properties.LEGEND_LAB || feature.properties.LABEL;
     fluid.set(labels, [feature.properties.COMMUNITY, classname], true);
 
     feature.properties.clazz = classname;
-    var clazz = classes[classname];
+    const clazz = classes[classname];
     if (!clazz) {
         console.log("Warning: unknown feature with name " + classname + " in file " + dataFileName);
     } else {

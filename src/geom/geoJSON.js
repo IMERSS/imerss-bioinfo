@@ -2,11 +2,11 @@
 
 "use strict";
 
-var fluid = require("infusion");
+const fluid = require("infusion");
 
 require("../lib/point-in-polygon.js");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
 
 hortis.countTrue = function (array) {
     return array.reduce(function (a, c) {return a + c;}, 0);
@@ -49,10 +49,10 @@ hortis.intersectsFeature = function (feature, mappedRow) {
 };
 
 hortis.intersectsAnyFeature = function (features, row) {
-    var intersects = features.map(function (feature) {
+    const intersects = features.map(function (feature) {
         return hortis.intersectsFeature(feature, row);
     });
-    var intersectCount = hortis.countTrue(intersects);
+    const intersectCount = hortis.countTrue(intersects);
     return intersectCount > 0;
 };
 
@@ -63,14 +63,14 @@ hortis.rowToLoggable = function (row) {
 hortis.makeFeatureRowFilter = function (feature, options) {
     options = options || {};
     return function (rows) {
-        var rejections = 0;
-        var togo = rows.filter(function (row) {
+        let rejections = 0;
+        const togo = rows.filter(function (row) {
             row.point = [hortis.parseFloat(row.longitude), hortis.parseFloat(row.latitude)];
-            var accept = hortis.intersectsAnyFeature(feature, row);
+            const accept = hortis.intersectsAnyFeature(feature, row);
             if (!accept) {
                 ++rejections;
                 if (options.logRejection) {
-                    var tolog = hortis.rowToLoggable(row);
+                    const tolog = hortis.rowToLoggable(row);
                     console.log("Rejecting observation ", tolog, " as lying outside polygon " + options.featureName);
                 }
             }
@@ -82,7 +82,7 @@ hortis.makeFeatureRowFilter = function (feature, options) {
 };
 
 hortis.processRegionFilter = function (resolved, patch, key) {
-    var filter = hortis.makeFeatureRowFilter(patch.patchData.features, {
+    const filter = hortis.makeFeatureRowFilter(patch.patchData.features, {
         logRejection: patch.logRejection,
         featureName: key
     });
@@ -91,28 +91,28 @@ hortis.processRegionFilter = function (resolved, patch, key) {
 };
 
 hortis.processAssignFeature = function (resolved, patch) {
-    var extraCols = {};
-    var features = patch.patchData.features;
-    var last = Date.now();
+    const extraCols = {};
+    const features = patch.patchData.features;
+    const last = Date.now();
     resolved.obsRows.forEach(function (row) {
         row.point = [hortis.parseFloat(row.longitude), hortis.parseFloat(row.latitude)];
-        var intersects = features.filter(function (feature) {
+        const intersects = features.filter(function (feature) {
             return hortis.intersectsFeature(feature, row);
         });
         if (intersects.length === 0) {
             console.log("Warning: row ", hortis.rowToLoggable(row), " did not intersect any feature");
         } else {
             if (intersects.length > 1) {
-                var allProps = fluid.getMembers(intersects, "properties");
+                const allProps = fluid.getMembers(intersects, "properties");
                 console.log("Warning: row ", hortis.rowToLoggable(row), " intersected multiple features: ", allProps);
             }
-            var props = intersects[0].properties;
+            const props = intersects[0].properties;
             fluid.extend(row, props);
             fluid.extend(extraCols, props);
         }
     });
     console.log("Intersected " + resolved.obsRows.length + " observations in " + (Date.now() - last) + " ms");
-    var extraOutMap = {
+    const extraOutMap = {
         columns: fluid.transform(extraCols, function (junk, key) {
             return key;
         })

@@ -52,25 +52,28 @@
     "datasets": {
         "dataPaper": {
             "name": "Galiano Data Paper Part I - Marine Observations (1968-2021)",
-            "input": "E:/source/gits/bagatelle/data/dataPaper-I/reintegrated-obs.csv",
-            "map": "E:/source/gits/bagatelle/data/dataPaper-I/combinedOutMap-obs.json",
+            "input": "E:/source/gits/imerss/data/dataPaper-I/reintegrated-obs.csv",
+            "map": "E:/source/gits/imerss/data/dataPaper-I/combinedOutMap-obs.json",
             "templateMap": false,
-            "outMap": "E:/source/gits/bagatelle/data/dataPaper-I/combinedOutMap-obs.json",
-            "colour": "#931362"
+            "outMap": "E:/source/gits/imerss/data/dataPaper-I/combinedOutMap-obs.json",
+            "colour": "#931362",
+            "datasetId": "dataPaper"
         },
         "iNat": {
             "name": "Xetthecum iNaturalist Observations (2005-2022)",
-            "input": "E:/source/gits/bagatelle/data/Xetthecum/iNaturalist_Catalogue_2022_02_28.csv",
-            "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
-            "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
-            "colour": "#2C8C99"
+            "input": "E:/source/gits/imerss/data/Xetthecum/iNaturalist_Catalogue_2022_02_28.csv",
+            "map": "E:/source/gits/imerss/data/iNaturalist/iNaturalist-obs-map-new.json",
+            "outMap": "E:/source/gits/imerss/data/iNaturalist/iNaturalist-obs-out-map.json",
+            "colour": "#2C8C99",
+            "datasetId": "iNat"
         },
         "Hunterston": {
             "name": "Hunterston Farm Stewardship Report: A Review of the 2010 BioBlitz (2010)",
-            "input": "E:/source/gits/bagatelle/data/Xetthecum/Hunterston_Farms_Bioblitz_2010_coordinates_corrected_mismatches_reconciled_2022-03-06_coordinates_corrected_2022-03-08.csv",
-            "map": "E:/source/gits/bagatelle/data/Xetthecum/hunterston-map.json",
-            "outMap": "E:/source/gits/bagatelle/data/Xetthecum/hunterston-out-map.json",
-            "colour": "#55a329"
+            "input": "E:/source/gits/imerss/data/Xetthecum/Hunterston_Farms_Bioblitz_2010_coordinates_corrected_mismatches_reconciled_2022-03-06_coordinates_corrected_2022-03-08.csv",
+            "map": "E:/source/gits/imerss/data/Xetthecum/hunterston-map.json",
+            "outMap": "E:/source/gits/imerss/data/Xetthecum/hunterston-out-map.json",
+            "colour": "#55a329",
+            "datasetId": "Hunterston"
         }
     }
 }

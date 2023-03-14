@@ -1,11 +1,12 @@
 {
-    "name": "bagatelle",
+    "name": "imerss-bioinfo",
     "description": "Working data of the IMERSS biodiversity informatics working group, together with algorithms",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "author": "Antranig Basman",
     "scripts": {
         "lint": "fluid-lint-all"
     },
+    "main":  "index.js",
     "dependencies": {
         "infusion": "4.0.0",
         "kettle": "2.3.0",
@@ -39,8 +40,11 @@
         "type": "git",
         "url": "https://github.com/IMERSS/imerss-bioinfo"
     },
+    "files": [
+        "/src", "/test", "/index.js", "/build.js", "/index*.html", "/docs/js", "/docs/css"
+    ],
     "engines": {
-        "node": ">=4.0.0"
+        "node": ">=14.0.0"
     },
     "license": "BSD-3-Clause"
 }

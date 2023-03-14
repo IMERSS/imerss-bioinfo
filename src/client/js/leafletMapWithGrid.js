@@ -7,9 +7,9 @@ var hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.leafletMap.withGrid", {
     selectors: {
-        grid: ".fld-bagatelle-map-grid",
-        datasetControls: ".fld-bagatelle-dataset-controls",
-        datasetsLabel: ".fld-bagatelle-datasets-label"
+        grid: ".fld-imerss-map-grid",
+        datasetControls: ".fld-imerss-dataset-controls",
+        datasetsLabel: ".fld-imerss-datasets-label"
     },
     baseZoomForOutline: 11.9,
     model: {
@@ -48,7 +48,7 @@ fluid.defaults("hortis.leafletMap.withGrid", {
         drawGrid: "hortis.leafletMap.drawGrid({that}, {that}.quantiser, {that}.model.datasetEnabled)"
     },
     gridStyle: {
-        className: "fld-bagatelle-map-region"
+        className: "fld-imerss-map-region"
     },
     listeners: {
         "buildMap.addGrid": "hortis.leafletMap.withGrid.addGrid({that})"
@@ -91,7 +91,7 @@ fluid.defaults("hortis.leafletMap.withGrid", {
 
 hortis.leafletMap.updateOutlineWidth = function (zoom, baseZoom, container) {
     const relativeZoom = Math.min(1, Math.pow(2, 2 * (zoom - baseZoom)));
-    container.style.setProperty("--bagatelle-stroke-width", 2 * relativeZoom);
+    container.style.setProperty("--imerss-stroke-width", 2 * relativeZoom);
 };
 
 hortis.leafletMap.withGrid.addGrid = function (that) {
@@ -165,7 +165,7 @@ hortis.leafletMap.withGrid.updateTooltipHighlight = function (map, oldKey) {
         const oldBucket = map.toPlot[oldKey];
         if (oldBucket) {
             const element = oldBucket.Lpolygon.getElement();
-            element.classList.remove("fl-bagatelle-highlightBlock");
+            element.classList.remove("fl-imerss-highlightBlock");
         }
     }
 };
@@ -200,7 +200,7 @@ hortis.leafletMap.withGrid.updateTooltip = function (map, key) {
         tooltip[0].innerHTML = text;
         tooltip.show();
         const element = bucket.Lpolygon.getElement();
-        element.classList.add("fl-bagatelle-highlightBlock");
+        element.classList.add("fl-imerss-highlightBlock");
         const parent = element.parentNode;
         parent.insertBefore(element, null);
     } else {

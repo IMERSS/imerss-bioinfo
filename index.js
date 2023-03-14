@@ -1,6 +1,7 @@
 /* eslint-env node */
 "use strict";
 
-var fluid = require("infusion");
+const fluid = require("infusion");
+console.log("INDEX LOADED");
 
-fluid.module.register("bagatelle", __dirname, require);
+fluid.module.register("imerss-bioinfo", __dirname, require);

@@ -1,7 +1,7 @@
 How to import Xetthecum SVG patterns:
 
 i) Cut and paste in the file contents from the original SVG file, 
-e.g. %bagatelle/data/Xetthecum/images/Xetthecum tiles_marine - Trincolmali.svg
+e.g. %imerss-bioinfo/data/Xetthecum/images/Xetthecum tiles_marine - Trincolmali.svg
 ii) Top and tail the root <svg> tag from it
 iii) Choose a width and height in the parent <pattern> element of 600, and choose an appropriate pattern scale,
 e.g. patternTransform="scale(0.2)"

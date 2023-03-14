@@ -15,7 +15,7 @@ fluid.registerNamespace("hortis.intersect");
 
 var polygon = require("../data/Galiano/Galiano-boundary.json");
 
-var completionPromise = hortis.bagatelle.csvReaderWithoutMap({
+var completionPromise = hortis.imerss.csvReaderWithoutMap({
     inputFile: process.argv[2],
     csvOptions: {
         separator: "\t",
@@ -44,5 +44,5 @@ completionPromise.then(function (result) {
         }
     });
     console.log("Found " + outs.length + " intersecting rows");
-    hortis.bagatelle.writeCSV("intersected.csv", result.headers, outs, fluid.promise());
+    hortis.imerss.writeCSV("intersected.csv", result.headers, outs, fluid.promise());
 });

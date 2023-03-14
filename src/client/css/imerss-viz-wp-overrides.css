@@ -1,0 +1,70 @@
+#sidebar {
+    display: none;
+}
+
+.et_boxed_layout #page-container,
+.et_fixed_nav.et_boxed_layout #page-container #top-header,
+.et_fixed_nav.et_boxed_layout #page-container #main-header,
+.et_boxed_layout #page-container .container,
+.et_boxed_layout #page-container .et_pb_row {
+    max-width: 2600px;
+}
+
+#main-content .container::before {
+    content: none;
+}
+
+
+.fl-imerss-container {
+    line-height: 1.4em;
+    margin: 0 1rem 0 1rem;
+}
+
+
+.fld-imerss-dataset-controls {
+    font-size: 16px;
+}
+
+table {
+    border: none !important;
+}
+
+#main-content .entry-content table td {
+    padding: 0 5px;
+}
+
+.fl-imerss-container .fld-imerss-checklist ul {
+    padding-bottom: 0;
+}
+
+.fld-imerss-taxonDisplay {
+    background: white;
+    width: 35%;
+    display: block; /* Without this, contents overflow with our extra margins */
+}
+
+.fl-imerss-taxa {
+    width: 100%;
+}
+
+.fl-imerss-tabs-and-search {
+    width: 65%;
+    margin-right: 1rem;
+}
+
+.fl-imerss-left-column {
+    width: auto;
+}
+
+.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder {
+    width: auto;
+    padding-right: 0;
+}
+
+#fli-tab-sunburst {
+    max-width: 850px;
+}
+
+.fl-taxonDisplay-expand {
+    margin-top: 2px;
+}

@@ -3,17 +3,17 @@ Examples of current drivers from biogaliano.org WordPress site:
 
 /taxa - "Life List"
 
-<div class="fl-bagatelle-container">
+<div class="fl-imerss-container">
  </div>
- <script src="/bagatelle-new/js/bagatelle-all.js"></script>
+ <script src="/imerss-new/js/imerss-viz-all.js"></script>
  <script>
- hortis.sunburstLoader(".fl-bagatelle-container", {
+ hortis.sunburstLoader(".fl-imerss-container", {
  colourCount: "undocumentedCount",
  sunburstPixels:800,
- markupTemplate: "/bagatelle-new/html/bagatelle.html",
+ markupTemplate: "/imerss-new/html/imerss.html",
  renderMarkup: true,
- vizFile: "/bagatelle-new/data/Galiano/Galiano-Life.json.lz4",
- phyloMap: "/bagatelle-new/json/emptyPhyloMap.json",
+ vizFile: "/imerss-new/data/Galiano/Galiano-Life.json.lz4",
+ phyloMap: "/imerss-new/json/emptyPhyloMap.json",
  commonNames: false
 });
  </script>
@@ -22,50 +22,50 @@ Examples of current drivers from biogaliano.org WordPress site:
 
  /web-of-life-viz - "Web of Life"
  
-<div class="fl-bagatelle-container">
+<div class="fl-imerss-container">
 </div>
 <style>
-.flc-bagatelle-svg {
+.flc-imerss-svg {
  font-size: 30px
 }
-.fld-bagatelle-taxonDisplay {
+.fld-imerss-taxonDisplay {
  font-size: 14px;
  line-height: 1.2em;
 }
-.fld-bagatelle-taxonDisplay table {
+.fld-imerss-taxonDisplay table {
  z-index: 100000
 }
 #main-header {
  z-index:100
 }
 </style>
- <script src="/bagatelle-new/js/bagatelle-all.js"></script>
+ <script src="/imerss-new/js/imerss-viz-all.js"></script>
  <script>
- hortis.sunburstLoader(".fl-bagatelle-container", {
- resourceBase: "/bagatelle-new",
+ hortis.sunburstLoader(".fl-imerss-container", {
+ resourceBase: "/imerss-new",
  sunburstPixels:800,
  renderMarkup: true,
  selectOnStartup: "Life",
- vizFile: "/bagatelle-new/data/Galiano WoL/Life.json.lz4"});
+ vizFile: "/imerss-new/data/Galiano WoL/Life.json.lz4"});
  </script>
  
  
  
    /spiders - "Spiders"
    
-<link rel="stylesheet" type="text/css" href="/bagatelle-new/css/bagatelle-all.css" />
-<div class="fl-bagatelle-container">
+<link rel="stylesheet" type="text/css" href="/imerss-new/css/imerss-viz-all.css" />
+<div class="fl-imerss-container">
  </div>
- <script src="/bagatelle-new/js/bagatelle-all.js"></script>
+ <script src="/imerss-new/js/imerss-viz-all.js"></script>
  <script>
- hortis.sunburstLoader(".fl-bagatelle-container", {
+ hortis.sunburstLoader(".fl-imerss-container", {
  colourCount: "undocumentedCount",
  sunburstPixels:800,
- markupTemplate: "/bagatelle-new/html/bagatelle.html",
+ markupTemplate: "/imerss-new/html/imerss.html",
  renderMarkup: true,
  queryOnStartup: "Araneae",
- vizFile: "/bagatelle-new/data/Galiano/Galiano-Life.json.lz4",
- phyloMap: "/bagatelle-new/json/emptyPhyloMap.json",
+ vizFile: "/imerss-new/data/Galiano/Galiano-Life.json.lz4",
+ phyloMap: "/imerss-new/json/emptyPhyloMap.json",
  commonNames: false
 });
  </script>

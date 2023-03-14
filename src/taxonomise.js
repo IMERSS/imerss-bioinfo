@@ -4,7 +4,7 @@
 
 const fluid = require("infusion");
 
-fluid.require("%bagatelle");
+fluid.require("%imerss-bioinfo");
 
 const minimist = require("minimist");
 
@@ -224,7 +224,7 @@ hortis.oneDatasetToLoadable = function (dataset, key) {
     hortis.resolvePaths(dataset, ["map", "outMap", "input"]);
     // TODO: Turn this into a component with transform chain elements some day
     const map = hortis.readJSONSync(dataset.map, "reading Observations map file");
-    map.datasetId = key;
+    map.datasetId = dataset.datasetId = key;
     if (dataset.datasetClass) {
         map.datasetClass = dataset.datasetClass;
     }

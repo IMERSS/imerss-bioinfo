@@ -1,36 +1,36 @@
-.fl-bagatelle-datasets {
+.fl-imerss-datasets {
     display: none;
     width: 0;
 }
 
-.fl-bagatelle-left-column {
+.fl-imerss-left-column {
     flex: 1 1 0;
     width: unset;
 }
 
-.fld-bagatelle-map {
+.fld-imerss-map {
     height: 100%;
     max-height: 40rem;
     min-width: 30rem;
 }
 
-.fl-bagatelle-map-and-taxa {
+.fl-imerss-map-and-taxa {
     flex-direction: row;
 }
 
-.fld-bagatelle-tabs {
+.fld-imerss-tabs {
     display: none;
 }
 
-.fl-bagatelle-tabs-and-search {
+.fl-imerss-tabs-and-search {
     padding: 2rem;
 }
 
-.fl-bagatelle-container {
+.fl-imerss-container {
     display: block;
 }
 
-.fld-bagatelle-map-holder {
+.fld-imerss-map-holder {
     flex: 1 1 0;
     margin-bottom: 7.5%;
     margin-top: 7.5%;
@@ -44,7 +44,7 @@
     opacity: 0.8;
 }
 
-.flc-bagatelle-viz-dimens {
+.flc-imerss-viz-dimens {
     height: revert;
     max-height: 40rem;
 }
@@ -58,7 +58,7 @@
     padding-left: 3rem;
 }
 
-.fld-bagatelle-we-overlay {
+.fld-imerss-we-overlay {
     position: absolute;
     cursor: pointer;
     height: 120%;
@@ -70,7 +70,7 @@
     transition: opacity 2s;
 }
 
-.fl-bagatelle-taxa {
+.fl-imerss-taxa {
     /** Ensure that WE logo pops under taxa to the right */
     z-index: 1000;
 }

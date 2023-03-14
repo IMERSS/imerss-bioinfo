@@ -20,7 +20,7 @@ fluid.defaults("hortis.summarise.csvReader", {
         },
         "onRow.storeRow": "{that}.storeRow",
         "onCompletion.writeCSV": {
-            funcName: "hortis.bagatelle.writeCSV",
+            funcName: "hortis.imerss.writeCSV",
             args: ["{that}.options.outputFile", "{that}.headers", "{that}.uniqueRows", "{that}.completionPromise"]
         }
     }

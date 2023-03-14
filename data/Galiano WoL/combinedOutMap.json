@@ -37,9 +37,9 @@
     "datasets": {
         "Marine Checklist": {
             "name": "Galiano WoL Marine Checklist",
-            "input": "E:/source/gits/bagatelle/data/Galiano WoL/Marine Checklist.csv",
-            "map": "E:/source/gits/bagatelle/data/Galiano WoL/Galiano-data-map.json",
-            "outMap": "E:/source/gits/bagatelle/data/Galiano WoL/Galiano-data-out-map.json",
+            "input": "E:/source/gits/imerss/data/Galiano WoL/Marine Checklist.csv",
+            "map": "E:/source/gits/imerss/data/Galiano WoL/Galiano-data-map.json",
+            "outMap": "E:/source/gits/imerss/data/Galiano WoL/Galiano-data-out-map.json",
             "colour": "#931362"
         }
     },

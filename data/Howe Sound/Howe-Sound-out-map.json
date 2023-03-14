@@ -1,0 +1,15 @@
+{
+    "columns": {
+        "taxonName": "Taxon name",
+        "authority": "Author",
+        "dateObserved": "Date observed",
+        "locality": "Place name",
+        "recordedBy": "Recorded by"
+    },
+    "counts": {
+        "undocumentedCount": {
+            "column": "documenting",
+            "equals": "undocumented"
+        }
+    }
+}

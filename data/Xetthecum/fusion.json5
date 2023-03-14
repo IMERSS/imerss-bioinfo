@@ -2,24 +2,24 @@
     datasets: {
         dataPaper: {
             name: "Galiano Data Paper Part I - Marine Observations (1968-2021)",
-            input: "%bagatelle/data/dataPaper-I/reintegrated-obs.csv",
-            map: "%bagatelle/data/dataPaper-I/combinedOutMap-obs.json",
+            input: "%imerss-bioinfo/data/dataPaper-I/reintegrated-obs.csv",
+            map: "%imerss-bioinfo/data/dataPaper-I/combinedOutMap-obs.json",
             templateMap: false,
-            outMap: "%bagatelle/data/dataPaper-I/combinedOutMap-obs.json",
+            outMap: "%imerss-bioinfo/data/dataPaper-I/combinedOutMap-obs.json",
             colour: "#931362"
         },
         iNat: {
             name: "Xetthecum iNaturalist Observations (2005-2022)",
-            input: "%bagatelle/data/Xetthecum/iNaturalist_Catalogue_2022_02_28.csv",
-            map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
-            outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
+            input: "%imerss-bioinfo/data/Xetthecum/iNaturalist_Catalogue_2022_02_28.csv",
+            map: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-map-new.json",
+            outMap: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99"
         },
         Hunterston: {
             name: "Hunterston Farm Stewardship Report: A Review of the 2010 BioBlitz (2010)",
-            input: "%bagatelle/data/Xetthecum/Hunterston_Farms_Bioblitz_2010_coordinates_corrected_mismatches_reconciled_2022-03-06_coordinates_corrected_2022-03-08.csv",
-            map: "%bagatelle/data/Xetthecum/hunterston-map.json",
-            outMap: "%bagatelle/data/Xetthecum/hunterston-out-map.json",
+            input: "%imerss-bioinfo/data/Xetthecum/Hunterston_Farms_Bioblitz_2010_coordinates_corrected_mismatches_reconciled_2022-03-06_coordinates_corrected_2022-03-08.csv",
+            map: "%imerss-bioinfo/data/Xetthecum/hunterston-map.json",
+            outMap: "%imerss-bioinfo/data/Xetthecum/hunterston-out-map.json",
             colour: "#55a329"
         },
     },
@@ -33,8 +33,8 @@
         },
         CorrectCoordinates: {
             type: "hortis.pipe.CSVInput",
-            input: "%bagatelle/data/Xetthecum/Biodiversity_data_integrated_Xetthecum_3.3_obs_georeferencing_corrected_2022-03-09.csv",
-            map: "%bagatelle/data/Xetthecum/correctedGeoreferencing-map.json",
+            input: "%imerss-bioinfo/data/Xetthecum/Biodiversity_data_integrated_Xetthecum_3.3_obs_georeferencing_corrected_2022-03-09.csv",
+            map: "%imerss-bioinfo/data/Xetthecum/correctedGeoreferencing-map.json",
             processor: "hortis.processCoordinatePatch"
         },
         RoundCoordinates: {
@@ -44,27 +44,27 @@
         },
         XetthecumRegion: {
             type: "hortis.pipe.JSONInput",
-            input: "%bagatelle/data/Xetthecum/Xetthecum_Project_Boundary_3.1.geojson",
+            input: "%imerss-bioinfo/data/Xetthecum/Xetthecum_Project_Boundary_3.1.geojson",
             processor: "hortis.processRegionFilter",
             logRejection: false
         },
         AssignXetthecumFeature: {
             type: "hortis.pipe.JSONInput",
-            input: "%bagatelle/data/Xetthecum/flatFeatures.json",
+            input: "%imerss-bioinfo/data/Xetthecum/flatFeatures.json",
             processor: "hortis.processAssignFeature"
         },
     },
     summaryPatches: {
         AssignHulqNames: {
             type: "hortis.pipe.CSVInput",
-            input: "%bagatelle/data/Xetthecum/Culturally_significant_species_synthesized_Thom_2011_Turner_2014_&_Luschim_2021.csv",
-            map: "%bagatelle/data/Xetthecum/Culturally_significant-map.json",
+            input: "%imerss-bioinfo/data/Xetthecum/Culturally_significant_species_synthesized_Thom_2011_Turner_2014_&_Luschim_2021.csv",
+            map: "%imerss-bioinfo/data/Xetthecum/Culturally_significant-map.json",
             processor: "hortis.xetthecum.assignHulqNames"
         },
         AssignHulqMedia: {
             type: "hortis.pipe.CSVInput",
-            input: "%bagatelle/data/Xetthecum/Species_media.csv",
-            map: "%bagatelle/data/Xetthecum/Species_media-map.json",
+            input: "%imerss-bioinfo/data/Xetthecum/Species_media.csv",
+            map: "%imerss-bioinfo/data/Xetthecum/Species_media-map.json",
             processor: "hortis.xetthecum.assignHulqMedia"
         },
     },
@@ -73,8 +73,8 @@
     },
     summarise: true,
     applySwaps: true, // TODO: Naturally, should be an actual pipeline element
-    output: "%bagatelle/data/Xetthecum/reintegrated.csv",
-    combinedOutMap: "%bagatelle/data/Xetthecum/combinedOutMap.json",
+    output: "%imerss-bioinfo/data/Xetthecum/reintegrated.csv",
+    combinedOutMap: "%imerss-bioinfo/data/Xetthecum/combinedOutMap.json",
     filters: {
     }
 }

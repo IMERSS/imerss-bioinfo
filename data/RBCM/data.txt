@@ -6,4 +6,4 @@ Sourced from GBIF.org (29 September 2020) GBIF Occurrence Download https://doi.o
 
 RBCM_GBIF_records_intersected_with_Galiano_polygon_2021_01_18.tsv
 Sourced from GBIF.org (18 January 2021) GBIF Occurrence Download https://doi.org/10.15468/dl.evn8yh
-Polygon used is %bagatelle/data/Galiano/Galiano-boundary-2021-01-18.json
+Polygon used is %imerss-bioinfo/data/Galiano/Galiano-boundary-2021-01-18.json

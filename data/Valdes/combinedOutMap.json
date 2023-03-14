@@ -51,37 +51,37 @@
     "datasets": {
         "PMLS": {
             "name": "Pacific Marine Life Surveys (1965-2015)",
-            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes marine data (dives included).csv",
-            "map": "E:/source/gits/bagatelle/data/Valdes/Valdes-PMLS-map.json",
-            "outMap": "E:/source/gits/bagatelle/data/Valdes/Valdes-PMLS-out-map.json",
+            "input": "E:/source/gits/imerss/data/Valdes/Valdes marine data (dives included).csv",
+            "map": "E:/source/gits/imerss/data/Valdes/Valdes-PMLS-map.json",
+            "outMap": "E:/source/gits/imerss/data/Valdes/Valdes-PMLS-out-map.json",
             "colour": "#931362"
         },
         "iNat": {
             "name": "iNaturalist (2013-2021)",
-            "input": "E:/source/gits/bagatelle/data/Valdes/iNaturalist_Catalogue_2022_11_10.csv",
-            "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
-            "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
+            "input": "E:/source/gits/imerss/data/Valdes/iNaturalist_Catalogue_2022_11_10.csv",
+            "map": "E:/source/gits/imerss/data/iNaturalist/iNaturalist-obs-map-new.json",
+            "outMap": "E:/source/gits/imerss/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99"
         },
         "RBCM": {
             "name": "Royal BC Museum (1920-2018)",
-            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - RBCM - 2022_09_11.csv",
-            "map": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-map.json",
-            "outMap": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-out-map.json",
+            "input": "E:/source/gits/imerss/data/Valdes/Valdes Island - RBCM - 2022_09_11.csv",
+            "map": "E:/source/gits/imerss/data/Valdes/Valdes-synth-map.json",
+            "outMap": "E:/source/gits/imerss/data/Valdes/Valdes-synth-out-map.json",
             "colour": "#29a329"
         },
         "UBC": {
             "name": "UBC Beaty Biodiversity Museum (1905-2018)",
-            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - UBC - 2022_09_11.csv",
-            "map": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-map.json",
-            "outMap": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-out-map.json",
+            "input": "E:/source/gits/imerss/data/Valdes/Valdes Island - UBC - 2022_09_11.csv",
+            "map": "E:/source/gits/imerss/data/Valdes/Valdes-synth-map.json",
+            "outMap": "E:/source/gits/imerss/data/Valdes/Valdes-synth-out-map.json",
             "colour": "#55a329"
         },
         "VIC": {
             "name": "Valdes Island Conservancy Surveys (2014-2019)",
-            "input": "E:/source/gits/bagatelle/data/Valdes/Valdes Island - VIC - 2022_09_11.csv",
-            "map": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-map.json",
-            "outMap": "E:/source/gits/bagatelle/data/Valdes/Valdes-synth-out-map.json",
+            "input": "E:/source/gits/imerss/data/Valdes/Valdes Island - VIC - 2022_09_11.csv",
+            "map": "E:/source/gits/imerss/data/Valdes/Valdes-synth-map.json",
+            "outMap": "E:/source/gits/imerss/data/Valdes/Valdes-synth-out-map.json",
             "colour": "#a7a329"
         }
     }

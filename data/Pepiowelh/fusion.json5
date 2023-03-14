@@ -2,9 +2,9 @@
     datasets: {
         iNat: {
             name: "iNaturalist (2014-2023)",
-            input: "%bagatelle/data/Pepiowelh/iNaturalist_Catalogue_2023_02_24.csv",
-            map: "%bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
-            outMap: "%bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
+            input: "%imerss-bioinfo/data/Pepiowelh/iNaturalist_Catalogue_2023_02_24.csv",
+            map: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-map-new.json",
+            outMap: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99",
             observationId: "iNat:%id"
         }
@@ -21,8 +21,8 @@
     },
     summarise: true,
     applySwaps: false, // TODO: Naturally, should be an actual pipeline element
-    output: "%bagatelle/data/Pepiowelh/reintegrated.csv",
-    combinedOutMap: "%bagatelle/data/Pepiowelh/combinedOutMap.json",
+    output: "%imerss-bioinfo/data/Pepiowelh/reintegrated.csv",
+    combinedOutMap: "%imerss-bioinfo/data/Pepiowelh/combinedOutMap.json",
     filters: {
     }
 }

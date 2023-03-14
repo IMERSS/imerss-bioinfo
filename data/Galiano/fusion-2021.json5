@@ -3,46 +3,46 @@
         Animalia: {
             name: "Animalia",
             datasetId: "GAL-Animalia",
-            input: "%bagatelle/data/Galiano/Animalia-2021.csv",
-            map: "%bagatelle/data/Galiano/Galiano-map.json",
-            outMap: "%bagatelle/data/Galiano/Galiano-out-map.json",
+            input: "%imerss-bioinfo/data/Galiano/Animalia-2021.csv",
+            map: "%imerss-bioinfo/data/Galiano/Galiano-map.json",
+            outMap: "%imerss-bioinfo/data/Galiano/Galiano-out-map.json",
             colour: "#931362"
         },
         Bacteria: {
             name: "Bacteria",
             datasetId: "GAL-Bacteria",
-            input: "%bagatelle/data/Galiano/Bacteria-2021.csv",
-            map: "%bagatelle/data/Galiano/Galiano-map.json",
-            outMap: "%bagatelle/data/Galiano/Galiano-out-map.json",
+            input: "%imerss-bioinfo/data/Galiano/Bacteria-2021.csv",
+            map: "%imerss-bioinfo/data/Galiano/Galiano-map.json",
+            outMap: "%imerss-bioinfo/data/Galiano/Galiano-out-map.json",
             colour: "#931362"
         },
         Fungi: {
             name: "Fungi, Lichens & Protozoa",
             datasetId: "GAL-Fungi",
-            input: "%bagatelle/data/Galiano/Fungi-2021.csv",
-            map: "%bagatelle/data/Galiano/Galiano-map.json",
-            outMap: "%bagatelle/data/Galiano/Galiano-out-map.json",
+            input: "%imerss-bioinfo/data/Galiano/Fungi-2021.csv",
+            map: "%imerss-bioinfo/data/Galiano/Galiano-map.json",
+            outMap: "%imerss-bioinfo/data/Galiano/Galiano-out-map.json",
             colour: "#931362"
         },
         Plantae: {
             name: "Plantae & Chromista",
             datasetId: "GAL-Plantae",
-            input: "%bagatelle/data/Galiano/Plantae-2021.csv",
-            map: "%bagatelle/data/Galiano/Galiano-map.json",
-            outMap: "%bagatelle/data/Galiano/Galiano-out-map.json",
+            input: "%imerss-bioinfo/data/Galiano/Plantae-2021.csv",
+            map: "%imerss-bioinfo/data/Galiano/Galiano-map.json",
+            outMap: "%imerss-bioinfo/data/Galiano/Galiano-out-map.json",
             colour: "#931362"
         }
     },
     summaryPatches: {
         AssignHulqNames: {
             type: "hortis.pipe.CSVInput",
-            input: "%bagatelle/data/Xetthecum/Culturally_significant_species_synthesized_Thom_2011_Turner_2014_&_Luschim_2021.csv",
-            map: "%bagatelle/data/Xetthecum/Culturally_significant-map.json",
+            input: "%imerss-bioinfo/data/Xetthecum/Culturally_significant_species_synthesized_Thom_2011_Turner_2014_&_Luschim_2021.csv",
+            map: "%imerss-bioinfo/data/Xetthecum/Culturally_significant-map.json",
             processor: "hortis.xetthecum.assignHulqNames"
         }
     },
     summarise: false,
     applySwaps: true,
-    output: "%bagatelle/data/Galiano/reintegrated.csv",
-    combinedOutMap: "%bagatelle/data/Galiano/combinedOutMap.json"
+    output: "%imerss-bioinfo/data/Galiano/reintegrated.csv",
+    combinedOutMap: "%imerss-bioinfo/data/Galiano/combinedOutMap.json"
 }

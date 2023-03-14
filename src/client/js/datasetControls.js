@@ -87,10 +87,10 @@ fluid.defaults("hortis.datasetControlBase", {
 fluid.defaults("hortis.datasetControlHeader", {
     gradeNames: "hortis.datasetControlBase",
     markup: {
-        container: "<tr class=\"fld-bagatelle-dataset-control\">" +
-                 "<td fl-bagatelle-dataset-legend-column></td>" +
-                 "<td fl-bagatelle-dataset-checkbox-column></td>" +
-                 "<td fl-bagatelle-dataset-name-column></td>" +
+        container: "<tr class=\"fld-imerss-dataset-control\">" +
+                 "<td fl-imerss-dataset-legend-column></td>" +
+                 "<td fl-imerss-dataset-checkbox-column></td>" +
+                 "<td fl-imerss-dataset-name-column></td>" +
                  "%extraColumns</tr>",
         cell: "<td class=\"%columnClass\">%text</td>"
     },
@@ -102,9 +102,9 @@ fluid.defaults("hortis.datasetControlHeader", {
 fluid.defaults("hortis.datasetControl", {
     gradeNames: "hortis.datasetControlBase",
     selectors: {
-        legend: ".fld-bagatelle-dataset-legend",
-        enable: ".fld-bagatelle-dataset-checkbox",
-        name: ".fld-bagatelle-dataset-name"
+        legend: ".fld-imerss-dataset-legend",
+        enable: ".fld-imerss-dataset-checkbox",
+        name: ".fld-imerss-dataset-name"
     },
     datasetId: "{source}.datasetId", // Stupid, creates circularity if we try to resolve model segment from model on line 274
     model: {
@@ -136,10 +136,10 @@ fluid.defaults("hortis.datasetControl", {
         renderMarkup: "hortis.datasetControl.renderMarkup({that}.options.markup, false, {that}.model.dataset, {quantiser}.datasets, {that}.options.datasetId)"
     },
     markup: {
-        container: "<tr class=\"fld-bagatelle-dataset-control\">" +
-                 "<td fl-bagatelle-dataset-legend-column><span class=\"fld-bagatelle-dataset-legend\"></span></td>" +
-                 "<td fl-bagatelle-dataset-checkbox-column><input class=\"fld-bagatelle-dataset-checkbox\" type=\"checkbox\" value=\"true\"/></td>" +
-                 "<td fl-bagatelle-dataset-name-column><span class=\"fld-bagatelle-dataset-name\"></span></td>" +
+        container: "<tr class=\"fld-imerss-dataset-control\">" +
+                 "<td fl-imerss-dataset-legend-column><span class=\"fld-imerss-dataset-legend\"></span></td>" +
+                 "<td fl-imerss-dataset-checkbox-column><input class=\"fld-imerss-dataset-checkbox\" type=\"checkbox\" value=\"true\"/></td>" +
+                 "<td fl-imerss-dataset-name-column><span class=\"fld-imerss-dataset-name\"></span></td>" +
                  "%extraColumns</tr>",
         cell: "<td class=\"%columnClass\">%text</td>"
     }
@@ -148,13 +148,13 @@ fluid.defaults("hortis.datasetControl", {
 fluid.defaults("hortis.datasetControlFooter", {
     gradeNames: "hortis.datasetControlBase",
     selectors: {
-        text: ".fl-bagatelle-dataset-text",
-        obsCount: ".fl-bagatelle-dataset-obs",
-        taxaCount: ".fl-bagatelle-dataset-taxa",
-        area: ".fl-bagatelle-dataset-area"
+        text: ".fl-imerss-dataset-text",
+        obsCount: ".fl-imerss-dataset-obs",
+        taxaCount: ".fl-imerss-dataset-taxa",
+        area: ".fl-imerss-dataset-area"
     },
     markup: {
-        container: "<tr><td></td><td></td><td class=\"fl-bagatelle-dataset-text\"></td><td class=\"fl-bagatelle-dataset-obs\"></td><td class=\"fl-bagatelle-dataset-taxa\"></td></tr>"
+        container: "<tr><td></td><td></td><td class=\"fl-imerss-dataset-text\"></td><td class=\"fl-imerss-dataset-obs\"></td><td class=\"fl-imerss-dataset-taxa\"></td></tr>"
     },
     modelRelay: {
         text: {
@@ -180,15 +180,15 @@ fluid.defaults("hortis.datasetControlFooter", {
 hortis.datasetControl.columnNames = {
     totalCount: {
         name: "Observations",
-        clazz: "fl-bagatelle-obs-count-column"
+        clazz: "fl-imerss-obs-count-column"
     },
     taxaCount: {
         name: "Taxa",
-        clazz: "fl-bagatelle-taxa-count-column"
+        clazz: "fl-imerss-taxa-count-column"
     }/*,
     area: {
         name: "Area (km²)",
-        clazz: "fl-bagatelle-area-column"
+        clazz: "fl-imerss-area-column"
     }*/
 };
 

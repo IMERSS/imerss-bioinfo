@@ -43,9 +43,9 @@
     "datasets": {
         "VASC": {
             "name": "Vascular Plants",
-            "input": "E:/source/gits/bagatelle/data/Galiano 2022/Galiano_Island_vascular_plant_records_consolidated.csv",
-            "map": "E:/source/gits/bagatelle/data/Galiano 2022/DWC-map.json",
-            "outMap": "E:/source/gits/bagatelle/data/Galiano 2022/DWC-out-map.json",
+            "input": "E:/source/gits/imerss/data/Galiano 2022/Galiano_Island_vascular_plant_records_consolidated.csv",
+            "map": "E:/source/gits/imerss/data/Galiano 2022/DWC-map.json",
+            "outMap": "E:/source/gits/imerss/data/Galiano 2022/DWC-out-map.json",
             "colour": "#931362"
         }
     }

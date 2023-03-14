@@ -1,0 +1,5 @@
+{
+    outputFile: "%imerss-bioinfo/data/Howe Sound/Howe-Sound-Life.json.lz4",
+    inputFiles: ["%imerss-bioinfo/data/Howe Sound/Howe-Sound-reintegrated.csv"],
+    mapFile: "%imerss-bioinfo/data/Howe Sound/combinedOutMap.json"
+}

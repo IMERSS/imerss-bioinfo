@@ -3,13 +3,13 @@
 "use strict";
 
 const fluid = require("infusion");
-fluid.require("%bagatelle");
+fluid.require("%imerss-bioinfo");
 fluid.require("kettle");
 
 const hortis = fluid.registerNamespace("hortis");
 
-fluid.require("%bagatelle/src/utils/dataSource.js");
-fluid.require("%bagatelle/src/iNaturalist/taxonAPI.js");
+fluid.require("%imerss-bioinfo/src/utils/dataSource.js");
+fluid.require("%imerss-bioinfo/src/iNaturalist/taxonAPI.js");
 
 const taxaAPIbyId = hortis.iNatTaxonById();
 const taxaAPIbyName = hortis.iNatTaxonByName();

@@ -3,9 +3,9 @@
         Animalia: {
             name: "Animalia",
             datasetId: "DATA-Animalia",
-            input: "%bagatelle/data/dataPaper-I-in/Animalia.csv",
-            map: "%bagatelle/data/dataPaper-I-in/dataPaper-map.json",
-            outMap: "%bagatelle/data/dataPaper-I-in/dataPaper-out-map.json",
+            input: "%imerss-bioinfo/data/dataPaper-I-in/Animalia.csv",
+            map: "%imerss-bioinfo/data/dataPaper-I-in/dataPaper-map.json",
+            outMap: "%imerss-bioinfo/data/dataPaper-I-in/dataPaper-out-map.json",
             colour: "#931362"
         }
     },
@@ -17,6 +17,6 @@
     // being faultily corrected by swaps. Therefore for final publication
     // this has to be set to true to avoid misidentifying these taxa.
     applySwaps: true,
-    output: "%bagatelle/data/dataPaper-I-in/reintegrated.csv",
-    combinedOutMap: "%bagatelle/data/dataPaper-I-in/combinedOutMap.json"
+    output: "%imerss-bioinfo/data/dataPaper-I-in/reintegrated.csv",
+    combinedOutMap: "%imerss-bioinfo/data/dataPaper-I-in/combinedOutMap.json"
 }

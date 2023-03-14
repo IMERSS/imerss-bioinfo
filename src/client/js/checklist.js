@@ -113,8 +113,8 @@ fluid.defaults("hortis.checklist", {
     filterRanks: false,
     selectors: {
         hoverable: "p",
-        checklist: ".fld-bagatelle-checklist",
-        upArrow: ".fld-bagatelle-checklist-up"
+        checklist: ".fld-imerss-checklist",
+        upArrow: ".fld-imerss-checklist-up"
     },
     invokers: {
         generateChecklist: {

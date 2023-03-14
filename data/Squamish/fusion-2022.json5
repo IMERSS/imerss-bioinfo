@@ -3,30 +3,30 @@
         Animalia: {
             name: "Animalia",
             datasetId: "SQU-Animalia",
-            input: "%bagatelle/data/Squamish/sources/Animalia-2022.csv",
-            map: "%bagatelle/data/Squamish/Squamish-map.json",
-            outMap: "%bagatelle/data/Squamish/Squamish-out-map.json",
+            input: "%imerss-bioinfo/data/Squamish/sources/Animalia-2022.csv",
+            map: "%imerss-bioinfo/data/Squamish/Squamish-map.json",
+            outMap: "%imerss-bioinfo/data/Squamish/Squamish-out-map.json",
             colour: "#931362"
         },
         Fungi: {
             name: "Fungi, Lichens & Protozoa",
             datasetId: "SQU-Fungi",
-            input: "%bagatelle/data/Squamish/sources/Fungi-2022.csv",
-            map: "%bagatelle/data/Squamish/Squamish-map.json",
-            outMap: "%bagatelle/data/Squamish/Squamish-out-map.json",
+            input: "%imerss-bioinfo/data/Squamish/sources/Fungi-2022.csv",
+            map: "%imerss-bioinfo/data/Squamish/Squamish-map.json",
+            outMap: "%imerss-bioinfo/data/Squamish/Squamish-out-map.json",
             colour: "#931362"
         },
         Plantae: {
             name: "Plantae & Chromista",
             datasetId: "SQU-Plantae",
-            input: "%bagatelle/data/Squamish/sources/Plantae-2022.csv",
-            map: "%bagatelle/data/Squamish/Squamish-map.json",
-            outMap: "%bagatelle/data/Squamish/Squamish-out-map.json",
+            input: "%imerss-bioinfo/data/Squamish/sources/Plantae-2022.csv",
+            map: "%imerss-bioinfo/data/Squamish/Squamish-map.json",
+            outMap: "%imerss-bioinfo/data/Squamish/Squamish-out-map.json",
             colour: "#931362"
         }
     },
     summarise: false,
     applySwaps: true,
-    output: "%bagatelle/data/Squamish/reintegrated.csv",
-    combinedOutMap: "%bagatelle/data/Squamish/combinedOutMap.json"
+    output: "%imerss-bioinfo/data/Squamish/reintegrated.csv",
+    combinedOutMap: "%imerss-bioinfo/data/Squamish/combinedOutMap.json"
 }

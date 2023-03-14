@@ -4,7 +4,7 @@
 
 const fluid = require("infusion");
 const minimist = require("minimist");
-fluid.require("%bagatelle");
+fluid.require("%imerss-bioinfo");
 
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithoutMap.js");
@@ -20,7 +20,7 @@ fluid.setLogging(true);
 const parsedArgs = minimist(process.argv.slice(2));
 
 const outputFile = parsedArgs.o || "unscrewed.csv";
-const inputFile = parsedArgs._[0] || "%bagatelle/data/RBCM/RBCM_GBIF_records_intersected_with_Galiano_polygon_2021_03_08.tsv";
+const inputFile = parsedArgs._[0] || "%imerss-bioinfo/data/RBCM/RBCM_GBIF_records_intersected_with_Galiano_polygon_2021_03_08.tsv";
 
 const input = hortis.csvReaderWithoutMap({
     inputFile: fluid.module.resolvePath(inputFile),

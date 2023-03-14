@@ -7,9 +7,9 @@ var fluid = require("infusion");
 var glob = require("glob");
 var kettle = require("kettle");
 var fs = require("fs");
-fluid.require("%bagatelle");
+fluid.require("%imerss-bioinfo");
 
-var baseDir = fluid.module.resolvePath("%bagatelle/data/dataPaper-I-in/Animalia/");
+var baseDir = fluid.module.resolvePath("%imerss-bioinfo/data/dataPaper-I-in/Animalia/");
 
 fs.mkdirSync(baseDir, {
     recursive: true

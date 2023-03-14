@@ -4,7 +4,7 @@
 
 var fluid = require("infusion");
 var minimist = require("minimist");
-fluid.require("%bagatelle");
+fluid.require("%imerss-bioinfo");
 
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
@@ -26,7 +26,7 @@ var parsedArgs = minimist(process.argv.slice(2));
 var file1 = parsedArgs._[0];
 var file2 = parsedArgs._[1];
 
-var mapFile = parsedArgs.map || "%bagatelle/data/coreOutMap.json";
+var mapFile = parsedArgs.map || "%imerss-bioinfo/data/coreOutMap.json";
 var map = hortis.readJSONSync(fluid.module.resolvePath(mapFile), "reading map file");
 
 var files = [file1, file2];

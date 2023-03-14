@@ -2,9 +2,9 @@
     datasets: {
         "Squamish Checklist": {
             name: "Biodiversity Squamish Species Checklist",
-            input: "%bagatelle/data/Squamish/Life.csv",
-            map: "%bagatelle/data/Squamish/Squamish-map.json",
-            outMap: "%bagatelle/data/Squamish/Squamish-out-map.json",
+            input: "%imerss-bioinfo/data/Squamish/Life.csv",
+            map: "%imerss-bioinfo/data/Squamish/Squamish-map.json",
+            outMap: "%imerss-bioinfo/data/Squamish/Squamish-out-map.json",
             colour: "#931362"
         }
     },
@@ -16,6 +16,6 @@
     },
     notes: "This data arose in an email from AS to amb26 of 13/08/2020 named \"2019 BIODIVERSITY SQUAMISH SPECIES CHECKLIST.xlsx\"",
     summarise: false,
-    output: "%bagatelle/data/Squamish/Squamish-reintegrated.csv",
-    combinedOutMap: "%bagatelle/data/Squamish/combinedOutMap.json"
+    output: "%imerss-bioinfo/data/Squamish/Squamish-reintegrated.csv",
+    combinedOutMap: "%imerss-bioinfo/data/Squamish/combinedOutMap.json"
 }

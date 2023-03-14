@@ -2,9 +2,9 @@
     datasets: {
         "Marine Checklist": {
             name: "Galiano WoL Marine Checklist",
-            input: "%bagatelle/data/Galiano WoL/Marine Checklist.csv",
-            map: "%bagatelle/data/Galiano WoL/Galiano-data-map.json",
-            outMap: "%bagatelle/data/Galiano WoL/Galiano-data-out-map.json",
+            input: "%imerss-bioinfo/data/Galiano WoL/Marine Checklist.csv",
+            map: "%imerss-bioinfo/data/Galiano WoL/Galiano-data-map.json",
+            outMap: "%imerss-bioinfo/data/Galiano WoL/Galiano-data-out-map.json",
             colour: "#931362"
         }
     },
@@ -16,6 +16,6 @@
     },
     notes: "This data arose in an email from AS to amb26 of 20/10/19 named \"preliminary marine checklist Galiano 2019\"",
     summarise: false,
-    output: "%bagatelle/data/Galiano WoL/Marine Checklist-reintegrated.csv",
-    combinedOutMap: "%bagatelle/data/Galiano WoL/combinedOutMap.json"
+    output: "%imerss-bioinfo/data/Galiano WoL/Marine Checklist-reintegrated.csv",
+    combinedOutMap: "%imerss-bioinfo/data/Galiano WoL/combinedOutMap.json"
 }

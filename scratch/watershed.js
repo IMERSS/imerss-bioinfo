@@ -3,7 +3,7 @@
 "use strict";
 
 var fluid = require("infusion");
-fluid.require("%bagatelle");
+fluid.require("%imerss-bioinfo");
 
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");

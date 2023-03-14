@@ -20,8 +20,8 @@ L.Map.include({
 fluid.defaults("hortis.leafletMap", {
     gradeNames: ["fluid.viewComponent", "{sunburstLoader}.options.mapFlavourGrade"], // Not a distribution because of FLUID-5836
     selectors: {
-        map: ".fld-bagatelle-map",
-        tooltip: ".fld-bagatelle-map-tooltip"
+        map: ".fld-imerss-map",
+        tooltip: ".fld-imerss-map-tooltip"
     },
     members: {
         toPlot: {}, // General contract from grid map - indexed by "mapBlockId" to "bucket" - contains byTaxonId, count, Lpolygon (colours only used in drawGrid)
@@ -45,8 +45,8 @@ fluid.defaults("hortis.leafletMap", {
         clearMapSelection: null
     },
     markup: {
-        tooltip: "<div class=\"fld-bagatelle-map-tooltip\"></div>",
-        grid: "<div class=\"fld-bagatelle-map-grid\"></div>",
+        tooltip: "<div class=\"fld-imerss-map-tooltip\"></div>",
+        grid: "<div class=\"fld-imerss-map-grid\"></div>",
         tooltipHeader: "<table>",
         tooltipRow: "<tr><td class=\"fl-taxonDisplay-key\">%key: </td><td class=\"fl-taxonDisplay-value\">%value</td>",
         tooltipFooter: "</table>"
@@ -85,7 +85,7 @@ fluid.defaults("hortis.leafletMap", {
 
 fluid.defaults("hortis.leafletMapWithWE", {
     selectors: {
-        WEOverlay: ".fld-bagatelle-we-overlay"
+        WEOverlay: ".fld-imerss-we-overlay"
     },
     listeners: {
         "buildMap.bindWEClick": "hortis.leafletMap.bindWEClick({that})"
@@ -187,7 +187,7 @@ hortis.leafletMap.createTooltip = function (that, markup) {
         }
     });
     $(document).on("click", function (event) {
-        const closest = event.target.closest(".fld-bagatelle-nodismiss-map");
+        const closest = event.target.closest(".fld-imerss-nodismiss-map");
         // Mysteriously SVG paths are not in the document
         if (!closest && event.target.closest("body")) {
             that.events.clearMapSelection.fire();
@@ -201,13 +201,14 @@ hortis.projectBounds = {
     Valdes: [[49.000, -123.798], [49.144, -123.504]],
     Xetthecum: [[48.93713, -123.5110], [48.9511, -123.4980]],
     Pepiowelh: [[48.5650, -123.1575], [48.5980, -123.1266]],
+    HoweSound: [[49.160, -124.281], [50.170, -122.050]],
     SalishSea: [[47.568, -124.200], [49.134, -122.059]]
 };
 
 fluid.defaults("hortis.sunburstLoaderWithMap", {
     gradeNames: "hortis.sunburstLoader",
     selectors: {
-        mapHolder: ".fld-bagatelle-map-holder"
+        mapHolder: ".fld-imerss-map-holder"
     },
     events: {
         sunburstLoaded: null
@@ -215,7 +216,7 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
     mapBounds: hortis.projectBounds.Galiano,
     mapGrades: [],
     mapFlavourGrade: "hortis.leafletMap.withGrid", // swap out for "withRegions" for Xetthecum style map
-    markupTemplate: "%resourceBase/html/bagatelle-map.html",
+    markupTemplate: "%resourceBase/html/imerss-viz-map.html",
     distributeOptions: {
         sunburstLoaded: {
             target: "{that sunburst}.options.listeners.onCreate",
@@ -270,7 +271,7 @@ hortis.injectSvgPatterns = function (patternText, resourceBase, container) {
 fluid.defaults("hortis.mapLoaderWithoutSunburst", {
     // TODO: Refactor this obvious insanity
     gradeNames: "hortis.sunburstLoaderWithMap",
-    markupTemplate: "%resourceBase/html/bagatelle-map-only.html",
+    markupTemplate: "%resourceBase/html/imerss-viz-map-only.html",
     components: {
         sunburst: {
             options: {

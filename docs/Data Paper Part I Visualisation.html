@@ -3,10 +3,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-        <link rel="stylesheet" type="text/css" href="css/bagatelle-all.css" />
+        <link rel="stylesheet" type="text/css" href="css/imerss-viz-all.css" />
         <script src="js/jquery.js"></script>
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-        <script src="js/bagatelle-all.js"></script>
+        <script src="js/imerss-viz-all.js"></script>
         <script src="data/Galiano/Galiano_map_0.js"></script>
 
         <title>Galiano Data Paper Part I - Marine List: Map View</title>
@@ -14,16 +14,16 @@
 
     <body>
         <style>
-            .fl-bagatelle-obs-count-column, .fl-bagatelle-dataset-obs {
+            .fl-imerss-obs-count-column, .fl-imerss-dataset-obs {
                 display: none;
             }
-            .fl-bagatelle-taxa-count-column, .fl-bagatelle-dataset-taxa {
+            .fl-imerss-taxa-count-column, .fl-imerss-dataset-taxa {
                 display: none;
             }            
-            .fl-bagatelle-area-column, .fl-bagatelle-dataset-area {
+            .fl-imerss-area-column, .fl-imerss-dataset-area {
                 display: none;
             }
-            .fl-bagatelle-dataset-text {
+            .fl-imerss-dataset-text {
                 display: none;
             }
             body {
@@ -32,11 +32,11 @@
         </style>
 
         <h2>Galiano Data Paper Part I - Marine List: Map View</h2>
-        <div class="fl-bagatelle-container">
+        <div class="fl-imerss-container">
 
         </div>
         <script>
-            hortis.mapLoaderWithoutSunburst(".fl-bagatelle-container", {
+            hortis.mapLoaderWithoutSunburst(".fl-imerss-container", {
                 mapGrades: ["hortis.GBIFTiles"],
                 resourceBase: ".",
                 colourCount: "observationCount",

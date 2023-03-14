@@ -8,7 +8,7 @@ var moment = require("moment-timezone");
 var ExcelJS = require("exceljs");
 var fs = require("fs");
 
-fluid.require("%bagatelle");
+fluid.require("%imerss-bioinfo");
 
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
