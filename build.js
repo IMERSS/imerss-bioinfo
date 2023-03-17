@@ -21,6 +21,7 @@ const buildIndex = {
         "src/client/js/leafletMap.js",
         "src/client/js/datasetControls.js",
         "src/client/js/leafletMapWithGrid.js",
+        "src/client/js/leafletMapWithBareRegions.js",
         "src/client/js/leafletMapWithRegions.js",
         "src/client/js/renderSVG.js",
         "src/client/js/tabs.js",

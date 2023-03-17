@@ -113,20 +113,6 @@ hortis.storeAtPath = function (treeBuilder, path, row) {
         node = child;
     });
 };
-/*
-hortis.loadCachedTaxonDoc = function (treeBuilder, id) {
-    let existing = treeBuilder.taxonCache[id];
-    if (!existing) {
-        existing = treeBuilder.taxonCache[id] = hortis.iNat.loadTaxonDoc(treeBuilder.options.taxonAPIFileBase, id);
-    }
-    // This otherwise causes rank to be "undefined" in the interface - AS report 18/4/22
-    // Not sure what to do about this long-term
-    if (existing.rank === "complex") {
-        existing.rank = "species";
-    }
-    return existing;
-};
- */
 
 /** Produce a "path" holding each cached taxon doc from the supplied row from the root
  * @param {TreeBuilder} treeBuilder - The treeBuilder instance
@@ -194,11 +180,12 @@ hortis.filterVizRanks = function (skipRanks) {
 
 fluid.defaults("hortis.treeBuilder", {
     gradeNames: "fluid.component",
-    taxonAPIFileBase: "data/iNaturalist/taxonAPI",
     mapFile: "data/Galiano/Galiano-map.json",
     outputFile: "Life.json.lz4",
     featureFile: "",
-    regionField: null, obsIdField: null,
+    // Note that "regionField" is currently ignored, and we are hardwired to shift COMMUNITY -> communities, clazz -> classes
+    regionField: null,
+    obsIdField: null,
     inputFiles: [],
     skipRanks: [],
     vizRanks: "@expand:hortis.filterVizRanks({that}.options.skipRanks)",
@@ -207,7 +194,8 @@ fluid.defaults("hortis.treeBuilder", {
         tree: "@expand:hortis.rootNode({that}.map)",
         map: "@expand:hortis.loadMapWithCounts({that}.options.mapFile)",
         features: null, // "flatFeatures" file output, e.g. by deqgis, if configured
-        obs: null, // observations file which will be applied to features - expected to contain column named "regionColumn" supplied in options
+        scrollyFeatures: null, // "scrollyFeatures" file output, e.g. by descrolly, if configured
+        obs: null, // observations file which will be applied to features - expected to contain column named "regionField" supplied in options
         // map of taxonId to taxon file
         taxonCache: {}
     },
@@ -229,23 +217,25 @@ hortis.filterDataset = function (dataset) {
     return fluid.filterKeys(dataset, ["name", "colour"]);
 };
 
-hortis.indexRegions = function (treeBuilder) {
-    const features = treeBuilder.features;
+hortis.newBucket = function (bucket) {
+    bucket.count = 0;
+    bucket.byTaxonId = {};
+    return bucket;
+};
+
+hortis.summaryById = function (treeBuilder) {
     const summaryById = {};
-    treeBuilder.summaryRows.forEach(function (row) {
-        summaryById[row.iNaturalistTaxonId] = row;
-    });
-    const communities = fluid.transform(features.communities, function (community) {
-        community.count = 0;
-        community.byTaxonId = {};
-        return community;
-    });
+    treeBuilder.summaryRows.forEach(row => summaryById[row.iNaturalistTaxonId] = row)
+    return summaryById;
+};
+
+hortis.indexRegions = function (treeBuilder) {
+    const summaryById = hortis.summaryById(treeBuilder);
+    const features = treeBuilder.features;
+    const communities = fluid.transform(features.communities, hortis.newBucket);
     const classes = {};
     fluid.each(features.classes, function (clazz, classKey) {
-        classes[classKey] = {
-            count: 0,
-            byTaxonId: {}
-        };
+        classes[classKey] = hortis.newBucket({});
     });
     const applyObs = function (container, key, taxonId, obsId) {
         if (key) {
@@ -281,6 +271,24 @@ hortis.indexRegions = function (treeBuilder) {
     };
 };
 
+hortis.indexScrollyRegions = function (treeBuilder) {
+    const summaryById = hortis.summaryById(treeBuilder);
+    const classes = treeBuilder.scrollyFeatures.classes;
+    const newClasses = fluid.transform(classes, function (clazz) {
+        // Translate iNat taxon ids to row ids
+        const byTaxonId = {};
+        fluid.each(clazz.byTaxonId, function (troo, key) {
+            const row = summaryById[key];
+            byTaxonId[row.id] = true;
+        });
+        return {byTaxonId};
+    });
+    return {
+        communities: newClasses,
+        classes: newClasses
+    };
+};
+
 hortis.marmalise = async function (treeBuilder) {
     const options = treeBuilder.options;
     await hortis.asyncMap(options.inputFiles, async function (fileName) {
@@ -303,14 +311,19 @@ hortis.marmalise = async function (treeBuilder) {
         }).completionPromise;
         console.log("Read " + obs.rows.length + " observation rows from " + options.obsFile);
         treeBuilder.obs = obs;
+    } else if (options.scrollyFeaturesFile) {
+        treeBuilder.scrollyFeatures = hortis.readModuleJSONSync(options.scrollyFeaturesFile);
+        // Currently do not process obs here
     }
+
 
     hortis.flattenChildren(treeBuilder.tree);
     const output = {
         datasets: fluid.transform(treeBuilder.map.datasets, hortis.filterDataset),
         tree: treeBuilder.tree
     };
-    const extraOutput = options.featuresFile ? hortis.indexRegions(treeBuilder) : {};
+    const extraOutput = options.featuresFile ? hortis.indexRegions(treeBuilder) : options.scrollyFeaturesFile ?
+        hortis.indexScrollyRegions(treeBuilder) : {};
     const fullOutput = fluid.extend(output, extraOutput);
     fs.writeFileSync("marmalised.json", JSON.stringify(fullOutput, null, 4) + "\n");
     const text = JSON.stringify(fullOutput);

@@ -38,6 +38,9 @@
         <script src="node_modules/infusion/src/framework/core/js/DataSource.js"></script>
         <script src="node_modules/infusion/src/framework/core/js/ResourceLoader.js"></script>
         <script src="node_modules/infusion/src/framework/core/js/ResourceLoader-browser.js"></script>
+        <script src="node_modules/infusion/src/framework/renderer/js/fluidParser.js"></script>
+
+        <script src="node_modules/infusion/src/components/tooltip/js/Tooltip.js"></script>
 
         <script src="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js"></script>
         <script src="data/Galiano/Galiano_map_0.js"></script>
@@ -47,19 +50,18 @@
         <script src="src/lib/jquery.binarytransport.js"></script>
 
         <link rel="stylesheet" type="text/css" href="src/client/css/imerss-viz.css"/>
-        <link rel="stylesheet" type="text/css" href="src/client/css/xetthecum.css"/>
+        <link rel="stylesheet" type="text/css" href="src/client/css/xetthecum-shared.css"/>
+        <link rel="stylesheet" type="text/css" href="src/client/css/xetthecum-external.css"/>
 
         <script src="src/client/js/colour.js"></script>
         <script src="src/client/js/renderSVG.js"></script>
         <script src="src/client/js/imerss-viz.js"></script>
         <script src="src/client/js/leafletMap.js"></script>
         <script src="src/client/js/datasetControls.js"></script>
-        <script src="src/client/js/leafletMapWithBareRegions.js"></script>
-        <script src="src/client/js/leafletMapWithRegions.js"></script>
+        <script src="src/client/js/leafletMapWithGrid.js"></script>
         <script src="src/client/js/autocomplete.js"></script>
         <script src="src/client/js/tabs.js"></script>
         <script src="src/client/js/checklist.js"></script>
-        <script src="src/client/js/xetthecum.js"></script>
 
         <style>
             body {
@@ -67,24 +69,18 @@
             }
         </style>
 
-        <title>Xetthecum Map View</title>
+        <title>Átl’ḵa7tsem/Howe Sound Biosphere Map View</title>
     </head>
 
     <body>
-        <h2 class="fl-xetthecum-banner">Xetthecum</h2>
+        <h2 class="fl-xetthecum-banner">Átl’ḵa7tsem/Howe Sound Biosphere Map View</h2>
         <div class="fl-imerss-container">
         </div>
         <script>
-            hortis.sunburstLoaderWithMap(".fl-imerss-container", {
-                gradeNames: ["hortis.svgPatternLoader", "hortis.xetthecumSunburstLoader"],
-                markupTemplate: "%resourceBase/html/imerss-viz-map-xetthecum.html",
-                mapGrades: ["hortis.GBIFTiles"],
-                mapFlavourGrade: "hortis.leafletMap.withRegions",
+            hortis.scrollyMapLoader(".fl-imerss-container", {
+                markupTemplate: "%resourceBase/html/imerss-viz-map-scrolly.html",
                 renderMarkup: true,
-                mapBounds: hortis.projectBounds.Xetthecum,
-                phyloMap: "%resourceBase/json/kingdomPhyloMap.json",
-                colourCount: "observationCount",
-                vizFile: "data/Xetthecum/Life.json.lz4"});
+                vizFile: "data/Howe Sound/Howe-Sound-Scrolly-Life.json.lz4"});
         </script>
     </body>
 </html>

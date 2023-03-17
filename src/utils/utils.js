@@ -90,3 +90,10 @@ hortis.asyncMap = async function (arr, fn) {
     }
     return result;
 };
+
+// Taken from https://codeburst.io/javascript-async-await-with-foreach-b6ba62bbf404
+hortis.asyncForEach = async function (array, callback) {
+    for (let index = 0; index < array.length; index++) {
+        await callback(array[index], index, array);
+    }
+};

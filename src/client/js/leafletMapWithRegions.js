@@ -6,22 +6,23 @@
 var hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.leafletMap.withRegions", {
+    gradeNames: "hortis.leafletMap.withBareRegions",
     selectors: {
         legendKeys: ".fld-imerss-map-legend-keys"
     },
     modelListeners: {
-        selectedRegions: [{
-            namespace: "map",
-            path: "selectedRegions",
-            func: "hortis.leafletMap.withRegions.showSelectedRegions",
-            args: ["{that}", "{change}.value"]
-        }, {
-            namespace: "legend",
+        legend: {
             path: "selectedRegions.*",
             func: "hortis.legendKey.selectRegion",
             args: ["{that}", "{change}.value", "{change}.path"]
-        }]
+        },
+        renderOuterMap: {
+            path: "selectedRegions",
+            func: "hortis.leafletMap.renderOuterPanel",
+            args: "{that}"
+        }
     },
+
     // See notes about this field in leafletMap
     selectionTransactionSource: "map",
     // legendKey: "@expand:hortis.leafletMap.renderLegendKey({that}.classes)",
@@ -33,25 +34,17 @@ fluid.defaults("hortis.leafletMap.withRegions", {
         selectionRoute: "map" // either "map" or "taxa"
     },
     members: {
+        // Represents actual polygons drawn - for bareRegions these are drawn by HTMLWidgets Leaflet
         features: "{sunburst}.viz.features",
-        classes: "{sunburst}.viz.classes",
-        communities: "{sunburst}.viz.communities",
-        toPlot: "{sunburst}.viz.communities", // For general contract of hortis.mapBlockToFocusedTaxa - rename this field, e.g. selectableRegions
-        regions: "{sunburst}.viz.classes",
         outerPanel: "{sunburst}.dom.mapOuterPanel"
     },
     listeners: {
         "buildMap.addRegions": "hortis.leafletMap.withRegions.addRegions({that})",
         "buildMap.drawRegions": "hortis.leafletMap.withRegions.drawRegions({that})",
         "buildMap.drawLegend": "hortis.legendKey.drawLegend({that})",
-        "clearMapSelection.regions": "hortis.clearSelectedRegions({that})",
-        //                                                                          class,       community
-        "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)",
+
         "onCreate.listenTaxonLinks": "hortis.listenTaxonLinks({sunburst})",
         "onCreate.validateTaxonLinks": "hortis.validateTaxonLinks({sunburst}, {that})"
-    },
-    events: {
-        selectRegion: null
     },
     components: {
         bannerManager: {
@@ -107,10 +100,6 @@ hortis.legendKey.drawLegend = function (map) {
             map.events.selectRegion.fire(className, map.classes[className].community);
         });
     });
-};
-
-hortis.toggleClass = function (element, clazz, value) {
-    element.toggleClass(clazz, value);
 };
 
 hortis.legendKey.selectRegion = function (map, value, path) {
@@ -281,65 +270,24 @@ hortis.leafletMap.renderMapOuterPanel = function (map) {
     return topPanel + bottomPanel;
 };
 
-// Most code from here on gets preserved in Howe Sound
-
-hortis.leafletMap.withRegions.selectedRegions = function (selectedRegion, regions) {
-    return fluid.transform(regions, function (junk, key) {
-    // Note simplest way to avoid highlighting all when there is no map selection is to say none are selected
-        return selectedRegion ? key === selectedRegion : false;
-    });
-};
-
-// TODO: This gets preserved but we need to split off the outerPanel update
-hortis.leafletMap.regionSelection = function (map, className, community) {
-    map.applier.change("mapBlockTooltipId", community);
-    map.applier.change("selectedRegions", hortis.leafletMap.withRegions.selectedRegions(className, map.classes));
-    map.applier.change("selectedCommunities", hortis.leafletMap.withRegions.selectedRegions(community, map.communities));
+hortis.leafletMap.renderOuterPanel = function (map) {
     map.outerPanel.html(hortis.leafletMap.renderMapOuterPanel(map));
 };
 
-// TODO: This gets preserved
-hortis.clearSelectedRegions = function (map) {
-    map.applier.change("selectedRegions", hortis.leafletMap.withRegions.selectedRegions(null, map.classes));
-    map.applier.change("selectedCommunities", hortis.leafletMap.withRegions.selectedRegions(null, map.communities));
-};
+// Most code from here on gets preserved in Howe Sound
 
-
-hortis.regionOpacity = function (region) {
-    return "--imerss-" + hortis.normaliseToClass(region) + "-opacity";
-};
-
-hortis.regionBorder = function (region) {
-    return "--imerss-" + hortis.normaliseToClass(region) + "-stroke";
-};
-
-hortis.leafletMap.withRegions.showSelectedRegions = function (map, selectedRegions) {
-    const style = map.container[0].style;
-    const noSelection = map.model.mapBlockTooltipId === null;
-    Object.keys(map.regions).forEach(function (key) {
-        const lineFeature = map.classes[key].color;
-        style.setProperty(hortis.regionOpacity(key), selectedRegions[key] || noSelection ? "1.0" : "0.4");
-        style.setProperty(hortis.regionBorder(key), selectedRegions[key] ? "#FEF410" : (lineFeature ? fluid.colour.arrayToString(lineFeature) : "none"));
-    });
-};
 
 hortis.leafletMap.withRegions.addRegions = function (that) {
     that.map.createPane("hortis-regions");
     that.regionGroup = L.layerGroup({pane: "hortis-regions"}).addTo(that.map);
 };
 
-hortis.addStyle = function (text) {
-    const style = document.createElement("style");
-    style.type = "text/css";
-    style.innerText = text;
-    document.getElementsByTagName("head")[0].appendChild(style);
-};
 
 hortis.leafletMap.withRegions.drawRegions = function (map) {
     const regionClass = function (className) {
         return "fld-imerss-region-" + hortis.normaliseToClass(className);
     };
-    map.applier.change("selectedRegions", hortis.leafletMap.withRegions.selectedRegions(null, map.classes));
+    map.applier.change("selectedRegions", hortis.leafletMap.selectedRegions(null, map.classes));
 
     map.regionGroup.clearLayers();
 

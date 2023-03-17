@@ -37,7 +37,7 @@ fluid.defaults("hortis.leafletMap", {
         mapInitialised: "@expand:{that}.events.buildMap.fire()",
         // zoom: Number (0 - whole world -> 18 - maximal zoom)
         datasetEnabled: "@expand:hortis.datasetEnabledModel({that}.options.datasets)",
-        // Terrible name which needs to be reviewed - common between map variants indicating "selected region"
+        // This name needs to become selectedRegion - common between map variants (grid, regions) indicating "selected region"
         mapBlockTooltipId: null
     },
     events: {
@@ -83,6 +83,7 @@ fluid.defaults("hortis.leafletMap", {
     // heatHigh: "#ff0000",
 });
 
+// Special grade to render the WhiteswanEnvironmental logo hovering over the map
 fluid.defaults("hortis.leafletMapWithWE", {
     selectors: {
         WEOverlay: ".fld-imerss-we-overlay"
@@ -243,6 +244,15 @@ fluid.defaults("hortis.sunburstLoaderWithMap", {
             }
         }
     }
+});
+
+fluid.defaults("hortis.scrollyMapLoader", {
+    gradeNames: "hortis.sunburstLoaderWithMap",
+    mapFlavourGrade: "hortis.leafletMap.withBareRegions",
+    selectors: { // The map does not render
+        mapHolder: ""
+    },
+    markupTemplate: "%resourceBase/html/imerss-viz-map-scrolly.html"
 });
 
 // Mixin grade for sunburstLoader, currently used in Xetthecum driver
