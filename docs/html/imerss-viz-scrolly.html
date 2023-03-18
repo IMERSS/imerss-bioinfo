@@ -1,7 +1,32 @@
 <div class="fl-imerss-container">
+  <style>
+    .fl-imerss-map-and-taxa {
+        flex-direction: row
+    }
+    .flc-imerss-viz-dimens {
+        height: auto;
+    }
+    .fl-imerss-checklist-holder {
+        background: var(--imerss-eco-colour);
+    }
+    .fl-imerss-container {
+        max-height: 70vh;
+    }
+    .fld-imerss-taxonDisplay {
+        width: 380px;
+    }
+  </style>
   <div class="fl-imerss-region"></div>
 
   <div class="fl-imerss-map-and-taxa">
+
+    <div class="fld-imerss-checklist-holder fl-imerss-checklist-holder fl-imerss-panel">
+      <div class="fld-imerss-panel-label"></div>
+      <div class="fld-imerss-checklist-up" title="Go to parent taxon" alt="Go to parent taxon">
+      </div>
+      <div class="fld-imerss-checklist">
+      </div>
+    </div>
 
     <div class="fl-imerss-taxa fld-imerss-nodismiss-map">
 
@@ -13,18 +38,10 @@
         </div>
 
         <div id="fli-tab-checklist" class="fl-imerss-panel">
-
           <div class="fl-imerss-checklist-spacer"></div>
-          <div class="fld-imerss-checklist-holder fl-imerss-checklist-holder flc-imerss-viz-dimens">
-            <div class="fld-imerss-panel-label"></div>
-            <div class="fld-imerss-checklist-up" title="Go to parent taxon" alt="Go to parent taxon">
-            </div>
-            <div class="fld-imerss-checklist">
-            </div>
-          </div>
         </div>
 
-        <div class="fld-imerss-tabs ui-tabs ui-widget ui-widget-content fl-imerss-left-column">
+        <div class="fld-imerss-tabs ui-tabs ui-widget ui-widget-content fl-imerss-left-column" style="display:none">
           <ul class="ui-tabs-nav" role="tablist">
             <li class="ui-tabs-tab ui-tab ui-state-default ui-tabs-active">
               <a class="ui-tabs-anchor" href="#fli-tab-simple-checklist">Checklist</a>
@@ -60,7 +77,7 @@
 
     </div>
 
-    <div class="fld-imerss-taxonDisplay fld-imerss-nodismiss-map flc-imerss-viz-dimens">
+    <div class="fld-imerss-taxonDisplay fld-imerss-nodismiss-map">
       <div class="fl-taxonDisplay-row"></div>
     </div>
   </div>
