@@ -47,9 +47,9 @@
     "datasets": {
         "HOWE": {
             "name": "Howe Sound Gridded Data",
-            "input": "E:/source/gits/imerss/data/Howe Sound/1km_gridded_vascular_plant_records_2022-12-24_WGS84.csv",
-            "map": "E:/source/gits/imerss/data/Howe Sound/Howe-Sound-map.json",
-            "outMap": "E:/source/gits/imerss/data/Howe Sound/Howe-Sound-out-map.json",
+            "input": "E:/source/gits/bagatelle/data/Howe Sound/1km_gridded_vascular_plant_records_2022-12-24_WGS84.csv",
+            "map": "E:/source/gits/bagatelle/data/Howe Sound/Howe-Sound-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Howe Sound/Howe-Sound-out-map.json",
             "colour": "#931362",
             "datasetId": "HOWE"
         }

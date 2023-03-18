@@ -3,9 +3,7 @@
 "use strict";
 
 const fluid = require("infusion");
-const fs = require("fs");
 const minimist = require("minimist");
-const glob = require("glob");
 
 fluid.require("%imerss-bioinfo");
 

@@ -23,6 +23,8 @@
         "latitude": "Latitude",
         "longitude": "Longitude",
         "authority": "Author",
+        "collection": "Collection",
+        "catalogueNumber": "Catalogue Number",
         "dateObserved": "Date observed",
         "locality": "Place name",
         "recordedBy": "Recorded by"

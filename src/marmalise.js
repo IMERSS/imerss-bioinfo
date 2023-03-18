@@ -225,7 +225,7 @@ hortis.newBucket = function (bucket) {
 
 hortis.summaryById = function (treeBuilder) {
     const summaryById = {};
-    treeBuilder.summaryRows.forEach(row => summaryById[row.iNaturalistTaxonId] = row)
+    treeBuilder.summaryRows.forEach(row => summaryById[row.iNaturalistTaxonId] = row);
     return summaryById;
 };
 

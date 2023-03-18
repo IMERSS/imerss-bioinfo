@@ -15,11 +15,6 @@ fluid.defaults("hortis.leafletMap.withRegions", {
             path: "selectedRegions.*",
             func: "hortis.legendKey.selectRegion",
             args: ["{that}", "{change}.value", "{change}.path"]
-        },
-        renderOuterMap: {
-            path: "selectedRegions",
-            func: "hortis.leafletMap.renderOuterPanel",
-            args: "{that}"
         }
     },
 
@@ -44,7 +39,8 @@ fluid.defaults("hortis.leafletMap.withRegions", {
         "buildMap.drawLegend": "hortis.legendKey.drawLegend({that})",
 
         "onCreate.listenTaxonLinks": "hortis.listenTaxonLinks({sunburst})",
-        "onCreate.validateTaxonLinks": "hortis.validateTaxonLinks({sunburst}, {that})"
+        "onCreate.validateTaxonLinks": "hortis.validateTaxonLinks({sunburst}, {that})",
+        "selectRegion.renderOuterPanel": "hortis.leafletMap.renderOuterPanel({that})"
     },
     components: {
         bannerManager: {

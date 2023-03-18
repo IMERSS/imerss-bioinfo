@@ -186,7 +186,9 @@ hortis.assignObsIds = function (rows, map, dataset) {
     }
     rows.forEach(function (row) {
         // TODO: Source this field from hortis.summarise - implies pushing summarise through args all the way back to hortis.fusionToLoadable
-        row.collection = map.datasetId;
+        if (row.collection === undefined) {
+            row.collection = map.datasetId;
+        }
     });
     return rows;
 };

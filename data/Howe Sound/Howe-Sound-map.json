@@ -2,6 +2,8 @@
     "columns": {
         "taxonName": "%scientific",
         "authority": "%scientif_1",
+        "collection": "%collection",
+        "catalogueNumber": "%catalogNum",
         "dateObserved": "%eventDate",
         "recordedBy": "%recordedBy",
         "locality": "%locality",

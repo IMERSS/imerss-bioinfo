@@ -1,5 +1,3 @@
-/* global L */
-
 "use strict";
 
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying

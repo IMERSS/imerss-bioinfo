@@ -25,7 +25,7 @@ const inputFile = parsedArgs._[0] || "%imerss-bioinfo/data/RBCM/RBCM_GBIF_record
 const input = hortis.csvReaderWithoutMap({
     inputFile: fluid.module.resolvePath(inputFile),
     csvOptions: {
-//        separator: "\t" // TODO: remember to put this back for real GBIF
+    //   separator: "\t" // TODO: remember to put this back for real GBIF
     }
 });
 input.completionPromise.then(function () {

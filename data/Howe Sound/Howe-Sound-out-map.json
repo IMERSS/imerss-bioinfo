@@ -2,6 +2,8 @@
     "columns": {
         "taxonName": "Taxon name",
         "authority": "Author",
+        "collection": "Collection",
+        "catalogueNumber": "Catalogue Number",
         "dateObserved": "Date observed",
         "locality": "Place name",
         "recordedBy": "Recorded by"

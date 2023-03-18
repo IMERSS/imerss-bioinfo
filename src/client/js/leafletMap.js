@@ -250,7 +250,12 @@ fluid.defaults("hortis.scrollyMapLoader", {
     gradeNames: "hortis.sunburstLoaderWithMap",
     mapFlavourGrade: "hortis.leafletMap.withBareRegions",
     selectors: { // The map does not render
-        mapHolder: ""
+        mapHolder: "{sunburstLoader}.container"
+    },
+    components: {
+        map: {
+            type: "fluid.emptySubcomponent"
+        }
     },
     markupTemplate: "%resourceBase/html/imerss-viz-map-scrolly.html"
 });
