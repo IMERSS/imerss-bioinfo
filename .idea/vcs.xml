@@ -5,6 +5,7 @@
     <mapping directory="$PROJECT_DIR$/../Salish-Sea-Community-Directory" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../adfsimon-bioinfo" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../howe-sound-mapping" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../inat-components" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../janszen-legacy-storymap" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../maxwell" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../r-scrollytelling-template" vcs="Git" />

@@ -23,6 +23,9 @@ fluid.defaults("hortis.leafletMap", {
         map: ".fld-imerss-map",
         tooltip: ".fld-imerss-map-tooltip"
     },
+    mergePolicy: {
+        "members.map": "replace"
+    },
     members: {
         toPlot: {}, // General contract from grid map - indexed by "mapBlockId" to "bucket" - contains byTaxonId, count, Lpolygon (colours only used in drawGrid)
         // byTaxonId is hash of rowId to array of obsId as built in hortis.quantiser.indexObs - so count is equal to # of keys
@@ -251,11 +254,6 @@ fluid.defaults("hortis.scrollyMapLoader", {
     mapFlavourGrade: "hortis.leafletMap.withBareRegions",
     selectors: { // The map does not render
         mapHolder: "{sunburstLoader}.container"
-    },
-    components: {
-        map: {
-            type: "fluid.emptySubcomponent"
-        }
     },
     markupTemplate: "%resourceBase/html/imerss-viz-map-scrolly.html"
 });

@@ -1,7 +1,7 @@
 {
     "name": "imerss-bioinfo",
     "description": "Working data of the IMERSS biodiversity informatics working group, together with algorithms",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "author": "Antranig Basman",
     "scripts": {
         "lint": "fluid-lint-all"

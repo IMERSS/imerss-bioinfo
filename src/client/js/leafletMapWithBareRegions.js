@@ -24,6 +24,7 @@ fluid.defaults("hortis.leafletMap.withBareRegions", {
         // selectedCommunities: communityKey -> boolean
     },
     members: {
+        map: null,
         classes: "{sunburst}.viz.classes",
         communities: "{sunburst}.viz.communities",
         toPlot: "{sunburst}.viz.communities", // For general contract of hortis.mapBlockToFocusedTaxa - rename this field, e.g. selectableRegions
@@ -39,7 +40,11 @@ fluid.defaults("hortis.leafletMap.withBareRegions", {
     listeners: {
         "clearMapSelection.regions": "hortis.clearSelectedRegions({that})",
         //                                                                          class,       community
-        "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)"
+        "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)",
+        "buildMap.bindZoom": "fluid.identity",
+        "buildMap.fitBounds": "fluid.identity",
+        "buildMap.createTooltip": "fluid.identity",
+        "buildMap.addTiles": "fluid.identity"
     }
 
 });
