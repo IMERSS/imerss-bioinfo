@@ -6,7 +6,7 @@
 var hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.leafletMap.withRegions", {
-    gradeNames: "hortis.leafletMap.withBareRegions",
+    gradeNames: "hortis.leafletMap.withRegionsBase",
     selectors: {
         legendKeys: ".fld-imerss-map-legend-keys"
     },
@@ -57,13 +57,13 @@ fluid.defaults("hortis.leafletMap.withRegions", {
 
 fluid.registerNamespace("hortis.legendKey");
 
-hortis.legendKey.rowTemplate = "<div class=\"fld-imerss-legend-row\ %rowClass\">" +
+hortis.legendKey.rowTemplate = "<div class=\"fld-imerss-legend-row fld-imerss-nodismiss-map %rowClass\">" +
             "<span class=\"fld-imerss-legend-icon\"></span>" +
             "<span class=\"fld-imerss-legend-preview %previewClass\" style=\"%previewStyle\"></span>" +
             "<span class=\"fld-imerss-legend-label\">%keyLabel</span>" +
             "</div>";
 
-hortis.legendKey.blockTemplate = "<div class=\"fld-imerss-legend-block\"><span class=\"fld-imerss-legend-block-name\">%community</span>%rows</div>";
+hortis.legendKey.blockTemplate = "<div class=\"fld-imerss-legend-block\"><span class=\"fld-imerss-legend-block-name fld-imerss-nodismiss-map\">%community</span>%rows</div>";
 
 hortis.legendKey.renderMarkup = function (markup, clazz, className) {
     const style = hortis.fillColorToStyle(clazz.fillColor || clazz.color);

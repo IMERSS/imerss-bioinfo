@@ -164,8 +164,9 @@ const buildFromFiles = function (buildIndex, nodeFiles) {
     const promise = terser.minify(fullJsHash, {
         mangle: false,
         sourceMap: {
-            filename: "imerss-viz.js",
-            url: "imerss-viz.js.map"
+            filename: "imerss-viz-all.js",
+            url: "imerss-viz-all.js.map",
+            root: "../.."
         }
     });
     promise.then(function (minified) {

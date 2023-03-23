@@ -1,12 +1,12 @@
 {
     "name": "imerss-bioinfo",
     "description": "Working data of the IMERSS biodiversity informatics working group, together with algorithms",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "author": "Antranig Basman",
     "scripts": {
         "lint": "fluid-lint-all"
     },
-    "main":  "index.js",
+    "main": "index.js",
     "dependencies": {
         "infusion": "4.0.0",
         "kettle": "2.3.0",
@@ -41,7 +41,13 @@
         "url": "https://github.com/IMERSS/imerss-bioinfo"
     },
     "files": [
-        "/src", "/test", "/index.js", "/build.js", "/index*.html", "/docs/js", "/docs/css"
+        "/src",
+        "/test",
+        "/index.js",
+        "/build.js",
+        "/index*.html",
+        "/docs/js",
+        "/docs/css"
     ],
     "engines": {
         "node": ">=14.0.0"

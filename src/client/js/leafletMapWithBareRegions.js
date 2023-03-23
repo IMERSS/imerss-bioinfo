@@ -10,7 +10,8 @@ hortis.addStyle = function (text) {
     document.getElementsByTagName("head")[0].appendChild(style);
 };
 
-fluid.defaults("hortis.leafletMap.withBareRegions", {
+// "Abstract" Base grade between withRegions and withBareRegions
+fluid.defaults("hortis.leafletMap.withRegionsBase", {
     modelListeners: {
         selectedRegions: [{
             namespace: "map",
@@ -19,34 +20,45 @@ fluid.defaults("hortis.leafletMap.withBareRegions", {
             args: ["{that}", "{change}.value"]
         }]
     },
-    model: {
-        // selectedRegions: classKey -> boolean
-        // selectedCommunities: communityKey -> boolean
+    events: {
+        selectRegion: null
     },
     members: {
-        map: null,
         classes: "{sunburst}.viz.classes",
         communities: "{sunburst}.viz.communities",
         toPlot: "{sunburst}.viz.communities", // For general contract of hortis.mapBlockToFocusedTaxa - rename this field, e.g. selectableRegions
         // The unit of what is drawn - for Xetthecum and scrolly, is the same as classes
         regions: "{sunburst}.viz.classes"
     },
+    listeners: {
+        "clearMapSelection.regions": "hortis.clearSelectedRegions({that})",
+        //                                                                          class,       community
+        "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)",
+    }
+});
+
+// A concrete grade which piggybacks on regions which have already been drawn externally - e.g. by scrolly map -
+// overrides the Leaflet map construction and its listeners to avoid building it
+fluid.defaults("hortis.leafletMap.withBareRegions", {
+    gradeNames: "hortis.leafletMap.withRegionsBase",
+    members: {
+        map: null
+    },
+    model: {
+        // selectedRegions: classKey -> boolean
+        // selectedCommunities: communityKey -> boolean
+    },
     events: {
-        selectRegion: null
         // Defined in leafletMap:
         // buildMap: null,
         // clearMapSelection: null
     },
     listeners: {
-        "clearMapSelection.regions": "hortis.clearSelectedRegions({that})",
-        //                                                                          class,       community
-        "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)",
         "buildMap.bindZoom": "fluid.identity",
         "buildMap.fitBounds": "fluid.identity",
         "buildMap.createTooltip": "fluid.identity",
         "buildMap.addTiles": "fluid.identity"
     }
-
 });
 
 hortis.regionOpacity = function (region) {
