@@ -62,7 +62,8 @@ hortis.baseCommonOutMap = fluid.freezeRecursive({
     "columns": {
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
-        "taxonName": "Taxon name"
+        "taxonName": "Taxon name",
+        "authority": "Author" // TODO: Make this conditional on whether it is present in input?
     }
 });
 

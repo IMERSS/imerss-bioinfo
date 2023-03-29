@@ -31,9 +31,9 @@ fluid.defaults("hortis.leafletMap.withRegionsBase", {
         regions: "{sunburst}.viz.classes"
     },
     listeners: {
-        "clearMapSelection.regions": "hortis.clearSelectedRegions({that})",
-        //                                                                          class,       community
-        "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1)",
+        "clearMapSelection.regions": "hortis.clearSelectedRegions({that}, {arguments}.0)",
+        //                                                                          class,       community,      source
+        "selectRegion.regionSelection": "hortis.leafletMap.regionSelection({that}, {arguments}.0, {arguments}.1, {arguments}.2)"
     }
 });
 
@@ -93,14 +93,15 @@ hortis.leafletMap.selectedRegions = function (selectedRegion, regions) {
 };
 
 // TODO: This gets preserved but we need to split off the outerPanel update
-hortis.leafletMap.regionSelection = function (map, className, community) {
-    map.applier.change("mapBlockTooltipId", community);
-    map.applier.change("selectedRegions", hortis.leafletMap.selectedRegions(className, map.classes));
-    map.applier.change("selectedCommunities", hortis.leafletMap.selectedRegions(community, map.communities));
+hortis.leafletMap.regionSelection = function (map, className, community, source) {
+    map.applier.change("mapBlockTooltipId", community, "ADD", source);
+    map.applier.change("selectedRegions", hortis.leafletMap.selectedRegions(className, map.classes), "ADD", source);
+    map.applier.change("selectedCommunities", hortis.leafletMap.selectedRegions(community, map.communities), "ADD", source);
 
 };
 
-hortis.clearSelectedRegions = function (map) {
-    map.applier.change("selectedRegions", hortis.leafletMap.selectedRegions(null, map.classes));
-    map.applier.change("selectedCommunities", hortis.leafletMap.selectedRegions(null, map.communities));
+hortis.clearSelectedRegions = function (map, source) {
+    // mapBlockTooltipId is cleared in LeafletMap
+    map.applier.change("selectedRegions", hortis.leafletMap.selectedRegions(null, map.classes), "ADD", source);
+    map.applier.change("selectedCommunities", hortis.leafletMap.selectedRegions(null, map.communities), "ADD", source);
 };

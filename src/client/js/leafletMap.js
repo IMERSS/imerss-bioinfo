@@ -62,7 +62,8 @@ fluid.defaults("hortis.leafletMap", {
         "buildMap.addTiles": "hortis.leafletMap.addTileLayer({that}.map, {that}.options.tileOptions)",
         "clearMapSelection.mapBlock": {
             changePath: "mapBlockTooltipId",
-            value: null
+            value: null,
+            source: "{arguments}.0"
         }
     },
     invokers: {

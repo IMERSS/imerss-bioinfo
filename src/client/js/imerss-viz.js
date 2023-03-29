@@ -695,7 +695,7 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         if (row.phyloPicUrl) {
             dumpPhyloPic("phyloPic", row.phyloPicUrl);
         }
-        dumpRow(row.rank, row.iNaturalistTaxonName, "fl-taxonDisplay-rank");
+        dumpRow(row.rank, row.taxonName || row.iNaturalistTaxonName, "fl-taxonDisplay-rank");
         hortis.commonFields.forEach(function (field) {
             dumpRow(field, row[field]);
         });
@@ -709,9 +709,9 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         if (row.species) {
             // Used to read:
             // dumpRow("Species:", row.species + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank");
-            // "species" now just holdes raw species name. In the long term we should support our own normalised species name
+            // "species" now just holds raw species name. In the long term we should support our own normalised species name
             // composed of taxon and infrataxon name but this is at least now complete and agrees with what is shown in the tooltip
-            dumpRow("iNaturalistTaxonName", row.iNaturalistTaxonName + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank", options);
+            dumpRow("iNaturalistTaxonName", (row.taxonName || row.iNaturalistTaxonName) + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank", options);
         }
         if (row.hulqName) { // wot no polymorphism?
             togo += hortis.dumpHulqName(row, markup);
@@ -793,7 +793,7 @@ hortis.renderTooltip = function (row) {
     } else {
         terms.taxonRank = "Species";
     }
-    const names = [row.iNaturalistTaxonName, row.commonName, row.hulqName].filter(name => name);
+    const names = [(row.taxonName || row.iNaturalistTaxonName), row.commonName, row.hulqName].filter(name => name);
     terms.taxonNames = names.join(" / ");
     return fluid.stringTemplate(hortis.tooltipTemplate, terms);
 };

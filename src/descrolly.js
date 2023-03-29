@@ -11,6 +11,7 @@ require("./dataProcessing/readJSON.js");
 require("./dataProcessing/writeJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVWithMap.js");
+require("./client/js/colour.js");
 
 require("./iNaturalist/taxonAPI.js");
 
@@ -48,8 +49,10 @@ hortis.descrolly = async function (config) {
         classes: {}
     };
 
-    await hortis.asyncForEach(scrollyInput.MAP_LABEL, async function (label, index) {
-        const taxaString = scrollyInput.taxa[index];
+    const scrollyInputTaxa = scrollyInput.taxa;
+
+    await hortis.asyncForEach(scrollyInputTaxa.MAP_LABEL, async function (label, index) {
+        const taxaString = scrollyInputTaxa.taxa[index];
         const taxa = taxaString.split(",").map(fluid.trim);
         console.log("Found " + taxa.length + " taxa for key " + label);
         const byTaxonId = {};
@@ -67,9 +70,12 @@ hortis.descrolly = async function (config) {
             } else {
                 console.log("Failed to look up taxon " + san);
             }
-            scrollyFeatures.classes[label] = {byTaxonId};
+            const fillColor = fluid.colour.hexToArray(scrollyInput.palette.col[index]);
+            scrollyFeatures.classes[label] = {byTaxonId, fillColor};
         });
     });
+
+
 
     hortis.writeJSONSync(fluid.module.resolvePath(config.scrollyFeatures), scrollyFeatures);
 };

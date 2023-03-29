@@ -1,5 +1,6 @@
 "use strict";
 
+// noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
 
 // Weird, non-general purpose intersect which modifies target by excluding source
@@ -12,14 +13,14 @@ hortis.intersect = function (target, source) {
 };
 
 hortis.combineDatasets = function (enabledList, quantiserDatasets) {
-    var intersect;
-    var union = {
+    let intersect;
+    const union = {
         obsCount: 0,
         buckets: {},
         byTaxonId: {}
     };
     enabledList.forEach(function (enabled) {
-        var dataset = quantiserDatasets[enabled];
+        const dataset = quantiserDatasets[enabled];
         if (!intersect) {
             intersect = {
                 buckets: fluid.extend({}, dataset.buckets),
@@ -41,7 +42,7 @@ hortis.combineDatasets = function (enabledList, quantiserDatasets) {
 
 hortis.renderDatasetControls = function (datasetEnabled, squareSide, datasets, quantiser, indexVersion) {
     console.log("renderDatasetControls executing for indexVersion " + indexVersion);
-    var togo = [{
+    const togo = [{
         type: "hortis.datasetControlHeader"
     }];
 
@@ -53,9 +54,9 @@ hortis.renderDatasetControls = function (datasetEnabled, squareSide, datasets, q
             quantiserDataset: quantiser.datasets[datasetId]
         });
     });
-    var enabledList = fluid.transforms.setMembershipToArray(datasetEnabled);
+    const enabledList = fluid.transforms.setMembershipToArray(datasetEnabled);
 
-    var createFooter = function (prefix, dataset) {
+    const createFooter = function (prefix, dataset) {
         if (prefix) {
             hortis.quantiser.datasetToSummary(dataset, squareSide);
             dataset.obsCount = (prefix === "Union" ? dataset.obsCount : "");
@@ -68,7 +69,7 @@ hortis.renderDatasetControls = function (datasetEnabled, squareSide, datasets, q
         }, dataset));
     };
     if (enabledList.length > 1 && Object.keys(quantiser.datasets).length > 0) { // TODO: Ensure that relay pulls quantiser on startup!
-        var combinedDatasets = hortis.combineDatasets(enabledList, quantiser.datasets);
+        const combinedDatasets = hortis.combineDatasets(enabledList, quantiser.datasets);
         createFooter("Intersection", combinedDatasets.intersect);
         createFooter("Union", combinedDatasets.union);
     } else {
@@ -193,7 +194,7 @@ hortis.datasetControl.columnNames = {
 };
 
 hortis.datasetControl.renderExtraColumns = function (markup, isHeader, dataset, quantiserDataset) {
-    var extraColumns = fluid.transform(hortis.datasetControl.columnNames, function (columnInfo, key) {
+    const extraColumns = fluid.transform(hortis.datasetControl.columnNames, function (columnInfo, key) {
         return fluid.stringTemplate(markup, {
             columnClass: columnInfo.clazz,
             text: isHeader ? columnInfo.name : quantiserDataset[key]
@@ -204,8 +205,8 @@ hortis.datasetControl.renderExtraColumns = function (markup, isHeader, dataset, 
 
 hortis.datasetControl.renderMarkup = function (markup, isHeader, dataset, quantiserDatasets, datasetId) {
     // Whilst we believe we have stuck this into the "source" model, it never actually arrives in the parent relay before rendering starts
-    var quantiserDataset = quantiserDatasets && quantiserDatasets[datasetId];
-    var extraColumns = hortis.datasetControl.renderExtraColumns(markup.cell, isHeader, dataset, quantiserDataset);
+    const quantiserDataset = quantiserDatasets && quantiserDatasets[datasetId];
+    const extraColumns = hortis.datasetControl.renderExtraColumns(markup.cell, isHeader, dataset, quantiserDataset);
     return fluid.stringTemplate(markup.container, {
         extraColumns: extraColumns
     });

@@ -24,7 +24,7 @@ hortis.checklistItem = function (entry, selectedId) {
     const selectedClass = rank === "species" && record.id === selectedId ? " class=\"fl-checklist-selected\"" : "";
     const header = "<li " + selectedClass + ">";
     let name = "<p " + styleprop + rowid + " class=\"flc-checklist-rank-" +
-        rank + "\">" + hortis.encodeHTML(record.iNaturalistTaxonName) + "</p>";
+        rank + "\">" + hortis.encodeHTML(record.taxonName || record.iNaturalistTaxonName) + "</p>";
     if (record.commonName) {
         name += " - <p " + styleprop + rowid + " class=\"flc-checklist-common-name\">" + record.commonName + "</p>";
     }

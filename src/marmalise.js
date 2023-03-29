@@ -281,7 +281,7 @@ hortis.indexScrollyRegions = function (treeBuilder) {
             const row = summaryById[key];
             byTaxonId[row.id] = true;
         });
-        return {byTaxonId};
+        return {byTaxonId, fillColor: clazz.fillColor};
     });
     return {
         communities: newClasses,
