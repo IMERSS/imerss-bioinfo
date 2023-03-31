@@ -17,5 +17,6 @@
     <orderEntry type="module" module-name="Salish-Sea-Community-Directory" />
     <orderEntry type="module" module-name="janszen-legacy-storymap" />
     <orderEntry type="module" module-name="inat-components" />
+    <orderEntry type="module" module-name="inat-components-shared" />
   </component>
 </module>

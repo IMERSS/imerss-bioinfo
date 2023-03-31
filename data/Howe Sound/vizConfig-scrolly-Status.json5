@@ -1,0 +1,6 @@
+{
+    outputFile: "%imerss-bioinfo/data/Howe Sound/Howe-Sound-Scrolly-Life-Status.json.lz4",
+    inputFiles: ["%imerss-bioinfo/data/Howe Sound/Howe-Sound-reintegrated.csv"],
+    mapFile: "%imerss-bioinfo/data/Howe Sound/combinedOutMap.json",
+    scrollyFeaturesFile: "%imerss-bioinfo/data/Howe Sound/scrollyFeatures-Status.json"
+}

@@ -9,5 +9,6 @@
     <mapping directory="$PROJECT_DIR$/../janszen-legacy-storymap" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../maxwell" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../r-scrollytelling-template" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../data/inat-components-shared" vcs="Git" />
   </component>
 </project>

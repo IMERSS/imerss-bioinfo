@@ -1,0 +1,6 @@
+{
+    scrollyInput: "%imerss-bioinfo/data/Howe Sound/Status-plotData.json",
+    taxaInput: "%imerss-bioinfo/data/Howe Sound/Howe-Sound-reintegrated.csv",
+    taxaMap: "%imerss-bioinfo/data/Howe Sound/combinedOutMap.json",
+    scrollyFeatures: "%imerss-bioinfo/data/Howe Sound/scrollyFeatures-Status.json"
+}

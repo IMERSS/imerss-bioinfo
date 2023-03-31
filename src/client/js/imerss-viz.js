@@ -753,8 +753,8 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
     return togo;
 };
 
-hortis.bindRowExpander = function () {
-    $(document).on("click", ".fl-taxonDisplay-expand", function (e) {
+hortis.bindRowExpander = function (that) {
+    that.container.on("click", ".fl-taxonDisplay-expand", function (e) {
         const target = $(e.target);
         target.toggleClass("fl-taxonDisplay-expanded");
         target.toggleClass("fl-taxonDisplay-unexpanded");
