@@ -5,9 +5,9 @@ together with algorithms for transforming, reconciling and projecting observatio
 suitable for publication, submission to global authorities such as [GBIF](https://www.gbif.org/), as well as
 map-based and graphical visualisations.
 
-# Mini-portal
+# Visualisations Portal
 
-A [mini-portal](https://imerss.github.io/imerss-bioinfo/) presenting a showcase of the latest versions of all of
+A [portal](https://imerss.github.io/imerss-bioinfo/) presenting a showcase of the latest versions of all of
 IMERSS' user-facing visualisations is available in [GitHub Pages](https://imerss.github.io/imerss-bioinfo/).
 
 # Data Archive
@@ -136,7 +136,7 @@ https://biogaliano.org/map-prototype/
 
 https://biogaliano.org/galiano-data-paper-map-view/
 
-And also a gallery in our [visualisations mini-portal](https://imerss.github.io/imerss-bioinfo/).
+and also a gallery in our [visualisations portal](https://imerss.github.io/imerss-bioinfo/).
 
 These visualisations are entirely static and so easy to host at any kind of site simply by uploading a folder of files
 and injecting an initialisation block into the markup such as
