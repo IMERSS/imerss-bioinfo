@@ -101,7 +101,9 @@ fluid.defaults("hortis.iNatTaxonById", {
 
 fluid.defaults("hortis.iNatTaxonByName", {
     gradeNames: ["kettle.dataSource.URL", "hortis.withINatRateLimit"],
-    url: "https://api.inaturalist.org/v1/taxa?q=%name",
+    // TODO: Search for Velutina velutina returns 376 results of which the exact match is not likely to be in first page
+    // Report as bug as well as implement paging in the source
+    url: "https://api.inaturalist.org/v1/taxa?q=%name&per_page=200",
     termMap: {
         name: "%name"
     }

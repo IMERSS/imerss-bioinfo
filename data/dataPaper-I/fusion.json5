@@ -14,7 +14,7 @@
             map: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-map-new.json",
             outMap: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99",
-            observationId: "%datasetId:%rowNumber"
+            observationId: "%datasetId:%id"
         },
         RBCM: {
             name: "Royal British Columbia Museum (1893-2011)",
@@ -23,6 +23,7 @@
 //            input: "%imerss-bioinfo/data/RBCM/RBCM_records_Galiano_2019-10-25.csv",
 //            map: "%imerss-bioinfo/data/RBCM/RBCM-map-old.json",
             outMap: "%imerss-bioinfo/data/RBCM/RBCM-out-map.json",
+            observationId: "%datasetId:%gbifID",
             colour: "#29a329"
         },
         BCCSN: {
@@ -189,7 +190,12 @@
             equals: "Eulipotyphla",
             exclude: true
         },
-        Rodentia: {
+        Felidae: { // CATTs
+            field: "family",
+            equals: "Felidae",
+            exclude: true
+        },
+        Rodentia: { // MMIACE
             field: "order",
             equals: "Rodentia",
             exclude: true

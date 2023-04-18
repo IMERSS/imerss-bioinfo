@@ -9,7 +9,7 @@ const hortis = fluid.registerNamespace("hortis");
 require("../src/iNaturalist/taxonAPI.js");
 
 const source = hortis.iNatTaxonSource({
-    disableCache: false
+    disableCache: true
 });
 
 // Old queries:
@@ -21,12 +21,14 @@ const source = hortis.iNatTaxonSource({
 // Achillea millefolium complex - Convert rank of "complex" to "species" as per AS
 // Adenocaulon bicolor - test retrieving subclass
 // Balanus glandula/Balanus crenatus - test caching of missing values
+// Velutina velutina - bizarrely resolves onto Sambucus cerulea, because iNat API returns 376 results TODO
+// Orthopyxis
 // {id: 47429}
 // {obsId: 86945066}
 
 const testSource = async function () {
     try {
-        const query = "Balanus glandula/Balanus crenatus";
+        const query = "Orthopyxis";
         const sane = hortis.sanitizeSpeciesName(query);
         const result = await source.get({name: sane});
         console.log(result);

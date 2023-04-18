@@ -57,7 +57,7 @@
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
             "colour": "#2C8C99",
-            "observationId": "%datasetId:%rowNumber",
+            "observationId": "%datasetId:%id",
             "datasetId": "iNat"
         },
         "RBCM": {
@@ -65,6 +65,7 @@
             "input": "E:/source/gits/bagatelle/data/RBCM/RBCM_GBIF_records_intersected_with_Galiano_polygon_2021_03_08_unscrewed.csv",
             "map": "E:/source/gits/bagatelle/data/RBCM/RBCM-map.json",
             "outMap": "E:/source/gits/bagatelle/data/RBCM/RBCM-out-map.json",
+            "observationId": "%datasetId:%gbifID",
             "colour": "#29a329",
             "datasetId": "RBCM"
         },
