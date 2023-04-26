@@ -511,7 +511,7 @@ hortis.filterArphaRows = function (rows, rec, rowCount) {
     });
 };
 
-// Note - argument modified
+// Note - rows argument modified
 hortis.sortRows = function (rows, sortBy) {
     const comparator = function (ra, rb) {
         return fluid.find(sortBy, function (column) {
@@ -564,10 +564,10 @@ hortis.checkDuplicates = function (rows, eliminate) {
         const outRows = [];
         let duplicates = 0;
         rows.forEach(function (row) {
-            var filtered = fluid.censorKeys(row, [column]);
-            var omitted = row[column] || true;
-            var hash = Object.values(filtered).join("|");
-            var oldValue = buckets[hash];
+            const filtered = fluid.censorKeys(row, [column]);
+            const omitted = row[column] || true;
+            const hash = Object.values(filtered).join("|");
+            const oldValue = buckets[hash];
             if (oldValue) {
                 emitDuplicate(oldValue);
                 emitDuplicate(row);
@@ -587,12 +587,12 @@ hortis.checkDuplicates = function (rows, eliminate) {
         }
     });
     fluid.each(byDataset.iNaturalist, function (row) {
-        var id = row.occurrenceID;
-        var iNatObs = id.substring(id.lastIndexOf(":") + 1);
+        const id = row.occurrenceID;
+        const iNatObs = id.substring(id.lastIndexOf(":") + 1);
         row.observationUrl = "https://www.inaturalist.org/observations/" + iNatObs;
     });
     fluid.each(byDataset, function (oneDataset, key) {
-        var outfile = "materials-duplicates-" + key + ".csv";
+        const outfile = "materials-duplicates-" + key + ".csv";
         hortis.writeCSV(outfile, Object.keys(oneDataset[0]), oneDataset, fluid.promise());
     });
     return rows;

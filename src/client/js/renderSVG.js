@@ -8,6 +8,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 "use strict";
 
+// noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
 
 hortis.encodeHTML = function (str) {
@@ -24,8 +25,8 @@ hortis.encodeHTML = function (str) {
 
 hortis.renderSVGElement = function (markup, parentContainer) {
     // Approach taken from http://stackoverflow.com/a/36507333
-    var container = $.parseXML(markup);
-    var element = container.documentElement;
+    const container = $.parseXML(markup);
+    const element = container.documentElement;
     parentContainer.append(element);
     return element;
 };
@@ -39,7 +40,7 @@ hortis.renderNumber = function (number) {
 };
 
 hortis.emitPath = function (elements) {
-    var togo = "";
+    let togo = "";
     elements.forEach(function (elem) {
         if (typeof(elem) === "string") {
             togo += elem;
@@ -51,7 +52,7 @@ hortis.emitPath = function (elements) {
 };
 
 hortis.circularPath = function (radius) {
-    var r = radius;
+    const r = radius;
     return hortis.emitPath(["M", -r, " ", 0,
         "A", r, " ", r, " 0 1 0 ", r, " ", 0,
         "A", r, " ", r, " 0 1 0 ", -r, " ", 0
@@ -59,7 +60,7 @@ hortis.circularPath = function (radius) {
 };
 
 hortis.annularPath = function (innerRadius, outerRadius) {
-    var ir = innerRadius, or = outerRadius;
+    const ir = innerRadius, or = outerRadius;
     return hortis.emitPath(["M", -or, " ", 0,
         "A", or, " ", or, " 0 1 0 ", or, " ", 0,
         "A", or, " ", or, " 0 1 0 ", -or, " ", 0,
@@ -72,7 +73,7 @@ hortis.annularPath = function (innerRadius, outerRadius) {
 };
 
 hortis.segmentPath = function (startAngle, endAngle, innerRadius, outerRadius) {
-    var cs = Math.cos(startAngle), ss = -Math.sin(startAngle),
+    const cs = Math.cos(startAngle), ss = -Math.sin(startAngle),
         ce = Math.cos(endAngle), se = -Math.sin(endAngle),
         i = innerRadius, o = outerRadius,
         lfa = (+((endAngle - startAngle) >= Math.PI)).toString();
@@ -85,7 +86,7 @@ hortis.segmentPath = function (startAngle, endAngle, innerRadius, outerRadius) {
 };
 
 hortis.linearTextPath = function (leftAngle, rightAngle, innerRadius, outerRadius) {
-    var midAngle = (leftAngle + rightAngle) / 2,
+    const midAngle = (leftAngle + rightAngle) / 2,
         c = Math.cos(midAngle), s = -Math.sin(midAngle),
         sr = c > 0 ? innerRadius : outerRadius,
         fr = c > 0 ? outerRadius : innerRadius;
@@ -93,7 +94,7 @@ hortis.linearTextPath = function (leftAngle, rightAngle, innerRadius, outerRadiu
 };
 
 hortis.segmentTextPath = function (startAngle, endAngle, outerRadius) {
-    var cs = Math.cos(startAngle), ss = -Math.sin(startAngle),
+    const cs = Math.cos(startAngle), ss = -Math.sin(startAngle),
         ce = Math.cos(endAngle), se = -Math.sin(endAngle),
         ar = outerRadius - 20,
         lfa = (+((endAngle - startAngle) >= Math.PI)).toString();
@@ -102,7 +103,7 @@ hortis.segmentTextPath = function (startAngle, endAngle, outerRadius) {
 };
 
 hortis.circularTextPath = function (outerRadius) {
-    var ar = outerRadius - 20;
+    const ar = outerRadius - 20;
     return hortis.emitPath(["M", "-0.1 ", -ar,
         "A", ar, " ", ar, " 0 1 0 ", "0.1 ", -ar]);
 };

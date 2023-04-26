@@ -644,7 +644,7 @@ a.ui-button:active,
 	box-shadow: 0/*{offsetLeftShadow}*/ 0/*{offsetTopShadow}*/ 5px/*{thicknessShadow}*/ #666666/*{bgColorShadow}*/;
 }
 /*!
- * jQuery UI Tabs 1.13.1
+ * jQuery UI Tabs 1.13.2
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -1224,4 +1224,8 @@ a.ui-button:active,
 .flc-checklist-rank-species {
     font-size: 1.0em;
     font-style: italic;
+}
+
+.flc-checklist-annote {
+    font-style: normal
 }

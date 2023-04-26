@@ -12,6 +12,15 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
 
+// cf arphify.js line 80 hortis.axeFromName and hortis.qualForming
+hortis.sppAnnotations = ["agg.", "aff.", "s.lat.", "cf", "sp.nov.", "var.", "sp.", "ssp.", "spp.", "complex"];
+hortis.annoteRegex = new RegExp("(" + hortis.sppAnnotations.map(annot => annot.replace(".", "\\.")).join("|") + ")", "g");
+
+// Render a species name with annotation specially rendered in Roman font
+hortis.renderSpeciesName = function (name) {
+    return name.replace(hortis.annoteRegex, "<span class=\"flc-checklist-annote\">$1</span>");
+};
+
 hortis.checklistItem = function (entry, selectedId) {
     const record = entry.row;
     // var focusProp = record.focusCount / record.childCount;
@@ -23,8 +32,9 @@ hortis.checklistItem = function (entry, selectedId) {
     const rank = record.species ? "species" : record.rank;
     const selectedClass = rank === "species" && record.id === selectedId ? " class=\"fl-checklist-selected\"" : "";
     const header = "<li " + selectedClass + ">";
+    const render = rank === "species" ? hortis.renderSpeciesName : fluid.identity;
     let name = "<p " + styleprop + rowid + " class=\"flc-checklist-rank-" +
-        rank + "\">" + hortis.encodeHTML(record.taxonName || record.iNaturalistTaxonName) + "</p>";
+        rank + "\">" + render(hortis.encodeHTML(hortis.rowToScientific(record))) + "</p>";
     if (record.commonName) {
         name += " - <p " + styleprop + rowid + " class=\"flc-checklist-common-name\">" + record.commonName + "</p>";
     }
@@ -82,7 +92,15 @@ hortis.acceptChecklistRow = function (row, filterRanks) {
     return acceptBasic && !rejectSpecies;
 };
 
-// Accepts a rows structure and returns "entries"
+hortis.scientificComparator = function (entrya, entryb) {
+    return hortis.rowToScientific(entrya.row) > hortis.rowToScientific(entryb.row) ? 1 : -1;
+};
+
+hortis.sortChecklistLevel = function (entries) {
+    return entries.sort(hortis.scientificComparator);
+};
+
+// Accepts a rows structure and returns "entries", where entry is {row, children<entry>}
 hortis.filterRanks = function (rows, filterRanks) {
     const togo = [];
     fluid.each(rows, function (row) {
@@ -96,7 +114,7 @@ hortis.filterRanks = function (rows, filterRanks) {
             Array.prototype.push.apply(togo, dChildren);
         }
     });
-    return togo;
+    return hortis.sortChecklistLevel(togo);
 };
 
 hortis.generateChecklist = function (element, rootId, selectedId, index, filterRanks) {

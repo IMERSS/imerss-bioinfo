@@ -256,7 +256,15 @@ fluid.defaults("hortis.scrollyMapLoader", {
     selectors: { // The map does not render
         mapHolder: "{sunburstLoader}.container"
     },
-    markupTemplate: "%resourceBase/html/imerss-viz-map-scrolly.html"
+    markupTemplate: "%resourceBase/html/imerss-viz-map-scrolly.html",
+    checklistRanks: ["family", "phylum", "class", "order", "species"],
+    distributeOptions: {
+        checklistRanks: {
+            // Note that we cannot easily hit just one checklist with this filter because of IoCSS rules
+            target: "{that sunburst > checklist}.options.filterRanks",
+            record: "{hortis.scrollyMapLoader}.options.checklistRanks"
+        }
+    }
 });
 
 // Mixin grade for sunburstLoader, currently used in Xetthecum driver

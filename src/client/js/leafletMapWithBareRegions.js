@@ -21,6 +21,7 @@ fluid.defaults("hortis.leafletMap.withRegionsBase", {
         }]
     },
     events: {
+        // Fired by external code when a region selection is requested
         selectRegion: null
     },
     members: {
@@ -97,7 +98,6 @@ hortis.leafletMap.regionSelection = function (map, className, community, source)
     map.applier.change("mapBlockTooltipId", community, "ADD", source);
     map.applier.change("selectedRegions", hortis.leafletMap.selectedRegions(className, map.classes), "ADD", source);
     map.applier.change("selectedCommunities", hortis.leafletMap.selectedRegions(community, map.communities), "ADD", source);
-
 };
 
 hortis.clearSelectedRegions = function (map, source) {

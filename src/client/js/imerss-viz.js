@@ -556,7 +556,7 @@ hortis.sourceTable = { // TODO: get this from marmalised.json but the names curr
 
 /** Decode data collection from an observation id from a colon-separated prefix
  * @param {String} obsId - The observation id to be decoded
- * @return {String|Null} The observation's collection if the observation id was qualified with a prefix, else null
+ * @return {String|null} The observation's collection if the observation id was qualified with a prefix, else null
  */
 hortis.sourceFromId = function (obsId) {
     const colpos = obsId ? obsId.indexOf(":") : -1;
@@ -659,6 +659,10 @@ hortis.idToTaxonLink = function (taxonId) {
     return "https://www.inaturalist.org/taxa/" + taxonId;
 };
 
+hortis.rowToScientific = function (row) {
+    return row.taxonName || row.iNaturalistTaxonName;
+};
+
 hortis.renderTaxonDisplay = function (row, markup, options) {
     if (!row) {
         return null;
@@ -695,7 +699,7 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         if (row.phyloPicUrl) {
             dumpPhyloPic("phyloPic", row.phyloPicUrl);
         }
-        dumpRow(row.rank, row.taxonName || row.iNaturalistTaxonName, "fl-taxonDisplay-rank");
+        dumpRow(row.rank, hortis.rowToScientific(row), "fl-taxonDisplay-rank");
         hortis.commonFields.forEach(function (field) {
             dumpRow(field, row[field]);
         });
