@@ -49,18 +49,18 @@
 </div>
 <h1>IMERSS Biodiversity Visualisations Portal</h1>
 <p style="margin-bottom:3rem">
-    <a href="http://imerss.org">IMERSS</a>, the Institute for Multidisciplinary Ecological Research in the Salish Sea,
+    The Institute for Multidisciplinary Ecological Research in the Salish Sea (<a href="http://imerss.org">IMERSS</a>)
     is building a federated collection of datasets on biodiversity for localities in the area, together with
-    matching configurations of our web-based visualisation software. This mini-portal collects links to the data and
-    these visualisations as hosted in <a href="https://docs.github.com/en/pages">GitHub pages</a> and elsewhere. As well as showcasing the datasets themselves,
-    this collection also highlights the flexibility of the visualisation framework and its ease of adaptation to
+    matching configurations of our web-based visualisation software. This portal collects links to the data and
+    these visualisations as hosted in <a href="https://docs.github.com/en/pages">GitHub pages</a> and elsewhere. Taken as a whole,
+    this collection highlights the flexibility of the visualisation framework and its ease of adaptation to
     map-based or non map-based data, with the ability to weave content from artists, designers, developers and local communities
     into the presentation.
 </p>
 <h2 id="core">Visualisations using core biodiversity framework</h2>
 Despite their diversity, all of the visualisations in this section use a common codebase, presenting either checklists or catalogues
-of biodiversity observations in various forms: Different kinds of hierarchical text-based summaries, a circular "starburst"
-visualisation optionally together with map-based plots of observations and controls for filtering based on datasets.
+of biodiversity observations in various forms, including hierarchical text-based summaries, circular "starburst"
+visualisations, optional maps and controls for filtering based on datasets.
 All data underlying and code implementing these visualisations is hosted in the
 <a href="https://github.com/IMERSS/imerss-bioinfo">IMERSS Bioinformatics Working Group repository</a> on GitHub.
 
@@ -68,10 +68,9 @@ All data underlying and code implementing these visualisations is hosted in the
 <div class="float">
     <a href="Galiano Life List.html"><img src="img/thumbs/Galiano.jpg"></a>
 </div>
-The <a href="Galiano Life List.html">Galiano Life List</a> is a basic visualisation of a species checklist without
-georeferencing data, showing the checklist and sunburst tabs with a taxon information panel,
-
-This visualisation may be seen hosted in various configurations with slightly different styling on the
+The <a href="Galiano Life List.html">Galiano Life List</a> presents a basic visualisation of a species checklist without
+georeferencing data, showing the checklist and sunburst tabs with a taxon information panel. This visualisation may be
+seen hosted in various configurations with slightly different styling on the
 <a href="https://biogaliano.org/">Biodiversity Galiano</a> web site (currently implemented in WordPress)
 on pages such as <a href="https://biogaliano.org/taxa/">Life List</a>,
 <a href="https://biogaliano.org/spiders/">Spiders</a> and
@@ -87,11 +86,12 @@ can be seen at the BioGaliano <a href="https://biogaliano.org/web-of-life-viz/">
 </div>
 <p>Our best-curated dataset, the result of a 2 year process of repeatedly reconciling:</p>
 <ul><li> On the one hand, upstream data from numerous
-    sources: citizen science data from <a href="https://www.inaturalist.org/">iNaturalist</a>, institutional scientific data from the
-    <a href="http://royalbcmuseum.bc.ca/">Royal BC Museum</a>, the <a href="https://nature.ca/en/home">Canadian Museum of Nature</a> and the
-    <a href="https://wildwhales.org/">British Columbia Cetacean Sightings Network</a> as well as data from local specialists such as
-    <a href="https://oceanwatch.ca/bccoast/sense-of-place/pacific-marine-life-surveys/">Pacific Marine Life Surveys</a>
-    and <a href="https://www.uvic.ca/science/biology/undergraduate/career-options/profiles/chu-jackson.php">Dr. Jackson Chu</a>.
+    sources, e.g., citizen science data from <a href="https://www.inaturalist.org/">iNaturalist</a> and
+    <a href="https://wildwhales.org/">Cetacean Sightings Network</a>; collections data from the
+    <a href="http://royalbcmuseum.bc.ca/">Royal BC Museum</a> and <a href="https://nature.ca/en/home">Canadian Museum of Nature</a>;
+    data curated by regional specialists, such as
+    <a href="https://oceanwatch.ca/bccoast/sense-of-place/pacific-marine-life-surveys/">Pacific Marine Life Surveys</a>;
+    and various sources of data from the scientific literature (e.g., <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1744-7410.2012.00262.x">.Chu & Leys, 2012</a>).
     <p>The "fusion" file specifying the weaving of the data sources in this direction can be found in GitHub at
         <a href="https://github.com/IMERSS/imerss-bioinfo/blob/main/data/dataPaper-I/fusion.json5">fusion.json5</a> and the
         final raw observation data prior to visualisation is at
@@ -104,7 +104,8 @@ can be seen at the BioGaliano <a href="https://biogaliano.org/web-of-life-viz/">
         <a href="https://github.com/IMERSS/imerss-bioinfo/blob/main/data/dataPaper-I-in/fusion.json5">fusion.json5</a> and the
         final reconciled checklist is at
         <a href="https://github.com/IMERSS/imerss-bioinfo/raw/main/data/dataPaper-I-in/reintegrated.csv">reintegrated.csv</a>.
-        The export files (CSV, XLSX) ready for submission to Pensoft and GBIF are at <a href="https://github.com/IMERSS/imerss-bioinfo/tree/main/data/dataPaper-I-in/arphified">arphified</a>.
+        The export files (CSV, XLSX) prepared for submission to Pensoft's Biodiversity Data Journal and the Global
+        Biodiversity Information Facility are at <a href="https://github.com/IMERSS/imerss-bioinfo/tree/main/data/dataPaper-I-in/arphified">arphified</a>.
     </p>
 </li>
 </ul>
@@ -116,10 +117,8 @@ can be seen at the BioGaliano <a href="https://biogaliano.org/web-of-life-viz/">
 <p>There is a <a href="https://www.figma.com/file/g4bneec0wtywSoLrDHbdnW/Galiano-Data">Figma visualisation</a> showing the "two-ended funnel" of this data reconciliation pipeline.
 </p>
 
-<p>As a result of discrepancies arising in the observation counts as a result of some observations being eliminated
-    as part of the submission of the final dataset to GBIF, the configuration visualisation submitted to the journal was
-    a <a href="Data Paper Part I Visualisation.html">stripped-down map</a> just showing datasets and observation counts.
-    However, a <a href="dataPaperSunburstAndMap.html">full visualisation</a> of the data is also available here showing the full datasets in their
+<p>The visualisation submitted to the journal was a <a href="Data Paper Part I Visualisation.html">stripped-down map</a> showing datasets and observation counts.
+    However, a <a href="dataPaperSunburstAndMap.html">full visualisation</a> of the data is also available here showing the data in their
     original form with the same panels as seen in the Life List above, together with the map view.
 </p>
 
@@ -132,12 +131,11 @@ can be seen at the BioGaliano <a href="https://biogaliano.org/web-of-life-viz/">
     <a href="Valdes Island Biodiversity.html"><img src="img/thumbs/Valdes.jpg"></a>
 </div>
 <p>A project undertaken for the <a href="http://www.valdes-island-conservancy.org/">Valdes Island Conservancy</a>, the <a href="Valdes Island Biodiversity.html">
-    Valdes Island Biodiversity</a> visualisation weaves together observation data
-    from many sources: citizen science data from <a href="https://www.inaturalist.org/">iNaturalist</a>, institutional scientific data from the
-    <a href="http://royalbcmuseum.bc.ca/">Royal BC Museum</a> and the
-    <a href="https://beatymuseum.ubc.ca/">UBC Beaty Biodiversity Museum</a> as well as data from local specialists such as
-    <a href="https://oceanwatch.ca/bccoast/sense-of-place/pacific-marine-life-surveys/">Pacific Marine Life Surveys</a>
-    and the Valdes Island Conservancy itself.
+    Valdes Island Biodiversity</a> visualisation weaves together observational data
+    from many sources: citizen science data from <a href="https://www.inaturalist.org/">iNaturalist</a> and the Valdes Island Conservancy;
+    collections data from the <a href="http://royalbcmuseum.bc.ca/">Royal BC Museum</a> and the
+    <a href="https://beatymuseum.ubc.ca/">UBC Beaty Biodiversity Museum</a>; and data curated by regional naturalists, e.g., the
+    <a href="https://oceanwatch.ca/bccoast/sense-of-place/pacific-marine-life-surveys/">Pacific Marine Life Surveys</a>.
 </p>
 <p>This is a gridded map-based visualisation using the  <a href="https://www.gbif.org/">GBIF</a> map tile set.</p>
 <p>The "fusion" file specifying the weaving of the data sources can be found in GitHub at
@@ -152,11 +150,11 @@ can be seen at the BioGaliano <a href="https://biogaliano.org/web-of-life-viz/">
 </div>
 <p>A preliminary visualisation of the <a href="http://cloud.squamishenvironment.ca:1080/products/files/doceditor.aspx?fileid=4274&doc=RlRVRDlGZ29XRjBCTzBSRXpaaUtDbHhZYkE2OHhhMnUzRHpwWVBBVzU5RT0_IjQyNzQi0">species list</a>
     for the <a href="https://en.unesco.org/biosphere/eu-na/atlka7tsem_howe-sound">Átl’ka7tsem/Howe Sound UNESCO Biosphere Reserve</a>,
-    compiled by the <a href="https://www.squamishenvironment.ca/projects/biodiversity-squamish/">Squamish Environment Society</a> under the direction of
-    Judith Holm. This compiles information citizen science data from <a href="https://www.inaturalist.org/">iNaturalist</a>, institutional scientific data from the
+    compiled by Judith Holm on bealf of the <a href="https://www.squamishenvironment.ca/projects/biodiversity-squamish/">Squamish Environment Society</a>.
+    This visualisation compiles data from <a href="https://www.inaturalist.org/">iNaturalist</a>, the
     <a href="http://royalbcmuseum.bc.ca/">Royal BC Museum</a> and the
-    <a href="https://beatymuseum.ubc.ca/">UBC Beaty Biodiversity Museum</a> as well as data from local specialists such as
-    K. Ricker and C. Dale's checklist of birds and the Squamish Environment Society itself.
+    <a href="https://beatymuseum.ubc.ca/">UBC Beaty Biodiversity Museum</a> and from local naturalists, e.g.,
+    K. Ricker and C. Dale's bird checklist.
 </p>
 
 <p>The "fusion" file specifying the weaving of the data sources can be found in GitHub at
@@ -170,17 +168,18 @@ can be seen at the BioGaliano <a href="https://biogaliano.org/web-of-life-viz/">
     <a href="Xetthecum.html"><img src="img/thumbs/Xetthecum.jpg"></a>
 </div>
 <p>Our most developed visualisation, an <a href="https://imerss.org/2019/01/01/ecocultural-mapping-pilot/">ecocultural mapping pilot</a>
-    incorporating data from Indigenous and non-Indigenous community members on cultural
-    values, written and spoken Hul'qumi'num names of regions and species, as well as ecological community boundaries exported
-    from the QGIS geographic information system, fused together into a single interactive system.
-    <a href="https://www.youtube.com/watch?v=0v84S7DeORU&t=35s">Xetthecum</a> is a small area
-    on the southwest coast of Galiano Island, also known as Retreat Cove.
+    being led by Jeannine Georgeson and Andrew Simon (IMERSS) on behalf of <a href="https://www.whiteswanenvironmental.org/">Whiteswan Environmental</a>.
+    <a href="https://www.youtube.com/watch?v=0v84S7DeORU&t=35s">Xetthecum</a> is a culturally significant site on the
+    coast of Galiano Island, also known as Retreat Cove.
+
+    The project incorporates data shared by Indigenous and non-Indigenous community members, local biodiversity data,
+    written and spoken Hul'qumi'num names, and geospatial data describing ecological communities.
+
     A YouTube video presented by Dana Ayotte has been published at <a href="https://www.youtube.com/watch?v=0v84S7DeORU">Ecocultural
         Mapping Tool</a> and was presented at the April 2022
     <a href="https://www.indigeverse.org/day-3-april-24th/session-2-indigenous-digital-collective-workshop-tasters">Indigeverse conference</a>.
-    Final raw observation data is at
-    <a href="https://github.com/IMERSS/imerss-bioinfo/raw/main/data/Xetthecum/reintegrated-obs.csv">reintegrated-obs.csv</a> and
-    provenance of community-curated ecocultural data is at
+    Processed observational data are available at
+    <a href="https://github.com/IMERSS/imerss-bioinfo/raw/main/data/Xetthecum/reintegrated-obs.csv">reintegrated-obs.csv</a> and the
     <a href="https://github.com/IMERSS/imerss-bioinfo/raw/main/data/Xetthecum/provenance.txt">provenance.txt</a>.
 </p>
 
@@ -191,12 +190,12 @@ can be seen at the BioGaliano <a href="https://biogaliano.org/web-of-life-viz/">
     <a href="https://imerss.github.io/r-scrollytelling-template/R-Markdown-Background-Reknitted.html"><img src="img/thumbs/R-Scrolly.jpg"></a>
 </div>
 
-We help diverse communities to work with data in formats they are comfortable with, with tools they are
+We help diverse communities work with data in formats they are comfortable with, with tools they are
 familiar with. The <a href="https://imerss.github.io/r-scrollytelling-template/R-Markdown-Background-Reknitted.html">R Markdown Scrollytelling Template</a>
 empowers naturalists with moderate technical skills to edit documents in simply structured
-<a href="https://rmarkdown.rstudio.com/">R Markdown</a> format, of which the web output is then rewoven into an
-interactive <a href="https://imerss.github.io/r-scrollytelling-template/R-Markdown-Background-Rewoven.html">scrollytelling interface</a>. These documents are hosted in
-<a href="https://pages.github.com/">GitHub pages</a> where any member may easily update and republish their documents without needing to consult a technician.
+<a href="https://rmarkdown.rstudio.com/">R Markdown</a> format, the web output of which is then rewoven into an
+interactive <a href="https://imerss.github.io/r-scrollytelling-template/R-Markdown-Background-Rewoven.html">scrollytelling interface</a> hosted in
+<a href="https://pages.github.com/">GitHub pages</a>.
 The template can be adopted by forking its <a href="https://github.com/IMERSS/r-scrollytelling-template">GitHub project</a> and customising it to your ends.
 
 Several projects have already been built using this template, listed below.
@@ -205,16 +204,15 @@ Several projects have already been built using this template, listed below.
 <div class="float">
     <a href="https://imerss.github.io/maxwell/R-Markdown-Background-Rewoven.html"><img src="img/thumbs/Maxwell.jpg"></a>
 </div>
-The first community to adopt the R Markdown Scrollytelling framework was the
+Development of the R Markdown Scrollytelling framework began with the
 <a href="https://transitionsaltspring.com/maxwell-creek-watershed-project/">Maxwell Creek Watershed Project</a>
-project undertaken with <a href="https://transitionsaltspring.com/">Transition Salt Spring</a>. The Maxwell Creek Watershed Project
-is tackling the complexities of addressing cumulative impacts of climate change on local ecosystems while also
-navigating interagency collaboration. The ultimate goal of the Project is to better understand and define the
-efficacy of nature-based solutions, such as the installation of green infrastructure,
-in increasing climate resilience and enhancing ecological integrity and biodiversity.
+project undertaken with <a href="https://transitionsaltspring.com/">Transition Salt Spring</a>.
+The ultimate goal of the Project is to better understand and define the
+efficacy of nature-based solutions for forest and hydrological restoration, towards enhanced
+ecological integrity and biodiversity in the Maxwell Creek watershed.
 
-A work in progress <a href="https://imerss.github.io/maxwell/R-Markdown-Background-Rewoven.html">scrollytelling presentation</a>
-of the project's area and aims is available in <a href="https://pages.github.com/">GitHub pages</a>.
+This <a href="https://imerss.github.io/maxwell/R-Markdown-Background-Rewoven.html">scrollytelling presentation</a>
+of the project is a work in progress, available in <a href="https://pages.github.com/">GitHub pages</a>.
 
 <h3 id="janszen">Janszen Legacy Project</h3>
 <div class="float">
@@ -227,9 +225,9 @@ mostly from the southern Gulf Islands of British Columbia, and curated comprehen
 documenting the flora of the southern Gulf Islands, Saanich Peninsula, San Juan Islands, and various other
 localities throughout the Salish Sea.
 
-Honouring and curating his legacy is a
-<a href="https://imerss.github.io/janszen-legacy-storymap/Janszen_Legacy_Project-Reknitted.html">scrollytelling story</a>
-presenting his many contributions and interests.
+This <a href="https://imerss.github.io/janszen-legacy-storymap/Janszen_Legacy_Project-Reknitted.html">scrollytelling storymap</a>
+presents a summary of the progress being made to preserve Harvey's work, with support from the Canadian Institute for
+Ecology and Evolution.
 
 <h3 id="howe">Átl’ḵa7tsem/Howe Sound Biosphere Vegetation Analysis</h3>
 <div class="float">
@@ -237,17 +235,16 @@ presenting his many contributions and interests.
 </div>
 
 A short distance from Vancouver, the <a href="https://en.unesco.org/biosphere/eu-na/atlka7tsem_howe-sound">Átl’ḵa7tsem/Howe Sound Biosphere Reserve</a>
-encompasses the fjord and islands of Átl’ka7tsem/Howe Sound over a 218,723 ha, of which 16% are marine areas.
-This mountainous coastal ecosystem of great altitudinal range influenced by the Pacific Ocean, is home to high levels of biodiversity,
-with some 721 native terrestrial animal species including grizzly bears, wolverines and bald eagles.
-It also sustains thousands of marine species, including living glass sponge reefs, which were long thought to have gone extinct 40 million years ago.
+encompasses the fjord and islands of Átl’ka7tsem/Howe Sound over a 218,723 ha area.
 
-Átl’ka7tsem (pronounced At-Kat-sum) is the Sḵwx̱wú7mesh/Squamish word for paddling up the Sound and First Nation people have prospered in the region since time immemorial.
+Átl’ka7tsem (pronounced At-Kat-sum) is the Sḵwx̱wú7mesh/Squamish word for "paddling up the Sound".
 
-IMERSS is developing a <a href="https://imerss.github.io/howe-sound-mapping/R-Markdown-AHSBR_Map_1-Reknitted.html#">scrollytelling visualisation<a>
-    of the vascular plant diversity of the reserve, which integrates the scrollytelling framework together with the
-    <a href="#core">core biodiversity framework</a> together with the <a href="#inat-components">iNaturalist observations widgets</a> developed by
-    Ben Keen, a highly experienced developer who is also a resident of the region.
+IMERSS is developing a biodiversity assessment framework for the region (e.g., a
+prototype <a href="https://imerss.github.io/howe-sound-mapping/R-Markdown-AHSBR_Map_1-Reknitted.html#">scrollytelling visualisation<a>
+    of the region's vascular plant diversity). This evolving framework integrates several components of our
+    biodiversity data science infrastructure, including the scrollytelling and
+    <a href="#core">core biodiversity framework</a>, as well as <a href="#inat-components">iNaturalist observations widgets</a> developed by
+    Howe Sound resident Ben Keen.
 
     <h2>Components from Ben Keen</h2>
     Kindly contributed to IMERSS by <a href="https://github.com/benkeen">Ben Keen</a> are components for working with species checklists and
@@ -256,12 +253,12 @@ IMERSS is developing a <a href="https://imerss.github.io/howe-sound-mapping/R-Ma
     <div class="float">
         <a href="https://bcleps.weebly.com/inat.html"><img src="img/thumbs/BCLeps.jpg"></a>
     </div>
-    Some prebuilt <a href=https://reactjs.org/">React</a> components to display iNaturalist data on your own sites.
-    The original goal was to provide
-    add an interactive page to the <a href="https://bcleps.weebly.com/inat.html">BC Lepidoptera website</a> so
-    visitors could see some high-level information about
-    lepidoptera (butterflies and moths) spotted in British Columbia. But the code was written to allow it to be
-    re-used by any website and for any taxon or place. Code for these components is housed in the
+    Prebuilt <a href=https://reactjs.org/">React</a> components to display iNaturalist data on your own sites.
+    The widget was originally implemented to provide
+    an interactive page on the <a href="https://bcleps.weebly.com/inat.html">BC Lepidoptera website</a> so
+    visitors could see some high-level information about butterflies and moths spotted in British Columbia.
+    However, the code was written to allow it to be
+    re-used by any website, to visualise any taxon or place. Code for these components is housed in the
     <a href="https://github.com/IMERSS/inat-components">IMERSS inat-components</a> repository.
 
     <h3>Checklist generator</h3>
