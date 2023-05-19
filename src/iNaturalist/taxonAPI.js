@@ -64,7 +64,7 @@ hortis.iNat.parentTaxaIds = function (taxonDoc) {
 
 fluid.defaults("hortis.iNatAPILimiter", {
     gradeNames: ["fluid.dataSource.rateLimiter", "fluid.resolveRootSingle"],
-    rateLimit: 1300,
+    rateLimit: 1200,
     singleRootType: "hortis.iNatAPILimiter"
 });
 
@@ -114,7 +114,7 @@ hortis.DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 fluid.defaults("hortis.cachedApiSource", {
     gradeNames: ["fluid.dataSource", "fluid.dataSource.noencoding"],
-    refreshInDays: 31,
+    refreshInDays: 70,
     disableCache: false,
     components: {
         inMemorySource: {

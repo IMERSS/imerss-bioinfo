@@ -1,0 +1,62 @@
+{
+    "classes": {
+        "332": {
+            "byTaxonId": {
+                "874030": true
+            }
+        },
+        "confirmed|332": {
+            "byTaxonId": {
+                "874030": true
+            }
+        },
+        "historic|332": {
+            "byTaxonId": {
+                "874030": true
+            }
+        },
+        "new|332": {
+            "byTaxonId": {
+                "874030": true
+            }
+        },
+        "confirmed": {
+            "byTaxonId": {
+                "874030": true
+            }
+        },
+        "historic": {
+            "byTaxonId": {
+                "874030": true
+            }
+        },
+        "new": {
+            "byTaxonId": {
+                "874030": true
+            }
+        }
+    },
+    "communities": {
+        "confirmed": {
+            "fillColor": [
+                90,
+                150,
+                210
+            ]
+        },
+        "historic": {
+            "fillColor": [
+                222,
+                203,
+                144
+            ]
+        },
+        "new": {
+            "fillColor": [
+                117,
+                98,
+                180
+            ]
+        }
+    }
+}

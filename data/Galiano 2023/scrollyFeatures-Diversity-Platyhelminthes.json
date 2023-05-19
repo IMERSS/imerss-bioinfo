@@ -1,0 +1,34 @@
+{
+    "classes": {
+        "108": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "206": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "332": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "375": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "376": {
+            "byTaxonId": {
+                "56699": true
+            }
+        },
+        "377": {
+            "byTaxonId": {
+                "56699": true
+            }
+        }
+    }
+}

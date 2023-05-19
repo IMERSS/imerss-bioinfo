@@ -12,6 +12,13 @@ hortis.addStyle = function (text) {
 
 // "Abstract" Base grade between withRegions and withBareRegions
 fluid.defaults("hortis.leafletMap.withRegionsBase", {
+    // Ported out of maxwell.scrollyVizBinder
+    regionStyles: {
+        strokeWeight: 2,
+        noSelectionOpacity: 0.6,
+        selectedOpacity: 0.8,
+        unselectedOpacity: 0.5
+    },
     modelListeners: {
         selectedRegions: [{
             namespace: "map",
@@ -75,7 +82,7 @@ hortis.leafletMap.showSelectedRegions = function (map, selectedRegions) {
     const noSelection = map.model.mapBlockTooltipId === null;
     Object.keys(map.regions).forEach(function (key) {
         const lineFeature = map.classes[key].color;
-        style.setProperty(hortis.regionOpacity(key), selectedRegions[key] || noSelection ? "1.0" : "0.4");
+        style.setProperty(hortis.regionOpacity(key), selectedRegions[key] || noSelection ? "0.8" : "0.5");
         style.setProperty(hortis.regionBorder(key), selectedRegions[key] ? "#FEF410" : (lineFeature ? fluid.colour.arrayToString(lineFeature) : "none"));
     });
 };

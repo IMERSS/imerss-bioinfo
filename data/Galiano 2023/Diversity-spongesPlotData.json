@@ -1,0 +1,33 @@
+{
+  "taxa": {
+    "19": "Amphilectus digitatus, Clathria (Microciona) pennata, Cliona californiana, Homaxinella amphispicula, Sycon spp., Tethya californiana",
+    "20": "Amphilectus digitatus, Antho (Plocamia) karykina, Aplysilla polyraphis, Aplysilla sp., Clathria (Microciona) pennata, Cliona californiana, Craniella villosa, Halichondria (Halichondria) bowerbanki, Haliclona (Haliclona) sp.1, Haliclona (Haliclona) sp.2, Homaxinella amphispicula, Leucilla nuttingi, Leucosolenia nautilia, Mycale (Aegogropila) adhaerens, Myxilla (Myxilla) incrustans, Myxilla (Myxilla) lacunosa, Pachychalina sp., Semisuberites cribrosa, Suberites concinnus, Sycon spp., Xestospongia hispida",
+    "22": "Amphilectus digitatus, Clathria (Microciona) pennata, Craniella villosa, Haliclona (Haliclona) sp.2, Leucandra heathi, Leucosolenia nautilia, Pachychalina sp.",
+    "66": "Halichondria (Halichondria) panicea",
+    "108": "Antho (Plocamia) karykina, Aplysilla sp., Clathria (Microciona) pennata, Cliona californiana, Craniella villosa, Hamigera sp., Isodictya rigida, Leucandra heathi, Leucilla nuttingi, Myxilla (Myxilla) lacunosa, Pachychalina sp., Polymastia pachymastia, Semisuberites cribrosa, Suberites concinnus, Sycon spp.",
+    "123": "Myxilla (Myxilla) incrustans",
+    "131": "Aphrocallistes vastus, Desmacella austini",
+    "152": "Aphrocallistes vastus, Rhabdocalyptus dawsoni, Semisuberites cribrosa, Tetilla sp.",
+    "153": "Aphrocallistes vastus, Desmacella austini, Rhabdocalyptus dawsoni, Semisuberites cribrosa",
+    "164": "Clathria (Microciona) pennata, Cliona californiana, Mycale (Aegogropila) adhaerens, Myxilla (Myxilla) incrustans",
+    "165": "Clathria (Microciona) pennata, Cliona californiana",
+    "183": "Clathria (Microciona) pennata, Cliona californiana, Mycale (Aegogropila) adhaerens, Myxilla (Myxilla) incrustans",
+    "185": "Clathria (Microciona) pennata, Cliona californiana, Mycale (Aegogropila) adhaerens, Sycon spp.",
+    "205": "Clathria (Microciona) pennata, Cliona californiana, Halichondria (Halichondria) bowerbanki, Haliclona (Haliclona) sp.2, Sycon spp.",
+    "206": "Clathria (Microciona) pennata, Cliona californiana, Craniella villosa, Halichondria (Halichondria) bowerbanki, Leucilla nuttingi, Mycale (Aegogropila) adhaerens",
+    "210": "Clathria (Microciona) pennata, Cliona californiana, Hamigera sp., Mycale (Aegogropila) adhaerens, Polymastia pachymastia, Suberites latus",
+    "215": "Aphrocallistes vastus",
+    "225": "Clathria (Microciona) pennata, Cliona californiana, Halichondria (Halichondria) bowerbanki, Semisuberites cribrosa",
+    "226": "Clathria (Microciona) pennata, Cliona californiana, Homaxinella amphispicula, Leucilla nuttingi, Myxilla (Myxilla) incrustans",
+    "247": "Clathria (Microciona) pennata",
+    "268": "Cliona californiana",
+    "289": "Acarnus erithacus, Clathria (Microciona) pennata, Cliona californiana, Haliclona (Haliclona) sp.1, Leucosolenia eleanor, Mycale (Aegogropila) adhaerens, Myxilla (Myxilla) incrustans, Sycon spp.",
+    "332": "Aplysilla sp., Clathria (Microciona) pennata, Clathrina sp., Cliona californiana, Craniella villosa, Halichondria (Halichondria) bowerbanki, Haliclona (Haliclona) sp.1, Haliclona (Haliclona) sp.2, Hamigera sp., Homaxinella amphispicula, Isodictya rigida, Leucilla nuttingi, Leucosolenia eleanor, Leucosolenia nautilia, Mycale (Aegogropila) adhaerens, Myxilla (Myxilla) incrustans, Myxilla (Myxilla) lacunosa, Polymastia pachymastia, Semisuberites cribrosa, Suberites latus, Sycon spp., Weberella perlucida, Xestospongia hispida",
+    "353": "Aplysilla sp., Clathria (Microciona) pennata, Cliona californiana, Craniella villosa, Halichondria (Halichondria) bowerbanki, Haliclona (Haliclona) sp.2, Hamigera sp., Iophon lamella, Isodictya rigida, Leucilla nuttingi, Leucosolenia eleanor, Mycale (Aegogropila) adhaerens, Myxilla (Myxilla) incrustans, Myxilla (Myxilla) lacunosa, Polymastia pachymastia, Semisuberites cribrosa, Suberites concinnus, Sycon spp., Xestospongia hispida",
+    "354": "Clathria (Microciona) pennata, Cliona californiana, Halichondria (Halichondria) bowerbanki, Halichondria (Halichondria) panicea, Hamigera sp., Leucilla nuttingi",
+    "375": "Acarnus erithacus, Aplysilla sp., Clathria (Microciona) pennata, Cliona californiana, Craniella villosa, Halichondria (Halichondria) bowerbanki, Haliclona (Haliclona) sp.2, Leucilla nuttingi, Mycale (Aegogropila) adhaerens, Myxilla (Myxilla) incrustans, Myxilla (Myxilla) lacunosa, Pleraplysilla sp., Polymastia pachymastia, Xestospongia hispida",
+    "376": "Acarnus erithacus, Antho (Plocamia) karykina, Aplysilla polyraphis, Aplysilla sp., Clathria (Microciona) pennata, Cliona californiana, Craniella villosa, Halichondria (Eumastia) sitiens, Halichondria (Halichondria) bowerbanki, Haliclona (Haliclona) sp.1, Haliclona (Haliclona) sp.2, Hamigera sp., Isodictya rigida, Leucilla nuttingi, Leucosolenia eleanor, Leucosolenia nautilia, Mycale (Aegogropila) adhaerens, Myxilla (Myxilla) incrustans, Myxilla (Myxilla) lacunosa, Pachychalina sp., Pleraplysilla sp., Polymastia pachymastia, Semisuberites cribrosa, Suberites concinnus, Sycon spp., Weberella perlucida, Xestospongia hispida",
+    "399": "Aplysilla sp., Clathria (Microciona) pennata, Cliona californiana, Craniella villosa, Halichondria (Eumastia) sitiens, Halichondria (Halichondria) bowerbanki, Haliclona (Haliclona) sp.2, Hamigera sp., Leucilla nuttingi, Mycale (Aegogropila) adhaerens, Myxilla (Myxilla) incrustans, Myxilla (Myxilla) lacunosa, Polymastia pachymastia"
+  },
+  "mapTitle": "Sponges diversity"
+}

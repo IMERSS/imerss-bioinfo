@@ -229,6 +229,7 @@ hortis.summaryById = function (treeBuilder) {
     return summaryById;
 };
 
+// Used for Xetthecum output via deqgis
 hortis.indexRegions = function (treeBuilder) {
     const summaryById = hortis.summaryById(treeBuilder);
     const features = treeBuilder.features;
@@ -271,6 +272,7 @@ hortis.indexRegions = function (treeBuilder) {
     };
 };
 
+// Used for scrolly framework output via descrolly
 hortis.indexScrollyRegions = function (treeBuilder) {
     const summaryById = hortis.summaryById(treeBuilder);
     const classes = treeBuilder.scrollyFeatures.classes;

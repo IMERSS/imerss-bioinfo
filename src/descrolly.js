@@ -24,10 +24,50 @@ const parsedArgs = minimist(process.argv.slice(2));
 const inputFile = parsedArgs._[0] || "%imerss-bioinfo/data/Howe Sound/descrolly.json5";
 
 const config = hortis.readJSONSync(fluid.module.resolvePath(inputFile));
+let scrollyInput, scrollyStatusInput;
 
-const scrollyInput = hortis.readJSONSync(fluid.module.resolvePath(config.scrollyInput));
+if (config.scrollyInput) {
+    scrollyInput = hortis.readJSONSync(fluid.module.resolvePath(config.scrollyInput));
+} else if (config.scrollyStatusInput) {
+    scrollyStatusInput = hortis.readJSONSync(fluid.module.resolvePath(config.scrollyStatusInput));
+}
 
 const taxaMap = hortis.readJSONSync(fluid.module.resolvePath(config.taxaMap));
+
+hortis.applyTaxaForKey = async function (that, taxaString, label, col) {
+    const {scrollyFeatures, source, reintById} = that;
+    const taxa = taxaString.split(",").map(fluid.trim);
+    console.log("Found " + taxa.length + " taxa for key " + label);
+    const byTaxonId = {};
+    await hortis.asyncForEach(taxa, async function (taxonName) {
+        const san = hortis.sanitizeSpeciesName(taxonName);
+        const looked = await source.get({name: san});
+        if (looked.doc) {
+            const taxonId = looked.doc.id;
+            const row = reintById[taxonId];
+            if (!row) {
+                console.log("Looked up " + san + " to id " + taxonId + " but no row found in reintegrated");
+            } else {
+                byTaxonId[taxonId] = true; // In a "proper" bucket this is a hash to obs Ids
+            }
+        } else {
+            console.log("Failed to look up taxon " + san);
+        }
+        if (col) {
+            const fillColor = fluid.colour.hexToArray(col);
+            scrollyFeatures.classes[label] = {byTaxonId, fillColor};
+        } else {
+            scrollyFeatures.classes[label] = {byTaxonId};
+        }
+    });
+    console.log("Deduplicated to " + Object.keys(byTaxonId).length + " taxa for key " + label);
+};
+
+hortis.appendTaxa = function (target, key, taxa) {
+    let existing = target[key];
+    existing = existing ? existing += ", " + taxa : taxa;
+    target[key] = existing;
+};
 
 hortis.descrolly = async function (config) {
     const source = hortis.iNatTaxonSource();
@@ -48,34 +88,34 @@ hortis.descrolly = async function (config) {
     const scrollyFeatures = {
         classes: {}
     };
+    const that = {scrollyFeatures, source, reintById};
 
-    const scrollyInputTaxa = scrollyInput.taxa;
-
-    await hortis.asyncForEach(scrollyInputTaxa.MAP_LABEL, async function (label, index) {
-        const taxaString = scrollyInputTaxa.taxa[index];
-        const taxa = taxaString.split(",").map(fluid.trim);
-        console.log("Found " + taxa.length + " taxa for key " + label);
-        const byTaxonId = {};
-        await hortis.asyncForEach(taxa, async function (taxonName) {
-            const san = hortis.sanitizeSpeciesName(taxonName);
-            const looked = await source.get({name: san});
-            if (looked.doc) {
-                const taxonId = looked.doc.id;
-                const row = reintById[taxonId];
-                if (!row) {
-                    console.log("Looked up " + san + " to id " + taxonId + " but no row found in reintegrated");
-                } else {
-                    byTaxonId[taxonId] = true; // In a "proper" bucket this is a hash to obs Ids
-                }
-            } else {
-                console.log("Failed to look up taxon " + san);
-            }
-            const fillColor = fluid.colour.hexToArray(scrollyInput.palette.col[index]);
-            scrollyFeatures.classes[label] = {byTaxonId, fillColor};
+    if (scrollyInput) {
+        await hortis.asyncEach(scrollyInput.taxa, async function (taxaString, label) {
+            const col = fluid.getImmediate(scrollyInput, ["palette", label]);
+            await hortis.applyTaxaForKey(that, taxaString, label, col);
         });
-    });
-
-
+    } else if (scrollyStatusInput) { // Two-level Bioblitz "Status" file
+        const byStatus = {};
+        const byCell = {};
+        await hortis.asyncEach(scrollyStatusInput.taxa, async function (record, status) {
+            await hortis.asyncEach(record, async function (taxa, cell_id) {
+                const key = status + "|" + cell_id;
+                await hortis.applyTaxaForKey(that, taxa, key);
+                hortis.appendTaxa(byStatus, status, taxa);
+                hortis.appendTaxa(byCell, cell_id, taxa);
+            });
+        });
+        await hortis.asyncEach(byStatus, async function (taxaString, status) {
+            await hortis.applyTaxaForKey(that, taxaString, status);
+        });
+        await hortis.asyncEach(byCell, async function (taxaString, cell_id) {
+            await hortis.applyTaxaForKey(that, taxaString, cell_id);
+        });
+        scrollyFeatures.communities = fluid.transform(scrollyStatusInput.palette, function (col) {
+            return {fillColor: fluid.colour.hexToArray(col)};
+        });
+    }
 
     hortis.writeJSONSync(fluid.module.resolvePath(config.scrollyFeatures), scrollyFeatures);
 };

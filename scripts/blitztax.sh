@@ -1,0 +1,1 @@
+find data/Galiano\ 2023/configs -name "fusion*" -exec node src/taxonomise.js --fusion {} \;

@@ -1,0 +1,25 @@
+{
+    "columns": {
+        "taxonName": "%scientificName",
+        "authority": "%scientificNameAuthorship",
+        "occurrenceID": "%occurrenceID",
+        "collection": "%collectionCode",
+        "catalogueNumber": "%catalogNumber",
+        "dateObserved": "%eventDate",
+        "recordedBy": "%recordedBy",
+        "locality": "%locality",
+        "individualCount": "%individualCount",
+        "kingdom": "%kingdom",
+        "phylum": "%phylum",
+        "class": "%class",
+        "order": "%order",
+        "suborder": "%suborder",
+        "infraorder": "%infraorder",
+        "superfamily": "%superfamily",
+        "family": "%family",
+        "genus": "%genus"
+    },
+    "datasetId": "Mollusca",
+    "datasetClass": "naturalist",
+    "observationId": "%occurrenceID"
+}

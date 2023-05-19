@@ -1,0 +1,59 @@
+{
+    "classes": {
+        "19": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "20": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "22": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "108": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "121": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "205": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "332": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "353": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "354": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "375": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "376": {
+            "byTaxonId": {
+                "122157": true
+            }
+        }
+    }
+}

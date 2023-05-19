@@ -1,0 +1,6 @@
+{
+    scrollyInput: "%imerss-bioinfo/data/Galiano 2023/Diversity-bryozoansPlotData.json",
+    taxaInput: "%imerss-bioinfo/data/Galiano 2023/Bryozoans-reintegrated.csv",
+    taxaMap: "%imerss-bioinfo/data/Galiano 2023/combinedOutMap.json",
+    scrollyFeatures: "%imerss-bioinfo/data/Galiano 2023/scrollyFeatures-Diversity-Bryozoans.json"
+}

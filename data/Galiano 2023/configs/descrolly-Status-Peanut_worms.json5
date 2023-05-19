@@ -1,0 +1,6 @@
+{
+    scrollyStatusInput: "%imerss-bioinfo/data/Galiano 2023/Status-peanut_wormsPlotData.json",
+    taxaInput: "%imerss-bioinfo/data/Galiano 2023/Peanut_worms-reintegrated.csv",
+    taxaMap: "%imerss-bioinfo/data/Galiano 2023/combinedOutMap.json",
+    scrollyFeatures: "%imerss-bioinfo/data/Galiano 2023/scrollyFeatures-Status-Peanut_worms.json"
+}

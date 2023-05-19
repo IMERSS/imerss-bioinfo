@@ -1,0 +1,1 @@
+find data/Galiano\ 2023/configs -name "descrolly*" -exec node src/descrolly.js {} \;

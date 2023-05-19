@@ -97,3 +97,9 @@ hortis.asyncForEach = async function (array, callback) {
         await callback(array[index], index, array);
     }
 };
+
+hortis.asyncEach = async function (source, callback) {
+    for (let key in source) {
+        await callback(source[key], key);
+    }
+};

@@ -1,0 +1,133 @@
+{
+    "classes": {
+        "108": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "206": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "332": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "375": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "376": {
+            "byTaxonId": {
+                "56699": true
+            }
+        },
+        "377": {
+            "byTaxonId": {
+                "56699": true
+            }
+        },
+        "confirmed|108": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "confirmed|206": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "confirmed|332": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "confirmed|375": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "historic|108": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "historic|206": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "historic|332": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "historic|375": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "historic|376": {
+            "byTaxonId": {
+                "56699": true
+            }
+        },
+        "historic|377": {
+            "byTaxonId": {
+                "56699": true
+            }
+        },
+        "new|376": {
+            "byTaxonId": {
+                "56699": true
+            }
+        },
+        "new|377": {
+            "byTaxonId": {
+                "56699": true
+            }
+        },
+        "confirmed": {
+            "byTaxonId": {
+                "447179": true
+            }
+        },
+        "historic": {
+            "byTaxonId": {
+                "56699": true,
+                "447179": true
+            }
+        },
+        "new": {
+            "byTaxonId": {
+                "56699": true
+            }
+        }
+    },
+    "communities": {
+        "confirmed": {
+            "fillColor": [
+                90,
+                150,
+                210
+            ]
+        },
+        "historic": {
+            "fillColor": [
+                222,
+                203,
+                144
+            ]
+        },
+        "new": {
+            "fillColor": [
+                117,
+                98,
+                180
+            ]
+        }
+    }
+}

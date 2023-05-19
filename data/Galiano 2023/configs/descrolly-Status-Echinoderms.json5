@@ -1,0 +1,6 @@
+{
+    scrollyStatusInput: "%imerss-bioinfo/data/Galiano 2023/Status-echinodermsPlotData.json",
+    taxaInput: "%imerss-bioinfo/data/Galiano 2023/Echinoderms-reintegrated.csv",
+    taxaMap: "%imerss-bioinfo/data/Galiano 2023/combinedOutMap.json",
+    scrollyFeatures: "%imerss-bioinfo/data/Galiano 2023/scrollyFeatures-Status-Echinoderms.json"
+}

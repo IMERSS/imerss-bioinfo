@@ -1,0 +1,1 @@
+find data/Galiano\ 2023/configs -name "vizConfig*" -exec node src/marmalise.js --config {} \;

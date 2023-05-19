@@ -1,0 +1,64 @@
+{
+  "palette": {
+    "confirmed": "#5a96d2",
+    "historic": "#decb90",
+    "new": "#7562b4"
+  },
+  "taxa": {
+    "confirmed": {
+      "19": "Beroe abyssicola, Pleurobrachia bachei",
+      "43": "Beroe abyssicola, Bolinopsis microptera",
+      "122": "Beroe abyssicola, Pleurobrachia bachei",
+      "152": "Bolinopsis microptera",
+      "162": "Bolinopsis microptera",
+      "165": "Pleurobrachia bachei",
+      "183": "Pleurobrachia bachei",
+      "185": "Pleurobrachia bachei",
+      "205": "Bolinopsis microptera",
+      "206": "Beroe abyssicola, Bolinopsis microptera, Pleurobrachia bachei",
+      "289": "Beroe abyssicola, Bolinopsis microptera, Euplokamis dunlapae, Pleurobrachia bachei",
+      "332": "Beroe abyssicola, Euplokamis dunlapae, Pleurobrachia bachei",
+      "353": "Beroe abyssicola, Pleurobrachia bachei",
+      "375": "Pleurobrachia bachei",
+      "376": "Pleurobrachia bachei",
+      "399": "Beroe abyssicola, Pleurobrachia bachei"
+    },
+    "historic": {
+      "19": "Beroe abyssicola, Pleurobrachia bachei",
+      "43": "Beroe abyssicola, Bolinopsis microptera",
+      "122": "Beroe abyssicola, Pleurobrachia bachei",
+      "152": "Bolinopsis microptera",
+      "162": "Bolinopsis microptera",
+      "165": "Pleurobrachia bachei",
+      "183": "Pleurobrachia bachei",
+      "185": "Pleurobrachia bachei",
+      "205": "Bolinopsis microptera",
+      "206": "Beroe abyssicola, Bolinopsis microptera, Pleurobrachia bachei",
+      "289": "Beroe abyssicola, Bolinopsis microptera, Euplokamis dunlapae, Pleurobrachia bachei",
+      "332": "Beroe abyssicola, Euplokamis dunlapae, Pleurobrachia bachei",
+      "353": "Beroe abyssicola, Pleurobrachia bachei",
+      "375": "Pleurobrachia bachei",
+      "376": "Pleurobrachia bachei",
+      "399": "Beroe abyssicola, Pleurobrachia bachei"
+    },
+    "new": {
+      "19": "Beroe abyssicola, Pleurobrachia bachei",
+      "43": "Beroe abyssicola, Bolinopsis microptera",
+      "122": "Beroe abyssicola, Pleurobrachia bachei",
+      "152": "Bolinopsis microptera",
+      "162": "Bolinopsis microptera",
+      "165": "Pleurobrachia bachei",
+      "183": "Pleurobrachia bachei",
+      "185": "Pleurobrachia bachei",
+      "205": "Bolinopsis microptera",
+      "206": "Beroe abyssicola, Bolinopsis microptera, Pleurobrachia bachei",
+      "289": "Beroe abyssicola, Bolinopsis microptera, Euplokamis dunlapae, Pleurobrachia bachei",
+      "332": "Beroe abyssicola, Euplokamis dunlapae, Pleurobrachia bachei",
+      "353": "Beroe abyssicola, Pleurobrachia bachei",
+      "375": "Pleurobrachia bachei",
+      "376": "Pleurobrachia bachei",
+      "399": "Beroe abyssicola, Pleurobrachia bachei"
+    }
+  },
+  "mapTitle": "Species Reporting Status"
+}

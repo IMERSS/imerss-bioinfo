@@ -18,5 +18,6 @@
     <orderEntry type="module" module-name="janszen-legacy-storymap" />
     <orderEntry type="module" module-name="inat-components" />
     <orderEntry type="module" module-name="inat-components-shared" />
+    <orderEntry type="module" module-name="galiano-bioblitz-2023" />
   </component>
 </module>
