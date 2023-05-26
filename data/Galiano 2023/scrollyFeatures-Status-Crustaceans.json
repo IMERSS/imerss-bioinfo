@@ -1,5 +1,28 @@
 {
     "classes": {
+        "confirmed": {
+            "fillColor": [
+                90,
+                150,
+                210
+            ]
+        },
+        "historic": {
+            "fillColor": [
+                222,
+                203,
+                144
+            ]
+        },
+        "new": {
+            "fillColor": [
+                117,
+                98,
+                180
+            ]
+        }
+    },
+    "communities": {
         "17": {
             "byTaxonId": {
                 "47826": true
@@ -1901,29 +1924,6 @@
                 "459508": true,
                 "872210": true
             }
-        }
-    },
-    "communities": {
-        "confirmed": {
-            "fillColor": [
-                90,
-                150,
-                210
-            ]
-        },
-        "historic": {
-            "fillColor": [
-                222,
-                203,
-                144
-            ]
-        },
-        "new": {
-            "fillColor": [
-                117,
-                98,
-                180
-            ]
         }
     }
 }

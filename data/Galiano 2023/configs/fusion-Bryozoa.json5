@@ -1,14 +1,14 @@
 {
     datasets: {
-        "Echinoderms": {
-            name: "Galiano 2023 Bioblitz Echinoderms",
-            input: "%imerss-bioinfo/data/Galiano 2023/echinoderms_records_gridded.csv",
+        "Bryozoans": {
+            name: "Galiano 2023 Bioblitz Bryozoans",
+            input: "%imerss-bioinfo/data/Galiano 2023/bryozoa_records_gridded.csv",
             map: "%imerss-bioinfo/data/Galiano 2023/Bioblitz-map.json",
             outMap: "%imerss-bioinfo/data/Galiano 2023/Bioblitz-out-map.json",
             colour: "#931362"
         }
     },
     summarise: true,
-    output: "%imerss-bioinfo/data/Galiano 2023/Echinoderms-reintegrated.csv",
+    output: "%imerss-bioinfo/data/Galiano 2023/Bryozoa-reintegrated.csv",
     combinedOutMap: "%imerss-bioinfo/data/Galiano 2023/combinedOutMap.json"
 }

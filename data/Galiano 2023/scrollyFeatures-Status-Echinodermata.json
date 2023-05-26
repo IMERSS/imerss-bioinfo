@@ -1,0 +1,2841 @@
+{
+    "classes": {
+        "confirmed": {
+            "fillColor": [
+                90,
+                150,
+                210
+            ]
+        },
+        "historic": {
+            "fillColor": [
+                222,
+                203,
+                144
+            ]
+        },
+        "new": {
+            "fillColor": [
+                117,
+                98,
+                180
+            ]
+        }
+    },
+    "communities": {
+        "18": {
+            "byTaxonId": {
+                "47664": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true,
+                "992313": true
+            }
+        },
+        "19": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "20": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117691": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129221": true,
+                "129228": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "356416": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "21": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "22": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "117695": true,
+                "120070": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "38": {
+            "byTaxonId": {
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "41": {
+            "byTaxonId": {
+                "47664": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "43": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true
+            }
+        },
+        "44": {
+            "byTaxonId": {
+                "47664": true,
+                "48035": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "120070": true,
+                "129221": true,
+                "202640": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "59": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true,
+                "255865": true,
+                "465153": true,
+                "992313": true
+            }
+        },
+        "60": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "117695": true
+            }
+        },
+        "65": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "202640": true
+            }
+        },
+        "66": {
+            "byTaxonId": {
+                "47673": true,
+                "49699": true,
+                "51695": true,
+                "84265": true,
+                "117695": true,
+                "120070": true
+            }
+        },
+        "80": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "81": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "82": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true
+            }
+        },
+        "87": {
+            "byTaxonId": {
+                "47673": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true,
+                "293174": true
+            }
+        },
+        "101": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "117695": true
+            }
+        },
+        "102": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true
+            }
+        },
+        "103": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "117695": true,
+                "120070": true,
+                "202640": true
+            }
+        },
+        "104": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true
+            }
+        },
+        "107": {
+            "byTaxonId": {
+                "84265": true,
+                "117695": true
+            }
+        },
+        "108": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "424353": true,
+                "464048": true,
+                "465153": true,
+                "473064": true,
+                "873892": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "121": {
+            "byTaxonId": {
+                "47664": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true,
+                "992313": true
+            }
+        },
+        "122": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "123": {
+            "byTaxonId": {
+                "192687": true,
+                "255865": true
+            }
+        },
+        "124": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "125": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true,
+                "957349": true
+            }
+        },
+        "128": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "129": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "130": {
+            "byTaxonId": {
+                "47664": true,
+                "63382": true
+            }
+        },
+        "144": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "145": {
+            "byTaxonId": {
+                "47673": true,
+                "49699": true
+            }
+        },
+        "148": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "150": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true
+            }
+        },
+        "152": {
+            "byTaxonId": {
+                "47664": true,
+                "47673": true,
+                "194701": true,
+                "293174": true,
+                "473064": true,
+                "537859": true
+            }
+        },
+        "153": {
+            "byTaxonId": {
+                "47664": true,
+                "194701": true,
+                "293174": true,
+                "537859": true
+            }
+        },
+        "162": {
+            "byTaxonId": {
+                "117695": true,
+                "120070": true,
+                "195859": true,
+                "202640": true,
+                "293174": true,
+                "424353": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "164": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "194701": true,
+                "195859": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "992313": true
+            }
+        },
+        "165": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "166": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true
+            }
+        },
+        "183": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "192687": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "185": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "192687": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "424353": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "186": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "117695": true
+            }
+        },
+        "205": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "195859": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "206": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "117696": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "210": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "63382": true,
+                "117692": true,
+                "120070": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true
+            }
+        },
+        "225": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "202640": true,
+                "873898": true
+            }
+        },
+        "226": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "192687": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "229": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true
+            }
+        },
+        "246": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "247": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "120070": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "267": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "63382": true,
+                "84265": true,
+                "202640": true
+            }
+        },
+        "268": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "356416": true,
+                "992313": true
+            }
+        },
+        "271": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "289": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "293": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "310": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true
+            }
+        },
+        "313": {
+            "byTaxonId": {
+                "49699": true,
+                "120070": true
+            }
+        },
+        "331": {
+            "byTaxonId": {
+                "63382": true
+            }
+        },
+        "332": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293174": true,
+                "356416": true,
+                "371725": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "353": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "354": {
+            "byTaxonId": {
+                "47673": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "375": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "117696": true,
+                "120070": true,
+                "129221": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293149": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "376": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "62364": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "171674": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293149": true,
+                "293174": true,
+                "356416": true,
+                "371725": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "377": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true
+            }
+        },
+        "399": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293174": true,
+                "356416": true,
+                "371725": true,
+                "465153": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|18": {
+            "byTaxonId": {
+                "47664": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true,
+                "992313": true
+            }
+        },
+        "confirmed|19": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|20": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117691": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129221": true,
+                "129228": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "356416": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|21": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "confirmed|22": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "117695": true,
+                "120070": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|38": {
+            "byTaxonId": {
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "confirmed|41": {
+            "byTaxonId": {
+                "47664": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "confirmed|43": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true
+            }
+        },
+        "confirmed|44": {
+            "byTaxonId": {
+                "47664": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "120070": true,
+                "129221": true,
+                "202640": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|59": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true,
+                "255865": true,
+                "465153": true,
+                "992313": true
+            }
+        },
+        "confirmed|60": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "117695": true
+            }
+        },
+        "confirmed|65": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "202640": true
+            }
+        },
+        "confirmed|66": {
+            "byTaxonId": {
+                "47673": true,
+                "49699": true,
+                "51695": true,
+                "84265": true,
+                "117695": true,
+                "120070": true
+            }
+        },
+        "confirmed|80": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "confirmed|81": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "confirmed|82": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true
+            }
+        },
+        "confirmed|87": {
+            "byTaxonId": {
+                "47673": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true,
+                "293174": true
+            }
+        },
+        "confirmed|101": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "117695": true
+            }
+        },
+        "confirmed|102": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true
+            }
+        },
+        "confirmed|103": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "117695": true,
+                "120070": true,
+                "202640": true
+            }
+        },
+        "confirmed|104": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true
+            }
+        },
+        "confirmed|107": {
+            "byTaxonId": {
+                "84265": true,
+                "117695": true
+            }
+        },
+        "confirmed|108": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|121": {
+            "byTaxonId": {
+                "47664": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true,
+                "992313": true
+            }
+        },
+        "confirmed|122": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "confirmed|123": {
+            "byTaxonId": {
+                "192687": true,
+                "255865": true
+            }
+        },
+        "confirmed|124": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "confirmed|125": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "confirmed|128": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "confirmed|129": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "confirmed|130": {
+            "byTaxonId": {
+                "47664": true,
+                "63382": true
+            }
+        },
+        "confirmed|144": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "confirmed|145": {
+            "byTaxonId": {
+                "47673": true,
+                "49699": true
+            }
+        },
+        "confirmed|148": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "confirmed|150": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true
+            }
+        },
+        "confirmed|152": {
+            "byTaxonId": {
+                "47664": true,
+                "47673": true,
+                "194701": true,
+                "293174": true,
+                "473064": true,
+                "537859": true
+            }
+        },
+        "confirmed|153": {
+            "byTaxonId": {
+                "47664": true,
+                "194701": true,
+                "293174": true,
+                "537859": true
+            }
+        },
+        "confirmed|162": {
+            "byTaxonId": {
+                "117695": true,
+                "120070": true,
+                "195859": true,
+                "202640": true,
+                "293174": true,
+                "424353": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|164": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "194701": true,
+                "195859": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "992313": true
+            }
+        },
+        "confirmed|165": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|166": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true
+            }
+        },
+        "confirmed|183": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "192687": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|185": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "192687": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "424353": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|186": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "117695": true
+            }
+        },
+        "confirmed|205": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "195859": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|206": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "117696": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|210": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "63382": true,
+                "117692": true,
+                "120070": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true
+            }
+        },
+        "confirmed|225": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "202640": true
+            }
+        },
+        "confirmed|226": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "192687": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|229": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true
+            }
+        },
+        "confirmed|246": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "confirmed|247": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "120070": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|267": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "63382": true,
+                "84265": true,
+                "202640": true
+            }
+        },
+        "confirmed|268": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "356416": true,
+                "992313": true
+            }
+        },
+        "confirmed|271": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "confirmed|289": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|293": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "confirmed|310": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true
+            }
+        },
+        "confirmed|313": {
+            "byTaxonId": {
+                "49699": true,
+                "120070": true
+            }
+        },
+        "confirmed|331": {
+            "byTaxonId": {
+                "63382": true
+            }
+        },
+        "confirmed|332": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293174": true,
+                "356416": true,
+                "371725": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|353": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|354": {
+            "byTaxonId": {
+                "47673": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|375": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "117696": true,
+                "120070": true,
+                "129221": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293149": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|376": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293149": true,
+                "293174": true,
+                "356416": true,
+                "371725": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed|377": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true
+            }
+        },
+        "confirmed|399": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293174": true,
+                "356416": true,
+                "371725": true,
+                "465153": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "historic|19": {
+            "byTaxonId": {
+                "1265168": true
+            }
+        },
+        "historic|20": {
+            "byTaxonId": {
+                "1265168": true
+            }
+        },
+        "historic|22": {
+            "byTaxonId": {
+                "1265168": true
+            }
+        },
+        "historic|44": {
+            "byTaxonId": {
+                "48035": true
+            }
+        },
+        "historic|108": {
+            "byTaxonId": {
+                "464048": true,
+                "873892": true,
+                "1265168": true
+            }
+        },
+        "historic|125": {
+            "byTaxonId": {
+                "957349": true
+            }
+        },
+        "historic|205": {
+            "byTaxonId": {
+                "1265168": true
+            }
+        },
+        "historic|206": {
+            "byTaxonId": {
+                "1265168": true
+            }
+        },
+        "historic|225": {
+            "byTaxonId": {
+                "873898": true
+            }
+        },
+        "historic|332": {
+            "byTaxonId": {
+                "1265168": true
+            }
+        },
+        "historic|353": {
+            "byTaxonId": {
+                "1265168": true
+            }
+        },
+        "historic|354": {
+            "byTaxonId": {
+                "1265168": true
+            }
+        },
+        "historic|375": {
+            "byTaxonId": {
+                "1265168": true
+            }
+        },
+        "historic|376": {
+            "byTaxonId": {
+                "62364": true,
+                "171674": true,
+                "1265168": true
+            }
+        },
+        "new|18": {
+            "byTaxonId": {
+                "47664": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true,
+                "992313": true
+            }
+        },
+        "new|19": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "new|20": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117691": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129221": true,
+                "129228": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "356416": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "new|21": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "new|22": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "117695": true,
+                "120070": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "new|38": {
+            "byTaxonId": {
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "new|41": {
+            "byTaxonId": {
+                "47664": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "new|43": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true
+            }
+        },
+        "new|44": {
+            "byTaxonId": {
+                "47664": true,
+                "48035": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "120070": true,
+                "129221": true,
+                "202640": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "new|59": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true,
+                "255865": true,
+                "465153": true,
+                "992313": true
+            }
+        },
+        "new|60": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "117695": true
+            }
+        },
+        "new|65": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "202640": true
+            }
+        },
+        "new|66": {
+            "byTaxonId": {
+                "47673": true,
+                "49699": true,
+                "51695": true,
+                "84265": true,
+                "117695": true,
+                "120070": true
+            }
+        },
+        "new|80": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "new|81": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "new|82": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true
+            }
+        },
+        "new|87": {
+            "byTaxonId": {
+                "47673": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true,
+                "293174": true
+            }
+        },
+        "new|101": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "117695": true
+            }
+        },
+        "new|102": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true
+            }
+        },
+        "new|103": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "117695": true,
+                "120070": true,
+                "202640": true
+            }
+        },
+        "new|104": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true
+            }
+        },
+        "new|107": {
+            "byTaxonId": {
+                "84265": true,
+                "117695": true
+            }
+        },
+        "new|108": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "424353": true,
+                "464048": true,
+                "465153": true,
+                "473064": true,
+                "873892": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "new|121": {
+            "byTaxonId": {
+                "47664": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "202640": true,
+                "992313": true
+            }
+        },
+        "new|122": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "new|123": {
+            "byTaxonId": {
+                "192687": true,
+                "255865": true
+            }
+        },
+        "new|124": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "new|125": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "202640": true,
+                "957349": true
+            }
+        },
+        "new|128": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "new|129": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "new|130": {
+            "byTaxonId": {
+                "47664": true,
+                "63382": true
+            }
+        },
+        "new|144": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "84265": true,
+                "117695": true,
+                "202640": true
+            }
+        },
+        "new|145": {
+            "byTaxonId": {
+                "47673": true,
+                "49699": true
+            }
+        },
+        "new|148": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "new|150": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true
+            }
+        },
+        "new|152": {
+            "byTaxonId": {
+                "47664": true,
+                "47673": true,
+                "194701": true,
+                "293174": true,
+                "473064": true,
+                "537859": true
+            }
+        },
+        "new|153": {
+            "byTaxonId": {
+                "47664": true,
+                "194701": true,
+                "293174": true,
+                "537859": true
+            }
+        },
+        "new|162": {
+            "byTaxonId": {
+                "117695": true,
+                "120070": true,
+                "195859": true,
+                "202640": true,
+                "293174": true,
+                "424353": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "new|164": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "194701": true,
+                "195859": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "992313": true
+            }
+        },
+        "new|165": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "new|166": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true
+            }
+        },
+        "new|183": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "192687": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "new|185": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "192687": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "424353": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "new|186": {
+            "byTaxonId": {
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "117695": true
+            }
+        },
+        "new|205": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "195859": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "new|206": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "117696": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "new|210": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "63382": true,
+                "117692": true,
+                "120070": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true
+            }
+        },
+        "new|225": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "202640": true,
+                "873898": true
+            }
+        },
+        "new|226": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "192687": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "new|229": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true
+            }
+        },
+        "new|246": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "new|247": {
+            "byTaxonId": {
+                "47669": true,
+                "47673": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "120070": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "new|267": {
+            "byTaxonId": {
+                "47673": true,
+                "49539": true,
+                "63382": true,
+                "84265": true,
+                "202640": true
+            }
+        },
+        "new|268": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "356416": true,
+                "992313": true
+            }
+        },
+        "new|271": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "new|289": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293174": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "new|293": {
+            "byTaxonId": {
+                "49699": true
+            }
+        },
+        "new|310": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true
+            }
+        },
+        "new|313": {
+            "byTaxonId": {
+                "49699": true,
+                "120070": true
+            }
+        },
+        "new|331": {
+            "byTaxonId": {
+                "63382": true
+            }
+        },
+        "new|332": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293174": true,
+                "356416": true,
+                "371725": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "new|353": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "new|354": {
+            "byTaxonId": {
+                "47673": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "194701": true,
+                "202640": true,
+                "208013": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "new|375": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "117696": true,
+                "120070": true,
+                "129221": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "293149": true,
+                "293174": true,
+                "356416": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "new|376": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "62364": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "171674": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293149": true,
+                "293174": true,
+                "356416": true,
+                "371725": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "992313": true,
+                "1265168": true
+            }
+        },
+        "new|377": {
+            "byTaxonId": {
+                "49699": true,
+                "63382": true,
+                "84265": true,
+                "117695": true,
+                "120070": true
+            }
+        },
+        "new|399": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117692": true,
+                "117695": true,
+                "120070": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195902": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293174": true,
+                "356416": true,
+                "371725": true,
+                "465153": true,
+                "473064": true,
+                "992313": true
+            }
+        },
+        "confirmed": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "63382": true,
+                "84265": true,
+                "117691": true,
+                "117692": true,
+                "117695": true,
+                "117696": true,
+                "120070": true,
+                "129221": true,
+                "129228": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293149": true,
+                "293174": true,
+                "356416": true,
+                "371725": true,
+                "424353": true,
+                "465153": true,
+                "473064": true,
+                "537859": true,
+                "992313": true
+            }
+        },
+        "historic": {
+            "byTaxonId": {
+                "48035": true,
+                "62364": true,
+                "171674": true,
+                "464048": true,
+                "873892": true,
+                "873898": true,
+                "957349": true,
+                "1265168": true
+            }
+        },
+        "new": {
+            "byTaxonId": {
+                "47664": true,
+                "47669": true,
+                "47673": true,
+                "48035": true,
+                "49539": true,
+                "49699": true,
+                "51695": true,
+                "62364": true,
+                "63382": true,
+                "84265": true,
+                "117691": true,
+                "117692": true,
+                "117695": true,
+                "117696": true,
+                "120070": true,
+                "129221": true,
+                "129228": true,
+                "171674": true,
+                "192687": true,
+                "194701": true,
+                "195859": true,
+                "195902": true,
+                "202051": true,
+                "202640": true,
+                "208013": true,
+                "255865": true,
+                "255883": true,
+                "293149": true,
+                "293174": true,
+                "356416": true,
+                "371725": true,
+                "424353": true,
+                "464048": true,
+                "465153": true,
+                "473064": true,
+                "537859": true,
+                "873892": true,
+                "873898": true,
+                "957349": true,
+                "992313": true,
+                "1265168": true
+            }
+        }
+    }
+}

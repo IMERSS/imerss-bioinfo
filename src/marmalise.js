@@ -275,19 +275,20 @@ hortis.indexRegions = function (treeBuilder) {
 // Used for scrolly framework output via descrolly
 hortis.indexScrollyRegions = function (treeBuilder) {
     const summaryById = hortis.summaryById(treeBuilder);
-    const classes = treeBuilder.scrollyFeatures.classes;
-    const newClasses = fluid.transform(classes, function (clazz) {
+    const comms = treeBuilder.scrollyFeatures.communities;
+    const newComms = fluid.transform(comms, function (comm) {
         // Translate iNat taxon ids to row ids
         const byTaxonId = {};
-        fluid.each(clazz.byTaxonId, function (troo, key) {
+        fluid.each(comm.byTaxonId, function (troo, key) {
             const row = summaryById[key];
             byTaxonId[row.id] = true;
         });
-        return {byTaxonId, fillColor: clazz.fillColor};
+        return {byTaxonId};
     });
     return {
-        communities: newClasses,
-        classes: newClasses
+        communities: newComms,
+        // We use these, if any, to communicate status region palettes and what is a status region
+        classes: treeBuilder.scrollyFeatures.classes
     };
 };
 

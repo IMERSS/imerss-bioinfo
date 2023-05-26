@@ -34,7 +34,7 @@ if (config.scrollyInput) {
 
 const taxaMap = hortis.readJSONSync(fluid.module.resolvePath(config.taxaMap));
 
-hortis.applyTaxaForKey = async function (that, taxaString, label, col) {
+hortis.applyTaxaForKey = async function (that, taxaString, label, container, col) {
     const {scrollyFeatures, source, reintById} = that;
     const taxa = taxaString.split(",").map(fluid.trim);
     console.log("Found " + taxa.length + " taxa for key " + label);
@@ -55,9 +55,9 @@ hortis.applyTaxaForKey = async function (that, taxaString, label, col) {
         }
         if (col) {
             const fillColor = fluid.colour.hexToArray(col);
-            scrollyFeatures.classes[label] = {byTaxonId, fillColor};
+            scrollyFeatures[container][label] = {byTaxonId, fillColor};
         } else {
-            scrollyFeatures.classes[label] = {byTaxonId};
+            scrollyFeatures[container][label] = {byTaxonId};
         }
     });
     console.log("Deduplicated to " + Object.keys(byTaxonId).length + " taxa for key " + label);
@@ -86,14 +86,15 @@ hortis.descrolly = async function (config) {
     });
 
     const scrollyFeatures = {
-        classes: {}
+        classes: {},
+        communities: {}
     };
     const that = {scrollyFeatures, source, reintById};
 
     if (scrollyInput) {
         await hortis.asyncEach(scrollyInput.taxa, async function (taxaString, label) {
             const col = fluid.getImmediate(scrollyInput, ["palette", label]);
-            await hortis.applyTaxaForKey(that, taxaString, label, col);
+            await hortis.applyTaxaForKey(that, taxaString, label, "communities", col);
         });
     } else if (scrollyStatusInput) { // Two-level Bioblitz "Status" file
         const byStatus = {};
@@ -101,18 +102,18 @@ hortis.descrolly = async function (config) {
         await hortis.asyncEach(scrollyStatusInput.taxa, async function (record, status) {
             await hortis.asyncEach(record, async function (taxa, cell_id) {
                 const key = status + "|" + cell_id;
-                await hortis.applyTaxaForKey(that, taxa, key);
+                await hortis.applyTaxaForKey(that, taxa, key, "communities");
                 hortis.appendTaxa(byStatus, status, taxa);
                 hortis.appendTaxa(byCell, cell_id, taxa);
             });
         });
         await hortis.asyncEach(byStatus, async function (taxaString, status) {
-            await hortis.applyTaxaForKey(that, taxaString, status);
+            await hortis.applyTaxaForKey(that, taxaString, status, "communities");
         });
         await hortis.asyncEach(byCell, async function (taxaString, cell_id) {
-            await hortis.applyTaxaForKey(that, taxaString, cell_id);
+            await hortis.applyTaxaForKey(that, taxaString, cell_id, "communities");
         });
-        scrollyFeatures.communities = fluid.transform(scrollyStatusInput.palette, function (col) {
+        scrollyFeatures.classes = fluid.transform(scrollyStatusInput.palette, function (col) {
             return {fillColor: fluid.colour.hexToArray(col)};
         });
     }

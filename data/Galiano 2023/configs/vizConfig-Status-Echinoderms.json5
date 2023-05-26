@@ -1,6 +1,0 @@
-{
-    outputFile: "%imerss-bioinfo/data/Galiano 2023/Galiano-2023-Status-Echinoderms.json.lz4",
-    inputFiles: ["%imerss-bioinfo/data/Galiano 2023/Echinoderms-reintegrated.csv"],
-    mapFile: "%imerss-bioinfo/data/Galiano 2023/combinedOutMap.json",
-    scrollyFeaturesFile: "%imerss-bioinfo/data/Galiano 2023/scrollyFeatures-Status-Echinoderms.json"
-}

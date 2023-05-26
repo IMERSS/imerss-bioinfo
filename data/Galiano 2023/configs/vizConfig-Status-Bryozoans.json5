@@ -1,6 +1,0 @@
-{
-    outputFile: "%imerss-bioinfo/data/Galiano 2023/Galiano-2023-Status-Bryozoans.json.lz4",
-    inputFiles: ["%imerss-bioinfo/data/Galiano 2023/Bryozoans-reintegrated.csv"],
-    mapFile: "%imerss-bioinfo/data/Galiano 2023/combinedOutMap.json",
-    scrollyFeaturesFile: "%imerss-bioinfo/data/Galiano 2023/scrollyFeatures-Status-Bryozoans.json"
-}
