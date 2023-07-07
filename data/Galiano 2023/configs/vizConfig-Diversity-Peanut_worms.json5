@@ -1,6 +1,0 @@
-{
-    outputFile: "%imerss-bioinfo/data/Galiano 2023/Galiano-2023-Diversity-Peanut_worms.json.lz4",
-    inputFiles: ["%imerss-bioinfo/data/Galiano 2023/Peanut_worms-reintegrated.csv"],
-    mapFile: "%imerss-bioinfo/data/Galiano 2023/combinedOutMap.json",
-    scrollyFeaturesFile: "%imerss-bioinfo/data/Galiano 2023/scrollyFeatures-Diversity-Peanut_worms.json"
-}

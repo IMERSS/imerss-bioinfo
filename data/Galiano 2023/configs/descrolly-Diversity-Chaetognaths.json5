@@ -1,6 +1,0 @@
-{
-    scrollyInput: "%imerss-bioinfo/data/Galiano 2023/Diversity-chaetognathsPlotData.json",
-    taxaInput: "%imerss-bioinfo/data/Galiano 2023/Chaetognaths-reintegrated.csv",
-    taxaMap: "%imerss-bioinfo/data/Galiano 2023/combinedOutMap.json",
-    scrollyFeatures: "%imerss-bioinfo/data/Galiano 2023/scrollyFeatures-Diversity-Chaetognaths.json"
-}

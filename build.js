@@ -14,6 +14,7 @@ const buildIndex = {
     localSource: [
         "src/client/css/imerss-viz.css",
         "src/auxBuild/restoreJQuery.js",
+        "src/lib/jquery-ui-widgets-tabs.js",
         "src/lib/lz4.js",
         "src/client/js/imerss-viz.js",
         "src/client/js/autocomplete.js",

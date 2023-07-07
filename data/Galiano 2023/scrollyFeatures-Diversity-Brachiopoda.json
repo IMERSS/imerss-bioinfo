@@ -1,0 +1,70 @@
+{
+    "classes": {},
+    "communities": {
+        "42": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "43": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "45": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "112": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "135": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "149": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "237": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "347": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "370": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "392": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "393": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "415": {
+            "byTaxonId": {
+                "122157": true
+            }
+        },
+        "416": {
+            "byTaxonId": {
+                "122157": true
+            }
+        }
+    }
+}

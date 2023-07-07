@@ -1,0 +1,42 @@
+{
+    "classes": {
+        "confirmed": {
+            "fillColor": [
+                90,
+                150,
+                210
+            ]
+        },
+        "historical": {
+            "fillColor": [
+                222,
+                203,
+                144
+            ]
+        },
+        "new": {
+            "fillColor": [
+                117,
+                98,
+                180
+            ]
+        }
+    },
+    "communities": {
+        "347": {
+            "byTaxonId": {
+                "874030": true
+            }
+        },
+        "historical|347": {
+            "byTaxonId": {
+                "874030": true
+            }
+        },
+        "historical": {
+            "byTaxonId": {
+                "874030": true
+            }
+        }
+    }
+}

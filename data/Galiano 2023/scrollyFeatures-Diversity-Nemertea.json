@@ -1,0 +1,57 @@
+{
+    "classes": {},
+    "communities": {
+        "43": {
+            "byTaxonId": {
+                "121950": true
+            }
+        },
+        "68": {
+            "byTaxonId": {
+                "121950": true,
+                "337279": true
+            }
+        },
+        "127": {
+            "byTaxonId": {
+                "117581": true
+            }
+        },
+        "215": {
+            "byTaxonId": {
+                "121950": true
+            }
+        },
+        "238": {
+            "byTaxonId": {
+                "117581": true,
+                "121950": true,
+                "337279": true
+            }
+        },
+        "347": {
+            "byTaxonId": {
+                "117581": true,
+                "117598": true,
+                "121950": true,
+                "873878": true
+            }
+        },
+        "392": {
+            "byTaxonId": {
+                "117581": true,
+                "121950": true
+            }
+        },
+        "416": {
+            "byTaxonId": {
+                "121950": true
+            }
+        },
+        "417": {
+            "byTaxonId": {
+                "51284": true
+            }
+        }
+    }
+}

@@ -42,13 +42,13 @@
         }
     },
     "datasets": {
-        "Tunicates": {
-            "name": "Galiano 2023 Bioblitz Tunicates",
-            "input": "E:/source/gits/bagatelle/data/Galiano 2023/tunicates_records_gridded.csv",
+        "Molluscs": {
+            "name": "Galiano 2023 Bioblitz Molluscs",
+            "input": "E:/source/gits/bagatelle/data/Galiano 2023/entoprocta_all_records_gridded.csv",
             "map": "E:/source/gits/bagatelle/data/Galiano 2023/Bioblitz-map.json",
             "outMap": "E:/source/gits/bagatelle/data/Galiano 2023/Bioblitz-out-map.json",
             "colour": "#931362",
-            "datasetId": "Tunicates"
+            "datasetId": "Molluscs"
         }
     }
 }

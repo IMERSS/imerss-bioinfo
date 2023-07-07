@@ -21,15 +21,16 @@ hortis.renderSpeciesName = function (name) {
     return name.replace(hortis.annoteRegex, "<span class=\"flc-checklist-annote\">$1</span>");
 };
 
-hortis.checklistItem = function (entry, selectedId) {
+hortis.checklistItem = function (entry, selectedId, simple) {
     const record = entry.row;
     // var focusProp = record.focusCount / record.childCount;
     // var interp = fluid.colour.interpolate(focusProp, hortis.checklist.unfocusedColour, hortis.checklist.focusedColour);
     // var styleprop = "style=\"color: " + fluid.colour.arrayToString(interp) + "\"";
     const styleprop = "";
     const rowid = " data-row-id=\"" + record.id + "\"";
-
-    const rank = record.species ? "species" : record.rank;
+    // Note: "species" really means "has obs" and could be a higher taxon - in the case of a simple checklist
+    // we promote e.g. a genus-level obs to species level so it appears inline
+    const rank = record.rank && !(simple && record.taxonName) || "species";
     const selectedClass = rank === "species" && record.id === selectedId ? " class=\"fl-checklist-selected\"" : "";
     const header = "<li " + selectedClass + ">";
     const render = rank === "species" ? hortis.renderSpeciesName : fluid.identity;
@@ -41,15 +42,15 @@ hortis.checklistItem = function (entry, selectedId) {
     if (record.hulqName) {
         name += " - <p " + styleprop + rowid + " class=\"flc-checklist-hulq-name\"><em>" + record.hulqName + "</em></p>";
     }
-    const subList = hortis.checklistList(entry.children);
+    const subList = hortis.checklistList(entry.children, selectedId, simple);
     const footer = "</li>";
     return header + name + subList + footer;
 };
 
-hortis.checklistList = function (entries, selectedId) {
+hortis.checklistList = function (entries, selectedId, simple) {
     return entries.length ?
         "<ul>" + entries.map(function (entry) {
-            return hortis.checklistItem(entry, selectedId);
+            return hortis.checklistItem(entry, selectedId, simple);
         }).join("") + "</ul>" : "";
 };
 
@@ -70,7 +71,7 @@ hortis.updateChecklistSelection = function (that, newSelectedId, oldSelectedId, 
     }
 };
 
-// Accepts entries and returns entries
+// Accepts array of entry and returns array of entry
 hortis.filterFocused = function (entries) {
     const togo = fluid.transform(entries, function (entry) {
         if (entry.row.focusCount > 0) {
@@ -89,7 +90,11 @@ hortis.acceptChecklistRow = function (row, filterRanks) {
     const acceptBasic = !filterRanks || filterRanks.includes(row.rank) || row.species;
     // Special request from AS - suppress any checklist entry at species level if there are any ssp
     const rejectSpecies = row.rank === "species" && row.children.length > 0;
-    return acceptBasic && !rejectSpecies;
+    // Note: Elaborated understanding - this so-called "genus level record" is actually a species - see elements
+    // in document 2nd July 2023
+    // "taxonName" being set will be a proxy for "there is an entry in the curated summary"
+    const acceptChecklist = row.taxonName;
+    return acceptBasic && !rejectSpecies || acceptChecklist;
 };
 
 hortis.scientificComparator = function (entrya, entryb) {
@@ -100,17 +105,17 @@ hortis.sortChecklistLevel = function (entries) {
     return entries.sort(hortis.scientificComparator);
 };
 
-// Accepts a rows structure and returns "entries", where entry is {row, children<entry>}
-hortis.filterRanks = function (rows, filterRanks) {
+// Accepts array of rows and returns array of "entries", where entry is {row, children: array of entry}
+hortis.filterRanks = function (rows, filterRanks, depth) {
     const togo = [];
     fluid.each(rows, function (row) {
-        if (hortis.acceptChecklistRow(row, filterRanks)) {
+        if (hortis.acceptChecklistRow(row, filterRanks) || depth === 0) {
             togo.push({
                 row: row,
-                children: hortis.filterRanks(row.children, filterRanks)
+                children: hortis.filterRanks(row.children, filterRanks, depth + 1)
             });
         } else {
-            const dChildren = hortis.filterRanks(row.children, filterRanks);
+            const dChildren = hortis.filterRanks(row.children, filterRanks, depth + 1);
             Array.prototype.push.apply(togo, dChildren);
         }
     });
@@ -120,9 +125,9 @@ hortis.filterRanks = function (rows, filterRanks) {
 hortis.generateChecklist = function (element, rootId, selectedId, index, filterRanks) {
     console.log("Generating checklist for id " + rootId);
     const rootChildren = rootId ? [index[rootId]] : [];
-    const filteredRanks = hortis.filterRanks(rootChildren, filterRanks);
+    const filteredRanks = hortis.filterRanks(rootChildren, filterRanks, 0);
     const filteredFocus = hortis.filterFocused(filteredRanks);
-    const markup = hortis.checklistList(filteredFocus, selectedId);
+    const markup = hortis.checklistList(filteredFocus, selectedId, filterRanks);
     element[0].innerHTML = markup;
 };
 

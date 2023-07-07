@@ -49,13 +49,20 @@ hortis.sanitizeSpeciesName = function (name) {
     return name;
 };
 
-hortis.iNat.filenameFromTaxonId = function (taxonAPIFileBase, id) {
-    return taxonAPIFileBase + "/" + id + ".json";
-};
-
-hortis.iNat.loadTaxonDoc = function (taxonAPIFileBase, id) {
-    const filename = hortis.iNat.filenameFromTaxonId(taxonAPIFileBase, id);
-    return hortis.readJSONSync(filename);
+hortis.invertSwaps = function (swaps) {
+    const invertedSwaps = {};
+    fluid.each(swaps, function (value, resolvedTaxon) {
+        const iNaturalistTaxonId = value.iNaturalistTaxonId;
+        if (!iNaturalistTaxonId) {
+            fluid.fail("Swap with name " + resolvedTaxon + " does not have iNaturalistTaxonId");
+        }
+        fluid.each(value.taxonNames, function (record, taxonName) {
+            if (record.type !== "commonName") {
+                invertedSwaps[taxonName] = iNaturalistTaxonId;
+            }
+        });
+    });
+    return invertedSwaps;
 };
 
 hortis.iNat.parentTaxaIds = function (taxonDoc) {
@@ -93,7 +100,7 @@ fluid.defaults("hortis.withINatRateLimit", {
 
 fluid.defaults("hortis.iNatTaxonById", {
     gradeNames: ["kettle.dataSource.URL", "hortis.withINatRateLimit"],
-    url: "https://www.inaturalist.org/taxa/%id.json",
+    url: "https://api.inaturalist.org/v1/taxa/%id",
     termMap: {
         id: "%id"
     }
@@ -103,7 +110,7 @@ fluid.defaults("hortis.iNatTaxonByName", {
     gradeNames: ["kettle.dataSource.URL", "hortis.withINatRateLimit"],
     // TODO: Search for Velutina velutina returns 376 results of which the exact match is not likely to be in first page
     // Report as bug as well as implement paging in the source
-    url: "https://api.inaturalist.org/v1/taxa?q=%name&per_page=200",
+    url: "https://api.inaturalist.org/v1/taxa/autocomplete?q=%name",
     termMap: {
         name: "%name"
     }
@@ -391,7 +398,7 @@ fluid.defaults("hortis.iNatTaxonAPI.dbTaxonAPIs", {
         db: {
             type: "hortis.sqliteDB",
             options: {
-                dbFile: "%imerss-bioinfo/data/iNaturalist/taxa.db/taxa.sqlite3"
+                dbFile: "%imerss-bioinfo/data/iNaturalist/taxa.db/taxa-auto.sqlite3"
             }
         },
         byId: {

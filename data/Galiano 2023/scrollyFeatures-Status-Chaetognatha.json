@@ -1,0 +1,62 @@
+{
+    "classes": {
+        "confirmed": {
+            "fillColor": [
+                90,
+                150,
+                210
+            ]
+        },
+        "historical": {
+            "fillColor": [
+                222,
+                203,
+                144
+            ]
+        },
+        "new": {
+            "fillColor": [
+                117,
+                98,
+                180
+            ]
+        }
+    },
+    "communities": {
+        "302": {
+            "byTaxonId": {
+                "246116": true
+            }
+        },
+        "347": {
+            "byTaxonId": {
+                "246116": true
+            }
+        },
+        "417": {
+            "byTaxonId": {
+                "246116": true
+            }
+        },
+        "confirmed|302": {
+            "byTaxonId": {
+                "246116": true
+            }
+        },
+        "confirmed|347": {
+            "byTaxonId": {
+                "246116": true
+            }
+        },
+        "confirmed|417": {
+            "byTaxonId": {
+                "246116": true
+            }
+        },
+        "confirmed": {
+            "byTaxonId": {
+                "246116": true
+            }
+        }
+    }
+}

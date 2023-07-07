@@ -34,6 +34,11 @@ if (config.scrollyInput) {
 
 const taxaMap = hortis.readJSONSync(fluid.module.resolvePath(config.taxaMap));
 
+const swaps = hortis.readJSONSync("data/taxon-swaps.json5", "reading taxon swaps file");
+const invertedSwaps = hortis.invertSwaps(swaps);
+
+const applySwaps = true;
+
 hortis.applyTaxaForKey = async function (that, taxaString, label, container, col) {
     const {scrollyFeatures, source, reintById} = that;
     const taxa = taxaString.split(",").map(fluid.trim);
@@ -41,7 +46,9 @@ hortis.applyTaxaForKey = async function (that, taxaString, label, container, col
     const byTaxonId = {};
     await hortis.asyncForEach(taxa, async function (taxonName) {
         const san = hortis.sanitizeSpeciesName(taxonName);
-        const looked = await source.get({name: san});
+        // Copied from taxonomise.js hortis.applyObservations
+        const invertedId = applySwaps ? invertedSwaps[san] : null;
+        const looked = invertedId && await source.get({id: invertedId}) || await source.get({name: san});
         if (looked.doc) {
             const taxonId = looked.doc.id;
             const row = reintById[taxonId];

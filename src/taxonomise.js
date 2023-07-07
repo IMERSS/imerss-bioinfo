@@ -129,22 +129,6 @@ hortis.summariseCommonOutMap = hortis.combineMaps([hortis.baseSummariseCommonOut
     columns: hortis.obsToSummaryColumns(hortis.obsToSummaryFields)
 }]);
 
-hortis.invertSwaps = function (swaps) {
-    const invertedSwaps = {};
-    fluid.each(swaps, function (value, resolvedTaxon) {
-        const iNaturalistTaxonId = value.iNaturalistTaxonId;
-        if (!iNaturalistTaxonId) {
-            fluid.fail("Swap with name " + resolvedTaxon + " does not have iNaturalistTaxonId");
-        }
-        fluid.each(value.taxonNames, function (record, taxonName) {
-            if (record.type !== "commonName") {
-                invertedSwaps[taxonName] = iNaturalistTaxonId;
-            }
-        });
-    });
-    return invertedSwaps;
-};
-
 const invertedSwaps = hortis.invertSwaps(swaps);
 
 hortis.checkFilters = function (filters, mapColumns) {

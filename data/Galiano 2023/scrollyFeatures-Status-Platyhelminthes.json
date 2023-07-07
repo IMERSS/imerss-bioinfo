@@ -7,7 +7,7 @@
                 210
             ]
         },
-        "historic": {
+        "historical": {
             "fillColor": [
                 222,
                 203,
@@ -23,104 +23,68 @@
         }
     },
     "communities": {
-        "108": {
+        "135": {
             "byTaxonId": {
                 "447179": true
             }
         },
-        "206": {
+        "238": {
             "byTaxonId": {
                 "447179": true
             }
         },
-        "332": {
+        "347": {
             "byTaxonId": {
                 "447179": true
             }
         },
-        "375": {
+        "392": {
             "byTaxonId": {
                 "447179": true
             }
         },
-        "376": {
+        "416": {
             "byTaxonId": {
                 "56699": true
             }
         },
-        "377": {
+        "417": {
             "byTaxonId": {
                 "56699": true
             }
         },
-        "confirmed|108": {
+        "confirmed|135": {
             "byTaxonId": {
                 "447179": true
             }
         },
-        "confirmed|206": {
+        "confirmed|238": {
             "byTaxonId": {
                 "447179": true
             }
         },
-        "confirmed|332": {
+        "confirmed|347": {
             "byTaxonId": {
                 "447179": true
             }
         },
-        "confirmed|375": {
+        "confirmed|392": {
             "byTaxonId": {
                 "447179": true
             }
         },
-        "historic|108": {
-            "byTaxonId": {
-                "447179": true
-            }
-        },
-        "historic|206": {
-            "byTaxonId": {
-                "447179": true
-            }
-        },
-        "historic|332": {
-            "byTaxonId": {
-                "447179": true
-            }
-        },
-        "historic|375": {
-            "byTaxonId": {
-                "447179": true
-            }
-        },
-        "historic|376": {
+        "new|416": {
             "byTaxonId": {
                 "56699": true
             }
         },
-        "historic|377": {
-            "byTaxonId": {
-                "56699": true
-            }
-        },
-        "new|376": {
-            "byTaxonId": {
-                "56699": true
-            }
-        },
-        "new|377": {
+        "new|417": {
             "byTaxonId": {
                 "56699": true
             }
         },
         "confirmed": {
             "byTaxonId": {
-                "447179": true
-            }
-        },
-        "historic": {
-            "byTaxonId": {
-                "56699": true,
                 "447179": true
             }
         },

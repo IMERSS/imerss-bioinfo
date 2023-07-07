@@ -1,0 +1,15 @@
+{
+    datasets: {
+        "Molluscs": {
+            name: "Galiano 2023 Bioblitz Molluscs",
+            input: "%imerss-bioinfo/data/Galiano 2023/tunicata_all_records_gridded.csv",
+            map: "%imerss-bioinfo/data/Galiano 2023/Bioblitz-map.json",
+            outMap: "%imerss-bioinfo/data/Galiano 2023/Bioblitz-out-map.json",
+            colour: "#931362"
+        }
+    },
+    summarise: true,
+    applySwaps: true,
+    output: "%imerss-bioinfo/data/Galiano 2023/Tunicata-reintegrated.csv",
+    combinedOutMap: "%imerss-bioinfo/data/Galiano 2023/combinedOutMap.json"
+}

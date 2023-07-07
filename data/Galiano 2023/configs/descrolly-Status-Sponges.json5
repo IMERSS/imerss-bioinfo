@@ -1,6 +1,0 @@
-{
-    scrollyStatusInput: "%imerss-bioinfo/data/Galiano 2023/Status-spongesPlotData.json",
-    taxaInput: "%imerss-bioinfo/data/Galiano 2023/Sponges-reintegrated.csv",
-    taxaMap: "%imerss-bioinfo/data/Galiano 2023/combinedOutMap.json",
-    scrollyFeatures: "%imerss-bioinfo/data/Galiano 2023/scrollyFeatures-Status-Sponges.json"
-}

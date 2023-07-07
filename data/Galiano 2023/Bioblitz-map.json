@@ -3,7 +3,7 @@
         "taxonName": "%scientificName",
         "authority": "%scientificNameAuthorship",
         "occurrenceID": "%occurrenceID",
-        "collection": "%collectionCode",
+        "collection": "%institutionCode",
         "catalogueNumber": "%catalogNumber",
         "dateObserved": "%eventDate",
         "recordedBy": "%recordedBy",

@@ -710,7 +710,9 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         if (row.iNaturalistTaxonImage && !row.obsPhotoLink) {
             dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage, row.iNaturalistTaxonId);
         }
-        if (row.species) {
+        if (row.species) { // TODO: Barentsia sp. does not have species - presumably we should just dump anything here?
+            // TODO: Need to revisit nutty system whereby we don't write "rank" for leaves. Need a special signal to
+            // determine "there are any obs at this level".
             // Used to read:
             // dumpRow("Species:", row.species + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank");
             // "species" now just holds raw species name. In the long term we should support our own normalised species name
@@ -823,10 +825,8 @@ hortis.clearTooltip = function (that) {
     if (tooltipTarget) {
         that.tooltipTarget = null;
         if (hortis.isInDocument(tooltipTarget)) {
-            console.log("Cleared tooltip");
             tooltipTarget.tooltip("destroy");
         } else {
-            console.log("Tooltip target lost from document");
             hortis.clearAllTooltips(that);
         }
     }
@@ -839,7 +839,6 @@ hortis.updateTooltip = function (that, id) {
     hortis.clearTooltip(that);
 
     if (content) {
-        console.log("Opening tooltip for node " + id);
         target.tooltip({
             items: target
         });

@@ -7,7 +7,7 @@
                 210
             ]
         },
-        "historic": {
+        "historical": {
             "fillColor": [
                 222,
                 203,
@@ -1828,49 +1828,49 @@
                 "1316654": true
             }
         },
-        "historic|39": {
+        "historical|39": {
             "byTaxonId": {
                 "117545": true
             }
         },
-        "historic|43": {
+        "historical|43": {
             "byTaxonId": {
                 "232769": true
             }
         },
-        "historic|87": {
+        "historical|87": {
             "byTaxonId": {
                 "68075": true
             }
         },
-        "historic|88": {
+        "historical|88": {
             "byTaxonId": {
                 "68075": true
             }
         },
-        "historic|135": {
+        "historical|135": {
             "byTaxonId": {
                 "64448": true,
                 "222146": true
             }
         },
-        "historic|193": {
+        "historical|193": {
             "byTaxonId": {
                 "107572": true
             }
         },
-        "historic|215": {
+        "historical|215": {
             "byTaxonId": {
                 "232944": true
             }
         },
-        "historic|238": {
+        "historical|238": {
             "byTaxonId": {
                 "53692": true,
                 "229295": true
             }
         },
-        "historic|302": {
+        "historical|302": {
             "byTaxonId": {
                 "68075": true,
                 "180028": true,
@@ -1878,19 +1878,19 @@
                 "607477": true
             }
         },
-        "historic|347": {
+        "historical|347": {
             "byTaxonId": {
                 "117545": true,
                 "229394": true,
                 "1433668": true
             }
         },
-        "historic|370": {
+        "historical|370": {
             "byTaxonId": {
                 "215459": true
             }
         },
-        "historic|417": {
+        "historical|417": {
             "byTaxonId": {
                 "228101": true
             }
@@ -1992,7 +1992,7 @@
                 "1316654": true
             }
         },
-        "historic": {
+        "historical": {
             "byTaxonId": {
                 "53692": true,
                 "64448": true,

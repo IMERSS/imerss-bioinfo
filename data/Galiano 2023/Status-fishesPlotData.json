@@ -1,7 +1,7 @@
 {
   "palette": {
     "confirmed": "#5a96d2",
-    "historic": "#decb90",
+    "historical": "#decb90",
     "new": "#7562b4"
   },
   "taxa": {
@@ -65,7 +65,7 @@
       "416": "Ammodytes personatus, Anarrhichthys ocellatus, Artedius fenestralis, Artedius harringtoni, Asemichthys taylori, Aulorhynchus flavidus, Brachyistius frenatus, Chirolophis decoratus, Chirolophis nugator, Chitonotus pugetensis, Citharichthys stigmaeus, Clupea pallasii, Cymatogaster aggregata, Embiotoca lateralis, Enophrys bison, Gadus chalcogrammus, Gobiesox maeandricus, Hemilepidotus hemilepidotus, Hexagrammos decagrammus, Jordania zonope, Lepidopsetta bilineata, Liparis pulchellus, Nautichthys oculofasciatus, Odontopyxis trispinosa, Oligocottus maculosus, Ophiodon elongatus, Oxylebius pictus, Pholis clemensi, Rhacochilus vacca, Rhamphocottus richardsonii, Rhinogobiops nicholsii, Ronquilus jordani, Scorpaenichthys marmoratus, Sebastes caurinus, Sebastes emphaeus, Sebastes flavidus, Sebastes maliger, Sebastes nigrocinctus, Sebastes ruberrimus, Squalus suckleyi",
       "417": "Artedius harringtoni, Cymatogaster aggregata, Embiotoca lateralis, Hexagrammos decagrammus, Jordania zonope, Oligocottus maculosus, Ophiodon elongatus, Oxylebius pictus, Rhacochilus vacca, Rhamphocottus richardsonii, Rhinogobiops nicholsii, Ronquilus jordani, Scorpaenichthys marmoratus, Sebastes caurinus, Sebastes emphaeus, Sebastes flavidus, Sebastes maliger, Sebastes melanops, Sebastes nigrocinctus, Sebastes ruberrimus"
     },
-    "historic": {
+    "historical": {
       "39": "Parophrys vetulus",
       "43": "Trachipterus altivelis",
       "87": "Oncorhynchus clarkii",

@@ -1,0 +1,20 @@
+{
+    "classes": {},
+    "communities": {
+        "85": {
+            "byTaxonId": {
+                "372139": true
+            }
+        },
+        "130": {
+            "byTaxonId": {
+                "372139": true
+            }
+        },
+        "191": {
+            "byTaxonId": {
+                "372139": true
+            }
+        }
+    }
+}
