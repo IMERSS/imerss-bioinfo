@@ -1,0 +1,399 @@
+// 20230713131036
+// https://api.inaturalist.org/v1/taxa/autocomplete?q=Crataegus%20monogyna%20monogyna
+
+{
+    "total_results": 8,
+    "page": 1,
+    "per_page": 10,
+    "results": [
+        {
+            "observations_count": 48269,
+            "taxon_schemes_count": 0,
+            "ancestry": "48460/47126/211194/47125/47124/47132/47148/922110/723302/51148/1437484/1437522",
+            "is_active": true,
+            "flag_counts": {
+                "unresolved": 0,
+                "resolved": 0
+            },
+            "wikipedia_url": null,
+            "current_synonymous_taxon_ids": null,
+            "iconic_taxon_id": 47126,
+            "rank_level": 11,
+            "taxon_changes_count": 0,
+            "atlas_id": null,
+            "complete_species_count": null,
+            "parent_id": 1437522,
+            "name": "Crataegus monogyna",
+            "rank": "complex",
+            "extinct": false,
+            "id": 1437600,
+            "default_photo": {
+                "square_url": "https://static.inaturalist.org/photos/26280730/square.jpg",
+                "attribution": "(c) sacoma18, all rights reserved",
+                "flags": [
+
+                ],
+                "medium_url": "https://static.inaturalist.org/photos/26280730/medium.jpg",
+                "id": 26280730,
+                "license_code": null,
+                "original_dimensions": {
+                    "width": 1536,
+                    "height": 2048
+                },
+                "url": "https://static.inaturalist.org/photos/26280730/square.jpg"
+            },
+            "ancestor_ids": [
+                48460,
+                47126,
+                211194,
+                47125,
+                47124,
+                47132,
+                47148,
+                922110,
+                723302,
+                51148,
+                1437484,
+                1437522,
+                1437600
+            ],
+            "matched_term": "Crataegus monogyna",
+            "iconic_taxon_name": "Plantae"
+        },
+        {
+            "observations_count": 47254,
+            "taxon_schemes_count": 5,
+            "ancestry": "48460/47126/211194/47125/47124/47132/47148/922110/723302/51148/1437484/1437522/1437600",
+            "is_active": true,
+            "flag_counts": {
+                "unresolved": 0,
+                "resolved": 1
+            },
+            "wikipedia_url": "http://en.wikipedia.org/wiki/Crataegus_monogyna",
+            "current_synonymous_taxon_ids": null,
+            "iconic_taxon_id": 47126,
+            "rank_level": 10,
+            "taxon_changes_count": 2,
+            "atlas_id": null,
+            "complete_species_count": null,
+            "parent_id": 1437600,
+            "name": "Crataegus monogyna",
+            "rank": "species",
+            "extinct": false,
+            "id": 51147,
+            "default_photo": {
+                "square_url": "https://static.inaturalist.org/photos/73530064/square.jpeg",
+                "attribution": "(c) Annice Bridgett, all rights reserved, uploaded by Annice Bridgett",
+                "flags": [
+
+                ],
+                "medium_url": "https://static.inaturalist.org/photos/73530064/medium.jpeg",
+                "id": 73530064,
+                "license_code": null,
+                "original_dimensions": {
+                    "width": 1536,
+                    "height": 2048
+                },
+                "url": "https://static.inaturalist.org/photos/73530064/square.jpeg"
+            },
+            "ancestor_ids": [
+                48460,
+                47126,
+                211194,
+                47125,
+                47124,
+                47132,
+                47148,
+                922110,
+                723302,
+                51148,
+                1437484,
+                1437522,
+                1437600,
+                51147
+            ],
+            "matched_term": "Crataegus monogyna",
+            "iconic_taxon_name": "Plantae",
+            "preferred_common_name": "common hawthorn"
+        },
+        {
+            "observations_count": 88,
+            "taxon_schemes_count": 0,
+            "ancestry": "48460/47126/211194/47125/47124/47132/47148/922110/723302/51148/1437484",
+            "is_active": true,
+            "flag_counts": {
+                "unresolved": 0,
+                "resolved": 0
+            },
+            "wikipedia_url": "https://en.wikipedia.org/wiki/Crataegus_×_media",
+            "current_synonymous_taxon_ids": null,
+            "iconic_taxon_id": 47126,
+            "rank_level": 10,
+            "taxon_changes_count": 1,
+            "atlas_id": null,
+            "complete_species_count": null,
+            "parent_id": 1437484,
+            "name": "Crataegus × media",
+            "rank": "hybrid",
+            "extinct": false,
+            "id": 1350225,
+            "default_photo": {
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/130535259/square.jpeg",
+                "attribution": "(c) wolff christiane, some rights reserved (CC BY-NC), uploaded by wolff christiane",
+                "flags": [
+
+                ],
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/130535259/medium.jpeg",
+                "id": 130535259,
+                "license_code": "cc-by-nc",
+                "original_dimensions": {
+                    "width": 1536,
+                    "height": 2048
+                },
+                "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/130535259/square.jpeg"
+            },
+            "ancestor_ids": [
+                48460,
+                47126,
+                211194,
+                47125,
+                47124,
+                47132,
+                47148,
+                922110,
+                723302,
+                51148,
+                1437484,
+                1350225
+            ],
+            "matched_term": "Crataegus laevigata × C monogyna",
+            "iconic_taxon_name": "Plantae"
+        },
+        {
+            "observations_count": 38,
+            "taxon_schemes_count": 0,
+            "ancestry": "48460/47126/211194/47125/47124/47132/47148/922110/723302/51148/1437484",
+            "is_active": true,
+            "flag_counts": {
+                "unresolved": 0,
+                "resolved": 0
+            },
+            "wikipedia_url": null,
+            "current_synonymous_taxon_ids": null,
+            "iconic_taxon_id": 47126,
+            "rank_level": 10,
+            "taxon_changes_count": 1,
+            "atlas_id": null,
+            "complete_species_count": null,
+            "parent_id": 1437484,
+            "name": "Crataegus × sinaica",
+            "rank": "hybrid",
+            "extinct": false,
+            "id": 1437510,
+            "default_photo": {
+                "square_url": "https://static.inaturalist.org/photos/45254709/square.jpeg",
+                "attribution": "(c) Ori Fragman-Sapir, all rights reserved, uploaded by Ori Fragman-Sapir",
+                "flags": [
+
+                ],
+                "medium_url": "https://static.inaturalist.org/photos/45254709/medium.jpeg",
+                "id": 45254709,
+                "license_code": null,
+                "original_dimensions": {
+                    "width": 800,
+                    "height": 600
+                },
+                "url": "https://static.inaturalist.org/photos/45254709/square.jpeg"
+            },
+            "ancestor_ids": [
+                48460,
+                47126,
+                211194,
+                47125,
+                47124,
+                47132,
+                47148,
+                922110,
+                723302,
+                51148,
+                1437484,
+                1437510
+            ],
+            "matched_term": "Crataegus azarolus × C monogyna",
+            "iconic_taxon_name": "Plantae",
+            "preferred_common_name": "Sinai Hawthorn"
+        },
+        {
+            "observations_count": 10,
+            "taxon_schemes_count": 1,
+            "ancestry": "48460/47126/211194/47125/47124/47132/47148/922110/723302/51148/1437484/1437522/1437600/51147",
+            "is_active": true,
+            "flag_counts": {
+                "unresolved": 1,
+                "resolved": 0
+            },
+            "wikipedia_url": null,
+            "current_synonymous_taxon_ids": null,
+            "iconic_taxon_id": 47126,
+            "rank_level": 5,
+            "taxon_changes_count": 0,
+            "atlas_id": null,
+            "complete_species_count": null,
+            "parent_id": 51147,
+            "name": "Crataegus monogyna nordica",
+            "rank": "subspecies",
+            "extinct": false,
+            "id": 320892,
+            "default_photo": {
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2338276/square.jpg",
+                "attribution": "(c) cw226, some rights reserved (CC BY-NC)",
+                "flags": [
+
+                ],
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2338276/medium.jpg",
+                "id": 2338276,
+                "license_code": "cc-by-nc",
+                "original_dimensions": {
+                    "width": 1536,
+                    "height": 2048
+                },
+                "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2338276/square.jpg"
+            },
+            "ancestor_ids": [
+                48460,
+                47126,
+                211194,
+                47125,
+                47124,
+                47132,
+                47148,
+                922110,
+                723302,
+                51148,
+                1437484,
+                1437522,
+                1437600,
+                51147,
+                320892
+            ],
+            "matched_term": "Crataegus monogyna nordica",
+            "iconic_taxon_name": "Plantae"
+        },
+        {
+            "observations_count": 1,
+            "taxon_schemes_count": 0,
+            "ancestry": "48460/47126/211194/47125/47124/47132/47148/922110/723302/51148",
+            "is_active": true,
+            "flag_counts": {
+                "unresolved": 0,
+                "resolved": 0
+            },
+            "wikipedia_url": null,
+            "current_synonymous_taxon_ids": null,
+            "iconic_taxon_id": 47126,
+            "rank_level": 10,
+            "taxon_changes_count": 0,
+            "atlas_id": null,
+            "complete_species_count": null,
+            "parent_id": 51148,
+            "name": "Crataegus × ruscinonensis",
+            "rank": "hybrid",
+            "extinct": false,
+            "id": 1418914,
+            "default_photo": null,
+            "ancestor_ids": [
+                48460,
+                47126,
+                211194,
+                47125,
+                47124,
+                47132,
+                47148,
+                922110,
+                723302,
+                51148,
+                1418914
+            ],
+            "matched_term": "Crataegus azarolus × monogyna",
+            "iconic_taxon_name": "Plantae"
+        },
+        {
+            "observations_count": 0,
+            "taxon_schemes_count": 0,
+            "ancestry": "48460/47126/211194/47125/47124/47132/47148/922110/723302/51148/1437484",
+            "is_active": true,
+            "flag_counts": {
+                "unresolved": 0,
+                "resolved": 0
+            },
+            "wikipedia_url": null,
+            "current_synonymous_taxon_ids": null,
+            "iconic_taxon_id": 47126,
+            "rank_level": 10,
+            "taxon_changes_count": 0,
+            "atlas_id": null,
+            "complete_species_count": null,
+            "parent_id": 1437484,
+            "name": "Crataegus × rubrinervis",
+            "rank": "hybrid",
+            "extinct": false,
+            "id": 1437506,
+            "default_photo": null,
+            "ancestor_ids": [
+                48460,
+                47126,
+                211194,
+                47125,
+                47124,
+                47132,
+                47148,
+                922110,
+                723302,
+                51148,
+                1437484,
+                1437506
+            ],
+            "matched_term": "Crataegus monogyna × C pentagyna",
+            "iconic_taxon_name": "Plantae"
+        },
+        {
+            "observations_count": 0,
+            "taxon_schemes_count": 0,
+            "ancestry": "48460/47126/211194/47125/47124/47132/47148/922110/723302/51148/1437484",
+            "is_active": true,
+            "flag_counts": {
+                "unresolved": 0,
+                "resolved": 0
+            },
+            "wikipedia_url": null,
+            "current_synonymous_taxon_ids": null,
+            "iconic_taxon_id": 47126,
+            "rank_level": 10,
+            "taxon_changes_count": 0,
+            "atlas_id": null,
+            "complete_species_count": null,
+            "parent_id": 1437484,
+            "name": "Crataegus × yosgatica",
+            "rank": "hybrid",
+            "extinct": false,
+            "id": 1437514,
+            "default_photo": null,
+            "ancestor_ids": [
+                48460,
+                47126,
+                211194,
+                47125,
+                47124,
+                47132,
+                47148,
+                922110,
+                723302,
+                51148,
+                1437484,
+                1437514
+            ],
+            "matched_term": "Crataegus monogyna × C tanacetifolia",
+            "iconic_taxon_name": "Plantae"
+        }
+    ]
+}

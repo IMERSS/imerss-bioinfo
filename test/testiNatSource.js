@@ -25,10 +25,11 @@ const source = hortis.iNatTaxonSource({
 // Orthopyxis
 // {id: 47429}
 // {obsId: 86945066}
+// Crataegus monogyna
 
 const testSource = async function () {
     try {
-        const query = "Orthopyxis";
+        const query = "Crataegus monogyna";
         const sane = hortis.sanitizeSpeciesName(query);
         const result = await source.get({name: sane});
         console.log(result);

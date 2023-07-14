@@ -35,6 +35,10 @@ fluid.defaults("hortis.xetthecumSunburstLoader", {
         outerPanelSelector: {
             target: "{that hortis.sunburst}.options.selectors.mapOuterPanel",
             record: ".fld-imerss-map-outer-panel"
+        },
+        openPanels: {
+            target: "{that hortis.sunburst}.options.openTaxonPanels.observationData",
+            record: false
         }
     },
     components: {

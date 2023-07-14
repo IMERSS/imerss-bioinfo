@@ -30,7 +30,7 @@ hortis.checklistItem = function (entry, selectedId, simple) {
     const rowid = " data-row-id=\"" + record.id + "\"";
     // Note: "species" really means "has obs" and could be a higher taxon - in the case of a simple checklist
     // we promote e.g. a genus-level obs to species level so it appears inline
-    const rank = record.rank && !(simple && record.taxonName) || "species";
+    const rank = record.rank && !(simple && record.taxonName) ? record.rank : "species";
     const selectedClass = rank === "species" && record.id === selectedId ? " class=\"fl-checklist-selected\"" : "";
     const header = "<li " + selectedClass + ">";
     const render = rank === "species" ? hortis.renderSpeciesName : fluid.identity;

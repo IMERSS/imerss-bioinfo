@@ -221,6 +221,9 @@ fluid.defaults("hortis.sunburst", {
         labelPath: "fld-imerss-labelPath",
         clickable: "fl-imerss-clickable"
     },
+    openTaxonPanels: {
+        observationData: true
+    },
     components: {
         autocomplete: {
             type: "hortis.autocomplete",
@@ -262,7 +265,7 @@ fluid.defaults("hortis.sunburst", {
             type: "hortis.checklist",
             options: {
                 container: "{sunburst}.dom.simpleChecklist",
-                filterRanks: ["phylum", "class", "order", "species"]
+                filterRanks: ["phylum", "class", "order", "family", "species"]
             }
         }
     },
@@ -506,6 +509,7 @@ hortis.taxonDisplayLookup = {
     taxonLink: "iNaturalist Taxon:",
     commonName: "Common Name:",
     wikipediaSummary: "Wikipedia Summary",
+    observationData: "Observation Data",
     iNaturalistTaxonImage: "iNaturalist Taxon Image:",
     phyloPic: "Taxon Icon:",
     taxonPic: "Taxon Picture:",
@@ -523,10 +527,12 @@ hortis.dumpRow = function (key, value, markup, extraClazz, valueClazz, options) 
     if (value) {
         const toLook = options?.friendlyNames ? hortis.friendlyDisplayLookup : hortis.taxonDisplayLookup;
         const keyName = key ? (toLook[key] || hortis.capitalize(key)) : "";
-        const clazz = "fl-taxonDisplay-row " + (extraClazz || "");
         valueClazz = valueClazz || "";
+        const openPanel = options?.openTaxonPanels[key];
+        const isRemainder = extraClazz && extraClazz.includes("fld-taxonDisplay-expandable-remainder");
+        const clazz = "fl-taxonDisplay-row " + (extraClazz || "") + (openPanel ? " fl-taxonDisplay-expanded" : " fl-taxonDisplay-unexpanded");
         return fluid.stringTemplate(markup.taxonDisplayRow, {
-            key: keyName,
+            key: isRemainder ? "" : keyName,
             value: value,
             rootAttrs: "class=\"" + clazz + "\"",
             valueClazz: valueClazz
@@ -540,7 +546,7 @@ hortis.renderDate = function (date) {
     return new Date(date).toISOString().substring(0, 10);
 };
 
-hortis.expandButtonMarkup = "<span class=\"fl-taxonDisplay-expand fl-taxonDisplay-unexpanded\"></span>";
+hortis.expandButtonMarkup = "<span class=\"fl-taxonDisplay-expand\"></span>";
 
 hortis.sourceTable = { // TODO: get this from marmalised.json but the names currently there are too long
     iNat: "iNaturalist",
@@ -670,14 +676,16 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
     let togo = markup.taxonDisplayHeader;
     const dumpRow = function (keyName, value, extraClazz, options) {
         if (keyName === "wikipediaSummary" && value) {
-            const row1 = hortis.dumpRow("Wikipedia Summary", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header fl-taxonDisplay-runon-header");
-            const row2 = hortis.dumpRow("", value, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder", "fl-taxonDisplay-wikipediaSummary");
+            // TODO: currently wikipediaSummary hard-defaults to closed on render
+            const row1 = hortis.dumpRow("Wikipedia Summary", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header fl-taxonDisplay-unexpanded fl-taxonDisplay-runon-header");
+            const row2 = hortis.dumpRow("", value, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-unexpanded fl-taxonDisplay-runon-remainder", "fl-taxonDisplay-wikipediaSummary");
             togo += row1 + row2;
         } else {
             togo += hortis.dumpRow(keyName, value, markup, extraClazz, undefined, options);
         }
     };
     const dumpImage = function (keyName, url, taxonId) {
+
         const imageMarkup = fluid.stringTemplate(hortis.imageTemplate, {
             imgUrl: url,
             iNatExtern: taxonId ? fluid.stringTemplate(hortis.iNatExtern, {
@@ -739,8 +747,8 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
             obsPanel += hortis.dumpRow("iNaturalistObsLink", "<a href=\"" + row.iNaturalistObsLink + "\">" + row.iNaturalistObsLink + "</a>", markup);
         }
         obsPanel += hortis.dumpRow("observationCount", row.observationCount, markup);
-        togo += hortis.dumpRow("Observation Data", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header");
-        togo += hortis.dumpRow("", obsPanel, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder");
+        togo += hortis.dumpRow("observationData", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header", null, options);
+        togo += hortis.dumpRow("observationData", obsPanel, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder", null, options);
 
         if (row.obsPhotoLink) {
         // See this nonsense: https://stackoverflow.com/questions/5843035/does-before-not-work-on-img-elements
@@ -762,16 +770,16 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
 hortis.bindRowExpander = function (that) {
     that.container.on("click", ".fl-taxonDisplay-expand", function (e) {
         const target = $(e.target);
-        target.toggleClass("fl-taxonDisplay-expanded");
-        target.toggleClass("fl-taxonDisplay-unexpanded");
-        const showing = target.hasClass("fl-taxonDisplay-expanded");
         const header = target.closest(".fld-taxonDisplay-expandable-header");
-        header.toggleClass("fl-taxonDisplay-expanded", showing);
+        header.toggleClass("fl-taxonDisplay-expanded");
+        header.toggleClass("fl-taxonDisplay-unexpanded");
+        const showing = header.hasClass("fl-taxonDisplay-expanded");
         const siblings = header.parent().children();
         const ownIndex = header.index();
         const next = $(siblings[ownIndex + 1]);
         if (next.hasClass("fld-taxonDisplay-expandable-remainder")) { // sanity check, we should not render ones without this
-            next[showing ? "show" : "hide"]();
+            next.toggleClass("fl-taxonDisplay-expanded", showing);
+            next.toggleClass("fl-taxonDisplay-unexpanded", !showing);
         }
     });
 };

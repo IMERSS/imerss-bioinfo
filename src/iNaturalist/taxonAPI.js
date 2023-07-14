@@ -12,6 +12,7 @@ require("../utils/dataSource.js");
 require("../utils/utils.js");
 require("../dataProcessing/sqlite.js");
 require("./obsAPI.js");
+require("../Wikipedia/wikipedia.js");
 require("kettle"); // for kettle.dataSource.URL
 
 hortis.ranks = fluid.freezeRecursive(fluid.require("%imerss-bioinfo/data/ranks.json"));
@@ -65,13 +66,14 @@ hortis.invertSwaps = function (swaps) {
     return invertedSwaps;
 };
 
+// Return parent taxa ids in order up the hierarchy
 hortis.iNat.parentTaxaIds = function (taxonDoc) {
     return taxonDoc.ancestry ? taxonDoc.ancestry.split("/").reverse() : [];
 };
 
 fluid.defaults("hortis.iNatAPILimiter", {
     gradeNames: ["fluid.dataSource.rateLimiter", "fluid.resolveRootSingle"],
-    rateLimit: 1200,
+    rateLimit: 1400,
     singleRootType: "hortis.iNatAPILimiter"
 });
 
@@ -108,8 +110,6 @@ fluid.defaults("hortis.iNatTaxonById", {
 
 fluid.defaults("hortis.iNatTaxonByName", {
     gradeNames: ["kettle.dataSource.URL", "hortis.withINatRateLimit"],
-    // TODO: Search for Velutina velutina returns 376 results of which the exact match is not likely to be in first page
-    // Report as bug as well as implement paging in the source
     url: "https://api.inaturalist.org/v1/taxa/autocomplete?q=%name",
     termMap: {
         name: "%name"
@@ -160,19 +160,22 @@ hortis.cachedApiSource.read = async function (that, payload, options) {
         if (cached && !that.options.disableCache) {
             const staleness = Date.now() - Date.parse(cached.fetched_at);
             if (staleness < that.options.refreshInDays * hortis.DAY_IN_MS) {
-                await that.inMemorySource.set(hortis.writeNoValue(query), cached);
+                await that.inMemorySource.set(query, cached);
                 return cached;
             } else {
                 console.log("Staleness is " + moment.duration(staleness).humanize() + " so fetching live document");
             }
         }
         const live = await that.apiSource.get(query);
-        const toWrite = await that.upgradeLiveDocument(query, live);
-        if (live) { // Only write to db if we got live
-            await that.dbSource.set(query, toWrite);
-        }
-        // Always write to top-level cache
-        await that.inMemorySource.set(hortis.writeNoValue(query), toWrite);
+        const writer = async function (query, toWrite) {
+            if (toWrite.doc) { // Only write to db if we got live
+                await that.dbSource.set(query, toWrite);
+            }
+            // Always write to top-level cache
+            await that.inMemorySource.set(query, hortis.writeNoValue(toWrite));
+        };
+        const toWrite = await that.upgradeLiveDocument(query, live, writer);
+
         return toWrite;
     }
 };
@@ -188,16 +191,49 @@ fluid.defaults("hortis.cachediNatTaxonById", {
         }
     },
     invokers: {
-        upgradeLiveDocument: "hortis.cachediNatTaxonById.upgradeLiveDocument"
+        upgradeLiveDocument: {
+            funcName: "hortis.cachediNatTaxonById.upgradeLiveDocument",
+            // query,          live
+            args: ["{arguments}.0", "{arguments}.1", "{arguments}.2", "{cachediNatTaxonById}.inMemorySource", "{wikipediaExtracts}"]
+        }
     }
 });
 
-hortis.cachediNatTaxonById.upgradeLiveDocument = function (query, live) {
-    return {
-        fetched_at: new Date().toISOString(),
-        id: query.id,
-        doc: live
+
+
+hortis.cachediNatTaxonById.upgradeLiveDocument = async function (query, live, writer, inMemorySource, wikipediaExtracts) {
+    const writeUpgrade = async (id, doc) => {
+        const cached = await inMemorySource.get({id});
+        if (!cached) {
+            if (doc) {
+                console.log("No cached doc for id " + id);
+                const extract = wikipediaExtracts && await wikipediaExtracts.get({name: doc.name});
+                doc.wikipedia_summary = extract && extract.extract;
+            }
+            const toWrite = {
+                fetched_at: new Date().toISOString(),
+                id: query.id,
+                doc: doc
+            };
+            await writer({id}, toWrite);
+            console.log("Document written for id " + id);
+            return toWrite;
+        }
+        return cached;
     };
+    if (live && live.results.length > 0) {
+        const oneLive = live.results[0];
+        const toWrite = fluid.censorKeys(oneLive, ["ancestors"]);
+        const togo = await writeUpgrade(query.id, toWrite);
+        const ancestors = oneLive.ancestors || [];
+        await hortis.asyncForEach(ancestors, async ancestor => {
+            await writeUpgrade(ancestor.id, ancestor);
+        });
+        return togo;
+    } else {
+        console.log("Got empty response ", live);
+        return await writeUpgrade(query.id, undefined);
+    }
 };
 
 fluid.defaults("hortis.cachediNatTaxonByName", {
@@ -212,18 +248,20 @@ fluid.defaults("hortis.cachediNatTaxonByName", {
         // byIdSource
     },
     invokers: {
-        upgradeLiveDocument: "hortis.cachediNatTaxonByName.upgradeLiveDocument({that}.byIdSource, {arguments}.0, {arguments}.1)"
+        upgradeLiveDocument: "hortis.cachediNatTaxonByName.upgradeLiveDocument({that}.byIdSource, {arguments}.0, {arguments}.1, {arguments}.2)"
     }
 });
 
-hortis.bestNameMatch = function (results, query) {
-    const match = results.findIndex(function (result) {
-        return result.matched_term === query.name || result.name === query.name;
-    });
-    return results[match === -1 ? 0 : match];
+hortis.scoreNameMatch = function (result, query) {
+    return (query.name === result.matched_term ? 200 : 0) + (query.name === result.name ? 100 : 0) - result.rank_level;
 };
 
-hortis.cachediNatTaxonByName.upgradeLiveDocument = async function (byIdSource, query, live) {
+hortis.bestNameMatch = function (results, query) {
+    const sorted = results.sort((a, b) => hortis.scoreNameMatch(b, query) - hortis.scoreNameMatch(a, query));
+    return sorted[0];
+};
+
+hortis.cachediNatTaxonByName.upgradeLiveDocument = async function (byIdSource, query, live, writer) {
     console.log("upgradeLive byName given ", live);
     const togo = {
         name: query.name,
@@ -231,25 +269,18 @@ hortis.cachediNatTaxonByName.upgradeLiveDocument = async function (byIdSource, q
     };
     if (live && live.results.length > 0) {
         const record = hortis.bestNameMatch(live.results, query);
-        const doc = fluid.filterKeys(record, ["name", "rank", "id"]);
+        const doc = fluid.filterKeys(record, ["name", "matched_term", "rank", "id"]);
 
-        const byIdBack = await byIdSource.get({id: doc.id});
-        const nameRecord = byIdBack.doc.taxon_names.find(function (nameRec) {
-            return nameRec.name === query.name;
-        });
-        let nameStatus;
-        if (nameRecord) {
-            fluid.extend(doc, fluid.filterKeys(nameRecord, ["is_valid", "lexicon", "created_at", "updated_at"]));
-            nameStatus = nameRecord.is_valid ? "accepted" : "unaccepted";
-        } else {
-            nameStatus = "invalid";
-        }
+        // const byIdBack = await byIdSource.get({id: doc.id});
+
+        const nameStatus = doc.matched_term === query.name ? (doc.name === query.name ? "accepted" : "unaccepted") : "invalid";
+
         doc.nameStatus = nameStatus;
         console.log("Filtered byName document to ", doc);
         togo.doc = doc;
         console.log("About to write ", togo);
-        return togo;
     }
+    await writer(query, togo);
     return togo;
 };
 
@@ -306,6 +337,9 @@ fluid.defaults("hortis.iNatTaxonSource", {
         },
         obsById: {
             type: "hortis.cachediNatObsById"
+        },
+        wikipediaExtracts: {
+            type: "hortis.wikipediaExtracts"
         }
     },
     listeners: {

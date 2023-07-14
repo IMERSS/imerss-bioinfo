@@ -867,16 +867,19 @@ a.ui-button:active,
     filter: invert(57%) sepia(0%) saturate(6%) hue-rotate(187deg) brightness(94%) contrast(88%);
 }
 
-.fl-taxonDisplay-unexpanded {
+.fl-taxonDisplay-unexpanded .fl-taxonDisplay-expand {
     background-image: url("../img/Arrow-down.svg");
 }
 
-.fl-taxonDisplay-expanded {
+.fl-taxonDisplay-expanded .fl-taxonDisplay-expand {
     background-image: url("../img/Arrow-up.svg");
 }
 
+.fl-taxonDisplay-runon-remainder.fl-taxonDisplay-unexpanded {
+    display: none
+}
+
 .fld-taxonDisplay-expandable-remainder {
-    display: none;
     padding-left: 20px;
 }
 

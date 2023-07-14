@@ -1,0 +1,66 @@
+// 20230713133548
+// https://api.inaturalist.org/v1/taxa/autocomplete?q=Symphyotrichum%20douglasii
+
+{
+    "total_results": 1,
+    "page": 1,
+    "per_page": 10,
+    "results": [
+        {
+            "observations_count": 1450,
+            "taxon_schemes_count": 3,
+            "ancestry": "48460/47126/211194/47125/47124/47605/47604/632790/461542/972608/56112/1416869/1416880",
+            "is_active": true,
+            "flag_counts": {
+                "unresolved": 0,
+                "resolved": 0
+            },
+            "wikipedia_url": null,
+            "current_synonymous_taxon_ids": null,
+            "iconic_taxon_id": 47126,
+            "rank_level": 10,
+            "taxon_changes_count": 2,
+            "atlas_id": null,
+            "complete_species_count": null,
+            "parent_id": 1416880,
+            "name": "Symphyotrichum subspicatum",
+            "rank": "species",
+            "extinct": false,
+            "id": 79303,
+            "default_photo": {
+                "square_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/3497297/square.JPG",
+                "attribution": "(c) sarahnwilson, some rights reserved (CC BY-NC), uploaded by sarahnwilson",
+                "flags": [
+
+                ],
+                "medium_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/3497297/medium.JPG",
+                "id": 3497297,
+                "license_code": "cc-by-nc",
+                "original_dimensions": {
+                    "width": 2048,
+                    "height": 1536
+                },
+                "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/3497297/square.JPG"
+            },
+            "ancestor_ids": [
+                48460,
+                47126,
+                211194,
+                47125,
+                47124,
+                47605,
+                47604,
+                632790,
+                461542,
+                972608,
+                56112,
+                1416869,
+                1416880,
+                79303
+            ],
+            "matched_term": "Symphyotrichum douglasii",
+            "iconic_taxon_name": "Plantae",
+            "preferred_common_name": "Douglas' Aster"
+        }
+    ]
+}

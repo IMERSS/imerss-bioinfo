@@ -24,7 +24,7 @@ const outputFile = parsedArgs.o || "assigned.csv";
 // fluid.module.resolvePath("%imerss-bioinfo/data/Squamish/Tracheophyta_review_summary_2022-12-14.csv")
 // fluid.module.resolvePath("%imerss-bioinfo/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv")
 // fluid.module.resolvePath("%imerss-bioinfo/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv")
-const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/Howe Sound/AHSBR_CNALH_data_spatial_query_2023-03-03_DwC.csv");
+const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/Howe Sound/AHSBR_CNALH_data_spatial_query_2023-03-03_DwC-UTF-8.csv");
 
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile
