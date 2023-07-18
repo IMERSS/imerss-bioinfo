@@ -3,6 +3,7 @@
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
         "taxonName": "Taxon name",
+        "authority": "Author",
         "kingdom": "Kingdom",
         "phylum": "Phylum",
         "subphylum": "Subphylum",
@@ -19,7 +20,6 @@
         "tribe": "Tribe",
         "genus": "Genus",
         "species": "Species",
-        "authority": "Author",
         "description": "Description",
         "placeName": "Place name",
         "commonName": "Common name",
@@ -51,34 +51,34 @@
     "datasets": {
         "Animalia": {
             "name": "Animalia",
-            "datasetId": "GAL-Animalia",
-            "input": "E:/source/gits/imerss/data/Galiano/Animalia-2021.csv",
-            "map": "E:/source/gits/imerss/data/Galiano/Galiano-map.json",
-            "outMap": "E:/source/gits/imerss/data/Galiano/Galiano-out-map.json",
+            "datasetId": "Animalia",
+            "input": "E:/source/gits/bagatelle/data/Galiano/Animalia-2021.csv",
+            "map": "E:/source/gits/bagatelle/data/Galiano/Galiano-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Galiano/Galiano-out-map.json",
             "colour": "#931362"
         },
         "Bacteria": {
             "name": "Bacteria",
-            "datasetId": "GAL-Bacteria",
-            "input": "E:/source/gits/imerss/data/Galiano/Bacteria-2021.csv",
-            "map": "E:/source/gits/imerss/data/Galiano/Galiano-map.json",
-            "outMap": "E:/source/gits/imerss/data/Galiano/Galiano-out-map.json",
+            "datasetId": "Bacteria",
+            "input": "E:/source/gits/bagatelle/data/Galiano/Bacteria-2021.csv",
+            "map": "E:/source/gits/bagatelle/data/Galiano/Galiano-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Galiano/Galiano-out-map.json",
             "colour": "#931362"
         },
         "Fungi": {
             "name": "Fungi, Lichens & Protozoa",
-            "datasetId": "GAL-Fungi",
-            "input": "E:/source/gits/imerss/data/Galiano/Fungi-2021.csv",
-            "map": "E:/source/gits/imerss/data/Galiano/Galiano-map.json",
-            "outMap": "E:/source/gits/imerss/data/Galiano/Galiano-out-map.json",
+            "datasetId": "Fungi",
+            "input": "E:/source/gits/bagatelle/data/Galiano/Fungi-2021.csv",
+            "map": "E:/source/gits/bagatelle/data/Galiano/Galiano-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Galiano/Galiano-out-map.json",
             "colour": "#931362"
         },
         "Plantae": {
             "name": "Plantae & Chromista",
-            "datasetId": "GAL-Plantae",
-            "input": "E:/source/gits/imerss/data/Galiano/Plantae-2021.csv",
-            "map": "E:/source/gits/imerss/data/Galiano/Galiano-map.json",
-            "outMap": "E:/source/gits/imerss/data/Galiano/Galiano-out-map.json",
+            "datasetId": "Plantae",
+            "input": "E:/source/gits/bagatelle/data/Galiano/Plantae-2021.csv",
+            "map": "E:/source/gits/bagatelle/data/Galiano/Galiano-map.json",
+            "outMap": "E:/source/gits/bagatelle/data/Galiano/Galiano-out-map.json",
             "colour": "#931362"
         }
     }

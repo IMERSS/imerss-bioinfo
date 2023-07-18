@@ -1,0 +1,27 @@
+// 20230713160232
+// https://en.wikipedia.org/w/api.php?action=query&exchars=1200&prop=extracts&redirects&format=json&titles=Plantae
+
+{
+    "batchcomplete": "",
+    "warnings": {
+        "extracts": {
+            "*": "HTML may be malformed and/or unbalanced and may omit inline images. Use at your own risk. Known problems are listed at https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:TextExtracts#Caveats."
+        }
+    },
+    "query": {
+        "redirects": [
+            {
+                "from": "Plantae",
+                "to": "Plant"
+            }
+        ],
+        "pages": {
+            "19828134": {
+                "pageid": 19828134,
+                "ns": 0,
+                "title": "Plant",
+                "extract": "<p class=\"mw-empty-elt\">\n\n\n\n</p>\n<p><b>Plants</b> are eukaryotes, predominantly photosynthetic, forming the kingdom <b>Plantae</b>. Many are multicellular. Historically, the plant kingdom encompassed all living things that were not animals, and included algae and fungi. All current definitions exclude the fungi and some of the algae. By one definition, plants form the clade Viridiplantae (Latin for \"green plants\") which consists of the green algae and the embryophytes or land plants. The latter include hornworts, liverworts, mosses, lycophytes, ferns, conifers and other gymnosperms, and flowering plants. A definition based on genomes includes the Viridiplantae, along with the red algae and the glaucophytes, in the clade Archaeplastida.\n</p><p>Green plants obtain most of their energy from sunlight, using chloroplasts derived from endosymbiosis with cyanobacteria. Chloroplasts perform photosynthesis using the pigment chlorophyll, which gives them their green colour. Some plants are parasitic and have lost the ability to produce normal amounts of chlorophyll or to photosynthesize. Plants are characterized by sexual reproduction and alternation of generations, but asexual reproduction is</p>..."
+            }
+        }
+    }
+}

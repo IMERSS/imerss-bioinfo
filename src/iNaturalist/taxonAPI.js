@@ -73,7 +73,7 @@ hortis.iNat.parentTaxaIds = function (taxonDoc) {
 
 fluid.defaults("hortis.iNatAPILimiter", {
     gradeNames: ["fluid.dataSource.rateLimiter", "fluid.resolveRootSingle"],
-    rateLimit: 1400,
+    rateLimit: 1200,
     singleRootType: "hortis.iNatAPILimiter"
 });
 
@@ -207,12 +207,15 @@ hortis.cachediNatTaxonById.upgradeLiveDocument = async function (query, live, wr
         if (!cached) {
             if (doc) {
                 console.log("No cached doc for id " + id);
-                const extract = wikipediaExtracts && await wikipediaExtracts.get({name: doc.name});
-                doc.wikipedia_summary = extract && extract.extract;
+                if (doc.wikipedia_url) {
+                    const name = hortis.wikipediaExtracts.urlToTitle(doc.wikipedia_url);
+                    const extract = wikipediaExtracts && await wikipediaExtracts.get({name: name});
+                    doc.wikipedia_summary = extract && extract.extract;
+                }
             }
             const toWrite = {
                 fetched_at: new Date().toISOString(),
-                id: query.id,
+                id: id,
                 doc: doc
             };
             await writer({id}, toWrite);
@@ -298,7 +301,7 @@ fluid.defaults("hortis.iNat.distributeJWT", {
     jwtHeaders: "@expand:hortis.iNat.computeHeaders({that}.options.jwt)",
     distributeOptions: {
         distributeJWT: {
-            target: "{that kettle.dataSource.URL}.options.headers",
+            target: "{that hortis.withINatRateLimit}.options.headers",
             source: "{that}.options.jwtHeaders"
         }
     }

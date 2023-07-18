@@ -23,13 +23,14 @@ const source = hortis.iNatTaxonSource({
 // Balanus glandula/Balanus crenatus - test caching of missing values
 // Velutina velutina - bizarrely resolves onto Sambucus cerulea, because iNat API returns 376 results TODO
 // Orthopyxis
+// Hyalophora - test Wikipedia extracts
 // {id: 47429}
 // {obsId: 86945066}
 // Crataegus monogyna
 
 const testSource = async function () {
     try {
-        const query = "Crataegus monogyna";
+        const query = "Bispira pacifica";
         const sane = hortis.sanitizeSpeciesName(query);
         const result = await source.get({name: sane});
         console.log(result);
