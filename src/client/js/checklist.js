@@ -86,15 +86,18 @@ hortis.filterFocused = function (entries) {
     return togo;
 };
 
+hortis.alwaysRejectRanks = ["subfamily", "genus"]; // AS directive of 18/7/23
+
 hortis.acceptChecklistRow = function (row, filterRanks) {
     const acceptBasic = !filterRanks || filterRanks.includes(row.rank) || row.species;
+    const alwaysReject = hortis.alwaysRejectRanks.includes(row.rank);
     // Special request from AS - suppress any checklist entry at species level if there are any ssp
     const rejectSpecies = row.rank === "species" && row.children.length > 0;
     // Note: Elaborated understanding - this so-called "genus level record" is actually a species - see elements
     // in document 2nd July 2023
-    // "taxonName" being set will be a proxy for "there is an entry in the curated summary"
+    // "taxonName" being set will be a proxy for "there is an entry in the curated summary" so we always accept
     const acceptChecklist = row.taxonName;
-    return acceptBasic && !rejectSpecies || acceptChecklist;
+    return acceptBasic && !rejectSpecies && !alwaysReject || acceptChecklist;
 };
 
 hortis.scientificComparator = function (entrya, entryb) {

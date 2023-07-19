@@ -508,6 +508,7 @@ hortis.taxonDisplayLookup = {
     iNaturalistObsLink: "Observation:",
     taxonLink: "iNaturalist Taxon:",
     commonName: "Common Name:",
+    hulqName: "Hul'qumi'num name:",
     wikipediaSummary: "Wikipedia Summary",
     observationData: "Observation Data",
     iNaturalistTaxonImage: "iNaturalist Taxon Image:",
@@ -629,7 +630,7 @@ hortis.dumpHulqName = function (row, markup) {
     const player = row.audioLink ? fluid.stringTemplate(hortis.drivePlayer, {
         url: hortis.driveToPreview(row.audioLink)
     }) : "";
-    const nameRow = hortis.dumpRow("Hul'qumi'num name", row.hulqName + player, markup);
+    const nameRow = hortis.dumpRow("hulqName", row.hulqName + player, markup);
     return nameRow;
 };
 

@@ -64,7 +64,6 @@ Examples of current drivers from biogaliano.org WordPress site:
  <script>
  hortis.sunburstLoader(".fl-imerss-container", {
  colourCount: "undocumentedCount",
- sunburstPixels:800,
  markupTemplate: "/bagatelle-new/html/imerss-viz.html",
  renderMarkup: true,
  queryOnStartup: "Araneae",
