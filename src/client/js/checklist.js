@@ -86,7 +86,7 @@ hortis.filterFocused = function (entries) {
     return togo;
 };
 
-hortis.alwaysRejectRanks = ["subfamily", "genus"]; // AS directive of 18/7/23
+hortis.alwaysRejectRanks = ["subfamily", "tribe", "genus"]; // AS directive of 18/7/23
 
 hortis.acceptChecklistRow = function (row, filterRanks) {
     const acceptBasic = !filterRanks || filterRanks.includes(row.rank) || row.species;

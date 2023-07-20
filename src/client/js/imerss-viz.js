@@ -303,7 +303,8 @@ fluid.defaults("hortis.sunburst", {
         // selectedId: id of row for taxon display
         // rowFocus: {} - rows "focused" as a result of, e.g. map
         visible: false,
-        commonNames: true
+        commonNames: true,
+        nativeDataOnly: true
     },
     modelRelay: {
         isAtRoot: {
@@ -331,14 +332,14 @@ fluid.defaults("hortis.sunburst", {
         taxonDisplayFooter: "</div>"
     },
     events: {
-        changeLayoutId: null
+        changeLayoutId: null,
+        doLayout: null
     },
     invokers: {
         render: "hortis.render({that})",
         renderLight: "hortis.renderLight({that})",
         renderSegment: "hortis.renderSegment({that}, {arguments}.0, {arguments}.1)",
         angleScale: "hortis.angleScale({arguments}.0, {that}.model.scale)",
-        elementToRow: "hortis.elementToRow({that}, {arguments}.0)",
         segmentClicked: "hortis.segmentClicked({that}, {arguments}.0)",
         fillColourForRow: "hortis.undocColourForRow({that}.options.parsedColours, {arguments}.0)",
         getMousable: "hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label, {that}.options.selectors.phyloPic)",
@@ -1040,7 +1041,6 @@ hortis.renderSVGTemplate = function (template, terms) {
     return fluid.stringTemplate(template, terms);
 };
 
-
 hortis.interpolateModels = function (f, m1, m2) {
     return fluid.transform(m1, function (value, key) {
         if (typeof(value) === "number") {
@@ -1139,11 +1139,6 @@ hortis.updateRowFocus = function (that, rowFocus, transaction) {
 hortis.elementToId = function (element) {
     const id = element.id;
     return id.substring(id.indexOf(":") + 1);
-};
-
-hortis.elementToRow = function (that, element) {
-    const id = hortis.elementToId(element);
-    return that.index[id];
 };
 
 hortis.backTaxon = function (that) {
