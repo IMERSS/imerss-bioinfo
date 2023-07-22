@@ -44,7 +44,7 @@
     "datasets": {
         "Molluscs": {
             "name": "Galiano 2023 Bioblitz Molluscs",
-            "input": "E:/source/gits/bagatelle/data/Galiano 2023/entoprocta_all_records_gridded.csv",
+            "input": "E:/source/gits/bagatelle/data/Galiano 2023/tunicata_all_records_gridded.csv",
             "map": "E:/source/gits/bagatelle/data/Galiano 2023/Bioblitz-map.json",
             "outMap": "E:/source/gits/bagatelle/data/Galiano 2023/Bioblitz-out-map.json",
             "colour": "#931362",

@@ -97,7 +97,8 @@ fluid.defaults("hortis.sunburstLoader", {
                     tree: "{that}.viz.tree"
                 },
                 model: {
-                    commonNames: "{sunburstLoader}.options.commonNames"
+                    commonNames: "{sunburstLoader}.options.commonNames",
+                    nativeDataOnly: "{sunburstLoader}.options.nativeDataOnly"
                 }
             }
         }
@@ -304,7 +305,7 @@ fluid.defaults("hortis.sunburst", {
         // rowFocus: {} - rows "focused" as a result of, e.g. map
         visible: false,
         commonNames: true,
-        nativeDataOnly: true
+        nativeDataOnly: false
     },
     modelRelay: {
         isAtRoot: {
@@ -373,29 +374,37 @@ fluid.defaults("hortis.sunburst", {
             path: "dom.back.click",
             funcName: "hortis.backTaxon",
             args: ["{that}"]
+        },
+        nativeDataOnly: {
+            namespace: "computeSunburstEntries",
+            funcName: "hortis.computeSunburstEntriesAndRender",
+            args: "{that}"
         }
     },
     listeners: {
         "onCreate.doLayout": {
+            func: "{that}.events.doLayout.fire"
+        },
+        "doLayout.impl": {
             func: "hortis.doLayout",
             args: ["{that}.flatTree"]
         },
-        "onCreate.computeInitialScale": {
+        "doLayout.computeInitialScale": {
             funcName: "hortis.computeInitialScale",
             args: ["{that}"],
             priority: "after:doLayout"
         },
-        "onCreate.boundNodes": {
+        "doLayout.boundNodes": {
             funcName: "hortis.boundNodes",
             args: ["{that}", "{that}.model.layoutId", true],
             priority: "before:render"
         },
-        "onCreate.applyPhyloMap": {
+        "doLayout.applyPhyloMap": {
             funcName: "hortis.applyPhyloMap",
             args: ["{sunburstLoader}.resources.phyloMap.parsed", "{that}.flatTree", "{sunburstLoader}.options.resourceOptions.terms"],
             priority: "before:computeInitialScale"
         },
-        "onCreate.render": {
+        "doLayout.render": {
             func: "{that}.render",
             priority: "after:computeInitialScale"
         },
@@ -1348,6 +1357,32 @@ hortis.depthComparator = function (rowa, rowb) {
     return rowa.depth - rowb.depth;
 };
 
+hortis.hasNativeData = function (row) {
+    return row.hulqName || row.culturalValues;
+};
+
+hortis.assignNativeDataFlags = function (flatTree) {
+    flatTree.forEach(function (row) {
+        if (hortis.hasNativeData(row)) {
+            let move = row;
+            while (move) {
+                move.hasNativeData = true;
+                move = move.parent;
+            }
+        } else {
+            row.hasNativeData = false; // May be overwritten by recursion
+        }
+    });
+};
+
+hortis.flattenTreeRecurse = function (tree, toAppend) {
+    tree.children.forEach(function (child) {
+        child.parent = tree;
+        toAppend.push(child);
+        hortis.flattenTreeRecurse(child, toAppend);
+    });
+};
+
 hortis.flattenTree = function (tree) {
     const flat = [];
     flat.push(tree);
@@ -1356,6 +1391,8 @@ hortis.flattenTree = function (tree) {
     flat.forEach(function (row, flatIndex) {
         row.flatIndex = flatIndex;
     });
+    // Again - wot no polymorphism?
+    hortis.assignNativeDataFlags(flat);
     return flat;
 };
 
@@ -1367,12 +1404,30 @@ hortis.indexTree = function (flatTree) {
     return index;
 };
 
-hortis.flattenTreeRecurse = function (tree, toAppend) {
-    tree.children.forEach(function (child) {
-        child.parent = tree;
-        toAppend.push(child);
-        hortis.flattenTreeRecurse(child, toAppend);
+hortis.acceptSunburstRow = function (row, nativeDataOnly) {
+    return !nativeDataOnly || row.hasNativeData;
+};
+
+// Accepts array of rows and returns array of "entries", where entry is {row, children: array of entry}
+// Identical algorithm as for hortis.filterRanks - no doubt a functional programmer would fold this up
+hortis.computeSunburstEntries = function (rows, nativeDataOnly) {
+    const togo = [];
+    fluid.each(rows, function (row) {
+        if (hortis.acceptSunburstRow(row, nativeDataOnly)) {
+            togo.push({
+                row: row,
+                children: hortis.computeSunburstEntries(row.children, nativeDataOnly)
+            });
+        } else {
+            const dChildren = hortis.computeSunburstEntries(row.children, nativeDataOnly);
+            Array.prototype.push.apply(togo, dChildren);
+        }
     });
+    return hortis.sortChecklistLevel(togo);
+};
+
+hortis.computeSunburstEntriesAndRender = function (that) {
+    that.entries = hortis.computeSunburstEntries(that.flatTree, that.model.nativeDataOnly);
 };
 
 hortis.doLayout = function (flatTree) {
