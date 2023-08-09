@@ -423,8 +423,9 @@ hortis.applyObservations = async function (that, obsRows, applySwaps) {
             if (taxon && taxon.doc) {
                 taxonLevel = taxon.doc.rank;
                 const existing = that.obsIdToTaxon[obsId];
-                if (existing) {
-                    fluid.fail("Error in dataset configuration - observation id " + obsId + " has previously been used to resolve taxon ", existing);
+                if (existing && existing.doc.id !== taxon.doc.id) {
+                    console.log("Warning: Observation id " + obsId + " has previously been used to resolve taxon ", existing
+                        , "now overwritten with ", taxon);
                 }
                 that.obsIdToTaxon[obsId] = taxon;
             }

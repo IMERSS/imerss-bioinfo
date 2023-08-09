@@ -3,6 +3,7 @@
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
         "taxonName": "Taxon name",
+        "authority": "Author",
         "kingdom": "Kingdom",
         "phylum": "Phylum",
         "subphylum": "Subphylum",

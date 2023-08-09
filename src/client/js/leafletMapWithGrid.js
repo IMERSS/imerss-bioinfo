@@ -276,16 +276,6 @@ hortis.quantiser.coordToIndex = function (coord, latres, longres) {
     }
 };
 
-hortis.datasetIdFromObs = function (obsId) {
-    const colpos = obsId.indexOf(":");
-    return obsId.substring(0, colpos);
-};
-
-hortis.localIdFromObs = function (obsId) {
-    const colpos = obsId.indexOf(":");
-    return obsId.substring(colpos + 1);
-};
-
 hortis.quantiser.indexObs = function (that, coord, obsId, rowId, latResolution, longResolution) {
     const coordIndex = hortis.quantiser.coordToIndex(coord, latResolution, longResolution);
     const datasetId = hortis.datasetIdFromObs(obsId);

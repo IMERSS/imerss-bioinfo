@@ -124,8 +124,18 @@
     margin-bottom: -0.2rem;
 }
 
+/* No idea why we do this, but we need to undo it for fld-imerss-media-name */
 .fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder :first-child {
     margin-top: -0.5rem;
+}
+
+.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder .fld-imerss-media-name {
+    padding-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.fl-taxonDisplay-row .fld-imerss-media-image {
+    padding-bottom: 5px;
 }
 
 .fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder.fl-taxonDisplay-row {

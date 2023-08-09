@@ -4,6 +4,7 @@
 
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
+// This is highly Xetthecum-specific and not used elsewhere
 
 fluid.defaults("hortis.leafletMap.withRegions", {
     gradeNames: "hortis.leafletMap.withRegionsBase",
@@ -143,11 +144,6 @@ hortis.leafletMap.outerPanelPhoto = "<div class=\"fl-imerss-photo %photoClass\">
 hortis.leafletMap.outerPanelCommunity = "<div class=\"fld-imerss-map-community\">Community:<br/>%community%hulqBlock</div>";
 hortis.leafletMap.outerPanelClass = "<div class=\"fld-imerss-map-class\">%clazz%hulqBlock</div>";
 
-hortis.leafletMap.outerPanelBlock =
-    "<div class=\"fld-imerss-map-panel-block fld-taxonDisplay-expandable-header fl-taxonDisplay-runon-header\">%blockName" + hortis.expandButtonMarkup + "</div>" +
-    "<div class=\"fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder\">%block</div>";
-
-
 hortis.leafletMap.renderHulqName = function (row) {
     return fluid.stringTemplate(hortis.leafletMap.hulqNameTemplate, {
         hulqName: row.hulqName,
@@ -220,6 +216,16 @@ hortis.listenTaxonLinks = function (sunburst) {
     });
 };
 
+hortis.renderMediaExpander = function (media, blockClazz) {
+    const mediaBlock = hortis.renderMedia(media);
+    const allMediaBlock = hortis.renderExpandable({
+        blockName: "Media",
+        block: mediaBlock,
+        blockClazz: blockClazz
+    }, true);
+    return allMediaBlock;
+};
+
 hortis.leafletMap.renderMapOuterPanel = function (map) {
     const selectedClazz = fluid.keyForValue(map.model.selectedRegions, true);
     const clazz = map.classes[selectedClazz];
@@ -229,6 +235,7 @@ hortis.leafletMap.renderMapOuterPanel = function (map) {
             photoClass: "fld-imerss-class-image-" + hortis.normaliseToClass(selectedClazz)
         });
     }
+
     const communityName = map.model.mapBlockTooltipId;
     const community = map.communities[communityName];
     topPanel += fluid.stringTemplate(hortis.leafletMap.outerPanelCommunity, {
@@ -239,16 +246,23 @@ hortis.leafletMap.renderMapOuterPanel = function (map) {
         clazz: selectedClazz,
         hulqBlock: clazz.hulqName ? hortis.leafletMap.renderHulqName(clazz) : ""
     });
+
+    if (clazz.media) {
+        // TODO: Simpler than taxon panel because we don't have key/value markup inside
+        topPanel += hortis.renderMediaExpander(clazz.media, "fld-imerss-map-panel-block", true);
+    }
+
     let bottomPanel = "";
     if (community.culturalValues) {
         const cultureBlock =
             hortis.convertTaxonLinks(hortis.textToMarkup(community.culturalValues)) +
             "<br/><br/><div class=\"fld-imerss-map-class-se-col\">Sources:</div>" +
             hortis.textToMarkup(community.culturalValuesSources);
-        const allCultureBlock = fluid.stringTemplate(hortis.leafletMap.outerPanelBlock, {
+        const allCultureBlock = hortis.renderExpandable({
             blockName: "Cultural Values",
-            block: cultureBlock
-        });
+            block: cultureBlock,
+            blockClazz: "fld-imerss-map-panel-block"
+        }, true);
         bottomPanel += allCultureBlock;
     }
     if (clazz["sE-Tagline"]) {
@@ -257,10 +271,11 @@ hortis.leafletMap.renderMapOuterPanel = function (map) {
             ecoBlock += "<div class=\"fld-imerss-map-class-se-col\">" + col + ": </div>";
             ecoBlock += "<div class=\"fld-imerss-map-class-se-val\">" + clazz["sE-" + col] + "</div>";
         });
-        const allEcoBlock = fluid.stringTemplate(hortis.leafletMap.outerPanelBlock, {
+        const allEcoBlock = hortis.renderExpandable({
             blockName: "Ecological Values",
-            block: ecoBlock
-        });
+            block: ecoBlock,
+            blockClazz: "fld-imerss-map-panel-block"
+        }, true);
         bottomPanel += allEcoBlock;
     }
     return topPanel + bottomPanel;

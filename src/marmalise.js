@@ -10,6 +10,7 @@ require("./utils/utils.js");
 require("./dataProcessing/readJSON.js");
 require("./dataProcessing/readCSV.js");
 require("./dataProcessing/readCSVwithMap.js");
+require("./dataProcessing/readCSVWithoutMap.js");
 require("./dataProcessing/LZ4.js");
 require("./iNaturalist/taxonAPI.js");
 
@@ -194,6 +195,7 @@ fluid.defaults("hortis.treeBuilder", {
         tree: "@expand:hortis.rootNode({that}.map)",
         map: "@expand:hortis.loadMapWithCounts({that}.options.mapFile)",
         features: null, // "flatFeatures" file output, e.g. by deqgis, if configured
+        mediaMap: null, // "mediaMap" file rows, if configured
         scrollyFeatures: null, // "scrollyFeatures" file output, e.g. by descrolly, if configured
         obs: null, // observations file which will be applied to features - expected to contain column named "regionField" supplied in options
         // map of taxonId to taxon file
@@ -229,6 +231,57 @@ hortis.summaryById = function (treeBuilder) {
     return summaryById;
 };
 
+hortis.summaryByName = function (summaryRows) {
+    const summaryByName = {};
+    summaryRows.forEach(row => summaryByName[row.iNaturalistTaxonName] = row);
+    return summaryByName;
+};
+
+hortis.rowToMediaEntry = function (row) {
+    return fluid.censorKeys(row, ["Target Type", "Target"]);
+};
+
+hortis.applyTaxonMedia = function (mediaMapRows, summaryRows) {
+    const summaryByName = hortis.summaryByName(summaryRows);
+    hortis.applyMediaMap(mediaMapRows, "Taxon", function (mediaEntry, row, index) {
+        const taxon = row.Target;
+        const summaryRow = summaryByName[taxon];
+        if (!summaryRow) {
+            console.log("Unknown taxon " + taxon + " referenced at row " + (index + 1) + " of media map file");
+        } else {
+            fluid.pushArray(summaryRow, "media", mediaEntry);
+        }
+    });
+};
+
+hortis.applyRegionMedia = function (mediaMapRows, output) {
+    const outputBlocks = {
+        "Class": "classes",
+        "Community": "communities"
+    };
+    const applyOneRegionMedium = function (mediaEntry, row, index, target, targetType) {
+        const outputBlock = outputBlocks[targetType];
+        const block = output[outputBlock][target];
+        if (!block) {
+            console.log("Unknown " + targetType + " " + target + " referenced at row " + (index + 1) + " of media map file");
+        }
+        fluid.pushArray(block, "media", mediaEntry);
+    };
+    hortis.applyMediaMap(mediaMapRows, "Class", applyOneRegionMedium);
+    hortis.applyMediaMap(mediaMapRows, "Community", applyOneRegionMedium);
+};
+
+hortis.applyMediaMap = function (mediaMapRows, targetType, applyMedia) {
+    mediaMapRows.forEach(function (row, index) {
+        const mediaEntry = hortis.rowToMediaEntry(row);
+        const rowTargetType = row["Target Type"];
+        const rowTarget = row.Target;
+        if (rowTargetType === targetType) {
+            applyMedia(mediaEntry, row, index, rowTarget, targetType);
+        }
+    });
+};
+
 // Used for Xetthecum output via deqgis
 hortis.indexRegions = function (treeBuilder) {
     const summaryById = hortis.summaryById(treeBuilder);
@@ -244,11 +297,7 @@ hortis.indexRegions = function (treeBuilder) {
             if (!region) {
                 fluid.fail("Unknown region key ", key, " in container with keys ", Object.keys(container).join(", "));
             }
-            let bucketTaxa = region.byTaxonId[taxonId]; // TODO: use fluid.pushArray?
-            if (!bucketTaxa) {
-                bucketTaxa = region.byTaxonId[taxonId] = [];
-            }
-            bucketTaxa.push(obsId);
+            fluid.pushArray(region.byTaxonId, taxonId, obsId);
             ++region.count;
         }
     };
@@ -294,6 +343,14 @@ hortis.indexScrollyRegions = function (treeBuilder) {
 
 hortis.marmalise = async function (treeBuilder) {
     const options = treeBuilder.options;
+    if (options.mediaMapFile) {
+        const mediaMap = await hortis.csvReaderWithoutMap({
+            inputFile: fluid.module.resolvePath(options.mediaMapFile)
+        }).completionPromise;
+        treeBuilder.mediaMap = mediaMap.rows;
+    } else {
+        treeBuilder.mediaMap = [];
+    }
     await hortis.asyncMap(options.inputFiles, async function (fileName) {
         const result = await hortis.csvReaderWithMap({
             inputFile: fluid.module.resolvePath(fileName),
@@ -301,8 +358,9 @@ hortis.marmalise = async function (treeBuilder) {
         }).completionPromise;
         // console.log(JSON.stringify(result.rows[0], null, 2));
         console.log("Applying " + result.rows.length + " rows from " + fileName);
+        hortis.applyTaxonMedia(treeBuilder.mediaMap, result.rows);
         treeBuilder.summaryRows = result.rows;
-        await treeBuilder.applyRowsToTree(fileName, result.rows);
+        await treeBuilder.applyRowsToTree(fileName, treeBuilder.summaryRows);
     });
     if (options.featuresFile) {
         fluid.expect("viz config file", options, ["obsFile", "obsMapFile", "regionField", "obsIdField"]);
@@ -318,9 +376,9 @@ hortis.marmalise = async function (treeBuilder) {
         treeBuilder.scrollyFeatures = hortis.readModuleJSONSync(options.scrollyFeaturesFile);
         // Currently do not process obs here
     }
-
-
+    // TODO: Why might children not be flat? Looks like this is a shallow flattening operation
     hortis.flattenChildren(treeBuilder.tree);
+
     const output = {
         datasets: fluid.transform(treeBuilder.map.datasets, hortis.filterDataset),
         tree: treeBuilder.tree
@@ -328,6 +386,7 @@ hortis.marmalise = async function (treeBuilder) {
     const extraOutput = options.featuresFile ? hortis.indexRegions(treeBuilder) : options.scrollyFeaturesFile ?
         hortis.indexScrollyRegions(treeBuilder) : {};
     const fullOutput = fluid.extend(output, extraOutput);
+    hortis.applyRegionMedia(treeBuilder.mediaMap, fullOutput);
     fs.writeFileSync("marmalised.json", JSON.stringify(fullOutput, null, 4) + "\n");
     const text = JSON.stringify(fullOutput);
     hortis.writeLZ4File(text, fluid.module.resolvePath(treeBuilder.options.outputFile));

@@ -61,29 +61,18 @@ hortis.checklistRowForId = function (that, id) {
 // Note that we can't test on layoutId since it is updated asynchronously and in a complex way in hortis.changeLayoutId
 // This is the kind of logic that, in the end, makes us want to render with something like Preact
 // Could we return component-like things backed by markup snippets? Rather than JSX, use relay-like notation?
-hortis.updateChecklistSelection = function (that, newSelectedId, oldSelectedId, index) {
+hortis.updateChecklistSelection = function (that, newSelectedId, oldSelectedId, entryIndex) {
+    // TODO: Since we updated Xetthecum data we are now getting a null selected id on startup
+    if (newSelectedId === null) {
+        return;
+    }
     const oldSelected = hortis.checklistRowForId(that, oldSelectedId);
     oldSelected.removeClass("fl-checklist-selected");
-    const row = index[newSelectedId];
+    const row = entryIndex[newSelectedId].row;
     if (row && row.species) {
         const newSelected = hortis.checklistRowForId(that, newSelectedId);
         newSelected.addClass("fl-checklist-selected");
     }
-};
-
-// Accepts array of entry and returns array of entry
-hortis.filterFocused = function (entries) {
-    const togo = fluid.transform(entries, function (entry) {
-        if (entry.row.focusCount > 0) {
-            return {
-                row: entry.row,
-                children: hortis.filterFocused(entry.children)
-            };
-        } else {
-            return fluid.NO_VALUE;
-        }
-    }) || [];
-    return togo;
 };
 
 hortis.alwaysRejectRanks = ["subfamily", "tribe", "genus"]; // AS directive of 18/7/23
@@ -125,12 +114,12 @@ hortis.filterRanks = function (rows, filterRanks, depth) {
     return hortis.sortChecklistLevel(togo);
 };
 
-hortis.generateChecklist = function (element, rootId, selectedId, index, filterRanks) {
+hortis.generateChecklist = function (element, rootId, selectedId, entryIndex, filterEntries, filterRanks) {
     console.log("Generating checklist for id " + rootId);
-    const rootChildren = rootId ? [index[rootId]] : [];
+    const rootChildren = rootId ? [entryIndex[rootId].row] : [];
     const filteredRanks = hortis.filterRanks(rootChildren, filterRanks, 0);
-    const filteredFocus = hortis.filterFocused(filteredRanks);
-    const markup = hortis.checklistList(filteredFocus, selectedId, filterRanks);
+    const filteredEntries = filterEntries(filteredRanks);
+    const markup = hortis.checklistList(filteredEntries, selectedId, filterRanks);
     element[0].innerHTML = markup;
 };
 
@@ -146,13 +135,13 @@ fluid.defaults("hortis.checklist", {
         generateChecklist: {
             funcName: "hortis.generateChecklist",
             args: ["{that}.dom.checklist", "{layoutHolder}.model.layoutId", "{layoutHolder}.model.selectedId",
-                "{layoutHolder}.index", "{that}.options.filterRanks"]
+                "{layoutHolder}.entryIndex", "{layoutHolder}.filterEntries", "{that}.options.filterRanks"]
         }
     },
     modelListeners: {
         updateSelected: {
             path: ["{layoutHolder}.model.selectedId"],
-            args: ["{that}", "{change}.value", "{change}.oldValue", "{layoutHolder}.index"],
+            args: ["{that}", "{change}.value", "{change}.oldValue", "{layoutHolder}.entryIndex"],
             func: "hortis.updateChecklistSelection"
         },
         generateChecklist: {
@@ -182,8 +171,8 @@ hortis.checklist.unfocusedColour = fluid.colour.hexToArray("#ccc");
 
 hortis.checklist.moveUp = function (layoutHolder) {
     const layoutId = layoutHolder.model.layoutId;
-    const row = layoutId ? layoutHolder.index[layoutId] : null;
-    const parentId = row && row.parent && row.parent.id;
+    const entry = layoutId ? layoutHolder.entryIndex[layoutId] : null;
+    const parentId = entry && entry.parent && entry.parent.row.id;
     layoutHolder.events.changeLayoutId.fire(parentId);
 };
 
