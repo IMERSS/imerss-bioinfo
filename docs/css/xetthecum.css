@@ -507,6 +507,15 @@ body {
     width: auto;
 }
 
+.fld-imerss-media-image img {
+    width: 100%
+}
+
+.fld-imerss-media-name {
+    padding-bottom: 5px;
+    font-size: 1.2rem;
+}
+
 /*
 on .ui-tabs .ui-tabs-nav li.ui-tabs-active
 will move it down so that it can overwrite border

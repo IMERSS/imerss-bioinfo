@@ -45,7 +45,7 @@ hortis.xetthecum.mediaOutMap = {
 };
 
 hortis.xetthecum.chooseName = function (target, hulqRow) {
-    var bestRec = hortis.xetthecum.names.find(function (rec) {
+    const bestRec = hortis.xetthecum.names.find(function (rec) {
         return !!hulqRow[rec.field];
     });
     if (bestRec) {
@@ -58,7 +58,7 @@ hortis.xetthecum.chooseName = function (target, hulqRow) {
 };
 
 hortis.xetthecum.summariseUnseen = function (byTaxon, usedTaxa, message) {
-    var unseen = [];
+    const unseen = [];
     fluid.each(byTaxon, function (value, key) {
         if (!usedTaxa[key]) {
             unseen.push(key);
@@ -68,17 +68,17 @@ hortis.xetthecum.summariseUnseen = function (byTaxon, usedTaxa, message) {
 };
 
 hortis.xetthecum.assignHulqNames = function (resolved, patch) {
-    var byTaxon = {};
-    var usedTaxa = {};
-    var withoutHulq = [];
-    var hits = 0;
-    var valueFields = Object.keys(hortis.xetthecum.valueOutMap.columns);
+    const byTaxon = {};
+    const usedTaxa = {};
+    const withoutHulq = [];
+    let hits = 0;
+    const valueFields = Object.keys(hortis.xetthecum.valueOutMap.columns);
     patch.patchData.rows.forEach(function (row) {
         byTaxon[row.scientificName] = row;
     });
     resolved.summarisedRows.forEach(function (row) {
-        var taxon = row.iNaturalistTaxonName;
-        var hulqRow = byTaxon[taxon];
+        const taxon = row.iNaturalistTaxonName;
+        const hulqRow = byTaxon[taxon];
         if (!hulqRow) {
             withoutHulq.push({
                 taxon: taxon,
@@ -86,8 +86,8 @@ hortis.xetthecum.assignHulqNames = function (resolved, patch) {
             });
         } else {
             usedTaxa[taxon] = true;
-            var transfer = fluid.filterKeys(hulqRow, valueFields);
-            var foundName = hortis.xetthecum.chooseName(transfer, hulqRow);
+            const transfer = fluid.filterKeys(hulqRow, valueFields);
+            const foundName = hortis.xetthecum.chooseName(transfer, hulqRow);
             if (foundName) {
                 ++hits;
             } else {
@@ -107,15 +107,15 @@ hortis.xetthecum.assignHulqNames = function (resolved, patch) {
 };
 
 hortis.xetthecum.assignHulqMedia = function (resolved, patch) {
-    var byTaxon = {};
-    var usedTaxa = {};
+    const byTaxon = {};
+    const usedTaxa = {};
     patch.patchData.rows.forEach(function (row) {
-        var sanitized = hortis.sanitizeSpeciesName(row.scientificName);
+        const sanitized = hortis.sanitizeSpeciesName(row.scientificName);
         byTaxon[sanitized] = row;
     });
     resolved.summarisedRows.forEach(function (row) {
-        var taxon = row.iNaturalistTaxonName;
-        var hulqRow = byTaxon[taxon];
+        const taxon = row.iNaturalistTaxonName;
+        const hulqRow = byTaxon[taxon];
         if (hulqRow) {
             usedTaxa[taxon] = true;
             row.audioLink = hulqRow.audioLink;

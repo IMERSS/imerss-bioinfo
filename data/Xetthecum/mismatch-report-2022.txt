@@ -1,0 +1,192 @@
+Matched 96 taxa with Hul'qumi'num names
+The following  182  taxa with Hul'qumi'num name records were not obser
+Acer glabrum var. douglasii
+Achyls triphylla
+Acipenser transmontanus
+Actinopterygii
+Aechmophorus occidentalis
+Aix sponsa
+Alectoria sarmentosa
+Allium acuminatum
+Allium cepa
+Amelanchier alnifolia
+Anas americana
+Apocrita
+Apocynum androsaemifolium
+Aquila chrysaetos
+Aquilegia formosa
+Arctium minus
+Arctostaphylos columbiana
+Asarum caudatum
+Ascomycota
+Avena sativa
+Aves
+Aythya valisineria
+Basidiomycota
+Betula papyrifera
+Bonasa umbellus
+Branta bernicla
+Bromus carinatus
+Bryophyta
+Bryoria fremontii
+Bubo virginianus
+Calypso bulbosa
+Camassia quamash
+Canis lupus crassodon
+Carex rostrata
+Carex sitchensis
+Caudata
+Cervus canadensis roosevelti
+Chen caerulescens
+Chimaphila umbellata
+Chlorophyta
+Cinclus mexicanus
+Cirsium brevistylum
+Cirsium edule
+Cirsium hookerianum
+Cirsium undulatum
+Clupea pallasii
+Colaptes cafer
+Conioselinum gmelinii
+Cornus canadensis
+Cornus nuttallii
+Crataegus columbiana
+Crataegus douglasii
+Cupressus nootkatensis
+Daucus carota
+Daucus pusillus
+Echinodontium tinctorium
+Enhydra lutris
+Equisetum hyemale
+Equisetum telmateia
+Erythronium grandiflorum
+Fomitopsis
+Fragaria
+Fragaria chiloensis
+Fragaria virginiana
+Frangula purshiana
+Fritillaria camschatcensis
+Gastropoda
+Gavia immer
+Gavia pacifica
+Haliotis kamtschatkana
+Heracleum maximum
+Heuchera chlorantha
+Heuchera cylindrica
+Hippoglossus stenolepis
+Hordeum jubatum
+Hypomesus pretiosus
+Juniperus communis
+Juniperus maritima
+Katharina tunicata
+Letharia vulpina
+Leymus mollis
+Littorinidae
+Lomatium nudicaule
+Lonicera involucrata
+Lycoperdon
+Maianthemum racemosum ssp. amplexicaule
+Malus fusca
+Melanitta fusca
+Melanitta perspicillata
+Mentha canadensis
+Mergus merganser
+Mytillus edulis complex
+Mytilus californianus
+Neovison vison
+Nyctea scandiaca
+Octopus dofleini
+Oncorhynchus
+Oncorhynchus keta
+Oncorhynchus nerka
+Oncorhynchus tshaytscha
+Oncorhynchuus gorbuscha
+Oncorhynnchus mykiss
+Oplopanax horridus
+Opuntia fragilis
+Ostrea lurida
+Pandalus platyceros
+Pandion haliaetus
+Parophrys vetulus
+Patinopecten caurinus
+Perideridia gairdneri
+Petasites frigidus var. palmatus
+Philadelphus lewisii
+Phoca vitulina
+Phragmites australis
+Physocarpus capitatus
+Picea sitchensis
+Pinus contorta
+Pinus monticola
+Plantago major
+Platichthys stellatus
+Poaceae
+Polyporus
+Populus balsamifera ssp. balsamifera
+Populus tremuloides
+Populus trichocarpa
+Procyon lotor
+Prunus domestica
+Prunus pensylvanica
+Prunus virginiana
+Pseudotsuga menziesii
+Pyropia
+Raja binoculata
+Rhododendron groenlandicum
+Ribes inerme
+Ribes lobbii
+Ribes oxyacanthoides ssp. irriguum
+Rosa acicularis
+Rosa pisocarpa
+Rosa woodsii
+Rubus idaeus
+Rumex aquaticus
+Rumex crispus
+Rumex obtusifolius
+Rumex occidentalis
+Sagittaria cuneata
+Sagittaria latifolia
+Salicornia pacifica
+Salix
+Sambucus caerulea
+Sambucus nigra
+Sauria
+Schoenoplectus acutus
+Sebastes
+Sebastes melanops
+Sebastes ruberrimus
+Shepherdia canadensis
+Siliqua patula
+Sorbus scopulina
+Sorbus sitchensis
+Spirogyra
+Streptopus amplexifolius
+Streptopus streptopoides
+Thaleichthys pacificus
+Tremella mesenterica
+Tricholoma magnivelare
+Triglochin maritima
+Trillium ovatum
+Trillium petiolatum
+Typha latifolia
+Uria aalge
+Vaccinium
+Vaccinium alaskaense
+Vaccinium membranaceum
+Vaccinium myrtilloides
+Vaccinium ovalifolium
+Vaccinium oxycoccos
+Vaccinium uliginosum
+Veratrum viride
+Viburnum edule
+Viburnum opulus
+Xerophyllum tenax
+Zalophus californianus
+The following  7  taxa with Hul'qumi'num media data were not observed:
+Oncorhynchuus gorbuscha
+Pyropia
+Lomatium nudicaule
+Camassia quamash
+Typha latifolia
+Oncorhynchus nerka
+Pseudotsuga menziesii

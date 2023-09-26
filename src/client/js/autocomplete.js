@@ -37,7 +37,7 @@ hortis.autocomplete.emptyQuery = function (query, callback) {
 };
 
 hortis.autocomplete.render = function (that) {
-    var widgetOptions = $.extend({
+    const widgetOptions = $.extend({
         element: that.container[0],
         id: that.options.id,
         source: that.query,

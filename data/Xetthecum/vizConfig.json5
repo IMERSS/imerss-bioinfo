@@ -1,8 +1,9 @@
 {
-    // This special field marks out for region processing and then also takes in the obs file
+    // This special field marks out for region processing and then also takes in the obs and mediaMap file
     featuresFile: "%imerss-bioinfo/data/Xetthecum/flatFeatures.json",
     obsFile: "%imerss-bioinfo/data/Xetthecum/reintegrated-obs.csv",
     obsMapFile: "%imerss-bioinfo/data/Xetthecum/combinedOutMap-obs.json",
+    mediaMapFile: "%imerss-bioinfo/data/Xetthecum/Xetthecum_Media_Map.csv",
     outputFile: "%imerss-bioinfo/data/Xetthecum/Life.json.lz4",
     inputFiles: ["%imerss-bioinfo/data/Xetthecum/reintegrated.csv"],
     mapFile: "%imerss-bioinfo/data/Xetthecum/combinedOutMap.json",

@@ -1,4 +1,6 @@
 Hulquminum Ecosystem Guide: From https://docs.google.com/spreadsheets/d/1EVi-hxqB5JxrP7_HMeSiQ2N55ETAkopt58Ei8D0OfGw/edit#gid=0
+AB note of 5/8/23: This sheet appears to have an irregular format (bad sort) and so far has not been used
+but in column F is Ecosystem.guide.content which looks like useful data which could be integrated
 
 Culturally Significant Species: From https://docs.google.com/spreadsheets/d/1c2aJosx35RhudJa1_rdtE7qgiRlNoB-jwJOSmI55iaI/edit#gid=0
 AS 13/2/22: for names, G H I in descending rank order of priority
@@ -55,3 +57,6 @@ Community/Class images: From https://drive.google.com/drive/folders/1B51_hHiMmXC
 Linkages in https://docs.google.com/spreadsheets/d/1ZxWVokPunoXQ8b7go67uezJpB0FyrYzUdJ1znD-d7XU/edit#gid=0 "Labels"
 
 Cultural values: Up-Close_Landscapes_Resynthesized_Indigenous_perspectives.csv from https://docs.google.com/spreadsheets/d/1NqAC63XwDTRbfMUvT-Lkt63Mf5drGrIvo2phQuZ4yzg/edit#gid=0
+
+Media Map: Xetthecum_Media_Map.csv from
+https://docs.google.com/spreadsheets/d/16mxVpagqi83-CXpZbrFMyrj-duyhg3Qj0pemhTLyQpw/edit#gid=0
