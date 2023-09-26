@@ -19,5 +19,7 @@
     <orderEntry type="module" module-name="inat-components" />
     <orderEntry type="module" module-name="inat-components-shared" />
     <orderEntry type="module" module-name="galiano-bioblitz-2023" />
+    <orderEntry type="module" module-name="galiano-marine-animal-atlas" />
+    <orderEntry type="module" module-name="preact" />
   </component>
 </module>
