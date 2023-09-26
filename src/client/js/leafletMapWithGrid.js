@@ -303,11 +303,7 @@ hortis.quantiser.indexObs = function (that, coord, obsId, rowId, latResolution, 
         }
         bucket.count++;
         dataset.maxCount = Math.max(dataset.maxCount, bucket.count);
-        let bucketTaxa = bucket.byTaxonId[rowId]; // TODO: use fluid.pushArray?
-        if (!bucketTaxa) {
-            bucketTaxa = bucket.byTaxonId[rowId] = [];
-        }
-        bucketTaxa.push(obsId);
+        fluid.pushArray(bucket.byTaxonId, rowId, obsId);
     }
 };
 

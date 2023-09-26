@@ -60,21 +60,6 @@ hortis.rowToTaxon = function (row, depth, counts) {
     hortis.addCounts(row, counts);
 };
 
-hortis.fullRecordTransform = {
-    "wikipediaSummary": "wikipedia_summary",
-    "commonName": "common_name.name",
-    "iNaturalistTaxonId": "id",
-    "iNaturalistTaxonImage": "default_photo.medium_url"
-};
-
-hortis.addTaxonInfo = function (row, fullRecord) {
-    fluid.each(hortis.fullRecordTransform, function (path, target) {
-        const source = fluid.get(fullRecord, path);
-        if (row[target] === undefined) {
-            row[target] = source;
-        }
-    });
-};
 
 hortis.reverseMerge = function (target, source) {
     fluid.each(source, function (value, key) {
@@ -95,7 +80,7 @@ hortis.storeAtPath = function (treeBuilder, path, row) {
         if (!child) {
             child = node.children[name] = (last ? row : hortis.newTaxon(name, doc.rank, index + 1, counts));
             try {
-                hortis.addTaxonInfo(child, doc);
+                hortis.iNat.addTaxonInfo(child, doc);
             } catch (e) {
                 console.log("While storing row ", row);
                 throw e;

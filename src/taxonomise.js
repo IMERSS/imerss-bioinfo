@@ -129,7 +129,7 @@ hortis.summariseCommonOutMap = hortis.combineMaps([hortis.baseSummariseCommonOut
     columns: hortis.obsToSummaryColumns(hortis.obsToSummaryFields)
 }]);
 
-const invertedSwaps = hortis.invertSwaps(swaps);
+const invertedSwaps = hortis.iNat.invertSwaps(swaps);
 
 hortis.checkFilters = function (filters, mapColumns) {
     fluid.each(filters, function (oneFilter) {
