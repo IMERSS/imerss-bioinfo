@@ -1,0 +1,34 @@
+{
+    datasets: {
+        iNat: {
+            name: "iNaturalist (2005-2021)",
+            input: "%imerss-bioinfo/data/Galiano 2024/Galiano_Union_Catalogue_2023_09_25.csv",
+            map: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-map-new.json",
+            outMap: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-out-map.json",
+            colour: "#2C8C99",
+            observationId: "%datasetId:%id"
+        }
+    },
+    patches: {
+        Deprivatise: {
+            processor: "hortis.deprivatise"
+        },
+        RoundCoordinates: {
+            type: "hortis.pipe",
+            processor: "hortis.roundCoordinates",
+            places: 6
+        },
+        GalianoRegion: {
+            type: "hortis.pipe.JSONInput",
+            input: "%imerss-bioinfo/data/Galiano/Galiano_Island_Project_Boundary_Chu_final_2021-02-23.json",
+            processor: "hortis.processRegionFilter",
+            logRejection: true
+        }
+    },
+    summarise: true,
+    applySwaps: true, // TODO: Naturally, should be an actual pipeline element
+    output: "%imerss-bioinfo/data/Galiano 2024/reintegrated.csv",
+    combinedOutMap: "%imerss-bioinfo/data/Galiano 2024/combinedOutMap.json",
+    filters: {
+    }
+}

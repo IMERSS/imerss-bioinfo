@@ -1,0 +1,55 @@
+{
+    "columns": {
+        "iNaturalistTaxonName": "iNaturalist taxon name",
+        "iNaturalistTaxonId": "iNaturalist taxon ID",
+        "taxonName": "Taxon name",
+        "authority": "Author",
+        "observationCount": "Observation count",
+        "coords": "Coordinates",
+        "kingdom": "Kingdom",
+        "phylum": "Phylum",
+        "subphylum": "Subphylum",
+        "superclass": "Superclass",
+        "class": "Class",
+        "subclass": "Subclass",
+        "superorder": "Superorder",
+        "order": "Order",
+        "suborder": "Suborder",
+        "infraorder": "Infraorder",
+        "superfamily": "Superfamily",
+        "family": "Family",
+        "subfamily": "Subfamily",
+        "tribe": "Tribe",
+        "genus": "Genus",
+        "species": "Species",
+        "firstRecordedBy": "First Reported By",
+        "firstCollection": "First Source",
+        "firstPlaceName": "First Place Name",
+        "firstCatalogueNumber": "First Catalogue Number",
+        "firstObservationId": "First observationId",
+        "firstTimestamp": "First Date Reported",
+        "lastRecordedBy": "Last Reported By",
+        "lastCollection": "Last Source",
+        "lastPlaceName": "Last Place Name",
+        "lastCatalogueNumber": "Last Catalogue Number",
+        "lastObservationId": "Last observationId",
+        "lastTimestamp": "Last Date Reported"
+    },
+    "counts": {
+        "observationCount": {
+            "column": "observationCount",
+            "free": true
+        }
+    },
+    "datasets": {
+        "iNat": {
+            "name": "iNaturalist (2005-2021)",
+            "input": "E:/source/gits/bagatelle/data/Galiano 2024/Galiano_Union_Catalogue_2023_09_25.csv",
+            "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
+            "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
+            "colour": "#2C8C99",
+            "observationId": "%datasetId:%id",
+            "datasetId": "iNat"
+        }
+    }
+}

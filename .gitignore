@@ -3,3 +3,5 @@
 package-lock.json
 /node_modules
 .Rproj.user
+
+data/Galiano 2024/bigdata/**
