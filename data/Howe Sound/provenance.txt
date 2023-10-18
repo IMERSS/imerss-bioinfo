@@ -11,3 +11,6 @@ adfsimon-bioinfo/blob/main/Howe_Sound/4_consolidate_records/Records/Digitized/Dw
 BEC vignette taken from 
 
 IMERSS/howe-sound-mapping/blob/main/tabular_data/1km_gridded_vascular_plant_records_2022-12-24_WGS84.csv
+
+Study area taken from 
+https://github.com/IMERSS/adfsimon-bioinfo/blob/main/Howe_Sound/study_area/Howe_Sound_project_area.geojson

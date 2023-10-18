@@ -1,0 +1,101 @@
+.fl-imerss-checklists {
+    display: flex;
+    flex-direction: row;
+    height: 60%;
+    overflow: hidden;
+}
+
+.fl-imerss-pollinators {
+    width: 30%;
+}
+
+.fl-imerss-interactions {
+    margin: 0.5em;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fl-imerss-plants {
+    width: 30%;
+}
+
+.fl-imerss-interactions-holder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fl-imerss-int-left {
+    flex: 0 0 160px;
+}
+
+
+.fl-imerss-int-right {
+    flex: 0 0 3em;
+}
+
+.fl-imerss-int-h-middle {
+    overflow-x: scroll;
+}
+
+.fl-imerss-int-top {
+    flex: 0 0 3em;
+}
+
+.fl-imerss-int-v-middle {
+    flex: 1 1 auto;
+    overflow-y: hidden;
+}
+
+.fl-imerss-int-bottom {
+    flex: 0 0 10em;
+}
+
+
+.fl-imerss-int-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.fld-imerss-poll-names {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: end;
+}
+
+.fld-imerss-poll-names .fl-imerss-int-label {
+    writing-mode: tb-rl;
+    transform: rotate(180deg);
+    bottom: 2em; /* No idea why they stick off the bottom otherwise */
+}
+
+.fld-imerss-plant-names {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.fld-imerss-plant-names::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
+
+.fl-imerss-int-label {
+    position: absolute;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.fld-imerss-int-poll-label {
+    padding-top: 10px;
+    font-size: 20px;
+    writing-mode: tb-rl;
+    transform: rotate(180deg);
+    padding-top: 2em;
+}
+
+.fld-imerss-int-plant-label {
+    font-size: 20px;
+}

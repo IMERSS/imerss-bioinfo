@@ -27,10 +27,11 @@ const source = hortis.iNatTaxonSource({
 // {id: 47429}
 // {obsId: 86945066}
 // Crataegus monogyna
+// Leptoglossus occidentalis gets wrong name in species
 
 const testSource = async function () {
     try {
-        const query = "Bispira pacifica";
+        const query = "Leptoglossus occidentalis";
         const sane = hortis.sanitizeSpeciesName(query);
         const result = await source.get({name: sane});
         console.log(result);

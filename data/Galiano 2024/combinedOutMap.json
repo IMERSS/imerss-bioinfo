@@ -44,9 +44,9 @@
     "datasets": {
         "iNat": {
             "name": "iNaturalist (2005-2021)",
-            "input": "E:/source/gits/bagatelle/data/Galiano 2024/Galiano_Union_Catalogue_2023_09_25.csv",
-            "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new.json",
-            "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map.json",
+            "input": "E:/source/gits/bagatelle/data/Galiano 2024/Galiano_Union_Catalogue_2023_10_17.csv",
+            "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new-cap.json",
+            "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map-cap.json",
             "colour": "#2C8C99",
             "observationId": "%datasetId:%id",
             "datasetId": "iNat"

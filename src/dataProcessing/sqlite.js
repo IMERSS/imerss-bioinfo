@@ -81,6 +81,9 @@ fluid.defaults("hortis.sqliteSource", {
     components: {
         db: "{hortis.sqliteDB}"
     },
+    invokers: {
+        encodeQueryKey: "fluid.identity({arguments}.0)"
+    },
     resources: {
         table: {
             promiseFunc: "hortis.sqliteSource.createTable",
@@ -158,13 +161,15 @@ hortis.transcodeColumns = function (direction, columns, columnCodecs) {
 
 hortis.sqliteSource.read = async function (that, readQuery, value, options) {
     const db = that.model.db; // for FLUID-6752
-    const result = await db.get(readQuery.query, hortis.sqliteSource.prepareQueryArgs(readQuery.args, options.directModel));
+    const querySource = that.encodeQueryKey(options.directModel);
+    const result = await db.get(readQuery.query, hortis.sqliteSource.prepareQueryArgs(readQuery.args, querySource));
     return hortis.transcodeColumns("decode", result, that.options.columnCodecs);
 };
 
 hortis.sqliteSource.write = function (that, writeQuery, value) {
     const db = that.model.db;
-    const prepared = hortis.sqliteSource.prepareQueryArgs(writeQuery.args, value);
+    const querySource = that.encodeQueryKey(value);
+    const prepared = hortis.sqliteSource.prepareQueryArgs(writeQuery.args, querySource);
     const encoded = hortis.transcodeColumns("encode", prepared, that.options.columnCodecs);
     return db.run(writeQuery.query, encoded);
 };

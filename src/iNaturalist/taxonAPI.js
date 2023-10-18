@@ -50,7 +50,23 @@ hortis.sanitizeSpeciesName = function (name) {
     return name;
 };
 
-hortis.invertSwaps = function (swaps) {
+hortis.iNat.recordTransform = {
+    "wikipediaSummary": "wikipedia_summary",
+    "commonName": "common_name.name",
+    "iNaturalistTaxonId": "id",
+    "iNaturalistTaxonImage": "default_photo.medium_url"
+};
+
+hortis.iNat.addTaxonInfo = function (transform, row, fullRecord) {
+    fluid.each(transform, function (path, target) {
+        const source = fluid.get(fullRecord, path);
+        if (row[target] === undefined) {
+            row[target] = source;
+        }
+    });
+};
+
+hortis.iNat.invertSwaps = function (swaps) {
     const invertedSwaps = {};
     fluid.each(swaps, function (value, resolvedTaxon) {
         const iNaturalistTaxonId = value.iNaturalistTaxonId;
@@ -255,24 +271,64 @@ fluid.defaults("hortis.cachediNatTaxonByName", {
     }
 });
 
-hortis.scoreNameMatch = function (result, query) {
-    return (query.name === result.matched_term ? 200 : 0) + (query.name === result.name ? 100 : 0) - result.rank_level;
+hortis.scoreNameMatch = async function (result, query, byIdSource) {
+    let score = (query.name === result.matched_term ? 200 : 0) + (query.name === result.name ? 100 : 0) - result.rank_level;
+    // Don't hit the DB for any results which are not already an exact match for the query
+    if (query.rank) {
+        if (query.rank === result.rank) {
+            score += 800;
+        }
+    }
+    if (query.phylum && score > 200) {
+        const rankTarget = {};
+        await hortis.iNat.getRanks(result.id, rankTarget, byIdSource, ["phylum"]);
+        if (query.phylum === rankTarget.phylum) {
+            score += 400;
+        }
+    }
+    return score;
 };
 
-hortis.bestNameMatch = function (results, query) {
-    const sorted = results.sort((a, b) => hortis.scoreNameMatch(b, query) - hortis.scoreNameMatch(a, query));
-    return sorted[0];
+// Assumes results sorted into descending order of $score, returns run of 1 or more for repeated equal scores
+hortis.topScoreRun = function (results) {
+    let highest = -Infinity,
+        run = 0;
+    for (let i = 0; i < results.length; ++i) {
+        const score = results[i].$score;
+        if (score > highest) {
+            highest = score;
+        } else if (score === highest) {
+            ++run;
+        } else {
+            break;
+        }
+    }
+    return run;
+};
+
+hortis.bestNameMatch = async function (results, query, byIdSource) {
+    await hortis.asyncForEach(results, async result => result.$score = await hortis.scoreNameMatch(result, query, byIdSource));
+    const sorted = results.sort((a, b) => b.$score - a.$score);
+    const run = hortis.topScoreRun(sorted);
+    const togo = sorted[0];
+    if (run > 0) {
+        togo.$ambiguous = sorted[1];
+        console.log("!*!*!*!* Warning - ambiguous name search for ", query.name, " - record ", togo.$ambiguous, " matches equally well");
+    }
+    return togo;
 };
 
 hortis.cachediNatTaxonByName.upgradeLiveDocument = async function (byIdSource, query, live, writer) {
+    // TODO: Note we could speed up this query a lot by supplying rank and phylum (via its id) to the autocomplete query in hortis.iNatTaxonByName
     console.log("upgradeLive byName given ", live);
     const togo = {
-        name: query.name,
+        ...query,
         fetched_at: new Date().toISOString()
     };
     if (live && live.results.length > 0) {
-        const record = hortis.bestNameMatch(live.results, query);
+        const record = await hortis.bestNameMatch(live.results, query, byIdSource);
         const doc = fluid.filterKeys(record, ["name", "matched_term", "rank", "id"]);
+        doc.ambiguousNameMatch = !!record.$ambiguous;
 
         // const byIdBack = await byIdSource.get({id: doc.id});
 
@@ -315,6 +371,11 @@ fluid.defaults("hortis.iNatTaxonSource", {
         disableCache: {
             source: "{that}.options.disableCache",
             target: "{that hortis.cachedApiSource}.options.disableCache"
+        },
+        disableNameCache: {
+            source: "{that}.options.disableNameCache",
+            target: "{that > byName}.options.disableCache",
+            priority: "after:disableCache"
         }
     },
     invokers: {
@@ -414,20 +475,37 @@ fluid.defaults("hortis.iNatTaxonAPI.byNameDBSource", {
     },
     readQuery: {
         query: "SELECT name, fetched_at, doc from iNatTaxaName WHERE name = ?",
-        args: ["%name"]
+        args: ["%key"]
     },
     writeQuery: {
         query: "INSERT OR REPLACE INTO iNatTaxaName (name, fetched_at, doc) VALUES ($name, $fetched_at, $doc)",
         args: {
-            $name: "%name",
+            $name: "%key",
             $fetched_at: "%fetched_at",
             $doc: "%doc"
         }
     },
     listQuery: {
         query: "SELECT name from iNatTaxaName"
+    },
+    invokers: {
+        encodeQueryKey: "hortis.iNatTaxonAPI.byNameDBSource.encodeQueryKey({arguments}.0)"
     }
 });
+
+hortis.iNatTaxonAPI.byNameDBSource.encodeQueryKey = function (query) {
+    let key = query.name;
+    if (query.phylum) {
+        key += "|phylum=" + query.phylum;
+    }
+    if (query.rank) {
+        key += "|rank=" + query.rank;
+    }
+    return {
+        ...query,
+        key
+    };
+};
 
 fluid.defaults("hortis.iNatTaxonAPI.dbTaxonAPIs", {
     gradeNames: "fluid.modelComponent",
@@ -482,9 +560,12 @@ hortis.iNat.getAncestry = async function (id, byIdSource) {
 hortis.iNat.getRanks = async function (id, rankTarget, byIdSource, fields) {
     const allDocs = await hortis.iNat.getAncestry(id, byIdSource);
     const indexed = {};
+    const taxonIsComplex = allDocs[0].doc.rank === "complex";
     allDocs.forEach(function (doc) {
         const docRank = doc.doc.rank;
-        const rank = hortis.capitalize(docRank === "complex" ? "species" : docRank);
+        // Prevent issue of 17/10/23 where name of complex got assigned as name of species - presumably we still need this
+        // bypass to display complexes themselves in the UI
+        const rank = hortis.capitalize(taxonIsComplex && docRank === "complex" ? "species" : docRank);
         indexed[rank] = rank === "Species" ? hortis.extractSpeciesName(doc.doc.name) : doc.doc.name;
     });
     // console.log("Got ranks ", Object.keys(indexed));

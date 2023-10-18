@@ -9,7 +9,7 @@ const hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.csvReaderWithMap", {
     gradeNames: ["hortis.csvFileReader", "hortis.storingCSVReader"],
-    // "columns" member of the map structure
+    // "columns" member of the map structure, with in-file keys as values, and in-memory keys as keys
     mapColumns: null,
     // true if the map file defines template interpolation via % rather than simply mapping column names e.g. as an "outMap"
     templateMap: false,

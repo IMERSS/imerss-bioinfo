@@ -27,6 +27,7 @@
         "description": "Description",
         "commonName": "Common name",
         "recordedBy": "Recorded by",
+        "captiveCultivated": "Captive/Cultivated",
         "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters"
     }
 }

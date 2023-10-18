@@ -170,6 +170,9 @@ fluid.defaults("hortis.layoutHolder", {
     members: {
         taxonHistory: []
     },
+    events: {
+        changeLayoutId: null // Used from checklists
+    },
     model: {
         rowFocus: {},
         layoutId: null,
@@ -1505,11 +1508,6 @@ hortis.indexEntries = function (entries) {
     return index;
 };
 
-hortis.acceptSunburstRow = function (row, nativeDataOnly) {
-    return !nativeDataOnly || row.hasNativeData;
-};
-
-
 // Accepts array of entry and returns array of entry - used from checklists
 hortis.filterEntries = function (that, entries) {
     const togo = fluid.transform(entries, function (entry) {
@@ -1528,6 +1526,9 @@ hortis.filterEntries = function (that, entries) {
     return togo;
 };
 
+hortis.acceptSunburstRow = function (row, nativeDataOnly) {
+    return !nativeDataOnly || row.hasNativeData;
+};
 
 // Accepts array of rows and returns array of "entries", where entry is {row, children: array of entry}
 // Identical algorithm as for hortis.filterRanks - no doubt a functional programmer would fold this up
@@ -1547,11 +1548,12 @@ hortis.computeSunburstEntries = function (rows, nativeDataOnly) {
     return hortis.sortChecklistLevel(togo);
 };
 
-hortis.flattenEntries = function (entry) {
+hortis.flattenEntries = function (rootEntry) {
     const flat = [];
-    flat.push(entry);
-    hortis.flattenTreeRecurse(entry, flat, 0);
+    flat.push(rootEntry);
+    hortis.flattenTreeRecurse(rootEntry, flat, 0);
     // Sort these primarily so that maxDepth is depth of last element
+    // TODO: Looks like this comparator use is faulty, must have been depending on sorting of rows before
     flat.sort(hortis.depthComparator);
     flat.forEach(function (row, flatIndex) {
         row.flatIndex = flatIndex;

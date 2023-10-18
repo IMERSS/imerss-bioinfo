@@ -57,14 +57,17 @@ hortis.iNat.obsMap = {
     "quality_grade": "quality_grade",
     "coordinates_obscured": "obscured",
     "image_url": "observation_photos.0.photo.url", // replace "small" with "medium"
-    // "latitude": "location.0",
+    // "latitude": "location.0", // achieved via "applyLocation"
     // "longitude": "location.1",
     "positional_accuracy": "positional_accuracy",
-    // "private_latitude": "private_location[0]",
+    // "private_latitude": "private_location[0]", // achieved via "applyLocation"
     // "private_longitude": "private_location[1]",
     "scientific_name": "taxon.name",
     "common_name": "taxon.preferred_common_name",
-    "taxon_id": "taxon.id"
+    // phylum - fetched from ancestors
+    "captive": "captive",
+    "taxon_id": "taxon.id",
+    "taxon_rank": "taxon.rank"
 };
 
 hortis.applyLocation = function (oneResult, row, prefix) {
@@ -74,19 +77,21 @@ hortis.applyLocation = function (oneResult, row, prefix) {
     row[prefix + "longitude"] = location[1];
 };
 
-hortis.resultToRow = function (oneResult) {
+hortis.resultToRow = async function (oneResult, byIdSource) {
     const row = fluid.transform(hortis.iNat.obsMap, function (value) {
         return fluid.get(oneResult, value);
     });
     hortis.applyLocation(oneResult, row, "");
     hortis.applyLocation(oneResult, row, "private_");
+    const phylumDoc = await byIdSource.get({id: oneResult.taxon.ancestor_ids[2]});
+    row.phylum = phylumDoc?.doc.name;
     row.time_observed_at = row.time_observed_at || row.observed_on;
     return row;
 };
 
-hortis.pushResultRows = function (rows, response) {
-    response.results.forEach(function (oneResult) {
-        const row = hortis.resultToRow(oneResult);
+hortis.pushResultRows = async function (rows, response, byIdSource) {
+    await hortis.asyncForEach(response.results, async function (oneResult) {
+        const row = await hortis.resultToRow(oneResult, byIdSource);
         rows.push(row);
     });
 };

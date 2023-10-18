@@ -1,0 +1,29 @@
+Perdita elongaticeps could not be found.
+There is Hoplitis elongaticeps but it seems too distant.
+
+Assumed Lasioglossum pruinosus -> Lasioglossum pruinosiforme -> Lasioglossum semicaeruleum
+
+Hesperapis cockerelli could not be found - NCBI has it "unverified", not known at EOL, etc.
+
+Anthophorula solidaginis could not be found, perhaps Exomalopsis solidaginis? 
+
+Stelis paiute - Attested in https://pubmed.ncbi.nlm.nih.gov/26213778/ -> add to iNat ADDED
+
+Lithurge apicalis could not be found, perhaps Lithurgopsis apicalis?
+
+Eucera primaveris - Attested at https://essigdb.berkeley.edu/cgi-bin/eme_species_query?step=detail&seq_num=44844
+although https://www.discoverlife.org/mp/20q?search=Eucera+primiveris suggests it is actually primiveris and that
+primaveris is "incorrect spelling". Added as typo
+
+Colletes lippiarum Cockerell attested at https://monarch.calacademy.org/taxa/index.php?tid=674694&taxauthid=1&clid=0
+https://ttu-ir.tdl.org/bitstream/handle/2346/87497/DISCUA-DISSERTATION-2021.pdf?sequence=1 says it is Colletes lippiarum Swenk, 1905 -> Should add to iNat once we get an authority. Hymenoptera of America North of Mexico: Synoptic Catalog, Volume 1 says it is Cockerell, 1909 although it might really be Colletes intermixtus ADDED
+
+Perdita dilecta attested at http://ecoregister.org/eco.pl?a=taxonPage&genus=Perdita&species=dilecta https://www.zportman.com/uploads/8/3/5/4/83540892/timberlake-1980.pdf says it is Timberlake, 1960 -> add to iNat ADDED
+
+Doeringiella balteatus etc. - all apparently revised into Triepeolus by https://www.biotaxa.org/Zootaxa/article/view/zootaxa.1710.1.1
+Except for Doeringiella morpho sp. 76, unknown
+
+Lasioglossum tegulariformis attested at https://bigcb.berkeley.edu/cgi/bigcb_speclist_show?ItemID=1628&Admin=&username= as Crawford 1907
+https://scan-bugs.org/portal/taxa/index.php?taxon=290529&taxauthid=1&cl=78 agrees -> actually typo for Lasioglossum tegulariforme
+
+Nomada (Centrias) - https://bugguide.net/node/view/165587/bgpage says that the "subgenera have been done away with in Nomada"

@@ -36,6 +36,7 @@ try {
 }
 
 const iNatTaxonSource = hortis.iNatTaxonSource({
+    // disableNameCache: true,
     jwt: jwt
 });
 
@@ -402,6 +403,17 @@ hortis.isSelfUndetermined = function (name) {
     return !name || name.includes("undetermined") || name.includes("various") || name.includes("Various") || name.includes("filamentous");
 };
 
+hortis.obsToNameQuery = function (name, obs) {
+    const query = {name};
+    if (obs.phylum) {
+        query.phylum = obs.phylum;
+    }
+    if (obs.taxonRank) {
+        query.rank = obs.taxonRank;
+    }
+    return query;
+};
+
 // Side-effects: populates that.obsIdToTaxon, that.undetHash, that.undetKeys, that.discardedTaxa
 hortis.applyObservations = async function (that, obsRows, applySwaps) {
     const identifiedTo = {}; // Two-level hash of {rank, obs id} to obs
@@ -419,7 +431,8 @@ hortis.applyObservations = async function (that, obsRows, applySwaps) {
         let taxonLevel = "Undetermined";
         if (!hortis.isSelfUndetermined(san)) {
             const invertedId = applySwaps ? invertedSwaps[san] : null;
-            const taxon = invertedId && await that.source.get({id: invertedId}) || await that.source.get({name: san});
+            const nameQuery = hortis.obsToNameQuery(san, obs);
+            const taxon = invertedId && await that.source.get({id: invertedId}) || await that.source.get(nameQuery);
             if (taxon && taxon.doc) {
                 taxonLevel = taxon.doc.rank;
                 const existing = that.obsIdToTaxon[obsId];
@@ -488,6 +501,7 @@ hortis.resolveObservationTaxa = async function (that, observations, outMap) {
             const outrow = fluid.copy(row);
             outrow.iNaturalistTaxonName = taxon.doc.name;
             outrow.iNaturalistTaxonId = taxon.doc.id;
+            outrow.ambiguousNameMatch = +!!taxon.doc.ambiguousNameMatch;
             // hortis.resolveTaxa(outrow, that.taxaById, taxon.taxonId, outMap.columns);
             await hortis.iNat.getRanks(taxon.doc.id, outrow, that.source, taxa);
             togo.push(outrow);

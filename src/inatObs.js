@@ -11,6 +11,7 @@ require("./dataProcessing/writeJSON.js");
 require("./dataProcessing/writeCSV.js");
 
 require("./iNaturalist/obsAPI.js");
+require("./iNaturalist/taxonAPI.js");
 
 const hortis = fluid.registerNamespace("hortis");
 
@@ -21,6 +22,30 @@ hortis.iNatProjects = {
             taxon_id: 1
         },
         outputFile: "data/iNaturalist/Galiano_Catalogue_Animalia_%Date.csv"
+    },
+    GalianoTrad: {
+        paramMap: {
+            project_id: 5799,
+            taxon_id: 48460,
+            quality_grade: ""
+        },
+        outputFile: "data/iNaturalist/Galiano_Trad_Catalogue_%Date.csv"
+    },
+    GalianoColl: {
+        paramMap: {
+            project_id: 147834,
+            taxon_id: 48460,
+            quality_grade: ""
+        },
+        outputFile: "data/iNaturalist/Galiano_Coll_Catalogue_%Date.csv"
+    },
+    GalianoTradHolly: { // Special proj to test we can read obscured coordinates since we get no errors from iNat on bad JWT
+        paramMap: {
+            project_id: 5799,
+            taxon_id: 53856,
+            quality_grade: ""
+        },
+        outputFile: "data/iNaturalist/Galiano_Trad_HollyCatalogue_%Date.csv"
     },
     Valdes: {
         paramMap: {
@@ -42,6 +67,14 @@ hortis.iNatProjects = {
             taxon_id: 48460 // Life
         },
         outputFile: "data/Pepiowelh/iNaturalist_Catalogue_%Date.csv"
+    },
+    HoweSoundLichens: {
+        paramMap: {
+            project_id: 38728,
+            taxon_id: 48250, // Ascomycota
+            quality_grade: ""
+        },
+        outputFile: "data/Howe Sound/iNaturalist_Ascomycota_Catalogue_%Date.csv"
     }
 };
 
@@ -58,6 +91,10 @@ const source = hortis.iNat.obsSource({
         Authorization: "Bearer " + jwt.api_token
     },
     paramMap: projectArgs.paramMap
+});
+
+const iNatTaxonSource = hortis.iNatTaxonSource({
+    jwt: jwt
 });
 
 const fileVars = {
@@ -85,11 +122,11 @@ hortis.writeObs = function (filename, rows) {
     return togo;
 };
 
-hortis.applyResponse = function (data) {
+hortis.applyResponse = async function (data) {
     hortis.logObsResponse(data);
     hortis.writeJSONSync("obsoutput.json", data);
     if (data.results.length > 0) {
-        hortis.pushResultRows(rows, data);
+        await hortis.pushResultRows(rows, data, iNatTaxonSource);
         const lastId = fluid.peek(rows).id;
         console.log("got last id " + lastId);
         directModel.id_above = lastId;
@@ -110,11 +147,13 @@ hortis.makeObsRequest = function (directModel) {
     console.log("Making request ", directModel);
     const promise = source.get(directModel);
 
-    promise.then(function (data) {
-        hortis.applyResponse(data);
+    promise.then(async function (data) {
+        await hortis.applyResponse(data);
     }, function (error) {
         console.log("Got ERROUR: ", error);
     });
 };
 
-hortis.makeObsRequest(directModel);
+iNatTaxonSource.events.onCreate.then(function () {
+    hortis.makeObsRequest(directModel);
+});

@@ -14,6 +14,8 @@ const taxonAPIFileBase = "data/iNaturalist/taxonAPI";
 
 const hortis = fluid.registerNamespace("hortis");
 
+// Convert our old-style "one JSON file per taxon" pseudo-DB into new-style SQLite dataSource DB
+
 const taxonAPIs = hortis.iNatTaxonAPI.dbTaxonAPIs();
 taxonAPIs.events.onCreate.then((function (taxonAPIs) {
     return traverseDB(taxonAPIs.byId, taxonAPIs.db);

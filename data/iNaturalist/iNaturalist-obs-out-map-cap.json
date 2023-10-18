@@ -1,0 +1,11 @@
+{
+    "columns": {
+        "taxonName": "Taxon name",
+        "dateObserved": "Date observed",
+        "description": "Description",
+        "commonName": "Common name",
+        "recordedBy": "Recorded by",
+        "captiveCultivated": "Captive/Cultivated",
+        "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters"
+    }
+}

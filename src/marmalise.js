@@ -81,7 +81,7 @@ hortis.storeAtPath = function (treeBuilder, path, row) {
         if (!child) {
             child = node.children[name] = (last ? row : hortis.newTaxon(name, doc.rank, index + 1, counts));
             try {
-                hortis.iNat.addTaxonInfo(child, doc);
+                hortis.iNat.addTaxonInfo(hortis.iNat.recordTransform, child, doc);
             } catch (e) {
                 console.log("While storing row ", row);
                 throw e;
