@@ -13,6 +13,7 @@
         "taxonRank": "%taxon_rank",
         "phylum": "%phylum",
         "captiveCultivated": "%captive",
+		"qualityGrade": "%quality_grade",
         "coordinateUncertaintyInMeters": "%positional_accuracy"
     },
     "datasetId": "iNat",

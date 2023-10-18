@@ -6,6 +6,7 @@
         "commonName": "Common name",
         "recordedBy": "Recorded by",
         "captiveCultivated": "Captive/Cultivated",
+		"qualityGrade": "Quality grade",
         "coordinateUncertaintyInMeters": "coordinateUncertaintyInMeters"
     }
 }
