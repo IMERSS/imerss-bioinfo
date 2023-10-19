@@ -24,7 +24,8 @@ const outputFile = parsedArgs.o || "assigned.csv";
 // fluid.module.resolvePath("%imerss-bioinfo/data/Squamish/Tracheophyta_review_summary_2022-12-14.csv")
 // fluid.module.resolvePath("%imerss-bioinfo/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv")
 // fluid.module.resolvePath("%imerss-bioinfo/data/Squamish/GBIF_2022_Plantae_DwC-deauthorized.csv")
-const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/Howe Sound/AHSBR_CNALH_data_spatial_query_2023-03-03_DwC-UTF-8.csv");
+// fluid.module.resolvePath("%imerss-bioinfo/data/Howe Sound/AHSBR_CNALH_data_spatial_query_2023-03-03_DwC-UTF-8.csv");
+const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/Galiano 2024/review/Terrestrial_arthropods_review_summary_2023-10-18.csv");
 
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile
@@ -32,11 +33,49 @@ const reader = hortis.csvReaderWithoutMap({
 
 const source = hortis.iNatTaxonSource();
 
+hortis.highRanks = ["kingdom", "phylum", "subphylum", "superclass", "class", "subclass", "superorder", "order",
+    "suborder", "infraorder", "superfamily", "family", "subfamily", "tribe", "genus", "species", "subspecies"].map(hortis.capitalize);
+
+hortis.finestRank = function (row, ranks) {
+    let finestRank = null;
+    ranks.forEach(function (rank) {
+        if (row[rank]) {
+            finestRank = rank;
+        }
+    });
+    return finestRank;
+};
+
+hortis.queryFromSummaryRow2023 = function (row) {
+    const name = hortis.sanitizeSpeciesName(row.Taxon);
+    const phylum = row.Phylum;
+    const rank = hortis.finestRank(row, hortis.highRanks);
+    return {name, phylum, rank};
+};
+
+hortis.obsIdFromSummaryRow2022 = function (row) {
+    const obsLink = row["iNaturalist Link"];
+    if (obsLink) {
+        const slashPos = obsLink.lastIndexOf("/");
+        const obsId = obsLink.substring(slashPos + 1);
+        return obsId;
+    }
+};
+
+hortis.obsIdFromSummaryRow2023 = function (row) {
+    const obsLink = row["iNaturalist.Link"];
+    if (obsLink) {
+        const slashPos = obsLink.lastIndexOf(":");
+        const obsId = obsLink.substring(slashPos + 1);
+        return obsId;
+    }
+};
+
 // One-off script to update taxonomies and iNaturalist ids from files produced in Andrew's 2022 run of Galiano data
 
-hortis.applyName = async function (row, taxon) {
-    const saneName = hortis.sanitizeSpeciesName(taxon);
-    const looked = await source.get({name: saneName});
+hortis.applyName = async function (row) {
+    const query = hortis.queryFromSummaryRow2023(row);
+    const looked = await source.get(query);
     //    console.log("Got document ", looked);
     if (looked && looked.doc) {
         row["Name Status"] = looked.doc.nameStatus;
@@ -58,10 +97,8 @@ hortis.applyName = async function (row, taxon) {
             }
         }
     }
-    const obsLink = row["iNaturalist Link"];
-    if (obsLink) {
-        const slashPos = obsLink.lastIndexOf("/");
-        const obsId = obsLink.substring(slashPos + 1);
+    const obsId = hortis.obsIdFromSummaryRow2023(row);
+    if (obsId) {
         row["Observation Taxon Name"] = "error";
         if (+obsId > 0) {
             const obs = await source.get({obsId: obsId});
@@ -89,14 +126,16 @@ Promise.all([reader.completionPromise, source.events.onCreate]).then(async funct
     for (let i = 0; i < reader.rows.length; ++i) {
         console.log("Processing row ", i);
         const row = reader.rows[i];
-        // const taxon = row["taxonName"]; // Taxon for AS reviewed data
+        await hortis.applyName(row);
+        // TODO: produce mapping functions for these older forms of data
+/*
         if (row.infraTaxonName) {
             await hortis.applyName(row, row.infraTaxonName);
         }
         if (!row.infraTaxonName || row["Name Status"] === "unknown") {
             await hortis.applyName(row, hortis.unscrewGBIFName(row.scientificName)); // taxonName for Dunwiddie data, scientificName for DwC
         }
-
+*/
         mapped.push(row);
     }
     hortis.writeCSV(fluid.module.resolvePath(outputFile), Object.keys(mapped[0]), mapped, fluid.promise());
