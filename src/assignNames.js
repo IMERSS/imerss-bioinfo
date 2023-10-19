@@ -88,7 +88,7 @@ hortis.applyName = async function (row) {
     if (row.ID && row.ID > 0) {
         try {
             const lookedId = await source.get({id: row.ID});
-            row["Indexed iNaturalist Name"] = lookedId ? lookedId.doc.name : "unknown";
+            row["Indexed iNaturalist Name"] = lookedId?.doc?.name || "unknown";
         } catch (e) {
             console.log("Got error: ", e);
             row["Indexed iNaturalist Name"] = "error";
