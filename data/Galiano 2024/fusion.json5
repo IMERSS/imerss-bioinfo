@@ -25,8 +25,16 @@
             logRejection: true
         }
     },
+    summaryPatches: {
+        AssignHulqNames: {
+            type: "hortis.pipe.CSVInput",
+            input: "%imerss-bioinfo/data/Xetthecum/Culturally_significant_species_synthesized_Thom_2011_Turner_2014_&_Luschim_2021.csv",
+            map: "%imerss-bioinfo/data/Xetthecum/Culturally_significant-map.json",
+            processor: "hortis.xetthecum.assignHulqNames"
+        },
+    },
+
     summarise: true,
-    applySwaps: true, // TODO: Naturally, should be an actual pipeline element
     output: "%imerss-bioinfo/data/Galiano 2024/reintegrated.csv",
     combinedOutMap: "%imerss-bioinfo/data/Galiano 2024/combinedOutMap.json",
     filters: {
