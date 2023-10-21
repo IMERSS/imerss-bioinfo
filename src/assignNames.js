@@ -36,6 +36,8 @@ const source = hortis.iNatTaxonSource();
 hortis.highRanks = ["kingdom", "phylum", "subphylum", "superclass", "class", "subclass", "superorder", "order",
     "suborder", "infraorder", "superfamily", "family", "subfamily", "tribe", "genus", "species", "subspecies"].map(hortis.capitalize);
 
+
+
 hortis.finestRank = function (row, ranks) {
     let finestRank = null;
     ranks.forEach(function (rank) {
@@ -52,6 +54,16 @@ hortis.queryFromSummaryRow2023 = function (row) {
     const rank = hortis.finestRank(row, hortis.highRanks);
     return {name, phylum, rank};
 };
+
+// Actually Luschim dataset for now
+hortis.queryFromGBIFRow = function (row) {
+    const name = hortis.sanitizeSpeciesName(row["Scientific.name"]);
+    // const phylum = row.Phylum;
+    const rawRank = row["Taxonomic.level"];
+    const frontRank = rawRank.substring(rawRank.indexOf(" ") + 1);
+    const rank = hortis.capitalize(frontRank);
+    return {name, rank};
+}
 
 hortis.obsIdFromSummaryRow2022 = function (row) {
     const obsLink = row["iNaturalist Link"];
@@ -74,7 +86,8 @@ hortis.obsIdFromSummaryRow2023 = function (row) {
 // One-off script to update taxonomies and iNaturalist ids from files produced in Andrew's 2022 run of Galiano data
 
 hortis.applyName = async function (row) {
-    const query = hortis.queryFromSummaryRow2023(row);
+    //const query = hortis.queryFromSummaryRow2023(row);
+    const query = hortis.queryFromGBIFRow(row);
     const looked = await source.get(query);
     //    console.log("Got document ", looked);
     if (looked && looked.doc) {
