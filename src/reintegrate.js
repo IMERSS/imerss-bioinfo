@@ -19,6 +19,9 @@ var swaps = hortis.readJSONSync("data/taxon-swaps.json5", "reading taxon swaps f
 
 // Long disused script to output a taxon-swaps JSON5 file given a CSV taxon resolution file
 
+// 24/10/23 - Interesting - forgot that swaps used to be accepted in CSV - which we think we plan to do
+// again. Did AS ever generate these?
+
 hortis.copyCSVProps = function (props, target, source) {
     props.forEach(function (prop) {
         if (fluid.isValue(source[prop]) && source[prop] !== "") {
