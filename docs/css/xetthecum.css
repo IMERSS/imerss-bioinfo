@@ -396,7 +396,7 @@ body {
     border-bottom: none;
 }
 
-/** Undo this insane rule from imerss-viz.css - this whole system needs to be rewritten **/
+/** Undo this insane rule from imerss-viz-scrolly.css - this whole system needs to be rewritten **/
 .fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder.fl-taxonDisplay-row {
     border-bottom: #888 1px solid;
 }

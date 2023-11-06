@@ -126,8 +126,9 @@ fluid.defaults("hortis.bannerManager", {
     }
 });
 
+// Improved version which deals with status|cell style regions seen in Marine Atlas
 hortis.normaliseToClass = function (str) {
-    return str.toLowerCase().replace(/ /g, "-");
+    return str.toLowerCase().replace(/[| ]/g, "-");
 };
 
 hortis.bannerManager.toggleClass = function (banner, state, path) {

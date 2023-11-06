@@ -14,3 +14,19 @@ IMERSS/howe-sound-mapping/blob/main/tabular_data/1km_gridded_vascular_plant_reco
 
 Study area taken from 
 https://github.com/IMERSS/adfsimon-bioinfo/blob/main/Howe_Sound/study_area/Howe_Sound_project_area.geojson
+
+GBIF HSBR query:
+
+Note that in GBIF Reptilia is divided into
+
+Crocodylia: 11493978
+Squamata: 11592253
+Testudines: 11418114
+Sphenodontia: 11569602 (Class on GBIF, Suborder on iNat)
+Note there are no Sphenodontia in HSBR so it is moot
+Only 4 Testudines
+
+Even simplifying project area to 5% is too big.
+
+Finally got DOI https://doi.org/10.15468/dl.f6ajrp for Mammalia Reptilia Testudines
+

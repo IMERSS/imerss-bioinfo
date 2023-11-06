@@ -39,10 +39,10 @@ const outputFile = parsedArgs.o || hortis.assignedFromInput(inputFile);
 
 const source = hortis.iNatTaxonSource();
 
-hortis.highRanks = ["kingdom", "phylum", "subphylum", "superclass", "class", "subclass", "superorder", "order",
-    "suborder", "infraorder", "superfamily", "family", "subfamily", "tribe", "genus", "species", "subspecies"].map(hortis.capitalize);
+hortis.lowRanks = ["kingdom", "phylum", "subphylum", "superclass", "class", "subclass", "superorder", "order",
+    "suborder", "infraorder", "superfamily", "family", "subfamily", "tribe", "genus", "species", "subspecies"];
 
-
+hortis.highRanks = hortis.lowRanks.map(hortis.capitalize);
 
 hortis.finestRank = function (row, ranks) {
     let finestRank = null;
@@ -59,6 +59,25 @@ hortis.queryFromSummaryRow2023 = function (row) {
     const phylum = row.Phylum;
     const rank = hortis.finestRank(row, hortis.highRanks);
     return {name, phylum, rank};
+};
+
+hortis.queryFromDwcaRow = function (row) {
+    const name = hortis.sanitizeSpeciesName(row.scientificName);
+    const phylum = row.phylum;
+    const rank = row.specificEpithet ? "species" : hortis.finestRank(row, hortis.lowRanks);
+    return {name, phylum, rank};
+};
+
+hortis.queryFromLichenRow = function (row) {
+    const name = hortis.sanitizeSpeciesName(row.scientificName);
+    const phylum = "Ascomycota";
+    return {name, phylum};
+};
+
+hortis.queryFromLichenXRow = function (row) {
+    const name = hortis.sanitizeSpeciesName(row["reference.taxa"]);
+    const phylum = "Ascomycota";
+    return {name, phylum};
 };
 
 // Actually Luschim dataset for now
@@ -94,6 +113,9 @@ hortis.obsIdFromSummaryRow2023 = function (row) {
 hortis.applyName = async function (row) {
     const query = hortis.queryFromSummaryRow2023(row);
     //const query = hortis.queryFromGBIFRow(row);
+    //const query = hortis.queryFromLichenXRow(row);
+    //const query = hortis.queryFromDwcaRow(row);
+
     const looked = await source.get(query);
     //    console.log("Got document ", looked);
     if (looked && looked.doc) {

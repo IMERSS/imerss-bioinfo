@@ -12,7 +12,7 @@ const buildIndex = {
         "jquery.js"
     ],
     localSource: [
-        "src/client/css/imerss-viz.css",
+        "src/client/css/imerss-viz-scrolly.css",
         "src/auxBuild/restoreJQuery.js",
         "src/lib/jquery-ui-widgets-tabs.js",
         "src/lib/lz4.js",

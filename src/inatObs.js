@@ -83,6 +83,14 @@ hortis.iNatProjects = {
             quality_grade: ""
         },
         outputFile: "data/Howe Sound/iNaturalist_Ascomycota_Catalogue_%Date.csv"
+    },
+    HoweSoundTerrestrial: {
+        paramMap: {
+            place_id: 137739, // Howe Sound Proposed Biosphere Reserve
+            taxon_id: "40151,20978,26036", // Mammalia, Amphibia, Reptilia
+            quality_grade: ""
+        },
+        outputFile: "data/Howe Sound/iNaturalist_Mammalia_Amphibia_Reptilia_Catalogue_%Date.csv"
     }
 };
 

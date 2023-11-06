@@ -21,5 +21,6 @@
     <orderEntry type="module" module-name="galiano-bioblitz-2023" />
     <orderEntry type="module" module-name="galiano-marine-animal-atlas" />
     <orderEntry type="module" module-name="preact" />
+    <orderEntry type="module" module-name="adfsimon-bioinfo-private" />
   </component>
 </module>

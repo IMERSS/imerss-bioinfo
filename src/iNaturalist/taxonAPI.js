@@ -551,7 +551,8 @@ hortis.iNat.getAncestry = async function (id, byIdSource) {
  * Resolve the higher taxon ranks of a taxon into a supplied structure, given a taxon Id
  * @param {String} id - The id of the taxon whose ranks are to be fetched
  * @param {Object} rankTarget - The structure to receive the ranks. If `fields` is not set, any existing rank fields
- * in this structure will be overwritten - otherwise just the fields listed in `fields` will be overwritten
+ * (either capitalised or uncapitalised) in this structure will be overwritten - otherwise just the fields listed in
+ * `fields` will be overwritten
  * @param {fluid.dataSource} byIdSource - The taxon source
  * @param {Array<String>} [fields] - [optional] If supplied, only the taxa whose keys are listed in this structure will be
  * fetched into `rankTarget` - these are uncapitalized
