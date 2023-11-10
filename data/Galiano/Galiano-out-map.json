@@ -2,8 +2,6 @@
     "columns": {
         "taxonName": "Taxon name",
         "authority": "Author",
-        "description": "Description",
-        "placeName": "Place name",
         "commonName": "Common name",
         "firstTimestamp": "Collected/Reported (y-m-d)",
         "firstRecordedBy": "Collector/Source",

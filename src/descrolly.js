@@ -35,18 +35,19 @@ if (config.scrollyInput) {
 const taxaMap = hortis.readJSONSync(fluid.module.resolvePath(config.taxaMap));
 
 const swaps = hortis.readJSONSync("data/taxon-swaps.json5", "reading taxon swaps file");
-const invertedSwaps = hortis.invertSwaps(swaps);
+const invertedSwaps = hortis.iNat.invertSwaps(swaps);
 
-const applySwaps = true;
+const applySwaps = config.applySwaps !== undefined ? config.applySwaps : true;
 
-hortis.applyTaxaForKey = async function (that, taxaString, label, container, col) {
+hortis.applyTaxaForKey = async function (that, taxaStringOrArray, label, container, col) {
     const {scrollyFeatures, source, reintById} = that;
-    const taxa = taxaString.split(",").map(fluid.trim);
+    const taxa = Array.isArray(taxaStringOrArray) ? taxaStringOrArray : taxaStringOrArray.split(",").map(fluid.trim);
     console.log("Found " + taxa.length + " taxa for key " + label);
     const byTaxonId = {};
     await hortis.asyncForEach(taxa, async function (taxonName) {
         const san = hortis.sanitizeSpeciesName(taxonName);
         // Copied from taxonomise.js hortis.applyObservations
+        // TODO: Disuse in favour of modern system applying phyla, perhaps most helpfully in config file
         const invertedId = applySwaps ? invertedSwaps[san] : null;
         const looked = invertedId && await source.get({id: invertedId}) || await source.get({name: san});
         if (looked.doc) {

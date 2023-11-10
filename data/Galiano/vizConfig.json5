@@ -1,5 +1,5 @@
 {
     outputFile: "%imerss-bioinfo/data/Galiano/Galiano-Life.json.lz4",
-    inputFiles: ["%imerss-bioinfo/data/Galiano/reintegrated.csv"],
-    mapFile: "%imerss-bioinfo/data/Galiano/combinedOutMap.json",
+    inputFiles: ["%imerss-bioinfo/data/Galiano/reintegrated-2023.csv"],
+    mapFile: "%imerss-bioinfo/data/Galiano/combinedOutMap-2023.json",
 }

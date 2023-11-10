@@ -1,0 +1,6 @@
+{
+    outputFile: "%imerss-bioinfo/data/MXCW/MXCW-Scrolly-Vascular.json.lz4",
+    inputFiles: ["%imerss-bioinfo/data/MXCW/MXCW-reintegrated.csv"],
+    mapFile: "%imerss-bioinfo/data/MXCW/combinedOutMap.json",
+    scrollyFeaturesFile: "%imerss-bioinfo/data/MXCW/scrollyFeatures-Vascular.json"
+}

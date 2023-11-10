@@ -1,0 +1,24 @@
+{
+    datasets: {
+        Galiano: {
+            name: "Galiano",
+            datasetId: "GAL",
+            input: "%imerss-bioinfo/data/Galiano/Biodiversity_Galiano_Island_biodiversity_summary_2023.csv",
+            map: "%imerss-bioinfo/data/Galiano/Galiano-map-2023.json",
+            outMap: "%imerss-bioinfo/data/Galiano/Galiano-out-map.json",
+            colour: "#931362"
+        }
+    },
+    summaryPatches: {
+        AssignHulqNames: {
+            type: "hortis.pipe.CSVInput",
+            input: "%imerss-bioinfo/data/Xetthecum/Culturally_significant_species_synthesized_Thom_2011_Turner_2014_&_Luschim_2021.csv",
+            map: "%imerss-bioinfo/data/Xetthecum/Culturally_significant-map.json",
+            processor: "hortis.xetthecum.assignHulqNames"
+        }
+    },
+    summarise: false,
+    applySwaps: true,
+    output: "%imerss-bioinfo/data/Galiano/reintegrated-2023.csv",
+    combinedOutMap: "%imerss-bioinfo/data/Galiano/combinedOutMap-2023.json"
+}

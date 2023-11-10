@@ -1,0 +1,8 @@
+{
+    "columns": {
+        "taxonName": "%species_name"
+    },
+    "datasetId": "MXCW",
+    "datasetClass": "naturalist",
+    "observationId": "%datasetId:%rowNumber"
+}

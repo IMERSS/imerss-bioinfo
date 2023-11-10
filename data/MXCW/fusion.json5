@@ -1,0 +1,14 @@
+{
+    datasets: {
+        "MXCW": {
+            name: "Maxwell Creek Plots Vegetation Data",
+            input: "%imerss-bioinfo/data/MXCW/MXCW_vegetation_percent_cover_data.csv",
+            map: "%imerss-bioinfo/data/MXCW/MXCW-map.json",
+            outMap: "%imerss-bioinfo/data/MXCW/MXCW-out-map.json",
+            colour: "#931362"
+        }
+    },
+    summarise: true,
+    output: "%imerss-bioinfo/data/MXCW/MXCW-reintegrated.csv",
+    combinedOutMap: "%imerss-bioinfo/data/MXCW/combinedOutMap.json"
+}

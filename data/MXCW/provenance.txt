@@ -1,0 +1,2 @@
+Taken from https://github.com/IMERSS/maxwell/blob/main/tabular_data/MXCW_vegetation_percent_cover_data.csv
+and https://github.com/IMERSS/maxwell/blob/main/viz_data/Vascular-plotData.json

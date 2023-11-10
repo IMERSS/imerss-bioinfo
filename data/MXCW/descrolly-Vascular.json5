@@ -1,0 +1,7 @@
+{
+    scrollyInput: "%imerss-bioinfo/data/MXCW/Vascular-plotData.json",
+    taxaInput: "%imerss-bioinfo/data/MXCW/MXCW-reintegrated.csv",
+    taxaMap: "%imerss-bioinfo/data/MXCW/combinedOutMap.json",
+    scrollyFeatures: "%imerss-bioinfo/data/MXCW/scrollyFeatures-Vascular.json",
+    applySwaps: false
+}

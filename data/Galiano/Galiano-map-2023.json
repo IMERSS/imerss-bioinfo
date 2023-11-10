@@ -1,0 +1,22 @@
+{
+    "columns": {
+        "taxonName": "%Taxon",
+        "authority": "%Taxon.Author",
+        "commonName": "%Common.Name",
+        "origin": "%Origin",
+        "reporting": "%Reporting.Status",
+        "firstTimestamp": "%Collected.Reported..y.m.d.",
+        "firstRecordedBy": "%Collector.Source",
+        "firstCollection": "%Collection.List",
+        "firstCatalogueNumber": "%Accession.Number",
+        "sinceTimestamp": "%First.Observed",
+        "sinceRecordedBy": "%Observer",
+        "sinceCollection": "iNat",
+        "iNaturalistLink": "%iNaturalist.Link",
+        "notes": "%Notes",
+        "statsCode": "%Stats.Code"
+    },
+    "datasetId": "GAL",
+    "datasetClass": "naturalist",
+    "observationId": "%datasetId:%rowNumber"
+}
