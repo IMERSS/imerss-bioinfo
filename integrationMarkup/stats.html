@@ -4,7 +4,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 <style>
   .bar-freq {
-    font-size: normal;
+    font-size: unset;
+  }
+  .tooltip {
+      position: absolute;
+      z-index: 1070;
+      display: block;
   }
 </style>
 <script>
@@ -45,7 +50,18 @@ function dashboard(id, fData){
  // Create bars for histogram to contain rectangles and freq labels.
  var bars = hGsvg.selectAll(".bar").data(fD).enter()
  .append("g").attr("class", "bar");
- 
+
+ // From
+     var Tooltip = d3.select(id)
+         .append("div")
+         .style("opacity", 0)
+         .attr("class", "tooltip")
+         .style("background-color", "white")
+         .style("border", "solid")
+         .style("border-width", "2px")
+         .style("border-radius", "5px")
+         .style("padding", "5px")
+
  //create the rectangles.
  bars.append("rect")
  .attr("x", function(d) { return x(d[0]); })
@@ -53,8 +69,9 @@ function dashboard(id, fData){
  .attr("width", x.rangeBand())
  .attr("height", function(d) { return hGDim.h - y(d[1]); })
  .attr('fill',barColor)
- .on("mouseover",mouseover)// mouseover is defined below.
- .on("mouseout",mouseout);// mouseout is defined below.
+ .on("mouseover",mouseover)
+ .on("mouseout",mouseout)
+ .on("mousemove",mousemove);
  
  //Create the frequency labels above the rectangles.
  bars.append("text").text(function(d){ return d3.format(",")(d[1])})
@@ -70,14 +87,24 @@ function dashboard(id, fData){
  // call update functions of pie-chart and legend. 
  pC.update(nD);
  leg.update(nD);
+     Tooltip.style("opacity", 1);
  }
  
  function mouseout(d){ // utility function to be called on mouseout.
  // reset the pie-chart and legend. 
  pC.update(tF);
  leg.update(tF);
+     Tooltip.style("opacity", 0);
  }
- 
+
+ function mousemove(d) {
+     Tooltip
+         .html(d[0])
+         .style("left", (d3.mouse(this)[0]) + "px")
+         .style("top", (d3.mouse(this)[1]) + "px")
+ }
+
+
  // create function to update the bars. This will be used by pie-chart.
  hG.update = function(nD, color){
  // update the domain of the y-axis map to reflect change in frequencies.
@@ -215,25 +242,7 @@ var rowNames = {
 </script>
 
 <script>
-var freqData=[
-{State:'ALGAE',freq:{und:53, doc:31, new:115}}
-,{State:'PLANTS',freq:{und:212, doc:518, new:152}}
-,{State:'FUNGI',freq:{und:287, doc:126, new:49}}
-,{State:'LICHENS',freq:{und:77, doc:96, new:77}}
-,{State:'PROTOZOA',freq:{und:5, doc:2, new:20}}
-,{State:'MARINE',freq:{und:109, doc:22, new:7}}
-,{State:'JELLIES',freq:{und:55, doc:19, new:8}}
-,{State:'MOLLUSKS',freq:{und:111, doc:61, new:32}}
-,{State:'ARTHROPODS',freq:{und:435, doc:167, new:494}}
-,{State:'ECHINODERMS',freq:{und:21, doc:19, new:0}}
-,{State:'FISH',freq:{und:37, doc:35, new:7}}
-,{State:'HERPTILES',freq:{und:1, doc:5, new:6}}
-,{State:'BIRDS',freq:{und:50, doc:131, new:2}}
-,{State:'MAMMALS',freq:{und:1, doc:12, new:21}}
-,{State:'THINGS',freq:{und:5, doc:12, new:55}}
-];
 
-// dashboard('#dashboard',freqData);
 Papa.parse("https://raw.githubusercontent.com/IMERSS/imerss-bioinfo/main/data/Galiano/Biodiversity_Galiano_Island_2021_summary_statistics.csv", {
   download: true,
   header: true,
