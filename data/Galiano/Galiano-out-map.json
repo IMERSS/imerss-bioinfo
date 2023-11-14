@@ -10,7 +10,7 @@
         "sinceTimestamp": "sinceTimestamp",
         "sinceRecordedBy": "sinceRecordedBy",
         "sinceCollection": "sinceCollection",
-        "documenting": "Documenting",
+        "reportingStatus": "reportingStatus",
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID"
     },

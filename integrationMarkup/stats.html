@@ -39,7 +39,10 @@ function dashboard(id, fData){
  // Add x-axis to the histogram svg.
  var xAxis = hGsvg.append("g").attr("class", "x axis")
  .attr("transform", "translate(0," + hGDim.h + ")")
- .call(d3.svg.axis().scale(x).orient("bottom"));
+ .call(d3.svg.axis().scale(x).orient("bottom").tickFormat(function(d) {
+     const split = d.split(" ");
+     return split[0] + (split.length === 1 ? "" : "…");
+ }));
  
  xAxis.selectAll('text').attr('transform', "rotate(-45)").attr('x', -30).attr('y', 15);
 
@@ -51,7 +54,7 @@ function dashboard(id, fData){
  var bars = hGsvg.selectAll(".bar").data(fD).enter()
  .append("g").attr("class", "bar");
 
- // From
+ // From https://d3-graph-gallery.com/graph/interactivity_tooltip.html
      var Tooltip = d3.select(id)
          .append("div")
          .style("opacity", 0)
@@ -101,7 +104,7 @@ function dashboard(id, fData){
      Tooltip
          .html(d[0])
          .style("left", (d3.mouse(this)[0]) + "px")
-         .style("top", (d3.mouse(this)[1]) + "px")
+         .style("top", (d3.mouse(this)[1]-20) + "px")
  }
 
 
@@ -243,7 +246,7 @@ var rowNames = {
 
 <script>
 
-Papa.parse("https://raw.githubusercontent.com/IMERSS/imerss-bioinfo/main/data/Galiano/Biodiversity_Galiano_Island_2021_summary_statistics.csv", {
+Papa.parse("https://raw.githubusercontent.com/IMERSS/imerss-bioinfo/main/data/Galiano/Biodiversity_Galiano_Island_summary_statistics.csv", {
   download: true,
   header: true,
   skipEmptyLines: true,

@@ -4,7 +4,7 @@
         "authority": "%Taxon.Author",
         "commonName": "%Common.Name",
         "origin": "%Origin",
-        "reporting": "%Reporting.Status",
+        "reportingStatus": "%Reporting.Status",
         "firstTimestamp": "%Collected.Reported..y.m.d.",
         "firstRecordedBy": "%Collector.Source",
         "firstCollection": "%Collection.List",

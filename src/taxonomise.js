@@ -64,6 +64,8 @@ hortis.baseCommonOutMap = fluid.freezeRecursive({
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
         "taxonName": "Taxon name",
+        "ambiguousNameMatch": "ambiguousNameMatch",
+        "nameStatus": "nameStatus",
         "authority": "Author" // TODO: Make this conditional on whether it is present in input?
     }
 });
@@ -450,10 +452,20 @@ hortis.applyObservations = async function (that, obsRows, applySwaps) {
         console.log("Identified " + Object.keys(recs).length + " records to " + taxonLevel);
     });
 
+    const swapaway = identifiedTo.stateofmatter;
+    const swapawayKeys = Object.keys(swapaway);
+
+    console.log(swapawayKeys.length + " records were swapped away: \n");
+
+    fluid.each(swapaway, function (value, key) {
+        console.log(value.taxonName + " (" + key + ")");
+    });
+
     const undets = identifiedTo["Undetermined"];
 
     if (that.options.discardRanksBelowIndex !== -1) {
-        hortis.ranks.forEach(function (rank, rankIndex) {
+        const allRanks = ["stateofmatter", ...hortis.ranks];
+        allRanks.forEach(function (rank, rankIndex) {
             if (rankIndex < that.options.discardRanksBelowIndex) {
                 const toDiscard = identifiedTo[rank];
                 if (toDiscard && Object.keys(toDiscard).length) {
@@ -469,7 +481,7 @@ hortis.applyObservations = async function (that, obsRows, applySwaps) {
     fluid.each(that.discardedTaxa, function (obsMap, taxonName) {
         const keys = Object.keys(obsMap);
         const firstObs = obsMap[keys[0]];
-        console.log("Discarded " + keys.length + " observations for taxon " + taxonName + " which were only identified to rank " + obsIdToRank[firstObs.observationId] + ":");
+        console.log("\nDiscarded " + keys.length + " observations for taxon " + taxonName + " which were only identified to rank " + obsIdToRank[firstObs.observationId] + ":");
         console.log(keys.join(", "));
     });
 
@@ -502,6 +514,7 @@ hortis.resolveObservationTaxa = async function (that, observations, outMap) {
             outrow.iNaturalistTaxonName = taxon.doc.name;
             outrow.iNaturalistTaxonId = taxon.doc.id;
             outrow.ambiguousNameMatch = +!!taxon.doc.ambiguousNameMatch;
+            outrow.nameStatus = taxon.doc.nameStatus;
             // hortis.resolveTaxa(outrow, that.taxaById, taxon.taxonId, outMap.columns);
             await hortis.iNat.getRanks(taxon.doc.id, outrow, that.source, taxa);
             togo.push(outrow);

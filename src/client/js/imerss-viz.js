@@ -30,7 +30,7 @@ fluid.defaults("hortis.sunburstLoader", {
     showObsListInTooltip: true,
     gridResolution: undefined,
     friendlyNames: undefined,
-    initialTab: "checklist",
+    initialTab: "simpleChecklist",
     distributeOptions: {
         gridResolution: {
             source: "{that}.options.gridResolution",
@@ -529,6 +529,7 @@ hortis.taxonDisplayLookup = {
     iNaturalistObsLink: "Observation:",
     taxonLink: "iNaturalist Taxon:",
     commonName: "Common Name:",
+    reportingStatus: "Status:",
     hulqName: "Hul'qumi'num name:",
     wikipediaSummary: "Wikipedia Summary",
     media: "Media",
@@ -796,7 +797,7 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         if (row.hulqName) { // wot no polymorphism?
             togo += hortis.dumpHulqName(row, markup);
         }
-        dumpRow("commonName", row.commonName);
+        dumpRow("commonName", row.commonName && hortis.capitalize(row.commonName));
 
         if (row.hulqName && options.culturalValues) { // wot no polymorphism?
             togo += hortis.dumpHulqValues(row, markup);
@@ -814,11 +815,13 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         obsPanel += hortis.renderObsBound(row, "first", markup, options);
         obsPanel += hortis.renderObsBound(row, "last", markup, options);
         obsPanel += hortis.renderObsBound(row, "since", markup, options);
+        obsPanel += hortis.dumpRow("reportingStatus", row.reportingStatus, markup);
 
         if (row.iNaturalistObsLink) {
             obsPanel += hortis.dumpRow("iNaturalistObsLink", "<a href=\"" + row.iNaturalistObsLink + "\">" + row.iNaturalistObsLink + "</a>", markup);
         }
         obsPanel += hortis.dumpRow("observationCount", row.observationCount, markup);
+
         // TODO: Move to hortis.expandableBlock - hard since fl-taxonDisplay-key and fl-taxonDisplay-value
         // are nested inside here, but they are not in the outer map panels
         togo += hortis.dumpRow("observationData", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header", null, options);

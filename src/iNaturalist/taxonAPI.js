@@ -44,6 +44,7 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace(" f.", "");
     name = name.replace(" species complex", "");
     name = name.replace(" complex", "");
+    name = name.replace(" cf. ", " ");
     name = name.replace(" cf ", " ");
     name = name.replace(" ?", " ");
     name = name.replace(" x ", " × ");
@@ -52,7 +53,7 @@ hortis.sanitizeSpeciesName = function (name) {
 
 hortis.iNat.recordTransform = {
     "wikipediaSummary": "wikipedia_summary",
-    "commonName": "common_name.name",
+    "commonName": "preferred_common_name",
     "iNaturalistTaxonId": "id",
     "iNaturalistTaxonImage": "default_photo.medium_url"
 };

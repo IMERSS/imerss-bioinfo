@@ -57,6 +57,82 @@
     map-based or non map-based data, with the ability to weave content from artists, designers, developers and local communities
     into the presentation.
 </p>
+
+<h2>Scrollytelling visualisations</h2>
+
+<h3 id="galiano-marine">Galiano Marine Atlas</h3>
+<div class="float">
+    <a href="https://imerss.github.io/galiano-marine-animal-atlas/Annelida-Reknitted.html"><img src="img/thumbs/Galiano-Marine-Atlas.jpg"></a>
+</div>
+The <a href="https://imerss.github.io/galiano-marine-animal-atlas/Annelida-Reknitted.html#">Galiano Marine Atlas</a>
+presents the marine animals of Galiano Island broken down into 18 major phyla. Each group, for example
+<a href="https://imerss.github.io/galiano-marine-animal-atlas/Annelida-Reknitted.html">Annelids</a>,
+<a href="https://imerss.github.io/galiano-marine-animal-atlas/Mollusca-Reknitted.html">Molluscs</a>,
+<a href="https://imerss.github.io/galiano-marine-animal-atlas/Tunicata-Reknitted.html">Tunicates</a>, etc. are framed in a scrollytelling narrative foregrounding their taxonomic interest,
+notable observations in the area and community contributions to their understanding. A vignette also contrasts the
+coverage of historical, scholarly observations with more recent efforts derived from citizen science.
+
+<h3 id="howe">Átl’ḵa7tsem/Howe Sound Biosphere Vegetation Analysis</h3>
+<div class="float">
+    <a href="https://imerss.github.io/howe-sound-mapping/R-Markdown-AHSBR_Map_1-Reknitted.html"><img src="img/thumbs/Howe.jpg"></a>
+</div>
+
+A short distance from Vancouver, the <a href="https://en.unesco.org/biosphere/eu-na/atlka7tsem_howe-sound">Átl’ḵa7tsem/Howe Sound Biosphere Reserve</a>
+encompasses the fjord and islands of Átl’ka7tsem/Howe Sound over a 218,723 ha area.
+
+Átl’ka7tsem (pronounced At-Kat-sum) is the Sḵwx̱wú7mesh/Squamish word for "paddling up the Sound".
+
+IMERSS is developing a biodiversity assessment framework for the region (e.g., a
+prototype <a href="https://imerss.github.io/howe-sound-mapping/R-Markdown-AHSBR_Map_1-Reknitted.html#">scrollytelling visualisation</a>
+of the region's vascular plant diversity). This evolving framework integrates several components of our
+biodiversity data science infrastructure, including the scrollytelling and
+<a href="#core">core biodiversity framework</a>, as well as <a href="#inat-components">iNaturalist observations widgets</a> developed by
+Howe Sound resident Ben Keen.
+
+
+<h3 id="maxwell">Maxwell Creek watershed project</h3>
+<div class="float">
+    <a href="https://imerss.github.io/maxwell/R-Markdown-Background-Rewoven.html"><img src="img/thumbs/Maxwell.jpg"></a>
+</div>
+Development of the R Markdown Scrollytelling framework began with the
+<a href="https://transitionsaltspring.com/maxwell-creek-watershed-project/">Maxwell Creek Watershed Project</a>
+project undertaken with <a href="https://transitionsaltspring.com/">Transition Salt Spring</a>.
+The ultimate goal of the Project is to better understand and define the
+efficacy of nature-based solutions for forest and hydrological restoration, towards enhanced
+ecological integrity and biodiversity in the Maxwell Creek watershed.
+
+This <a href="https://imerss.github.io/maxwell/R-Markdown-Background-Rewoven.html">scrollytelling presentation</a>
+of the project is a work in progress, available in <a href="https://pages.github.com/">GitHub pages</a>.
+
+<h3 id="janszen">Janszen Legacy Project</h3>
+<div class="float">
+    <a href="https://imerss.github.io/janszen-legacy-storymap/Janszen_Legacy_Project-Reknitted.html"><img src="img/thumbs/Janszen.jpg"></a>
+</div>
+
+Harvey Janszen (July 11, 1946–May 10, 2021) was an accomplished amateur botanist and naturalist endeared to many in British Columbia's
+natural history community. During his career, Harvey collected over 3,000 vascular plant specimens,
+mostly from the southern Gulf Islands of British Columbia, and curated comprehensive species checklists
+documenting the flora of the southern Gulf Islands, Saanich Peninsula, San Juan Islands, and various other
+localities throughout the Salish Sea.
+
+This <a href="https://imerss.github.io/janszen-legacy-storymap/Janszen_Legacy_Project-Reknitted.html">scrollytelling storymap</a>
+presents a summary of the progress being made to preserve Harvey's work, with support from the Canadian Institute for
+Ecology and Evolution.
+
+
+<h3 id="scrolly">R Markdown Scrollytelling Template</h3>
+<div class="float">
+    <a href="https://imerss.github.io/r-scrollytelling-template/R-Markdown-Background-Reknitted.html"><img src="img/thumbs/R-Scrolly.jpg"></a>
+</div>
+
+The above scrollytelling visualisations were built from on this common framework which is available for other
+communities to adapt. The <a href="https://imerss.github.io/r-scrollytelling-template/R-Markdown-Background-Reknitted.html">R Markdown Scrollytelling Template</a>
+empowers naturalists with moderate technical skills to edit documents in simply structured
+<a href="https://rmarkdown.rstudio.com/">R Markdown</a> format, the web output of which is then rewoven into an
+interactive <a href="https://imerss.github.io/r-scrollytelling-template/R-Markdown-Background-Rewoven.html">scrollytelling interface</a> hosted in
+<a href="https://pages.github.com/">GitHub pages</a>.
+The template can be adopted by forking its <a href="https://github.com/IMERSS/r-scrollytelling-template">GitHub project</a> and customising it to your ends.
+
 <h2 id="core">Visualisations using core biodiversity framework</h2>
 Despite their diversity, all of the visualisations in this section use a common codebase, presenting either checklists or catalogues
 of biodiversity observations in various forms, including hierarchical text-based summaries, circular "starburst"
@@ -183,91 +259,28 @@ can be seen at the BioGaliano <a href="https://biogaliano.org/web-of-life-viz/">
     <a href="https://github.com/IMERSS/imerss-bioinfo/raw/main/data/Xetthecum/provenance.txt">provenance.txt</a>.
 </p>
 
-<h2>Scrollytelling visualisations</h2>
-
-<h3 id="scrolly">R Markdown Scrollytelling Template</h3>
+<h2>Components from Ben Keen</h2>
+Kindly contributed to IMERSS by <a href="https://github.com/benkeen">Ben Keen</a> are components for working with species checklists and
+presenting observations reported to <a href="https://www.inaturalist.org/">iNaturalist</a>.
+<h3 id="inat-components">iNaturalist observations widget</h3>
 <div class="float">
-    <a href="https://imerss.github.io/r-scrollytelling-template/R-Markdown-Background-Reknitted.html"><img src="img/thumbs/R-Scrolly.jpg"></a>
+    <a href="https://bcleps.weebly.com/inat.html"><img src="img/thumbs/BCLeps.jpg"></a>
 </div>
+Prebuilt <a href=https://reactjs.org/">React</a> components to display iNaturalist data on your own sites.
+The widget was originally implemented to provide
+an interactive page on the <a href="https://bcleps.weebly.com/inat.html">BC Lepidoptera website</a> so
+visitors could see some high-level information about butterflies and moths spotted in British Columbia.
+However, the code was written to allow it to be
+re-used by any website, to visualise any taxon or place. Code for these components is housed in the
+<a href="https://github.com/IMERSS/inat-components">IMERSS inat-components</a> repository.
 
-We help diverse communities work with data in formats they are comfortable with, with tools they are
-familiar with. The <a href="https://imerss.github.io/r-scrollytelling-template/R-Markdown-Background-Reknitted.html">R Markdown Scrollytelling Template</a>
-empowers naturalists with moderate technical skills to edit documents in simply structured
-<a href="https://rmarkdown.rstudio.com/">R Markdown</a> format, the web output of which is then rewoven into an
-interactive <a href="https://imerss.github.io/r-scrollytelling-template/R-Markdown-Background-Rewoven.html">scrollytelling interface</a> hosted in
-<a href="https://pages.github.com/">GitHub pages</a>.
-The template can be adopted by forking its <a href="https://github.com/IMERSS/r-scrollytelling-template">GitHub project</a> and customising it to your ends.
-
-Several projects have already been built using this template, listed below.
-
-<h3 id="maxwell">Maxwell Creek watershed project</h3>
+<h3>Checklist generator</h3>
 <div class="float">
-    <a href="https://imerss.github.io/maxwell/R-Markdown-Background-Rewoven.html"><img src="img/thumbs/Maxwell.jpg"></a>
+    <a href="https://imerss.github.io/checklist-generator/"><img src="img/thumbs/Checklist.jpg"></a>
 </div>
-Development of the R Markdown Scrollytelling framework began with the
-<a href="https://transitionsaltspring.com/maxwell-creek-watershed-project/">Maxwell Creek Watershed Project</a>
-project undertaken with <a href="https://transitionsaltspring.com/">Transition Salt Spring</a>.
-The ultimate goal of the Project is to better understand and define the
-efficacy of nature-based solutions for forest and hydrological restoration, towards enhanced
-ecological integrity and biodiversity in the Maxwell Creek watershed.
-
-This <a href="https://imerss.github.io/maxwell/R-Markdown-Background-Rewoven.html">scrollytelling presentation</a>
-of the project is a work in progress, available in <a href="https://pages.github.com/">GitHub pages</a>.
-
-<h3 id="janszen">Janszen Legacy Project</h3>
-<div class="float">
-    <a href="https://imerss.github.io/janszen-legacy-storymap/Janszen_Legacy_Project-Reknitted.html"><img src="img/thumbs/Janszen.jpg"></a>
-</div>
-
-Harvey Janszen (July 11, 1946–May 10, 2021) was an accomplished amateur botanist and naturalist endeared to many in British Columbia's
-natural history community. During his career, Harvey collected over 3,000 vascular plant specimens,
-mostly from the southern Gulf Islands of British Columbia, and curated comprehensive species checklists
-documenting the flora of the southern Gulf Islands, Saanich Peninsula, San Juan Islands, and various other
-localities throughout the Salish Sea.
-
-This <a href="https://imerss.github.io/janszen-legacy-storymap/Janszen_Legacy_Project-Reknitted.html">scrollytelling storymap</a>
-presents a summary of the progress being made to preserve Harvey's work, with support from the Canadian Institute for
-Ecology and Evolution.
-
-<h3 id="howe">Átl’ḵa7tsem/Howe Sound Biosphere Vegetation Analysis</h3>
-<div class="float">
-    <a href="https://imerss.github.io/howe-sound-mapping/R-Markdown-AHSBR_Map_1-Reknitted.html"><img src="img/thumbs/Howe.jpg"></a>
-</div>
-
-A short distance from Vancouver, the <a href="https://en.unesco.org/biosphere/eu-na/atlka7tsem_howe-sound">Átl’ḵa7tsem/Howe Sound Biosphere Reserve</a>
-encompasses the fjord and islands of Átl’ka7tsem/Howe Sound over a 218,723 ha area.
-
-Átl’ka7tsem (pronounced At-Kat-sum) is the Sḵwx̱wú7mesh/Squamish word for "paddling up the Sound".
-
-IMERSS is developing a biodiversity assessment framework for the region (e.g., a
-prototype <a href="https://imerss.github.io/howe-sound-mapping/R-Markdown-AHSBR_Map_1-Reknitted.html#">scrollytelling visualisation<a>
-    of the region's vascular plant diversity). This evolving framework integrates several components of our
-    biodiversity data science infrastructure, including the scrollytelling and
-    <a href="#core">core biodiversity framework</a>, as well as <a href="#inat-components">iNaturalist observations widgets</a> developed by
-    Howe Sound resident Ben Keen.
-
-    <h2>Components from Ben Keen</h2>
-    Kindly contributed to IMERSS by <a href="https://github.com/benkeen">Ben Keen</a> are components for working with species checklists and
-    presenting observations reported to <a href="https://www.inaturalist.org/">iNaturalist</a>.
-    <h3 id="inat-components">iNaturalist observations widget</h3>
-    <div class="float">
-        <a href="https://bcleps.weebly.com/inat.html"><img src="img/thumbs/BCLeps.jpg"></a>
-    </div>
-    Prebuilt <a href=https://reactjs.org/">React</a> components to display iNaturalist data on your own sites.
-    The widget was originally implemented to provide
-    an interactive page on the <a href="https://bcleps.weebly.com/inat.html">BC Lepidoptera website</a> so
-    visitors could see some high-level information about butterflies and moths spotted in British Columbia.
-    However, the code was written to allow it to be
-    re-used by any website, to visualise any taxon or place. Code for these components is housed in the
-    <a href="https://github.com/IMERSS/inat-components">IMERSS inat-components</a> repository.
-
-    <h3>Checklist generator</h3>
-    <div class="float">
-        <a href="https://imerss.github.io/checklist-generator/"><img src="img/thumbs/Checklist.jpg"></a>
-    </div>
-    A simple tool that converts a CSV file into a checklist of rows, grouped by hierarchy. See the <a href="https://imerss.github.io/checklist-generator/">live site</a>
-    for an explanation of the functionality. Code for this component is housed in the <a href="https://github.com/IMERSS/checklist-generator">IMERSS checklist-generator</a>
-    repository.
+A simple tool that converts a CSV file into a checklist of rows, grouped by hierarchy. See the <a href="https://imerss.github.io/checklist-generator/">live site</a>
+for an explanation of the functionality. Code for this component is housed in the <a href="https://github.com/IMERSS/checklist-generator">IMERSS checklist-generator</a>
+repository.
 
 </body>
 </html>
