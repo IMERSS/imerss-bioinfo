@@ -612,7 +612,7 @@ hortis.renderObsId = function (obsId) {
     const dataset = hortis.datasetIdFromObs(obsId);
     if (dataset === "iNat") {
         const localId = hortis.localIdFromObs(obsId);
-        return fluid.stringTemplate("<a target=\"_blank\" href=\"https://www.inaturalist.org/observations/%obsId\">%obsId</a>", {
+        return fluid.stringTemplate(" (<a target=\"_blank\" href=\"https://www.inaturalist.org/observations/%obsId\">%obsId</a>)", {
             obsId: localId
         });
     } else {
@@ -645,10 +645,10 @@ hortis.renderObsBound = function (row, prefix, markup, options) {
         let source = renderedCollection + (catalogueNumber && institutionCode !== "iNaturalist" ? " (" + catalogueNumber + ")" : "");
         // Two alternative routes to identifying an iNaturalist observation old-style and GBIF-style
         if (obsId && obsIdCollection === "iNat") {
-            source += " observation " + hortis.renderObsId(obsId);
+            source += hortis.renderObsId(obsId);
         }
         if (catalogueNumber && institutionCode === "iNaturalist") {
-            source += " observation " + hortis.renderObsId("iNat:" + catalogueNumber);
+            source += hortis.renderObsId("iNat:" + catalogueNumber);
         }
 
         const row2 = hortis.dumpRow("Source:", source, markup);
