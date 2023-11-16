@@ -317,7 +317,7 @@ hortis.indexScrollyRegions = function (treeBuilder) {
             const row = summaryById[key];
             byTaxonId[row.id] = true;
         });
-        return {byTaxonId};
+        return {...comm, byTaxonId};
     });
     return {
         communities: newComms,
