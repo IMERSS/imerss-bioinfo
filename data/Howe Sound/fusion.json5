@@ -2,8 +2,8 @@
     datasets: {
         "HOWE": {
             name: "Howe Sound Gridded Data",
-            input: "%imerss-bioinfo/data/Howe Sound/1km_gridded_vascular_plant_records_2022-12-24_WGS84.csv",
-            map: "%imerss-bioinfo/data/Howe Sound/Howe-Sound-map.json",
+            input: "%imerss-bioinfo/data/Howe Sound/gridded_plants_WGS84.csv",
+            map: "%imerss-bioinfo/data/Howe Sound/Howe-Sound-map-2023.json",
             outMap: "%imerss-bioinfo/data/Howe Sound/Howe-Sound-out-map.json",
             colour: "#931362"
         }
@@ -15,6 +15,7 @@
         }
     },
     summarise: true,
+    applySwaps: true,
     output: "%imerss-bioinfo/data/Howe Sound/Howe-Sound-reintegrated.csv",
     combinedOutMap: "%imerss-bioinfo/data/Howe Sound/combinedOutMap.json"
 }

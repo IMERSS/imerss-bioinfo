@@ -3,6 +3,8 @@
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
         "taxonName": "Taxon name",
+        "ambiguousNameMatch": "ambiguousNameMatch",
+        "nameStatus": "nameStatus",
         "authority": "Author",
         "kingdom": "Kingdom",
         "phylum": "Phylum",
@@ -25,6 +27,7 @@
         "longitude": "Longitude",
         "collection": "Collection",
         "catalogueNumber": "Catalogue Number",
+        "institutionCode": "Institution Code",
         "dateObserved": "Date observed",
         "locality": "Place name",
         "recordedBy": "Recorded by"

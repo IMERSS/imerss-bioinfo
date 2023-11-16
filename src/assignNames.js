@@ -80,6 +80,12 @@ hortis.queryFromLichenXRow = function (row) {
     return {name, phylum};
 };
 
+hortis.queryFromLichenNRow = function (row) {
+    const name = hortis.sanitizeSpeciesName(row.Taxon);
+    const phylum = "Ascomycota";
+    return {name, phylum};
+};
+
 // Actually Luschim dataset for now
 hortis.queryFromGBIFRow = function (row) {
     const name = hortis.sanitizeSpeciesName(row["Scientific.name"]);
@@ -111,9 +117,9 @@ hortis.obsIdFromSummaryRow2023 = function (row) {
 // One-off script to update taxonomies and iNaturalist ids from files produced in Andrew's 2022 run of Galiano data
 
 hortis.applyName = async function (row) {
-    const query = hortis.queryFromSummaryRow2023(row);
+    //const query = hortis.queryFromSummaryRow2023(row);
     //const query = hortis.queryFromGBIFRow(row);
-    //const query = hortis.queryFromLichenXRow(row);
+    const query = hortis.queryFromLichenNRow(row);
     //const query = hortis.queryFromDwcaRow(row);
 
     const looked = await source.get(query);

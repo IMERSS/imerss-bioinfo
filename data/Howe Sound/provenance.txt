@@ -8,11 +8,16 @@ Second round
 
 adfsimon-bioinfo/blob/main/Howe_Sound/4_consolidate_records/Records/Digitized/DwC/AHSBR_CNABH_data_spatial_query_2023-03-03_DwC.csv
 
+
 Newer data source:
 https://github.com/IMERSS/adfsimon-bioinfo/blob/main/Howe_Sound/consolidate_records/Plantae_et_Chromista/vascular_plants/synthesized/Howe_Sound_vascular_plant_records_consolidated.csv
 
 BEC vignette taken from 
 IMERSS/howe-sound-mapping/blob/main/tabular_data/1km_gridded_vascular_plant_records_2022-12-24_WGS84.csv
+
+Newer update from
+IMERSS/adfsimon-bioinfo/blob/main/Howe_Sound/analyse/outputs/gridded_plants_WGS84.csv
+
 
 Study area taken from 
 https://github.com/IMERSS/adfsimon-bioinfo/blob/main/Howe_Sound/study_area/Howe_Sound_project_area.geojson
@@ -30,5 +35,8 @@ Only 4 Testudines
 
 Even simplifying project area to 5% is too big.
 
-Finally got DOI https://doi.org/10.15468/dl.f6ajrp for Mammalia Amphibia Reptilia 
+Finally got DOI https://doi.org/10.15468/dl.f6ajrp for Mammalia Amphibia Reptilia
+
+Now using Howe_Sound_context_area_much_simplified.geojson - get 
+GBIF.org (15 November 2023) GBIF Occurrence Download https://doi.org/10.15468/dl.k8mv76
 

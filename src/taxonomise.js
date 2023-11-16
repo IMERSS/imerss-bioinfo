@@ -73,7 +73,8 @@ hortis.baseCommonOutMap = fluid.freezeRecursive({
 // Fields which are transferred to "first" and "last" entries from observations to summaries
 hortis.obsToSummaryFields = {
     recordedBy: "Reported By",
-    collection: "Source",
+    collection: "Source", // old-fashioned pre-GBIF field - being phased out - would have been "collectionCode" which is not so useful
+    institutionCode: "Institution Code",
     placeName: "Place Name",
     catalogueNumber: "Catalogue Number",
     observationId: "observationId",
@@ -453,13 +454,15 @@ hortis.applyObservations = async function (that, obsRows, applySwaps) {
     });
 
     const swapaway = identifiedTo.stateofmatter;
-    const swapawayKeys = Object.keys(swapaway);
+    if (swapaway) {
+        const swapawayKeys = Object.keys(swapaway);
 
-    console.log(swapawayKeys.length + " records were swapped away: \n");
+        console.log(swapawayKeys.length + " records were swapped away: \n");
 
-    fluid.each(swapaway, function (value, key) {
-        console.log(value.taxonName + " (" + key + ")");
-    });
+        fluid.each(swapaway, function (value, key) {
+            console.log(value.taxonName + " (" + key + ")");
+        });
+    }
 
     const undets = identifiedTo["Undetermined"];
 

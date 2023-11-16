@@ -630,17 +630,25 @@ hortis.renderObsBound = function (row, prefix, markup, options) {
         const catalogueNumber = row[prefix + "CatalogueNumber"];
         const value = hortis.renderDate(row[prefix + "Timestamp"]) + (recordedBy && !options.suppressObsAuthors ? " by " + recordedBy : "");
 
-        const row1 = hortis.dumpRow(capPrefix + (prefix === "since" ? " Observed:" : " Reported:"), value, markup);
+        const row1 = hortis.dumpRow(capPrefix + (prefix === "since" ? "First Observed:" : " Reported:"), value, markup);
 
         const obsId = row[prefix + "ObservationId"];
 
+        // old-fashioned data used to use "Collection" - note that obsIds for Howe are currently screwed up so we use institutionCode
+        // in prefewrence
         const collection = row[prefix + "Collection"];
-        const obsIdCollection = hortis.sourceFromId(row[prefix + "ObservationId"]);
-        const renderedCollection = hortis.sourceTable[obsIdCollection || collection] || collection;
+        const institutionCode = row[prefix + "InstitutionCode"];
 
-        let source = renderedCollection + (catalogueNumber ? " (" + catalogueNumber + ")" : "");
+        const obsIdCollection = hortis.sourceFromId(row[prefix + "ObservationId"]);
+        const renderedCollection = institutionCode || hortis.sourceTable[obsIdCollection || collection] || collection;
+
+        let source = renderedCollection + (catalogueNumber && institutionCode !== "iNaturalist" ? " (" + catalogueNumber + ")" : "");
+        // Two alternative routes to identifying an iNaturalist observation old-style and GBIF-style
         if (obsId && obsIdCollection === "iNat") {
             source += " observation " + hortis.renderObsId(obsId);
+        }
+        if (catalogueNumber && institutionCode === "iNaturalist") {
+            source += " observation " + hortis.renderObsId("iNat:" + catalogueNumber);
         }
 
         const row2 = hortis.dumpRow("Source:", source, markup);
@@ -812,10 +820,10 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         dumpRow("wikipediaSummary", row.wikipediaSummary);
         let obsPanel = "";
 
+        obsPanel += hortis.dumpRow("reportingStatus", row.reportingStatus && hortis.capitalize(row.reportingStatus), markup);
         obsPanel += hortis.renderObsBound(row, "first", markup, options);
         obsPanel += hortis.renderObsBound(row, "last", markup, options);
         obsPanel += hortis.renderObsBound(row, "since", markup, options);
-        obsPanel += hortis.dumpRow("reportingStatus", row.reportingStatus, markup);
 
         if (row.iNaturalistObsLink) {
             obsPanel += hortis.dumpRow("iNaturalistObsLink", "<a href=\"" + row.iNaturalistObsLink + "\">" + row.iNaturalistObsLink + "</a>", markup);

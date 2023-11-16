@@ -45,6 +45,7 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace(" species complex", "");
     name = name.replace(" complex", "");
     name = name.replace(" cf. ", " ");
+    name = name.replace(" cfr. ", " ");
     name = name.replace(" cf ", " ");
     name = name.replace(" ?", " ");
     name = name.replace(" x ", " × ");
@@ -226,8 +227,13 @@ hortis.cachediNatTaxonById.upgradeLiveDocument = async function (query, live, wr
                 console.log("No cached doc for id " + id);
                 if (doc.wikipedia_url) {
                     const name = hortis.wikipediaExtracts.urlToTitle(doc.wikipedia_url);
-                    const extract = wikipediaExtracts && await wikipediaExtracts.get({name: name});
-                    doc.wikipedia_summary = extract && extract.extract;
+                    try {
+                        const extract = wikipediaExtracts && await wikipediaExtracts.get({name: name});
+                        doc.wikipedia_summary = extract && extract.extract;
+                    } catch (e) {
+                        console.log("Error fetching Wikipedia extract", e);
+                        doc.wikipedia_summary = "Error";
+                    }
                 }
             }
             const toWrite = {
