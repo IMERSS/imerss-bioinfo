@@ -2,13 +2,19 @@
   "taxa": {
     "43": "Tubulanus sexlineatus",
     "68": "Emplectonema gracile, Tubulanus sexlineatus",
+    "85": "Cerebratulus sp.",
     "127": "Tubulanus polymorphus",
+    "130": "Paranemertes peregrina, Tubulanus polymorphus",
+    "149": "Tubulanus sexlineatus",
+    "192": "Tubulanus sexlineatus",
     "215": "Tubulanus sexlineatus",
     "238": "Emplectonema gracile, Tubulanus polymorphus, Tubulanus sexlineatus",
+    "303": "Tubulanus sexlineatus",
     "347": "Micrura verrilli, Tubulanus albocinctus, Tubulanus polymorphus, Tubulanus sexlineatus",
     "392": "Tubulanus polymorphus, Tubulanus sexlineatus",
+    "393": "Tubulanus sexlineatus",
     "416": "Tubulanus sexlineatus",
-    "417": "Paranemertes peregrina"
+    "417": "Paranemertes peregrina, Tubulanus polymorphus"
   },
   "mapTitle": "Nemertea diversity"
 }

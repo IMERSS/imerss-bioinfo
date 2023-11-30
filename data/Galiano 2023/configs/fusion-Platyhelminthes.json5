@@ -8,6 +8,14 @@
             colour: "#931362"
         }
     },
+    summaryPatches: {
+        AssignHulqNames: {
+            type: "hortis.pipe.CSVInput",
+            input: "%imerss-bioinfo/data/Xetthecum/Culturally_significant_species_synthesized_Thom_2011_Turner_2014_&_Luschim_2021.csv",
+            map: "%imerss-bioinfo/data/Xetthecum/Culturally_significant-map.json",
+            processor: "hortis.xetthecum.assignHulqNames"
+        },
+    },
     summarise: true,
     applySwaps: true,
     output: "%imerss-bioinfo/data/Galiano 2023/Platyhelminthes-reintegrated.csv",

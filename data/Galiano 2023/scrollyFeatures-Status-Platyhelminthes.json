@@ -73,24 +73,20 @@
                 "447179": true
             }
         },
-        "new|416": {
+        "confirmed|416": {
             "byTaxonId": {
                 "56699": true
             }
         },
-        "new|417": {
+        "confirmed|417": {
             "byTaxonId": {
                 "56699": true
             }
         },
         "confirmed": {
             "byTaxonId": {
+                "56699": true,
                 "447179": true
-            }
-        },
-        "new": {
-            "byTaxonId": {
-                "56699": true
             }
         }
     }

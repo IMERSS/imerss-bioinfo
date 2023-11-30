@@ -38,22 +38,22 @@
                 "246116": true
             }
         },
-        "confirmed|302": {
+        "historical|302": {
             "byTaxonId": {
                 "246116": true
             }
         },
-        "confirmed|347": {
+        "historical|347": {
             "byTaxonId": {
                 "246116": true
             }
         },
-        "confirmed|417": {
+        "historical|417": {
             "byTaxonId": {
                 "246116": true
             }
         },
-        "confirmed": {
+        "historical": {
             "byTaxonId": {
                 "246116": true
             }

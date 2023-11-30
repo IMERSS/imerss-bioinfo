@@ -5,12 +5,12 @@
     "new": "#7562b4"
   },
   "taxa": {
-    "confirmed": {
+    "confirmed": {},
+    "historical": {
       "302": "Sagittoidea",
       "347": "Sagittoidea",
       "417": "Sagittoidea"
     },
-    "historical": {},
     "new": {}
   },
   "mapTitle": "Species Reporting Status"

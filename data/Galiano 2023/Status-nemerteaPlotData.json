@@ -9,16 +9,24 @@
       "43": "Tubulanus sexlineatus",
       "68": "Emplectonema gracile, Tubulanus sexlineatus",
       "127": "Tubulanus polymorphus",
+      "130": "Tubulanus polymorphus",
+      "149": "Tubulanus sexlineatus",
+      "192": "Tubulanus sexlineatus",
       "215": "Tubulanus sexlineatus",
       "238": "Emplectonema gracile, Tubulanus polymorphus, Tubulanus sexlineatus",
-      "347": "Tubulanus albocinctus, Tubulanus polymorphus, Tubulanus sexlineatus",
+      "303": "Tubulanus sexlineatus",
+      "347": "Tubulanus polymorphus, Tubulanus sexlineatus",
       "392": "Tubulanus polymorphus, Tubulanus sexlineatus",
-      "416": "Tubulanus sexlineatus"
+      "393": "Tubulanus sexlineatus",
+      "416": "Tubulanus sexlineatus",
+      "417": "Tubulanus polymorphus"
     },
     "historical": {
-      "347": "Micrura verrilli"
+      "347": "Micrura verrilli, Tubulanus albocinctus"
     },
     "new": {
+      "85": "Cerebratulus sp.",
+      "130": "Paranemertes peregrina",
       "417": "Paranemertes peregrina"
     }
   },

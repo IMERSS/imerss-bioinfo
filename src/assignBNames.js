@@ -24,13 +24,25 @@ hortis.handleFailure = function () {
 
 fluid.failureEvent.addListener(hortis.handleFailure, "hortis", "before:fail");
 
-const parsedArgs = minimist(process.argv.slice(2));
+hortis.inputFileToTrunk = function (inputFile) {
+    const lastdotpos = inputFile.lastIndexOf(".");
+    const lasthypos = inputFile.lastIndexOf("-");
+    const trunkPos = lasthypos === -1 ? lastdotpos : lasthypos;
+    return inputFile.substring(0, trunkPos);
+};
 
-const outputFile = parsedArgs.o || "assigned.csv";
+const parsedArgs = minimist(process.argv.slice(2));
 
 const swapsFile = parsedArgs.swaps || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/taxon-swaps.csv");
 
 const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/plant-pollinators-Carril-normalised.csv");
+
+const inputTrunk = hortis.inputFileToTrunk(inputFile);
+
+const outputFile = parsedArgs.o || inputTrunk + "-assigned.csv";
+const outputTaxaFile = parsedArgs.taxa || inputTrunk + "-assigned-taxa.csv";
+
+const mismatchFile = parsedArgs.mismatches || inputTrunk + "-mismatches.csv";
 
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile
@@ -49,7 +61,7 @@ const source = hortis.iNatTaxonSource();
 
 const scientificNames = {
     pollinatorINatName: "scientificName",
-    plantInatName: "plantScientificName"
+    plantINatName: "plantScientificName"
 };
 
 const storeRanks = ["stateofmatter", "kingdom", "phylum", "subphylum", "class", "order", "family", "genus"];
@@ -161,15 +173,17 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
     }
     const resolveOut = fluid.module.resolvePath(outputFile);
     await hortis.writeCSV(resolveOut, Object.keys(mapped[0]), mapped, fluid.promise());
-    const outDir = path.dirname(resolveOut);
-    const outTaxaFile = outDir + "/assigned-taxa.csv";
+
     const taxaRows = hortis.flattenTaxa(taxa);
-    await hortis.writeCSV(outTaxaFile, Object.keys(taxaRows[0]), taxaRows, fluid.promise());
+    await hortis.writeCSV(outputTaxaFile, Object.keys(taxaRows[0]), taxaRows, fluid.promise());
 
     const unmapped = Object.keys(unmappedTaxa);
     console.log("Listing " + unmapped.length + " unmapped taxa:");
-    unmapped.forEach(function (key) {
-        console.log(key + ", original name " + unmappedTaxa[key].scientificName);
+    const unmappedRows = unmapped.map(function (key) {
+        const scientificName = unmappedTaxa[key].scientificName;
+        console.log(key + ", original name " + scientificName);
+        return {taxonName: key, originalName: scientificName};
     });
+    await hortis.writeCSV(mismatchFile, Object.keys(unmappedRows[0]), unmappedRows, fluid.promise());
 
 });

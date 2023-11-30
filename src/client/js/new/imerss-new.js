@@ -466,9 +466,9 @@ fluid.defaults("hortis.libreMap.streetmapTiles", {
 fluid.defaults("hortis.libreMap.usEcoL3Tiles", {
     tileSets: {
         ecoL3: {
-            // TODO: Commit this to GitHub and see how it performs
-            tiles: ["data/b-team/us_eco_l3_tiles/{z}/{x}/{y}.png"],
+            tiles: ["https://usda-nifa-b-team.github.io/b-team/tiles/us_eco_l3_tiles/{z}/{x}/{y}.png"],
             tileSize: 512,
+            maxzoom: 8,
             paint: {
                 "raster-opacity": 0.5
             }

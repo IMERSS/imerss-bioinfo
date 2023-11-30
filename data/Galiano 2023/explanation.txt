@@ -1,0 +1,1 @@
+This directory contains files in transit to and from the Galiano Marine Atlas at https://github.com/IMERSS/galiano-marine-animal-atlas

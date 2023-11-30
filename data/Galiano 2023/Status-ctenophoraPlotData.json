@@ -7,25 +7,38 @@
   "taxa": {
     "confirmed": {
       "42": "Beroe abyssicola, Pleurobrachia bachei",
+      "43": "Bolinopsis infundibulum",
       "44": "Beroe abyssicola",
-      "68": "Bolinopsis microptera",
+      "68": "Pleurobrachia bachei",
+      "108": "Pleurobrachia bachei",
       "127": "Beroe abyssicola, Pleurobrachia bachei",
-      "159": "Bolinopsis microptera",
-      "191": "Pleurobrachia bachei",
-      "192": "Bolinopsis microptera",
-      "193": "Pleurobrachia bachei",
+      "129": "Beroe abyssicola",
+      "149": "Beroe abyssicola",
+      "191": "Bolinopsis infundibulum, Pleurobrachia bachei",
+      "193": "Bolinopsis infundibulum, Pleurobrachia bachei",
       "195": "Pleurobrachia bachei",
-      "237": "Bolinopsis microptera",
-      "238": "Beroe abyssicola, Bolinopsis microptera, Pleurobrachia bachei",
-      "325": "Beroe abyssicola, Bolinopsis microptera, Euplokamis dunlapae, Pleurobrachia bachei",
-      "347": "Beroe abyssicola, Euplokamis dunlapae, Pleurobrachia bachei",
-      "370": "Pleurobrachia bachei",
-      "392": "Beroe abyssicola, Pleurobrachia bachei",
-      "416": "Pleurobrachia bachei",
-      "417": "Beroe abyssicola, Pleurobrachia bachei"
+      "214": "Bolinopsis infundibulum",
+      "215": "Bolinopsis infundibulum",
+      "238": "Beroe abyssicola, Bolinopsis infundibulum, Pleurobrachia bachei",
+      "325": "Beroe abyssicola, Euplokamis dunlapae, Pleurobrachia bachei",
+      "347": "Beroe abyssicola, Bolinopsis infundibulum, Euplokamis dunlapae, Pleurobrachia bachei",
+      "370": "Bolinopsis infundibulum, Pleurobrachia bachei",
+      "392": "Beroe abyssicola, Bolinopsis infundibulum, Pleurobrachia bachei",
+      "416": "Bolinopsis infundibulum, Pleurobrachia bachei",
+      "417": "Beroe abyssicola, Bolinopsis infundibulum, Pleurobrachia bachei"
     },
     "historical": {},
-    "new": {}
+    "new": {
+      "68": "Bolinopsis microptera",
+      "105": "Bolinopsis microptera",
+      "108": "Bolinopsis microptera",
+      "159": "Bolinopsis microptera",
+      "181": "Bolinopsis microptera",
+      "192": "Bolinopsis microptera",
+      "237": "Bolinopsis microptera",
+      "238": "Bolinopsis microptera",
+      "325": "Bolinopsis microptera"
+    }
   },
   "mapTitle": "Species Reporting Status"
 }

@@ -5,7 +5,8 @@
     "new": "#7562b4"
   },
   "taxa": {
-    "confirmed": {
+    "confirmed": {},
+    "historical": {
       "42": "Terebratalia transversa",
       "43": "Terebratalia transversa",
       "45": "Terebratalia transversa",
@@ -20,7 +21,6 @@
       "415": "Terebratalia transversa",
       "416": "Terebratalia transversa"
     },
-    "historical": {},
     "new": {}
   },
   "mapTitle": "Species Reporting Status"

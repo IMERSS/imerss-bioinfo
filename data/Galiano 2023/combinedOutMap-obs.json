@@ -3,6 +3,8 @@
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
         "taxonName": "Taxon name",
+        "ambiguousNameMatch": "ambiguousNameMatch",
+        "nameStatus": "nameStatus",
         "authority": "Author",
         "kingdom": "Kingdom",
         "phylum": "Phylum",

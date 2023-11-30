@@ -2,7 +2,7 @@
     datasets: {
         "Consolidated": {
             name: "Galiano 2023 Bioblitz Consolidated",
-            input: "%imerss-bioinfo/data/Galiano 2023/Galiano_marine_animal_records_consolidated_2023-04-22.csv",
+            input: "%imerss-bioinfo/data/Galiano 2023/Galiano_marine_animal_records_consolidated-2023-11-03.csv",
             map: "%imerss-bioinfo/data/Galiano 2023/Bioblitz-map.json",
             outMap: "%imerss-bioinfo/data/Galiano 2023/Bioblitz-out-map.json",
             colour: "#931362"

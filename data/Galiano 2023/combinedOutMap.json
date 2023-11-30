@@ -3,6 +3,8 @@
         "iNaturalistTaxonName": "iNaturalist taxon name",
         "iNaturalistTaxonId": "iNaturalist taxon ID",
         "taxonName": "Taxon name",
+        "ambiguousNameMatch": "ambiguousNameMatch",
+        "nameStatus": "nameStatus",
         "authority": "Author",
         "observationCount": "Observation count",
         "coords": "Coordinates",
@@ -24,12 +26,14 @@
         "species": "Species",
         "firstRecordedBy": "First Reported By",
         "firstCollection": "First Source",
+        "firstInstitutionCode": "First Institution Code",
         "firstPlaceName": "First Place Name",
         "firstCatalogueNumber": "First Catalogue Number",
         "firstObservationId": "First observationId",
         "firstTimestamp": "First Date Reported",
         "lastRecordedBy": "Last Reported By",
         "lastCollection": "Last Source",
+        "lastInstitutionCode": "Last Institution Code",
         "lastPlaceName": "Last Place Name",
         "lastCatalogueNumber": "Last Catalogue Number",
         "lastObservationId": "Last observationId",
@@ -50,13 +54,13 @@
         }
     },
     "datasets": {
-        "Consolidated": {
-            "name": "Galiano 2023 Bioblitz Consolidated",
-            "input": "E:/source/gits/bagatelle/data/Galiano 2023/Galiano_marine_animal_records_consolidated_2023-04-22.csv",
+        "Molluscs": {
+            "name": "Galiano 2023 Bioblitz Molluscs",
+            "input": "E:/source/gits/bagatelle/data/Galiano 2023/tunicata_all_records_gridded.csv",
             "map": "E:/source/gits/bagatelle/data/Galiano 2023/Bioblitz-map.json",
             "outMap": "E:/source/gits/bagatelle/data/Galiano 2023/Bioblitz-out-map.json",
             "colour": "#931362",
-            "datasetId": "Consolidated"
+            "datasetId": "Molluscs"
         }
     }
 }

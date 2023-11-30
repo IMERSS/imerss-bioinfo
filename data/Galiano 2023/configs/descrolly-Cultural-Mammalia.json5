@@ -1,0 +1,6 @@
+{
+    scrollyInput: "%imerss-bioinfo/data/Galiano 2023/Cultural-mammaliaPlotData.json",
+    taxaInput: "%imerss-bioinfo/data/Galiano 2023/Mammalia-reintegrated.csv",
+    taxaMap: "%imerss-bioinfo/data/Galiano 2023/combinedOutMap.json",
+    scrollyFeatures: "%imerss-bioinfo/data/Galiano 2023/scrollyFeatures-Cultural-Mammalia.json"
+}

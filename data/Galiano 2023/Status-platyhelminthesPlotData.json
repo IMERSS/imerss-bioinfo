@@ -9,13 +9,12 @@
       "135": "Eurylepta leoparda",
       "238": "Eurylepta leoparda",
       "347": "Eurylepta leoparda",
-      "392": "Eurylepta leoparda"
-    },
-    "historical": {},
-    "new": {
+      "392": "Eurylepta leoparda",
       "416": "Kaburakia excelsa",
       "417": "Kaburakia excelsa"
-    }
+    },
+    "historical": {},
+    "new": {}
   },
   "mapTitle": "Species Reporting Status"
 }
