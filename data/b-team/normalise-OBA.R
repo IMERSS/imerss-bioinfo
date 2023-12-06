@@ -55,6 +55,7 @@ filtered <- mutate(raw,
                    eventDate = raw$`Collection Date`
 )
 
-filteredDown <- filtered[, !names(filtered) %in% c("Associated plant - genus, species", "Dec. Long.", "Dec. Lat.", "Year 1", "MonthAb", "monthJul", "Month 1", "Collection Day 1", "Collection Date")]
+filteredDown <- filtered[, !names(filtered) %in% c("Associated plant - genus, species", "Dec. Long.", "Dec. Lat.", "MonthAb", "MonthJul",
+   "Year 1", "Month 1", "Time 1", "Collection Day 1", "Year 2", "Month 2", "Time 2", "Collection Day 2", "Collection Day 2 Merge", "Collection Date")]
 
 timedWrite(filteredDown, "plant-pollinators-OBA-normalised.csv")

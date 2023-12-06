@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Howe_Sound_context_area_much_simplified_2" id="Howe_Sound_context_area_much_simplified_2">
+	<SimpleField name="OBJECTID" type="float"></SimpleField>
+	<SimpleField name="Biome" type="string"></SimpleField>
+	<SimpleField name="ORIG_FID" type="int"></SimpleField>
+	<SimpleField name="Shape_Leng" type="float"></SimpleField>
+	<SimpleField name="Shape_Le_1" type="float"></SimpleField>
+	<SimpleField name="Shape_Area" type="float"></SimpleField>
+</Schema>
+<Folder><name>Howe_Sound_context_area_much_simplified_2</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Howe_Sound_context_area_much_simplified_2">
+		<SimpleData name="OBJECTID">2</SimpleData>
+		<SimpleData name="Biome">Salish Sea Terrestrial</SimpleData>
+		<SimpleData name="ORIG_FID">2</SimpleData>
+		<SimpleData name="Shape_Leng">0.00437495925</SimpleData>
+		<SimpleData name="Shape_Le_1">0.00437495925</SimpleData>
+		<SimpleData name="Shape_Area">1.5238e-07</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-123.45452,48.45021 -123.56596,48.42635 -123.90401,48.58074 -124.49559,48.84927 -125.15705,49.54775 -124.88401,49.66801 -124.03727,50.48225 -123.84225,50.8593 -123.20029,51.07383 -123.08652,51.23147 -122.66234,51.15671 -122.53395,51.21685 -122.29991,51.06895 -121.62751,50.99611 -121.49381,50.37661 -122.0415,49.63551 -122.19265,49.05693 -122.33404,49.01793 -122.53557,48.51086 -122.68505,48.47058 -122.77556,48.39343 -122.89529,48.38311 -123.04264,48.44585 -123.24904,48.51411 -123.45452,48.45021</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+</Folder>
+</Document></kml>

@@ -91,6 +91,19 @@ hortis.iNatProjects = {
             quality_grade: ""
         },
         outputFile: "data/Howe Sound/iNaturalist_Mammalia_Amphibia_Reptilia_Catalogue_%Date.csv"
+    },
+    // Guide at https://forum.inaturalist.org/t/inat-api-how-to-get-info-from-polygon/32589
+    // used bbox of Howe_Sound_context_area_much_simplified.geojson
+    HoweSoundContextTerrestrial: {
+        paramMap: {
+            swlat: 48.38311,
+            swlng: -125.15705,
+            nelat: 51.23147,
+            nelng: -121.49381,
+            taxon_id: "40151,20978,26036", // Mammalia, Amphibia, Reptilia
+            quality_grade: ""
+        },
+        outputFile: "data/Howe Sound/iNaturalist_Mammalia_Amphibia_Reptilia_Context_Catalogue_%Date.csv"
     }
 };
 
