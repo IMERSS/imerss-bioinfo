@@ -27,7 +27,10 @@ const parsedArgs = minimist(process.argv.slice(2));
 const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/Galiano 2024/review/Terrestrial_arthropods_review_summary_2023-10-18.csv");
 
 const reader = hortis.csvReaderWithoutMap({
-    inputFile: inputFile
+    inputFile: inputFile,
+    csvOptions: {
+        separator: "\t" // TODO: remember to put this back for real GBIF
+    }
 });
 
 hortis.assignedFromInput = function (inputFile) {
@@ -87,13 +90,21 @@ hortis.queryFromLichenNRow = function (row) {
 };
 
 // Actually Luschim dataset for now
-hortis.queryFromGBIFRow = function (row) {
+hortis.queryFromLuschimRow = function (row) {
     const name = hortis.sanitizeSpeciesName(row["Scientific.name"]);
     // const phylum = row.Phylum;
     const rawRank = row["Taxonomic.level"];
     const frontRank = rawRank.substring(rawRank.indexOf(" ") + 1);
     const rank = hortis.capitalize(frontRank);
     return {name, rank};
+};
+
+// An actual GBIF export
+hortis.queryFromGBIFRow = function (row) {
+    const name = hortis.sanitizeSpeciesName(row.verbatimScientificName);
+    const phylum = row.phylum;
+    const rank = row.taxonRank.toLowerCase();
+    return {name, phylum, rank};
 };
 
 hortis.obsIdFromSummaryRow2022 = function (row) {
@@ -117,8 +128,8 @@ hortis.obsIdFromSummaryRow2023 = function (row) {
 // One-off script to update taxonomies and iNaturalist ids from files produced in Andrew's 2022 run of Galiano data
 
 hortis.applyName = async function (row) {
-    const query = hortis.queryFromSummaryRow2023(row);
-    //const query = hortis.queryFromGBIFRow(row);
+    //const query = hortis.queryFromSummaryRow2023(row);
+    const query = hortis.queryFromGBIFRow(row);
     //const query = hortis.queryFromLichenNRow(row);
     //const query = hortis.queryFromDwcaRow(row);
 

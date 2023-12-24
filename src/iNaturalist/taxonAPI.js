@@ -27,6 +27,11 @@ hortis.sanitizeSpeciesName = function (name) {
             name = name.substring(0, index);
         }
     });
+    // Unscrew scientificName entries which appear in GBIF which sometimes have authorities appended
+    const capPoint = name.search(/ [A-Z]/);
+    if (capPoint !== -1) {
+        name = name.slice(0, capPoint);
+    }
     name = name.replace("�", "ue");
     name = name.replace(/ (\(.*\))/g, "");
     name = name.replace(" ssp.", "");
@@ -587,7 +592,7 @@ hortis.iNat.getRanks = async function (id, rankTarget, byIdSource, fields) {
             const thisRank = indexed[rank];
             const oldTarget = rankTarget[targetRank];
             if (thisRank && oldTarget && oldTarget !== thisRank) {
-                console.log("Replacing " + targetRank + " " + oldTarget + " with " + thisRank + " for taxon " + rankTarget.taxonName);
+                console.log("Replacing " + targetRank + " " + oldTarget + " with " + thisRank + " for taxon " + (rankTarget.taxonName || rankTarget["Referred iNaturalist Name"]));
             }
             rankTarget[targetRank] = thisRank || "";
         }
