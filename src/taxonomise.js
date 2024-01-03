@@ -330,12 +330,20 @@ hortis.deprivatise = function (resolved) {
     });
 };
 
+hortis.fuseUsers = function (resolved) {
+    resolved.obsRows.forEach(function (row) {
+        row.recordedBy = row.recordedBy || row.observer;
+    });
+};
+
 hortis.roundCoordinates = function (resolved, patch) {
     resolved.obsRows.forEach(function (row) {
         row.latitude = hortis.roundDecimals(row.latitude, patch.places);
         row.longitude = hortis.roundDecimals(row.longitude, patch.places);
     });
 };
+
+
 
 hortis.deduplicateById = function (resolved, patch) {
     const idField = patch.idField;
