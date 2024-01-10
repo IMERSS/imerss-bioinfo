@@ -40,3 +40,16 @@ Finally got DOI https://doi.org/10.15468/dl.f6ajrp for Mammalia Amphibia Reptili
 Now using Howe_Sound_context_area_much_simplified.geojson - get 
 GBIF.org (15 November 2023) GBIF Occurrence Download https://doi.org/10.15468/dl.k8mv76
 
+Annoyingly the 15 November 2023 query omitted Amphibia - this was the text:
+
+ All must apply
+Geometry MULTIPOLYGON(((-123.45452 48.45021,-123.24904 48.51411,-123.04264 48.44585,-122.89529 48.38311,-122.77556 48.39343,-122.68505 48.47058,-122.53557 48.51086,-122.33404 49.01793,-122.19265 49.05693,-122.0415 49.63551,-121.49381 50.37661,-121.62751 50.99611,-122.29991 51.06895,-122.53395 51.21685,-122.66234 51.15671,-123.08652 51.23147,-123.20029 51.07383,-123.84225 50.8593,-124.03727 50.48225,-124.88401 49.66801,-125.15705 49.54775,-124.49559 48.84927,-123.90401 48.58074,-123.56596 48.42635,-123.45452 48.45021)))
+Has coordinate true
+Has geospatial issue false
+Occurrence status present
+Scientific name Mammalia Squamata Crocodylia Testudines Sphenodontia
+
+Got fresh Christmas Eve GBIF download of
+
+GBIF.org (24 December 2023) GBIF Occurrence Download https://doi.org/10.15468/dl.9r24fd
+

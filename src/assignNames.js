@@ -27,7 +27,10 @@ const parsedArgs = minimist(process.argv.slice(2));
 const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/Galiano 2024/review/Terrestrial_arthropods_review_summary_2023-10-18.csv");
 
 const reader = hortis.csvReaderWithoutMap({
-    inputFile: inputFile
+    inputFile: inputFile,
+    csvOptions: {
+        separator: "\t" // TODO: remember to put this back for real GBIF
+    }
 });
 
 hortis.assignedFromInput = function (inputFile) {
@@ -94,11 +97,12 @@ hortis.queryFromLuschimRow = function (row) {
     return {name, rank};
 };
 
+// An actual GBIF export
 hortis.queryFromGBIFRow = function (row) {
-    const name = hortis.sanitizeSpeciesName(row["scientificName"]);
-    // TODO: rank should probably be here
-    const phylum = row.Phylum;
-    return {name, phylum};
+    const name = hortis.sanitizeSpeciesName(row.verbatimScientificName);
+    const phylum = row.phylum;
+    const rank = row.taxonRank.toLowerCase();
+    return {name, phylum, rank};
 };
 
 hortis.obsIdFromSummaryRow2022 = function (row) {

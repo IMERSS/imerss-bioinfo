@@ -18,6 +18,9 @@
             processor: "hortis.roundCoordinates",
             places: 6
         },
+        FuseUsers: {
+            processor: "hortis.fuseUsers"
+        },
         GalianoRegion: {
             type: "hortis.pipe.JSONInput",
             input: "%imerss-bioinfo/data/Galiano/Galiano_Island_Project_Boundary_Chu_final_2021-02-23.json",
