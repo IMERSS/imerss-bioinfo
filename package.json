@@ -11,7 +11,7 @@
     "dependencies": {
         "infusion": "4.6.0",
         "kettle": "2.3.0",
-        "axios": "1.6.2",
+        "axios": "1.6.5",
         "csv-parser": "3.0.0",
         "papaparse": "5.4.1",
         "remove-bom-stream": "2.0.0",
@@ -23,7 +23,6 @@
         "moment": "2.29.4",
         "moment-timezone": "0.5.43",
         "jsep": "EricSmekens/jsep#25fcb53",
-        "glob": "7.2.0",
         "minimist": "1.2.8",
         "lz4": "0.6.5",
         "pako": "2.1.0",
@@ -32,8 +31,9 @@
         "jquery-ui": "1.13.2"
     },
     "devDependencies": {
-        "terser": "5.17.1",
-        "fs-extra": "11.1.1",
+        "terser": "5.26.0",
+        "fs-extra": "11.2.0",
+        "glob": "10.3.10",
         "eslint": "8.39.0",
         "eslint-config-fluid": "2.1.1",
         "fluid-lint-all": "1.2.9",

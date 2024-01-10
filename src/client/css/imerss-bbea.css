@@ -28,9 +28,8 @@
 }
 
 .fl-imerss-int-left {
-    flex: 0 0 160px;
+    flex: 0 0 180px;
 }
-
 
 .fl-imerss-int-right {
     flex: 0 0 3em;
@@ -50,7 +49,7 @@
 }
 
 .fl-imerss-int-bottom {
-    flex: 0 0 10em;
+    flex: 0 0 180px;
 }
 
 
@@ -64,6 +63,34 @@
     flex: 1 1 auto;
     display: flex;
     align-items: end;
+    margin-right: calc(var(--imerss-scrollbar-width) + 4px);
+}
+
+.fld-imerss-poll-counts {
+    position: relative;
+    display: flex;
+    align-items: end;
+    overflow-x: hidden;
+    margin-right: calc(var(--imerss-scrollbar-width) + 4px);
+}
+
+.fld-imerss-plant-names {
+    margin-bottom: calc(var(--imerss-scrollbar-width) + 4px);
+}
+
+.fld-imerss-plant-counts {
+    margin-left: 4px;
+    margin-bottom: calc(var(--imerss-scrollbar-width) + 4px);
+}
+
+.fld-imerss-plant-names, .fld-imerss-plant-counts {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.fld-imerss-plant-names::-webkit-scrollbar, .fld-imerss-plant-counts::-webkit-scrollbar  {
+    display: none;  /* Safari and Chrome */
 }
 
 .fld-imerss-poll-names .fl-imerss-int-label {
@@ -72,20 +99,25 @@
     bottom: 2em; /* No idea why they stick off the bottom otherwise */
 }
 
-.fld-imerss-plant-names {
-    position: relative;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-.fld-imerss-plant-names::-webkit-scrollbar {
-    display: none;  /* Safari and Chrome */
-}
-
 .fl-imerss-int-label {
     position: absolute;
     white-space: nowrap;
     font-size: 14px;
+}
+
+.fl-imerss-int-count {
+    position: absolute;
+}
+
+.fld-imerss-plant-counts .fl-imerss-int-count {
+    /* Colour taken from Young et al 2021 */
+    background-color: #4c92c3;
+    border: 1px solid black;
+}
+
+.fld-imerss-poll-counts .fl-imerss-int-count {
+    background-color: #ff7c4a;
+    border: 1px solid black;
 }
 
 .fld-imerss-int-poll-label {

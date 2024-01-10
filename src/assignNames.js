@@ -86,14 +86,19 @@ hortis.queryFromLichenNRow = function (row) {
     return {name, phylum};
 };
 
-// Actually Luschim dataset for now
-hortis.queryFromGBIFRow = function (row) {
+hortis.queryFromLuschimRow = function (row) {
     const name = hortis.sanitizeSpeciesName(row["Scientific.name"]);
-    // const phylum = row.Phylum;
     const rawRank = row["Taxonomic.level"];
     const frontRank = rawRank.substring(rawRank.indexOf(" ") + 1);
     const rank = hortis.capitalize(frontRank);
     return {name, rank};
+};
+
+hortis.queryFromGBIFRow = function (row) {
+    const name = hortis.sanitizeSpeciesName(row["scientificName"]);
+    // TODO: rank should probably be here
+    const phylum = row.Phylum;
+    return {name, phylum};
 };
 
 hortis.obsIdFromSummaryRow2022 = function (row) {
@@ -108,7 +113,7 @@ hortis.obsIdFromSummaryRow2022 = function (row) {
 hortis.obsIdFromSummaryRow2023 = function (row) {
     const obsLink = row["iNaturalist.Link"];
     if (obsLink) {
-        const slashPos = obsLink.lastIndexOf(":");
+        const slashPos = obsLink.lastIndexOf("/");
         const obsId = obsLink.substring(slashPos + 1);
         return obsId;
     }
@@ -117,8 +122,8 @@ hortis.obsIdFromSummaryRow2023 = function (row) {
 // One-off script to update taxonomies and iNaturalist ids from files produced in Andrew's 2022 run of Galiano data
 
 hortis.applyName = async function (row) {
-    const query = hortis.queryFromSummaryRow2023(row);
-    //const query = hortis.queryFromGBIFRow(row);
+    //const query = hortis.queryFromSummaryRow2023(row);
+    const query = hortis.queryFromGBIFRow(row);
     //const query = hortis.queryFromLichenNRow(row);
     //const query = hortis.queryFromDwcaRow(row);
 
@@ -129,19 +134,28 @@ hortis.applyName = async function (row) {
         row["Referred iNaturalist Id"] = looked.doc.id;
         row["Referred iNaturalist Name"] = looked.doc.name;
         await hortis.iNat.getRanks(looked.doc.id, row, source.byId /*, hortis.ranks*/); // uncomment for Dunwiddie
+        if (row.commonName === "") {
+            const lookedId = await source.get({id: looked.doc.id});
+            row.commonName = lookedId?.doc.preferred_common_name;
+        }
     } else {
         row["Name Status"] = "unknown";
     }
-    if (row.ID && row.ID > 0) {
-        try {
-            const lookedId = await source.get({id: row.ID});
-            row["Indexed iNaturalist Name"] = lookedId?.doc?.name || "unknown";
-        } catch (e) {
-            console.log("Got error: ", e);
-            row["Indexed iNaturalist Name"] = "error";
-            if (e.statusCode !== 404) {
-                throw e;
+    if (row.ID !== undefined) {
+        if (row.ID > 0) {
+            try {
+                const lookedId = await source.get({id: row.ID});
+                row["Indexed iNaturalist Name"] = lookedId?.doc?.name || "unknown";
+            } catch (e) {
+                console.log("Got error: ", e);
+                row["Indexed iNaturalist Name"] = "error";
+                if (e.statusCode !== 404) {
+                    throw e;
+                }
             }
+
+        } else {
+            row["Indexed iNaturalist Name"] = "";
         }
     }
     const obsId = hortis.obsIdFromSummaryRow2023(row);

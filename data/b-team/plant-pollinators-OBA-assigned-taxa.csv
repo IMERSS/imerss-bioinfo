@@ -8,7 +8,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,wikipediaSummary,iNaturalistTax
 
 
 </p>
-<p><b>Life</b> is a quality that distinguishes matter that has biological processes, such as signaling and self-sustaining processes, from matter that does not, and is defined descriptively by the capacity for homeostasis, organisation, metabolism, growth, adaptation, response to stimuli, and reproduction. Many philosophical definitions of living systems have been proposed, such as self</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/73661252/medium.jpg,,"{""Life"":""accepted""}"
+<p><b>Life</b> is a quality that distinguishes matter that has biological processes, such as signaling and self-sustaining processes, from matter that does not, and is defined descriptively by the capacity for homeostasis, organisation, metabolism, growth, adaptation, response to stimuli, and reproduction. Many philosophical definitions of living systems have been proposed, such as self</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/73661252/medium.jpg,,
 1,48460,Animalia,Animals,kingdom,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 
@@ -23,35 +23,15 @@ id,parentId,iNaturalistTaxonName,commonName,rank,wikipediaSummary,iNaturalistTax
 
 
 </p>
-<p><b>Plants</b> are the eukaryotes that form the kingdom <b>Plantae</b>; they are predominantly photosynthetic. This means that they obtain their energy from sunlight, using chloroplasts derived from endosymbiosis with cyanobacteria to produce sugars from carbon dioxide and water, using the green pigment chlorophyll. Exceptions are parasitic plants that have lost the genes for chlorophyll and photosynthesis, and</p>...",https://static.inaturalist.org/photos/221143410/medium.jpeg,,"{""Plantae"":""accepted""}"
-47170,48460,Fungi,Fungi Including Lichens,kingdom,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
-<p class=""mw-empty-elt"">
-
-
-</p><p class=""mw-empty-elt"">
-</p>
-<p>A <b>fungus</b> (<abbr title=""plural form"">pl.</abbr>: <b>fungi</b> or <b>funguses</b>) is any member of the group of eukaryotic organisms that includes microorganisms such as yeasts and molds, as well as the more familiar mushrooms. These organisms are classified as one of the traditional eukaryotic kingdoms</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/260296784/medium.jpg,,
-2,1,Chordata,Chordates,phylum,"<p class=""mw-empty-elt"">
-
-</p>
-<p>A <b>chordate</b> (<span></span> <i title=""English pronunciation respelling""><span>KOR</span>-dayt</i>) is a deuterostomic animal belonging to the phylum <b>Chordata</b> (<span></span> <i title=""English pronunciation respelling"">kor-<span>DAY</span>-tə</i>). All chordates possess, at some point during their larval or adult stages, five distinctive physical characteristics (synapomorphies) that distinguish them from</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/80551845/medium.jpg,,
+<p><b>Plants</b> are the eukaryotes that form the kingdom <b>Plantae</b>; they are predominantly photosynthetic. This means that they obtain their energy from sunlight, using chloroplasts derived from endosymbiosis with cyanobacteria to produce sugars from carbon dioxide and water, using the green pigment chlorophyll. Exceptions are parasitic plants that have lost the genes for chlorophyll and photosynthesis, and</p>...",https://static.inaturalist.org/photos/221143410/medium.jpeg,,
 47120,1,Arthropoda,Arthropods,phylum,"<p class=""mw-empty-elt"">
 
 
 </p>
-<p><b>Arthropods</b> (<span></span>, from Ancient Greek <i> </i>ἄρθρον<i> (arthron)</i>&#160;'joint', and <i> </i>πούς<i> (pous)</i>&#160;'foot' (gen. ποδός)) are invertebrate animals in the phylum <b>Arthropoda</b>. They possess an exoskeleton with a cuticle made of chitin, often mineralised with calcium carbonate, a body with differentiated (metameric) segments, and paired jointed appendages. In order to keep growing, they</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/92982075/medium.jpg,,
-47169,47170,Basidiomycota,Basidiomycete Fungi,phylum,"<p class=""mw-empty-elt"">
-</p>
-<p><b>Basidiomycota</b> (<span></span>) is one of two large divisions that, together with the Ascomycota, constitute the subkingdom Dikarya (often referred to as the ""<b>higher fungi</b>"") within the kingdom Fungi. Members are known as <b>basidiomycetes</b>. More specifically, Basidiomycota includes these groups: agarics, puffballs, stinkhorns, bracket fungi, other polypores, jelly fungi, boletes, chanterelles, earth</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/160331738/medium.jpg,,
-48250,47170,Ascomycota,Ascomycete Fungi,phylum,"<p class=""mw-empty-elt"">
-</p>
-
-<p class=""mw-empty-elt"">
-</p>
-<p><b>Ascomycota</b> is a phylum of the kingdom Fungi that, together with the Basidiomycota, forms the subkingdom Dikarya. Its members are commonly known as the <b>sac fungi</b> or <b>ascomycetes</b>. It is the largest phylum of Fungi, with over 64,000 species. The defining feature of this fungal group is the ""ascus"" (from Ancient Greek <i> </i><span lang=""grc"">ἀσκός</span><i> (</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/4896433/medium.jpg,,
+<p><b>Arthropods</b> (<span></span>, from Ancient Greek <i> </i>ἄρθρον<i> (arthron)</i>&#160;'joint', and <i> </i>πούς<i> (pous)</i>&#160;'foot' (gen. ποδός)) are invertebrates that are a part of the phylum <b>Arthropoda</b>. They possess an exoskeleton with a cuticle made of chitin, often mineralised with calcium carbonate, a body with differentiated (metameric) segments, and paired jointed appendages. In order to keep growing</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/92982075/medium.jpg,,
 211194,47126,Tracheophyta,vascular plants,phylum,"<p class=""mw-empty-elt"">
 </p>
-<p><b>Vascular plants</b> (from Latin <i> <i lang=""la"">vasculum</i></i>&#160;'duct'), also called <b>tracheophytes</b> (<span></span>) or collectively <b>Tracheophyta</b> (from Ancient Greek <i> </i><span lang=""grc"">τραχεῖα ἀρτηρία</span><i> (<span title=""Ancient Greek transliteration"" lang=""grc-Latn""><i>trakheîa artēría</i></span>)</i>&#160;'windpipe', and <i> </i><span lang=""grc"">φυτά</span><i> (</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/78650848/medium.jpeg,,
+<p><b>Vascular plants</b> (from Latin <i> <i lang=""la"">vasculum</i></i>&#160;'duct'), (<span></span>) or collectively the phylum <b>Tracheophyta</b> (from Ancient Greek <i> </i><span lang=""grc"">τραχεῖα ἀρτηρία</span><i> (<span title=""Ancient Greek transliteration"" lang=""grc-Latn""><i>trakheîa artēría</i></span>)</i>&#160;'windpipe', and <i> </i><span lang=""grc"">φυτά</span><i> (</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/78650848/medium.jpeg,,
 47125,211194,Angiospermae,flowering plants,subphylum,"<p class=""mw-empty-elt"">
 </p>
 
@@ -60,73 +40,27 @@ id,parentId,iNaturalistTaxonName,commonName,rank,wikipediaSummary,iNaturalistTax
 
 </p>
 <p><b>Flowering plants</b> are plants that bear flowers and fruits, and form the clade <b>Angiospermae</b> (<span></span>), commonly called <b>angiosperms</b>. They include all forbs (flowering plants without a woody stem), grasses and grass-like plants, a vast majority of broad-leaved trees, shrubs and vines, and most aquatic plants. The term ""angiosperm"" is derived from the Greek words</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/6943609/medium.jpg,,"{""Angiospermae"":""accepted""}"
-85493,47120,Crustacea,Crustaceans,subphylum,"<p><b>Crustaceans</b> are animals of the subphylum <b>Crustacea</b> (<span></span>), a large, diverse group of mainly aquatic arthropods including decapods (shrimps, prawns, crabs, lobsters and crayfish), seed shrimp, branchiopods, fish lice, krill, remipedes, isopods, barnacles, copepods, opossum shrimps, amphipods and mantis shrimp. The crustacean group can be treated as a subphylum under the clade Mandibulata. It is now well accepted that the hexapods</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/110062992/medium.jpeg,,
 136329,211194,Pinopsida,conifers,class,"<p class=""mw-empty-elt"">
 
 
 </p>
 <p><b>Conifers</b> are a group of cone-bearing seed plants, a subset of gymnosperms. Scientifically, they make up the division <b>Pinophyta</b> (<span></span>), also known as <b>Coniferophyta</b> (<span></span>) or <b>Coniferae</b>. The division contains a single extant class, <b>Pinopsida</b>. All extant conifers are perennial woody plants with secondary growth. The great majority are trees, though a few are shrubs</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/8663614/medium.jpg,,
-355675,2,Vertebrata,Vertebrates,subphylum,"<p class=""mw-empty-elt"">
-
-</p>
-<p><b>Vertebrates</b> (<span></span>) are deuterostomal animals with bony or cartilaginous axial endoskeleton — known as the vertebral column, spine or backbone — around and along the spinal cord, including all fish, amphibians, reptiles, birds and mammals. The vertebrates consist of all the taxa within the subphylum <b>Vertebrata</b> (<span></span>) (chordates with backbones) and represent the overwhelming majority</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/80551642/medium.jpg,,
 372739,47120,Hexapoda,Hexapods,subphylum,"<p class=""mw-empty-elt"">
 
 </p>
 <p>The subphylum <b>Hexapoda</b> (from Greek for 'six legs') or <b>hexapods</b> comprises the largest clade of arthropods and includes most of the extant arthropod species. It includes the crown group class Insecta (true insects), as well as the much smaller class Entognatha, which includes three orders of wingless arthropods that were once considered insects: Collembola (springtails), Protura (coneheads) and Diplura</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/251770376/medium.jpg,,
-372740,48250,Pezizomycotina,Higher Ascomycetes,subphylum,"<p class=""mw-empty-elt"">
-</p>
-<p><b>Pezizomycotina</b> make up most of the Ascomycota fungi and include most lichenized fungi too. Pezizomycotina contains the filamentous ascomycetes and is a subdivision of the <b>Ascomycota</b> (fungi that form their spores in a sac-like <i>ascus</i>). It is more or less synonymous with the older taxon <b>Euascomycota</b>. These fungi reproduce by fission rather than budding and this subdivision includes almost all</p>...",https://static.inaturalist.org/photos/26914623/medium.jpg,,
-492000,47169,Agaricomycotina,Higher Basidiomycetes,subphylum,"<p class=""mw-empty-elt"">
-</p>
-<p><b>Agaricomycotina</b> is one of three subdivisions of the Basidiomycota (fungi bearing spores on basidia), and represents all of the fungi which form macroscopic fruiting bodies. Agaricomycotina contains over 30,000 species, divided into three classes: Tremellomycetes, Dacrymycetes, and Agaricomycetes. Around 98% of the species are in the class Agaricomycetes, including all the agarics (gilled mushrooms), bracket</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/102914709/medium.jpg,,
-26036,355675,Reptilia,Reptiles,class,"<p class=""mw-empty-elt"">
-
-</p>
-<p><b>Reptiles</b>, in common parlance, are a group of tetrapods with an ectothermic ('cold-blooded') metabolism and amniotic development. Living reptiles comprise four orders: Testudines (turtles), Crocodilia (crocodilians), Squamata (lizards and snakes), and Rhynchocephalia (the tuatara). As of May 2023, about 12,000 living species of reptiles are listed in the Reptile Database. The study of the traditional reptile</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/1813745/medium.jpg,,
-40151,355675,Mammalia,Mammals,class,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
-<p class=""mw-empty-elt"">
-
-
-
-
-</p>
-<p>A <b>mammal</b> (from Latin <i> <i lang=""la"">mamma</i></i>&#160;'breast') is an endothermic vertebrate animal of the class <b>Mammalia</b> (<span></span>), characterized by the presence of mammary glands (specialized sweat glands that secrete nutritious milk — i.e. lactation — for feeding newborn offsprings), a neocortex region of the</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/80551250/medium.jpg,,
 47124,47125,Magnoliopsida,dicots,class,"<p><b>Magnoliopsida</b> is a valid botanical name for a class of flowering plants.  By definition the class will include the family Magnoliaceae, but its circumscription can otherwise vary, being more inclusive or less inclusive depending upon the classification system being discussed.
 </p>
-
-
-",https://static.inaturalist.org/photos/10307058/medium.jpg,,"{""Magnoliopsida"":""accepted""}"
+<meta property=""mw:PageProp/toc"" />",https://static.inaturalist.org/photos/10307058/medium.jpg,,"{""Magnoliopsida"":""accepted""}"
 47158,372739,Insecta,Insects,class,"<p class=""mw-empty-elt"">
 
 
 </p>
-<p><b>Insects</b> (from Latin <i><span title=""Latin-language text""><i lang=""la"">insectum</i></span></i>) are pancrustacean hexapod invertebrates of the class <b>Insecta</b>. They are the largest group within the arthropod phylum. Insects have a chitinous exoskeleton, a three-part body (head, thorax and abdomen), three pairs of jointed legs, compound eyes and one pair of antennae. Their blood is not totally contained</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/45827902/medium.jpg,,
+<p><b>Insects</b> (from Latin <i><span title=""Latin-language text""><i lang=""la"">insectum</i></span></i>) are hexapod invertebrates of the class <b>Insecta</b>. They are the largest group within the arthropod phylum. Insects have a chitinous exoskeleton, a three-part body (head, thorax and abdomen), three pairs of jointed legs, compound eyes, and a pair of antennae. Insects are the most diverse group of animals, with</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/45827902/medium.jpg,,
 47163,47125,Liliopsida,monocots,class,<p><b>Liliopsida</b> <small>Batsch</small> (synonym: <b>Liliatae</b>) is a botanical name for the class containing the family Liliaceae (or Lily Family). It is considered synonymous (or nearly synonymous) with the name monocotyledon. Publication of the name is credited to Scopoli (in 1760): see author citation (botany). This name is formed by replacing the termination <i>-aceae</i> in the name Liliaceae by the termination <i>-opsida</i> (Art 16 of</p>...,https://inaturalist-open-data.s3.amazonaws.com/photos/274224/medium.jpg,,
 47375,136329,Pinales,conifers,order,"<p class=""mw-empty-elt"">
 </p>
 <p>The order <b>Pinales</b> in the division Pinophyta, class Pinopsida, comprises all the extant conifers. The distinguishing characteristic is the reproductive structure known as a cone produced by all Pinales. All of the extant conifers, such as Araucaria, cedar, celery-pine, cypress, fir, juniper, kauri, larch, pine, redwood, spruce, and yew, are included here. Some fossil conifers, however, belong to other distinct</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/170033792/medium.jpg,,
-50814,492000,Agaricomycetes,"mushrooms, bracket fungi, puffballs, and allies",class,"<p class=""mw-empty-elt"">
-</p>
-<p>The <b>Agaricomycetes</b> are a class of fungi in the division Basidiomycota. The taxon is roughly identical to that defined for the <b>Homobasidiomycetes</b>  (alternatively called holobasidiomycetes) by Hibbett &amp; Thorn, with the inclusion of Auriculariales and Sebacinales. It includes not only mushroom-forming fungi, but also most species placed in the deprecated taxa Gasteromycetes and Homobasidiomycetes.  Within</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/6993855/medium.jpg,,
-55523,372740,Leotiomycetes,,class,"<p class=""mw-empty-elt"">
-</p>
-<p>The <b>Leotiomycetes</b> are a class of ascomycete fungi. Many of them cause serious plant diseases.
-</p>
-
-
-",https://inaturalist-open-data.s3.amazonaws.com/photos/5149868/medium.jpg,,
-26172,26036,Squamata,Snakes and Lizards,order,"<p class=""mw-empty-elt"">
-
-</p>
-<p><b>Squamata</b> (<span></span>, Latin <i>squamatus</i>, 'scaly, having scales') is the largest order of reptiles, comprising lizards, snakes, and amphisbaenians (worm lizards), which are collectively known as <b>squamates</b> or <b>scaled reptiles</b>. With over 11,500 species, it is also the second-largest order of extant (living) vertebrates, after the perciform fish. Members of the order are distinguished by their</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/28516312/medium.jpeg,,
-39532,26036,Testudines,Turtles and Tortoises,order,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
-<p class=""mw-empty-elt"">
-
-
-
-</p>
-<p><b>Turtles</b> are reptiles of the order <b>Testudines</b>, characterized by a special shell developed mainly from their ribs. Modern turtles are divided into two major groups, the Pleurodira (side necked turtles) and Cryptodira (hidden necked turtles), which differ in the way the head retracts. There are 360 living and recently</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/5135998/medium.jpg,,
 47123,47124,Fabales,"legumes, milkworts, and allies",order,"<p class=""mw-empty-elt"">
 </p>
 <p><b>Fabales</b> is an order of flowering plants included in the rosid group of the eudicots in the Angiosperm Phylogeny Group II classification system. In the APG II circumscription, this order includes the families Fabaceae or legumes (including the subfamilies Caesalpinioideae, Mimosoideae, and Faboideae), Quillajaceae, Polygalaceae or milkworts (including the families Diclidantheraceae, Moutabeaceae, and Xanthophyllaceae</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/73034071/medium.jpg,,
@@ -144,10 +78,6 @@ id,parentId,iNaturalistTaxonName,commonName,rank,wikipediaSummary,iNaturalistTax
 
 </p>
 <p>The <b>Ericales</b> are a large and diverse order of dicotyledons. Species in this order have considerable commercial importance including for tea, persimmon, blueberry, kiwifruit, Brazil nuts, argan, and azalea. The order includes trees, bushes, lianas, and herbaceous plants. Together with ordinary autophytic plants, the Ericales include chlorophyll-deficient mycoheterotrophic plants (e.g., <i>Sarcodes sanguinea</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/121441132/medium.jpeg,,
-47187,85493,Malacostraca,Malacostracans,class,"<p class=""mw-empty-elt"">
-
-</p>
-<p><b>Malacostraca</b> (from Neo-Latin; from Ancient Greek <i> </i><span lang=""grc"">μαλακός</span><i> (<span title=""Ancient Greek transliteration"" lang=""grc-Latn""><i>malakós</i></span>)</i>&#160;'soft', and <i> </i><span lang=""grc"">όστρακον</span><i> (<span title=""Ancient Greek transliteration"" lang=""grc-Latn""><i>óstrakon</i></span>)</i>&#160;'shell') is the second largest of the six classes of crustaceans just behind hexapods</p>...",https://static.inaturalist.org/photos/31164035/medium.png,,
 47195,47124,Cornales,"dogwoods, hydrangeas, and allies",order,"<p class=""mw-empty-elt"">
 </p>
 <p>The <b>Cornales</b> are an order of flowering plants, early diverging among the asterids, containing about 600 species. Plants within the Cornales usually have four-parted flowers, drupaceous fruits, and inferior to half-inferior gynoecia topped with disc-shaped nectaries.
@@ -247,19 +177,9 @@ larches, pines and spruces. The family is included in the order Pinales, formerl
 </p>
 <p>The <b>Malvales</b> are an order of flowering plants. As circumscribed by APG II-system, the order includes about 6000 species within nine families. The order is placed in the eurosids II, which are part of the eudicots.
 </p><p>The plants are mostly shrubs and trees; most of its families have a cosmopolitan distribution in the tropics and subtropics, with limited expansion into temperate regions. An interesting distribution</p>...",https://static.inaturalist.org/photos/3035871/medium.JPG,,
-49073,55523,Helotiales,,order,"<p class=""mw-empty-elt"">
-</p>
-<p><b>Helotiales</b> is an order of the class Leotiomycetes within the division Ascomycota. The taxonomy within Helotiales has been debated. It has expanded significantly as genomic techniques for taxonomical identification have become more commonly used. As of February&#160;2020, the order is estimated to contain 30 accepted families, 519 genera, and 6266 species.</p><p>Helotiales is the largest order of non-stromatic discomycetes</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/5149868/medium.jpg,,
 49146,47163,Commelinales,spiderworts and allies,order,"<p class=""mw-empty-elt"">
 </p>
 <p><b>Commelinales</b> is an order of flowering plants. It comprises five families: Commelinaceae, Haemodoraceae, Hanguanaceae, Philydraceae, and Pontederiaceae. All the families combined contain over 885 species in about 70 genera; the majority of species are in the Commelinaceae. Plants in the order share a number of synapomorphies that tie them together, such as a lack of mycorrhizal associations and tapetal raphides</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/13524791/medium.jpeg,,
-50898,47124,Magnoliales,"magnolias, nutmegs, and allies",order,"<p class=""mw-empty-elt"">
-</p>
-<p>The <b>Magnoliales</b> are an order of flowering plants.
-</p>
-
-
-",https://static.inaturalist.org/photos/16050587/medium.jpg,,
 51120,47124,Nymphaeales,"Waterlilies, Fanworts, and Allies",order,"<p class=""mw-empty-elt"">
 </p>
 <p>The <b>Nymphaeales</b> are an order of flowering plants, consisting of three families of aquatic plants, the Hydatellaceae, the Cabombaceae, and the Nymphaeaceae (water lilies). It is one of the three orders of basal angiosperms, an early-diverging grade of flowering plants. At least 10 morphological characters unite the Nymphaeales. One of the traits is the absence of a vascular cambium, which is required to produce</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/3008652/medium.JPG,,
@@ -287,18 +207,11 @@ larches, pines and spruces. The family is included in the order Pinales, formerl
 </p><p>In the Angiosperm Phylogeny Group classification system, the Saxifragales</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/1539441/medium.jpg,,
 523723,47124,Boraginales,borages,order,"<p class=""mw-empty-elt"">
 </p>
-<p><b>Boraginales</b> is an order of flowering plants in the asterid clade. It includes the Boraginaceae and a number of other families, with a total of about 125 genera and 2,700 species. Its herbs, shrubs, trees and lianas (vines) have a worldwide distribution.
+<p><b>Boraginales</b> is an order of flowering plants in the asterid clade, with a total of about 125 genera and 2,700 species. Different taxonomic treatments either include only a single family, the Boraginaceae, or divide it into up to eleven families. Its herbs, shrubs, trees and lianas (vines) have a worldwide distribution.
 </p>
 
 
-",https://inaturalist-open-data.s3.amazonaws.com/photos/9003371/medium.jpg,,
-39680,39532,Chelydridae,Snapping Turtles,family,"<p class=""mw-empty-elt"">
-</p>
-<p>The <b>Chelydridae</b> is a family of turtles that has seven extinct and two extant genera. The extant genera are the <b>snapping turtles</b>, <i>Chelydra</i> and <i>Macrochelys</i>. Both are endemic to the Western Hemisphere. The extinct genera are <i>Acherontemys</i>, <i>Chelydrops</i>, <i>Chelydropsis</i>, <i>Emarginachelys</i>, <i>Macrocephalochelys</i>, <i>Planiplastron</i>, and <i>Protochelydra</i>.
-</p>
-
-
-",https://inaturalist-open-data.s3.amazonaws.com/photos/19076658/medium.jpeg,,
+",https://inaturalist-open-data.s3.amazonaws.com/photos/66417631/medium.jpeg,,
 47122,47123,Fabaceae,legumes,family,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 
@@ -318,20 +231,13 @@ larches, pines and spruces. The family is included in the order Pinales, formerl
 47151,48151,Scrophulariaceae,figwort family,family,"<p class=""mw-empty-elt"">
 </p>
 <p>The <b>Scrophulariaceae</b> are a family of flowering plants, commonly known as the <b>figwort family</b>.  The plants are annual and perennial herbs, as well as shrubs.  Flowers have bilateral (zygomorphic) or rarely radial  (actinomorphic) symmetry.  The Scrophulariaceae have a cosmopolitan distribution, with the majority found in temperate areas, including tropical mountains.  The family name is based on the name</p>...",https://static.inaturalist.org/photos/55578/medium.jpg,,
-47157,47158,Lepidoptera,Butterflies and Moths,order,"<p class=""mw-empty-elt"">
-</p>
-
-<p class=""mw-empty-elt"">
-
-</p>
-<p><b>Lepidoptera</b> (<span></span> <i title=""English pronunciation respelling""><span>LEP</span>-ih-<span>DOP</span>-tər-ə</i>) is an order of insects that includes butterflies and moths (both are called <b>lepidopterans</b>). About 180,000 species of the Lepidoptera have been described, representing ten percent of the total described species of living organisms, and placed in 126 families</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/36127/medium.jpg,,
 47194,47195,Cornaceae,Dogwood family,family,"<p class=""mw-empty-elt"">
 </p>
 <p>The <b>Cornaceae</b> are a cosmopolitan family of flowering plants in the order <b>Cornales</b>. The family contains approximately 85 species in two genera, <i>Alangium</i> and <i>Cornus</i>. They are mostly trees and shrubs, which may be deciduous or evergreen, although a few species are perennial herbs. Members of the family usually have opposite or alternate simple leaves, four- or five-parted flowers clustered</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/79182213/medium.jpg,,
 47201,47158,Hymenoptera,"Ants, Bees, Wasps, and Sawflies",order,"<p class=""mw-empty-elt"">
 </p>
 <p><b> Hymenoptera</b> is a large order of insects, comprising the sawflies, wasps, bees, and ants. Over 150,000 living species of Hymenoptera have been described, in addition to over 2,000 extinct ones. Many of the species are parasitic. 
-Females typically have a special ovipositor for inserting eggs into hosts or places that are otherwise inaccessible. This ovipositor is often modified into a stinger. The young develop</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/301992102/medium.jpeg,,"{""Hymenoptera"":""accepted""}"
+Females typically have a special ovipositor for inserting eggs into hosts or places that are otherwise inaccessible. This ovipositor is often modified into a stinger. The young develop</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/301992102/medium.jpeg,,
 47204,71275,Brassicaceae,mustard family,family,"<p class=""mw-empty-elt"">
 </p>
 <p><b>Brassicaceae</b> (<span></span>) or (the older) <b>Cruciferae</b> (<span></span>) is a medium-sized and economically important family of flowering plants commonly known as the <b>mustards</b>, the <b>crucifers</b>, or the <b>cabbage family</b>. Most are herbaceous plants, while some are shrubs. The leaves are simple (although are sometimes deeply incised), lack stipules, and appear alternately on stems or in rosettes</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/17880512/medium.jpg,,"{""Brassicaceae"":""accepted""}"
@@ -355,15 +261,15 @@ Females typically have a special ovipositor for inserting eggs into hosts or pla
 <p>The <b>Papaveraceae</b> <span></span> are an economically important family of about 42 genera and approximately 775 known species of flowering plants in the order Ranunculales, informally known as the <b>poppy family</b>. The family is cosmopolitan, occurring in temperate and subtropical climates (mostly in the northern hemisphere), but almost unknown in the tropics. Most are herbaceous plants, but a few are shrubs</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/178340187/medium.jpg,,
 47362,47363,Apocynaceae,dogbane family,family,"<p class=""mw-empty-elt"">
 </p>
-<p><b>Apocynaceae</b> (<span></span>, from <i>Apocynum</i>, Greek for ""dog-away"") is a family of flowering plants that includes trees, shrubs, herbs, stem succulents, and vines, commonly known as the <b>dogbane family</b>, because some taxa were used as dog poison. Members of the family are native to the European, Asian, African, Australian, and American tropics or subtropics, with some temperate members. The former family</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/138510430/medium.jpeg,,"{""Apocynaceae"":""accepted""}"
+<p><b>Apocynaceae</b> (<span></span>, from <i>Apocynum</i>, Greek for ""dog-away"") is a family of flowering plants that includes trees, shrubs, herbs, stem succulents, and vines, commonly known as the <b>dogbane family</b>, because some taxa were used as dog poison.  Members of the family are native to the European, Asian, African, Australian, and American tropics or subtropics, with some temperate members. The former</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/138510430/medium.jpeg,,"{""Apocynaceae"":""accepted""}"
 47434,47162,Poaceae,grasses,family,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 
 </p>
 <p><b>Poaceae</b> (<span></span>) or <b>Gramineae</b> (<span></span>)  is a large and nearly ubiquitous family of monocotyledonous flowering plants commonly known as <b>grasses</b>. It includes the cereal grasses, bamboos and the grasses of natural grassland and species cultivated in lawns and pasture. The latter are commonly referred</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/76692662/medium.jpg,,
-47539,47540,Celastraceae,Spindle Family,family,"<p class=""mw-empty-elt"">
+47539,47540,Celastraceae,staff-vine family,family,"<p class=""mw-empty-elt"">
 </p>
-<p>The <b>Celastraceae</b> (<b>staff-vine</b> or <b>bittersweet</b>) are a family of 97 genera and 1,350 species of herbs, vines, shrubs and small trees, belonging to the order Celastrales. The great majority of the genera are tropical, with only <i>Celastrus</i> (the staff vines), <i>Euonymus</i> (the spindles) and <i>Maytenus</i> widespread in temperate climates, and <i>Parnassia</i> (bog-stars) found in alpine and</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/93860834/medium.jpeg,,
+<p>The <b>Celastraceae</b> (<b>staff-vine</b> or <b>bittersweet</b>) are a family of 98 genera and 1,350 species of herbs, vines, shrubs and small trees, belonging to the order Celastrales. The great majority of the genera are tropical, with only <i>Celastrus</i> (the staff vines), <i>Euonymus</i> (the spindles) and <i>Maytenus</i> widespread in temperate climates, and <i>Parnassia</i> (bog-stars) found in alpine and</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/93860834/medium.jpeg,,
 47567,51820,Salicaceae,willow family,family,"<p class=""mw-empty-elt"">
 </p>
 <p>The <b>Salicaceae</b> is the <b>willow family</b> of flowering plants. The traditional family (Salicaceae <i>sensu stricto</i>) included the willows, poplar, aspen, and cottonwoods. Genetic studies summarized by the Angiosperm Phylogeny Group (APG) have greatly expanded the circumscription of the family to contain 56 genera and about 1220 species, including the Scyphostegiaceae and many of the former Flacourtiaceae</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/79452056/medium.jpeg,,
@@ -388,7 +294,7 @@ Females typically have a special ovipositor for inserting eggs into hosts or pla
 47759,70233,Oxalidaceae,woodsorrel family,family,"<p class=""mw-empty-elt"">
 </p>
 <p>The <b>Oxalidaceae</b>, or wood sorrel family, are a small family of five genera of herbaceous plants, shrubs and small trees, with the great majority of the 570 species in the genus <i>Oxalis</i> (wood sorrels). Members of this family typically have divided leaves, the leaflets showing ""sleep movements"", spreading open in light and closing in darkness.
-</p><p>The genus <i>Averrhoa</i> of which starfruit is a member</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/7179/medium.jpg,,
+</p><p>The genus <i>Averrhoa</i> of which starfruit is a member</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/30011270/medium.jpg,,
 47781,47218,Iridaceae,irises and allies,family,"<p class=""mw-empty-elt"">
 </p>
 <p><b>Iridaceae</b> (<span></span>) is a family of plants in order Asparagales, taking its name from the irises. It has a nearly global distribution, with 69 accepted genera with a total of c. 2500 species.  It includes a number of economically important cultivated plants, such as species of <i>Freesia</i>, <i>Gladiolus</i>, and <i>Crocus</i>, as well as the crop saffron.
@@ -406,7 +312,7 @@ Females typically have a special ovipositor for inserting eggs into hosts or pla
 </p><p class=""mw-empty-elt"">
 </p>
 
-<p>A <b>cactus</b> (<abbr title=""plural form""><span><span>PL</span></span></abbr>: <b>cacti</b>, <b>cactuses</b>, or less commonly, <b>cactus</b>) is a member of the plant family <b>Cactaceae</b> (<span></span>), a family comprising about 127 genera with some 1,750 known species of the order Caryophyllales</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/13279984/medium.jpeg,,
+<p>A <b>cactus</b> (<abbr title=""plural form"">pl.</abbr>: <b>cacti</b>, <b>cactuses</b>, or less commonly, <b>cactus</b>) is a member of the plant family <b>Cactaceae</b> (<span></span>), a family comprising about 127 genera with some 1,750 known species of the order Caryophyllales. The word <i>cactus</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/13279984/medium.jpeg,,
 48040,47605,Campanulaceae,bellflower family,family,"<p class=""mw-empty-elt"">
 </p>
 <p>The family <b>Campanulaceae</b> (also <b>bellflower family</b>), of the order Asterales, contains nearly 2400 species in 84 genera of herbaceous plants, shrubs, and rarely small trees, often with milky sap.  Among them are several familiar garden plants belonging to the genera <i>Campanula</i> (bellflower), <i>Lobelia</i>, and <i>Platycodon</i> (balloonflower). <i>Campanula rapunculus</i> (rampion or r. bellflower</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/51665998/medium.jpg,,
@@ -457,7 +363,7 @@ Females typically have a special ovipositor for inserting eggs into hosts or pla
 48623,48151,Lamiaceae,mint family,family,"<p class=""mw-empty-elt"">
 </p>
 <p>The <b>Lamiaceae</b> (<span></span> <i title=""English pronunciation respelling""><span>LAY</span>-mee-<span>AY</span>-see-ee, -⁠eye</i>)
-or <b>Labiatae</b> are a family of flowering plants commonly known as the <b>mint</b>, <b>deadnettle</b> or <b>sage</b> family. Many of the plants are aromatic in all parts and include widely used culinary herbs like basil, mint, rosemary, sage, savory, marjoram, oregano, hyssop, thyme</p>...",https://static.inaturalist.org/photos/9018542/medium.jpg,,"{""Lamiaceae"":""accepted""}"
+or <b>Labiatae</b> are a family of flowering plants commonly known as the <b>mint</b>, <b>deadnettle</b> or <b>sage</b> family. Many of the plants are aromatic in all parts and include widely used culinary herbs like basil, mint, rosemary, sage, savory, marjoram, oregano, hyssop, thyme</p>...",https://static.inaturalist.org/photos/72305606/medium.jpg,,"{""Lamiaceae"":""accepted""}"
 48699,48700,Apiaceae,carrot family,family,"<p class=""mw-empty-elt"">
 
 </p>
@@ -541,30 +447,16 @@ or <b>Labiatae</b> are a family of flowering plants commonly known as the <b>min
 <p><b>Hydrangeaceae</b> is a family of flowering plants in the order Cornales, with a wide distribution in Asia and North America, and locally in southeastern Europe.</p>
 
 
-",https://inaturalist-open-data.s3.amazonaws.com/photos/79184590/medium.jpeg,,
+",https://inaturalist-open-data.s3.amazonaws.com/photos/154345374/medium.jpeg,,
 52849,48700,Araliaceae,ivy family,family,"<p class=""mw-empty-elt"">
 </p>
 <p>The <b>Araliaceae</b> are a family of flowering plants composed of about 43 genera and around 1500 species consisting of primarily woody plants and some herbaceous plants commonly called the <b>ginseng family</b>. The morphology of Araliaceae varies widely, but it is predominantly distinguishable based on its woody habit, tropical distribution, and the presence of simple umbels.</p><p>There are numerous plants of economic</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/8874/medium.jpg,,
-53581,50898,Magnoliaceae,magnolia family,family,"<p class=""mw-empty-elt"">
-</p>
-<p>The <b>Magnoliaceae</b> (<span></span>) are a flowering plant family, the <b>magnolia family</b>,  in the order Magnoliales. It consists of two genera: <i>Magnolia</i> and <i>Liriodendron</i> (tulip trees).
-</p><p>Unlike most angiosperms, whose flower parts are in whorls (rings), the Magnoliaceae have their stamens and pistils in spirals on a conical receptacle. This arrangement is found in some fossil plants and is</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/134684137/medium.jpg,,
 53922,47195,Loasaceae,Stickleaf Family,family,"<p class=""mw-empty-elt"">
 </p>
 <p><b>Loasaceae</b> is a family of 15–20 genera and about 200–260 species of flowering plants in the order Cornales, native to the Americas and Africa. Members of the family include annual, biennial and perennial herbaceous plants, and a few shrubs and small trees. Members of the subfamily Loasoideae are known to exhibit rapid thigmonastic stamen movement when pollinators are present.</p>
 
 
 ",https://static.inaturalist.org/photos/221143410/medium.jpeg,,
-55013,50814,Geastrales,Geastrales,order,"<p class=""mw-empty-elt"">
-</p>
-<p><b>Geastrales</b> is an order of gasterocarpic basidiomycetes (fungi) that are related to Cantharellales. The order contains the single family <b>Geastraceae</b>, which includes the ""earthstars"" formerly placed in Lycoperdales, or Phallales.</p><p>Approximately 64 species are classified in this family, divided among eight genera, including  <i>Geastrum</i>, <i>Myriostoma</i> and <i>Sphaerobolus</i>.  <i>Sphaerobolus</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/1259539/medium.,,
-55525,49073,Erysiphaceae,Powdery Mildews,family,"<p class=""mw-empty-elt"">
-</p>
-<p><b>Erysiphales</b> are an order of ascomycete fungi. The order contains one family, <b>Erysiphaceae</b>. Many of them cause plant diseases called powdery mildew.
-</p>
-
-
-",https://inaturalist-open-data.s3.amazonaws.com/photos/1213471/medium.,,
 55849,47218,Amaryllidaceae,"amaryllis, onions, and allies",family,"<p class=""mw-empty-elt"">
 </p>
 
@@ -600,7 +492,7 @@ or <b>Labiatae</b> are a family of flowering plants commonly known as the <b>min
 <p>The <b>Elaeagnaceae</b> are a plant family, the <b>oleaster family</b>,  of the order Rosales comprising small trees and shrubs, native to temperate regions of the Northern Hemisphere, south into tropical Asia and Australia. The family has about 60 species in three genera.</p><p>They are commonly thorny, with simple leaves often coated with tiny scales or hairs. Most of the species are xerophytes (found in dry habitats</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/20487/medium.jpg,,
 71409,71275,Cleomaceae,spider flower family,family,"<p class=""mw-empty-elt"">
 </p>
-<p>The <b>Cleomaceae</b>  are a small family of flowering plants in the order Brassicales, comprising about 300 species in 10 genera, or about 150 species in 17 genera. These genera were previously included in the family Capparaceae, but were raised to a distinct family when DNA evidence suggested the genera included in it are more closely related to the Brassicaceae than they are to the Capparaceae. The APG II system</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/197404913/medium.jpg,,
+<p>The <b>Cleomaceae</b>  are a small family of flowering plants in the order Brassicales, comprising about 220 species in two genera, <i>Cleome</i> and <i>Cleomella</i>. These genera were previously included in the family Capparaceae, but were raised to a distinct family when DNA evidence suggested the genera included in it are more closely related to the Brassicaceae than they are to the Capparaceae. The APG II system</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/197404913/medium.jpg,,
 71412,51820,Hypericaceae,St. John's wort family,family,"<p class=""mw-empty-elt"">
 
 </p>
@@ -632,17 +524,6 @@ or <b>Labiatae</b> are a family of flowering plants commonly known as the <b>min
 </p>
 <p><b>Adoxaceae</b>, commonly known as <b>moschatel family</b>, is a small family of flowering plants in the order Dipsacales, now consisting of five genera and about 150–200 species. They are characterised by opposite toothed leaves, small five- or, more rarely, four-petalled flowers in cymose inflorescences, and the fruit being a drupe. They are thus similar to many Cornaceae.
 </p><p>In older classifications, this entire</p>...",https://static.inaturalist.org/photos/2419980/medium.jpg,,
-26504,26172,Colubridae,Colubrid Snakes,family,"<p class=""mw-empty-elt"">
-</p>
-<p><b>Colubridae</b> (<span></span>, commonly known as <b>colubrids</b> <span></span>, from Latin: <i lang=""la"">coluber</i>, 'snake') is a family of snakes. With 249 genera, it is the largest snake family. The earliest species of the family date back to the Oligocene epoch. Colubrid snakes are found on every continent except Antarctica.</p>
-
-
-",https://inaturalist-open-data.s3.amazonaws.com/photos/1813733/medium.jpg,,
-39681,39680,Chelydra,Typical Snapping Turtles,genus,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Chelydra</b></i>  is one of the two extant genera of the <b>snapping turtle</b> family, Chelydridae, the other being <i>Macrochelys</i>, the much larger alligator snapping turtle. The snapping turtles are native to the Americas, with <i>Chelydra</i> having three species, one in North America and two in Central America, one of which is also found in northwestern South America.
-</p>
-",https://static.inaturalist.org/photos/5471/medium.jpg,,
 47130,47131,Ribes,currants and gooseberries,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Ribes</b></i> (<span></span>) is a genus of about 200 known species of flowering plants, most of them native to the temperate regions of the Northern Hemisphere. The various species are known as <b>currants</b> or gooseberries, and some are cultivated for their edible fruit or as ornamental plants. <i>Ribes</i> is the only genus in the family <b>Grossulariaceae</b>.
@@ -663,11 +544,13 @@ or <b>Labiatae</b> are a family of flowering plants commonly known as the <b>min
 
 
 ",https://static.inaturalist.org/photos/82252441/medium.jpg,,
-47538,47539,Euonymus,spindles,genus,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
+47538,47539,Euonymus,spindles,genus,"<p class=""mw-empty-elt"">
+</p>
+<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 
 </p>
-<p><i><b>Euonymus</b></i> <span></span> is a genus of flowering plants in the staff vine family, Celastraceae. Common names vary widely among different species and between different English-speaking countries, but include <b>spindle</b> (or <b>spindle tree</b>), <b>burning-bush</b>, <b>strawberry-bush</b>, <b>wahoo</b>, <b>wintercreeper</b></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/13452700/medium.jpg,,"{""Euonymus"":""accepted""}"
+<p><i><b>Euonymus</b></i> <span></span> is a genus of flowering plants in the staff vine family, Celastraceae. Common names vary widely among different species and between different English-speaking countries, but include <b>spindle</b> (or <b>spindle tree</b>), <b>burning-bush</b>, <b>strawberry-bush</b></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/96624/medium.jpg,,"{""Euonymus"":""accepted""}"
 47574,47374,Juniperus,junipers,genus,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 </p>
@@ -683,7 +566,7 @@ or <b>Labiatae</b> are a family of flowering plants commonly known as the <b>min
 47727,58321,Acer,maples,genus,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 </p>
-<p><i><b>Acer</b></i> (<span></span> <i title=""English pronunciation respelling""><span>AY</span>-sər</i>) is a genus of trees and shrubs commonly known as <b>maples</b>. The genus is placed in the family Sapindaceae. There are approximately 132 species, most of which are native to Asia, with a number also appearing in Europe, northern</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/99147747/medium.jpg,,
+<p><i><b>Acer</b></i> (<span></span> <i title=""English pronunciation respelling""><span>AY</span>-sər</i>) is a genus of trees and shrubs commonly known as <b>maples</b>. The genus is placed in the soapberry family, Sapindaceae, along with lychee and horse chestnut. There are approximately 132 species, most of which are native to Asia,</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/99147747/medium.jpg,,
 47732,47733,Syringa,Lilacs,genus,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 
@@ -800,9 +683,6 @@ or <b>Labiatae</b> are a family of flowering plants commonly known as the <b>min
 54774,781703,Viburnum,viburnums,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Viburnum</b></i>  is a genus of about 150–175 species of flowering plants in the moschatel family, Adoxaceae. Its current classification is based on molecular phylogeny. It was previously included in the honeysuckle family Caprifoliaceae.</p><p>The member species are evergreen or deciduous shrubs or (in a few cases) small trees native throughout the temperate Northern Hemisphere, with a few species extending</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/1089094/medium.JPG,,
-55014,55013,Geastraceae,,family,"<p class=""mw-empty-elt"">
-</p>
-<p><b>Geastrales</b> is an order of gasterocarpic basidiomycetes (fungi) that are related to Cantharellales. The order contains the single family <b>Geastraceae</b>, which includes the ""earthstars"" formerly placed in Lycoperdales, or Phallales.</p><p>Approximately 64 species are classified in this family, divided among eight genera, including  <i>Geastrum</i>, <i>Myriostoma</i> and <i>Sphaerobolus</i>.  <i>Sphaerobolus</i></p>...",https://static.inaturalist.org/photos/1895395/medium.jpg,,
 55883,52849,Hedera,ivies,genus,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
@@ -849,14 +729,10 @@ The generic name is from the Latin <i><span title=""Latin-language text""><i lan
 72027,71417,Calyptridium,pussypaws,genus,,https://inaturalist-open-data.s3.amazonaws.com/photos/9392212/medium.jpeg,,
 72058,71409,Cleomella,stinkweed,genus,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Cleomella</b></i> is a small genus of about ten species of flowering plants. Like their relatives, the cleomes, plants of this genus have traditionally been included in the caper family Capparaceae but have recently been moved into a new family, Cleomaceae. <i>Cleomella</i> are annual wildflowers native to the dry and desert regions of western North America. They are similar to cleomes in appearance. They are</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/13474891/medium.jpeg,,
+<p><i><b>Cleomella</b></i> is a genus of flowering plants. It includes 22 species of native to North America, ranging from southern Mexico through the western and central United States to western and central Canada. Like their relatives, the cleomes, plants of this genus have traditionally been included in the caper family Capparaceae but have recently been moved into a new family, Cleomaceae. <i>Cleomella</i> are annual</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/23061780/medium.jpg,,
 72409,71426,Triantha,sticky false asphodels,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Triantha</b></i> is a small genus of flowering plants in the family Tofieldiaceae, first described as a genus in 1879. <b>False asphodel</b> is a common name for plants in this genus.</p><p><i>Triantha</i> has four known species. One of these is endemic to Japan. The other three are native to North America.</p><p>A comparison of DNA sequences has indicated that <i>Triantha glutinosa</i> might be two species.</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/409656/medium.JPG,,
-82096,53581,Magnolia,magnolias,genus,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
-<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Magnolia</b></i> is a large genus of about 210 to 340 flowering plant species in the subfamily Magnolioideae of the family Magnoliaceae. The natural range of <i>Magnolia</i> species is disjunct, with a main center in east and southeast Asia and a secondary center in eastern North America, Central America, the West Indies, and</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/116481151/medium.jpg,,
 83157,52469,Hydrangea,hydrangeas,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Hydrangea</b></i>, (<span></span>) commonly named the <b>hortensia</b>, is a genus of more than 70 species of flowering plants native to Asia and the Americas. By far the greatest species diversity is in eastern Asia, notably China, Korea, and Japan. Most are shrubs 1–3&#160;m (3&#160;ft 3&#160;in&#160;– 9&#160;ft 10&#160;in) tall, but some are small trees, and others lianas reaching up to 30&#160;m (100&#160;ft) by climbing up trees. They can be either</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/82166001/medium.jpg,,
@@ -894,20 +770,9 @@ The generic name is from the Latin <i><span title=""Latin-language text""><i lan
 <p><b>Mimulus</b> <span></span>, also known as <b>monkeyflowers</b>, is a plant genus in the family Phrymaceae, which was traditionally placed in family Scrophulariaceae. The genus now contains only seven species, two native to eastern North America and the other five native to Asia, Australia, Africa, or Madagascar. In the past, about 150 species were placed in this genus, most of which have since been assigned to other</p>...",https://static.inaturalist.org/photos/12283474/medium.jpg,,"{""Mimulus"":""accepted""}"
 796031,48150,Cynoglossoideae,,subfamily,,https://inaturalist-open-data.s3.amazonaws.com/photos/11843725/medium.jpg,Cynoglossoideae,"{""Cynoglossoideae"":""accepted""}"
 889256,51890,Sempervivoideae,,subfamily,,https://inaturalist-open-data.s3.amazonaws.com/photos/26707624/medium.jpg,Sempervivoideae,"{""Sempervivoideae"":""accepted""}"
-39682,39681,Chelydra serpentina,Common Snapping Turtle,species,"<p class=""mw-empty-elt"">
-</p>
-<p>The <b>common snapping turtle</b> (<i><b>Chelydra serpentina</b></i>) is a species of large freshwater turtle in the family Chelydridae. Its natural range extends from southeastern Canada, southwest to the edge of the Rocky Mountains, as far east as Nova Scotia and Florida. The three species of <i>Chelydra</i> and the larger alligator snapping turtles (genus <i>Macrochelys</i>) are the only extant chelydrids, a family</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/165512432/medium.jpeg,Chelydra serpentina,"{""Serpentine"":""invalid""}"
-43367,40151,Primates,Primates,order,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
-<p class=""mw-empty-elt"">
-</p>
-<p><b>Primates</b> are a diverse order of mammals. They are divided into the strepsirrhines, which include the lemurs, galagos, and lorisids, and the haplorhines, which include the tarsiers and the simians (monkeys, including apes and humans). Primates arose 85–55&#160;million years ago first from small terrestrial mammals, which adapted to</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/80550919/medium.jpg,,
 47179,133387,Arctostaphylos,bearberries and manzanitas,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Arctostaphylos</b></i> (<span></span>; from <span lang=""grc"">ἄρκτος</span> <span title=""Ancient Greek transliteration"" lang=""grc-Latn""><i>árktos</i></span> ""bear"" and <span lang=""grc"">σταφυλή</span> <span title=""Ancient Greek transliteration"" lang=""grc-Latn""><i>staphulḗ</i></span> ""bunch of grapes"") is a genus of plants comprising the manzanitas (<span></span>) and bearberries. They are shrubs or small trees</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/22868101/medium.jpeg,,"{""Arctostaphylos"":""accepted""}"
-47186,47187,Decapoda,Decapods,order,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
-<p class=""mw-empty-elt"">
-</p>
-<p>The <b>Decapoda</b> or <b>decapods</b> (literally ""ten-footed"") are an order of crustaceans within the class Malacostraca, and includes crabs, lobsters, crayfish, shrimp, and prawns. Most decapods are scavengers. The order is estimated to contain nearly 15,000 extant species in around 2,700 genera, with around 3,300 fossil species.</p>...",https://static.inaturalist.org/photos/28953476/medium.jpeg,,
 47324,50638,Collinsia,Blue-eyed Marys,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Collinsia</b></i> is a genus of about 20 species of annual flowering plants, consisting of the <b>blue eyed Marys</b> and the <b>Chinese houses</b>.  It was traditionally placed in the snapdragon family Scrophulariaceae, but following recent research in molecular genetics, it has now been placed in a much enlarged family Plantaginaceae.
@@ -918,9 +783,6 @@ The generic name is from the Latin <i><span title=""Latin-language text""><i lan
 47589,47217,Cypripedium,Hardy slipper orchids,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Cypripedium</b></i> is a genus of 58 species and nothospecies of hardy orchids; it is one of five genera that together compose the subfamily of lady's slipper orchids (Cypripedioideae). They are widespread across much of the Northern Hemisphere, including most of Europe and Africa (Algeria) (one species), Russia, China, Central Asia, Canada the United States, Mexico, and Central America. They are most commonly</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/2696/medium.jpg,,
-47653,47157,Hesperiidae,Skippers,family,"<p class=""mw-empty-elt"">
-</p>
-<p><b>Skippers</b> are a group of butterflies placed in the family <b>Hesperiidae</b> within the order Lepidoptera (moths and butterflies). They were previously placed in a separate superfamily, <b>Hesperioidea</b>; however, the most recent taxonomy places the family in the superfamily Papilionoidea, the butterflies. They are named for their quick, darting flight habits. Most have their antenna tips modified into narrow</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/106771799/medium.jpg,,
 48039,48040,Lobelia,Lobelias,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Lobelia</b></i> (<span></span>) is a genus of flowering plants comprising 415 species, with a subcosmopolitan distribution primarily in tropical to warm temperate regions of the world, a few species extending into cooler temperate regions. They are known generally as <b>lobelias</b>.</p>
@@ -955,19 +817,12 @@ The generic name is from the Latin <i><span title=""Latin-language text""><i lan
 
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/26009649/medium.jpg,,
-48670,47157,Noctuidae,Cutworm Moths and Allies,family,"<p class=""mw-empty-elt"">
-</p>
-<p>The <b>Noctuidae</b>, commonly known as <b>owlet moths</b>, cutworms or armyworms, are a family of moths. They are considered the most controversial family in the superfamily Noctuoidea because many of the clades are constantly changing, along with the other families of the Noctuoidea. It was considered the largest family in Lepidoptera for a long time, but after regrouping Lymantriinae, Catocalinae and Calpinae within</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/143436/medium.JPG,,
 49340,47322,Castilleja,Paintbrushes,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Castilleja</b></i>, commonly known as <b>paintbrush</b>, <b>Indian paintbrush</b>, or <b>prairie-fire</b>, is a genus of about 200 species of annual and perennial herbaceous plants native to the west of the Americas from Alaska south to the Andes, northern Asia, and one species as far west as the Kola Peninsula in northwestern Russia. These plants are classified in the broomrape family Orobanchaceae (following</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/1611/medium.jpg,,"{""Castilleja"":""accepted""}"
 49347,48150,Phacelia,Scorpionweeds,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Phacelia</b></i> (<b>phacelia</b>, <b>scorpionweed</b>, <b>heliotrope</b>) is a genus of about 200 species of annual or perennial herbaceous plants in the borage family, native to North and South America. California is particularly rich in species with over 90 recorded in the region. </p><p>The genus is traditionally placed at family rank with the waterleafs (Hydrophyllaceae) in the order Boraginales. The Angiosperm</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/32535473/medium.jpg,,"{""Phacelia"":""accepted""}"
-49530,47157,Geometridae,Geometer Moths,family,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
-<p class=""mw-empty-elt"">
-</p>
-<p>The <b>geometer moths</b> are moths belonging to the family <b>Geometridae</b> of the insect order Lepidoptera, the moths and butterflies. Their scientific name derives from the Ancient Greek <i>geo</i> γεω (derivative form of <span title=""Ancient Greek (to 1453)-language text""><span lang=""grc"">γῆ</span></span> or </p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/50987789/medium.jpg,,
 49646,47322,Pedicularis,Louseworts,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Pedicularis</b></i> is a genus of perennial green root parasite plants currently placed in the family Orobanchaceae (the genus previously having been placed in Scrophulariaceae <i>sensu lato</i>).
@@ -1089,7 +944,7 @@ The generic name is from the Latin <i><span title=""Latin-language text""><i lan
 </p><p>The plant bears attractive neatly rounded heads of small, bright golden flowers. The individual flowers have no petals</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/121060983/medium.jpg,Abronia latifolia,"{""Abronia latifolia"":""accepted""}"
 52761,71412,Hypericum,St. John's worts,genus,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Hypericum</b></i> <span></span> is a genus of flowering plants in the family Hypericaceae (formerly considered a subfamily of Clusiaceae).  The genus has a nearly worldwide distribution, missing only from tropical lowlands, deserts and polar regions. Many <i>Hypericum</i> species are regarded as invasive species and noxious weeds.  All members of the genus may be referred to as <b>St. John's wort</b>, and some</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/72000734/medium.jpg,,"{""Hypericum"":""accepted""}"
+<p><i><b>Hypericum</b></i> <span></span> is a genus of flowering plants in the family Hypericaceae (formerly considered a subfamily of Clusiaceae).  The genus has a nearly worldwide distribution, missing only from tropical lowlands, deserts and polar regions. Many <i>Hypericum</i> species are regarded as invasive species and noxious weeds.  All members of the genus may be referred to as <b>St. John's wort</b>, and some</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/72000734/medium.jpg,,
 53030,48527,Dipsacus,teasels,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Dipsacus</b></i> is a genus of flowering plant in the family Caprifoliaceae. The members of this genus are known as <b>teasel</b>, <b>teazel</b> or <b>teazle</b>. The genus includes about 15 species of tall herbaceous biennial plants (rarely short-lived perennial plants) growing to 1–2.5 metres (3.3–8.2&#160;ft) tall. <i>Dipsacus</i> species are native to Europe, Asia and northern Africa.
@@ -1329,10 +1184,6 @@ is a deciduous broadleaf tree native to western North America (Alaska, Yukon, Br
 <p><i><b>Chimaphila</b></i> (<b>prince's pine</b> or <b>wintergreen</b>; from Greek: <i>cheima</i> 'winter' and <i>philos</i> 'lover', hence 'winter lover') is a genus of five species of small, evergreen, flowering plants native to temperate regions of the Northern Hemisphere. They are classified in the family Ericaceae, but were formerly placed in the segregate family Pyrolaceae.
 </p>
 <dl><dt>Species</dt></dl><ul><li class=""mw-empty-elt""></li></ul>...",https://inaturalist-open-data.s3.amazonaws.com/photos/244943707/medium.jpg,,
-63077,55014,Geastrum,Earthstars,genus,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Geastrum</b></i> (orthographical variant <i><b>Geaster</b></i>) is a genus of puffball-like mushrooms in the family Geastraceae. Many species are commonly known as <b>earthstars</b>.
-</p><p>The name, which comes from <i>geo</i> meaning <i>earth</i> and <span title=""Latin-language text""><i lang=""la"">aster</i></span> meaning <i>star</i>, refers to the behavior of the outer peridium. At maturity, the outer layer</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/45292742/medium.jpeg,,
 63364,63366,Limonium californicum,Western Marsh Rosemary,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Limonium californicum</b></i> is a species of sea lavender in the family Plumbaginaceae. It is known by the common names <b>western marsh rosemary</b> and <b>California sea lavender</b>.
@@ -1362,9 +1213,9 @@ is a deciduous broadleaf tree native to western North America (Alaska, Yukon, Br
 <p><i><b>Elaeagnus angustifolia</b></i>, commonly called <b>Russian olive</b>, <b>silver berry</b>, <b>oleaster</b>, or <b>wild olive</b>, is a species of <i>Elaeagnus</i>, native to western and central Asia, Iran, from southern Russia and Kazakhstan to Turkey, parts of Pakistan and parts of India. As of 2020, it is widely established in North America as an introduced species.</p>
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/57604163/medium.jpg,Elaeagnus angustifolia,"{""Elaeagnus angustifolia"":""accepted""}"
-64697,64696,Elaeagnus umbellata,spreading oleaster,species,"<p class=""mw-empty-elt"">
+64697,64696,Elaeagnus umbellata,autumn olive,species,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Elaeagnus umbellata</b></i> is known as <b>Japanese silverberry</b>, <b>umbellata oleaster</b>, <b>autumn olive</b>, <b>autumn elaeagnus</b>, or <b>spreading oleaster</b>. The species is indigenous to eastern Asia and ranges from the Himalayas eastwards to Japan. It is a hardy, aggressive invasive species able to readily colonize barren land, becoming a troublesome plant in the central and northeastern United</p>...",https://static.inaturalist.org/photos/98619666/medium.jpeg,Elaeagnus umbellata,"{""Elaeagnus umbellata"":""accepted""}"
+<p><i><b>Elaeagnus umbellata</b></i> is known as <b>Japanese silverberry</b>, <b>umbellata oleaster</b>, <b>autumn olive</b>, <b>autumn elaeagnus</b>, <b>spreading oleaster</b>, <b>autumnberry</b>, or <b>autumn berry</b>. The species is indigenous to eastern Asia and ranges from the Himalayas eastwards to Japan. It is a hardy, aggressive invasive species able to readily colonize barren land, becoming a troublesome plant</p>...",https://static.inaturalist.org/photos/98619666/medium.jpeg,Elaeagnus umbellata,"{""Elaeagnus umbellata"":""accepted""}"
 67802,67803,Sarcobatus vermiculatus,Greasewood,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Sarcobatus</b></i> is a North American genus of two species of flowering plants, formerly considered to be a single species. Common names for <i>S.&#160;vermiculatus</i> include <b>greasewood</b>, <b>seepwood</b>, and <b>saltbush</b>. Traditionally, <i>Sarcobatus</i> has been treated in the family Chenopodiaceae, but the APG III system of 2009 recognizes it as the sole genus in the family <b>Sarcobataceae</b>.
@@ -1374,6 +1225,14 @@ is a deciduous broadleaf tree native to western North America (Alaska, Yukon, Br
 <p><i><b>Boykinia</b></i> is a small genus of plants related to the saxifrages. It contains at least nine species, known as <b>brookfoams</b>. Brookfoams are glandular rhizomatous creeping perennials with highly lobed or toothed leaves and inflorescences of petite flowers. They are native to North America and Asia.
 </p>
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/24956/medium.jpg,,
+71982,48567,Arenaria,,genus,"<p class=""mw-empty-elt"">
+</p>
+<p><i><b>Arenaria</b></i> is a genus of flowering plants, within the family Caryophyllaceae.
+</p><p>Species of this genus are among those plants commonly known as <b>""sandworts""</b>. Several species formerly classified within <i>Arenaria</i> are now classed in the genera <i>Spergularia</i>, <i>Eremogone</i> and <i>Minuartia</i>.
+</p>
+
+
+",https://inaturalist-open-data.s3.amazonaws.com/photos/182271813/medium.jpeg,,"{""Arenaria"":""accepted""}"
 72117,48567,Eremogone,,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Eremogone</b></i> is a genus of flowering plants in the family Caryophyllaceae, native to western North America, northern Asia, eastern Europe and northeastern Africa. Attempts to resolve taxonomic relationships within the Caryophyllaceae have resulted in the enlargement of <i>Eremogone</i> with species from other genera.</p>
@@ -1536,11 +1395,6 @@ is a deciduous broadleaf tree native to western North America (Alaska, Yukon, Br
 <p><b>Madieae</b> is a tribe of flowering plants in the family Asteraceae.  It is sometimes considered a subtribe of Heliantheae. Notable species include the <b>tarweeds</b> of the Western United States as well as the silverswords of Hawaii.
 </p>
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/50671161/medium.jpeg,Madieae,"{""Madieae"":""accepted""}"
-334961,55525,Podosphaera,,genus,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Podosphaera</b></i> is a genus of fungi in the family Erysiphaceae. Species in this genus are plant pathogens, causing powdery mildew.
-</p>
-",https://static.inaturalist.org/photos/122219480/medium.jpg,,
 349786,47538,Euonymus japonicus,Japanese spindle tree,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Euonymus japonicus</b></i> (<b>evergreen spindle</b> or <b>Japanese spindle</b>) is a species of flowering plant in the family Celastraceae, native to Japan, Korea and China. It is an evergreen shrub or small tree growing to 2–8&#160;m (6&#160;ft 7&#160;in&#160;– 26&#160;ft 3&#160;in) tall, with opposite, oval leaves 3–7&#160;cm long with finely serrated margins. The flowers are inconspicuous, greenish-white, 5&#160;mm diameter.  In autumn, orange</p>...",https://static.inaturalist.org/photos/28512586/medium.jpg,Euonymus japonicus,"{""Euonymus japonicus"":""accepted""}"
@@ -1558,9 +1412,6 @@ is a deciduous broadleaf tree native to western North America (Alaska, Yukon, Br
 461542,47604,Astereae,asters and allies,tribe,"<p class=""mw-empty-elt"">
 </p>
 <p><b>Astereae</b> is a tribe of plants in the family Asteraceae that includes annuals, biennials, perennials, subshrubs, shrubs, and trees. They are found primarily in temperate regions of the world. Plants within the tribe are present nearly worldwide divided into over 250 genera and more than 3,100 species, making it the second-largest tribe in the family behind Senecioneae.</p><p>The taxonomy of the tribe Astereae</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/15416442/medium.jpg,Astereae,"{""Astereae"":""accepted""}"
-506175,82096,Magnolia loebneri,Loebner Magnolia,hybrid,"<p class=""mw-empty-elt"">
-</p>
-<p><b><i>Magnolia</i> × <i>loebneri</i></b> <small>Kache</small> is a hybrid of two Magnolia species, the Japanese <i>Magnolia kobus</i> and <i>M. stellata</i>. crossed by <i>Garteninspektor</i> Max Löbner of Pillnitz, Germany, shortly before World War I; it first flowered  in 1917. The deciduous, elegant and compact multi-stemmed small flowering tree or large shrub, slowly attaining a height of 20&#160;ft (6.1&#160;m) and somewhat</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/90093212/medium.jpeg,Magnolia loebneri,"{""Magnolia loebneri "":""invalid""}"
 514665,48567,Sabulina,,genus,,https://inaturalist-open-data.s3.amazonaws.com/photos/7833998/medium.jpeg,,
 518532,156674,Osmanthus × burkwoodii,Burkwood osmanthus,hybrid,"<p class=""mw-empty-elt"">
 </p>
@@ -1569,10 +1420,6 @@ an evergreen shrub native to the Guizhou, Sichuan and Yunnan regions of southern
 
 
 ",https://static.inaturalist.org/photos/14621008/medium.jpg,Osmanthus × burkwoodii,"{""Osmanthus × burkwoodii"":""accepted""}"
-532896,26504,Natricinae,Natricine Snakes,subfamily,"<p class=""mw-empty-elt"">
-</p>
-<p>The <b>Natricinae</b> are a subfamily of colubroid snakes, sometimes referred to as a family <b>(Natricidae)</b>. The subfamily comprises 36 genera. Members include many very common snake species, such as the European grass snakes, and the North American water snakes and garter snakes. Some Old World members of the subfamily are known as <b>keelbacks</b>, because their dorsal scales exhibit strong keeling.
-</p><p>Natricine</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/17112560/medium.jpg,Natricinae,"{""N"":""invalid""}"
 533443,47122,Loteae,,tribe,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1097763485"" /><p class=""mw-empty-elt"">
 </p>
 <p>The tribe <b>Loteae</b> is a subdivision of the plant family Fabaceae, in the Robinioids. These genera are recognized by the USDA:</p>
@@ -1580,7 +1427,7 @@ an evergreen shrub native to the Guizhou, Sichuan and Yunnan regions of southern
 ",https://static.inaturalist.org/photos/2086190/medium.jpg,Loteae,"{""Loteae"":""accepted""}"
 564969,564913,Chamaenerion angustifolium,rosebay willowherb,species,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Chamaenerion angustifolium</b></i> is a perennial herbaceous flowering plant in the willowherb family Onagraceae. It is known in North America as <b>fireweed</b>, in some parts of Canada as <b>great willowherb</b>, in Britain and Ireland as <b>rosebay willowherb</b>. In the United Kingdom it is also known as <b>bombweed</b>, as a result of its rapid appearance on city bomb sites during the Blitz of World War</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/145664133/medium.jpg,Chamaenerion angustifolium,"{""Chamaenerion angustifolium"":""accepted"",""Willow"":""invalid"",""Chamerion angustifolium"":""unaccepted""}"
+<p><i><b>Chamaenerion angustifolium</b></i> is a perennial herbaceous flowering plant in the willowherb family Onagraceae. It is known in North America as <b>fireweed</b>, in some parts of Canada as <b>great willowherb</b>, in Britain and Ireland as <b>rosebay willowherb</b>. In the United Kingdom it is also known as <b>bombweed</b>, as a result of its rapid appearance on city bomb sites during the Blitz of World War</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/145664133/medium.jpg,Chamaenerion angustifolium,"{""Chamaenerion angustifolium"":""accepted"",""Chamerion angustifolium"":""unaccepted""}"
 605446,47604,Heliantheae,sunflowers and allies,tribe,"<p class=""mw-empty-elt"">
 </p>
 <p>The <b>Heliantheae</b> (sometimes called the <b>sunflower tribe</b>) are the third-largest tribe in the sunflower family (Asteraceae). With some 190 genera and nearly 2500 recognized species, only the tribes Senecioneae and Astereae are larger. The name is derived from the genus <i>Helianthus</i>, which is Greek for sun flower. Most genera and species are found in North America (particularly in Mexico) and South America</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/23811700/medium.jpg,Heliantheae,"{""Heliantheae"":""accepted""}"
@@ -1593,7 +1440,7 @@ an evergreen shrub native to the Guizhou, Sichuan and Yunnan regions of southern
 <ul><li><i>Lathyrus</i> <small>L.</small> (vetchlings)</li>
 <li><i>Lens</i> <small>Mill.</small> (lentils)</li>
 <li><i>Pisum</i> <small>L.</small> (peas)</li>
-<li><i>Vavilovia</i> <small>Fed.</small></li></ul>...",https://static.inaturalist.org/photos/72060054/medium.jpg,Fabeae,"{""Fabeae"":""accepted""}"
+<li><i>Vavilovia</i> <small>Fed.</small></li></ul>...",https://inaturalist-open-data.s3.amazonaws.com/photos/277437418/medium.jpg,Fabeae,"{""Fabeae"":""accepted""}"
 779780,52995,Claytonia,Claytonia sect. Claytonia,section,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Claytonia</b></i> (<b>spring beauty</b>) is a genus of flowering plants native to Asia, North America, and Central America. The vitamin-rich leaves can be eaten raw or cooked, and the tubers can be prepared like potatoes.
@@ -1737,7 +1584,7 @@ an evergreen shrub native to the Guizhou, Sichuan and Yunnan regions of southern
 </p>
 <p><i><b>Eriogonum</b></i> is a genus of flowering plants in the family Polygonaceae. The genus is found in North America and is known as <b>wild buckwheat</b>.  This is a highly species-rich genus, and indications are that active speciation is continuing.  It includes some common wildflowers such as the California buckwheat (<i>Eriogonum fasciculatum</i>).
 </p><p>The genus derived its name from the Greek word <i>erion</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/58619859/medium.jpeg,,
-48943,48516,Datura,Thorn-apples,genus,"<p class=""mw-empty-elt"">
+48943,48516,Datura,Devil's Trumpets,genus,"<p class=""mw-empty-elt"">
 
 </p>
 <p><i><b>Datura</b></i> is a genus of nine species of highly poisonous, vespertine-flowering plants belonging to the nightshade family (Solanaceae). They are commonly known as <b>thornapples</b> or <b>jimsonweeds</b>, but are also known as <b>devil's trumpets</b> (not to be confused with angel's trumpets, which are placed in the closely related genus <i>Brugmansia</i>). Other English common names include <b>moonflower</b></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/174525717/medium.jpeg,,
@@ -1886,7 +1733,7 @@ It is nicknamed the ""Refrigerator Tree"" due to the fact that its bark contains
 51080,51079,Toxicodendron diversilobum,Pacific poison oak,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Toxicodendron diversilobum</b></i> (syn. <i>Rhus diversiloba</i>), commonly named <b>Pacific poison oak</b> or <b>western poison oak</b>, is a woody vine or shrub in the sumac family, Anacardiaceae. It is widely distributed in western North America, inhabiting conifer and mixed broadleaf forests, woodlands, grasslands, and chaparral biomes. Peak flowering occurs in May. Like other members of the genus <i>Toxicodendron</i></p>...",https://static.inaturalist.org/photos/14897857/medium.jpeg,Toxicodendron diversilobum,"{""Toxicodendron diversilobum"":""accepted""}"
-51085,51086,Triteleia laxa,Triplet lily,species,"<p class=""mw-empty-elt"">
+51085,51086,Triteleia laxa,Ithuriel's Spear,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Triteleia laxa</b></i> (previously <i>Brodiaea laxa</i>) is a triplet lily known by several common names, including <b>Ithuriel's spear</b>, <b>common triteleia</b> and <b>grassnut</b>. It is native to California where it is a common wildflower, and it is occasionally found in southwestern Oregon. It bears a tall, naked stem topped with a spray of smaller stalks, each ending in a purple or blue flower. The flower</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/60796/medium.jpg,Triteleia laxa,"{""Triteleia laxa"":""accepted""}"
 51148,47148,Crataegus,hawthorns,genus,"<p class=""mw-empty-elt"">
@@ -1929,17 +1776,15 @@ It is nicknamed the ""Refrigerator Tree"" due to the fact that its bark contains
 </p>
 <p><i><b>Phyllodoce</b></i> <span></span> is a small genus of plants in the heather family, Ericaceae. They are known commonly as <b>mountainheaths</b>, <b>mountain heaths</b>, or <b>mountain heathers</b>. They are native to North America and Eurasia, where they have a circumboreal distribution.</p>
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/31584/medium.jpg,,
-52472,47122,Vicia,Vetches,genus,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
-
-<p class=""mw-empty-elt"">
+52472,47122,Vicia,Vetches,genus,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Vicia</b></i> is a genus of over 240 species of flowering plants that are part of the legume family (Fabaceae), and which are commonly known as <b>vetches</b>. Member species are native to Europe, North America, South America, Asia and Africa. Some other genera of their subfamily Faboideae also have names containing ""vetch"",</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/51639903/medium.jpg,,"{""Vicia"":""accepted""}"
+<p><i><b>Vicia</b></i> is a genus of over 240 species of flowering plants that are part of the legume family (Fabaceae), and which are commonly known as <b>vetches</b>. Member species are native to Europe, North America, South America, Asia and Africa. Some other genera of their subfamily Faboideae also have names containing ""vetch"", for example the vetchlings (<i>Lathyrus</i>) or the milk-vetches (<i>Astragalus</i>)</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/51639903/medium.jpg,,"{""Vicia"":""accepted""}"
 52501,52502,Kolkwitzia amabilis,Beauty Bush,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Linnaea amabilis</b></i>, also known under the synonym <i><b>Kolkwitzia amabilis</b></i> <span></span> and the English name <b>beauty bush</b>, is a species of flowering plant in the family Caprifoliaceae. It is a deciduous shrub grown as an ornamental plant. In China, where it originated, the plant is called <i>wèi shí </i> (蝟实).</p>
 
 
-",https://static.inaturalist.org/photos/74604868/medium.jpg,Kolkwitzia amabilis,"{""Linnaea amabilis"":""unaccepted""}"
+",https://inaturalist-open-data.s3.amazonaws.com/photos/44278471/medium.jpg,Kolkwitzia amabilis,"{""Linnaea amabilis"":""unaccepted""}"
 52504,47332,Papaver,poppies,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Papaver</b></i> <span></span> is a genus of 70–100 species of frost-tolerant annuals, biennials, and perennials native to temperate and cold regions of Eurasia, Africa and North America. It is the type genus of the <b>poppy</b> family, Papaveraceae.
@@ -2030,11 +1875,10 @@ It is nicknamed the ""Refrigerator Tree"" due to the fact that its bark contains
 </p>
 <p><i><b>Oemleria cerasiformis</b></i>, a shrub commonly known as <b>osoberry</b> or <b>Indian plum</b>, is the sole species in genus <i><b>Oemleria</b></i>.
 </p><p>Native to the Pacific coast and ranges of North America, from British Columbia, Canada to Santa Barbara County, California, U.S.A., it is among the first plants to leaf out and flowers early in the spring. It reaches a height of 1.5–5&#160;m and has lance-shaped</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/5409/medium.jpg,,
-53436,47130,Ribes sanguineum glutinosum,blood currant,variety,,https://static.inaturalist.org/photos/113426373/medium.jpg,Ribes sanguineum glutinosum,"{""Ribes sanguineum "":""invalid""}"
 53438,47148,Rosa,roses,genus,"<p class=""mw-empty-elt"">
 
 </p>
-<p>A <b>rose</b> is either a woody perennial flowering plant of the genus <i><b>Rosa</b></i> (<span></span>), in the family Rosaceae (<span></span>), or the flower it bears. There are over three hundred species and tens of thousands of cultivars. They form a group of plants that can be erect shrubs, climbing, or trailing, with stems that are often armed with sharp prickles. Their flowers vary in size and shape and are</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/128386918/medium.jpeg,,"{""Rosa"":""accepted""}"
+<p>A <b>rose</b> is either a woody perennial flowering plant of the genus <i><b>Rosa</b></i> (<span></span>), in the family Rosaceae (<span></span>), or the flower it bears. There are over three hundred species and tens of thousands of cultivars. They form a group of plants that can be erect shrubs, climbing, or trailing, with stems that are often armed with sharp prickles. Their flowers vary in size and shape and are</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/128386918/medium.jpeg,,
 53456,48528,Symphoricarpos mollis,creeping snowberry,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Symphoricarpos mollis</b></i>, with the common names <b>creeping snowberry</b>, <b>Southern California snowberry</b>, and <b>trip vine</b>, is a shrub in the Honeysuckle Family (Caprifoliaceae). It is found in western North America from British Columbia to California inland to Nevada and Idaho.</p>
@@ -2106,7 +1950,6 @@ It is nicknamed the ""Refrigerator Tree"" due to the fact that its bark contains
 
 
 ",https://static.inaturalist.org/photos/138606452/medium.jpeg,,"{""Lamium"":""accepted""}"
-55546,47130,Ribes aureum villosum,Buffalo Currant,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/3394402/medium.jpg,Ribes aureum villosum,"{""Ribes aureum\r\r\n"":""invalid""}"
 55679,51309,Linum bienne,Pale flax,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Linum bienne</b></i>, the <b>pale</b> or <b>narrowleaf  flax</b>, is a flowering plant in the genus <i>Linum</i>, native to the Mediterranean region and western Europe, north to England and Ireland.
@@ -2252,7 +2095,7 @@ Australian species have since been reclassified into the genus <i>Rytidosperma</
 </p>
 
 
-",https://inaturalist-open-data.s3.amazonaws.com/photos/13147/medium.jpg,Phacelia tanacetifolia,"{""Phacelia tanacetifolia"":""accepted"",""phacelia tanacetifolia"":""invalid""}"
+",https://inaturalist-open-data.s3.amazonaws.com/photos/13147/medium.jpg,Phacelia tanacetifolia,"{""Phacelia tanacetifolia"":""accepted""}"
 58465,47604,Dahlia,Dahlias,genus,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 </p>
@@ -2492,7 +2335,7 @@ Australian species have since been reclassified into the genus <i>Rytidosperma</
 71152,49347,Phacelia corymbosa,serpentine phacelia,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Phacelia corymbosa</b></i> is a species of flowering plant known by the common name <b>serpentine phacelia</b>. It is native to the mountains of southern Oregon and northern California, where it grows in serpentine soils.
-</p><p>It is a perennial herb growing mostly erect to a maximum height near 40 centimeters. It is very glandular and coated in stiff hairs. The lower leaves are up to 15 centimeters long and</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/199847620/medium.jpeg,Phacelia corymbosa,"{""Phacelia corymbosa"":""accepted"",""phacelia corymb"":""invalid""}"
+</p><p>It is a perennial herb growing mostly erect to a maximum height near 40 centimeters. It is very glandular and coated in stiff hairs. The lower leaves are up to 15 centimeters long and</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/199847620/medium.jpeg,Phacelia corymbosa,"{""Phacelia corymbosa"":""accepted""}"
 72012,47604,Blepharipappus,,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Blepharipappus</b></i> is a North American plant genus in the family Asteraceae containing the single known species <i><b>Blepharipappus scaber</b></i>, known by the common name <b>rough eyelash</b>, or <b>rough eyelashweed</b>. <i>Blepharis</i> is Greek for 'eyelash' and 'pappus' refers to the feathery part of the plant's seeds.</p><p><i>Blepharipappus scaber</i> is a small, inconspicuous, annual plant herb</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/3864075/medium.jpg,,
@@ -2643,7 +2486,6 @@ Australian species have since been reclassified into the genus <i>Rytidosperma</
 79477,56161,Valeriana sitchensis,Sitka valerian,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Valeriana sitchensis</b></i> is a species of valerian known by the common name <b>Sitka valerian</b>. It is native to northwestern North America from Alaska and northern Canada to Montana to northern California, where it grows in many types of habitat, including moist mountain forests. In moist subalpine meadows, it is often one of the most common plants. This is a rhizomatous perennial herb producing a stout</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/456354/medium.jpg,Valeriana sitchensis,"{""Valeriana sitchensis"":""accepted""}"
-81342,47130,Ribes cereum cereum,Wax Currant,variety,,https://static.inaturalist.org/photos/3694245/medium.JPG,Ribes cereum cereum,"{""RIbes cereum"":""invalid"",""Ribes Cereum"":""invalid""}"
 84036,51890,Hylotelephium,Live-forever,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Hylotelephium</b></i> is a genus of flowering plants in the stonecrop family Crassulaceae. It includes about 33 species distributed in Asia, Europe, and North America.
@@ -2661,16 +2503,10 @@ They grow up to 2&#160;m (7&#160;ft) tall with purple or pink tubular flowers in
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/73515585/medium.jpg,,
 118536,47599,Drimia,poison squills,genus,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Drimia</b></i> is a genus of flowering plants. In the APG IV classification system, it is placed in the family Asparagaceae, subfamily Scilloideae (formerly the family Hyacinthaceae). When broadly circumscribed, the genus includes a number of other genera previously treated separately, including <i><b>Litanthus</b></i>, <i><b>Rhodocodon</b></i>, <i><b>Schizobasis</b></i> and <i><b>Urginea</b></i>.</p><p>One of</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/65770546/medium.png,,
+<p><i><b>Drimia</b></i> is a genus of African, south European and south Asian flowering plants. In the APG IV classification system, it is placed in the family Asparagaceae, subfamily Scilloideae (formerly the family Hyacinthaceae). When broadly circumscribed, the genus includes a number of other genera previously treated separately, including <i><b>Litanthus</b></i>, <i><b>Rhodocodon</b></i>, <i><b>Schizobasis</b></i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/65770546/medium.png,,
 119451,133387,Calluna,,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Calluna vulgaris</b></i>, <b>common heather</b>, <b>ling</b>, or simply <b>heather</b>, is the sole species in the genus <i><b>Calluna</b></i> in the flowering plant family Ericaceae. It is a low-growing evergreen shrub growing to 20 to 50 centimetres (8 to 20&#160;in) tall, or rarely to 1 metre (40&#160;in) and taller, and is found widely in Europe and Asia Minor on acidic soils in open sunny situations and in moderate</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/252997/medium.jpg,,"{""Calluna"":""accepted""}"
-122493,47653,Hesperiinae,Grass Skippers,subfamily,"<p class=""mw-empty-elt"">
-</p>
-<p><b>Grass skippers</b> or <b>banded skippers</b> are butterflies of the subfamily <b>Hesperiinae</b>, part of the skipper family, Hesperiidae. The subfamily was established by Pierre André Latreille in 1809.</p>
-
-
-",https://inaturalist-open-data.s3.amazonaws.com/photos/134755/medium.jpg,Hesperiinae,"{""Grass"":""invalid""}"
 127187,47122,Securigera,,genus,"<p class=""mw-empty-elt"">
 </p>
 <p>The genus <i><b>Securigera</b></i> contains a number of plant species commonly referred to as <b>crownvetch</b>. It is a segregate of the genus <i>Coronilla</i>.  The name <i>Securigera</i> was first published by A. P. de Candolle in 1805 with the single species <i>Securigera coronilla</i>, which is now considered to be a synonym of <i>Securigera securidaca</i> <span>(L.) Degen &amp; Dörfl. (1897)</span>, based on</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/3677294/medium.JPG,,
@@ -2714,7 +2550,7 @@ It is a perennial plant native to the West Coast of North America, occurring in 
 <p><i><b>Camassia cusickii</b></i>, common name <b>Cusick's camas</b> or <b>Cusick's quamash</b>, is a species of plant in the family Asparagaceae (subfamily Agavoideae). It is native to parts of North America. <i>C. cusickii</i> originally appeared in horticultural journals in the late 1800s, but they have been sold and cultivated for about thirty years.</p>
 
 
-",https://inaturalist-open-data.s3.amazonaws.com/photos/6017646/medium.jpg,Camassia cusickii,"{""Camassia cusicki"":""invalid"",""Camassia cusickii"":""accepted""}"
+",https://inaturalist-open-data.s3.amazonaws.com/photos/6017646/medium.jpg,Camassia cusickii,"{""Camassia cusickii"":""accepted""}"
 159730,62219,Camassia howellii,Howell's camas,species,"<p class=""mw-empty-elt"">
 </p>
 <p><br /><i><b>Camassia howellii</b></i>, commonly known as <b>Howell's camas</b>, is a species of perennial flowering plant in the family Asparagaceae endemic to western Oregon.</p><p>Discovered in 1889, <i>Camassia howellii</i> is now considered to be imperiled due to residential development, mining and grazing.</p>
@@ -2808,7 +2644,6 @@ It is a perennial plant native to the West Coast of North America, occurring in 
 
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/43442051/medium.jpg,,
-910763,334961,Podosphaera erigerontis-canadensis,Dandelion Powdery Mildew,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/103658655/medium.jpeg,Podosphaera erigerontis-canadensis,"{""dandelion"":""invalid""}"
 964919,47701,Geranium,Section Geranium,section,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p><b> </b>
 </p>
@@ -2821,12 +2656,13 @@ It is a perennial plant native to the West Coast of North America, occurring in 
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/28818025/medium.jpg,Lobelia,"{""Lobelia"":""accepted""}"
 999677,48039,Plagiobotrys,,section,,https://inaturalist-open-data.s3.amazonaws.com/photos/52214204/medium.jpeg,Plagiobotrys,"{""Plagiobotrys"":""accepted""}"
-1023136,47758,Oxalis,,section,,https://inaturalist-open-data.s3.amazonaws.com/photos/60226313/medium.jpg,Oxalis,"{""Oxalis"":""accepted""}"
+1023136,47758,Oxalis,,section,"<i><b>Oxalis</b></i> /ˈɒksəlɪs/ (American English) or /ɒksˈɑːlɪs/ (British English) is a large genus of flowering plants in the wood-sorrel family Oxalidaceae comprising about 570 species. The genus occurs throughout most of the world, except for the polar areas; species diversity is particularly rich in tropical Brazil, Mexico and South Africa.",https://inaturalist-open-data.s3.amazonaws.com/photos/60226313/medium.jpg,Oxalis,"{""Oxalis"":""accepted""}"
 1096206,57011,Helianthemum,,section,"<i><b>Helianthemum</b></i> /ˌhiːliˈænθɪməm/, known as <b>rock rose</b>, <b>sunrose</b>, <b>rushrose</b>, or <b>frostweed</b>, is a genus of about 110 species of flowering plants in the family Cistaceae. They are widely distributed throughout the Northern Hemisphere, especially in the Mediterranean.",https://inaturalist-open-data.s3.amazonaws.com/photos/69139260/medium.jpeg,Helianthemum,"{""Helianthemum"":""accepted""}"
 1152869,49340,Castilleja collegiorum,Collegial Paintbrush,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/113842763/medium.jpg,Castilleja collegiorum,"{""Castilleja collegiorum"":""accepted""}"
 1237164,53453,Salix,,section,,https://inaturalist-open-data.s3.amazonaws.com/photos/59393301/medium.jpeg,Salix,"{""Salix"":""accepted""}"
 1441528,50791,Linaria,,section,,https://static.inaturalist.org/photos/43706398/medium.jpg,Linaria,"{""Linaria"":""accepted""}"
 1468923,72171,Hesperochiron nanus,meadow stars,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/10190066/medium.jpg,Hesperochiron nanus,"{""Hesperochiron californicus"":""unaccepted""}"
+1503792,52761,Hypericum,,section,,https://inaturalist-open-data.s3.amazonaws.com/photos/106957767/medium.jpg,Hypericum,"{""Hypericum"":""accepted""}"
 47203,47204,Lepidium,Pepperweeds,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Lepidium</b></i> is a genus of plants in the mustard/cabbage family, Brassicaceae. The genus is widely distributed in the Americas, Africa, Asia, Europe, and Australia. It includes familiar species such as garden cress, maca, and dittander. General common names include <b>peppercress</b>, <b>peppergrass</b>, <b>pepperweed</b>, and <b>pepperwort</b>.  Some species form tumbleweeds.
@@ -2841,7 +2677,7 @@ The genus name <i>Lepidium</i></p>...",https://inaturalist-open-data.s3.amazonaw
 47906,47362,Asclepias,milkweeds,genus,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 </p>
-<p><i><b>Asclepias</b></i> is a genus of herbaceous, perennial, flowering plants known as <b>milkweeds</b>, named for their latex, a milky substance containing cardiac glycosides termed cardenolides, exuded where cells are damaged. Most species are toxic to humans and many other species, primarily due to the presence of cardenolides. However</p>...",https://static.inaturalist.org/photos/40111/medium.jpg,,"{""Asclepias"":""accepted""}"
+<p><i><b>Asclepias</b></i> is a genus of herbaceous, perennial, flowering plants known as <b>milkweeds</b>, named for their latex, a milky substance containing cardiac glycosides termed cardenolides, exuded where cells are damaged. Most species are toxic to humans and many other species, primarily due to the presence of cardenolides. However</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/17220682/medium.jpg,,"{""Asclepias"":""accepted""}"
 48152,48153,Cynoglossum officinale,hound's-tongue,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Cynoglossum officinale</b></i> (<b>houndstongue</b>, <b>houndstooth</b>, <b>dog's tongue</b>, <b>gypsy flower</b>, and <b>rats and mice</b> due to its smell) is a herbaceous plant of the family Boraginaceae.
@@ -2855,7 +2691,7 @@ The genus name <i>Lepidium</i></p>...",https://inaturalist-open-data.s3.amazonaw
 48225,48226,Eschscholzia californica,California poppy,species,"<p class=""mw-empty-elt"">
 
 </p>
-<p><i><b>Eschscholzia californica</b></i>, the <b>California poppy</b>, <b>golden poppy</b>, <b>California sunlight</b> or <b>cup of gold</b>, is a species of flowering plant in the family Papaveraceae, native to the United States and Mexico. It is cultivated as an ornamental plant flowering in summer (spring in southern Australia), with showy cup-shaped flowers in brilliant shades of red, orange and yellow (occasionally</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/1233073/medium.,Eschscholzia californica,"{""Eschscholzia californica"":""accepted"",""californica"":""invalid""}"
+<p><i><b>Eschscholzia californica</b></i>, the <b>California poppy</b>, <b>golden poppy</b>, <b>California sunlight</b> or <b>cup of gold</b>, is a species of flowering plant in the family Papaveraceae, native to the United States and Mexico. It is cultivated as an ornamental plant flowering in summer (spring in southern Australia), with showy cup-shaped flowers in brilliant shades of red, orange and yellow (occasionally</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/1233073/medium.,Eschscholzia californica,"{""Eschscholzia californica"":""accepted""}"
 48229,48230,Ranunculus repens,Creeping buttercup,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Ranunculus repens</b></i>, the <b>creeping buttercup</b>, is a flowering plant in the buttercup family Ranunculaceae, native to Europe, Asia and northwestern Africa. It is also called <b>creeping crowfoot</b> and (along with restharrow) <b>sitfast</b>.</p>
@@ -2865,12 +2701,7 @@ The genus name <i>Lepidium</i></p>...",https://inaturalist-open-data.s3.amazonaw
 48243,47604,Wyethia,mule's ears,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Wyethia</b></i> is a genus of North American flowering plants in the family Asteraceae. First published by Thomas Nuttall in J. Acad. Nat. Sci. Philadelphia vol.7 on page 39 in 1834.</p><p>These plants are commonly referred to as <b>mule's ears</b>. They are short, low to the ground golden-rayed wildflowers that resemble miniature sunflowers. The genus is named for an early explorer of the western United States</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/13836/medium.jpg,,"{""Wyethia"":""accepted""}"
-48258,47727,Acer circinatum,Vine Maple,species,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Acer circinatum</b></i>, the <b>vine maple</b>, is a species of maple native to western North America.  Douglas Maple, a variety of Acer glabrum is also incorrectly called vine maple.</p>
-
-
-",https://inaturalist-open-data.s3.amazonaws.com/photos/78597312/medium.jpeg,Acer circinatum,"{""Acer circinatum"":""accepted""}"
+48258,47727,Acer circinatum,Vine Maple,species,"<p><i><b>Acer circinatum</b></i>, or vine maple, is a species of maple native to western North America. Vine maple typically grows as a low-elevation costal tree in temperate areas of high precipitation such as the west coast of Oregon and northern California, as well as the rain forests of Washington State and British Columbia. Vine maples play an important role in conserving the biodiversity of lowland ecosystems by enriching upper soil layers and</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/78597312/medium.jpeg,Acer circinatum,"{""Acer circinatum"":""accepted""}"
 48349,48353,Vaccinium ovatum,Evergreen Huckleberry,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Vaccinium ovatum</b></i> is a North American species of flowering shrub known by the common names <b>evergreen huckleberry,</b> <b>winter huckleberry,</b> <b>cynamoka berry</b> and <b>California huckleberry</b>.
@@ -3078,7 +2909,7 @@ Common names include <b>couch grass</b>, <b>wildrye</b> and <b>wheatgrass</b>.</
 52851,52852,Arnica discoidea,rayless arnica,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Arnica discoidea</b></i> is a North American species of arnica in the sunflower family. It is known by the common name <b>rayless arnica</b> because its flower heads have disc florets but none of the showier ray florets. It is native to the woodlands, forests, and chaparral of the western United States (Washington, Oregon, California, and western Nevada (Washoe County).</p><p><i>Arnica discoidea</i> is a rhizomatous</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/8872713/medium.jpeg,Arnica discoidea,"{""Arnica discoidea"":""accepted""}"
-52855,47604,Artemisia,Mugworts and Wormwoods,genus,"<p class=""mw-empty-elt"">
+52855,47604,Artemisia,wormwoods and sagebrushes,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Artemisia</b></i> (<span></span>) is a large, diverse genus of plants belonging to the daisy family Asteraceae, with between 200 and 400 species. Common names for various species in the genus include mugwort, wormwood, and sagebrush.
 </p><p><i>Artemisia</i> comprises hardy herbaceous plants and shrubs, which are known for the powerful chemical constituents in their essential oils. <i>Artemisia</i> species grow</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/21443667/medium.jpeg,,
@@ -3095,11 +2926,10 @@ Common names include <b>couch grass</b>, <b>wildrye</b> and <b>wheatgrass</b>.</
 52998,52999,Conium maculatum,poison hemlock,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Conium maculatum</b></i>, colloquially known as <b>hemlock</b>, <b>poison hemlock</b> or <b>wild hemlock</b>, is a highly poisonous biennial herbaceous flowering plant in the carrot family Apiaceae, native to Europe and North Africa. A hardy plant capable of living in a variety of environments, hemlock is widely naturalized in locations outside its native range, such as parts of Australia, West Asia, and North</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/18903781/medium.jpg,Conium maculatum,"{""Conium maculatum"":""accepted""}"
-53002,52995,Claytonia perfoliata perfoliata,,subspecies,,https://static.inaturalist.org/photos/26614/medium.JPG,Claytonia perfoliata perfoliata,"{""Clayton perfoliata"":""invalid""}"
 53021,53022,Convolvulus arvensis,field bindweed,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Convolvulus arvensis</b></i>, or <b>field bindweed</b>, is a species of bindweed in the Convolvulaceae native to Europe and Asia. It is a rhizomatous and climbing or creeping herbaceous perennial plant with stems growing to 0.5–2 metres (1.6–6.6&#160;ft) in length. It is usually found at ground level with small white and pink flowers.
-</p><p>Other common names, mostly obsolete, include lesser bindweed, European bindweed</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/146112520/medium.jpg,Convolvulus arvensis,"{""Convolvulus arvensis"":""accepted""}"
+</p><p>Other common names, mostly obsolete, include lesser bindweed, European bindweed</p>...",https://static.inaturalist.org/photos/104247761/medium.jpeg,Convolvulus arvensis,"{""Convolvulus arvensis"":""accepted""}"
 53037,47604,Iva,,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Iva</b></i> is a genus of wind-pollinated plants in the family Asteraceae, described as a genus by Linnaeus in 1753. Plants of this genus are known generally as <b>marsh elders</b>. The genus is native to North America.</p>
@@ -3120,7 +2950,7 @@ Common names include <b>couch grass</b>, <b>wildrye</b> and <b>wheatgrass</b>.</
 <p><i><b>Helenium</b></i> is a genus of annuals and herbaceous perennial plants in the family Asteraceae, native to the Americas.</p><p>They bear yellow or orange daisy-like composite flowers. A number of these species (particularly <i>Helenium autumnale</i>) have the common name <b>sneezeweed</b>, based on the former use of their dried leaves in making snuff. It was inhaled to cause sneezing that would supposedly rid</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/88727490/medium.jpg,,
 53094,53095,Heracleum maximum,common cowparsnip,species,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Heracleum maximum</b></i>, commonly known as <b>cow parsnip</b>, is the only member of the genus <i>Heracleum</i> native to North America. It is also known as <b>American cow-parsnip</b>, <b>Satan celery</b>, <b>Indian celery</b>, <b>Indian rhubarb </b> or <b>pushki</b>.
+<p><i><b>Heracleum maximum</b></i>, commonly known as <b>cow parsnip</b>, is the only member of the genus <i>Heracleum</i> native to North America. It is also known as <b>American cow-parsnip</b>, <b>Satan celery</b>, <b>Indian celery</b>, <b>Indian rhubarb</b>, <b>poison turnip</b> or <b>pushki</b>.
 </p>
 
 
@@ -3280,9 +3110,6 @@ Common names include <b>couch grass</b>, <b>wildrye</b> and <b>wheatgrass</b>.</
 
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/3908816/medium.jpg,,
-55725,48150,Symphytum,Comfrey,genus,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Symphytum</b></i> is a genus of flowering plants in the borage family, Boraginaceae, known by the common name <b>comfrey</b> (pronounced <span></span>). There are 59 recognized species.  Some species and hybrids, particularly <i>S. officinale</i>, <i>Symphytum grandiflorum</i>, and <i>S.</i> × <i>uplandicum</i>, are used in gardening and herbal medicine. They are not to be confused with <i>Andersonglossum virginianum</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/2031387/medium.JPG,,
 55745,51876,Trifolium repens,white clover,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Trifolium repens</b></i>, the <b>white clover</b>, is a herbaceous perennial plant in the bean family Fabaceae (otherwise known as Leguminosae). It is native to Europe, including the British Isles, and central Asia and is one of the most widely cultivated types of clover. It has been widely introduced worldwide as a forage crop, and is now also common in most grassy areas (lawns and gardens) of North America</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/64586855/medium.jpeg,Trifolium repens,"{""Trifolium repens"":""accepted""}"
@@ -3293,9 +3120,6 @@ Common names include <b>couch grass</b>, <b>wildrye</b> and <b>wheatgrass</b>.</
 
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/44350506/medium.jpeg,,
-55831,48623,Glechoma,ground-ivies,genus,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Glechoma</b></i> is a genus of flowering plants in the mint family, Lamiaceae, first described for modern science in 1753. It is distributed in northern Asia and Europe with a center of diversity in Asia, especially China. One species is naturalized in New Zealand and in North America.</p><p>These plants are perennial herbs with stolons. The stems are prostrate or upright and bear leaf blades on long petioles</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/9727/medium.jpg,,
 55846,53453,Salix caprea,goat willow,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Salix caprea</b></i>, known as <b>goat willow</b>, <b>pussy willow</b> or <b>great sallow</b>, is a common species of willow native to Europe and western and central Asia.</p>
@@ -3307,9 +3131,7 @@ Common names include <b>couch grass</b>, <b>wildrye</b> and <b>wheatgrass</b>.</
 <p><i><b>Lamium purpureum</b></i>, known as <b>red dead-nettle</b>, <b>purple dead-nettle</b>, or <b>purple archangel</b>, is an annual herbaceous flowering plant native to Europe and Asia.
 </p><p>Varieties:
 </p>
-<ul><li><i>Lamium purpureum</i> var. <i>hybridum</i> (Vill.) Vill. (synonym: <i>Lamium hybridum</i> Vill.)</li></ul>
-
-",https://inaturalist-open-data.s3.amazonaws.com/photos/9778/medium.jpg,Lamium purpureum,"{""Lamium purpureum"":""accepted""}"
+<ul><li><i>Lamium purpureum</i> var. <i>hybridum</i> (Vill.) Vill. (synonym: <i>Lamium hybridum</i> Vill.)</li></ul><meta property=""mw:PageProp/toc"" />",https://inaturalist-open-data.s3.amazonaws.com/photos/9778/medium.jpg,Lamium purpureum,"{""Lamium purpureum"":""accepted""}"
 55910,47604,Hieracium,hawkweeds,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Hieracium</b></i> (<span></span>),
@@ -3329,7 +3151,7 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 
 
 </p>
-<p><i><b>Symphyotrichum</b></i> (<span></span>) is a genus of over 100 species and naturally occurring hybrids of herbaceous annual and perennial plants in the composite family, Asteraceae, most which were formerly treated within the genus <i>Aster</i>. The majority are endemic to North America, but several also occur in the West Indies, Central and South America, as well as in eastern Eurasia. Several species have</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/5044116/medium.jpg,,
+<p><i><b>Symphyotrichum</b></i> (<span></span>) is a genus of over 100 species and naturally occurring hybrids of herbaceous annual and perennial plants in the composite family, Asteraceae, most which were formerly treated within the genus <i>Aster</i>. The majority are endemic to North America, but several also occur in the West Indies, Central and South America, as well as one species in eastern Eurasia. Several species</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/5044116/medium.jpg,,
 56174,56175,Echium vulgare,viper's-bugloss,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Echium vulgare</b></i>, known as <b>viper's bugloss</b> and <b>blueweed</b>, is a species of flowering plant in the borage family Boraginaceae. It is native to most of Europe and western and central Asia and it occurs as an introduced species in north-eastern North America, south-western South America and the South and North Island of New Zealand. The plant root was used in ancient times as a treatment for snake</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/135087647/medium.jpg,Echium vulgare,"{""Echium vulgare"":""accepted""}"
@@ -3381,7 +3203,7 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 </p>
 
 
-",https://inaturalist-open-data.s3.amazonaws.com/photos/35442018/medium.jpg,Plagiobothrys nothofulvus,"{""Plagiobothrys nothofulvus"":""accepted"",""PLagiobothrys"":""invalid""}"
+",https://inaturalist-open-data.s3.amazonaws.com/photos/35442018/medium.jpg,Plagiobothrys nothofulvus,"{""Plagiobothrys nothofulvus"":""accepted""}"
 56993,47204,Lobularia,,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Lobularia</b></i> is a genus of five species of flowering plants in the family Brassicaceae, closely related to (and formerly often included in) the genus <i>Alyssum</i>. The genus is native to Macaronesia and the Mediterranean region, and comprises annuals and perennials growing to 10–40&#160;cm (4–16&#160;in) tall, with hairy oblong-oval leaves and clusters of cross-shaped (cruciform), fragrant white flowers.</p><p>The</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/11690/medium.jpg,,
@@ -3462,9 +3284,6 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 </p>
 <p><i><b>Filago</b></i> is a genus of plants in the sunflower family, native from Europe and northern Africa to Mongolia, Nepal, and Macaronesia. They are sometimes called <b>cottonroses</b> or <b>cudweeds</b>.</p><p>The name cudweed comes from the fact that they were once used to feed cows that had lost the ability to chew the cud.</p><p>Several species are sometimes treated as members of the genus <i>Logfia</i>.
 </p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/16708/medium.jpg,,"{""Filago"":""accepted""}"
-57979,47604,Gutierrezia,matchweeds and snakeweeds,genus,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Gutierrezia</b></i> is a genus of flowering plants in the family Asteraceae, native to western North America and western South America. Plants of this genus are known generally as <b>snakeweeds</b> or <b>matchweeds</b>. Some species have been called greasewood. They are annual or perennial plants or subshrubs with yellow or white flowers.</p><p>These plants contain chemical compounds which can be toxic to livestock</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/92680342/medium.jpg,,
 57989,47604,Heterotheca,False Goldenasters,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Heterotheca</b></i> (common names <b>goldenasters,</b> <b>camphorweed,</b> or <b>telegraph weed</b>) is a genus of North American plants in the family Asteraceae.</p>
@@ -3491,7 +3310,7 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 <p><i><b>Berberis</b></i> (<span></span>), commonly known as <b>barberry</b>, is a large genus of deciduous and evergreen shrubs from 1–5&#160;m (3.3–16.4&#160;ft) tall, found throughout temperate and subtropical regions of the world (apart from Australia). Species diversity is greatest in South America and Asia; Europe, Africa and North America</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/48462429/medium.jpg,,
 58907,57067,Melilotus albus,White Sweetclover,species,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Melilotus albus</b></i>, known as <b>honey clover</b>, <b>white melilot</b> (UK), <b>Bokhara clover</b> (Australia), <b>white sweetclover</b> (US), and <b>sweet clover</b>, is a nitrogen-fixing legume in the family Fabaceae. <i>Melilotus albus</i> is considered a valuable honey plant and source of nectar and is often grown for forage. Its characteristic sweet odor, intensified by drying, is derived from coumarin</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/88013424/medium.jpg,Melilotus albus,"{""Melilotus albus"":""accepted"",""clover"":""invalid"",""Melilotus alba"":""unaccepted""}"
+<p><i><b>Melilotus albus</b></i>, known as <b>honey clover</b>, <b>white melilot</b> (UK), <b>Bokhara clover</b> (Australia), <b>white sweetclover</b> (US), and <b>sweet clover</b>, is a nitrogen-fixing legume in the family Fabaceae. <i>Melilotus albus</i> is considered a valuable honey plant and source of nectar and is often grown for forage. Its characteristic sweet odor, intensified by drying, is derived from coumarin</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/88013424/medium.jpg,Melilotus albus,"{""Melilotus albus"":""accepted"",""Melilotus alba"":""unaccepted""}"
 59298,59314,Ligusticum apiifolium,Celery Leaf Lovage,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Ligusticum apiifolium</b></i> is a species of plant in the carrot family known by the common names <b>celery-leafed lovage</b> and <b>celery-leaf licorice-root</b>. It resembles other carrot-like plants, bearing umbels of whitish or brownish flowers.
@@ -3504,10 +3323,10 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 <p>It is native to western North America, where it grows in the Pacific Coast Ranges from southwestern British Columbia to northern California.</p>
 
 
-",https://static.inaturalist.org/photos/3231914/medium.jpg,Erythronium oregonum,"{""oregonum"":""invalid"",""Erythronium oregonum"":""accepted""}"
+",https://static.inaturalist.org/photos/3231914/medium.jpg,Erythronium oregonum,"{""Erythronium oregonum"":""accepted""}"
 59549,47121,Lupinus polyphyllus,Large-leaved lupine,species,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Lupinus polyphyllus</b></i>, the <b>large-leaved lupine</b>, <b>big-leaved lupine</b>, <b>many-leaved lupine</b>, <b>blue-pod lupine</b>, or, primarily in cultivation, <b>garden lupin</b>, is a species of lupine (lupin) native to western North America from southern Alaska and British Columbia and western Wyoming, and south to Utah and California. It commonly grows along streams and creeks, preferring moist habitats</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/56894992/medium.jpeg,Lupinus polyphyllus,"{""Lupinus polyphyllus"":""accepted"",""Lupinus "":""invalid""}"
+<p><i><b>Lupinus polyphyllus</b></i>, the <b>large-leaved lupine</b>, <b>big-leaved lupine</b>, <b>many-leaved lupine</b>, <b>blue-pod lupine</b>, or, primarily in cultivation, <b>garden lupin</b>, is a species of lupine (lupin) native to western North America from southern Alaska and British Columbia and western Wyoming, and south to Utah and California. It commonly grows along streams and creeks, preferring moist habitats</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/56894992/medium.jpeg,Lupinus polyphyllus,"{""Lupinus polyphyllus"":""accepted""}"
 59584,48928,Lilium parvum,Sierra Tiger Lily,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Lilium parvum</b></i> is a species of lily known by the common names <b>Sierra tiger lily</b> and <b>alpine lily.</b> It is native to the mountains of the western United States, primarily the Sierra Nevada of California but also with additional populations in northwestern Nevada and southwestern Oregon. The plant grows in high altitude forests, sending up flowering stalks during the summer months.</p>
@@ -3909,7 +3728,7 @@ It is very closely related to <i>R. reptans</i>,  which is distinguished by pros
 </p>
 
 
-",https://inaturalist-open-data.s3.amazonaws.com/photos/4181634/medium.JPG,Hackelia micrantha,"{""Hackelia micrantha"":""accepted"",""Hackelia micrantha "":""invalid""}"
+",https://inaturalist-open-data.s3.amazonaws.com/photos/4181634/medium.JPG,Hackelia micrantha,"{""Hackelia micrantha"":""accepted""}"
 77455,50842,Hosackia crassifolia,Big deervetch,species,"<i><b>Hosackia crassifolia</b></i>, synonym <i>Lotus crassifolius</i>, is a species of legume native to Washington, California and Oregon. It is known by the common names <b>big deervetch</b> and <b>broad-leafed lotus</b>.",https://inaturalist-open-data.s3.amazonaws.com/photos/12498169/medium.jpeg,Hosackia crassifolia,"{""Hosackia crassifolia"":""accepted""}"
 77605,72203,Kelloggia galioides,milk kelloggia,species,"<p class=""mw-empty-elt"">
 </p>
@@ -3934,7 +3753,7 @@ It is very closely related to <i>R. reptans</i>,  which is distinguished by pros
 </p>
 
 
-",https://inaturalist-open-data.s3.amazonaws.com/photos/45444/medium.jpg,Lilium columbianum,"{""Lilium columbianum"":""accepted"",""Lilium Columbianum"":""invalid""}"
+",https://inaturalist-open-data.s3.amazonaws.com/photos/45444/medium.jpg,Lilium columbianum,"{""Lilium columbianum"":""accepted""}"
 77778,50791,Linaria purpurea,Purple Toadflax,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Linaria purpurea</b></i> or <b>purple toadflax</b> is a purple-flowered plant native to Italy, part of the plantain family (Plantaginaceae). It is sometimes planted in gardens and is also an introduced weed in North America and other parts of Europe.</p>
@@ -4022,12 +3841,6 @@ This plant is often consumed as a food, with its leaves, stalks</p>...",https://
 78883,53438,Rosa nutkana,Nootka rose,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Rosa nutkana</b></i>, the <b>Nootka rose</b>, <b>bristly rose</b>, or <b>wild rose</b> is a 0.6–3.0-metre-tall (2–10-foot) perennial shrub in the rose family (Rosaceae).</p><p>The species name <i>nootka</i> comes from the Nootka Sound of Vancouver Island, where the plant was first described. This plant is native to Western North America.  There are 2 varieties:  <i>hispida</i> grows in the Intermountain West</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/26171318/medium.jpg,Rosa nutkana,"{""Rosa nutkana"":""accepted""}"
-78887,53438,Rosa woodsii,Woods' rose,species,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Rosa woodsii</b></i> is a species of wild rose known by the common names <b>Woods' rose</b>, <b>interior rose</b>, <b>common wild rose</b>, <b>mountain rose</b>, <b>pear-hip rose</b>, and <b>prairie rose</b>.</p>
-
-
-",https://inaturalist-open-data.s3.amazonaws.com/photos/4560367/medium.jpeg,Rosa woodsii,"{""Rosa woodsii"":""accepted""}"
 78941,53453,Salix hookeriana,coastal willow,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Salix hookeriana</b></i> is a species of willow known by the common names <b>dune willow</b>, <b>coastal willow</b>, and <b>Hooker's willow</b>.
@@ -4063,7 +3876,6 @@ This plant is often consumed as a food, with its leaves, stalks</p>...",https://
 79422,51876,Trifolium longipes,Long-stalked Clover,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Trifolium longipes</b></i> is a species of clover known by the common name <b>longstalk clover</b>. It is native to the western United States, where it occurs in many types of habitats such as meadows, valleys, lower mountains, and subalpine slopes. There are many subtaxa (subspecies and varieties) which occur in different regions and differ slightly in appearance. In general, it is a perennial herb with leaves</p>...",https://static.inaturalist.org/photos/73609793/medium.jpg,Trifolium longipes,"{""Trifolium longipes"":""accepted""}"
-79659,62219,Camassia leichtlinii suksdorfii,Suksdorf's Large Camas,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/2862271/medium.JPG,Camassia leichtlinii suksdorfii,"{""Camas leichtlinii"":""invalid""}"
 80116,49347,Phacelia heterophylla virgata,Virgate Phacelia,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/8750243/medium.jpg,Phacelia heterophylla virgata,"{""Phacelia heterophylla virgata"":""accepted""}"
 80118,49347,Phacelia nemoralis oregonensis,,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/2305758/medium.jpg,Phacelia nemoralis oregonensis,"{""Phacelia nemoralis oregonensis"":""accepted""}"
 80645,56932,Cuscuta pacifica pacifica,,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/1762269/medium.jpg,Cuscuta pacifica pacifica,"{""Cuscuta salina major"":""unaccepted""}"
@@ -4319,7 +4131,6 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 </p>
 <p><i><b>Ficaria verna</b></i> (formerly <i><b>Ranunculus ficaria</b></i> <span>L.</span>), commonly known as <b>lesser celandine</b> or <b>pilewort</b>, is a low-growing, hairless perennial flowering plant in the buttercup family Ranunculaceae native to Europe and Western Asia. It has fleshy dark green, heart-shaped leaves and distinctive flowers with bright yellow, glossy petals. It is now introduced in North America</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/7034063/medium.jpg,Ficaria verna,"{""Ficaria verna"":""accepted""}"
 209325,53376,Cotoneaster microphyllus,Rockspray Cotoneaster,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/24987497/medium.jpeg,Cotoneaster microphyllus,"{""Cotoneaster microphyllus"":""accepted""}"
-234790,62219,Camassia quamash maxima,,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/7221920/medium.jpg,Camassia quamash maxima,"{""Camas quamash"":""invalid""}"
 322591,49347,Phacelia hastata alpina,,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/46293843/medium.jpeg,Phacelia hastata alpina,"{""Phacelia hastata alpina"":""accepted""}"
 337822,48681,Spiraea nipponica,Snowmound Spirea,species,"<p class=""mw-empty-elt"">
 </p>
@@ -4342,7 +4153,7 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 
 
 </p>
-<p>An <b>apple</b> is a round, edible fruit produced by an <b>apple tree</b> (<i><b>Malus domestica</b></i>). Apple trees are cultivated worldwide and are the most widely grown species in the genus <i>Malus</i>. The tree originated in Central Asia, where its wild ancestor, <i>Malus sieversii</i>, is still found. Apples have been grown</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/14004/medium.jpg,Malus domestica,"{""Malus pumila"":""unaccepted"",""Malus pumila "":""invalid""}"
+<p>An <b>apple</b> is a round, edible fruit produced by an <b>apple tree</b> (<i><b>Malus domestica</b></i>). Apple trees are cultivated worldwide and are the most widely grown species in the genus <i>Malus</i>. The tree originated in Central Asia, where its wild ancestor, <i>Malus sieversii</i>, is still found. Apples have been grown</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/14004/medium.jpg,Malus domestica,"{""Malus pumila"":""unaccepted""}"
 526815,48673,Pediomelum tenuiflorum,Slimflower Scurfpea,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/3929498/medium.JPG,Pediomelum tenuiflorum,"{""Psoralidium tenuiflorum"":""unaccepted""}"
 704166,52836,Angelica capitellata,ranger buttons,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/15595998/medium.jpg,Angelica capitellata,"{""Sphenosciadium capitellatum"":""unaccepted""}"
 708344,425377,Glandora diffusa,purple gromwell,species,"<p class=""mw-empty-elt"">
@@ -4358,11 +4169,6 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 <li>Erica, Emmen, a village in Drenthe, the Netherlands</li>
 <li>Erica, Victoria, a town in Australia
 <ul><li>Erica railway station</li></ul></li></ul>...",https://inaturalist-open-data.s3.amazonaws.com/photos/111978070/medium.jpeg,Erica,"{""Erica"":""accepted""}"
-735500,49530,Tanagridia,,genus,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Tanagridia</b></i> is a monotypic moth genus in the family Geometridae. The only species is <i><b>Tanagridia fusca</b></i>, which is found in Patagonia. Both the genus and species were first described by Arthur Gardiner Butler in 1882.
-</p>
-",https://inaturalist-open-data.s3.amazonaws.com/photos/114927046/medium.jpg,,"{""Tanagridia"":""accepted""}"
 769151,769101,Adelinia grande,Pacific hound's tongue,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Adelinia grandis</b></i>, previously known as <i><b>Cynoglossum grande</b></i>, is a species of flowering plant in the borage family known as <b>Pacific hound's tongue</b>. It is the only species in the genus <i><b>Adelinia</b></i>. 
@@ -4385,9 +4191,6 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 </p>
 <p><i><b>Acmispon decumbens</b></i> is a species of flowering plant in the family Fabaceae, native to the western United States (Nevada, California) and north-western Mexico (Baja California). It was first described by George Bentham in 1836 as <i>Hosackia decumbens</i>.</p><p>It grows in several types of habitat, including mountain forest and meadows. It is a spreading or mat-forming perennial herb coated in long hairs</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/42115318/medium.jpg,Acmispon decumbens,"{""Acmispon nevadensis"":""unaccepted"",""Lotus nevadensis"":""unaccepted""}"
 967289,51876,Trifolium,,subgenus,,https://inaturalist-open-data.s3.amazonaws.com/photos/89739687/medium.jpg,Trifolium,"{""Trifolium"":""accepted""}"
-1085880,63077,Arenaria,Geastrum subsect. Arenaria,subsection,"<p><b>Arenaria</b>, a Latin word meaning sand-loving (or psammophilic), may refer to:
-</p>
-",https://inaturalist-open-data.s3.amazonaws.com/photos/51589912/medium.jpg,Arenaria,"{""Arenaria"":""accepted""}"
 1112641,48939,Eriogonum,,subgenus,,https://static.inaturalist.org/photos/22485494/medium.jpg,Eriogonum,"{""Eriogonum"":""accepted""}"
 1112899,50199,Chaenactis,,section,"<p class=""mw-empty-elt"">
 </p>
@@ -4401,6 +4204,7 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 1439845,49917,Sisyrinchium,,section,,https://static.inaturalist.org/photos/6636612/medium.jpg,Sisyrinchium,"{""Sisyrinchium"":""accepted""}"
 1445421,48493,Delphinium,Subgenus Delphinium,subgenus,,https://inaturalist-open-data.s3.amazonaws.com/photos/134024124/medium.jpeg,Delphinium,"{""Delphinium"":""accepted""}"
 1447328,55735,Sedum,Section Sedum,subgenus,,https://inaturalist-open-data.s3.amazonaws.com/photos/142326888/medium.jpeg,Sedum,"{""Sedum"":""accepted""}"
+1511486,53438,Rosa,,section,,,Rosa,"{""Rosa"":""accepted""}"
 47221,47201,Apidae,"Honey Bees, Bumble Bees, and Allies",family,"<p class=""mw-empty-elt"">
 </p>
 <p><b>Apidae</b> is the largest family within the superfamily Apoidea, containing at least 5700 species of bees. The family includes some of the most commonly seen bees, including bumblebees and honey bees, but also includes stingless bees (also used for honey production), carpenter bees, orchid bees, cuckoo bees, and a number of other less widely known groups. Many are valuable pollinators in natural habitats and for</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/45462820/medium.jpg,,
@@ -4440,7 +4244,6 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 49037,49038,Hymenoxys hoopesii,owlsclaws,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Hymenoxys hoopesii</b></i> (formerly <i>Dugaldia hoopesii</i>) is a species of flowering plant in the daisy family known by the common names <b>owl's claws</b>, <b>orange sneezeweed</b>, and <b>yerba del lobo</b>. It is native to the western United States, where it grows in habitats of moderate elevation, such as mountain meadows in the Rocky Mountains, Sierra Nevada, southern Cascades, and other ranges. It has</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/448964/medium.jpg,Hymenoxys hoopesii,"{""Hymenoxys hoopesii"":""accepted""}"
-49141,49140,Amsinckia menziesii intermedia,Rancher's fiddleneck,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/23982764/medium.jpeg,Amsinckia menziesii intermedia,"{""Amsinckia "":""invalid""}"
 49707,47201,Halictidae,Sweat Bees,family,"<p class=""mw-empty-elt"">
 </p>
 <p><b>Halictidae</b> is the second-largest family of bees (clade Anthophila) with nearly 4,500 species. They are commonly called <b>sweat bees</b> (especially the smaller species), as they are often attracted to perspiration. Halictid species are an extremely diverse group that can vary greatly in appearance. These bees occur all over the world and are found on every continent except Antarctica. Usually dark-colored </p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/19744145/medium.jpg,,
@@ -4465,9 +4268,6 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/7229972/medium.jpeg,Lasthenia californica,"{""Lasthenia californica"":""accepted""}"
-51042,47186,Penaeidae,Penaeid Prawns,family,"<p class=""mw-empty-elt"">
-</p>
-<p><b>Penaeidae</b> is a family of marine crustaceans in the suborder Dendrobranchiata, which are often referred to as <b>penaeid shrimp</b> or <b>penaeid prawns</b>. The Penaeidae contain many species of economic importance, such as the tiger prawn, whiteleg shrimp, Atlantic white shrimp, and Indian prawn. Many prawns are the subject of commercial fishery, and farming, both in marine settings, and in freshwater farms</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/101783163/medium.jpeg,,
 51049,51051,Dicentra formosa formosa,,subspecies,,https://static.inaturalist.org/photos/483887/medium.jpg,Dicentra formosa formosa,"{""Dicentra formosa formosa"":""accepted""}"
 51646,47544,Rubus parviflorus,thimbleberry,species,"<p class=""mw-empty-elt"">
 </p>
@@ -4505,7 +4305,11 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 ",https://static.inaturalist.org/photos/208293365/medium.jpeg,Monardella villosa,"{""Monardella villosa"":""accepted""}"
 52287,52288,Borago officinalis,Borage,species,"<p class=""mw-empty-elt"">
 </p>
-<p><b>Borage</b> (<span> </span> or <span></span>; <i><b>Borago officinalis</b></i>), also known as <b>starflower</b>, is an annual herb in the flowering plant family Boraginaceae. It is native to the Mediterranean region, and has naturalized in many other locales.</p><p>It grows satisfactorily in gardens in most of Europe, such as Denmark, France, Germany, the United Kingdom, and Ireland, remaining in the garden from</p>...",https://static.inaturalist.org/photos/60861953/medium.jpg,Borago officinalis,"{""Borago officinalis"":""accepted"",""Borage"":""unaccepted""}"
+<p><b>Borage</b> (<span> <span></span></span> or <span></span>; <i><b>Borago officinalis</b></i>), also known as <b>starflower</b>, is an annual herb in the flowering plant family Boraginaceae native to the Mediterranean region. Although the plant contains small amounts of pyrrolizidine alkaloids, some parts are edible and its seeds provide oil.
+</p>
+
+
+",https://static.inaturalist.org/photos/60861953/medium.jpg,Borago officinalis,"{""Borago officinalis"":""accepted"",""Borage"":""unaccepted""}"
 52586,52587,Silybum marianum,milk thistle,species,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 </p>
@@ -4614,7 +4418,7 @@ is a genus of flowering plant in the family Asteraceae, and closely related</p>.
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/10145/medium.jpg,Tanacetum parthenium,"{""Tanacetum parthenium"":""accepted""}"
 54834,47351,Prunus serotina,rum cherry,species,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Prunus serotina</b></i>, commonly called <b>black cherry</b>, <b>wild black cherry</b>, <b>rum cherry</b>, or <b>mountain black cherry</b>, is a deciduous tree or shrub of the genus <i>Prunus</i>. Despite being called black cherry, it is not very closely related to the commonly cultivated cherries such as sweet cherry (<i>P. avium</i>), sour cherry (<i>P. cerasus</i>) and Japanese flowering cherries (<i>P. serrulata</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/14006/medium.jpg,Prunus serotina,"{""prunus"":""invalid"",""Prunus serotina"":""accepted""}"
+<p><i><b>Prunus serotina</b></i>, commonly called <b>black cherry</b>, <b>wild black cherry</b>, <b>rum cherry</b>, or <b>mountain black cherry</b>, is a deciduous tree or shrub of the genus <i>Prunus</i>. Despite being called black cherry, it is not very closely related to the commonly cultivated cherries such as sweet cherry (<i>P. avium</i>), sour cherry (<i>P. cerasus</i>) and Japanese flowering cherries (<i>P. serrulata</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/14006/medium.jpg,Prunus serotina,"{""Prunus serotina"":""accepted""}"
 54835,47351,Prunus virginiana,chokecherry,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Prunus virginiana</b></i>, commonly called <b>bitter-berry</b>, <b>chokecherry</b>, <b>Virginia bird cherry</b>, and <b>western chokecherry</b> (also <b>black chokecherry</b> for <i>P.&#160;virginiana</i> var. <i>demissa</i>), is a species of bird cherry (<i>Prunus</i> subgenus <i>Padus</i>) native to North America.
@@ -4660,9 +4464,6 @@ It has leathery purple-spotted green leaves and bright yellow</p>...",https://in
 
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/156216282/medium.jpg,Cardamine hirsuta,"{""Cardamine hirsuta"":""accepted""}"
-55830,55831,Glechoma hederacea,ground-ivy,species,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Glechoma hederacea</b></i> is an aromatic, perennial, evergreen creeper of the mint family Lamiaceae.  It is commonly known as <b>ground-ivy</b>, <b>gill-over-the-ground</b>, <b>creeping charlie</b>, <b>alehoof</b>, <b>tunhoof</b>, <b>catsfoot</b>, <b>field balm</b>, and <b>run-away-robin</b>. It is also sometimes known  as <b>creeping jenny</b>, but that name more commonly refers to <i>Lysimachia nummularia</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/72797040/medium.jpeg,Glechoma hederacea,"{""Ground"":""invalid""}"
 55884,53438,Rosa canina,Dog-rose,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Rosa canina</b></i>, commonly known as the <b>dog rose</b>, is a variable climbing, wild rose species native to Europe, northwest Africa, and western Asia.
@@ -4680,7 +4481,6 @@ It has leathery purple-spotted green leaves and bright yellow</p>...",https://in
 
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/206801592/medium.jpg,Lapsana communis,"{""Lapsana communis"":""accepted""}"
-56066,48539,Cytisus scoparius andreanus,,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/282592832/medium.jpg,Cytisus scoparius andreanus,"{""Cytisus Scoparius"":""invalid""}"
 56121,52979,Capsella bursa-pastoris,shepherd's-purse,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Capsella bursa-pastoris</b></i>, known as <b>shepherd's purse</b> because of its triangular flat fruits, which are purse-like, is a small annual and ruderal flowering plant in the mustard family (Brassicaceae). It is native to eastern Europe and Asia minor, but is naturalized and considered a common weed in many parts of the world, especially in colder climates, including British Isles, where it is regarded as</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/9103381/medium.jpg,Capsella bursa-pastoris,"{""Capsella bursa-pastoris"":""accepted""}"
@@ -4877,9 +4677,7 @@ Its true native range is not clear, but the plant is present on most continents,
 </p>
 <p><i><b>Monardella odoratissima</b></i> (<b>mountain coyote mint</b>, <b>mountain beebalm</b>, <b>mountain monardella</b> or <b>mountain pennyroyal</b>) is a perennial  flowering plant which grows in mountain forests and sagebrush scrub. It is a member of the mint family (Lamiaceae). It has the minty odor characteristic of this family.
 </p>
-
-
-",https://inaturalist-open-data.s3.amazonaws.com/photos/17872/medium.jpg,Monardella odoratissima,"{""Monardella odoratissima"":""accepted""}"
+<meta property=""mw:PageProp/toc"" />",https://inaturalist-open-data.s3.amazonaws.com/photos/17872/medium.jpg,Monardella odoratissima,"{""Monardella odoratissima"":""accepted""}"
 62681,54051,Crepis pleurocarpa,nakedstem hawksbeard,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Crepis pleurocarpa</b></i> is a North American species of flowering plant in the family Asteraceae known by the common name <b>nakedstem hawksbeard</b>. It is native to the western United States (Washington, Oregon, northern California and western Nevada.</p><p><i>Crepis pleurocarpa</i> grows in dry, wooded or open habitat, sometimes on serpentine soils. It is a taprooted perennial herb producing a branching</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/17904/medium.jpg,Crepis pleurocarpa,"{""Crepis pleurocarpa"":""accepted""}"
@@ -4892,14 +4690,14 @@ Its true native range is not clear, but the plant is present on most continents,
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/17876/medium.jpg,Chaenactis douglasii,"{""Chaenactis douglasii"":""accepted""}"
 62691,47121,Lupinus argenteus,silvery lupine,species,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Lupinus argenteus</b></i> is a species of lupine known by the common name <b>silvery lupine</b>. It is native to much of western North America from the southwestern Canadian provinces to the southwestern and midwestern United States, where it grows in several types of habitats, including sagebrush, grassland, and forests. This is a perennial herb growing erect to heights anywhere between 10 centimetres (3.9&#160;in</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/6748365/medium.jpeg,Lupinus argenteus,"{""Lupinus argenteus"":""accepted""}"
+<p><i><b>Lupinus argenteus</b></i> is a species of lupine known by the common name <b>silvery lupine</b>. It is native to much of western North America from the southwestern Canadian provinces to the southwestern and midwestern United States, where it grows in several types of habitats, including sagebrush, grassland, and forests. This is a perennial herb growing erect to heights anywhere between 10 centimetres (3.9&#160;in</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/18421301/medium.jpg,Lupinus argenteus,"{""Lupinus argenteus"":""accepted""}"
 63135,62021,Filipendula ulmaria ulmaria,Queen-of-the-meadow,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/3914624/medium.jpg,Filipendula ulmaria ulmaria,"{""Filipendula ulmaria ulmaria"":""accepted""}"
 63316,52635,Agastache urticifolia,nettle-leaf giant hyssop,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Agastache urticifolia</b></i> is a species of flowering plant in the mint family known by the common name <b>nettleleaf giant hyssop</b> or <b>horse mint</b>.</p>
 
 
-",https://inaturalist-open-data.s3.amazonaws.com/photos/47186226/medium.jpg,Agastache urticifolia,"{""Agastache urticifolia"":""accepted"",""Agastache \r\r\nurticifolia"":""invalid""}"
+",https://inaturalist-open-data.s3.amazonaws.com/photos/47186226/medium.jpg,Agastache urticifolia,"{""Agastache urticifolia"":""accepted""}"
 63352,47203,Lepidium draba,Heart-podded Hoary Cress,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Lepidium draba</b></i>, also known as <b>whitetop</b>, <b>hoary cress</b>, or <b>Thanet cress</b>, is a rhizomatous perennial flowering plant in the family Brassicaceae. It is native to western Asia and southeastern Europe and has been widely introduced elsewhere.
@@ -5091,9 +4889,6 @@ Its true native range is not clear, but the plant is present on most continents,
 
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/50260312/medium.jpeg,Grindelia squarrosa,"{""Grindelia squarrosa"":""accepted""}"
-77312,57979,Gutierrezia sarothrae,Broom Snakeweed,species,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Gutierrezia sarothrae</b></i> is a species of flowering plant in the family Asteraceae known by the common names <b>broom snakeweed</b>, <b>broomweed</b>, <b>snakeweed</b>, and <b>matchweed</b>. It is a subshrub native to much of the western half of North America, from western Canada to northern Mexico, and can be found in a number of arid, grassland, and mountain habitats. It can be toxic to livestock in large</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/51267043/medium.jpeg,Gutierrezia sarothrae,"{""Globosa"":""invalid""}"
 77354,56955,Helianthus cusickii,Cusick's Sunflower,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Helianthus cusickii</b></i> is a species of sunflower known by the common names <b>Cusick's sunflower</b> and <b>turniproot sunflower</b>. It is native to the western United States from Washington, Oregon, Idaho, northern California, and northwestern Nevada.</p><p><i>Helianthus cusickii</i> grows in mountain forests and foothills. This wildflower is a perennial up to 120&#160;cm (4 feet) tall, growing from a thick</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/6520777/medium.jpeg,Helianthus cusickii,"{""Helianthus cusickii"":""accepted""}"
@@ -5188,6 +4983,12 @@ Its true native range is not clear, but the plant is present on most continents,
 78798,72328,Pyrrocoma lanceolata,lance-leaved goldenweed,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Pyrrocoma lanceolata</b></i> is a species of flowering plant in the family Asteraceae known by the common name <b>lanceleaf goldenweed</b>. It is native to western North America from central Canada to northeastern California to Colorado, where it grows in many types of habitat, including disturbed places and areas with wet, alkali soils. It is a widespread and variable plant. It is a perennial herb growing one</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/143941870/medium.jpg,Pyrrocoma lanceolata,"{""Pyrrocoma lanceolata"":""accepted""}"
+78887,53438,Rosa woodsii,Woods' rose,species,"<p class=""mw-empty-elt"">
+</p>
+<p><i><b>Rosa woodsii</b></i> is a species of wild rose known by the common names <b>Woods' rose</b>, <b>interior rose</b>, <b>common wild rose</b>, <b>mountain rose</b>, <b>pear-hip rose</b>, and <b>prairie rose</b>.</p>
+
+
+",https://inaturalist-open-data.s3.amazonaws.com/photos/4560367/medium.jpeg,Rosa woodsii,"{""Rosa woodsii"":""accepted""}"
 79026,55735,Sedum lanceolatum,Lanceleaf Stonecrop,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Sedum lanceolatum</b></i> is a species of flowering plant in the family Crassulaceae known by the common names <b>spearleaf stonecrop</b> and <b>lanceleaf stonecrop</b>.
@@ -5233,9 +5034,7 @@ Its true native range is not clear, but the plant is present on most continents,
 84732,50879,Erigeron speciosus,aspen fleabane,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Erigeron speciosus</b></i> is a widespread North American species of flowering plants in the family Asteraceae known by the common names <b>aspen fleabane</b>, <b>garden fleabane</b>, and <b>showy fleabane</b>.</p>
-
-
-",https://inaturalist-open-data.s3.amazonaws.com/photos/159218891/medium.jpeg,Erigeron speciosus,"{""Erigeron speciosus"":""accepted""}"
+<meta property=""mw:PageProp/toc"" />",https://inaturalist-open-data.s3.amazonaws.com/photos/159218891/medium.jpeg,Erigeron speciosus,"{""Erigeron speciosus"":""accepted""}"
 85320,52736,Monarda fistulosa,wild bergamot,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Monarda fistulosa</b></i>, the <b>wild bergamot</b> or <b>bee balm</b>, is a wildflower in the mint family Lamiaceae, widespread and abundant as a native plant in much of North America. This plant, with showy summer-blooming pink to lavender flowers, is often used as a honey plant, medicinal plant, and garden ornamental.  The species is quite variable, and several subspecies or varieties have been recognized</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/47763/medium.jpg,Monarda fistulosa,"{""Monarda fistulosa"":""accepted""}"
@@ -5256,11 +5055,6 @@ Its true native range is not clear, but the plant is present on most continents,
 
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/11241242/medium.jpg,Aster alpinus,"{""Aster alpinus"":""accepted""}"
-124313,48670,Leucania,,genus,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Leucania</b></i> is a genus of moths of the family Noctuidae first described by Ferdinand Ochsenheimer in 1816.
-</p>
-",https://inaturalist-open-data.s3.amazonaws.com/photos/2253901/medium.jpg,,
 124526,55365,Grindelia integrifolia,Puget sound gumweed,species,"<p class=""mw-empty-elt"">
 </p>
 <p><b><i>Grindelia integrifolia</i>,</b> common name <b>Puget Sound gumweed</b>, is a plant species known only from Oregon, Washington and British Columbia. It grows in wet meadows and marshlands.</p>
@@ -5397,7 +5191,6 @@ Its true native range is not clear, but the plant is present on most continents,
 
 </p>
 <p>The <b>garden pansy</b> (<b><i>Viola</i> × <i>wittrockiana</i></b>) is a type of polychromatic large-flowered hybrid plant cultivated as a garden flower. It is derived by hybridization from several species in the section <i>Melanium</i> (""the pansies"") of the genus <i>Viola</i>, particularly <i>V. tricolor</i>, a wildflower of Europe and western Asia known as heartsease. It is sometimes</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/11140676/medium.jpg,Viola × wittrockiana,"{""Viola wittrockiana"":""unaccepted""}"
-181784,47121,Lupinus sparsiflorus inopinatus,,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/6475030/medium.jpg,Lupinus sparsiflorus inopinatus,"{""Lupinus sp"":""invalid""}"
 204304,72104,Drymocallis arguta,Tall Cinquefoil,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Drymocallis arguta</b></i>, commonly known as the <b>tall cinquefoil</b>, <b>prairie cinquefoil</b>, or <b>sticky cinquefoil</b>, is a perennial herbaceous plant native to North America. It was formerly included with the typical cinquefoils in the genus <i>Potentilla</i>.
@@ -5419,13 +5212,8 @@ The abundant golden yellow flowers bloom in spring.
 </p>
 <p><b><i>Nepeta</i> × <i>faassenii</i></b>, a flowering plant also known as <b>catmint</b> and <b>Faassen's catnip</b>, is a primary hybrid of garden origin. The parent species are <i>Nepeta racemosa</i> and <i>Nepeta nepetella</i>.
 </p><p>It is an herbaceous perennial, with oval, opposite, intricately veined, gray—green leaves, on square stems. The foliage is fragrant. It grows from 1–2 feet (30–61&#160;cm) tall by 1–3 feet</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/155914545/medium.jpg,Nepeta × faassenii,"{""Nepeta racemosa × nepetella"":""unaccepted"",""Nepeta faassenii"":""unaccepted""}"
-434513,49530,Larentia,,genus,"<p><b>Larentia</b> may refer to:
-</p>
-<ul><li>Acca Larentia, Hercules' mistress or the adoptive mother of Romulus and Remus in Roman mythology</li>
-<li><i>Larentia</i> (moth), a geometer moth genus</li>
-<li><i>Larentia</i> (plant), a plant genus in the iris family</li></ul>",https://inaturalist-open-data.s3.amazonaws.com/photos/1971549/medium.jpg,,
 491173,51611,Veronica peregrina xalapensis,hairy purslane speedwell,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/3264765/medium.JPG,Veronica peregrina xalapensis,"{""Veronica peregrina xalapensis"":""accepted""}"
-711086,203680,Pilosella caespitosa,Yellow Fox-and-cubs,species,"<p class=""mw-empty-elt"">
+711086,203680,Pilosella caespitosa,meadow hawkweed,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Pilosella caespitosa</b></i> (synonym <i><b>Hieracium caespitosum</b></i>, commonly known as <b>meadow hawkweed</b>, <b>yellow hawkweed</b>,<b>field hawkweed</b>, <b>king devil</b>, <b>yellow paintbrush</b>, <b>devil's paintbrush</b>, <b>yellow devil</b>, <b>yellow fox-and-cubs</b>, and <b>yellow king-devil</b>)
 is like several other <i>Pilosella</i> species and has a similar appearance to many of the hawkweeds</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/42013414/medium.jpg,Pilosella caespitosa,"{""Hieracium caespitosum"":""unaccepted""}"
@@ -5475,9 +5263,9 @@ is like several other <i>Pilosella</i> species and has a similar appearance to m
 1249575,47780,Iris,Section Iris,section,"<p><b>Iris</b> most often refers to:
 </p>
 <ul><li>Iris (anatomy), part of the eye</li>
+<li>Iris (color), an ambiguous color term</li>
 <li>Iris (mythology), a Greek goddess</li>
-<li><i>Iris</i> (plant), a genus of flowering plants</li>
-<li>Iris (color), an ambiguous color term</li></ul><p><b>Iris</b> or <b>IRIS</b> may also refer to:
+<li><i>Iris</i> (plant), a genus of flowering plants</li></ul><p><b>Iris</b> or <b>IRIS</b> may also refer to:
 </p>
 
 ",https://static.inaturalist.org/photos/197915920/medium.jpg,Iris,"{""Iris"":""accepted""}"
@@ -5495,7 +5283,7 @@ is like several other <i>Pilosella</i> species and has a similar appearance to m
 <dl><dt>Description</dt></dl><p><i>Allium falcifolium</i>, grows from a reddish-brown bulb one to two centimeters wide. The reddish or</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/1738052/medium.jpg,Allium falcifolium,"{""Allium falcifolium"":""accepted""}"
 47602,47603,Taraxacum officinale,common dandelion,species,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Taraxacum officinale</b></i>, the <b>dandelion</b> or <b>common</b> <b>dandelion</b>, is a herbaceous perennial flowering plant in the daisy family Asteraceae (syn. Compositae). The common dandelion is well known for its yellow flower heads that turn into round balls of many silver-tufted fruits that disperse in the wind. These balls are called ""clocks"" in both British and American English. The name ""blowball</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/63490891/medium.jpeg,Taraxacum officinale,"{""Taraxacum officinale"":""accepted""}"
+<p><i><b>Taraxacum officinale</b></i>, the <b>dandelion</b> or <b>common</b> <b>dandelion</b>, is a herbaceous perennial flowering plant in the daisy family Asteraceae (syn. Compositae). The common dandelion is well known for its yellow flower heads that turn into round balls of many silver-tufted fruits that disperse in the wind. These balls are called ""clocks"" in both British and American English. The name ""blowball</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/56076509/medium.jpeg,Taraxacum officinale,"{""Taraxacum officinale"":""accepted""}"
 48984,48160,Centaurea montana,Perennial Cornflower,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Centaurea  montana</b></i>, the <b>perennial cornflower</b>, <b>mountain cornflower</b>, <b>bachelor's button</b>, <b>montane knapweed</b> or <b>mountain bluet</b>, is a species of flowering plant in the family Asteraceae, endemic to Europe. It is widespread and common in the more southerly mountain ranges of Europe, but is rarer in the north. It escapes from gardens readily, and has thereby become established</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/25278/medium.jpg,Centaurea montana,"{""Cyanus montanus"":""unaccepted""}"
@@ -5505,8 +5293,8 @@ is like several other <i>Pilosella</i> species and has a similar appearance to m
 <p class=""mw-empty-elt"">
 </p>
 <p><i><b>Achillea millefolium</b></i>, commonly known as <b>yarrow</b> (<span></span>) or <b>common yarrow</b>, is a flowering plant in the family Asteraceae. Other common names include <b>old man's pepper</b>, <b>devil's nettle</b>, <b>sanguinary</b>, <b>milfoil</b>, <b>soldier's woundwort</b>, and <b>thousand seal</b>.
-</p><p>The plant is native to temperate regions of the Northern Hemisphere</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/4902/medium.jpg,Achillea millefolium,"{""Achillea millefolium"":""accepted"",""Mustard"":""invalid""}"
-53271,53113,Brassica rapa,Turnip,species,"<p class=""mw-empty-elt"">
+</p><p>The plant is native to temperate regions of the Northern Hemisphere</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/4902/medium.jpg,Achillea millefolium,"{""Achillea millefolium"":""accepted""}"
+53271,53113,Brassica rapa,field mustard,species,"<p class=""mw-empty-elt"">
 
 </p>
 <p><i><b>Brassica rapa</b></i> is a plant species growing in various widely cultivated forms including the <b>turnip</b> (a root vegetable); <b>Komatsuna</b>, <b>napa cabbage</b>, <b>bomdong</b>, <b>bok choy</b>, and <b>rapini</b>.
@@ -5549,7 +5337,6 @@ is like several other <i>Pilosella</i> species and has a similar appearance to m
 
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/9663584/medium.jpg,Polygonum paronychia,"{""Polygonum paronychia"":""accepted""}"
-60966,55365,Grindelia stricta platyphylla,Coastal Gum Plant,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/175126535/medium.jpg,Grindelia stricta platyphylla,"{""Grindelia Stricta"":""invalid""}"
 61009,50321,Lathyrus latifolius,Broad-leaved everlasting-pea,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Lathyrus latifolius</b></i>, the <b>perennial peavine</b>, <b>perennial pea</b>, <b>broad-leaved everlasting-pea</b>, or just <b>everlasting pea</b>, is a robust, sprawling herbaceous perennial flowering plant in the pea family Fabaceae. It is native to Europe but is present on other continents, such as North America and Australia, where it is most often seen along roadsides.</p>
@@ -5565,7 +5352,6 @@ It grows in moist areas such as meadows, marshes, or streamsides. It is found at
 <p><i><b>Rudbeckia hirta</b></i>, commonly called <b>black-eyed Susan</b>, is a North American flowering plant in the family Asteraceae, native to Eastern and Central North America and naturalized in the Western part of the continent as well as in China. It has now been found in all 10 Canadian Provinces and all 48 of the states in the contiguous United States.</p><p><i>Rudbeckia hirta</i> is the state flower of Maryland</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/135566/medium.jpg,Rudbeckia hirta,"{""Rudbeckia hirta"":""accepted""}"
 63735,47351,Prunus domestica,Plum,species,"<p><i><b>Prunus domestica</b></i> is a species of flowering plant in the family Rosaceae. A deciduous tree, it includes many varieties of the fruit trees known as plums in English, though not all plums belong to this species. The greengages and damsons also belong to subspecies of <i>P.&#160;domestica</i>.
 </p><p>Its hybrid parentage was believed to be <i>Prunus spinosa</i> and <i>P.&#160;cerasifera</i>; however recent cytogenetic evidence seem to implicate</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/92270923/medium.jpg,Prunus domestica,"{""Prunus domestica"":""accepted""}"
-63900,47351,Prunus virginiana demissa,Western Chokecherry,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/594423/medium.jpg,Prunus virginiana demissa,"{""Prunus virginiana "":""invalid""}"
 64241,53113,Brassica juncea,Brown Mustard,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Brassica juncea</b></i>, commonly <b>brown mustard</b>, <b>Chinese mustard</b>, <b>Indian mustard</b>, <b>leaf mustard</b>, <b>Oriental mustard</b> and <b>vegetable mustard</b>, is a species of mustard plant.</p>
@@ -5575,10 +5361,6 @@ It grows in moist areas such as meadows, marshes, or streamsides. It is found at
 67820,50879,Erigeron philadelphicus,Philadelphia fleabane,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Erigeron philadelphicus</b></i>, the <b>Philadelphia fleabane</b>, is a species of flowering plant in the composite family (Asteraceae). Other common names include <b>common fleabane</b>, <b>daisy fleabane</b>, <b>frost-root</b>, <b>marsh fleabane</b>, <b>poor robin's plantain</b>, <b>skervish</b>, and, in the British Isles, <b>robin's-plantain</b>, but all of these names are shared with other species of fleabanes</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/13932511/medium.jpg,Erigeron philadelphicus,"{""Erigeron philadelphicus"":""accepted""}"
-69714,47544,Rubus trivialis,southern dewberry,species,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Rubus trivialis</b></i>, commonly known as <b>southern dewberry</b>, is a species of flowering plant in the rose family (Rosaceae) native to the southern United States and northern Mexico. It is distinguished from northern dewberry (<i>Rubus flagellaris</i>) by its hispid stems. It is a perennial herb and blooms March to April.</p>
-",https://static.inaturalist.org/photos/63333674/medium.jpg,Rubus trivialis,"{""rubus trivialis"":""invalid""}"
 75869,53113,Brassica napus,rapeseed,species,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 
@@ -5622,7 +5404,6 @@ It grows in moist areas such as meadows, marshes, or streamsides. It is found at
 80915,55365,Grindelia stricta stricta,,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/9570300/medium.jpeg,Grindelia stricta stricta,"{""Grindelia stricta stricta"":""accepted""}"
 81366,53207,Senecio integerrimus exaltatus,columbia ragwort,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/403429/medium.png,Senecio integerrimus exaltatus,"{""Senecio integerrimus exaltatus"":""accepted""}"
 81370,53207,Senecio serra serra,tall ragwort,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/45916444/medium.jpeg,Senecio serra serra,"{""Senecio serra serra"":""accepted""}"
-84263,51042,Artemesia,Stiletto Shrimps,genus,,https://inaturalist-open-data.s3.amazonaws.com/photos/64065291/medium.jpeg,,
 85469,81754,Thymus vulgaris,common thyme,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Thymus vulgaris</b></i> (<b>common thyme</b>, <b>German thyme</b>, <b>garden thyme</b> or just <b>thyme</b>) is a species of flowering plant in the mint family Lamiaceae, native to southern Europe from the western Mediterranean to southern Italy. Growing to 15–30&#160;cm (6–12&#160;in) tall by 40&#160;cm (16&#160;in) wide, it is a bushy, woody-based evergreen subshrub with small, highly aromatic, grey-green leaves and clusters of</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/48088/medium.jpg,Thymus vulgaris,"{""Thymus vulgaris"":""accepted""}"
@@ -5656,20 +5437,8 @@ It grows in moist areas such as meadows, marshes, or streamsides. It is found at
 170837,56058,Leucanthemum × superbum,Shasta Daisy,hybrid,"<p class=""mw-empty-elt"">
 </p>
 <p><b><i>Leucanthemum</i> × <i>superbum</i></b>, the <b>Shasta daisy</b>, is a commonly grown flowering herbaceous perennial plant with the classic daisy appearance of white petals (ray florets) around a yellow disc, similar to the oxeye daisy <i>Leucanthemum vulgare</i> <small>Lam,</small> but larger.
-</p><p>It originated as a hybrid produced in 1890 by the American horticulturist Luther Burbank from a number of daisies</p>...",https://static.inaturalist.org/photos/3893205/medium.jpg,Leucanthemum × superbum,"{""Leucanthemum superbum"":""unaccepted"",""Leucanthemum x superbum"":""invalid""}"
-181924,55725,Symphytum × uplandicum,Russian Comfrey,hybrid,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Symphytum</b></i> is a genus of flowering plants in the borage family, Boraginaceae, known by the common name <b>comfrey</b> (pronounced <span></span>). There are 59 recognized species.  Some species and hybrids, particularly <i>S. officinale</i>, <i>Symphytum grandiflorum</i>, and <i>S.</i> × <i>uplandicum</i>, are used in gardening and herbal medicine. They are not to be confused with <i>Andersonglossum virginianum</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/304485/medium.jpg,Symphytum × uplandicum,"{""Symphytum � uplandicum"":""invalid""}"
-223548,124313,Leucania incognita,Unknown Wainscot,species,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Leucania incognita</b></i> is a species of cutworm or dart moth in the family Noctuidae first described by William Barnes and James Halliday McDunnough in 1918. It is found in North America.</p><p>The MONA or Hodges number for <i>Leucania incognita</i> is 10450.</p>
-",https://inaturalist-open-data.s3.amazonaws.com/photos/2898637/medium.jpg,Leucania incognita,"{""unknown"":""invalid""}"
-234316,47361,Apocynum androsaemifolium androsaemifolium,,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/3739485/medium.jpg,Apocynum androsaemifolium androsaemifolium,"{""Apocynum Androsaemifolium"":""invalid""}"
+</p><p>It originated as a hybrid produced in 1890 by the American horticulturist Luther Burbank from a number of daisies</p>...",https://static.inaturalist.org/photos/3893205/medium.jpg,Leucanthemum × superbum,"{""Leucanthemum superbum"":""unaccepted""}"
 242050,48367,Penstemon attenuatus palustris,,variety,,,Penstemon attenuatus palustris,"{""Penstemon attenuatus palustris"":""accepted""}"
-315646,50879,Erigeron coronarius durangensis,,variety,,,Erigeron coronarius durangensis,"{""Coronarius"":""invalid""}"
-434512,434513,Larentia clavaria,Mallow,species,"<p class=""mw-empty-elt"">
-</p>
-<p><i><b>Larentia clavaria</b></i>, the <b>mallow</b>, is a moth of the family Geometridae. The species was first described by Adrian Hardy Haworth in 1809. It is found from Siberia (Altai Mountains) in the east to the Iberian Peninsula, North Africa, and the British Isles in the west. In the north it ranges to the Caucasus, Tajikistan and Fennoscandia. In the south  it is found the western Mediterranean islands, Italy</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/28768097/medium.jpg,Larentia clavaria,"{""Larentia clavaria"":""accepted""}"
 498114,55820,Primula jeffreyi,Sierra shooting star,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/26873628/medium.jpg,Primula jeffreyi,"{""Primula jeffreyi"":""accepted""}"
 549932,55820,Primula frigida,Northern Shooting Star,species,"<p class=""mw-empty-elt"">
 </p>
@@ -5695,7 +5464,6 @@ It grows in moist areas such as meadows, marshes, or streamsides. It is found at
 972154,48160,Centaurea,,section,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Centaurea</b></i> (<span></span>) is a genus of over 700 species of herbaceous thistle-like flowering plants in the family Asteraceae. Members of the genus are found only north of the equator, mostly in the Eastern Hemisphere; the Middle East and surrounding regions are particularly species-rich. In the western United States, yellow starthistles are an invasive species. Around the year 1850, seeds from the plant</p>...",https://static.inaturalist.org/photos/77798831/medium.jpeg,Centaurea,"{""Centaurea"":""accepted""}"
-1051965,55776,Erica carnea carnea,,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/116925571/medium.jpeg,Erica carnea carnea,"{""Erica carnea "":""invalid""}"
 1080360,47357,Allium,,subsection,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Allium</b></i> is a genus of monocotyledonous flowering plants with hundreds of species, including the cultivated onion, garlic, scallion, shallot, leek, and chives. The generic name <i>Allium</i> is the Latin word for garlic, and the type species for the genus is <i>Allium sativum</i> which means ""cultivated garlic"".</p><p>Carl Linnaeus first described the genus <i>Allium</i> in 1753. Some sources refer to Greek</p>...",https://static.inaturalist.org/photos/126311853/medium.jpg,Allium,"{""Allium"":""accepted""}"
@@ -5703,12 +5471,6 @@ It grows in moist areas such as meadows, marshes, or streamsides. It is found at
 </p>
 <p>The <b>thymus</b> (<abbr title=""plural form"">pl.</abbr>: <b>thymuses</b> or <b>thymi</b>) is a specialized primary lymphoid organ of the immune system. Within the thymus, thymus cell lymphocytes or <i>T cells</i> mature. T cells are critical to the adaptive immune system, where the body adapts to specific foreign invaders. The thymus is located in the  upper front part of the chest, in the anterior superior mediastinum</p>...",,Thymus,"{""Thymus"":""accepted""}"
 1459423,49487,Rhododendron,Subsection Rhododendron,subsection,,https://static.inaturalist.org/photos/75894105/medium.jpeg,Rhododendron,"{""Rhododendron"":""accepted""}"
-43575,43367,Hominidae,Great Apes,family,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
-<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
-<p class=""mw-empty-elt"">
-
-</p>
-<p>The <b>Hominidae</b> (<span></span>), whose members are known as the <b>great apes</b> or <b>hominids</b> (<span></span>), are a taxonomic family of primates that includes eight extant species in four genera: <i>Pongo</i> (the Bornean, Sumatran and</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/80550643/medium.jpg,,
 49486,49487,Rhododendron catawbiense,Catawba Rhododendron,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Rhododendron catawbiense</b></i>, with common names <b>Catawba rosebay</b>, <b>Catawba rhododendron</b>, <b>mountain rosebay</b>, <b>purple ivy</b>, <b>purple laurel</b>, <b>purple rhododendron</b>, <b>red laurel</b>, <b>rosebay</b>, <b>rosebay laurel</b>, is a species of <i>Rhododendron</i> native to the eastern United States, growing mainly in the southern Appalachian Mountains from Virginia south to northern</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/86538698/medium.jpg,Rhododendron catawbiense,"{""Rhododendron catawbiense"":""accepted""}"
@@ -5734,7 +5496,7 @@ It grows in moist areas such as meadows, marshes, or streamsides. It is found at
 </p>
 
 
-",https://inaturalist-open-data.s3.amazonaws.com/photos/66817598/medium.jpeg,Draba verna,"{""Draba verna"":""accepted""}"
+",https://inaturalist-open-data.s3.amazonaws.com/photos/847762/medium.jpg,Draba verna,"{""Draba verna"":""accepted""}"
 56113,56112,Symphyotrichum foliaceum,Leafy Aster,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/409552/medium.jpg,Symphyotrichum foliaceum,"{""Symphyotrichum foliaceum"":""accepted""}"
 56861,56112,Symphyotrichum chilense,Pacific Aster,species,"<p class=""mw-empty-elt"">
 
@@ -5777,7 +5539,6 @@ It grows in moist areas such as meadows, marshes, or streamsides. It is found at
 <p><i><b>Rhododendron columbianum</b></i>, commonly known as <b>western Labrador tea</b>, <b>swamp tea</b>, or <b>muskeg tea</b>, is a shrub that is widespread in the western United States and in western Canada, reported from British Columbia, Alberta, Washington, Oregon, Idaho, California, Montana, Wyoming, Utah, Nevada, and Colorado. It grows in wet places from sea level up to 3,500&#160;m (11,000&#160;ft). It was formerly known</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/3832710/medium.JPG,Rhododendron columbianum,"{""Rhododendron columbianum"":""accepted""}"
 79295,56112,Symphyotrichum bracteolatum,Eaton's aster,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/49113905/medium.jpg,Symphyotrichum bracteolatum,"{""Symphyotrichum bracteolatum"":""accepted""}"
 79303,56112,Symphyotrichum subspicatum,Douglas' Aster,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/3497297/medium.JPG,Symphyotrichum subspicatum,"{""Symphyotrichum subspicatum"":""accepted"",""Aster subspicatus"":""unaccepted""}"
-82898,47357,Allium schoenoprasum schoenoprasum,Wild Chives,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/1817761/medium.jpg,Allium schoenoprasum schoenoprasum,"{""Allium Schoenoprasum"":""invalid""}"
 83059,49487,Rhododendron maximum,great rhododendron,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Rhododendron maximum</b></i> — its common names include <b>great laurel</b>, <b>great rhododendron</b>, <b>rosebay rhododendron</b>, <b>American rhododendron</b> and <b>big rhododendron</b> — is a species of <i>Rhododendron</i> native to the Appalachians of eastern North America, from Alabama north to coastal Nova Scotia.
@@ -5833,17 +5594,14 @@ It grows in moist areas such as meadows, marshes, or streamsides. It is found at
 </p>
 <p><i><b>Euphorbia rigida</b></i>, the <b>gopher spurge</b> or <b>upright myrtle spurge</b>, is a species of flowering plant in the spurge family Euphorbiaceae, native to southern Europe and southwest Asia. Growing to 50&#160;cm (20&#160;in) tall and broad, it is a bushy evergreen perennial with somewhat fleshy leaves arranged in a spiral, bearing bunches of bright yellow flowers in late Spring.
 </p><p>In its native Mediterranean</p>...",https://static.inaturalist.org/photos/14001076/medium.jpg,Euphorbia rigida,"{""Euphorbia rigida"":""accepted""}"
-239064,52818,Achillea millefolium borealis,Northern Yarrow,variety,,https://static.inaturalist.org/photos/9180893/medium.jpg,Achillea millefolium borealis,"{""Achille millefolium"":""invalid""}"
 281359,50644,Salvia divinorum,Diviner's Sage,species,"<p class=""mw-empty-elt"">
 
 
 </p>
 <p><i><b>Salvia divinorum</b></i>  (Latin: <i lang=""la"">sage of the diviners</i>; also called <b>ska maría pastora</b>, <b>seer's sage</b>, <b>yerba de la pastora</b>, <b>magic mint</b> or simply <b>salvia</b>) is a plant species with transient psychoactive properties when its leaves, or extracts made from the leaves, are administered by smoking, chewing, or drinking (as a tea). The leaves contain the potent compound</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/29674417/medium.jpeg,Salvia divinorum,"{""Salvia divinorum"":""accepted""}"
-322552,52818,Achillea millefolium lanulosa,Mountain Yarrow,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/2538857/medium.JPG,Achillea millefolium lanulosa,"{""Achillea lanulosa"":""invalid""}"
 479654,48160,Centaurea × moncktonii,Monckton's Knapweed,hybrid,,https://inaturalist-open-data.s3.amazonaws.com/photos/25509714/medium.jpg,Centaurea × moncktonii,"{""Centaurea × moncktonii"":""accepted""}"
 502213,48160,Centaurea thuillieri,Meadow Knapweed,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/69457034/medium.jpeg,Centaurea thuillieri,"{""Centaurea x moncktonii"":""unaccepted"",""Centaurea thuillieri"":""accepted""}"
 524498,49487,Rhododendron pachysanthum,,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/23675405/medium.jpg,Rhododendron pachysanthum,"{""Rhododendron pachysanthum"":""accepted""}"
-1228206,50321,Lathyrus latifolius latifolius,,subspecies,,https://static.inaturalist.org/photos/130657490/medium.jpeg,Lathyrus latifolius latifolius,"{""Lathyrus Latifolius"":""invalid""}"
 1416877,56112,Symphyotrichum,eastern American asters,subsection,,https://inaturalist-open-data.s3.amazonaws.com/photos/96378098/medium.jpeg,Symphyotrichum,"{""Symphyotrichum"":""accepted""}"
 1449409,47544,Rubus,Series Rubus,complex,,https://inaturalist-open-data.s3.amazonaws.com/photos/31000826/medium.jpeg,Rubus,"{""Rubus"":""accepted""}"
 47220,47221,Apis,Honey Bees,genus,"<p class=""mw-empty-elt"">
@@ -5895,7 +5653,7 @@ It grows in moist areas such as meadows, marshes, or streamsides. It is found at
 <p>The bee genus <i><b>Anthophora</b></i> is one of the largest in the family Apidae, with over 450 species worldwide in 14 different subgenera. They are most abundant and diverse in the Holarctic and African biogeographic regions. All species are solitary, though many nest in large aggregations. Nearly all species make nests in the soil, either in banks or in flat ground; the larvae develop in cells with waterproof linings</p>...",https://static.inaturalist.org/photos/50500980/medium.jpg,,
 61317,47544,Rubus armeniacus,Armenian Blackberry,species,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Rubus armeniacus</b></i>, the <b>Himalayan blackberry</b> or <b>Armenian blackberry</b>,  is a species of <i>Rubus</i> in the blackberry group <i>Rubus</i> subgenus <i>Rubus</i> series <i>Discolores</i> (P.J. Müll.) Focke. It is native to Armenia and Northern Iran, and widely naturalised elsewhere. Both its scientific name and origin have been the subject of much confusion, with much of the literature referring</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/16312416/medium.jpg,Rubus armeniacus,"{""rubus armeniacus"":""invalid"",""Rubus armeniacus"":""accepted"",""Rubus Armeniacus"":""invalid"",""Rubus armeniacus "":""invalid""}"
+<p><i><b>Rubus armeniacus</b></i>, the <b>Himalayan blackberry</b> or <b>Armenian blackberry</b>,  is a species of <i>Rubus</i> in the blackberry group <i>Rubus</i> subgenus <i>Rubus</i> series <i>Discolores</i> (P.J. Müll.) Focke. It is native to Armenia and Northern Iran, and widely naturalised elsewhere. Both its scientific name and origin have been the subject of much confusion, with much of the literature referring</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/16312416/medium.jpg,Rubus armeniacus,"{""Rubus armeniacus"":""accepted""}"
 61891,49707,Sphecodes,Blood Bees,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Sphecodes</b></i> is a genus of cuckoo bees from the family Halictidae, the majority of which are black and red in colour and are colloquially known as <b>blood bees</b>. <i>Sphecodes</i> bees are kleptoparasitic on other bees, especially bees in the genera <i>Lasioglossum</i>, <i>Halictus</i> and <i>Andrena</i>. The adults consume nectar, but because they use other bees' provisions to feed their offspring they</p>...",https://static.inaturalist.org/photos/16799170/medium.jpg,,"{""Sphecodes"":""accepted""}"
@@ -5931,7 +5689,7 @@ It grows in moist areas such as meadows, marshes, or streamsides. It is found at
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/43531269/medium.jpg,Symphyotrichum campestre,"{""Symphyotrichum campestre"":""accepted""}"
 121512,47221,Diadasia,,genus,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Diadasia</b></i> is a genus of bees in family Apidae. Species of <i>Diadasia</i> are oligolectic, specialized on a relatively small number of plant species. 
+<p><i><b>Diadasia</b></i> is a genus of bees in family Apidae. Species of <i>Diadasia</i> are oligolectic, specialized on a relatively small number of plant species.
 </p><p>Their host plants include asters, bindweeds, cacti, mallows, and willowherbs, although mallows are the most common and likely ancestral host plant for the whole genus. Its tribe is Emphorini.
 In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/34710610/medium.jpg,,
 121513,47221,Habropoda,Mountain-digger Bees,genus,"<p class=""mw-empty-elt"">
@@ -5980,7 +5738,7 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/28438258/medium.jpg,,"{""Epeolus"":""accepted""}"
 155108,47221,Ceratina,Small Carpenter Bees,genus,"<p class=""mw-empty-elt"">
 </p>
-<p>The cosmopolitan bee genus <i><b>Ceratina</b></i>, often referred to as <b>small carpenter bees</b>, is the sole lineage of the tribe <b>Ceratinini</b>, and is not closely related to the more familiar carpenter bees. The genus presently contains over 300 species in 23 subgenera. They make nests in dead wood, stems, or pith, and while many are solitary, a number are subsocial, with mothers caring for their larvae, and</p>...",https://static.inaturalist.org/photos/83900826/medium.jpg,,
+<p>The cosmopolitan bee genus <i><b>Ceratina</b></i>, often referred to as <b>small carpenter bees</b>, is the sole lineage of the tribe <b>Ceratinini</b>, and is not closely related to the more familiar carpenter bees. The genus presently contains over 300 species in 23 subgenera. They make nests in dead wood, stems, or pith, and while many are solitary, a number are subsocial, with mothers caring for their larvae, and</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/62287264/medium.jpg,,
 168025,47544,Rubus bifrons,Himalayan Blackberry,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Rubus bifrons</b></i>, the <b>European blackberry</b> or <b>Himalayan blackberry</b>, is a European species of flowering plant in the rose family. It is widespread across much of Europe and naturalized in scattered parts of North America. It is sometimes considered to include the species <i>R. armeniacus</i>.</p><p><i>Rubus bifrons</i> is a spiny shrub up to 50&#160;cm (20 inches) tall. Stems are biennial, arching</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/955171/medium.jpg,Rubus bifrons,"{""Rubus bifrons"":""accepted""}"
@@ -6023,7 +5781,6 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/22677282/medium.jpg,,
 217440,127741,Colletes fulgidus,Glittering Cellophane Bee,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/296610632/medium.jpg,Colletes fulgidus,"{""Colletes fulgidus"":""accepted""}"
-252417,52777,Anthidiellum,,genus,,https://static.inaturalist.org/photos/29244543/medium.jpg,,
 252470,52777,Chelostoma,Scissor Bees,genus,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Chelostoma</b></i> is a genus of bees in the Osmiini tribe of the family Megachilidae. The genus is divided into 5 subgenera with at least 60 described species.</p>
@@ -6041,7 +5798,6 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 434303,52777,Pseudoanthidium,Small Carder Bees,genus,,https://static.inaturalist.org/photos/17445299/medium.jpg,,
 458977,173715,Dufourea holocyanea,All-blue Shortface,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/43586976/medium.jpeg,Dufourea holocyanea,"{""Dufourea holocyanea"":""accepted""}"
 458978,173715,Dufourea trochantera,,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/158673058/medium.jpg,Dufourea trochantera,"{""Dufourea trochantera"":""accepted""}"
-464375,49487,Rhododendron cinnabarinum xanthocodon,,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/256005601/medium.jpg,Rhododendron cinnabarinum xanthocodon,"{""Rhododendron x"":""invalid""}"
 521869,48160,Centaurea stoebe australis,Spotted Starthistle,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/87878687/medium.jpg,Centaurea stoebe australis,"{""Centaurea maculosa"":""unaccepted""}"
 574503,47221,Biastes,,genus,,https://inaturalist-open-data.s3.amazonaws.com/photos/31212448/medium.jpg,,
 602834,127812,Hylaeus,,subgenus,"<p><b>Hylaeus</b> may refer to:
@@ -6052,11 +5808,6 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 </p>
 <ul><li>The species represented by the type specimen of <i>Rubus fruticosus</i> L., which is also the type specimen of the genus <i>Rubus</i>. This specimen is considered to match the species <i>R. plicatus</i>, in <i>Rubus</i> subgenus <i>Rubus</i>, section <i></i></li></ul>...",https://inaturalist-open-data.s3.amazonaws.com/photos/76714167/medium.jpg,Rubus fruticosus,"{""Rubus fruticosus"":""accepted""}"
 1254664,47221,Brachymelecta,,genus,,https://inaturalist-open-data.s3.amazonaws.com/photos/139810211/medium.jpg,,
-43583,43575,Homo,Ancestral and Modern Humans,genus,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
-<p class=""mw-empty-elt"">
-
-</p>
-<p><i><b>Homo</b></i> (from Latin <i> homō</i>&#160;'human') is the genus that emerged from the genus <i>Australopithecus</i> and encompasses the extant species <i>Homo sapiens</i> (modern humans) and several extinct species classified as either ancestral to or closely related to modern humans, including <i>Homo&#160;erectus</i> and <i>Homo&#160;neanderthalensis</i></p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/80550464/medium.jpg,,
 81375,48678,Solidago lepida salebrosa,western goldenrod,variety,,https://inaturalist-open-data.s3.amazonaws.com/photos/1487644/medium.jpg,Solidago lepida salebrosa,"{""Solidago lepida salebrosa"":""accepted""}"
 178357,57668,Perdita,Fairy Bees,genus,"<p class=""mw-empty-elt"">
 </p>
@@ -6087,7 +5838,7 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/63045242/medium.jpeg,Habropoda depressa,"{""Habropoda depressa"":""accepted""}"
 361454,121513,Habropoda dammersi,,species,,,Habropoda dammersi,"{""Habropoda dammersi"":""accepted""}"
 361480,127812,Hylaeus nunenmacheri,,species,,https://static.inaturalist.org/photos/70819033/medium.jpg,Hylaeus nunenmacheri,"{""Hylaeus nunenmacheri"":""accepted""}"
-458980,121513,Habropoda cineraria,Ashy Digger Bee,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/68267818/medium.jpg,Habropoda cineraria,"{""Habropoda cineraria"":""accepted""}"
+458980,121513,Habropoda cineraria,Ashy Digger Bee,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/260661671/medium.jpg,Habropoda cineraria,"{""Habropoda cineraria"":""accepted""}"
 538903,52775,Bombus,,subgenus,"<link rel=""mw-deduplicated-inline-style"" href=""mw-data:TemplateStyles:r1033289096"" />
 <p class=""mw-empty-elt"">
 
@@ -6158,11 +5909,6 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 1339526,178745,Triepeolus argyreus,,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/309775759/medium.jpeg,Triepeolus argyreus,"{""Triepeolus argyreus"":""accepted""}"
 1428586,252953,Pseudopanurgus,,subgenus,,https://static.inaturalist.org/photos/153001496/medium.jpg,Pseudopanurgus,"{""Pseudopanurgus"":""accepted""}"
 1447898,57678,Lasioglossum allonotum,,species,,,Lasioglossum allonotum,"{""Lasioglossum allonotum"":""accepted""}"
-43584,43583,Homo sapiens,Human,species,"<p class=""mw-empty-elt"">
-
-
-</p>
-<p><b>Humans</b>, or <b>modern humans</b> (<i><b>Homo sapiens</b></i>), are the most common and widespread species of primate. A great ape characterized by their hairlessness, bipedalism, and high intelligence, humans have a large brain and resulting cognitive skills that enable them to thrive in varied environments and develop complex societies and civilizations. Humans are highly social and tend to live in complex</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/80550183/medium.jpg,Homo sapiens,"{""Homo sapiens"":""accepted""}"
 47219,47220,Apis mellifera,Western Honey Bee,species,"<p class=""mw-empty-elt"">
 </p>
 <p>The <b>western honey bee</b> or <b>European honey bee</b> (<i><b>Apis mellifera</b></i>) is the most common of the 7–12 species of honey bees worldwide. The genus name <i>Apis</i> is Latin for ""bee"", and <i>mellifera</i> is the Latin for ""honey-bearing"" or ""honey carrying"", referring to the species' production of honey.</p><p>Like all honey bee species, the western honey bee is eusocial, creating colonies with a single</p>...",https://static.inaturalist.org/photos/2369526/medium.jpg,Apis mellifera,"{""Apis mellifera"":""accepted""}"
@@ -6182,7 +5928,7 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 </p>
 <p><i><b>Anthophora urbana</b></i> is a species of anthophorine bee in the family Apidae. It is found in Central America and North America.</p>
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/104857418/medium.jpeg,Anthophora urbana,"{""Anthophora urbana"":""accepted""}"
-57686,51111,Xylocopa tabaniformis,Horse-fly Carpenter,species,"<i><b>Xylocopa tabaniformis</b></i>, the <b>horsefly-like carpenter bee</b>, is a species of carpenter bee in the family Apidae. It is found in Central America, North America, and South America.",https://inaturalist-open-data.s3.amazonaws.com/photos/29796/medium.jpg,Xylocopa tabaniformis,"{""Xylocopa tabaniformis"":""accepted""}"
+57686,51111,Xylocopa tabaniformis,Horse-fly Carpenter Bee,species,"<i><b>Xylocopa tabaniformis</b></i>, the <b>horsefly-like carpenter bee</b>, is a species of carpenter bee in the family Apidae. It is found in Central America, North America, and South America.",https://inaturalist-open-data.s3.amazonaws.com/photos/29796/medium.jpg,Xylocopa tabaniformis,"{""Xylocopa tabaniformis"":""accepted""}"
 57688,51111,Xylocopa californica,Western Carpenter Bee,species,"<p class=""mw-empty-elt"">
 </p>
 <p>The <b>California carpenter bee</b>, <i><b>Xylocopa californica</b></i>, is a species of carpenter bee in the order Hymenoptera, and it is native to western North America.</p>
@@ -6253,7 +5999,7 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 <p><i><b>Osmia ribifloris</b></i>, one of several species referred to as a <b>blueberry bee</b>, is a megachilid bee native to western North America, including Oregon, California, Nevada, Utah, Arizona, New Mexico, Texas and northern Mexico. This solitary bee normally gathers pollen from plants in the family Ericaceae, with manzanita, <i>Arctostaphylos sp.</i> being a preferred host in the wild.  It will pollinate blueberries</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/63693456/medium.jpg,Osmia ribifloris,"{""Osmia ribifloris"":""accepted""}"
 133797,50086,Agapostemon texanus,Texas Striped Sweat Bee,species,"<p class=""mw-empty-elt"">
 </p>
-<p><i><b>Agapostemon texanus</b></i> is a species of bee found in North America. Commonly known as the metallic green sweat bee or the Texas striped sweat bee, it varies greatly in its appearance, with variations in color and in the amount of black markings on the legs.</p><p>The flight season of <i>A. texanus</i> ranges from March to October with their peak activity happening in May to September. They transport pollen</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/165112380/medium.jpeg,Agapostemon texanus,"{""Agapostemon texanus"":""accepted""}"
+<p><i><b>Agapostemon texanus</b></i> is a species of bee found in North America. Commonly known as the <b>metallic green sweat bee</b> or the Texas striped sweat bee, it varies greatly in its appearance, with variations in color and in the amount of black markings on the legs.</p><p>The flight season of <i>A. texanus</i> ranges from March to October with their peak activity happening in May to September. They transport</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/165112380/medium.jpeg,Agapostemon texanus,"{""Agapostemon texanus"":""accepted""}"
 135310,121512,Diadasia enavata,Sunflower Chimney Bee,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Diadasia enavata</b></i>, the <b>sunflower chimney bee</b>, is a species of chimney bee in the family Apidae. It is found in Central America and North America. It is a pollinator restricted to plants of the Asteraceae family. It has been observed pollinating <i>Coreopsis tinctoria</i>.</p>
@@ -6287,7 +6033,7 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 199102,57678,Lasioglossum cressonii,Cresson's Sweat Bee,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Lasioglossum cressonii</b></i> (Robertson, 1890) is a species in the sweat bee genus Lasioglossum, family Halictidae. Halictidae exhibit eusocial hierarchy behavior which is interesting given that eusociality in this group is hard to evolve and easy to lose. <i>L. cressonii</i> is found throughout North America. <i>L. cressonii</i> have been shown to be important pollinators for apple trees and many other North</p>...",https://inaturalist-open-data.s3.amazonaws.com/photos/49025691/medium.jpeg,Lasioglossum cressonii,"{""Lasioglossum cressonii"":""accepted""}"
-199115,57677,Halictus confusus,Southern Bronze Furrow Bee,species,"<i><b>Halictus confusus</b></i>, the <b>southern bronze furrow bee</b>, is a species of sweat bee in the family Halictidae.",https://inaturalist-open-data.s3.amazonaws.com/photos/70668589/medium.jpeg,Halictus confusus,"{""Halictus confusus"":""accepted""}"
+199115,57677,Halictus confusus,Confusing Furrow Bee,species,"<i><b>Halictus confusus</b></i>, the <b>southern bronze furrow bee</b>, is a species of sweat bee in the family Halictidae.",https://inaturalist-open-data.s3.amazonaws.com/photos/70668589/medium.jpeg,Halictus confusus,"{""Halictus confusus"":""accepted""}"
 199124,57674,Osmia caerulescens,Blue Mason Bee,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Osmia caerulescens</b></i>, the <b>blue mason bee</b>, is a species of solitary bee from the family Megachilidae. It has a Holarctic distribution extending into the Indomalayan region, although its presence in the Nearctic may be due to human-assisted introduction.</p>
@@ -6307,7 +6053,9 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 </p>
 <p><i><b>Megachile melanophaea</b></i> is a species of leaf-cutter bee in the family Megachilidae. It was first described by the British zoologist Frederick Smith in 1853. It is native to North America.
 </p>
-<meta property=""mw:PageProp/toc"" />",https://inaturalist-open-data.s3.amazonaws.com/photos/139404100/medium.png,Megachile melanophaea,"{""Megachile melanophaea"":""accepted""}"
+
+
+",https://inaturalist-open-data.s3.amazonaws.com/photos/139404100/medium.png,Megachile melanophaea,"{""Megachile melanophaea"":""accepted""}"
 199134,52784,Megachile inermis,,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Megachile inermis</b></i> is a species of bee in the family Megachilidae. It was described by Provancher in 1888.</p>
@@ -6523,7 +6271,7 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 361498,173032,Ashmeadiella foveata,,species,,,Ashmeadiella foveata,"{""Ashmeadiella foveata"":""accepted""}"
 361503,252470,Chelostoma phaceliae,,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/140115136/medium.jpeg,Chelostoma phaceliae,"{""Chelostoma phaceliae"":""accepted""}"
 361505,57672,Dianthidium singulare,Singular Pebble Bee,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/21319333/medium.jpeg,Dianthidium singulare,"{""Dianthidium singulare"":""accepted""}"
-361559,177785,Hoplitis hypocrita,Mimic Small-Mason,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/21185823/medium.jpg,Hoplitis hypocrita,"{""Hoplitis hypocrita"":""accepted""}"
+361559,177785,Hoplitis hypocrita,Mimic Small-Mason,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/108521775/medium.jpg,Hoplitis hypocrita,"{""Hoplitis hypocrita"":""accepted""}"
 361566,52784,Megachile coquilletti,,species,"<p class=""mw-empty-elt"">
 </p>
 <p><i><b>Megachile coquilletti</b></i> is a species of bee in the family Megachilidae. It was described by Theodore Dru Alison Cockerell in 1915.</p>
@@ -6558,7 +6306,7 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 453650,57678,Lasioglossum anhypops,Miteless Sweat Bee,species,,,Lasioglossum anhypops,"{""Lasioglossum anhypops"":""accepted""}"
 459047,124222,Heriades cressoni,,species,,,Heriades cressoni,"{""Heriades cressoni"":""accepted""}"
 459048,252470,Chelostoma minutum,,species,,,Chelostoma minutum,"{""Chelostoma minutum"":""accepted""}"
-459051,57682,Anthophora peritomae,,species,,,Anthophora peritomae,"{""Anthophora peritomae"":""accepted""}"
+459051,57682,Anthophora peritomae,,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/9450000/medium.jpg,Anthophora peritomae,"{""Anthophora peritomae"":""accepted""}"
 459058,57672,Dianthidium curvatum,Curved Pebble Bee,species,<i><b>Dianthidium curvatum</b></i> is a species of hymenopteran in the family Megachilidae. It is found in North America.,https://inaturalist-open-data.s3.amazonaws.com/photos/78924199/medium.jpg,Dianthidium curvatum,"{""Dianthidium curvatum"":""accepted""}"
 459079,177785,Hoplitis louisae,Louisa's Small-Mason,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/224110113/medium.jpg,Hoplitis louisae,"{""Hoplitis louisae"":""accepted""}"
 459080,177785,Hoplitis robusta,Robust Small-Mason,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/291065838/medium.jpg,Hoplitis robusta,"{""Hoplitis robusta"":""accepted""}"
@@ -6643,7 +6391,6 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 <p><i><b>Diadasia diminuta</b></i>, the <b>globe mallow bee</b>, is a species of chimney bee in the family Apidae. It is found in Central America and North America.</p>
 ",https://inaturalist-open-data.s3.amazonaws.com/photos/53784819/medium.jpeg,Diadasia diminuta,"{""Diadasia diminuta"":""accepted""}"
 308914,57678,Lasioglossum aberrans,,species,,,Lasioglossum aberrans,"{""Lasioglossum aberrans"":""accepted""}"
-361496,252417,Anthidiellum notatum robertsoni,California Rotund-Resin Bee,subspecies,,https://inaturalist-open-data.s3.amazonaws.com/photos/81246698/medium.jpg,Anthidiellum notatum robertsoni,"{""Anthidiellum robertsoni"":""invalid""}"
 453635,57678,Lasioglossum albohirtum,,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/277230527/medium.jpg,Lasioglossum albohirtum,"{""Lasioglossum albohirtum"":""accepted""}"
 459090,57678,Lasioglossum diatretum,Reticulated Sweat Bee,species,,,Lasioglossum diatretum,"{""Lasioglossum diatretum"":""accepted""}"
 459092,57678,Lasioglossum ebmerellum,Ebmer's Sweat Bee,species,,,Lasioglossum ebmerellum,"{""Lasioglossum ebmerellum"":""accepted""}"
@@ -6651,7 +6398,7 @@ In the Sonoran Desert, <i>Diadasia rinconis</i> is considered</p>...",https://in
 459102,57678,Lasioglossum synthyridis,Figwort Sweat Bee,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/64066689/medium.jpeg,Lasioglossum synthyridis,"{""Lasioglossum synthyridis"":""accepted""}"
 459104,57678,Lasioglossum nigrum,Black Sweat Bee,species,,,Lasioglossum nigrum,"{""Lasioglossum nigrum"":""accepted""}"
 556539,57678,Lasioglossum tuolumnense,,species,,,Lasioglossum tuolumnense,"{""Lasioglossum tuolumnense"":""accepted""}"
-883222,57678,Lasioglossum pulveris,,species,,,Lasioglossum pulveris,"{""Lasioglossum pulveris"":""accepted""}"
+883222,57678,Lasioglossum pulveris,,species,,https://www.inaturalist.org/attachment_defaults/local_photos/medium.png,Lasioglossum pulveris,"{""Lasioglossum pulveris"":""accepted""}"
 1020304,52775,Bombus vancouverensis,Vancouver Bumble Bee,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/285392473/medium.jpg,Bombus vancouverensis,"{""Bombus vancouverensis"":""accepted""}"
 1339272,57678,Lasioglossum vaporellum,,species,,,Lasioglossum vaporellum,"{""Lasioglossum vaporellum"":""accepted""}"
 1426170,57678,Lasioglossum helianthi,,species,,https://inaturalist-open-data.s3.amazonaws.com/photos/9221340/medium.jpg,Lasioglossum helianthi,"{""Lasioglossum imbrex"":""unaccepted"",""Lasioglossum helianthi"":""accepted""}"

@@ -2,10 +2,12 @@
 "use strict";
 
 const readline = require("readline"),
+    glob = require("glob"),
     fs = require("fs-extra");
 
 const fluid = require("infusion");
 const terser = require("terser");
+const path = require("path");
 
 const buildIndex = {
     excludes: [
@@ -59,32 +61,8 @@ const buildIndex = {
         src: "src/client/css/pepiowelh.css",
         dest: "docs/css/pepiowelh.css"
     }, {
-        src: "src/buildSource/Galiano Life List.html",
-        dest: "docs/Galiano Life List.html"
-    }, {
-        src: "src/buildSource/Comprehensive Lists.html",
-        dest: "docs/Comprehensive Lists.html"
-    }, {
-        src: "src/buildSource/Squamish Life List.html",
-        dest: "docs/Squamish Life List.html"
-    }, {
-        src: "src/buildSource/dataPaperSunburstAndMap.html",
-        dest: "docs/dataPaperSunburstAndMap.html"
-    }, {
-        src: "src/buildSource/Data Paper Part I Visualisation.html",
-        dest: "docs/Data Paper Part I Visualisation.html"
-    }, {
-        src: "src/buildSource/Valdes Island Biodiversity.html",
-        dest: "docs/Valdes Island Biodiversity.html"
-    }, {
-        src: "src/buildSource/Xetthecum.html",
-        dest: "docs/Xetthecum.html"
-    }, {
-        src: "src/buildSource/Pe'pi'ow'elh.html",
-        dest: "docs/Pe'pi'ow'elh.html"
-    }, {
-        src: "src/buildSource/index.html",
-        dest: "docs/index.html"
+        src: "src/buildSource/*.html",
+        dest: "docs/"
     }, {
         src: "data/dataPaper-I/Life.json.lz4",
         dest: "docs/data/dataPaper-I/Life.json.lz4"
@@ -135,6 +113,46 @@ const readLines = function (filename) {
     return togo;
 };
 
+// These two taken from reknit.js
+
+const copyGlob = function (sourcePattern, targetDir) {
+    console.log("copyGlob ", sourcePattern);
+    const fileNames = glob.sync(sourcePattern);
+    console.log("Got files ", fileNames);
+    fileNames.forEach(filePath => {
+        const fileName = path.basename(filePath);
+        const destinationPath = path.join(targetDir, fileName);
+
+        fs.ensureDirSync(path.dirname(destinationPath));
+        fs.copyFileSync(filePath, destinationPath);
+        console.log(`Copied file: ${fileName}`);
+    });
+};
+
+/** Copy dependencies into docs directory for GitHub pages **/
+
+const copyDep = function (source, target, replaceSource, replaceTarget) {
+    const targetPath = fluid.module.resolvePath(target);
+    const sourceModule = fluid.module.refToModuleName(source);
+    if (sourceModule && sourceModule !== "maxwell") {
+        require(sourceModule);
+    }
+    const sourcePath = fluid.module.resolvePath(source);
+    if (replaceSource) {
+        const text = fs.readFileSync(sourcePath, "utf8");
+        const replaced = text.replace(replaceSource, replaceTarget);
+        fs.writeFileSync(targetPath, replaced, "utf8");
+        console.log(`Copied file: ${targetPath}`);
+    } else if (sourcePath.includes("*")) {
+        copyGlob(sourcePath, targetPath);
+    } else {
+        fs.ensureDirSync(path.dirname(targetPath));
+        fs.copySync(sourcePath, targetPath);
+        console.log(`Copied file: ${targetPath}`);
+    }
+};
+
+
 const filesToContentHash = function (allFiles, extension) {
     const extFiles = allFiles.filter(function (file) {
         return file.endsWith(extension);
@@ -154,7 +172,7 @@ const computeAllFiles = function (buildIndex, nodeFiles) {
     return withExcludes.concat(buildIndex.localSource);
 };
 
-const buildFromFiles = function (buildIndex, nodeFiles) {
+const buildFromFiles = async function (buildIndex, nodeFiles) {
     const allFiles = computeAllFiles(buildIndex, nodeFiles);
     console.log("allFiles " + allFiles);
     nodeFiles.concat(buildIndex.localSource);
@@ -162,7 +180,7 @@ const buildFromFiles = function (buildIndex, nodeFiles) {
     const jsHash = filesToContentHash(allFiles, ".js");
     const fullJsHash = fluid.extend({header: buildIndex.codeHeader}, jsHash, {footer: buildIndex.codeFooter});
     fluid.log("Minifying " + Object.keys(fullJsHash).length + " JS files ... ");
-    const promise = terser.minify(fullJsHash, {
+    const minifiedAll = await terser.minify(fullJsHash, {
         mangle: false,
         sourceMap: {
             filename: "imerss-viz-all.js",
@@ -170,30 +188,43 @@ const buildFromFiles = function (buildIndex, nodeFiles) {
             root: "../.."
         }
     });
-    promise.then(function (minified) {
-        fs.removeSync("docs");
-        fs.ensureDirSync("docs/js");
-        fs.writeFileSync("docs/js/imerss-viz-all.js", minified.code, "utf8");
-        fs.writeFileSync("docs/js/imerss-viz-all.js.map", minified.map);
-
-        const cssHash = filesToContentHash(allFiles, ".css");
-        const cssConcat = String.prototype.concat.apply("", Object.values(cssHash));
-
-        fs.ensureDirSync("docs/css");
-        fs.writeFileSync("docs/css/imerss-viz-all.css", cssConcat);
-        buildIndex.copy.forEach(function (oneCopy) {
-            fs.copySync(oneCopy.src, oneCopy.dest);
-        });
-        fluid.log("Copied " + (buildIndex.copy.length + 3) + " files to " + fs.realpathSync("docs"));
+    // imerss-viz-lib.js contains just upstream libraries we depend on, to support reasonably easy deploy of "new" framework
+    const libJsHash = filesToContentHash(nodeFiles, ".js");
+    console.log("nodeFiles " + nodeFiles);
+    fluid.log("Minifying " + Object.keys(libJsHash).length + " JS files ... ");
+    const minifiedLib = await terser.minify(libJsHash, {
+        mangle: false,
+        sourceMap: {
+            filename: "imerss-viz-lib.js",
+            url: "imerss-viz-lib.js.map",
+            root: "../.."
+        }
     });
+
+    fs.removeSync("docs");
+    fs.ensureDirSync("docs/js");
+    fs.writeFileSync("docs/js/imerss-viz-all.js", minifiedAll.code, "utf8");
+    fs.writeFileSync("docs/js/imerss-viz-all.js.map", minifiedAll.map);
+    fs.writeFileSync("docs/js/imerss-viz-lib.js", minifiedLib.code, "utf8");
+    fs.writeFileSync("docs/js/imerss-viz-lib.js.map", minifiedLib.map);
+
+    const cssHash = filesToContentHash(allFiles, ".css");
+    const cssConcat = String.prototype.concat.apply("", Object.values(cssHash));
+
+    fs.ensureDirSync("docs/css");
+    fs.writeFileSync("docs/css/imerss-viz-all.css", cssConcat);
+    buildIndex.copy.forEach(function (oneCopy) {
+        copyDep(oneCopy.src, oneCopy.dest);
+    });
+    fluid.log("Copied " + (buildIndex.copy.length + 3) + " files to " + fs.realpathSync("docs"));
 };
 
 fluid.setLogging(true);
 
 const linesPromise = readLines("gh-pages-nm.txt");
 
-linesPromise.then(function (lines) {
-    buildFromFiles(buildIndex, lines);
+linesPromise.then(async function (lines) {
+    await buildFromFiles(buildIndex, lines);
 }, function (error) {
     console.log(error);
 });

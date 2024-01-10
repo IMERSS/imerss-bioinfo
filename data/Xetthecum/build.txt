@@ -1,0 +1,17 @@
+To generate
+
+reintegrated.csv
+reintegrated-obs.csv
+
+from upstream catalogues, run
+
+node src/taxonomise.js --fusion data/Xetthecum/fusion.json5
+
+
+To generate
+
+data/Xetthecum/Life.json.lz4 from reintegrated.csv, reintegrated-obs.csv and Xetthecum_Media_Map.csv
+
+run
+
+node src/marmalise.js --config data/Xetthecum/vizConfig.json5

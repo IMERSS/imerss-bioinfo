@@ -66,6 +66,7 @@ hortis.baseCommonOutMap = fluid.freezeRecursive({
         "taxonName": "Taxon name",
         "ambiguousNameMatch": "ambiguousNameMatch",
         "nameStatus": "nameStatus",
+        "commonName": "commonName",
         "authority": "Author" // TODO: Make this conditional on whether it is present in input?
     }
 });
@@ -349,16 +350,6 @@ hortis.deduplicateById = function (resolved, patch) {
     resolved.obsRows = filteredObsRows;
 };
 
-hortis.resolveTaxa = function (target, taxaById, taxonId, columns) {
-    let taxon = taxaById[taxonId];
-    while (taxon.parentNameUsageId) {
-        if (columns[taxon.taxonRank]) {
-            target[taxon.taxonRank] = taxon.scientificName;
-        }
-        taxon = taxaById[taxon.parentNameUsageId];
-    }
-};
-
 hortis.blankRow = function (row) {
     return fluid.transform(row, function (/* col */) {
         return "";
@@ -518,7 +509,8 @@ hortis.resolveObservationTaxa = async function (that, observations, outMap) {
             outrow.iNaturalistTaxonId = taxon.doc.id;
             outrow.ambiguousNameMatch = +!!taxon.doc.ambiguousNameMatch;
             outrow.nameStatus = taxon.doc.nameStatus;
-            // hortis.resolveTaxa(outrow, that.taxaById, taxon.taxonId, outMap.columns);
+            const byId = await that.source.get({id: taxon.doc.id});
+            outrow.commonName = outrow.commonName || byId.doc.preferred_common_name;
             await hortis.iNat.getRanks(taxon.doc.id, outrow, that.source, taxa);
             togo.push(outrow);
         }

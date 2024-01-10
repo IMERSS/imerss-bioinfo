@@ -4,7 +4,6 @@
 
 const fluid = require("infusion");
 const minimist = require("minimist");
-const path = require("path");
 
 fluid.require("%imerss-bioinfo");
 
@@ -57,7 +56,9 @@ const swapsReader = hortis.csvReaderWithMap({
     }
 });
 
-const source = hortis.iNatTaxonSource();
+const source = hortis.iNatTaxonSource({
+//    disableNameCache: true
+});
 
 const scientificNames = {
     pollinatorINatName: "scientificName",
@@ -112,17 +113,18 @@ hortis.storeTaxon = async function (allTaxa, taxonDoc, inSummary) {
 };
 
 // Note: This is the beginning of "new marmalisation" - hortis.iNat.addTaxonInfo used to be called in the marmaliser
-hortis.applyName = async function (row, prefix, invertedSwaps, allTaxa, unmappedTaxa) {
+hortis.applyName = async function (row, prefix, phylum, invertedSwaps, allTaxa, unmappedTaxa) {
     const fieldName = prefix + "INatName";
     const rawName = row[fieldName];
     const iNatName = invertedSwaps[rawName]?.preferred || rawName;
     const scientificName = row[scientificNames[fieldName]];
     // const saneName = hortis.sanitizeSpeciesName(taxon);
-    const looked = await source.get({name: iNatName});
+    const looked = await source.get({name: iNatName, phylum: phylum});
 
-    if (looked && looked.doc) {
+    if (looked && looked.doc && looked.doc.phylumMatch) {
         const id = looked.doc.id;
         row[prefix + "INatId"] = id;
+        row[prefix + "AssignedINatName"] = looked.doc.name;
         const existing = allTaxa[id];
         if (!existing) {
             const taxonDoc = await source.get({id: id});
@@ -166,8 +168,8 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
             console.log("Processing row ", i);
         }
         const row = reader.rows[i];
-        await hortis.applyName(row, "plant", invertedSwaps, taxa, unmappedTaxa);
-        await hortis.applyName(row, "pollinator", invertedSwaps, taxa, unmappedTaxa);
+        await hortis.applyName(row, "plant", "Tracheophyta", invertedSwaps, taxa, unmappedTaxa);
+        await hortis.applyName(row, "pollinator", "Arthropoda", invertedSwaps, taxa, unmappedTaxa);
 
         mapped.push(row);
     }

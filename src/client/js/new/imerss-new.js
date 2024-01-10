@@ -317,7 +317,7 @@ hortis.taxa.map = function (rows, byId) {
 fluid.defaults("hortis.layoutHolder", {
     gradeNames: "fluid.modelComponent",
     members: {
-        taxonHistory: [],
+        taxonHistory: []
         // entryById
     },
     events: {
@@ -620,8 +620,8 @@ fluid.defaults("hortis.interactions", {
     members: {
         crossTable: {}, // keys are plantId|pollId, values ints
         plantTable: {},
-        pollinatorTable: {},
-        maxCount: "@expand:hortis.interactions.count({that}, {obsLoader})"
+        pollTable: {},
+        maxCounts: "@expand:hortis.interactions.count({that}, {obsLoader})"
     }
 });
 
@@ -636,10 +636,17 @@ hortis.addCount = function (table, key) {
     ++table[key];
 };
 
+hortis.max = function (hash) {
+    let max = 0;
+    fluid.each(hash, function (val) {
+        max = Math.max(val, max);
+    });
+    return max;
+};
+
 hortis.interactions.count = function (that, obsLoader) {
     const rows = obsLoader.data;
-    let maxCrossCount = 0;
-    const {crossTable, plantTable, pollinatorTable} = that;
+    const {crossTable, plantTable, pollTable} = that;
 
     rows.forEach(function (row) {
         const {pollinatorINatId: pollId, plantINatId: plantId} = row;
@@ -647,18 +654,23 @@ hortis.interactions.count = function (that, obsLoader) {
             const key = hortis.intIdsToKey(plantId, pollId);
             hortis.addCount(crossTable, key);
             hortis.addCount(plantTable, plantId);
-            hortis.addCount(pollinatorTable, pollId);
-            maxCrossCount = Math.max(maxCrossCount, ++crossTable[key]);
+            hortis.addCount(pollTable, pollId);
         }
     });
+    const max = {
+        cross: hortis.max(crossTable),
+        plants: hortis.max(plantTable),
+        polls: hortis.max(pollTable)
+    };
+
     const cells = Object.keys(crossTable).length;
     const plants = Object.keys(plantTable).length;
-    const polls = Object.keys(pollinatorTable).length;
+    const polls = Object.keys(pollTable).length;
     console.log("Counted ", rows.length + " obs into " + cells + " cells for " + plants + " plants and " + polls + " pollinators");
-    console.log("Maximum count: " + maxCrossCount);
+    console.log("Maximum count: " + max.cross);
     console.log("Occupancy: " + (100 * (cells / (plants * polls))).toFixed(2) + "%");
 
-    return maxCrossCount;
+    return max;
 };
 
 fluid.defaults("hortis.drawInteractions", {
@@ -683,14 +695,25 @@ fluid.defaults("hortis.drawInteractions", {
     }
 });
 
+hortis.makePerm = function (table, cutoff) {
+    const entries = Object.entries(table).map((entry, index) => ({
+        id: entry[0],
+        count: entry[1],
+        index: index
+    }));
+    entries.sort((ea, eb) => eb.count - ea.count);
+    const cutIndex = entries.findIndex(entry => entry.count < cutoff);
+    return entries.slice(0, cutIndex === -1 ? undefined : cutIndex);
+};
 
 
+// noinspection CssInvalidPropertyValue
 hortis.drawInteractions.render = function (that) {
-    const {crossTable, plantTable, pollinatorTable, maxCount} = that.interactions;
+    const {crossTable, plantTable, pollTable, maxCounts} = that.interactions;
     const {squareSize, squareMargin} = that.options;
 
-    const plants = Object.keys(plantTable);
-    const polls = Object.keys(pollinatorTable);
+    const plantPerm = hortis.makePerm(plantTable, 5);
+    const pollPerm = hortis.makePerm(pollTable, 5);
 
     const canvas = that.locate("interactions")[0];
     const ctx = canvas.getContext("2d");
@@ -698,20 +721,22 @@ hortis.drawInteractions.render = function (that) {
 
     ctx.lineWidth = 10;
 
-    const width = polls.length * squareSize + squareMargin;
-    const height = plants.length * squareSize + squareMargin;
+    const width = pollPerm.length * squareSize + squareMargin;
+    const height = plantPerm.length * squareSize + squareMargin;
     canvas.width = width;
     canvas.height = height;
 
     const xPos = index => index * squareSize + squareMargin / 2;
     const yPos = index => index * squareSize + squareMargin / 2;
 
-    plants.forEach(function (plantId, plantIndex) {
-        polls.forEach(function (pollId, pollIndex) {
+    plantPerm.forEach(function (plantRec, plantIndex) {
+        const {id : plantId} = plantRec;
+        pollPerm.forEach(function (pollRec, pollIndex) {
+            const {id : pollId} = pollRec;
             const key = hortis.intIdsToKey(plantId, pollId);
             const count = crossTable[key];
             if (count !== undefined) {
-                const scaled = count / maxCount;
+                const scaled = count / maxCounts.cross;
                 const colour = fluid.colour.interpolateStops(that.options.fillStops, scaled);
                 const xywh = [xPos(pollIndex), yPos(plantIndex), side, side];
 
@@ -724,32 +749,60 @@ hortis.drawInteractions.render = function (that) {
         });
     });
 
-    const yoffset = -4; // TODO: relative to label font
+    const yoffset = 0; // offset currently disused
+    const countDimen = 48; // Need to hack bars slightly smaller to avoid clipping
+    const countScale = 100 * (1 - 2 / countDimen);
 
     const plantNames = that.locate("plantNames")[0];
     plantNames.style.height = height;
-    const plantMark = plants.map(function (plantId, plantIndex) {
+    const plantMark = plantPerm.map(function (rec, plantIndex) {
+        const {id : plantId} = rec;
         const row = that.taxa.rowById[plantId];
         const top = yPos(plantIndex);
-        return `<div class="fl-imerss-int-label" data-row-id="${plantId}" style="top: ${top+yoffset}px">${row.iNaturalistTaxonName}</div>`;
+        return `<div class="fl-imerss-int-label" data-row-id="${plantId}" style="top: ${top + yoffset}px">${row.iNaturalistTaxonName}</div>`;
     });
     plantNames.innerHTML = plantMark.join("\n");
 
+    const plantCounts = that.locate("plantCounts")[0];
+    plantCounts.style.height = height;
+    const plantCountMark = plantPerm.map(function (rec, plantIndex) {
+        const {id: plantId, count} = rec;
+        const prop = fluid.roundToDecimal(countScale * count / maxCounts.plants, 2);
+        const top = yPos(plantIndex);
+        // noinspection CssInvalidPropertyValue
+        return `<div class="fl-imerss-int-count" data-row-id="${plantId}" style="top: ${top + yoffset}px; width: ${prop}%; height: ${side}px;"></div>`;
+    });
+    plantCounts.innerHTML = plantCountMark.join("\n");
+
     const pollNames = that.locate("pollNames")[0];
-    plantNames.style.width = width;
-    const pollMark = polls.map(function (pollId, pollIndex) {
+    pollNames.style.width = width;
+    const pollMark = pollPerm.map(function (rec, pollIndex) {
+        const {id: pollId} = rec;
         const row = that.taxa.rowById[pollId];
         const left = xPos(pollIndex);
-        return `<div class="fl-imerss-int-label" data-row-id="${pollId}" style="left:${left}px">${row.iNaturalistTaxonName}</div>`;
+        return `<div class="fl-imerss-int-label" data-row-id="${pollId}" style="left: ${left}px">${row.iNaturalistTaxonName}</div>`;
     });
     pollNames.innerHTML = pollMark.join("\n");
+
+    const pollCounts = that.locate("pollCounts")[0];
+    pollCounts.style.width = `${width}px`;
+    const pollCountMark = pollPerm.map(function (rec, pollIndex) {
+        const {id: pollId, count} = rec;
+        const prop = fluid.roundToDecimal(countScale * count / maxCounts.polls, 2);
+        const left = xPos(pollIndex);
+        // noinspection CssInvalidPropertyValue
+        return `<div class="fl-imerss-int-count" data-row-id="${pollId}" style="left: ${left - 1}px; height: ${prop}%; width: ${side}px;"></div>`;
+    });
+    pollCounts.innerHTML = pollCountMark.join("\n");
 
     const scroll = that.locate("scroll")[0];
     scroll.addEventListener("scroll", function () {
         const scrollTop = scroll.scrollTop;
         plantNames.scrollTop = scrollTop;
+        plantCounts.scrollTop = scrollTop;
         const scrollLeft = scroll.scrollLeft;
         pollNames.scrollLeft = scrollLeft;
+        pollCounts.scrollLeft = scrollLeft;
     });
 
     plantNames.addEventListener("scroll", function () {
@@ -800,12 +853,12 @@ fluid.defaults("hortis.obsQuantiser", {
         latResolution: {
             target: "latResolution",
             func: "hortis.longToLat",
-            args: ["{that}.model.longResolution", "{that}.options.baseLatitude"],
+            args: ["{that}.model.longResolution", "{that}.options.baseLatitude"]
         },
         index: {
             target: "indexVersion",
             func: "hortis.obsQuantiser.indexObs",
-            args: ["{that}", "{obsLoader}", "{that}.model.latResolution", "{that}.model.longResolution", "{that}.model.indexVersion"],
+            args: ["{that}", "{obsLoader}", "{that}.model.latResolution", "{that}.model.longResolution", "{that}.model.indexVersion"]
         }
     },
     members: {

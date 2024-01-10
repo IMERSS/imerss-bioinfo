@@ -278,19 +278,20 @@ fluid.defaults("hortis.cachediNatTaxonByName", {
     }
 });
 
+// Highest iNat rank is 100 for Life - we want the most specific taxon of those selected
 hortis.scoreNameMatch = async function (result, query, byIdSource) {
-    let score = (query.name === result.matched_term ? 200 : 0) + (query.name === result.name ? 100 : 0) - result.rank_level;
+    let score = (query.name === result.matched_term ? 256 : 0) + (query.name === result.name ? 128 : 0) + (128 - result.rank_level);
     // Don't hit the DB for any results which are not already an exact match for the query
     if (query.rank) {
         if (query.rank === result.rank) {
-            score += 800;
+            score |= 1024;
         }
     }
-    if (query.phylum && score > 200) {
+    if (query.phylum && (score & 256)) {
         const rankTarget = {};
         await hortis.iNat.getRanks(result.id, rankTarget, byIdSource, ["phylum"]);
         if (query.phylum === rankTarget.phylum) {
-            score += 400;
+            score |= 512;
         }
     }
     return score;
@@ -336,6 +337,7 @@ hortis.cachediNatTaxonByName.upgradeLiveDocument = async function (byIdSource, q
         const record = await hortis.bestNameMatch(live.results, query, byIdSource);
         const doc = fluid.filterKeys(record, ["name", "matched_term", "rank", "id"]);
         doc.ambiguousNameMatch = !!record.$ambiguous;
+        doc.phylumMatch = !!(record.$score & 512);
 
         // const byIdBack = await byIdSource.get({id: doc.id});
 

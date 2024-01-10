@@ -1,3 +1,5 @@
+library(dplyr)
+
 source("./utils.R")
 
 raw <- timedFread("plant-pollinators-OBA.csv");
@@ -57,5 +59,9 @@ filtered <- mutate(raw,
 
 filteredDown <- filtered[, !names(filtered) %in% c("Associated plant - genus, species", "Dec. Long.", "Dec. Lat.", "MonthAb", "MonthJul",
    "Year 1", "Month 1", "Time 1", "Collection Day 1", "Year 2", "Month 2", "Time 2", "Collection Day 2", "Collection Day 2 Merge", "Collection Date")]
+
+# Remove remaining empty columns for now - https://stackoverflow.com/a/17672764
+emptyCols <- colSums(is.na(filteredDown)) == nrow(filteredDown)
+filteredDown <- filteredDown[!emptyCols]
 
 timedWrite(filteredDown, "plant-pollinators-OBA-normalised.csv")

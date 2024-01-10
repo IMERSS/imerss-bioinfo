@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="node_modules/infusion/src/lib/jquery/ui/css/default-theme/core.css" />
+        <link rel="stylesheet" href="node_modules/infusion/src/lib/jquery/ui/css/default-theme/tooltip.css" />
+        <link rel="stylesheet" href="node_modules/infusion/src/lib/jquery/ui/css/default-theme/theme.css" />
+        <link rel="stylesheet" href="node_modules/jquery-ui/themes/base/tabs.css" />
+        <link rel="stylesheet" type="text/css" href="node_modules/infusion/src/framework/core/css/fluid.css" />
+        <link rel="stylesheet" type="text/css" href="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.css" />
+
+        <script src="js/imerss-viz-lib.js"></script>
+        <script src="https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl-dev.js"></script>
+        <script src="https://unpkg.com/pako@2.1.0/dist/pako_inflate.min.js"></script>
+        <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="src/client/css/imerss-core.css"/>
+        <link rel="stylesheet" type="text/css" href="src/client/css/imerss-bbea.css"/>
+
+        <script src="src/client/js/colour.js"></script>
+        <script src="src/client/js/renderSVG.js"></script>
+        <script src="src/client/js/new/imerss-new.js"></script>
+        <script src="src/client/js/autocomplete.js"></script>
+        <script src="src/client/js/tabs.js"></script>
+        <script src="src/client/js/new/newChecklist.js"></script>
+
+        <title>BBEA TTOOL</title>
+    </head>
+
+    <body>
+        <h2>BBEA TTOOL</h2>
+        <div class="fl-imerss-container">
+
+            <div class="fl-imerss-map-and-taxa">
+
+                <div class="fld-imerss-map-holder fld-imerss-nodismiss-map">
+                    <div class="fld-imerss-map fl-imerss-left-column">
+                    </div>
+                    <div class="fl-imerss-datasets fl-imerss-right-column">
+                        <div class="fld-imerss-datasets-label">
+                        </div>
+                        <table class="fld-imerss-dataset-controls">
+                        </table>
+                    </div>
+                </div>
+
+                <div class="fl-imerss-taxa fld-imerss-nodismiss-map">
+
+                    <div class="fld-imerss-taxonDisplay flc-imerss-viz-dimens">
+                        <div class="fl-taxonDisplay-row"></div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="fl-imerss-checklists">
+                <div class="fl-imerss-pollinators fl-imerss-checklist-holder">
+                    <div class="fld-imerss-panel-label">Pollinators</div>
+                    <div class="fld-imerss-checklist">
+                    </div>
+                </div>
+                <div class="fl-imerss-interactions">
+                    <div class="fld-imerss-panel-label">Interactions</div>
+                    <div class="fl-imerss-interactions-holder">
+                        <div class="fl-imerss-int-top fl-imerss-int-row">
+                            <div class="fl-imerss-int-left fld-imerss-int-plant-label">Plants</div>
+                            <div class="fld-imerss-poll-counts fl-imerss-int-h-middle"></div>
+                            <div class="fl-imerss-int-right"></div>
+                        </div>
+                        <div class="fl-imerss-int-v-middle fl-imerss-int-row">
+                            <div class="fld-imerss-plant-names fl-imerss-int-left"></div>
+                            <div class="fl-imerss-int-h-middle fld-imerss-int-scroll">
+                                <canvas class="fld-imerss-interactions"></canvas>
+                            </div>
+                            <div class="fld-imerss-plant-counts fl-imerss-int-right"></div>
+                        </div>
+                        <div class="fl-imerss-int-bottom fl-imerss-int-row">
+                            <div class="fl-imerss-int-left fld-imerss-int-poll-label">Pollinators</div>
+                            <div class="fld-imerss-poll-names fl-imerss-int-h-middle fl-imerss-int-sideways"></div>
+                            <div class="fl-imerss-int-right"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fl-imerss-plants fl-imerss-checklist-holder">
+                    <div class="fld-imerss-panel-label">Plants</div>
+                    <div class="fld-imerss-checklist">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script>
+            hortis.vizLoaderWithMap(".fl-imerss-container", {
+                gradeNames: "hortis.beaVizLoader",
+                obsFile: "data/b-team/plant-pollinators-OBA-assigned.csv",
+                taxaFile: "data/b-team/plant-pollinators-OBA-assigned-taxa.csv",
+                mapGrades: "hortis.demoLibreMap",
+                resourceBase: "src/client"
+            });
+        </script>
+    </body>
+</html>

@@ -2,8 +2,29 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-flow: column;
-    height: calc(100vh - 16px);
+    margin: 8px;
+    height: calc(100vh - 16px); /* To allow for 8px borders */
     overflow: hidden
+}
+
+:root {
+    --imerss-scrollbar-width: 12px;
+}
+
+body ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: var(--imerss-scrollbar-width);
+    background-color: #eee
+}
+
+body ::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #C1C1C1;
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #A8A8A8;
 }
 
 .fl-imerss-container {
