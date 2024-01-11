@@ -31,6 +31,14 @@ const buildIndex = {
         "src/client/js/checklist.js",
         "src/client/js/xetthecum.js"
     ],
+    newSource: [
+        "src/client/js/colour.js",
+        "src/client/js/renderSVG.js",
+        "src/client/js/new/imerss-new.js",
+        "src/client/js/autocomplete.js",
+        "src/client/js/tabs.js",
+        "src/client/js/new/newChecklist.js"
+    ],
     codeHeader: "",
     codeFooter: "", // "\njQuery.noConflict()",
     copy: [{
@@ -46,20 +54,8 @@ const buildIndex = {
         src: "src/client/html",
         dest: "docs/html"
     }, {
-        src: "src/client/css/imerss-viz-wp-overrides.css",
-        dest: "docs/css/imerss-viz-wp-overrides.css"
-    }, {
-        src: "src/client/css/xetthecum.css",
-        dest: "docs/css/xetthecum.css"
-    }, {
-        src: "src/client/css/xetthecum-shared.css",
-        dest: "docs/css/xetthecum-shared.css"
-    }, {
-        src: "src/client/css/xetthecum-external.css",
-        dest: "docs/css/xetthecum-external.css"
-    }, {
-        src: "src/client/css/pepiowelh.css",
-        dest: "docs/css/pepiowelh.css"
+        src: "src/client/css/*.css",
+        dest: "docs/css"
     }, {
         src: "src/buildSource/*.html",
         dest: "docs/"
@@ -90,6 +86,12 @@ const buildIndex = {
     }, {
         src: "data/Pepiowelh/Life.json.lz4",
         dest: "docs/data/Pepiowelh/Life.json.lz4"
+    }, {
+        src: "data/b-team/plant-pollinators-OBA-assigned.csv",
+        dest: "docs/data/b-team/plant-pollinators-OBA-assigned.csv"
+    }, {
+        src: "data/b-team/plant-pollinators-OBA-assigned-taxa.csv",
+        dest: "docs/data/b-team/plant-pollinators-OBA-assigned-taxa.csv"
     }]
 };
 
@@ -200,6 +202,17 @@ const buildFromFiles = async function (buildIndex, nodeFiles) {
             root: "../.."
         }
     });
+    const newJsHash = filesToContentHash(buildIndex.newSource, ".js");
+    console.log("newFiles " + buildIndex.newSource);
+    fluid.log("Minifying " + Object.keys(newJsHash).length + " JS files ... ");
+    const newLib = await terser.minify(newJsHash, {
+        mangle: false,
+        sourceMap: {
+            filename: "imerss-viz-new.js",
+            url: "imerss-viz-new.js.map",
+            root: "../.."
+        }
+    });
 
     fs.removeSync("docs");
     fs.ensureDirSync("docs/js");
@@ -207,12 +220,18 @@ const buildFromFiles = async function (buildIndex, nodeFiles) {
     fs.writeFileSync("docs/js/imerss-viz-all.js.map", minifiedAll.map);
     fs.writeFileSync("docs/js/imerss-viz-lib.js", minifiedLib.code, "utf8");
     fs.writeFileSync("docs/js/imerss-viz-lib.js.map", minifiedLib.map);
+    fs.writeFileSync("docs/js/imerss-viz-new.js", newLib.code, "utf8");
+    fs.writeFileSync("docs/js/imerss-viz-new.js.map", newLib.map);
 
     const cssHash = filesToContentHash(allFiles, ".css");
     const cssConcat = String.prototype.concat.apply("", Object.values(cssHash));
 
+    const cssLibHash = filesToContentHash(nodeFiles, ".css");
+    const cssLibConcat = String.prototype.concat.apply("", Object.values(cssLibHash));
+
     fs.ensureDirSync("docs/css");
     fs.writeFileSync("docs/css/imerss-viz-all.css", cssConcat);
+    fs.writeFileSync("docs/css/imerss-viz-lib.css", cssLibConcat);
     buildIndex.copy.forEach(function (oneCopy) {
         copyDep(oneCopy.src, oneCopy.dest);
     });

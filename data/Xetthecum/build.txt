@@ -3,7 +3,7 @@ To generate
 reintegrated.csv
 reintegrated-obs.csv
 
-from upstream catalogues, run
+from upstream catalogues, Species_media.csv, Culturally_significant...csv, run
 
 node src/taxonomise.js --fusion data/Xetthecum/fusion.json5
 

@@ -1,0 +1,308 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-flow: column;
+    margin: 8px;
+    height: calc(100vh - 16px); /* To allow for 8px borders */
+    overflow: hidden
+}
+
+:root {
+    --imerss-scrollbar-width: 12px;
+}
+
+body ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: var(--imerss-scrollbar-width);
+    background-color: #eee
+}
+
+body ::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #C1C1C1;
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #A8A8A8;
+}
+
+.fl-imerss-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0; /* Essential otherwise it overflows */
+}
+
+.fl-imerss-map-and-taxa {
+    display: flex;
+    height: 40%;
+    flex-direction: column;
+}
+
+.fld-imerss-map-holder {
+    height: 100%;
+    width: 50%;
+}
+
+.fl-imerss-tabs-and-search {
+    display: flex;
+    flex-direction: column;
+}
+
+.fl-imerss-taxa {
+    display: flex;
+    flex-direction: row;
+}
+
+.fld-imerss-segment {
+    stroke: #444;
+    stroke-width: 1px;
+}
+
+.fld-imerss-segment.fl-imerss-layoutRoot {
+    stroke-width: 3.5px;
+}
+
+.fld-imerss-labelPath {
+    fill: none;
+    stroke: none;
+}
+
+.flc-imerss-svg {
+    font-size: 40px;
+/*    max-height: calc(var(--imerss-sun-height) + 2rem);*/
+    margin-top: -1rem;
+}
+
+.fl-imerss-left-column {
+    /* This one from pepiowelh.css, unsets hard width in old core */
+    flex: 1 1 0;
+    width: 30%
+}
+/*    width: 1024px; */
+
+/* Note that right column contains dataset displays which don't usually appear */
+.fl-imerss-right-column {
+    /* Roughly agree with taxon display - 480px plus scroll bar and change */
+    /*    width: calc(480px + 3rem);*/
+}
+
+
+
+/* This one from pepiowelh again */
+.fld-imerss-map {
+    height: 100%;
+    width: 100%;
+    min-width: 480px;
+    min-height: 320px;
+}
+
+
+
+.fl-imerss-panel {
+    position: relative;
+}
+
+.fl-imerss-clickable {
+    cursor: pointer;
+}
+
+
+.fl-imerss-highlightBlock {
+    stroke: deepskyblue;
+    stroke-width: 4px;
+}
+
+.fl-imerss-selected-region {
+    fill-opacity: 1;
+}
+
+.fl-imerss-unselected-region {
+    fill-opacity: 0.25;
+}
+
+.fld-imerss-map-tooltip tr:nth-child(even) {
+    background: #eee;
+}
+
+.fld-imerss-map-tooltip tr:nth-child(odd) {
+    background: #fff;
+}
+
+.fld-imerss-map-tooltip table {
+    border-collapse: collapse;
+}
+
+.fl-imerss-photo {
+    width: auto;
+    min-width: 320px;
+    height: 400px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.fl-imerss-tooltip .fl-imerss-photo {
+    width: 165px;
+    height: 125px;
+    min-width: auto;
+}
+
+.fl-imerss-tooltip div.fl-text {
+    max-width: 165px;
+    margin-top: 0.5rem;
+}
+
+.fld-imerss-autocomplete {
+    width: 30em;
+    margin-left: 1rem;
+    display: inline-block;
+}
+
+.flc-imerss-autocomplete-row {
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.flc-imerss-autocomplete-row label {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.autocomplete__menu {
+    max-height: 600px;
+}
+
+#fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
+    padding: 0;
+}
+
+.fld-imerss-tabs .ui-state-active.ui-tabs-tab {
+    background: #fff;
+}
+
+.fld-imerss-tabs .ui-state-active.ui-tabs-tab a {
+    background: #fff;
+    color: #444;
+}
+
+.fl-imerss-checklist-holder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-right: 1em;
+    margin: 0.5em;
+}
+
+.fld-imerss-panel-label {
+    font-size: 1.5rem;
+    padding-bottom: 5px;
+}
+
+#fli-tab-sunburst {
+    position: relative;
+    user-select: none;
+}
+
+.fld-imerss-checklist {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.fld-imerss-checklist p {
+    display: inline;
+    padding: 1px;
+}
+
+.fld-imerss-checklist p:hover {
+    background: #dde;
+}
+
+.fl-checklist-selected {
+    outline: 2px solid black;
+}
+
+.fld-imerss-checklist ul {
+    margin-block-start: 0;
+    list-style-type: none;
+}
+
+.fl-imerss-checklist-no-indent ul {
+    padding-inline-start: 0;
+}
+
+.fl-imerss-checklist-no-indent .flc-checklist-rank-species {
+    padding-left: 40px;
+}
+
+.fld-imerss-checklist > ul {
+    padding: 0;
+}
+
+.fld-imerss-checklist-up {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url(../img/up-arrow.svg);
+    background-size: cover;
+    margin-left: -0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.fld-imerss-checklist-up:hover {
+    outline: 1px solid black;
+    outline-offset: 1px;
+}
+
+/* The checklist rank highlighting */
+
+.flc-checklist-rank-life {
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.flc-checklist-rank-kingdom {
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.flc-checklist-rank-phylum {
+    text-transform: uppercase;
+    font-size: 1.1em;
+}
+
+.flc-checklist-rank-class {
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-subclass {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-order {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-family {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-genus {
+    font-size: 1.0em;
+    font-style: italic;
+}
+
+.flc-checklist-rank-species {
+    font-size: 1.0em;
+    font-style: italic;
+}
+
+.flc-checklist-annote {
+    font-style: normal
+}

@@ -1,0 +1,548 @@
+:root {
+  --imerss-map-width: 800px;
+  --imerss-sun-height: 815px;
+}
+
+.fl-imerss-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.fl-imerss-map-and-taxa {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.75rem;
+}
+
+.fl-imerss-tabs-and-search {
+    display: flex;
+    flex-direction: column;
+}
+
+.fl-imerss-taxa {
+    display: flex;
+    flex-direction: row;
+}
+
+.fld-imerss-segment {
+    stroke: #444;
+    stroke-width: 1px;
+}
+
+.fld-imerss-segment.fl-imerss-layoutRoot {
+    stroke-width: 3.5px;
+}
+
+.fld-imerss-labelPath {
+    fill: none;
+    stroke: none;
+}
+
+.flc-imerss-svg {
+    font-size: 40px;
+    max-height: calc(var(--imerss-sun-height) + 2rem);
+    margin-top: -1rem;
+}
+
+.fl-imerss-left-column {
+    width: 1024px;
+}
+
+.fl-imerss-right-column {
+    /* Roughly agree with taxon display - 480px plus scroll bar and change */
+    width: calc(480px + 3rem);
+}
+
+.fld-imerss-map {
+    height: 500px;
+    width: var(--imerss-map-width);
+}
+
+.flc-imerss-viz-dimens {
+    height: var(--imerss-sun-height);
+}
+
+.fl-imerss-panel {
+    position: relative;
+}
+
+.fl-imerss-clickable {
+    cursor: pointer;
+}
+
+.fld-imerss-back {
+    border: 2px solid black;
+    display: inline;
+    padding: 5px 15px 5px 15px;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.6rem;
+    user-select: none;
+}
+
+.fld-imerss-back:hover:not([aria-disabled="true"]) {
+    background: #ccc;
+}
+
+.fld-imerss-back:not([aria-disabled="true"]) {
+    cursor: pointer;
+}
+
+.fld-imerss-back[aria-disabled="true"] {
+    opacity: 0.2;
+    cursor: default;
+}
+
+.fld-imerss-taxonDisplay {
+    height: calc(800px + 6rem); /* Viz dimens plus tab height */
+    width: 480px;
+    border: black solid 2px;
+    display: flex;
+    overflow-y: scroll;
+    min-width: 320px;
+}
+
+.fld-imerss-taxonDisplay > div {
+    width: 100%
+}
+
+.fl-taxonDisplay-row {
+    padding: 10px 8px 6px 8px;
+    border-bottom: #ccc 2px solid;
+    width: auto;
+    min-width: 320px;
+}
+
+/* unindent nested rows a bit */
+.fl-taxonDisplay-row .fl-taxonDisplay-row {
+    margin-left: -0.5rem;
+}
+
+.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder :last-child {
+    margin-bottom: -0.2rem;
+}
+
+/* No idea why we do this, but we need to undo it for fld-imerss-media-name */
+.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder :first-child {
+    margin-top: -0.5rem;
+}
+
+.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder .fld-imerss-media-name {
+    padding-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.fl-taxonDisplay-row .fld-imerss-media-image {
+    padding-bottom: 5px;
+}
+
+.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder.fl-taxonDisplay-row {
+    border-bottom: none;
+}
+
+.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder .fl-taxonDisplay-row .fl-taxonDisplay-key {
+    margin-left: 1rem;
+}
+
+.fl-taxonDisplay-runon-header.fl-taxonDisplay-expanded {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.fl-taxonDisplay-empty-header {
+    border-bottom: none;
+}
+  
+.fl-taxonDisplay-empty-row .fl-taxonDisplay-key {
+    display: none;
+} 
+
+.fl-taxonDisplay-key {
+    width: 12em;
+    margin-right: 4px;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.fl-taxonDisplay-value {
+    width: 100%;
+}
+
+.fl-taxonDisplay-expand {
+    width: 2rem;
+    background-size: 2rem;
+    height: 1rem;
+    background-image: url("../img/Arrow-down.svg");
+    cursor: pointer;
+    float: right;
+    /* From https://codepen.io/sosuke/pen/Pjoqqp */
+    filter: invert(57%) sepia(0%) saturate(6%) hue-rotate(187deg) brightness(94%) contrast(88%);
+}
+
+.fl-taxonDisplay-unexpanded .fl-taxonDisplay-expand {
+    background-image: url("../img/Arrow-down.svg");
+}
+
+.fl-taxonDisplay-expanded .fl-taxonDisplay-expand {
+    background-image: url("../img/Arrow-up.svg");
+}
+
+.fl-taxonDisplay-runon-remainder.fl-taxonDisplay-unexpanded {
+    display: none
+}
+
+.fld-taxonDisplay-expandable-remainder {
+    padding-left: 20px;
+}
+
+.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder {
+    padding-left: 8px; /* Back to value in fl-taxonDisplay-row */
+    padding-right: 0; /* Avoid right gap */
+}
+
+.fl-taxonDisplay-runon-remainder > .fl-taxonDisplay-key {
+    padding: 0;
+    margin: 0;
+}
+
+.fl-taxonDisplay-image-holder {
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.fl-taxonDisplay-iNat-extern {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    background: #ddd;
+    padding: 4px;
+    padding-left: 6px;
+    color: black;
+}
+
+.fl-external-link {
+    width: 1rem;
+    height: 0.9rem;
+    display: inline-block;
+    background-image: url("../img/external-link.svg");
+    background-repeat: no-repeat;
+    background-size: 0.9rem;
+    margin-left: 8px;
+}
+
+
+.fl-imerss-cultural-values {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fl-imerss-cultural-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.fld-imerss-cultural-value-text {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 0.2rem;
+}
+
+.fl-imerss-cultural-value-img {
+    width: 108px;
+    height: 108px;
+    background-repeat: no-repeat;
+    background-size: 108px;
+}
+
+.fld-imerss-value-food {
+    background-image: url(../img/Xetthecum/food.svg);
+}
+
+.fld-imerss-value-medicinal {
+    background-image: url(../img/Xetthecum/medicinal.svg);
+}
+
+.fld-imerss-value-spiritual {
+    background-image: url(../img/Xetthecum/spiritual.svg);
+}
+
+.fld-imerss-value-material {
+    background-image: url(../img/Xetthecum/material.svg);
+}
+
+.fld-imerss-value-trade {
+    background-image: url(../img/Xetthecum/trade.svg);
+}
+
+.fld-imerss-value-indicator {
+    background-image: url(../img/Xetthecum/indicator.svg);
+}
+
+.fld-imerss-value-missing {
+    background-image: url(../img/Xetthecum/missing-value.svg);
+}
+
+.fld-imerss-datasets-label {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding-left: 2rem;
+}
+
+.fld-imerss-dataset-controls {
+    display: table;
+    padding: 2px;
+    font-size: 0.9rem;
+}
+
+.fl-imerss-dataset-taxa {
+    min-width: 2rem;
+}
+
+.fld-imerss-dataset-controls td {
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 1.2rem;
+}
+
+.fld-imerss-dataset-legend {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid black;
+    background-color: red;
+    vertical-align: middle;
+    margin: 2px;
+}
+
+.fld-imerss-dataset-checkbox {
+    vertical-align: middle;
+    margin: 4px;
+}
+
+.fld-imerss-dataset-footer {
+    text-align: center;
+}
+
+.fld-imerss-map-holder {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    --imerss-stroke-width: 2;
+}
+
+.fld-imerss-dataset-name {
+    vertical-align: middle;
+}
+
+.fld-imerss-map-grid {
+    z-index: 750;
+}
+
+.fld-imerss-map-region {
+    stroke-width: var(--imerss-stroke-width);
+    stroke: black;
+    stroke-opacity: 1;
+    fill-opacity: 1;
+}
+
+.fld-imerss-map-tooltip {
+    z-index: 800;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 12rem;
+    font-size: small;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.fl-imerss-highlightBlock {
+    stroke: deepskyblue;
+    stroke-width: 4px;
+}
+
+.fl-imerss-selected-region {
+    fill-opacity: 1;
+}
+
+.fl-imerss-unselected-region {
+    fill-opacity: 0.25;
+}
+
+.fld-imerss-map-tooltip tr:nth-child(even) {
+    background: #eee;
+}
+
+.fld-imerss-map-tooltip tr:nth-child(odd) {
+    background: #fff;
+}
+
+.fld-imerss-map-tooltip table {
+    border-collapse: collapse;
+}
+
+.fl-imerss-photo {
+    width: auto;
+    min-width: 320px;
+    height: 400px;
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat;
+}
+
+.fl-imerss-tooltip .fl-imerss-photo {
+    width: 165px;
+    height: 125px;
+    min-width: auto;
+}
+
+.fl-imerss-tooltip div.fl-text {
+    max-width: 165px;
+    margin-top: 0.5rem;
+}
+
+.fld-imerss-autocomplete {
+    width: 30em;
+    margin-left: 1rem;
+    display: inline-block;
+}
+
+.flc-imerss-autocomplete-row {
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.flc-imerss-autocomplete-row label {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.autocomplete__menu {
+    max-height: 600px;
+}
+
+#fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
+    padding: 0;
+}
+
+.fld-imerss-tabs .ui-state-active.ui-tabs-tab {
+    background: #fff;
+}
+
+.fld-imerss-tabs .ui-state-active.ui-tabs-tab a {
+    background: #fff;
+    color: #444;
+}
+
+.fl-imerss-checklist-holder {
+    overflow-y: scroll;
+    padding: 1em 1.4em;
+}
+
+#fli-tab-sunburst {
+    position: relative;
+    user-select: none;
+}
+
+.fld-imerss-checklist p {
+    display: inline;
+    padding: 1px;
+}
+
+.fld-imerss-checklist p:hover {
+    background: #dde;
+}
+
+.fl-checklist-selected {
+    outline: 2px solid black;
+}
+
+.fld-imerss-checklist ul {
+    margin-block-start: 0;
+    list-style-type: none;
+}
+
+.fl-imerss-checklist-no-indent ul {
+    padding-inline-start: 0;
+}
+
+.fl-imerss-checklist-no-indent .flc-checklist-rank-species {
+    padding-left: 40px;
+}
+
+.fld-imerss-checklist > ul {
+    padding: 0;
+}
+
+.fld-imerss-checklist-up {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url(../img/up-arrow.svg);
+    background-size: cover;
+    margin-left: -0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.fld-imerss-checklist-up:hover {
+    outline: 1px solid black;
+    outline-offset: 1px;
+}
+
+/* The checklist rank highlighting */
+
+.flc-checklist-rank-life {
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.flc-checklist-rank-kingdom {
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.flc-checklist-rank-phylum {
+    text-transform: uppercase;
+    font-size: 1.1em;
+}
+
+.flc-checklist-rank-class {
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-subclass {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-order {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-family {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.flc-checklist-rank-genus {
+    font-size: 1.0em;
+    font-style: italic;
+}
+
+.flc-checklist-rank-species {
+    font-size: 1.0em;
+    font-style: italic;
+}
+
+.flc-checklist-annote {
+    font-style: normal
+}

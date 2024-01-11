@@ -1,0 +1,133 @@
+.fl-imerss-checklists {
+    display: flex;
+    flex-direction: row;
+    height: 60%;
+    overflow: hidden;
+}
+
+.fl-imerss-pollinators {
+    width: 30%;
+}
+
+.fl-imerss-interactions {
+    margin: 0.5em;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fl-imerss-plants {
+    width: 30%;
+}
+
+.fl-imerss-interactions-holder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fl-imerss-int-left {
+    flex: 0 0 180px;
+}
+
+.fl-imerss-int-right {
+    flex: 0 0 3em;
+}
+
+.fl-imerss-int-h-middle {
+    overflow-x: scroll;
+}
+
+.fl-imerss-int-top {
+    flex: 0 0 3em;
+}
+
+.fl-imerss-int-v-middle {
+    flex: 1 1 auto;
+    overflow-y: hidden;
+}
+
+.fl-imerss-int-bottom {
+    flex: 0 0 180px;
+}
+
+
+.fl-imerss-int-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.fld-imerss-poll-names {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: end;
+    margin-right: calc(var(--imerss-scrollbar-width) + 4px);
+}
+
+.fld-imerss-poll-counts {
+    position: relative;
+    display: flex;
+    align-items: end;
+    overflow-x: hidden;
+    margin-right: calc(var(--imerss-scrollbar-width) + 4px);
+}
+
+.fld-imerss-plant-names {
+    margin-bottom: calc(var(--imerss-scrollbar-width) + 4px);
+}
+
+.fld-imerss-plant-counts {
+    margin-left: 4px;
+    margin-bottom: calc(var(--imerss-scrollbar-width) + 4px);
+}
+
+.fld-imerss-plant-names, .fld-imerss-plant-counts {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.fld-imerss-plant-names::-webkit-scrollbar, .fld-imerss-plant-counts::-webkit-scrollbar  {
+    display: none;  /* Safari and Chrome */
+}
+
+.fld-imerss-poll-names .fl-imerss-int-label {
+    writing-mode: tb-rl;
+    transform: rotate(180deg);
+    bottom: 2em; /* No idea why they stick off the bottom otherwise */
+}
+
+.fl-imerss-int-label {
+    position: absolute;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.fl-imerss-int-count {
+    position: absolute;
+}
+
+.fld-imerss-plant-counts .fl-imerss-int-count {
+    /* Colour taken from Young et al 2021 */
+    background-color: #4c92c3;
+    border: 1px solid black;
+}
+
+.fld-imerss-poll-counts .fl-imerss-int-count {
+    background-color: #ff7c4a;
+    border: 1px solid black;
+}
+
+.fld-imerss-int-poll-label {
+    padding-top: 10px;
+    font-size: 20px;
+    writing-mode: tb-rl;
+    transform: rotate(180deg);
+    padding-top: 2em;
+}
+
+.fld-imerss-int-plant-label {
+    font-size: 20px;
+}
