@@ -5,6 +5,26 @@
     overflow: hidden;
 }
 
+/* Grabbed definition for default "checked" to apply to indeterminate checkboxes */
+.pretty input:indeterminate~.state label:after {
+    background-color: #bdc3c7!important;
+    transform: scale(.6);
+}
+
+.pretty .state label:after, .pretty .state label:before {
+    width: calc(1em + 0px);
+    height: calc(1em + 0px);
+}
+
+.pretty.p-icon .state .icon {
+    width: calc(1em + 0px);
+    height: calc(1em + 0px);
+}
+
+.pretty {
+    margin-right: 0.3em;
+}
+
 .fl-imerss-pollinators {
     width: 30%;
 }
@@ -131,3 +151,4 @@
 .fld-imerss-int-plant-label {
     font-size: 20px;
 }
+

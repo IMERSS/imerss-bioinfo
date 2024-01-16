@@ -21,7 +21,21 @@ hortis.renderSpeciesName = function (name) {
     return name.replace(hortis.annoteRegex, "<span class=\"flc-checklist-annote\">$1</span>");
 };
 
-hortis.checklistItem = function (entry, selectedId, simple) {
+// In indeterminate state, add p-is-indeterminate to div state
+// In indeterminate state remove mdi-check from i
+
+hortis.checklistCheckbox = function (rowid) {
+    return `
+    <span class="pretty p-icon">
+      <input type="checkbox" class="flc-checklist-check" ${rowid}/>
+      <span class="state p-success">
+        <i class="icon mdi mdi-check"></i>
+        <label></label>
+      </span>
+    </span>`;
+};
+
+hortis.checklistItem = function (entry, selectedId, simple, selectable) {
     const record = entry.row;
     const styleprop = "";
     const rowid = " data-row-id=\"" + record.id + "\"";
@@ -39,15 +53,16 @@ hortis.checklistItem = function (entry, selectedId, simple) {
     if (record.hulqName) {
         name += " - <p " + styleprop + rowid + " class=\"flc-checklist-hulq-name\"><em>" + record.hulqName + "</em></p>";
     }
-    const subList = hortis.checklistList(entry.children, selectedId, simple);
+    const subList = hortis.checklistList(entry.children, selectedId, simple, selectable);
     const footer = "</li>";
-    return header + name + subList + footer;
+    const check = (selectable ? hortis.checklistCheckbox(rowid) : "");
+    return header + check + name + subList + footer;
 };
 
-hortis.checklistList = function (entries, selectedId, simple) {
+hortis.checklistList = function (entries, selectedId, simple, selectable) {
     return entries.length ?
         "<ul>" + entries.map(function (entry) {
-            return hortis.checklistItem(entry, selectedId, simple);
+            return hortis.checklistItem(entry, selectedId, simple, selectable);
         }).join("") + "</ul>" : "";
 };
 
@@ -98,7 +113,7 @@ hortis.sortChecklistLevel = function (entries) {
     return entries.sort(hortis.scientificComparator);
 };
 
-// Accepts array of rows and returns array of "entries", where entry is {row, children: array of entry}
+// Accepts array of rows and returns fresh array of "entries", where entry is {row, children: array of entry}
 hortis.filterRanks = function (rows, filterRanks, showRoot, depth) {
     const togo = [];
     fluid.each(rows, function (row) {
@@ -115,17 +130,9 @@ hortis.filterRanks = function (rows, filterRanks, showRoot, depth) {
     return hortis.sortChecklistLevel(togo);
 };
 
-hortis.generateChecklist = function (element, layoutHolder, filterRanks, showRoot) {
-    const {entryById, filterEntries} = layoutHolder;
-    const {layoutId: rootId, selectedId} = layoutHolder.model;
-
-    console.log("Generating checklist for id " + rootId);
-    const rootChildren = rootId ? [entryById[rootId].row] : [];
-    const filteredRanks = hortis.filterRanks(rootChildren, filterRanks, showRoot, 0);
-    const filteredEntries = filterEntries(filteredRanks);
-    const markup = hortis.checklistList(filteredEntries, selectedId, filterRanks);
-    element[0].innerHTML = markup;
-};
+hortis.SELECTED = 1;
+hortis.UNSELECTED = 0;
+hortis.INDETERMINATE = -1;
 
 fluid.defaults("hortis.checklist", {
     gradeNames: ["hortis.withPanelLabel", "fluid.viewComponent"],
@@ -133,13 +140,14 @@ fluid.defaults("hortis.checklist", {
     showRoot: false,
     selectors: {
         hoverable: "p",
-        checklist: ".fld-imerss-checklist",
+        checklist: ".fld-imerss-checklist"
     },
     invokers: {
         generateChecklist: {
-            funcName: "hortis.generateChecklist",
-            args: ["{that}.dom.checklist", "{layoutHolder}", "{that}.options.filterRanks", "{that}.options.showRoot"]
-        }
+            funcName: "hortis.checklist.generate",
+            args: ["{that}", "{that}.dom.checklist", "{layoutHolder}", "{that}.options.filterRanks", "{that}.options.showRoot"]
+        },
+        check: "hortis.checklist.check({that}, {arguments}.0, {arguments}.1)"
     },
     modelListeners: {
         updateSelected: {
@@ -150,10 +158,134 @@ fluid.defaults("hortis.checklist", {
         generateChecklist: {
             path: ["{layoutHolder}.model.layoutId", "{layoutHolder}.model.rowFocus"],
             func: "{that}.generateChecklist"
+        },
+        modelToCheck: {
+            path: "idToState.*",
+            func: "hortis.checklist.stateToCheck",
+            args: ["{that}", "{change}.value", "{change}.path"]
         }
     },
     listeners: {
-        "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {layoutHolder})"
+        "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {layoutHolder})",
+        "onCreate.bindClick": "hortis.checklist.bindClick({that})"
     }
 });
 
+hortis.checklist.bindClick = function (checklist) {
+    checklist.container.on("click", ".pretty input", function () {
+        const id = this.dataset.rowId;
+        console.log("Checkbox clicked with row " + id);
+        checklist.check(id, this.checked);
+        // checklist.applier.change(["idToState", id], this.checked);
+    });
+};
+
+hortis.checklist.stateToCheck = function (checklist, state, path) {
+    const id = fluid.peek(path);
+    const node = checklist.idToNode?.[id];
+    if (node) {
+        node.checked = state === hortis.SELECTED;
+        node.indeterminate = state === hortis.INDETERMINATE;
+        const holder = node.closest(".p-icon");
+        const ui = holder.querySelector(".icon");
+        $(ui).toggleClass("mdi-check", state !== hortis.INDETERMINATE);
+    }
+};
+
+hortis.checklist.generate = function (that, element, layoutHolder, filterRanks, showRoot) {
+    const {entryById, filterEntries} = layoutHolder;
+    const {layoutId: rootId, selectedId} = layoutHolder.model;
+
+    console.log("Generating checklist for id " + rootId);
+    const rootChildren = rootId ? [entryById[rootId].row] : [];
+    const filteredRanks = hortis.filterRanks(rootChildren, filterRanks, showRoot, 0);
+    const filteredEntries = filterEntries(filteredRanks);
+    that.rootEntry = {row: {}, children: filteredEntries};
+    const {idToEntry, allRowFocus, model} = hortis.checklist.computeInitialModel(that.rootEntry);
+    that.idToEntry = idToEntry;
+    that.allRowFocus = allRowFocus; // Must do this first because checksToSelection will read it
+
+    that.applier.change([], model);
+
+    const markup = hortis.checklistList(filteredEntries, selectedId, filterRanks, true);
+    element[0].innerHTML = markup;
+    const checks = element[0].querySelectorAll(".flc-checklist-check");
+    const idToNode = {};
+    checks.forEach(check => idToNode[check.dataset.rowId] = check);
+    that.idToNode = idToNode;
+};
+
+hortis.checklist.allChildrenState = function (idToState, entry, state) {
+    return entry.children.find(child => idToState[child.row.id] !== state) === undefined;
+};
+
+// In-DOM variants of this algorithm at https://css-tricks.com/indeterminate-checkboxes/
+hortis.checklist.check = function (checklist, id, checked) {
+    const idToStateUp = {...checklist.model.idToState};
+    const upState = checked ? hortis.SELECTED : hortis.UNSELECTED;
+    const entry = checklist.idToEntry[id];
+    // Traverse downward, cascading selected/unselected flag
+    const setChildState = function (entry, state) {
+        idToStateUp[entry.row.id] = state;
+        entry.children.forEach(child => setChildState(child, state));
+    };
+
+    // Traverse upward, cascading indeterminate as well as flag
+    setChildState(entry, upState);
+
+    let parent = entry.parent;
+    while (parent) {
+        const allChildrenState = hortis.checklist.allChildrenState(idToStateUp, parent, upState);
+        idToStateUp[parent.row.id] = allChildrenState ? upState : hortis.INDETERMINATE;
+        parent = parent.parent;
+    }
+    checklist.applier.change(["idToState"], idToStateUp);
+
+};
+
+hortis.checklist.computeInitialModel = function (rootEntry) {
+    const selectedCount = 0,
+        idToState = {},
+        idToEntry = {},
+        allRowFocus = {};
+    const indexEntry = function (entry, parent) {
+        idToState[entry.row.id] = hortis.UNSELECTED;
+        idToEntry[entry.row.id] = entry;
+        allRowFocus[entry.row.id] = true;
+        entry.parent = parent;
+        entry.children.forEach(childEntry => indexEntry(childEntry, entry));
+    };
+    indexEntry(rootEntry);
+    return {idToEntry, allRowFocus, model: {idToState, selectedCount}};
+};
+
+fluid.defaults("hortis.checklist.withHolder", {
+    gradeNames: ["hortis.layoutHolder", "hortis.checklist"],
+    invokers: {
+        filterEntries: "{vizLoader}.filterEntries"
+    },
+    modelListeners: {
+        // Can't use modelRelay because of https://issues.fluidproject.org/browse/FLUID-6208
+        checklistSelection: {
+            path: ["{checklist}.model.idToState", "{checklist}.model.rowFocus"],
+            func: "hortis.checklist.checksToSelection",
+            args: ["{checklist}.model.idToState", "{checklist}.model.rowFocus", "{checklist}"],
+            excludeSource: "init"
+        }
+    }
+});
+
+// TODO: Get layoutHolder to compute allRowFocus
+hortis.checklist.checksToSelection = function (idToState, rowFocus, checklist) {
+    const selection = {};
+    let selected = 0;
+    fluid.each(idToState, (state, key) => {
+        if (state === hortis.SELECTED) {
+            ++selected;
+            selection[key] = true;
+        }
+    });
+    const anyRowFocus = !$.isEmptyObject(rowFocus);
+    const rowSelection = selected === 0 ? (anyRowFocus ? {...rowFocus} : checklist.allRowFocus) : selection;
+    fluid.replaceModelValue(checklist.applier, "rowSelection", rowSelection);
+};
