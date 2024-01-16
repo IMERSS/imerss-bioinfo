@@ -192,8 +192,8 @@ body ::-webkit-scrollbar-thumb {
     height: 100%;
     display: flex;
     flex-direction: column;
+    padding: 0.5em;
     padding-right: 1em;
-    margin: 0.5em;
 }
 
 .fld-imerss-panel-label {

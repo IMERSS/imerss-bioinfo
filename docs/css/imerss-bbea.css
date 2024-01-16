@@ -5,6 +5,10 @@
     overflow: hidden;
 }
 
+.fl-imerss-checklists * {
+    box-sizing: border-box;
+}
+
 /* Grabbed definition for default "checked" to apply to indeterminate checkboxes */
 .pretty input:indeterminate~.state label:after {
     background-color: #bdc3c7!important;
@@ -27,10 +31,11 @@
 
 .fl-imerss-pollinators {
     width: 30%;
+    min-width: 30%;
 }
 
 .fl-imerss-interactions {
-    margin: 0.5em;
+    padding: 0.5em;
     width: 40%;
     height: 100%;
     display: flex;
@@ -39,6 +44,7 @@
 
 .fl-imerss-plants {
     width: 30%;
+    min-width: 30%;
 }
 
 .fl-imerss-interactions-holder {
@@ -84,6 +90,7 @@
     display: flex;
     align-items: end;
     margin-right: calc(var(--imerss-scrollbar-width) + 4px);
+    overflow-x: hidden;
 }
 
 .fld-imerss-poll-counts {
