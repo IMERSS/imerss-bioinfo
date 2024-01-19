@@ -111,16 +111,18 @@ fluid.defaults("hortis.vizLoader", {
     }
 });
 
-hortis.tooltipTemplate = "<div class=\"fl-imerss-tooltip\">" +
-    "<div class=\"fl-imerss-photo\" style=\"background-image: url(%imgUrl)\"></div>" +
-    "<div class=\"fl-text\"><b>%taxonRank:</b> %taxonNames</div>" +
-    "</div>";
+hortis.taxonTooltipTemplate =
+`<div class="fl-imerss-tooltip">
+    <div class="fl-imerss-photo" style="background-image: url(%imgUrl)"></div>
+    <div class="fl-text"><b>%taxonRank:</b> %taxonNames</div>
+</div>`;
 
 hortis.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-hortis.renderTooltip = function (row) {
+hortis.renderTaxonTooltip = function (that, hoverId) {
+    const row = that.entryById[hoverId].row;
     const terms = {
         imgUrl: row.iNaturalistTaxonImage || ""
     };
@@ -131,7 +133,7 @@ hortis.renderTooltip = function (row) {
     }
     const names = [(row.taxonName || row.iNaturalistTaxonName), row.commonName, row.hulqName].filter(name => name);
     terms.taxonNames = names.join(" / ");
-    return fluid.stringTemplate(hortis.tooltipTemplate, terms);
+    return fluid.stringTemplate(hortis.taxonTooltipTemplate, terms);
 };
 
 
@@ -147,7 +149,7 @@ hortis.isInDocument = function (node) {
 hortis.clearAllTooltips = function (that) {
     hortis.clearTooltip(that);
     $(".ui-tooltip").remove();
-    that.applier.change("hoverId", null);
+    that.applier.change(that.options.tooltipKey, null);
 };
 
 hortis.clearTooltip = function (that) {
@@ -163,21 +165,20 @@ hortis.clearTooltip = function (that) {
 };
 
 hortis.updateTooltip = function (that, id) {
-    const content = id ? hortis.renderTooltip(that.entryById[id].row, that.options.markup) : null;
-    const target = $(that.mouseEvent.target);
-
+    const content = id ? that.renderTooltip(id) : null;
     hortis.clearTooltip(that);
 
     if (content) {
+        const target = $(that.hoverEvent.target);
         target.tooltip({
             items: target
         });
         target.tooltip("option", "content", content || "");
         target.tooltip("option", "track", true);
-        target.tooltip("open", that.mouseEvent);
+        target.tooltip("open", that.hoverEvent);
         that.tooltipTarget = target;
     } else {
-        that.mouseEvent = null;
+        that.hoverEvent = null;
     }
 };
 
@@ -288,7 +289,7 @@ hortis.bindTaxonHover = function (that, layoutHolder) {
     const hoverable = that.options.selectors.hoverable;
     that.container.on("mouseenter", hoverable, function (e) {
         const id = this.dataset.rowId;
-        layoutHolder.mouseEvent = e;
+        layoutHolder.hoverEvent = e;
         layoutHolder.applier.change("hoverId", id);
     });
     that.container.on("mouseleave", hoverable, function () {
@@ -356,9 +357,10 @@ hortis.taxa.map = function (rows, byId) {
 };
 
 
-// Holds model state shared with checklist and index
+// Holds model state shared with checklist and index - TODO rename after purpose, "layout" used to refer to sunburst root
 fluid.defaults("hortis.layoutHolder", {
     gradeNames: "fluid.modelComponent",
+    tooltipKey: "hoverId",
     members: {
         taxonHistory: []
         // entryById
@@ -391,6 +393,7 @@ fluid.defaults("hortis.layoutHolder", {
         }
     },
     invokers: {
+        renderTooltip: "hortis.renderTaxonTooltip({that}, {arguments}.0)",
         filterEntries: "fluid.notImplemented"
     }
 });
@@ -659,10 +662,10 @@ hortis.libreMap.fitBounds = function (that, fitBounds) {
 fluid.defaults("hortis.interactions", {
     gradeNames: "fluid.modelComponent",
     members: {
-        crossTable: {}, // keys are plantId|pollId, values ints
+        // keys are plantId|pollId, values ints
+        crossTable: "@expand:hortis.interactions.count({that}, {obsLoader})",
         plantTable: {},
-        pollTable: {},
-        maxCounts: "@expand:hortis.interactions.count({that}, {obsLoader})"
+        pollTable: {}
     }
 });
 
@@ -670,24 +673,50 @@ hortis.intIdsToKey = function (plantId, pollId) {
     return plantId + "|" + pollId;
 };
 
-hortis.addCount = function (table, key) {
+hortis.keyToIntIds = function (key) {
+    const parts = key.split("|");
+    return {
+        plantId: +parts[0],
+        pollId: +parts[1]
+    };
+};
+
+hortis.addCount = function (table, key, count = 1) {
     if (table[key] === undefined) {
         table[key] = 0;
     }
-    ++table[key];
+    table[key] += count;
 };
 
 hortis.max = function (hash) {
-    let max = 0;
+    let max = Number.NEGATIVE_INFINITY;
     fluid.each(hash, function (val) {
         max = Math.max(val, max);
     });
     return max;
 };
 
+hortis.maxReducer = function () {
+    const togo = {
+        value: Number.NEGATIVE_INFINITY,
+        reduce: next => {togo.value = Math.max(next, togo.value);}
+    };
+    return togo;
+};
+
+hortis.minReducer = function () {
+    const togo = {
+        value: Number.POSITIVE_INFINITY,
+        reduce: next => {togo.value = Math.min(next, togo.value);}
+    };
+    return togo;
+};
+
+
 hortis.interactions.count = function (that, obsLoader) {
     const rows = obsLoader.data;
-    const {crossTable, plantTable, pollTable} = that;
+    const {plantTable, pollTable} = that;
+    const crossTable = {};
 
     rows.forEach(function (row) {
         const {pollinatorINatId: pollId, plantINatId: plantId} = row;
@@ -698,24 +727,19 @@ hortis.interactions.count = function (that, obsLoader) {
             hortis.addCount(pollTable, pollId);
         }
     });
-    const max = {
-        cross: hortis.max(crossTable),
-        plants: hortis.max(plantTable),
-        polls: hortis.max(pollTable)
-    };
 
     const cells = Object.keys(crossTable).length;
     const plants = Object.keys(plantTable).length;
     const polls = Object.keys(pollTable).length;
     console.log("Counted ", rows.length + " obs into " + cells + " cells for " + plants + " plants and " + polls + " pollinators");
-    console.log("Maximum count: " + max.cross);
     console.log("Occupancy: " + (100 * (cells / (plants * polls))).toFixed(2) + "%");
 
-    return max;
+    return crossTable;
 };
 
 fluid.defaults("hortis.drawInteractions", {
     gradeNames: "fluid.viewComponent",
+    tooltipKey: "hoverCellKey",
     selectors: {
         plantNames: ".fld-imerss-plant-names",
         plantCounts: ".fld-imerss-plant-counts",
@@ -726,128 +750,284 @@ fluid.defaults("hortis.drawInteractions", {
         hoverable: ".fl-imerss-int-label"
     },
     squareSize: 16,
-    squareMargin: 4,
+    squareMargin: 2,
     fillStops: hortis.libreMap.natureStops,
     fillOpacity: 0.7,
     outlineColour: "black",
     listeners: {
+        "onCreate.bindEvents": "hortis.drawInteractions.bindEvents",
         // "onCreate.render": "hortis.drawInteractions.render",
         // TODO: We now have one layoutHolder for each checklist, need to complexify this
         "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {layoutHolder})"
+    },
+    invokers: {
+        renderTooltip: "hortis.renderInteractionTooltip({that}, {arguments}.0)"
+    },
+    model: {
+        hoverCellKey: null
     },
     modelListeners: {
         render: {
             path: "{interactions}.model",
             func: "hortis.drawInteractions.render",
             args: ["{that}"]
+        },
+        hover: {
+            path: "hoverCellKey",
+            excludeSource: "init",
+            funcName: "hortis.updateTooltip",
+            args: ["{that}", "{change}.value"]
+        }
+    },
+    components: {
+        pollTooltips: {
+            container: "{that}.dom.pollCounts",
+            type: "hortis.histoTooltips",
+            options: {
+                counts: "pollCounts"
+            }
+        },
+        plantTooltips: {
+            container: "{that}.dom.plantCounts",
+            type: "hortis.histoTooltips",
+            options: {
+                counts: "plantCounts"
+            }
         }
     }
 });
 
-hortis.makePerm = function (table, cutoff) {
+fluid.defaults("hortis.histoTooltips", {
+    gradeNames: "fluid.viewComponent",
+    tooltipKey: "hoverId",
+    selectors: {
+        hoverable: ".fl-imerss-int-count",
+    },
+    model: {
+        hoverId: null
+    },
+    modelListeners: {
+        hover: {
+            path: "hoverId",
+            excludeSource: "init",
+            funcName: "hortis.updateTooltip",
+            args: ["{that}", "{change}.value"]
+        }
+    },
+    invokers: {
+        renderTooltip: "hortis.renderHistoTooltip({that}, {arguments}.0, {drawInteractions})"
+    },
+    listeners: {
+        "onCreate.bindHistoHover": "hortis.bindHistoHover"
+    }
+});
+
+hortis.bindHistoHover = function (that) {
+    const hoverable = that.options.selectors.hoverable;
+    that.container.on("mouseenter", hoverable, function (e) {
+        const id = this.dataset.rowId;
+        that.hoverEvent = e;
+        that.applier.change("hoverId", id);
+    });
+    that.container.on("mouseleave", hoverable, function () {
+        that.applier.change("hoverId", null);
+    });
+};
+
+hortis.renderHistoTooltip = function (that, id, interactions) {
+    const counts = interactions[that.options.counts];
+    const count = counts.counts[id];
+    const row = interactions.taxa.rowById[id];
+    const name = row.iNaturalistTaxonName;
+    return `<div class="fl-imerss-int-tooltip"><div><i>${name}</i>:</div><div>Observation count: ${count}</div></div>`;
+};
+
+hortis.makePerm = function (table) {
     const tEntries = Object.entries(table);
-    const count = tEntries.length;
     const entries = tEntries.map((entry, index) => ({
         id: entry[0],
         count: entry[1],
         index: index
     }));
-    entries.sort((ea, eb) => eb.count - ea.count);
-    const cutIndex = entries.findIndex(entry => entry.count < cutoff);
-    return entries.slice(0, count < 50 || cutIndex === -1 ? undefined : cutIndex);
+    return entries;
 };
 
-
 hortis.drawInteractions.render = function (that) {
-    const {crossTable, plantTable, pollTable, maxCounts} = that.interactions;
+    const {crossTable, plantTable, pollTable} = that.interactions;
     const {squareSize, squareMargin} = that.options;
 
     const plantSelection = that.interactions.model.plantSelection;
     const filteredPlant = plantSelection ? fluid.filterKeys(plantTable, Object.keys(plantSelection)) : plantTable;
-    const plantPerm = hortis.makePerm(filteredPlant, 5);
+    const plantPerm = hortis.makePerm(filteredPlant);
     const pollSelection = that.interactions.model.pollinatorSelection;
     const filteredPoll = pollSelection ? fluid.filterKeys(pollTable, Object.keys(pollSelection)) : pollTable;
-    const pollPerm = hortis.makePerm(filteredPoll, 5);
+    const pollPerm = hortis.makePerm(filteredPoll);
 
     const canvas = that.locate("interactions")[0];
     const ctx = canvas.getContext("2d");
-    const side = squareSize - squareMargin;
+    const side = squareSize - 2 * squareMargin;
 
     ctx.lineWidth = 10;
 
-    const width = pollPerm.length * squareSize + squareMargin;
-    const height = plantPerm.length * squareSize + squareMargin;
-    canvas.width = width;
-    canvas.height = height;
+    const plantCounts = {counts: {}, max: 0};
+    const pollCounts = {counts: {}, max: 0};
 
-    const xPos = index => index * squareSize + squareMargin / 2;
-    const yPos = index => index * squareSize + squareMargin / 2;
-
-    plantPerm.forEach(function (plantRec, plantIndex) {
-        const {id : plantId} = plantRec;
-        pollPerm.forEach(function (pollRec, pollIndex) {
-            const {id : pollId} = pollRec;
+    plantPerm.forEach(function (plantRec) {
+        const plantId = plantRec.id;
+        pollPerm.forEach(function (pollRec) {
+            const pollId = pollRec.id;
             const key = hortis.intIdsToKey(plantId, pollId);
             const count = crossTable[key];
             if (count !== undefined) {
-                const scaled = count / maxCounts.cross;
-                const colour = fluid.colour.interpolateStops(that.options.fillStops, scaled);
-                const xywh = [xPos(pollIndex), yPos(plantIndex), side, side];
-
-                ctx.fillStyle = colour;
-                ctx.fillRect.apply(ctx, xywh);
-
-                ctx.strokeStyle = that.options.outlineColour;
-                ctx.strokeRect.apply(ctx, xywh);
+                hortis.addCount(plantCounts.counts, plantId, count);
+                hortis.addCount(pollCounts.counts, pollId, count);
             }
         });
     });
 
+    plantCounts.max = hortis.max(plantCounts.counts);
+    pollCounts.max = hortis.max(pollCounts.counts);
+
+    const filterZero = function (perm, counts) {
+        fluid.remove_if(perm, rec => counts[rec.id] === undefined);
+        perm.sort((ea, eb) => counts[eb.id] - counts[ea.id]);
+    };
+
+    const filterCutoff = function (perm, counts, sizeLimit, countLimit) {
+        if (perm.length >= sizeLimit) {
+            const cutIndex = perm.findIndex(entry => counts[entry.id] < countLimit);
+            if (cutIndex !== -1) {
+                perm.length = cutIndex;
+            }
+        }
+    };
+
+    filterZero(plantPerm, plantCounts.counts);
+    filterZero(pollPerm, pollCounts.counts);
+
+    filterCutoff(plantPerm, plantCounts.counts, 100, 8);
+    filterCutoff(pollPerm, pollCounts.counts, 100, 8);
+
+    that.plantPerm = plantPerm;
+    that.pollPerm = pollPerm;
+    that.plantCounts = plantCounts;
+    that.pollCounts = pollCounts;
+
+    const cellTable = [],
+        cellMax = hortis.maxReducer(),
+        cellMin = hortis.minReducer();
+
+    plantPerm.forEach(function (plantRec, plantIndex) {
+        const plantId = plantRec.id;
+        pollPerm.forEach(function (pollRec, pollIndex) {
+            const pollId = pollRec.id;
+            const key = hortis.intIdsToKey(plantId, pollId);
+            const count = crossTable[key];
+            if (count !== undefined) {
+                const scaled = count / Math.sqrt((plantCounts.counts[plantId] * pollCounts.counts[pollId]));
+                cellMax.reduce(scaled);
+                cellMin.reduce(scaled);
+                cellTable.push({scaled, plantIndex, pollIndex});
+            }
+        });
+    });
+
+    const width = pollPerm.length * squareSize + 2 * squareMargin;
+    const height = plantPerm.length * squareSize + 2 * squareMargin;
+    canvas.width = width;
+    canvas.height = height;
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, width, height);
+
+    const xPos = index => index * squareSize + squareMargin;
+    const yPos = index => index * squareSize + squareMargin;
+
+    cellTable.forEach(function (cell) {
+        const {scaled, plantIndex, pollIndex} = cell;
+        const prop = (scaled - cellMin.value) / (cellMax.value - cellMin.value);
+
+        const colour = fluid.colour.interpolateStops(that.options.fillStops, prop);
+        const xywh = [xPos(pollIndex), yPos(plantIndex), side, side];
+
+        ctx.fillStyle = colour;
+        ctx.fillRect.apply(ctx, xywh);
+
+        ctx.strokeStyle = that.options.outlineColour;
+        ctx.strokeRect.apply(ctx, xywh);
+    });
+
     const yoffset = 0; // offset currently disused
+    const xoffset = -0.75;
     const countDimen = 48; // Need to hack bars slightly smaller to avoid clipping
     const countScale = 100 * (1 - 2 / countDimen);
 
     const plantNames = that.locate("plantNames")[0];
     plantNames.style.height = height;
     const plantMark = plantPerm.map(function (rec, plantIndex) {
-        const {id : plantId} = rec;
+        const plantId = rec.id;
         const row = that.taxa.rowById[plantId];
         const top = yPos(plantIndex);
         return `<div class="fl-imerss-int-label" data-row-id="${plantId}" style="top: ${top + yoffset}px">${row.iNaturalistTaxonName}</div>`;
     });
     plantNames.innerHTML = plantMark.join("\n");
 
-    const plantCounts = that.locate("plantCounts")[0];
-    plantCounts.style.height = height;
+    const plantCountNode = that.locate("plantCounts")[0];
+    plantCountNode.style.height = height;
     const plantCountMark = plantPerm.map(function (rec, plantIndex) {
-        const {id: plantId, count} = rec;
-        const prop = fluid.roundToDecimal(countScale * count / maxCounts.plants, 2);
+        const plantId = rec.id;
+        const count = plantCounts.counts[plantId];
+        const prop = fluid.roundToDecimal(countScale * count / plantCounts.max, 2);
         const top = yPos(plantIndex);
         // noinspection CssInvalidPropertyValue
         return `<div class="fl-imerss-int-count" data-row-id="${plantId}" style="top: ${top + yoffset}px; width: ${prop}%; height: ${side}px;"></div>`;
     });
-    plantCounts.innerHTML = plantCountMark.join("\n");
+    plantCountNode.innerHTML = plantCountMark.join("\n");
 
     const pollNames = that.locate("pollNames")[0];
     pollNames.style.width = width;
     const pollMark = pollPerm.map(function (rec, pollIndex) {
-        const {id: pollId} = rec;
+        const pollId = rec.id;
         const row = that.taxa.rowById[pollId];
         const left = xPos(pollIndex);
-        return `<div class="fl-imerss-int-label" data-row-id="${pollId}" style="left: ${left}px">${row.iNaturalistTaxonName}</div>`;
+        return `<div class="fl-imerss-int-label" data-row-id="${pollId}" style="left: ${left + xoffset}px">${row.iNaturalistTaxonName}</div>`;
     });
     pollNames.innerHTML = pollMark.join("\n");
 
-    const pollCounts = that.locate("pollCounts")[0];
-    pollCounts.style.width = `${width}px`;
+    const pollCountNode = that.locate("pollCounts")[0];
+    pollCountNode.style.width = `${width}px`;
     const pollCountMark = pollPerm.map(function (rec, pollIndex) {
-        const {id: pollId, count} = rec;
-        const prop = fluid.roundToDecimal(countScale * count / maxCounts.polls, 2);
+        const pollId = rec.id;
+        const count = pollCounts.counts[pollId];
+        const prop = fluid.roundToDecimal(countScale * count / pollCounts.max, 2);
         const left = xPos(pollIndex);
         // noinspection CssInvalidPropertyValue
-        return `<div class="fl-imerss-int-count" data-row-id="${pollId}" style="left: ${left - 1}px; height: ${prop}%; width: ${side}px;"></div>`;
+        return `<div class="fl-imerss-int-count" data-row-id="${pollId}" style="left: ${left + xoffset}px; height: ${prop}%; width: ${side}px;"></div>`;
     });
-    pollCounts.innerHTML = pollCountMark.join("\n");
+    pollCountNode.innerHTML = pollCountMark.join("\n");
+
+};
+
+hortis.interactionTooltipTemplate = `<div class="fl-imerss-tooltip">
+    <div class="fl-imerss-photo" style="background-image: url(%imgUrl)"></div>" +
+    <div class="fl-text"><b>%taxonRank:</b> %taxonNames</div>" +
+    </div>`;
+
+hortis.renderInteractionTooltip = function (that, cellKey) {
+    const {plantId, pollId} = hortis.keyToIntIds(cellKey);
+    const plantRow = that.taxa.rowById[plantId];
+    const plantName = plantRow.iNaturalistTaxonName;
+    const pollRow = that.taxa.rowById[pollId];
+    const pollName = pollRow.iNaturalistTaxonName;
+    const count = that.interactions.crossTable[cellKey];
+    return `<div class="fl-imerss-int-tooltip"><div><i>${pollName}</i> on </div><div><i>${plantName}</i>:</div><div>Count: ${count}</div></div>`;
+};
+
+hortis.drawInteractions.bindEvents = function (that) {
+    const crossTable = that.interactions.crossTable;
+    const plantNames = that.locate("plantNames")[0];
+    const plantCounts = that.locate("plantCounts")[0];
+    const pollNames = that.locate("pollNames")[0];
+    const pollCounts = that.locate("pollCounts")[0];
 
     const scroll = that.locate("scroll")[0];
     scroll.addEventListener("scroll", function () {
@@ -863,6 +1043,28 @@ hortis.drawInteractions.render = function (that) {
         scroll.scrollTop = plantNames.scrollTop;
     });
 
+    const canvas = that.locate("interactions")[0];
+
+    const {squareSize, squareMargin} = that.options;
+    const buff = squareMargin / squareSize;
+
+    canvas.addEventListener("mousemove", function (e) {
+        const xc = e.offsetX / squareSize,
+            yc = e.offsetY / squareSize;
+        const xb = xc % 1, yb = yc % 1;
+        if (xb >= buff && xb <= 1 - buff && yb >= buff && yb <= 1 - buff) {
+            const pollId = that.pollPerm?.[Math.floor(xc)]?.id,
+                plantId = that.plantPerm?.[Math.floor(yc)]?.id;
+            const key = hortis.intIdsToKey(plantId, pollId);
+            const crossCount = crossTable[key];
+            that.hoverEvent = e;
+            that.applier.change("hoverCellKey", crossCount ? key : null);
+        } else {
+            that.applier.change("hoverCellKey", null);
+        }
+    });
+
+    canvas.addEventListener("mouseleave", () => that.applier.change("hoverCellKey", null));
 };
 
 
