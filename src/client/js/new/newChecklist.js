@@ -87,7 +87,10 @@ hortis.updateChecklistSelection = function (that, newSelectedId, oldSelectedId, 
     }
 };
 
-hortis.alwaysRejectRanks = ["subfamily", "tribe", "genus"]; // AS directive of 18/7/23
+hortis.alwaysRejectRanks = [];
+// We used to have
+// ["subfamily", "tribe", "genus"]; // AS directive of 18/7/23
+// which doubtless makes no sense in the new world
 
 hortis.acceptChecklistRow = function (row, filterRanks) {
     const acceptBasic = !filterRanks || filterRanks.includes(row.rank) || row.species;

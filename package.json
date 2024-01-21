@@ -14,6 +14,7 @@
         "axios": "1.6.5",
         "csv-parser": "3.0.0",
         "papaparse": "5.4.1",
+        "@ronomon/hash-table": "2.0.8",
         "remove-bom-stream": "2.0.0",
         "event-stream": "4.0.1",
         "csv-writer": "1.6.0",

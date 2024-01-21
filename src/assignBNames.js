@@ -79,6 +79,13 @@ hortis.addName = function (allTaxa, id, name, nameStatus) {
     const existing = allTaxa[id];
     existing.names = existing.names || {};
     existing.names[name] = nameStatus;
+
+    // Bodge to ensure that we don't omit higher taxa which do appear in catalogue - in practice we need
+    // a swaps system
+    // In practice there is too much junk in the OBA data
+    // if (nameStatus === "accepted") {
+    //    existing.taxonName = existing.iNaturalistTaxonName;
+    //}
 };
 
 hortis.storeTaxon = async function (allTaxa, taxonDoc, inSummary) {

@@ -32,6 +32,7 @@ const buildIndex = {
         "src/client/js/xetthecum.js"
     ],
     newSource: [
+        "src/lib/hash-table.js",
         "src/client/js/colour.js",
         "src/client/js/renderSVG.js",
         "src/client/js/new/imerss-new.js",

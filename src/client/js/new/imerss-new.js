@@ -7,7 +7,7 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
-/* global Papa, maplibregl */
+/* global Papa, maplibregl, HashTable */
 
 "use strict";
 
@@ -669,15 +669,19 @@ fluid.defaults("hortis.interactions", {
     }
 });
 
+// Note that we can't use bitwise operators since they are defined to work on 32 bit operands!!
+// https://stackoverflow.com/questions/63697853/js-bitwise-shift-operator-not-returning-the-correct-result
+hortis.SHIFT = 2 ** 22;
+hortis.MASK = hortis.SHIFT - 1;
+
 hortis.intIdsToKey = function (plantId, pollId) {
-    return plantId + "|" + pollId;
+    return ((+plantId) * hortis.SHIFT) + (+pollId);
 };
 
 hortis.keyToIntIds = function (key) {
-    const parts = key.split("|");
     return {
-        plantId: +parts[0],
-        pollId: +parts[1]
+        plantId: Math.floor(key / hortis.SHIFT),
+        pollId: key & hortis.MASK
     };
 };
 
@@ -712,17 +716,51 @@ hortis.minReducer = function () {
     return togo;
 };
 
+hortis.intKey = new Uint8Array(8);
+hortis.intValue = new Uint8Array(4);
+
+// Adapted from https://stackoverflow.com/a/12965194 by reversing bytes
+hortis.writeLong = function (target, long) {
+    for (let index = target.length - 1; index >= 0; --index) {
+        const byte = long & 0xff;
+        target [ index ] = byte;
+        long = (long - byte) / 256;
+    }
+};
+
+hortis.readLong = function (source) {
+    let value = 0;
+    for (let i = 0; i < source.length; ++i) {
+        value = (value * 256) + source[i];
+    }
+    return value;
+};
+
+hortis.getHashCount = function (hash, key) {
+    hortis.writeLong(hortis.intKey, key);
+    const found = hash.get(hortis.intKey, 0, hortis.intValue, 0);
+    return found === 1 ? hortis.readLong(hortis.intValue) : undefined;
+};
+
+hortis.addHashCount = function (hash, key) {
+    const count = hortis.getHashCount(hash, key);
+    hortis.writeLong(hortis.intValue, count === undefined ? 1 : count + 1);
+    hortis.writeLong(hortis.intKey, key);
+    hash.set(hortis.intKey, 0, hortis.intValue, 0);
+};
 
 hortis.interactions.count = function (that, obsLoader) {
     const rows = obsLoader.data;
     const {plantTable, pollTable} = that;
     const crossTable = {};
+    const crossTableHash = new HashTable(8, 4, 1024, 32768);
 
     rows.forEach(function (row) {
         const {pollinatorINatId: pollId, plantINatId: plantId} = row;
         if (plantId && pollId) {
             const key = hortis.intIdsToKey(plantId, pollId);
             hortis.addCount(crossTable, key);
+            hortis.addHashCount(crossTableHash, key);
             hortis.addCount(plantTable, plantId);
             hortis.addCount(pollTable, pollId);
         }
@@ -733,6 +771,7 @@ hortis.interactions.count = function (that, obsLoader) {
     const polls = Object.keys(pollTable).length;
     console.log("Counted ", rows.length + " obs into " + cells + " cells for " + plants + " plants and " + polls + " pollinators");
     console.log("Occupancy: " + (100 * (cells / (plants * polls))).toFixed(2) + "%");
+    that.crossTableHash = crossTableHash;
 
     return crossTable;
 };
@@ -753,6 +792,7 @@ fluid.defaults("hortis.drawInteractions", {
     squareMargin: 2,
     fillStops: hortis.libreMap.natureStops,
     fillOpacity: 0.7,
+    memoStops: "@expand:fluid.colour.memoStops({that}.options.fillStops, 32)",
     outlineColour: "black",
     listeners: {
         "onCreate.bindEvents": "hortis.drawInteractions.bindEvents",
@@ -853,8 +893,10 @@ hortis.makePerm = function (table) {
 };
 
 hortis.drawInteractions.render = function (that) {
-    const {crossTable, plantTable, pollTable} = that.interactions;
+    const {crossTableHash, plantTable, pollTable} = that.interactions;
     const {squareSize, squareMargin} = that.options;
+
+    const now = Date.now();
 
     const plantSelection = that.interactions.model.plantSelection;
     const filteredPlant = plantSelection ? fluid.filterKeys(plantTable, Object.keys(plantSelection)) : plantTable;
@@ -877,7 +919,7 @@ hortis.drawInteractions.render = function (that) {
         pollPerm.forEach(function (pollRec) {
             const pollId = pollRec.id;
             const key = hortis.intIdsToKey(plantId, pollId);
-            const count = crossTable[key];
+            const count = hortis.getHashCount(crossTableHash, key);
             if (count !== undefined) {
                 hortis.addCount(plantCounts.counts, plantId, count);
                 hortis.addCount(pollCounts.counts, pollId, count);
@@ -896,7 +938,7 @@ hortis.drawInteractions.render = function (that) {
     const filterCutoff = function (perm, counts, sizeLimit, countLimit) {
         if (perm.length >= sizeLimit) {
             const cutIndex = perm.findIndex(entry => counts[entry.id] < countLimit);
-            if (cutIndex !== -1) {
+            if (cutIndex !== -1 && cutIndex >= sizeLimit) {
                 perm.length = cutIndex;
             }
         }
@@ -905,8 +947,8 @@ hortis.drawInteractions.render = function (that) {
     filterZero(plantPerm, plantCounts.counts);
     filterZero(pollPerm, pollCounts.counts);
 
-    filterCutoff(plantPerm, plantCounts.counts, 100, 8);
-    filterCutoff(pollPerm, pollCounts.counts, 100, 8);
+    filterCutoff(plantPerm, plantCounts.counts, 100, 5);
+    filterCutoff(pollPerm, pollCounts.counts, 100, 5);
 
     that.plantPerm = plantPerm;
     that.pollPerm = pollPerm;
@@ -922,7 +964,7 @@ hortis.drawInteractions.render = function (that) {
         pollPerm.forEach(function (pollRec, pollIndex) {
             const pollId = pollRec.id;
             const key = hortis.intIdsToKey(plantId, pollId);
-            const count = crossTable[key];
+            const count = hortis.getHashCount(crossTableHash, key);
             if (count !== undefined) {
                 const scaled = count / Math.sqrt((plantCounts.counts[plantId] * pollCounts.counts[pollId]));
                 cellMax.reduce(scaled);
@@ -931,6 +973,10 @@ hortis.drawInteractions.render = function (that) {
             }
         });
     });
+
+    const delay = Date.now() - now;
+    console.log("Computed celltable in " + delay + " ms");
+    const now2 = Date.now();
 
     const width = pollPerm.length * squareSize + 2 * squareMargin;
     const height = plantPerm.length * squareSize + 2 * squareMargin;
@@ -946,7 +992,7 @@ hortis.drawInteractions.render = function (that) {
         const {scaled, plantIndex, pollIndex} = cell;
         const prop = (scaled - cellMin.value) / (cellMax.value - cellMin.value);
 
-        const colour = fluid.colour.interpolateStops(that.options.fillStops, prop);
+        const colour = fluid.colour.lookupStop(that.options.memoStops, prop);
         const xywh = [xPos(pollIndex), yPos(plantIndex), side, side];
 
         ctx.fillStyle = colour;
@@ -955,6 +1001,8 @@ hortis.drawInteractions.render = function (that) {
         ctx.strokeStyle = that.options.outlineColour;
         ctx.strokeRect.apply(ctx, xywh);
     });
+
+    console.log("Celltable draw at  " + (Date.now() - now2) + " ms");
 
     const yoffset = 0; // offset currently disused
     const xoffset = -0.75;
@@ -1005,6 +1053,8 @@ hortis.drawInteractions.render = function (that) {
     });
     pollCountNode.innerHTML = pollCountMark.join("\n");
 
+    const delay2 = Date.now() - now2;
+    console.log("Rendered in " + delay2 + " ms")
 };
 
 hortis.interactionTooltipTemplate = `<div class="fl-imerss-tooltip">

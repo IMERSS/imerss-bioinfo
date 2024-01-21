@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link async rel="stylesheet" href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
+
+    <title>Tri-State Checkbox test</title>
+  <style>
+    .p-is-indeterminate label:after {
+      background-color: #bdc3c7!important;
+      transform: scale(.6);
+    }
+  </style>
+</head>
+<body>
+<!-- Taken from https://github.com/lokesh-coder/pretty-checkbox -->
+
+<p>
+Default checkbox:
+
+<div class="pretty p-default">
+  <input type="checkbox" />
+  <div class="state">
+    <label>Default</label>
+  </div>
+</div>
+
+</p>
+
+<p>
+MDI-check:
+
+<div class="pretty p-icon">
+  <input type="checkbox" />
+  <div class="state p-success">
+    <i class="icon mdi mdi-check"></i>
+    <label>mdi-check</label>
+  </div>
+</div>
+</p>
+
+<p>
+Indeterminate:
+
+<div class="pretty p-icon p-has-indeterminate">
+  <input type="checkbox" />
+  <div class="state">
+    <i class="icon mdi mdi-check"></i>
+    <label>Normal</label>
+  </div>
+  <div class="state p-is-indeterminate">
+    <i class="icon mdi"></i>
+    <label>Indeterminate</label>
+  </div>
+</div>
+<input type="button" value="Toggle Indeterminate" onclick="toggleIndeterminate()"/>
+
+</p>
+
+<script>
+  const toggleIndeterminate = function () {
+    const check = document.querySelector(".p-has-indeterminate input");
+    console.log("Got check ", check);
+    check.indeterminate = !check.indeterminate;
+  }
+</script>
+
+<p>
+Unstyled:
+
+<input type="checkbox" />
+</p>
+
+</body>
+</html>

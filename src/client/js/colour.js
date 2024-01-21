@@ -68,6 +68,19 @@ fluid.colour.interpolateStops = function (stops, value) {
     return fluid.colour.arrayToString(interpolatedColor);
 };
 
+fluid.colour.memoStops = function (stops, steps) {
+    const colours = [];
+    for (let i = 0; i <= steps; ++i) {
+        colours.push(fluid.colour.interpolateStops(stops, i / steps));
+    }
+    return colours;
+};
+
+fluid.colour.lookupStop = function (steps, prop) {
+    const bin = Math.floor(prop * (steps.length - 1));
+    return steps[bin];
+};
+
 fluid.colour.average = function (ca) {
     const sum = ca.reduce(function (total, c) {
         total[0] += c[0];
