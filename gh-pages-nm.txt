@@ -30,4 +30,3 @@ node_modules/infusion/src/framework/core/js/DataSource.js
 node_modules/infusion/src/framework/core/js/ResourceLoader.js
 node_modules/infusion/src/framework/core/js/ResourceLoader-browser.js
 node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js
-node_modules/@ronomon/hash-table/index.js
