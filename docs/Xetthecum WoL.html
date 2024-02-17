@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="css/imerss-viz-all.css" />
+        <script src="js/jquery.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <script src="js/imerss-viz-all.js"></script>
+        <script src="data/Galiano/Galiano_map_0.js"></script>
+
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+        </style>
+
+        <title>Xetthecum Web of Life</title>
+    </head>
+
+    <body>
+        <h2>Xetthecum Web of Life</h2>
+        <div class="fl-imerss-container">
+        </div>
+        <div style="padding: 1rem">
+<strong>Last updated November 2023.</strong>
+Note: this visualization is based on a working species list and may contain some errors and redundancies.
+As a work in progress it is continually subject to review with assistance from various taxonomic authorities.
+Please contact the project curator if you identify any errors.
+</div>
+        <script>
+            hortis.sunburstLoader(".fl-imerss-container", {
+                resourceBase: ".",
+                renderMarkup: true,
+                colourCount: "observationCount",
+                culturalValues: false,
+                initialTab: "sunburst",
+                vizFile: "data/Xetthecum/Life.json.lz4",
+                phyloMap: "%resourceBase/json/kingdomPhyloMap.json",
+                markupTemplate: "%resourceBase/html/imerss-viz-nomap-wol.html",
+                commonNames: false
+            });
+        </script>
+    </body>
+</html>
