@@ -71,6 +71,7 @@ hortis.applyName = async function (row) {
         row["Referred iNaturalist Name"] = looked.doc.name;
         const lookedId = await source.get({id: looked.doc.id});
         row.iNaturalistTaxonImage = lookedId?.doc.default_photo?.medium_url;
+        row.wikipediaSummary = lookedId?.doc.wikipedia_summary;
         if (row.commonName === "") {
             row.commonName = lookedId?.doc.preferred_common_name;
         }
