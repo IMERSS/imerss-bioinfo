@@ -7,12 +7,16 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
-/* global Papa, maplibregl, HashTable */
+/* global Papa, maplibregl, HashTable, preactSignalsCore */
 
 "use strict";
 
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
+
+// TODO: Hoist this into some kind of core library
+// noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
+var {signal, computed, effect} = preactSignalsCore;
 
 fluid.defaults("hortis.csvReader", {
     gradeNames: "fluid.component",
@@ -39,7 +43,7 @@ hortis.csvReader.parse = function (that, csvOptions, url) {
             that.parsed = results;
             that.data = results.data;
             that.headers = results.meta.fields;
-            that.completionPromise.resolve(true);
+            that.completionPromise.resolve(that.data);
         },
         error: function (err) {
             that.completionPromise.reject();
@@ -56,10 +60,14 @@ fluid.defaults("hortis.urlCsvReader", {
     }
 });
 
-
+fluid.computed = function (funcName, ...args) {
+    return computed( () => {
+        return fluid.invokeGlobalFunction(funcName, args);
+    });
+};
 
 fluid.defaults("hortis.vizLoader", {
-    gradeNames: ["fluid.resourceLoader"],
+    gradeNames: ["fluid.component"],
     // obsFile,
     // taxaFile
     components: {
@@ -77,39 +85,69 @@ fluid.defaults("hortis.vizLoader", {
         },
         taxa: {
             type: "hortis.taxa",
-            createOnEvent: "onResourcesLoaded",
             options: {
-                members: {
-                    rows: "{taxaLoader}.data"
+                model: {
+                    rows: "{vizLoader}.model.taxa"
                 }
             }
         }
     },
+    // Currently not a resourceLoader, but the name fits
     events: {
-        obsFilterChange: null
-    },
-    model: {
-    //        taxaLoaded: "{that}.resources.taxa.parsed",
-    //        obsLoaded: "{that}.resources.obs.parsed",
-    },
-    invokers: { // Deal with global selection model, e.g. via map selections
-        filterEntries: "fluid.identity"
+        onResourcesLoaded: null
     },
     members: {
+        taxaRows: "@expand:signal([])",
+        obsRows: "@expand:signal([])",
+        obsFilterVersion: "@expand:signal(0)",
+        filteredObs: "@expand:computed({that}.obs, {that}.obsFilter, {that}.obsFilterVersion)",
         // Not an invoker for performance reasons
         obsFilter: fluid.identity
     },
-    resources: {
-        taxa: {
-            promiseFunc: "fluid.identity",
-            promiseArgs: "{that}.taxaLoader.completionPromise"
-        },
-        obs: {
-            promiseFunc: "fluid.identity",
-            promiseArgs: "{that}.obsLoader.completionPromise"
+    model: {
+        taxa: [],
+        obs: [],
+        filteredObs: new fluid.ImmutableArray()
+        // obsFilterVersion: 0
+    },
+    modelListeners: {
+        filterObs: {
+            path: "obsFilterVersion",
+            funcName: "hortis.filterObs",
+            args: ["{that}", "{that}.model.obs", "{that}.obsFilter"]
         }
+    },
+    invokers: { // Deal with global selection model for taxa, e.g. via map selections
+        filterEntries: "fluid.identity"
+    },
+
+    listeners: {
+        "onCreate.bindResources": "hortis.vizLoader.bindResources"
     }
 });
+
+// Do this by hand since we will have compressed viz one day
+hortis.vizLoader.bindResources = async function (that) {
+    const promises = [that.taxaLoader.completionPromise, that.obsLoader.completionPromise];
+    const [taxa, obs] = await Promise.all(promises);
+    that.applier.change([], {taxa, obs, obsFilterVersion: 0});
+    that.events.onResourcesLoaded.fire();
+};
+
+hortis.filterObs = function (that, obs, obsFilter) {
+    const filteredObs = new fluid.ImmutableArray();
+
+    let dropped = 0;
+    obs.forEach(function (row) {
+        const accept = obsFilter(row);
+        if (accept) {
+            filteredObs.push(row);
+        } else {
+            ++dropped;
+        }
+    });
+    that.applier.change(["filteredObs"], filteredObs);
+};
 
 hortis.taxonTooltipTemplate =
 `<div class="fl-imerss-tooltip">
@@ -122,7 +160,7 @@ hortis.capitalize = function (string) {
 };
 
 hortis.renderTaxonTooltip = function (that, hoverId) {
-    const row = that.entryById[hoverId].row;
+    const row = that.model.entryById[hoverId].row;
     const terms = {
         imgUrl: row.iNaturalistTaxonImage || ""
     };
@@ -183,59 +221,99 @@ hortis.updateTooltip = function (that, id) {
 };
 
 
-fluid.defaults("hortis.taxa", {
-    gradeNames: "fluid.component",
-    members: {
-        rowById: "@expand:hortis.indexTree({that}.rows)",
-        flatTree: "@expand:hortis.taxa.map({that}.rows, {that}.rowById)",
-        // TODO: These will be somehow modellised in the end
-        entries: "@expand:hortis.computeEntries({that}.flatTree, {that}.acceptRow)",
-        entryById: "@expand:hortis.indexEntries({that}.entries)"
-    },
+fluid.defaults("fluid.stringTemplateRenderingView", {
+    gradeNames: "fluid.containerRenderingView",
     invokers: {
-        acceptRow: "hortis.acceptRow({that}, {arguments}.0)"
+        renderMarkup: "fluid.stringTemplate({that}.options.markup.container, {that}.model)"
+    },
+    modelListeners: {
+        render: {
+            path: "",
+            func: "fluid.renderToDocument",
+            args: "{that}"
+        }
     }
 });
 
-hortis.acceptRow = function (/*that, row*/) {
-    // TODO: in Sunburst used to check nativeData
-    return true;
+fluid.conditionalStringTemplate = function (container, fallbackContainer, model) {
+    return model ? fluid.stringTemplate(container, model) : fallbackContainer;
+};
+
+// Perhaps one day could be Preactish!
+fluid.renderToDocument = function (that) {
+    const markup = that.renderMarkup();
+    that.container[0].innerHTML = markup;
+};
+
+fluid.defaults("hortis.recordReporter", {
+    gradeNames: "fluid.stringTemplateRenderingView",
+    invokers: {
+        renderMarkup: "hortis.recordReporter.renderMarkup({that}, {that}.options.markup)"
+    },
+    markup: {
+        fallbackContainer: "<div></div>",
+        container: "<div>Displaying %filteredRows of %allRows records</div>"
+    },
+    // BUG: Accessing model with undefined initial value during evaluateContainers causes circular exception
+    // Apparently even null will do it!
+    model: 0
+});
+
+hortis.recordReporter.renderMarkup = function (that, markup) {
+    const model = that.model;
+    return model.filteredRows ? fluid.stringTemplate(markup.container, model) : markup.fallbackContainer;
+};
+
+hortis.filteredToReport = function (vizLoader, recordReporter) {
+    const model = {
+        filteredRows: vizLoader.model.filteredObs.length,
+        allRows: vizLoader.model.obs.length
+    };
+    recordReporter.applier.change("", model);
 };
 
 fluid.defaults("hortis.beaVizLoader", {
     selectors: {
-        interactions: ".fl-imerss-interactions-holder"
+        interactions: ".fld-imerss-interactions-holder",
+        recordReporter: ".fld-record-reporter"
     },
     components: {
+        recordReporter: {
+            type: "hortis.recordReporter",
+            container: "{that}.dom.recordReporter",
+            options: {
+                model: {
+                    filteredRows: "{vizLoader}.model.filteredObs.length",
+                    allRows: "{vizLoader}.model.obs.length"
+                }
+            }
+        },
         pollinatorChecklist: {
             type: "hortis.checklist.withHolder",
-            createOnEvent: "onResourcesLoaded",
             container: ".fl-imerss-pollinators",
             options: {
                 gradeNames: "hortis.checklist.inLoader",
                 rootId: 1,
-                filterRanks: ["order", "family"],
-                members: {
-                    entryById: "{taxa}.entryById"
+                filterRanks: ["epifamily", "family"],
+                model: {
+                    rowById: "{taxa}.model.rowById"
                 }
             }
         },
         plantChecklist: {
             type: "hortis.checklist.withHolder",
-            createOnEvent: "onResourcesLoaded",
             container: ".fl-imerss-plants",
             options: {
                 gradeNames: "hortis.checklist.inLoader",
                 rootId: 47126,
                 filterRanks: ["class", "order", "family", "kingdom"],
-                members: {
-                    entryById: "{taxa}.entryById"
+                model: {
+                    rowById: "{taxa}.model.rowById"
                 }
             }
         },
         interactions: {
             type: "hortis.interactions",
-            createOnEvent: "onResourcesLoaded",
             options: {
                 model: {
                     plantSelection: "{plantChecklist}.model.rowSelection",
@@ -245,7 +323,6 @@ fluid.defaults("hortis.beaVizLoader", {
         },
         drawInteractions: {
             type: "hortis.drawInteractions",
-            createOnEvent: "onResourcesLoaded",
             container: "{that}.dom.interactions",
             options: {
                 components: {
@@ -255,13 +332,8 @@ fluid.defaults("hortis.beaVizLoader", {
             }
         }
     },
-    listeners: {
-        // Not an invoker for performance, not a member since checklists don't init until resources loaded
-        "onResourcesLoaded.makeObsFilter": {
-            funcName: "hortis.makeBeaObsFilter",
-            args: ["{that}"],
-            priority: "after:fluid-componentConstruction"
-        }
+    members: {
+        obsFilter: "@expand:hortis.makeBeaObsFilter({that})"
     }
 });
 
@@ -269,7 +341,8 @@ fluid.defaults("hortis.checklist.inLoader", {
     modelListeners: {
         obsFilterChange: {
             path: "{that}.model.rowSelection",
-            func: "{vizLoader}.events.obsFilterChange.fire",
+            funcName: "fluid.incrementModel",
+            args: ["{that}", "obsFilterVersion"],
             excludeSource: "init"
         }
     }
@@ -278,7 +351,7 @@ fluid.defaults("hortis.checklist.inLoader", {
 hortis.makeBeaObsFilter = function (beaVizLoader) {
     const plantChecklist = beaVizLoader.plantChecklist;
     const pollinatorChecklist = beaVizLoader.pollinatorChecklist;
-    beaVizLoader.obsFilter = function (obsRow) {
+    return function beaObsFilter(obsRow) {
         return plantChecklist.model.rowSelection[obsRow.plantINatId] &&
             pollinatorChecklist.model.rowSelection[obsRow.pollinatorINatId];
     };
@@ -301,11 +374,56 @@ hortis.bindTaxonHover = function (that, layoutHolder) {
     });
 };
 
+fluid.defaults("hortis.taxa", {
+    gradeNames: "fluid.modelComponent",
+    model: {
+        entries: new fluid.ImmutableArray(),
+        entryById: new fluid.ImmutableObject()
+    },
+    modelRelay: {
+        indexTaxa: {
+            target: "rowById",
+            source: "rows",
+            func: "hortis.indexTree",
+            // Crucial point where one relay needs to operate first - signals might do this naturally
+            priority: "first"
+        },
+        flatTree: {
+            target: "flatTree",
+            // Note, actually just fills in entries in rows
+            func: "hortis.taxa.map",
+            args: ["{that}.model.rows", "{that}.model.rowById)"]
+        },
+        entries: {
+            target: "entries",
+            func: "hortis.computeEntries",
+            args: ["{that}.model.flatTree", "{that}.acceptRow"]
+        },
+        entryById: {
+            target: "entryById",
+            func: "hortis.indexEntries",
+            args: "{that}.model.entries"
+
+        }
+    },
+    invokers: {
+        acceptRow: "hortis.acceptRow({that}, {arguments}.0)"
+    }
+});
+
+hortis.acceptRow = function (/*that, row*/) {
+    // TODO: in Sunburst used to check nativeData
+    return true;
+};
+
+// Since these functions got modellised the all have to return the strange new fluid.ImmutableX objects to avoid being
+// copied whenever models update.
+
 // Accepts array of rows and returns array of "entries", where entry is {row, children: array of entry}
 // Identical algorithm as for hortis.filterRanks - no doubt a functional programmer would fold this up
 // Was hortis.computeSunburstEntries
 hortis.computeEntries = function (rows, acceptRow) {
-    const togo = [];
+    const togo = new fluid.ImmutableArray();
     fluid.each(rows, function (row) {
         if (acceptRow(row)) {
             togo.push({
@@ -321,8 +439,8 @@ hortis.computeEntries = function (rows, acceptRow) {
 };
 
 hortis.indexEntries = function (entries) {
-    const index = {};
-    entries.forEach(function (entry) {
+    const index = new fluid.ImmutableObject();
+    (entries || []).forEach(function (entry) {
         index[entry.row.id] = entry;
     });
     return index;
@@ -330,7 +448,7 @@ hortis.indexEntries = function (entries) {
 
 // Copied from imerss-viz.js
 hortis.indexTree = function (flatTree) {
-    const index = {};
+    const index = new fluid.ImmutableObject();
     flatTree.forEach(function (row) {
         index[row.id] = row;
     });
@@ -352,7 +470,9 @@ hortis.taxa.map = function (rows, byId) {
         node.depth = depth;
         node.children.forEach(child => assignDepth(child, depth + 1));
     };
-    assignDepth(rows[0], 0);
+    if (rows.length > 0) {
+        assignDepth(rows[0], 0);
+    }
     return rows;
 };
 
@@ -363,7 +483,6 @@ fluid.defaults("hortis.layoutHolder", {
     tooltipKey: "hoverId",
     members: {
         taxonHistory: []
-        // entryById
     },
     events: {
         changeLayoutId: null
@@ -371,6 +490,7 @@ fluid.defaults("hortis.layoutHolder", {
     // rootId
     model: {
         // isAtRoot
+        // entryById -> rowById now
         rowFocus: {}, // non-taxon based selection external to the checklist, e.g. incoming from a map? TODO currently checklist computes initial value
         rowSelection: {}, // taxon-based selection from the checklist - will be subset of rowFocus
         layoutId: "{that}.options.rootId",
@@ -407,7 +527,6 @@ fluid.defaults("hortis.vizLoaderWithMap", {
         map: {
             type: "hortis.libreMap",
             container: "{that}.dom.map",
-            createOnEvent: "onResourcesLoaded",
             options: {
                 gradeNames: "{vizLoader}.options.mapGrades"
             }
@@ -426,9 +545,12 @@ hortis.projectBounds = {
     SalishSea: [[47.568, -124.200], [49.134, -122.059]]
 };
 
-hortis.initBounds = function (bounds) {
-    bounds[0] = [Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY];
-    bounds[1] = [Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY];
+hortis.initBounds = function () {
+    const bounds = [
+        [90,  180],
+        [-90, -180]
+    ];
+    return bounds;
 };
 
 hortis.updateBounds = function (bounds, lat, long) {
@@ -555,7 +677,7 @@ hortis.libreMap.natureStops = [
 // TODO: Convert into subcomponent, possibly of something completely different - we may want one layer for each map, etc.
 fluid.defaults("hortis.libreMap.withObsGrid", {
     modelListeners: {
-        "{obsQuantiser}.model.indexVersion": {
+        "{obsQuantiser}.model.grid": {
             func: "{that}.updateObsGrid",
             excludeSource: "init"
         }
@@ -576,7 +698,7 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
     listeners: {
         // Depends that buildMap fired async by mapLibre
         "buildMap.addObsGrid": "{that}.addObsGrid",
-        "buildMap.fitBounds": "hortis.libreMap.fitBounds({that}, {obsQuantiser}.grid.bounds)"
+        "buildMap.fitBounds": "hortis.libreMap.fitBounds({that}, {obsQuantiser}.model.grid.bounds)"
     }
 });
 
@@ -592,7 +714,7 @@ hortis.libreMap.rectFromCorner = function (lat, long, latres, longres) {
 };
 
 hortis.libreMap.obsGridFeature = function (map, obsQuantiser) {
-    const grid = obsQuantiser.grid,
+    const grid = obsQuantiser.model.grid,
         buckets = grid.buckets,
         latres = obsQuantiser.model.latResolution,
         longres = obsQuantiser.model.longResolution;
@@ -661,9 +783,16 @@ hortis.libreMap.fitBounds = function (that, fitBounds) {
 
 fluid.defaults("hortis.interactions", {
     gradeNames: "fluid.modelComponent",
-    members: {
+    modelRelay: {
+        target: "crossTable",
+        func: "hortis.interactions.count",
+        args: ["{that}", "{vizLoader}.model.obs"]
+    },
+    model: {
         // keys are plantId|pollId, values ints
-        crossTable: "@expand:hortis.interactions.count({that}, {obsLoader})",
+        // crossTable
+    },
+    members: {
         plantTable: {},
         pollTable: {}
     }
@@ -749,8 +878,8 @@ hortis.addHashCount = function (hash, key) {
     hash.set(hortis.intKey, 0, hortis.intValue, 0);
 };
 
-hortis.interactions.count = function (that, obsLoader) {
-    const rows = obsLoader.data;
+hortis.interactions.count = function (that, obsRows) {
+    const rows = obsRows;
     const {plantTable, pollTable} = that;
     const crossTable = {};
     const crossTableHash = new HashTable(8, 4, 1024, 32768);
@@ -769,7 +898,7 @@ hortis.interactions.count = function (that, obsLoader) {
     const cells = Object.keys(crossTable).length;
     const plants = Object.keys(plantTable).length;
     const polls = Object.keys(pollTable).length;
-    console.log("Counted ", rows.length + " obs into " + cells + " cells for " + plants + " plants and " + polls + " pollinators");
+    console.log("Counted ", rows.length + " obs into " + cells + " interaction cells for " + plants + " plants and " + polls + " pollinators");
     console.log("Occupancy: " + (100 * (cells / (plants * polls))).toFixed(2) + "%");
     that.crossTableHash = crossTableHash;
 
@@ -841,7 +970,7 @@ fluid.defaults("hortis.histoTooltips", {
     gradeNames: "fluid.viewComponent",
     tooltipKey: "hoverId",
     selectors: {
-        hoverable: ".fl-imerss-int-count",
+        hoverable: ".fl-imerss-int-count"
     },
     model: {
         hoverId: null
@@ -1054,7 +1183,7 @@ hortis.drawInteractions.render = function (that) {
     pollCountNode.innerHTML = pollCountMark.join("\n");
 
     const delay2 = Date.now() - now2;
-    console.log("Rendered in " + delay2 + " ms")
+    console.log("Rendered in " + delay2 + " ms");
 };
 
 hortis.interactionTooltipTemplate = `<div class="fl-imerss-tooltip">
@@ -1147,13 +1276,23 @@ hortis.longToLat = function (lng, lat) {
     return lng * longLength / latLength;
 };
 
+fluid.registerNamespace("hortis.obsQuantiser");
+
+hortis.obsQuantiser.initGrid = function () {
+    const grid = new fluid.ImmutableObject();
+    grid.bounds = hortis.initBounds();
+    grid.maxCount = 0;
+    grid.buckets = {}; // hash of id to {count, byId}
+    return grid;
+};
+
 fluid.defaults("hortis.obsQuantiser", {
     gradeNames: "fluid.modelComponent",
     baseLatitude: 37.5,
     model: {
         // latResolution - relay from long
         longResolution: 0.005,
-        indexVersion: 0
+        grid: hortis.obsQuantiser.initGrid()
     },
     modelRelay: {
         latResolution: {
@@ -1161,25 +1300,13 @@ fluid.defaults("hortis.obsQuantiser", {
             func: "hortis.longToLat",
             args: ["{that}.model.longResolution", "{that}.options.baseLatitude"]
         },
-        index: {
-            target: "indexVersion",
+        obsToGrid: {
+            target: "grid",
             func: "hortis.obsQuantiser.indexObs",
-            args: ["{that}", "{obsLoader}", "{that}.model.latResolution", "{that}.model.longResolution", "{vizLoader}", "{that}.model.indexVersion"]
+            args: ["{that}", "{vizLoader}.model.filteredObs", "{that}.model.latResolution", "{that}.model.longResolution"]
         }
-    },
-    members: {
-        grid: {}
-    },
-    events: {
-        indexUpdated: null  // unused currently
     }
 });
-
-hortis.obsQuantiser.initGrid = function (grid) {
-    grid.bounds = [];
-    grid.maxCount = 0;
-    grid.buckets = {}; // hash of id to {count, byId}
-};
 
 hortis.obsQuantiser.indexToCoord = function (index, latres, longres) {
     const coords = index.split("|");
@@ -1192,39 +1319,33 @@ hortis.obsQuantiser.coordToIndex = function (lat, long, latres, longres) {
     return latq + "|" + longq;
 };
 
-hortis.obsQuantiser.indexObs = function (that, obsLoader, latResolution, longResolution, obsFilterHolder, indexVersion) {
-    const grid = that.grid;
-    hortis.obsQuantiser.initGrid(grid);
+hortis.obsQuantiser.indexObs = function (that, filteredObs, latResolution, longResolution) {
+    const grid = hortis.obsQuantiser.initGrid();
 
     const now = Date.now();
-    const rows = obsLoader.data.length;
-    const obsFilter = obsFilterHolder.obsFilter;
-    hortis.initBounds(grid.bounds);
-    obsLoader.data.forEach(function (row, index) {
-        const accept = obsFilter(row);
-        if (accept) {
-            const coordIndex = hortis.obsQuantiser.coordToIndex(row.decimalLatitude, row.decimalLongitude, latResolution, longResolution);
-            hortis.updateBounds(grid.bounds, row.decimalLatitude, row.decimalLongitude);
+    const rows = filteredObs;
+    rows.forEach(function (row, index) {
+        const coordIndex = hortis.obsQuantiser.coordToIndex(row.decimalLatitude, row.decimalLongitude, latResolution, longResolution);
+        hortis.updateBounds(grid.bounds, row.decimalLatitude, row.decimalLongitude);
 
-            let bucket = grid.buckets[coordIndex];
-            if (!bucket) {
-                bucket = grid.buckets[coordIndex] = {count: 0, byTaxonId: {}, plantByTaxonId: {}};
-            }
-            bucket.count++;
-            grid.maxCount = Math.max(grid.maxCount, bucket.count);
-            fluid.pushArray(bucket.byTaxonId, row.pollinatorINatId, index);
-            fluid.pushArray(bucket.plantByTaxonId, row.plantINatId, index);
+        let bucket = grid.buckets[coordIndex];
+        if (!bucket) {
+            bucket = grid.buckets[coordIndex] = {count: 0, byTaxonId: {}, plantByTaxonId: {}};
         }
+        bucket.count++;
+        grid.maxCount = Math.max(grid.maxCount, bucket.count);
+        fluid.pushArray(bucket.byTaxonId, row.pollinatorINatId, index);
+        fluid.pushArray(bucket.plantByTaxonId, row.plantINatId, index);
     });
-    hortis.expandBounds(grid.bounds, 0.1); // mapBox fitBounds are a bit tight
+    if (rows.length > 0) {
+        hortis.expandBounds(grid.bounds, 0.1); // mapBox fitBounds are a bit tight
+    }
     const delay = Date.now() - now;
-    console.log(rows + " rows in " + delay + " ms: " + 1000 * (delay / rows) + " us/row");
-    return indexVersion + 1;
-};
+    console.log("Gridded " + rows.length + " rows in " + delay + " ms: " + 1000 * (delay / rows.length) + " us/row");
 
-hortis.increment = function (that, path) {
-    const value = fluid.get(that.model, path);
-    that.applier.change(path, value + 1);
+    return grid;
+
+    // that.applier.change(["grid"], grid);
 };
 
 fluid.defaults("hortis.libreObsMap", {
@@ -1233,13 +1354,6 @@ fluid.defaults("hortis.libreObsMap", {
         quantiser: {
             type: "hortis.obsQuantiser",
             options: {
-                listeners: {
-                    "{vizLoader}.events.obsFilterChange": {
-                        namespace: "indexObs",
-                        func: "hortis.increment",
-                        args: ["{that}", "indexVersion"]
-                    }
-                },
                 model: {
                     longResolution: 0.075
                 }

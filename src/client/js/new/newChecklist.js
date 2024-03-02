@@ -39,7 +39,7 @@ hortis.checklistItem = function (entry, selectedId, simple, selectable) {
     const record = entry.row;
     const styleprop = "";
     const rowid = " data-row-id=\"" + record.id + "\"";
-    // Note: "species" really means "has obs" and could be a higher taxon - in the case of a simple checklist
+    // Note: "species" really means "has obs " and could be a higher taxon - in the case of a simple checklist
     // we promote e.g. a genus-level obs to species level so it appears inline
     const rank = record.rank && !(simple && record.taxonName) ? record.rank : "species";
     const selectedClass = rank === "species" && record.id === selectedId ? " class=\"fl-checklist-selected\"" : "";
@@ -73,14 +73,14 @@ hortis.checklistRowForId = function (that, id) {
 // Note that we can't test on layoutId since it is updated asynchronously and in a complex way in hortis.changeLayoutId
 // This is the kind of logic that, in the end, makes us want to render with something like Preact
 // Could we return component-like things backed by markup snippets? Rather than JSX, use relay-like notation?
-hortis.updateChecklistSelection = function (that, newSelectedId, oldSelectedId, entryById) {
+hortis.updateChecklistSelection = function (that, newSelectedId, oldSelectedId, rowById) {
     // TODO: Since we updated Xetthecum data we are now getting a null selected id on startup
     if (newSelectedId === null) {
         return;
     }
     const oldSelected = hortis.checklistRowForId(that, oldSelectedId);
     oldSelected.removeClass("fl-checklist-selected");
-    const row = entryById[newSelectedId].row;
+    const row = rowById[newSelectedId];
     if (row && row.species) {
         const newSelected = hortis.checklistRowForId(that, newSelectedId);
         newSelected.addClass("fl-checklist-selected");
@@ -92,7 +92,9 @@ hortis.alwaysRejectRanks = [];
 // ["subfamily", "tribe", "genus"]; // AS directive of 18/7/23
 // which doubtless makes no sense in the new world
 
-hortis.acceptChecklistRow = function (row, filterRanks) {
+// Variety of acceptChecklistRow following work with Andrew Simon where the importance is on the number of resolved
+// entities - as a result there are rules such as not producing a genus level entry if any are resolved to species level
+hortis.acceptChecklistRowAS = function (row, filterRanks) {
     const acceptBasic = !filterRanks || filterRanks.includes(row.rank) || row.species;
     const alwaysReject = hortis.alwaysRejectRanks.includes(row.rank);
     // Special request from AS - suppress any checklist entry at species level if there are any ssp
@@ -117,16 +119,16 @@ hortis.sortChecklistLevel = function (entries) {
 };
 
 // Accepts array of rows and returns fresh array of "entries", where entry is {row, children: array of entry}
-hortis.filterRanks = function (rows, filterRanks, showRoot, depth) {
+hortis.filterTaxonomy = function (rows, depth, acceptChecklistRow, filterTaxonomy, showRoot) {
     const togo = [];
     fluid.each(rows, function (row) {
-        if (hortis.acceptChecklistRow(row, filterRanks) || depth === 0 && showRoot) {
+        if (acceptChecklistRow(row) || depth === 0 && showRoot) {
             togo.push({
                 row: row,
-                children: hortis.filterRanks(row.children, filterRanks, depth + 1)
+                children: filterTaxonomy(row.children, depth + 1)
             });
         } else {
-            const dChildren = hortis.filterRanks(row.children, filterRanks, depth + 1);
+            const dChildren = filterTaxonomy(row.children, depth + 1);
             Array.prototype.push.apply(togo, dChildren);
         }
     });
@@ -139,27 +141,37 @@ hortis.INDETERMINATE = -1;
 
 fluid.defaults("hortis.checklist", {
     gradeNames: ["hortis.withPanelLabel", "fluid.viewComponent"],
-    filterRanks: false, // or array to include
+    filterRanks: false, // or array to include - if set, counts as "simple"
     showRoot: false,
     selectors: {
         hoverable: "p",
         checklist: ".fld-imerss-checklist"
     },
     invokers: {
+        acceptChecklistRow: {
+            funcName: "hortis.acceptChecklistRowAS",
+            //     row
+            args: ["{arguments}.0", "{that}.options.filterRanks"]
+        },
+        filterTaxonomy: {
+            funcName: "hortis.filterTaxonomy",
+            //     rows            , depth
+            args: ["{arguments}.0", "{arguments}.1", "{that}.acceptChecklistRow", "{that}.filterTaxonomy", "{that}.options.showRoot"]
+        },
         generateChecklist: {
             funcName: "hortis.checklist.generate",
-            args: ["{that}", "{that}.dom.checklist", "{layoutHolder}", "{that}.options.filterRanks", "{that}.options.showRoot"]
+            args: ["{that}", "{that}.dom.checklist", "{layoutHolder}", "{that}.filterTaxonomy", "{that}.options.filterRanks"]
         },
         check: "hortis.checklist.check({that}, {arguments}.0, {arguments}.1)"
     },
     modelListeners: {
         updateSelected: {
             path: ["{layoutHolder}.model.selectedId"],
-            args: ["{that}", "{change}.value", "{change}.oldValue", "{layoutHolder}.entryById"],
+            args: ["{that}", "{change}.value", "{change}.oldValue", "{layoutHolder}.model.rowById"],
             func: "hortis.updateChecklistSelection"
         },
         generateChecklist: {
-            path: ["{layoutHolder}.model.layoutId", "{layoutHolder}.model.rowFocus"],
+            path: ["{layoutHolder}.model.layoutId", "{layoutHolder}.model.rowFocus", "{layoutHolder}.model.rowById"],
             func: "{that}.generateChecklist"
         },
         modelToCheck: {
@@ -195,22 +207,21 @@ hortis.checklist.stateToCheck = function (checklist, state, path) {
     }
 };
 
-hortis.checklist.generate = function (that, element, layoutHolder, filterRanks, showRoot) {
-    const {entryById, filterEntries} = layoutHolder;
-    const {layoutId: rootId, selectedId} = layoutHolder.model;
+hortis.checklist.generate = function (that, element, layoutHolder, filterTaxonomy, simple) {
+    const {layoutId: rootId, selectedId, rowById} = layoutHolder.model;
 
     console.log("Generating checklist for id " + rootId);
-    const rootChildren = rootId ? [entryById[rootId].row] : [];
-    const filteredRanks = hortis.filterRanks(rootChildren, filterRanks, showRoot, 0);
-    const filteredEntries = filterEntries(filteredRanks);
-    that.rootEntry = {row: {}, children: filteredEntries};
+    const rootChildren = fluid.makeArray(rowById[rootId]);
+    const filteredRanks = filterTaxonomy(rootChildren, 0);
+    const filteredEntries = layoutHolder.filterEntries(filteredRanks);
+    that.rootEntry = {row: {id: hortis.checklist.ROOT_ID}, children: filteredEntries};
     const {idToEntry, allRowFocus, model} = hortis.checklist.computeInitialModel(that.rootEntry);
     that.idToEntry = idToEntry;
     that.allRowFocus = allRowFocus; // Must do this first because checksToSelection will read it
 
     that.applier.change([], model);
 
-    const markup = hortis.checklistList(filteredEntries, selectedId, filterRanks, true);
+    const markup = hortis.checklistList(filteredEntries, selectedId, simple, true);
     element[0].innerHTML = markup;
     const checks = element[0].querySelectorAll(".flc-checklist-check");
     const idToNode = {};
@@ -246,15 +257,23 @@ hortis.checklist.check = function (checklist, id, checked) {
 
 };
 
+// A fake ID to hold the checklist's root so we can display a polyphyletic set
+hortis.checklist.ROOT_ID = Number.NEGATIVE_INFINITY;
+
 hortis.checklist.computeInitialModel = function (rootEntry) {
     const selectedCount = 0,
         idToState = {},
         idToEntry = {},
         allRowFocus = {};
     const indexEntry = function (entry, parent) {
-        idToState[entry.row.id] = hortis.UNSELECTED;
-        idToEntry[entry.row.id] = entry;
-        allRowFocus[entry.row.id] = true;
+        const id = entry.row.id;
+        if (!id) {
+            console.log("Warning, discarding row ", entry.row, " without id set");
+        } else {
+            idToState[id] = hortis.UNSELECTED;
+            idToEntry[id] = entry;
+            allRowFocus[id] = true;
+        }
         entry.parent = parent;
         entry.children.forEach(childEntry => indexEntry(childEntry, entry));
     };
