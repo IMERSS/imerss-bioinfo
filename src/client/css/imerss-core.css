@@ -75,6 +75,7 @@ body ::-webkit-scrollbar-thumb {
     margin-top: -1rem;
 }
 
+/* TODO these can be axed - especially since we flipped left/right in Xetthecum phase III */
 .fl-imerss-left-column {
     /* This one from pepiowelh.css, unsets hard width in old core */
     flex: 1 1 0;
@@ -209,6 +210,8 @@ body ::-webkit-scrollbar-thumb {
 .fld-imerss-checklist {
     height: 100%;
     overflow-y: auto;
+    /** Otherwise top checkbox gets clipped */
+    padding-top: 2px;
 }
 
 .fld-imerss-checklist p {

@@ -11,6 +11,7 @@
     <mapping directory="$PROJECT_DIR$/../r-scrollytelling-template" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../sewa-e-kheti" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../sewa-saamarth" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../xetthecum-storymap" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../xetthecum-storymap-scrolly" vcs="Git" />
   </component>
 </project>

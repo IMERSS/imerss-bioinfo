@@ -1,3 +1,9 @@
+
+/* Why is this "column" in core? What does it look like ... */
+.fl-imerss-map-and-taxa {
+    flex-direction: row;
+}
+
 .fl-imerss-checklists {
     display: flex;
     flex-direction: row;

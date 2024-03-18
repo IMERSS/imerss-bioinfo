@@ -306,6 +306,22 @@ hortis.indexRegions = function (treeBuilder) {
     };
 };
 
+// Temporary tweaks to indexRegions output for March 2024 timeframe before new framework is ready
+// Axe "features" since things are drawn on the R side, and make this appear roughly like the output of
+// hortis.indexScrollyRegions with everything in "communities"
+hortis.phaseIIITweaks = function (fullOutput) {
+    delete fullOutput.features;
+    delete fullOutput.classes;
+    const oldWood = "Woodlands and rock outcrops";
+    // tweak names to agree with https://github.com/IMERSS/xetthecum-storymap-scrolly/blob/main/tabular_data/communityStyling.csv
+    fullOutput.communities.Woodlands = fullOutput.communities[oldWood];
+    delete fullOutput.communities[oldWood];
+    fluid.each(fullOutput.communities, community => {
+        delete community.culturalValues;
+        delete community.culturalValuesSources;
+    });
+};
+
 // Used for scrolly framework output via descrolly
 hortis.indexScrollyRegions = function (treeBuilder) {
     const summaryById = hortis.summaryById(treeBuilder);
@@ -372,6 +388,11 @@ hortis.marmalise = async function (treeBuilder) {
         hortis.indexScrollyRegions(treeBuilder) : {};
     const fullOutput = fluid.extend(output, extraOutput);
     hortis.applyRegionMedia(treeBuilder.mediaMap, fullOutput);
+
+    if (options.tweakPhaseIII) {
+        hortis.phaseIIITweaks(fullOutput);
+    }
+
     fs.writeFileSync("marmalised.json", JSON.stringify(fullOutput, null, 4) + "\n");
     const text = JSON.stringify(fullOutput);
     hortis.writeLZ4File(text, fluid.module.resolvePath(treeBuilder.options.outputFile));

@@ -7,10 +7,16 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
+/* global preactSignalsCore */
+
 "use strict";
 
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
+
+//
+// noinspection ES6ConvertVarToLetConst
+var {signal, effect} = preactSignalsCore; // eslint-disable-line no-unused-vars
 
 // cf arphify.js line 80 hortis.axeFromName and hortis.qualForming
 hortis.sppAnnotations = ["agg.", "aff.", "s.lat.", "cf", "sp.nov.", "var.", "sp.", "ssp.", "spp.", "complex"];
@@ -66,23 +72,23 @@ hortis.checklistList = function (entries, selectedId, simple, selectable) {
         }).join("") + "</ul>" : "";
 };
 
-hortis.checklistRowForId = function (that, id) {
-    return that.container.find("[data-row-id=" + id + "]").closest("li");
+hortis.checklistRowForId = function (container, id) {
+    return container.find("[data-row-id=" + id + "]").closest("li");
 };
 
 // Note that we can't test on layoutId since it is updated asynchronously and in a complex way in hortis.changeLayoutId
 // This is the kind of logic that, in the end, makes us want to render with something like Preact
 // Could we return component-like things backed by markup snippets? Rather than JSX, use relay-like notation?
-hortis.updateChecklistSelection = function (that, newSelectedId, oldSelectedId, rowById) {
+hortis.updateChecklistSelection = function (container, newSelectedId, oldSelectedId, rowById) {
     // TODO: Since we updated Xetthecum data we are now getting a null selected id on startup
     if (newSelectedId === null) {
         return;
     }
-    const oldSelected = hortis.checklistRowForId(that, oldSelectedId);
+    const oldSelected = hortis.checklistRowForId(container, oldSelectedId);
     oldSelected.removeClass("fl-checklist-selected");
     const row = rowById[newSelectedId];
     if (row && row.species) {
-        const newSelected = hortis.checklistRowForId(that, newSelectedId);
+        const newSelected = hortis.checklistRowForId(container, newSelectedId);
         newSelected.addClass("fl-checklist-selected");
     }
 };
@@ -94,7 +100,7 @@ hortis.alwaysRejectRanks = [];
 
 // Variety of acceptChecklistRow following work with Andrew Simon where the importance is on the number of resolved
 // entities - as a result there are rules such as not producing a genus level entry if any are resolved to species level
-hortis.acceptChecklistRowAS = function (row, filterRanks) {
+hortis.acceptChecklistRowAS = function (row, filterRanks, rowFocus) {
     const acceptBasic = !filterRanks || filterRanks.includes(row.rank) || row.species;
     const alwaysReject = hortis.alwaysRejectRanks.includes(row.rank);
     // Special request from AS - suppress any checklist entry at species level if there are any ssp
@@ -103,7 +109,7 @@ hortis.acceptChecklistRowAS = function (row, filterRanks) {
     // in document 2nd July 2023
     // "taxonName" being set will be a proxy for "there is an entry in the curated summary" so we always accept
     const acceptChecklist = row.taxonName;
-    return acceptBasic && !rejectSpecies && !alwaysReject || acceptChecklist;
+    return rowFocus[row.id] && (acceptBasic && !rejectSpecies && !alwaysReject || acceptChecklist);
 };
 
 hortis.rowToScientific = function (row) {
@@ -151,7 +157,7 @@ fluid.defaults("hortis.checklist", {
         acceptChecklistRow: {
             funcName: "hortis.acceptChecklistRowAS",
             //     row
-            args: ["{arguments}.0", "{that}.options.filterRanks"]
+            args: ["{arguments}.0", "{that}.options.filterRanks", "{that}.rowFocus.value"]
         },
         filterTaxonomy: {
             funcName: "hortis.filterTaxonomy",
@@ -160,25 +166,16 @@ fluid.defaults("hortis.checklist", {
         },
         generateChecklist: {
             funcName: "hortis.checklist.generate",
-            args: ["{that}", "{that}.dom.checklist", "{layoutHolder}", "{that}.filterTaxonomy", "{that}.options.filterRanks"]
+            args: ["{that}", "{that}.dom.checklist", "{layoutHolder}", "{that}.filterTaxonomy", "{that}.options.filterRanks", "{arguments}.0"]
         },
         check: "hortis.checklist.check({that}, {arguments}.0, {arguments}.1)"
     },
-    modelListeners: {
-        updateSelected: {
-            path: ["{layoutHolder}.model.selectedId"],
-            args: ["{that}", "{change}.value", "{change}.oldValue", "{layoutHolder}.model.rowById"],
-            func: "hortis.updateChecklistSelection"
-        },
-        generateChecklist: {
-            path: ["{layoutHolder}.model.layoutId", "{layoutHolder}.model.rowFocus", "{layoutHolder}.model.rowById"],
-            func: "{that}.generateChecklist"
-        },
-        modelToCheck: {
-            path: "idToState.*",
-            func: "hortis.checklist.stateToCheck",
-            args: ["{that}", "{change}.value", "{change}.path"]
-        }
+    members: {
+        idToState: "@expand:signal({})",
+        rowSelection: "@expand:fluid.computed(hortis.checklist.checksToSelection, {checklist}.idToState, {checklist}.rowFocus, {checklist}.allRowFocus)",
+        subscribeChecks: "@expand:hortis.checklist.subscribeChecks({that}.idToState, {that})",
+        subscribeSelected: "@expand:hortis.checklist.subscribeSelected({that}, {that}.selectedId, {that}.rowById)",
+        subscribeGenerate: "@expand:hortis.checklist.subscribeGenerate({that}, {that}.rootId, {that}.selectedId, {that}.rowFocus, {that}.rowById)"
     },
     listeners: {
         "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {layoutHolder})",
@@ -195,8 +192,64 @@ hortis.checklist.bindClick = function (checklist) {
     });
 };
 
-hortis.checklist.stateToCheck = function (checklist, state, path) {
-    const id = fluid.peek(path);
+// This used to read:
+// modelToCheck: {
+//     path: "idToState.*",
+//         func: "hortis.checklist.stateToCheck",
+//         args: ["{that}", "{change}.value", "{change}.path"]
+// }
+
+hortis.checklist.subscribeChecks = function (idToStateSignal, checklist) {
+    let oldIdToState = undefined;
+    return effect( () => {
+        const newIdToState = idToStateSignal.value;
+        fluid.each(newIdToState, (newState, id) => {
+            const oldState = oldIdToState[id];
+            if (newState !== oldState) {
+                hortis.checklist.stateToCheck(checklist, newState, id);
+            }
+        });
+        oldIdToState = newIdToState;
+    });
+};
+
+// This used to read:
+//         updateSelected: {
+//             path: ["{layoutHolder}.model.selectedId"],
+//             args: ["{that}", "{change}.value", "{change}.oldValue", "{layoutHolder}.model.rowById"],
+//             func: "hortis.updateChecklistSelection"
+//         },
+hortis.checklist.subscribeSelected = function (that, selectedIdSignal, rowByIdSignal) {
+    let oldSelectedId = undefined;
+    return effect( () => {
+        const newSelectedId = selectedIdSignal.value;
+        hortis.updateChecklistSelection(that.container, newSelectedId, oldSelectedId, rowByIdSignal.peek());
+        oldSelectedId = newSelectedId;
+    });
+};
+
+// This used to read:
+// generateChecklist: {
+//     path: ["{layoutHolder}.model.layoutId", "{layoutHolder}.model.rowFocus", "{layoutHolder}.model.rowById"],
+//         func: "{that}.generateChecklist"
+// },
+hortis.checklist.subscribeGenerate = function (that, rootIdSignal, selectedIdSignal, rowFocusSignal, rowByIdSignal) {
+    return effect( () => {
+        // note that this reads selectedId but does not depend on it because of rendering optimisation
+        const rootId = rootIdSignal.value,
+            selectedId = selectedIdSignal.value,
+            rowFocus = rowFocusSignal.value,
+            rowById = rowByIdSignal.value;
+
+        const model = {rootId, selectedId, rowFocus, rowById};
+        that.generateChecklist(model);
+        // Writes: idToEntry, idToNode, idToState
+        // idToNode is a cache just used in stateToCheck, no need to signalise it
+        // Updates signal idToState
+    });
+};
+
+hortis.checklist.stateToCheck = function (checklist, state, id) {
     const node = checklist.idToNode?.[id];
     if (node) {
         node.checked = state === hortis.SELECTED;
@@ -207,19 +260,16 @@ hortis.checklist.stateToCheck = function (checklist, state, path) {
     }
 };
 
-hortis.checklist.generate = function (that, element, layoutHolder, filterTaxonomy, simple) {
-    const {layoutId: rootId, selectedId, rowById} = layoutHolder.model;
+hortis.checklist.generate = function (that, element, layoutHolder, filterTaxonomy, simple, model) {
+    const {rootId, selectedId, rowFocus, rowById} = model;
 
     console.log("Generating checklist for id " + rootId);
     const rootChildren = fluid.makeArray(rowById[rootId]);
-    const filteredRanks = filterTaxonomy(rootChildren, 0);
-    const filteredEntries = layoutHolder.filterEntries(filteredRanks);
+    const filteredEntries = filterTaxonomy(rootChildren, 0);
     that.rootEntry = {row: {id: hortis.checklist.ROOT_ID}, children: filteredEntries};
-    const {idToEntry, allRowFocus, model} = hortis.checklist.computeInitialModel(that.rootEntry);
+    const {idToEntry, idToState} = hortis.checklist.computeInitialModel(that.rootEntry, rowFocus);
     that.idToEntry = idToEntry;
-    that.allRowFocus = allRowFocus; // Must do this first because checksToSelection will read it
-
-    that.applier.change([], model);
+    that.idToState.value = idToState;
 
     const markup = hortis.checklistList(filteredEntries, selectedId, simple, true);
     element[0].innerHTML = markup;
@@ -234,8 +284,9 @@ hortis.checklist.allChildrenState = function (idToState, entry, state) {
 };
 
 // In-DOM variants of this algorithm at https://css-tricks.com/indeterminate-checkboxes/
+// From reacting to an individual checkbox click, compute the full idToState signal
 hortis.checklist.check = function (checklist, id, checked) {
-    const idToStateUp = {...checklist.model.idToState};
+    const idToStateUp = {...checklist.idToState.value};
     const upState = checked ? hortis.SELECTED : hortis.UNSELECTED;
     const entry = checklist.idToEntry[id];
     // Traverse downward, cascading selected/unselected flag
@@ -253,52 +304,37 @@ hortis.checklist.check = function (checklist, id, checked) {
         idToStateUp[parent.row.id] = allChildrenState ? upState : hortis.INDETERMINATE;
         parent = parent.parent;
     }
-    checklist.applier.change(["idToState"], idToStateUp);
-
+    checklist.idToState.value = idToStateUp;
 };
 
 // A fake ID to hold the checklist's root so we can display a polyphyletic set
 hortis.checklist.ROOT_ID = Number.NEGATIVE_INFINITY;
 
-hortis.checklist.computeInitialModel = function (rootEntry) {
-    const selectedCount = 0,
-        idToState = {},
-        idToEntry = {},
-        allRowFocus = {};
+hortis.checklist.computeInitialModel = function (rootEntry, rowFocus) {
+    const idToState = {},
+        idToEntry = {};
     const indexEntry = function (entry, parent) {
         const id = entry.row.id;
         if (!id) {
             console.log("Warning, discarding row ", entry.row, " without id set");
-        } else {
+        } else if (rowFocus[id]) {
             idToState[id] = hortis.UNSELECTED;
             idToEntry[id] = entry;
-            allRowFocus[id] = true;
         }
         entry.parent = parent;
         entry.children.forEach(childEntry => indexEntry(childEntry, entry));
     };
     indexEntry(rootEntry);
-    return {idToEntry, allRowFocus, model: {idToState, selectedCount}};
+    return {idToEntry, idToState};
 };
 
 fluid.defaults("hortis.checklist.withHolder", {
-    gradeNames: ["hortis.layoutHolder", "hortis.checklist"],
-    invokers: {
-        filterEntries: "{vizLoader}.filterEntries"
-    },
-    modelListeners: {
-        // Can't use modelRelay because of https://issues.fluidproject.org/browse/FLUID-6208
-        checklistSelection: {
-            path: ["{checklist}.model.idToState", "{checklist}.model.rowFocus"],
-            func: "hortis.checklist.checksToSelection",
-            args: ["{checklist}.model.idToState", "{checklist}.model.rowFocus", "{checklist}"],
-            excludeSource: "init"
-        }
-    }
+    gradeNames: ["hortis.layoutHolder", "hortis.checklist"]
 });
 
-// TODO: Get layoutHolder to compute allRowFocus
-hortis.checklist.checksToSelection = function (idToState, rowFocus, checklist) {
+// TODO: Get layoutHolder to compute allRowFocus which needs to take account of external, e.g. map-based filters
+// From the individual signals of each checkbox, compute the effective rowSelection - taking into account the "no selection is all selection" idiom
+hortis.checklist.checksToSelection = function (idToState, rowFocus, allRowFocus) {
     const selection = {};
     let selected = 0;
     fluid.each(idToState, (state, key) => {
@@ -308,6 +344,6 @@ hortis.checklist.checksToSelection = function (idToState, rowFocus, checklist) {
         }
     });
     const anyRowFocus = !$.isEmptyObject(rowFocus);
-    const rowSelection = selected === 0 ? (anyRowFocus ? {...rowFocus} : checklist.allRowFocus) : selection;
-    fluid.replaceModelValue(checklist.applier, "rowSelection", rowSelection);
+    const rowSelection = selected === 0 ? (anyRowFocus ? {...rowFocus} : allRowFocus) : selection;
+    return rowSelection;
 };

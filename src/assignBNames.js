@@ -65,13 +65,13 @@ const scientificNames = {
     plantINatName: "plantScientificName"
 };
 
-const storeRanks = ["stateofmatter", "kingdom", "phylum", "subphylum", "class", "order", "family", "genus"];
+// Added in Epifamily so we can include Bees [Epifamily Anthophila]
+const storeRanks = ["stateofmatter", "kingdom", "phylum", "subphylum", "class", "order", "epifamily", "family", "genus"];
 
 hortis.iNat.newRecordTransform = {
     iNaturalistTaxonName: "name",
     commonName: "preferred_common_name", // This one seems to have moved in the new API
     rank: "rank",
-    wikipediaSummary: "wikipedia_summary",
     iNaturalistTaxonImage: "default_photo.medium_url"
 };
 

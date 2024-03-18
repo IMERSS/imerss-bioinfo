@@ -18,24 +18,24 @@ hortis.intersectsFeature = function (feature, mappedRow) {
     if (!hortis.isPoint(mappedRow.point)) {
         return false;
     } else {
-        var reject = function (message) {
+        const reject = function (message) {
             fluid.fail(message + " for feature ", feature);
         };
-        var intersectPolygon = function (polyPolygon) {
-            var intersects = polyPolygon.map(function (polygon) {
+        const intersectPolygon = function (polyPolygon) {
+            const intersects = polyPolygon.map(function (polygon) {
                 ++hortis.intersections;
                 return hortis.pointInPolygon(mappedRow.point, polygon);
             });
-            var count = hortis.countTrue(intersects);
+            const count = hortis.countTrue(intersects);
             return count % 2;
         };
-        var geometry = feature.geometry;
+        const geometry = feature.geometry;
         // Stupid export of Galiano polygon has the latter type
         if (geometry.type !== "MultiPolygon" && geometry.type !== "MultiLineString") {
             reject("Cannot handle feature type " + geometry.type);
         } else {
-            var coords = geometry.coordinates;
-            var intersects = false;
+            const coords = geometry.coordinates;
+            let intersects = false;
             if (geometry.type === "MultiLineString") {
                 intersects = intersectPolygon(coords);
             } else {

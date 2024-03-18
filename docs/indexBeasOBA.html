@@ -29,19 +29,18 @@
             <div class="fl-imerss-map-and-taxa">
 
                 <div class="fld-imerss-map-holder fld-imerss-nodismiss-map">
-                    <div class="fld-imerss-map fl-imerss-left-column">
+                    <div class="fld-imerss-map">
                     </div>
-                    <div class="fl-imerss-datasets fl-imerss-right-column">
-                        <div class="fld-imerss-datasets-label">
-                        </div>
-                        <table class="fld-imerss-dataset-controls">
-                        </table>
+                </div>
+                <div class="fld-imerss-filter-panel">
+                    <div class="fld-record-reporter">
+
                     </div>
                 </div>
 
                 <div class="fl-imerss-taxa fld-imerss-nodismiss-map">
 
-                    <div class="fld-imerss-taxonDisplay flc-imerss-viz-dimens">
+                    <div class="fld-imerss-taxonDisplay">
                         <div class="fl-taxonDisplay-row"></div>
                     </div>
 
@@ -50,13 +49,13 @@
             </div>
             <div class="fl-imerss-checklists">
                 <div class="fl-imerss-pollinators fl-imerss-checklist-holder">
-                    <div class="fld-imerss-panel-label">Pollinators</div>
+                    <div class="fld-imerss-panel-label">Bees</div>
                     <div class="fld-imerss-checklist">
                     </div>
                 </div>
                 <div class="fl-imerss-interactions">
                     <div class="fld-imerss-panel-label">Interactions</div>
-                    <div class="fl-imerss-interactions-holder">
+                    <div class="fld-imerss-interactions-holder">
                         <div class="fl-imerss-int-top fl-imerss-int-row">
                             <div class="fl-imerss-int-left fld-imerss-int-plant-label">Plants</div>
                             <div class="fld-imerss-poll-counts fl-imerss-int-h-middle"></div>
@@ -70,7 +69,7 @@
                             <div class="fld-imerss-plant-counts fl-imerss-int-right"></div>
                         </div>
                         <div class="fl-imerss-int-bottom fl-imerss-int-row">
-                            <div class="fl-imerss-int-left fld-imerss-int-poll-label">Pollinators</div>
+                            <div class="fl-imerss-int-left fld-imerss-int-poll-label">Bees</div>
                             <div class="fld-imerss-poll-names fl-imerss-int-h-middle fl-imerss-int-sideways"></div>
                             <div class="fl-imerss-int-right"></div>
                         </div>
@@ -87,7 +86,7 @@
         <script>
             hortis.vizLoaderWithMap(".fl-imerss-container", {
                 gradeNames: "hortis.beaVizLoader",
-                obsFile: "data/b-team/plant-pollinators-OBA-assigned.csv",
+                obsFile: "data/b-team/plant-pollinators-OBA-assigned-subset.csv",
                 taxaFile: "data/b-team/plant-pollinators-OBA-assigned-taxa.csv",
                 mapGrades: "hortis.demoLibreMap",
                 resourceBase: "src/client"

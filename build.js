@@ -18,6 +18,7 @@ const buildIndex = {
         "src/auxBuild/restoreJQuery.js",
         "src/lib/jquery-ui-widgets-tabs.js",
         "src/lib/lz4.js",
+        "src/lib/signals-core.min.js",
         "src/client/js/imerss-viz.js",
         "src/client/js/autocomplete.js",
         "src/client/js/colour.js",
@@ -33,6 +34,7 @@ const buildIndex = {
     ],
     newSource: [
         "src/lib/hash-table.js",
+        "src/lib/signals-core.min.js",
         "src/client/js/colour.js",
         "src/client/js/renderSVG.js",
         "src/client/js/new/imerss-new.js",
@@ -88,8 +90,8 @@ const buildIndex = {
         src: "data/Pepiowelh/Life.json.lz4",
         dest: "docs/data/Pepiowelh/Life.json.lz4"
     }, {
-        src: "data/b-team/plant-pollinators-OBA-assigned.csv",
-        dest: "docs/data/b-team/plant-pollinators-OBA-assigned.csv"
+        src: "data/b-team/plant-pollinators-OBA-assigned-subset.csv",
+        dest: "docs/data/b-team/plant-pollinators-OBA-assigned-subset.csv"
     }, {
         src: "data/b-team/plant-pollinators-OBA-assigned-taxa.csv",
         dest: "docs/data/b-team/plant-pollinators-OBA-assigned-taxa.csv"
@@ -177,7 +179,7 @@ const computeAllFiles = function (buildIndex, nodeFiles) {
 
 const buildFromFiles = async function (buildIndex, nodeFiles) {
     const allFiles = computeAllFiles(buildIndex, nodeFiles);
-    console.log("allFiles " + allFiles);
+    console.log("allFiles ", allFiles);
     nodeFiles.concat(buildIndex.localSource);
 
     const jsHash = filesToContentHash(allFiles, ".js");
@@ -193,7 +195,7 @@ const buildFromFiles = async function (buildIndex, nodeFiles) {
     });
     // imerss-viz-lib.js contains just upstream libraries we depend on, to support reasonably easy deploy of "new" framework
     const libJsHash = filesToContentHash(nodeFiles, ".js");
-    console.log("nodeFiles " + nodeFiles);
+    console.log("nodeFiles ", nodeFiles);
     fluid.log("Minifying " + Object.keys(libJsHash).length + " JS files ... ");
     const minifiedLib = await terser.minify(libJsHash, {
         mangle: false,
