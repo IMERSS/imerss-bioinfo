@@ -30,7 +30,31 @@ hortis.inputFileToTrunk = function (inputFile) {
     return inputFile.substring(0, trunkPos);
 };
 
-const parsedArgs = minimist(process.argv.slice(2));
+const strategies = {
+    bees: {
+        plant: {
+            iNatName: "plantINatName",
+            rawName: "plantScientificName",
+            iNatId: "plantINatId",
+            assignedINatName: "plantAssignedINatName"
+        },
+        pollinator: {
+            iNatName: "pollinatorINatName",
+            rawName: "scientificName",
+            iNatId: "pollinatorINatId",
+            assignedINatName: "pollinatorAssignedINatName"
+        }
+    },
+    // Has been reintegrated already, info should match and we just need to compute and assign higher taxa
+    reintegrated: {
+        iNatName: "iNaturalist taxon name",
+        rawName: "Taxon name",
+        iNatId: "iNaturalist taxon ID",
+        assignedINatName: "iNaturalist taxon name"
+    }
+};
+
+const parsedArgs = minimist(process.argv.slice(2), {boolean: Object.keys(strategies)});
 
 const swapsFile = parsedArgs.swaps || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/taxon-swaps.csv");
 
@@ -60,10 +84,10 @@ const source = hortis.iNatTaxonSource({
 //    disableNameCache: true
 });
 
-const scientificNames = {
-    pollinatorINatName: "scientificName",
-    plantINatName: "plantScientificName"
-};
+
+const strategy = Object.keys(strategies).find(strategy => parsedArgs[strategy]);
+const strategyBigRec = strategies[strategy];
+
 
 // Added in Epifamily so we can include Bees [Epifamily Anthophila]
 const storeRanks = ["stateofmatter", "kingdom", "phylum", "subphylum", "class", "order", "epifamily", "family", "genus"];
@@ -120,24 +144,35 @@ hortis.storeTaxon = async function (allTaxa, taxonDoc, inSummary) {
 };
 
 // Note: This is the beginning of "new marmalisation" - hortis.iNat.addTaxonInfo used to be called in the marmaliser
-hortis.applyName = async function (row, prefix, phylum, invertedSwaps, allTaxa, unmappedTaxa) {
-    const fieldName = prefix + "INatName";
+hortis.applyName = async function (row, phylum, invertedSwaps, allTaxa, unmappedTaxa, strategyRec) {
+    const s = strategyRec;
+    const fieldName = s.iNatName;
     const rawName = row[fieldName];
     const iNatName = invertedSwaps[rawName]?.preferred || rawName;
-    const scientificName = row[scientificNames[fieldName]];
+    const scientificName = row[s.rawName];
     // const saneName = hortis.sanitizeSpeciesName(taxon);
     const looked = await source.get({name: iNatName, phylum: phylum});
 
+    const assign = function (row, field, value) {
+        // eslint-disable-next-line eqeqeq
+        if (row[field] !== undefined && row[field] != value) {
+            console.log(`Inconsistency in reintegrated data - assigning ${value} to field ${field} over existing value ${row[field]}`);
+            console.log("Row: ", row);
+        }
+        row[field] = value;
+    };
+
     if (looked && looked.doc && looked.doc.phylumMatch) {
         const id = looked.doc.id;
-        row[prefix + "INatId"] = id;
-        row[prefix + "AssignedINatName"] = looked.doc.name;
+        assign(row, s.iNatId, id);
+        assign(row, s.assignedINatName, looked.doc.name);
         const existing = allTaxa[id];
         if (!existing) {
             const taxonDoc = await source.get({id: id});
             await hortis.storeTaxon(allTaxa, taxonDoc, true);
         }
-        hortis.addName(allTaxa, id, iNatName, looked.doc.nameStatus);
+        // Can't recall what this field did
+        // hortis.addName(allTaxa, id, iNatName, looked.doc.nameStatus);
     } else {
         row["Name Status"] = "unknown";
         unmappedTaxa[iNatName] = {scientificName};
@@ -158,7 +193,7 @@ hortis.depthComparator = function (rowa, rowb) {
 
 hortis.flattenTaxa = function (taxa) {
     const taxaRows = Object.values(taxa);
-    taxaRows.forEach(row => row.names = JSON.stringify(row.names));
+    // taxaRows.forEach(row => row.names = JSON.stringify(row.names));
     taxaRows.sort(hortis.depthComparator);
     taxaRows.forEach(row => delete row.depth);
     return taxaRows;
@@ -175,8 +210,12 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
             console.log("Processing row ", i);
         }
         const row = reader.rows[i];
-        await hortis.applyName(row, "plant", "Tracheophyta", invertedSwaps, taxa, unmappedTaxa);
-        await hortis.applyName(row, "pollinator", "Arthropoda", invertedSwaps, taxa, unmappedTaxa);
+        if (strategy === "bees") {
+            await hortis.applyName(row, "Tracheophyta", invertedSwaps, taxa, unmappedTaxa, strategyBigRec.plant);
+            await hortis.applyName(row, "Arthropoda", invertedSwaps, taxa, unmappedTaxa, strategyBigRec.pollinator);
+        } else if (strategy === "reintegrated") {
+            await hortis.applyName(row, row.Phylum, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
+        }
 
         mapped.push(row);
     }
@@ -187,12 +226,14 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
     await hortis.writeCSV(outputTaxaFile, Object.keys(taxaRows[0]), taxaRows, fluid.promise());
 
     const unmapped = Object.keys(unmappedTaxa);
-    console.log("Listing " + unmapped.length + " unmapped taxa:");
-    const unmappedRows = unmapped.map(function (key) {
-        const scientificName = unmappedTaxa[key].scientificName;
-        console.log(key + ", original name " + scientificName);
-        return {taxonName: key, originalName: scientificName};
-    });
-    await hortis.writeCSV(mismatchFile, Object.keys(unmappedRows[0]), unmappedRows, fluid.promise());
+    if (unmapped.length > 0) {
+        console.log("Listing " + unmapped.length + " unmapped taxa:");
+        const unmappedRows = unmapped.map(function (key) {
+            const scientificName = unmappedTaxa[key].scientificName;
+            console.log(key + ", original name " + scientificName);
+            return {taxonName: key, originalName: scientificName};
+        });
+        await hortis.writeCSV(mismatchFile, Object.keys(unmappedRows[0]), unmappedRows, fluid.promise());
+    }
 
 });

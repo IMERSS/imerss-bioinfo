@@ -115,14 +115,6 @@ body ::-webkit-scrollbar-thumb {
     stroke-width: 4px;
 }
 
-.fl-imerss-selected-region {
-    fill-opacity: 1;
-}
-
-.fl-imerss-unselected-region {
-    fill-opacity: 0.25;
-}
-
 .fld-imerss-map-tooltip tr:nth-child(even) {
     background: #eee;
 }

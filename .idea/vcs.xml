@@ -13,5 +13,6 @@
     <mapping directory="$PROJECT_DIR$/../sewa-saamarth" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../xetthecum-storymap" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../xetthecum-storymap-scrolly" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../xetthecum-storymap-story" vcs="Git" />
   </component>
 </project>

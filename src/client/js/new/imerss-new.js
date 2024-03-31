@@ -324,6 +324,7 @@ fluid.defaults("hortis.beaVizLoader", {
                 gradeNames: "hortis.checklist.inLoader",
                 rootId: 1,
                 filterRanks: ["epifamily", "family"],
+                selectable: true,
                 members: {
                     rowById: "{taxa}.rowById",
                     rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, pollRowFocus)",
@@ -338,10 +339,11 @@ fluid.defaults("hortis.beaVizLoader", {
                 gradeNames: "hortis.checklist.inLoader",
                 rootId: 47126,
                 filterRanks: ["class", "order", "family", "kingdom"],
+                selectable: true,
                 members: {
                     rowById: "{taxa}.rowById",
                     rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, plantRowFocus)",
-                    allRowFocus: "@expand:fluid.derefSignal({vizLoader}.allTaxaFromObs, pollRowFocus)"
+                    allRowFocus: "@expand:fluid.derefSignal({vizLoader}.allTaxaFromObs, plantRowFocus)"
                 }
             }
         },
@@ -368,8 +370,8 @@ fluid.defaults("hortis.beaVizLoader", {
     members: {
         finalFilteredObs: `@expand:fluid.computed(hortis.filterObsByTwoTaxa, {that}.filteredObs, 
                 {plantChecklist}.rowSelection, {pollChecklist}.rowSelection)`,
-        allTaxaFromObs: "@expand:fluid.computed(hortis.taxaFromObs, {that}.obsRows, {taxa}.rowById)",
-        taxaFromObs: "@expand:fluid.computed(hortis.taxaFromObs, {that}.filteredObs, {taxa}.rowById)"
+        allTaxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.obsRows, {taxa}.rowById)",
+        taxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.filteredObs, {taxa}.rowById)"
     },
     invokers: {
         // filterObs: "hortis.filterObs
@@ -388,6 +390,14 @@ hortis.closeParentTaxa = function (rowFocus, rowById) {
 };
 
 hortis.taxaFromObs = function (filteredObs, rowById) {
+    const taxonIds = {};
+    filteredObs.forEach(row => {
+        taxonIds[row["iNaturalist taxon ID"]] = true;
+    });
+    return hortis.closeParentTaxa(taxonIds, rowById);
+};
+
+hortis.twoTaxaFromObs = function (filteredObs, rowById) {
     const plantIds = {},
         pollIds = {};
     filteredObs.forEach(row => {
@@ -489,11 +499,13 @@ hortis.indexTree = function (flatTree) {
     return index;
 };
 
-// cf. hortis.flattenTreeRecurse - the tree now comes in flat and in the right order
+// cf. hortis.flattenTreeRecurse - the tree now comes in flat
 hortis.taxa.map = function (rows, byId) {
     rows.forEach((row, i) => {
         row.flatIndex = i;
-        row.children = []; // conform to standard of imerss-viz.js
+        if (!row.children) {
+            row.children = []; // conform to standard of imerss-viz.js, this may get initialised by fluid.pushArray
+        }
         if (row.parentId) {
             const parent = byId[row.parentId];
             row.parent = parent;

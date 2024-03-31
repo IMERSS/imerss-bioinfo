@@ -1,5 +1,5 @@
 /*
-Copyright 2021 Antranig Basman
+Copyright 2023 Antranig Basman
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
 Licenses.
@@ -41,6 +41,19 @@ hortis.checklistCheckbox = function (rowid) {
     </span>`;
 };
 
+// Duplicate from renderSVG.js so we don't need to rebuild temporarily whilst we work on Xetthecum
+hortis.encodeHTML = function (str) {
+    return str.replace(/[&<>'"]/g, function (tag) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "'": "&#39;",
+            "\"": "&quot;"
+        }[tag];
+    });
+};
+
 hortis.checklistItem = function (entry, selectedId, simple, selectable) {
     const record = entry.row;
     const styleprop = "";
@@ -56,8 +69,9 @@ hortis.checklistItem = function (entry, selectedId, simple, selectable) {
     if (record.commonName) {
         name += " - <p " + styleprop + rowid + " class=\"flc-checklist-common-name\">" + record.commonName + "</p>";
     }
-    if (record.hulqName) {
-        name += " - <p " + styleprop + rowid + " class=\"flc-checklist-hulq-name\"><em>" + record.hulqName + "</em></p>";
+    const hulqName = record["Hulquminum Name"];
+    if (hulqName) {
+        name += " - <p " + styleprop + rowid + " class=\"flc-checklist-hulq-name\"><em>" + hulqName + "</em></p>";
     }
     const subList = hortis.checklistList(entry.children, selectedId, simple, selectable);
     const footer = "</li>";
@@ -149,6 +163,7 @@ fluid.defaults("hortis.checklist", {
     gradeNames: ["hortis.withPanelLabel", "fluid.viewComponent"],
     filterRanks: false, // or array to include - if set, counts as "simple"
     showRoot: false,
+    selectable: false,
     selectors: {
         hoverable: "p",
         checklist: ".fld-imerss-checklist"
@@ -262,21 +277,26 @@ hortis.checklist.stateToCheck = function (checklist, state, id) {
 
 hortis.checklist.generate = function (that, element, layoutHolder, filterTaxonomy, simple, model) {
     const {rootId, selectedId, rowFocus, rowById} = model;
+    const selectable = that.options.selectable;
 
     console.log("Generating checklist for id " + rootId);
     const rootChildren = fluid.makeArray(rowById[rootId]);
     const filteredEntries = filterTaxonomy(rootChildren, 0);
     that.rootEntry = {row: {id: hortis.checklist.ROOT_ID}, children: filteredEntries};
-    const {idToEntry, idToState} = hortis.checklist.computeInitialModel(that.rootEntry, rowFocus);
-    that.idToEntry = idToEntry;
-    that.idToState.value = idToState;
+    if (selectable) {
+        const {idToEntry, idToState} = hortis.checklist.computeInitialModel(that.rootEntry, rowFocus);
+        that.idToEntry = idToEntry;
+        that.idToState.value = idToState;
+    }
 
-    const markup = hortis.checklistList(filteredEntries, selectedId, simple, true);
+    const markup = hortis.checklistList(filteredEntries, selectedId, simple, selectable);
     element[0].innerHTML = markup;
-    const checks = element[0].querySelectorAll(".flc-checklist-check");
-    const idToNode = {};
-    checks.forEach(check => idToNode[check.dataset.rowId] = check);
-    that.idToNode = idToNode;
+    if (selectable) {
+        const checks = element[0].querySelectorAll(".flc-checklist-check");
+        const idToNode = {};
+        checks.forEach(check => idToNode[check.dataset.rowId] = check);
+        that.idToNode = idToNode;
+    }
 };
 
 hortis.checklist.allChildrenState = function (idToState, entry, state) {
@@ -332,7 +352,6 @@ fluid.defaults("hortis.checklist.withHolder", {
     gradeNames: ["hortis.layoutHolder", "hortis.checklist"]
 });
 
-// TODO: Get layoutHolder to compute allRowFocus which needs to take account of external, e.g. map-based filters
 // From the individual signals of each checkbox, compute the effective rowSelection - taking into account the "no selection is all selection" idiom
 hortis.checklist.checksToSelection = function (idToState, rowFocus, allRowFocus) {
     const selection = {};
