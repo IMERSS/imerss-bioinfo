@@ -7,9 +7,9 @@ var hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.leafletMap.withGrid", {
     selectors: {
-        grid: ".fld-imerss-map-grid",
-        datasetControls: ".fld-imerss-dataset-controls",
-        datasetsLabel: ".fld-imerss-datasets-label"
+        grid: ".imerss-map-grid",
+        datasetControls: ".imerss-dataset-controls",
+        datasetsLabel: ".imerss-datasets-label"
     },
     baseZoomForOutline: 11.9,
     model: {
@@ -48,7 +48,7 @@ fluid.defaults("hortis.leafletMap.withGrid", {
         drawGrid: "hortis.leafletMap.drawGrid({that}, {that}.quantiser, {that}.model.datasetEnabled)"
     },
     gridStyle: {
-        className: "fld-imerss-map-region"
+        className: "imerss-map-region"
     },
     listeners: {
         "buildMap.addGrid": "hortis.leafletMap.withGrid.addGrid({that})"
@@ -165,7 +165,7 @@ hortis.leafletMap.withGrid.updateTooltipHighlight = function (map, oldKey) {
         const oldBucket = map.toPlot[oldKey];
         if (oldBucket) {
             const element = oldBucket.Lpolygon.getElement();
-            element.classList.remove("fl-imerss-highlightBlock");
+            element.classList.remove("imerss-highlightBlock");
         }
     }
 };
@@ -200,7 +200,7 @@ hortis.leafletMap.withGrid.updateTooltip = function (map, key) {
         tooltip[0].innerHTML = text;
         tooltip.show();
         const element = bucket.Lpolygon.getElement();
-        element.classList.add("fl-imerss-highlightBlock");
+        element.classList.add("imerss-highlightBlock");
         const parent = element.parentNode;
         parent.insertBefore(element, null);
     } else {

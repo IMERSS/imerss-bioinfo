@@ -188,7 +188,7 @@ fluid.defaults("hortis.layoutHolder", {
 fluid.defaults("hortis.withPanelLabel", {
     gradeNames: "fluid.viewComponent",
     selectors: {
-        panelLabel: ".fld-imerss-panel-label"
+        panelLabel: ".imerss-panel-label"
     },
     model: {
         panelLabel: ""
@@ -201,32 +201,32 @@ fluid.defaults("hortis.withPanelLabel", {
     }
 });
 
-// Note that sunburst's container is the overall fl-imerss-container, all of its contents related to the
+// Note that sunburst's container is the overall imerss-container, all of its contents related to the
 // sunburst itself really need to be demoted
 fluid.defaults("hortis.sunburst", {
     gradeNames: ["hortis.layoutHolder", "hortis.withPanelLabel", "fluid.viewComponent"],
     selectors: {
-        panelLabel: "#fli-tab-sunburst .fld-imerss-panel-label", // irregularity due to faulty container level
-        svg: ".flc-imerss-svg",
-        back: ".fld-imerss-back",
-        tabs: ".fld-imerss-tabs",
-        taxonDisplay: ".fld-imerss-taxonDisplay",
-        autocomplete: ".fld-imerss-autocomplete",
-        checklist: ".fld-imerss-checklist-holder",
-        simpleChecklist: ".fld-imerss-simple-checklist-holder",
-        segment: ".fld-imerss-segment",
-        label: ".fld-imerss-label",
-        phyloPic: ".fld-imerss-phyloPic"
+        panelLabel: "#fli-tab-sunburst .imerss-panel-label", // irregularity due to faulty container level
+        svg: ".imerss-svg",
+        back: ".imerss-back",
+        tabs: ".imerss-tabs",
+        taxonDisplay: ".imerss-taxonDisplay",
+        autocomplete: ".imerss-autocomplete",
+        checklist: ".imerss-full-checklist-holder",
+        simpleChecklist: ".imerss-simple-checklist-holder",
+        segment: ".imerss-segment",
+        label: ".imerss-label",
+        phyloPic: ".imerss-phyloPic"
         // No longer supportable under FLUID-6145: BUG
         // mousable: "@expand:hortis.combineSelectors({that}.options.selectors.segment, {that}.options.selectors.label, {that}.options.selectors.phyloPic)"
     },
     styles: {
-        segment: "fld-imerss-segment",
-        label: "fld-imerss-label",
-        phyloPic: "fld-imerss-phyloPic",
-        layoutRoot: "fl-imerss-layoutRoot",
-        labelPath: "fld-imerss-labelPath",
-        clickable: "fl-imerss-clickable"
+        segment: "imerss-segment",
+        label: "imerss-label",
+        phyloPic: "imerss-phyloPic",
+        layoutRoot: "imerss-layoutRoot",
+        labelPath: "imerss-labelPath",
+        clickable: "imerss-clickable"
     },
     openTaxonPanels: {
         observationData: true,
@@ -334,10 +334,10 @@ fluid.defaults("hortis.sunburst", {
         label: "<path id=\"%labelPathId\" d=\"%textPath\" visibility=\"%labelVisibility\" class=\"%labelPathClass\" vector-effect=\"non-scaling-stroke\"></path>"
             + "<text id=\"%labelId\" dy=\"0.25em\" class=\"%labelClass\" visibility=\"%labelVisibility\" style=\"%labelStyle\">"
             + "<textPath xlink:href=\"#%labelPathId\" startOffset=\"50%\" style=\"text-anchor: middle\">%label</textPath></text>",
-        phyloPic: "<image id=\"%phyloPicId\" class=\"%phyloPicClass fl-imerss-clickable\" xlink:href=\"%phyloPicUrl\" height=\"%picDiameter\" width=\"%picDiameter\" x=\"%phyloPicX\" y=\"%phyloPicY\" />",
+        phyloPic: "<image id=\"%phyloPicId\" class=\"%phyloPicClass imerss-clickable\" xlink:href=\"%phyloPicUrl\" height=\"%picDiameter\" width=\"%picDiameter\" x=\"%phyloPicX\" y=\"%phyloPicY\" />",
         segmentFooter: "</g>",
         taxonDisplayHeader: "<div>",
-        taxonDisplayRow: "<div %rootAttrs><span class=\"fl-taxonDisplay-key\">%key</span><span class=\"fl-taxonDisplay-value %valueClazz\">%value</span></div>",
+        taxonDisplayRow: "<div %rootAttrs><span class=\"taxonDisplay-key\">%key</span><span class=\"taxonDisplay-value %valueClazz\">%value</span></div>",
         taxonDisplayFooter: "</div>"
     },
     events: {
@@ -553,8 +553,8 @@ hortis.dumpRow = function (key, value, markup, extraClazz, valueClazz, options) 
         const keyName = key ? (toLook[key] || hortis.capitalize(key)) : "";
         valueClazz = valueClazz || "";
         const openPanel = options?.openTaxonPanels[key];
-        const isRemainder = extraClazz && extraClazz.includes("fld-taxonDisplay-expandable-remainder");
-        const clazz = "fl-taxonDisplay-row " + (extraClazz || "") + (openPanel ? " fl-taxonDisplay-expanded" : " fl-taxonDisplay-unexpanded");
+        const isRemainder = extraClazz && extraClazz.includes("taxonDisplay-expandable-remainder");
+        const clazz = "taxonDisplay-row " + (extraClazz || "") + (openPanel ? " taxonDisplay-expanded" : " taxonDisplay-unexpanded");
         return fluid.stringTemplate(markup.taxonDisplayRow, {
             key: isRemainder ? "" : keyName,
             value: value,
@@ -570,11 +570,11 @@ hortis.renderDate = function (date) {
     return new Date(date).toISOString().substring(0, 10);
 };
 
-hortis.expandButtonMarkup = "<span class=\"fl-taxonDisplay-expand\"></span>";
+hortis.expandButtonMarkup = "<span class=\"taxonDisplay-expand\"></span>";
 
 hortis.expandableBlock =
-    "<div class=\"%blockClazz fld-taxonDisplay-expandable-header fl-taxonDisplay-runon-header %state\">%blockName" + hortis.expandButtonMarkup + "</div>" +
-    "<div class=\"fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder %state\">%block</div>";
+    "<div class=\"%blockClazz taxonDisplay-expandable-header taxonDisplay-runon-header %state\">%blockName" + hortis.expandButtonMarkup + "</div>" +
+    "<div class=\"taxonDisplay-expandable-remainder taxonDisplay-runon-remainder %state\">%block</div>";
 
 
 hortis.sourceTable = { // TODO: get this from marmalised.json but the names currently there are too long
@@ -660,9 +660,9 @@ hortis.renderObsBound = function (row, prefix, markup, options) {
 };
 
 hortis.mediaBlock =
-    "<div class=\"fld-imerss-media-name\">%mediaName</div>" +
-    "<div class=\"fld-imerss-media-image\"><a href=\"%mediaTarget\"><img src=\"%mediaImage\"/></a></div>" +
-    "<div class=\"fld-imerss-media-text\">%mediaText</div>";
+    "<div class=\"imerss-media-name\">%mediaName</div>" +
+    "<div class=\"imerss-media-image\"><a href=\"%mediaTarget\"><img src=\"%mediaImage\"/></a></div>" +
+    "<div class=\"imerss-media-text\">%mediaText</div>";
 
 hortis.renderOneMedium = function (medium) {
     return fluid.stringTemplate(hortis.mediaBlock, {
@@ -676,7 +676,7 @@ hortis.renderOneMedium = function (medium) {
 hortis.renderExpandable = function (terms, expanded) {
     const allTerms = {
         ...terms,
-        state: expanded ? "fl-taxonDisplay-expanded" : "fl-taxonDisplay-unexpanded"
+        state: expanded ? "taxonDisplay-expanded" : "taxonDisplay-unexpanded"
     };
     return fluid.stringTemplate(hortis.expandableBlock, allTerms);
 };
@@ -696,9 +696,9 @@ hortis.driveToPreview = function (url) {
 
 hortis.hulqValues = ["food", "medicinal", "spiritual", "material", "trade", "indicator"];
 
-hortis.hulqValueItem = "<div class=\"fl-imerss-cultural-value\"><div role=\"img\" class=\"fld-imerss-value-%img fl-imerss-cultural-value-img\"></div><div class=\"fld-imerss-cultural-value-text\">%label</div></div>";
+hortis.hulqValueItem = "<div class=\"imerss-cultural-value\"><div role=\"img\" class=\"imerss-value-%img imerss-cultural-value-img\"></div><div class=\"imerss-cultural-value-text\">%label</div></div>";
 
-hortis.hulqValueBlock = "<div class=\"fl-imerss-cultural-values\">%valueBlocks</div>";
+hortis.hulqValueBlock = "<div class=\"imerss-cultural-values\">%valueBlocks</div>";
 
 hortis.dumpHulqName = function (row, markup) {
     const player = row.audioLink ? fluid.stringTemplate(hortis.drivePlayer, {
@@ -721,17 +721,17 @@ hortis.dumpHulqValues = function (row, markup) {
         valueBlocks: valueBlocks.join("\n")
     });
 
-    const valueRow1 = hortis.dumpRow("Cultural values", " ", markup, "fl-taxonDisplay-empty-header");
-    const valueRow2 = hortis.dumpRow("", valueBlock, markup, "fl-taxonDisplay-empty-row");
+    const valueRow1 = hortis.dumpRow("Cultural values", " ", markup, "taxonDisplay-empty-header");
+    const valueRow2 = hortis.dumpRow("", valueBlock, markup, "taxonDisplay-empty-row");
     return valueRow1 + valueRow2;
 };
 
-hortis.iNatExtern = "<a href=\"%iNatLink\" target=\"_blank\" class=\"fl-taxonDisplay-iNat-extern\">iNaturalist<span class=\"fl-external-link\"></span></a>";
+hortis.iNatExtern = "<a href=\"%iNatLink\" target=\"_blank\" class=\"taxonDisplay-iNat-extern\">iNaturalist<span class=\"external-link\"></span></a>";
 
 
 hortis.imageTemplate =
-    "<div class=\"fl-taxonDisplay-image-holder\">" +
-        "<div class=\"fl-imerss-photo\" style=\"background-image: url(%imgUrl)\"/>" +
+    "<div class=\"taxonDisplay-image-holder\">" +
+        "<div class=\"imerss-photo\" style=\"background-image: url(%imgUrl)\"/>" +
         "%iNatExtern" +
     "</div></div>";
 
@@ -752,8 +752,8 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         if (keyName === "wikipediaSummary" && value) {
             // TODO: currently wikipediaSummary hard-defaults to closed on render
             // TODO: move to hortis.expandableBlock
-            const row1 = hortis.dumpRow("Wikipedia Summary", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header fl-taxonDisplay-unexpanded fl-taxonDisplay-runon-header");
-            const row2 = hortis.dumpRow("", value, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-unexpanded fl-taxonDisplay-runon-remainder", "fl-taxonDisplay-wikipediaSummary");
+            const row1 = hortis.dumpRow("Wikipedia Summary", hortis.expandButtonMarkup, markup, "taxonDisplay-expandable-header taxonDisplay-unexpanded taxonDisplay-runon-header");
+            const row2 = hortis.dumpRow("", value, markup, "taxonDisplay-expandable-remainder taxonDisplay-unexpanded taxonDisplay-runon-remainder", "taxonDisplay-wikipediaSummary");
             togo += row1 + row2;
         } else {
             togo += hortis.dumpRow(keyName, value, markup, extraClazz, undefined, options);
@@ -771,7 +771,7 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         togo += imageMarkup;
     };
     const dumpPhyloPic = function (keyName, url) {
-        togo += hortis.dumpRow(keyName, "<div><img alt=\"Taxon photo\" height=\"150\" width=\"150\" class=\"fl-imerss-photo\" src=\"" + url + "\"/></div>", markup);
+        togo += hortis.dumpRow(keyName, "<div><img alt=\"Taxon photo\" height=\"150\" width=\"150\" class=\"imerss-photo\" src=\"" + url + "\"/></div>", markup);
     };
     if (row.rank) {
         if (row.iNaturalistTaxonImage && !row.taxonPic) {
@@ -782,7 +782,7 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         if (row.phyloPicUrl) {
             dumpPhyloPic("phyloPic", row.phyloPicUrl);
         }
-        dumpRow(row.rank, hortis.rowToScientific(row), "fl-taxonDisplay-rank");
+        dumpRow(row.rank, hortis.rowToScientific(row), "taxonDisplay-rank");
         hortis.commonFields.forEach(function (field) {
             dumpRow(field, row[field]);
         });
@@ -797,10 +797,10 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
             // TODO: Need to revisit nutty system whereby we don't write "rank" for leaves. Need a special signal to
             // determine "there are any obs at this level".
             // Used to read:
-            // dumpRow("Species:", row.species + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank");
+            // dumpRow("Species:", row.species + (row.authority ? (" " + row.authority) : ""), "taxonDisplay-rank");
             // "species" now just holds raw species name. In the long term we should support our own normalised species name
             // composed of taxon and infrataxon name but this is at least now complete and agrees with what is shown in the tooltip
-            dumpRow("iNaturalistTaxonName", (row.taxonName || row.iNaturalistTaxonName) + (row.authority ? (" " + row.authority) : ""), "fl-taxonDisplay-rank", options);
+            dumpRow("iNaturalistTaxonName", (row.taxonName || row.iNaturalistTaxonName) + (row.authority ? (" " + row.authority) : ""), "taxonDisplay-rank", options);
         }
         if (row.hulqName) { // wot no polymorphism?
             togo += hortis.dumpHulqName(row, markup);
@@ -813,8 +813,8 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
 
         if (row.media) {
             const mediaPanel = hortis.renderMedia(row.media, "");
-            togo += hortis.dumpRow("media", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header", null, options);
-            togo += hortis.dumpRow("media", mediaPanel, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder", null, options);
+            togo += hortis.dumpRow("media", hortis.expandButtonMarkup, markup, "taxonDisplay-expandable-header", null, options);
+            togo += hortis.dumpRow("media", mediaPanel, markup, "taxonDisplay-expandable-remainder taxonDisplay-runon-remainder", null, options);
         }
 
         dumpRow("wikipediaSummary", row.wikipediaSummary);
@@ -830,10 +830,10 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         }
         obsPanel += hortis.dumpRow("observationCount", row.observationCount, markup);
 
-        // TODO: Move to hortis.expandableBlock - hard since fl-taxonDisplay-key and fl-taxonDisplay-value
+        // TODO: Move to hortis.expandableBlock - hard since taxonDisplay-key and taxonDisplay-value
         // are nested inside here, but they are not in the outer map panels
-        togo += hortis.dumpRow("observationData", hortis.expandButtonMarkup, markup, "fld-taxonDisplay-expandable-header", null, options);
-        togo += hortis.dumpRow("observationData", obsPanel, markup, "fld-taxonDisplay-expandable-remainder fl-taxonDisplay-runon-remainder", null, options);
+        togo += hortis.dumpRow("observationData", hortis.expandButtonMarkup, markup, "taxonDisplay-expandable-header", null, options);
+        togo += hortis.dumpRow("observationData", obsPanel, markup, "taxonDisplay-expandable-remainder taxonDisplay-runon-remainder", null, options);
 
         if (row.obsPhotoLink) {
         // See this nonsense: https://stackoverflow.com/questions/5843035/does-before-not-work-on-img-elements
@@ -853,18 +853,18 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
 };
 
 hortis.bindRowExpander = function (that) {
-    that.container.on("click", ".fl-taxonDisplay-expand", function (e) {
+    that.container.on("click", ".taxonDisplay-expand", function (e) {
         const target = $(e.target);
-        const header = target.closest(".fld-taxonDisplay-expandable-header");
-        header.toggleClass("fl-taxonDisplay-expanded");
-        header.toggleClass("fl-taxonDisplay-unexpanded");
-        const showing = header.hasClass("fl-taxonDisplay-expanded");
+        const header = target.closest(".taxonDisplay-expandable-header");
+        header.toggleClass("taxonDisplay-expanded");
+        header.toggleClass("taxonDisplay-unexpanded");
+        const showing = header.hasClass("taxonDisplay-expanded");
         const siblings = header.parent().children();
         const ownIndex = header.index();
         const next = $(siblings[ownIndex + 1]);
-        if (next.hasClass("fld-taxonDisplay-expandable-remainder")) { // sanity check, we should not render ones without this
-            next.toggleClass("fl-taxonDisplay-expanded", showing);
-            next.toggleClass("fl-taxonDisplay-unexpanded", !showing);
+        if (next.hasClass("taxonDisplay-expandable-remainder")) { // sanity check, we should not render ones without this
+            next.toggleClass("taxonDisplay-expanded", showing);
+            next.toggleClass("taxonDisplay-unexpanded", !showing);
         }
     });
 };
@@ -878,9 +878,9 @@ hortis.updateTaxonDisplay = function (that, id) {
     }
 };
 
-hortis.tooltipTemplate = "<div class=\"fl-imerss-tooltip\">" +
-    "<div class=\"fl-imerss-photo\" style=\"background-image: url(%imgUrl)\"></div>" +
-    "<div class=\"fl-text\"><b>%taxonRank:</b> %taxonNames</div>" +
+hortis.tooltipTemplate = "<div class=\"imerss-tooltip\">" +
+    "<div class=\"imerss-photo\" style=\"background-image: url(%imgUrl)\"></div>" +
+    "<div class=\"text\"><b>%taxonRank:</b> %taxonNames</div>" +
     "</div>";
 
 hortis.renderTooltip = function (row) {

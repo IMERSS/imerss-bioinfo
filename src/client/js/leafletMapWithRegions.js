@@ -9,7 +9,7 @@ var hortis = fluid.registerNamespace("hortis");
 fluid.defaults("hortis.leafletMap.withRegions", {
     gradeNames: "hortis.leafletMap.withRegionsBase",
     selectors: {
-        legendKeys: ".fld-imerss-map-legend-keys"
+        legendKeys: ".imerss-map-legend-keys"
     },
     modelListeners: {
         legend: {
@@ -58,20 +58,20 @@ fluid.defaults("hortis.leafletMap.withRegions", {
 
 fluid.registerNamespace("hortis.legendKey");
 
-hortis.legendKey.rowTemplate = "<div class=\"fld-imerss-legend-row fld-imerss-nodismiss-map %rowClass\">" +
-            "<span class=\"fld-imerss-legend-icon\"></span>" +
-            "<span class=\"fld-imerss-legend-preview %previewClass\" style=\"%previewStyle\"></span>" +
-            "<span class=\"fld-imerss-legend-label\">%keyLabel</span>" +
+hortis.legendKey.rowTemplate = "<div class=\"imerss-legend-row imerss-nodismiss-map %rowClass\">" +
+            "<span class=\"imerss-legend-icon\"></span>" +
+            "<span class=\"imerss-legend-preview %previewClass\" style=\"%previewStyle\"></span>" +
+            "<span class=\"imerss-legend-label\">%keyLabel</span>" +
             "</div>";
 
-hortis.legendKey.blockTemplate = "<div class=\"fld-imerss-legend-block\"><span class=\"fld-imerss-legend-block-name fld-imerss-nodismiss-map\">%community</span>%rows</div>";
+hortis.legendKey.blockTemplate = "<div class=\"imerss-legend-block\"><span class=\"imerss-legend-block-name imerss-nodismiss-map\">%community</span>%rows</div>";
 
 hortis.legendKey.renderMarkup = function (markup, clazz, className) {
     const style = hortis.fillColorToStyle(clazz.fillColor || clazz.color);
     const normal = hortis.normaliseToClass(className);
     return fluid.stringTemplate(markup, {
-        rowClass: "fld-imerss-legend-row-" + normal,
-        previewClass: "fld-imerss-class-" + normal,
+        rowClass: "imerss-legend-row-" + normal,
+        previewClass: "imerss-class-" + normal,
         previewStyle: "background-color: " + style.fillColor,
         keyLabel: className
     });
@@ -91,7 +91,7 @@ hortis.legendKey.drawLegend = function (map) {
     const legendKeys = map.locate("legendKeys");
     legendKeys.html(markup);
     map.clazzToLegendNodes = fluid.transform(map.classes, function (troo, className) {
-        const rowSel = ".fld-imerss-legend-row-" + hortis.normaliseToClass(className);
+        const rowSel = ".imerss-legend-row-" + hortis.normaliseToClass(className);
         const row = legendKeys.find(rowSel);
         row.click(function () {
             map.events.selectRegion.fire(className, map.classes[className].community);
@@ -101,8 +101,8 @@ hortis.legendKey.drawLegend = function (map) {
 
 hortis.legendKey.selectRegion = function (map, value, path) {
     const className = fluid.peek(path);
-    const row = map.locate("legendKeys").find(".fld-imerss-legend-row-" + hortis.normaliseToClass(className));
-    row.toggleClass("fld-imerss-selected", value);
+    const row = map.locate("legendKeys").find(".imerss-legend-row-" + hortis.normaliseToClass(className));
+    row.toggleClass("imerss-selected", value);
 };
 
 hortis.fillColorToStyle = function (fillColor) {
@@ -116,7 +116,7 @@ hortis.fillColorToStyle = function (fillColor) {
 fluid.defaults("hortis.bannerManager", {
     gradeNames: "fluid.viewComponent",
     selectors: {
-        banner: ".fl-xetthecum-banner"
+        banner: ".xetthecum-banner"
     },
     modelListeners: {
         "selectedCommunities.*": {
@@ -133,17 +133,17 @@ hortis.normaliseToClass = function (str) {
 
 hortis.bannerManager.toggleClass = function (banner, state, path) {
     const community = fluid.peek(path);
-    banner.toggleClass("fld-imerss-banner-" + hortis.normaliseToClass(community), state);
+    banner.toggleClass("imerss-banner-" + hortis.normaliseToClass(community), state);
 };
 
 hortis.leafletMap.seColumns = ["What", "Where", "Importance", "Protection", "Source"];
 
-hortis.leafletMap.hulqNameTemplate = " / <span aria-label=\"%label\" title=\"%label\" class=\"fl-imerss-hulq-name\">%hulqName</span>";
+hortis.leafletMap.hulqNameTemplate = " / <span aria-label=\"%label\" title=\"%label\" class=\"imerss-hulq-name\">%hulqName</span>";
 
-hortis.leafletMap.outerPanelPhoto = "<div class=\"fl-imerss-photo %photoClass\"></div>";
+hortis.leafletMap.outerPanelPhoto = "<div class=\"imerss-photo %photoClass\"></div>";
 
-hortis.leafletMap.outerPanelCommunity = "<div class=\"fld-imerss-map-community\">Community:<br/>%community%hulqBlock</div>";
-hortis.leafletMap.outerPanelClass = "<div class=\"fld-imerss-map-class\">%clazz%hulqBlock</div>";
+hortis.leafletMap.outerPanelCommunity = "<div class=\"imerss-map-community\">Community:<br/>%community%hulqBlock</div>";
+hortis.leafletMap.outerPanelClass = "<div class=\"imerss-map-class\">%clazz%hulqBlock</div>";
 
 hortis.leafletMap.renderHulqName = function (row) {
     return fluid.stringTemplate(hortis.leafletMap.hulqNameTemplate, {
@@ -160,7 +160,7 @@ hortis.taxonLinkRegex = /\[([^\[]+)\]\(([^\)]*)\)/gm;
 
 hortis.convertTaxonLinks = function (text) {
     return text.replace(hortis.taxonLinkRegex, function (match, p1, p2) {
-        return "<a class=\"fld-imerss-taxon-link\" href=\"" + p2 + "\">" + p1 + "</a>";
+        return "<a class=\"imerss-taxon-link\" href=\"" + p2 + "\">" + p1 + "</a>";
     });
 };
 
@@ -200,19 +200,19 @@ hortis.withTaxonLink = function (sunburst, e, func) {
 };
 
 hortis.listenTaxonLinks = function (sunburst) {
-    $(document).on("click", ".fld-imerss-taxon-link", function (e) {
+    $(document).on("click", ".imerss-taxon-link", function (e) {
         hortis.withTaxonLink(sunburst, e, function (row) {
             sunburst.events.changeLayoutId.fire(row.id);
         });
     });
 
-    $(document).on("mouseenter", ".fld-imerss-taxon-link", function (e) {
+    $(document).on("mouseenter", ".imerss-taxon-link", function (e) {
         hortis.withTaxonLink(sunburst, e, function (row) {
             sunburst.mouseEvent = e;
             sunburst.applier.change("hoverId", row.id);
         });
     });
-    $(document).on("mouseleave", ".fld-imerss-taxon-link", function () {
+    $(document).on("mouseleave", ".imerss-taxon-link", function () {
         sunburst.applier.change("hoverId", null);
     });
 };
@@ -233,7 +233,7 @@ hortis.leafletMap.renderMapOuterPanel = function (map) {
     let topPanel = "";
     if (clazz.hasImage) {
         topPanel += fluid.stringTemplate(hortis.leafletMap.outerPanelPhoto, {
-            photoClass: "fld-imerss-class-image-" + hortis.normaliseToClass(selectedClazz)
+            photoClass: "imerss-class-image-" + hortis.normaliseToClass(selectedClazz)
         });
     }
 
@@ -250,32 +250,32 @@ hortis.leafletMap.renderMapOuterPanel = function (map) {
 
     if (clazz.media) {
         // TODO: Simpler than taxon panel because we don't have key/value markup inside
-        topPanel += hortis.renderMediaExpander(clazz.media, "fld-imerss-map-panel-block", true);
+        topPanel += hortis.renderMediaExpander(clazz.media, "imerss-map-panel-block", true);
     }
 
     let bottomPanel = "";
     if (community.culturalValues) {
         const cultureBlock =
             hortis.convertTaxonLinks(hortis.textToMarkup(community.culturalValues)) +
-            "<br/><br/><div class=\"fld-imerss-map-class-se-col\">Sources:</div>" +
+            "<br/><br/><div class=\"imerss-map-class-se-col\">Sources:</div>" +
             hortis.textToMarkup(community.culturalValuesSources);
         const allCultureBlock = hortis.renderExpandable({
             blockName: "Cultural Values",
             block: cultureBlock,
-            blockClazz: "fld-imerss-map-panel-block"
+            blockClazz: "imerss-map-panel-block"
         }, true);
         bottomPanel += allCultureBlock;
     }
     if (clazz["sE-Tagline"]) {
-        let ecoBlock = "<div class=\"fld-imerss-map-class-tagline\">" + clazz["sE-Tagline"] + "</div>";
+        let ecoBlock = "<div class=\"imerss-map-class-tagline\">" + clazz["sE-Tagline"] + "</div>";
         hortis.leafletMap.seColumns.forEach(function (col) {
-            ecoBlock += "<div class=\"fld-imerss-map-class-se-col\">" + col + ": </div>";
-            ecoBlock += "<div class=\"fld-imerss-map-class-se-val\">" + clazz["sE-" + col] + "</div>";
+            ecoBlock += "<div class=\"imerss-map-class-se-col\">" + col + ": </div>";
+            ecoBlock += "<div class=\"imerss-map-class-se-val\">" + clazz["sE-" + col] + "</div>";
         });
         const allEcoBlock = hortis.renderExpandable({
             blockName: "Ecological Values",
             block: ecoBlock,
-            blockClazz: "fld-imerss-map-panel-block"
+            blockClazz: "imerss-map-panel-block"
         }, true);
         bottomPanel += allEcoBlock;
     }
@@ -297,7 +297,7 @@ hortis.leafletMap.withRegions.addRegions = function (that) {
 
 hortis.leafletMap.withRegions.drawRegions = function (map) {
     const regionClass = function (className) {
-        return "fld-imerss-region-" + hortis.normaliseToClass(className);
+        return "imerss-region-" + hortis.normaliseToClass(className);
     };
     map.applier.change("selectedRegions", hortis.leafletMap.selectedRegions(null, map.classes));
 
@@ -318,7 +318,7 @@ hortis.leafletMap.withRegions.drawRegions = function (map) {
                 weight: 3
             }
         };
-        options.className = regionClass(className) + " fld-imerss-region";
+        options.className = regionClass(className) + " imerss-region";
         const Lpolygon = L.geoJSON(feature, options);
         map.regionGroup.addLayer(Lpolygon);
 

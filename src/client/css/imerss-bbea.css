@@ -1,46 +1,39 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-flow: column;
+    margin: 8px;
+    height: calc(100vh - 16px); /* To allow for 8px borders */
+    overflow: hidden
+}
 
 /* Why is this "column" in core? What does it look like ... */
-.fl-imerss-map-and-taxa {
+.imerss-map-and-taxa {
     flex-direction: row;
 }
 
-.fl-imerss-checklists {
+.imerss-map-holder {
+    height: 100%;
+    width: 50%;
+}
+
+.imerss-checklists {
     display: flex;
     flex-direction: row;
     height: 60%;
     overflow: hidden;
 }
 
-.fl-imerss-checklists * {
+.imerss-checklists * {
     box-sizing: border-box;
 }
 
-/* Grabbed definition for default "checked" to apply to indeterminate checkboxes */
-.pretty input:indeterminate~.state label:after {
-    background-color: #bdc3c7!important;
-    transform: scale(.6);
-}
-
-.pretty .state label:after, .pretty .state label:before {
-    width: calc(1em + 0px);
-    height: calc(1em + 0px);
-}
-
-.pretty.p-icon .state .icon {
-    width: calc(1em + 0px);
-    height: calc(1em + 0px);
-}
-
-.pretty {
-    margin-right: 0.3em;
-}
-
-.fl-imerss-pollinators {
+.imerss-pollinators {
     width: 30%;
     min-width: 30%;
 }
 
-.fl-imerss-interactions {
+.imerss-interactions {
     padding: 0.5em;
     width: 40%;
     height: 100%;
@@ -48,49 +41,49 @@
     flex-direction: column;
 }
 
-.fl-imerss-plants {
+.imerss-plants {
     width: 30%;
     min-width: 30%;
 }
 
-.fl-imerss-interactions-holder {
+.imerss-interactions-holder {
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.fl-imerss-int-left {
+.imerss-int-left {
     flex: 0 0 180px;
 }
 
-.fl-imerss-int-right {
+.imerss-int-right {
     flex: 0 0 3em;
 }
 
-.fl-imerss-int-h-middle {
+.imerss-int-h-middle {
     overflow-x: scroll;
 }
 
-.fl-imerss-int-top {
+.imerss-int-top {
     flex: 0 0 3em;
 }
 
-.fl-imerss-int-v-middle {
+.imerss-int-v-middle {
     flex: 1 1 auto;
     overflow-y: hidden;
 }
 
-.fl-imerss-int-bottom {
+.imerss-int-bottom {
     flex: 0 0 180px;
 }
 
 
-.fl-imerss-int-row {
+.imerss-int-row {
     display: flex;
     flex-direction: row;
 }
 
-.fld-imerss-poll-names {
+.imerss-poll-names {
     position: relative;
     flex: 1 1 auto;
     display: flex;
@@ -99,7 +92,7 @@
     overflow-x: hidden;
 }
 
-.fld-imerss-poll-counts {
+.imerss-poll-counts {
     position: relative;
     display: flex;
     align-items: end;
@@ -107,53 +100,53 @@
     margin-right: calc(var(--imerss-scrollbar-width) + 4px);
 }
 
-.fld-imerss-plant-names {
+.imerss-plant-names {
     margin-bottom: calc(var(--imerss-scrollbar-width) + 4px);
 }
 
-.fld-imerss-plant-counts {
+.imerss-plant-counts {
     margin-left: 4px;
     margin-bottom: calc(var(--imerss-scrollbar-width) + 4px);
 }
 
-.fld-imerss-plant-names, .fld-imerss-plant-counts {
+.imerss-plant-names, .imerss-plant-counts {
     position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
-.fld-imerss-plant-names::-webkit-scrollbar, .fld-imerss-plant-counts::-webkit-scrollbar  {
+.imerss-plant-names::-webkit-scrollbar, .imerss-plant-counts::-webkit-scrollbar  {
     display: none;  /* Safari and Chrome */
 }
 
-.fld-imerss-poll-names .fl-imerss-int-label {
+.imerss-poll-names .imerss-int-label {
     writing-mode: tb-rl;
     transform: rotate(180deg);
     bottom: 2em; /* No idea why they stick off the bottom otherwise */
 }
 
-.fl-imerss-int-label {
+.imerss-int-label {
     position: absolute;
     white-space: nowrap;
     font-size: 14px;
 }
 
-.fl-imerss-int-count {
+.imerss-int-count {
     position: absolute;
 }
 
-.fld-imerss-plant-counts .fl-imerss-int-count {
+.imerss-plant-counts .imerss-int-count {
     /* Colour taken from Young et al 2021 */
     background-color: #4c92c3;
     border: 1px solid black;
 }
 
-.fld-imerss-poll-counts .fl-imerss-int-count {
+.imerss-poll-counts .imerss-int-count {
     background-color: #ff7c4a;
     border: 1px solid black;
 }
 
-.fld-imerss-int-poll-label {
+.imerss-int-poll-label {
     padding-top: 10px;
     font-size: 20px;
     writing-mode: tb-rl;
@@ -161,11 +154,11 @@
     padding-top: 2em;
 }
 
-.fld-imerss-int-plant-label {
+.imerss-int-plant-label {
     font-size: 20px;
 }
 
-.fl-imerss-int-tooltip {
+.imerss-int-tooltip {
     font-size: 15px;
 }
 

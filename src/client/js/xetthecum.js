@@ -35,7 +35,7 @@ fluid.defaults("hortis.xetthecumSunburstLoader", {
         },
         outerPanelSelector: {
             target: "{that hortis.sunburst}.options.selectors.mapOuterPanel",
-            record: ".fld-imerss-map-outer-panel"
+            record: ".imerss-map-outer-panel"
         },
         openPanels: {
             target: "{that hortis.sunburst}.options.openTaxonPanels.observationData",
@@ -80,8 +80,8 @@ hortis.clearMapSelectionConditionally = function (map, layoutId, source) {
 fluid.defaults("hortis.infoPanelManager", {
     gradeNames: "fluid.viewComponent",
     selectors: {
-        map: ".fld-imerss-map-outer-panel-wrapper",
-        taxa: ".fld-imerss-taxonDisplay-wrapper"
+        map: ".imerss-map-outer-panel-wrapper",
+        taxa: ".imerss-taxonDisplay-wrapper"
     },
     panels: {
         map: true,

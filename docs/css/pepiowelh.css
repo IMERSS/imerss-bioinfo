@@ -1,36 +1,36 @@
-.fl-imerss-datasets {
+.imerss-datasets {
     display: none;
     width: 0;
 }
 
-.fl-imerss-left-column {
+.imerss-left-column {
     flex: 1 1 0;
     width: unset;
 }
 
-.fld-imerss-map {
+.imerss-map {
     height: 100%;
     max-height: 40rem;
     min-width: 30rem;
 }
 
-.fl-imerss-map-and-taxa {
+.imerss-map-and-taxa {
     flex-direction: row;
 }
 
-.fld-imerss-tabs {
+.imerss-tabs {
     display: none;
 }
 
-.fl-imerss-tabs-and-search {
+.imerss-tabs-and-search {
     padding: 2rem;
 }
 
-.fl-imerss-container {
+.imerss-container {
     display: block;
 }
 
-.fld-imerss-map-holder {
+.imerss-map-holder {
     flex: 1 1 0;
     margin-bottom: 7.5%;
     margin-top: 7.5%;
@@ -44,21 +44,21 @@
     opacity: 0.8;
 }
 
-.flc-imerss-viz-dimens {
+.imerss-viz-dimens {
     height: revert;
     max-height: 40rem;
 }
 
-.fl-banner {
+.banner {
     display: flex;
     align-items: center;
 }
 
-.fl-banner span {
+.banner span {
     padding-left: 3rem;
 }
 
-.fld-imerss-we-overlay {
+.imerss-we-overlay {
     position: absolute;
     cursor: pointer;
     height: 120%;
@@ -70,7 +70,7 @@
     transition: opacity 2s;
 }
 
-.fl-imerss-taxa {
+.imerss-taxa {
     /** Ensure that WE logo pops under taxa to the right */
     z-index: 1000;
 }

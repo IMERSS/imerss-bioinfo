@@ -695,116 +695,125 @@ a.ui-button:active,
 	background: none;
 }
 .autocomplete__wrapper{position:relative}.autocomplete__hint,.autocomplete__input{-webkit-appearance:none;border:2px solid #0b0c0c;border-radius:0;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;margin-bottom:0;width:100%}.autocomplete__input{background-color:transparent;position:relative}.autocomplete__hint{color:#b1b4b6;position:absolute}.autocomplete__input--default{padding:5px}.autocomplete__input--focused{outline:3px solid #fd0;outline-offset:0;box-shadow:inset 0 0 0 2px}.autocomplete__input--show-all-values{padding:5px 34px 5px 5px;cursor:pointer}.autocomplete__dropdown-arrow-down{z-index:-1;display:inline-block;position:absolute;right:8px;width:24px;height:24px;top:10px}.autocomplete__menu{background-color:#fff;border:2px solid #0b0c0c;border-top:0;color:#0b0c0c;margin:0;max-height:342px;overflow-x:hidden;padding:0;width:100%;width:calc(100% - 4px)}.autocomplete__menu--visible{display:block}.autocomplete__menu--hidden{display:none}.autocomplete__menu--overlay{box-shadow:rgba(0,0,0,.256863) 0 2px 6px;left:0;position:absolute;top:100%;z-index:100}.autocomplete__menu--inline{position:relative}.autocomplete__option{border-bottom:solid #b1b4b6;border-width:1px 0;cursor:pointer;display:block;position:relative}.autocomplete__option>*{pointer-events:none}.autocomplete__option:first-of-type{border-top-width:0}.autocomplete__option:last-of-type{border-bottom-width:0}.autocomplete__option--odd{background-color:#fafafa}.autocomplete__option--focused,.autocomplete__option:hover{background-color:#1d70b8;border-color:#1d70b8;color:#fff;outline:0}@media (-ms-high-contrast:active),(forced-colors:active){.autocomplete__menu{border-color:FieldText}.autocomplete__option{background-color:Field;color:FieldText}.autocomplete__option--focused,.autocomplete__option:hover{forced-color-adjust:none;background-color:SelectedItem;border-color:SelectedItem;color:SelectedItemText;outline-color:SelectedItemText}}.autocomplete__option--no-results{background-color:#fafafa;color:#646b6f;cursor:not-allowed}.autocomplete__hint,.autocomplete__input,.autocomplete__option{font-size:16px;line-height:1.25}.autocomplete__hint,.autocomplete__option{padding:5px}@media (min-width:641px){.autocomplete__hint,.autocomplete__input,.autocomplete__option{font-size:19px;line-height:1.31579}}:root {
-  --imerss-map-width: 800px;
-  --imerss-sun-height: 815px;
+    --imerss-scrollbar-width: 12px;
 }
 
-.fl-imerss-container {
+body ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: var(--imerss-scrollbar-width);
+    background-color: #eee
+}
+
+body ::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #C1C1C1;
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #A8A8A8;
+}
+
+/* Styling for checkboxes with indeterminate value */
+/* Grabbed definition for default "checked" to apply to indeterminate checkboxes */
+.pretty input:indeterminate~.state label:after {
+    background-color: #bdc3c7!important;
+    transform: scale(.6);
+}
+
+.pretty .state label:after, .pretty .state label:before {
+    width: calc(1em + 0px);
+    height: calc(1em + 0px);
+}
+
+.pretty.p-icon .state .icon {
+    width: calc(1em + 0px);
+    height: calc(1em + 0px);
+}
+
+.pretty {
+    margin-right: 0.3em;
+}
+
+
+.imerss-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0; /* Essential otherwise it overflows */
+}
+
+.imerss-map-and-taxa {
+    display: flex;
+    height: 40%;
+    flex-direction: column;
+}
+
+.imerss-tabs-and-search {
+    display: flex;
+    flex-direction: column;
+}
+
+.imerss-taxa {
     display: flex;
     flex-direction: row;
 }
 
-.fl-imerss-map-and-taxa {
-    display: flex;
-    flex-direction: column;
-    margin-right: 0.75rem;
-}
-
-.fl-imerss-tabs-and-search {
-    display: flex;
-    flex-direction: column;
-}
-
-.fl-imerss-taxa {
-    display: flex;
-    flex-direction: row;
-}
-
-.fld-imerss-segment {
+.imerss-segment {
     stroke: #444;
     stroke-width: 1px;
 }
 
-.fld-imerss-segment.fl-imerss-layoutRoot {
+.imerss-segment.imerss-layoutRoot {
     stroke-width: 3.5px;
 }
 
-.fld-imerss-labelPath {
+.imerss-labelPath {
     fill: none;
     stroke: none;
 }
 
-.flc-imerss-svg {
+.imerss-svg {
     font-size: 40px;
-    max-height: calc(var(--imerss-sun-height) + 2rem);
+/*    max-height: calc(var(--imerss-sun-height) + 2rem);*/
     margin-top: -1rem;
 }
 
-.fl-imerss-left-column {
-    width: 1024px;
+/* This one from pepiowelh again */
+.imerss-map {
+    height: 100%;
+    width: 100%;
+    min-width: 480px;
+    min-height: 320px;
 }
 
-.fl-imerss-right-column {
-    /* Roughly agree with taxon display - 480px plus scroll bar and change */
-    width: calc(480px + 3rem);
-}
 
-.fld-imerss-map {
-    height: 500px;
-    width: var(--imerss-map-width);
-}
-
-.flc-imerss-viz-dimens {
-    height: var(--imerss-sun-height);
-}
-
-.fl-imerss-panel {
+.imerss-panel {
     position: relative;
 }
 
-.fl-imerss-clickable {
+.imerss-clickable {
     cursor: pointer;
 }
 
-.fld-imerss-back {
-    border: 2px solid black;
-    display: inline;
-    padding: 5px 15px 5px 15px;
-    border-radius: 1rem;
-    font-size: 1.5rem;
-    position: absolute;
-    bottom: 1.5rem;
-    left: 1.6rem;
-    user-select: none;
-}
 
-.fld-imerss-back:hover:not([aria-disabled="true"]) {
-    background: #ccc;
-}
-
-.fld-imerss-back:not([aria-disabled="true"]) {
-    cursor: pointer;
-}
-
-.fld-imerss-back[aria-disabled="true"] {
-    opacity: 0.2;
-    cursor: default;
-}
-
-.fld-imerss-taxonDisplay {
-    height: calc(800px + 6rem); /* Viz dimens plus tab height */
-    width: 480px;
+.imerss-taxonDisplay {
+    /* height: calc(800px + 6rem); */ /* Viz dimens plus tab height */
+    /* width: 480px; */
     border: black solid 2px;
     display: flex;
     overflow-y: scroll;
     min-width: 320px;
 }
 
-.fld-imerss-taxonDisplay > div {
+/* TODO: Move taxonDisplay to core, stop binding Xetthecum to viz-all */
+/*
+.imerss-taxonDisplay > div {
     width: 100%
 }
+*/
 
-.fl-taxonDisplay-row {
+.taxonDisplay-row {
     padding: 10px 8px 6px 8px;
     border-bottom: #ccc 2px solid;
     width: auto;
@@ -812,61 +821,61 @@ a.ui-button:active,
 }
 
 /* unindent nested rows a bit */
-.fl-taxonDisplay-row .fl-taxonDisplay-row {
+.taxonDisplay-row .taxonDisplay-row {
     margin-left: -0.5rem;
 }
 
-.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder :last-child {
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder :last-child {
     margin-bottom: -0.2rem;
 }
 
-/* No idea why we do this, but we need to undo it for fld-imerss-media-name */
-.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder :first-child {
+/* No idea why we do this, but we need to undo it for imerss-media-name */
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder :first-child {
     margin-top: -0.5rem;
 }
 
-.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder .fld-imerss-media-name {
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder .imerss-media-name {
     padding-bottom: 15px;
     font-size: 1.1rem;
 }
 
-.fl-taxonDisplay-row .fld-imerss-media-image {
+.taxonDisplay-row .imerss-media-image {
     padding-bottom: 5px;
 }
 
-.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder.fl-taxonDisplay-row {
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder.taxonDisplay-row {
     border-bottom: none;
 }
 
-.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder .fl-taxonDisplay-row .fl-taxonDisplay-key {
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder .taxonDisplay-row .taxonDisplay-key {
     margin-left: 1rem;
 }
 
-.fl-taxonDisplay-runon-header.fl-taxonDisplay-expanded {
+.taxonDisplay-runon-header.taxonDisplay-expanded {
     border-bottom: none;
     padding-bottom: 0;
 }
 
-.fl-taxonDisplay-empty-header {
+.taxonDisplay-empty-header {
     border-bottom: none;
 }
-  
-.fl-taxonDisplay-empty-row .fl-taxonDisplay-key {
-    display: none;
-} 
 
-.fl-taxonDisplay-key {
+.taxonDisplay-empty-row .taxonDisplay-key {
+    display: none;
+}
+
+.taxonDisplay-key {
     width: 12em;
     margin-right: 4px;
     font-weight: bold;
     padding: 2px;
 }
 
-.fl-taxonDisplay-value {
+.taxonDisplay-value {
     width: 100%;
 }
 
-.fl-taxonDisplay-expand {
+.taxonDisplay-expand {
     width: 2rem;
     background-size: 2rem;
     height: 1rem;
@@ -877,38 +886,41 @@ a.ui-button:active,
     filter: invert(57%) sepia(0%) saturate(6%) hue-rotate(187deg) brightness(94%) contrast(88%);
 }
 
-.fl-taxonDisplay-unexpanded .fl-taxonDisplay-expand {
+.taxonDisplay-unexpanded .taxonDisplay-expand {
     background-image: url("../img/Arrow-down.svg");
 }
 
-.fl-taxonDisplay-expanded .fl-taxonDisplay-expand {
+.taxonDisplay-expanded .taxonDisplay-expand {
     background-image: url("../img/Arrow-up.svg");
 }
 
-.fl-taxonDisplay-runon-remainder.fl-taxonDisplay-unexpanded {
+.taxonDisplay-runon-remainder.taxonDisplay-unexpanded {
     display: none
 }
 
-.fld-taxonDisplay-expandable-remainder {
+.taxonDisplay-expandable-remainder {
     padding-left: 20px;
 }
 
-.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder {
-    padding-left: 8px; /* Back to value in fl-taxonDisplay-row */
+.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder {
+    padding-left: 8px; /* Back to value in taxonDisplay-row */
     padding-right: 0; /* Avoid right gap */
 }
 
-.fl-taxonDisplay-runon-remainder > .fl-taxonDisplay-key {
+.taxonDisplay-runon-remainder > .taxonDisplay-key {
     padding: 0;
     margin: 0;
 }
 
-.fl-taxonDisplay-image-holder {
+.taxonDisplay-image-holder {
     position: relative;
     padding-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-.fl-taxonDisplay-iNat-extern {
+.taxonDisplay-iNat-extern {
     position: absolute;
     right: 1rem;
     bottom: 1rem;
@@ -918,204 +930,53 @@ a.ui-button:active,
     color: black;
 }
 
-.fl-external-link {
-    width: 1rem;
-    height: 0.9rem;
-    display: inline-block;
-    background-image: url("../img/external-link.svg");
-    background-repeat: no-repeat;
-    background-size: 0.9rem;
-    margin-left: 8px;
-}
 
 
-.fl-imerss-cultural-values {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.fl-imerss-cultural-value {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 1rem 1rem 1rem;
-}
-
-.fld-imerss-cultural-value-text {
-    font-size: 0.9rem;
-    font-weight: bold;
-    margin-top: 0.2rem;
-}
-
-.fl-imerss-cultural-value-img {
-    width: 108px;
-    height: 108px;
-    background-repeat: no-repeat;
-    background-size: 108px;
-}
-
-.fld-imerss-value-food {
-    background-image: url(../img/Xetthecum/food.svg);
-}
-
-.fld-imerss-value-medicinal {
-    background-image: url(../img/Xetthecum/medicinal.svg);
-}
-
-.fld-imerss-value-spiritual {
-    background-image: url(../img/Xetthecum/spiritual.svg);
-}
-
-.fld-imerss-value-material {
-    background-image: url(../img/Xetthecum/material.svg);
-}
-
-.fld-imerss-value-trade {
-    background-image: url(../img/Xetthecum/trade.svg);
-}
-
-.fld-imerss-value-indicator {
-    background-image: url(../img/Xetthecum/indicator.svg);
-}
-
-.fld-imerss-value-missing {
-    background-image: url(../img/Xetthecum/missing-value.svg);
-}
-
-.fld-imerss-datasets-label {
-    font-size: 1.3rem;
-    font-weight: bold;
-    padding-left: 2rem;
-}
-
-.fld-imerss-dataset-controls {
-    display: table;
-    padding: 2px;
-    font-size: 0.9rem;
-}
-
-.fl-imerss-dataset-taxa {
-    min-width: 2rem;
-}
-
-.fld-imerss-dataset-controls td {
-    padding-left: 5px;
-    padding-right: 5px;
-    height: 1.2rem;
-}
-
-.fld-imerss-dataset-legend {
-    display: inline-block;
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 1px solid black;
-    background-color: red;
-    vertical-align: middle;
-    margin: 2px;
-}
-
-.fld-imerss-dataset-checkbox {
-    vertical-align: middle;
-    margin: 4px;
-}
-
-.fld-imerss-dataset-footer {
-    text-align: center;
-}
-
-.fld-imerss-map-holder {
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    position: relative;
-    --imerss-stroke-width: 2;
-}
-
-.fld-imerss-dataset-name {
-    vertical-align: middle;
-}
-
-.fld-imerss-map-grid {
-    z-index: 750;
-}
-
-.fld-imerss-map-region {
-    stroke-width: var(--imerss-stroke-width);
-    stroke: black;
-    stroke-opacity: 1;
-    fill-opacity: 1;
-}
-
-.fld-imerss-map-tooltip {
-    z-index: 800;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 12rem;
-    font-size: small;
-    background-color: white;
-    border: 1px solid black;
-}
-
-.fl-imerss-highlightBlock {
-    stroke: deepskyblue;
-    stroke-width: 4px;
-}
-
-.fl-imerss-selected-region {
-    fill-opacity: 1;
-}
-
-.fl-imerss-unselected-region {
-    fill-opacity: 0.25;
-}
-
-.fld-imerss-map-tooltip tr:nth-child(even) {
+.imerss-map-tooltip tr:nth-child(even) {
     background: #eee;
 }
 
-.fld-imerss-map-tooltip tr:nth-child(odd) {
+.imerss-map-tooltip tr:nth-child(odd) {
     background: #fff;
 }
 
-.fld-imerss-map-tooltip table {
+.imerss-map-tooltip table {
     border-collapse: collapse;
 }
 
-.fl-imerss-photo {
+.imerss-photo {
     width: auto;
     min-width: 320px;
     height: 400px;
-    background-size: cover; 
-    background-position: center center; 
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
 }
 
-.fl-imerss-tooltip .fl-imerss-photo {
+.imerss-tooltip .imerss-photo {
     width: 165px;
     height: 125px;
     min-width: auto;
 }
 
-.fl-imerss-tooltip div.fl-text {
+.imerss-tooltip div.text {
     max-width: 165px;
     margin-top: 0.5rem;
 }
 
-.fld-imerss-autocomplete {
+.imerss-autocomplete {
     width: 30em;
     margin-left: 1rem;
     display: inline-block;
 }
 
-.flc-imerss-autocomplete-row {
+.imerss-autocomplete-row {
     text-align: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
 
-.flc-imerss-autocomplete-row label {
+.imerss-autocomplete-row label {
     font-size: 1.3rem;
     font-weight: bold;
 }
@@ -1128,18 +989,27 @@ a.ui-button:active,
     padding: 0;
 }
 
-.fld-imerss-tabs .ui-state-active.ui-tabs-tab {
+.imerss-tabs .ui-state-active.ui-tabs-tab {
     background: #fff;
 }
 
-.fld-imerss-tabs .ui-state-active.ui-tabs-tab a {
+.imerss-tabs .ui-state-active.ui-tabs-tab a {
     background: #fff;
     color: #444;
 }
 
-.fl-imerss-checklist-holder {
-    overflow-y: scroll;
-    padding: 1em 1.4em;
+/* TODO This has diverged between -core and -viz */
+.imerss-checklist-holder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em;
+    padding-right: 1em;
+}
+
+.imerss-panel-label {
+    font-size: 1.5rem;
+    padding-bottom: 5px;
 }
 
 #fli-tab-sunburst {
@@ -1147,37 +1017,44 @@ a.ui-button:active,
     user-select: none;
 }
 
-.fld-imerss-checklist p {
+.imerss-checklist {
+    height: 100%;
+    overflow-y: auto;
+    /** Otherwise top checkbox gets clipped */
+    padding-top: 2px;
+}
+
+.imerss-checklist p {
     display: inline;
     padding: 1px;
 }
 
-.fld-imerss-checklist p:hover {
+.imerss-checklist p:hover {
     background: #dde;
 }
 
-.fl-checklist-selected {
+.checklist-selected {
     outline: 2px solid black;
 }
 
-.fld-imerss-checklist ul {
+.imerss-checklist ul {
     margin-block-start: 0;
     list-style-type: none;
 }
 
-.fl-imerss-checklist-no-indent ul {
+.imerss-checklist-no-indent ul {
     padding-inline-start: 0;
 }
 
-.fl-imerss-checklist-no-indent .flc-checklist-rank-species {
+.imerss-checklist-no-indent .checklist-rank-species {
     padding-left: 40px;
 }
 
-.fld-imerss-checklist > ul {
+.imerss-checklist > ul {
     padding: 0;
 }
 
-.fld-imerss-checklist-up {
+.imerss-checklist-up {
     width: 1.5rem;
     height: 1.5rem;
     background-image: url(../img/up-arrow.svg);
@@ -1186,59 +1063,347 @@ a.ui-button:active,
     margin-bottom: 0.2rem;
 }
 
-.fld-imerss-checklist-up:hover {
+.imerss-checklist-up:hover {
     outline: 1px solid black;
     outline-offset: 1px;
 }
 
 /* The checklist rank highlighting */
 
-.flc-checklist-rank-life {
+.checklist-rank-life {
     text-transform: uppercase;
     font-size: 1.2em;
 }
 
-.flc-checklist-rank-kingdom {
+.checklist-rank-kingdom {
     text-transform: uppercase;
     font-size: 1.2em;
 }
 
-.flc-checklist-rank-phylum {
+.checklist-rank-phylum {
     text-transform: uppercase;
     font-size: 1.1em;
 }
 
-.flc-checklist-rank-class {
+.checklist-rank-class {
     text-transform: uppercase;
     font-style: italic;
     font-size: 1.0em;
 }
 
-.flc-checklist-rank-subclass {
+.checklist-rank-subclass {
     text-transform: uppercase;
     font-size: 1.0em;
 }
 
-.flc-checklist-rank-order {
+.checklist-rank-order {
     text-transform: uppercase;
     font-size: 1.0em;
 }
 
-.flc-checklist-rank-family {
+.checklist-rank-family {
     text-transform: uppercase;
     font-size: 1.0em;
 }
 
-.flc-checklist-rank-genus {
+.checklist-rank-genus {
     font-size: 1.0em;
     font-style: italic;
 }
 
-.flc-checklist-rank-species {
+.checklist-rank-species {
     font-size: 1.0em;
     font-style: italic;
 }
 
-.flc-checklist-annote {
+.checklist-annote {
     font-style: normal
+}
+:root {
+  --imerss-map-width: 800px;
+  --imerss-sun-height: 815px;
+}
+
+.imerss-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.imerss-map-and-taxa {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.75rem;
+}
+
+.imerss-tabs-and-search {
+    display: flex;
+    flex-direction: column;
+}
+
+.imerss-taxa {
+    display: flex;
+    flex-direction: row;
+}
+
+.imerss-segment {
+    stroke: #444;
+    stroke-width: 1px;
+}
+
+.imerss-segment.imerss-layoutRoot {
+    stroke-width: 3.5px;
+}
+
+.imerss-labelPath {
+    fill: none;
+    stroke: none;
+}
+
+.imerss-svg {
+    font-size: 40px;
+    max-height: calc(var(--imerss-sun-height) + 2rem);
+    margin-top: -1rem;
+}
+
+.imerss-map {
+    height: 500px;
+    width: var(--imerss-map-width);
+}
+
+.imerss-viz-dimens {
+    height: var(--imerss-sun-height);
+    /** Overrides width: 480px which is now in core, probably shou */
+    width: auto;
+}
+
+.imerss-panel {
+    position: relative;
+}
+
+.imerss-clickable {
+    cursor: pointer;
+}
+
+.imerss-back {
+    border: 2px solid black;
+    display: inline;
+    padding: 5px 15px 5px 15px;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.6rem;
+    user-select: none;
+}
+
+.imerss-back:hover:not([aria-disabled="true"]) {
+    background: #ccc;
+}
+
+.imerss-back:not([aria-disabled="true"]) {
+    cursor: pointer;
+}
+
+.imerss-back[aria-disabled="true"] {
+    opacity: 0.2;
+    cursor: default;
+}
+
+.external-link {
+    width: 1rem;
+    height: 0.9rem;
+    display: inline-block;
+    background-image: url("../img/external-link.svg");
+    background-repeat: no-repeat;
+    background-size: 0.9rem;
+    margin-left: 8px;
+}
+
+.imerss-cultural-values {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.imerss-cultural-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.imerss-cultural-value-text {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 0.2rem;
+}
+
+.imerss-cultural-value-img {
+    width: 108px;
+    height: 108px;
+    background-repeat: no-repeat;
+    background-size: 108px;
+}
+
+.imerss-value-food {
+    background-image: url(../img/Xetthecum/food.svg);
+}
+
+.imerss-value-medicinal {
+    background-image: url(../img/Xetthecum/medicinal.svg);
+}
+
+.imerss-value-spiritual {
+    background-image: url(../img/Xetthecum/spiritual.svg);
+}
+
+.imerss-value-material {
+    background-image: url(../img/Xetthecum/material.svg);
+}
+
+.imerss-value-trade {
+    background-image: url(../img/Xetthecum/trade.svg);
+}
+
+.imerss-value-indicator {
+    background-image: url(../img/Xetthecum/indicator.svg);
+}
+
+.imerss-value-missing {
+    background-image: url(../img/Xetthecum/missing-value.svg);
+}
+
+.imerss-datasets-label {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding-left: 2rem;
+}
+
+.imerss-dataset-controls {
+    display: table;
+    padding: 2px;
+    font-size: 0.9rem;
+}
+
+.imerss-dataset-taxa {
+    min-width: 2rem;
+}
+
+.imerss-dataset-controls td {
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 1.2rem;
+}
+
+.imerss-dataset-legend {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid black;
+    background-color: red;
+    vertical-align: middle;
+    margin: 2px;
+}
+
+.imerss-dataset-checkbox {
+    vertical-align: middle;
+    margin: 4px;
+}
+
+.imerss-dataset-footer {
+    text-align: center;
+}
+
+.imerss-map-holder {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    --imerss-stroke-width: 2;
+}
+
+.imerss-highlightBlock {
+    stroke: deepskyblue;
+    stroke-width: 4px;
+}
+
+.imerss-dataset-name {
+    vertical-align: middle;
+}
+
+.imerss-map-grid {
+    z-index: 750;
+}
+
+.imerss-map-region {
+    stroke-width: var(--imerss-stroke-width);
+    stroke: black;
+    stroke-opacity: 1;
+    fill-opacity: 1;
+}
+
+.imerss-map-tooltip {
+    z-index: 800;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 12rem;
+    font-size: small;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.imerss-highlightBlock {
+    stroke: deepskyblue;
+    stroke-width: 4px;
+}
+
+.imerss-selected-region {
+    fill-opacity: 1;
+}
+
+.imerss-unselected-region {
+    fill-opacity: 0.25;
+}
+
+/* TODO This has diverged between -core and -viz */
+.imerss-checklist-holder {
+    overflow-y: scroll;
+    padding: 1em 1.4em;
+}
+
+/** Core has overflow-y: auto, we do scrolling at holder level together with viz-dimens */
+.imerss-checklist {
+    overflow-y: revert;
+}
+
+.imerss-photo {
+    width: 100%;
+}
+
+.imerss-left-column {
+    width: 1024px;
+}
+
+/* This one from pepiowelh.css, unsets hard width in old core */
+/* Where do we want this? Doesn't seem desirable in any "old" viz and not used in "new" */
+/*
+.imerss-left-column {
+    flex: 1 1 0;
+    width: 30%
+}
+*/
+.imerss-right-column {
+    /* Roughly agree with taxon display - 480px plus scroll bar and change */
+    width: calc(480px + 3rem);
+}
+
+.imerss-taxonDisplay {
+    width: 100%;
+}
+
+/** Deal with weird markup from old taxon display which has extra div */
+
+.imerss-taxonDisplay > div {
+    width: 100%;
 }

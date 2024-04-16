@@ -20,8 +20,8 @@ L.Map.include({
 fluid.defaults("hortis.leafletMap", {
     gradeNames: ["fluid.viewComponent", "{sunburstLoader}.options.mapFlavourGrade"], // Not a distribution because of FLUID-5836
     selectors: {
-        map: ".fld-imerss-map",
-        tooltip: ".fld-imerss-map-tooltip"
+        map: ".imerss-map",
+        tooltip: ".imerss-map-tooltip"
     },
     mergePolicy: {
         "members.map": "replace"
@@ -48,10 +48,10 @@ fluid.defaults("hortis.leafletMap", {
         clearMapSelection: null
     },
     markup: {
-        tooltip: "<div class=\"fld-imerss-map-tooltip\"></div>",
-        grid: "<div class=\"fld-imerss-map-grid\"></div>",
+        tooltip: "<div class=\"imerss-map-tooltip\"></div>",
+        grid: "<div class=\"imerss-map-grid\"></div>",
         tooltipHeader: "<table>",
-        tooltipRow: "<tr><td class=\"fl-taxonDisplay-key\">%key: </td><td class=\"fl-taxonDisplay-value\">%value</td>",
+        tooltipRow: "<tr><td class=\"taxonDisplay-key\">%key: </td><td class=\"taxonDisplay-value\">%value</td>",
         tooltipFooter: "</table>"
     },
     // fitBounds: [[48.855,-123.65],[49.005,-123.25]],
@@ -90,7 +90,7 @@ fluid.defaults("hortis.leafletMap", {
 // Special grade to render the WhiteswanEnvironmental logo hovering over the map
 fluid.defaults("hortis.leafletMapWithWE", {
     selectors: {
-        WEOverlay: ".fld-imerss-we-overlay"
+        WEOverlay: ".imerss-we-overlay"
     },
     listeners: {
         "buildMap.bindWEClick": "hortis.leafletMap.bindWEClick({that})"
@@ -192,7 +192,7 @@ hortis.leafletMap.createTooltip = function (that, markup) {
         }
     });
     $(document).on("click", function (event) {
-        const closest = event.target.closest(".fld-imerss-nodismiss-map");
+        const closest = event.target.closest(".imerss-nodismiss-map");
         // Mysteriously SVG paths are not in the document
         if (!closest && event.target.closest("body")) {
             that.events.clearMapSelection.fire();
@@ -213,7 +213,7 @@ hortis.projectBounds = {
 fluid.defaults("hortis.sunburstLoaderWithMap", {
     gradeNames: "hortis.sunburstLoader",
     selectors: {
-        mapHolder: ".fld-imerss-map-holder"
+        mapHolder: ".imerss-map-holder"
     },
     events: {
         sunburstLoaded: null

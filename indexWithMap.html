@@ -49,6 +49,7 @@
         <script src="src/lib/lz4.js"></script>
         <script src="src/lib/jquery.binarytransport.js"></script>
 
+        <link rel="stylesheet" type="text/css" href="src/client/css/imerss-core.css"/>
         <link rel="stylesheet" type="text/css" href="src/client/css/imerss-viz.css"/>
 
         <script src="src/client/js/colour.js"></script>
@@ -66,10 +67,10 @@
 
     <body>
         <h2>Galiano Data Paper Preliminary Marine List</h2>
-        <div class="fl-imerss-container">
+        <div class="imerss-container">
         </div>
         <script>
-            hortis.sunburstLoaderWithMap(".fl-imerss-container", {
+            hortis.sunburstLoaderWithMap(".imerss-container", {
                 colourCount: "observationCount",
                 renderMarkup: true,
                 geoJSONMapLayers: [json_Galiano_map_0],

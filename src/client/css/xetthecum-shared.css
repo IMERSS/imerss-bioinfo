@@ -8,7 +8,7 @@ body {
     margin: 0;
 }
 
-.fl-xetthecum-banner {
+.xetthecum-banner {
     background: #EDEFE9;
     margin: 0;
     padding-top: 1.5rem;
@@ -20,28 +20,28 @@ body {
     background-size: cover;
 }
 
-.fl-imerss-container {
+.imerss-container {
     margin: 1.5rem 0.5rem 0.5rem 0.5rem;
 }
 
-.fld-imerss-map-holder {
+.imerss-map-holder {
     background: var(--imerss-map-colour);
 }
 
-.fl-imerss-map-panel {
+.imerss-map-panel {
     padding: 1rem 0rem 2rem 2rem;
 }
 
-.fl-imerss-map-panel .fld-imerss-panel-label {
+.imerss-map-panel .imerss-panel-label {
     position: unset;
     padding-bottom: 1.5rem;
 }
 
-.fld-imerss-map {
+.imerss-map {
     height: 450px;
 }
 
-.fld-imerss-taxonDisplay {
+.imerss-taxonDisplay {
     margin-top: 0;
     width: auto;
 }
@@ -63,18 +63,18 @@ body {
     background: var(--imerss-eco-colour);
 }
 
-.fld-imerss-taxonDisplay-wrapper {
+.imerss-taxonDisplay-wrapper {
     background: var(--imerss-eco-colour);
 }
 
-.fld-imerss-tabs .ui-state-active.ui-tabs-active a {
+.imerss-tabs .ui-state-active.ui-tabs-active a {
     background: var(--imerss-eco-colour);
 }
 
-.fld-imerss-tabs .ui-state-active.ui-tabs-tab {
+.imerss-tabs .ui-state-active.ui-tabs-tab {
     background: var(--imerss-eco-colour);
 }
 
-.fld-imerss-map-outer-panel-wrapper {
+.imerss-map-outer-panel-wrapper {
     background: var(--imerss-map-colour);
 }

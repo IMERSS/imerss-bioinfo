@@ -123,6 +123,7 @@ fluid.defaults("hortis.vizLoader", {
         }
     },
     members: {
+        resourcesLoaded: "@expand:signal()",
         taxaRows: "@expand:signal([])",
         obsRows: "@expand:signal([])",
         // Proposed syntax: @compute:hortis.filterObs(*{that}.obs, {that}.obsFilter, *{that}.obsFilterVersion)
@@ -148,13 +149,14 @@ hortis.vizLoader.bindResources = async function (that) {
     batch( () => {
         that.taxaRows.value = taxa;
         that.obsRows.value = obs;
+        that.resourcesLoaded.value = true;
     });
 };
 
 hortis.taxonTooltipTemplate =
-`<div class="fl-imerss-tooltip">
-    <div class="fl-imerss-photo" style="background-image: url(%imgUrl)"></div>
-    <div class="fl-text"><b>%taxonRank:</b> %taxonNames</div>
+`<div class="imerss-tooltip">
+    <div class="imerss-photo" style="background-image: url(%imgUrl)"></div>
+    <div class="text"><b>%taxonRank:</b> %taxonNames</div>
 </div>`;
 
 hortis.capitalize = function (string) {
@@ -303,8 +305,8 @@ fluid.derefSignal = function (signal, path) {
 
 fluid.defaults("hortis.beaVizLoader", {
     selectors: {
-        interactions: ".fld-imerss-interactions-holder",
-        recordReporter: ".fld-record-reporter"
+        interactions: ".imerss-interactions-holder",
+        recordReporter: ".record-reporter"
     },
     components: {
         recordReporter: {
@@ -319,7 +321,7 @@ fluid.defaults("hortis.beaVizLoader", {
         },
         pollChecklist: {
             type: "hortis.checklist.withHolder",
-            container: ".fl-imerss-pollinators",
+            container: ".imerss-pollinators",
             options: {
                 gradeNames: "hortis.checklist.inLoader",
                 rootId: 1,
@@ -334,7 +336,7 @@ fluid.defaults("hortis.beaVizLoader", {
         },
         plantChecklist: {
             type: "hortis.checklist.withHolder",
-            container: ".fl-imerss-plants",
+            container: ".imerss-plants",
             options: {
                 gradeNames: "hortis.checklist.inLoader",
                 rootId: 47126,
@@ -438,8 +440,7 @@ hortis.bindTaxonHover = function (that, layoutHolder) {
     });
     that.container.on("click", hoverable, function () {
         const id = this.dataset.rowId;
-        // Currently disused
-        layoutHolder.events.changeLayoutId.fire(id);
+        layoutHolder.events.taxonSelect.fire(id);
     });
 };
 
@@ -527,7 +528,7 @@ fluid.defaults("hortis.layoutHolder", {
     gradeNames: "fluid.modelComponent",
     tooltipKey: "hoverId",
     events: {
-        changeLayoutId: null
+        taxonSelect: null
     },
     members: {
         // isAtRoot computed
@@ -561,7 +562,7 @@ fluid.defaults("hortis.layoutHolder", {
 fluid.defaults("hortis.vizLoaderWithMap", {
     gradeNames: ["fluid.viewComponent", "hortis.vizLoader"],
     selectors: {
-        map: ".fld-imerss-map"
+        map: ".imerss-map"
     },
     components: {
         map: {
@@ -913,13 +914,13 @@ fluid.defaults("hortis.drawInteractions", {
     gradeNames: "fluid.viewComponent",
     tooltipKey: "hoverCellKey",
     selectors: {
-        plantNames: ".fld-imerss-plant-names",
-        plantCounts: ".fld-imerss-plant-counts",
-        pollNames: ".fld-imerss-poll-names",
-        pollCounts: ".fld-imerss-poll-counts",
-        interactions: ".fld-imerss-interactions",
-        scroll: ".fld-imerss-int-scroll",
-        hoverable: ".fl-imerss-int-label"
+        plantNames: ".imerss-plant-names",
+        plantCounts: ".imerss-plant-counts",
+        pollNames: ".imerss-poll-names",
+        pollCounts: ".imerss-poll-counts",
+        interactions: ".imerss-interactions",
+        scroll: ".imerss-int-scroll",
+        hoverable: ".imerss-int-label"
     },
     squareSize: 16,
     squareMargin: 2,
@@ -968,7 +969,7 @@ fluid.defaults("hortis.histoTooltips", {
     gradeNames: "fluid.viewComponent",
     tooltipKey: "hoverId", // TODO: is this used?
     selectors: {
-        hoverable: ".fl-imerss-int-count"
+        hoverable: ".imerss-int-count"
     },
     members: {
         hoverId: "@expand:signal(null)",
@@ -999,7 +1000,7 @@ hortis.renderHistoTooltip = function (that, id, interactions) {
     const count = counts.counts[id];
     const row = interactions.taxa.rowById.value[id];
     const name = row.iNaturalistTaxonName;
-    return `<div class="fl-imerss-int-tooltip"><div><i>${name}</i>:</div><div>Observation count: ${count}</div></div>`;
+    return `<div class="imerss-int-tooltip"><div><i>${name}</i>:</div><div>Observation count: ${count}</div></div>`;
 };
 
 hortis.makePerm = function (table) {
@@ -1145,7 +1146,7 @@ hortis.drawInteractions.render = function (that, model) {
         const plantId = rec.id;
         const row = rowById[plantId];
         const top = yPos(plantIndex);
-        return `<div class="fl-imerss-int-label" data-row-id="${plantId}" style="top: ${top + yoffset}px">${row.iNaturalistTaxonName}</div>`;
+        return `<div class="imerss-int-label" data-row-id="${plantId}" style="top: ${top + yoffset}px">${row.iNaturalistTaxonName}</div>`;
     });
     plantNames.innerHTML = plantMark.join("\n");
 
@@ -1157,7 +1158,7 @@ hortis.drawInteractions.render = function (that, model) {
         const prop = fluid.roundToDecimal(countScale * count / plantCounts.max, 2);
         const top = yPos(plantIndex);
         // noinspection CssInvalidPropertyValue
-        return `<div class="fl-imerss-int-count" data-row-id="${plantId}" style="top: ${top + yoffset}px; width: ${prop}%; height: ${side}px;"></div>`;
+        return `<div class="imerss-int-count" data-row-id="${plantId}" style="top: ${top + yoffset}px; width: ${prop}%; height: ${side}px;"></div>`;
     });
     plantCountNode.innerHTML = plantCountMark.join("\n");
 
@@ -1167,7 +1168,7 @@ hortis.drawInteractions.render = function (that, model) {
         const pollId = rec.id;
         const row = rowById[pollId];
         const left = xPos(pollIndex);
-        return `<div class="fl-imerss-int-label" data-row-id="${pollId}" style="left: ${left + xoffset}px">${row.iNaturalistTaxonName}</div>`;
+        return `<div class="imerss-int-label" data-row-id="${pollId}" style="left: ${left + xoffset}px">${row.iNaturalistTaxonName}</div>`;
     });
     pollNames.innerHTML = pollMark.join("\n");
 
@@ -1179,7 +1180,7 @@ hortis.drawInteractions.render = function (that, model) {
         const prop = fluid.roundToDecimal(countScale * count / pollCounts.max, 2);
         const left = xPos(pollIndex);
         // noinspection CssInvalidPropertyValue
-        return `<div class="fl-imerss-int-count" data-row-id="${pollId}" style="left: ${left + xoffset}px; height: ${prop}%; width: ${side}px;"></div>`;
+        return `<div class="imerss-int-count" data-row-id="${pollId}" style="left: ${left + xoffset}px; height: ${prop}%; width: ${side}px;"></div>`;
     });
     pollCountNode.innerHTML = pollCountMark.join("\n");
 
@@ -1187,9 +1188,9 @@ hortis.drawInteractions.render = function (that, model) {
     console.log("Rendered in " + delay2 + " ms");
 };
 
-hortis.interactionTooltipTemplate = `<div class="fl-imerss-tooltip">
-    <div class="fl-imerss-photo" style="background-image: url(%imgUrl)"></div>" +
-    <div class="fl-text"><b>%taxonRank:</b> %taxonNames</div>" +
+hortis.interactionTooltipTemplate = `<div class="imerss-tooltip">
+    <div class="imerss-photo" style="background-image: url(%imgUrl)"></div>" +
+    <div class="text"><b>%taxonRank:</b> %taxonNames</div>" +
     </div>`;
 
 hortis.renderInteractionTooltip = function (that, cellKey) {
@@ -1199,7 +1200,7 @@ hortis.renderInteractionTooltip = function (that, cellKey) {
     const pollRow = that.taxa.rowById.value[pollId];
     const pollName = pollRow.iNaturalistTaxonName;
     const count = that.interactions.crossTable.value[cellKey];
-    return `<div class="fl-imerss-int-tooltip"><div><i>${pollName}</i> on </div><div><i>${plantName}</i>:</div><div>Count: ${count}</div></div>`;
+    return `<div class="imerss-int-tooltip"><div><i>${pollName}</i> on </div><div><i>${plantName}</i>:</div><div>Count: ${count}</div></div>`;
 };
 
 hortis.drawInteractions.bindEvents = function (that) {

@@ -49,6 +49,7 @@
     <script src="src/lib/lz4.js"></script>
     <script src="src/lib/jquery.binarytransport.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="src/client/css/imerss-core.css"/>
     <link rel="stylesheet" type="text/css" href="src/client/css/imerss-viz.css"/>
     <link rel="stylesheet" type="text/css" href="src/client/css/pepiowelh.css"/>
 
@@ -66,7 +67,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 margin: 1rem;
             }
-            .fl-banner {
+            .banner {
                 justify-content: center;
             }
         </style>
@@ -75,7 +76,7 @@
     </head>
 
     <body>
-        <h2 class="fl-banner">
+        <h2 class="banner">
             <img height="200" src="src/client/img/Pepiowelh/Ecocultural Mapping Banner.svg"/>
             <span>Pe'pi'ow'elh (English Camp) Biodiversity</span>
         </h2>
@@ -96,10 +97,10 @@
         <p>The data underlying this vizualisation was last updated on 24th February 2023.
         </p>
 
-        <div class="fl-imerss-container">
+        <div class="imerss-container">
         </div>
         <script>
-            hortis.sunburstLoaderWithMap(".fl-imerss-container", {
+            hortis.sunburstLoaderWithMap(".imerss-container", {
                 mapGrades: ["hortis.MtbTiles", "hortis.leafletMapWithWE"],
                 markupTemplate: "%resourceBase/html/imerss-viz-map-pepi.html",
                 mapBounds: hortis.projectBounds.SalishSea,

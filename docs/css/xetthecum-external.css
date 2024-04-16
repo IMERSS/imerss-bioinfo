@@ -6,42 +6,42 @@
   --imerss-map-width: 500px;
 }
 
-.fld-imerss-map {
+.imerss-map {
     height: 350px;
 }
 
-.fld-imerss-panel-label {
+.imerss-panel-label {
     display: none;
 }
 
-.fl-imerss-map-info-panel {
+.imerss-map-info-panel {
     display: none;
 }
 
-.fl-imerss-left-column {
+.imerss-left-column {
     width: 900px;
 }
 
-.flc-imerss-svg {
+.imerss-svg {
     margin-left: -80px;
 }
 
-.fld-imerss-taxonDisplay {
+.imerss-taxonDisplay {
     min-height: 800px;
     height: auto;
 }
 
-.fld-imerss-taxonDisplay-wrapper {
+.imerss-taxonDisplay-wrapper {
     position: sticky;
     top: 0;
 }
 
-.fl-imerss-map-panel {
+.imerss-map-panel {
     display: flex;
     align-items: center;
 }
 
-tr:first-child .fl-imerss-obs-count-column,
-tr:first-child .fl-imerss-taxa-count-column {
+tr:first-child .imerss-obs-count-column,
+tr:first-child .imerss-taxa-count-column {
     font-size: smaller;
 }

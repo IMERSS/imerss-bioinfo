@@ -122,7 +122,7 @@ To convert a CSV file, run `marmalise.js` e.g. via a line such as
     node src/marmalise.js data/dataPaper-I/reintegrated.csv --map data/dataPaper-I/combinedOutMap.json
 
 By default this will produce a `Life.json.lz4` file which can be copied into a suitable location, e.g. in the </data>
-directories and then referred to in the JavaScript initialisation block seen, e.g. in the various [index.html](index.html)
+directories and then referred to in the JavaScript initialisation block seen, e.g. in the various [index.html](indexWoL.html)
 files in this root. You can supply a `-o` option to output a file of a chosen name at a chosen path.
 
 To preview the web UI, host this project via some suitable static web server and then access its `index.html`.
@@ -143,7 +143,7 @@ and injecting an initialisation block into the markup such as
 
 ````html
 <script>
-    hortis.sunburstLoader(".fl-imerss-container", {
+    hortis.sunburstLoader(".imerss-container", {
         colourCount: "undocumentedCount",
         selectOnStartup: "Life",
         vizFile: "data/Galiano/Galiano-Life.json.lz4",

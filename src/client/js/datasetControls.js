@@ -88,10 +88,10 @@ fluid.defaults("hortis.datasetControlBase", {
 fluid.defaults("hortis.datasetControlHeader", {
     gradeNames: "hortis.datasetControlBase",
     markup: {
-        container: "<tr class=\"fld-imerss-dataset-control\">" +
-                 "<td fl-imerss-dataset-legend-column></td>" +
-                 "<td fl-imerss-dataset-checkbox-column></td>" +
-                 "<td fl-imerss-dataset-name-column></td>" +
+        container: "<tr class=\"imerss-dataset-control\">" +
+                 "<td imerss-dataset-legend-column></td>" +
+                 "<td imerss-dataset-checkbox-column></td>" +
+                 "<td imerss-dataset-name-column></td>" +
                  "%extraColumns</tr>",
         cell: "<td class=\"%columnClass\">%text</td>"
     },
@@ -103,9 +103,9 @@ fluid.defaults("hortis.datasetControlHeader", {
 fluid.defaults("hortis.datasetControl", {
     gradeNames: "hortis.datasetControlBase",
     selectors: {
-        legend: ".fld-imerss-dataset-legend",
-        enable: ".fld-imerss-dataset-checkbox",
-        name: ".fld-imerss-dataset-name"
+        legend: ".imerss-dataset-legend",
+        enable: ".imerss-dataset-checkbox",
+        name: ".imerss-dataset-name"
     },
     datasetId: "{source}.datasetId", // Stupid, creates circularity if we try to resolve model segment from model on line 274
     model: {
@@ -137,10 +137,10 @@ fluid.defaults("hortis.datasetControl", {
         renderMarkup: "hortis.datasetControl.renderMarkup({that}.options.markup, false, {that}.model.dataset, {quantiser}.datasets, {that}.options.datasetId)"
     },
     markup: {
-        container: "<tr class=\"fld-imerss-dataset-control\">" +
-                 "<td fl-imerss-dataset-legend-column><span class=\"fld-imerss-dataset-legend\"></span></td>" +
-                 "<td fl-imerss-dataset-checkbox-column><input class=\"fld-imerss-dataset-checkbox\" type=\"checkbox\" value=\"true\"/></td>" +
-                 "<td fl-imerss-dataset-name-column><span class=\"fld-imerss-dataset-name\"></span></td>" +
+        container: "<tr class=\"imerss-dataset-control\">" +
+                 "<td imerss-dataset-legend-column><span class=\"imerss-dataset-legend\"></span></td>" +
+                 "<td imerss-dataset-checkbox-column><input class=\"imerss-dataset-checkbox\" type=\"checkbox\" value=\"true\"/></td>" +
+                 "<td imerss-dataset-name-column><span class=\"imerss-dataset-name\"></span></td>" +
                  "%extraColumns</tr>",
         cell: "<td class=\"%columnClass\">%text</td>"
     }
@@ -149,13 +149,13 @@ fluid.defaults("hortis.datasetControl", {
 fluid.defaults("hortis.datasetControlFooter", {
     gradeNames: "hortis.datasetControlBase",
     selectors: {
-        text: ".fl-imerss-dataset-text",
-        obsCount: ".fl-imerss-dataset-obs",
-        taxaCount: ".fl-imerss-dataset-taxa",
-        area: ".fl-imerss-dataset-area"
+        text: ".imerss-dataset-text",
+        obsCount: ".imerss-dataset-obs",
+        taxaCount: ".imerss-dataset-taxa",
+        area: ".imerss-dataset-area"
     },
     markup: {
-        container: "<tr><td></td><td></td><td class=\"fl-imerss-dataset-text\"></td><td class=\"fl-imerss-dataset-obs\"></td><td class=\"fl-imerss-dataset-taxa\"></td></tr>"
+        container: "<tr><td></td><td></td><td class=\"imerss-dataset-text\"></td><td class=\"imerss-dataset-obs\"></td><td class=\"imerss-dataset-taxa\"></td></tr>"
     },
     modelRelay: {
         text: {
@@ -181,15 +181,15 @@ fluid.defaults("hortis.datasetControlFooter", {
 hortis.datasetControl.columnNames = {
     totalCount: {
         name: "Observations",
-        clazz: "fl-imerss-obs-count-column"
+        clazz: "imerss-obs-count-column"
     },
     taxaCount: {
         name: "Taxa",
-        clazz: "fl-imerss-taxa-count-column"
+        clazz: "imerss-taxa-count-column"
     }/*,
     area: {
         name: "Area (km²)",
-        clazz: "fl-imerss-area-column"
+        clazz: "imerss-area-column"
     }*/
 };
 

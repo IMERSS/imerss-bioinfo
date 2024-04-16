@@ -1,12 +1,3 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-flow: column;
-    margin: 8px;
-    height: calc(100vh - 16px); /* To allow for 8px borders */
-    overflow: hidden
-}
-
 :root {
     --imerss-scrollbar-width: 12px;
 }
@@ -27,72 +18,73 @@ body ::-webkit-scrollbar-thumb {
     background-color: #A8A8A8;
 }
 
-.fl-imerss-container {
+/* Styling for checkboxes with indeterminate value */
+/* Grabbed definition for default "checked" to apply to indeterminate checkboxes */
+.pretty input:indeterminate~.state label:after {
+    background-color: #bdc3c7!important;
+    transform: scale(.6);
+}
+
+.pretty .state label:after, .pretty .state label:before {
+    width: calc(1em + 0px);
+    height: calc(1em + 0px);
+}
+
+.pretty.p-icon .state .icon {
+    width: calc(1em + 0px);
+    height: calc(1em + 0px);
+}
+
+.pretty {
+    margin-right: 0.3em;
+}
+
+
+.imerss-container {
     display: flex;
     flex-direction: column;
     height: 100%;
     min-height: 0; /* Essential otherwise it overflows */
 }
 
-.fl-imerss-map-and-taxa {
+.imerss-map-and-taxa {
     display: flex;
     height: 40%;
     flex-direction: column;
 }
 
-.fld-imerss-map-holder {
-    height: 100%;
-    width: 50%;
-}
-
-.fl-imerss-tabs-and-search {
+.imerss-tabs-and-search {
     display: flex;
     flex-direction: column;
 }
 
-.fl-imerss-taxa {
+.imerss-taxa {
     display: flex;
     flex-direction: row;
 }
 
-.fld-imerss-segment {
+.imerss-segment {
     stroke: #444;
     stroke-width: 1px;
 }
 
-.fld-imerss-segment.fl-imerss-layoutRoot {
+.imerss-segment.imerss-layoutRoot {
     stroke-width: 3.5px;
 }
 
-.fld-imerss-labelPath {
+.imerss-labelPath {
     fill: none;
     stroke: none;
 }
 
-.flc-imerss-svg {
+.imerss-svg {
     font-size: 40px;
 /*    max-height: calc(var(--imerss-sun-height) + 2rem);*/
     margin-top: -1rem;
 }
 
-/* TODO these can be axed - especially since we flipped left/right in Xetthecum phase III */
-.fl-imerss-left-column {
-    /* This one from pepiowelh.css, unsets hard width in old core */
-    flex: 1 1 0;
-    width: 30%
-}
-/*    width: 1024px; */
-
-/* Note that right column contains dataset displays which don't usually appear */
-.fl-imerss-right-column {
-    /* Roughly agree with taxon display - 480px plus scroll bar and change */
-    /*    width: calc(480px + 3rem);*/
-}
-
-
-
 /* This one from pepiowelh again */
-.fld-imerss-map {
+.imerss-map {
     height: 100%;
     width: 100%;
     min-width: 480px;
@@ -100,34 +92,163 @@ body ::-webkit-scrollbar-thumb {
 }
 
 
-
-.fl-imerss-panel {
+.imerss-panel {
     position: relative;
 }
 
-.fl-imerss-clickable {
+.imerss-clickable {
     cursor: pointer;
 }
 
 
-.fl-imerss-highlightBlock {
-    stroke: deepskyblue;
-    stroke-width: 4px;
+.imerss-taxonDisplay {
+    /* height: calc(800px + 6rem); */ /* Viz dimens plus tab height */
+    /* width: 480px; */
+    border: black solid 2px;
+    display: flex;
+    overflow-y: scroll;
+    min-width: 320px;
 }
 
-.fld-imerss-map-tooltip tr:nth-child(even) {
+/* TODO: Move taxonDisplay to core, stop binding Xetthecum to viz-all */
+/*
+.imerss-taxonDisplay > div {
+    width: 100%
+}
+*/
+
+.taxonDisplay-row {
+    padding: 10px 8px 6px 8px;
+    border-bottom: #ccc 2px solid;
+    width: auto;
+    min-width: 320px;
+}
+
+/* unindent nested rows a bit */
+.taxonDisplay-row .taxonDisplay-row {
+    margin-left: -0.5rem;
+}
+
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder :last-child {
+    margin-bottom: -0.2rem;
+}
+
+/* No idea why we do this, but we need to undo it for imerss-media-name */
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder :first-child {
+    margin-top: -0.5rem;
+}
+
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder .imerss-media-name {
+    padding-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.taxonDisplay-row .imerss-media-image {
+    padding-bottom: 5px;
+}
+
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder.taxonDisplay-row {
+    border-bottom: none;
+}
+
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder .taxonDisplay-row .taxonDisplay-key {
+    margin-left: 1rem;
+}
+
+.taxonDisplay-runon-header.taxonDisplay-expanded {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.taxonDisplay-empty-header {
+    border-bottom: none;
+}
+
+.taxonDisplay-empty-row .taxonDisplay-key {
+    display: none;
+}
+
+.taxonDisplay-key {
+    width: 12em;
+    margin-right: 4px;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.taxonDisplay-value {
+    width: 100%;
+}
+
+.taxonDisplay-expand {
+    width: 2rem;
+    background-size: 2rem;
+    height: 1rem;
+    background-image: url("../img/Arrow-down.svg");
+    cursor: pointer;
+    float: right;
+    /* From https://codepen.io/sosuke/pen/Pjoqqp */
+    filter: invert(57%) sepia(0%) saturate(6%) hue-rotate(187deg) brightness(94%) contrast(88%);
+}
+
+.taxonDisplay-unexpanded .taxonDisplay-expand {
+    background-image: url("../img/Arrow-down.svg");
+}
+
+.taxonDisplay-expanded .taxonDisplay-expand {
+    background-image: url("../img/Arrow-up.svg");
+}
+
+.taxonDisplay-runon-remainder.taxonDisplay-unexpanded {
+    display: none
+}
+
+.taxonDisplay-expandable-remainder {
+    padding-left: 20px;
+}
+
+.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder {
+    padding-left: 8px; /* Back to value in taxonDisplay-row */
+    padding-right: 0; /* Avoid right gap */
+}
+
+.taxonDisplay-runon-remainder > .taxonDisplay-key {
+    padding: 0;
+    margin: 0;
+}
+
+.taxonDisplay-image-holder {
+    position: relative;
+    padding-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.taxonDisplay-iNat-extern {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    background: #ddd;
+    padding: 4px;
+    padding-left: 6px;
+    color: black;
+}
+
+
+
+.imerss-map-tooltip tr:nth-child(even) {
     background: #eee;
 }
 
-.fld-imerss-map-tooltip tr:nth-child(odd) {
+.imerss-map-tooltip tr:nth-child(odd) {
     background: #fff;
 }
 
-.fld-imerss-map-tooltip table {
+.imerss-map-tooltip table {
     border-collapse: collapse;
 }
 
-.fl-imerss-photo {
+.imerss-photo {
     width: auto;
     min-width: 320px;
     height: 400px;
@@ -136,30 +257,30 @@ body ::-webkit-scrollbar-thumb {
     background-repeat: no-repeat;
 }
 
-.fl-imerss-tooltip .fl-imerss-photo {
+.imerss-tooltip .imerss-photo {
     width: 165px;
     height: 125px;
     min-width: auto;
 }
 
-.fl-imerss-tooltip div.fl-text {
+.imerss-tooltip div.text {
     max-width: 165px;
     margin-top: 0.5rem;
 }
 
-.fld-imerss-autocomplete {
+.imerss-autocomplete {
     width: 30em;
     margin-left: 1rem;
     display: inline-block;
 }
 
-.flc-imerss-autocomplete-row {
+.imerss-autocomplete-row {
     text-align: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
 
-.flc-imerss-autocomplete-row label {
+.imerss-autocomplete-row label {
     font-size: 1.3rem;
     font-weight: bold;
 }
@@ -172,16 +293,17 @@ body ::-webkit-scrollbar-thumb {
     padding: 0;
 }
 
-.fld-imerss-tabs .ui-state-active.ui-tabs-tab {
+.imerss-tabs .ui-state-active.ui-tabs-tab {
     background: #fff;
 }
 
-.fld-imerss-tabs .ui-state-active.ui-tabs-tab a {
+.imerss-tabs .ui-state-active.ui-tabs-tab a {
     background: #fff;
     color: #444;
 }
 
-.fl-imerss-checklist-holder {
+/* TODO This has diverged between -core and -viz */
+.imerss-checklist-holder {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -189,7 +311,7 @@ body ::-webkit-scrollbar-thumb {
     padding-right: 1em;
 }
 
-.fld-imerss-panel-label {
+.imerss-panel-label {
     font-size: 1.5rem;
     padding-bottom: 5px;
 }
@@ -199,44 +321,44 @@ body ::-webkit-scrollbar-thumb {
     user-select: none;
 }
 
-.fld-imerss-checklist {
+.imerss-checklist {
     height: 100%;
     overflow-y: auto;
     /** Otherwise top checkbox gets clipped */
     padding-top: 2px;
 }
 
-.fld-imerss-checklist p {
+.imerss-checklist p {
     display: inline;
     padding: 1px;
 }
 
-.fld-imerss-checklist p:hover {
+.imerss-checklist p:hover {
     background: #dde;
 }
 
-.fl-checklist-selected {
+.checklist-selected {
     outline: 2px solid black;
 }
 
-.fld-imerss-checklist ul {
+.imerss-checklist ul {
     margin-block-start: 0;
     list-style-type: none;
 }
 
-.fl-imerss-checklist-no-indent ul {
+.imerss-checklist-no-indent ul {
     padding-inline-start: 0;
 }
 
-.fl-imerss-checklist-no-indent .flc-checklist-rank-species {
+.imerss-checklist-no-indent .checklist-rank-species {
     padding-left: 40px;
 }
 
-.fld-imerss-checklist > ul {
+.imerss-checklist > ul {
     padding: 0;
 }
 
-.fld-imerss-checklist-up {
+.imerss-checklist-up {
     width: 1.5rem;
     height: 1.5rem;
     background-image: url(../img/up-arrow.svg);
@@ -245,59 +367,59 @@ body ::-webkit-scrollbar-thumb {
     margin-bottom: 0.2rem;
 }
 
-.fld-imerss-checklist-up:hover {
+.imerss-checklist-up:hover {
     outline: 1px solid black;
     outline-offset: 1px;
 }
 
 /* The checklist rank highlighting */
 
-.flc-checklist-rank-life {
+.checklist-rank-life {
     text-transform: uppercase;
     font-size: 1.2em;
 }
 
-.flc-checklist-rank-kingdom {
+.checklist-rank-kingdom {
     text-transform: uppercase;
     font-size: 1.2em;
 }
 
-.flc-checklist-rank-phylum {
+.checklist-rank-phylum {
     text-transform: uppercase;
     font-size: 1.1em;
 }
 
-.flc-checklist-rank-class {
+.checklist-rank-class {
     text-transform: uppercase;
     font-style: italic;
     font-size: 1.0em;
 }
 
-.flc-checklist-rank-subclass {
+.checklist-rank-subclass {
     text-transform: uppercase;
     font-size: 1.0em;
 }
 
-.flc-checklist-rank-order {
+.checklist-rank-order {
     text-transform: uppercase;
     font-size: 1.0em;
 }
 
-.flc-checklist-rank-family {
+.checklist-rank-family {
     text-transform: uppercase;
     font-size: 1.0em;
 }
 
-.flc-checklist-rank-genus {
+.checklist-rank-genus {
     font-size: 1.0em;
     font-style: italic;
 }
 
-.flc-checklist-rank-species {
+.checklist-rank-species {
     font-size: 1.0em;
     font-style: italic;
 }
 
-.flc-checklist-annote {
+.checklist-annote {
     font-style: normal
 }

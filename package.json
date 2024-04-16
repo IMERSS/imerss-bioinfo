@@ -11,7 +11,7 @@
     "dependencies": {
         "infusion": "4.6.0",
         "kettle": "2.3.0",
-        "axios": "1.6.5",
+        "axios": "1.6.8",
         "csv-parser": "3.0.0",
         "papaparse": "5.4.1",
         "@ronomon/hash-table": "2.0.8",
@@ -35,10 +35,10 @@
     "devDependencies": {
         "terser": "5.26.0",
         "fs-extra": "11.2.0",
-        "glob": "10.3.10",
-        "eslint": "8.39.0",
+        "glob": "10.3.12",
+        "eslint": "8.57.0",
         "eslint-config-fluid": "2.1.1",
-        "fluid-lint-all": "1.2.9",
+        "fluid-lint-all": "1.2.10",
         "node-jqunit": "1.1.9"
     },
     "repository": {

@@ -8,48 +8,48 @@ body {
     margin: 0;
 }
 
-.fld-imerss-region-subtidal {
+.imerss-region-subtidal {
     fill: url(#marine);
     background-repeat: repeat;
 }
 
-.fld-imerss-region-lake-laughlin-lake {
+.imerss-region-lake-laughlin-lake {
     fill: url(#lacustrine);
     background-repeat: repeat;
 }
 
-.fld-imerss-region-wetland {
+.imerss-region-wetland {
     fill: url(#wetland);
     background-repeat: repeat;
 }
 
-.fld-imerss-region-clearcut {
+.imerss-region-clearcut {
     fill: url(#recently-harvested);
     background-repeat: repeat;
 }
 
-.fld-imerss-region-pole-sapling {
+.imerss-region-pole-sapling {
     fill: url(#pole-sapling);
     background-repeat: repeat;
 }
 
-.fld-imerss-region-young-forest {
+.imerss-region-young-forest {
     fill: url(#young-forest);
     background-repeat: repeat;
 }
 
-.fld-imerss-region-mature-forest {
+.imerss-region-mature-forest {
     fill: url(#mature-forest);
     background-repeat: repeat;
 }
 
-.fld-imerss-region-woodland {
+.imerss-region-woodland {
     fill: url(#woodland);
     background-repeat: repeat;
 }
 
 
-.fl-xetthecum-banner {
+.xetthecum-banner {
     margin: 0;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
@@ -60,82 +60,82 @@ body {
     background-size: cover;
 }
 
-.fld-imerss-banner-marine {
+.imerss-banner-marine {
     background-image: url(../img/Xetthecum/Marine_banner.jpg);
 }
 
-.fld-imerss-banner-freshwater {
+.imerss-banner-freshwater {
     background-image: url(../img/Xetthecum/Freshwater_banner.jpg);
     color: white;
 }
 
-.fld-imerss-banner-forests {
+.imerss-banner-forests {
     background-image: url(../img/Xetthecum/Forests_banner.jpg);
     color: white;
 }
 
-.fld-imerss-banner-woodlands-and-rock-outcrops {
+.imerss-banner-woodlands-and-rock-outcrops {
     background-image: url(../img/Xetthecum/Woodland_banner.jpg);
     color: white;
 }
 
-.fld-imerss-banner-anthropogenic {
+.imerss-banner-anthropogenic {
     background-image: url(../img/Xetthecum/Anthropogenic_banner.jpg);
 }
 
 
-.fl-imerss-container {
+.imerss-container {
     margin: 1.5rem 0.5rem 0.5rem 0.5rem;
 }
 
-.fld-imerss-map-holder {
+.imerss-map-holder {
     background: var(--imerss-map-colour);
 }
 
-.fl-imerss-active-panel {
+.imerss-active-panel {
     border: 3px solid #4F5346;
 }
 
-.fl-imerss-map-panel {
+.imerss-map-panel {
     padding: 1rem 0rem 2rem 2rem;
 }
 
-.fl-imerss-map-panel .fld-imerss-panel-label {
+.imerss-map-panel .imerss-panel-label {
     position: unset;
     padding-bottom: 1.5rem;
 }
 
-.fld-imerss-map-outer-panel {
+.imerss-map-outer-panel {
     background: var(--imerss-map-colour);
     padding: 1rem 1rem 1rem 1rem;
     margin: 1px; /* Fight strange layout bug on Chrome 76 */
 }
 
-.fld-imerss-infoPanel {
+.imerss-infoPanel {
     margin-left: 2.5rem;
 }
 
 /* Very odd that this doesn't work on the panel itself */
-.fld-imerss-infoPanel > * {
+.imerss-infoPanel > * {
     position: sticky;
     top: 0;
 }
 
-.fld-imerss-infoPanel .fld-imerss-panel-label {
+.imerss-infoPanel .imerss-panel-label {
     padding: 1rem 2rem 0.5rem 1rem;
 }
 
-.fld-imerss-map-community {
+.imerss-map-community {
     font-size: 1.7rem;
     padding-bottom: 1rem;
 }
 
-.fld-imerss-map-class {
+.imerss-map-class {
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
-.fld-imerss-map-panel-block {
+.imerss-map-panel-block {
     font-size: 1.5rem;
     margin-top: 0.5rem;
     padding-top: 0.5rem;
@@ -144,43 +144,43 @@ body {
     border-bottom: #ccc 2px solid;
 }
 
-.fld-imerss-map-class-tagline {
+.imerss-map-class-tagline {
     font-size: 1.5rem;
     padding-bottom: 0.5rem;
 }
 
-.fld-imerss-map-class-se-col {
+.imerss-map-class-se-col {
     font-weight: bold;
 }
 
-.fld-imerss-map-class-se-val {
+.imerss-map-class-se-val {
     padding-bottom: 0.5rem;
     text-indent: 1rem;
 }
 
-.fl-imerss-map-info-panel {
+.imerss-map-info-panel {
     width: 28rem;
     margin-left: 2rem;
 }
 
-.fld-imerss-map-legend > span {
+.imerss-map-legend > span {
     display: inline-block;
     font-size: 1.3rem;
     margin-left: 2rem;
     margin-bottom: 0.4rem;
 }
 
-.fld-imerss-map-legend-keys {
+.imerss-map-legend-keys {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     height: 500px;
 }
 
-.fld-imerss-legend-block {
+.imerss-legend-block {
 }
 
-.fld-imerss-legend-block-name {
+.imerss-legend-block-name {
     margin-top: 0.7rem;
     display: inline-block;
     width: 8rem;
@@ -189,29 +189,29 @@ body {
 }
 
 
-.fld-imerss-legend-row {
+.imerss-legend-row {
     padding: 2px;
 }
 
-.fld-imerss-legend-row.fld-imerss-selected {
+.imerss-legend-row.imerss-selected {
     background: #FCFF63;
 }
 
 
-.fld-imerss-legend-icon {
+.imerss-legend-icon {
     display: inline-block;
     width: 2rem;
     height: 1rem;
 }
 
-.fld-imerss-legend-row.fld-imerss-selected .fld-imerss-legend-icon {
+.imerss-legend-row.imerss-selected .imerss-legend-icon {
     background-image: url(../img/selected-tick.svg);
     background-size: 1rem;
     background-position: center center; 
     background-repeat: no-repeat;
 }
 
-.fld-imerss-legend-preview {
+.imerss-legend-preview {
     display: inline-block;
     width: 1.2rem;
     height: 1.2rem;
@@ -221,7 +221,7 @@ body {
     top: 3px;
 }
 
-.fld-imerss-legend-label {
+.imerss-legend-label {
     display: inline-block;
     font-size: 0.9rem;
     width: 8rem;
@@ -229,15 +229,15 @@ body {
     top: -2px;
 }
 
-.fld-imerss-map {
+.imerss-map {
     height: 450px;
 }
 
-.fld-imerss-tabs {
+.imerss-tabs {
     position: relative;
 }
 
-.flc-imerss-autocomplete-row {
+.imerss-autocomplete-row {
     position: absolute;
     top: 3rem;
     left: 8rem;
@@ -256,7 +256,7 @@ body {
     padding-top: 4rem;
 }
 
-.fl-imerss-checklist-spacer {
+.imerss-checklist-spacer {
     height: 4rem;
 }
 
@@ -279,24 +279,24 @@ body {
 }
 
 /** Temporary until we can use ordinary 3px border on tabs **/
-.fld-imerss-tabs {
+.imerss-tabs {
     width: 1031px;
 }
 
-.fl-imerss-checklist-holder {
+.imerss-checklist-holder {
     padding: 1em 1.4em;
 }
 
-.flc-checklist-hulq-name {
+.checklist-hulq-name {
     font-weight: bolder;
 }
 
-.fl-imerss-taxa .fld-imerss-panel-label {
+.imerss-taxa .imerss-panel-label {
     position: absolute;
     right: 1.5rem;
 }
 
-.fld-imerss-panel-label {
+.imerss-panel-label {
     font-weight: bold;
     font-size: 1.7rem;
     top: 1rem;
@@ -306,12 +306,12 @@ body {
     padding-top: 3rem;
 }
 
-.fld-imerss-taxonDisplay {
+.imerss-taxonDisplay {
     margin-top: 4.4rem;
     border: none;
 }
 
-.fl-taxonDisplay-row {
+.taxonDisplay-row {
     padding-left: 1rem;
     padding-right: 1rem;
     margin-left: 1rem;
@@ -319,60 +319,60 @@ body {
     border-bottom: #888 1px solid;
 }
 
-.fl-taxonDisplay-row.fl-taxonDisplay-expanded {
+.taxonDisplay-row.taxonDisplay-expanded {
     border-bottom: none;
 }
 
-.fl-taxonDisplay-row .fl-taxonDisplay-row {
+.taxonDisplay-row .taxonDisplay-row {
     border-bottom: none;
 }
 
 /** Undo this insane rule from imerss-viz-scrolly.css - this whole system needs to be rewritten **/
-.fl-taxonDisplay-row.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder.fl-taxonDisplay-row {
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder.taxonDisplay-row {
     border-bottom: #888 1px solid;
 }
 
-.fl-taxonDisplay-rank .fl-taxonDisplay-key {
+.taxonDisplay-rank .taxonDisplay-key {
     font-size: 1.5rem;
     font-weight: bold;
     padding-left: 0;
     padding-bottom: 5px;
 }
 
-.fl-taxonDisplay-rank span {
+.taxonDisplay-rank span {
     display: inline-block
 }
 
-.fl-imerss-right-column {
+.imerss-right-column {
     width: 544px;
 }
 
 /*
-.fl-imerss-photo {
+.imerss-photo {
     width: calc(448px + 6rem);
 }
 */
 
-.fld-imerss-map-outer-panel .fl-imerss-photo {
+.imerss-map-outer-panel .imerss-photo {
     margin-left: -1rem;
     margin-right: -1rem;
     margin-bottom: 1rem;
 }
 
-.fld-imerss-taxonDisplay-wrapper {
+.imerss-taxonDisplay-wrapper {
     background: var(--imerss-eco-colour);
     width: 500px;
 }
 
-.fld-imerss-tabs .ui-state-active.ui-tabs-active a {
+.imerss-tabs .ui-state-active.ui-tabs-active a {
     background: var(--imerss-eco-colour);
 }
 
-.fld-imerss-tabs .ui-state-active.ui-tabs-tab {
+.imerss-tabs .ui-state-active.ui-tabs-tab {
     background: var(--imerss-eco-colour);
 }
 
-.fld-imerss-map-outer-panel-wrapper {
+.imerss-map-outer-panel-wrapper {
     background: var(--imerss-map-colour);
     width: 500px;
 }
@@ -390,7 +390,7 @@ body {
     border: none;
 }
 
-.fl-xetthecum-audio {
+.xetthecum-audio {
     width: 2.5rem;
     height: 2.5rem;
     padding-bottom: 0.4rem;
@@ -403,7 +403,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.fl-xetthecum-small-audio {
+.xetthecum-small-audio {
     width: 1.5rem;
     height: 1.5rem;
     padding-bottom: 0.2rem;
@@ -416,33 +416,33 @@ body {
     background-repeat: no-repeat;
 }
 
-.fl-xetthecum-audio:hover, .fl-xetthecum-small-audio:hover {
+.xetthecum-audio:hover, .xetthecum-small-audio:hover {
     outline: 1px solid black;
     outline-offset: 1px;
 }
 
-.fl-taxonDisplay-value iframe {
+.taxonDisplay-value iframe {
     margin-top: 5px;
 }
 
 
-.fld-imerss-taxonDisplay {
+.imerss-taxonDisplay {
     margin-top: 0;
     width: auto;
 }
 
-.fl-taxonDisplay-wikipediaSummary {
+.taxonDisplay-wikipediaSummary {
     display: block;
     margin-left: 2.5rem;
     margin-right: 1rem;
     width: auto;
 }
 
-.fld-imerss-media-image img {
+.imerss-media-image img {
     width: 100%
 }
 
-.fld-imerss-media-name {
+.imerss-media-name {
     padding-bottom: 5px;
     font-size: 1.2rem;
 }

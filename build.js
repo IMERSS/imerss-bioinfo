@@ -14,6 +14,7 @@ const buildIndex = {
         "jquery.js"
     ],
     localSource: [
+        "src/client/css/imerss-core.css",
         "src/client/css/imerss-viz.css",
         "src/auxBuild/restoreJQuery.js",
         "src/lib/jquery-ui-widgets-tabs.js",
@@ -162,6 +163,7 @@ const filesToContentHash = function (allFiles, extension) {
     const extFiles = allFiles.filter(function (file) {
         return file.endsWith(extension);
     });
+    // console.log("Computed content hash ", extFiles, " for extension ", extension);
     const hash = fluid.transform(fluid.arrayToHash(extFiles), function (troo, filename) {
         return fs.readFileSync(filename, "utf8");
     });

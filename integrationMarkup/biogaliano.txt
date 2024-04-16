@@ -4,11 +4,11 @@ Examples of current drivers from biogaliano.org WordPress site:
 /taxa - "Life List"
 
 
- <div class="fl-imerss-container">
+ <div class="imerss-container">
   </div>
   <script src="/bagatelle-new/js/imerss-viz-all.js"></script>
   <script>
-  hortis.sunburstLoader(".fl-imerss-container", {
+  hortis.sunburstLoader(".imerss-container", {
   colourCount: "undocumentedCount",
   culturalValues: false,
   sunburstPixels: 800,
@@ -25,17 +25,17 @@ Examples of current drivers from biogaliano.org WordPress site:
 
  /web-of-life-viz - "Web of Life"
  
-<div class="fl-imerss-container">
+<div class="imerss-container">
 </div>
 <style>
-.flc-imerss-svg {
+.imerss-svg {
  font-size: 30px
 }
-.fld-imerss-taxonDisplay {
+.imerss-taxonDisplay {
  font-size: 14px;
  line-height: 1.2em;
 }
-.fld-imerss-taxonDisplay table {
+.imerss-taxonDisplay table {
  z-index: 100000
 }
 #main-header {
@@ -44,7 +44,7 @@ Examples of current drivers from biogaliano.org WordPress site:
 </style>
  <script src="/imerss-new/js/imerss-viz-all.js"></script>
  <script>
- hortis.sunburstLoader(".fl-imerss-container", {
+ hortis.sunburstLoader(".imerss-container", {
  resourceBase: "/imerss-new",
  sunburstPixels:800,
  renderMarkup: true,
@@ -58,11 +58,11 @@ Examples of current drivers from biogaliano.org WordPress site:
    
 <link rel="stylesheet" type="text/css" href="/imerss-new/css/imerss-viz-all.css" />
 
-<div class="fl-imerss-container">
+<div class="imerss-container">
  </div>
  <script src="/bagatelle-new/js/imerss-viz-all.js"></script>
  <script>
- hortis.sunburstLoader(".fl-imerss-container", {
+ hortis.sunburstLoader(".imerss-container", {
  colourCount: "undocumentedCount",
  markupTemplate: "/bagatelle-new/html/imerss-viz.html",
  renderMarkup: true,

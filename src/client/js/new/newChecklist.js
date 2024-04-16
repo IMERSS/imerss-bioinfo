@@ -24,7 +24,7 @@ hortis.annoteRegex = new RegExp("(" + hortis.sppAnnotations.map(annot => annot.r
 
 // Render a species name with annotation specially rendered in Roman font
 hortis.renderSpeciesName = function (name) {
-    return name.replace(hortis.annoteRegex, "<span class=\"flc-checklist-annote\">$1</span>");
+    return name.replace(hortis.annoteRegex, "<span class=\"checklist-annote\">$1</span>");
 };
 
 // In indeterminate state, add p-is-indeterminate to div state
@@ -33,7 +33,7 @@ hortis.renderSpeciesName = function (name) {
 hortis.checklistCheckbox = function (rowid) {
     return `
     <span class="pretty p-icon">
-      <input type="checkbox" class="flc-checklist-check" ${rowid}/>
+      <input type="checkbox" class="checklist-check" ${rowid}/>
       <span class="state p-success">
         <i class="icon mdi mdi-check"></i>
         <label></label>
@@ -61,17 +61,17 @@ hortis.checklistItem = function (entry, selectedId, simple, selectable) {
     // Note: "species" really means "has obs " and could be a higher taxon - in the case of a simple checklist
     // we promote e.g. a genus-level obs to species level so it appears inline
     const rank = record.rank && !(simple && record.taxonName) ? record.rank : "species";
-    const selectedClass = rank === "species" && record.id === selectedId ? " class=\"fl-checklist-selected\"" : "";
+    const selectedClass = rank === "species" && record.id === selectedId ? " class=\"checklist-selected\"" : "";
     const header = "<li " + selectedClass + ">";
     const render = rank === "species" ? hortis.renderSpeciesName : fluid.identity;
-    let name = "<p " + styleprop + rowid + " class=\"flc-checklist-rank-" +
+    let name = "<p " + styleprop + rowid + " class=\"checklist-rank-" +
         rank + "\">" + render(hortis.encodeHTML(hortis.rowToScientific(record))) + "</p>";
     if (record.commonName) {
-        name += " - <p " + styleprop + rowid + " class=\"flc-checklist-common-name\">" + record.commonName + "</p>";
+        name += " - <p " + styleprop + rowid + " class=\"checklist-common-name\">" + record.commonName + "</p>";
     }
     const hulqName = record["Hulquminum Name"];
     if (hulqName) {
-        name += " - <p " + styleprop + rowid + " class=\"flc-checklist-hulq-name\"><em>" + hulqName + "</em></p>";
+        name += " - <p " + styleprop + rowid + " class=\"checklist-hulq-name\"><em>" + hulqName + "</em></p>";
     }
     const subList = hortis.checklistList(entry.children, selectedId, simple, selectable);
     const footer = "</li>";
@@ -99,11 +99,11 @@ hortis.updateChecklistSelection = function (container, newSelectedId, oldSelecte
         return;
     }
     const oldSelected = hortis.checklistRowForId(container, oldSelectedId);
-    oldSelected.removeClass("fl-checklist-selected");
+    oldSelected.removeClass("checklist-selected");
     const row = rowById[newSelectedId];
     if (row && row.species) {
         const newSelected = hortis.checklistRowForId(container, newSelectedId);
-        newSelected.addClass("fl-checklist-selected");
+        newSelected.addClass("checklist-selected");
     }
 };
 
@@ -166,7 +166,7 @@ fluid.defaults("hortis.checklist", {
     selectable: false,
     selectors: {
         hoverable: "p",
-        checklist: ".fld-imerss-checklist"
+        checklist: ".imerss-checklist"
     },
     invokers: {
         acceptChecklistRow: {
@@ -194,11 +194,11 @@ fluid.defaults("hortis.checklist", {
     },
     listeners: {
         "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {layoutHolder})",
-        "onCreate.bindClick": "hortis.checklist.bindClick({that})"
+        "onCreate.bindCheckboxClick": "hortis.checklist.bindCheckboxClick({that})"
     }
 });
 
-hortis.checklist.bindClick = function (checklist) {
+hortis.checklist.bindCheckboxClick = function (checklist) {
     checklist.container.on("click", ".pretty input", function () {
         const id = this.dataset.rowId;
         console.log("Checkbox clicked with row " + id);
@@ -292,7 +292,7 @@ hortis.checklist.generate = function (that, element, layoutHolder, filterTaxonom
     const markup = hortis.checklistList(filteredEntries, selectedId, simple, selectable);
     element[0].innerHTML = markup;
     if (selectable) {
-        const checks = element[0].querySelectorAll(".flc-checklist-check");
+        const checks = element[0].querySelectorAll(".checklist-check");
         const idToNode = {};
         checks.forEach(check => idToNode[check.dataset.rowId] = check);
         that.idToNode = idToNode;

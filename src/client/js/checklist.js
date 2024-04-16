@@ -18,7 +18,7 @@ hortis.annoteRegex = new RegExp("(" + hortis.sppAnnotations.map(annot => annot.r
 
 // Render a species name with annotation specially rendered in Roman font
 hortis.renderSpeciesName = function (name) {
-    return name.replace(hortis.annoteRegex, "<span class=\"flc-checklist-annote\">$1</span>");
+    return name.replace(hortis.annoteRegex, "<span class=\"checklist-annote\">$1</span>");
 };
 
 hortis.checklistItem = function (entry, selectedId, simple) {
@@ -31,16 +31,16 @@ hortis.checklistItem = function (entry, selectedId, simple) {
     // Note: "species" really means "has obs" and could be a higher taxon - in the case of a simple checklist
     // we promote e.g. a genus-level obs to species level so it appears inline
     const rank = record.rank && !(simple && record.taxonName) ? record.rank : "species";
-    const selectedClass = rank === "species" && record.id === selectedId ? " class=\"fl-checklist-selected\"" : "";
+    const selectedClass = rank === "species" && record.id === selectedId ? " class=\"checklist-selected\"" : "";
     const header = "<li " + selectedClass + ">";
     const render = rank === "species" ? hortis.renderSpeciesName : fluid.identity;
-    let name = "<p " + styleprop + rowid + " class=\"flc-checklist-rank-" +
+    let name = "<p " + styleprop + rowid + " class=\"checklist-rank-" +
         rank + "\">" + render(hortis.encodeHTML(hortis.rowToScientific(record))) + "</p>";
     if (record.commonName) {
-        name += " - <p " + styleprop + rowid + " class=\"flc-checklist-common-name\">" + record.commonName + "</p>";
+        name += " - <p " + styleprop + rowid + " class=\"checklist-common-name\">" + record.commonName + "</p>";
     }
     if (record.hulqName) {
-        name += " - <p " + styleprop + rowid + " class=\"flc-checklist-hulq-name\"><em>" + record.hulqName + "</em></p>";
+        name += " - <p " + styleprop + rowid + " class=\"checklist-hulq-name\"><em>" + record.hulqName + "</em></p>";
     }
     const subList = hortis.checklistList(entry.children, selectedId, simple);
     const footer = "</li>";
@@ -67,11 +67,11 @@ hortis.updateChecklistSelection = function (that, newSelectedId, oldSelectedId, 
         return;
     }
     const oldSelected = hortis.checklistRowForId(that, oldSelectedId);
-    oldSelected.removeClass("fl-checklist-selected");
+    oldSelected.removeClass("checklist-selected");
     const row = entryIndex[newSelectedId].row;
     if (row && row.species) {
         const newSelected = hortis.checklistRowForId(that, newSelectedId);
-        newSelected.addClass("fl-checklist-selected");
+        newSelected.addClass("checklist-selected");
     }
 };
 
@@ -128,8 +128,8 @@ fluid.defaults("hortis.checklist", {
     filterRanks: false,
     selectors: {
         hoverable: "p",
-        checklist: ".fld-imerss-checklist",
-        upArrow: ".fld-imerss-checklist-up"
+        checklist: ".imerss-checklist",
+        upArrow: ".imerss-checklist-up"
     },
     invokers: {
         generateChecklist: {
