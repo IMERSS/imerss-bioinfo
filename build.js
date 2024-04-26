@@ -34,10 +34,12 @@ const buildIndex = {
         "src/client/js/xetthecum.js"
     ],
     newSource: [
-        "src/lib/hash-table.js",
         "src/lib/signals-core.min.js",
+        "src/lib/vizjs.js", // TODO: Kick this into imerss-viz-bbea.js
+        "src/lib/jquery-ui-widgets-tabs.js",
         "src/client/js/colour.js",
         "src/client/js/renderSVG.js",
+        "src/client/js/new/fluidNew.js",
         "src/client/js/new/imerss-new.js",
         "src/client/js/autocomplete.js",
         "src/client/js/tabs.js",
@@ -60,6 +62,15 @@ const buildIndex = {
     }, {
         src: "src/client/css/*.css",
         dest: "docs/css"
+    }, {
+        src: "src/client/js/new/bipartitePP.js",
+        dest: "docs/js/bipartitePP.js"
+    }, {
+        src: "src/client/js/new/imerss-bbea.js",
+        dest: "docs/js/imerss-bbea.js"
+    }, {
+        src: "src/lib/vizjs.js",
+        dest: "docs/js/vizjs.js"
     }, {
         src: "src/buildSource/*.html",
         dest: "docs/"
@@ -91,11 +102,17 @@ const buildIndex = {
         src: "data/Pepiowelh/Life.json.lz4",
         dest: "docs/data/Pepiowelh/Life.json.lz4"
     }, {
-        src: "data/b-team/plant-pollinators-OBA-assigned-subset.csv",
-        dest: "docs/data/b-team/plant-pollinators-OBA-assigned-subset.csv"
+        src: "data/b-team/us-eco-l3-regions.csv",
+        dest: "docs/data/b-team/us-eco-l3-regions.csv"
+    }, {
+        src: "data/b-team/plant-pollinators-OBA-assigned-subset-labels.csv",
+        dest: "docs/data/b-team/plant-pollinators-OBA-assigned-subset-labels.csv"
     }, {
         src: "data/b-team/plant-pollinators-OBA-assigned-taxa.csv",
         dest: "docs/data/b-team/plant-pollinators-OBA-assigned-taxa.csv"
+    }, {
+        src: "data/b-team/us-eco-l3-regions.csv",
+        dest: "docs/data/b-team/us-eco-l3-regions.csv"
     }]
 };
 

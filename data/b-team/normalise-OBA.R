@@ -47,6 +47,8 @@ plantParsed <- flipLists(normaliseName(plantName))
 beeName <- ifelse(raw$Species == "", raw$Genus, paste(raw$Genus, raw$Species))
 beeParsed <- flipLists(normaliseName(beeName))
 
+normaliseSex <- c("female" = "F", "Female" = "F", "male" = "M", "Male" = "M")
+
 filtered <- mutate(raw,
                    pollinatorINatName = as.character(unlist(beeParsed$name)),
                    scientificName = beeName,
@@ -54,7 +56,8 @@ filtered <- mutate(raw,
                    plantScientificName =  plantName,
                    decimalLongitude = raw$"Dec. Long.",
                    decimalLatitude = raw$"Dec. Lat.",
-                   eventDate = raw$`Collection Date`
+                   eventDate = raw$`Collection Date`,
+                   sex = normaliseSex[sex]
 )
 
 filteredDown <- filtered[, !names(filtered) %in% c("Associated plant - genus, species", "Dec. Long.", "Dec. Lat.", "MonthAb", "MonthJul",

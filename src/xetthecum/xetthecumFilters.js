@@ -44,6 +44,12 @@ hortis.xetthecum.mediaOutMap = {
     }
 };
 
+hortis.xetthecum.taxonResolution = {
+    "Camassia": "Camassia quamash",
+    "Camassia leichtlinii suksdorfii": "Camassia leichtlinii",
+    "Pseudotsuga menziesii menziesii": "Pseudotsuga menziesii"
+};
+
 hortis.xetthecum.chooseName = function (target, hulqRow) {
     const bestRec = hortis.xetthecum.names.find(function (rec) {
         return !!hulqRow[rec.field];
@@ -78,14 +84,16 @@ hortis.xetthecum.assignHulqNames = function (resolved, patch) {
     });
     resolved.summarisedRows.forEach(function (row) {
         const taxon = row.iNaturalistTaxonName;
-        const hulqRow = byTaxon[taxon];
+        const resolve = hortis.xetthecum.taxonResolution[taxon];
+        const useLookup = resolve || taxon;
+        const hulqRow = byTaxon[useLookup];
         if (!hulqRow) {
             withoutHulq.push({
                 taxon: taxon,
                 found: "no record"
             });
         } else {
-            usedTaxa[taxon] = true;
+            usedTaxa[useLookup] = true;
             const transfer = fluid.filterKeys(hulqRow, valueFields);
             const foundName = hortis.xetthecum.chooseName(transfer, hulqRow);
             if (foundName) {
@@ -115,7 +123,9 @@ hortis.xetthecum.assignHulqMedia = function (resolved, patch) {
     });
     resolved.summarisedRows.forEach(function (row) {
         const taxon = row.iNaturalistTaxonName;
-        const hulqRow = byTaxon[taxon];
+        const resolve = hortis.xetthecum.taxonResolution[taxon];
+        const useLookup = resolve || taxon;
+        const hulqRow = byTaxon[useLookup];
         if (hulqRow) {
             usedTaxa[taxon] = true;
             row.audioLink = hulqRow.audioLink;

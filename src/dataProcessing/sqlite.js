@@ -53,12 +53,13 @@ hortis.sqliteDB.endTransaction = function (db) {
 };
 
 /** Opens an SQLite database held at the supplied module-relative path
- * @param {String }dbFile - The (possibly module-qualified) filesystem path holding the database
+ * @param {String} dbFile - The (possibly module-qualified) filesystem path holding the database
  * @return {Promise<Database>} A promise for an "sqlite" wrapper for the opened SQLite database
  */
 hortis.sqliteDB.openDB = async function (dbFile) {
     const path = fluid.module.resolvePath(dbFile);
     try {
+        fluid.log("Opening SQLite database at ", path);
         return sqlite.open({
             filename: path,
             driver: sqlite3.Database

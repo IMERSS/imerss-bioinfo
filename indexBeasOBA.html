@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="node_modules/jquery-ui/themes/base/tabs.css" />
         <link rel="stylesheet" type="text/css" href="node_modules/infusion/src/framework/core/css/fluid.css" />
         <link rel="stylesheet" type="text/css" href="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css" />
-        <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.css" />
+        <link rel="stylesheet" href="node_modules/maplibre-gl/dist/maplibre-gl.css" />
         <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
 
@@ -48,9 +48,10 @@
         <script src="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js"></script>
 
         <script src="node_modules/maplibre-gl/dist/maplibre-gl-dev.js"></script>
+        <script src="node_modules/d3/dist/d3.js"></script>
 
-        <script src="src/lib/hash-table.js"></script>
         <script src="src/lib/signals-core.min.js"></script>
+        <script src="src/lib/vizjs.js"></script>
 
         <script src="https://unpkg.com/pako@2.1.0/dist/pako_inflate.min.js"></script>
         <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
@@ -60,14 +61,17 @@
 
         <script src="src/client/js/colour.js"></script>
         <script src="src/client/js/renderSVG.js"></script>
+        <script src="src/client/js/new/fluidNew.js"></script>
         <script src="src/client/js/new/imerss-new.js"></script>
+        <script src="src/client/js/new/imerss-bbea.js"></script>
+        <script src="src/client/js/new/bipartitePP.js"></script>
+        <script src="src/client/js/new/steensData.js"></script>
         <script src="src/client/js/autocomplete.js"></script>
         <script src="src/client/js/tabs.js"></script>
         <script src="src/client/js/new/newChecklist.js"></script>
 
         <title>BBEA TTOOL</title>
     </head>
-
 
     <body>
         <h2>BBEA TTOOL</h2>
@@ -80,7 +84,10 @@
                     </div>
                 </div>
                 <div class="imerss-filter-panel">
-                    <div class="record-reporter">
+                    <div class="imerss-filters">
+
+                    </div>
+                    <div class="imerss-record-reporter">
 
                     </div>
                 </div>
@@ -102,23 +109,25 @@
                 </div>
                 <div class="imerss-interactions">
                     <div class="imerss-panel-label">Interactions</div>
-                    <div class="imerss-interactions-holder">
-                        <div class="imerss-int-top imerss-int-row">
-                            <div class="imerss-int-left imerss-int-plant-label">Plants</div>
-                            <div class="imerss-poll-counts imerss-int-h-middle"></div>
-                            <div class="imerss-int-right"></div>
-                        </div>
-                        <div class="imerss-int-v-middle imerss-int-row">
-                            <div class="imerss-plant-names imerss-int-left"></div>
-                            <div class="imerss-int-h-middle imerss-int-scroll">
-                                <canvas class="imerss-interactions"></canvas>
+
+                    <div class="imerss-tabs ui-tabs ui-widget ui-widget-content">
+                        <ul class="ui-tabs-nav" role="tablist">
+                            <li class="ui-tabs-tab ui-tab ui-state-default ui-tabs-active">
+                                <a class="ui-tabs-anchor" href="#fli-tab-bipartite">Bipartite View</a>
+                            </li>
+                            <li class="ui-tabs-tab ui-tab ui-state-default">
+                                <a class="ui-tabs-anchor" href="#fli-tab-matrix">Matrix View</a>
+                            </li>
+                        </ul>
+                        <div id="fli-tab-bipartite" class="imerss-tab-panel">
+                            <div class="imerss-bipartite">
+                                <svg width="1000" height="2500">
+                                </svg>
                             </div>
-                            <div class="imerss-plant-counts imerss-int-right"></div>
                         </div>
-                        <div class="imerss-int-bottom imerss-int-row">
-                            <div class="imerss-int-left imerss-int-poll-label">Bees</div>
-                            <div class="imerss-poll-names imerss-int-h-middle imerss-int-sideways"></div>
-                            <div class="imerss-int-right"></div>
+                        <div id="fli-tab-matrix" class="imerss-tab-panel">
+                            <div class="imerss-interactions-holder">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -133,9 +142,10 @@
         <script>
             hortis.vizLoaderWithMap(".imerss-container", {
                 gradeNames: "hortis.beaVizLoader",
-                obsFile: "data/b-team/plant-pollinators-OBA-assigned-subset.csv",
+                obsFile: "data/b-team/plant-pollinators-OBA-assigned-subset-labels.csv",
                 taxaFile: "data/b-team/plant-pollinators-OBA-assigned-taxa.csv",
-                mapGrades: "hortis.demoLibreMap",
+                ecoL3File: "data/b-team/us-eco-l3-regions.csv",
+                mapGrades: "hortis.bbeaLibreMap",
                 resourceBase: "src/client"
             });
         </script>

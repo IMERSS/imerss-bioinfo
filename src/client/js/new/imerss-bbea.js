@@ -1,0 +1,872 @@
+"use strict";
+
+/* global preactSignalsCore, imerss, d3 */
+
+// noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
+var hortis = fluid.registerNamespace("hortis");
+
+// noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
+var {effect} = preactSignalsCore;
+
+fluid.setLogging(true);
+
+fluid.defaults("hortis.beaVizLoader", {
+    selectors: {
+        interactions: ".imerss-interactions-holder",
+        bipartite: ".imerss-bipartite",
+        recordReporter: ".imerss-record-reporter",
+        filters: ".imerss-filters"
+    },
+    components: {
+        ecoL3Loader: {
+            type: "hortis.urlCsvReader",
+            options: {
+                url: "{vizLoader}.options.ecoL3File"
+            }
+        },
+        recordReporter: {
+            type: "hortis.recordReporter",
+            container: "{that}.dom.recordReporter",
+            options: {
+                signals: {
+                    filteredObs: "{vizLoader}.finalFilteredObs",
+                    obsRows: "{vizLoader}.obsRows"
+                }
+            }
+        },
+        filters: {
+            type: "hortis.bbeaFilters",
+            container: "{that}.dom.filters",
+            options: {
+                members: {
+                    allInput: "{vizLoader}.obsRows"
+                }
+            }
+        },
+        pollChecklist: {
+            type: "hortis.checklist.withHolder",
+            container: ".imerss-pollinators",
+            options: {
+                gradeNames: "hortis.checklist.withOBA",
+                rootId: 1,
+                filterRanks: ["epifamily", "family"],
+                disclosableRanks: ["tribe", "genus", "subgenus", "species"],
+                selectable: true,
+                members: {
+                    rowById: "{taxa}.rowById",
+                    rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, pollRowFocus)",
+                    allRowFocus: "@expand:fluid.derefSignal({vizLoader}.allTaxaFromObs, pollRowFocus)"
+                }
+            }
+        },
+        plantChecklist: {
+            type: "hortis.checklist.withHolder",
+            container: ".imerss-plants",
+            options: {
+                gradeNames: "hortis.checklist.withOBA",
+                rootId: 47126,
+                filterRanks: ["kingdom", "order"],
+                disclosableRanks: ["family", "genus"],
+                selectable: true,
+                members: {
+                    rowById: "{taxa}.rowById",
+                    rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, plantRowFocus)",
+                    allRowFocus: "@expand:fluid.derefSignal({vizLoader}.allTaxaFromObs, plantRowFocus)"
+                }
+            }
+        },
+        interactionTabs: {
+            type: "hortis.tabs",
+            container: ".imerss-interactions .imerss-tabs",
+            options: {
+                tabIds: {
+                    bipartite: "fli-tab-bipartite",
+                    matrix: "fli-tab-matrix"
+                },
+                model: {
+                    selectedTab: "bipartite"
+                }
+            }
+        },
+        interactions: {
+            type: "hortis.interactions",
+            options: {
+                members: {
+                    obsRows: "{vizLoader}.finalFilteredObs",
+                    plantSelection: "{plantChecklist}.rowSelection",
+                    pollSelection: "{pollChecklist}.rowSelection",
+                    rowById: "{taxa}.rowById"
+                }
+            }
+        },
+        drawInteractions: {
+            type: "hortis.drawInteractions",
+            container: "{that}.dom.interactions"
+        },
+        bipartite: {
+            type: "hortis.bipartite",
+            container: "{that}.dom.bipartite",
+            options: {
+                members: {
+                    // TODO: Split drawInteractions render prepare back out into interactions
+                    bipartiteRows: "{drawInteractions}.bipartiteRows",
+                    beeSelection: "{pollChecklist}.rowSelection"
+                }
+            }
+        }
+    },
+    members: {
+        filteredObs: "{filters}.allOutput",
+        taxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.filteredObs, {taxa}.rowById)",
+        allTaxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.obsRows, {taxa}.rowById)",
+        finalFilteredObs: `@expand:fluid.computed(hortis.filterObsByTwoTaxa, {that}.filteredObs, 
+                {plantChecklist}.rowFocus, {pollChecklist}.rowFocus)`
+    },
+    invokers: {
+        // filterObs: "hortis.filterObs
+    }
+});
+
+hortis.twoTaxaFromObs = function (filteredObs, rowById) {
+    const plantIds = {},
+        pollIds = {};
+    const now = Date.now();
+    filteredObs.forEach(row => {
+        plantIds[row.plantINatId] = true;
+        pollIds[row.pollinatorINatId] = true;
+    });
+    const togo = {
+        plantRowFocus: hortis.closeParentTaxa(plantIds, rowById),
+        pollRowFocus: hortis.closeParentTaxa(pollIds, rowById)
+    };
+    const delay = Date.now() - now;
+    fluid.log("twoTaxaFromObs for " + filteredObs.length + " in " + delay + " ms");
+    return togo;
+};
+
+hortis.filterObsByTwoTaxa = function (obsRows, plantRowFocus, pollRowFocus) {
+    const filteredObs = [];
+    obsRows.forEach(function (row) {
+        const accept = plantRowFocus[row.plantINatId] && pollRowFocus[row.pollinatorINatId];
+        if (accept) {
+            filteredObs.push(row);
+        }
+    });
+    return filteredObs;
+};
+
+
+fluid.defaults("hortis.interactions", {
+    gradeNames: "fluid.modelComponent",
+    members: {
+        obsRows: "@expand:signal([])",
+        plantSelection: "@expand:signal([])",
+        pollSelection: "@expand:signal([])",
+        // keys are plantId|pollId, values ints
+        crossTable: "@expand:fluid.computed(hortis.interactions.count, {that}, {that}.obsRows, {that}.plantSelection, {that}.pollSelection)",
+        // Accessing crossTable.value will populate these three by a hideous side-effect
+        plantCounts: {},
+        pollCounts: {}
+    }
+});
+
+// Note that we can't use bitwise operators since they are defined to work on 32 bit operands!!
+// https://stackoverflow.com/questions/63697853/js-bitwise-shift-operator-not-returning-the-correct-result
+hortis.SHIFT = 2 ** 22;
+hortis.MASK = hortis.SHIFT - 1;
+
+hortis.intIdsToKey = function (plantId, pollId) {
+    return ((+plantId) * hortis.SHIFT) + (+pollId);
+};
+
+hortis.keyToIntIds = function (key) {
+    return {
+        plantId: Math.floor(key / hortis.SHIFT),
+        pollId: key & hortis.MASK
+    };
+};
+
+hortis.addCount = function (table, key, count = 1) {
+    if (table[key] === undefined) {
+        table[key] = 0;
+    }
+    table[key] += count;
+};
+
+hortis.max = function (hash) {
+    let max = Number.NEGATIVE_INFINITY;
+    fluid.each(hash, function (val) {
+        max = Math.max(val, max);
+    });
+    return max;
+};
+
+hortis.maxReducer = function () {
+    const togo = {
+        value: Number.NEGATIVE_INFINITY,
+        reduce: next => {togo.value = Math.max(next, togo.value);}
+    };
+    return togo;
+};
+
+hortis.minReducer = function () {
+    const togo = {
+        value: Number.POSITIVE_INFINITY,
+        reduce: next => {togo.value = Math.min(next, togo.value);}
+    };
+    return togo;
+};
+
+
+hortis.findAncestor = function (row, selection) {
+    let move = row;
+    while (move !== undefined) {
+        if (selection[move.id] !== undefined) {
+            return move.id;
+        }
+        move = move.parent;
+    }
+};
+
+hortis.ancestorHitCache = function (selection, rowById) {
+    const taxonToAncestor = {};
+    return {
+        taxonToAncestor,
+        get: function (taxonId) {
+            const existing = taxonToAncestor[taxonId];
+            if (existing) {
+                return existing;
+            } else {
+                const row = rowById[taxonId];
+                const computed = hortis.findAncestor(row, selection);
+                taxonToAncestor[taxonId] = computed;
+                return computed;
+            }
+        }
+    };
+};
+
+hortis.interactions.count = function (that, rows, plantSelection, pollSelection) {
+    const rowById = that.rowById.peek();
+    const allSelection = {...plantSelection, ...pollSelection};
+    const ancestorCache = hortis.ancestorHitCache(allSelection, rowById);
+
+    const crossTable = {};
+    const plantCounts = {counts: {}, max: 0};
+    const pollCounts = {counts: {}, max: 0};
+
+    const now = Date.now();
+    const f = hash => Object.keys(hash).length;
+
+    // Currently get several notifications during startup, turn checklist's rowSelection into a computed rather than effect
+    if (f(plantSelection) && f(pollSelection)) {
+        rows.forEach(function (row) {
+            const {pollinatorINatId: pollId, plantINatId: plantId} = row;
+            if (plantId && pollId) {
+                const plantCountKey = ancestorCache.get(plantId);
+                const pollCountKey = ancestorCache.get(pollId);
+                if (plantCountKey && pollCountKey) {
+                    const key = hortis.intIdsToKey(plantCountKey, pollCountKey);
+
+                    hortis.addCount(crossTable, key);
+                    hortis.addCount(plantCounts.counts, plantCountKey);
+                    hortis.addCount(pollCounts.counts, pollCountKey);
+                }
+            }
+        });
+    }
+
+    plantCounts.max = hortis.max(plantCounts.counts);
+    pollCounts.max = hortis.max(pollCounts.counts);
+
+    const cells = Object.keys(crossTable).length;
+    const plants = Object.keys(plantCounts.counts).length;
+    const polls = Object.keys(pollCounts.counts).length;
+    fluid.log("Counted ", rows.length + " obs into " + cells + " interaction cells for " + plants + " plants and " + polls + " pollinators");
+    fluid.log("Occupancy: " + (100 * (cells / (plants * polls))).toFixed(2) + "%");
+    const delay = Date.now() - now;
+    fluid.log("Computed interactions in " + delay + " ms");
+
+    that.plantCounts = plantCounts;
+    that.pollCounts = pollCounts;
+    return crossTable;
+};
+
+hortis.familyColours = {
+    "Andrenidae": "#E41A1C",
+    "Apidae": "#377EB8",
+    "Colletidae": "#4DAF4A",
+    "Megachilidae": "#FF7F00",
+    "Halictidae": "#984EA3"
+};
+
+fluid.defaults("hortis.bipartite", {
+    gradeNames: "fluid.viewComponent",
+    selectors: {
+        svg: "svg"
+    },
+    members: {
+        bipartiteRows: "@expand:signal([])",
+        beeSelection: "@expand:signal([])",
+        render: "@expand:fluid.effect(hortis.bipartite.render, {that}.dom.svg.0, {that}.bipartiteRows, {that}.beeSelection)"
+    }
+});
+
+hortis.bipartite.render = function (svgNode, bipartiteRows, beeSelection) {
+    const svg = d3.select(svgNode);
+    imerss.bipartitePP(bipartiteRows, svg, 1000, 2500, {
+        FigureLabel: "",
+        sortedBeeNames: Object.keys(beeSelection),
+        beeColors: hortis.familyColours,
+        MainFigSizeX: 400,
+        MainFigSizeY: 2000
+    });
+};
+
+hortis.interactionMarkup =
+`
+    <div class="imerss-interactions-holder">
+        <div class="imerss-int-top imerss-int-row">
+            <div class="imerss-int-left imerss-int-plant-label">Plants</div>
+            <div class="imerss-poll-counts imerss-int-h-middle"></div>
+            <div class="imerss-int-right"></div>
+        </div>
+        <div class="imerss-int-v-middle imerss-int-row">
+            <div class="imerss-plant-names imerss-int-left"></div>
+            <div class="imerss-int-h-middle imerss-int-scroll">
+                <canvas class="imerss-interactions-canvas"></canvas>
+            </div>
+            <div class="imerss-plant-counts imerss-int-right"></div>
+        </div>
+        <div class="imerss-int-bottom imerss-int-row">
+            <div class="imerss-int-left imerss-int-poll-label">Bees</div>
+            <div class="imerss-poll-names imerss-int-h-middle imerss-int-sideways"></div>
+            <div class="imerss-int-right"></div>
+        </div>
+    </div>`;
+
+fluid.defaults("hortis.drawInteractions", {
+    gradeNames: "fluid.stringTemplateRenderingView",
+    tooltipKey: "hoverCellKey",
+    selectors: {
+        plantNames: ".imerss-plant-names",
+        plantCounts: ".imerss-plant-counts",
+        pollNames: ".imerss-poll-names",
+        pollCounts: ".imerss-poll-counts",
+        interactions: ".imerss-interactions-canvas",
+        scroll: ".imerss-int-scroll",
+        hoverable: ".imerss-int-label"
+    },
+    markup: {
+        container: hortis.interactionMarkup
+    },
+    squareSize: 16,
+    squareMargin: 2,
+    fillStops: hortis.libreMap.natureStops,
+    fillOpacity: 0.7,
+    memoStops: "@expand:fluid.colour.memoStops({that}.options.fillStops, 32)",
+    outlineColour: "black",
+    listeners: {
+        "onCreate.bindEvents": "hortis.drawInteractions.bindEvents",
+        // TODO: We now have one layoutHolder for each checklist, need to complexify this
+        "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {layoutHolder})"
+    },
+    invokers: {
+        renderTooltip: "hortis.renderInteractionTooltip({that}, {arguments}.0)"
+    },
+    members: {
+        hoverCellKey: "@expand:signal()",
+        // plantSelection, pollSelection: injected
+        subscribeRender: `@expand:fluid.effect(hortis.drawInteractions.render, {that}, {interactions},
+            {interactions}.crossTable, {taxa}.rowById)`,
+        subscribeHover: "@expand:hortis.subscribeHover({that})",
+        bipartiteRows: "@expand:signal([])"
+    },
+    components: {
+        pollTooltips: {
+            container: "{that}.dom.pollCounts",
+            type: "hortis.histoTooltips",
+            options: {
+                counts: "pollCounts"
+            }
+        },
+        plantTooltips: {
+            container: "{that}.dom.plantCounts",
+            type: "hortis.histoTooltips",
+            options: {
+                counts: "plantCounts"
+            }
+        }
+    }
+});
+
+fluid.defaults("hortis.histoTooltips", {
+    gradeNames: "fluid.viewComponent",
+    tooltipKey: "hoverId",
+    // counts - an index into nteractions
+    selectors: {
+        hoverable: ".imerss-int-count"
+    },
+    members: {
+        hoverId: "@expand:signal()",
+        subscribeHover: "@expand:hortis.subscribeHover({that})"
+    },
+    invokers: {
+        renderTooltip: "hortis.renderHistoTooltip({that}, {arguments}.0, {interactions})"
+    },
+    listeners: {
+        "onCreate.bindHistoHover": "hortis.bindHistoHover"
+    }
+});
+
+hortis.bindHistoHover = function (that) {
+    const hoverable = that.options.selectors.hoverable;
+    that.container.on("mouseenter", hoverable, function (e) {
+        const id = this.dataset.rowId;
+        that.hoverEvent = e;
+        that.hoverId.value = id;
+    });
+    that.container.on("mouseleave", hoverable, function () {
+        that.hoverId.value = null;
+    });
+};
+
+hortis.renderHistoTooltip = function (that, id, interactions) {
+    const counts = interactions[that.options.counts];
+    const count = counts.counts[id];
+    const row = interactions.rowById.value[id];
+    const name = row.iNaturalistTaxonName;
+    return `<div class="imerss-int-tooltip"><div><i>${name}</i>:</div><div>Observation count: ${count}</div></div>`;
+};
+
+
+hortis.drawInteractions.render = function (that, interactions, crossTable, rowById) {
+    const {plantCounts, pollCounts} = interactions;
+
+    const now = Date.now();
+
+    const filterZero = function (taxonIds, counts) {
+        fluid.remove_if(taxonIds, id => counts[id] === undefined);
+        taxonIds.sort((ea, eb) => counts[eb] - counts[ea]);
+    };
+
+    const filterCutoff = function (taxonIds, counts, sizeLimit, countLimit) {
+        if (taxonIds.length >= sizeLimit) {
+            const cutIndex = taxonIds.findIndex(id => counts[id] < countLimit);
+            if (cutIndex !== -1 && cutIndex >= sizeLimit) {
+                taxonIds.length = cutIndex;
+            }
+        }
+    };
+
+    const selectedPlantIds = Object.keys(plantCounts.counts);
+    const selectedPollIds = Object.keys(pollCounts.counts);
+
+    filterZero(selectedPlantIds, plantCounts.counts);
+    filterZero(selectedPollIds, pollCounts.counts);
+
+    filterCutoff(selectedPlantIds, plantCounts.counts, 100, 5);
+    filterCutoff(selectedPollIds, pollCounts.counts, 100, 5);
+
+    // Read by bindEvents, tooltips, etc.
+    Object.assign(that, {crossTable, selectedPlantIds, selectedPollIds, rowById});
+
+    const taxonIndices = {},
+        idIt = (id, index) => taxonIndices[id] = index;
+    selectedPlantIds.forEach(idIt);
+    selectedPollIds.forEach(idIt);
+
+    const cellTable = [],
+        cellMax = hortis.maxReducer(),
+        cellMin = hortis.minReducer();
+
+    const bipartiteRows = [];
+
+    Object.entries(crossTable).forEach(([key, count]) => {
+        const {plantId, pollId} = hortis.keyToIntIds(key);
+        const plantIndex = taxonIndices[plantId];
+        const pollIndex = taxonIndices[pollId];
+
+        const scaled = count / Math.sqrt((plantCounts.counts[plantId] * pollCounts.counts[pollId]));
+        cellMax.reduce(scaled);
+        cellMin.reduce(scaled);
+        cellTable.push({scaled, plantIndex, pollIndex});
+
+        const plantRow = rowById[plantId];
+        const pollRow = rowById[pollId];
+        bipartiteRows.push([pollRow.iNaturalistTaxonName, plantRow.iNaturalistTaxonName, count]);
+    });
+
+    const delay = Date.now() - now;
+    fluid.log("Computed celltable in " + delay + " ms");
+    that.bipartiteRows.value = bipartiteRows;
+
+    // From here on we read selectedPollIds, selectedPlantIds, cellTable - should be separate function
+
+    const now2 = Date.now();
+
+    const {squareSize, squareMargin} = that.options;
+    const canvas = that.locate("interactions")[0];
+    const ctx = canvas.getContext("2d");
+    const side = squareSize - 2 * squareMargin;
+
+    ctx.lineWidth = 10;
+
+    const width = selectedPollIds.length * squareSize + 2 * squareMargin;
+    const height = selectedPlantIds.length * squareSize + 2 * squareMargin;
+    canvas.width = width;
+    canvas.height = height;
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, width, height);
+
+    const xPos = index => index * squareSize + squareMargin;
+    const yPos = index => index * squareSize + squareMargin;
+
+    cellTable.forEach(function (cell) {
+        const {scaled, plantIndex, pollIndex} = cell;
+        const prop = (scaled - cellMin.value) / (cellMax.value - cellMin.value);
+
+        const colour = fluid.colour.lookupStop(that.options.memoStops, prop);
+        const xywh = [xPos(pollIndex), yPos(plantIndex), side, side];
+
+        ctx.fillStyle = colour;
+        ctx.fillRect.apply(ctx, xywh);
+
+        ctx.strokeStyle = that.options.outlineColour;
+        ctx.strokeRect.apply(ctx, xywh);
+    });
+
+    fluid.log("Celltable draw at  " + (Date.now() - now2) + " ms");
+
+    const yoffset = 0; // offset currently disused
+    const xoffset = -0.75;
+    const countDimen = 48; // Need to hack bars slightly smaller to avoid clipping
+    const countScale = 100 * (1 - 2 / countDimen);
+
+    const plantNames = that.locate("plantNames")[0];
+    plantNames.style.height = height;
+    const plantMark = selectedPlantIds.map(function (plantId, plantIndex) {
+        const row = rowById[plantId];
+        const top = yPos(plantIndex);
+        return `<div class="imerss-int-label" data-row-id="${plantId}" style="top: ${top + yoffset}px">${row.iNaturalistTaxonName}</div>`;
+    });
+    plantNames.innerHTML = plantMark.join("\n");
+
+    const plantCountNode = that.locate("plantCounts")[0];
+    plantCountNode.style.height = height;
+    const plantCountMark = selectedPlantIds.map(function (plantId, plantIndex) {
+        const count = plantCounts.counts[plantId];
+        const prop = fluid.roundToDecimal(countScale * count / plantCounts.max, 2);
+        const top = yPos(plantIndex);
+        // noinspection CssInvalidPropertyValue
+        return `<div class="imerss-int-count" data-row-id="${plantId}" style="top: ${top + yoffset}px; width: ${prop}%; height: ${side}px;"></div>`;
+    });
+    plantCountNode.innerHTML = plantCountMark.join("\n");
+
+    const pollNames = that.locate("pollNames")[0];
+    pollNames.style.width = width;
+    const pollMark = selectedPollIds.map(function (pollId, pollIndex) {
+        const row = rowById[pollId];
+        const left = xPos(pollIndex);
+        return `<div class="imerss-int-label" data-row-id="${pollId}" style="left: ${left + xoffset}px">${row.iNaturalistTaxonName}</div>`;
+    });
+    pollNames.innerHTML = pollMark.join("\n");
+
+    const pollCountNode = that.locate("pollCounts")[0];
+    pollCountNode.style.width = `${width}px`;
+    const pollCountMark = selectedPollIds.map(function (pollId, pollIndex) {
+        const count = pollCounts.counts[pollId];
+        const prop = fluid.roundToDecimal(countScale * count / pollCounts.max, 2);
+        const left = xPos(pollIndex);
+        // noinspection CssInvalidPropertyValue
+        return `<div class="imerss-int-count" data-row-id="${pollId}" style="left: ${left + xoffset}px; height: ${prop}%; width: ${side}px;"></div>`;
+    });
+    pollCountNode.innerHTML = pollCountMark.join("\n");
+
+    const delay2 = Date.now() - now2;
+    fluid.log("Rendered in " + delay2 + " ms");
+};
+
+hortis.interactionTooltipTemplate = `<div class="imerss-tooltip">
+    <div class="imerss-photo" style="background-image: url(%imgUrl)"></div>" +
+    <div class="text"><b>%taxonRank:</b> %taxonNames</div>" +
+    </div>`;
+
+hortis.renderInteractionTooltip = function (that, cellKey) {
+    const {plantId, pollId} = hortis.keyToIntIds(cellKey);
+    const plantRow = that.rowById[plantId];
+    const plantName = plantRow.iNaturalistTaxonName;
+    const pollRow = that.rowById[pollId];
+    const pollName = pollRow.iNaturalistTaxonName;
+    const count = that.crossTable[cellKey];
+    return `<div class="imerss-int-tooltip"><div><i>${pollName}</i> on </div><div><i>${plantName}</i>:</div><div>Count: ${count}</div></div>`;
+};
+
+hortis.drawInteractions.bindEvents = function (that) {
+    const plantNames = that.locate("plantNames")[0];
+    const plantCounts = that.locate("plantCounts")[0];
+    const pollNames = that.locate("pollNames")[0];
+    const pollCounts = that.locate("pollCounts")[0];
+
+    const scroll = that.locate("scroll")[0];
+    scroll.addEventListener("scroll", function () {
+        const scrollTop = scroll.scrollTop;
+        plantNames.scrollTop = scrollTop;
+        plantCounts.scrollTop = scrollTop;
+        const scrollLeft = scroll.scrollLeft;
+        pollNames.scrollLeft = scrollLeft;
+        pollCounts.scrollLeft = scrollLeft;
+    });
+
+    plantNames.addEventListener("scroll", function () {
+        scroll.scrollTop = plantNames.scrollTop;
+    });
+
+    const canvas = that.locate("interactions")[0];
+
+    const {squareSize, squareMargin} = that.options;
+    const buff = squareMargin / squareSize;
+
+    canvas.addEventListener("mousemove", function (e) {
+        const xc = e.offsetX / squareSize,
+            yc = e.offsetY / squareSize;
+        const xb = xc % 1, yb = yc % 1;
+        if (xb >= buff && xb <= 1 - buff && yb >= buff && yb <= 1 - buff) {
+            const pollId = that.selectedPollIds?.[Math.floor(xc)],
+                plantId = that.selectedPlantIds?.[Math.floor(yc)];
+            const key = hortis.intIdsToKey(plantId, pollId);
+            const crossCount = that.crossTable[key];
+            that.hoverEvent = e;
+            that.hoverCellKey.value = crossCount ? key : null;
+        } else {
+            that.hoverCellKey.value = null;
+        }
+    });
+
+    canvas.addEventListener("mouseleave", () => that.hoverCellKey.value = null);
+};
+
+hortis.bbeaGridBucket = () => ({count: 0, byTaxonId: {}, plantByTaxonId: {}});
+
+hortis.indexBbeaObs = function (bucket, row, index) {
+    fluid.pushArray(bucket.byTaxonId, row.pollinatorINatId, index);
+    fluid.pushArray(bucket.plantByTaxonId, row.plantINatId, index);
+};
+
+fluid.defaults("hortis.bbeaObsQuantiser", {
+    members: {
+        // Not invokers for performance
+        newBucket: hortis.bbeaGridBucket,
+        indexObs: hortis.indexBbeaObs
+    }
+});
+
+fluid.defaults("hortis.bbeaLibreMap", {
+    gradeNames: ["hortis.libreObsMap", "hortis.libreMap.withTiles", "hortis.libreMap.streetmapTiles", "hortis.libreMap.usEcoL3Tiles"],
+    components: {
+        obsQuantiser: {
+            type: "hortis.obsQuantiser",
+            options: {
+                gradeNames: "hortis.bbeaObsQuantiser"
+            }
+        }
+    }
+});
+
+fluid.defaults("hortis.recordReporter", {
+    gradeNames: "fluid.stringTemplateRenderingView",
+    invokers: {
+        signalsToModel: {
+            args: "{that}.options.signals",
+            func: ({filteredObs, obsRows}) => ({
+                filteredRows: filteredObs.value.length,
+                allRows: obsRows.value.length
+            })
+        },
+        renderMarkup: {
+            args: ["{that}.options.markup", "{that}.signalsToModel"],
+            func: (markup, signalsToModel) => {
+                const model = signalsToModel();
+                return model.filteredRows ? fluid.stringTemplate(markup.container, model) : markup.fallbackContainer;
+            }
+        }
+    },
+    markup: {
+        fallbackContainer: "<div></div>",
+        container: "<div>Displaying %filteredRows of %allRows records</div>"
+    }
+});
+
+
+
+fluid.defaults("hortis.sexFilter", {
+    gradeNames: ["hortis.filter", "fluid.stringTemplateRenderingView"],
+    markup: {
+        container: `
+        <div class="imerss-sex-filter">
+            <div class="imerss-filter-title">Sex selection:</div>
+            <div class="imerss-filter-body imerss-sex-filter-checks"> 
+            Male: <div class="imerss-male-check"></div>
+            Female: <div class="imerss-female-check"></div>
+            </div>
+        </div>
+        `
+    },
+    members: {
+        male: "@expand:signal()",
+        female: "@expand:signal()",
+        filterState: "@expand:fluid.computed(hortis.sexFilter.toState, {that}.male, {that}.female)"
+    },
+    invokers: {
+        doFilter: "hortis.sexFilter.doFilter"
+    },
+    selectors: {
+        male: ".imerss-male-check",
+        female: ".imerss-female-check"
+    },
+    components: {
+        maleCheckbox: {
+            type: "hortis.checkbox",
+            container: "{that}.dom.male",
+            options: {
+                members: {
+                    value: "{sexFilter}.male"
+                }
+            }
+        },
+        femaleCheckbox: {
+            type: "hortis.checkbox",
+            container: "{that}.dom.female",
+            options: {
+                members: {
+                    value: "{sexFilter}.female"
+                }
+            }
+        }
+    }
+});
+
+hortis.sexFilter.toState = function (male, female) {
+    return {male, female};
+};
+
+hortis.sexFilter.doFilter = function (obsRows, filterState) {
+    const now = Date.now();
+    const all = !(filterState.female || filterState.male);
+
+    const togo = all ? obsRows :
+        obsRows.filter(row => row.sex === "F" && filterState.female || row.sex === "M" && filterState.male);
+    const delay = Date.now() - now;
+    fluid.log("Filtered " + obsRows.length + " obs to " + togo.length + " in " + delay + " ms");
+    return togo;
+};
+
+
+hortis.computeCollectors = function (obsRows) {
+    const collectors = {};
+    obsRows.forEach(row => {
+        row.Collectors.split(";").map(lump => lump.trim()).map(trimmed => collectors[trimmed] = true);
+    });
+    return Object.keys(collectors);
+};
+
+fluid.defaults("hortis.collectorFilter", {
+    gradeNames: ["hortis.filter", "fluid.stringTemplateRenderingView"],
+    markup: {
+        container: `
+        <div class="imerss-collector-filter">
+            <label class="imerss-filter-title" for="fli-imerss-collector">Collector:</label>
+            <div class="imerss-filter-body imerss-collector-autocomplete">
+                <div class="imerss-filter-clear imerss-hidden"></div>
+            </div>
+        </div>
+        `
+    },
+    members: {
+        obsRows: "{vizLoader}.obsRows",
+        // TODO: This is lazy, we really want it computed at any "idle time" so as not to delay 3rd keystroke
+        collectors: "@expand:fluid.computed(hortis.computeCollectors, {that}.obsRows)",
+        filterState: "@expand:signal()"
+    },
+    invokers: {
+        doFilter: "hortis.collectorFilter.doFilter"
+    },
+    selectors: {
+        autocomplete: ".imerss-collector-autocomplete",
+        clearFilter: ".imerss-filter-clear",
+        control: "#fli-imerss-collector"
+    },
+    listeners: {
+        "onCreate.bindClearClick": {
+            func: (that) => that.dom.locate("clearFilter").on("click", () => {
+                that.dom.locate("control").val("");
+                fluid.invokeLater(() => that.filterState.value = "");
+            })
+        },
+        "onCreate.bindShowClear": {
+            args: ["{that}.dom.clearFilter.0", "{that}.filterState"],
+            func: (node, filterState) => effect(() => hortis.toggleClass(node, "imerss-hidden", !filterState.value))
+        }
+    },
+    components: {
+        autocomplete: {
+            type: "hortis.autocomplete",
+            options: {
+                container: "{filter}.dom.autocomplete",
+                id: "fli-imerss-collector",
+                maxSuggestions: 10,
+                widgetOptions: {
+                    minLength: 3
+                },
+                listeners: {
+                    onConfirm: {
+                        args: ["{filter}", "{arguments}.0"],
+                        func: (filter, selection) => filter.filterState.value = selection
+                    }
+                },
+                invokers: {
+                    //                                                                   query,         callback
+                    query: "hortis.queryAutocompleteCollector({filter}.collectors.value, {arguments}.0, {arguments}.1)"
+                }
+            }
+        }
+    }
+});
+
+hortis.collectorFilter.doFilter = function (obsRows, filterState) {
+    const all = !(filterState);
+    return all ? obsRows : obsRows.filter(row =>row.Collectors.includes(filterState));
+};
+
+hortis.queryAutocompleteCollector = function (collectors, query, callback) {
+    const lowerQuery = query.toLowerCase();
+    const results = query.length < 3 ? [] : collectors.filter(collector => collector.toLowerCase().includes(lowerQuery));
+    callback(results);
+};
+
+fluid.defaults("hortis.bbeaFilters", {
+    gradeNames: ["hortis.filters", "fluid.stringTemplateRenderingView"],
+    markup: {
+        container: `
+        <div class="imerss-filters">
+            <div class="imerss-filter"></div>
+            <div class="imerss-sex-filter imerss-filter"></div>
+            <div class="imerss-collector-filter imerss-filter"></div>
+        </div>
+        `
+    },
+    selectors: {
+        sexFilter: ".imerss-sex-filter",
+        collectorFilter: ".imerss-collector-filter"
+    },
+    components: {
+        sexFilter: {
+            type: "hortis.sexFilter",
+            container: "{that}.dom.sexFilter"
+        },
+        collectorFilter: {
+            type: "hortis.collectorFilter",
+            container: "{that}.dom.collectorFilter"
+        }
+    }
+});

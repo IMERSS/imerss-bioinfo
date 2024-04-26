@@ -28,7 +28,8 @@ fluid.defaults("hortis.autocomplete", {
         renderInputValue: "fluid.identity"
     },
     widgetOptions: {
-        displayMenu: "overlay"
+        displayMenu: "overlay",
+        confirmOnBlur: false
     }
 });
 

@@ -414,8 +414,10 @@ hortis.computeTaxonDisplayRow = function (taxonObs, taxaById, taxonId) {
                 target[prefix + key] = row[value];
             });
         };
-        obsToFields(togo, "first", taxonObs[0]);
-        obsToFields(togo, "last", fluid.peek(taxonObs));
+        if (taxonObs.length > 0) {
+            obsToFields(togo, "first", taxonObs[0]);
+            obsToFields(togo, "last", fluid.peek(taxonObs));
+        }
         return togo;
     } else {
         return null;

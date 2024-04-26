@@ -19,6 +19,8 @@ var hortis = fluid.registerNamespace("hortis");
 fluid.defaults("hortis.tabs", {
     gradeNames: ["fluid.viewComponent"],
     tabOptions: {},
+    tabIds: {
+    },
     model: {
         selectedTab: null
     },

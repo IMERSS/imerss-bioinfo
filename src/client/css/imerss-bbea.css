@@ -162,3 +162,92 @@ body {
     font-size: 15px;
 }
 
+.imerss-taxonDisplay {
+    display: none;
+}
+
+.imerss-sex-filter-checks {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.imerss-sex-filter-checks > div {
+    display: flex;
+    padding-left: 5px;
+}
+
+.imerss-filter-panel {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.imerss-filter {
+    padding: 2px 0 2px;
+    border-bottom: 1px solid #dbe3e7;
+}
+
+.imerss-filters {
+    height: 100%;
+    width: 20rem;
+}
+
+.imerss-filter-title {
+    font-size: smaller;
+}
+
+.imerss-filter-body {
+    padding-left: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.imerss-filter-clear {
+    background-image: url(../img/x-circle-close.svg);
+    background-size: 20px;
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+.imerss-filter-clear.imerss-hidden {
+    display: none;
+}
+
+.imerss-filters .autocomplete__hint, .imerss-filters .autocomplete__input, .imerss-filters .autocomplete__option {
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.imerss-filters .autocomplete__input--default {
+    padding: 2px 4px 2px 4px;
+    border-width: 1px;
+    width: 15rem;
+}
+
+.imerss-bipartite {
+    overflow: scroll;
+    height: 100%;
+    font-size: 14px;
+}
+
+/* Follow this illogical advice: https://stackoverflow.com/a/66689926/1381443 */
+.imerss-tabs {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.imerss-tab-panel {
+    height: 100%;
+    min-height: 0;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 0.5em;
+}

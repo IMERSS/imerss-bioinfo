@@ -9,8 +9,8 @@
             colour: "#931362"
         },
         iNat: {
-            name: "Xetthecum iNaturalist Observations (2005-2023)",
-            input: "%imerss-bioinfo/data/Xetthecum/iNaturalist_Catalogue_2023_08_08.csv",
+            name: "iNaturalist Observations (2005-2024)",
+            input: "%imerss-bioinfo/data/Galiano 2024/Galiano_Union_Catalogue_2024_04_24.csv",
             map: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-map-new.json",
             outMap: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-out-map.json",
             colour: "#2C8C99",

@@ -1,0 +1,4 @@
+vizjs.js from http://vizjs.org/viz.v1.1.0.min.js
+GitHub repository https://github.com/NPashaP/Viz
+Version 1.1.0 as of https://github.com/NPashaP/Viz/blob/6ef9016b0bc16e658fc60f9b23e898b63c7bed85/viz.v1.js
+Version of July 31st 2016
