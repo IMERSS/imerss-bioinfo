@@ -54,8 +54,7 @@ fluid.defaults("hortis.beaVizLoader", {
                 selectable: true,
                 members: {
                     rowById: "{taxa}.rowById",
-                    rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, pollRowFocus)",
-                    allRowFocus: "@expand:fluid.derefSignal({vizLoader}.allTaxaFromObs, pollRowFocus)"
+                    rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, pollRowFocus)"
                 }
             }
         },
@@ -70,8 +69,7 @@ fluid.defaults("hortis.beaVizLoader", {
                 selectable: true,
                 members: {
                     rowById: "{taxa}.rowById",
-                    rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, plantRowFocus)",
-                    allRowFocus: "@expand:fluid.derefSignal({vizLoader}.allTaxaFromObs, plantRowFocus)"
+                    rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, plantRowFocus)"
                 }
             }
         },
@@ -92,10 +90,11 @@ fluid.defaults("hortis.beaVizLoader", {
             type: "hortis.interactions",
             options: {
                 members: {
-                    obsRows: "{vizLoader}.finalFilteredObs",
+                    obsRows: "{vizLoader}.filteredObs",
                     plantSelection: "{plantChecklist}.rowSelection",
                     pollSelection: "{pollChecklist}.rowSelection",
-                    rowById: "{taxa}.rowById"
+                    rowById: "{taxa}.rowById",
+                    finalFilteredObs: "{vizLoader}.finalFilteredObs"
                 }
             }
         },
@@ -119,11 +118,12 @@ fluid.defaults("hortis.beaVizLoader", {
         filteredObs: "{filters}.allOutput",
         taxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.filteredObs, {taxa}.rowById)",
         allTaxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.obsRows, {taxa}.rowById)",
-        finalFilteredObs: `@expand:fluid.computed(hortis.filterObsByTwoTaxa, {that}.filteredObs, 
-                {plantChecklist}.rowFocus, {pollChecklist}.rowFocus)`
+        finalFilteredObs: "@expand:signal([])"
+
+        //`@expand:fluid.computed(hortis.filterObsByTwoTaxa, {that}.filteredObs,
+        //    {plantChecklist}.rowFocus, {pollChecklist}.rowFocus)`
     },
     invokers: {
-        // filterObs: "hortis.filterObs
     }
 });
 
@@ -258,6 +258,8 @@ hortis.interactions.count = function (that, rows, plantSelection, pollSelection)
     const now = Date.now();
     const f = hash => Object.keys(hash).length;
 
+    const finalFilteredObs = [];
+
     // Currently get several notifications during startup, turn checklist's rowSelection into a computed rather than effect
     if (f(plantSelection) && f(pollSelection)) {
         rows.forEach(function (row) {
@@ -271,6 +273,7 @@ hortis.interactions.count = function (that, rows, plantSelection, pollSelection)
                     hortis.addCount(crossTable, key);
                     hortis.addCount(plantCounts.counts, plantCountKey);
                     hortis.addCount(pollCounts.counts, pollCountKey);
+                    finalFilteredObs.push(row);
                 }
             }
         });
@@ -289,6 +292,8 @@ hortis.interactions.count = function (that, rows, plantSelection, pollSelection)
 
     that.plantCounts = plantCounts;
     that.pollCounts = pollCounts;
+    // Hack since we are in a computation - in fact count should make a multiple return
+    fluid.invokeLater(() => that.finalFilteredObs.value = finalFilteredObs);
     return crossTable;
 };
 
@@ -761,6 +766,105 @@ hortis.sexFilter.doFilter = function (obsRows, filterState) {
     return togo;
 };
 
+fluid.defaults("hortis.regionFilter", {
+    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.stringTemplateRenderingView"],
+    markup: {
+        container: `
+        <div class="imerss-region-filter">
+            <div class="imerss-filter-title">%filterName:</div>
+            <div class="imerss-filter-body imerss-region-filter-rows">%rows</div>
+        </div>
+        `,
+        row: `
+        <div class="imerss-filter-row">
+            <div class="imerss-row-label">%rowLabel</div>
+            <div class="imerss-row-checkbox">%checkbox</div>
+        </div>
+        `
+    },
+    // fieldName
+    // filterName
+    members: {
+        values: "@expand:fluid.computed(hortis.regionFilter.computeValues, {that}.obsRows, {that}.options.fieldName)",
+        filterState: "@expand:signal({})"
+    },
+    invokers: {
+        signalsToModel: "hortis.regionFilter.signalsToModel({that}.values, {that}.idToLabel, {that}.options.markup, {that}.options.filterName)",
+        idToLabel: "fluid.identity",
+        doFilter: "hortis.regionFilter.doFilter({that}.options.fieldName, {arguments}.0, {arguments}.1)"
+    },
+    listeners: {
+        "onCreate.bindClick": "hortis.regionFilter.bindClick"
+    }
+});
+
+hortis.regionFilter.doFilter = function (fieldName, obsRows, filterState) {
+    const all = Object.keys(filterState).length === 0;
+
+    return all ? obsRows : obsRows.filter(row => filterState[row[fieldName]]);
+};
+
+// cf. hortis.checklist.bindCheckboxClick
+hortis.regionFilter.bindClick = function (that) {
+    that.container.on("click", ".pretty input", function () {
+        const id = this.dataset.rowId;
+        fluid.log("Filter clicked with row " + id);
+        const filterState = {...that.filterState.value};
+        if (this.checked) {
+            filterState[id] = true;
+        } else {
+            delete filterState[id];
+        }
+        that.filterState.value = filterState;
+    });
+};
+
+
+fluid.defaults("hortis.regionFilter.withLookup", {
+    // idField,
+    // nameField
+    members: {
+        indirection: "@expand:signal([])"
+    },
+    invokers: {
+        lookupId: "hortis.regionFilter.withLookup.lookupId({that}, {arguments}.0)",
+        idToLabel: "{that}.lookupId({arguments}.0)"
+    }
+});
+
+hortis.regionFilter.withLookup.lookupId = function (that, id) {
+    const rows = that.indirection.value;
+    return rows.find(row => row[that.options.idField] === id)?.[that.options.nameField];
+};
+
+hortis.regionFilter.computeValues = function (obsRows, fieldName) {
+    const values = {};
+    obsRows.forEach(row => {
+        const value = row[fieldName];
+        if (value !== undefined && value !== "") {
+            values[value] = true;
+        }
+    });
+    return Object.keys(values);
+};
+
+hortis.regionFilter.renderRow = function (template, rowLabel, rowId) {
+    const rowIdAttr = ` data-row-id="${rowId}"`;
+    return fluid.stringTemplate(template, {
+        rowLabel,
+        checkbox: hortis.rowCheckbox(rowIdAttr)
+    });
+};
+
+hortis.regionFilter.signalsToModel = function (valuesSig, idToLabel, markup, filterName) {
+    const values = valuesSig.value;
+
+    return {
+        filterName,
+        rows: values.map(value => hortis.regionFilter.renderRow(markup.row, idToLabel(value), value)).join("\n")
+    };
+};
+
 
 hortis.computeCollectors = function (obsRows) {
     const collectors = {};
@@ -770,8 +874,14 @@ hortis.computeCollectors = function (obsRows) {
     return Object.keys(collectors);
 };
 
+fluid.defaults("hortis.dataDrivenFilter", {
+    members: {
+        obsRows: "{hortis.filters}.obsRows"
+    }
+});
+
 fluid.defaults("hortis.collectorFilter", {
-    gradeNames: ["hortis.filter", "fluid.stringTemplateRenderingView"],
+    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.stringTemplateRenderingView"],
     markup: {
         container: `
         <div class="imerss-collector-filter">
@@ -783,7 +893,7 @@ fluid.defaults("hortis.collectorFilter", {
         `
     },
     members: {
-        obsRows: "{vizLoader}.obsRows",
+        // obsRows:
         // TODO: This is lazy, we really want it computed at any "idle time" so as not to delay 3rd keystroke
         collectors: "@expand:fluid.computed(hortis.computeCollectors, {that}.obsRows)",
         filterState: "@expand:signal()"
@@ -852,12 +962,19 @@ fluid.defaults("hortis.bbeaFilters", {
             <div class="imerss-filter"></div>
             <div class="imerss-sex-filter imerss-filter"></div>
             <div class="imerss-collector-filter imerss-filter"></div>
+            <div class="imerss-monument-filter imerss-filter"></div>
+            <div class="imerss-l3eco-filter imerss-filter"></div>
         </div>
         `
     },
+    members: {
+        obsRows: "{vizLoader}.obsRows"
+    },
     selectors: {
         sexFilter: ".imerss-sex-filter",
-        collectorFilter: ".imerss-collector-filter"
+        collectorFilter: ".imerss-collector-filter",
+        monumentFilter: ".imerss-monument-filter",
+        l3ecoFilter: ".imerss-l3eco-filter"
     },
     components: {
         sexFilter: {
@@ -867,6 +984,34 @@ fluid.defaults("hortis.bbeaFilters", {
         collectorFilter: {
             type: "hortis.collectorFilter",
             container: "{that}.dom.collectorFilter"
+        },
+        monumentFilter: {
+            type: "hortis.regionFilter",
+            container: "{that}.dom.monumentFilter",
+            options: {
+                filterName: "Monument",
+                fieldName: "monument"
+            }
+        },
+        l3ecoFilter: {
+            type: "hortis.regionFilter",
+            container: "{that}.dom.l3ecoFilter",
+            options: {
+                gradeNames: "hortis.regionFilter.withLookup",
+                filterName: "L3 ecoregion",
+                fieldName: "US_L3CODE",
+                idField: "US_L3CODE",
+                nameField: "US_L3NAME",
+                members: {
+                    indirection: "{ecoL3Loader}.rows"
+                },
+                invokers: {
+                    idToLabel: {
+                        args: ["{that}", "{arguments}.0"],
+                        func: (that, id) => `${id}. ${that.lookupId(id)}`
+                    }
+                }
+            }
         }
     }
 });

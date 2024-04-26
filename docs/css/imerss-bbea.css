@@ -202,7 +202,6 @@ body {
     position: relative;
     display: flex;
     flex-direction: row;
-    align-items: center;
 }
 
 .imerss-filter-clear {
@@ -228,6 +227,27 @@ body {
     padding: 2px 4px 2px 4px;
     border-width: 1px;
     width: 15rem;
+}
+
+.imerss-region-filter-rows {
+    display: flex;
+    font-size: smaller;
+    flex-direction: column;
+    overflow-y: auto;
+    align-items: end;
+}
+
+.imerss-l3eco-filter .imerss-filter-body {
+    height: 5rem;
+}
+
+.imerss-filter-row {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.imerss-filter-row .imerss-row-label {
+    padding-right: 0.5rem;
 }
 
 .imerss-bipartite {

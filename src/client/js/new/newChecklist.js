@@ -27,20 +27,6 @@ hortis.renderSpeciesName = function (name) {
     return name.replace(hortis.annoteRegex, "<span class=\"checklist-annote\">$1</span>");
 };
 
-// In indeterminate state, add p-is-indeterminate to div state
-// In indeterminate state remove mdi-check from i
-
-hortis.checklistCheckbox = function (rowid) {
-    return `
-    <span class="pretty p-icon">
-      <input type="checkbox" class="checklist-check" ${rowid}/>
-      <span class="state p-success">
-        <i class="icon mdi mdi-check"></i>
-        <label></label>
-      </span>
-    </span>`;
-};
-
 // Duplicate from renderSVG.js so we don't need to rebuild temporarily whilst we work on Xetthecum
 hortis.encodeHTML = function (str) {
     return str.replace(/[&<>'"]/g, function (tag) {
@@ -61,7 +47,7 @@ hortis.rowToScientific = function (row) {
 hortis.checklistItem = function (entry, selectedId, simple, selectable) {
     const record = entry.row;
     const styleprop = "";
-    const rowid = " data-row-id=\"" + record.id + "\"";
+    const rowid = ` data-row-id="${record.id}"`;
     // Note: "species" really means "has obs " and could be a higher taxon - in the case of a simple checklist
     // we promote e.g. a genus-level obs to species level so it appears inline
     const rank = record.rank && !(simple && record.taxonName) ? record.rank : "species";
@@ -79,7 +65,7 @@ hortis.checklistItem = function (entry, selectedId, simple, selectable) {
     }
     const subList = hortis.checklistList(entry.children, selectedId, simple, selectable);
     const footer = "</li>";
-    const check = (selectable ? hortis.checklistCheckbox(rowid) : "");
+    const check = (selectable ? hortis.rowCheckbox(rowid) : "");
     return header + check + name + subList + footer;
 };
 
@@ -194,6 +180,8 @@ fluid.defaults("hortis.checklist", {
     members: {
         idToState: "@expand:signal({})",
         // cache of old value used during generateChecklist render cycle
+        // rowById: required for tooltips
+        // rowFocus
         oldIdToState: {},
         rowSelection: "@expand:fluid.computed(hortis.checklist.checksToSelection, {checklist}.idToState)",
         subscribeChecks: "@expand:hortis.checklist.subscribeChecks({that}.idToState, {that})",

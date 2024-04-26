@@ -119,9 +119,6 @@ fluid.defaults("fluid.stringTemplateRenderingView", {
     elideParent: true,
     hasRoot: true,
     members: {
-        // The smallest possible interval between evaluateContainers and subscribing to updates - but a fully integrated
-        // solution would set up the subscription as part of the action of fluid.containerRenderingView's "renderContainer"
-        // renderSubscribe: "@expand:fluid.renderSubscribe({that}, {that}.signalsToModel)"
     },
     signals: { // override with your signals in here
     }

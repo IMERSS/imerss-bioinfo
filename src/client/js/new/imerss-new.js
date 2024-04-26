@@ -32,6 +32,9 @@ fluid.defaults("hortis.csvReader", {
         header: true,
         skipEmptyLines: true
     },
+    members: {
+        rows: "@expand:signal([])"
+    },
     events: {
     },
     listeners: {
@@ -60,6 +63,7 @@ hortis.csvReader.parse = function (that, csvOptions, url) {
             that.data = results.data;
             that.headers = results.meta.fields;
             that.completionPromise.resolve(that.data);
+            that.rows.value = that.data;
         },
         error: function (err) {
             that.completionPromise.reject();
@@ -128,6 +132,9 @@ fluid.defaults("hortis.filter", {
     members: {
         filterInput: null, // must be overridden
         filterOutput: null // must be overridden
+    },
+    invokers: {
+        // doFilter
     }
 });
 
@@ -166,6 +173,20 @@ hortis.vizLoader.bindResources = async function (that) {
         that.obsRows.value = obs;
         that.resourcesLoaded.value = true;
     });
+};
+
+// In indeterminate state, add p-is-indeterminate to div state
+// In indeterminate state remove mdi-check from i
+
+hortis.rowCheckbox = function (rowid) {
+    return `
+    <span class="pretty p-icon">
+      <input type="checkbox" class="checklist-check" ${rowid}/>
+      <span class="state p-success">
+        <i class="icon mdi mdi-check"></i>
+        <label></label>
+      </span>
+    </span>`;
 };
 
 hortis.taxonTooltipTemplate =
@@ -498,8 +519,10 @@ hortis.expandBounds = function (bounds, factor) {
     const height = bounds[1][0] - bounds[0][0];
     const he = width * factor;
     const ve = height * factor;
-    bounds[0][0] -= ve; bounds[0][1] -= he;
-    bounds[1][0] += ve; bounds[1][1] += he;
+    if (width < 360) {
+        bounds[0][0] -= ve; bounds[0][1] -= he;
+        bounds[1][0] += ve; bounds[1][1] += he;
+    }
 };
 
 // Basic style: https://github.com/maplibre/maplibre-gl-js/issues/638
@@ -745,6 +768,7 @@ fluid.defaults("hortis.obsQuantiser", {
         baseLatitude: "@expand:signal(37.5)",
         longResolution: "@expand:signal(0.005)",
         latResolution: "@expand:fluid.computed(hortis.longToLat, {that}.longResolution, {that}.baseLatitude)",
+        maxBounds: "@expand:fluid.computed(hortis.obsBounds, {vizLoader}.obsRows)",
         grid: {
             expander: {
                 funcName: "fluid.computed",
@@ -765,6 +789,14 @@ hortis.obsQuantiser.coordToIndex = function (lat, long, latres, longres) {
     return latq + "|" + longq;
 };
 
+hortis.obsBounds = function (rows) {
+    const bounds = hortis.initBounds();
+    rows.forEach(function (row) {
+        hortis.updateBounds(bounds, row.decimalLatitude, row.decimalLongitude);
+    });
+    return bounds;
+};
+
 hortis.obsQuantiser.indexObs = function (that, rows, latRes, longRes) {
     const grid = hortis.obsQuantiser.initGrid();
 
@@ -781,9 +813,11 @@ hortis.obsQuantiser.indexObs = function (that, rows, latRes, longRes) {
         grid.maxCount = Math.max(grid.maxCount, bucket.count);
         that.indexObs(bucket, row, index);
     });
-    if (rows.length > 0) {
-        hortis.expandBounds(grid.bounds, 0.1); // mapBox fitBounds are a bit tight
+    if (rows.length === 0) {
+        grid.bounds = [...that.maxBounds.value];
     }
+    hortis.expandBounds(grid.bounds, 0.1); // mapBox fitBounds are a bit tight
+
     const delay = Date.now() - now;
     fluid.log("Gridded " + rows.length + " rows in " + delay + " ms: " + 1000 * (delay / rows.length) + " us/row");
 
