@@ -2483,5 +2483,16 @@
             }
         },
         iNaturalistTaxonId: "75316"
+    }, // Xetthecum Phase III swaps from here
+    "Camassia leichtlinii": {
+        taxonNames: {
+            "Camassia leichtlinii suksdorfii": {
+                resolvedBy: "AB",
+                notes: "This is the species that we link to",
+                oldiNaturalistTaxonId: "79659",
+                scope: "Xetthecum"
+            }
+        },
+        iNaturalistTaxonId: "62218"
     }
 }

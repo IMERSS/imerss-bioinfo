@@ -319,12 +319,12 @@ fluid.defaults("hortis.bipartite", {
 
 hortis.bipartite.render = function (svgNode, bipartiteRows, beeSelection) {
     const svg = d3.select(svgNode);
-    imerss.bipartitePP(bipartiteRows, svg, 1000, 2500, {
+    imerss.bipartitePP(bipartiteRows, svg, 1000, 1000, {
         FigureLabel: "",
         sortedBeeNames: Object.keys(beeSelection),
         beeColors: hortis.familyColours,
-        MainFigSizeX: 400,
-        MainFigSizeY: 2000
+        MainFigSizeX: 300,
+        MainFigSizeY: 600
     });
 };
 

@@ -24,7 +24,7 @@ hortis.annoteRegex = new RegExp("(" + hortis.sppAnnotations.map(annot => annot.r
 
 // Render a species name with annotation specially rendered in Roman font
 hortis.renderSpeciesName = function (name) {
-    return name.replace(hortis.annoteRegex, "<span class=\"checklist-annote\">$1</span>");
+    return name.replace(hortis.annoteRegex, `<span class="checklist-annote">$1</span>`);
 };
 
 // Duplicate from renderSVG.js so we don't need to rebuild temporarily whilst we work on Xetthecum
@@ -44,35 +44,48 @@ hortis.rowToScientific = function (row) {
     return row.taxonName || row.iNaturalistTaxonName;
 };
 
-hortis.checklistItem = function (entry, selectedId, simple, selectable) {
+hortis.accessRowHulq = function (row) {
+    const togo = {
+        nativeName: row.hulquminumName,
+        scientificName: hortis.rowToScientific(row),
+        commonName: row.commonName
+    };
+    togo.featuredName = togo.nativeName || togo.commonName;
+    return togo;
+};
+
+hortis.checklistItem = function (accessRow, entry, selectedId, simple, selectable) {
     const record = entry.row;
-    const styleprop = "";
     const rowid = ` data-row-id="${record.id}"`;
     // Note: "species" really means "has obs " and could be a higher taxon - in the case of a simple checklist
     // we promote e.g. a genus-level obs to species level so it appears inline
     const rank = record.rank && !(simple && record.taxonName) ? record.rank : "species";
-    const selectedClass = rank === "species" && record.id === selectedId ? " class=\"checklist-selected\"" : "";
-    const header = "<li " + selectedClass + ">";
+    const selectedClass = rank === "species" && record.id === selectedId ? " checklist-selected" : "";
+    const header = `<li class="checklist-rank-${rank}${selectedClass}">`;
+    const accessed = accessRow(record);
     const render = rank === "species" ? hortis.renderSpeciesName : fluid.identity;
-    let name = "<p " + styleprop + rowid + " class=\"checklist-rank-" +
-        rank + "\">" + render(hortis.encodeHTML(hortis.rowToScientific(record))) + "</p>";
-    if (record.commonName) {
-        name += " - <p " + styleprop + rowid + " class=\"checklist-common-name\">" + record.commonName + "</p>";
+    const names = {};
+    if (accessed.nativeName) {
+        names.nativeName = `<p ${rowid} class="checklist-hulq-name"><em>${accessed.nativeName}</em></p>`;
+    };
+    if (accessed.scientificName) {
+        names.scientificName = `<p ${rowid} class="checklist-scientific-name">${render(hortis.encodeHTML(accessed.scientificName))}</p>`;
     }
-    const hulqName = record["Hulquminum Name"];
-    if (hulqName) {
-        name += " - <p " + styleprop + rowid + " class=\"checklist-hulq-name\"><em>" + hulqName + "</em></p>";
+    if (accessed.commonName) {
+        names.commonName = `<p ${rowid} class="checklist-common-name">${accessed.commonName}</p>`;
     }
-    const subList = hortis.checklistList(entry.children, selectedId, simple, selectable);
+    // TODO: Sort according to order in accessRow
+    const name = Object.values(names).join(" - ");
+    const subList = hortis.checklistList(accessRow, entry.children, selectedId, simple, selectable);
     const footer = "</li>";
     const check = (selectable ? hortis.rowCheckbox(rowid) : "");
     return header + check + name + subList + footer;
 };
 
-hortis.checklistList = function (entries, selectedId, simple, selectable) {
+hortis.checklistList = function (accessRow, entries, selectedId, simple, selectable) {
     return entries.length ?
         "<ul>" + entries.map(function (entry) {
-            return hortis.checklistItem(entry, selectedId, simple, selectable);
+            return hortis.checklistItem(accessRow, entry, selectedId, simple, selectable);
         }).join("") + "</ul>" : "";
 };
 
@@ -161,6 +174,9 @@ fluid.defaults("hortis.checklist", {
         checklist: ".imerss-checklist"
     },
     invokers: {
+        accessRow: {
+            funcName: "hortis.accessRowHulq"
+        },
         acceptChecklistRow: {
             funcName: "hortis.acceptChecklistRowAS",
             //     row
@@ -242,11 +258,10 @@ hortis.checklist.subscribeChecks = function (idToStateSignal, checklist) {
 //         },
 hortis.checklist.subscribeSelected = function (that, selectedIdSignal, rowByIdSignal) {
     let oldSelectedId = undefined;
-    return effect( () => {
-        const newSelectedId = selectedIdSignal.value;
-        hortis.updateChecklistSelection(that.container, newSelectedId, oldSelectedId, rowByIdSignal.peek());
+    return fluid.effect(function (newSelectedId, rowById) {
+        hortis.updateChecklistSelection(that.container, newSelectedId, oldSelectedId, rowById);
         oldSelectedId = newSelectedId;
-    });
+    }, selectedIdSignal, rowByIdSignal);
 };
 
 // This used to read:
@@ -255,19 +270,14 @@ hortis.checklist.subscribeSelected = function (that, selectedIdSignal, rowByIdSi
 //         func: "{that}.generateChecklist"
 // },
 hortis.checklist.subscribeGenerate = function (that, rootIdSignal, selectedIdSignal, rowFocusSignal, rowByIdSignal) {
-    return effect( () => {
+    return fluid.effect(function (rootId, selectedId, rowFocus, rowById) {
         // note that this reads selectedId but does not depend on it because of rendering optimisation
-        const rootId = rootIdSignal.value,
-            selectedId = selectedIdSignal.value,
-            rowFocus = rowFocusSignal.value,
-            rowById = rowByIdSignal.value;
-
         const model = {rootId, selectedId, rowFocus, rowById};
         that.generateChecklist(model);
         // Writes: idToEntry, idToNode, idToState
         // idToNode is a cache just used in stateToCheck, no need to signalise it
         // Updates signal idToState
-    });
+    }, rootIdSignal, selectedIdSignal, rowFocusSignal, rowByIdSignal);
 };
 
 hortis.checklist.stateToCheck = function (checklist, state, id) {
@@ -297,7 +307,7 @@ hortis.checklist.generate = function (that, element, layoutHolder, filterTaxonom
         that.idToState.value = idToState;
     }
 
-    const markup = hortis.checklistList(filteredEntries, selectedId, simple, selectable);
+    const markup = hortis.checklistList(that.accessRow, filteredEntries, selectedId, simple, selectable);
     element[0].innerHTML = markup;
     if (selectable) {
         const checks = element[0].querySelectorAll(".checklist-check");

@@ -11,39 +11,43 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 
 "use strict";
 
-// TODO: Hoist this into some kind of core library
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
-var {signal, effect, computed, batch} = preactSignalsCore;
+var {signal, effect, computed} = preactSignalsCore;
 
 // Monkey-patch core framework to support wide range of primitives and JSON initial values
 fluid.coerceToPrimitive = function (string) {
     return /^(true|false|null)$/.test(string) || /^[\[{0-9]/.test(string) && !/^{\w/.test(string) ? JSON.parse(string) : string;
 };
 
+fluid.processSignalArgs = function (args) {
+    let undefinedSignals = false;
+    const designalArgs = [];
+    for (const arg of args) {
+        if (arg instanceof preactSignalsCore.Signal) {
+            const value = arg.value;
+            designalArgs.push(arg.value);
+            if (value === undefined) {
+                undefinedSignals = true;
+            }
+        } else {
+            designalArgs.push(arg);
+        }
+    }
+    return {designalArgs, undefinedSignals};
+};
+
 fluid.computed = function (func, ...args) {
     return computed( () => {
-        const designalArgs = args.map(arg => arg instanceof preactSignalsCore.Signal ? arg.value : arg);
-        return typeof(func) === "string" ? fluid.invokeGlobalFunction(func, designalArgs) : func.apply(null, designalArgs);
+        const {designalArgs, undefinedSignals} = fluid.processSignalArgs(args);
+        return undefinedSignals ? undefined :
+            typeof(func) === "string" ? fluid.invokeGlobalFunction(func, designalArgs) : func.apply(null, designalArgs);
     });
 };
 
 // TODO: Return needs to be wrapped in a special marker so that component destruction can dispose it
 fluid.effect = function (func, ...args) {
     return effect( () => {
-        let undefinedSignals = false;
-        const designalArgs = [];
-        for (const arg of args) {
-            if (arg instanceof preactSignalsCore.Signal) {
-                const value = arg.value;
-                designalArgs.push(arg.value);
-                if (value === undefined) {
-                    undefinedSignals = true;
-                }
-            } else {
-                designalArgs.push(arg);
-            }
-        }
-        // const designalArgs = args.map(arg => arg instanceof preactSignalsCore.Signal ? arg.value : arg);
+        const {designalArgs, undefinedSignals} = fluid.processSignalArgs(args);
         if (!undefinedSignals) {
             return typeof(func) === "string" ? fluid.invokeGlobalFunction(func, designalArgs) : func.apply(null, designalArgs);
         }
@@ -85,46 +89,52 @@ fluid.parseMarkup = function (template, hasRoot) {
     return hasRoot ? fragment.firstElementChild : fragment;
 };
 
+fluid.spliceContainer = function (target, source, elideParent) {
+    const children = elideParent ? source.childNodes : [source];
+    // Or polyfill at https://stackoverflow.com/a/66528507
+    target.replaceChildren(...children);
+    if (elideParent) {
+        target.classList.add(...source.classList);
+    }
+};
+
 // TODO: Could move to HTM's parser using virtual DOM for tree building
 fluid.renderContainerSplice = function (parentContainer, elideParent, hasRoot, renderMarkup) {
     const resolvedContainer = fluid.validateContainer(parentContainer);
     effect ( () => {
         const containerMarkup = renderMarkup();
         const template = fluid.parseMarkup(containerMarkup, true);
-        // Or polyfill at https://stackoverflow.com/a/66528507
-        const children = elideParent ? template.childNodes : [template];
-        resolvedContainer.replaceChildren(...children);
-        if (elideParent) {
-            resolvedContainer.classList.add(...template.classList);
-        }
+        fluid.spliceContainer(resolvedContainer, template, elideParent);
     });
     return parentContainer;
 };
 
-fluid.renderStringTemplate = function (template, modelFetcher) {
-    return fluid.stringTemplate(template, modelFetcher());
+fluid.renderStringTemplate = function (markup, renderModelSignal) {
+    const renderModel = renderModelSignal.value;
+    return renderModel === undefined ? markup.fallbackContainer : fluid.stringTemplate(markup.container, renderModel);
 };
 
 
 fluid.defaults("fluid.stringTemplateRenderingView", {
     gradeNames: "fluid.containerRenderingView",
+    markup: {
+        fallbackContainer: "<div></div>"
+    },
     invokers: {
-        renderMarkup: "fluid.renderStringTemplate({that}.options.markup.container, {that}.signalsToModel)",
+        renderMarkup: "fluid.renderStringTemplate({that}.options.markup, {that}.renderModel)",
         renderContainer: "fluid.renderContainerSplice({that}.options.parentContainer, {that}.options.elideParent, {that}.options.hasRoot, {that}.renderMarkup)",
         // Blast this unnecessary invoker definition
-        addToParent: null,
-        // Need an empty default so that initial rendering effect is triggered
-        signalsToModel: "fluid.emptySignalsToModel()"
+        addToParent: null
     },
     elideParent: true,
     hasRoot: true,
     members: {
-    },
-    signals: { // override with your signals in here
+        // Need an blank default so that initial rendering effect is triggered
+        renderModel: "@expand:fluid.computed(fluid.blankRenderModel)"
     }
 });
 
-fluid.emptySignalsToModel = function () {
-    const emptySignal = signal();
-    return emptySignal.value;
+fluid.blankRenderModel = function () {
+    const blankSignal = signal(true);
+    return blankSignal.value;
 };

@@ -41,6 +41,8 @@
         "fieldNumber": "Field number",
         "coordinatesCorrected": "Coordinates Corrected",
         "coordinatesCorrectedNote": "Coordinates Corrected Note",
+        "captiveCultivated": "Captive/Cultivated",
+        "qualityGrade": "Quality grade",
         "STATE": "STATE",
         "CLASS": "CLASS",
         "SUB_CLASS": "SUB_CLASS",

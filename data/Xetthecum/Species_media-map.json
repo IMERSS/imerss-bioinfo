@@ -1,6 +1,7 @@
 {
     "columns": {
         "scientificName": "Scientific_name",
-        "audioLink": "Audio_link"
+        "audioLink": "Audio_link",
+		"audioPath": "Audio_path"
     }
 }

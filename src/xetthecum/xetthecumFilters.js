@@ -22,25 +22,25 @@ hortis.xetthecum.names = [{
 
 hortis.xetthecum.valueOutMap = {
     columns: {
-        "foodValue": "Food Value",
-        "medicinalValue": "Medicinal Value",
-        "spiritualValue": "Spiritual Value",
-        "materialValue": "Material Value",
-        "tradeValue": "Trade Value",
-        "indicatorValue": "Indicator Value"
+        "foodValue": "foodValue",
+        "medicinalValue": "medicinalValue",
+        "spiritualValue": "spiritualValue",
+        "materialValue": "materialValue",
+        "tradeValue": "tradeValue",
+        "indicatorValue": "indicatorValue"
     }
 };
 
 hortis.xetthecum.extraOutMap = {
     columns: {
-        "hulqName": "Hulquminum Name",
-        "hulqAuth": "Hulquminum Authority"
+        "hulqName": "hulquminumName",
+        "hulqAuth": "hulquminumAuthority"
     }
 };
 
 hortis.xetthecum.mediaOutMap = {
     columns: {
-        "audioLink": "Audio Link"
+        "audioLink": "audioLink"
     }
 };
 
@@ -114,6 +114,14 @@ hortis.xetthecum.assignHulqNames = function (resolved, patch) {
     resolved.combinedOutMap = hortis.combineMaps([resolved.combinedOutMap, hortis.xetthecum.valueOutMap, hortis.xetthecum.extraOutMap]);
 };
 
+// e.g. input of .../audio/ey'x_Levi_Wilson_&_Emily_Menzies_Galiano_Island_2022-02-20.WAV
+// becomes audio/ey_x_Levi_Wilson_&_Emily_Menzies_Galiano_Island_2022-02-20.mp3
+hortis.xetthecum.transformAudioPath = function (audioPath) {
+    const rel = audioPath.substring(".../".length); // Weird initial paths in Species_media table
+    const lower = rel.replaceAll("'", "_"); // Google Drive export does this
+    return lower.replace(/\.WAV$/, ".mp3");
+};
+
 hortis.xetthecum.assignHulqMedia = function (resolved, patch) {
     const byTaxon = {};
     const usedTaxa = {};
@@ -128,7 +136,7 @@ hortis.xetthecum.assignHulqMedia = function (resolved, patch) {
         const hulqRow = byTaxon[useLookup];
         if (hulqRow) {
             usedTaxa[taxon] = true;
-            row.audioLink = hulqRow.audioLink;
+            row.audioLink = hortis.xetthecum.transformAudioPath(hulqRow.audioPath);
         }
     });
     resolved.combinedOutMap = hortis.combineMaps([resolved.combinedOutMap, hortis.xetthecum.mediaOutMap]);

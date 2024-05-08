@@ -9,7 +9,7 @@ hortis.taxonDisplayLookup = {
     observationCount: "Observation Count:",
     iNaturalistObsLink: "Observation:",
     taxonLink: "iNaturalist Taxon:",
-    commonName: "Common Name:",
+    commonName: "&#xfeff;", //"Common Name:",
     reportingStatus: "Status:",
     hulqName: "Hul'qumi'num name:",
     wikipediaSummary: "Wikipedia Summary",
@@ -167,36 +167,53 @@ hortis.renderMedia = function (media) {
     return mediaBlocks.join("\n");
 };
 
-hortis.drivePlayer = "<iframe frameborder=\"0\" width=\"360\" height=\"55\" src=\"%url\"></iframe>";
+hortis.hulqValues = ["Food", "Medicinal", "Spiritual", "Material", "Trade", "Indicator"];
 
+hortis.hulqValueItem = `
+<div class=\"imerss-cultural-value\">
+    <div role=\"img\" class=\"imerss-value-%img imerss-cultural-value-img\"></div>
+    <div class=\"imerss-cultural-value-text\">%label</div>
+</div>`;
+
+hortis.emptyHulqValueItem = `
+<div class="imerss-cultural-value">
+    <div role="img" class="imerss-cultural-value-img"></div>
+</div>
+`;
+
+hortis.hulqValueBlock = `<div class="imerss-cultural-values">%valueBlocks</div>`;
+
+hortis.drivePlayer = `<iframe frameborder="0" width="360" height="55" src="%url"></iframe>`;
+
+hortis.audioPlayer = `<audio controls><source src="%url" type="audio/mpeg"></audio>`;
 
 hortis.driveToPreview = function (url) {
     const lastSlash = url.lastIndexOf("/");
     return url.substring(0, lastSlash) + "/preview";
 };
 
-hortis.hulqValues = ["Food", "Medicinal", "Spiritual", "Material", "Trade", "Indicator"];
 
-hortis.hulqValueItem = "<div class=\"imerss-cultural-value\"><div role=\"img\" class=\"imerss-value-%img imerss-cultural-value-img\"></div><div class=\"imerss-cultural-value-text\">%label</div></div>";
-
-hortis.hulqValueBlock = "<div class=\"imerss-cultural-values\">%valueBlocks</div>";
+hortis.renderAudioLink = function (audioLink) {
+    return audioLink ? fluid.stringTemplate(hortis.audioPlayer, {
+        url: audioLink
+    }) : "";
+};
 
 hortis.dumpHulqName = function (row, hulqName, markup) {
-    const player = row.audioLink ? fluid.stringTemplate(hortis.drivePlayer, {
-        url: hortis.driveToPreview(row.audioLink)
-    }) : "";
-    const nameRow = hortis.dumpRow("hulqName",hulqName + player, markup);
+    const player = hortis.renderAudioLink(row.audioLink);
+    const nameRow = hortis.dumpRow("hulqName", `<div>${hulqName}</div>` + player, markup);
     return nameRow;
 };
 
 hortis.dumpHulqValues = function (row, markup) {
     const valueBlocks = hortis.hulqValues.map(function (value) {
-        return row[value + " Value"] === "1" ? value : "missing";
+        return row[value.toLowerCase() + "Value"] === "1" ? value : "missing";
     }).map(function (img, index) {
-        return fluid.stringTemplate(hortis.hulqValueItem, {
-            img: img.toLowerCase(),
-            label: hortis.hulqValues[index]
-        });
+        return img === "missing" ? hortis.emptyHulqValueItem :
+            fluid.stringTemplate(hortis.hulqValueItem, {
+                img: img.toLowerCase(),
+                label: hortis.hulqValues[index]
+            });
     });
     const valueBlock = fluid.stringTemplate(hortis.hulqValueBlock, {
         valueBlocks: valueBlocks.join("\n")
@@ -207,24 +224,25 @@ hortis.dumpHulqValues = function (row, markup) {
     return valueRow1 + valueRow2;
 };
 
-hortis.iNatExtern = "<a href=\"%iNatLink\" target=\"_blank\" class=\"taxonDisplay-iNat-extern\">iNaturalist<span class=\"external-link\"></span></a>";
+hortis.iNatExtern =
+    `<a href="%iNatLink" target="_blank" class="taxonDisplay-iNat-extern">iNaturalist<span class="external-link"></span></a>`;
 
 
-hortis.imageTemplate =
-    "<div class=\"taxonDisplay-image-holder\">" +
-    "<div class=\"imerss-photo\" style=\"background-image: url(%imgUrl)\"/>" +
-    "%iNatExtern" +
-    "</div></div>";
+hortis.imageTemplate = `
+    <div class="taxonDisplay-image-holder">
+        <div class="imerss-photo" style="background-image: url(%imgUrl)"/>
+        %iNatExtern
+        </div>
+        <div class="imerss-photo-caption">
+        %photoCaption
+        </div>
+    </div>`;
 
 hortis.idToTaxonLink = function (taxonId) {
     return "https://www.inaturalist.org/taxa/" + taxonId;
 };
 
-hortis.rowToScientific = function (row) {
-    return row.taxonName || row.iNaturalistTaxonName;
-};
-
-hortis.renderTaxonDisplay = function (row, markup, options) {
+hortis.renderTaxonDisplay = function (row, accessRow, markup, options) {
     if (!row) {
         return null;
     }
@@ -240,10 +258,10 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
             togo += hortis.dumpRow(keyName, value, markup, extraClazz, undefined, options);
         }
     };
-    const dumpImage = function (keyName, url, taxonId) {
-
-        const imageMarkup = fluid.stringTemplate(hortis.imageTemplate, {
+    const dumpImage = function (keyName, url, taxonId, photoCaption) {
+        const imageMarkup = fluid.stringTemplate(markup.imageTemplate, {
             imgUrl: url,
+            photoCaption,
             iNatExtern: taxonId ? fluid.stringTemplate(hortis.iNatExtern, {
                 iNatLink: hortis.idToTaxonLink(taxonId)
             }) : ""
@@ -252,18 +270,19 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         togo += imageMarkup;
     };
     const dumpPhyloPic = function (keyName, url) {
-        togo += hortis.dumpRow(keyName, "<div><img alt=\"Taxon photo\" height=\"150\" width=\"150\" class=\"imerss-photo\" src=\"" + url + "\"/></div>", markup);
+        togo += hortis.dumpRow(keyName, `<div><img alt="Taxon photo" height="150" width="150" class="imerss-photo" src="${url}"></div>`, markup);
     };
+    const photoCaption = `<div>${accessRow.featuredName}</div>` + hortis.renderAudioLink(row.audioLink);
     if (!row.taxonName) { // It's a higher taxon with no direct obs
         if (row.iNaturalistTaxonImage && !row.taxonPic) {
-            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage, row.iNaturalistTaxonId);
+            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage, row.id, photoCaption);
         } else if (row.taxonPic) {
             dumpImage("taxonPic", row.taxonPic);
         }
         if (row.phyloPicUrl) {
             dumpPhyloPic("phyloPic", row.phyloPicUrl);
         }
-        dumpRow(row.rank, hortis.rowToScientific(row), "taxonDisplay-rank");
+        dumpRow(row.rank, accessRow.scientificName, "taxonDisplay-rank");
         hortis.commonFields.forEach(function (field) {
             dumpRow(field, row[field]);
         });
@@ -272,7 +291,7 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         dumpRow("observationCount", row.observationCount);
     } else {
         if (row.iNaturalistTaxonImage && !row.obsPhotoLink) {
-            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage, row.iNaturalistTaxonId);
+            dumpImage("iNaturalistTaxonImage", row.iNaturalistTaxonImage, row.id, photoCaption);
         }
         if (row.species) { // TODO: Barentsia sp. does not have species - presumably we should just dump anything here?
             // TODO: Need to revisit nutty system whereby we don't write "rank" for leaves. Need a special signal to
@@ -283,13 +302,16 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
             // composed of taxon and infrataxon name but this is at least now complete and agrees with what is shown in the tooltip
             dumpRow("iNaturalistTaxonName", (row.taxonName || row.iNaturalistTaxonName) + (row.authority ? (" " + row.authority) : ""), "taxonDisplay-rank", options);
         }
-        const hulqName = row["Hulquminum Name"];
-        if (hulqName) { // wot no polymorphism?
-            togo += hortis.dumpHulqName(row, hulqName, markup);
+        // We now dump this as featuredName to right of photo
+        /*
+        if (accessRow.nativeName) {
+            togo += hortis.dumpHulqName(row, accessRow.nativeName, markup);
+        }*/
+        if (accessRow.commonName !== accessRow.featuredName) {
+            dumpRow("commonName", row.commonName && hortis.capitalize(row.commonName));
         }
-        dumpRow("commonName", row.commonName && hortis.capitalize(row.commonName));
 
-        if (hulqName && options.culturalValues) { // wot no polymorphism?
+        if (accessRow.nativeName && options.culturalValues) {
             togo += hortis.dumpHulqValues(row, markup);
         }
 
@@ -308,7 +330,7 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         obsPanel += hortis.renderObsBound(row, "since", markup, options);
 
         if (row.iNaturalistObsLink) {
-            obsPanel += hortis.dumpRow("iNaturalistObsLink", "<a href=\"" + row.iNaturalistObsLink + "\">" + row.iNaturalistObsLink + "</a>", markup);
+            obsPanel += hortis.dumpRow("iNaturalistObsLink", `<a href=${row.iNaturalistObsLink}">${row.iNaturalistObsLink}</a>`, markup);
         }
         obsPanel += hortis.dumpRow("observationCount", row.observationCount, markup);
 
@@ -352,7 +374,7 @@ hortis.bindRowExpander = function (that) {
 };
 
 hortis.updateTaxonDisplay = function (that, taxonRow) {
-    const content = taxonRow ? hortis.renderTaxonDisplay(taxonRow, that.options.markup, that.options) : null;
+    const content = taxonRow ? hortis.renderTaxonDisplay(taxonRow, that.accessRow(taxonRow), that.options.markup, that.options) : null;
     const taxonDisplay = that.container[0];
     taxonDisplay.innerHTML = content || "";
 };
@@ -365,10 +387,16 @@ fluid.defaults("hortis.taxonDisplay", {
             args: ["{that}"]
         }
     },
+    invokers: {
+        accessRow: {
+            funcName: "hortis.accessRowHulq"
+        }
+    },
     markup: {
         taxonDisplayHeader: "",
         taxonDisplayRow: "<div %rootAttrs><span class=\"taxonDisplay-key\">%key</span><span class=\"taxonDisplay-value %valueClazz\">%value</span></div>",
-        taxonDisplayFooter: ""
+        taxonDisplayFooter: "",
+        imageTemplate: hortis.imageTemplate
     },
     members: {
         selectedTaxonId: "@expand:signal()",
@@ -387,8 +415,12 @@ fluid.defaults("hortis.taxonDisplay", {
     // suppressObsAuthors
 });
 
+hortis.byField = function (fieldName) {
+    return (a, b) => a[fieldName] > b[fieldName] ? 1 : -1;
+};
+
 hortis.obsForTaxon = function (obsRows, taxonId) {
-    return obsRows.filter(row => row["iNaturalist taxon ID"] === taxonId);
+    return obsRows.filter(row => row["iNaturalist taxon ID"] === taxonId).sort(hortis.byField("Date observed"));
 };
 
 // Fields which are transferred to "first" and "last" entries from observations to summaries

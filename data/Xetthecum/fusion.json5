@@ -11,8 +11,8 @@
         iNat: {
             name: "iNaturalist Observations (2005-2024)",
             input: "%imerss-bioinfo/data/Galiano 2024/Galiano_Union_Catalogue_2024_04_24.csv",
-            map: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-map-new.json",
-            outMap: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-out-map.json",
+            map: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-map-new-cap.json",
+            outMap: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-out-map-cap.json",
             colour: "#2C8C99",
             observationId: "%datasetId:%id"
         },
@@ -39,6 +39,12 @@
             map: "%imerss-bioinfo/data/Xetthecum/correctedGeoreferencing-map.json",
             processor: "hortis.processCoordinatePatch"
         },
+        CorrectCoordinates2024: {
+            type: "hortis.pipe.CSVInput",
+            input: "%imerss-bioinfo/data/Xetthecum/Vascular_plants_Xetthecum_4.0_georeferencing_corrected_2024-04-29.csv",
+            map: "%imerss-bioinfo/data/Xetthecum/correctedGeoreferencing-2024-map.json",
+            processor: "hortis.processCoordinatePatch"
+        },
         RoundCoordinates: {
             type: "hortis.pipe",
             processor: "hortis.roundCoordinates",
@@ -54,7 +60,7 @@
             type: "hortis.pipe.JSONInput",
             input: "%imerss-bioinfo/data/Xetthecum/flatFeatures.json",
             processor: "hortis.processAssignFeature"
-        },
+        }
     },
     summaryPatches: {
         AssignHulqNames: {

@@ -102,6 +102,7 @@ body ::-webkit-scrollbar-thumb {
     /* width: 480px; */
     border: black solid 2px;
     display: flex;
+    flex-direction: column;
     overflow-y: scroll;
     min-width: 320px;
 }
@@ -215,9 +216,10 @@ body ::-webkit-scrollbar-thumb {
 .taxonDisplay-image-holder {
     position: relative;
     padding-bottom: 8px;
+    padding-left: 8px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    align-items: center;
 }
 
 .taxonDisplay-iNat-extern {
@@ -251,6 +253,15 @@ body ::-webkit-scrollbar-thumb {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    position: relative;
+}
+
+.imerss-photo-caption {
+    padding-left: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
 }
 
 .imerss-tooltip .imerss-photo {
@@ -346,8 +357,10 @@ body ::-webkit-scrollbar-thumb {
     padding-inline-start: 0;
 }
 
-.imerss-checklist-no-indent .checklist-rank-species {
+li.checklist-rank-species {
+    margin-left: 40px;
     padding-left: 40px;
+    text-indent: -40px;
 }
 
 .imerss-checklist > ul {
@@ -370,48 +383,48 @@ body ::-webkit-scrollbar-thumb {
 
 /* The checklist rank highlighting */
 
-.checklist-rank-life {
+.checklist-rank-life > p {
     text-transform: uppercase;
     font-size: 1.2em;
 }
 
-.checklist-rank-kingdom {
+.checklist-rank-kingdom > p {
     text-transform: uppercase;
     font-size: 1.2em;
 }
 
-.checklist-rank-phylum {
+.checklist-rank-phylum > p {
     text-transform: uppercase;
     font-size: 1.1em;
 }
 
-.checklist-rank-class {
+.checklist-rank-class > p {
     text-transform: uppercase;
     font-style: italic;
     font-size: 1.0em;
 }
 
-.checklist-rank-subclass {
+.checklist-rank-subclass > p {
     text-transform: uppercase;
     font-size: 1.0em;
 }
 
-.checklist-rank-order {
+.checklist-rank-order > p {
     text-transform: uppercase;
     font-size: 1.0em;
 }
 
-.checklist-rank-family {
+.checklist-rank-family > p {
     text-transform: uppercase;
     font-size: 1.0em;
 }
 
-.checklist-rank-genus {
+.checklist-rank-genus > p {
     font-size: 1.0em;
     font-style: italic;
 }
 
-.checklist-rank-species {
+.checklist-rank-species > p {
     font-size: 1.0em;
     font-style: italic;
 }

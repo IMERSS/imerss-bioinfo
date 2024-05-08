@@ -33,7 +33,7 @@ fluid.defaults("hortis.csvReader", {
         skipEmptyLines: true
     },
     members: {
-        rows: "@expand:signal([])"
+        rows: "@expand:signal()"
     },
     events: {
     },
@@ -106,10 +106,13 @@ fluid.defaults("hortis.vizLoader", {
             }
         }
     },
+    events: {
+        onResourcesLoaded: null
+    },
     members: {
         resourcesLoaded: "@expand:signal()",
-        taxaRows: "@expand:signal([])",
-        obsRows: "@expand:signal([])",
+        taxaRows: "@expand:signal()",
+        obsRows: "@expand:signal()",
         // Overridden by overall loader def to equal {filters}.allOutput
         filteredObs: "{that}.obsRows",
         // Proposed syntax: @compute:hortis.filterObs(*{that}.obs, {that}.obsFilter, *{that}.obsFilterVersion)
@@ -126,6 +129,19 @@ fluid.defaults("hortis.vizLoader", {
         "onCreate.bindResources": "hortis.vizLoader.bindResources"
     }
 });
+
+// Do this by hand since we will have compressed viz one day
+hortis.vizLoader.bindResources = async function (that) {
+    const resourceLoaders = fluid.queryIoCSelector(that, "hortis.bareResourceLoader", true);
+    const promises = resourceLoaders.map(resourceLoader => resourceLoader.completionPromise);
+    const [taxa, obs] = await Promise.all(promises);
+    batch( () => {
+        that.taxaRows.value = taxa;
+        that.obsRows.value = obs;
+        that.resourcesLoaded.value = true;
+        that.events.onResourcesLoaded.fire();
+    });
+};
 
 fluid.defaults("hortis.filter", {
     // gradeNames: "fluid.component",
@@ -145,7 +161,7 @@ fluid.defaults("hortis.filters", {
     },
     members: {
         allInput: "{vizLoader}.obsRows",
-        allOutput: "@expand:signal([])"
+        allOutput: "@expand:signal()"
     }
 });
 
@@ -155,24 +171,12 @@ hortis.wireObsFilters = function (that) {
 
     filterComps.forEach(filterComp => {
         filterComp.filterInput = prevOutput;
-        filterComp.filterOutput = computed( () => {
-            return filterComp.doFilter(filterComp.filterInput.value, filterComp.filterState.value);
-        });
+        filterComp.filterOutput = fluid.computed(filterComp.doFilter, filterComp.filterInput, filterComp.filterState);
         prevOutput = filterComp.filterOutput;
     });
+    // This is the bit we can't wire up with a computed - it would be great to be able to "wire" the pre-existing
+    // allOutput.value onto prevOutput.value after it had been constructed
     effect( () => that.allOutput.value = prevOutput.value);
-};
-
-// Do this by hand since we will have compressed viz one day
-hortis.vizLoader.bindResources = async function (that) {
-    const resourceLoaders = fluid.queryIoCSelector(that, "hortis.bareResourceLoader", true);
-    const promises = resourceLoaders.map(resourceLoader => resourceLoader.completionPromise);
-    const [taxa, obs] = await Promise.all(promises);
-    batch( () => {
-        that.taxaRows.value = taxa;
-        that.obsRows.value = obs;
-        that.resourcesLoaded.value = true;
-    });
 };
 
 // In indeterminate state, add p-is-indeterminate to div state
@@ -453,8 +457,8 @@ fluid.defaults("hortis.layoutHolder", {
         rowFocus: "@expand:signal({})", // non-taxon based selection external to the checklist, e.g. incoming from a map?
         rowSelection: "@expand:signal({})", // taxon-based selection from the checklist - will be subset of rowFocus
 
-        selectedId: "@expand:signal()",
-        hoverId: "@expand:signal()",
+        selectedId: "@expand:signal(null)",
+        hoverId: "@expand:signal(null)",
 
         subscribeHover: "@expand:hortis.subscribeHover({that})"
     },

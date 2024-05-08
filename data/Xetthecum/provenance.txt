@@ -60,3 +60,6 @@ Cultural values: Up-Close_Landscapes_Resynthesized_Indigenous_perspectives.csv f
 
 Media Map: Xetthecum_Media_Map.csv from
 https://docs.google.com/spreadsheets/d/16mxVpagqi83-CXpZbrFMyrj-duyhg3Qj0pemhTLyQpw/edit#gid=0
+
+Remember that what we do is copy Life-PhaseIII.json.lz4 to Cait's site as Life.json.lz4 since it is smaller.
+Life.json.lz4 still runs the Phase II site.

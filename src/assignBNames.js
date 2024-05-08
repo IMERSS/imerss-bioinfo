@@ -138,20 +138,21 @@ hortis.storeTaxon = async function (allTaxa, taxonDoc, inSummary) {
         // Call out for the standard fields that the viz depends on
         hortis.iNat.addTaxonInfo(hortis.iNat.newRecordTransform, filtered, taxonDoc.doc);
         // TODO: Should actualy be the curated summary name
-        filtered.taxonName = inSummary ? filtered.iNaturalistTaxonName : "";
+        // Need to accept summary file as input, right now we axe this and apply it later in the merge
+        // filtered.taxonName = inSummary ? filtered.iNaturalistTaxonName : "";
         allTaxa[id] = filtered;
     }
 };
 
 // Note: This is the beginning of "new marmalisation" - hortis.iNat.addTaxonInfo used to be called in the marmaliser
-hortis.applyName = async function (row, phylum, invertedSwaps, allTaxa, unmappedTaxa, strategyRec) {
+hortis.applyName = async function (row, phylum, rank, invertedSwaps, allTaxa, unmappedTaxa, strategyRec) {
     const s = strategyRec;
     const fieldName = s.iNatName;
     const rawName = row[fieldName];
     const iNatName = invertedSwaps[rawName]?.preferred || rawName;
     const scientificName = row[s.rawName];
     // const saneName = hortis.sanitizeSpeciesName(taxon);
-    const looked = await source.get({name: iNatName, phylum: phylum});
+    const looked = await source.get({name: iNatName, phylum, rank});
 
     const assign = function (row, field, value) {
         // eslint-disable-next-line eqeqeq
@@ -214,7 +215,7 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
             await hortis.applyName(row, "Tracheophyta", invertedSwaps, taxa, unmappedTaxa, strategyBigRec.plant);
             await hortis.applyName(row, "Arthropoda", invertedSwaps, taxa, unmappedTaxa, strategyBigRec.pollinator);
         } else if (strategy === "reintegrated") {
-            await hortis.applyName(row, row.Phylum, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
+            await hortis.applyName(row, row.Phylum, row.Rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         }
 
         mapped.push(row);
