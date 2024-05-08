@@ -28,6 +28,14 @@ body {
     box-sizing: border-box;
 }
 
+.checklist-rank-order > p {
+    text-transform: none;
+}
+
+.checklist-rank-family > p {
+    text-transform: none;
+}
+
 .imerss-pollinators {
     width: 30%;
     min-width: 30%;

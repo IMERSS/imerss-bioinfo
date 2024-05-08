@@ -28,9 +28,9 @@ fluid.defaults("hortis.beaVizLoader", {
             type: "hortis.recordReporter",
             container: "{that}.dom.recordReporter",
             options: {
-                signals: {
-                    filteredObs: "{vizLoader}.finalFilteredObs",
-                    obsRows: "{vizLoader}.obsRows"
+                members: {
+                    filteredRows: "{vizLoader}.finalFilteredObs",
+                    allRows: "{vizLoader}.obsRows"
                 }
             }
         },
@@ -118,7 +118,7 @@ fluid.defaults("hortis.beaVizLoader", {
         filteredObs: "{filters}.allOutput",
         taxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.filteredObs, {taxa}.rowById)",
         allTaxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.obsRows, {taxa}.rowById)",
-        finalFilteredObs: "@expand:signal([])"
+        finalFilteredObs: "@expand:signal()"
 
         //`@expand:fluid.computed(hortis.filterObsByTwoTaxa, {that}.filteredObs,
         //    {plantChecklist}.rowFocus, {pollChecklist}.rowFocus)`
@@ -159,9 +159,9 @@ hortis.filterObsByTwoTaxa = function (obsRows, plantRowFocus, pollRowFocus) {
 fluid.defaults("hortis.interactions", {
     gradeNames: "fluid.modelComponent",
     members: {
-        obsRows: "@expand:signal([])",
-        plantSelection: "@expand:signal([])",
-        pollSelection: "@expand:signal([])",
+        obsRows: "@expand:signal()",
+        plantSelection: "@expand:signal()",
+        pollSelection: "@expand:signal()",
         // keys are plantId|pollId, values ints
         crossTable: "@expand:fluid.computed(hortis.interactions.count, {that}, {that}.obsRows, {that}.plantSelection, {that}.pollSelection)",
         // Accessing crossTable.value will populate these three by a hideous side-effect
@@ -311,8 +311,8 @@ fluid.defaults("hortis.bipartite", {
         svg: "svg"
     },
     members: {
-        bipartiteRows: "@expand:signal([])",
-        beeSelection: "@expand:signal([])",
+        bipartiteRows: "@expand:signal()",
+        beeSelection: "@expand:signal()",
         render: "@expand:fluid.effect(hortis.bipartite.render, {that}.dom.svg.0, {that}.bipartiteRows, {that}.beeSelection)"
     }
 });
@@ -385,7 +385,7 @@ fluid.defaults("hortis.drawInteractions", {
         subscribeRender: `@expand:fluid.effect(hortis.drawInteractions.render, {that}, {interactions},
             {interactions}.crossTable, {taxa}.rowById)`,
         subscribeHover: "@expand:hortis.subscribeHover({that})",
-        bipartiteRows: "@expand:signal([])"
+        bipartiteRows: "@expand:signal()"
     },
     components: {
         pollTooltips: {
@@ -680,29 +680,18 @@ fluid.defaults("hortis.bbeaLibreMap", {
 
 fluid.defaults("hortis.recordReporter", {
     gradeNames: "fluid.stringTemplateRenderingView",
-    invokers: {
-        signalsToModel: {
-            args: "{that}.options.signals",
-            func: ({filteredObs, obsRows}) => ({
-                filteredRows: filteredObs.value.length,
-                allRows: obsRows.value.length
-            })
-        },
-        renderMarkup: {
-            args: ["{that}.options.markup", "{that}.signalsToModel"],
-            func: (markup, signalsToModel) => {
-                const model = signalsToModel();
-                return model.filteredRows ? fluid.stringTemplate(markup.container, model) : markup.fallbackContainer;
-            }
-        }
+    members: {
+        renderModel: "@expand:fluid.computed(hortis.recordReporter.renderModel, {that}.filteredRows, {that}.allRows)"
     },
     markup: {
-        fallbackContainer: "<div></div>",
         container: "<div>Displaying %filteredRows of %allRows records</div>"
     }
 });
 
-
+hortis.recordReporter.renderModel = (filteredRows, allRows) => ({
+    filteredRows: filteredRows.length,
+    allRows: allRows.length
+});
 
 fluid.defaults("hortis.sexFilter", {
     gradeNames: ["hortis.filter", "fluid.stringTemplateRenderingView"],
@@ -718,8 +707,8 @@ fluid.defaults("hortis.sexFilter", {
         `
     },
     members: {
-        male: "@expand:signal()",
-        female: "@expand:signal()",
+        male: "@expand:signal(false)",
+        female: "@expand:signal(false)",
         filterState: "@expand:fluid.computed(hortis.sexFilter.toState, {that}.male, {that}.female)"
     },
     invokers: {
@@ -786,10 +775,11 @@ fluid.defaults("hortis.regionFilter", {
     // filterName
     members: {
         values: "@expand:fluid.computed(hortis.regionFilter.computeValues, {that}.obsRows, {that}.options.fieldName)",
-        filterState: "@expand:signal({})"
+        filterState: "@expand:signal({})",
+        renderModel: `@expand:fluid.computed(hortis.regionFilter.renderModel, {that}.values,
+            {that}.idToLabel, {that}.options.markup, {that}.options.filterName)`
     },
     invokers: {
-        signalsToModel: "hortis.regionFilter.signalsToModel({that}.values, {that}.idToLabel, {that}.options.markup, {that}.options.filterName)",
         idToLabel: "fluid.identity",
         doFilter: "hortis.regionFilter.doFilter({that}.options.fieldName, {arguments}.0, {arguments}.1)"
     },
@@ -856,9 +846,7 @@ hortis.regionFilter.renderRow = function (template, rowLabel, rowId) {
     });
 };
 
-hortis.regionFilter.signalsToModel = function (valuesSig, idToLabel, markup, filterName) {
-    const values = valuesSig.value;
-
+hortis.regionFilter.renderModel = function (values, idToLabel, markup, filterName) {
     return {
         filterName,
         rows: values.map(value => hortis.regionFilter.renderRow(markup.row, idToLabel(value), value)).join("\n")
@@ -896,7 +884,7 @@ fluid.defaults("hortis.collectorFilter", {
         // obsRows:
         // TODO: This is lazy, we really want it computed at any "idle time" so as not to delay 3rd keystroke
         collectors: "@expand:fluid.computed(hortis.computeCollectors, {that}.obsRows)",
-        filterState: "@expand:signal()"
+        filterState: "@expand:signal(null)"
     },
     invokers: {
         doFilter: "hortis.collectorFilter.doFilter"
@@ -945,7 +933,7 @@ fluid.defaults("hortis.collectorFilter", {
 
 hortis.collectorFilter.doFilter = function (obsRows, filterState) {
     const all = !(filterState);
-    return all ? obsRows : obsRows.filter(row =>row.Collectors.includes(filterState));
+    return all ? obsRows : obsRows.filter(row => row.Collectors.includes(filterState));
 };
 
 hortis.queryAutocompleteCollector = function (collectors, query, callback) {
@@ -954,18 +942,21 @@ hortis.queryAutocompleteCollector = function (collectors, query, callback) {
     callback(results);
 };
 
+hortis.bbeaFiltersTemplate = `
+    <div class="imerss-filters">
+        <div class="imerss-filter"></div>
+        <div class="imerss-sex-filter imerss-filter"></div>
+        <div class="imerss-collector-filter imerss-filter"></div>
+        <div class="imerss-monument-filter imerss-filter"></div>
+        <div class="imerss-l3eco-filter imerss-filter"></div>
+    </div>
+`;
+
 fluid.defaults("hortis.bbeaFilters", {
     gradeNames: ["hortis.filters", "fluid.stringTemplateRenderingView"],
-    markup: {
-        container: `
-        <div class="imerss-filters">
-            <div class="imerss-filter"></div>
-            <div class="imerss-sex-filter imerss-filter"></div>
-            <div class="imerss-collector-filter imerss-filter"></div>
-            <div class="imerss-monument-filter imerss-filter"></div>
-            <div class="imerss-l3eco-filter imerss-filter"></div>
-        </div>
-        `
+    markup: { // Clearly unsatisfactory, have to move over to preactish rendering before long
+        container: hortis.bbeaFiltersTemplate,
+        fallbackContainer: hortis.bbeaFiltersTemplate
     },
     members: {
         obsRows: "{vizLoader}.obsRows"
