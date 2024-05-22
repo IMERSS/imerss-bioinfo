@@ -1,0 +1,52 @@
+.imerss-cultural-values {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.imerss-cultural-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.imerss-cultural-value-text {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 0.2rem;
+}
+
+.imerss-cultural-value-img {
+    width: 108px;
+    height: 108px;
+    background-repeat: no-repeat;
+    background-size: 108px;
+}
+
+.imerss-value-food {
+    background-image: url(../img/Xetthecum/food.svg);
+}
+
+.imerss-value-medicinal {
+    background-image: url(../img/Xetthecum/medicinal.svg);
+}
+
+.imerss-value-spiritual {
+    background-image: url(../img/Xetthecum/spiritual.svg);
+}
+
+.imerss-value-material {
+    background-image: url(../img/Xetthecum/material.svg);
+}
+
+.imerss-value-trade {
+    background-image: url(../img/Xetthecum/trade.svg);
+}
+
+.imerss-value-indicator {
+    background-image: url(../img/Xetthecum/indicator.svg);
+}
+
+.imerss-value-missing {
+    background-image: url(../img/Xetthecum/missing-value.svg);
+}

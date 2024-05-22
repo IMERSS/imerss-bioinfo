@@ -279,7 +279,15 @@ hortis.subscribeHover = function (that) {
     });
 };
 
-
+fluid.defaults("hortis.withTooltip", {
+    // tooltipKey,
+    invokers: {
+        renderTooltip: "fluid.notImplemented"
+    },
+    members: {
+        subscribeHover: "@expand:hortis.subscribeHover({that})"
+    }
+});
 
 
 
@@ -442,7 +450,7 @@ hortis.taxa.map = function (rows, byId) {
 
 // Holds model state shared with checklist and index - TODO rename after purpose, "layout" used to refer to sunburst root
 fluid.defaults("hortis.layoutHolder", {
-    gradeNames: "fluid.modelComponent",
+    gradeNames: ["fluid.modelComponent", "hortis.withTooltip"],
     tooltipKey: "hoverId",
     events: {
         taxonSelect: null
@@ -458,9 +466,7 @@ fluid.defaults("hortis.layoutHolder", {
         rowSelection: "@expand:signal({})", // taxon-based selection from the checklist - will be subset of rowFocus
 
         selectedId: "@expand:signal(null)",
-        hoverId: "@expand:signal(null)",
-
-        subscribeHover: "@expand:hortis.subscribeHover({that})"
+        hoverId: "@expand:signal(null)"
     },
     // rootId
     modelRelay: {

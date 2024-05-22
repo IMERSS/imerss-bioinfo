@@ -3,13 +3,8 @@ body {
     display: flex;
     flex-flow: column;
     margin: 8px;
-    height: calc(100vh - 16px); /* To allow for 8px borders */
+    height: calc(100vh - 16px); /* To allow for 8px margins */
     overflow: hidden
-}
-
-/* Why is this "column" in core? What does it look like ... */
-.imerss-map-and-taxa {
-    flex-direction: row;
 }
 
 .imerss-map-holder {
