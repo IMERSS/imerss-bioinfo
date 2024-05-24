@@ -305,6 +305,29 @@ hortis.familyColours = {
     "Halictidae": "#984EA3"
 };
 
+hortis.expandBBox = function (accum, bbox) {
+    return {
+        minX: Math.min(accum.minX, bbox.x),
+        minY: Math.min(accum.minY, bbox.y),
+        maxX: Math.max(accum.maxX, bbox.x + bbox.width),
+        maxY: Math.max(accum.maxY, bbox.y + bbox.height)
+    };
+};
+
+hortis.computeSVGBBox = function (svgNode) {
+    const elements = svgNode.querySelectorAll("*");
+    const emptyBBox = {
+        minX: Infinity,
+        minY: Infinity,
+        maxX: -Infinity,
+        maxY: -Infinity
+    };
+    return [...elements].reduce( (accum, element) => {
+        const bbox = element.getBBox();
+        return hortis.expandBBox(accum, bbox);
+    }, emptyBBox);
+};
+
 fluid.defaults("hortis.bipartite", {
     gradeNames: "fluid.viewComponent",
     selectors: {
@@ -313,19 +336,36 @@ fluid.defaults("hortis.bipartite", {
     members: {
         bipartiteRows: "@expand:signal()",
         beeSelection: "@expand:signal()",
-        render: "@expand:fluid.effect(hortis.bipartite.render, {that}.dom.svg.0, {that}.bipartiteRows, {that}.beeSelection)"
+        containerWidth: "@expand:signal()",
+        render: "@expand:fluid.effect(hortis.bipartite.render, {that}.dom.svg.0, {that}.containerWidth, {that}.bipartiteRows, {that}.beeSelection)"
+    },
+    listeners: {
+        "onCreate.listenWidth": "hortis.bipartite.listenWidth({that}.container.0, {that}.containerWidth)"
     }
 });
 
-hortis.bipartite.render = function (svgNode, bipartiteRows, beeSelection) {
+hortis.bipartite.listenWidth = function (containerNode, widthSignal) {
+    const observer = new ResizeObserver(entries => {
+        entries.forEach(entry => {
+            widthSignal.value = entry.contentRect.width || undefined;
+        });
+    });
+    observer.observe(containerNode);
+};
+
+
+hortis.bipartite.render = function (svgNode, containerWidth, bipartiteRows, beeSelection) {
     const svg = d3.select(svgNode);
-    imerss.bipartitePP(bipartiteRows, svg, 1000, 1000, {
+    const {totalWidth} = imerss.bipartitePP(bipartiteRows, svg, containerWidth, 1000, {
         FigureLabel: "",
         sortedBeeNames: Object.keys(beeSelection),
         beeColors: hortis.familyColours,
-        MainFigSizeX: 300,
+        MainFigSizeX: Math.max(containerWidth - 330, 100),
         MainFigSizeY: 600
     });
+    const bbox = hortis.computeSVGBBox(svgNode);
+    svgNode.setAttribute("height", bbox.maxY - bbox.minY);
+    svgNode.setAttribute("width", totalWidth);
 };
 
 hortis.interactionMarkup =

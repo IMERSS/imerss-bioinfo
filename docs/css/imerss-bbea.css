@@ -254,9 +254,13 @@ body {
 }
 
 .imerss-bipartite {
-    overflow: scroll;
+    overflow: auto;
     height: 100%;
     font-size: 14px;
+}
+
+.imerss-bipartite svg {
+    display: block;
 }
 
 /* Follow this illogical advice: https://stackoverflow.com/a/66689926/1381443 */

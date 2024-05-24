@@ -196,6 +196,19 @@ const computeAllFiles = function (buildIndex, nodeFiles) {
     return withExcludes.concat(buildIndex.localSource);
 };
 
+const minify = async function (hash, filename) {
+    fluid.log("Minifying " + Object.keys(hash).length + " JS files to " + filename);
+    return await terser.minify(hash, {
+        mangle: false,
+        compress: false, // https://github.com/terser/terser?tab=readme-ov-file#terser-fast-minify-mode
+        sourceMap: {
+            filename,
+            url: filename + ".map",
+            root: "../.."
+        }
+    });
+};
+
 const buildFromFiles = async function (buildIndex, nodeFiles) {
     const allFiles = computeAllFiles(buildIndex, nodeFiles);
     console.log("allFiles ", allFiles);
@@ -203,38 +216,16 @@ const buildFromFiles = async function (buildIndex, nodeFiles) {
 
     const jsHash = filesToContentHash(allFiles, ".js");
     const fullJsHash = fluid.extend({header: buildIndex.codeHeader}, jsHash, {footer: buildIndex.codeFooter});
-    fluid.log("Minifying " + Object.keys(fullJsHash).length + " JS files to imerss-viz-all.js ");
-    const minifiedAll = await terser.minify(fullJsHash, {
-        mangle: false,
-        sourceMap: {
-            filename: "imerss-viz-all.js",
-            url: "imerss-viz-all.js.map",
-            root: "../.."
-        }
-    });
+    const minifiedAll = await minify(fullJsHash, "imerss-viz-all.js");
+
     // imerss-viz-lib.js contains just upstream libraries we depend on, to support reasonably easy deploy of "new" framework
     const libJsHash = filesToContentHash(nodeFiles, ".js");
     console.log("nodeFiles ", nodeFiles);
-    fluid.log("Minifying " + Object.keys(libJsHash).length + " JS files to imerss-viz-lib.js ");
-    const minifiedLib = await terser.minify(libJsHash, {
-        mangle: false,
-        sourceMap: {
-            filename: "imerss-viz-lib.js",
-            url: "imerss-viz-lib.js.map",
-            root: "../.."
-        }
-    });
+    const minifiedLib = await minify(libJsHash, "imerss-viz-lib.js");
+
     const newJsHash = filesToContentHash(buildIndex.newSource, ".js");
     console.log("newFiles ", buildIndex.newSource);
-    fluid.log("Minifying " + Object.keys(newJsHash).length + " JS files to imerss-viz-new.js ");
-    const newLib = await terser.minify(newJsHash, {
-        mangle: false,
-        sourceMap: {
-            filename: "imerss-viz-new.js",
-            url: "imerss-viz-new.js.map",
-            root: "../.."
-        }
-    });
+    const newLib = await minify(newJsHash, "imerss-viz-new.js");
 
     fs.removeSync("docs");
     fs.ensureDirSync("docs/js");

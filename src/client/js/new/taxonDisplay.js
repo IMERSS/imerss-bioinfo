@@ -175,12 +175,6 @@ hortis.hulqValueItem = `
     <div class=\"imerss-cultural-value-text\">%label</div>
 </div>`;
 
-hortis.emptyHulqValueItem = `
-<div class="imerss-cultural-value">
-    <div role="img" class="imerss-cultural-value-img"></div>
-</div>
-`;
-
 hortis.hulqValueBlock = `<div class="imerss-cultural-values">%valueBlocks</div>`;
 
 hortis.drivePlayer = `<iframe frameborder="0" width="360" height="55" src="%url"></iframe>`;
@@ -209,7 +203,7 @@ hortis.dumpHulqValues = function (row, markup) {
     const valueBlocks = hortis.hulqValues.map(function (value) {
         return row[value.toLowerCase() + "Value"] === "1" ? value : "missing";
     }).map(function (img, index) {
-        return img === "missing" ? hortis.emptyHulqValueItem :
+        return img === "missing" ? "" :
             fluid.stringTemplate(hortis.hulqValueItem, {
                 img: img.toLowerCase(),
                 label: hortis.hulqValues[index]
