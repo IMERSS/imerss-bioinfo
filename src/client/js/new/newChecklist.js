@@ -16,7 +16,7 @@ var hortis = fluid.registerNamespace("hortis");
 
 //
 // noinspection ES6ConvertVarToLetConst
-var {signal, effect} = preactSignalsCore; // eslint-disable-line no-unused-vars
+var {signal, effect, batch} = preactSignalsCore; // eslint-disable-line no-unused-vars
 
 // cf arphify.js line 80 hortis.axeFromName and hortis.qualForming
 hortis.sppAnnotations = ["agg.", "aff.", "s.lat.", "cf", "sp.nov.", "var.", "sp.", "ssp.", "spp.", "complex"];
@@ -54,20 +54,53 @@ hortis.accessRowHulq = function (row) {
     return togo;
 };
 
-hortis.checklistItem = function (accessRow, entry, selectedId, simple, selectable) {
-    const record = entry.row;
-    const rowid = ` data-row-id="${record.id}"`;
+hortis.rowFold = function (rowid, folded) {
+    const foldChar = folded === "folded" ? "chevron-right" : folded === "unfolded" ? "chevron-down" : "none";
+    const active = foldChar === "none" ? "" : " active";
+    return `
+    <span ${rowid} class="pretty p-icon checklist-fold-control ${active}">
+        <span class="state">
+            <i class="icon mdi mdi-${foldChar}"></i>
+            <label></label>
+        </span>
+    </span>`;
+};
+
+// See hortis.checklist.stateToCheck - will be nice to do this with HTM templating?
+
+// In indeterminate state, add p-is-indeterminate to div state
+// In indeterminate state remove mdi-check from i
+// Problem: https://stackoverflow.com/questions/9366087/html-why-isnt-indeterminate-indeterminatetrue-respected
+
+hortis.rowCheckbox = function (id, state) {
+    const checked = state === "selected" ? "checked" : "";
+    const indeterminate = `indeterminate="${state === "indeterminate"}"`;
+    const rowid = ` data-row-id="${id}"`;
+    return `
+    <span class="pretty p-icon">
+      <input type="checkbox" class="checklist-check" ${checked} ${indeterminate} ${rowid}/>
+      <span class="state p-success">
+        <i class="icon mdi mdi-check"></i>
+        <label></label>
+      </span>
+    </span>`;
+};
+
+hortis.checklistItem = function (entry, options, state) {
+    const record = entry.row,
+        id = record.id;
+    const rowid = `data-row-id="${id}"`;
     // Note: "species" really means "has obs " and could be a higher taxon - in the case of a simple checklist
     // we promote e.g. a genus-level obs to species level so it appears inline
-    const rank = record.rank && !(simple && record.taxonName) ? record.rank : "species";
-    const selectedClass = rank === "species" && record.id === selectedId ? " checklist-selected" : "";
-    const header = `<li class="checklist-rank-${rank}${selectedClass}">`;
-    const accessed = accessRow(record);
+    const rank = record.rank && !(options.simple && record.taxonName) ? record.rank : "species";
+    const selectedClass = rank === "species" && record.id === state.selectedId ? " checklist-selected" : "";
+    const header = `<li class="checklist-row checklist-rank-${rank}${selectedClass}">`;
+    const accessed = options.accessRow(record);
     const render = rank === "species" ? hortis.renderSpeciesName : fluid.identity;
     const names = {};
     if (accessed.nativeName) {
         names.nativeName = `<p ${rowid} class="checklist-hulq-name"><em>${accessed.nativeName}</em></p>`;
-    };
+    }
     if (accessed.scientificName) {
         names.scientificName = `<p ${rowid} class="checklist-scientific-name">${render(hortis.encodeHTML(accessed.scientificName))}</p>`;
     }
@@ -76,21 +109,23 @@ hortis.checklistItem = function (accessRow, entry, selectedId, simple, selectabl
     }
     // TODO: Sort according to order in accessRow
     const name = Object.values(names).join(" - ");
-    const subList = hortis.checklistList(accessRow, entry.children, selectedId, simple, selectable);
+    const rowState = state.idToState[id];
+    const subList = hortis.checklistList(rowState.folded === "folded" ? [] : entry.children, options, state);
     const footer = "</li>";
-    const check = (selectable ? hortis.rowCheckbox(rowid) : "");
-    return header + check + name + subList + footer;
+    const fold = options.unfoldable ? hortis.rowFold(rowid, rowState.folded) : "";
+    const check = options.selectable ? hortis.rowCheckbox(id, rowState.selected) : "";
+    return header + fold + check + name + subList + footer;
 };
 
-hortis.checklistList = function (accessRow, entries, selectedId, simple, selectable) {
+hortis.checklistList = function (entries, options, state) {
     return entries.length ?
         "<ul>" + entries.map(function (entry) {
-            return hortis.checklistItem(accessRow, entry, selectedId, simple, selectable);
+            return hortis.checklistItem(entry, options, state);
         }).join("") + "</ul>" : "";
 };
 
 hortis.checklistRowForId = function (container, id) {
-    return container.find("[data-row-id=" + id + "]").closest("li");
+    return container.find(`[data-row-id=${id}]`).closest("li");
 };
 
 // Note that we can't test on layoutId since it is updated asynchronously and in a complex way in hortis.changeLayoutId
@@ -160,15 +195,13 @@ hortis.filterTaxonomy = function (rows, depth, acceptChecklistRow, filterTaxonom
     return hortis.sortChecklistLevel(togo);
 };
 
-hortis.SELECTED = 1;
-hortis.UNSELECTED = 0;
-hortis.INDETERMINATE = -1;
-
 fluid.defaults("hortis.checklist", {
     gradeNames: ["hortis.withPanelLabel", "fluid.viewComponent"],
     filterRanks: false, // or array to include - if set, counts as "simple"
+    // disclosableRanks: array
     showRoot: false,
     selectable: false,
+    unfoldable: false,
     selectors: {
         hoverable: "p",
         checklist: ".imerss-checklist"
@@ -176,6 +209,10 @@ fluid.defaults("hortis.checklist", {
     invokers: {
         accessRow: {
             funcName: "hortis.accessRowHulq"
+        },
+        foldByDefault: {
+            args: ["{that}.options.disclosableRanks", "{arguments}.0"],
+            func: (disclosableRanks, row) => disclosableRanks && disclosableRanks.includes(row.rank)
         },
         acceptChecklistRow: {
             funcName: "hortis.acceptChecklistRowAS",
@@ -187,22 +224,28 @@ fluid.defaults("hortis.checklist", {
             //     rows            , depth
             args: ["{arguments}.0", "{arguments}.1", "{that}.acceptChecklistRow", "{that}.filterTaxonomy", "{that}.options.showRoot"]
         },
-        generateChecklist: {
+        generate: { // Triggered async from scheduleRender signal
             funcName: "hortis.checklist.generate",
-            args: ["{that}", "{that}.dom.checklist", "{layoutHolder}", "{that}.filterTaxonomy", "{that}.options.filterRanks", "{arguments}.0"]
+            args: ["{that}", "{that}.dom.checklist", "{that}.idToState.value", "{that}.rootEntry.value", "{that}.selectedId.value"]
         },
-        check: "hortis.checklist.check({that}, {arguments}.0, {arguments}.1)"
+        check: "hortis.checklist.check({that}, {arguments}.0, {arguments}.1)",
+        toggleFold: "hortis.checklist.toggleFold({that}, {arguments}.0)"
     },
     members: {
-        idToState: "@expand:signal({})",
-        // cache of old value used during generateChecklist render cycle
+        // Can't return 2 signals from computeRootEntry, do this collaterally
+        idToEntry: {},
+        rootEntry: "@expand:fluid.computed(hortis.checklist.computeRootEntry, {that}, {that}.rowById, {that}.rootId, {that}.filterTaxonomy)",
+        idToStateUIOld: null,
+        idToStateUI: "@expand:signal(null)", // Must supply an initial value or else computation never starts
+        scheduleRender: "@expand:signal()",
+        subscribeScheduleRender: "@expand:fluid.effect({that}.generate, {that}.scheduleRender)",
+        idToStateOld: null, // Cache of old value used to transfer user's selection state, preact-signals doesn't allow "peek" at self
+        idToState: "@expand:fluid.computed(hortis.checklist.idToState, {that}, {that}.idToStateUI, {that}.rootEntry, {that}.rowFocus)",
         // rowById: required for tooltips
         // rowFocus
-        oldIdToState: {},
-        rowSelection: "@expand:fluid.computed(hortis.checklist.checksToSelection, {checklist}.idToState)",
-        subscribeChecks: "@expand:hortis.checklist.subscribeChecks({that}.idToState, {that})",
-        subscribeSelected: "@expand:hortis.checklist.subscribeSelected({that}, {that}.selectedId, {that}.rowById)",
-        subscribeGenerate: "@expand:hortis.checklist.subscribeGenerate({that}, {that}.rootId, {that}.selectedId, {that}.rowFocus, {that}.rowById)"
+        rowSelection: "@expand:fluid.computed(hortis.checklist.checksToSelection, {that}.idToState)",
+        subscribeChecks: "@expand:fluid.effect(hortis.checklist.subscribeChecks, {that}, {that}.idToStateUI)",
+        subscribeSelected: "@expand:hortis.checklist.subscribeSelected({that}, {that}.selectedId, {that}.rowById)"
     },
     listeners: {
         "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {layoutHolder})",
@@ -227,6 +270,24 @@ hortis.checklist.bindCheckboxClick = function (checklist) {
         checklist.check(id, this.checked);
         // checklist.applier.change(["idToState", id], this.checked);
     });
+
+    checklist.container.on("click", ".checklist-fold-control.active", function () {
+        const id = this.dataset.rowId;
+        fluid.log("Fold clicked with row " + id);
+        checklist.toggleFold(id);
+    });
+};
+
+hortis.checklist.stateToCheck = function (checklist, state, id) {
+    const node = checklist.idToNode?.[id];
+    if (node) {
+        node.checked = state.selected === "selected";
+        // Don't use "indeterminate" property since we can't control this from markup
+        node.setAttribute("indeterminate", state.selected === "indeterminate");
+        const holder = node.closest(".p-icon");
+        const ui = holder.querySelector(".icon");
+        $(ui).toggleClass("mdi-check", state.selected !== "indeterminate");
+    }
 };
 
 // This used to read:
@@ -236,18 +297,63 @@ hortis.checklist.bindCheckboxClick = function (checklist) {
 //         args: ["{that}", "{change}.value", "{change}.path"]
 // }
 
-hortis.checklist.subscribeChecks = function (idToStateSignal, checklist) {
-    let oldIdToState = undefined;
-    return effect( () => {
-        const newIdToState = idToStateSignal.value;
-        fluid.each(newIdToState, (newState, id) => {
-            const oldState = oldIdToState[id];
-            if (newState !== oldState) {
-                hortis.checklist.stateToCheck(checklist, newState, id);
-            }
-        });
-        oldIdToState = newIdToState;
+hortis.checklist.subscribeChecks = function (checklist, idToStateUI) {
+    const oldIdToState = checklist.idToStateUIOld;
+    fluid.each(idToStateUI, (newState, id) => {
+        const oldState = oldIdToState[id];
+        if (newState !== oldState) {
+            hortis.checklist.stateToCheck(checklist, newState, id);
+        }
     });
+    checklist.idToStateUIOld = idToStateUI;
+};
+
+hortis.checklist.allChildrenState = function (idToState, entry, state) {
+    return entry.children.find(child => idToState[child.row.id].selected !== state) === undefined;
+};
+
+// In-DOM variants of this algorithm at https://css-tricks.com/indeterminate-checkboxes/
+// From reacting to an individual checkbox click, compute the full idToState signal
+hortis.checklist.check = function (checklist, id, checked) {
+    const idToStateUp = fluid.copy(checklist.idToStateUI.value);
+    const upState = checked ? "selected" : "unselected";
+    const entry = checklist.idToEntry[id];
+
+    // Traverse downward, cascading selected/unselected flag
+    const setChildState = function (entry, state) {
+        idToStateUp[entry.row.id].selected = state;
+        entry.children.forEach(child => setChildState(child, state));
+    };
+    setChildState(entry, upState);
+
+    // Traverse upward, cascading indeterminate as well as flag
+    let parent = entry.parent;
+    while (parent.row) {
+        const allChildrenState = hortis.checklist.allChildrenState(idToStateUp, parent, upState);
+        idToStateUp[parent.row.id].selected = allChildrenState ? upState : "indeterminate";
+        parent = parent.parent;
+    }
+    batch( () => {
+        checklist.idToStateUI.value = idToStateUp;
+        if (upState === "selected" && idToStateUp[id].folded === "folded") {
+            hortis.checklist.toggleFold(checklist, id);
+        }
+    });
+};
+
+hortis.checklist.toggleFold = function (checklist, id) {
+    const idToStateUp = fluid.copy(checklist.idToStateUI.value);
+    const state = idToStateUp[id];
+    const newFolded = state.folded === "folded" ? "unfolded" : "folded";
+    state.folded = newFolded;
+    const entry = checklist.idToEntry[id];
+    // nb. duplicates some logic in initial defaultFold
+    const defaultNewFold = entry => entry.children.length === 0 ? "fixed" : "folded";
+    entry.children.forEach(child => idToStateUp[child.row.id].folded = newFolded === "folded" ? "hidden" : defaultNewFold(child));
+    // Triggers update through idToState
+    checklist.idToStateUI.value = idToStateUp;
+    // Schedule full render
+    checklist.scheduleRender.value = true;
 };
 
 // This used to read:
@@ -264,50 +370,62 @@ hortis.checklist.subscribeSelected = function (that, selectedIdSignal, rowByIdSi
     }, selectedIdSignal, rowByIdSignal);
 };
 
-// This used to read:
-// generateChecklist: {
-//     path: ["{layoutHolder}.model.layoutId", "{layoutHolder}.model.rowFocus", "{layoutHolder}.model.rowById"],
-//         func: "{that}.generateChecklist"
-// },
-hortis.checklist.subscribeGenerate = function (that, rootIdSignal, selectedIdSignal, rowFocusSignal, rowByIdSignal) {
-    return fluid.effect(function (rootId, selectedId, rowFocus, rowById) {
-        // note that this reads selectedId but does not depend on it because of rendering optimisation
-        const model = {rootId, selectedId, rowFocus, rowById};
-        that.generateChecklist(model);
-        // Writes: idToEntry, idToNode, idToState
-        // idToNode is a cache just used in stateToCheck, no need to signalise it
-        // Updates signal idToState
-    }, rootIdSignal, selectedIdSignal, rowFocusSignal, rowByIdSignal);
-};
-
-hortis.checklist.stateToCheck = function (checklist, state, id) {
-    const node = checklist.idToNode?.[id];
-    if (node) {
-        node.checked = state === hortis.SELECTED;
-        node.indeterminate = state === hortis.INDETERMINATE;
-        const holder = node.closest(".p-icon");
-        const ui = holder.querySelector(".icon");
-        $(ui).toggleClass("mdi-check", state !== hortis.INDETERMINATE);
-    }
-};
-
-hortis.checklist.generate = function (that, element, layoutHolder, filterTaxonomy, simple, model) {
-    const {rootId, selectedId, rowFocus, rowById} = model;
-    const selectable = that.options.selectable;
-
+hortis.checklist.computeRootEntry = function (that, rowById, rootId, filterTaxonomy) {
+    // TODO: Use of ROOT_ID to display polyphyletic set needed?
+    const rootRow = rowById[rootId];
     fluid.log("Generating checklist for id " + rootId);
-    // Don't read it to avoid creating a cycle since we are likely already in an effect
-    that.oldIdToState = that.idToState.peek();
-    const rootChildren = fluid.makeArray(rowById[rootId]);
-    const filteredEntries = filterTaxonomy(rootChildren, 0);
-    that.rootEntry = {row: {id: hortis.checklist.ROOT_ID}, children: filteredEntries};
-    if (selectable) {
-        const {idToEntry, idToState} = hortis.checklist.computeInitialModel(that.rootEntry, rowFocus, that.oldIdToState);
-        that.idToEntry = idToEntry;
-        that.idToState.value = idToState;
-    }
+    const filteredEntries = filterTaxonomy([rootRow], 0);
+    const idToEntry = that.idToEntry;
+    fluid.clear(idToEntry);
+    let entryIndex = 0;
+    const indexEntry = function (entry, parent) {
+        idToEntry[entry.row.id] = entry;
+        entry.index = entryIndex++;
+        entry.parent = parent;
+        entry.children.forEach(child => indexEntry(child, entry));
+    };
+    filteredEntries.forEach(indexEntry);
+    // "Wouldn't it be good" if we could return 2 signals
+    return {children: filteredEntries};
+};
 
-    const markup = hortis.checklistList(that.accessRow, filteredEntries, selectedId, simple, selectable);
+// TODO: rowFocus is probably already fully accounted for in computeRootEntry - we should axe it from here
+hortis.checklist.idToState = function (that, idToStateUI, rootEntry, rowFocus) {
+    const idToStateOld = that.idToStateOld;
+    let togo;
+    if (idToStateOld === idToStateUI) { // There must have been a change in rowFocus or rootEntry, regenerate new value
+        togo = hortis.checklist.computeInitialModel(rootEntry, rowFocus, idToStateOld, that.options.unfoldable, that.foldByDefault);
+        // Trigger rendering async - we can't update another computed in this computation
+        fluid.invokeLater(() => that.scheduleRender.value = true);
+    } else { // There must have been a UI-driven update or a fresh render, simply pass it through
+        togo = idToStateUI;
+        // Don't put this in the branch above, so that when we get a fresh render, we pass through this branch next time on the update of idToStateUI
+        that.idToStateOld = togo;
+    }
+    // The main cycle broken here is computation of rowSelection
+    return togo;
+};
+
+// An async non-effect since only idToState computation can determine if a full render is required
+hortis.checklist.generate = function (that, element, idToState, rootEntry, selectedId) {
+    const selectable = that.options.selectable,
+        unfoldable = that.options.unfoldable,
+        simple = !!that.options.filterRanks;
+
+    const rootEntries = rootEntry.children;
+
+    const options = {
+        simple,
+        selectable,
+        unfoldable,
+        accessRow: that.accessRow
+    };
+    const state = {
+        selectedId,
+        idToState
+    };
+
+    const markup = hortis.checklistList(rootEntries, options, state);
     element[0].innerHTML = markup;
     if (selectable) {
         const checks = element[0].querySelectorAll(".checklist-check");
@@ -315,55 +433,37 @@ hortis.checklist.generate = function (that, element, layoutHolder, filterTaxonom
         checks.forEach(check => idToNode[check.dataset.rowId] = check);
         that.idToNode = idToNode;
     }
-};
-
-hortis.checklist.allChildrenState = function (idToState, entry, state) {
-    return entry.children.find(child => idToState[child.row.id] !== state) === undefined;
-};
-
-// In-DOM variants of this algorithm at https://css-tricks.com/indeterminate-checkboxes/
-// From reacting to an individual checkbox click, compute the full idToState signal
-hortis.checklist.check = function (checklist, id, checked) {
-    const idToStateUp = {...checklist.idToState.value};
-    const upState = checked ? hortis.SELECTED : hortis.UNSELECTED;
-    const entry = checklist.idToEntry[id];
-    // Traverse downward, cascading selected/unselected flag
-    const setChildState = function (entry, state) {
-        idToStateUp[entry.row.id] = state;
-        entry.children.forEach(child => setChildState(child, state));
-    };
-
-    // Traverse upward, cascading indeterminate as well as flag
-    setChildState(entry, upState);
-
-    let parent = entry.parent;
-    while (parent) {
-        const allChildrenState = hortis.checklist.allChildrenState(idToStateUp, parent, upState);
-        idToStateUp[parent.row.id] = allChildrenState ? upState : hortis.INDETERMINATE;
-        parent = parent.parent;
-    }
-    checklist.idToState.value = idToStateUp;
+    that.scheduleRender.value = undefined;
+    // Do this first to cull action of subscribeChecks
+    that.idToStateUIOld = idToState;
+    // This then may trigger update of idToState via a further pass through checklist.idToState (may not if was an unfold)
+    that.idToStateUI.value = idToState;
 };
 
 // A fake ID to hold the checklist's root so we can display a polyphyletic set
+// TODO not currently used - we always seem to have a real root, recheck this
 hortis.checklist.ROOT_ID = Number.NEGATIVE_INFINITY;
 
-hortis.checklist.computeInitialModel = function (rootEntry, rowFocus, oldIdToState) {
-    const idToState = {},
-        idToEntry = {};
-    const indexEntry = function (entry, parent) {
+hortis.checklist.defaultFold = function (entry, unfoldable, foldByDefault) {
+    return entry.children.length === 0 || !unfoldable ? "fixed" : entry.children.every(child => foldByDefault(child.row)) ? "folded" : "unfolded";
+};
+
+hortis.checklist.computeInitialModel = function (rootEntry, rowFocus, oldIdToState, unfoldable, foldByDefault) {
+    const idToState = {};
+    const indexEntry = function (entry, parentFolded) {
         const id = entry.row.id;
         if (!id) {
             fluid.log("Warning, discarding row ", entry.row, " without id set");
         } else if (rowFocus[id]) {
-            idToState[id] = oldIdToState[id] || hortis.UNSELECTED;
-            idToEntry[id] = entry;
+            const defaultFolded = (parentFolded === "folded" || parentFolded === "hidden") ? "hidden" :
+                parentFolded === "root" ? "fixed" : hortis.checklist.defaultFold(entry, unfoldable, foldByDefault);
+            idToState[id] = oldIdToState?.[id] || {selected: "unselected", folded: defaultFolded};
         }
-        entry.parent = parent;
-        entry.children.forEach(childEntry => indexEntry(childEntry, entry));
+        const folded = idToState[id].folded;
+        entry.children.forEach(childEntry => indexEntry(childEntry, folded));
     };
-    indexEntry(rootEntry);
-    return {idToEntry, idToState};
+    rootEntry.children.forEach(childEntry => indexEntry(childEntry, "root"));
+    return idToState;
 };
 
 fluid.defaults("hortis.checklist.withHolder", {
@@ -376,11 +476,13 @@ hortis.checklist.checksToSelection = function (idToState) {
     const selectAll = {};
     let selected = 0;
     fluid.each(idToState, (state, key) => {
-        if (state === hortis.SELECTED) {
-            ++selected;
-            selection[key] = true;
+        if (state.folded !== "hidden") {
+            if (state.selected === "selected") {
+                ++selected;
+                selection[key] = true;
+            }
+            selectAll[key] = true;
         }
-        selectAll[key] = true;
     });
     return selected === 0 ? selectAll : selection;
 };

@@ -729,7 +729,7 @@ a.ui-button:active,
 
 /* Styling for checkboxes with indeterminate value */
 /* Grabbed definition for default "checked" to apply to indeterminate checkboxes */
-.pretty input:indeterminate~.state label:after {
+.pretty input[indeterminate="true"]~.state label:after {
     background-color: #bdc3c7!important;
     transform: scale(.6);
 }
@@ -746,6 +746,8 @@ a.ui-button:active,
 
 .pretty {
     margin-right: 0.3em;
+    /* Cancel the wrapping behaviour at higher checklist level */
+    text-indent: 0;
 }
 
 
@@ -1028,8 +1030,31 @@ a.ui-button:active,
     outline: 2px solid black;
 }
 
+.pretty.p-icon.checklist-fold-control .state .icon {
+    font-size: 1.5em;
+    top: -0.25em;
+    left: -0.16em;
+    width: 1em;
+    height: 1em;
+    opacity: 1;
+}
+
+.pretty.checklist-fold-control .state label:before {
+    border: none;
+}
+
+.pretty.checklist-fold-control {
+    margin-right: -0.3em;
+    color: #555;
+}
+
+.pretty.checklist-fold-control.active {
+    cursor: pointer;
+}
+
 .imerss-checklist ul {
     margin-block-start: 0;
+    padding-inline-start: 0;
     list-style-type: none;
 }
 
@@ -1037,10 +1062,10 @@ a.ui-button:active,
     padding-inline-start: 0;
 }
 
-li.checklist-rank-species {
-    margin-left: 40px;
-    padding-left: 40px;
-    text-indent: -40px;
+li.checklist-row {
+    margin-left: 10px;
+    padding-left: 20px;
+    text-indent: -30px;
 }
 
 .imerss-checklist > ul {

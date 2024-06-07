@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Harvey_Janszen_Legacy_Project/.idea/Harvey_Janszen_Legacy_Project.iml" filepath="$PROJECT_DIR$/../Harvey_Janszen_Legacy_Project/.idea/Harvey_Janszen_Legacy_Project.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Salish-Sea-Community-Directory/.idea/Salish-Sea-Community-Directory.iml" filepath="$PROJECT_DIR$/../Salish-Sea-Community-Directory/.idea/Salish-Sea-Community-Directory.iml" />
       <module fileurl="file://$PROJECT_DIR$/../adfsimon-bioinfo/.idea/adfsimon-bioinfo.iml" filepath="$PROJECT_DIR$/../adfsimon-bioinfo/.idea/adfsimon-bioinfo.iml" />
       <module fileurl="file://$PROJECT_DIR$/../adfsimon-bioinfo-private/.idea/adfsimon-bioinfo-private.iml" filepath="$PROJECT_DIR$/../adfsimon-bioinfo-private/.idea/adfsimon-bioinfo-private.iml" />

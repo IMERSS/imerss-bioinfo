@@ -89,6 +89,12 @@ hortis.queryFromLichenNRow = function (row) {
     return {name, phylum};
 };
 
+hortis.queryFromEFloraRow = function (row) {
+    const name = hortis.sanitizeSpeciesName(row.Taxon);
+    const phylum = "Tracheophyta";
+    return {name, phylum};
+};
+
 hortis.queryFromLuschimRow = function (row) {
     const name = hortis.sanitizeSpeciesName(row["Scientific.name"]);
     const rawRank = row["Taxonomic.level"];
@@ -127,7 +133,8 @@ hortis.obsIdFromSummaryRow2023 = function (row) {
 
 hortis.applyName = async function (row) {
     //const query = hortis.queryFromSummaryRow2023(row);
-    const query = hortis.queryFromGBIFRow(row);
+    //const query = hortis.queryFromGBIFRow(row);
+    const query = hortis.queryFromEFloraRow(row);
     //const query = hortis.queryFromLichenNRow(row);
     //const query = hortis.queryFromDwcaRow(row);
 
@@ -137,7 +144,7 @@ hortis.applyName = async function (row) {
         row["Name Status"] = looked.doc.nameStatus;
         row["Referred iNaturalist Id"] = looked.doc.id;
         row["Referred iNaturalist Name"] = looked.doc.name;
-        await hortis.iNat.getRanks(looked.doc.id, row, source.byId /*, hortis.ranks*/); // uncomment for Dunwiddie
+        await hortis.iNat.getRanks(looked.doc.id, row, source.byId, hortis.ranks); // uncomment for Dunwiddie, EFlora
         if (row.commonName === "") {
             const lookedId = await source.get({id: looked.doc.id});
             row.commonName = lookedId?.doc.preferred_common_name;

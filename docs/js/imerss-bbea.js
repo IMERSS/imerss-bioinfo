@@ -49,9 +49,10 @@ fluid.defaults("hortis.beaVizLoader", {
             options: {
                 gradeNames: "hortis.checklist.withOBA",
                 rootId: 1,
-                filterRanks: ["epifamily", "family"],
+                filterRanks: ["epifamily", "family", "tribe", "genus", "subgenus", "species"],
                 disclosableRanks: ["tribe", "genus", "subgenus", "species"],
                 selectable: true,
+                unfoldable: true,
                 members: {
                     rowById: "{taxa}.rowById",
                     rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, pollRowFocus)"
@@ -64,9 +65,10 @@ fluid.defaults("hortis.beaVizLoader", {
             options: {
                 gradeNames: "hortis.checklist.withOBA",
                 rootId: 47126,
-                filterRanks: ["kingdom", "order"],
+                filterRanks: ["kingdom", "order", "family", "genus"],
                 disclosableRanks: ["family", "genus"],
                 selectable: true,
+                unfoldable: true,
                 members: {
                     rowById: "{taxa}.rowById",
                     rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, plantRowFocus)"
@@ -109,7 +111,8 @@ fluid.defaults("hortis.beaVizLoader", {
                 members: {
                     // TODO: Split drawInteractions render prepare back out into interactions
                     bipartiteRows: "{drawInteractions}.bipartiteRows",
-                    beeSelection: "{pollChecklist}.rowSelection"
+                    beeSelection: "{pollChecklist}.rowSelection",
+                    beeIdToEntry: "{pollChecklist}.idToEntry"
                 }
             }
         }
@@ -297,12 +300,33 @@ hortis.interactions.count = function (that, rows, plantSelection, pollSelection)
     return crossTable;
 };
 
-hortis.familyColours = {
-    "Andrenidae": "#E41A1C",
-    "Apidae": "#377EB8",
-    "Colletidae": "#4DAF4A",
-    "Megachilidae": "#FF7F00",
-    "Halictidae": "#984EA3"
+hortis.pollColours = {
+    family: {
+        "Andrenidae": "#E41A1C",
+        "Apidae": "#377EB8",
+        "Colletidae": "#4DAF4A",
+        "Megachilidae": "#FF7F00",
+        "Halictidae": "#984EA3"
+    }
+};
+
+hortis.computeRankColours = function (selection, colourIndex, idToEntry) {
+    const entries = Object.keys(selection).map(id => idToEntry[id]);
+    const rows = entries.sort((a, b) => a.index - b.index).map(entry => entry.row);
+    const colourEntries = rows.map(row => {
+        let togo = [row.iNaturalistTaxonName, null];
+        while (row) {
+            const entry = colourIndex[row.rank]?.[row.iNaturalistTaxonName];
+            if (entry) {
+                togo[1] = entry;
+                break;
+            }
+            row = row.parent;
+        }
+        return togo;
+    });
+    const colours = Object.fromEntries(colourEntries);
+    return {rows, colours};
 };
 
 hortis.expandBBox = function (accum, bbox) {
@@ -336,8 +360,9 @@ fluid.defaults("hortis.bipartite", {
     members: {
         bipartiteRows: "@expand:signal()",
         beeSelection: "@expand:signal()",
+        // beeIdToEntry: {}, - injected from checklist
         containerWidth: "@expand:signal()",
-        render: "@expand:fluid.effect(hortis.bipartite.render, {that}.dom.svg.0, {that}.containerWidth, {that}.bipartiteRows, {that}.beeSelection)"
+        render: "@expand:fluid.effect(hortis.bipartite.render, {that}, {that}.dom.svg.0, {that}.containerWidth, {that}.bipartiteRows, {that}.beeIdToEntry)"
     },
     listeners: {
         "onCreate.listenWidth": "hortis.bipartite.listenWidth({that}.container.0, {that}.containerWidth)"
@@ -354,12 +379,15 @@ hortis.bipartite.listenWidth = function (containerNode, widthSignal) {
 };
 
 
-hortis.bipartite.render = function (svgNode, containerWidth, bipartiteRows, beeSelection) {
+hortis.bipartite.render = function (that, svgNode, containerWidth, bipartiteRows, beeIdToEntry) {
     const svg = d3.select(svgNode);
+    // Read this directly so we don't get an extra notification - bipartiteRows is computed by an effect upstream in drawInteractions
+    const beeSelection = that.beeSelection.peek();
+    const {rows, colours} = hortis.computeRankColours(beeSelection, hortis.pollColours, beeIdToEntry);
     const {totalWidth} = imerss.bipartitePP(bipartiteRows, svg, containerWidth, 1000, {
         FigureLabel: "",
-        sortedBeeNames: Object.keys(beeSelection),
-        beeColors: hortis.familyColours,
+        sortedBeeNames: rows.map(row => row.iNaturalistTaxonName),
+        beeColors: colours,
         MainFigSizeX: Math.max(containerWidth - 330, 100),
         MainFigSizeY: 600
     });
@@ -879,10 +907,9 @@ hortis.regionFilter.computeValues = function (obsRows, fieldName) {
 };
 
 hortis.regionFilter.renderRow = function (template, rowLabel, rowId) {
-    const rowIdAttr = ` data-row-id="${rowId}"`;
     return fluid.stringTemplate(template, {
         rowLabel,
-        checkbox: hortis.rowCheckbox(rowIdAttr)
+        checkbox: hortis.rowCheckbox(rowId)
     });
 };
 

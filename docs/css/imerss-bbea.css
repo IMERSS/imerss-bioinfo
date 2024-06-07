@@ -23,6 +23,11 @@ body {
     box-sizing: border-box;
 }
 
+/** Quick hack to deal with the fact we can't quickly suppress spacing for non-unfoldable root */
+.imerss-checklist {
+    margin-left: -20px;
+}
+
 .checklist-rank-order > p {
     text-transform: none;
 }
@@ -77,7 +82,7 @@ body {
 }
 
 .imerss-int-bottom {
-    flex: 0 0 180px;
+    flex: 0 0 100px;
 }
 
 
@@ -125,7 +130,7 @@ body {
 .imerss-poll-names .imerss-int-label {
     writing-mode: tb-rl;
     transform: rotate(180deg);
-    bottom: 2em; /* No idea why they stick off the bottom otherwise */
+    /* bottom: 1em; No idea why they stick off the bottom otherwise */
 }
 
 .imerss-int-label {
@@ -150,11 +155,9 @@ body {
 }
 
 .imerss-int-poll-label {
-    padding-top: 10px;
     font-size: 20px;
     writing-mode: tb-rl;
     transform: rotate(180deg);
-    padding-top: 2em;
 }
 
 .imerss-int-plant-label {

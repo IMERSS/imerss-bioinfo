@@ -16,7 +16,7 @@ var hortis = fluid.registerNamespace("hortis");
 
 // TODO: Hoist this into some kind of core library
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
-var {effect, computed, batch} = preactSignalsCore;
+var {effect, batch} = preactSignalsCore;
 
 fluid.defaults("hortis.bareResourceLoader", {
     gradeNames: "fluid.component",
@@ -179,20 +179,6 @@ hortis.wireObsFilters = function (that) {
     effect( () => that.allOutput.value = prevOutput.value);
 };
 
-// In indeterminate state, add p-is-indeterminate to div state
-// In indeterminate state remove mdi-check from i
-
-hortis.rowCheckbox = function (rowid) {
-    return `
-    <span class="pretty p-icon">
-      <input type="checkbox" class="checklist-check" ${rowid}/>
-      <span class="state p-success">
-        <i class="icon mdi mdi-check"></i>
-        <label></label>
-      </span>
-    </span>`;
-};
-
 hortis.taxonTooltipTemplate =
 `<div class="imerss-tooltip">
     <div class="imerss-photo" style="background-image: url(%imgUrl)"></div>
@@ -317,12 +303,13 @@ fluid.defaults("hortis.checkbox", {
 });
 
 hortis.checkbox.valueToDom = function (value, node) {
-    const state = value ? hortis.SELECTED : hortis.UNSELECTED;
-    node.checked = state === hortis.SELECTED;
-    node.indeterminate = state === hortis.INDETERMINATE;
+    const state = value ? "selected" : "unselected";
+    node.checked = state === "selected";
+    // State currently unused
+    node.setAttribute("indeterminate", state === "indeterminate");
     const holder = node.closest(".p-icon");
     const ui = holder.querySelector(".icon");
-    $(ui).toggleClass("mdi-check", state !== hortis.INDETERMINATE);
+    $(ui).toggleClass("mdi-check", state !== "indeterminate");
 };
 
 hortis.checkbox.listenCheck = function (that) {
@@ -462,7 +449,7 @@ fluid.defaults("hortis.layoutHolder", {
         historyIndex: "@expand:signal(0)",
 
         rootId: "@expand:signal({that}.options.rootId)",
-        rowFocus: "@expand:signal({})", // non-taxon based selection external to the checklist, e.g. incoming from a map?
+        rowFocus: "@expand:signal({})", // non-taxon based selection external to the checklist, e.g. derived from filtered Obs
         rowSelection: "@expand:signal({})", // taxon-based selection from the checklist - will be subset of rowFocus
 
         selectedId: "@expand:signal(null)",
