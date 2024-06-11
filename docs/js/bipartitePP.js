@@ -5,8 +5,24 @@
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var imerss = imerss || {};
 
-imerss.bipartitePP = function (data, svg, height, width, options) { // eslint-disable-line no-unused-vars
-    const {sortedBeeNames, beeColors, FigureLabel, MainFigSizeX, MainFigSizeY} = options;
+// String measurement cribbed from https://stackoverflow.com/a/48172630/1381443
+imerss.charWidths = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.28,0.28,0.35,0.55,0.55,0.89,0.67,0.19,0.33,0.33,0.39,0.58,0.28,0.33,0.28,0.3,0.55,0.55,0.55,0.55,0.55,0.55,0.55,0.55,0.55,0.55,0.28,0.28,0.58,0.58,0.58,0.55,1.01,0.67,0.67,0.72,0.72,0.67,0.61,0.78,0.72,0.28,0.5,0.67,0.55,0.83,0.72,0.78,0.67,0.78,0.72,0.67,0.61,0.72,0.67,0.94,0.67,0.67,0.61,0.28,0.35,0.28,0.48,0.55,0.33,0.55,0.55,0.5,0.55,0.55,0.28,0.55,0.55,0.22,0.24,0.5,0.22,0.83,0.55,0.55,0.55,0.55,0.33,0.5,0.28,0.55,0.50,0.72,0.5,0.5,0.5,0.35,0.26,0.35,0.59];
+imerss.avgWidth = 0.53;
+
+imerss.measureText = function (str) {
+    return Array.from(str).reduce(
+        (acc, cur) => acc + (imerss.charWidths[cur.charCodeAt(0)] ?? imerss.avgWidth), 0
+    );
+};
+
+imerss.maxTextWidth = function (labels, fontSize) {
+    return labels.map(label => label.toString()).reduce((max, label) => {
+        return Math.max(max, imerss.measureText(label));
+    }, 0) * fontSize * 1.02; // Add on 2% since our font seems just a touch wider than the respondent's
+};
+
+imerss.bipartitePP = function (data, svg, width, height, options) { // eslint-disable-line no-unused-vars
+    const {sortedBeeNames, sortedPlantNames, beeColors, FigureLabel} = options;
 
     // const IndivFigSizeX = 400; // here will become = IndivFigSizeX
     // const IndivFigSizeY = 1000; // here will become = IndivFigSizeY
@@ -14,17 +30,15 @@ imerss.bipartitePP = function (data, svg, height, width, options) { // eslint-di
     // this group of variables should always be the same
     // const ColourBy  = 1;
     // const colouroption = "manual";
-    const BarSize = 35;
+    const BarWidth = 35;
     const MinWidth = 10;
+    const MinFigWidth = 120;
     const Pad = 2.25;
     const IncludeCount = 1;
 
-    const LabelPad = 30;
+    const LabelPad = 10;
 
     const fontSize = parseInt(getComputedStyle(svg.node()).getPropertyValue("font-size"));
-
-    // "Megachilidae" at 14px is of width 83px, approx 7px so pick 50% of the font size as average
-    const fontScale = 0.5 * fontSize;
 
     const Orientation = "vertical";
     const PrimaryLab =  "Bees" ;
@@ -33,35 +47,27 @@ imerss.bipartitePP = function (data, svg, height, width, options) { // eslint-di
     // const mpA = 1;
     // const mpB = 1;
 
-    // below are the calculations that are now done here instead of in R
+    const lengMaxBee = imerss.maxTextWidth(data.map(element => element[0]), fontSize);
+    const lengMaxPlant = imerss.maxTextWidth(data.map(element => element[1]), fontSize);
 
-    const lengMaxPlant = data.reduce((max, element) => {
-        return Math.max(max, element[1].length);
-    }, 0);
-    const lengMaxBee = data.reduce((max, element) => {
-        return Math.max(max, element[0].length);
-    }, 0);
+    const countWidth = imerss.maxTextWidth(data.map(element => element[2]), fontSize);
 
-    // const BoxLabPosBee = -lengMaxBee * fontScale;
-    // const BoxLabPosPlant = lengMaxPlant * fontScale;
-
-    const BoxLabPosBee = -LabelPad;
-    const BoxLabPosPlant = LabelPad;
+    const BoxLabPosBee = -LabelPad - BarWidth / 2;
+    const BoxLabPosPlant = LabelPad + BarWidth / 2;
 
     // original - BoxLabPos <- (c(max(stringr::str_length(df[, 1])), max(stringr::str_length(df[, 2]))) * 1.2) + 20
 
-    const countWidth = 5,
-        countPadding = 5;
+    const countPadding = 15;
 
     // original - PercPos <- (BoxLabPos) * 7 + c(-5, 20)
-    const CountPosBee = BoxLabPosBee - countPadding - lengMaxBee * fontScale;
-    const CountPosPlant = BoxLabPosPlant + countPadding + lengMaxPlant * fontScale;
+    const CountPosBee = BoxLabPosBee - countPadding - lengMaxBee;
+    const CountPosPlant = BoxLabPosPlant + countPadding + lengMaxPlant;
 
     //original - LeftSidePadding = 20 + BoxLabPos[bee] + IncludePerc * PercPos[bee] - change include perc to 1
-    const LeftSidePadding = -CountPosBee + (IncludeCount ? countWidth * fontScale : 0);
-    const RightSidePadding = CountPosPlant + (IncludeCount ? countWidth * fontScale : 0);
+    const LeftSidePadding = -CountPosBee + (IncludeCount ? countWidth : 0);
+    const RightSidePadding = CountPosPlant + (IncludeCount ? countWidth : 0);
 
-    const totalWidth = LeftSidePadding + MainFigSizeX + RightSidePadding;
+    // const totalWidth = LeftSidePadding + MainFigSizeX + RightSidePadding;
 
     //const RightSidePadding = 20 + BoxLabPosPlant + IncludePerc * PercPosPlant;
     //original RightSidePadding = 20 + BoxLabPos[2] + IncludePerc * PercPos[2]
@@ -73,15 +79,19 @@ imerss.bipartitePP = function (data, svg, height, width, options) { // eslint-di
     //const WPerPlot = (MainFigSizeX - LeftSidePadding) / mpB;
     //original - WPerPlot <- (MainFigSize[x] - LeftSidePadding)/mp[2]
 
-    const ColPos = LeftSidePadding; // simplified from original, will need work if wanting to more than one facet
+    // All labels end up in a transform that shifts half a bar width outwards
+    const ColPos = LeftSidePadding - BarWidth / 2; // simplified from original, will need work if wanting to more than one facet
     //original - ColPos <- rep(floor(seq(from = LeftSidePadding, by = WPerPlot,
     //                        length = mp[2])), mp[a])
 
     //const HPerPlot = (MainFigSizeY - 100) / mpA;
     //original - HPerPlot <- (MainFigSize[2] - 100)/mp[a]
-    const RowPos = 50; // simplified for now, another multiple facet problem
+    const RowPos = 30; // simplified for now, another multiple facet problem
     //RowPos <- rep(floor(seq(from = 50, by = HPerPlot, length = mp[a])),
     //              each = mp[2])
+
+    const MainFigSizeX = Math.max(width - LeftSidePadding - RightSidePadding, MinFigWidth);
+    const MainFigSizeY = Math.max(height, sortedBeeNames.length * 20, sortedPlantNames.length * 20) - RowPos;
 
     function sort(sortOrder) {
         return function (a,b) {
@@ -91,7 +101,6 @@ imerss.bipartitePP = function (data, svg, height, width, options) { // eslint-di
 
     svg.html("");
 
-    // function(figHeight, figWidth, translateValu = c(ColPos[i], ",", RowPos[i]))
     const g1 = svg.append("g").attr("transform", `translate(${ColPos},${RowPos})`);
 
     const bp1 = viz.bP()
@@ -101,33 +110,27 @@ imerss.bipartitePP = function (data, svg, height, width, options) { // eslint-di
         .pad(Pad)  // standard
         .height(MainFigSizeY)
         .width(MainFigSizeX) // "^ same"
-        .barSize(BarSize) // this is standard
+        .barSize(BarWidth) // this is standard
         .fill(d => beeColors[d.primary]) // this too (assuming we are colouring by bees)
         .orient(Orientation)
-        .sortPrimary(sort(sortedBeeNames));
-        // this order is produced by sorting on bee family, then genus within family, then species (all alphabetically)
-        // similarly to color, this is not possible to make given the current const data
-        // will become sort (sortedBeeNames)
+        .sortPrimary(sort(sortedBeeNames))
+        .sortSecondary(sort(sortedPlantNames));
 
     g1.call(bp1); g1.append("text")
         .attr("x", 17.5).attr("y", -8)
         .style("text-anchor", "middle")
-        .text(PrimaryLab);
+        .text(PrimaryLab).attr("class", "bipartite-label");
 
     g1.append("text")
-        .attr("x", (MainFigSizeX - 17.5)) // 382.5 comes from IndivFigSize[1]-17.5
+        .attr("x", (MainFigSizeX - BarWidth / 2))
         .attr("y", -8).style("text-anchor","middle")
-        .text(SecondaryLab);
+        .text(SecondaryLab).attr("class", "bipartite-label");;
 
     g1.append("text")
-        .attr("x",((MainFigSizeX - 17.5) / 2)).attr("y", -25) // comes from (IndivFigSize[1]-17.5)/2
+        .attr("x",((MainFigSizeX - BarWidth) / 2)).attr("y", -25)
         .style("text-anchor", "middle")
         .attr("class", "header")
         .text(FigureLabel); // comes from subset name - only applicable sometimes
-
-    g1.selectAll(".mainBars") // no changes
-        .on("mouseover",mouseover)
-        .on("mouseout",mouseout);
 
     g1.selectAll(".mainBars").append("text").attr("class", "label")
         .attr("x", d => (d.part === "primary" ? BoxLabPosBee : BoxLabPosPlant))
@@ -160,6 +163,15 @@ imerss.bipartitePP = function (data, svg, height, width, options) { // eslint-di
             .text(function (d) { return (d.value);});
     }
 
-    return {totalWidth};
+    g1.selectAll(".mainBars") // no changes
+        .on("mouseover", mouseover)
+        .on("mouseout", mouseout);
+
+    return {
+        // Add on a little for scrollbars
+        renderedWidth: 8 + MainFigSizeX + LeftSidePadding + RightSidePadding - BarWidth,
+        // Add on a little for descenders and a hanging bottom row of text
+        renderedHeight: fontSize + MainFigSizeY + RowPos
+    };
 
 };

@@ -12,10 +12,14 @@ body {
     width: 50%;
 }
 
+.imerss-map-and-taxa {
+    height: 30%;
+}
+
 .imerss-checklists {
     display: flex;
     flex-direction: row;
-    height: 60%;
+    height: 70%;
     overflow: hidden;
 }
 
@@ -37,13 +41,13 @@ body {
 }
 
 .imerss-pollinators {
-    width: 30%;
-    min-width: 30%;
+    width: 25%;
+    min-width: 25%;
 }
 
 .imerss-interactions {
     padding: 0.5em;
-    width: 40%;
+    width: 50%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -184,7 +188,7 @@ body {
 }
 
 .imerss-filter-panel {
-    padding: 1rem;
+    padding: 2px 1rem 2px 1rem;
     display: flex;
     flex-direction: column;
 }
@@ -197,6 +201,12 @@ body {
 .imerss-filters {
     height: 100%;
     width: 20rem;
+    overflow-y: auto;
+    padding-right: 0.5em;
+}
+
+.imerss-record-reporter {
+    padding-top: 2px;
 }
 
 .imerss-filter-title {
@@ -266,11 +276,17 @@ body {
     display: block;
 }
 
+.bipartite-label {
+    font-size: 18px;
+    font-weight: 500;
+}
+
 /* Follow this illogical advice: https://stackoverflow.com/a/66689926/1381443 */
 .imerss-tabs {
     min-height: 0;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .imerss-tab-panel {

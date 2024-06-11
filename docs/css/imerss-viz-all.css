@@ -782,8 +782,6 @@ a.ui-button:active,
 .imerss-map {
     height: 100%;
     width: 100%;
-    min-width: 480px;
-    min-height: 320px;
 }
 
 

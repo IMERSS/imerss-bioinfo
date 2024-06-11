@@ -112,7 +112,9 @@ fluid.defaults("hortis.beaVizLoader", {
                     // TODO: Split drawInteractions render prepare back out into interactions
                     bipartiteRows: "{drawInteractions}.bipartiteRows",
                     beeSelection: "{pollChecklist}.rowSelection",
-                    beeIdToEntry: "{pollChecklist}.idToEntry"
+                    beeIdToEntry: "{pollChecklist}.idToEntry",
+                    plantSelection: "{plantChecklist}.rowSelection",
+                    plantIdToEntry: "{plantChecklist}.idToEntry"
                 }
             }
         }
@@ -310,6 +312,12 @@ hortis.pollColours = {
     }
 };
 
+hortis.plantColours = {
+    phylum: {
+        "Tracheophyta": "#4DAF4A"
+    }
+};
+
 hortis.computeRankColours = function (selection, colourIndex, idToEntry) {
     const entries = Object.keys(selection).map(id => idToEntry[id]);
     const rows = entries.sort((a, b) => a.index - b.index).map(entry => entry.row);
@@ -329,29 +337,6 @@ hortis.computeRankColours = function (selection, colourIndex, idToEntry) {
     return {rows, colours};
 };
 
-hortis.expandBBox = function (accum, bbox) {
-    return {
-        minX: Math.min(accum.minX, bbox.x),
-        minY: Math.min(accum.minY, bbox.y),
-        maxX: Math.max(accum.maxX, bbox.x + bbox.width),
-        maxY: Math.max(accum.maxY, bbox.y + bbox.height)
-    };
-};
-
-hortis.computeSVGBBox = function (svgNode) {
-    const elements = svgNode.querySelectorAll("*");
-    const emptyBBox = {
-        minX: Infinity,
-        minY: Infinity,
-        maxX: -Infinity,
-        maxY: -Infinity
-    };
-    return [...elements].reduce( (accum, element) => {
-        const bbox = element.getBBox();
-        return hortis.expandBBox(accum, bbox);
-    }, emptyBBox);
-};
-
 fluid.defaults("hortis.bipartite", {
     gradeNames: "fluid.viewComponent",
     selectors: {
@@ -360,9 +345,11 @@ fluid.defaults("hortis.bipartite", {
     members: {
         bipartiteRows: "@expand:signal()",
         beeSelection: "@expand:signal()",
+        plantSelection: "@expand:signal()",
         // beeIdToEntry: {}, - injected from checklist
+        // plantIdToEntry: {}
         containerWidth: "@expand:signal()",
-        render: "@expand:fluid.effect(hortis.bipartite.render, {that}, {that}.dom.svg.0, {that}.containerWidth, {that}.bipartiteRows, {that}.beeIdToEntry)"
+        render: "@expand:fluid.effect(hortis.bipartite.render, {that}, {that}.dom.svg.0, {that}.containerWidth, {that}.bipartiteRows, {that}.beeIdToEntry, {that}.plantIdToEntry)"
     },
     listeners: {
         "onCreate.listenWidth": "hortis.bipartite.listenWidth({that}.container.0, {that}.containerWidth)"
@@ -379,21 +366,22 @@ hortis.bipartite.listenWidth = function (containerNode, widthSignal) {
 };
 
 
-hortis.bipartite.render = function (that, svgNode, containerWidth, bipartiteRows, beeIdToEntry) {
+hortis.bipartite.render = function (that, svgNode, containerWidth, bipartiteRows, beeIdToEntry, plantIdToEntry) {
     const svg = d3.select(svgNode);
     // Read this directly so we don't get an extra notification - bipartiteRows is computed by an effect upstream in drawInteractions
     const beeSelection = that.beeSelection.peek();
-    const {rows, colours} = hortis.computeRankColours(beeSelection, hortis.pollColours, beeIdToEntry);
-    const {totalWidth} = imerss.bipartitePP(bipartiteRows, svg, containerWidth, 1000, {
+    const plantSelection = that.plantSelection.peek();
+    const containerHeight = that.container[0].clientHeight;
+    const {rows: beeRows, colours: beeColours} = hortis.computeRankColours(beeSelection, hortis.pollColours, beeIdToEntry);
+    const {rows: plantRows} = hortis.computeRankColours(plantSelection, hortis.plantColours, plantIdToEntry);
+    const {renderedWidth, renderedHeight} = imerss.bipartitePP(bipartiteRows, svg, containerWidth, containerHeight, {
         FigureLabel: "",
-        sortedBeeNames: rows.map(row => row.iNaturalistTaxonName),
-        beeColors: colours,
-        MainFigSizeX: Math.max(containerWidth - 330, 100),
-        MainFigSizeY: 600
+        sortedBeeNames: beeRows.map(row => row.iNaturalistTaxonName),
+        sortedPlantNames: plantRows.map(row => row.iNaturalistTaxonName),
+        beeColors: beeColours
     });
-    const bbox = hortis.computeSVGBBox(svgNode);
-    svgNode.setAttribute("height", bbox.maxY - bbox.minY);
-    svgNode.setAttribute("width", totalWidth);
+    svgNode.setAttribute("height", renderedHeight);
+    svgNode.setAttribute("width", renderedWidth);
 };
 
 hortis.interactionMarkup =
