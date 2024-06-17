@@ -85,7 +85,8 @@ const source = hortis.iNatTaxonSource({
 });
 
 
-const strategy = Object.keys(strategies).find(strategy => parsedArgs[strategy]);
+const strategy = Object.keys(strategies).find(strategy => parsedArgs[strategy] !== undefined);
+console.log("Applying strategy ", strategy);
 const strategyBigRec = strategies[strategy];
 
 
@@ -212,8 +213,8 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
         }
         const row = reader.rows[i];
         if (strategy === "bees") {
-            await hortis.applyName(row, "Tracheophyta", invertedSwaps, taxa, unmappedTaxa, strategyBigRec.plant);
-            await hortis.applyName(row, "Arthropoda", invertedSwaps, taxa, unmappedTaxa, strategyBigRec.pollinator);
+            await hortis.applyName(row, "Tracheophyta", null, invertedSwaps, taxa, unmappedTaxa, strategyBigRec.plant);
+            await hortis.applyName(row, "Arthropoda", null, invertedSwaps, taxa, unmappedTaxa, strategyBigRec.pollinator);
         } else if (strategy === "reintegrated") {
             await hortis.applyName(row, row.Phylum, row.Rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         }

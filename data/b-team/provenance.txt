@@ -11,17 +11,17 @@ via subset-b-team.R
 
 via normalise-OBA.R
 
---> plant-pollinators-normalised.csv
+--> plant-pollinators-OBA-normalised.csv
 
-via assignBNames.js --bees
+via assignBNames.js plant-pollinators-OBA-normalised.csv --bees
 
---> plant-pollinators-assigned.csv
-and plant-pollinators-assigned-taxa.csv
+--> plant-pollinators-OBA-assigned.csv
+and plant-pollinators-OBA-assigned-taxa.csv
 
 via subset-assigned.R
 
---> plant-pollinators-assigned-subset.csv
+--> plant-pollinators-OBA-assigned-subset.csv
 
 via b-team/intersectShapes.R
 
---> plant-pollinators-assigned-subset-labels.csv
+--> plant-pollinators-OBA-assigned-subset-labels.csv

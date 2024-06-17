@@ -39,6 +39,13 @@ hortis.iNatProjects = {
         },
         outputFile: "data/iNaturalist/Galiano_Coll_Catalogue_%Date.csv"
     },
+    GalianoChrom: {
+        paramMap: {
+            project_id: 5799,
+            taxon_id: "48222,50863,57774"
+        },
+        outputFile: "data/iNaturalist/Galiano_Trad_Catalogue_Chromists_etal_%Date.csv"
+    },
     GalianoTradHolly: { // Special proj to test we can read obscured coordinates since we get no errors from iNat on bad JWT
         paramMap: {
             project_id: 5799,

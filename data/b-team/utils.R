@@ -20,7 +20,9 @@ timedFread <- function (toread) {
 
 timedWrite <- function (x, towrite) {
   start <- Sys.time()
-  write.csv(x, towrite, na = "", row.names = FALSE)
+  # Approach for selective quoting taken from https://stackoverflow.com/a/25810538/1381443
+  commas <- which(sapply(x, function(y) any(grepl(",",y))))
+  write.csv(x, towrite, na = "", row.names = FALSE, quote = commas)
   end <- Sys.time()
   cat("Written ", nrow(x), " rows to ", towrite, " in ", (end - start), "s")
 }

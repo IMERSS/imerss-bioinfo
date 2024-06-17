@@ -2,7 +2,7 @@ library(dplyr)
 
 source("./utils.R")
 
-raw <- timedFread("plant-pollinators-OBA.csv");
+raw <- timedFread("plant-pollinators-OBA-2.csv");
 
 breaks = c("/", "'", "(")
 
@@ -67,4 +67,4 @@ filteredDown <- filtered[, !names(filtered) %in% c("Associated plant - genus, sp
 emptyCols <- colSums(is.na(filteredDown)) == nrow(filteredDown)
 filteredDown <- filteredDown[!emptyCols]
 
-timedWrite(filteredDown, "plant-pollinators-OBA-normalised.csv")
+timedWrite(filteredDown, "plant-pollinators-OBA-normalised-2.csv")

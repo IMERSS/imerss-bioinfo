@@ -1,4 +1,9 @@
+/* global preactSignalsCore */
+
 "use strict";
+
+// noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
+var {signal, computed} = preactSignalsCore;
 
 const testDOMSpeed = function (its) {
     const array = [];
@@ -12,6 +17,23 @@ const testDOMSpeed = function (its) {
         element.setAttribute("t6", "" + i);
         array.push(element);
     }
+    return array;
+};
+
+const testSignalSpeed = function (its) {
+    const array = [];
+    array[0] = signal(-1);
+    for (let i = 1; i < its; ++i) {
+        const preds = [...Array(3).keys()].map(() => array[Math.floor(Math.random() * i)]);
+        const element = computed( () => 1 + preds.reduce((p, s) => p + s.value, 0));
+        array.push(element);
+    }
+
+    const now = Date.now();
+    ++array[0].value;
+    console.log("Computed final signal value ", array[its - 1].value);
+    const delay = Date.now() - now;
+    console.log(its + " computations in " + delay + " ms: " + 1000 * (delay / its) + " us/it");
     return array;
 };
 
@@ -54,6 +76,7 @@ const timeIt = function (its, fn, name) {
 };
 
 function testSpeed() {
+    timeIt(1000000, testSignalSpeed, "signals");
     timeIt(1000000, testDOMSpeed, "DOM nodes");
     timeIt(10000000, testJSONSpeed, "JSON objects");
 }

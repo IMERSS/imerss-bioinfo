@@ -29,7 +29,7 @@ const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/d
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile,
     csvOptions: {
-        separator: "\t" // TODO: remember to put this back for real GBIF
+        // separator: "\t" // TODO: remember to put this back for real GBIF
     }
 });
 
@@ -95,6 +95,12 @@ hortis.queryFromEFloraRow = function (row) {
     return {name, phylum};
 };
 
+hortis.queryFromEFloraRow2 = function (row) {
+    const name = hortis.sanitizeSpeciesName(row["Name Adopted"]);
+    const phylum = "Tracheophyta";
+    return {name, phylum};
+};
+
 hortis.queryFromLuschimRow = function (row) {
     const name = hortis.sanitizeSpeciesName(row["Scientific.name"]);
     const rawRank = row["Taxonomic.level"];
@@ -134,7 +140,7 @@ hortis.obsIdFromSummaryRow2023 = function (row) {
 hortis.applyName = async function (row) {
     //const query = hortis.queryFromSummaryRow2023(row);
     //const query = hortis.queryFromGBIFRow(row);
-    const query = hortis.queryFromEFloraRow(row);
+    const query = hortis.queryFromEFloraRow2(row);
     //const query = hortis.queryFromLichenNRow(row);
     //const query = hortis.queryFromDwcaRow(row);
 
