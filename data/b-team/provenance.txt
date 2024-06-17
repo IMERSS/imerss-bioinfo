@@ -5,7 +5,7 @@ OBA Workflow:
 
 From Google Drive B-Team/Datasets/Example Oregon Bee Atlas species occurrence.csv
 
-via subset-b-team.R
+via subset-b-team.R / subset-b-team-2.R
 
 --> plant-pollinators-OBA.csv
 

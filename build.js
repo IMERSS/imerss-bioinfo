@@ -108,8 +108,14 @@ const buildIndex = {
         src: "data/b-team/plant-pollinators-OBA-assigned-subset-labels.csv",
         dest: "docs/data/b-team/plant-pollinators-OBA-assigned-subset-labels.csv"
     }, {
+        src: "data/b-team/plant-pollinators-OBA-2-assigned-subset-labels.csv",
+        dest: "docs/data/b-team/plant-pollinators-OBA-2-assigned-subset-labels.csv"
+    }, {
         src: "data/b-team/plant-pollinators-OBA-assigned-taxa.csv",
         dest: "docs/data/b-team/plant-pollinators-OBA-assigned-taxa.csv"
+    }, {
+        src: "data/b-team/plant-pollinators-OBA-2-assigned-taxa.csv",
+        dest: "docs/data/b-team/plant-pollinators-OBA-2-assigned-taxa.csv"
     }, {
         src: "data/b-team/us-eco-l3-regions.csv",
         dest: "docs/data/b-team/us-eco-l3-regions.csv"

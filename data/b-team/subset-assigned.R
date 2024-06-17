@@ -4,6 +4,6 @@ source("./utils.R")
 
 assigned <- timedFread("plant-pollinators-OBA-2-assigned.csv")
 
-subset <- assigned[assigned$plantAssignedINatName != "" & assigned$pollinatorAssignedINatName != "", ]
+subset <- assigned[!is.na(assigned$plantAssignedINatName) & !is.na(assigned$pollinatorAssignedINatName), ]
 
 timedWrite(subset, "plant-pollinators-OBA-2-assigned-subset.csv")
