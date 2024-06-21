@@ -722,8 +722,18 @@ fluid.defaults("hortis.bbeaObsQuantiser", {
     }
 });
 
+hortis.bbeaGridTooltipTemplate =
+`<div class="imerss-tooltip imerss-bbea-grid-tooltip">
+    <div><b>Observations:</b> %obsCount</div>
+    <div class="text"><b>Bees species:</b> %beeCount<div>%beeTaxa</div></div>
+    %footer
+</div>`;
+
 fluid.defaults("hortis.bbeaLibreMap", {
     gradeNames: ["hortis.libreObsMap", "hortis.libreMap.withTiles", "hortis.libreMap.streetmapTiles", "hortis.libreMap.usEcoL3Tiles"],
+    invokers: {
+        renderTooltip: "hortis.renderBbeaGridTooltip({that}, {obsQuantiser}.grid.value, {taxa}.rowById.value, {arguments}.0)"
+    },
     components: {
         obsQuantiser: {
             type: "hortis.obsQuantiser",
@@ -733,6 +743,33 @@ fluid.defaults("hortis.bbeaLibreMap", {
         }
     }
 });
+
+
+hortis.renderBbeaGridTooltip = function (that, grid, rowById, cellId) {
+    const bucket = grid.buckets[cellId];
+
+    const rowTemplate = "<div>%beeName: %obsCount observation%s</div>";
+
+    const rows = Object.entries(bucket.byTaxonId).map(([taxonId, obsIds]) => ({
+        beeName: rowById[taxonId].iNaturalistTaxonName,
+        obsCount: obsIds.length,
+        s: obsIds.length === 1 ? "" : "s"
+    }));
+    const sorted = rows.sort((rowa, rowb) => rowb.obsCount - rowa.obsCount);
+    let footer = "";
+    if (sorted.length > 10) {
+        footer = `<div class="text">...</div>`;
+        sorted.length = 10;
+    }
+
+    const terms = {
+        obsCount: bucket.count,
+        beeCount: rows.length,
+        beeTaxa: sorted.map(row => fluid.stringTemplate(rowTemplate, row)).join("\n"),
+        footer
+    };
+    return fluid.stringTemplate(hortis.bbeaGridTooltipTemplate, terms);
+};
 
 fluid.defaults("hortis.recordReporter", {
     gradeNames: "fluid.stringTemplateRenderingView",
@@ -811,19 +848,37 @@ hortis.sexFilter.doFilter = function (obsRows, filterState) {
     return togo;
 };
 
+fluid.defaults("hortis.repeatingRowFilter", {
+    markup: {
+        row: `
+        <div class="imerss-filter-row">
+            <div class="imerss-row-label">%rowLabel</div>
+            <div class="imerss-row-checkbox">%checkbox</div>
+        </div>
+        `
+    }
+});
+
+hortis.repeatingRowFilter.renderRow = function (template, rowLabel, rowId) {
+    return fluid.stringTemplate(template, {
+        rowLabel,
+        checkbox: hortis.rowCheckbox(rowId)
+    });
+};
+
+fluid.defaults("hortis.dataDrivenFilter", {
+    members: {
+        obsRows: "{hortis.filters}.obsRows"
+    }
+});
+
 fluid.defaults("hortis.regionFilter", {
-    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.stringTemplateRenderingView"],
+    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "hortis.repeatingRowFilter", "fluid.stringTemplateRenderingView"],
     markup: {
         container: `
         <div class="imerss-region-filter">
             <div class="imerss-filter-title">%filterName:</div>
             <div class="imerss-filter-body imerss-region-filter-rows">%rows</div>
-        </div>
-        `,
-        row: `
-        <div class="imerss-filter-row">
-            <div class="imerss-row-label">%rowLabel</div>
-            <div class="imerss-row-checkbox">%checkbox</div>
         </div>
         `
     },
@@ -845,9 +900,9 @@ fluid.defaults("hortis.regionFilter", {
 });
 
 hortis.regionFilter.doFilter = function (fieldName, obsRows, filterState) {
-    const all = Object.keys(filterState).length === 0;
+    const none = Object.keys(filterState).length === 0;
 
-    return all ? obsRows : obsRows.filter(row => filterState[row[fieldName]]);
+    return none ? obsRows : obsRows.filter(row => filterState[row[fieldName]]);
 };
 
 // cf. hortis.checklist.bindCheckboxClick
@@ -894,20 +949,120 @@ hortis.regionFilter.computeValues = function (obsRows, fieldName) {
     return Object.keys(values);
 };
 
-hortis.regionFilter.renderRow = function (template, rowLabel, rowId) {
+hortis.regionFilter.renderModel = function (values, idToLabel, markup, filterName) {
+    return {
+        filterName,
+        rows: values.map(value => hortis.repeatingRowFilter.renderRow(markup.row, idToLabel(value), value)).join("\n")
+    };
+};
+
+fluid.defaults("hortis.phenologyFilter", {
+    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.stringTemplateRenderingView"],
+    ranges: [{
+        label: "Early",
+        start: "April 1",
+        end: "June 15"
+    }, {
+        label: "Mid",
+        start: "June 15",
+        end: "August 1"
+    }, {
+        label: "Late",
+        start: "August 1",
+        end: "October 1"
+    }],
+    markup: {
+        container: `
+        <div class="imerss-phenology-filter">
+            <div class="imerss-filter-title">Phenology:</div>
+            <div class="imerss-filter-body imerss-region-filter-rows">%rows</div>
+        </div>
+        `,
+        row: `
+        <div class="imerss-filter-row">
+            <div class="imerss-phenology-label">%rowLabel:</div>
+            <div class="imerss-phenology-range">%rowRange</div>
+            <div class="imerss-row-checkbox">%checkbox</div>
+        </div>
+        `
+    },
+    // fieldName
+    // filterName
+    members: {
+        // [year, rangeIndex] => {start, end} in milliseconds for that year
+        rangeCache: "@expand:fluid.computed(hortis.phenologyFilter.rangeCache, {that}.obsRows, {that}.options.ranges)",
+        values: "@expand:fluid.computed(hortis.regionFilter.computeValues, {that}.obsRows, {that}.options.fieldName)",
+        filterState: "@expand:signal([])",
+        renderModel: `@expand:fluid.computed(hortis.phenologyFilter.renderModel, {that}.options.ranges, {that}.options.markup)`
+    },
+    invokers: {
+        doFilter: "hortis.phenologyFilter.doFilter({arguments}.0, {arguments}.1, {that}.rangeCache.value)"
+    },
+    listeners: {
+        "onCreate.bindClick": "hortis.phenologyFilter.bindClick"
+    }
+});
+
+hortis.phenologyFilter.renderRow = function (template, rowLabel, rowRange, rowId) {
     return fluid.stringTemplate(template, {
         rowLabel,
+        rowRange,
         checkbox: hortis.rowCheckbox(rowId)
     });
 };
 
-hortis.regionFilter.renderModel = function (values, idToLabel, markup, filterName) {
+hortis.phenologyFilter.renderModel = function (ranges, markup) {
+    const renderRange = ({start, end}) => `${start} - ${end}`;
     return {
-        filterName,
-        rows: values.map(value => hortis.regionFilter.renderRow(markup.row, idToLabel(value), value)).join("\n")
+        rows: ranges.map((range, i) => hortis.phenologyFilter.renderRow(markup.row, range.label, renderRange(range), i)).join("\n")
     };
 };
 
+hortis.dayInMs = 24 * 60 * 60 * 1000;
+
+// Compute cache of millisecond range bounds for each year in range found in data (necessary because leap years may disturb)
+// side-effect: initialises row with "timestamp" in milliseconds
+hortis.phenologyFilter.rangeCache = function (obsRows, ranges) {
+    const [minYear, maxYear] = obsRows.reduce(([min, max], row) => {
+        const date = new Date(row.eventDate);
+        const year = date.getFullYear();
+        // OCTOPOKHO: Side effect initialising year, timestamp on obs rows
+        row.year = year;
+        row.timestamp = date.getTime();
+        return isNaN(year) ? [min, max] : [Math.min(min, year), Math.max(max, year)];
+    }, [Number.MAX_VALUE, Number.MIN_VALUE]);
+    const years = fluid.iota(1 + maxYear - minYear, minYear);
+    const values = years.map(year => {
+        return ranges.map(({start, end}) =>
+            ({
+                start: Date.parse(`${start} ${year}`),
+                end: Date.parse(`${end} ${year}`) + hortis.dayInMs
+            })
+        );
+    });
+    return Object.fromEntries(years.map((year, index) => [year, values[index]]));
+};
+
+hortis.phenologyFilter.doFilter = function (obsRows, filterState, rangeCache) {
+    const none = filterState.every(oneFilter => !oneFilter);
+    const passFilter = (row, rangeIndex) => {
+        const cache = !isNaN(row.year) && rangeCache[row.year][rangeIndex];
+        return cache ? row.timestamp >= cache.start && row.timestamp < cache.end : false;
+    };
+
+    return none ? obsRows : obsRows.filter(row => filterState.some((checked, rangeIndex) => checked ? passFilter(row, rangeIndex) : false));
+};
+
+// cf. hortis.checklist.bindCheckboxClick
+hortis.phenologyFilter.bindClick = function (that) {
+    that.container.on("click", ".pretty input", function () {
+        const id = this.dataset.rowId;
+        fluid.log("Filter clicked with row " + id);
+        const filterState = [...that.filterState.value];
+        filterState[id] = this.checked;
+        that.filterState.value = filterState;
+    });
+};
 
 hortis.computeCollectors = function (obsRows) {
     const collectors = {};
@@ -916,12 +1071,6 @@ hortis.computeCollectors = function (obsRows) {
     });
     return Object.keys(collectors);
 };
-
-fluid.defaults("hortis.dataDrivenFilter", {
-    members: {
-        obsRows: "{hortis.filters}.obsRows"
-    }
-});
 
 fluid.defaults("hortis.collectorFilter", {
     gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.stringTemplateRenderingView"],
@@ -1004,6 +1153,7 @@ hortis.bbeaFiltersTemplate = `
         <div class="imerss-collector-filter imerss-filter"></div>
         <div class="imerss-monument-filter imerss-filter"></div>
         <div class="imerss-l3eco-filter imerss-filter"></div>
+        <div class="imerss-phenology-filter imerss-filter"></div>
     </div>
 `;
 
@@ -1020,7 +1170,8 @@ fluid.defaults("hortis.bbeaFilters", {
         sexFilter: ".imerss-sex-filter",
         collectorFilter: ".imerss-collector-filter",
         monumentFilter: ".imerss-monument-filter",
-        l3ecoFilter: ".imerss-l3eco-filter"
+        l3ecoFilter: ".imerss-l3eco-filter",
+        phenologyFilter: ".imerss-phenology-filter"
     },
     components: {
         sexFilter: {
@@ -1058,6 +1209,10 @@ fluid.defaults("hortis.bbeaFilters", {
                     }
                 }
             }
+        },
+        phenologyFilter: {
+            type: "hortis.phenologyFilter",
+            container: "{that}.dom.phenologyFilter"
         }
     }
 });

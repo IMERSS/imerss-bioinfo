@@ -260,10 +260,23 @@ body {
 .imerss-filter-row {
     display: flex;
     flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: end;
+    width: 100%;
 }
 
-.imerss-filter-row .imerss-row-label {
+.imerss-filter-row .imerss-row-label, .imerss-phenology-range {
     padding-right: 0.5rem;
+}
+
+.imerss-phenology-label {
+    padding-right: 0.5rem;
+    margin-right: auto;
+    padding-left: 6rem;
+}
+
+.imerss-bbea-grid-tooltip div.text {
+    max-width: initial;
 }
 
 .imerss-bipartite {

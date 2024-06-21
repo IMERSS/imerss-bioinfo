@@ -612,6 +612,8 @@ hortis.libreMap.natureStops = [
 
 // TODO: Convert into subcomponent, possibly of something completely different - we may want one layer for each map, etc.
 fluid.defaults("hortis.libreMap.withObsGrid", {
+    gradeNames: ["hortis.withTooltip"],
+    tooltipKey: "hoverCell",
     fillStops: hortis.libreMap.viridisStops,
     fillOpacity: 0.7,
     outlineColour: "black",
@@ -619,10 +621,53 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
         // TODO: "Trundling dereferencer" in the framework
         gridBounds: "@expand:fluid.derefSignal({obsQuantiser}.grid, bounds)",
         updateObsGrid: "@expand:fluid.effect(hortis.libreMap.updateObsGrid, {that}, {obsQuantiser}, {obsQuantiser}.grid, {that}.mapLoaded)",
-        fitBounds: "@expand:fluid.effect(hortis.libreMap.fitBounds, {that}, {that}.gridBounds, {that}.mapLoaded)"
+        fitBounds: "@expand:fluid.effect(hortis.libreMap.fitBounds, {that}, {that}.gridBounds, {that}.mapLoaded)",
+        hoverCell: "@expand:signal(null)"
+    },
+    invokers: {
+        // Need to override renderTooltip
+    },
+    listeners: {
+        "onCreate.bindGridSelect": "hortis.libreMap.bindGridSelect({that})"
     }
 });
 
+
+
+hortis.capitalize = function (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+hortis.renderTaxonTooltip = function (that, hoverId) {
+    const row = that.rowById.value[hoverId];
+    const terms = {
+        imgUrl: row.iNaturalistTaxonImage || ""
+    };
+    if (row.rank) {
+        terms.taxonRank = hortis.capitalize(row.rank);
+    } else {
+        terms.taxonRank = "Species";
+    }
+    const names = [(row.taxonName || row.iNaturalistTaxonName), row.commonName, row.hulqName].filter(name => name);
+    terms.taxonNames = names.join(" / ");
+    return fluid.stringTemplate(hortis.taxonTooltipTemplate, terms);
+};
+
+// cf. hortis.libreMap.bindRegionSelect in reknit-client.js
+hortis.libreMap.bindGridSelect = function (that) {
+    const map = that.map;
+
+    map.on("mousemove", (e) => {
+        const features = map.queryRenderedFeatures(e.point);
+        const visibleFeatures = features.filter(feature => feature.properties.cellId);
+        that.hoverEvent = e.originalEvent;
+        const cellId = visibleFeatures[0]?.properties.cellId || null;
+        that.hoverCell.value = cellId;
+        map.getCanvas().style.cursor = cellId ? "default" : "";
+    });
+
+    map.getCanvas().addEventListener("mouseleave", () => hortis.clearAllTooltips(that));
+};
 
 // GeoJSON-style (long, lat) polygon traversed anticlockwise
 hortis.libreMap.rectFromCorner = function (lat, long, latres, longres) {
@@ -650,6 +695,7 @@ hortis.libreMap.obsGridFeature = function (map, obsQuantiser, grid) {
                     coordinates: [hortis.libreMap.rectFromCorner(lat, long, latres, longres)]
                 },
                 properties: {
+                    cellId: key,
                     obsprop: bucket.count / grid.maxCount
                 }
             };
