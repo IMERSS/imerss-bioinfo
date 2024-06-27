@@ -34,5 +34,9 @@
     <orderEntry type="module" module-name="xetthecum-storymap" />
     <orderEntry type="module" module-name="xetthecum-storymap-story" />
     <orderEntry type="module" module-name="Harvey_Janszen_Legacy_Project" />
+    <orderEntry type="module" module-name="infusion-6" />
+    <orderEntry type="module" module-name="fluid-infusion-6" />
+    <orderEntry type="module" module-name="bc-bryo-atlas" />
+    <orderEntry type="module" module-name="bc-bryo-atlas3" />
   </component>
 </module>

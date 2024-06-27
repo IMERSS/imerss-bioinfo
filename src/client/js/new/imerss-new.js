@@ -511,14 +511,14 @@ hortis.updateBounds = function (bounds, lat, long) {
     bounds[1][1] = Math.max(bounds[1][1], long);
 };
 
-hortis.expandBounds = function (bounds, factor) {
-    const width = bounds[1][1] - bounds[0][1];
-    const height = bounds[1][0] - bounds[0][0];
-    const he = width * factor;
-    const ve = height * factor;
-    if (width < 360) {
-        bounds[0][0] -= ve; bounds[0][1] -= he;
-        bounds[1][0] += ve; bounds[1][1] += he;
+hortis.expandBounds = function (bounds, factor, latMin, longMin) {
+    const longSpan = bounds[1][1] - bounds[0][1];
+    const latSpan = bounds[1][0] - bounds[0][0];
+    const longD = Math.max(longSpan * factor, longMin / 2);
+    const latD = Math.max(latSpan * factor, latMin / 2);
+    if (longSpan < 360) {
+        bounds[1][1] += longD; bounds[0][1] -= longD;
+        bounds[1][0] += latD; bounds[0][0] -= latD;
     }
 };
 
@@ -859,7 +859,8 @@ hortis.obsQuantiser.indexObs = function (that, rows, latRes, longRes) {
     if (rows.length === 0) {
         grid.bounds = [...that.maxBounds.value];
     }
-    hortis.expandBounds(grid.bounds, 0.1); // mapBox fitBounds are a bit tight
+
+    hortis.expandBounds(grid.bounds, 0.1, latRes * 6, longRes * 6); // mapBox fitBounds are a bit tight
 
     const delay = Date.now() - now;
     fluid.log("Gridded " + rows.length + " rows in " + delay + " ms: " + 1000 * (delay / rows.length) + " us/row");
