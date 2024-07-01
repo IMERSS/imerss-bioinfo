@@ -38,5 +38,6 @@
     <orderEntry type="module" module-name="fluid-infusion-6" />
     <orderEntry type="module" module-name="bc-bryo-atlas" />
     <orderEntry type="module" module-name="bc-bryo-atlas3" />
+    <orderEntry type="module" module-name="qunit" />
   </component>
 </module>

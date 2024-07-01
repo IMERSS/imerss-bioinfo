@@ -5,6 +5,7 @@
         "taxonName": "Taxon name",
         "ambiguousNameMatch": "ambiguousNameMatch",
         "nameStatus": "nameStatus",
+        "commonName": "commonName",
         "authority": "Author",
         "observationCount": "Observation count",
         "coords": "Coordinates",
@@ -48,7 +49,7 @@
     "datasets": {
         "iNat": {
             "name": "iNaturalist (2005-2023)",
-            "input": "E:/source/gits/bagatelle/data/Howe Sound/iNaturalist_Mammalia_Amphibia_Reptilia_Context_Catalogue_2023_12_06.csv",
+            "input": "E:/source/gits/bagatelle/data/Howe Sound/iNaturalist_Mammalia_Amphibia_Reptilia_Context_Catalogue_2024_07_01.csv",
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new-cap.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map-cap.json",
             "colour": "#2C8C99",

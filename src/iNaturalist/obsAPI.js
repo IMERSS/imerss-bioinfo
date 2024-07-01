@@ -60,6 +60,8 @@ hortis.iNat.obsMap = {
     // "latitude": "location.0", // achieved via "applyLocation"
     // "longitude": "location.1",
     "positional_accuracy": "positional_accuracy",
+    "positioning_method": "positioning_method",
+    "positioning_device": "positioning_device",
     // "private_latitude": "private_location[0]", // achieved via "applyLocation"
     // "private_longitude": "private_location[1]",
     "scientific_name": "taxon.name",

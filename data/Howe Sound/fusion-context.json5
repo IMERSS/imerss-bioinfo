@@ -2,7 +2,7 @@
     datasets: {
         iNat: {
             name: "iNaturalist (2005-2023)",
-            input: "%imerss-bioinfo/data/Howe Sound/iNaturalist_Mammalia_Amphibia_Reptilia_Context_Catalogue_2023_12_06.csv",
+            input: "%imerss-bioinfo/data/Howe Sound/iNaturalist_Mammalia_Amphibia_Reptilia_Context_Catalogue_2024_07_01.csv",
             map: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-map-new-cap.json",
             outMap: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-out-map-cap.json",
             colour: "#2C8C99",
@@ -27,7 +27,7 @@
     },
 
     summarise: true,
-    output: "%imerss-bioinfo/data/Howe Sound/reintegrated-context-2023-12-06.csv",
+    output: "%imerss-bioinfo/data/Howe Sound/reintegrated-context-2024_07_01.csv",
     combinedOutMap: "%imerss-bioinfo/data/Howe Sound/combinedOutMap-context.json",
     filters: {
     }
