@@ -47,7 +47,7 @@ Geometry MULTIPOLYGON(((-123.45452 48.45021,-123.24904 48.51411,-123.04264 48.44
 Has coordinate true
 Has geospatial issue false
 Occurrence status present
-Scientific name Mammalia Squamata Crocodylia Testudines Sphenodontia
+Scientific name Mammalia Squamata Crocodylia Testudines Sphenodontia  <-- ADD AMPHIBIA HERE
 
 Got fresh Christmas Eve GBIF download of
 
