@@ -13,6 +13,7 @@
     <mapping directory="$PROJECT_DIR$/../howe-sound-mapping" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../infusion-6" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../maxwell" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../preact-signals" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../qunit" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../r-scrollytelling-template" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../sewa-e-kheti" vcs="Git" />

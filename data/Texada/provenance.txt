@@ -1,0 +1,24 @@
+Texada-boundary.json - Drawn by hand by AS on geojson.io 2024-07-10 and then rounded to 4dp
+
+GBIF download:
+
+GBIF.org (11 July 2024) GBIF Occurrence Download https://doi.org/10.15468/dl.hkbzkj
+
+Download Information
+
+DOI: https://doi.org/10.15468/dl.hkbzkj (may take some hours before being active)
+Creation Date: 10:12:11 11 July 2024
+Records included: 1026 records from 13 published datasets
+Compressed data size: 86.8 kB
+Download format: simple tab-separated values (TSV)
+Filter used:
+
+{
+  "and" : [
+    "Geometry POLYGON((-124.6438 49.8127,-124.6547 49.7268,-124.5421 49.6816,-124.4358 49.6052,-124.29 49.5455,-124.2539 49.5301,-124.196 49.51,-124.1692 49.4934,-124.1391 49.4793,-124.1181 49.4805,-124.0982 49.4887,-124.1096 49.521,-124.1479 49.5643,-124.2044 49.5935,-124.271 49.6528,-124.3456 49.7186,-124.4833 49.747,-124.5409 49.774,-124.5952 49.8142,-124.6438 49.8127))",
+    "HasCoordinate is true",
+    "HasGeospatialIssue is false",
+    "OccurrenceStatus is Present",
+    "TaxonKey is Tracheophyta"
+  ]
+}

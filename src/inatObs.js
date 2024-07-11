@@ -111,7 +111,15 @@ hortis.iNatProjects = {
             quality_grade: ""
         },
         outputFile: "data/Howe Sound/iNaturalist_Mammalia_Amphibia_Reptilia_Context_Catalogue_%Date.csv"
-    }
+    },
+    TexadaVascular: {
+        paramMap: {
+            place_id: 205178,
+            taxon_id: 211194, // Tracheophyta
+            quality_grade: ""
+        },
+        outputFile: "data/Texada/iNaturalist_Tracheophyta_Catalogue_%Date.csv"
+    },
 };
 
 const parsedArgs = minimist(process.argv.slice(2));

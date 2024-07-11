@@ -39,5 +39,6 @@
     <orderEntry type="module" module-name="bc-bryo-atlas" />
     <orderEntry type="module" module-name="bc-bryo-atlas3" />
     <orderEntry type="module" module-name="qunit" />
+    <orderEntry type="module" module-name="preact-signals" />
   </component>
 </module>
