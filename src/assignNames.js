@@ -95,6 +95,12 @@ hortis.queryFromEFloraRow = function (row) {
     return {name, phylum};
 };
 
+hortis.queryFromCPNWHRow = function (row) {
+    const name = hortis.sanitizeSpeciesName(row["Accepted.Name"] || row["Scientific.Name"]);
+    const phylum = "Tracheophyta";
+    return {name, phylum};
+};
+
 hortis.queryFromEFloraRow2 = function (row) {
     const name = hortis.sanitizeSpeciesName(row["Name Adopted"]);
     const phylum = "Tracheophyta";
@@ -140,7 +146,7 @@ hortis.obsIdFromSummaryRow2023 = function (row) {
 hortis.applyName = async function (row) {
     //const query = hortis.queryFromSummaryRow2023(row);
     //const query = hortis.queryFromGBIFRow(row);
-    const query = hortis.queryFromEFloraRow2(row);
+    const query = hortis.queryFromCPNWHRow(row);
     //const query = hortis.queryFromLichenNRow(row);
     //const query = hortis.queryFromDwcaRow(row);
 
