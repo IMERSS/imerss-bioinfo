@@ -29,7 +29,7 @@ const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/d
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile,
     csvOptions: {
-        // separator: "\t" // TODO: remember to put this back for real GBIF
+        separator: "\t" // TODO: remember to put this back for real GBIF
     }
 });
 
@@ -145,8 +145,8 @@ hortis.obsIdFromSummaryRow2023 = function (row) {
 
 hortis.applyName = async function (row) {
     //const query = hortis.queryFromSummaryRow2023(row);
-    //const query = hortis.queryFromGBIFRow(row);
-    const query = hortis.queryFromCPNWHRow(row);
+    const query = hortis.queryFromGBIFRow(row);
+    //const query = hortis.queryFromCPNWHRow(row);
     //const query = hortis.queryFromLichenNRow(row);
     //const query = hortis.queryFromDwcaRow(row);
 
