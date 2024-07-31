@@ -7,3 +7,5 @@ package-lock.json
 .Rhistory
 
 data/Galiano 2024/bigdata/**
+
+.DS_Store
