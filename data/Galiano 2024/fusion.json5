@@ -2,7 +2,7 @@
     datasets: {
         iNat: {
             name: "iNaturalist (2005-2021)",
-            input: "%imerss-bioinfo/data/Galiano 2024/Galiano_Union_Catalogue_2023_11_15.csv",
+            input: "%imerss-bioinfo/data/Galiano 2024/Galiano_Union_Catalogue_2024_07_31.csv",
             map: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-map-new-cap.json",
             outMap: "%imerss-bioinfo/data/iNaturalist/iNaturalist-obs-out-map-cap.json",
             colour: "#2C8C99",

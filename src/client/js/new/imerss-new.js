@@ -151,6 +151,7 @@ fluid.defaults("hortis.filter", {
     },
     invokers: {
         // doFilter
+        // reset
     }
 });
 
@@ -271,6 +272,7 @@ fluid.defaults("hortis.withTooltip", {
         renderTooltip: "fluid.notImplemented"
     },
     members: {
+        // hoverEvent applied manually
         subscribeHover: "@expand:hortis.subscribeHover({that})"
     }
 });
@@ -617,22 +619,89 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
     fillStops: hortis.libreMap.viridisStops,
     fillOpacity: 0.7,
     outlineColour: "black",
+    legendStops: 5,
     members: {
         // TODO: "Trundling dereferencer" in the framework
         gridBounds: "@expand:fluid.derefSignal({obsQuantiser}.grid, bounds)",
         updateObsGrid: "@expand:fluid.effect(hortis.libreMap.updateObsGrid, {that}, {obsQuantiser}, {obsQuantiser}.grid, {that}.mapLoaded)",
         fitBounds: "@expand:fluid.effect(hortis.libreMap.fitBounds, {that}, {that}.gridBounds, {that}.mapLoaded)",
-        hoverCell: "@expand:signal(null)"
+
+        memoStops: "@expand:fluid.colour.memoStops({that}.options.fillStops, 256)",
+        // cf. maxwell.legendKey.addLegendControl in reknit-client.js - produces a DOM node immediately, renders as effect
+        control: "@expand:hortis.libreMap.withObsGrid.addLegendControl({map}, {obsQuantiser}.grid, {that}.gridVisible)",
+
+        hoverCell: "@expand:signal(null)",
+        gridVisible: "@expand:signal(true)"
     },
     invokers: {
-        // Need to override renderTooltip
+        drawObsGridLegend: "hortis.libreMap.withObsGrid.drawLegend({map}, {obsQuantiser}.grid, {that}.gridVisible)"
+        // Client needs to override renderTooltip
     },
     listeners: {
         "onCreate.bindGridSelect": "hortis.libreMap.bindGridSelect({that})"
     }
 });
 
+fluid.registerNamespace("hortis.legend");
 
+hortis.legend.rowTemplate = `
+<div class="imerss-legend-row">
+    <span class="imerss-legend-icon"></span>
+    <span class="imerss-legend-preview %previewClass" style="%previewStyle"></span>
+    <span class="imerss-legend-label">%keyLabel</span>
+</div>`;
+
+// Very similar to maxwell.legendKey.addLegendControl and in practice generic, see if we can fold up - parameterised by
+// rendering function, whatever signal args it has, and also visibility func
+hortis.libreMap.withObsGrid.addLegendControl = function (map) {
+    const control = map.drawObsGridLegend();
+    control.onAdd = () => control.container;
+    control.onRemove = () => {
+        console.log("Cleaning up legend attached to ", control.container);
+        control.cleanup();
+    };
+
+    map.map.addControl(control, "bottom-right");
+
+    return control;
+};
+
+hortis.libreMap.withObsGrid.drawLegend = function (map, gridSignal, gridVisibleSignal) {
+    const quant = map.obsQuantiser;
+    const container = document.createElement("div");
+    container.classList.add("imerss-legend");
+    const cstops = map.options.legendStops;
+    const stops = fluid.iota(cstops);
+    // Proportions from 0 to 1 at which legend entries are generated
+    const legendStopProps = fluid.iota(cstops + 1).map(stop => stop / cstops);
+
+    const renderLegend = function (grid) {
+        // TODO: parameterise what the legend is with respect to
+        const propToLevel = prop => Math.floor(prop * grid.maxObsCount);
+        const regionMarkupRows = stops.map(function (stop) {
+            const midProp = (legendStopProps[stop] + legendStopProps[stop + 1]) / 2;
+            const colour = fluid.colour.lookupStop(map.memoStops, midProp);
+            const label = propToLevel(legendStopProps[stop]) + " - " + propToLevel(legendStopProps[stop + 1]);
+            return fluid.stringTemplate(hortis.legend.rowTemplate, {
+                previewStyle: "background-color: " + colour,
+                keyLabel: label
+            });
+        });
+        const longRes = quant.longResolution.value;
+        const baseLat = quant.baseLatitude.value;
+        const longLen = Math.floor(longRes * hortis.longitudeLength(baseLat));
+
+        const markup = `<div class="imerss-legend-title">Observation count</div>` +
+            regionMarkupRows.join("\n") +
+            `<div class="imerss-legend-cell-size">Cell size: ${longLen}m</div>`;
+        container.innerHTML = markup;
+    };
+
+    fluid.effect(renderLegend, gridSignal);
+    fluid.effect(isVisible => hortis.toggleClass(container, "imerss-hidden", !isVisible), gridVisibleSignal);
+
+    return {container};
+};
 
 hortis.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -696,7 +765,7 @@ hortis.libreMap.obsGridFeature = function (map, obsQuantiser, grid) {
                 },
                 properties: {
                     cellId: key,
-                    obsprop: bucket.count / grid.maxCount
+                    obsprop: bucket.obsCount / grid.maxObsCount
                 }
             };
         })
@@ -789,12 +858,12 @@ fluid.registerNamespace("hortis.obsQuantiser");
 hortis.obsQuantiser.initGrid = function () {
     const grid = {};
     grid.bounds = hortis.initBounds();
-    grid.maxCount = 0;
+    grid.maxObsCount = 0;
     grid.buckets = {}; // hash of id to {count, byId}
     return grid;
 };
 
-hortis.gridBucket = () => ({count: 0, byTaxonId: {}});
+hortis.gridBucket = () => ({obsCount: 0, byTaxonId: {}});
 
 hortis.indexObs = function (bucket, row, index) {
     // TODO: some kind of mapping for standard rows, lightweight version of readCSVWithMap - current standard is for
@@ -852,8 +921,8 @@ hortis.obsQuantiser.indexObs = function (that, rows, latRes, longRes) {
         if (!bucket) {
             bucket = grid.buckets[coordIndex] = that.newBucket();
         }
-        bucket.count++;
-        grid.maxCount = Math.max(grid.maxCount, bucket.count);
+        bucket.obsCount++;
+        grid.maxObsCount = Math.max(grid.maxObsCount, bucket.obsCount);
         that.indexObs(bucket, row, index);
     });
     if (rows.length === 0) {

@@ -15,24 +15,24 @@
 }
 
 
-.imerss-container {
+.fl-imerss-container {
     line-height: 1.4em;
     margin: 0 1rem 0 1rem;
 }
 
 
-.imerss-container ::-webkit-scrollbar {
+.fl-imerss-container ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 10px;
 }
 
-.imerss-container ::-webkit-scrollbar-thumb {
+.fl-imerss-container ::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: #C1C1C1;
     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
-.imerss-container ::-webkit-scrollbar-thumb:hover {
+.fl-imerss-container ::-webkit-scrollbar-thumb:hover {
     background-color: #A8A8A8;
 }
 
@@ -49,30 +49,30 @@ table {
     padding: 0 5px;
 }
 
-.imerss-container .imerss-checklist ul {
+.fl-imerss-container .fld-imerss-checklist ul {
     padding-bottom: 0;
 }
 
-.imerss-taxonDisplay {
+.fld-imerss-taxonDisplay {
     background: white;
     width: 35%;
     display: block; /* Without this, contents overflow with our extra margins */
 }
 
-.imerss-taxa {
+.fl-imerss-taxa {
     width: 100%;
 }
 
-.imerss-tabs-and-search {
+.fl-imerss-tabs-and-search {
     width: 65%;
     margin-right: 1rem;
 }
 
-.imerss-left-column {
+.fl-imerss-left-column {
     width: auto;
 }
 
-.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder {
+.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder {
     width: auto;
     padding-right: 0;
 }
@@ -81,6 +81,16 @@ table {
     max-width: 850px;
 }
 
-.taxonDisplay-expand {
+.fl-taxonDisplay-expand {
     margin-top: 2px;
+}
+
+/* AS requested these override in the global nav */
+
+.nav li li {
+    line-height: 1em;
+}
+
+#top-menu li li a {
+    padding: 2px 5px;
 }

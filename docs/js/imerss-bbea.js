@@ -6,7 +6,7 @@
 var hortis = fluid.registerNamespace("hortis");
 
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
-var {effect} = preactSignalsCore;
+var {effect, batch} = preactSignalsCore;
 
 fluid.setLogging(true);
 
@@ -15,6 +15,7 @@ fluid.defaults("hortis.beaVizLoader", {
         interactions: ".imerss-interactions-holder",
         bipartite: ".imerss-bipartite",
         recordReporter: ".imerss-record-reporter",
+        filterControls: ".imerss-filter-controls",
         filters: ".imerss-filters"
     },
     components: {
@@ -23,6 +24,10 @@ fluid.defaults("hortis.beaVizLoader", {
             options: {
                 url: "{vizLoader}.options.ecoL3File"
             }
+        },
+        filterControls: {
+            type: "hortis.filterControls",
+            container: "{that}.dom.filterControls"
         },
         recordReporter: {
             type: "hortis.recordReporter",
@@ -47,12 +52,13 @@ fluid.defaults("hortis.beaVizLoader", {
             type: "hortis.checklist.withHolder",
             container: ".imerss-pollinators",
             options: {
-                gradeNames: "hortis.checklist.withOBA",
+                gradeNames: ["hortis.checklist.withOBA", "hortis.checklist.withCopy"],
                 rootId: 1,
                 filterRanks: ["epifamily", "family", "tribe", "genus", "subgenus", "species"],
                 disclosableRanks: ["tribe", "genus", "subgenus", "species"],
                 selectable: true,
                 unfoldable: true,
+                copyButtonMessage: "Copy %rows bee taxa to clipboard",
                 members: {
                     rowById: "{taxa}.rowById",
                     rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, pollRowFocus)"
@@ -63,12 +69,13 @@ fluid.defaults("hortis.beaVizLoader", {
             type: "hortis.checklist.withHolder",
             container: ".imerss-plants",
             options: {
-                gradeNames: "hortis.checklist.withOBA",
+                gradeNames: ["hortis.checklist.withOBA", "hortis.checklist.withCopy"],
                 rootId: 47126,
                 filterRanks: ["kingdom", "order", "family", "genus"],
                 disclosableRanks: ["family", "genus"],
                 selectable: true,
                 unfoldable: true,
+                copyButtonMessage: "Copy %rows plant taxa to clipboard",
                 members: {
                     rowById: "{taxa}.rowById",
                     rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, plantRowFocus)"
@@ -707,7 +714,7 @@ hortis.drawInteractions.bindEvents = function (that) {
     canvas.addEventListener("mouseleave", () => that.hoverCellKey.value = null);
 };
 
-hortis.bbeaGridBucket = () => ({count: 0, byTaxonId: {}, plantByTaxonId: {}});
+hortis.bbeaGridBucket = () => ({obsCount: 0, byTaxonId: {}, plantByTaxonId: {}});
 
 hortis.indexBbeaObs = function (bucket, row, index) {
     fluid.pushArray(bucket.byTaxonId, row.pollinatorINatId, index);
@@ -786,6 +793,27 @@ hortis.recordReporter.renderModel = (filteredRows, allRows) => ({
     allRows: allRows.length
 });
 
+fluid.defaults("hortis.filterControls", {
+    gradeNames: "fluid.viewComponent",
+    selectors: {
+        button: ".imerss-reset-filter"
+    },
+    listeners: {
+        "onCreate.bindClick": "hortis.filterControls.bindClick({hortis.vizLoader}, {that}.dom.button)"
+    }
+});
+
+hortis.filterControls.bindClick = function (vizLoader, button) {
+    button.on("click", () => {
+        const filters = fluid.queryIoCSelector(vizLoader, "hortis.filter");
+        const checklists = fluid.queryIoCSelector(vizLoader, "hortis.checklist");
+        batch(() => {
+            filters.forEach(filter => filter.reset());
+            checklists.forEach(checklist => checklist.reset());
+        });
+    });
+};
+
 fluid.defaults("hortis.sexFilter", {
     gradeNames: ["hortis.filter", "fluid.stringTemplateRenderingView"],
     markup: {
@@ -805,7 +833,8 @@ fluid.defaults("hortis.sexFilter", {
         filterState: "@expand:fluid.computed(hortis.sexFilter.toState, {that}.male, {that}.female)"
     },
     invokers: {
-        doFilter: "hortis.sexFilter.doFilter"
+        doFilter: "hortis.sexFilter.doFilter",
+        reset: "hortis.sexFilter.reset({that})"
     },
     selectors: {
         male: ".imerss-male-check",
@@ -833,6 +862,12 @@ fluid.defaults("hortis.sexFilter", {
     }
 });
 
+// Roll on applier-style signalisation
+hortis.sexFilter.reset = function (that) {
+    that.male.value = false;
+    that.female.value = false;
+};
+
 hortis.sexFilter.toState = function (male, female) {
     return {male, female};
 };
@@ -852,8 +887,8 @@ fluid.defaults("hortis.repeatingRowFilter", {
     markup: {
         row: `
         <div class="imerss-filter-row">
-            <div class="imerss-row-label">%rowLabel</div>
             <div class="imerss-row-checkbox">%checkbox</div>
+            <div class="imerss-row-label">%rowLabel</div>
         </div>
         `
     }
@@ -892,7 +927,8 @@ fluid.defaults("hortis.regionFilter", {
     },
     invokers: {
         idToLabel: "fluid.identity",
-        doFilter: "hortis.regionFilter.doFilter({that}.options.fieldName, {arguments}.0, {arguments}.1)"
+        doFilter: "hortis.regionFilter.doFilter({that}.options.fieldName, {arguments}.0, {arguments}.1)",
+        reset: "hortis.regionFilter.reset({that})"
     },
     listeners: {
         "onCreate.bindClick": "hortis.regionFilter.bindClick"
@@ -903,6 +939,12 @@ hortis.regionFilter.doFilter = function (fieldName, obsRows, filterState) {
     const none = Object.keys(filterState).length === 0;
 
     return none ? obsRows : obsRows.filter(row => filterState[row[fieldName]]);
+};
+
+hortis.regionFilter.reset = function (that) {
+    that.filterState.value = {};
+    // TODO: preactish rendering with signals
+    hortis.resetChecks(that.container[0]);
 };
 
 // cf. hortis.checklist.bindCheckboxClick
@@ -970,6 +1012,10 @@ fluid.defaults("hortis.phenologyFilter", {
         label: "Late",
         start: "August 1",
         end: "October 1"
+    }, {
+        label: "Winter",
+        start: "October 1",
+        end: "April 1"
     }],
     markup: {
         container: `
@@ -980,9 +1026,9 @@ fluid.defaults("hortis.phenologyFilter", {
         `,
         row: `
         <div class="imerss-filter-row">
+            <div class="imerss-row-checkbox">%checkbox</div>
             <div class="imerss-phenology-label">%rowLabel:</div>
             <div class="imerss-phenology-range">%rowRange</div>
-            <div class="imerss-row-checkbox">%checkbox</div>
         </div>
         `
     },
@@ -996,12 +1042,18 @@ fluid.defaults("hortis.phenologyFilter", {
         renderModel: `@expand:fluid.computed(hortis.phenologyFilter.renderModel, {that}.options.ranges, {that}.options.markup)`
     },
     invokers: {
-        doFilter: "hortis.phenologyFilter.doFilter({arguments}.0, {arguments}.1, {that}.rangeCache.value)"
+        doFilter: "hortis.phenologyFilter.doFilter({arguments}.0, {arguments}.1, {that}.rangeCache.value)",
+        reset: "hortis.phenologyFilter.reset({that})"
     },
     listeners: {
         "onCreate.bindClick": "hortis.phenologyFilter.bindClick"
     }
 });
+
+hortis.phenologyFilter.reset = function (that) {
+    that.filterState.value = [];
+    hortis.resetChecks(that.container[0]);
+};
 
 hortis.phenologyFilter.renderRow = function (template, rowLabel, rowRange, rowId) {
     return fluid.stringTemplate(template, {
@@ -1038,16 +1090,24 @@ hortis.phenologyFilter.rangeCache = function (obsRows, ranges) {
                 start: Date.parse(`${start} ${year}`),
                 end: Date.parse(`${end} ${year}`) + hortis.dayInMs
             })
-        );
+        ).map(({start, end}) => start > end ? {
+            start, end,
+            wrapped: true,
+            yearStart: Date.parse(`January 1 ${year}`),
+            yearEnd: Date.parse(`December 31 ${year}`) + hortis.dayInMs
+        } : {start, end});
     });
     return Object.fromEntries(years.map((year, index) => [year, values[index]]));
 };
 
 hortis.phenologyFilter.doFilter = function (obsRows, filterState, rangeCache) {
     const none = filterState.every(oneFilter => !oneFilter);
+    const passCache = (timestamp, cache) => cache.wrapped ?
+        timestamp >= cache.start && timestamp <= cache.yearEnd || timestamp >= cache.yearStart && timestamp < cache.end :
+        timestamp >= cache.start && timestamp < cache.end;
     const passFilter = (row, rangeIndex) => {
         const cache = !isNaN(row.year) && rangeCache[row.year][rangeIndex];
-        return cache ? row.timestamp >= cache.start && row.timestamp < cache.end : false;
+        return cache ? passCache(row.timestamp, cache) : false;
     };
 
     return none ? obsRows : obsRows.filter(row => filterState.some((checked, rangeIndex) => checked ? passFilter(row, rangeIndex) : false));
@@ -1091,7 +1151,8 @@ fluid.defaults("hortis.collectorFilter", {
         filterState: "@expand:signal(null)"
     },
     invokers: {
-        doFilter: "hortis.collectorFilter.doFilter"
+        doFilter: "hortis.collectorFilter.doFilter",
+        reset: "hortis.collectorFilter.reset({that})"
     },
     selectors: {
         autocomplete: ".imerss-collector-autocomplete",
@@ -1101,8 +1162,7 @@ fluid.defaults("hortis.collectorFilter", {
     listeners: {
         "onCreate.bindClearClick": {
             func: (that) => that.dom.locate("clearFilter").on("click", () => {
-                that.dom.locate("control").val("");
-                fluid.invokeLater(() => that.filterState.value = "");
+                that.reset();
             })
         },
         "onCreate.bindShowClear": {
@@ -1138,6 +1198,11 @@ fluid.defaults("hortis.collectorFilter", {
 hortis.collectorFilter.doFilter = function (obsRows, filterState) {
     const all = !(filterState);
     return all ? obsRows : obsRows.filter(row => row.Collectors.includes(filterState));
+};
+
+hortis.collectorFilter.reset = function (that) {
+    that.filterState.value = "";
+    that.dom.locate("control").val("");
 };
 
 hortis.queryAutocompleteCollector = function (collectors, query, callback) {

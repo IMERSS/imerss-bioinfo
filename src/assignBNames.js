@@ -26,7 +26,8 @@ fluid.failureEvent.addListener(hortis.handleFailure, "hortis", "before:fail");
 hortis.inputFileToTrunk = function (inputFile) {
     const lastdotpos = inputFile.lastIndexOf(".");
     const lasthypos = inputFile.lastIndexOf("-");
-    const trunkPos = lasthypos === -1 ? lastdotpos : lasthypos;
+    const lastslashpos = inputFile.lastIndexOf("/");
+    const trunkPos = (lasthypos === -1 || lasthypos <= lastslashpos) ? lastdotpos : lasthypos;
     return inputFile.substring(0, trunkPos);
 };
 
@@ -44,6 +45,13 @@ const strategies = {
             iNatId: "pollinatorINatId",
             assignedINatName: "pollinatorAssignedINatName"
         }
+    },
+    DwC: {
+        iNatName: "scientificName",
+        rawName: "scientificName",
+        iNatId: "iNaturalist.taxon.ID",
+        assignedINatName: "iNaturalist.taxon.name",
+        sanitize: true
     },
     // Has been reintegrated already, info should match and we just need to compute and assign higher taxa
     reintegrated: {
@@ -85,7 +93,12 @@ const source = hortis.iNatTaxonSource({
 });
 
 
-const strategy = Object.keys(strategies).find(strategy => parsedArgs[strategy] !== undefined);
+const strategy = Object.keys(strategies).find(strategy => parsedArgs[strategy]);
+
+if (!strategy) {
+    fluid.fail("Please supply strategy argument via one of ", Object.keys(strategies).map(key => "--" + key).join(", "));
+}
+
 console.log("Applying strategy ", strategy);
 const strategyBigRec = strategies[strategy];
 
@@ -151,9 +164,10 @@ hortis.applyName = async function (row, phylum, rank, invertedSwaps, allTaxa, un
     const fieldName = s.iNatName;
     const rawName = row[fieldName];
     const iNatName = invertedSwaps[rawName]?.preferred || rawName;
+    const saneName = s.sanitize ? hortis.sanitizeSpeciesName(iNatName) : iNatName;
+    const looked = await source.get({name: saneName, phylum, rank});
+
     const scientificName = row[s.rawName];
-    // const saneName = hortis.sanitizeSpeciesName(taxon);
-    const looked = await source.get({name: iNatName, phylum, rank});
 
     const assign = function (row, field, value) {
         // eslint-disable-next-line eqeqeq
@@ -217,6 +231,8 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
             await hortis.applyName(row, "Arthropoda", null, invertedSwaps, taxa, unmappedTaxa, strategyBigRec.pollinator);
         } else if (strategy === "reintegrated") {
             await hortis.applyName(row, row.Phylum, row.Rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
+        } else if (strategy === "DwC") {
+            await hortis.applyName(row, row.phylum, row.taxonRank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         }
 
         mapped.push(row);

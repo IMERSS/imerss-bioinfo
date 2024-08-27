@@ -18,6 +18,59 @@
     background-color: #A8A8A8;
 }
 
+#inline-svg {
+    height: 0px;
+    position: absolute;
+}
+
+.imerss-legend-preview {
+    width: 18px;
+    height: 18px;
+    margin: 2px;
+    border: 1px solid gray;
+}
+
+.imerss-legend-label {
+    display: inline-block;
+    width: 8rem;
+    margin-left: 6px;
+    position: relative;
+    top: 1px;
+}
+
+.imerss-legend-cell-size {
+    align-self: center;
+    font-size: 12px;
+    padding-top: 5px;
+}
+
+.imerss-legend {
+    width: 10rem;
+    margin-left: auto;
+    margin-right: 10px;
+    background: #555e;
+    pointer-events: all;
+    display: flex;
+    flex-direction: column;
+
+    /* This section taken from R Leaflet's ".info" */
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    /* background: #555; */
+    color: #eee;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    /* Solution from https://stackoverflow.com/a/21335440 */
+    visibility: visible;
+    transition-property: opacity, visibility;
+    transition-duration: 400ms;
+}
+
+.imerss-legend-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
 /* Styling for checkboxes with indeterminate value */
 /* Grabbed definition for default "checked" to apply to indeterminate checkboxes */
@@ -298,6 +351,31 @@
 .imerss-panel-label {
     font-size: 1.5rem;
     padding-bottom: 5px;
+}
+
+.imerss-copy-checklist {
+    display: inline-block;
+    fill: #636c76;
+    margin-left: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    margin-top: -5px;
+    /* margin-top: -10px; */
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    border-radius: 6px;
+    position: relative;
+    top: 3px;
+}
+
+.imerss-copy-checklist svg {
+    /** Ripped off from GitHub so positioning is a little wonky **/
+    vertical-align: top;
+}
+
+.imerss-copy-checklist:hover {
+    background: #d0d7de33;
 }
 
 .imerss-checklist {

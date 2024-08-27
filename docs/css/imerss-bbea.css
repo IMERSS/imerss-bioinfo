@@ -13,13 +13,13 @@ body {
 }
 
 .imerss-map-and-taxa {
-    height: 30%;
+    height: 40%;
 }
 
 .imerss-checklists {
     display: flex;
     flex-direction: row;
-    height: 70%;
+    height: 60%;
     overflow: hidden;
 }
 
@@ -205,6 +205,24 @@ body {
     padding-right: 0.5em;
 }
 
+.imerss-filter-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.imerss-reset-filter {
+    cursor: pointer;
+    margin-right: 5px;
+    padding: 2px;
+    border-radius: 6px;
+}
+
+.imerss-reset-filter:hover {
+    /* outline: 1px solid gray;*/
+    background: #d0d7de33;
+}
+
 .imerss-record-reporter {
     padding-top: 2px;
 }
@@ -261,7 +279,6 @@ body {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    justify-content: end;
     width: 100%;
 }
 
@@ -272,7 +289,11 @@ body {
 .imerss-phenology-label {
     padding-right: 0.5rem;
     margin-right: auto;
-    padding-left: 6rem;
+    width: 4rem;
+}
+
+.imerss-phenology-range {
+    flex-grow: 1;
 }
 
 .imerss-bbea-grid-tooltip div.text {

@@ -5,6 +5,7 @@
         "taxonName": "Taxon name",
         "ambiguousNameMatch": "ambiguousNameMatch",
         "nameStatus": "nameStatus",
+        "commonName": "commonName",
         "authority": "Author",
         "observationCount": "Observation count",
         "coords": "Coordinates",
@@ -38,14 +39,14 @@
         "lastCatalogueNumber": "Last Catalogue Number",
         "lastObservationId": "Last observationId",
         "lastTimestamp": "Last Date Reported",
-        "foodValue": "Food Value",
-        "medicinalValue": "Medicinal Value",
-        "spiritualValue": "Spiritual Value",
-        "materialValue": "Material Value",
-        "tradeValue": "Trade Value",
-        "indicatorValue": "Indicator Value",
-        "hulqName": "Hulquminum Name",
-        "hulqAuth": "Hulquminum Authority"
+        "foodValue": "foodValue",
+        "medicinalValue": "medicinalValue",
+        "spiritualValue": "spiritualValue",
+        "materialValue": "materialValue",
+        "tradeValue": "tradeValue",
+        "indicatorValue": "indicatorValue",
+        "hulqName": "hulquminumName",
+        "hulqAuth": "hulquminumAuthority"
     },
     "counts": {
         "observationCount": {
@@ -56,7 +57,7 @@
     "datasets": {
         "iNat": {
             "name": "iNaturalist (2005-2021)",
-            "input": "E:/source/gits/bagatelle/data/Galiano 2024/Galiano_Union_Catalogue_2023_11_15.csv",
+            "input": "E:/source/gits/bagatelle/data/Galiano 2024/Galiano_Union_Catalogue_2024_07_31.csv",
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new-cap.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map-cap.json",
             "colour": "#2C8C99",
