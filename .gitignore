@@ -3,7 +3,7 @@
 package-lock.json
 /node_modules
 .Rproj.user
-.idea
+.idea/
 .Rhistory
 
 data/Galiano 2024/bigdata/**

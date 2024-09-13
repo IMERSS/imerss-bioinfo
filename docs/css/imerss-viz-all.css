@@ -861,7 +861,8 @@ a.ui-button:active,
     border: black solid 2px;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    /** Check this - looks like disabled customised scrollbars take up width without display */
+    overflow-y: auto;
     min-width: 320px;
 }
 

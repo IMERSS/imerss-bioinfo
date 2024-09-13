@@ -251,7 +251,8 @@ fluid.defaults("hortis.checklist", {
         rowSelection: "@expand:fluid.computed(hortis.checklist.checksToSelection, {that}.idToState)",
         subscribeChecks: "@expand:fluid.effect(hortis.checklist.subscribeChecks, {that}, {that}.idToStateUI)",
         subscribeSelected: "@expand:hortis.checklist.subscribeSelected({that}, {that}.selectedId, {that}.rowById)",
-        allLeaves: "@expand:fluid.computed(hortis.checklist.computeLeaves, {that}.idToEntry, {that}.rowSelection)"
+        allLeaves: "@expand:fluid.computed(hortis.checklist.computeLeaves, {that}.idToEntry, {that}.rowSelection)",
+        renderEffect: "@expand:fluid.effect(fluid.identity, {that}.idToState)"
     },
     listeners: {
         "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {layoutHolder})",
