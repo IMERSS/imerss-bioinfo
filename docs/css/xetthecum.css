@@ -86,6 +86,75 @@ body {
 }
 
 
+.imerss-class-image-shoreline {
+    background-image: url(../img/Xetthecum/Intertidal.jpg);
+}
+
+.imerss-class-image-subtidal {
+    background-image: url(../img/Xetthecum/Subtidal.jpg);
+}
+
+.imerss-class-image-pole-sapling {
+    background-image: url(../img/Xetthecum/Conifer_Pole_Sapling.jpg);
+}
+
+.imerss-class-image-mature-forest {
+    background-image: url(../img/Xetthecum/Mature_Conifer_Forest.jpg);
+}
+
+.imerss-class-image-young-forest {
+    background-image: url(../img/Xetthecum/Young_Conifer_Forest.jpg);
+}
+
+.imerss-class-image-wetland {
+    background-image: url(../img/Xetthecum/Wetland.jpg);
+}
+
+.imerss-class-image-laughlin-lake {
+    background-image: url(../img/Xetthecum/Laughlin_Lake.jpg);
+}
+
+.imerss-class-image-greig-creek {
+    background-image: url(../img/Xetthecum/Greig_Creek.jpg);
+}
+
+.imerss-class-image-riparian {
+    background-image: url(../img/Xetthecum/Riparian.jpg);
+}
+
+.imerss-class-image-coastal-bluff {
+    background-image: url(../img/Xetthecum/Coastal_Bluffs.jpg);
+}
+
+.imerss-class-image-woodland {
+    background-image: url(../img/Xetthecum/Woodland.jpg);
+}
+
+.imerss-class-image-agricultural {
+    background-image: url(../img/Xetthecum/Agricultural.jpg);
+}
+
+.imerss-class-image-developed {
+    background-image: url(../img/Xetthecum/Developed.jpg);
+}
+
+.imerss-class-image-rural {
+    background-image: url(../img/Xetthecum/Rural.jpg);
+}
+
+.imerss-class-image-road {
+    background-image: url(../img/Xetthecum/Porlier_Pass_Road.jpg);
+}
+
+.imerss-class-image-dock {
+    background-image: url(../img/Xetthecum/Dock.jpg);
+}
+
+.imerss-class-image-eelgrass-beds {
+    background-image: url(../img/Xetthecum/Eelgrass.jpg);
+}
+
+
 .imerss-container {
     margin: 1.5rem 0.5rem 0.5rem 0.5rem;
     flex-direction: row;
@@ -229,7 +298,8 @@ body {
     font-size: 0.9rem;
     width: 8rem;
     position: relative;
-    top: -2px;
+    top: 3px;
+    margin-left: 2px;
 }
 
 .imerss-map {
@@ -360,10 +430,14 @@ body {
 }
 */
 
+/** These margins eat into the ones for imerss-map-outer-panel - we also have a width: 100% definition in core which we
+ now need to override
+ */
 .imerss-map-outer-panel .imerss-photo {
     margin-left: -1rem;
     margin-right: -1rem;
     margin-bottom: 1rem;
+    width: auto;
 }
 
 .imerss-taxonDisplay-wrapper {
