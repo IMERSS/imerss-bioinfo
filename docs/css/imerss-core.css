@@ -349,6 +349,14 @@
     overflow: auto;
 }
 
+/** These "panels" currently only exist in the old-style jQuery tabbed panes. This definition is here to make
+ * Xetthecum phase II panel labels show up in the right place but might be helpful in future.
+ * These two uses of "imerss-panel-label" (in Xetthecum and BBEAS) are unconnected.
+ */
+.imerss-panel {
+    position: relative;
+}
+
 .imerss-panel-label {
     font-size: 1.5rem;
     padding-bottom: 5px;

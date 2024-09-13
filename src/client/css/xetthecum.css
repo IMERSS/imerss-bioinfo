@@ -88,6 +88,7 @@ body {
 
 .imerss-container {
     margin: 1.5rem 0.5rem 0.5rem 0.5rem;
+    flex-direction: row;
 }
 
 .imerss-map-holder {
@@ -233,6 +234,8 @@ body {
 
 .imerss-map {
     height: 450px;
+    min-width: 480px;
+    min-height: 320px;
 }
 
 .imerss-tabs {
@@ -287,6 +290,8 @@ body {
 
 .imerss-checklist-holder {
     padding: 1em 1.4em;
+    /** Override definition which ended up in imerss-viz.css of 0.5em 1.2em in May 2024 */
+    margin: 0;
 }
 
 .checklist-hulq-name {
@@ -431,6 +436,11 @@ body {
 .imerss-taxonDisplay {
     margin-top: 0;
     width: auto;
+}
+
+/** Override core definition from May 2024 onwards - make sure images are flush in row in Xetthecum **/
+.taxonDisplay-image-holder {
+    padding-left: 0;
 }
 
 .taxonDisplay-wikipediaSummary {
