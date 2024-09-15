@@ -120,6 +120,14 @@ hortis.iNatProjects = {
         },
         outputFile: "data/Texada/iNaturalist_Tracheophyta_Catalogue_%Date.csv"
     },
+    GalianoDataII: {
+        paramMap: {
+            project_id: 147834,
+            taxon_id: 123880,
+            quality_grade: ""
+        },
+        outputFile: "data/dataPaper-II/Galiano_Catalogue_Diatoms_%Date.csv"
+    },
 };
 
 const parsedArgs = minimist(process.argv.slice(2));

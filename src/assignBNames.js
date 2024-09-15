@@ -31,6 +31,7 @@ hortis.inputFileToTrunk = function (inputFile) {
     return inputFile.substring(0, trunkPos);
 };
 
+// Only current use of "rawName" is to be spat out for "unmapped taxa"
 const strategies = {
     bees: {
         plant: {
@@ -59,6 +60,13 @@ const strategies = {
         rawName: "Taxon name",
         iNatId: "iNaturalist taxon ID",
         assignedINatName: "iNaturalist taxon name"
+    },
+    // Raw iNat obs output
+    iNat: {
+        iNatName: "scientific_name",
+        rawName: "scientific_name",
+        iNatId: "taxon_id",
+        assignedINatName: "scientific_name"
     }
 };
 
@@ -233,6 +241,8 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
             await hortis.applyName(row, row.Phylum, row.Rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         } else if (strategy === "DwC") {
             await hortis.applyName(row, row.phylum, row.taxonRank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
+        } else if (strategy === "iNat") {
+            await hortis.applyName(row, row.phylum, row.taxon_rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         }
 
         mapped.push(row);
