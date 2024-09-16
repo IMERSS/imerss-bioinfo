@@ -177,9 +177,9 @@ hortis.hulqValueItem = `
 
 hortis.hulqValueBlock = `<div class="imerss-cultural-values">%valueBlocks</div>`;
 
-hortis.drivePlayer = `<iframe frameborder="0" width="360" height="55" src="%url"></iframe>`;
+hortis.drivePlayerTemplate = `<iframe frameborder="0" width="360" height="55" src="%url"></iframe>`;
 
-hortis.audioPlayer = `<audio controls><source src="%url" type="audio/mpeg"></audio>`;
+hortis.audioPlayerTemplate = `<audio controls><source src="%url" type="audio/mpeg"></audio>`;
 
 hortis.driveToPreview = function (url) {
     const lastSlash = url.lastIndexOf("/");
@@ -188,7 +188,7 @@ hortis.driveToPreview = function (url) {
 
 
 hortis.renderAudioLink = function (audioLink) {
-    return audioLink ? fluid.stringTemplate(hortis.audioPlayer, {
+    return audioLink ? fluid.stringTemplate(hortis.audioPlayerTemplate, {
         url: audioLink
     }) : "";
 };

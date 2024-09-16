@@ -32,10 +32,9 @@ hortis.checklistItem = function (entry, selectedId, simple) {
     // we promote e.g. a genus-level obs to species level so it appears inline
     const rank = record.rank && !(simple && record.taxonName) ? record.rank : "species";
     const selectedClass = rank === "species" && record.id === selectedId ? " class=\"checklist-selected\"" : "";
-    const header = "<li " + selectedClass + ">";
+    const header = `<li class="checklist-row checklist-rank-${rank}${selectedClass}">`;
     const render = rank === "species" ? hortis.renderSpeciesName : fluid.identity;
-    let name = "<p " + styleprop + rowid + " class=\"checklist-rank-" +
-        rank + "\">" + render(hortis.encodeHTML(hortis.rowToScientific(record))) + "</p>";
+    let name = "<p " + styleprop + rowid + " class=\"checklist-scientific-name\">" + render(hortis.encodeHTML(hortis.rowToScientific(record))) + "</p>";
     if (record.commonName) {
         name += " - <p " + styleprop + rowid + " class=\"checklist-common-name\">" + record.commonName + "</p>";
     }

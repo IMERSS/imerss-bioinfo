@@ -686,12 +686,20 @@ hortis.renderMedia = function (media) {
     return mediaBlocks.join("\n");
 };
 
-hortis.drivePlayer = "<iframe frameborder=\"0\" width=\"360\" height=\"55\" src=\"%url\"></iframe>";
+hortis.drivePlayerTemplate = "<iframe frameborder=\"0\" width=\"360\" height=\"55\" src=\"%url\"></iframe>";
 
+hortis.audioPlayerTemplate = `<audio controls><source src="%url" type="audio/mpeg"></audio>`;
 
 hortis.driveToPreview = function (url) {
     const lastSlash = url.lastIndexOf("/");
     return url.substring(0, lastSlash) + "/preview";
+};
+
+// TODO: Backport of Phase III-style audio links so that we can still view Phase II viz with media
+hortis.renderAudioLinkBackport = function (audioLink) {
+    return audioLink ? fluid.stringTemplate(hortis.audioPlayerTemplate, {
+        url: "https://imerss.github.io/xetthecum-storymap-story/" + audioLink
+    }) : "";
 };
 
 hortis.hulqValues = ["food", "medicinal", "spiritual", "material", "trade", "indicator"];
@@ -701,9 +709,7 @@ hortis.hulqValueItem = "<div class=\"imerss-cultural-value\"><div role=\"img\" c
 hortis.hulqValueBlock = "<div class=\"imerss-cultural-values\">%valueBlocks</div>";
 
 hortis.dumpHulqName = function (row, markup) {
-    const player = row.audioLink ? fluid.stringTemplate(hortis.drivePlayer, {
-        url: hortis.driveToPreview(row.audioLink)
-    }) : "";
+    const player = hortis.renderAudioLinkBackport(row.audioLink);
     const nameRow = hortis.dumpRow("hulqName", row.hulqName + player, markup);
     return nameRow;
 };

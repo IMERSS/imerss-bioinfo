@@ -388,6 +388,10 @@ body {
     border: none;
 }
 
+.imerss-taxonDisplay audio {
+    padding-top: 4px;
+}
+
 .taxonDisplay-row {
     padding-left: 1rem;
     padding-right: 1rem;
