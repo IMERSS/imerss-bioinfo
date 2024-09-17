@@ -24,6 +24,7 @@ body {
 
 .imerss-container {
     margin: 1.5rem 0.5rem 0.5rem 0.5rem;
+    flex-direction: row;
 }
 
 .imerss-map-holder {
@@ -46,6 +47,10 @@ body {
 .imerss-taxonDisplay {
     margin-top: 0;
     width: auto;
+}
+
+.imerss-checklist-holder {
+    margin: 0;
 }
 
 .ui-widget-header { /* Override theme to avoid clutter in tab top */

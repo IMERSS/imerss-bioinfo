@@ -40,6 +40,7 @@
 .imerss-map-panel {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 tr:first-child .imerss-obs-count-column,
