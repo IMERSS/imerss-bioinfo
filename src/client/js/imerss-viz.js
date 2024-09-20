@@ -337,7 +337,7 @@ fluid.defaults("hortis.sunburst", {
         phyloPic: "<image id=\"%phyloPicId\" class=\"%phyloPicClass imerss-clickable\" xlink:href=\"%phyloPicUrl\" height=\"%picDiameter\" width=\"%picDiameter\" x=\"%phyloPicX\" y=\"%phyloPicY\" />",
         segmentFooter: "</g>",
         taxonDisplayHeader: "<div>",
-        taxonDisplayRow: "<div %rootAttrs><span class=\"taxonDisplay-key\">%key</span><span class=\"taxonDisplay-value %valueClazz\">%value</span></div>",
+        taxonDisplayRow: "<div %rootAttrs><p><span class=\"taxonDisplay-key\">%key</span><span class=\"taxonDisplay-value %valueClazz\">%value</span></p></div>",
         taxonDisplayFooter: "</div>"
     },
     events: {
@@ -758,8 +758,9 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         if (keyName === "wikipediaSummary" && value) {
             // TODO: currently wikipediaSummary hard-defaults to closed on render
             // TODO: move to hortis.expandableBlock
+            const stripped = value.replaceAll("<p", "<span").replaceAll("</p", "</span");
             const row1 = hortis.dumpRow("Wikipedia Summary", hortis.expandButtonMarkup, markup, "taxonDisplay-expandable-header taxonDisplay-unexpanded taxonDisplay-runon-header");
-            const row2 = hortis.dumpRow("", value, markup, "taxonDisplay-expandable-remainder taxonDisplay-unexpanded taxonDisplay-runon-remainder", "taxonDisplay-wikipediaSummary");
+            const row2 = hortis.dumpRow("", stripped, markup, "taxonDisplay-expandable-remainder taxonDisplay-unexpanded taxonDisplay-runon-remainder", "taxonDisplay-wikipediaSummary");
             togo += row1 + row2;
         } else {
             togo += hortis.dumpRow(keyName, value, markup, extraClazz, undefined, options);
@@ -839,7 +840,7 @@ hortis.renderTaxonDisplay = function (row, markup, options) {
         // TODO: Move to hortis.expandableBlock - hard since taxonDisplay-key and taxonDisplay-value
         // are nested inside here, but they are not in the outer map panels
         togo += hortis.dumpRow("observationData", hortis.expandButtonMarkup, markup, "taxonDisplay-expandable-header", null, options);
-        togo += hortis.dumpRow("observationData", obsPanel, markup, "taxonDisplay-expandable-remainder taxonDisplay-runon-remainder", null, options);
+        togo += hortis.dumpRow("observationData", obsPanel, markup, "taxonDisplay-expandable-remainder taxonDisplay-runon-remainder taxonDisplay-group", null, options);
 
         if (row.obsPhotoLink) {
         // See this nonsense: https://stackoverflow.com/questions/5843035/does-before-not-work-on-img-elements
@@ -879,8 +880,7 @@ hortis.updateTaxonDisplay = function (that, id) {
     const content = id ? hortis.renderTaxonDisplay(that.index[id], that.options.markup, that.options) : null;
     const taxonDisplay = that.locate("taxonDisplay");
     if (content) {
-        taxonDisplay.empty();
-        taxonDisplay.html(content);
+        taxonDisplay[0].innerHTML = content;
     }
 };
 

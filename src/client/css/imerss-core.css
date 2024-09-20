@@ -120,6 +120,8 @@
 .imerss-taxa {
     display: flex;
     flex-direction: row;
+    /** Grabbed from Xetthecum's style produced by bootstrap */
+    font-family: Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 
@@ -153,9 +155,21 @@
     border: black solid 2px;
     display: flex;
     flex-direction: column;
-    /** Check this - looks like disabled customised scrollbars take up width without display */
-    overflow-y: auto;
+    overflow-y: scroll;
     min-width: 320px;
+}
+
+/** Give some space but absorb space of empty key */
+.taxonDisplay-value.taxonDisplay-wikipediaSummary {
+    display: block;
+    margin-top: -12px;
+}
+
+.imerss-taxonDisplay p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    text-indent: -2em;
+    padding-left: 2em
 }
 
 .taxonDisplay-row {
@@ -168,15 +182,6 @@
 /* unindent nested rows a bit */
 .taxonDisplay-row .taxonDisplay-row {
     margin-left: -0.5rem;
-}
-
-.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder :last-child {
-    margin-bottom: -0.2rem;
-}
-
-/* No idea why we do this, but we need to undo it for imerss-media-name */
-.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder :first-child {
-    margin-top: -0.5rem;
 }
 
 .taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder .imerss-media-name {
@@ -250,6 +255,11 @@
 .taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder {
     padding-left: 8px; /* Back to value in taxonDisplay-row */
     padding-right: 0; /* Avoid right gap */
+    padding-top: 0;
+}
+
+.taxonDisplay-group > p {
+    display: none;
 }
 
 .taxonDisplay-runon-remainder > .taxonDisplay-key {
@@ -440,8 +450,10 @@
 }
 
 li.checklist-row {
-    margin-left: 10px;
-    padding-left: 20px;
+    /** TODO: We put in margin-left: 10px and padding-left: 20px for Xetthecum but this ruins highlighting - figure
+     * out why we did this
+     */
+    padding-left: 30px;
     text-indent: -30px;
 }
 
@@ -452,9 +464,10 @@ li.checklist-row {
 .imerss-checklist-up {
     width: 1.5rem;
     height: 1.5rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
     background-image: url(../img/up-arrow.svg);
     background-size: cover;
-    margin-left: -0.5rem;
     margin-bottom: 0.2rem;
 }
 
@@ -512,5 +525,19 @@ li.checklist-row {
 }
 
 .checklist-annote {
+    font-style: normal
+}
+
+/* AS edict of 25th August 2024 - bold for phylum and kingdom names */
+
+.checklist-rank-phylum > .checklist-scientific-name {
+    font-weight: bold
+}
+
+.checklist-rank-kingdom > .checklist-scientific-name {
+    font-weight: bold
+}
+
+.imerss-checklist-holder .checklist-common-name {
     font-style: normal
 }

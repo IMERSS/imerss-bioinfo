@@ -7,7 +7,7 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
-/* global Papa, maplibregl, preactSignalsCore */
+/* global Papa, maplibregl, MapboxDraw, preactSignalsCore */
 
 "use strict";
 
@@ -541,11 +541,6 @@ fluid.defaults("hortis.libreMap", {
     }
 });
 
-fluid.defaults("hortis.libreMap.withTiles", {
-    // TODO: Syntax for throwing away arguments
-    addTiles: "@expand:fluid.effect(hortis.libreMap.addTileLayers, {that}.map, {that}.options.tileSets, {that}.mapLoaded)"
-});
-
 hortis.libreMap.make = function (container, mapOptions, mapLoaded) {
     const togo = new maplibregl.Map({container, ...mapOptions});
     togo.on("load", function () {
@@ -553,6 +548,35 @@ hortis.libreMap.make = function (container, mapOptions, mapLoaded) {
         mapLoaded.value = 1;
     });
     return togo;
+};
+
+fluid.defaults("hortis.libreMap.withTiles", {
+    // TODO: Syntax for throwing away arguments
+    addTiles: "@expand:fluid.effect(hortis.libreMap.addTileLayers, {that}.map, {that}.options.tileSets, {that}.mapLoaded)"
+});
+
+// Attested in demos and in https://github.com/maplibre/maplibre-gl-js/issues/2601
+MapboxDraw.constants.classes.CONTROL_BASE  = "maplibregl-ctrl";
+MapboxDraw.constants.classes.CONTROL_PREFIX = "maplibregl-ctrl-";
+MapboxDraw.constants.classes.CONTROL_GROUP = "maplibregl-ctrl-group";
+
+fluid.defaults("hortis.libreMap.withPolygonDraw", {
+    mapboxDrawOptions: {
+        displayControlsDefault: false,
+        controls: {
+            polygon: true,
+            trash: true
+        }
+    },
+    members: {
+        mapboxDraw: "@expand:hortis.libreMap.makeMapboxDraw({that}.map, {that}.options.mapboxDrawOptions)"
+    }
+});
+
+hortis.libreMap.makeMapboxDraw = function (map, mapboxDrawOptions) {
+    const draw = new MapboxDraw(mapboxDrawOptions);
+    map.addControl(draw);
+    return draw;
 };
 
 fluid.defaults("hortis.libreMap.streetmapTiles", {

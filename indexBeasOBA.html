@@ -13,6 +13,7 @@
         <link rel="stylesheet" type="text/css" href="node_modules/infusion/src/framework/core/css/fluid.css" />
         <link rel="stylesheet" type="text/css" href="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css" />
         <link rel="stylesheet" href="node_modules/maplibre-gl/dist/maplibre-gl.css" />
+        <link rel="stylesheet" href="node_modules/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css" />
         <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
         <!-- Refers to some fonts so just use the CDN -
           <link rel="stylesheet" href="node_modules/@mdi/font/css/materialdesignicons.min.css"> -->
@@ -52,6 +53,7 @@
         <script src="node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js"></script>
 
         <script src="node_modules/maplibre-gl/dist/maplibre-gl-dev.js"></script>
+        <script src="node_modules/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw-unminified.js"></script>
         <script src="node_modules/d3/dist/d3.js"></script>
 
         <script src="src/lib/signals-core.min.js"></script>
@@ -169,7 +171,8 @@
                 obsFile: "data/b-team/plant-pollinators-OBA-2-assigned-subset-labels.csv",
                 taxaFile: "data/b-team/plant-pollinators-OBA-2-assigned-taxa.csv",
                 ecoL3File: "data/b-team/us-eco-l3-regions.csv",
-                mapGrades: "hortis.bbeaLibreMap",
+                // TODO: add to default bbeaLibreMap grades
+                mapGrades: ["hortis.bbeaLibreMap", "hortis.libreMap.withPolygonDraw"],
                 resourceBase: "src/client"
             });
         </script>

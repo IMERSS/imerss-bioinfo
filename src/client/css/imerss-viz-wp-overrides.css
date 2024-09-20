@@ -14,7 +14,9 @@
     content: none;
 }
 
-
+/** Need to keep this as fl-imerss-container since there are so many pages on BioGaliano using this in the literal
+ * initBlock text, and a search and replace plugin costs $60/year!
+ */
 .fl-imerss-container {
     line-height: 1.4em;
     margin: 0 1rem 0 1rem;
@@ -49,32 +51,34 @@ table {
     padding: 0 5px;
 }
 
-.fl-imerss-container .fld-imerss-checklist ul {
+.fl-imerss-container .imerss-checklist ul {
     padding-bottom: 0;
 }
 
-.fld-imerss-taxonDisplay {
+.imerss-checklist-holder {
+    margin: 0.5em 0
+}
+
+.imerss-taxonDisplay {
     background: white;
     width: 35%;
     display: block; /* Without this, contents overflow with our extra margins */
-    /** Temporary fix until we can update BioGaliano to latest codebase */
-    overflow-y: auto;
 }
 
-.fl-imerss-taxa {
+.imerss-taxa {
     width: 100%;
 }
 
-.fl-imerss-tabs-and-search {
+.imerss-tabs-and-search {
     width: 65%;
     margin-right: 1rem;
 }
 
-.fl-imerss-left-column {
+.imerss-left-column {
     width: auto;
 }
 
-.fld-taxonDisplay-expandable-remainder.fl-taxonDisplay-runon-remainder {
+.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder {
     width: auto;
     padding-right: 0;
 }
@@ -83,7 +87,7 @@ table {
     max-width: 850px;
 }
 
-.fl-taxonDisplay-expand {
+.taxonDisplay-expand {
     margin-top: 2px;
 }
 

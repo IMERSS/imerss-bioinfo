@@ -184,8 +184,8 @@
 
 .imerss-checklist-holder {
     overflow-y: scroll;
-    padding: 1em 1.4em;
-    margin: 0.5em 1.2em;
+    padding: 0 0.5em 0.5em 0.5em;
+    margin: 0.5em 0;
 }
 
 /** Core has overflow-y: auto, we do scrolling at holder level together with viz-dimens */
