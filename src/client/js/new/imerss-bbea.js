@@ -16,8 +16,9 @@ fluid.defaults("hortis.beaVizLoader", {
         bipartite: ".imerss-bipartite",
         recordReporter: ".imerss-record-reporter",
         filterControls: ".imerss-filter-controls",
-        filters: ".imerss-filters",
-        loadingIndicator: ".bee-loading-container"
+        filters: ".imerss-main-filters",
+        loadingIndicator: ".bee-loading-container",
+        bbeaFilters: ".imerss-bbea-filters"
     },
     components: {
         ecoL3Loader: {
@@ -65,6 +66,10 @@ fluid.defaults("hortis.beaVizLoader", {
                     rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, pollRowFocus)"
                 }
             }
+        },
+        bbeaFilters: {
+            container: "{that}.dom.bbeaFilters",
+            type: "hortis.bbeaBbeaFilters"
         },
         plantChecklist: {
             type: "hortis.checklist.withHolder",
@@ -899,23 +904,7 @@ hortis.sexFilter.doFilter = function (obsRows, filterState) {
 
 fluid.defaults("hortis.phenologyFilter", {
     gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.stringTemplateRenderingView"],
-    ranges: [{
-        label: "Early",
-        start: "April 1",
-        end: "June 15"
-    }, {
-        label: "Mid",
-        start: "June 15",
-        end: "August 1"
-    }, {
-        label: "Late",
-        start: "August 1",
-        end: "October 1"
-    }, {
-        label: "Winter",
-        start: "October 1",
-        end: "April 1"
-    }],
+    ranges: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     markup: {
         container: `
         <div class="imerss-phenology-filter">
@@ -926,17 +915,16 @@ fluid.defaults("hortis.phenologyFilter", {
         row: `
         <div class="imerss-filter-row">
             <div class="imerss-row-checkbox">%checkbox</div>
-            <div class="imerss-phenology-label">%rowLabel:</div>
-            <div class="imerss-phenology-range">%rowRange</div>
+            <div class="imerss-phenology-label">%rowLabel</div>
         </div>
         `
     },
     // fieldName
     // filterName
     members: {
-        // [year, rangeIndex] => {start, end} in milliseconds for that year
-        rangeCache: "@expand:fluid.computed(hortis.phenologyFilter.rangeCache, {that}.obsRows, {that}.options.ranges)",
         values: "@expand:fluid.computed(hortis.regionFilter.computeValues, {that}.obsRows, {that}.options.fieldName)",
+        // Dummy value to cache months on rows
+        rangeCache: "@expand:fluid.computed(hortis.phenologyFilter.rangeCache, {that}.obsRows)",
         filterState: "@expand:signal([])",
         renderModel: `@expand:fluid.computed(hortis.phenologyFilter.renderModel, {that}.options.ranges, {that}.options.markup)`
     },
@@ -954,60 +942,35 @@ hortis.phenologyFilter.reset = function (that) {
     hortis.resetChecks(that.container[0]);
 };
 
-hortis.phenologyFilter.renderRow = function (template, rowLabel, rowRange, rowId) {
+hortis.phenologyFilter.renderRow = function (template, rowLabel, rowId) {
     return fluid.stringTemplate(template, {
         rowLabel,
-        rowRange,
         checkbox: hortis.rowCheckbox(rowId)
     });
 };
 
 hortis.phenologyFilter.renderModel = function (ranges, markup) {
-    const renderRange = ({start, end}) => `${start} - ${end}`;
     return {
-        rows: ranges.map((range, i) => hortis.phenologyFilter.renderRow(markup.row, range.label, renderRange(range), i)).join("\n")
+        rows: ranges.map((range, i) => hortis.phenologyFilter.renderRow(markup.row, range, i)).join("\n")
     };
 };
 
-hortis.dayInMs = 24 * 60 * 60 * 1000;
 
 // Compute cache of millisecond range bounds for each year in range found in data (necessary because leap years may disturb)
 // side-effect: initialises row with "timestamp" in milliseconds
-hortis.phenologyFilter.rangeCache = function (obsRows, ranges) {
-    const [minYear, maxYear] = obsRows.reduce(([min, max], row) => {
+hortis.phenologyFilter.rangeCache = function (obsRows) {
+    obsRows.forEach(row => {
         const date = new Date(row.eventDate);
-        const year = date.getFullYear();
-        // OCTOPOKHO: Side effect initialising year, timestamp on obs rows
-        row.year = year;
-        row.timestamp = date.getTime();
-        return isNaN(year) ? [min, max] : [Math.min(min, year), Math.max(max, year)];
-    }, [Number.MAX_VALUE, Number.MIN_VALUE]);
-    const years = fluid.iota(1 + maxYear - minYear, minYear);
-    const values = years.map(year => {
-        return ranges.map(({start, end}) =>
-            ({
-                start: Date.parse(`${start} ${year}`),
-                end: Date.parse(`${end} ${year}`) + hortis.dayInMs
-            })
-        ).map(({start, end}) => start > end ? {
-            start, end,
-            wrapped: true,
-            yearStart: Date.parse(`January 1 ${year}`),
-            yearEnd: Date.parse(`December 31 ${year}`) + hortis.dayInMs
-        } : {start, end});
+        const month = date.getMonth();
+        // OCTOPOKHO: Side effect initialising month
+        row.month = month;
     });
-    return Object.fromEntries(years.map((year, index) => [year, values[index]]));
+    return true;
 };
 
-hortis.phenologyFilter.doFilter = function (obsRows, filterState, rangeCache) {
+hortis.phenologyFilter.doFilter = function (obsRows, filterState) {
     const none = filterState.every(oneFilter => !oneFilter);
-    const passCache = (timestamp, cache) => cache.wrapped ?
-        timestamp >= cache.start && timestamp <= cache.yearEnd || timestamp >= cache.yearStart && timestamp < cache.end :
-        timestamp >= cache.start && timestamp < cache.end;
-    const passFilter = (row, rangeIndex) => {
-        const cache = !isNaN(row.year) && rangeCache[row.year][rangeIndex];
-        return cache ? passCache(row.timestamp, cache) : false;
-    };
+    const passFilter = (row, monthIndex) => row.month === monthIndex;
 
     return none ? obsRows : obsRows.filter(row => filterState.some((checked, rangeIndex) => checked ? passFilter(row, rangeIndex) : false));
 };
@@ -1113,7 +1076,6 @@ hortis.queryAutocompleteCollector = function (collectors, query, callback) {
 hortis.bbeaFiltersTemplate = `
     <div class="imerss-filters">
         <div class="imerss-filter"></div>
-        <div class="imerss-sex-filter imerss-filter"></div>
         <div class="imerss-collector-filter imerss-filter"></div>
         <div class="imerss-monument-filter imerss-filter"></div>
         <div class="imerss-l3eco-filter imerss-filter"></div>
@@ -1131,7 +1093,6 @@ fluid.defaults("hortis.bbeaFilters", {
         obsRows: "{vizLoader}.obsRows"
     },
     selectors: {
-        sexFilter: ".imerss-sex-filter",
         collectorFilter: ".imerss-collector-filter",
         monumentFilter: ".imerss-monument-filter",
         l3ecoFilter: ".imerss-l3eco-filter",
@@ -1139,10 +1100,6 @@ fluid.defaults("hortis.bbeaFilters", {
     },
     components: {
         filterRoot: "{vizLoader}",
-        sexFilter: {
-            type: "hortis.sexFilter",
-            container: "{that}.dom.sexFilter"
-        },
         collectorFilter: {
             type: "hortis.collectorFilter",
             container: "{that}.dom.collectorFilter"
@@ -1178,6 +1135,32 @@ fluid.defaults("hortis.bbeaFilters", {
         phenologyFilter: {
             type: "hortis.phenologyFilter",
             container: "{that}.dom.phenologyFilter"
+        }
+    }
+});
+
+// A fake 1-element "filters" block currently just to relocate the sex filter to above the bee checklist as
+// requested by Michael O'Laughlin
+
+hortis.bbeaBbeaFiltersTemplate = `
+    <div>
+        <div class="imerss-sex-filter imerss-filter"></div>
+    </div>
+`;
+
+fluid.defaults("hortis.bbeaBbeaFilters", {
+    gradeNames: ["fluid.stringTemplateRenderingView"],
+    markup: { // Clearly unsatisfactory, have to move over to preactish rendering before long
+        container: hortis.bbeaBbeaFiltersTemplate,
+        fallbackContainer: hortis.bbeaBbeaFiltersTemplate
+    },
+    selectors: {
+        sexFilter: ".imerss-sex-filter"
+    },
+    components: {
+        sexFilter: {
+            type: "hortis.sexFilter",
+            container: "{that}.dom.sexFilter"
         }
     }
 });

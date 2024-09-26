@@ -50,22 +50,31 @@ imerss.bipartitePP = function (data, svg, width, height, options) { // eslint-di
     const lengMaxBee = imerss.maxTextWidth(data.map(element => element[0]), fontSize);
     const lengMaxPlant = imerss.maxTextWidth(data.map(element => element[1]), fontSize);
 
-    const countWidth = imerss.maxTextWidth(data.map(element => element[2]), fontSize);
+    // Compute actual marginal counts so we can size column correctly - this will duplicate calculation within biPartitePP
+    const beeCounts = Object.fromEntries(sortedBeeNames.map(name => [name, 0]));
+    const plantCounts = Object.fromEntries(sortedPlantNames.map(name => [name, 0]));
+    data.forEach(row => {
+        beeCounts[row[0]] += row[2];
+        plantCounts[row[1]] += row[2];
+    });
+
+    const beeCountWidth = imerss.maxTextWidth(Object.values(beeCounts), fontSize);
+    const plantCountWidth = imerss.maxTextWidth(Object.values(plantCounts), fontSize);
 
     const BoxLabPosBee = -LabelPad - BarWidth / 2;
     const BoxLabPosPlant = LabelPad + BarWidth / 2;
 
     // original - BoxLabPos <- (c(max(stringr::str_length(df[, 1])), max(stringr::str_length(df[, 2]))) * 1.2) + 20
 
-    const countPadding = 15;
+    const countPadding = 10;
 
     // original - PercPos <- (BoxLabPos) * 7 + c(-5, 20)
     const CountPosBee = BoxLabPosBee - countPadding - lengMaxBee;
     const CountPosPlant = BoxLabPosPlant + countPadding + lengMaxPlant;
 
     //original - LeftSidePadding = 20 + BoxLabPos[bee] + IncludePerc * PercPos[bee] - change include perc to 1
-    const LeftSidePadding = -CountPosBee + (IncludeCount ? countWidth : 0);
-    const RightSidePadding = CountPosPlant + (IncludeCount ? countWidth : 0);
+    const LeftSidePadding = -CountPosBee + (IncludeCount ? beeCountWidth : 0);
+    const RightSidePadding = CountPosPlant + (IncludeCount ? plantCountWidth : 0);
 
     // const totalWidth = LeftSidePadding + MainFigSizeX + RightSidePadding;
 

@@ -256,7 +256,7 @@ fluid.defaults("hortis.checklist", {
     },
     listeners: {
         "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {layoutHolder})",
-        "onCreate.bindCheckboxClick": "hortis.checklist.bindCheckboxClick({that})"
+        "onCreate.bindCheckboxClick": "hortis.checklist.bindCheckboxClick({that}, {that}.dom.checklist)"
     }
 });
 
@@ -352,15 +352,15 @@ hortis.checklist.withCopy.copyToClipboard = function (copyButton, checklist) {
     });
 };
 
-hortis.checklist.bindCheckboxClick = function (checklist) {
-    checklist.container.on("click", ".pretty input", function () {
+hortis.checklist.bindCheckboxClick = function (checklist, checklistContainer) {
+    checklistContainer.on("click", ".pretty input", function () {
         const id = this.dataset.rowId;
         fluid.log("Checkbox clicked with row " + id);
         checklist.check(id, this.checked);
         // checklist.applier.change(["idToState", id], this.checked);
     });
 
-    checklist.container.on("click", ".checklist-fold-control.active", function () {
+    checklistContainer.on("click", ".checklist-fold-control.active", function () {
         const id = this.dataset.rowId;
         fluid.log("Fold clicked with row " + id);
         checklist.toggleFold(id);

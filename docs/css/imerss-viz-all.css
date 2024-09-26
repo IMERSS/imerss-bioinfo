@@ -2015,6 +2015,98 @@ a.maplibregl-ctrl-logo.maplibregl-compact {
 }
 
 
+.imerss-filter-panel {
+    padding: 2px 1rem 2px 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.imerss-filter {
+    padding: 2px 0 2px;
+    border-bottom: 1px solid #dbe3e7;
+}
+
+.imerss-filters {
+    height: 100%;
+    width: 20rem;
+    overflow-y: auto;
+    padding-right: 0.5em;
+}
+
+.imerss-filter-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.imerss-reset-filter {
+    cursor: pointer;
+    margin-right: 5px;
+    padding: 2px;
+    border-radius: 6px;
+}
+
+.imerss-reset-filter:hover {
+    /* outline: 1px solid gray;*/
+    background: #d0d7de33;
+}
+
+.imerss-record-reporter {
+    padding-top: 2px;
+}
+
+.imerss-filter-title {
+    font-size: smaller;
+}
+
+.imerss-filter-body {
+    padding-left: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.imerss-filter-clear {
+    background-image: url(../img/x-circle-close.svg);
+    background-size: 20px;
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+.imerss-filter-clear.imerss-hidden {
+    display: none;
+}
+
+.imerss-filters .autocomplete__hint, .imerss-filters .autocomplete__input, .imerss-filters .autocomplete__option {
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.imerss-filters .autocomplete__input--default {
+    padding: 2px 4px 2px 4px;
+    border-width: 1px;
+    width: 15rem;
+}
+
+.imerss-region-filter-rows {
+    display: flex;
+    font-size: smaller;
+    flex-direction: column;
+    overflow-y: auto;
+    align-items: end;
+}
+
+.imerss-filter-row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    width: 100%;
+}
+
+
 #fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
     padding: 0;
 }
