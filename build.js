@@ -1,8 +1,7 @@
 /* eslint-env node */
 "use strict";
 
-const readline = require("readline"),
-    glob = require("glob"),
+const glob = require("glob"),
     fs = require("fs-extra");
 
 const fluid = require("infusion");
@@ -10,9 +9,45 @@ const terser = require("terser");
 const path = require("path");
 
 const buildIndex = {
-    excludes: [
-        "jquery.js"
+    libSource: [
+        "node_modules/infusion/src/framework/core/css/fluid.css",
+        "node_modules/infusion/src/lib/jquery/ui/css/default-theme/core.css",
+        "node_modules/infusion/src/lib/jquery/ui/css/default-theme/tooltip.css",
+        "node_modules/infusion/src/lib/jquery/ui/css/default-theme/theme.css",
+        "node_modules/jquery-ui/themes/base/tabs.css",
+        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css",
+        "src/client/css/maplibre-gl.css",
+        "src/client/css/mapbox-gl-draw.css",
+        "node_modules/pretty-checkbox/dist/pretty-checkbox.min.css",
+        //        "node_modules/infusion/src/lib/jquery/core/js/jquery.js",
+        "node_modules/infusion/src/lib/jquery/ui/js/version.js",
+        "node_modules/infusion/src/lib/jquery/ui/js/keycode.js",
+        "node_modules/jquery-ui/ui/safe-active-element.js",
+        "node_modules/jquery-ui/ui/widget.js",
+        "node_modules/jquery-ui/ui/unique-id.js",
+        "node_modules/jquery-ui/ui/position.js",
+        "node_modules/jquery-ui/ui/widgets/tooltip.js",
+        "node_modules/infusion/src/framework/core/js/jquery.keyboard-a11y.js",
+        "node_modules/infusion/src/framework/core/js/Fluid.js",
+        "node_modules/infusion/src/framework/core/js/FluidPromises.js",
+        "node_modules/infusion/src/framework/core/js/FluidDebugging.js",
+        "node_modules/infusion/src/framework/core/js/FluidDocument.js",
+        "node_modules/infusion/src/framework/core/js/FluidIoC.js",
+        "node_modules/infusion/src/framework/core/js/DataBinding.js",
+        "node_modules/infusion/src/framework/core/js/ModelTransformation.js",
+        "node_modules/infusion/src/framework/core/js/ModelTransformationTransforms.js",
+        "node_modules/infusion/src/framework/enhancement/js/ContextAwareness.js",
+        "node_modules/infusion/src/framework/enhancement/js/ProgressiveEnhancement.js",
+        "node_modules/infusion/src/framework/core/js/FluidView.js",
+        "node_modules/infusion/src/framework/core/js/FluidView-browser.js",
+        "node_modules/infusion/src/framework/core/js/NewViewSupport.js",
+        "node_modules/infusion/src/framework/core/js/DataSource.js",
+        "node_modules/infusion/src/framework/core/js/ResourceLoader.js",
+        "node_modules/infusion/src/framework/core/js/ResourceLoader-browser.js",
+        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js",
+        "node_modules/maplibre-gl/dist/maplibre-gl-dev.js"
     ],
+
     localSource: [
         "src/client/css/imerss-core.css",
         "src/client/css/imerss-viz.css",
@@ -36,10 +71,13 @@ const buildIndex = {
     newSource: [
         "src/lib/signals-core.min.js",
         "src/lib/jquery-ui-widgets-tabs.js",
+        "src/lib/point-in-polygon.js",
+        "src/utils/utils.js",
         "src/client/js/colour.js",
         "src/client/js/renderSVG.js",
         "src/client/js/new/fluidNew.js",
         "src/client/js/new/imerss-new.js",
+        "src/client/js/new/filters.js",
         "src/client/js/autocomplete.js",
         "src/client/js/tabs.js",
         "src/client/js/new/newChecklist.js",
@@ -122,26 +160,6 @@ const buildIndex = {
     }]
 };
 
-
-const readLines = function (filename) {
-    const lines = [];
-    const togo = fluid.promise();
-    const rl = readline.createInterface({
-        input: fs.createReadStream(filename),
-        terminal: false
-    });
-    rl.on("line", function (line) {
-        lines.push(line);
-    });
-    rl.on("close", function () {
-        togo.resolve(lines);
-    });
-    rl.on("error", function (error) {
-        togo.reject(error);
-    });
-    return togo;
-};
-
 // These two taken from reknit.js
 
 const copyGlob = function (sourcePattern, targetDir) {
@@ -193,15 +211,6 @@ const filesToContentHash = function (allFiles, extension) {
     return hash;
 };
 
-const computeAllFiles = function (buildIndex, nodeFiles) {
-    const withExcludes = nodeFiles.filter(function (oneFile) {
-        return !buildIndex.excludes.some(function (oneExclude) {
-            return oneFile.indexOf(oneExclude) !== -1;
-        });
-    });
-    return withExcludes.concat(buildIndex.localSource);
-};
-
 const minify = async function (hash, filename) {
     fluid.log("Minifying " + Object.keys(hash).length + " JS files to " + filename);
     return await terser.minify(hash, {
@@ -215,18 +224,17 @@ const minify = async function (hash, filename) {
     });
 };
 
-const buildFromFiles = async function (buildIndex, nodeFiles) {
-    const allFiles = computeAllFiles(buildIndex, nodeFiles);
+const buildFromFiles = async function (buildIndex) {
+    const allFiles = buildIndex.libSource.concat(buildIndex.localSource);
     console.log("allFiles ", allFiles);
-    nodeFiles.concat(buildIndex.localSource);
 
     const jsHash = filesToContentHash(allFiles, ".js");
     const fullJsHash = fluid.extend({header: buildIndex.codeHeader}, jsHash, {footer: buildIndex.codeFooter});
     const minifiedAll = await minify(fullJsHash, "imerss-viz-all.js");
 
     // imerss-viz-lib.js contains just upstream libraries we depend on, to support reasonably easy deploy of "new" framework
-    const libJsHash = filesToContentHash(nodeFiles, ".js");
-    console.log("nodeFiles ", nodeFiles);
+    const libJsHash = filesToContentHash(buildIndex.libSource, ".js");
+    console.log("libFiles ", buildIndex.libSource);
     const minifiedLib = await minify(libJsHash, "imerss-viz-lib.js");
 
     const newJsHash = filesToContentHash(buildIndex.newSource, ".js");
@@ -245,7 +253,7 @@ const buildFromFiles = async function (buildIndex, nodeFiles) {
     const cssHash = filesToContentHash(allFiles, ".css");
     const cssConcat = String.prototype.concat.apply("", Object.values(cssHash));
 
-    const cssLibHash = filesToContentHash(nodeFiles, ".css");
+    const cssLibHash = filesToContentHash(buildIndex.libSource, ".css");
     const cssLibConcat = String.prototype.concat.apply("", Object.values(cssLibHash));
 
     fs.ensureDirSync("docs/css");
@@ -259,10 +267,6 @@ const buildFromFiles = async function (buildIndex, nodeFiles) {
 
 fluid.setLogging(true);
 
-const linesPromise = readLines("gh-pages-nm.txt");
-
-linesPromise.then(async function (lines) {
-    await buildFromFiles(buildIndex, lines);
-}, function (error) {
+buildFromFiles(buildIndex).then(null, function (error) {
     console.log(error);
 });

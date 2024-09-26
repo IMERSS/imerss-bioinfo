@@ -143,42 +143,6 @@ hortis.vizLoader.bindResources = async function (that) {
     });
 };
 
-fluid.defaults("hortis.filter", {
-    // gradeNames: "fluid.component",
-    members: {
-        filterInput: null, // must be overridden
-        filterOutput: null // must be overridden
-    },
-    invokers: {
-        // doFilter
-        // reset
-    }
-});
-
-fluid.defaults("hortis.filters", {
-    // gradeNames: "fluid.component",
-    listeners: {
-        "onCreate.wireFilters": "hortis.wireObsFilters"
-    },
-    members: {
-        allInput: "{vizLoader}.obsRows",
-        allOutput: "@expand:signal()"
-    }
-});
-
-hortis.wireObsFilters = function (that) {
-    const filterComps = fluid.queryIoCSelector(that, "hortis.filter", true);
-    let prevOutput = that.allInput;
-
-    filterComps.forEach(filterComp => {
-        filterComp.filterInput = prevOutput;
-        filterComp.filterOutput = fluid.computed(filterComp.doFilter, filterComp.filterInput, filterComp.filterState);
-        prevOutput = filterComp.filterOutput;
-    });
-    // This is the bit we can't wire up with a computed - it would be great to be able to "wire" the pre-existing
-    // allOutput.value onto prevOutput.value after it had been constructed
-    effect( () => that.allOutput.value = prevOutput.value);
-};
 
 hortis.taxonTooltipTemplate =
 `<div class="imerss-tooltip">
@@ -539,6 +503,7 @@ fluid.defaults("hortis.libreMap", {
         map: "@expand:hortis.libreMap.make({that}.container.0, {that}.options.mapOptions, {that}.mapLoaded)",
         mapLoaded: "@expand:signal()"
     }
+
 });
 
 hortis.libreMap.make = function (container, mapOptions, mapLoaded) {
@@ -561,6 +526,16 @@ MapboxDraw.constants.classes.CONTROL_PREFIX = "maplibregl-ctrl-";
 MapboxDraw.constants.classes.CONTROL_GROUP = "maplibregl-ctrl-group";
 
 fluid.defaults("hortis.libreMap.withPolygonDraw", {
+    components: {
+        polygonDraw: {
+            type: "hortis.libreMap.polygonFilter"
+        }
+    }
+});
+
+// Currently combine draw UI and filter, could break apart
+fluid.defaults("hortis.libreMap.polygonFilter", {
+    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.component"],
     mapboxDrawOptions: {
         displayControlsDefault: false,
         controls: {
@@ -568,14 +543,51 @@ fluid.defaults("hortis.libreMap.withPolygonDraw", {
             trash: true
         }
     },
+    invokers: {
+        updateArea: "hortis.libreMap.polygonFilter.updateArea({that})",
+        doFilter: "hortis.libreMap.polygonFilter.doFilter({arguments}.0, {arguments}.1)",
+        reset: "hortis.libreMap.polygonFilter.reset({that})"
+    },
     members: {
-        mapboxDraw: "@expand:hortis.libreMap.makeMapboxDraw({that}.map, {that}.options.mapboxDrawOptions)"
+        // filterState holds "features" array from GeoJSON FeatureCollection
+        // Right now just initialises "point" member on each row but could intern and cache in future
+        pointCache: "@expand:fluid.effect(hortis.libreMap.polygonFilter.pointCache, {that}.obsRows)",
+        filterState: "@expand:signal([])",
+        drawMode: "@expand:signal(null)",
+        mapboxDraw: "@expand:hortis.libreMap.makeMapboxDraw({hortis.libreMap}.map, {that}.options.mapboxDrawOptions, {that}.updateArea, {that}.drawMode)"
     }
 });
 
-hortis.libreMap.makeMapboxDraw = function (map, mapboxDrawOptions) {
+hortis.libreMap.polygonFilter.pointCache = function (obsRows) {
+    // Taken from landlocked.js which seems to be only historical site feeding into point-in-polygon.js
+    obsRows.forEach(row => row.point = [hortis.parseFloat(row.decimalLongitude), hortis.parseFloat(row.decimalLatitude)]);
+};
+
+hortis.libreMap.polygonFilter.doFilter = function (obsRows, filterState) {
+    const none = filterState.length === 0;
+
+    return none ? obsRows : obsRows.filter(row => hortis.intersectsAnyFeature(filterState, row));
+};
+
+hortis.libreMap.polygonFilter.reset = function (that) {
+    that.mapboxDraw.deleteAll();
+    that.filterState.value = [];
+};
+
+hortis.libreMap.polygonFilter.updateArea = function (that) {
+    that.filterState.value = that.mapboxDraw.getAll().features;
+};
+
+hortis.libreMap.makeMapboxDraw = function (map, mapboxDrawOptions, updateArea, drawMode) {
     const draw = new MapboxDraw(mapboxDrawOptions);
     map.addControl(draw);
+    map.on("draw.create", updateArea);
+    map.on("draw.delete", updateArea);
+    map.on("draw.update", updateArea);
+    map.on("draw.modechange", mode => {
+        console.log("New mode ", mode);
+        drawMode.value = mode;
+    });
     return draw;
 };
 

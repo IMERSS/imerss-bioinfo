@@ -16,7 +16,8 @@ fluid.defaults("hortis.beaVizLoader", {
         bipartite: ".imerss-bipartite",
         recordReporter: ".imerss-record-reporter",
         filterControls: ".imerss-filter-controls",
-        filters: ".imerss-filters"
+        filters: ".imerss-filters",
+        loadingIndicator: ".bee-loading-container"
     },
     components: {
         ecoL3Loader: {
@@ -116,6 +117,7 @@ fluid.defaults("hortis.beaVizLoader", {
             container: "{that}.dom.bipartite",
             options: {
                 members: {
+                    rendered: "{hortis.vizLoader}.rendered",
                     // TODO: Split drawInteractions render prepare back out into interactions
                     bipartiteRows: "{drawInteractions}.bipartiteRows",
                     beeSelection: "{pollChecklist}.rowSelection",
@@ -127,10 +129,12 @@ fluid.defaults("hortis.beaVizLoader", {
         }
     },
     members: {
+        rendered: "@expand:signal()",
         filteredObs: "{filters}.allOutput",
         taxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.filteredObs, {taxa}.rowById)",
         allTaxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.obsRows, {taxa}.rowById)",
-        finalFilteredObs: "@expand:signal()"
+        finalFilteredObs: "@expand:signal()",
+        hideLoadingIndicator: "@expand:fluid.effect(hortis.beaVizLoader.hideLoadingIndicator, {that}.rendered)"
 
         //`@expand:fluid.computed(hortis.filterObsByTwoTaxa, {that}.filteredObs,
         //    {plantChecklist}.rowFocus, {pollChecklist}.rowFocus)`
@@ -138,6 +142,12 @@ fluid.defaults("hortis.beaVizLoader", {
     invokers: {
     }
 });
+
+hortis.beaVizLoader.hideLoadingIndicator = function () {
+    const container = document.querySelector(".bee-loading-container");
+    container.classList.add("bee-loading-container-hidden");
+    window.setTimeout(() => container.remove(), 1000);
+};
 
 hortis.twoTaxaFromObs = function (filteredObs, rowById) {
     const plantIds = {},
@@ -353,6 +363,7 @@ fluid.defaults("hortis.bipartite", {
         bipartiteRows: "@expand:signal()",
         beeSelection: "@expand:signal()",
         plantSelection: "@expand:signal()",
+        rendered: "@expand:signal()",
         // beeIdToEntry: {}, - injected from checklist
         // plantIdToEntry: {}
         containerWidth: "@expand:signal()",
@@ -389,6 +400,7 @@ hortis.bipartite.render = function (that, svgNode, containerWidth, bipartiteRows
     });
     svgNode.setAttribute("height", renderedHeight);
     svgNode.setAttribute("width", renderedWidth);
+    that.rendered.value = true;
 };
 
 hortis.interactionMarkup =
@@ -737,7 +749,7 @@ hortis.bbeaGridTooltipTemplate =
 </div>`;
 
 fluid.defaults("hortis.bbeaLibreMap", {
-    gradeNames: ["hortis.libreObsMap", "hortis.libreMap.withTiles", "hortis.libreMap.streetmapTiles", "hortis.libreMap.usEcoL3Tiles"],
+    gradeNames: ["hortis.libreObsMap", "hortis.libreMap.withTiles", "hortis.libreMap.streetmapTiles", "hortis.libreMap.usEcoL3Tiles", "hortis.libreMap.withPolygonDraw"],
     invokers: {
         renderTooltip: "hortis.renderBbeaGridTooltip({that}, {obsQuantiser}.grid.value, {taxa}.rowById.value, {arguments}.0)"
     },
@@ -770,7 +782,7 @@ hortis.renderBbeaGridTooltip = function (that, grid, rowById, cellId) {
     }
 
     const terms = {
-        obsCount: bucket.count,
+        obsCount: bucket.obsCount,
         beeCount: rows.length,
         beeTaxa: sorted.map(row => fluid.stringTemplate(rowTemplate, row)).join("\n"),
         footer
@@ -883,120 +895,7 @@ hortis.sexFilter.doFilter = function (obsRows, filterState) {
     return togo;
 };
 
-fluid.defaults("hortis.repeatingRowFilter", {
-    markup: {
-        row: `
-        <div class="imerss-filter-row">
-            <div class="imerss-row-checkbox">%checkbox</div>
-            <div class="imerss-row-label">%rowLabel</div>
-        </div>
-        `
-    }
-});
 
-hortis.repeatingRowFilter.renderRow = function (template, rowLabel, rowId) {
-    return fluid.stringTemplate(template, {
-        rowLabel,
-        checkbox: hortis.rowCheckbox(rowId)
-    });
-};
-
-fluid.defaults("hortis.dataDrivenFilter", {
-    members: {
-        obsRows: "{hortis.filters}.obsRows"
-    }
-});
-
-fluid.defaults("hortis.regionFilter", {
-    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "hortis.repeatingRowFilter", "fluid.stringTemplateRenderingView"],
-    markup: {
-        container: `
-        <div class="imerss-region-filter">
-            <div class="imerss-filter-title">%filterName:</div>
-            <div class="imerss-filter-body imerss-region-filter-rows">%rows</div>
-        </div>
-        `
-    },
-    // fieldName
-    // filterName
-    members: {
-        values: "@expand:fluid.computed(hortis.regionFilter.computeValues, {that}.obsRows, {that}.options.fieldName)",
-        filterState: "@expand:signal({})",
-        renderModel: `@expand:fluid.computed(hortis.regionFilter.renderModel, {that}.values,
-            {that}.idToLabel, {that}.options.markup, {that}.options.filterName)`
-    },
-    invokers: {
-        idToLabel: "fluid.identity",
-        doFilter: "hortis.regionFilter.doFilter({that}.options.fieldName, {arguments}.0, {arguments}.1)",
-        reset: "hortis.regionFilter.reset({that})"
-    },
-    listeners: {
-        "onCreate.bindClick": "hortis.regionFilter.bindClick"
-    }
-});
-
-hortis.regionFilter.doFilter = function (fieldName, obsRows, filterState) {
-    const none = Object.keys(filterState).length === 0;
-
-    return none ? obsRows : obsRows.filter(row => filterState[row[fieldName]]);
-};
-
-hortis.regionFilter.reset = function (that) {
-    that.filterState.value = {};
-    // TODO: preactish rendering with signals
-    hortis.resetChecks(that.container[0]);
-};
-
-// cf. hortis.checklist.bindCheckboxClick
-hortis.regionFilter.bindClick = function (that) {
-    that.container.on("click", ".pretty input", function () {
-        const id = this.dataset.rowId;
-        fluid.log("Filter clicked with row " + id);
-        const filterState = {...that.filterState.value};
-        if (this.checked) {
-            filterState[id] = true;
-        } else {
-            delete filterState[id];
-        }
-        that.filterState.value = filterState;
-    });
-};
-
-
-fluid.defaults("hortis.regionFilter.withLookup", {
-    // idField,
-    // nameField
-    members: {
-        indirection: "@expand:signal([])"
-    },
-    invokers: {
-        lookupId: "hortis.regionFilter.withLookup.lookupId({that}, {arguments}.0)",
-        idToLabel: "{that}.lookupId({arguments}.0)"
-    }
-});
-
-hortis.regionFilter.withLookup.lookupId = function (that, id) {
-    const rows = that.indirection.value;
-    return rows.find(row => row[that.options.idField] === id)?.[that.options.nameField];
-};
-
-hortis.regionFilter.computeValues = function (obsRows, fieldName) {
-    const values = {};
-    obsRows.forEach(row => {
-        const value = row[fieldName];
-        if (value !== undefined && value !== "") {
-            values[value] = true;
-        }
-    });
-    return Object.keys(values);
-};
-
-hortis.regionFilter.renderModel = function (values, idToLabel, markup, filterName) {
-    return {
-        filterName,
-        rows: values.map(value => hortis.repeatingRowFilter.renderRow(markup.row, idToLabel(value), value)).join("\n")
-    };
-};
 
 fluid.defaults("hortis.phenologyFilter", {
     gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.stringTemplateRenderingView"],
@@ -1239,6 +1138,7 @@ fluid.defaults("hortis.bbeaFilters", {
         phenologyFilter: ".imerss-phenology-filter"
     },
     components: {
+        filterRoot: "{vizLoader}",
         sexFilter: {
             type: "hortis.sexFilter",
             container: "{that}.dom.sexFilter"

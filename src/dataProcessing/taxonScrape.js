@@ -2,13 +2,16 @@
 
 "use strict";
 
-var fluid = require("infusion");
-var fs = require("fs");
+const fluid = require("infusion");
+const fs = require("fs");
 
-var hortis = fluid.registerNamespace("hortis");
+const hortis = fluid.registerNamespace("hortis");
+
+// Ancient utility used in the obsoleted inattify.js and wormify.js from the days we wrote taxon docs to the filesystem
+// rather than putting them in SQLite
 
 hortis.writeTaxonDoc = function (filename, doc) {
-    var formatted = JSON.stringify(doc, null, 4);
+    const formatted = JSON.stringify(doc, null, 4);
     fs.writeFileSync(filename, formatted);
     console.log("Written " + formatted.length + " bytes to " + filename);
 };

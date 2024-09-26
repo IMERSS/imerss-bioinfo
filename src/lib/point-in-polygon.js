@@ -2,7 +2,7 @@
 
 "use strict";
 
-var fluid = require("infusion");
+var fluid = fluid || require("infusion");
 
 var hortis = fluid.registerNamespace("hortis");
 

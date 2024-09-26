@@ -16,6 +16,7 @@ require("./dataProcessing/writeCSV.js");
 require("./dataProcessing/summarise.js");
 require("./dataProcessing/coordinatePatch.js");
 require("./geom/geoJSON.js");
+require("./dataProcessing/featureFilters.js");
 require("./utils/utils.js");
 require("./utils/settleStructure.js");
 require("./iNaturalist/taxonAPI.js");

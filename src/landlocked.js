@@ -14,6 +14,7 @@ require("./dataProcessing/readCSVwithoutMap.js");
 require("./dataProcessing/writeCSV.js");
 require("./lib/point-in-polygon.js");
 require("./geom/geoJSON.js");
+require("./dataProcessing/featureFilters.js");
 
 var hortis = fluid.registerNamespace("hortis");
 

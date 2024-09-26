@@ -2,9 +2,11 @@
 
 "use strict";
 
-const fluid = require("infusion");
+// noinspection ES6ConvertVarToLetConst
+var fluid = fluid || require("infusion");
 
-const hortis = fluid.registerNamespace("hortis");
+// noinspection ES6ConvertVarToLetConst
+var hortis = fluid.registerNamespace("hortis");
 
 hortis.capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

@@ -281,13 +281,16 @@ fluid.defaults("hortis.checklist.withCopy", {
             container: "{that}.dom.copyButton",
             options: {
                 gradeNames: "hortis.withTooltip",
-                tooltipKey: "hovered",
+                tooltipKey: "tooltipKey",
                 members: {
-                    hovered: "@expand:signal(null)"
+                    hovered: "@expand:signal(null)",
+                    inCopy: "@expand:signal(null)",
+                    tooltipKey: "@expand:fluid.computed(hortis.checklist.withCopy.deriveTooltipKey, {that}.hovered, {that}.inCopy)",
+                    inCopyEffect: "@expand:fluid.effect(hortis.checklist.withCopy.inCopyEffect, {that}.container.0, {that}.inCopy)"
                 },
                 invokers: {
-                    renderTooltip: "hortis.checklist.withCopy.renderTooltip({hortis.checklist})",
-                    copyToClipboard: "hortis.checklist.withCopy.copyToClipboard({hortis.checklist})"
+                    renderTooltip: "hortis.checklist.withCopy.renderTooltip({copyButton}, {hortis.checklist})",
+                    copyToClipboard: "hortis.checklist.withCopy.copyToClipboard({copyButton},{hortis.checklist})"
                 },
                 listeners: {
                     "onCreate.bindHover": "hortis.checklist.withCopy.bindHover"
@@ -308,17 +311,39 @@ hortis.checklist.withCopy.bindHover = function (that) {
     that.container.on("click", that.copyToClipboard);
 };
 
-hortis.checklist.withCopy.renderTooltip = function (checklist) {
-    const leaves = checklist.allLeaves.value;
-    const limit = 5;
-    const truncate = leaves.length > limit;
-    const message = fluid.stringTemplate(checklist.options.copyButtonMessage, {
-        rows: leaves.length
-    }) + ":\n" + (truncate ? [...leaves.slice(0, limit), "..."].join("\n") : leaves.join("\n"));
-    return message.replaceAll("\n", "<br/>");
+hortis.checklist.withCopy.deriveTooltipKey = function (hovered, inCopy) {
+    return inCopy ? "inCopy" : hovered;
 };
 
-hortis.checklist.withCopy.copyToClipboard = function (checklist) {
+hortis.checklist.withCopy.inCopyEffect = function (container, inCopy) {
+    const node = container.querySelector("use");
+    if (inCopy) {
+        node.setAttribute("href", "#copy-check");
+        container.classList.add("imerss-copy-checklist-copied");
+    } else {
+        node.setAttribute("href", "#copy-clipboard");
+        container.classList.remove("imerss-copy-checklist-copied");
+    }
+};
+
+hortis.checklist.withCopy.renderTooltip = function (copyButton, checklist) {
+    if (copyButton.inCopy.value) {
+        return "Copied!";
+    } else {
+        const leaves = checklist.allLeaves.value;
+        const limit = 5;
+        const truncate = leaves.length > limit;
+        const message = fluid.stringTemplate(checklist.options.copyButtonMessage, {
+            rows: leaves.length
+        }) + ":\n" + (truncate ? [...leaves.slice(0, limit), "..."].join("\n") : leaves.join("\n"));
+        return message.replaceAll("\n", "<br/>");
+    }
+};
+
+hortis.checklist.withCopy.copyToClipboard = function (copyButton, checklist) {
+    copyButton.inCopy.value = true;
+    window.setTimeout(() => copyButton.inCopy.value = null, 2000);
+
     const leaves = checklist.allLeaves.value.join("\n");
     navigator.clipboard.writeText(leaves).then(function () {
         console.log("Copying to clipboard was successful!");

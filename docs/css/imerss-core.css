@@ -72,6 +72,29 @@
     align-items: center;
 }
 
+/* Styling for polygon draw */
+
+/* Notion from https://stackoverflow.com/questions/6312067/border-radius-background-color-cropped-border */
+.maplibregl-ctrl-group {
+    overflow: hidden;
+}
+
+.mapbox-gl-draw_ctrl-draw-btn:hover {
+    background-color: #eee;
+}
+
+.mapbox-gl-draw_ctrl-draw-btn.active {
+    background-color: #ccc;
+}
+
+.mapbox-gl-draw_ctrl-draw-btn.active:hover {
+    background-color: #ddd;
+}
+
+.mode-draw_polygon .maplibregl-canvas-container.maplibregl-interactive {
+    cursor: crosshair;
+}
+
 /* Styling for checkboxes with indeterminate value */
 /* Grabbed definition for default "checked" to apply to indeterminate checkboxes */
 .pretty input[indeterminate="true"]~.state label:after {
@@ -386,6 +409,10 @@
     border-radius: 6px;
     position: relative;
     top: 3px;
+}
+
+.imerss-copy-checklist-copied {
+    fill: #1a7f37;
 }
 
 .imerss-copy-checklist svg {
