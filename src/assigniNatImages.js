@@ -4,6 +4,7 @@
 
 const fluid = require("infusion");
 const minimist = require("minimist");
+const axios = require("axios");
 fluid.require("%imerss-bioinfo");
 
 require("./dataProcessing/readCSV.js");
@@ -36,6 +37,10 @@ const outputFile = parsedArgs.o || hortis.assignedFromInput(inputFile);
 
 const source = hortis.iNatTaxonSource();
 
+const uncachedSource = hortis.iNatTaxonSource({
+    disableCache: true
+});
+
 hortis.lowRanks = ["kingdom", "phylum", "subphylum", "superclass", "class", "subclass", "superorder", "order",
     "suborder", "infraorder", "superfamily", "family", "subfamily", "tribe", "genus", "species", "subspecies"];
 
@@ -64,17 +69,48 @@ hortis.applyName = async function (row) {
     const query = hortis.queryFromReintegrated(row);
 
     const looked = await source.get(query);
-    //    console.log("Got document ", looked);
-    if (looked && looked.doc) {
+
+    const applyLooked = async function (looked, uncached) {
         row["Name Status"] = looked.doc.nameStatus;
         row["Referred iNaturalist Id"] = looked.doc.id;
         row["Referred iNaturalist Name"] = looked.doc.name;
-        const lookedId = await source.get({id: looked.doc.id});
+        const lookedId = await (uncached ? uncachedSource : source).get({id: looked.doc.id});
         row.iNaturalistTaxonImage = lookedId?.doc.default_photo?.medium_url;
         row.wikipediaSummary = lookedId?.doc.wikipedia_summary;
         if (row.commonName === "") {
             row.commonName = lookedId?.doc.preferred_common_name;
         }
+    };
+
+    const checkImage = async function (row) {
+        let ok = false;
+        try {
+            const res = await axios.get(row.iNaturalistTaxonImage);
+            if (res.status === 200) {
+                ok = true;
+            }
+        } catch (err) {
+        }
+        return ok;
+    };
+
+    //    console.log("Got document ", looked);
+    if (looked && looked.doc) {
+        await applyLooked(looked);
+
+        if (row.iNaturalistTaxonImage) {
+            const ok = await checkImage(row);
+            if (!ok) {
+                console.log("***** Error fetching image ", row.iNaturalistTaxonImage, " for taxon ", looked.doc.name);
+                const looked2 = await uncachedSource.get(query);
+                await applyLooked(looked2, true);
+                const ok2 = await checkImage(row);
+                if (!ok2) {
+                    console.log("*!*!*!*! Error refetching image ", row.iNaturalistTaxonImage, " for taxon ", looked.doc.name);
+                }
+            }
+        }
+
     } else {
         row["Name Status"] = "unknown";
     }
