@@ -75,12 +75,15 @@ const buildIndex = {
     ],
     // Full source for environments with strong focus on biodiversity info
     newSource: [
-        "src/client/css/mapbox-gl-draw.css",
+        "node_modules/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js",
+        "src/client/css/mapbox-gl-draw.css", // has our own overrides
+        "node_modules/papaparse/papaparse.min.js",
         "node_modules/pretty-checkbox/dist/pretty-checkbox.min.css",
         "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js",
         "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css",
         "src/lib/jquery-ui-widgets-tabs.js",
         "src/lib/point-in-polygon.js",
+        "src/geom/geoJSON.js",
         "src/utils/utils.js",
         "src/client/js/new/filters.js",
         "src/client/js/new/polygon-draw.js",
