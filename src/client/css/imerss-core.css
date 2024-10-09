@@ -102,17 +102,18 @@
     transform: scale(.6);
 }
 
-.pretty .state label:after, .pretty .state label:before {
+/* Need to beat builtin definitions even though we are included earlier */
+.pretty.pretty .state label:after, .pretty.pretty .state label:before {
     width: calc(1em + 0px);
     height: calc(1em + 0px);
 }
 
-.pretty.p-icon .state .icon {
+.pretty.pretty.p-icon .state .icon {
     width: calc(1em + 0px);
     height: calc(1em + 0px);
 }
 
-.pretty {
+.pretty.pretty {
     margin-right: 0.3em;
     /* Cancel the wrapping behaviour at higher checklist level */
     text-indent: 0;

@@ -7,7 +7,7 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
-/* global Papa, maplibregl, MapboxDraw, preactSignalsCore */
+/* global Papa, maplibregl, preactSignalsCore */
 
 "use strict";
 
@@ -500,96 +500,83 @@ fluid.defaults("hortis.libreMap", {
         }
     },
     members: {
-        map: "@expand:hortis.libreMap.make({that}.container.0, {that}.options.mapOptions, {that}.mapLoaded)",
+        map: "@expand:hortis.libreMap.make({that}.container.0, {that}.options.mapOptions, {that}.options.zoomDuration, {that}.mapLoaded)",
         mapLoaded: "@expand:signal()"
     }
 
 });
 
-hortis.libreMap.make = function (container, mapOptions, mapLoaded) {
-    const togo = new maplibregl.Map({container, ...mapOptions});
-    togo.on("load", function () {
+
+const initNavigationControl = function (options) {
+    this.options = options;
+    this._container = fluid.h("div", {class: "maplibregl-ctrl maplibregl-ctrl-group"});
+    this._zoomInButton = this._createButton("maplibregl-ctrl-zoom-in", (e) =>
+        this._map.zoomIn({
+            duration: options.zoomDuration,
+            essential: true
+        }, {originalEvent: e})
+    );
+    this._zoomInButton.appendChild(fluid.h("span", {
+        class: "maplibregl-ctrl-icon",
+        "aria-hidden": true
+    }));
+    this._zoomOutButton = this._createButton("maplibregl-ctrl-zoom-out", (e) =>
+        this._map.zoomOut({
+            duration: options.zoomDuration,
+            essential: true
+        }, {originalEvent: e})
+    );
+    this._zoomOutButton.appendChild(fluid.h("span", {
+        class: "maplibregl-ctrl-icon",
+        "aria-hidden": true
+    }));
+    // These two methods need to be copied in because bizarrely the ES6 class -> prototype mangling process sticks these
+    // into the constructor - perhaps this is part of TS
+    this._updateZoomButtons = () => {
+        const zoom = this._map.getZoom();
+        const isMax = zoom === this._map.getMaxZoom();
+        const isMin = zoom === this._map.getMinZoom();
+        this._zoomInButton.disabled = isMax;
+        this._zoomOutButton.disabled = isMin;
+        this._zoomInButton.setAttribute("aria-disabled", isMax.toString());
+        this._zoomOutButton.setAttribute("aria-disabled", isMin.toString());
+    };
+    this._setButtonTitle = (button, title) => {
+        const str = this._map._getUIString(`NavigationControl.${title}`);
+        button.title = str;
+        button.setAttribute("aria-label", str);
+    };
+};
+
+const makeNavigationControl = function (options) {
+    const inst = Object.create(maplibregl.NavigationControl.prototype);
+    initNavigationControl.bind(inst)(options);
+    return inst;
+};
+
+
+hortis.libreMap.zoomControls = function (map, zoomDuration) {
+    map.addControl(makeNavigationControl({showCompass: false, showZoom: true, zoomDuration}));
+    // disable map rotation using right click + drag
+    map.dragRotate.disable();
+    // disable map rotation using touch rotation gesture
+    map.touchZoomRotate.disableRotation();
+};
+
+hortis.libreMap.make = function (container, mapOptions, zoomDuration, mapLoaded) {
+    const map = new maplibregl.Map({container, ...mapOptions});
+    map.on("load", function () {
         console.log("Map loaded");
         mapLoaded.value = 1;
     });
-    return togo;
+    hortis.libreMap.zoomControls(map, zoomDuration);
+    return map;
 };
 
 fluid.defaults("hortis.libreMap.withTiles", {
     // TODO: Syntax for throwing away arguments
     addTiles: "@expand:fluid.effect(hortis.libreMap.addTileLayers, {that}.map, {that}.options.tileSets, {that}.mapLoaded)"
 });
-
-// Attested in demos and in https://github.com/maplibre/maplibre-gl-js/issues/2601
-MapboxDraw.constants.classes.CONTROL_BASE  = "maplibregl-ctrl";
-MapboxDraw.constants.classes.CONTROL_PREFIX = "maplibregl-ctrl-";
-MapboxDraw.constants.classes.CONTROL_GROUP = "maplibregl-ctrl-group";
-
-fluid.defaults("hortis.libreMap.withPolygonDraw", {
-    components: {
-        polygonDraw: {
-            type: "hortis.libreMap.polygonFilter"
-        }
-    }
-});
-
-// Currently combine draw UI and filter, could break apart
-fluid.defaults("hortis.libreMap.polygonFilter", {
-    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.component"],
-    mapboxDrawOptions: {
-        displayControlsDefault: false,
-        controls: {
-            polygon: true,
-            trash: true
-        }
-    },
-    invokers: {
-        updateArea: "hortis.libreMap.polygonFilter.updateArea({that})",
-        doFilter: "hortis.libreMap.polygonFilter.doFilter({arguments}.0, {arguments}.1)",
-        reset: "hortis.libreMap.polygonFilter.reset({that})"
-    },
-    members: {
-        // filterState holds "features" array from GeoJSON FeatureCollection
-        // Right now just initialises "point" member on each row but could intern and cache in future
-        pointCache: "@expand:fluid.effect(hortis.libreMap.polygonFilter.pointCache, {that}.obsRows)",
-        filterState: "@expand:signal([])",
-        drawMode: "@expand:signal(null)",
-        mapboxDraw: "@expand:hortis.libreMap.makeMapboxDraw({hortis.libreMap}.map, {that}.options.mapboxDrawOptions, {that}.updateArea, {that}.drawMode)"
-    }
-});
-
-hortis.libreMap.polygonFilter.pointCache = function (obsRows) {
-    // Taken from landlocked.js which seems to be only historical site feeding into point-in-polygon.js
-    obsRows.forEach(row => row.point = [hortis.parseFloat(row.decimalLongitude), hortis.parseFloat(row.decimalLatitude)]);
-};
-
-hortis.libreMap.polygonFilter.doFilter = function (obsRows, filterState) {
-    const none = filterState.length === 0;
-
-    return none ? obsRows : obsRows.filter(row => hortis.intersectsAnyFeature(filterState, row));
-};
-
-hortis.libreMap.polygonFilter.reset = function (that) {
-    that.mapboxDraw.deleteAll();
-    that.filterState.value = [];
-};
-
-hortis.libreMap.polygonFilter.updateArea = function (that) {
-    that.filterState.value = that.mapboxDraw.getAll().features;
-};
-
-hortis.libreMap.makeMapboxDraw = function (map, mapboxDrawOptions, updateArea, drawMode) {
-    const draw = new MapboxDraw(mapboxDrawOptions);
-    map.addControl(draw);
-    map.on("draw.create", updateArea);
-    map.on("draw.delete", updateArea);
-    map.on("draw.update", updateArea);
-    map.on("draw.modechange", mode => {
-        console.log("New mode ", mode);
-        drawMode.value = mode;
-    });
-    return draw;
-};
 
 fluid.defaults("hortis.libreMap.streetmapTiles", {
     tileSets: {
@@ -608,7 +595,7 @@ fluid.defaults("hortis.libreMap.usEcoL3Tiles", {
             tileSize: 512,
             maxzoom: 8,
             paint: {
-                "raster-opacity": 0.5
+                "raster-opacity": 0.3
             }
         }
     }
@@ -653,7 +640,7 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
     gradeNames: ["hortis.withTooltip"],
     tooltipKey: "hoverCell",
     fillStops: hortis.libreMap.viridisStops,
-    fillOpacity: 0.7,
+    fillOpacity: 0.5,
     outlineColour: "black",
     legendStops: 5,
     members: {

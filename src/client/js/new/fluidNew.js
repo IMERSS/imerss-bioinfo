@@ -114,6 +114,16 @@ fluid.renderStringTemplate = function (markup, renderModelSignal) {
     return renderModel === undefined ? markup.fallbackContainer : fluid.stringTemplate(markup.container, renderModel);
 };
 
+// Taken from reknit.js
+fluid.makeCreateElement = function (dokkument) {
+    return (tagName, props) => {
+        const element = dokkument.createElement(tagName);
+        Object.entries(props).forEach(([key, value]) => element.setAttribute(key, value));
+        return element;
+    };
+};
+
+fluid.h = fluid.makeCreateElement(document);
 
 fluid.defaults("fluid.stringTemplateRenderingView", {
     gradeNames: "fluid.containerRenderingView",

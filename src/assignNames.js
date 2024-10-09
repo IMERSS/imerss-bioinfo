@@ -29,7 +29,7 @@ const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/d
 const reader = hortis.csvReaderWithoutMap({
     inputFile: inputFile,
     csvOptions: {
-        separator: "\t" // TODO: remember to put this back for real GBIF
+        //separator: "\t" // TODO: remember to put this back for real GBIF
     }
 });
 
@@ -136,16 +136,20 @@ hortis.obsIdFromSummaryRow2023 = function (row) {
     const obsLink = row["iNaturalist.Link"];
     if (obsLink) {
         const slashPos = obsLink.lastIndexOf("/");
-        const obsId = obsLink.substring(slashPos + 1);
-        return obsId;
+        if (slashPos !== -1) {
+            return obsLink.substring(slashPos + 1);
+        } else {
+            const colPos = obsLink.lastIndexOf(":");
+            return obsLink.substring(colPos + 1);
+        }
     }
 };
 
 // One-off script to update taxonomies and iNaturalist ids from files produced in Andrew's 2022 run of Galiano data
 
 hortis.applyName = async function (row) {
-    //const query = hortis.queryFromSummaryRow2023(row);
-    const query = hortis.queryFromGBIFRow(row);
+    const query = hortis.queryFromSummaryRow2023(row);
+    //const query = hortis.queryFromGBIFRow(row);
     //const query = hortis.queryFromCPNWHRow(row);
     //const query = hortis.queryFromLichenNRow(row);
     //const query = hortis.queryFromDwcaRow(row);

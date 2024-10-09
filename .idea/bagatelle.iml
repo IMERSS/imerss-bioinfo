@@ -42,5 +42,6 @@
     <orderEntry type="module" module-name="preact-signals" />
     <orderEntry type="module" module-name="infusion-6" />
     <orderEntry type="module" module-name="bc-bryo-atlas" />
+    <orderEntry type="module" module-name="bc-bryo-atlas" />
   </component>
 </module>

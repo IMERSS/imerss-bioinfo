@@ -749,7 +749,7 @@ fluid.defaults("hortis.bbeaObsQuantiser", {
 hortis.bbeaGridTooltipTemplate =
 `<div class="imerss-tooltip imerss-bbea-grid-tooltip">
     <div><b>Observations:</b> %obsCount</div>
-    <div class="text"><b>Bees species:</b> %beeCount<div>%beeTaxa</div></div>
+    <div class="text"><b>Bees:</b> %beeCount<div>%beeTaxa</div></div>
     %footer
 </div>`;
 

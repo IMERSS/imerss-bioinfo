@@ -15,11 +15,9 @@ const buildIndex = {
         "node_modules/infusion/src/lib/jquery/ui/css/default-theme/tooltip.css",
         "node_modules/infusion/src/lib/jquery/ui/css/default-theme/theme.css",
         "node_modules/jquery-ui/themes/base/tabs.css",
-        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css",
-        "src/client/css/maplibre-gl.css",
-        "src/client/css/mapbox-gl-draw.css",
-        "node_modules/pretty-checkbox/dist/pretty-checkbox.min.css",
         //        "node_modules/infusion/src/lib/jquery/core/js/jquery.js",
+        "src/client/css/imerss-core.css",
+        "src/lib/signals-core.min.js",
         "node_modules/infusion/src/lib/jquery/ui/js/version.js",
         "node_modules/infusion/src/lib/jquery/ui/js/keycode.js",
         "node_modules/jquery-ui/ui/safe-active-element.js",
@@ -44,20 +42,18 @@ const buildIndex = {
         "node_modules/infusion/src/framework/core/js/DataSource.js",
         "node_modules/infusion/src/framework/core/js/ResourceLoader.js",
         "node_modules/infusion/src/framework/core/js/ResourceLoader-browser.js",
-        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js",
-        "node_modules/maplibre-gl/dist/maplibre-gl-dev.js"
+        "src/client/js/new/fluidNew.js",
+        "src/client/js/colour.js"
     ],
-
-    localSource: [
-        "src/client/css/imerss-core.css",
+    oldSource: [
         "src/client/css/imerss-viz.css",
+        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js",
+        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css",
         "src/auxBuild/restoreJQuery.js",
         "src/lib/jquery-ui-widgets-tabs.js",
         "src/lib/lz4.js",
-        "src/lib/signals-core.min.js",
         "src/client/js/imerss-viz.js",
         "src/client/js/autocomplete.js",
-        "src/client/js/colour.js",
         "src/client/js/leafletMap.js",
         "src/client/js/datasetControls.js",
         "src/client/js/leafletMapWithGrid.js",
@@ -68,20 +64,28 @@ const buildIndex = {
         "src/client/js/checklist.js",
         "src/client/js/xetthecum.js"
     ],
+    // Source for simplified environments such as Xetthecum without features like tabs, polygon drawing, etc.
+    newCoreSource: [
+        "node_modules/papaparse/papaparse.min.js",
+        "src/client/css/maplibre-gl.css",
+        "node_modules/maplibre-gl/dist/maplibre-gl-dev.js",
+        "src/client/js/new/taxonDisplay.js",
+        "src/client/js/new/imerss-new.js",
+        "src/client/js/new/newChecklist.js"
+    ],
+    // Full source for environments with strong focus on biodiversity info
     newSource: [
-        "src/lib/signals-core.min.js",
+        "src/client/css/mapbox-gl-draw.css",
+        "node_modules/pretty-checkbox/dist/pretty-checkbox.min.css",
+        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js",
+        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css",
         "src/lib/jquery-ui-widgets-tabs.js",
         "src/lib/point-in-polygon.js",
         "src/utils/utils.js",
-        "src/client/js/colour.js",
-        "src/client/js/renderSVG.js",
-        "src/client/js/new/fluidNew.js",
-        "src/client/js/new/imerss-new.js",
         "src/client/js/new/filters.js",
+        "src/client/js/new/polygon-draw.js",
         "src/client/js/autocomplete.js",
-        "src/client/js/tabs.js",
-        "src/client/js/new/newChecklist.js",
-        "src/client/js/new/taxonDisplay.js"
+        "src/client/js/tabs.js"
     ],
     codeHeader: "",
     codeFooter: "", // "\njQuery.noConflict()",
@@ -225,40 +229,55 @@ const minify = async function (hash, filename) {
 };
 
 const buildFromFiles = async function (buildIndex) {
-    const allFiles = buildIndex.libSource.concat(buildIndex.localSource);
-    console.log("allFiles ", allFiles);
+    const allOldFiles = buildIndex.libSource.concat(buildIndex.oldSource);
+    console.log("allOldFiles ", allOldFiles);
 
-    const jsHash = filesToContentHash(allFiles, ".js");
-    const fullJsHash = fluid.extend({header: buildIndex.codeHeader}, jsHash, {footer: buildIndex.codeFooter});
-    const minifiedAll = await minify(fullJsHash, "imerss-viz-all.js");
+    const oldJsHash = filesToContentHash(allOldFiles, ".js");
+    const allOldJsHash = fluid.extend({header: buildIndex.codeHeader}, oldJsHash, {footer: buildIndex.codeFooter});
+    const minifiedAllOld = await minify(allOldJsHash, "imerss-viz-all.js");
 
     // imerss-viz-lib.js contains just upstream libraries we depend on, to support reasonably easy deploy of "new" framework
     const libJsHash = filesToContentHash(buildIndex.libSource, ".js");
     console.log("libFiles ", buildIndex.libSource);
     const minifiedLib = await minify(libJsHash, "imerss-viz-lib.js");
 
+    const newCoreJsHash = filesToContentHash(buildIndex.newCoreSource, ".js");
+    console.log("newCoreFiles ", buildIndex.newCoreSource);
+    const newCoreJs = await minify(newCoreJsHash, "imerss-viz-new-core.js");
+
     const newJsHash = filesToContentHash(buildIndex.newSource, ".js");
     console.log("newFiles ", buildIndex.newSource);
-    const newLib = await minify(newJsHash, "imerss-viz-new.js");
+    const newJs = await minify(newJsHash, "imerss-viz-new.js");
 
     fs.removeSync("docs");
     fs.ensureDirSync("docs/js");
-    fs.writeFileSync("docs/js/imerss-viz-all.js", minifiedAll.code, "utf8");
-    fs.writeFileSync("docs/js/imerss-viz-all.js.map", minifiedAll.map);
+    fs.writeFileSync("docs/js/imerss-viz-all.js", minifiedAllOld.code, "utf8");
+    fs.writeFileSync("docs/js/imerss-viz-all.js.map", minifiedAllOld.map);
     fs.writeFileSync("docs/js/imerss-viz-lib.js", minifiedLib.code, "utf8");
     fs.writeFileSync("docs/js/imerss-viz-lib.js.map", minifiedLib.map);
-    fs.writeFileSync("docs/js/imerss-viz-new.js", newLib.code, "utf8");
-    fs.writeFileSync("docs/js/imerss-viz-new.js.map", newLib.map);
+    fs.writeFileSync("docs/js/imerss-viz-new-core.js", newCoreJs.code, "utf8");
+    fs.writeFileSync("docs/js/imerss-viz-new-core.js.map", newCoreJs.map);
+    fs.writeFileSync("docs/js/imerss-viz-new.js", newJs.code, "utf8");
+    fs.writeFileSync("docs/js/imerss-viz-new.js.map", newJs.map);
 
-    const cssHash = filesToContentHash(allFiles, ".css");
-    const cssConcat = String.prototype.concat.apply("", Object.values(cssHash));
+    const allOldCssHash = filesToContentHash(allOldFiles, ".css");
+    const allOldCssConcat = String.prototype.concat.apply("", Object.values(allOldCssHash));
 
     const cssLibHash = filesToContentHash(buildIndex.libSource, ".css");
     const cssLibConcat = String.prototype.concat.apply("", Object.values(cssLibHash));
 
+    const cssNewCoreHash = filesToContentHash(buildIndex.newCoreSource, ".css");
+    const cssNewCoreConcat = String.prototype.concat.apply("", Object.values(cssNewCoreHash));
+
+    const cssNewHash = filesToContentHash(buildIndex.newSource, ".css");
+    const cssNewConcat = String.prototype.concat.apply("", Object.values(cssNewHash));
+
     fs.ensureDirSync("docs/css");
-    fs.writeFileSync("docs/css/imerss-viz-all.css", cssConcat);
+    fs.writeFileSync("docs/css/imerss-viz-all.css", allOldCssConcat);
     fs.writeFileSync("docs/css/imerss-viz-lib.css", cssLibConcat);
+    fs.writeFileSync("docs/css/imerss-viz-new-core.css", cssNewCoreConcat);
+    fs.writeFileSync("docs/css/imerss-viz-new.css", cssNewConcat);
+
     buildIndex.copy.forEach(function (oneCopy) {
         copyDep(oneCopy.src, oneCopy.dest);
     });
