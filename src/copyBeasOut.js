@@ -13,7 +13,7 @@ const config = {
     copyJobs: [
         {
             source: "%imerss-bioinfo/docs/indexBeasOBA.html",
-            target: "%b-team/docs/index.html"
+            target: "%b-team/docs/viz.html"
         },
         "%imerss-bioinfo/docs/js/vizjs.js",
         "%imerss-bioinfo/docs/js/bipartitePP.js",

@@ -556,7 +556,7 @@ const makeNavigationControl = function (options) {
 
 
 hortis.libreMap.zoomControls = function (map, zoomDuration) {
-    map.addControl(makeNavigationControl({showCompass: false, showZoom: true, zoomDuration}));
+    map.addControl(makeNavigationControl({showCompass: false, showZoom: true, zoomDuration}), "top-left");
     // disable map rotation using right click + drag
     map.dragRotate.disable();
     // disable map rotation using touch rotation gesture

@@ -71,7 +71,7 @@ hortis.libreMap.polygonFilter.updateArea = function (that) {
 
 hortis.libreMap.makeMapboxDraw = function (map, mapboxDrawOptions, updateArea, drawMode) {
     const draw = new MapboxDraw(mapboxDrawOptions);
-    map.addControl(draw);
+    map.addControl(draw, "top-left");
     map.on("draw.create", updateArea);
     map.on("draw.delete", updateArea);
     map.on("draw.update", updateArea);
