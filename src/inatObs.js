@@ -128,6 +128,14 @@ hortis.iNatProjects = {
         },
         outputFile: "data/dataPaper-II/Galiano_Catalogue_Diatoms_%Date.csv"
     },
+    HoweSoundVascular: {
+        paramMap: {
+            place_id: 137739, // Howe Sound Proposed Biosphere Reserve
+            taxon_id: 211194, // Tracheophyta
+            quality_grade: ""
+        },
+        outputFile: "data/Howe Sound/iNaturalist_Tracheophyta_Catalogue_%Date.csv"
+    }
 };
 
 const parsedArgs = minimist(process.argv.slice(2));
