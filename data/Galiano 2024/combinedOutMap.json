@@ -57,7 +57,7 @@
     "datasets": {
         "iNat": {
             "name": "iNaturalist (2005-2021)",
-            "input": "E:/source/gits/bagatelle/data/Galiano 2024/Galiano_Union_Catalogue_2024_10_29.csv",
+            "input": "E:/source/gits/bagatelle/data/Galiano 2024/Galiano_Union_Catalogue_2024_11_04.csv",
             "map": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-map-new-cap.json",
             "outMap": "E:/source/gits/bagatelle/data/iNaturalist/iNaturalist-obs-out-map-cap.json",
             "colour": "#2C8C99",
