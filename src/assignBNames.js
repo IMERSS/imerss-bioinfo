@@ -159,7 +159,7 @@ hortis.storeTaxon = async function (allTaxa, taxonDoc, inSummary) {
         filtered.parentId = parentId;
         // Call out for the standard fields that the viz depends on
         hortis.iNat.addTaxonInfo(hortis.iNat.newRecordTransform, filtered, taxonDoc.doc);
-        // TODO: Should actualy be the curated summary name
+        // TODO: Should actually be the curated summary name
         // Need to accept summary file as input, right now we axe this and apply it later in the merge
         // filtered.taxonName = inSummary ? filtered.iNaturalistTaxonName : "";
         allTaxa[id] = filtered;

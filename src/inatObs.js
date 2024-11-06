@@ -135,6 +135,13 @@ hortis.iNatProjects = {
             quality_grade: ""
         },
         outputFile: "data/Howe Sound/iNaturalist_Tracheophyta_Catalogue_%Date.csv"
+    },
+    GalianoBioBlitz2023: {
+        paramMap: {
+            project_id: "galiano-bioblitz-2023",
+            quality_grade: ""
+        },
+        outputFile: "data/Galiano 2023 Bioblitz/iNaturalist_GalianoBioBlitz2023_Catalogue_%Date.csv"
     }
 };
 

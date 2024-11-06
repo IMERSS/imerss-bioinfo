@@ -85,7 +85,7 @@ hortis.resultToRow = async function (oneResult, byIdSource) {
     });
     hortis.applyLocation(oneResult, row, "");
     hortis.applyLocation(oneResult, row, "private_");
-    const phylumDoc = await byIdSource.get({id: oneResult.taxon.ancestor_ids[2]});
+    const phylumDoc = await byIdSource.get({id: oneResult.taxon?.ancestor_ids[2]});
     row.phylum = phylumDoc?.doc.name;
     row.time_observed_at = row.time_observed_at || row.observed_on;
     return row;

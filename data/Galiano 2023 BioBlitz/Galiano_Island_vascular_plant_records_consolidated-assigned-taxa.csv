@@ -1,0 +1,1311 @@
+id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
+48460,,Life,life,stateofmatter,https://inaturalist-open-data.s3.amazonaws.com/photos/347064198/medium.jpeg
+47126,48460,Plantae,plants,kingdom,https://static.inaturalist.org/photos/221143410/medium.jpeg
+211194,47126,Tracheophyta,vascular plants,phylum,https://inaturalist-open-data.s3.amazonaws.com/photos/78650848/medium.jpeg
+47125,211194,Angiospermae,flowering plants,subphylum,https://inaturalist-open-data.s3.amazonaws.com/photos/6943609/medium.jpg
+47623,211194,Lycopodiopsida,lycophytes,class,https://inaturalist-open-data.s3.amazonaws.com/photos/6124489/medium.jpeg
+121943,211194,Polypodiopsida,ferns,class,https://inaturalist-open-data.s3.amazonaws.com/photos/97935359/medium.jpeg
+136329,211194,Pinopsida,conifers,class,https://inaturalist-open-data.s3.amazonaws.com/photos/8663614/medium.jpg
+47124,47125,Magnoliopsida,dicots,class,https://static.inaturalist.org/photos/10307058/medium.jpg
+47163,47125,Liliopsida,monocots,class,https://inaturalist-open-data.s3.amazonaws.com/photos/274224/medium.jpg
+47375,136329,Pinales,conifers,order,https://inaturalist-open-data.s3.amazonaws.com/photos/170033792/medium.jpg
+47622,47623,Lycopodiales,clubmosses and firmosses,order,https://inaturalist-open-data.s3.amazonaws.com/photos/250128745/medium.jpg
+58769,47623,Selaginellales,spikemosses,order,https://inaturalist-open-data.s3.amazonaws.com/photos/1910623/medium.jpg
+47123,47124,Fabales,"legumes, milkworts, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/73034071/medium.jpg
+47132,47124,Rosales,"roses, elms, figs, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/11763754/medium.jpg
+47162,47163,Poales,"grasses, sedges, cattails, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/54589881/medium.jpg
+47181,47124,Ericales,"heathers, balsams, primroses, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/121441132/medium.jpeg
+47195,47124,Cornales,"dogwoods, hydrangeas, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/79182087/medium.jpg
+47218,47163,Asparagales,"agaves, orchids, irises, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/112879715/medium.jpg
+47329,47163,Liliales,"lilies, supplejacks, and allies",order,https://static.inaturalist.org/photos/33994968/medium.jpeg
+47363,47124,Gentianales,"gentians, dogbanes, madders, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/6232/medium.jpg
+47366,47124,Caryophyllales,"pinks, cactuses, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/74999656/medium.jpg
+47374,47375,Cupressaceae,cypress family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/164349061/medium.jpg
+47540,47124,Celastrales,staff-vines and allies,order,https://inaturalist-open-data.s3.amazonaws.com/photos/31231998/medium.jpg
+47556,47375,Taxaceae,yew family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/12117252/medium.jpeg
+47562,47375,Pinaceae,pine family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/275129245/medium.jpg
+47605,47124,Asterales,"sunflowers, bellflowers, fanflowers, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/13529909/medium.jpg
+47621,47622,Lycopodiaceae,Clubmosses and Firmosses,family,https://inaturalist-open-data.s3.amazonaws.com/photos/101326007/medium.jpg
+47690,47124,Geraniales,"geraniums, bridal wreaths, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/208209960/medium.jpeg
+47729,47124,Sapindales,"soapberries, cashews, mahoganies, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/54896742/medium.jpg
+47748,121943,Equisetales,horsetails,order,https://inaturalist-open-data.s3.amazonaws.com/photos/20163/medium.jpg
+47754,121943,Polypodiales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/76066835/medium.jpg
+47791,47124,Myrtales,"myrtles, evening primroses, and allies",order,https://static.inaturalist.org/photos/42561347/medium.jpeg
+47853,47124,Fagales,"beeches, oaks, walnuts, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/2305595/medium.JPG
+48073,47163,Alismatales,"Aroids, Water-Plantains, Seagrass, and allies",order,https://static.inaturalist.org/photos/107900/medium.jpg
+48151,47124,Lamiales,"mints, plantains, olives, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/31256836/medium.jpg
+48232,47124,Ranunculales,"buttercups, poppies, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/10459/medium.jpg
+48515,47124,Solanales,"nightshades, bindweeds, gooseweeds, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/50520559/medium.jpg
+48526,47124,Dipsacales,"honeysuckles, moschatels, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/5417/medium.jpg
+48700,47124,Apiales,"carrots, ivies, and allies",order,https://static.inaturalist.org/photos/39794882/medium.jpeg
+48796,47124,Malvales,"mallows, rock-roses, and allies",order,https://static.inaturalist.org/photos/3035871/medium.JPG
+49669,47124,Santalales,"sandalwoods, mistletoes, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/250082551/medium.jpg
+51120,47124,Nymphaeales,"Waterlilies, Fanworts, and Allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/3008652/medium.JPG
+51820,47124,Malpighiales,"nances, willows, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/57932018/medium.jpg
+55328,121943,Ophioglossales,adder's-tongues and allies,order,https://inaturalist-open-data.s3.amazonaws.com/photos/60642378/medium.jpg
+58770,58769,Selaginellaceae,spikemoss family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1910623/medium.jpg
+70233,47124,Oxalidales,"woodsorrels, quandongs, and allies",order,https://static.inaturalist.org/photos/36921206/medium.jpeg
+71272,47124,Aquifoliales,hollies and allies,order,https://inaturalist-open-data.s3.amazonaws.com/photos/236523238/medium.jpeg
+71275,47124,Brassicales,"mustards, capers, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/128540743/medium.jpg
+71289,47124,Saxifragales,"saxifrages, stonecrops, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/1539441/medium.jpg
+153070,47124,Ceratophyllales,Coontails,order,https://inaturalist-open-data.s3.amazonaws.com/photos/102917704/medium.jpeg
+523723,47124,Boraginales,borages,order,https://inaturalist-open-data.s3.amazonaws.com/photos/66417631/medium.jpeg
+47122,47123,Fabaceae,legumes,family,https://static.inaturalist.org/photos/73592940/medium.jpg
+47131,71289,Grossulariaceae,Gooseberry Family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/50463241/medium.jpg
+47148,47132,Rosaceae,rose family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/2066379/medium.JPG
+47151,48151,Scrophulariaceae,figwort family,family,https://static.inaturalist.org/photos/55578/medium.jpg
+47161,47162,Cyperaceae,sedges,family,https://inaturalist-open-data.s3.amazonaws.com/photos/297489762/medium.jpg
+47194,47195,Cornaceae,Dogwood family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/79182213/medium.jpg
+47204,71275,Brassicaceae,mustard family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/17880512/medium.jpg
+47217,47218,Orchidaceae,orchids,family,https://inaturalist-open-data.s3.amazonaws.com/photos/108347006/medium.jpeg
+47322,48151,Orobanchaceae,broomrape family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/218490138/medium.jpeg
+47328,47329,Liliaceae,lilies,family,https://inaturalist-open-data.s3.amazonaws.com/photos/4233595/medium.jpg
+47332,48232,Papaveraceae,poppy family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/178340187/medium.jpg
+47362,47363,Apocynaceae,dogbane family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/138510430/medium.jpeg
+47434,47162,Poaceae,grasses,family,https://inaturalist-open-data.s3.amazonaws.com/photos/103778669/medium.jpg
+47539,47540,Celastraceae,staff-vine family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/244246545/medium.jpg
+47555,47556,Taxus,yews,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/8502/medium.jpg
+47567,51820,Salicaceae,willow family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/79452056/medium.jpeg
+47599,47218,Asparagaceae,agave and allies,family,https://inaturalist-open-data.s3.amazonaws.com/photos/3721262/medium.JPG
+47604,47605,Asteraceae,"sunflowers, daisies, asters, and allies",family,https://inaturalist-open-data.s3.amazonaws.com/photos/72961012/medium.jpg
+47689,47690,Geraniaceae,Geranium family,family,https://static.inaturalist.org/photos/21874983/medium.jpeg
+47693,47363,Rubiaceae,madder family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/217150548/medium.jpeg
+47733,48151,Oleaceae,olive family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/7363/medium.jpg
+47747,47748,Equisetaceae,horsetail family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/50758026/medium.jpg
+47759,70233,Oxalidaceae,woodsorrel family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/95604542/medium.jpeg
+47781,47218,Iridaceae,irises and allies,family,https://inaturalist-open-data.s3.amazonaws.com/photos/939730/medium.jpg
+47790,47791,Onagraceae,evening primrose family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/16678238/medium.jpg
+47852,47853,Fagaceae,beech family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/9429093/medium.jpg
+47890,47181,Balsaminaceae,balsam family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/160080301/medium.jpg
+47903,47366,Cactaceae,cacti,family,https://inaturalist-open-data.s3.amazonaws.com/photos/13279984/medium.jpeg
+48040,47605,Campanulaceae,bellflower family,family,https://static.inaturalist.org/photos/20710337/medium.jpg
+48064,47181,Primulaceae,primroses,family,https://inaturalist-open-data.s3.amazonaws.com/photos/15229725/medium.jpeg
+48150,523723,Boraginaceae,borage family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/31342774/medium.jpg
+48231,48232,Ranunculaceae,buttercup family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/3063606/medium.jpg
+48382,47366,Polygonaceae,knotweed family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/6818849/medium.jpg
+48386,71289,Saxifragaceae,saxifrage family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/32017311/medium.jpeg
+48516,48515,Solanaceae,nightshade family,family,https://static.inaturalist.org/photos/4608305/medium.jpeg
+48527,48526,Caprifoliaceae,honeysuckle family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/29884886/medium.jpg
+48536,48073,Araceae,arum family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/5700/medium.jpg
+48567,47366,Caryophyllaceae,pink family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/50002751/medium.jpg
+48623,48151,Lamiaceae,mint family,family,https://static.inaturalist.org/photos/72305606/medium.jpg
+48694,47162,Typhaceae,"bulrushes, cattails, and allies",family,https://inaturalist-open-data.s3.amazonaws.com/photos/33177903/medium.jpeg
+48699,48700,Apiaceae,carrot family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/8872/medium.jpg
+48797,48796,Malvaceae,Mallow and Hibiscus Family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/7334/medium.jpg
+48874,47729,Anacardiaceae,cashew family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/56402931/medium.jpg
+48932,47181,Polemoniaceae,phlox family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1215798/medium.
+49041,47132,Rhamnaceae,buckthorn family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/80456202/medium.jpg
+49155,47853,Betulaceae,birch family,family,https://static.inaturalist.org/photos/8119202/medium.jpg
+49289,48232,Berberidaceae,barberry family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/14991/medium.jpg
+49464,47329,Melanthiaceae,bunchflowers,family,https://inaturalist-open-data.s3.amazonaws.com/photos/129437915/medium.jpg
+50313,48796,Thymelaeaceae,Stringbarks,family,https://inaturalist-open-data.s3.amazonaws.com/photos/11609675/medium.jpg
+50361,48073,Hydrocharitaceae,tape-grass family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/209371645/medium.jpg
+50638,48151,Plantaginaceae,plantain family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/11147978/medium.jpg
+50828,51820,Violaceae,violet family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/19508334/medium.jpeg
+51121,51120,Nymphaeaceae,Waterlily Family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/115591053/medium.jpeg
+51308,51820,Linaceae,Flax Family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/15494/medium.jpg
+51821,51820,Euphorbiaceae,spurge family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/10222510/medium.jpg
+51885,47132,Urticaceae,nettle family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/60191852/medium.jpeg
+51890,71289,Crassulaceae,stonecrop family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/26707624/medium.jpg
+51937,47366,Droseraceae,Sundew Family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/9788583/medium.jpg
+52327,47366,Amaranthaceae,amaranths,family,https://inaturalist-open-data.s3.amazonaws.com/photos/34572/medium.jpg
+52345,48515,Convolvulaceae,bindweed family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/73482456/medium.jpg
+52469,47195,Hydrangeaceae,hydrangea family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/154345374/medium.jpeg
+52615,48073,Zosteraceae,Seagrasses,family,https://inaturalist-open-data.s3.amazonaws.com/photos/170768896/medium.jpg
+52642,47162,Juncaceae,Rushes and Allies,family,https://inaturalist-open-data.s3.amazonaws.com/photos/306524062/medium.jpg
+52849,48700,Araliaceae,ivy family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/8874/medium.jpg
+53855,71272,Aquifoliaceae,holly family,family,https://static.inaturalist.org/photos/240827687/medium.jpg
+55329,55328,Ophioglossaceae,adder's-tongue family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/111297641/medium.jpg
+55849,47218,Amaryllidaceae,"amaryllis, onions, and allies",family,https://inaturalist-open-data.s3.amazonaws.com/photos/9537450/medium.jpeg
+56235,47363,Gentianaceae,gentian family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/200324833/medium.jpeg
+57860,48151,Lentibulariaceae,bladderwort family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/59790672/medium.jpg
+58321,47729,Sapindaceae,soapberry family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/27342760/medium.jpeg
+58771,58770,Selaginella,spikemosses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/20479/medium.jpg
+58935,47791,Lythraceae,lythrum family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/9787692/medium.jpg
+59109,48073,Potamogetonaceae,pondweed family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/102629371/medium.jpg
+59992,49669,Santalaceae,sandalwood family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/250082606/medium.jpg
+60205,71289,Haloragaceae,water milfoil family,family,https://static.inaturalist.org/photos/227196307/medium.jpg
+60266,48073,Juncaginaceae,Arrowgrass family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/14177/medium.jpg
+60478,47366,Plumbaginaceae,plumbago family,family,https://static.inaturalist.org/photos/3926141/medium.jpg
+60998,153070,Ceratophyllaceae,coontails,family,https://inaturalist-open-data.s3.amazonaws.com/photos/80184/medium.jpg
+62369,47605,Menyanthaceae,bogbean family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/6099661/medium.jpg
+64552,48151,Phrymaceae,lopseed family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/177471315/medium.jpg
+64695,47132,Elaeagnaceae,oleaster family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/20487/medium.jpg
+71412,51820,Hypericaceae,St. John's wort family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/23343255/medium.jpg
+71417,47366,Montiaceae,Pussypaw Family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/853/medium.jpg
+133387,47181,Ericaceae,heath family,family,https://static.inaturalist.org/photos/27053770/medium.jpg
+781703,48526,Viburnaceae,elder family,family,https://static.inaturalist.org/photos/2419980/medium.jpg
+47130,47131,Ribes,currants and gooseberries,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/117502191/medium.jpeg
+47193,47194,Cornus,dogwoods,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/37787988/medium.jpeg
+47561,47562,Pinus,pines,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/54643374/medium.jpeg
+47566,47567,Populus,"poplars, cottonwoods, and aspens",genus,https://inaturalist-open-data.s3.amazonaws.com/photos/16738351/medium.jpeg
+47574,47374,Juniperus,junipers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3521476/medium.jpg
+47620,47621,Lycopodium,ground and creeping clubmosses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/20805663/medium.jpg
+47688,47689,Erodium,stork's-bills,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/66772719/medium.jpeg
+47701,47689,Geranium,geraniums and cranesbills,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/49517684/medium.jpg
+47727,58321,Acer,maples,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/99147747/medium.jpg
+47746,47747,Equisetum,horsetails,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/67590226/medium.jpg
+47753,47754,Dryopteridaceae,shieldfern family,family,https://static.inaturalist.org/photos/161285165/medium.jpg
+47758,47759,Oxalis,woodsorrels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/19227560/medium.jpg
+47789,47790,Clarkia,Clarkias,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/17563453/medium.jpeg
+47851,47852,Quercus,oaks,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/96348060/medium.jpg
+47889,47890,Impatiens,touch-me-nots,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/54562552/medium.jpg
+47933,47790,Circaea,enchanter's nightshades,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/61135411/medium.jpg
+48253,47374,Thuja,arborvitaes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/10015447/medium.jpg
+48255,47562,Tsuga,hemlocks,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/605983/medium.jpg
+48257,47562,Pseudotsuga,Douglas-firs,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11770154/medium.jpeg
+48434,47754,Blechnaceae,Chain Fern Family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/190348520/medium.jpg
+48437,47754,Pteridaceae,brake family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/8305/medium.jpg
+48626,47790,Oenothera,"evening primroses, sundrops, and beeblossoms",genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3615404/medium.jpg
+48686,48694,Typha,Cattails,genus,https://static.inaturalist.org/photos/640955/medium.jpg
+48790,71417,Montia,Montias,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/354073635/medium.jpg
+49156,49155,Betula,birches,genus,https://static.inaturalist.org/photos/44632280/medium.jpg
+49674,49041,Ceanothus,Ceanothus,genus,https://static.inaturalist.org/photos/115875111/medium.jpg
+49912,71417,Calandrinia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/25658/medium.jpg
+50339,47790,Ludwigia,Primrose-willows,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/56018181/medium.jpeg
+50829,50828,Viola,violets,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11654351/medium.jpeg
+51886,51885,Urtica,nettles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/202182474/medium.jpeg
+51935,51937,Drosera,Sundews,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/9788583/medium.jpg
+52470,52469,Philadelphus,mock oranges,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/83023833/medium.jpeg
+52616,52615,Zostera,Eelgrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/35524456/medium.jpg
+52643,52642,Juncus,rushes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/403792468/medium.jpeg
+52679,47754,Polypodiaceae,polypody family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/8304/medium.jpg
+52682,47754,Dennstaedtiaceae,bracken family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/143677347/medium.jpeg
+52689,781703,Sambucus,elders,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/39056940/medium.jpeg
+52942,48932,Navarretia,Pincushion plants,genus,https://static.inaturalist.org/photos/41009557/medium.jpeg
+52972,47790,Epilobium,willowherbs,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/16455/medium.jpg
+52995,71417,Claytonia,spring beauties,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/8870/medium.jpg
+52997,48932,Collomia,trumpets,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/12790537/medium.jpeg
+53350,58321,Aesculus,buckeyes and horse-chestnuts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/277035469/medium.jpg
+53352,49155,Alnus,alders,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/111091510/medium.jpg
+53373,49155,Corylus,hazels,genus,https://static.inaturalist.org/photos/138077371/medium.jpeg
+53453,47567,Salix,Willows,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/79451981/medium.jpeg
+53854,53855,Ilex,hollies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/84984390/medium.jpg
+54262,47562,Abies,firs,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/108627343/medium.jpeg
+54774,781703,Viburnum,viburnums,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1089094/medium.JPG
+55209,47555,Taxus brevifolia,Pacific yew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/99338130/medium.jpeg
+55796,52642,Luzula,woodrushes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/9663/medium.jpg
+55883,52849,Hedera,ivies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/63122305/medium.jpg
+57624,50361,Elodea,waterweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/57234967/medium.jpeg
+57849,51121,Nuphar,yellow pond-lilies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/31258607/medium.jpeg
+57861,57860,Utricularia,Bladderworts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/158883179/medium.jpg
+58937,58935,Lythrum,Lythrum Loosestrifes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/41847224/medium.jpeg
+58971,48932,Leptosiphon,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/12291/medium.jpg
+59110,59109,Potamogeton,Pondweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/30550982/medium.jpg
+60207,60205,Myriophyllum,Milfoils,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/265825659/medium.jpeg
+60270,60266,Triglochin,Arrowgrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/59035806/medium.jpeg
+60999,60998,Ceratophyllum,Hornworts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/80184/medium.jpg
+61117,48694,Sparganium,bur-reeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/15187/medium.jpg
+61215,48932,Microsteris,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/117136991/medium.jpeg
+61316,50313,Daphne,Daphnes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/55518212/medium.jpg
+62370,62369,Nymphoides,,genus,https://static.inaturalist.org/photos/82244249/medium.jpg
+63573,47562,Picea,spruces,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/10967638/medium.jpeg
+63875,58771,Selaginella wallacei,Wallace's spikemoss,species,https://inaturalist-open-data.s3.amazonaws.com/photos/57806759/medium.jpg
+63963,47539,Paxistima,Mountain-Lovers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/48990/medium.jpg
+64662,47754,Aspleniaceae,spleenwort family,family,https://static.inaturalist.org/photos/92877566/medium.jpeg
+69819,47733,Ligustrum,privets,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/126520804/medium.jpeg
+72235,62369,Menyanthes,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/32429061/medium.jpg
+72359,64695,Shepherdia,Buffaloberries,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/82156678/medium.jpeg
+319976,64552,Erythranthe,monkeyflowers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/72061328/medium.jpeg
+332916,47754,Cystopteridaceae,,family,https://static.inaturalist.org/photos/45118360/medium.jpg
+332930,47754,Athyriaceae,Ladyferns and allies,family,https://inaturalist-open-data.s3.amazonaws.com/photos/506259/medium.jpg
+564913,47790,Chamaenerion,fireweeds,genus,https://static.inaturalist.org/photos/10363945/medium.jpg
+47179,133387,Arctostaphylos,bearberries and manzanitas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/22868101/medium.jpeg
+47324,50638,Collinsia,Blue-eyed Marys,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3543523/medium.JPG
+48063,48064,Lysimachia,Loosestrifes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/17942996/medium.jpeg
+48245,48231,Aquilegia,columbines,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/245963537/medium.jpg
+48252,48253,Thuja plicata,western redcedar,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7846522/medium.jpeg
+48254,48255,Tsuga heterophylla,western hemlock,species,https://static.inaturalist.org/photos/11793124/medium.jpg
+48367,50638,Penstemon,beardtongues,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/84784274/medium.jpeg
+48385,48386,Heuchera,alumroots,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/7665173/medium.jpg
+48528,48527,Symphoricarpos,snowberries,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/44050/medium.jpg
+48596,48040,Campanula,bellflowers,genus,https://static.inaturalist.org/photos/9158550/medium.jpg
+48685,48686,Typha latifolia,broadleaf cattail,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4280840/medium.jpeg
+48729,48536,Lysichiton,skunk cabbages,genus,https://static.inaturalist.org/photos/270505564/medium.jpg
+48970,50638,Antirrhinum,Snapdragons,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/102869078/medium.jpeg
+49340,47322,Castilleja,Paintbrushes,genus,https://static.inaturalist.org/photos/342511568/medium.jpg
+49347,48150,Phacelia,Scorpionweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/32535473/medium.jpg
+49389,48567,Stellaria,chickweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/236995747/medium.jpg
+49478,133387,Monotropa,Indian pipes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/99737854/medium.jpeg
+49650,49464,Toxicoscordion,Deathcamas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1832/medium.jpg
+49883,49156,Betula papyrifera,paper birch,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7963576/medium.jpg
+50259,59992,Arceuthobium,Dwarf-Mistletoes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/9166/medium.jpg
+50636,50638,Plantago,plantains,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/31254943/medium.jpg
+50651,48150,Nemophila,baby blue eyes and allies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4795045/medium.jpg
+50791,50638,Linaria,Toadflaxes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/175257689/medium.jpeg
+50793,47322,Triphysaria,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/24571/medium.jpg
+50800,48386,Lithophragma,woodland stars,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6257/medium.jpg
+50853,48567,Cerastium,Mouse-ear Chickweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/46801074/medium.jpeg
+51047,133387,Arbutus,madrones,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/335168998/medium.jpg
+51079,48874,Toxicodendron,poison ivies and oaks,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/64172688/medium.jpg
+51086,47599,Triteleia,triplet lilies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/200077190/medium.jpg
+51287,47322,Bellardia,,genus,https://static.inaturalist.org/photos/22804828/medium.jpeg
+51309,51308,Linum,Flaxes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/102736146/medium.jpeg
+51611,50638,Veronica,speedwells,genus,https://static.inaturalist.org/photos/379019197/medium.jpeg
+51644,48386,Tiarella,foamflowers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/32377/medium.jpg
+51656,48386,Tellima,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6256/medium.jpg
+51753,47599,Brodiaea,Brodiaeas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11765/medium.jpg
+51874,48527,Lonicera,honeysuckles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/120273217/medium.jpg
+52117,133387,Pterospora,pinedrops,genus,https://static.inaturalist.org/photos/12953782/medium.jpg
+52326,52327,Amaranthus,amaranths,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2592919/medium.jpg
+52614,52616,Zostera marina,Eelgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/179257999/medium.jpg
+52670,332930,Athyrium,lady ferns,genus,https://static.inaturalist.org/photos/55216721/medium.jpeg
+52683,52682,Pteridium,brackens,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/149174235/medium.jpeg
+52761,71412,Hypericum,St. John's worts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/72000734/medium.jpg
+52971,52972,Epilobium brachycarpum,panicled willowherb,species,https://inaturalist-open-data.s3.amazonaws.com/photos/23989929/medium.jpg
+52996,52997,Collomia heterophylla,variableleaf collomia,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1828069/medium.jpg
+53030,48527,Dipsacus,teasels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4745284/medium.jpg
+53157,52942,Navarretia squarrosa,Skunkweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/206639053/medium.jpg
+53424,49041,Frangula,False-Buckthorns,genus,https://static.inaturalist.org/photos/18560465/medium.jpeg
+53435,47130,Ribes sanguineum,Red-flowering Currant,species,https://inaturalist-open-data.s3.amazonaws.com/photos/33825076/medium.jpg
+53856,53854,Ilex aquifolium,European holly,species,https://static.inaturalist.org/photos/358989184/medium.jpg
+53984,50638,Digitalis,Foxgloves,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/229075348/medium.jpg
+54519,48536,Lemna,Duckweeds,genus,https://static.inaturalist.org/photos/77333416/medium.jpeg
+54664,133387,Hemitomes,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/7376/medium.jpg
+55434,48386,Saxifraga,Saxifrages,genus,https://static.inaturalist.org/photos/43669608/medium.jpg
+55677,48567,Sagina,pearlworts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11491/medium.jpg
+55728,50638,Cymbalaria,Cancerworts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/31090428/medium.jpg
+55731,48567,Spergularia,Sand-Spurries,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/15788/medium.jpg
+55754,48527,Valerianella,Cornsalads,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/66244251/medium.jpg
+55869,48064,Cyclamen,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/171067874/medium.jpg
+55882,55883,Hedera helix,common ivy,species,https://inaturalist-open-data.s3.amazonaws.com/photos/23968680/medium.jpeg
+56034,53352,Alnus rubra,Red Alder,species,https://inaturalist-open-data.s3.amazonaws.com/photos/50900970/medium.jpg
+56100,48623,Ajuga,Bugles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/70480839/medium.jpeg
+56165,47151,Verbascum,mulleins,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/25583063/medium.jpg
+56932,52345,Cuscuta,dodders,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11821161/medium.jpg
+57006,48567,Spergula,Spurreys,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/8188650/medium.jpeg
+57017,51890,Crassula,Stonecrops,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/19521003/medium.jpeg
+57149,52972,Epilobium densiflorum,denseflower willowherb,species,https://inaturalist-open-data.s3.amazonaws.com/photos/41363/medium.jpg
+57150,52972,Epilobium minutum,little willowherb,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1559099/medium.JPG
+57285,48527,Plectritis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/12437/medium.jpg
+57286,48527,Centranthus,Valerian,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/200045226/medium.jpeg
+57869,48536,Spirodela,greater duckweeds,genus,https://static.inaturalist.org/photos/53814500/medium.jpg
+58096,50638,Callitriche,Water Starworts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/29814/medium.jpg
+58756,332916,Cystopteris,fragile ferns,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/15453/medium.jpg
+58990,48790,Montia fontana,blinks,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6196397/medium.jpeg
+59113,50638,Nuttallanthus,Toadflax,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/82249435/medium.jpg
+59932,47322,Euphrasia,eyebrights,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/9708663/medium.jpg
+60092,47322,Rhinanthus,Rattles,genus,https://static.inaturalist.org/photos/40841598/medium.jpg
+60221,50339,Ludwigia palustris,Water Purslane,species,https://inaturalist-open-data.s3.amazonaws.com/photos/425242/medium.jpg
+60264,60270,Triglochin maritima,common arrowgrass,species,https://static.inaturalist.org/photos/291571459/medium.jpg
+60316,48686,Typha angustifolia,narrow-leaved cattail,species,https://inaturalist-open-data.s3.amazonaws.com/photos/143259898/medium.jpeg
+60369,133387,Pyrola,wintergreens,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/17022/medium.jpg
+60479,60478,Armeria,Thrift,genus,https://static.inaturalist.org/photos/120960866/medium.jpg
+61210,61215,Microsteris gracilis,slender phlox,species,https://static.inaturalist.org/photos/131026425/medium.jpg
+61321,58937,Lythrum salicaria,purple loosestrife,species,https://static.inaturalist.org/photos/63744014/medium.jpeg
+61826,52643,Juncus occidentalis,western rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/305962/medium.jpg
+61885,48567,Moehringia,Grove sandworts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/189167962/medium.jpeg
+62219,47599,Camassia,camas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/16966/medium.jpg
+62223,52470,Philadelphus lewisii,Lewis' mock orange,species,https://static.inaturalist.org/photos/40363644/medium.jpg
+62232,133387,Chimaphila,wintergreens,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/244943707/medium.jpg
+62482,133387,Allotropa,sugarsticks,genus,https://static.inaturalist.org/photos/43175281/medium.jpg
+62575,61117,Sparganium emersum,unbranched bur-reed,species,https://static.inaturalist.org/photos/218395908/medium.jpg
+63137,48527,Linnaea,twinflowers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/18376/medium.jpg
+63893,63963,Paxistima myrsinites,Oregon Boxwood,species,https://inaturalist-open-data.s3.amazonaws.com/photos/170158626/medium.jpg
+64292,48040,Triodanis,Venus' Looking-Glasses,genus,https://static.inaturalist.org/photos/18153075/medium.jpg
+64571,47151,Buddleja,butterfly bushes and allies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/34193/medium.jpg
+68131,63573,Picea sitchensis,Sitka spruce,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3313185/medium.jpg
+71982,48567,Arenaria,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/182271813/medium.jpeg
+71992,64662,Asplenium,Spleenworts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/93830925/medium.jpeg
+72066,48699,Conioselinum,hemlock-parsleys,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/47674974/medium.jpeg
+72177,50638,Hippuris,Mare's-Tails,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/61662629/medium.jpeg
+72206,47322,Kopsiopsis,Groundcones,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/109829/medium.jpg
+72236,48386,Micranthes,Early saxifrages,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/14510/medium.jpg
+72240,48567,Moenchia,upright chickweed,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/285558/medium.jpg
+72427,48536,Wolffia,watermeals,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/61763269/medium.jpeg
+76793,57624,Elodea canadensis,Canadian Waterweed,species,https://static.inaturalist.org/photos/113225954/medium.jpg
+77553,52643,Juncus bolanderi,bolander's rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3953065/medium.JPG
+77567,52643,Juncus dudleyi,Dudley's Rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/22890468/medium.jpeg
+77569,52643,Juncus ensifolius,dagger rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/87054436/medium.jpg
+77588,52643,Juncus oxymeris,pointed rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/107034170/medium.jpg
+77594,52643,Juncus supiniformis,hair-leaved rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9718993/medium.jpeg
+77693,58971,Leptosiphon minimus,Bicolored Desert-gold,species,https://inaturalist-open-data.s3.amazonaws.com/photos/293080/medium.jpeg
+77897,55796,Luzula parviflora,Small-flower Woodrush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/51673704/medium.jpg
+77901,55796,Luzula subsessilis,short-stalked woodrush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2927235/medium.jpg
+77914,47620,Lycopodium clavatum,stag's-horn clubmoss,species,https://inaturalist-open-data.s3.amazonaws.com/photos/187298450/medium.jpeg
+78016,72235,Menyanthes trifoliata,Bogbean,species,https://inaturalist-open-data.s3.amazonaws.com/photos/32429061/medium.jpg
+78119,48790,Montia dichotoma,Dwarf Montia,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7453185/medium.jpeg
+78121,48790,Montia howellii,howell's montia,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1876986/medium.jpg
+78122,48790,Montia linearis,Narrow-leaved Montia,species,https://inaturalist-open-data.s3.amazonaws.com/photos/767691/medium.jpg
+78123,48790,Montia parvifolia,Small-leaved Blinks,species,https://static.inaturalist.org/photos/949351/medium.jpg
+78157,60207,Myriophyllum spicatum,Eurasian water-milfoil,species,https://inaturalist-open-data.s3.amazonaws.com/photos/47678802/medium.jpeg
+78234,57849,Nuphar polysepala,western yellow pond-lily,species,https://inaturalist-open-data.s3.amazonaws.com/photos/42352635/medium.jpeg
+78237,62370,Nymphoides peltata,water fringe,species,https://inaturalist-open-data.s3.amazonaws.com/photos/449388/medium.jpg
+78705,59110,Potamogeton amplifolius,Broad-leaved Pondweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/10299704/medium.jpg
+78706,59110,Potamogeton berchtoldii,Berchtold's pondweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/553138/medium.jpg
+78710,59110,Potamogeton gramineus,grass-leaved pondweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/221875/medium.jpg
+78712,59110,Potamogeton natans,floating-leaved pondweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2917085/medium.jpg
+78714,59110,Potamogeton pusillus,small pondweed,species,https://static.inaturalist.org/photos/231989582/medium.jpg
+78852,47130,Ribes bracteosum,Stink Currant,species,https://static.inaturalist.org/photos/147974395/medium.jpeg
+78858,47130,Ribes lacustre,swamp currant,species,https://static.inaturalist.org/photos/200056455/medium.jpg
+78861,47130,Ribes lobbii,gummy gooseberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/93159/medium.jpg
+79072,72359,Shepherdia canadensis,Canadian buffalo-berry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/115112379/medium.jpg
+79161,61117,Sparganium angustifolium,Narrow-leaved Bur-reed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/34187128/medium.jpeg
+79162,61117,Sparganium natans,Small Bur-reed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/555429/medium.jpeg
+79558,52616,Zostera japonica,Japanese Eelgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/47312791/medium.jpeg
+82666,54774,Viburnum tinus,Laurustinus viburnum,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11569121/medium.jpg
+84298,53350,Aesculus hippocastanum,horse-chestnut,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18293649/medium.jpg
+119805,69819,Ligustrum vulgare,Common Privet,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11066803/medium.jpeg
+127391,61316,Daphne laureola,Spurge-laurel,species,https://static.inaturalist.org/photos/120446955/medium.jpeg
+143799,52689,Sambucus cerulea,blue elder,species,https://inaturalist-open-data.s3.amazonaws.com/photos/46738687/medium.jpg
+160354,60999,Ceratophyllum echinatum,spineless hornwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/44783367/medium.jpeg
+163267,47701,Geranium versicolor,Pencilled Crane's-bill,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1650487/medium.jpg
+163549,55883,Hedera hibernica,Atlantic Ivy,species,https://inaturalist-open-data.s3.amazonaws.com/photos/236581363/medium.jpg
+273241,47322,Aphyllon,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/187928351/medium.jpg
+400267,49912,Calandrinia menziesii,redmaids,species,https://inaturalist-open-data.s3.amazonaws.com/photos/259881614/medium.jpg
+489052,48434,Struthiopteris,,genus,https://static.inaturalist.org/photos/24694544/medium.jpeg
+514665,48567,Sabulina,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/7833998/medium.jpeg
+564969,564913,Chamaenerion angustifolium,fireweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/145664133/medium.jpg
+851026,55329,Sceptridium,grapeferns,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11889881/medium.jpg
+890625,55796,Luzula macrantha,Prairie Woodrush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/38222551/medium.jpg
+1490819,52972,Epilobium ravenii,California Willowherb,species,https://inaturalist-open-data.s3.amazonaws.com/photos/239521/medium.jpg
+47121,47122,Lupinus,lupines,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/249761150/medium.jpeg
+47160,47161,Schoenoplectus,Schoenoplectus Bulrushes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/25906839/medium.jpg
+47351,47148,Prunus,"plums, cherries, and allies",genus,https://inaturalist-open-data.s3.amazonaws.com/photos/93584919/medium.jpg
+47357,55849,Allium,onions,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/13632/medium.jpg
+47436,47122,Lotus,bird's-foot trefoils,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/47159330/medium.jpeg
+47544,47148,Rubus,brambles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1148035/medium.JPG
+47565,47566,Populus nigra,Black Poplar,species,https://inaturalist-open-data.s3.amazonaws.com/photos/67417631/medium.jpg
+47687,47688,Erodium cicutarium,Redstem Stork's-bill,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3044348/medium.jpg
+47692,47693,Sherardia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11845/medium.jpg
+47752,47753,Polystichum,shield ferns,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/887917/medium.jpeg
+47780,47781,Iris,Irises,genus,https://static.inaturalist.org/photos/14274367/medium.jpg
+47902,47903,Opuntia,Prickly Pears,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/7562939/medium.jpeg
+48226,47332,Eschscholzia,Desert Poppies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6236/medium.jpg
+48227,47727,Acer macrophyllum,bigleaf maple,species,https://inaturalist-open-data.s3.amazonaws.com/photos/105744044/medium.jpeg
+48230,48231,Ranunculus,buttercups,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/8922702/medium.jpg
+48241,47328,Erythronium,fawn lilies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/14234311/medium.jpg
+48244,48245,Aquilegia formosa,western columbine,species,https://inaturalist-open-data.s3.amazonaws.com/photos/35766593/medium.jpeg
+48353,133387,Vaccinium,"blueberries, cranberries, and allies",genus,https://inaturalist-open-data.s3.amazonaws.com/photos/56288/medium.jpg
+48436,48437,Adiantum,maidenhair ferns,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/13524975/medium.jpeg
+48439,52327,Chenopodium,Goosefoots,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/84485453/medium.jpeg
+48442,133387,Gaultheria,wintergreens,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/122726974/medium.jpeg
+48493,48231,Delphinium,larkspurs,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/13316588/medium.jpg
+48537,48729,Lysichiton americanus,western skunk cabbage,species,https://static.inaturalist.org/photos/107900/medium.jpg
+48539,47122,Cytisus,brooms,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1179457/medium.jpg
+48571,47161,Carex,true sedges,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/18432491/medium.jpeg
+48582,47148,Sorbus,Rowans and Mountain Ashes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/327388047/medium.jpg
+48681,47148,Spiraea,meadowsweet,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/20524813/medium.jpeg
+48928,47328,Lilium,true lilies,genus,https://static.inaturalist.org/photos/58176964/medium.jpg
+48943,48516,Datura,Devil's Trumpets,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/174525717/medium.jpeg
+49131,48150,Myosotis,Forget-me-nots,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/70204650/medium.jpg
+49139,48150,Plagiobothrys,Popcornflowers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/63049540/medium.jpg
+49140,48150,Amsinckia,Fiddlenecks,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/259439469/medium.jpg
+49149,47599,Scilla,Squills,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/114184611/medium.jpeg
+49230,47148,Amelanchier,serviceberries,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/47463/medium.jpg
+49341,49340,Castilleja attenuata,valley tassels,species,https://inaturalist-open-data.s3.amazonaws.com/photos/386814484/medium.jpg
+49371,47161,Scirpus,Scirpus Bulrushes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/12835/medium.jpg
+49398,133387,Kalmia,mountain-laurels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/241052591/medium.jpg
+49477,49478,Monotropa uniflora,Ghost Pipe,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4319833/medium.jpeg
+49487,133387,Rhododendron,rhododendrons and azaleas,genus,https://static.inaturalist.org/photos/132769155/medium.jpg
+49869,48231,Caltha,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3299515/medium.jpg
+49871,48231,Actaea,baneberries and cohoshes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/41899028/medium.jpeg
+49877,48231,Clematis,Clematis and leatherflowers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/25083605/medium.jpeg
+49917,47781,Sisyrinchium,blue-eyed grasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/30909859/medium.jpg
+50204,47604,Bidens,Beggarticks,genus,https://static.inaturalist.org/photos/56995180/medium.jpeg
+50249,47599,Maianthemum,mayflowers and false Solomon's seals,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/80170/medium.jpg
+50321,47122,Lathyrus,sweet peas and vetchlings,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/91675201/medium.jpg
+50619,47328,Fritillaria,Fritillaries,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6272/medium.jpg
+50641,48516,Solanum,nightshades,genus,https://static.inaturalist.org/photos/5299629/medium.jpeg
+50921,47599,Muscari,Grape hyacinths,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/49812279/medium.jpeg
+51046,51047,Arbutus menziesii,Pacific madrone,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9248407/medium.jpeg
+51080,51079,Toxicodendron diversilobum,Pacific poison oak,species,https://static.inaturalist.org/photos/14897857/medium.jpeg
+51148,47148,Crataegus,hawthorns,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/76382616/medium.jpg
+51229,48623,Stachys,Hedgenettles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/45199648/medium.jpeg
+51306,51309,Linum usitatissimum,common flax,species,https://inaturalist-open-data.s3.amazonaws.com/photos/41906068/medium.jpeg
+51607,55849,Galanthus,snowdrops,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/31966317/medium.jpeg
+51655,51656,Tellima grandiflora,fringe cups,species,https://inaturalist-open-data.s3.amazonaws.com/photos/143999155/medium.jpg
+51742,48699,Aegopodium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/119193/medium.jpg
+51811,47122,Laburnum,Laburnum,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/12186994/medium.jpg
+51876,47122,Trifolium,clovers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/226413420/medium.jpg
+52118,52117,Pterospora andromedea,woodland pinedrops,species,https://inaturalist-open-data.s3.amazonaws.com/photos/424555/medium.JPG
+52195,48567,Silene,Catchflies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/9522/medium.jpg
+52472,47122,Vicia,Vetches,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/51639903/medium.jpg
+52504,47332,Papaver,poppies,genus,https://static.inaturalist.org/photos/18288854/medium.jpg
+52617,52327,Salicornia,pickleweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2774880/medium.JPG
+52672,47753,Dryopteris,wood ferns,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/133824012/medium.jpg
+52677,48437,Pentagramma,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/10360182/medium.jpg
+52680,52679,Polypodium,polypody ferns,genus,https://static.inaturalist.org/photos/375942266/medium.jpeg
+52701,47434,Bromus,bromes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11796/medium.jpg
+52724,47746,Equisetum arvense,field horsetail,species,https://static.inaturalist.org/photos/72881677/medium.jpg
+52803,47434,Melica,melicgrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/20894945/medium.jpeg
+52836,48699,Angelica,angelicas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/35465/medium.jpg
+52973,50853,Cerastium glomeratum,Sticky mouse-ear chickweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/33886207/medium.jpeg
+52994,52995,Claytonia perfoliata,miner's lettuce,species,https://inaturalist-open-data.s3.amazonaws.com/photos/182808852/medium.jpeg
+52999,48699,Conium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5169/medium.jpg
+53022,52345,Convolvulus,bindweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/32864798/medium.jpg
+53050,52972,Epilobium ciliatum,fringed willowherb,species,https://static.inaturalist.org/photos/20242455/medium.jpeg
+53060,47693,Galium,bedstraws,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/30968909/medium.jpg
+53136,47604,Madia,tarweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/17593/medium.jpg
+53141,47604,Anisocarpus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5245/medium.jpg
+53152,47122,Medicago,medicks,genus,https://static.inaturalist.org/photos/114442803/medium.jpg
+53196,48382,Rumex,docks and sorrels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/14989/medium.jpg
+53202,48699,Sanicula,sanicles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/15406/medium.jpg
+53368,53373,Corylus cornuta californica,California hazelnut,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/295770866/medium.jpg
+53376,47148,Cotoneaster,Cotoneasters,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/87746968/medium.jpeg
+53415,47148,Holodiscus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5390/medium.jpg
+53420,47148,Oemleria,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5409/medium.jpg
+53438,47148,Rosa,roses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/128386918/medium.jpeg
+53449,47130,Ribes divaricatum divaricatum,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/70367393/medium.jpeg
+53456,48528,Symphoricarpos mollis,creeping snowberry,species,https://static.inaturalist.org/photos/88670719/medium.jpg
+53597,55849,Narcissus,daffodils,genus,https://static.inaturalist.org/photos/119190821/medium.jpg
+53787,47332,Fumaria,Fumitories,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/13538462/medium.jpeg
+54500,47148,Malus,apples,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/14004/medium.jpg
+54604,48623,Marrubium,Horehounds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/10810/medium.jpg
+54663,54664,Hemitomes congestum,gnome plant,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8521583/medium.jpeg
+54840,47566,Populus tremuloides,trembling aspen,species,https://inaturalist-open-data.s3.amazonaws.com/photos/26648317/medium.jpeg
+55343,48699,Lomatium,Biscuitroots,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/8867/medium.jpg
+55460,48623,Lamium,deadnettles and archangels,genus,https://static.inaturalist.org/photos/138606452/medium.jpeg
+55461,50651,Nemophila pedunculata,Meadow Baby-blue-eyes,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6744394/medium.jpg
+55667,55677,Sagina procumbens,Procumbent Pearlwort,species,https://static.inaturalist.org/photos/322698745/medium.jpeg
+55727,55728,Cymbalaria muralis,Ivy-leaved toadflax,species,https://inaturalist-open-data.s3.amazonaws.com/photos/325309839/medium.jpeg
+55730,55731,Spergularia rubra,Red Sand Spurrey,species,https://inaturalist-open-data.s3.amazonaws.com/photos/40279255/medium.jpeg
+55735,51890,Sedum,stonecrops,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/137304118/medium.jpeg
+55751,47148,Geum,avens,genus,https://static.inaturalist.org/photos/28198687/medium.jpg
+55752,55754,Valerianella locusta,common cornsalad,species,https://inaturalist-open-data.s3.amazonaws.com/photos/74123736/medium.jpeg
+55767,52995,Claytonia sibirica,Candy Flower,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12326504/medium.jpg
+55820,48064,Primula,Primroses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/64504107/medium.jpg
+55978,48797,Malva,Mallows,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/7691700/medium.jpg
+56002,53030,Dipsacus fullonum,wild teasel,species,https://static.inaturalist.org/photos/4385824/medium.jpg
+56031,52345,Calystegia,false bindweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/58969509/medium.jpeg
+56089,47122,Robinia,Locust Trees,genus,https://static.inaturalist.org/photos/146377889/medium.jpeg
+56095,47599,Hyacinthoides,Bluebells,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/34750997/medium.jpg
+56099,56100,Ajuga reptans,carpet bugle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/28863996/medium.jpeg
+56138,47599,Ornithogalum,star-of-Bethlehem,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/53046914/medium.jpeg
+56175,48150,Echium,Viper's-buglosses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/17865712/medium.jpg
+56234,56235,Centaurium,Centauries,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/109916552/medium.jpeg
+56839,48699,Perideridia,yampahs,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/22636/medium.jpg
+56855,47604,Adenocaulon,trailplants,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/46132350/medium.jpg
+56998,55677,Sagina apetala,Annual Pearlwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/292742199/medium.jpeg
+57005,57006,Spergula arvensis,Corn spurrey,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8188650/medium.jpeg
+57007,49389,Stellaria nitens,shining chickweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/148503/medium.jpg
+57022,47161,Eleocharis,spikerushes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/33564882/medium.jpeg
+57067,47122,Melilotus,melilots and sweetclovers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11727/medium.jpg
+57126,51753,Brodiaea coronaria,crown brodiaea,species,https://inaturalist-open-data.s3.amazonaws.com/photos/96888150/medium.jpeg
+57132,51086,Triteleia hyacinthina,white brodiaea,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11771/medium.jpg
+57166,47434,Danthonia,Oatgrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11803/medium.jpg
+57251,47148,Physocarpus,ninebarks,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/20478/medium.jpg
+57276,50793,Triphysaria pusilla,dwarf owl's-clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/29457/medium.jpg
+57283,57286,Centranthus ruber,Red Valerian,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11861/medium.jpg
+57287,57285,Plectritis macrocera,Longhorn Seablush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4298873/medium.jpg
+57353,50651,Nemophila parviflora,small-flowered nemophila,species,https://inaturalist-open-data.s3.amazonaws.com/photos/16167374/medium.jpg
+57863,47161,Rhynchospora,Beaksedges,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/50977623/medium.jpg
+57867,57869,Spirodela polyrhiza,greater duckweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/151067379/medium.jpeg
+58112,52327,Atriplex,Saltbushes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/23926689/medium.jpg
+58185,49347,Phacelia tanacetifolia,Lacy phacelia,species,https://inaturalist-open-data.s3.amazonaws.com/photos/13147/medium.jpg
+58294,52995,Claytonia parviflora,Streambank Springbeauty,species,https://inaturalist-open-data.s3.amazonaws.com/photos/351679916/medium.jpg
+58307,48231,Myosurus,Mousetail,genus,https://static.inaturalist.org/photos/191268659/medium.jpg
+58346,47161,Bolboschoenus,Clubrush,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/85389480/medium.jpg
+58736,47148,Pyrus,pears,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/19086/medium.jpg
+58755,58756,Cystopteris fragilis,brittle bladderfern,species,https://inaturalist-open-data.s3.amazonaws.com/photos/245721680/medium.jpg
+59013,47324,Collinsia parviflora,small-flowered blue-eyed mary,species,https://inaturalist-open-data.s3.amazonaws.com/photos/381319425/medium.jpg
+59029,56165,Verbascum thapsus,great mullein,species,https://static.inaturalist.org/photos/44885369/medium.jpg
+59076,54519,Lemna minuta,Least Duckweed,species,https://static.inaturalist.org/photos/9512478/medium.jpg
+59087,49650,Toxicoscordion venenosum,Meadow Deathcamas,species,https://inaturalist-open-data.s3.amazonaws.com/photos/39521164/medium.jpeg
+59986,49478,Monotropa hypopitys,pinesap,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14046/medium.jpg
+60001,48567,Dianthus,carnations,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/144967319/medium.jpeg
+60126,48699,Cicuta,water hemlocks,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/14180/medium.jpg
+60128,48699,Oenanthe,Water-dropworts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/28810031/medium.jpg
+60476,60479,Armeria maritima,Sea Thrift,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14469/medium.jpg
+60848,47332,Meconella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/15087/medium.jpg
+61064,47434,Glyceria,Sweet Grasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/87781838/medium.jpeg
+61470,60092,Rhinanthus minor,Yellow Rattle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/77519626/medium.jpg
+61884,61885,Moehringia macrophylla,Largeleaf Sandwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/16342/medium.jpg
+61948,49389,Stellaria graminea,lesser stitchwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/16584/medium.jpg
+62206,48797,Alcea,hollyhocks,genus,https://static.inaturalist.org/photos/153872572/medium.jpg
+62207,48626,Oenothera biennis,common evening-primrose,species,https://static.inaturalist.org/photos/16944/medium.jpg
+62239,60369,Pyrola picta,white-veined wintergreen,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2183784/medium.JPG
+62256,47217,Neottia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/33732/medium.jpg
+62379,51890,Sempervivum,houseleeks,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/64309210/medium.jpeg
+62481,62482,Allotropa virgata,sugarstick,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6749273/medium.jpeg
+63690,54262,Abies grandis,grand fir,species,https://inaturalist-open-data.s3.amazonaws.com/photos/83838154/medium.jpeg
+63910,48257,Pseudotsuga menziesii menziesii,Coast Douglas-fir,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/641410/medium.jpg
+64276,47434,Phragmites,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2676655/medium.jpg
+64293,64292,Triodanis perfoliata,clasping Venus's looking glass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7717458/medium.jpg
+64336,47122,Acmispon,deervetch,genus,https://static.inaturalist.org/photos/699816/medium.jpg
+68008,48699,Smyrnium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/24104/medium.jpg
+68049,47179,Arctostaphylos uva-ursi,bearberry,species,https://static.inaturalist.org/photos/181302737/medium.jpeg
+72105,47161,Dulichium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4318782/medium.jpg
+72113,133387,Empetrum,crowberries,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/53111037/medium.jpeg
+72122,47161,Eriophorum,Cottongrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/102764/medium.jpg
+72290,48699,Petroselinum,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2869732/medium.JPG
+75500,50259,Arceuthobium douglasii,Douglas-Fir Dwarf-Mistletoe,species,https://inaturalist-open-data.s3.amazonaws.com/photos/95029580/medium.jpeg
+75505,47179,Arctostaphylos columbiana,hairy manzanita,species,https://inaturalist-open-data.s3.amazonaws.com/photos/814361/medium.jpg
+75916,64571,Buddleja davidii,Butterfly bush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/87998902/medium.jpg
+75935,58096,Callitriche heterophylla,Large Water-starwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/317441/medium.jpg
+75991,48596,Campanula scouleri,scouler's harebell,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1707988/medium.jpg
+76197,49674,Ceanothus sanguineus,redstem ceanothus,species,https://inaturalist-open-data.s3.amazonaws.com/photos/340465/medium.jpg
+76409,47324,Collinsia grandiflora,Giant Blue-eyed Mary,species,https://static.inaturalist.org/photos/19082966/medium.jpeg
+76447,47193,Cornus nuttallii,Pacific Dogwood,species,https://inaturalist-open-data.s3.amazonaws.com/photos/22606935/medium.jpeg
+76831,52972,Epilobium hallianum,Hall's willowherb,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1497461/medium.jpg
+76835,52972,Epilobium leptophyllum,Linear-leaf Willowherb,species,https://inaturalist-open-data.s3.amazonaws.com/photos/225607086/medium.jpg
+77156,53424,Frangula purshiana,Cascara,species,https://inaturalist-open-data.s3.amazonaws.com/photos/70995836/medium.jpg
+77422,72177,Hippuris vulgaris,Common Mare's Tail,species,https://inaturalist-open-data.s3.amazonaws.com/photos/50186912/medium.jpg
+77611,72206,Kopsiopsis hookeri,small ground-cone,species,https://inaturalist-open-data.s3.amazonaws.com/photos/814356/medium.jpg
+77655,54519,Lemna trisulca,Ivy-leaved Duckweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7955723/medium.jpeg
+77656,54519,Lemna turionifera,turion duckweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/92986688/medium.jpeg
+77789,50800,Lithophragma glabrum,Bulbous woodland star,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3827358/medium.jpg
+77791,50800,Lithophragma parviflorum,smallflower woodland star,species,https://inaturalist-open-data.s3.amazonaws.com/photos/277498/medium.jpg
+78088,72240,Moenchia erecta,Upright Chickweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/235469408/medium.jpg
+78235,59113,Nuttallanthus texanus,Texas toadflax,species,https://inaturalist-open-data.s3.amazonaws.com/photos/266953797/medium.jpg
+78499,49347,Phacelia linearis,Linearleaf Phacelia,species,https://static.inaturalist.org/photos/119594837/medium.jpg
+78699,47566,Populus trichocarpa,black cottonwood,species,https://static.inaturalist.org/photos/19455945/medium.jpg
+78793,60369,Pyrola asarifolia,bog wintergreen,species,https://static.inaturalist.org/photos/23892778/medium.jpg
+78990,851026,Sceptridium multifidum,leathery grapefern,species,https://inaturalist-open-data.s3.amazonaws.com/photos/157103/medium.jpg
+79169,55731,Spergularia marina,Saltmarsh Sand Spurry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/379957737/medium.jpg
+79201,49389,Stellaria crispa,Crisp Starwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/148626165/medium.jpeg
+79452,51086,Triteleia grandiflora,large-flowered triteleia,species,https://static.inaturalist.org/photos/76347134/medium.jpeg
+79528,72427,Wolffia columbiana,Columbian Watermeal,species,https://inaturalist-open-data.s3.amazonaws.com/photos/28423169/medium.jpg
+79729,47933,Circaea alpina pacifica,Pacific enchanter's-nightshade,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/8630571/medium.jpg
+81080,55796,Luzula comosa laxa,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/8088549/medium.jpg
+81439,60270,Triglochin concinna concinna,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/184379790/medium.jpg
+118893,59932,Euphrasia nemorosa,Common Eyebright,species,https://inaturalist-open-data.s3.amazonaws.com/photos/64004453/medium.jpeg
+119451,133387,Calluna,,genus,https://static.inaturalist.org/photos/320192956/medium.jpeg
+119891,133387,Andromeda,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/169062/medium.jpg
+128204,49340,Castilleja hispida,harsh indian paintbrush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/43820742/medium.jpg
+159764,48596,Campanula persicifolia,Peach-leaved Bellflower,species,https://inaturalist-open-data.s3.amazonaws.com/photos/242333280/medium.jpg
+160341,50853,Cerastium pumilum,Dwarf Mouse-ear,species,https://inaturalist-open-data.s3.amazonaws.com/photos/60115261/medium.jpeg
+160347,50853,Cerastium tomentosum,Snow-in-summer,species,https://inaturalist-open-data.s3.amazonaws.com/photos/268809630/medium.jpeg
+160830,72066,Conioselinum gmelinii,Western Hemlock-parsley,species,https://inaturalist-open-data.s3.amazonaws.com/photos/63464023/medium.jpeg
+164313,47574,Juniperus maritima,Seaside Juniper,species,https://static.inaturalist.org/photos/116901571/medium.jpg
+170140,56165,Verbascum phlomoides,Orange Mullein,species,https://inaturalist-open-data.s3.amazonaws.com/photos/304748/medium.jpg
+181436,47179,Arctostaphylos × media,,hybrid,https://inaturalist-open-data.s3.amazonaws.com/photos/23518246/medium.jpeg
+204353,48063,Lysimachia minima,Chaffweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/33125189/medium.jpeg
+235283,47789,Clarkia amoena caurina,Northwestern Farewell-to-Spring,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/8884456/medium.jpg
+235285,47789,Clarkia amoena lindleyi,Lindley's Clarkia,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/4092586/medium.jpg
+236555,52643,Juncus arcticus alaskanus,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/8195024/medium.jpeg
+453717,319976,Erythranthe microphylla,Small-leaf Monkeyflower,species,https://inaturalist-open-data.s3.amazonaws.com/photos/121654136/medium.jpg
+470643,319976,Erythranthe guttata,seep monkeyflower,species,https://static.inaturalist.org/photos/1242791/medium.
+537967,51287,Bellardia viscosa,Yellow Glandweed,species,https://static.inaturalist.org/photos/31449/medium.jpg
+543175,52689,Sambucus racemosa arborescens,Coastal Red Elder,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/7357995/medium.jpeg
+545973,319976,Erythranthe nasuta,shy monkeyflower,species,https://inaturalist-open-data.s3.amazonaws.com/photos/117995360/medium.jpeg
+630966,60369,Pyrola aphylla,Leafless wintergreen,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21693767/medium.jpg
+734821,51890,Petrosedum,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/105160533/medium.jpeg
+771653,47122,Ulex,Gorses,genus,https://static.inaturalist.org/photos/2107349/medium.jpg
+771843,319976,Erythranthe alsinoides,wingstem monkeyflower,species,https://inaturalist-open-data.s3.amazonaws.com/photos/119194864/medium.jpg
+771908,319976,Erythranthe ptilota,wing-leaf monkeyflower,species,https://static.inaturalist.org/photos/144748228/medium.jpg
+774894,489052,Struthiopteris spicant,deer fern,species,https://inaturalist-open-data.s3.amazonaws.com/photos/64848459/medium.jpg
+836878,514665,Sabulina macra,Slender Stitchwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3943473/medium.jpg
+962562,47434,Eriocoma,Western Needlegrasses,genus,https://static.inaturalist.org/photos/95159703/medium.jpg
+1023289,47758,Myriophyllum,,section,
+1074432,51886,Urtica gracilis gracilis,American stinging nettle,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/100054561/medium.jpeg
+47203,47204,Lepidium,Pepperweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/59023843/medium.jpg
+47216,47217,Calypso,fairy-slippers,genus,https://static.inaturalist.org/photos/358/medium.jpg
+47361,47362,Apocynum,dogbanes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/353214749/medium.jpeg
+47603,47604,Taraxacum,dandelions,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/106557104/medium.jpg
+47691,47692,Sherardia arvensis,Field madder,species,https://inaturalist-open-data.s3.amazonaws.com/photos/199966195/medium.jpg
+47696,47434,Cynosurus,Dog's Tail,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/283098/medium.jpg
+47698,47204,Hesperis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/7478076/medium.jpg
+47751,47752,Polystichum munitum,western sword fern,species,https://inaturalist-open-data.s3.amazonaws.com/photos/879722/medium.jpg
+47888,47889,Impatiens capensis,common jewelweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/112963/medium.jpg
+48031,47217,Platanthera,Bog Orchids,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/78592990/medium.jpeg
+48160,47604,Centaurea,knapweeds,genus,https://static.inaturalist.org/photos/120728958/medium.jpeg
+48177,47604,Galinsoga,galinsogas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2002964/medium.JPG
+48225,48226,Eschscholzia californica,California poppy,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1233073/medium.
+48441,48442,Gaultheria shallon,salal,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1142/medium.jpg
+48525,48528,Symphoricarpos albus laevigatus,garden snowberry,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/5417/medium.jpg
+48538,48539,Cytisus scoparius,Scotch Broom,species,https://inaturalist-open-data.s3.amazonaws.com/photos/39060163/medium.jpeg
+48544,47604,Mycelis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/10340/medium.jpg
+48561,47604,Cirsium,Plume Thistles,genus,https://static.inaturalist.org/photos/59587162/medium.jpg
+48678,47604,Solidago,goldenrods,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/145658304/medium.jpg
+48969,48970,Antirrhinum majus,Snapdragon,species,https://inaturalist-open-data.s3.amazonaws.com/photos/122559388/medium.jpeg
+48972,48382,Polygonum,knotweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/227072695/medium.jpg
+49130,49131,Myosotis scorpioides,water forget-me-not,species,https://inaturalist-open-data.s3.amazonaws.com/photos/199155526/medium.jpg
+49445,47217,Corallorhiza,Coralroots,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/72829209/medium.jpeg
+49652,47204,Cardamine,Bittercresses and Toothworts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/17401/medium.jpg
+49870,49871,Actaea rubra,red baneberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/247810008/medium.jpeg
+50055,47434,Setaria,foxtails and bristlegrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/159937386/medium.jpeg
+50299,47148,Fragaria,strawberries,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/56019786/medium.jpg
+50614,47121,Lupinus bicolor,Miniature Lupine,species,https://inaturalist-open-data.s3.amazonaws.com/photos/367088042/medium.jpg
+50630,47204,Erysimum,Wallflowers,genus,https://static.inaturalist.org/photos/63101390/medium.jpeg
+50716,47217,Epipactis,Helleborines,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4811198/medium.jpeg
+50718,47217,Goodyera,rattlesnake plantains,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/150468053/medium.jpeg
+50741,47217,Spiranthes,Ladies'-tresses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/14572/medium.jpg
+50807,47604,Uropappus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/7016134/medium.jpeg
+50847,50853,Cerastium arvense strictum,field mouse-ear chickweed,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/42426739/medium.jpeg
+50879,47604,Erigeron,fleabanes and horseweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/159218891/medium.jpeg
+51606,51607,Galanthus nivalis,common snowdrop,species,https://inaturalist-open-data.s3.amazonaws.com/photos/176914826/medium.jpeg
+51619,48699,Myrrhis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/929197/medium.jpg
+51649,51644,Tiarella trifoliata trifoliata,Threeleaf Foamflower,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/82766444/medium.jpeg
+51650,51644,Tiarella trifoliata laciniata,Lace Foamflower,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/83659447/medium.jpeg
+51726,49131,Myosotis arvensis,field forget-me-not,species,https://inaturalist-open-data.s3.amazonaws.com/photos/31652471/medium.jpg
+51741,51742,Aegopodium podagraria,Goutweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/79566592/medium.jpg
+51751,771653,Ulex europaeus,gorse,species,https://inaturalist-open-data.s3.amazonaws.com/photos/62089764/medium.jpeg
+51810,51811,Laburnum anagyroides,Common Laburnum,species,https://inaturalist-open-data.s3.amazonaws.com/photos/70994958/medium.jpg
+51822,51821,Euphorbia,spurges,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/10222514/medium.jpg
+51875,51876,Trifolium pratense,Red Clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/35545444/medium.jpg
+51900,47604,Hypochaeris,Cat's-Ears,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2280301/medium.jpg
+52163,47204,Cakile,Searockets,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/39469/medium.jpg
+52471,52472,Vicia cracca,tufted vetch,species,https://static.inaturalist.org/photos/50242829/medium.jpeg
+52658,51935,Drosera rotundifolia,round-leaved sundew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/775538/medium.jpg
+52684,52683,Pteridium aquilinum pubescens,Hairy brackenfern,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/396677804/medium.jpg
+52693,47434,Agrostis,bent grass,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/97758056/medium.jpeg
+52695,47434,Aira,Hair Grass,genus,https://static.inaturalist.org/photos/364292/medium.jpg
+52697,47434,Avena,Oats,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/39122466/medium.jpeg
+52721,47434,Dactylis,cocks-foot and orchard grasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/14604/medium.jpg
+52723,47434,Deschampsia,Hair Grass,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11801/medium.jpg
+52765,48623,Prunella,selfheals,genus,https://static.inaturalist.org/photos/4010443/medium.JPG
+52792,47434,Elymus,Wild Ryes and Wheatgrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/49723/medium.jpg
+52794,47434,Holcus,,genus,https://static.inaturalist.org/photos/22314776/medium.jpeg
+52797,47434,Hordeum,Barleys,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/71926845/medium.jpg
+52800,47434,Lolium,Ryegrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/17441417/medium.jpg
+52809,47434,Poa,Meadow-grasses,genus,https://static.inaturalist.org/photos/8360831/medium.jpg
+52818,47604,Achillea,yarrows,genus,https://static.inaturalist.org/photos/19971995/medium.jpeg
+52829,47604,Agoseris,mountain dandelions,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/90108749/medium.jpg
+52834,47604,Anaphalis,everlastings,genus,https://static.inaturalist.org/photos/300017666/medium.jpeg
+52842,47604,Anthemis,Chamomiles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/174802475/medium.jpg
+52845,47604,Matricaria,German chamomiles and pineapple-weeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/10253/medium.jpg
+52847,48699,Anthriscus,,genus,https://static.inaturalist.org/photos/39295509/medium.jpg
+52855,47604,Artemisia,wormwoods and sagebrushes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/21443667/medium.jpeg
+52914,47604,Cichorium,chicories and endives,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/155613293/medium.jpeg
+52977,47204,Barbarea,wintercresses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/38482827/medium.jpg
+52979,47204,Capsella,Shepherd's-purses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/181055706/medium.jpeg
+52998,52999,Conium maculatum,poison hemlock,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18903781/medium.jpg
+53021,53022,Convolvulus arvensis,field bindweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/200854803/medium.jpg
+53036,47604,Ambrosia,Ragweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/110847951/medium.jpeg
+53065,53060,Galium triflorum,fragrant bedstraw,species,https://inaturalist-open-data.s3.amazonaws.com/photos/50976242/medium.jpg
+53075,47701,Geranium dissectum,Cut-leaved crane's-bill,species,https://static.inaturalist.org/photos/39432181/medium.jpg
+53078,47604,Pseudognaphalium,rabbit-tobaccos,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/49732889/medium.jpg
+53082,47604,Gnaphalium,cudweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/47654653/medium.jpg
+53106,47604,Lactuca,wild lettuces,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/91403681/medium.jpg
+53135,53136,Madia gracilis,grassy tarweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/272767956/medium.jpg
+53137,53141,Anisocarpus madioides,woodland madia,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3533149/medium.jpg
+53143,53136,Madia sativa,coast tarweed,species,https://static.inaturalist.org/photos/214033351/medium.jpg
+53167,48699,Osmorhiza,sweet cicely,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4817759/medium.jpeg
+53168,47758,Oxalis corniculata,Creeping Woodsorrel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/279196/medium.jpg
+53186,47148,Potentilla,cinquefoils,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/29778840/medium.jpg
+53189,47604,Psilocarphus,Woolly-Marbles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/176157768/medium.jpeg
+53204,48623,Clinopodium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/312285243/medium.jpg
+53207,47604,Senecio,groundsels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/176575697/medium.jpeg
+53267,47204,Sisymbrium,Hedgemustards,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/56156876/medium.jpg
+53270,47604,Sonchus,sow thistles,genus,https://static.inaturalist.org/photos/45293323/medium.jpg
+53298,49389,Stellaria media,common chickweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/183922286/medium.jpeg
+53305,48699,Torilis,hedge parslies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/176506656/medium.jpg
+53307,50853,Cerastium fontanum,Common mouse-ear chickweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/407864563/medium.jpeg
+53320,52472,Vicia americana,American vetch,species,https://inaturalist-open-data.s3.amazonaws.com/photos/71578389/medium.jpg
+53322,52472,Vicia gigantea,giant vetch,species,https://inaturalist-open-data.s3.amazonaws.com/photos/34664752/medium.jpeg
+53324,52472,Vicia sativa,Common Vetch,species,https://inaturalist-open-data.s3.amazonaws.com/photos/187398427/medium.jpg
+53327,47362,Vinca,periwinkles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/94954066/medium.jpeg
+53366,47193,Cornus sericea occidentalis,western dogwood,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/89793568/medium.jpeg
+53396,47604,Eriophyllum,Woolly sunflowers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/200883682/medium.jpg
+53416,51874,Lonicera hispidula,Pink Honeysuckle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/91736943/medium.jpeg
+53419,53420,Oemleria cerasiformis,Osoberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5410/medium.jpg
+53771,53376,Cotoneaster horizontalis,Wall cotoneaster,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1680590/medium.jpg
+53910,47746,Equisetum hyemale affine,western scouringrush,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/615460/medium.jpg
+53983,53984,Digitalis purpurea,purple foxglove,species,https://inaturalist-open-data.s3.amazonaws.com/photos/179728943/medium.jpeg
+54051,47604,Crepis,hawksbeards,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1185795/medium.jpg
+54142,47604,Tragopogon,Salsifies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/42157151/medium.jpg
+54332,47204,Nasturtium,Watercresses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/40694653/medium.jpg
+54521,47604,Tanacetum,tansies,genus,https://static.inaturalist.org/photos/86915918/medium.jpeg
+54570,48623,Mentha,mints,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1186003/medium.jpg
+54605,54604,Marrubium vulgare,White Horehound,species,https://inaturalist-open-data.s3.amazonaws.com/photos/665395/medium.jpg
+54677,47204,Rorippa,yellowcresses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/75487946/medium.jpeg
+55104,52680,Polypodium glycyrrhiza,licorice fern,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6878355/medium.jpeg
+55326,47204,Lunaria,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/9865/medium.jpg
+55365,47604,Grindelia,gumplants,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/195833808/medium.jpg
+55412,47204,Raphanus,Radishes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/61669677/medium.jpeg
+55436,49140,Amsinckia menziesii,Common Fiddleneck,species,https://inaturalist-open-data.s3.amazonaws.com/photos/184494409/medium.jpeg
+55458,47204,Thysanocarpus,Fringepods,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/13050/medium.jpg
+55564,47604,Bellis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3908816/medium.jpg
+55725,48150,Symphytum,Comfrey,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2031387/medium.JPG
+55737,47148,Sanguisorba,burnets,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/21536938/medium.jpg
+55745,51876,Trifolium repens,white clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/64586855/medium.jpeg
+55748,51611,Veronica arvensis,corn speedwell,species,https://static.inaturalist.org/photos/1229778/medium.
+55749,51611,Veronica serpyllifolia,thyme-leaved speedwell,species,https://inaturalist-open-data.s3.amazonaws.com/photos/424131091/medium.jpeg
+55779,47604,Petasites,Butterburs,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/180164398/medium.jpeg
+55824,47204,Draba,Drabas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/44350506/medium.jpeg
+55826,49131,Myosotis sylvatica,Wood Forget-me-not,species,https://inaturalist-open-data.s3.amazonaws.com/photos/363401670/medium.jpeg
+55831,48623,Glechoma,ground-ivies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/9727/medium.jpg
+55854,48943,Datura stramonium,jimsonweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/130686290/medium.jpg
+55910,47604,Hieracium,hawkweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/72202962/medium.jpeg
+55925,47701,Geranium robertianum,Herb Robert,species,https://inaturalist-open-data.s3.amazonaws.com/photos/285381873/medium.jpg
+55977,55978,Malva moschata,musk mallow,species,https://inaturalist-open-data.s3.amazonaws.com/photos/138963389/medium.jpg
+55982,47604,Lapsana,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/10127/medium.jpg
+56023,47148,Alchemilla,Lady's-mantles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/10270/medium.jpg
+56058,47604,Leucanthemum,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/73086618/medium.jpg
+56063,48582,Sorbus aucuparia,European mountain ash,species,https://inaturalist-open-data.s3.amazonaws.com/photos/10451/medium.jpg
+56088,56089,Robinia pseudoacacia,black locust,species,https://inaturalist-open-data.s3.amazonaws.com/photos/257842284/medium.jpeg
+56112,47604,Symphyotrichum,American asters,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5044116/medium.jpg
+56174,56175,Echium vulgare,viper's-bugloss,species,https://inaturalist-open-data.s3.amazonaws.com/photos/130825766/medium.jpg
+56236,56234,Centaurium erythraea,Common centaury,species,https://inaturalist-open-data.s3.amazonaws.com/photos/20424700/medium.jpg
+56727,48699,Daucus,carrots,genus,https://static.inaturalist.org/photos/56882175/medium.jpeg
+56827,55343,Lomatium utriculatum,Foothill desert-parsley,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14301282/medium.jpg
+56848,48699,Yabea,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/258617/medium.jpg
+56854,56855,Adenocaulon bicolor,American trailplant,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3471018/medium.jpeg
+56971,53136,Madia exigua,small tarweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/198254770/medium.jpeg
+56993,47204,Lobularia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11690/medium.jpg
+57000,55677,Sagina decumbens occidentalis,western pearlwort,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/33104549/medium.jpeg
+57032,47746,Equisetum telmateia braunii,Braun's Giant Horsetail,subspecies,https://static.inaturalist.org/photos/66893591/medium.jpg
+57048,64336,Acmispon parviflorus,Short-flower Deervetch,species,https://inaturalist-open-data.s3.amazonaws.com/photos/147260/medium.jpg
+57079,51876,Trifolium microdon,thimble clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18921/medium.jpg
+57080,51876,Trifolium variegatum,white-tipped clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/36118752/medium.jpg
+57081,51876,Trifolium willdenovii,tomcat clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/379941587/medium.jpeg
+57107,52643,Juncus bufonius,Toad rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/62222498/medium.jpg
+57165,57166,Danthonia californica,California oatgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/431713/medium.jpg
+57170,47434,Festuca,Fescues,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/41600338/medium.jpeg
+57185,47434,Leymus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11813/medium.jpg
+57187,47434,Koeleria,Junegrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/79378658/medium.jpg
+57189,47434,Phalaris,Canarygrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11818/medium.jpg
+57193,47434,Phleum,Timothies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/209619890/medium.jpg
+57200,47434,Polypogon,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/18998186/medium.jpeg
+57229,52995,Claytonia exigua glauca,Glaucous Springbeauty,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/12359172/medium.jpeg
+57234,52995,Claytonia exigua exigua,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/6527551/medium.jpg
+57249,57251,Physocarpus capitatus,Pacific ninebark,species,https://inaturalist-open-data.s3.amazonaws.com/photos/41345619/medium.jpg
+57277,51611,Veronica americana,American brooklime,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8234588/medium.jpeg
+57525,47604,Crocidium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6743475/medium.jpg
+57635,56095,Hyacinthoides hispanica,Spanish Bluebell,species,https://static.inaturalist.org/photos/122452626/medium.jpg
+57787,57285,Plectritis congesta brachystemon,Pink Plectritis,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/1876982/medium.jpg
+57862,57863,Rhynchospora alba,white beak-sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/24281478/medium.jpg
+57976,47604,Filago,cudweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/16708/medium.jpg
+58066,49139,Plagiobothrys tenellus,Pacific popcornflower,species,https://inaturalist-open-data.s3.amazonaws.com/photos/708778/medium.jpg
+58068,47204,Arabis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/15158/medium.jpg
+58070,47204,Athysanus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/264032231/medium.jpeg
+58127,48439,Chenopodium album,Common Lambsquarters,species,https://static.inaturalist.org/photos/45792371/medium.jpg
+58306,58307,Myosurus minimus,Tiny Mousetail,species,https://inaturalist-open-data.s3.amazonaws.com/photos/77604605/medium.jpg
+58347,52643,Juncus balticus,Baltic Rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/46339870/medium.jpg
+58365,47434,Alopecurus,Foxtail grasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/42036458/medium.jpeg
+58373,47434,Distichlis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/12854/medium.jpg
+58374,47434,Echinochloa,Barnyard Grasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/58692437/medium.jpeg
+58728,49289,Berberis,Barberries,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/256350818/medium.jpg
+58907,57067,Melilotus albus,White Sweetclover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/88013424/medium.jpg
+58911,51876,Trifolium microcephalum,small-headed clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18932/medium.jpg
+58917,47701,Geranium carolinianum,Carolina crane's-bill,species,https://static.inaturalist.org/photos/116546288/medium.jpg
+59068,49371,Scirpus microcarpus,Panicled Bulrush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12835/medium.jpg
+59205,47160,Schoenoplectus acutus,hardstem bulrush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/20892505/medium.jpg
+59253,57285,Plectritis congesta congesta,shortspur seablush,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/12436/medium.jpg
+59520,48241,Erythronium oregonum,giant white fawn lily,species,https://inaturalist-open-data.s3.amazonaws.com/photos/192044591/medium.jpg
+59571,47604,Arctium,burdocks,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/13564/medium.jpg
+59902,48623,Melissa,Melissas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/45296352/medium.jpeg
+60127,60128,Oenanthe sarmentosa,water parsley,species,https://inaturalist-open-data.s3.amazonaws.com/photos/138170784/medium.jpg
+60145,47604,Leontodon,hawkbit,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/52320808/medium.jpeg
+60151,47604,Soliva,burweeds and allies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/75825422/medium.jpeg
+60176,58112,Atriplex prostrata,Creeping Saltbush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/48942/medium.jpg
+60194,64336,Acmispon denticulatus,riverbar bird's-foot trefoil,species,https://inaturalist-open-data.s3.amazonaws.com/photos/79086869/medium.jpeg
+60201,51876,Trifolium subterraneum,Subterranean Clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7383824/medium.jpeg
+60204,47701,Geranium pusillum,Small-flowered Crane's-bill,species,https://inaturalist-open-data.s3.amazonaws.com/photos/79028068/medium.jpg
+60208,48623,Lycopus,water horehounds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/17792/medium.jpg
+60301,47434,Panicum,panicgrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/22271340/medium.jpg
+60311,47434,Puccinellia,Salt Grass,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/457467/medium.jpg
+60958,47604,Gamochaeta,Everlastings and Cudweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/189571560/medium.jpeg
+60996,49389,Stellaria borealis sitchana,Sitka starwort,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/9000132/medium.jpg
+61021,51876,Trifolium glomeratum,Clustered clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/36475266/medium.jpeg
+61086,53196,Rumex occidentalis,western dock,species,https://inaturalist-open-data.s3.amazonaws.com/photos/43937491/medium.jpeg
+61100,53453,Salix sitchensis,Sitka willow,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3717180/medium.jpeg
+61112,51611,Veronica scutellata,Marsh Speedwell,species,https://inaturalist-open-data.s3.amazonaws.com/photos/143547507/medium.jpg
+61179,51876,Trifolium dichotomum,Branched Clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/265129/medium.jpg
+61397,48623,Origanum,Marjorams,genus,https://static.inaturalist.org/photos/139527030/medium.jpg
+61432,47351,Prunus laurocerasus,Cherry laurel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/146285013/medium.jpg
+61474,55731,Spergularia macrotheca macrotheca,Beach Sandspurry,variety,https://static.inaturalist.org/photos/208461/medium.jpg
+61787,48382,Persicaria,"knotweeds, smartweeds, and waterpeppers",genus,https://inaturalist-open-data.s3.amazonaws.com/photos/47659541/medium.jpg
+61824,51876,Trifolium hybridum,Alsike clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12164535/medium.jpg
+62205,62206,Alcea rosea,Hollyhock,species,https://inaturalist-open-data.s3.amazonaws.com/photos/160996954/medium.jpg
+62215,47148,Comarum,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/399193/medium.jpg
+62312,48596,Campanula rotundifolia,Common Harebell,species,https://static.inaturalist.org/photos/5478271/medium.jpg
+62474,47902,Opuntia fragilis,Brittle Pricklypear,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4708875/medium.jpeg
+62499,47604,Jacobaea,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/48635936/medium.jpeg
+63951,58736,Pyrus communis,Common Pear,species,https://static.inaturalist.org/photos/17253854/medium.jpeg
+63960,47544,Rubus leucodermis,whitebark raspberry,species,https://static.inaturalist.org/photos/22798930/medium.jpg
+64055,52672,Dryopteris expansa,spreading wood fern,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21824168/medium.jpg
+64268,51876,Trifolium incarnatum,crimson clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/73250250/medium.jpg
+64541,60001,Dianthus armeria,Deptford pink,species,https://inaturalist-open-data.s3.amazonaws.com/photos/141115670/medium.jpg
+68007,68008,Smyrnium olusatrum,Alexanders,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6094077/medium.jpg
+68084,47561,Pinus monticola,western white pine,species,https://static.inaturalist.org/photos/24652249/medium.jpg
+69930,52643,Juncus tenuis,Slender Path Rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/80707118/medium.jpg
+71076,53453,Salix scouleriana,Scouler's willow,species,https://inaturalist-open-data.s3.amazonaws.com/photos/105656720/medium.jpg
+71122,51876,Trifolium oliganthum,few-flowered clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6913303/medium.jpeg
+71146,51876,Trifolium wormskioldii,springbank clover,species,https://static.inaturalist.org/photos/208025692/medium.jpeg
+71943,49289,Achlys,,genus,https://static.inaturalist.org/photos/121126/medium.JPG
+71973,47434,Anthoxanthum,sweetgrasses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/168398572/medium.jpeg
+71988,47434,Arrhenatherum,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/725447/medium.jpg
+72054,47434,Cinna,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/136662/medium.jpg
+72133,48382,Fallopia,Fallopias,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/46628104/medium.jpg
+72191,47204,Idahoa,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/290598/medium.jpg
+72355,47434,Secale,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/75687/medium.jpg
+72390,47204,Teesdalia,Shepherdscress,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/110848702/medium.jpg
+72396,47204,Thlaspi,penny cresses,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/114726/medium.jpg
+72402,47434,Torreyochloa,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/977562/medium.jpg
+72416,47204,Turritis,tower mustards,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/290604/medium.jpg
+75398,52326,Amaranthus powellii,powell's amaranth,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8954268/medium.jpeg
+75450,52836,Angelica genuflexa,Kneeling Angelica,species,https://inaturalist-open-data.s3.amazonaws.com/photos/58970790/medium.jpg
+75701,58112,Atriplex dioica,thickleaf orach,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2982149/medium.jpg
+75765,50204,Bidens cernua,Nodding Beggarticks,species,https://inaturalist-open-data.s3.amazonaws.com/photos/110532/medium.jpg
+76338,60126,Cicuta douglasii,Western Water Hemlock,species,https://inaturalist-open-data.s3.amazonaws.com/photos/77066379/medium.jpeg
+76461,53376,Cotoneaster simonsii,Himalayan cotoneaster,species,https://inaturalist-open-data.s3.amazonaws.com/photos/88086681/medium.jpeg
+76603,57166,Danthonia decumbens,mountain heath grass,species,https://static.inaturalist.org/photos/13571739/medium.jpg
+76604,57166,Danthonia intermedia,Vasey's Oatgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/61035803/medium.jpeg
+76745,72105,Dulichium arundinaceum,Three-way Sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/93587963/medium.jpg
+76779,57022,Eleocharis obtusa,Blunt Spikerush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/245010186/medium.jpg
+76812,72113,Empetrum nigrum,black crowberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/53111037/medium.jpeg
+77045,72122,Eriophorum gracile,slender cottongrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2099481/medium.jpg
+77216,53060,Galium trifidum,three-petal bedstraw,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8230353/medium.jpeg
+77251,47701,Geranium bicknellii,Northern Cranesbill,species,https://inaturalist-open-data.s3.amazonaws.com/photos/96524/medium.jpg
+77266,55751,Geum macrophyllum,Large-leaved Avens,species,https://inaturalist-open-data.s3.amazonaws.com/photos/41192976/medium.jpeg
+77287,61064,Glyceria borealis,boreal manna grass,species,https://static.inaturalist.org/photos/79938840/medium.jpg
+77289,61064,Glyceria elata,Tufted Tall Mannagrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/34358/medium.jpg
+77292,61064,Glyceria leptostachya,narrow manna grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2537008/medium.jpg
+77293,61064,Glyceria striata,Fowl Mannagrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/129824/medium.jpg
+77480,52761,Hypericum androsaemum,Tutsan,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4032719/medium.jpg
+77481,52761,Hypericum calycinum,Rose-of-sharon,species,https://inaturalist-open-data.s3.amazonaws.com/photos/229098021/medium.jpeg
+77549,52643,Juncus acuminatus,tapered rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/856679/medium.jpg
+77552,52643,Juncus articulatus,Jointed rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/61718017/medium.jpg
+77638,50321,Lathyrus japonicus,seaside pea,species,https://inaturalist-open-data.s3.amazonaws.com/photos/354009189/medium.jpeg
+77778,50791,Linaria purpurea,Purple Toadflax,species,https://inaturalist-open-data.s3.amazonaws.com/photos/173700035/medium.jpg
+77818,55343,Lomatium nudicaule,Barestem Biscuitroot,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8213632/medium.jpg
+77832,51874,Lonicera ciliosa,orange honeysuckle,species,https://static.inaturalist.org/photos/18945520/medium.jpg
+77917,48063,Lysimachia thyrsiflora,Tufted Loosestrife,species,https://inaturalist-open-data.s3.amazonaws.com/photos/80629615/medium.jpeg
+77923,53136,Madia glomerata,mountain tarweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/142684/medium.jpg
+77948,54500,Malus fusca,Pacific Crab Apple,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3101906/medium.JPG
+77952,55978,Malva neglecta,dwarf mallow,species,https://inaturalist-open-data.s3.amazonaws.com/photos/83395271/medium.jpg
+77970,60848,Meconella oregana,Oregon Fairypoppy,species,https://inaturalist-open-data.s3.amazonaws.com/photos/117561670/medium.jpg
+77983,52803,Melica harfordii,Harford's oniongrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/142744/medium.jpg
+77986,52803,Melica subulata,Alaska Oniongrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18310877/medium.jpeg
+78027,72236,Micranthes integrifolia,Wholeleaf Saxifrage,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18934/medium.jpg
+78150,49131,Myosotis laxa,bay forget-me-not,species,https://inaturalist-open-data.s3.amazonaws.com/photos/138207566/medium.jpeg
+78346,52504,Papaver somniferum,opium poppy,species,https://inaturalist-open-data.s3.amazonaws.com/photos/223924155/medium.jpg
+78434,56839,Perideridia gairdneri,Gairdner's Yampah,species,https://inaturalist-open-data.s3.amazonaws.com/photos/200488/medium.jpg
+78465,72290,Petroselinum crispum,garden parsley,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9083364/medium.jpeg
+78910,53196,Rumex transitorius,Pacific willow dock,species,https://static.inaturalist.org/photos/21801789/medium.jpg
+78941,53453,Salix hookeriana,coastal willow,species,https://inaturalist-open-data.s3.amazonaws.com/photos/131374502/medium.jpg
+79002,49371,Scirpus cyperinus,woolgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9233128/medium.jpeg
+79408,51876,Trifolium arvense,rabbitfoot clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/251457481/medium.jpg
+79432,51876,Trifolium striatum,Knotted clover,species,https://inaturalist-open-data.s3.amazonaws.com/photos/431017/medium.jpg
+79464,57861,Utricularia gibba,humped bladderwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/260067465/medium.jpeg
+79503,52472,Vicia lathyroides,spring vetch,species,https://inaturalist-open-data.s3.amazonaws.com/photos/956261/medium.jpg
+79637,71992,Asplenium trichomanes trichomanes,maidenhair spleenwort,subspecies,https://static.inaturalist.org/photos/76170206/medium.gif
+79659,62219,Camassia leichtlinii suksdorfii,Suksdorf's Large Camas,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/2862271/medium.JPG
+79751,52995,Claytonia rubra depressa,Rosetted Springbeauty,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/14335688/medium.jpg
+80645,56932,Cuscuta pacifica pacifica,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/1762269/medium.jpg
+81026,63137,Linnaea borealis longiflora,Longtube Twinflower,variety,https://static.inaturalist.org/photos/384229/medium.jpg
+81378,55731,Spergularia canadensis occidentalis,western sand-spurrey,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/8726127/medium.jpeg
+85063,60128,Oenanthe pimpinelloides,Corky-fruited Water-dropwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1450784/medium.jpg
+118435,62219,Camassia quamash quamash,,subspecies,https://static.inaturalist.org/photos/7368202/medium.jpg
+119450,119451,Calluna vulgaris,common heather,species,https://inaturalist-open-data.s3.amazonaws.com/photos/91325703/medium.jpeg
+127355,55869,Cyclamen hederifolium,Ivy-leaved cyclamen,species,https://inaturalist-open-data.s3.amazonaws.com/photos/110836055/medium.jpg
+129020,51611,Veronica officinalis,heath speedwell,species,https://inaturalist-open-data.s3.amazonaws.com/photos/29312850/medium.jpg
+129075,53787,Fumaria muralis,common ramping-fumitory,species,https://inaturalist-open-data.s3.amazonaws.com/photos/16104053/medium.jpg
+132710,53787,Fumaria reuteri,Martin's Ramping-fumitory,species,https://inaturalist-open-data.s3.amazonaws.com/photos/23927194/medium.jpg
+153479,48493,Delphinium menziesii,Menzies' Larkspur,species,https://inaturalist-open-data.s3.amazonaws.com/photos/131162731/medium.jpeg
+156879,47148,Argentina,Silverweeds,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/54317947/medium.jpeg
+159233,50204,Bidens amplissima,Vancouver Island beggarticks,species,https://inaturalist-open-data.s3.amazonaws.com/photos/157623744/medium.jpeg
+162678,72122,Eriophorum chamissonis,russet cottongrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5683207/medium.jpeg
+170971,47351,Prunus × pugetensis,Puget Sound cherry,hybrid,https://inaturalist-open-data.s3.amazonaws.com/photos/127715926/medium.jpg
+181694,47727,Acer glabrum douglasii,Douglas maple,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/913182/medium.jpg
+181942,47604,Scorzoneroides,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/52460807/medium.jpg
+203680,47604,Pilosella,mouse-ear hawkweeds,genus,https://static.inaturalist.org/photos/42518355/medium.jpg
+204175,48063,Lysimachia maritima,Sea Milkwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2872306/medium.jpg
+204214,47434,Graphephorum,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/30904990/medium.jpeg
+234941,49340,Castilleja miniata dixonii,Dixon's Paintbrush,variety,https://static.inaturalist.org/photos/111354519/medium.jpeg
+237139,55796,Luzula multiflora multiflora,common heath woodrush,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/173308530/medium.jpg
+238339,55677,Sagina maxima maxima,Sticky-stem Pearlwort,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/41458058/medium.jpg
+244100,49149,Scilla luciliae,Boissier's Glory-of-the-snow,species,https://inaturalist-open-data.s3.amazonaws.com/photos/64008549/medium.jpg
+316609,62232,Chimaphila umbellata umbellata,Eurasian Umbellate Wintergreen,subspecies,https://static.inaturalist.org/photos/2016628/medium.jpg
+357949,72236,Micranthes rufidula,Rustyhair Saxifrage,species,https://inaturalist-open-data.s3.amazonaws.com/photos/186915327/medium.jpeg
+379255,48382,Reynoutria,Rhizomatous Knotweeds,genus,https://static.inaturalist.org/photos/7065992/medium.jpg
+406080,50641,Solanum nitidibaccatum,Green Nightshade,species,https://inaturalist-open-data.s3.amazonaws.com/photos/184772306/medium.jpeg
+411074,53376,Cotoneaster coriaceus,Late cotoneaster,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6155423/medium.jpeg
+469472,54500,Malus domestica,apple,species,https://inaturalist-open-data.s3.amazonaws.com/photos/268437/medium.jpg
+496537,48063,Lysimachia latifolia,Western Starflower,species,https://static.inaturalist.org/photos/146237736/medium.jpg
+710296,734821,Petrosedum forsterianum,Rock Stonecrop,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2884821/medium.JPG
+734805,734821,Petrosedum rupestre,Reflexed Stonecrop,species,https://inaturalist-open-data.s3.amazonaws.com/photos/380150313/medium.jpg
+739040,273241,Aphyllon purpureum,oneflower broomrape,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21050136/medium.jpg
+791928,48063,Lysimachia arvensis,scarlet pimpernel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/medium.jpg
+863646,56095,Hyacinthoides × massartiana,Hybrid bluebell,hybrid,https://inaturalist-open-data.s3.amazonaws.com/photos/34158242/medium.jpg
+1220721,962562,Eriocoma lemmonii,lemmon's needle grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/421475/medium.jpeg
+1234070,55343,Lomatium papilioniferum,pungent desert parsley,species,https://inaturalist-open-data.s3.amazonaws.com/photos/33874874/medium.jpeg
+1319212,53376,Cotoneaster franchetii,Franchet's cotoneaster,species,https://inaturalist-open-data.s3.amazonaws.com/photos/33337608/medium.jpg
+1459210,48241,Erythronium oregonum × revolutum,giant white × coast fawn lily,hybrid,https://inaturalist-open-data.s3.amazonaws.com/photos/35708345/medium.jpeg
+47359,47361,Apocynum androsaemifolium,spreading dogbane,species,https://inaturalist-open-data.s3.amazonaws.com/photos/375675/medium.jpg
+47435,47436,Lotus corniculatus,bird's-foot trefoil,species,https://inaturalist-open-data.s3.amazonaws.com/photos/23521868/medium.jpg
+47543,47544,Rubus spectabilis,Salmonberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/313742389/medium.jpg
+47695,47696,Cynosurus echinatus,bristly dogtail grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/330824782/medium.jpg
+47697,47698,Hesperis matronalis,dame's rocket,species,https://inaturalist-open-data.s3.amazonaws.com/photos/850/medium.jpg
+48349,48353,Vaccinium ovatum,Evergreen Huckleberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4845/medium.jpg
+48354,48353,Vaccinium parvifolium,Red Huckleberry,species,https://static.inaturalist.org/photos/4855055/medium.jpg
+48543,48544,Mycelis muralis,Wall Lettuce,species,https://inaturalist-open-data.s3.amazonaws.com/photos/10340/medium.jpg
+49444,49445,Corallorhiza mertensiana,Pacific coralroot,species,https://inaturalist-open-data.s3.amazonaws.com/photos/15894/medium.jpg
+50618,50619,Fritillaria affinis,checker lily,species,https://inaturalist-open-data.s3.amazonaws.com/photos/27849/medium.jpg
+50719,50718,Goodyera oblongifolia,Western Rattlesnake Plantain,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12879824/medium.jpeg
+50743,50741,Spiranthes romanzoffiana,Hooded Ladies' Tresses,species,https://static.inaturalist.org/photos/1937959/medium.jpg
+50806,50807,Uropappus lindleyi,silverpuffs,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7015916/medium.jpeg
+51344,48385,Heuchera micrantha diversifolia,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/13359312/medium.jpg
+51618,51619,Myrrhis odorata,sweet cicely,species,https://inaturalist-open-data.s3.amazonaws.com/photos/929198/medium.jpg
+51646,47544,Rubus parviflorus,thimbleberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/26833062/medium.jpeg
+51779,62379,Sempervivum tectorum,Houseleek,species,https://inaturalist-open-data.s3.amazonaws.com/photos/85631937/medium.jpg
+52627,51229,Stachys chamissonis cooleyae,Cooley's Hedge-nettle,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/6758732/medium.jpg
+52692,52693,Agrostis pallens,seashore bentgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/381991483/medium.jpg
+52694,52695,Aira caryophyllea,Silver Hairgrass,species,https://static.inaturalist.org/photos/364292/medium.jpg
+52698,52697,Avena fatua,wild oat,species,https://static.inaturalist.org/photos/68891941/medium.jpg
+52702,52701,Bromus diandrus,great brome,species,https://inaturalist-open-data.s3.amazonaws.com/photos/202675829/medium.jpeg
+52703,52701,Bromus hordeaceus,common soft brome,species,https://inaturalist-open-data.s3.amazonaws.com/photos/130309776/medium.jpeg
+52720,52721,Dactylis glomerata,orchard grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/44960033/medium.jpeg
+52722,52723,Deschampsia elongata,slender hairgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11801/medium.jpg
+52793,52794,Holcus lanatus,Yorkshire fog,species,https://inaturalist-open-data.s3.amazonaws.com/photos/157538875/medium.jpg
+52812,52809,Poa howellii,Howell's Bluegrass,species,https://static.inaturalist.org/photos/130176428/medium.jpeg
+52833,52834,Anaphalis margaritacea,pearly everlasting,species,https://inaturalist-open-data.s3.amazonaws.com/photos/22863111/medium.jpeg
+52841,52842,Anthemis cotula,Stinking chamomile,species,https://static.inaturalist.org/photos/362005/medium.jpg
+52846,52847,Anthriscus caucalis,Bur Parsley,species,https://inaturalist-open-data.s3.amazonaws.com/photos/25575053/medium.jpg
+52913,52914,Cichorium intybus,chicory,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9244618/medium.jpg
+52976,52977,Barbarea orthoceras,American yellowrocket,species,https://static.inaturalist.org/photos/8500245/medium.jpg
+52981,49652,Cardamine oligosperma,little western bittercress,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3002876/medium.jpg
+52989,48561,Cirsium vulgare,Bull Thistle,species,https://static.inaturalist.org/photos/47950246/medium.jpg
+52992,52845,Matricaria discoidea,pineapple-weed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/381508628/medium.jpg
+52993,48561,Cirsium brevistylum,Short-styled Thistle,species,https://static.inaturalist.org/photos/114124015/medium.jpg
+53012,50249,Maianthemum racemosum amplexicaule,western Solomon's plume,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/11016026/medium.jpg
+53059,53060,Galium aparine,catchweed bedstraw,species,https://inaturalist-open-data.s3.amazonaws.com/photos/79984095/medium.jpg
+53076,47701,Geranium molle,Dove's-foot crane's-bill,species,https://inaturalist-open-data.s3.amazonaws.com/photos/71225717/medium.jpg
+53089,53078,Pseudognaphalium stramineum,cottonbatting plant,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6770717/medium.jpeg
+53103,51900,Hypochaeris glabra,Smooth Cat's Ear,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1003756/medium.jpg
+53104,51900,Hypochaeris radicata,Common Cat's-ear,species,https://inaturalist-open-data.s3.amazonaws.com/photos/49330430/medium.jpg
+53107,53106,Lactuca serriola,prickly lettuce,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5228/medium.jpg
+53166,53167,Osmorhiza berteroi,mountain sweet cicely,species,https://inaturalist-open-data.s3.amazonaws.com/photos/22613/medium.jpg
+53178,50636,Plantago lanceolata,ribwort plantain,species,https://inaturalist-open-data.s3.amazonaws.com/photos/289213594/medium.jpg
+53188,53189,Psilocarphus tenellus,slender woolly-marbles,species,https://inaturalist-open-data.s3.amazonaws.com/photos/129482817/medium.jpg
+53197,53196,Rumex crispus,curled dock,species,https://static.inaturalist.org/photos/95760612/medium.jpeg
+53203,53204,Clinopodium douglasii,yerba buena,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6758827/medium.jpg
+53210,53207,Senecio sylvaticus,Heath Groundsel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5286/medium.jpg
+53211,53207,Senecio vulgaris,common groundsel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/67415508/medium.jpg
+53266,53267,Sisymbrium officinale,Hedge mustard,species,https://static.inaturalist.org/photos/131342649/medium.jpeg
+53269,53270,Sonchus asper,prickly sowthistle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/261760280/medium.jpeg
+53294,53270,Sonchus oleraceus,Common Sow-thistle,species,https://static.inaturalist.org/photos/28460419/medium.jpeg
+53313,51876,Trifolium dubium,Lesser hop trefoil,species,https://inaturalist-open-data.s3.amazonaws.com/photos/280916253/medium.jpeg
+53326,53327,Vinca major,greater periwinkle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/187076568/medium.jpeg
+53328,50829,Viola adunca,hookedspur violet,species,https://static.inaturalist.org/photos/192684110/medium.jpg
+53441,53438,Rosa gymnocarpa,Baldhip Rose,species,https://inaturalist-open-data.s3.amazonaws.com/photos/26171161/medium.jpeg
+54050,54051,Crepis capillaris,Smooth hawksbeard,species,https://inaturalist-open-data.s3.amazonaws.com/photos/151130085/medium.jpeg
+54141,54142,Tragopogon porrifolius,purple salsify,species,https://static.inaturalist.org/photos/74416324/medium.jpg
+54520,54521,Tanacetum parthenium,feverfew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/10145/medium.jpg
+54835,47351,Prunus virginiana,chokecherry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/146282563/medium.jpg
+55342,50829,Viola sempervirens,Redwood Violet,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8866/medium.jpg
+55364,55365,Grindelia hirsutula,Hairy Gumweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8538806/medium.jpeg
+55367,50299,Fragaria chiloensis,beach strawberry,species,https://static.inaturalist.org/photos/12686733/medium.jpg
+55411,55412,Raphanus raphanistrum,Wild radish,species,https://inaturalist-open-data.s3.amazonaws.com/photos/284199344/medium.jpg
+55563,55564,Bellis perennis,Lawn daisy,species,https://inaturalist-open-data.s3.amazonaws.com/photos/360603587/medium.jpeg
+55666,51611,Veronica persica,bird's-eye speedwell,species,https://inaturalist-open-data.s3.amazonaws.com/photos/358387633/medium.jpg
+55732,53186,Potentilla norvegica,rough cinquefoil,species,https://static.inaturalist.org/photos/43777719/medium.jpeg
+55734,55735,Sedum acre,Biting Stonecrop,species,https://inaturalist-open-data.s3.amazonaws.com/photos/102765258/medium.jpg
+55825,51611,Veronica filiformis,Slender speedwell,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9709/medium.jpg
+55829,49652,Cardamine hirsuta,hairy bittercress,species,https://inaturalist-open-data.s3.amazonaws.com/photos/156216282/medium.jpg
+55830,55831,Glechoma hederacea,ground-ivy,species,https://inaturalist-open-data.s3.amazonaws.com/photos/72797040/medium.jpeg
+55844,53327,Vinca minor,lesser periwinkle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/66917488/medium.jpeg
+55845,50829,Viola odorata,Sweet violet,species,https://inaturalist-open-data.s3.amazonaws.com/photos/63834973/medium.jpg
+55886,55326,Lunaria annua,Annual Honesty,species,https://static.inaturalist.org/photos/129122306/medium.jpeg
+55971,54521,Tanacetum vulgare,tansy,species,https://inaturalist-open-data.s3.amazonaws.com/photos/23464794/medium.jpg
+55981,55982,Lapsana communis,nipplewort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/206801592/medium.jpg
+56121,52979,Capsella bursa-pastoris,shepherd's-purse,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9103381/medium.jpg
+56166,61787,Persicaria maculosa,spotted lady's thumb,species,https://inaturalist-open-data.s3.amazonaws.com/photos/30061970/medium.jpg
+56170,48177,Galinsoga quadriradiata,shaggy soldier,species,https://inaturalist-open-data.s3.amazonaws.com/photos/219741036/medium.jpg
+56188,52472,Vicia hirsuta,Hairy tare,species,https://inaturalist-open-data.s3.amazonaws.com/photos/105701010/medium.jpeg
+56224,49869,Caltha palustris,marsh marigold,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5897227/medium.jpg
+56726,56727,Daucus pusillus,American wild carrot,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7606922/medium.jpg
+56846,53305,Torilis arvensis,common hedge parsley,species,https://inaturalist-open-data.s3.amazonaws.com/photos/391026391/medium.jpg
+56847,56848,Yabea microcarpa,California Hedge Parsley,species,https://inaturalist-open-data.s3.amazonaws.com/photos/81101506/medium.jpeg
+56992,56993,Lobularia maritima,sweet alyssum,species,https://inaturalist-open-data.s3.amazonaws.com/photos/372743100/medium.jpeg
+56996,53267,Sisymbrium altissimum,Tall Tumblemustard,species,https://static.inaturalist.org/photos/67836882/medium.jpg
+57016,57017,Crassula connata,sand pygmyweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3193770/medium.JPG
+57053,64336,Acmispon americanus americanus,Spanish clover,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/997642/medium.jpg
+57076,51876,Trifolium campestre,hop trefoil,species,https://inaturalist-open-data.s3.amazonaws.com/photos/73248929/medium.jpg
+57156,52697,Avena sativa,Common Oat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/51273833/medium.jpg
+57163,52701,Bromus sterilis,Barren Brome,species,https://inaturalist-open-data.s3.amazonaws.com/photos/152944035/medium.jpeg
+57164,52723,Deschampsia danthonioides,annual hairgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/131992784/medium.jpg
+57183,57187,Koeleria macrantha,Prairie Junegrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/58243239/medium.jpeg
+57190,57193,Phleum pratense,Timothy grass,species,https://static.inaturalist.org/photos/23213196/medium.jpg
+57191,57189,Phalaris canariensis,canary grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/204178428/medium.jpeg
+57197,57200,Polypogon monspeliensis,rabbitfoot grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/115909148/medium.jpeg
+57198,52809,Poa secunda,Pine bluegrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11822/medium.jpg
+57215,53196,Rumex conglomeratus,Clustered Dock,species,https://inaturalist-open-data.s3.amazonaws.com/photos/79061685/medium.jpeg
+57310,52472,Vicia tetrasperma,Smooth tare,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11876/medium.jpg
+57315,52472,Vicia villosa villosa,Shaggy Vetch,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/136337272/medium.jpg
+57524,57525,Crocidium multicaule,spring gold,species,https://static.inaturalist.org/photos/33411839/medium.jpg
+57847,50921,Muscari armeniacum,Garden Grape-hyacinth,species,https://inaturalist-open-data.s3.amazonaws.com/photos/10422616/medium.jpg
+57980,53082,Gnaphalium palustre,western marsh cudweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8082065/medium.jpg
+58069,58070,Athysanus pusillus,common sandweed,species,https://static.inaturalist.org/photos/260799030/medium.jpg
+58088,55458,Thysanocarpus curvipes,sand fringepod,species,https://inaturalist-open-data.s3.amazonaws.com/photos/13050/medium.jpg
+58229,50636,Plantago elongata,Coastal Plantain,species,https://inaturalist-open-data.s3.amazonaws.com/photos/202946/medium.jpg
+58369,52701,Bromus tectorum,Cheatgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/70313319/medium.jpeg
+58372,58373,Distichlis spicata,Saltgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/54208942/medium.jpeg
+58382,52809,Poa bulbosa,Bulbous Bluegrass,species,https://static.inaturalist.org/photos/65638909/medium.jpg
+58767,52677,Pentagramma triangularis triangularis,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/14244966/medium.jpg
+58886,55735,Sedum spathulifolium,Broad-leaved Stonecrop,species,https://inaturalist-open-data.s3.amazonaws.com/photos/285028783/medium.jpg
+58961,50636,Plantago major,greater plantain,species,https://inaturalist-open-data.s3.amazonaws.com/photos/349979346/medium.jpeg
+59035,50641,Solanum americanum,American black nightshade,species,https://static.inaturalist.org/photos/347090049/medium.jpeg
+59088,52693,Agrostis exarata,Pacific bentgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/19749178/medium.jpg
+59091,57170,Festuca occidentalis,western fescue,species,https://inaturalist-open-data.s3.amazonaws.com/photos/129430507/medium.jpeg
+59570,59571,Arctium minus,lesser burdock,species,https://inaturalist-open-data.s3.amazonaws.com/photos/52263099/medium.jpg
+59901,59902,Melissa officinalis,lemon balm,species,https://static.inaturalist.org/photos/45898551/medium.jpeg
+60132,48561,Cirsium arvense,creeping thistle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21270271/medium.jpeg
+60150,60151,Soliva sessilis,common soliva,species,https://inaturalist-open-data.s3.amazonaws.com/photos/40131372/medium.jpeg
+60206,60208,Lycopus americanus,American bugleweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4076864/medium.jpg
+60283,58374,Echinochloa crus-galli,barnyardgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/42017621/medium.jpeg
+60284,52792,Elymus repens,Quack Grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/81832479/medium.jpg
+60287,52797,Hordeum jubatum,Foxtail Barley,species,https://inaturalist-open-data.s3.amazonaws.com/photos/99131141/medium.jpg
+60309,60311,Puccinellia nuttalliana,nuttall's alkali grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/130305706/medium.jpg
+60318,51611,Veronica peregrina peregrina,common purslane speedwell,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/61934798/medium.jpg
+61002,52670,Athyrium filix-femina cyclosorum,western lady fern,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/130276306/medium.jpg
+61010,47121,Lupinus arboreus,coastal bush lupine,species,https://inaturalist-open-data.s3.amazonaws.com/photos/120260472/medium.jpg
+61012,53152,Medicago arabica,Spotted medick,species,https://inaturalist-open-data.s3.amazonaws.com/photos/63696933/medium.jpg
+61016,47121,Lupinus polyphyllus polyphyllus,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/40164699/medium.jpg
+61032,52761,Hypericum anagalloides,Bog St. John's-wort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/396680345/medium.jpg
+61058,52695,Aira praecox,early hair grass,species,https://static.inaturalist.org/photos/191244990/medium.jpeg
+61396,61397,Origanum vulgare,Oregano,species,https://inaturalist-open-data.s3.amazonaws.com/photos/145466748/medium.jpeg
+61964,47351,Prunus avium,wild cherry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/67740473/medium.jpg
+61992,55365,Grindelia stricta,Oregon Gumplant,species,https://inaturalist-open-data.s3.amazonaws.com/photos/151301892/medium.jpg
+62211,53186,Potentilla recta,sulphur cinquefoil,species,https://inaturalist-open-data.s3.amazonaws.com/photos/296519399/medium.jpeg
+62213,62215,Comarum palustre,marsh cinquefoil,species,https://inaturalist-open-data.s3.amazonaws.com/photos/98107767/medium.jpg
+62498,62499,Jacobaea vulgaris,ragwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/45878089/medium.jpeg
+63337,57189,Phalaris arundinacea,reed canary grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/78038371/medium.jpg
+63371,53196,Rumex obtusifolius,broad-leaved dock,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5084024/medium.jpg
+63905,47351,Prunus emarginata,Bitter cherry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/67338881/medium.jpg
+63939,50249,Maianthemum dilatatum,Western Lily of the Valley,species,https://inaturalist-open-data.s3.amazonaws.com/photos/40236053/medium.jpg
+68470,53202,Sanicula crassicaulis crassicaulis,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/6101355/medium.jpg
+68471,53202,Sanicula crassicaulis tripartita,Three-parted Pacific Sanicle,variety,https://static.inaturalist.org/photos/69425480/medium.jpg
+68543,50636,Plantago maritima,Sea Plantain,species,https://static.inaturalist.org/photos/44671595/medium.jpg
+69636,49652,Cardamine flexuosa,wavy bittercress,species,https://inaturalist-open-data.s3.amazonaws.com/photos/97368295/medium.jpeg
+69931,52693,Agrostis stolonifera,Creeping Bent,species,https://static.inaturalist.org/photos/88672155/medium.jpeg
+70265,49131,Myosotis discolor,Changing Forget-me-not,species,https://inaturalist-open-data.s3.amazonaws.com/photos/31342774/medium.jpg
+71135,53036,Ambrosia chamissonis,silver beachweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/43337/medium.jpg
+71136,52977,Barbarea verna,land cress,species,https://inaturalist-open-data.s3.amazonaws.com/photos/31378/medium.jpg
+71140,58365,Alopecurus geniculatus,Marsh foxtail,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8585500/medium.jpeg
+71141,58365,Alopecurus pratensis,Meadow Foxtail,species,https://static.inaturalist.org/photos/389843432/medium.jpeg
+75263,71943,Achlys triphylla,vanilla leaf,species,https://static.inaturalist.org/photos/3816738/medium.jpg
+75312,52693,Agrostis capillaris,colonial bent,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1184582/medium.jpg
+75314,52693,Agrostis gigantea,redtop,species,https://inaturalist-open-data.s3.amazonaws.com/photos/172928054/medium.jpeg
+75319,52693,Agrostis scabra,Rough Bentgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/237115052/medium.jpeg
+75415,49230,Amelanchier alnifolia,Saskatoon,species,https://static.inaturalist.org/photos/8047816/medium.jpg
+75475,71973,Anthoxanthum odoratum,sweet vernal grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/20694647/medium.jpg
+75494,58068,Arabis eschscholtziana,Eschscholtz's hairy rockcress,species,https://inaturalist-open-data.s3.amazonaws.com/photos/133951301/medium.jpg
+75501,59571,Arctium lappa,greater burdock,species,https://inaturalist-open-data.s3.amazonaws.com/photos/85477865/medium.jpg
+75597,52855,Artemisia suksdorfii,coastal mugwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/82212944/medium.jpeg
+75756,58728,Berberis nervosa,Cascade Oregon-grape,species,https://inaturalist-open-data.s3.amazonaws.com/photos/44971943/medium.jpg
+75900,52701,Bromus commutatus,Meadow Brome,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3952731/medium.jpg
+75903,52701,Bromus inermis,Smooth Brome,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9089871/medium.jpeg
+75909,52701,Bromus racemosus,Bald Brome,species,https://inaturalist-open-data.s3.amazonaws.com/photos/40559765/medium.jpg
+75911,52701,Bromus secalinus,Rye Brome,species,https://static.inaturalist.org/photos/8634388/medium.jpg
+75912,52701,Bromus sitchensis,sitka brome,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1708013/medium.jpg
+75915,52701,Bromus vulgaris,columbia brome,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18513503/medium.jpeg
+76002,49652,Cardamine nuttallii,Nuttall's toothwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1876981/medium.jpg
+76003,49652,Cardamine occidentalis,Western Bittercress,species,https://inaturalist-open-data.s3.amazonaws.com/photos/192453142/medium.jpg
+76005,49652,Cardamine pensylvanica,Pennsylvania Bittercress,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7916320/medium.jpg
+76340,72054,Cinna latifolia,drooping woodreed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/642144/medium.jpg
+76469,51148,Crataegus douglasii,Black Hawthorn,species,https://inaturalist-open-data.s3.amazonaws.com/photos/66932638/medium.jpg
+76581,47696,Cynosurus cristatus,crested dogtail grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1003125/medium.jpg
+76610,56727,Daucus carota,wild carrot,species,https://inaturalist-open-data.s3.amazonaws.com/photos/45271729/medium.jpeg
+76639,52723,Deschampsia cespitosa,tufted hair grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/298842865/medium.jpeg
+76704,55824,Draba nemorosa,Wood Whitlow-grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/41110459/medium.jpeg
+76782,57022,Eleocharis palustris,Common Spike-rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/35116249/medium.jpeg
+76907,50879,Erigeron canadensis,horseweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/217437689/medium.jpg
+77068,50630,Erysimum cheiranthoides,wormseed wallflower,species,https://static.inaturalist.org/photos/41181904/medium.jpg
+77136,57170,Festuca bromoides,brome fescue,species,https://inaturalist-open-data.s3.amazonaws.com/photos/459069/medium.jpg
+77145,57170,Festuca subulata,bearded fescue,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2854014/medium.JPG
+77146,57170,Festuca subuliflora,crinkle-awn fescue,species,https://static.inaturalist.org/photos/204763156/medium.jpeg
+77148,57170,Festuca trachyphylla,hard fescue,species,https://inaturalist-open-data.s3.amazonaws.com/photos/142745/medium.jpeg
+77224,60958,Gamochaeta ustulata,featherweed,species,https://static.inaturalist.org/photos/732723/medium.JPG
+77305,55365,Grindelia squarrosa,Curlycup Gumweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/50260312/medium.jpeg
+77486,72191,Idahoa scapigera,Scapose Scalepod,species,https://inaturalist-open-data.s3.amazonaws.com/photos/117313837/medium.jpeg
+77574,52643,Juncus hesperius,Lamp rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/34453538/medium.jpeg
+77663,47203,Lepidium campestre,field peppergrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/60843863/medium.jpg
+77669,47203,Lepidium heterophyllum,Smith's Cress,species,https://static.inaturalist.org/photos/22188245/medium.jpeg
+77744,48928,Lilium columbianum,Columbia lily,species,https://inaturalist-open-data.s3.amazonaws.com/photos/45444/medium.jpg
+77915,60208,Lycopus uniflorus,northern bugleweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9606460/medium.jpg
+77991,54570,Mentha canadensis,Canada mint,species,https://inaturalist-open-data.s3.amazonaws.com/photos/46047059/medium.jpeg
+77993,54570,Mentha suaveolens,Apple Mint,species,https://static.inaturalist.org/photos/22266687/medium.jpeg
+78174,54332,Nasturtium officinale,watercress,species,https://inaturalist-open-data.s3.amazonaws.com/photos/203236672/medium.jpeg
+78337,60301,Panicum capillare,witch grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/308890634/medium.jpg
+78450,61787,Persicaria amphibia,water smartweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/61212580/medium.jpeg
+78636,52809,Poa compressa,Canada bluegrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/113038/medium.jpg
+78649,52809,Poa nemoralis,Wood Meadow-grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/47806616/medium.jpg
+78650,52809,Poa palustris,Swamp Meadow-grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/119964432/medium.jpg
+78657,52809,Poa trivialis,Rough Meadow-grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/449454/medium.jpg
+78765,53078,Pseudognaphalium thermale,Northwestern rabbit-tobacco,species,https://inaturalist-open-data.s3.amazonaws.com/photos/266574/medium.jpg
+78783,60311,Puccinellia nutkaensis,alaska alkali grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8822482/medium.jpeg
+78785,60311,Puccinellia pumila,dwarf alkali grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/80794987/medium.jpeg
+78931,52617,Salicornia pacifica,Pacific Glasswort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/161785604/medium.jpg
+78985,55434,Saxifraga cespitosa,tufted saxifrage,species,https://static.inaturalist.org/photos/21176818/medium.jpg
+79021,72355,Secale cereale,rye,species,https://inaturalist-open-data.s3.amazonaws.com/photos/153345817/medium.jpg
+79070,50055,Setaria viridis,Green Bristle Grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9580146/medium.jpeg
+79141,50641,Solanum nigrum,black nightshade,species,https://inaturalist-open-data.s3.amazonaws.com/photos/250702428/medium.jpeg
+79325,72390,Teesdalia nudicaulis,Shepherd's Cress,species,https://static.inaturalist.org/photos/22207120/medium.jpeg
+79358,72396,Thlaspi arvense,field penny-cress,species,https://inaturalist-open-data.s3.amazonaws.com/photos/114726/medium.jpg
+79460,72416,Turritis glabra,Tower Mustard,species,https://static.inaturalist.org/photos/132582693/medium.jpeg
+79465,57861,Utricularia macrorhiza,common bladderwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/174830488/medium.jpg
+79514,50829,Viola palustris,alpine marsh violet,species,https://inaturalist-open-data.s3.amazonaws.com/photos/113486015/medium.jpg
+79646,58346,Bolboschoenus maritimus paludosus,saltmarsh bulrush,subspecies,https://static.inaturalist.org/photos/2117457/medium.jpg
+80130,47561,Pinus contorta contorta,Shore Pine,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/425521/medium.JPG
+80373,71982,Arenaria serpyllifolia serpyllifolia,thymeleaf sandwort,subspecies,https://static.inaturalist.org/photos/1906851/medium.JPG
+80941,53415,Holodiscus discolor discolor,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/249855819/medium.jpeg
+81358,53453,Salix lasiandra lasiandra,Pacific Willow,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/291958/medium.JPG
+83938,48367,Penstemon ovatus,Broadleaf Beardtongue,species,https://inaturalist-open-data.s3.amazonaws.com/photos/13567775/medium.jpg
+118539,56031,Calystegia sepium sepium,Hedge Bindweed,subspecies,https://static.inaturalist.org/photos/50738/medium.jpg
+120519,50641,Solanum sarrachoides,Hairy Nightshade,species,https://inaturalist-open-data.s3.amazonaws.com/photos/299929513/medium.jpeg
+126560,48353,Vaccinium oxycoccos,bog cranberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/39611867/medium.jpeg
+126887,58728,Berberis aquifolium,Oregon grape,species,https://static.inaturalist.org/photos/33215492/medium.jpeg
+129038,55779,Petasites japonicus,Giant Butterbur,species,https://inaturalist-open-data.s3.amazonaws.com/photos/216159354/medium.jpg
+133036,60208,Lycopus europaeus,European water-horehound,species,https://inaturalist-open-data.s3.amazonaws.com/photos/28315086/medium.jpg
+133918,53305,Torilis japonica,upright hedge-parsley,species,https://inaturalist-open-data.s3.amazonaws.com/photos/176509928/medium.jpg
+136366,53082,Gnaphalium uliginosum,marsh cudweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/571157/medium.jpg
+160697,49877,Clematis vitalba,Old man's beard,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5264348/medium.jpg
+167006,50636,Plantago macrocarpa,Alaska Plantain,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12952929/medium.jpg
+204167,181942,Scorzoneroides autumnalis,Autumn Hawkbit,species,https://inaturalist-open-data.s3.amazonaws.com/photos/54354989/medium.jpg
+204194,52643,Juncus pylaei,Pylaie's Soft Rush,species,https://inaturalist-open-data.s3.amazonaws.com/photos/86956093/medium.jpg
+204339,55460,Lamium galeobdolon,yellow archangel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/72097716/medium.jpg
+204364,62256,Neottia cordata,Heartleaf Twayblade,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3950882/medium.JPG
+205873,64276,Phragmites australis americanus,American common reed,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/11983319/medium.jpg
+234778,56031,Calystegia silvatica silvatica,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/358488427/medium.jpeg
+239202,119891,Andromeda polifolia polifolia,Bog Rosemary,variety,https://static.inaturalist.org/photos/48330/medium.jpg
+241251,50321,Lathyrus nevadensis pilosellus,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/3827170/medium.JPG
+243048,48681,Spiraea douglasii douglasii,Douglas' Meadowsweet,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/7407961/medium.jpg
+401314,48493,Delphinium ajacis,doubtful knight's-spur,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3692365/medium.jpg
+491173,51611,Veronica peregrina xalapensis,hairy purslane speedwell,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/327773252/medium.jpg
+524900,156879,Argentina pacifica,Pacific silverweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/135888693/medium.jpg
+634625,57976,Filago germanica,Common Cudweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/46514976/medium.jpg
+711103,203680,Pilosella aurantiaca,orange hawkweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9986/medium.jpg
+716948,48063,Lysimachia europaea arctica,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/137324460/medium.jpeg
+802465,273241,Aphyllon californicum californicum,California Broomrape,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/949980/medium.jpg
+914922,379255,Reynoutria japonica,Japanese knotweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/74418856/medium.jpg
+947668,48436,Adiantum aleuticum aleuticum,Western Maidenhair Fern,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/72251463/medium.jpeg
+1035494,49398,Kalmia microphylla occidentalis,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/71877137/medium.jpg
+1392347,50829,Viola minuscula,northern white violet,species,https://inaturalist-open-data.s3.amazonaws.com/photos/268047681/medium.jpeg
+1538791,57187,Koeleria spicata,spike trisetum,species,https://inaturalist-open-data.s3.amazonaws.com/photos/960942/medium.jpg
+1538926,204214,Graphephorum cernuum,nodding trisetum,species,https://inaturalist-open-data.s3.amazonaws.com/photos/20385913/medium.jpg
+1538928,204214,Graphephorum canescens,tall trisetum,species,https://inaturalist-open-data.s3.amazonaws.com/photos/421466/medium.jpeg
+47602,47603,Taraxacum officinale,common dandelion,species,https://inaturalist-open-data.s3.amazonaws.com/photos/103385379/medium.jpeg
+48229,48230,Ranunculus repens,Creeping buttercup,species,https://inaturalist-open-data.s3.amazonaws.com/photos/38652836/medium.jpeg
+52801,52800,Lolium perenne,Perennial Ryegrass,species,https://static.inaturalist.org/photos/3607783/medium.jpg
+52808,52809,Poa annua,Annual Meadow-grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/119472992/medium.jpeg
+52821,52818,Achillea millefolium,common yarrow,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4902/medium.jpg
+53195,53196,Rumex acetosella,Sheep's sorrel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/177768765/medium.jpg
+53212,52195,Silene gallica,Small-flowered Catchfly,species,https://static.inaturalist.org/photos/25136155/medium.jpeg
+53445,47544,Rubus ursinus,trailing blackberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/124445245/medium.jpg
+55721,52195,Silene vulgaris,bladder campion,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9522/medium.jpg
+55724,55725,Symphytum officinale,common comfrey,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9630/medium.jpg
+55736,55737,Sanguisorba minor,Salad Burnet,species,https://inaturalist-open-data.s3.amazonaws.com/photos/591404/medium.jpg
+55778,55779,Petasites frigidus palmatus,Western Sweet Coltsfoot,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/5193213/medium.jpg
+55837,47351,Prunus cerasifera,Cherry-plum,species,https://static.inaturalist.org/photos/34262837/medium.jpeg
+55851,55460,Lamium purpureum,red deadnettle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9778/medium.jpg
+55884,53438,Rosa canina,Dog-rose,species,https://inaturalist-open-data.s3.amazonaws.com/photos/137686798/medium.jpg
+56057,56058,Leucanthemum vulgare,oxeye daisy,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21365414/medium.jpg
+56064,48230,Ranunculus acris,meadow buttercup,species,https://inaturalist-open-data.s3.amazonaws.com/photos/134844788/medium.jpeg
+56077,52761,Hypericum perforatum,Common St. John's Wort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/283622526/medium.jpg
+56859,52829,Agoseris heterophylla heterophylla,Annual False Dandelion,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/372293452/medium.jpeg
+57056,53152,Medicago lupulina,Black Medick,species,https://inaturalist-open-data.s3.amazonaws.com/photos/62641151/medium.jpg
+57108,52643,Juncus effusus pacificus,pacific rush,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/43642283/medium.jpeg
+57171,52792,Elymus glaucus glaucus,Blue Wild Rye,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/316253/medium.jpeg
+57724,47216,Calypso bulbosa occidentalis,Western Fairy-slipper,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/72717526/medium.jpg
+57922,48160,Centaurea melitensis,Maltese star-thistle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/206740899/medium.jpg
+58780,52195,Silene antirrhina,sleepy catchfly,species,https://inaturalist-open-data.s3.amazonaws.com/photos/708591/medium.jpg
+59782,47357,Allium acuminatum,Hooker's onion,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7767834/medium.jpg
+60267,47357,Allium amplectens,narrowleaf onion,species,https://inaturalist-open-data.s3.amazonaws.com/photos/13632/medium.jpg
+60307,52809,Poa pratensis,Smooth Meadow-grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14390/medium.jpg
+60975,60145,Leontodon saxatilis saxatilis,Lesser Hawkbit,subspecies,https://static.inaturalist.org/photos/13286264/medium.jpg
+61000,48571,Carex obnupta,slough sedge,species,https://static.inaturalist.org/photos/82391485/medium.jpg
+61009,50321,Lathyrus latifolius,broad-leaved sweet pea,species,https://inaturalist-open-data.s3.amazonaws.com/photos/155822874/medium.jpeg
+61334,53597,Narcissus poeticus,Poet's Narcissus,species,https://inaturalist-open-data.s3.amazonaws.com/photos/282122375/medium.jpg
+61834,52797,Hordeum brachyantherum brachyantherum,northern meadow barley,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/127507531/medium.jpg
+63333,52797,Hordeum murinum murinum,Barley Grass,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/468559/medium.jpg
+63890,47851,Quercus garryana garryana,Oregon white oak,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/1765723/medium.jpg
+63898,48230,Ranunculus uncinatus,woodland buttercup,species,https://static.inaturalist.org/photos/362970/medium.jpg
+63937,55910,Hieracium albiflorum,white hawkweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/908179/medium.jpg
+64157,54677,Rorippa palustris palustris,Bog Yellowcress,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/23307831/medium.jpg
+64297,52701,Bromus carinatus carinatus,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/392151997/medium.jpg
+67826,48230,Ranunculus flammula,Lesser Spearwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/23525/medium.jpg
+68479,52800,Lolium multiflorum,Italian Ryegrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/10693239/medium.jpg
+69640,48571,Carex sylvatica,European Woodland Sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/151584811/medium.jpg
+76014,48571,Carex arcta,northern clustered sedge,species,https://static.inaturalist.org/photos/27108965/medium.jpg
+76017,48571,Carex aurea,golden sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/10641338/medium.jpg
+76028,48571,Carex cusickii,Cusick's sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/410204/medium.jpg
+76036,48571,Carex exsiccata,western inflated sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/359594974/medium.jpg
+76048,48571,Carex hendersonii,Henderson's Sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3636530/medium.jpg
+76062,48571,Carex laeviculmis,smooth-stemmed sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/19559343/medium.jpeg
+76063,48571,Carex lasiocarpa,woolly-fruited sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11396770/medium.jpg
+76067,48571,Carex leporina,oval sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/927135/medium.jpg
+76069,48571,Carex leptalea,bristle-stalked sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1042845/medium.jpg
+76070,48571,Carex leptopoda,slender-footed sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18494169/medium.jpeg
+76072,48571,Carex livida,livid sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/13344638/medium.jpg
+76076,48571,Carex lyngbyei,Lyngbye's sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1876990/medium.jpg
+76089,48571,Carex pachystachya,starry broomsedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4048199/medium.jpg
+76091,48571,Carex pellita,woolly sedge,species,https://static.inaturalist.org/photos/298689975/medium.jpeg
+76104,48571,Carex scoparia,pointed broom sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2131645/medium.jpg
+76124,48571,Carex utriculata,Northwest Territory sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9785844/medium.jpeg
+77129,72133,Fallopia convolvulus,Black-bindweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/62011891/medium.jpg
+77140,57170,Festuca myuros,rattail sixweeks grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/290046593/medium.jpeg
+78642,52809,Poa infirma,Early Meadow-grass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/149815065/medium.jpg
+78682,48972,Polygonum douglasii,Douglas' knotweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/322518/medium.jpg
+78683,48972,Polygonum fowleri,Fowler's Knotweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/91647913/medium.jpeg
+78692,48972,Polygonum spergulariiforme,scatter knotweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2492238/medium.jpg
+78817,48230,Ranunculus aquatilis,common water-crowfoot,species,https://inaturalist-open-data.s3.amazonaws.com/photos/223987862/medium.jpg
+78829,48230,Ranunculus parviflorus,smallflower buttercup,species,https://inaturalist-open-data.s3.amazonaws.com/photos/274752/medium.jpg
+78832,48230,Ranunculus sardous,hairy buttercup,species,https://inaturalist-open-data.s3.amazonaws.com/photos/37498081/medium.jpeg
+78886,53438,Rosa rubiginosa,Sweet-brier,species,https://inaturalist-open-data.s3.amazonaws.com/photos/26171838/medium.jpg
+79025,55735,Sedum album,white stonecrop,species,https://inaturalist-open-data.s3.amazonaws.com/photos/79186913/medium.jpg
+79109,52195,Silene latifolia,white campion,species,https://inaturalist-open-data.s3.amazonaws.com/photos/301833921/medium.jpeg
+79317,47603,Taraxacum erythrospermum,red-seeded dandelion,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14322330/medium.jpeg
+79576,71973,Anthoxanthum aristatum aristatum,annual vernal grass,subspecies,https://static.inaturalist.org/photos/3786099/medium.jpeg
+79961,52643,Juncus effusus effusus,common rush,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/31174426/medium.jpeg
+79971,47203,Lepidium virginicum menziesii,Menzies' pepperweed,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/410139/medium.jpg
+80173,53438,Rosa nutkana nutkana,Nootka Rose (Nootka),subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/855005/medium.JPG
+80219,53270,Sonchus arvensis arvensis,glandular field sowthistle,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/5851127/medium.jpg
+80332,52829,Agoseris grandiflora leptophylla,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/4018912/medium.JPG
+80614,49445,Corallorhiza maculata maculata,Eastern spotted coralroot,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/26134532/medium.jpeg
+80615,49445,Corallorhiza maculata occidentalis,Western spotted coralroot,variety,https://static.inaturalist.org/photos/130395248/medium.jpeg
+81248,47561,Pinus ponderosa ponderosa,North Plateau Ponderosa Pine,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/8702067/medium.jpeg
+81287,52765,Prunella vulgaris vulgaris,Eurasian Self-heal,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/926573/medium.jpg
+81372,49917,Sisyrinchium idahoense idahoense,Idaho Blue-eyed Grass (Idaho),variety,https://inaturalist-open-data.s3.amazonaws.com/photos/7828297/medium.jpg
+81431,72402,Torreyochloa pallida pauciflora,weak manna grass,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/80107186/medium.jpeg
+116364,47357,Allium cernuum,nodding onion,species,https://inaturalist-open-data.s3.amazonaws.com/photos/120632/medium.jpg
+118426,57185,Leymus mollis mollis,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/309516/medium.JPG
+131215,49445,Corallorhiza striata striata,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/273703/medium.jpg
+159956,48571,Carex garberi,Elk Sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/73471634/medium.jpg
+160006,48571,Carex macrocephala,big-head sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/204181539/medium.jpg
+160055,48571,Carex pallescens,pale sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/52577699/medium.jpeg
+164708,52800,Lolium arundinaceum,tall fescue,species,https://inaturalist-open-data.s3.amazonaws.com/photos/29121494/medium.jpeg
+234668,52163,Cakile edentula edentula,Eastern Searocket,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/153055687/medium.jpg
+236055,50299,Fragaria vesca bracteata,Western Woodland Strawberry,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/202614386/medium.jpg
+238479,55735,Sedum lanceolatum nesioticum,Island Stonecrop,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/6741767/medium.jpeg
+239373,71988,Arrhenatherum elatius elatius,False Oat-grass,subspecies,https://static.inaturalist.org/photos/1256927/medium.
+240700,53396,Eriophyllum lanatum leucophyllum,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/8336830/medium.jpg
+240796,57170,Festuca roemeri roemeri,Oregon Fescue,variety,https://static.inaturalist.org/photos/73476763/medium.jpeg
+337699,52163,Cakile maritima maritima,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/5479956/medium.jpeg
+355392,48031,Platanthera transversa,Flat Spurred Piperia,species,https://inaturalist-open-data.s3.amazonaws.com/photos/401889775/medium.jpg
+452199,49445,Corallorhiza maculata ozettensis,Ozette Coralroot,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/8335013/medium.jpg
+473217,48031,Platanthera ephemerantha,Whiteflower Rein Orchid,species,https://inaturalist-open-data.s3.amazonaws.com/photos/138251857/medium.jpeg
+485191,52195,Silene coronaria,Rose campion,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18447252/medium.jpg
+487175,55820,Primula hendersonii,Henderson's shooting star,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2120/medium.jpg
+551466,48031,Platanthera elongata,Denseflower Rein Orchid,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4413/medium.jpg
+747262,47603,Taraxacum lacistophyllum,Cut-leaved dandelion,species,https://inaturalist-open-data.s3.amazonaws.com/photos/70566825/medium.jpg
+840638,48031,Platanthera unalascensis,Alaska Rein Orchid,species,https://inaturalist-open-data.s3.amazonaws.com/photos/396678236/medium.jpg
+840641,48031,Platanthera elegans,Elegant Rein Orchid,species,https://inaturalist-open-data.s3.amazonaws.com/photos/343740058/medium.png
+857006,47780,Iris × hybrida,,hybrid,https://static.inaturalist.org/photos/133980859/medium.jpg
+866252,52800,Lolium pratense,meadow fescue,species,https://inaturalist-open-data.s3.amazonaws.com/photos/32721828/medium.jpg
+866483,56023,Alchemilla arvensis,Field Parsley Piert,species,https://inaturalist-open-data.s3.amazonaws.com/photos/459066/medium.jpg
+933404,48160,Centaurea cyanus,Cornflower,species,https://static.inaturalist.org/photos/120728857/medium.jpeg
+995125,55412,Raphanus raphanistrum sativus,garden radish,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/28387821/medium.jpeg
+1369716,55460,Lamium hybridum,cutleaf deadnettle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/263132990/medium.jpg
+1377236,57170,Festuca microstachys pauciflora,Pacific Fescue,variety,https://static.inaturalist.org/photos/4966083/medium.jpg
+1452907,56023,Alchemilla occidentalis,western lady's mantle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/272953944/medium.jpg
+47779,47780,Iris pseudacorus,Yellow Iris,species,https://static.inaturalist.org/photos/132791736/medium.jpeg
+50717,50716,Epipactis helleborine,Broad-leaved helleborine,species,https://static.inaturalist.org/photos/47124220/medium.jpg
+51147,51148,Crataegus monogyna,common hawthorn,species,https://static.inaturalist.org/photos/73530064/medium.jpeg
+55766,51822,Euphorbia cyparissias,cypress spurge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/170131620/medium.jpg
+55823,55824,Draba verna,Common Whitlowgrass,species,https://inaturalist-open-data.s3.amazonaws.com/photos/847762/medium.jpg
+56137,56138,Ornithogalum umbellatum,common star-of-Bethlehem,species,https://static.inaturalist.org/photos/5094071/medium.jpg
+56861,56112,Symphyotrichum chilense,Pacific Aster,species,https://inaturalist-open-data.s3.amazonaws.com/photos/32339769/medium.jpg
+57036,51822,Euphorbia peplus,Petty Spurge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/51646215/medium.jpg
+78678,48972,Polygonum aviculare,Prostrate Knotweed,species,https://inaturalist-open-data.s3.amazonaws.com/photos/61530524/medium.jpeg
+79303,56112,Symphyotrichum subspicatum,Douglas' Aster,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3497297/medium.JPG
+79673,48571,Carex canescens canescens,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/1425414/medium.jpg
+79675,48571,Carex echinata echinata,star sedge,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/410206/medium.jpeg
+79677,48571,Carex inops inops,Long-rhizomed Sedge,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/8088509/medium.jpg
+80511,48571,Carex aquatilis dives,Sitka sedge,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/1425411/medium.jpg
+81335,48230,Ranunculus occidentalis occidentalis,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/409846/medium.jpg
+82511,51822,Euphorbia myrsinites,Donkey Tail,species,https://inaturalist-open-data.s3.amazonaws.com/photos/583744/medium.jpg
+85484,48571,Carex flava,yellow-green sedge,species,https://inaturalist-open-data.s3.amazonaws.com/photos/123167/medium.jpg
+180413,49487,Rhododendron groenlandicum,Bog Labrador Tea,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14124095/medium.jpg
+181758,57170,Festuca rubra pruinosa,Bloomed Fescue,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/296782592/medium.jpg
+181759,57170,Festuca rubra rubra,Strong Creeping Red Fescue,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/1425404/medium.jpg
+361656,52855,Artemisia campestris pacifica,Pacific wormwood,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/5588849/medium.jpg
+550711,55820,Primula pauciflora pauciflora,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/13136319/medium.jpg
+1091402,48571,Carex kelloggii limnophila,lagoon sedge,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/43877529/medium.jpg
+75371,47357,Allium vineale,wild garlic,species,https://static.inaturalist.org/photos/77553802/medium.jpeg
+78891,47544,Rubus laciniatus,Cutleaf Blackberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/223841507/medium.jpg
+79152,48678,Solidago lepida,Elegant Goldenrod,species,https://inaturalist-open-data.s3.amazonaws.com/photos/520451/medium.jpg
+79679,48571,Carex viridula viridula,green-yellow sedge,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/8831604/medium.jpeg
+168025,47544,Rubus bifrons,Himalayan Blackberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/955171/medium.jpg
