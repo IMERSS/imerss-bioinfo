@@ -114,6 +114,9 @@ const buildIndex = {
         src: "src/client/js/new/imerss-bbea.js",
         dest: "docs/js/imerss-bbea.js"
     }, {
+        src: "src/client/js/new/imerss-viz.js",
+        dest: "docs/js/imerss-viz.js"
+    }, {
         src: "src/lib/vizjs.js",
         dest: "docs/js/vizjs.js"
     }, {
@@ -164,6 +167,12 @@ const buildIndex = {
     }, {
         src: "data/b-team/us-eco-l3-regions.csv",
         dest: "docs/data/b-team/us-eco-l3-regions.csv"
+    }, {
+        src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv",
+        dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv"
+    }, {
+        src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-assigned-taxa.csv",
+        dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-assigned-taxa.csv"
     }]
 };
 

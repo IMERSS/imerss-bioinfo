@@ -180,6 +180,7 @@ hortis.isInDocument = function (node) {
 };
 
 hortis.clearAllTooltips = function (that) {
+    return;
     hortis.clearTooltip(that);
     $(".ui-tooltip").remove();
     that[that.options.tooltipKey].value = null;
@@ -643,6 +644,16 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
     fillOpacity: 0.5,
     outlineColour: "black",
     legendStops: 5,
+    legendPosition: "bottom-right",
+    gridResolution: 100,
+    components: {
+        obsQuantiser: {
+            type: "hortis.obsQuantiser",
+            options: {
+                gridResolution: "{hortis.libreMap}.options.gridResolution"
+            }
+        }
+    },
     members: {
         // TODO: "Trundling dereferencer" in the framework
         gridBounds: "@expand:fluid.derefSignal({obsQuantiser}.grid, bounds)",
@@ -651,7 +662,7 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
 
         memoStops: "@expand:fluid.colour.memoStops({that}.options.fillStops, 256)",
         // cf. maxwell.legendKey.addLegendControl in reknit-client.js - produces a DOM node immediately, renders as effect
-        control: "@expand:hortis.libreMap.withObsGrid.addLegendControl({map}, {obsQuantiser}.grid, {that}.gridVisible)",
+        control: "@expand:hortis.libreMap.withObsGrid.addLegendControl({map}, {that}.options.legendPosition)",
 
         hoverCell: "@expand:signal(null)",
         gridVisible: "@expand:signal(true)"
@@ -676,7 +687,7 @@ hortis.legend.rowTemplate = `
 
 // Very similar to maxwell.legendKey.addLegendControl and in practice generic, see if we can fold up - parameterised by
 // rendering function, whatever signal args it has, and also visibility func
-hortis.libreMap.withObsGrid.addLegendControl = function (map) {
+hortis.libreMap.withObsGrid.addLegendControl = function (map, legendPosition) {
     const control = map.drawObsGridLegend();
     control.onAdd = () => control.container;
     control.onRemove = () => {
@@ -684,7 +695,7 @@ hortis.libreMap.withObsGrid.addLegendControl = function (map) {
         control.cleanup();
     };
 
-    map.map.addControl(control, "bottom-right");
+    map.map.addControl(control, legendPosition);
 
     return control;
 };
@@ -862,6 +873,10 @@ hortis.longitudeLength = function (latitude) {
     return Math.PI * hortis.WGS84a * Math.cos(latrad) / (180 * Math.sqrt(1 - hortis.WGS84e2 * sinrad * sinrad));
 };
 
+hortis.metresToLong = function (long, latitude) {
+    return long / hortis.longitudeLength(latitude);
+};
+
 /** Length in metres for a degree of latitude at given latitude **/
 
 hortis.latitudeLength = function (latitude) {
@@ -891,17 +906,18 @@ hortis.gridBucket = () => ({obsCount: 0, byTaxonId: {}});
 hortis.indexObs = function (bucket, row, index) {
     // TODO: some kind of mapping for standard rows, lightweight version of readCSVWithMap - current standard is for
     // "iNaturalist taxon ID" as seen in "assigned" data in Xetthecum story map
-    fluid.pushArray(bucket.byTaxonId, row.iNatTaxonId, index);
+    fluid.pushArray(bucket.byTaxonId, row.iNaturalistTaxonId, index);
 };
 
 fluid.defaults("hortis.obsQuantiser", {
     gradeNames: "fluid.modelComponent",
+    gridResolution: 100,
     members: {
         // Not invokers for performance
         newBucket: hortis.gridBucket,
         indexObs: hortis.indexObs,
         baseLatitude: "@expand:signal(37.5)",
-        longResolution: "@expand:signal(0.005)",
+        longResolution: "@expand:fluid.computed(hortis.metresToLong, {that}.options.gridResolution, {that}.baseLatitude)",
         latResolution: "@expand:fluid.computed(hortis.longToLat, {that}.longResolution, {that}.baseLatitude)",
         maxBounds: "@expand:fluid.computed(hortis.obsBounds, {vizLoader}.obsRows)",
         grid: {
@@ -961,17 +977,7 @@ hortis.obsQuantiser.indexObs = function (that, rows, latRes, longRes) {
 };
 
 fluid.defaults("hortis.libreObsMap", {
-    gradeNames: ["hortis.libreMap", "hortis.libreMap.withObsGrid"],
-    components: {
-        obsQuantiser: {
-            type: "hortis.obsQuantiser",
-            options: {
-                members: {
-                    longResolution: "@expand:signal(0.075)"
-                }
-            }
-        }
-    }
+    gradeNames: ["hortis.libreMap", "hortis.libreMap.withObsGrid"]
 });
 
 

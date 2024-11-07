@@ -459,6 +459,12 @@
     width: 100%;
 }
 
+/** Override core definition in tabs.css to stop tab content overflowing
+ * TODO: Check that Xetthecum Phase III is still all right etc.
+ */
+.ui-tabs .ui-tabs-panel {
+    display: flex;
+}
 
 #fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
     padding: 0;
@@ -475,6 +481,7 @@
 
 .imerss-checklist-holder {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 6px;

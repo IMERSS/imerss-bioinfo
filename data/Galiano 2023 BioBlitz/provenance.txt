@@ -2,3 +2,14 @@ Data as for 2022 but supporting Galiano 2023 Bioblitz with new framework
 
 From https://github.com/IMERSS/adfsimon-bioinfo/blob/main/Biodiversity_Galiano/review/Plantae_et_Chromista/vascular_plants/summaries/Galiano_Tracheophyta_review_summary_reviewed_2024-10-07-assigned_revised.csv
 From https://github.com/IMERSS/adfsimon-bioinfo/blob/main/Biodiversity_Galiano/consolidate_records/Plantae_et_Chromista/vascular_plants/synthesized/Galiano_Island_vascular_plant_records_consolidated.csv
+
+Workflow:
+
+filter-bioblitz.R -> Galiano_Island_vascular_plant_records_consolidated-filtered.csv
+
+node src/assignBNames.js --DwC data/Galiano\ 2023\ BioBlitz/Galiano_Island_vascular_plant_records_consolidated-filtered.csv
+ -> Galiano_Island_vascular_plant_records_consolidated-assigned.csv
+ -> Galiano_Island_vascular_plant_records_consolidated-assigned-taxa.csv --> viz
+
+prepare-bioblitz.R -> Galiano_Island_vascular_plant_records_consolidated-prepared.csv --> viz
+

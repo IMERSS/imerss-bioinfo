@@ -50,8 +50,8 @@ const strategies = {
     DwC: {
         iNatName: "scientificName",
         rawName: "scientificName",
-        iNatId: "iNaturalist.taxon.ID",
-        assignedINatName: "iNaturalist.taxon.name",
+        iNatId: "iNaturalistTaxonId",
+        assignedINatName: "iNaturalistTaxonName",
         sanitize: true
     },
     // Has been reintegrated already, info should match and we just need to compute and assign higher taxa
