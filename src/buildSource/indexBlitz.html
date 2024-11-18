@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Galiano BioBlitz 2023 Outcomes</title>
+        <title>Galiano BioBlitz 2023 Outcomes: vascular plants</title>
 
         <!-- Looks like this comes from here - use CDN since it refers to relative fonts
         https://github.com/Templarian/MaterialDesign-Webfont/releases/tag/v2.0.46 -->
@@ -22,6 +22,7 @@
         <script src="js/imerss-viz-new-core.js"></script>
         <script src="js/imerss-viz-new.js"></script>
         <script src="js/imerss-viz.js"></script>
+        <script src="js/imerss-blitz.js"></script>
 
         <svg id="inline-svg">
             <defs>
@@ -42,7 +43,7 @@
     <body>
     <div class="imerss-container">
         <div class="imerss-blitz-left">
-            <h2>Galiano BioBlitz 2023 Outcomes</h2>
+            <h2>Galiano BioBlitz 2023 Outcomes: vascular plants</h2>
             <div class="imerss-main-tabs imerss-tabs ui-tabs ui-widget ui-widget-content">
                 <ul class="ui-tabs-nav" role="tablist">
                     <li class="ui-tabs-tab ui-tab ui-state-default ui-tabs-active">
@@ -79,7 +80,8 @@
                 </div>
                 <div id="fli-tab-wol" class="imerss-tab-panel">
                 </div>
-
+                <div class="imerss-blitz-records">
+                </div>
             </div>
         </div>
         <div class="imerss-blitz-right">
@@ -96,7 +98,7 @@
                 <div class="imerss-record-reporter">
                 </div>
             </div>
-            <div class="imerss-blitz-content">
+            <div class="mxcw-content">
 
             </div>
             <div class="imerss-blitz-widgets">
@@ -106,10 +108,9 @@
         </div>
     </div>
     <script>
-        hortis.vizLoaderWithMap(".imerss-container", {
-            gradeNames: "hortis.blitzVizLoader",
+        hortis.blitzVizLoader(".imerss-container", {
             obsFile: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv",
-            taxaFile: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-assigned-taxa.csv",
+            taxaFile: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared-taxa.csv",
             mapGrades: ["hortis.vizLibreMap"],
             resourceBase: "src/client"
         });

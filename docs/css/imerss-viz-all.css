@@ -698,6 +698,12 @@ a.ui-button:active,
     --imerss-scrollbar-width: 12px;
 }
 
+.imerss-container *,
+.imerss-container *:before,
+.imerss-container *:after {
+    box-sizing: border-box;
+}
+
 .imerss-container ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: var(--imerss-scrollbar-width);

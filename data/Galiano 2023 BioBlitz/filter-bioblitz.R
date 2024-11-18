@@ -5,7 +5,7 @@ source("./utils.R")
 
 raw <- timedFread("Galiano_Island_vascular_plant_records_consolidated.csv")
 
-# Load the BioBlitz catalogue and assign a column inBioBlitz
+# Load the iNaturalist BioBlitz catalogue and assign a column inBioBlitz
 bioblitzObs <- timedFread("iNaturalist_GalianoBioBlitz2023_Catalogue_2024_11_06.csv")
 bioblitzIds <- data.frame(id = bioblitzObs$id, inBioBlitz = 1)
 

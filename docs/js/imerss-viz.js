@@ -9,7 +9,8 @@ var hortis = fluid.registerNamespace("hortis");
 var {} = preactSignalsCore;
 
 
-fluid.defaults("hortis.blitzVizLoader", {
+fluid.defaults("hortis.standardVizLoader", {
+    gradeNames: "hortis.vizLoaderWithMap",
     selectors: {
         recordReporter: ".imerss-record-reporter",
         filterControls: ".imerss-filter-controls",
@@ -91,48 +92,6 @@ hortis.taxaFromObs = function (filteredObs, rowById) {
     fluid.log("taxaFromObs for " + filteredObs.length + " in " + delay + " ms");
     return togo;
 };
-
-hortis.blitzFiltersTemplate = `
-    <div class="imerss-filters">
-        <div class="imerss-filter"></div>
-        <div class="imerss-collector-filter imerss-filter"></div>
-        <div class="imerss-dataset-filter imerss-filter"></div>
-    </div>
-`;
-
-fluid.defaults("hortis.blitzFilters", {
-    gradeNames: ["hortis.filters", "fluid.stringTemplateRenderingView"],
-    markup: { // Clearly unsatisfactory, have to move over to preactish rendering before long
-        container: hortis.blitzFiltersTemplate,
-        fallbackContainer: hortis.blitzFiltersTemplate
-    },
-    members: {
-        obsRows: "{vizLoader}.obsRows"
-    },
-    selectors: {
-        collectorFilter: ".imerss-collector-filter",
-        datasetFilter: ".imerss-dataset-filter"
-    },
-    components: {
-        filterRoot: "{vizLoader}",
-        collectorFilter: {
-            type: "hortis.collectorFilter",
-            container: "{that}.dom.collectorFilter",
-            options: {
-                filterName: "Recorder",
-                fieldName: "recordedBy"
-            }
-        },
-        monumentFilter: {
-            type: "hortis.regionFilter",
-            container: "{that}.dom.datasetFilter",
-            options: {
-                filterName: "Dataset",
-                fieldName: "datasetName"
-            }
-        },
-    }
-});
 
 hortis.mapGridTooltipTemplate =
     `<div class="imerss-tooltip imerss-bbea-grid-tooltip">

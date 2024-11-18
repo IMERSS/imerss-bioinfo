@@ -66,6 +66,7 @@ const buildIndex = {
     ],
     // Source for simplified environments such as Xetthecum without features like tabs, polygon drawing, etc.
     newCoreSource: [
+        "src/utils/utils.js",
         "node_modules/papaparse/papaparse.min.js",
         "src/client/css/maplibre-gl.css",
         "node_modules/maplibre-gl/dist/maplibre-gl-dev.js",
@@ -84,7 +85,6 @@ const buildIndex = {
         "src/lib/jquery-ui-widgets-tabs.js",
         "src/lib/point-in-polygon.js",
         "src/geom/geoJSON.js",
-        "src/utils/utils.js",
         "src/client/js/new/filters.js",
         "src/client/js/new/polygon-draw.js",
         "src/client/js/autocomplete.js",
@@ -116,6 +116,9 @@ const buildIndex = {
     }, {
         src: "src/client/js/new/imerss-viz.js",
         dest: "docs/js/imerss-viz.js"
+    }, {
+        src: "src/client/js/new/imerss-blitz.js",
+        dest: "docs/js/imerss-blitz.js"
     }, {
         src: "src/lib/vizjs.js",
         dest: "docs/js/vizjs.js"
@@ -171,8 +174,8 @@ const buildIndex = {
         src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv",
         dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv"
     }, {
-        src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-assigned-taxa.csv",
-        dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-assigned-taxa.csv"
+        src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared-taxa.csv",
+        dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared-taxa.csv"
     }]
 };
 

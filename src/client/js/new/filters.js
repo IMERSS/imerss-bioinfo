@@ -112,14 +112,14 @@ hortis.repeatingRowFilter.renderRow = function (template, rowLabel, rowId) {
     });
 };
 
-fluid.defaults("hortis.dataDrivenFilter", {
+fluid.defaults("hortis.obsDrivenFilter", {
     members: {
         obsRows: "{hortis.filters}.obsRows"
     }
 });
 
 fluid.defaults("hortis.regionFilter", {
-    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "hortis.repeatingRowFilter", "fluid.stringTemplateRenderingView"],
+    gradeNames: ["hortis.filter", "hortis.obsDrivenFilter", "hortis.repeatingRowFilter", "fluid.stringTemplateRenderingView"],
     markup: {
         container: `
         <div class="imerss-region-filter">
@@ -191,6 +191,7 @@ hortis.regionFilter.withLookup.lookupId = function (that, id) {
     return rows.find(row => row[that.options.idField] === id)?.[that.options.nameField];
 };
 
+// Compute an array of the distinct values of the field found in the obs
 hortis.regionFilter.computeValues = function (obsRows, fieldName) {
     const values = {};
     obsRows.forEach(row => {
@@ -209,63 +210,41 @@ hortis.regionFilter.renderModel = function (values, idToLabel, markup, filterNam
     };
 };
 
-// Collectors filter
-
-hortis.computeCollectors = function (obsRows, fieldName) {
-    const collectors = {};
-    obsRows.forEach(row => {
-        row[fieldName].split(";").map(lump => lump.trim()).map(trimmed => collectors[trimmed] = true);
-    });
-    return Object.keys(collectors);
-};
-
-fluid.defaults("hortis.collectorFilter", {
-    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.stringTemplateRenderingView"],
+fluid.defaults("hortis.autocompleteFilter", {
+    gradeNames: ["hortis.filter", "hortis.obsDrivenFilter", "fluid.stringTemplateRenderingView"],
+    // fieldName
+    // filterName
+    // controlId
+    // rootClass
     markup: {
         container: `
-        <div class="imerss-collector-filter">
-            <label class="imerss-filter-title" for="fli-imerss-collector">%filterName:</label>
-            <div class="imerss-filter-body imerss-collector-autocomplete">
+        <div class="%rootClass">
+            <label class="imerss-filter-title" for="%controlId">%filterName:</label>
+            <div class="imerss-filter-body imerss-filter-autocomplete">
                 <div class="imerss-filter-clear imerss-hidden"></div>
             </div>
         </div>
         `
     },
-    // fieldName
-    // filterName
+    selectors: {
+        autocomplete: ".imerss-filter-autocomplete",
+        clearFilter: ".imerss-filter-clear"
+    },
     members: {
         // obsRows:
-        // TODO: This is lazy, we really want it computed at any "idle time" so as not to delay 3rd keystroke
-        collectors: "@expand:fluid.computed(hortis.computeCollectors, {that}.obsRows, {that}.options.fieldName)",
         filterState: "@expand:signal(null)",
-        renderModel: `@expand:fluid.computed(hortis.collectorFilter.renderModel, {that}.options.filterName)`
+        renderModel: `@expand:fluid.computed(hortis.autocompleteFilter.renderModel, 
+            {that}.options.filterName, {that}.options.controlId, {that}.options.rootClass)`
     },
     invokers: {
-        doFilter: "hortis.collectorFilter.doFilter({arguments}.0, {arguments}.1, {that}.options.fieldName)",
-        reset: "hortis.collectorFilter.reset({that})"
-    },
-    selectors: {
-        autocomplete: ".imerss-collector-autocomplete",
-        clearFilter: ".imerss-filter-clear",
-        control: "#fli-imerss-collector"
-    },
-    listeners: {
-        "onCreate.bindClearClick": {
-            func: (that) => that.dom.locate("clearFilter").on("click", () => {
-                that.reset();
-            })
-        },
-        "onCreate.bindShowClear": {
-            args: ["{that}.dom.clearFilter.0", "{that}.filterState"],
-            func: (node, filterState) => effect(() => hortis.toggleClass(node, "imerss-hidden", !filterState.value))
-        }
+        reset: "hortis.autocompleteFilter.reset({that})"
     },
     components: {
         autocomplete: {
             type: "hortis.autocomplete",
             options: {
                 container: "{filter}.dom.autocomplete",
-                id: "fli-imerss-collector",
+                id: "{filter}.options.controlId",
                 maxSuggestions: 10,
                 widgetOptions: {
                     minLength: 3
@@ -277,13 +256,60 @@ fluid.defaults("hortis.collectorFilter", {
                     }
                 },
                 invokers: {
-                    //                                                                   query,         callback
-                    query: "hortis.queryAutocompleteCollector({filter}.collectors.value, {arguments}.0, {arguments}.1)"
+                    //                                 query,         callback
+                    query: "{filter}.queryAutocomplete({arguments}.0, {arguments}.1)"
                 }
             }
         }
+    },
+    listeners: {
+        "onCreate.bindClearClick": {
+            func: (that) => that.dom.locate("clearFilter").on("click", () => {
+                that.reset();
+            })
+        },
+        "onCreate.bindShowClear": {
+            args: ["{that}.dom.clearFilter.0", "{that}.filterState"],
+            func: (node, filterState) => effect(() => hortis.toggleClass(node, "imerss-hidden", !filterState.value))
+        }
     }
 });
+
+hortis.autocompleteFilter.reset = function (that) {
+    that.filterState.value = "";
+    that.container.find("#" + that.options.controlId).val("");
+};
+
+// Isn't this awkward, because it is a "computed" it needs some kind of signal to get it going. In future, all
+// access to constants will be signalised
+hortis.autocompleteFilter.renderModel = function (filterName, controlId, rootClass) {
+    const model = signal({filterName, controlId, rootClass});
+    return model.value;
+};
+
+// Collectors filter
+
+fluid.defaults("hortis.collectorFilter", {
+    gradeNames: ["hortis.autocompleteFilter"],
+    controlId: "fli-imerss-collector",
+    rootClass: "imerss-collector-filter",
+    members: {
+        // TODO: This is lazy, we really want it computed at any "idle time" so as not to delay 3rd keystroke
+        allCollectors: "@expand:fluid.computed(hortis.computeAllCollectors, {that}.obsRows, {that}.options.fieldName)"
+    },
+    invokers: {
+        doFilter: "hortis.collectorFilter.doFilter({arguments}.0, {arguments}.1, {that}.options.fieldName)",
+        queryAutocomplete: "hortis.queryAutocompleteCollector({filter}.allCollectors.value, {arguments}.0, {arguments}.1)"
+    }
+});
+
+hortis.computeAllCollectors = function (obsRows, fieldName) {
+    const collectors = {};
+    obsRows.forEach(row => {
+        row[fieldName].split(";").map(lump => lump.trim()).map(trimmed => collectors[trimmed] = true);
+    });
+    return Object.keys(collectors);
+};
 
 hortis.collectorFilter.doFilter = function (obsRows, filterState, fieldName) {
     const all = !(filterState);
@@ -291,20 +317,61 @@ hortis.collectorFilter.doFilter = function (obsRows, filterState, fieldName) {
     return all ? obsRows : obsRows.filter(row => row[fieldName].includes(filterState));
 };
 
-hortis.collectorFilter.reset = function (that) {
-    that.filterState.value = "";
-    that.dom.locate("control").val("");
-};
-
-hortis.queryAutocompleteCollector = function (collectors, query, callback) {
+hortis.queryAutocompleteCollector = function (allCollectors, query, callback) {
     const lowerQuery = query.toLowerCase();
-    const results = query.length < 3 ? [] : collectors.filter(collector => collector.toLowerCase().includes(lowerQuery));
+    const results = query.length < 3 ? [] : allCollectors.filter(collector => collector.toLowerCase().includes(lowerQuery));
     callback(results);
 };
 
-// Isn't this awkward, because it is a "computed" it needs some kind of signal to get it going. In future, all
-// access to constants will be signalised
-hortis.collectorFilter.renderModel = function (filterName) {
-    const model = signal({filterName});
-    return model.value;
+// Taxon filter
+
+fluid.defaults("hortis.taxonFilter", {
+    gradeNames: ["hortis.autocompleteFilter"],
+    controlId: "fli-imerss-taxonFilter",
+    rootClass: "imerss-taxon-filter",
+    components: {
+        taxa: "{hortis.taxa}",
+        autocomplete: {
+            options: {
+                invokers: {
+                    renderSuggestion: "hortis.autocompleteSuggestionForTaxonRow",
+                    renderInputValue: "hortis.autocompleteInputForTaxonRow"
+                }
+            }
+        }
+    },
+    invokers: {
+        doFilter: "hortis.taxonFilter.doFilter({arguments}.0, {arguments}.1, {that}.taxa.rowById.value)",
+        queryAutocomplete: "hortis.queryAutocompleteTaxon({taxa}.lookupTaxon, {arguments}.0, {arguments}.1, {autocomplete}.options.maxSuggestions)"
+    }
+});
+
+hortis.computeAllCollectors = function (obsRows, fieldName) {
+    const collectors = {};
+    obsRows.forEach(row => {
+        row[fieldName].split(";").map(lump => lump.trim()).map(trimmed => collectors[trimmed] = true);
+    });
+    return Object.keys(collectors);
 };
+
+hortis.taxonFilter.doFilter = function (obsRows, filterState, taxonRowById) {
+    const all = !(filterState);
+    const filterRoot = filterState?.id;
+    const includeRow = function (obsRow) {
+        let taxonRow = taxonRowById[obsRow.iNaturalistTaxonId];
+        while (taxonRow) {
+            if (taxonRow.id === filterRoot) {
+                return true;
+            }
+            taxonRow = taxonRow.parent;
+        }
+        return false;
+    };
+    return all ? obsRows : obsRows.filter(includeRow);
+};
+
+hortis.queryAutocompleteTaxon = function (lookupTaxon, query, callback, maxSuggestions) {
+    const output = lookupTaxon(query, maxSuggestions);
+    callback(output);
+};
+

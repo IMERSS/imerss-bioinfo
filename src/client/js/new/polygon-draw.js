@@ -26,7 +26,7 @@ fluid.defaults("hortis.libreMap.withPolygonDraw", {
 
 // Currently combine draw UI and filter, could break apart
 fluid.defaults("hortis.libreMap.polygonFilter", {
-    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.component"],
+    gradeNames: ["hortis.filter", "hortis.obsDrivenFilter", "fluid.component"],
     mapboxDrawOptions: {
         displayControlsDefault: false,
         controls: {

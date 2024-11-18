@@ -2,14 +2,14 @@ library(dplyr)
 
 source("./utils.R")
 
-raw <- timedFread("Galiano_Island_vascular_plant_records_consolidated-assigned.csv")
+rawRecords <- timedFread("Galiano_Island_vascular_plant_records_consolidated-assigned.csv")
 # To check against all summary
 # raw <- timedFread("Galiano_Island_vascular_plant_records_consolidated-filtered.csv")
 
 summary <- timedFread("Galiano_Tracheophyta_review_summary_reviewed_2024-10-07-assigned_revised.csv")
-summaryIds <- data.frame(id = summary$ID, inSummary = 1)
+inSummary <- data.frame(id = summary$ID, inSummary = 1)
 
-joined <- raw %>% left_join(summaryIds, by = join_by(taxonID == id))
+joined <- rawRecords %>% left_join(inSummary, by = join_by(taxonID == id))
 
 notInSummary <- joined %>% filter(inSummary != 1)
 
@@ -37,3 +37,10 @@ emptyCols <- colSums(is.na(filteredDown)) == nrow(filteredDown)
 filteredDown2 <- filteredDown[!emptyCols]
 
 timedWrite(filteredDown2, "Galiano_Island_vascular_plant_records_consolidated-prepared.csv")
+
+rawSummary <- timedFread("Galiano_Island_vascular_plant_records_consolidated-assigned-taxa.csv")
+
+summaryFields <- data.frame(id = summary$ID, reportingStatus = summary$Reporting.Status, observation = summary$Observation, inSummary = 1)
+joinedSummary <- rawSummary %>% left_join(summaryFields, by = join_by(id))
+
+timedWrite(joinedSummary, "Galiano_Island_vascular_plant_records_consolidated-prepared-taxa.csv")

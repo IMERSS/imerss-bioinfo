@@ -11,6 +11,7 @@ var {} = preactSignalsCore;
 fluid.setLogging(true);
 
 fluid.defaults("hortis.beaVizLoader", {
+    mapGrades: ["hortis.bbeaLibreMap"],
     selectors: {
         interactions: ".imerss-interactions-holder",
         bipartite: ".imerss-bipartite",
@@ -761,7 +762,7 @@ fluid.defaults("hortis.bbeaLibreMap", {
     invokers: {
         renderTooltip: "hortis.renderBbeaGridTooltip({that}, {obsQuantiser}.grid.value, {taxa}.rowById.value, {arguments}.0)"
     },
-    gridResolution: 0.075,
+    gridResolution: 6000,
     components: {
         obsQuantiser: {
             type: "hortis.obsQuantiser",
@@ -871,7 +872,7 @@ hortis.sexFilter.doFilter = function (obsRows, filterState) {
 
 
 fluid.defaults("hortis.phenologyFilter", {
-    gradeNames: ["hortis.filter", "hortis.dataDrivenFilter", "fluid.stringTemplateRenderingView"],
+    gradeNames: ["hortis.filter", "hortis.obsDrivenFilter", "fluid.stringTemplateRenderingView"],
     ranges: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     markup: {
         container: `
