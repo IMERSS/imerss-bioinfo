@@ -1183,7 +1183,9 @@ a.ui-button:active,
 
 .imerss-checklist-holder {
     height: 100%;
-    width: 100%;
+    /** This removes scrollbar in Xetthecum check against OBA */
+    width: auto;
+    /* width: 100%; */
     display: flex;
     flex-direction: column;
     padding: 6px;

@@ -4,6 +4,7 @@
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../Salish-Sea-Community-Directory" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../adfsimon-bioinfo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../alien-signals" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../b-team" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../bc-bryo-atlas" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../galiano-marine-animal-atlas" vcs="Git" />

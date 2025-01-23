@@ -40,6 +40,7 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace(" grp.", "");
     name = name.replace(" grp", "");
     name = name.replace(" group", "");
+    name = name.replace(" nr ", " ");
     name = name.replace(" var.", "");
     name = name.replace(" ined.", "");
     name = name.replace(" etc.", "");

@@ -43,5 +43,6 @@
     <orderEntry type="module" module-name="infusion-6" />
     <orderEntry type="module" module-name="bc-bryo-atlas" />
     <orderEntry type="module" module-name="bc-bryo-atlas" />
+    <orderEntry type="module" module-name="alien-signals" />
   </component>
 </module>

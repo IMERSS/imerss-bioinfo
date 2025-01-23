@@ -38,19 +38,23 @@ const strategies = {
             iNatName: "plantINatName",
             rawName: "plantScientificName",
             iNatId: "plantINatId",
+            nameStatus: "plantNameStatus",
             assignedINatName: "plantAssignedINatName"
         },
         pollinator: {
             iNatName: "pollinatorINatName",
             rawName: "scientificName",
             iNatId: "pollinatorINatId",
-            assignedINatName: "pollinatorAssignedINatName"
+            nameStatus: "pollinatorNameStatus",
+            assignedINatName: "pollinatorAssignedINatName",
+            sanitize: true
         }
     },
     DwC: {
         iNatName: "scientificName",
         rawName: "scientificName",
         iNatId: "iNaturalistTaxonId",
+        nameStatus: "nameStatus",
         assignedINatName: "iNaturalistTaxonName",
         sanitize: true
     },
@@ -59,6 +63,7 @@ const strategies = {
         iNatName: "iNaturalist taxon name",
         rawName: "Taxon name",
         iNatId: "iNaturalist taxon ID",
+        nameStatus: "nameStatus",
         assignedINatName: "iNaturalist taxon name"
     },
     // Raw iNat obs output
@@ -66,6 +71,7 @@ const strategies = {
         iNatName: "scientific_name",
         rawName: "scientific_name",
         iNatId: "taxon_id",
+        nameStatus: "nameStatus",
         assignedINatName: "scientific_name"
     }
 };
@@ -195,10 +201,11 @@ hortis.applyName = async function (row, phylum, rank, invertedSwaps, allTaxa, un
             const taxonDoc = await source.get({id: id});
             await hortis.storeTaxon(allTaxa, taxonDoc, true);
         }
+        row[s.nameStatus] = looked.doc.nameStatus;
         // Can't recall what this field did
         // hortis.addName(allTaxa, id, iNatName, looked.doc.nameStatus);
     } else {
-        row["Name Status"] = "unknown";
+        row[s.nameStatus] = "unknown";
         unmappedTaxa[iNatName] = {scientificName};
     }
 };

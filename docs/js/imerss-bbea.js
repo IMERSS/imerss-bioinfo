@@ -676,10 +676,11 @@ hortis.drawInteractions.render = function (that, interactions, crossTable, rowBy
     fluid.log("Rendered in " + delay2 + " ms");
 };
 
+// TODO unused
 hortis.interactionTooltipTemplate = `<div class="imerss-tooltip">
-    <div class="imerss-photo" style="background-image: url(%imgUrl)"></div>" +
-    <div class="text"><b>%taxonRank:</b> %taxonNames</div>" +
-    </div>`;
+    <div class="imerss-photo" style="background-image: url(%imgUrl)"></div>
+    <div class="text"><b>%taxonRank:</b> %taxonNames</div>
+</div>`;
 
 hortis.renderInteractionTooltip = function (that, cellKey) {
     const {plantId, pollId} = hortis.keyToIntIds(cellKey);
@@ -987,7 +988,7 @@ fluid.defaults("hortis.bbeaFilters", {
             container: "{that}.dom.collectorFilter",
             options: {
                 filterName: "Collector",
-                fieldName: "Collectors"
+                fieldName: "recordedBy"
             }
         },
         monumentFilter: {
