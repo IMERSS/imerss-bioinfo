@@ -47,7 +47,7 @@ body {
 
 .imerss-interactions {
     padding: 0.5em;
-    width: 50%;
+    width: 45%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -60,6 +60,7 @@ body {
 
 .imerss-interactions-holder {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -214,6 +215,7 @@ body {
 .imerss-bipartite {
     overflow: auto;
     height: 100%;
+    width: 100%;
     font-size: 14px;
 }
 

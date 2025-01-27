@@ -221,7 +221,10 @@ fluid.defaults("hortis.autocompleteFilter", {
         <div class="%rootClass">
             <label class="imerss-filter-title" for="%controlId">%filterName:</label>
             <div class="imerss-filter-body imerss-filter-autocomplete">
-                <div class="imerss-filter-clear imerss-hidden"></div>
+                <div class="imerss-filter-clear imerss-hidden"><svg width="24" height="24">
+                        <use href="#x-circle-close" />
+                    </svg>
+                </div>
             </div>
         </div>
         `
@@ -374,4 +377,3 @@ hortis.queryAutocompleteTaxon = function (lookupTaxon, query, callback, maxSugge
     const output = lookupTaxon(query, maxSuggestions);
     callback(output);
 };
-

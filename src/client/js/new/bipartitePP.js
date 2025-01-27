@@ -24,6 +24,9 @@ imerss.maxTextWidth = function (labels, fontSize) {
 imerss.bipartitePP = function (data, svg, width, height, options) { // eslint-disable-line no-unused-vars
     const {sortedBeeNames, sortedPlantNames, beeColors, FigureLabel} = options;
 
+    // Ensure we layout width short by this so we don't jank if/when browser relays out to produce vertical scrollbar
+    const ScrollbarWidth = 24;
+
     // const IndivFigSizeX = 400; // here will become = IndivFigSizeX
     // const IndivFigSizeY = 1000; // here will become = IndivFigSizeY
 
@@ -99,7 +102,7 @@ imerss.bipartitePP = function (data, svg, width, height, options) { // eslint-di
     //RowPos <- rep(floor(seq(from = 50, by = HPerPlot, length = mp[a])),
     //              each = mp[2])
 
-    const MainFigSizeX = Math.max(width - LeftSidePadding - RightSidePadding, MinFigWidth);
+    const MainFigSizeX = Math.max(width - LeftSidePadding - RightSidePadding - ScrollbarWidth, MinFigWidth);
     const MainFigSizeY = Math.max(height, sortedBeeNames.length * 20, sortedPlantNames.length * 20) - RowPos;
 
     function sort(sortOrder) {
@@ -177,8 +180,7 @@ imerss.bipartitePP = function (data, svg, width, height, options) { // eslint-di
         .on("mouseout", mouseout);
 
     return {
-        // Add on a little for scrollbars
-        renderedWidth: 8 + MainFigSizeX + LeftSidePadding + RightSidePadding - BarWidth,
+        renderedWidth: MainFigSizeX + LeftSidePadding + RightSidePadding - BarWidth,
         // Add on a little for descenders and a hanging bottom row of text
         renderedHeight: fontSize + MainFigSizeY + RowPos
     };

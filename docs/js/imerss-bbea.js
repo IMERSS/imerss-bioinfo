@@ -386,7 +386,10 @@ fluid.defaults("hortis.bipartite", {
 hortis.bipartite.listenWidth = function (containerNode, widthSignal) {
     const observer = new ResizeObserver(entries => {
         entries.forEach(entry => {
-            widthSignal.value = entry.contentRect.width || undefined;
+            const width = entry.contentRect.width;
+            if (width > 0) {
+                widthSignal.value = entry.contentRect.width;
+            }
         });
     });
     observer.observe(containerNode);
@@ -395,18 +398,24 @@ hortis.bipartite.listenWidth = function (containerNode, widthSignal) {
 
 hortis.bipartite.render = function (that, svgNode, containerWidth, bipartiteRows, beeIdToEntry, plantIdToEntry) {
     const svg = d3.select(svgNode);
+    fluid.log("Bipartite render with containerWidth of ", containerWidth);
+
     // Read this directly so we don't get an extra notification - bipartiteRows is computed by an effect upstream in drawInteractions
     const beeSelection = that.beeSelection.peek();
     const plantSelection = that.plantSelection.peek();
     const containerHeight = that.container[0].clientHeight;
     const {rows: beeRows, colours: beeColours} = hortis.computeRankColours(beeSelection, hortis.pollColours, beeIdToEntry);
     const {rows: plantRows} = hortis.computeRankColours(plantSelection, hortis.plantColours, plantIdToEntry);
-    const {renderedWidth, renderedHeight} = imerss.bipartitePP(bipartiteRows, svg, containerWidth, containerHeight, {
+    const {
+        renderedWidth,
+        renderedHeight
+    } = imerss.bipartitePP(bipartiteRows, svg, containerWidth, containerHeight, {
         FigureLabel: "",
         sortedBeeNames: beeRows.map(row => row.iNaturalistTaxonName),
         sortedPlantNames: plantRows.map(row => row.iNaturalistTaxonName),
         beeColors: beeColours
     });
+
     svgNode.setAttribute("height", renderedHeight);
     svgNode.setAttribute("width", renderedWidth);
     that.rendered.value = true;
