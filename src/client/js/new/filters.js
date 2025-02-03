@@ -16,7 +16,7 @@ var hortis = fluid.registerNamespace("hortis");
 
 // TODO: Hoist this into some kind of core library
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
-var {signal, effect, batch} = preactSignalsCore;
+var {signal, computed, effect, batch} = preactSignalsCore;
 
 fluid.defaults("hortis.filter", {
     // gradeNames: "fluid.component",
@@ -32,30 +32,60 @@ fluid.defaults("hortis.filter", {
 
 fluid.defaults("hortis.filters", {
     // gradeNames: "fluid.component",
-    listeners: {
-        "onCreate.wireFilters": "hortis.wireObsFilters"
-    },
     components: {
         filterRoot: "{that}"
     },
     members: {
         allInput: "{vizLoader}.obsRows",
+        combinedFilterInput: "@expand:hortis.combinedFilterInput({that})",
+        idle: "@expand:signal(true)",
+        lastEvaluatedInput: null,
+        scheduleFilter: "@expand:fluid.effect(hortis.scheduleFilter, {that}, {that}.combinedFilterInput, {that}.idle)",
+        // TODO: syntax for unavailable literal on startup
         allOutput: "@expand:signal()"
     }
 });
 
-hortis.wireObsFilters = function (that) {
-    const filterComps = fluid.queryIoCSelector(that.filterRoot, "hortis.filter", false);
-    let prevOutput = that.allInput;
+hortis.combinedFilterInput = function (that) {
+    return computed( () => {
+        const filterComps = fluid.queryIoCSelector(that.filterRoot, "hortis.filter", false);
 
-    filterComps.forEach(filterComp => {
-        filterComp.filterInput = prevOutput;
-        filterComp.filterOutput = fluid.computed(filterComp.doFilter, filterComp.filterInput, filterComp.filterState);
-        prevOutput = filterComp.filterOutput;
+        const filterStates = filterComps.map(comp => comp.filterState);
+
+        const args = [that.allInput, ...filterStates];
+        const {undefinedSignals} = fluid.processSignalArgs(args);
+
+        return undefinedSignals ? fluid.unavailable({message: "Filter input unavailable"}) : {
+            filterStates: filterStates.map(filterState => filterState.value),
+            filterComps,
+            allInput: that.allInput.value};
     });
-    // This is the bit we can't wire up with a computed - it would be great to be able to "wire" the pre-existing
-    // allOutput.value onto prevOutput.value after it had been constructed
-    effect( () => that.allOutput.value = prevOutput.value);
+};
+
+hortis.evaluateFilter = function (that, combinedFilterInput) {
+    const {filterStates, filterComps, allInput} = combinedFilterInput;
+
+    let prevOutput = allInput;
+
+    for (let i = 0; i < filterComps.length; ++i) {
+        const filterComp = filterComps[i];
+        const filterOutput = filterComp.doFilter(prevOutput, filterStates[i]);
+        prevOutput = filterOutput;
+        if (fluid.isUnavailable(prevOutput)) {
+            break;
+        }
+    }
+    that.allOutput.value = prevOutput;
+    // that.idle.value = true;
+    // idle marking is done globally in fluid.bipartite.render - probably need some some standard utility for this
+};
+
+hortis.scheduleFilter = function (that, combinedFilterInput, idle) {
+    if (idle && combinedFilterInput !== that.lastEvaluatedInput) {
+        that.idle.value = false;
+        that.lastEvaluatedInput = combinedFilterInput;
+        window.setTimeout(() => hortis.evaluateFilter(that, combinedFilterInput), 1);
+    }
 };
 
 fluid.defaults("hortis.filterControls", {

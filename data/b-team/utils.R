@@ -1,5 +1,6 @@
 library(googledrive)
 library(data.table)
+library(readxl)
 
 timedRead <- function (toread) {
   start <- Sys.time()
@@ -16,6 +17,14 @@ timedFread <- function (toread) {
   cat("Read ", nrow(frame), " rows from ", toread, " in ", (end - start), "s")
   # Otherwise traditional R indexing notation fails
   as.data.frame(frame)
+}
+
+timedReadXslx <- function (toread) {
+  start <- Sys.time()
+  frame <- read_xlsx(toread, col_types = "text")
+  end <- Sys.time()
+  cat("Read ", nrow(frame), " rows from ", toread, " in ", (end - start), "s")
+  frame
 }
 
 timedWrite <- function (x, towrite) {

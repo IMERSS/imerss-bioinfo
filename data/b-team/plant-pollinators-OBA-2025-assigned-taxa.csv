@@ -253,6 +253,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 72058,71409,Cleomella,stinkweed,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/23061780/medium.jpg
 72118,47790,Eremothera,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/623151/medium.JPG
 72141,47790,Gayophytum,groundsmoke,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/19947211/medium.jpg
+72281,47689,Pelargonium,geraniums and storksbills,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/100918647/medium.jpeg
 72409,71426,Triantha,sticky false asphodels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/409656/medium.JPG
 81938,71433,Alstroemeria,Peruvian lilies,genus,https://static.inaturalist.org/photos/104750288/medium.jpeg
 83058,71645,Camellia,Camellias,genus,https://static.inaturalist.org/photos/297970656/medium.jpeg
@@ -492,6 +493,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 127152,61875,Styrax americanus,American Snowbell,species,https://static.inaturalist.org/photos/58536192/medium.jpeg
 127413,48527,Leycesteria,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/684530/medium.jpg
 128570,61875,Styrax japonicus,Japanese snowbell,species,https://static.inaturalist.org/photos/40635797/medium.jpg
+128767,54774,Viburnum davidii,David Viburnum,species,https://static.inaturalist.org/photos/63916715/medium.jpeg
 128917,50623,Skimmia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/198956073/medium.jpg
 129116,48527,Knautia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/143861/medium.png
 133368,48874,Cotinus,smoketrees,genus,https://static.inaturalist.org/photos/93169411/medium.jpg
@@ -528,6 +530,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 982845,319976,Erythranthe,,section,https://static.inaturalist.org/photos/19841190/medium.jpg
 990620,157029,Deutzia lemoinei,,species,
 1014606,126405,Begonia,Section Begonia,section,https://inaturalist-open-data.s3.amazonaws.com/photos/63174341/medium.jpg
+1028040,47130,Ribes × nidigrolaria,Jostaberry,hybrid,https://inaturalist-open-data.s3.amazonaws.com/photos/75503186/medium.jpeg
 1152874,51338,Limnanthes pumila,Woolly Meadowfoam,species,https://inaturalist-open-data.s3.amazonaws.com/photos/269176447/medium.jpg
 1191150,49674,Ceanothus,Ceanothus subg. Ceanothus,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/70731354/medium.jpeg
 1196714,47599,Dipterostemon,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3405854/medium.jpg
@@ -1000,6 +1003,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 635401,319976,Erythranthe primuloides,primrose monkeyflower,species,https://inaturalist-open-data.s3.amazonaws.com/photos/13525987/medium.jpg
 705158,48150,Oreocarya,Perennial Cryptanthas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/17729197/medium.jpg
 705161,514665,Sabulina howellii,Howell's sandwort,species,https://inaturalist-open-data.s3.amazonaws.com/photos/294857874/medium.jpg
+719975,72281,Pelargonium,true storksbills,section,https://inaturalist-open-data.s3.amazonaws.com/photos/54607847/medium.jpeg
 734821,51890,Petrosedum,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/105160533/medium.jpeg
 738395,51611,Veronica,,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/111058054/medium.jpeg
 743344,53984,Digitalis,,section,https://inaturalist-open-data.s3.amazonaws.com/photos/6308657/medium.jpeg
@@ -2540,6 +2544,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 739454,53113,Brassica oleracea sabellica,Kale,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/35130989/medium.jpg
 1090496,47544,Rubus fruticosus,pilated-leaved blackberry,species,https://inaturalist-open-data.s3.amazonaws.com/photos/76714167/medium.jpg
 1254664,47221,Brachymelecta,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/139810211/medium.jpg
+1593690,47221,Epimelissodes,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/300373540/medium.jpeg
 50086,49707,Agapostemon,Striped Sweat Bees,genus,https://static.inaturalist.org/photos/41193264/medium.jpg
 57675,57676,Nomia melanderi,Alkali Nomia,species,https://inaturalist-open-data.s3.amazonaws.com/photos/139597527/medium.jpg
 57677,49707,Halictus,Furrow Bees,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/181638/medium.jpg
@@ -2562,6 +2567,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 307633,121513,Habropoda miserabilis,Pacific Dune-Digger,species,https://inaturalist-open-data.s3.amazonaws.com/photos/10313300/medium.jpg
 308635,252932,Zacosmia maculata,Spotted Mini-digger-Cuckoo,species,https://inaturalist-open-data.s3.amazonaws.com/photos/52813798/medium.jpeg
 308866,154666,Epeolus compactus,Compact Cellophane-Cuckoo,species,https://static.inaturalist.org/photos/590434/medium.jpg
+309053,252959,Holcopasites pulchellus,Nice Cuckoo Nomad Bee,species,
 335697,121513,Habropoda depressa,California Mountain-Digger Bee,species,https://static.inaturalist.org/photos/62632917/medium.jpg
 361454,121513,Habropoda dammersi,,species,
 361480,127812,Hylaeus nunenmacheri,,species,https://static.inaturalist.org/photos/70819033/medium.jpg
@@ -2590,15 +2596,12 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 626757,199145,Coelioxys,,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/39851893/medium.jpeg
 628301,57674,Osmia,,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/76301075/medium.jpeg
 633385,177785,Hoplitis,,subgenus,https://static.inaturalist.org/photos/15161773/medium.jpg
-638424,252417,Anthidiellum,,subgenus,https://static.inaturalist.org/photos/23120129/medium.jpg
 638430,57671,Anthidium,,subgenus,https://static.inaturalist.org/photos/13092651/medium.jpg
 699096,57672,Dianthidium,,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/78924199/medium.jpg
-699142,434303,Pseudoanthidium,,subgenus,https://static.inaturalist.org/photos/17445299/medium.jpg
 699681,173032,Ashmeadiella,,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/121208285/medium.jpeg
 699683,173053,Atoposmia,,subgenus,
 699686,252470,Chelostoma,,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/38908686/medium.jpg
 699696,124222,Heriades,,subgenus,https://static.inaturalist.org/photos/15162461/medium.jpg
-699710,252946,Protosmia,,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/198716401/medium.jpeg
 924639,154666,Epeolus novomexicanus,New Mexico Cellophane-cuckoo Bee,species,https://inaturalist-open-data.s3.amazonaws.com/photos/160795169/medium.jpg
 924642,154666,Epeolus olympiellus,Olympia Cellophane-cuckoo Bee,species,https://inaturalist-open-data.s3.amazonaws.com/photos/19730062/medium.jpg
 1037559,178745,Triepeolus utahensis,Utah Longhorn-Cuckoo,species,https://inaturalist-open-data.s3.amazonaws.com/photos/200613032/medium.jpeg
@@ -2607,6 +2610,9 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 1339526,178745,Triepeolus argyreus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/309775759/medium.jpeg
 1416049,252953,Protandrena,,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/222865777/medium.jpg
 1593758,252949,Xenoglossodes,,subgenus,
+1604270,57674,Osmia caraformis,,species,
+1604271,252417,Anthidiellum robertsoni,,species,
+1604272,574503,Biastes fulviventris,,species,
 47219,47220,Apis mellifera,Western Honey Bee,species,https://static.inaturalist.org/photos/2369526/medium.jpg
 51110,51111,Xylocopa virginica,Eastern Carpenter Bee,species,https://inaturalist-open-data.s3.amazonaws.com/photos/33118717/medium.jpg
 52780,52781,Melissodes agilis,Agile Longhorn Bee,species,https://inaturalist-open-data.s3.amazonaws.com/photos/83426814/medium.jpeg
@@ -2638,6 +2644,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 196604,121512,Diadasia bituberculata,Bindweed Turret Bee,species,https://inaturalist-open-data.s3.amazonaws.com/photos/87871568/medium.jpg
 198850,52784,Megachile pugnata,Pugnacious Leafcutter Bee,species,https://inaturalist-open-data.s3.amazonaws.com/photos/98819803/medium.jpeg
 198851,57674,Osmia simillima,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/251047002/medium.jpeg
+198853,57674,Osmia proxima,,species,
 198854,57682,Anthophora terminalis,Orange-tipped Wood-digger,species,https://inaturalist-open-data.s3.amazonaws.com/photos/89785587/medium.jpeg
 198855,57682,Anthophora bomboides,Bumblebee-like Digger Bee,species,https://inaturalist-open-data.s3.amazonaws.com/photos/222695/medium.jpg
 198954,57669,Andrena w-scripta,W-labrum Miner,species,https://inaturalist-open-data.s3.amazonaws.com/photos/157604847/medium.jpg
@@ -2701,12 +2708,12 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 226673,57674,Osmia integra,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7870554/medium.jpg
 226674,57674,Osmia longula,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/30253243/medium.jpg
 226675,57674,Osmia montana,,species,https://static.inaturalist.org/photos/131122437/medium.jpg
+226676,57674,Osmia nanula,,species,
 226677,57674,Osmia nifoata,,species,
 226678,57674,Osmia paradisica,,species,
 226684,57674,Osmia texana,Texas Mason Bee,species,https://inaturalist-open-data.s3.amazonaws.com/photos/84079158/medium.jpeg
 226687,57674,Osmia tristella,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2337738/medium.jpeg
 236822,178512,Melecta pacifica,,species,https://static.inaturalist.org/photos/7168630/medium.jpg
-270467,252417,Anthidiellum notatum,Northern Rotund-Resin Bee,species,https://inaturalist-open-data.s3.amazonaws.com/photos/85751344/medium.jpeg
 271063,173032,Ashmeadiella altadenae,,species,
 271346,177785,Hoplitis grinnelli,Grinnell's Small-Mason,species,https://inaturalist-open-data.s3.amazonaws.com/photos/118482237/medium.jpeg
 271349,57671,Anthidium clypeodentatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/151883298/medium.jpeg
@@ -2915,6 +2922,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 1339496,61891,Sphecodes kincaidii,,species,
 1341026,52781,Melissodes pallidisignatus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9717659/medium.jpeg
 1448011,61891,Sphecodes olympicus,,species,
+1593698,1593690,Epimelissodes obliqua,Oblique Longhorn,species,https://inaturalist-open-data.s3.amazonaws.com/photos/24405340/medium.jpg
 1594041,252949,Xenoglossa pruinosa,Pruinose Squash Bee,species,https://static.inaturalist.org/photos/5947702/medium.jpg
 50087,50086,Agapostemon melliventris,Honey-tailed Striped Sweat Bee,species,https://inaturalist-open-data.s3.amazonaws.com/photos/157331/medium.jpg
 52774,52775,Bombus fervidus,Golden Northern Bumble Bee,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21952111/medium.jpg
@@ -2976,9 +2984,10 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 1339264,57678,Lasioglossum robustum,,species,
 1339267,57678,Lasioglossum sequoiae,,species,
 1425843,57678,Lasioglossum megastictum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/282687439/medium.jpeg
-1447898,57678,Lasioglossum allonotum,,species,
 1453118,57678,Lasioglossum zonulus,Bull-headed Furrow Bee,species,https://static.inaturalist.org/photos/93540956/medium.jpg
 1453119,57678,Lasioglossum pavonotus,Peacock Sweat Bee,species,https://static.inaturalist.org/photos/3038602/medium.jpg
+1588473,57678,Lasioglossum allonotus,,species,
+1604276,57674,Osmia albolateralis visenda,,subspecies,
 199085,57678,Lasioglossum quebecense,Quebec Sweat Bee,species,https://static.inaturalist.org/photos/66999549/medium.jpeg
 199107,57678,Lasioglossum boreale,Boreal Sweat Bee,species,
 271075,57678,Lasioglossum tegulariforme,,species,

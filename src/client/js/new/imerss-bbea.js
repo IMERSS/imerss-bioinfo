@@ -24,6 +24,7 @@ fluid.defaults("hortis.beaVizLoader", {
     members: {
         // Flag set by bipartite renderer to indicate initial view is fully rendered
         rendered: "@expand:signal()",
+        idle: "@expand:signal(true)",
         filteredObs: "{filters}.allOutput",
         taxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.filteredObs, {taxa}.rowById)",
         allTaxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.obsRows, {taxa}.rowById)",
@@ -62,7 +63,8 @@ fluid.defaults("hortis.beaVizLoader", {
             container: "{that}.dom.filters",
             options: {
                 members: {
-                    allInput: "{vizLoader}.obsRows"
+                    allInput: "{vizLoader}.obsRows",
+                    idle: "{vizLoader}.idle"
                 }
             }
         },
@@ -74,6 +76,7 @@ fluid.defaults("hortis.beaVizLoader", {
                 rootId: 1,
                 filterRanks: ["epifamily", "family", "tribe", "genus", "subgenus", "species"],
                 disclosableRanks: ["tribe", "genus", "subgenus", "species"],
+                copyChecklistRanks: ["genus", "species"],
                 selectable: true,
                 unfoldable: true,
                 copyButtonMessage: "Copy %rows bee taxa to clipboard",
@@ -95,6 +98,7 @@ fluid.defaults("hortis.beaVizLoader", {
                 rootId: 47126,
                 filterRanks: ["kingdom", "order", "family", "genus"],
                 disclosableRanks: ["family", "genus"],
+                copyChecklistRanks: ["genus"],
                 selectable: true,
                 unfoldable: true,
                 copyButtonMessage: "Copy %rows plant taxa to clipboard",
@@ -139,6 +143,7 @@ fluid.defaults("hortis.beaVizLoader", {
             options: {
                 members: {
                     rendered: "{hortis.vizLoader}.rendered",
+                    idle: "{hortis.vizLoader}.idle",
                     // TODO: Split drawInteractions render prepare back out into interactions
                     bipartiteRows: "{drawInteractions}.bipartiteRows",
                     beeSelection: "{pollChecklist}.rowSelection",
@@ -170,7 +175,6 @@ hortis.twoTaxaFromObs = function (filteredObs, rowById) {
         pollRowFocus: hortis.closeParentTaxa(pollIds, rowById)
     };
     const delay = Date.now() - now;
-    fluid.log("twoTaxaFromObs for " + filteredObs.length + " in " + delay + " ms");
     return togo;
 };
 
@@ -419,6 +423,7 @@ hortis.bipartite.render = function (that, svgNode, containerWidth, bipartiteRows
     svgNode.setAttribute("height", renderedHeight);
     svgNode.setAttribute("width", renderedWidth);
     that.rendered.value = true;
+    that.idle.value = true;
 };
 
 hortis.interactionMarkup =
@@ -901,7 +906,6 @@ fluid.defaults("hortis.phenologyFilter", {
     // fieldName
     // filterName
     members: {
-        values: "@expand:fluid.computed(hortis.regionFilter.computeValues, {that}.obsRows, {that}.options.fieldName)",
         // Dummy value to cache months on rows
         rangeCache: "@expand:fluid.computed(hortis.phenologyFilter.rangeCache, {that}.obsRows)",
         filterState: "@expand:signal([])",
@@ -965,6 +969,80 @@ hortis.phenologyFilter.bindClick = function (that) {
     });
 };
 
+fluid.defaults("hortis.elevationFilter", {
+    gradeNames: ["hortis.filter", "hortis.obsDrivenFilter", "fluid.stringTemplateRenderingView"],
+    markup: {
+        container: `
+        <div class="imerss-elevation-filter">
+            <div class="imerss-filter-title">Elevation:</div>
+            <div class="imerss-filter-body"></div>
+        </div>
+        `
+    },
+    selectors: {
+        filterBody: ".imerss-filter-body"
+    },
+    // fieldName
+    // filterName
+    members: {
+        rangeCache: "@expand:fluid.computed(hortis.elevationFilter.rangeCache, {that}.obsRows, {that}.options.fieldName)",
+        filterState: {
+            // So perverse! Hopefully in new framework this is simply filterState: {lower: {dualRangeInput}.min, upper: {dualRangeInput}.max}
+            expander: { // So perverse!!
+                func: (minSignal, maxSignal) => fluid.computed( (min, max) => ({lower: min, upper: max}), minSignal, maxSignal),
+                args: ["{dualRangeInput}.min", "{dualRangeInput}.max"]
+            }
+        }
+    },
+    components: {
+        dualRangeInput: {
+            type: "hortis.dualRangeInput",
+            container: "{that}.dom.filterBody",
+            options: {
+                members: {
+                    minRange: "@expand:fluid.derefSignal({elevationFilter}.rangeCache, lower)",
+                    maxRange: "@expand:fluid.derefSignal({elevationFilter}.rangeCache, upper)"
+                },
+                markup: {
+                    valuesTemplate: `
+            <span>%minRange m</span>
+            <span>%min - %max m</span>
+            <span>%maxRange m</span>`
+                }
+            }
+        }
+    },
+    invokers: {
+        doFilter: "hortis.elevationFilter.doFilter({arguments}.0, {arguments}.1, {that}.options.fieldName, {that}.rangeCache.value)",
+        reset: {
+            func: "{dualRangeInput}.reset"
+        }
+    }
+
+});
+
+hortis.elevationFilter.rangeCache = function (obsRows, fieldName) {
+    const range = {lower: Number.POSITIVE_INFINITY, upper: Number.NEGATIVE_INFINITY};
+    obsRows.forEach(row => {
+        const elevation = +row[fieldName];
+        // OCTOPOKHO: Side effect converting type
+        row[fieldName] = elevation;
+
+        range.lower = Math.min(elevation, range.lower);
+        range.upper = Math.max(elevation, range.upper);
+    });
+    return range;
+};
+
+hortis.elevationFilter.doFilter = function (obsRows, filterState, fieldName, rangeCache) {
+    const none = filterState.lower === rangeCache.lower && filterState.upper === rangeCache.upper;
+
+    return none ? obsRows : obsRows.filter(row => {
+        const elevation = row[fieldName];
+        return elevation >= filterState.lower && elevation <= filterState.upper;
+    });
+};
+
 hortis.bbeaFiltersTemplate = `
     <div class="imerss-filters">
         <div class="imerss-filter"></div>
@@ -972,6 +1050,7 @@ hortis.bbeaFiltersTemplate = `
         <div class="imerss-monument-filter imerss-filter"></div>
         <div class="imerss-l3eco-filter imerss-filter"></div>
         <div class="imerss-phenology-filter imerss-filter"></div>
+        <div class="imerss-elevation-filter imerss-filter"></div>
     </div>
 `;
 
@@ -988,7 +1067,8 @@ fluid.defaults("hortis.bbeaFilters", {
         collectorFilter: ".imerss-collector-filter",
         monumentFilter: ".imerss-monument-filter",
         l3ecoFilter: ".imerss-l3eco-filter",
-        phenologyFilter: ".imerss-phenology-filter"
+        phenologyFilter: ".imerss-phenology-filter",
+        elevationFilter: ".imerss-elevation-filter"
     },
     components: {
         filterRoot: "{vizLoader}",
@@ -1031,6 +1111,13 @@ fluid.defaults("hortis.bbeaFilters", {
         phenologyFilter: {
             type: "hortis.phenologyFilter",
             container: "{that}.dom.phenologyFilter"
+        },
+        elevationFilter: {
+            type: "hortis.elevationFilter",
+            container: "{that}.dom.elevationFilter",
+            options: {
+                fieldName: "verbatimElevation"
+            }
         }
     }
 });

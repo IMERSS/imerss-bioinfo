@@ -9,7 +9,7 @@ const hortis = fluid.registerNamespace("hortis");
 require("../src/iNaturalist/taxonAPI.js");
 
 const source = hortis.iNatTaxonSource({
-    disableCache: true
+    // disableCache: true
 });
 
 // Old queries:
@@ -28,10 +28,11 @@ const source = hortis.iNatTaxonSource({
 // {obsId: 86945066}
 // Crataegus monogyna
 // Leptoglossus occidentalis gets wrong name in species
+// We updated it but seemed to have bad cache
 
 const testSource = async function () {
     try {
-        const query = "Leptoglossus occidentalis";
+        const query = "Anthidiellum robertsoni";
         const sane = hortis.sanitizeSpeciesName(query);
         const result = await source.get({name: sane});
         console.log(result);

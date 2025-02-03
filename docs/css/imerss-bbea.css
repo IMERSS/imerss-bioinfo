@@ -208,6 +208,10 @@ body {
     grid-template-rows: repeat(4, 1fr);
 }
 
+.imerss-elevation-filter .imerss-filter-body {
+    flex-direction: column;
+}
+
 .imerss-bbea-grid-tooltip div.text {
     max-width: initial;
 }

@@ -239,7 +239,8 @@ fluid.defaults("hortis.checklist", {
     members: {
         // Can't return 2 signals from computeRootEntry, do this collaterally
         idToEntry: {},
-        rootEntry: "@expand:fluid.computed(hortis.checklist.computeRootEntry, {that}, {that}.rowById, {that}.rootId, {that}.filterTaxonomy)",
+        // Added throwaway dependency here since acceptChecklistRow may depend on rowFocus and it isn't computed until we have rows filtered by filters
+        rootEntry: "@expand:fluid.computed(hortis.checklist.computeRootEntry, {that}, {that}.rowById, {that}.rootId, {that}.filterTaxonomy, {that}.rowFocus)",
         idToStateUIOld: null,
         idToStateUI: "@expand:signal(null)", // Must supply an initial value or else computation never starts
         scheduleRender: "@expand:signal()",
@@ -247,11 +248,10 @@ fluid.defaults("hortis.checklist", {
         idToStateOld: null, // Cache of old value used to transfer user's selection state, preact-signals doesn't allow "peek" at self
         idToState: "@expand:fluid.computed(hortis.checklist.idToState, {that}, {that}.idToStateUI, {that}.rootEntry, {that}.rowFocus)",
         // rowById: required for tooltips
-        // rowFocus
+        // rowFocus: awkward - injected in and depends on filtered obs
         rowSelection: "@expand:fluid.computed(hortis.checklist.checksToSelection, {that}.idToState)",
         subscribeChecks: "@expand:fluid.effect(hortis.checklist.subscribeChecks, {that}, {that}.idToStateUI)",
         subscribeSelected: "@expand:hortis.checklist.subscribeSelected({that}, {that}.selectedId, {that}.rowById)",
-        allLeaves: "@expand:fluid.computed(hortis.checklist.computeLeaves, {that}.idToEntry, {that}.rowSelection)",
         renderEffect: "@expand:fluid.effect(fluid.identity, {that}.idToState)"
     },
     listeners: {
@@ -274,7 +274,11 @@ fluid.defaults("hortis.checklist.withCopy", {
     selectors: {
         copyButton: ".imerss-copy-checklist"
     },
+    members: {
+        allLeaves: "@expand:fluid.computed(hortis.checklist.computeLeaves, {that}.idToEntry, {that}.rowSelection, {that}.options.copyChecklistRanks)",
+    },
     // copyButtonMessage
+    // copyChecklistRanks: array
     components: {
         copyButton: {
             type: "fluid.viewComponent",
@@ -290,7 +294,7 @@ fluid.defaults("hortis.checklist.withCopy", {
                 },
                 invokers: {
                     renderTooltip: "hortis.checklist.withCopy.renderTooltip({copyButton}, {hortis.checklist})",
-                    copyToClipboard: "hortis.checklist.withCopy.copyToClipboard({copyButton},{hortis.checklist})"
+                    copyToClipboard: "hortis.checklist.withCopy.copyToClipboard({copyButton}, {hortis.checklist})"
                 },
                 listeners: {
                     "onCreate.bindHover": "hortis.checklist.withCopy.bindHover"
@@ -583,17 +587,27 @@ hortis.checklist.checksToSelection = function (idToState) {
     return selected === 0 ? selectAll : selection;
 };
 
-hortis.checklist.computeLeaves = function (idToEntry, selection) {
-    const leaves = [];
+hortis.checklist.computeLeaves = function (idToEntry, selection, copyChecklistRanks) {
+    const leaves = {};
+    const parentRow = row => idToEntry[row.parentId]?.row;
+    const strikeParents = function (row) {
+        row = parentRow(row);
+        while (row) {
+            delete leaves[row.id];
+            row = parentRow(row);
+        }
+    };
     const appendLeaves = function (id) {
         const entry = idToEntry[id];
         if (entry.children.length === 0) {
-            leaves.push(entry.row.iNaturalistTaxonName);
+            leaves[entry.row.id] = entry.row;
         } else {
             entry.children.forEach(child => appendLeaves(child.row.id));
         }
     };
 
     Object.keys(selection).forEach(id => appendLeaves(id));
-    return leaves;
+    Object.values(leaves).map(leaf => strikeParents(leaf));
+    const rankFiltered = Object.values(leaves).filter(leaf => copyChecklistRanks.includes(leaf.rank));
+    return rankFiltered.map(leaf => leaf.iNaturalistTaxonName).sort();
 };

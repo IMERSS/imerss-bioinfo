@@ -1,11 +1,8 @@
-library(readxl)
 library(dplyr)
 library(stringr)
 source("./utils.R")
 
-raw <- read_xlsx("bigdata/OBA_2018-2023_all_records.xlsx", col_types = "text")
-
-cat("Read ", nrow(raw), " raw records")
+raw <- timedReadXslx("bigdata/OBA_2018-2023_all_records.xlsx")
 
 emptyCols <- colSums(is.na(raw)) == nrow(raw)
 
@@ -46,6 +43,9 @@ griddable <- mutate(griddable,
                     sex = normaliseSex[sex],
                     eventDate = eventDate
 )
+
+# Map all elevation to be >= 0
+griddable$verbatimElevation[griddable$verbatimElevation < 0] <- 0
 
 # Get rid of source columns
 griddable <- griddable[, !names(griddable) %in% c("year", "month", "day", "lastName", "firstNameInitial", 

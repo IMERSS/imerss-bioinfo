@@ -78,7 +78,7 @@ const strategies = {
 
 const parsedArgs = minimist(process.argv.slice(2), {boolean: Object.keys(strategies)});
 
-const swapsFile = parsedArgs.swaps || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/taxon-swaps.csv");
+const swapsFile = parsedArgs.swaps || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/taxon-swaps-2025.csv");
 
 const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/plant-pollinators-Carril-normalised.csv");
 

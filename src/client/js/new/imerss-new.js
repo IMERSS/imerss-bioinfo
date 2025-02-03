@@ -556,6 +556,9 @@ fluid.defaults("hortis.libreMap", {
             args: ["{that}.map", "{that}.options.mapOptions", "{that}.mapLoaded"]
         }
     },
+    invokers: {
+        sortLayers: "hortis.libreMap.sortLayers({that}.map)"
+    },
     members: {
         map: "@expand:hortis.libreMap.make({that}, {that}.events.onLoad, {that}.container.0)",
         mapLoaded: "@expand:signal()",
@@ -583,6 +586,22 @@ hortis.libreMap.make = function (that, onLoad, container) {
         fluid.promise.fireTransformEvent(onLoad, null, {that});
     });
     return map;
+};
+
+hortis.libreMap.sortLayers = function (map) {
+    // Reach into undocumented impl of mapLibre and quickly sort the layers into desired order
+    const style = map.style;
+    const layers = Object.values(style._layers);
+    console.log("Sorting layers ", layers);
+    const sorted = layers.sort((a, b) => {
+        const sortKeyA = a?.metadata?.sortKey ?? Infinity;
+        const sortKeyB = b?.metadata?.sortKey ?? Infinity;
+        return sortKeyA - sortKeyB;
+    });
+    const newOrder = sorted.map(sorted => sorted.id);
+    style._order = newOrder;
+    style._changed = true;
+    style._layerOrderChanged = true;
 };
 
 const initNavigationControl = function (options) {
@@ -678,7 +697,10 @@ fluid.defaults("hortis.libreMap.streetmapTiles", {
         baseMap: {
             tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
             attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors",
-            tileSize: 256
+            tileSize: 256,
+            metadata: {
+                sortKey: 0
+            }
         }
     }
 });
@@ -690,7 +712,10 @@ fluid.defaults("hortis.libreMap.usEcoL3Tiles", {
             tileSize: 512,
             maxzoom: 8,
             paint: {
-                "raster-opacity": 0.3
+                "raster-opacity": 0.3,
+            },
+            metadata: {
+                sortKey: 1
             }
         }
     }
@@ -698,9 +723,11 @@ fluid.defaults("hortis.libreMap.usEcoL3Tiles", {
 
 hortis.libreMap.addTileLayers = function (map, tileSets) {
     const tileKeys = Object.keys(tileSets);
-    tileKeys.reverse().forEach(function (key) {
+    tileKeys.forEach(function (key) {
         const tileSet = tileSets[key];
         const paint = tileSet.paint || {};
+        const metadata = tileSet.metadata || {};
+        console.log("Add tiles");
         map.addSource(key, {
             type: "raster",
             ...fluid.censorKeys(tileSet, ["paint"]) // TODO: "layout" too - https://docs.mapbox.com/style-spec/reference/layers/
@@ -709,7 +736,7 @@ hortis.libreMap.addTileLayers = function (map, tileSets) {
             id: key,
             type: "raster",
             source: key,
-            paint: paint
+            paint, metadata
         });
     });
 };
@@ -926,9 +953,15 @@ hortis.libreMap.updateObsGrid = function (map, obsQuantiser, grid) {
                 },
                 "fill-opacity": map.options.fillOpacity,
                 "fill-outline-color": map.options.outlineColour
+            },
+            metadata: {
+                sortKey: 100
             }
         };
         map.map.addLayer(layer);
+        // TODO: Rather unsatisfactory, but we assume that this is the point we have all layers we are expecting to
+        // Really need a dedicated addLayer wrapper
+        map.sortLayers();
     }
 
 };

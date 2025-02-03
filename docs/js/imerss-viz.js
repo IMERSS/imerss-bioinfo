@@ -69,6 +69,7 @@ fluid.defaults("hortis.standardVizLoader", {
                 rootId: 48460, // Life
                 filterRanks: ["epifamily", "family", "tribe", "genus", "subgenus", "species"],
                 disclosableRanks: ["tribe", "genus", "subgenus", "species"],
+                copyChecklistRanks: ["genus", "species"],
                 selectable: false,
                 unfoldable: true,
                 copyButtonMessage: "Copy %rows taxa to clipboard",

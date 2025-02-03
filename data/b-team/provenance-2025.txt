@@ -1,0 +1,23 @@
+Taken from https://app.box.com/folder/304815097495 
+
+https://app.box.com/file/1761900850920 as OBA_2018-2023_all_records.xlsx in  B-Team Visualization / Data
+
+OBA Workflow:
+
+normalise-OBA-2025.R
+
+--> plant-pollinators-OBA-2025.csv (filter records without georef, time and taxonomy)
+--> plant-pollinators-OBA-2025-normalised.csv (condense bulky columns and normalise)
+
+via assignBNames.js plant-pollinators-OBA-2025-normalised.csv --bees
+
+--> plant-pollinators-OBA-2025-assigned.csv
+and plant-pollinators-OBA-2025-assigned-taxa.csv
+
+via subset-assigned.R
+
+--> plant-pollinators-OBA-assigned-subset.csv
+
+via b-team/intersectShapes.R
+
+--> plant-pollinators-OBA-assigned-subset-labels.csv

@@ -82,11 +82,13 @@ const buildIndex = {
         "node_modules/pretty-checkbox/dist/pretty-checkbox.min.css",
         "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js",
         "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css",
+        "node_modules/@stanko/dual-range-input/dist/index.css",
         "src/lib/jquery-ui-widgets-tabs.js",
         "src/lib/point-in-polygon.js",
         "src/geom/geoJSON.js",
         "src/client/js/new/filters.js",
         "src/client/js/new/polygon-draw.js",
+        "src/client/js/new/dual-range-input.js",
         "src/client/js/autocomplete.js",
         "src/client/js/tabs.js"
     ],

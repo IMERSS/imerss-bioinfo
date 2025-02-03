@@ -1114,6 +1114,7 @@ a.ui-button:active,
     display: flex;
     flex-direction: row;
     align-items: center;
+    font-size: smaller;
 }
 
 .imerss-filter-clear {
@@ -1161,6 +1162,15 @@ a.ui-button:active,
     flex-wrap: nowrap;
     flex-direction: row;
     width: 100%;
+}
+
+/* Taken from muffinman article demo at https://muffinman.io/blog/native-dual-range-input/ */
+.dual-range-values {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    width: 100%
 }
 
 /** Override core definition in tabs.css to stop tab content overflowing

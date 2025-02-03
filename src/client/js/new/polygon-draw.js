@@ -70,6 +70,7 @@ hortis.libreMap.polygonFilter.updateArea = function (that) {
 };
 
 hortis.libreMap.makeMapboxDraw = function (map, mapboxDrawOptions, updateArea, drawMode) {
+    console.log("Make mapbox draw");
     const draw = new MapboxDraw(mapboxDrawOptions);
     map.addControl(draw, "top-left");
     map.on("draw.create", updateArea);
