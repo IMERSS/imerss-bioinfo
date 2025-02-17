@@ -2,6 +2,18 @@
     --imerss-scrollbar-width: 12px;
 }
 
+
+/** This block refers to standalone viz rather than story
+ */
+
+.imerss-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0; /* Essential otherwise it overflows */
+    contain: paint; /* Makes sure loading indicator is clipped */
+}
+
 .imerss-container *,
 .imerss-container *:before,
 .imerss-container *:after {
@@ -38,7 +50,7 @@
 
 .imerss-legend-label {
     display: inline-block;
-    width: 8rem;
+    width: 8em;
     margin-left: 6px;
     position: relative;
     top: 1px;
@@ -51,7 +63,7 @@
 }
 
 .imerss-legend {
-    width: 10rem;
+    width: 10em;
     margin-left: auto;
     margin-right: 10px;
     background: #555e;
@@ -125,16 +137,6 @@
     text-indent: 0;
 }
 
-
-/** This block refers to standalone viz rather than story
- */
-
-.imerss-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 0; /* Essential otherwise it overflows */
-}
 
 .imerss-map-and-taxa {
     display: flex;
@@ -381,7 +383,7 @@
 
 .imerss-filters {
     height: 100%;
-    width: 20rem;
+    width: 20em;
     overflow-y: auto;
     padding-right: 0.5em;
 }
@@ -450,7 +452,7 @@
 .imerss-filters .autocomplete__input--default {
     padding: 2px 4px 2px 4px;
     border-width: 1px;
-    width: 15rem;
+    width: 15em;
 }
 
 .imerss-region-filter-rows {

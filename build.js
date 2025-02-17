@@ -110,6 +110,9 @@ const buildIndex = {
         src: "src/client/css/*.css",
         dest: "docs/css"
     }, {
+        src: "src/client/fonts",
+        dest: "docs/fonts"
+    }, {
         src: "src/client/js/new/bipartitePP.js",
         dest: "docs/js/bipartitePP.js"
     }, {

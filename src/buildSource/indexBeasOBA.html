@@ -18,6 +18,12 @@
         <link rel="stylesheet" type="text/css" href="css/imerss-viz-new-core.css"/>
         <link rel="stylesheet" type="text/css" href="css/imerss-viz-new.css"/>
         <link rel="stylesheet" type="text/css" href="css/imerss-bbea.css"/>
+        <link rel="stylesheet" type="text/css" href="css/OSU.css"/>
+        <!-- for search icon font in OSU header -->
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="css/OSU-superfish.css"/>
+        <link rel="stylesheet" type="text/css" href="css/OSU-overrides.css"/>
 
         <script src="js/jquery.js"></script>
         <script src="js/imerss-viz-lib.js"></script>
@@ -46,35 +52,89 @@
     </head>
 
     <body>
-        <div class="bee-loading-container">
-            <div class="loading-message">Bee Plant Network Visualization Tool Loading</div>
-            <div class="bee">
-                <div class="bee-body">
-                    <div class="line"></div>
+    <header id="navbar" role="banner" class="navbar container-fluid navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-top">
+                <div id="search-overlay">
+                    <form class="search" role="search" action="https://agsci.oregonstate.edu/bee-atlas" method="post" id="osu-search-top-hat-form" accept-charset="UTF-8"><div><div class="form-item form-item-term form-type-textfield form-group"><input class="search-terms form-control form-text" placeholder="Search this site" type="text" id="edit-term" name="term" value="" size="60" maxlength="128"> <label class="control-label element-invisible" for="edit-term">Search Field</label>
+                    </div><button class="icon-search word-hide btn btn-primary form-submit" type="submit" id="edit-submit" name="op" value="Search">Search</button>
+                        <input type="hidden" name="group_path" value="bee-atlas">
+                        <input type="hidden" name="form_build_id" value="form-r2V0JEln9IIk_xK1OaATeKlF-4w9F8Nc58lHtCJjb3Y">
+                        <input type="hidden" name="form_id" value="osu_search_top_hat_form">
+                    </div></form>        <button class="exit-search">Exit Search</button>
                 </div>
-                <div>
-                    <div class="wing-right"></div>
-                    <div class="wing-left"></div>
+                <div class="navbar-header">
+                    <div class="navbar-logo navbar-col">
+                        <p><a class="logo navbar-btn" href="https://oregonstate.edu" title="University Home">
+                            <img src="img/OSU/OSU-logo.png" alt="Oregon State University">
+                        </a></p>
+                    </div>
+
+                    <div class="navbar-group navbar-col">
+                        <div class="navbar-group-middle navbar-vcol">
+                            <span class="group-parent"><a class="parent-site" href="https://agsci.oregonstate.edu"> College of Agricultural Sciences</a> <span class="group-header-separator">»</span> </span><a class="group" href="/bee-atlas">Oregon Bee Atlas</a>          </div>
+                    </div>
+
+                    <div class="navbar-upper-nav navbar-col">
+                        <div class="site-search">
+                            <a href="https://agsci.oregonstate.edu/search/google" id="search-link" class="m-icon-link">
+                                <i class="icon-search"></i><span class="sr-only">Open search box</span>
+                            </a>
+                        </div>
+
+                        <div class="upper-nav-menu">
+                            <p><a href="https://admissions.oregonstate.edu/apply-choose-application">Apply</a>&nbsp;&nbsp;&nbsp;<a href="https://agsci.oregonstate.edu/mycas">MyCAS</a></p>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="bee-path">
-                    <div class="pollen"></div>
-                    <div class="pollen"></div>
-                    <div class="pollen"></div>
-                    <div class="pollen"></div>
-                    <div class="pollen"></div>
-                    <div class="pollen"></div>
-                    <div class="pollen"></div>
-                    <div class="pollen"></div>
-                    <div class="pollen"></div>
-                    <div class="pollen"></div>
-                    <div class="pollen"></div>
-                    <div class="pollen"></div>
+            </div>
+
+            <div class="navbar-main-menu">
+                <div class="main-menu" role="navigation">
+                    <ul id="superfish-larch" class="menu sf-menu sf-menu-og-273436 sf-horizontal sf-style-none sf-total-items-5 sf-parent-items-0 sf-single-items-5 sf-js-enabled sf-shadow">
+                        <li id="menu-89556-larch" class="first odd sf-item-1 sf-depth-1 sf-no-children"><a href="https://agsci.oregonstate.edu/bee-atlas/oba-discoveries" class="sf-depth-1">Discoveries</a></li>
+                        <li id="menu-89566-larch" class="middle even sf-item-2 sf-depth-1 sf-no-children"><a href="https://agsci.oregonstate.edu/bee-atlas/frequently-asked-questions" class="sf-depth-1">FAQ</a></li>
+                        <li id="menu-89576-larch" class="middle odd sf-item-3 sf-depth-1 sf-no-children"><a href="#">Plant-Pollinator Interactions</a></li>
+                        <li id="menu-89571-larch" class="middle even sf-item-4 sf-depth-1 sf-no-children"><a href="https://extension.oregonstate.edu/master-melittologist" title="" class="sf-depth-1">Master Melittologist Program</a></li>
+                        <li id="menu-89561-larch" class="last odd sf-item-5 sf-depth-1 sf-no-children"><a href="https://agsci.oregonstate.edu/bee-atlas/donate" class="sf-depth-1">Donate</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <h2>Oregon Bee Atlas Plant-Pollinator Interactions</h2>
+    </header>
+    <ol class="breadcrumb">
+        <li>Oregon Bee Atlas</li>
+        <li>Plant-Pollinator Interactions</li>
+    </ol>
+    <section id="content-main">
         <div class="imerss-container">
-
+            <div class="bee-loading-container">
+                <div class="loading-message">Plant-Pollinator Interactions Visualization Tool Loading</div>
+                <div class="bee">
+                    <div class="bee-body">
+                        <div class="line"></div>
+                    </div>
+                    <div>
+                        <div class="wing-right"></div>
+                        <div class="wing-left"></div>
+                    </div>
+                    <div class="bee-path">
+                        <div class="pollen"></div>
+                        <div class="pollen"></div>
+                        <div class="pollen"></div>
+                        <div class="pollen"></div>
+                        <div class="pollen"></div>
+                        <div class="pollen"></div>
+                        <div class="pollen"></div>
+                        <div class="pollen"></div>
+                        <div class="pollen"></div>
+                        <div class="pollen"></div>
+                        <div class="pollen"></div>
+                        <div class="pollen"></div>
+                    </div>
+                </div>
+            </div>
             <div class="imerss-map-and-taxa">
 
                 <div class="imerss-map-holder imerss-nodismiss-map">
@@ -149,6 +209,7 @@
             </div>
 
         </div>
+    </section>
 
         <script>
             hortis.vizLoaderWithMap(".imerss-container", {

@@ -1,0 +1,39 @@
+#navbar {
+    width: 100%;
+    /** Weird height definitions are required to reduce jank on startup - perhaps viz content is oversized **/
+    min-height: 168px;
+    max-height: 168px;
+    display: flex;
+    flex-direction: column;
+}
+
+.breadcrumb {
+    margin-bottom: 5px;
+}
+
+#content-main {
+    margin-top: 6px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+/** Override bogus definition from OSU core styles */
+
+input[type="radio"], input[type="checkbox"] {
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'Stratum2Web';
+    src: url(../fonts/OSU/Stratum2WebBold.woff2) format('woff2'),url(../fonts/OSU/Stratum2WebBold.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Stratum2Light';
+    src: url(../fonts/OSU/Stratum2WebLight.woff2) format('woff2'),url(../fonts/OSU/Stratum2WebLight.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Stratum2Regular';
+    src: url(../fonts/OSU/Stratum2WebRegular.woff2) format('woff2'),url(../fonts/OSU/Stratum2WebRegular.woff) format('woff');
+}

@@ -58,6 +58,10 @@ body {
     min-width: 30%;
 }
 
+.imerss-plants.imerss-checklist-holder {
+    padding-right: 0;
+}
+
 .imerss-interactions-holder {
     height: 100%;
     width: 100%;
@@ -189,7 +193,7 @@ body {
 }
 
 .imerss-l3eco-filter .imerss-filter-body {
-    height: 5rem;
+    height: 6em;
 }
 
 .imerss-filter-row .imerss-row-label, .imerss-phenology-range {
@@ -273,15 +277,17 @@ body {
 }
 
 .bee-loading-container {
-    position: absolute;
+    position: fixed;
     z-index: 999;
     opacity: 95%;
     display: flex;
     background: #ffeb3b;
-    width: calc(100% - 16px);
-    height: calc(100% - 16px);
     border-radius: 10px;
     overflow: hidden;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 
 .bee-loading-container-hidden {
