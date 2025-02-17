@@ -37,3 +37,9 @@ input[type="radio"], input[type="checkbox"] {
     font-family: 'Stratum2Regular';
     src: url(../fonts/OSU/Stratum2WebRegular.woff2) format('woff2'),url(../fonts/OSU/Stratum2WebRegular.woff) format('woff');
 }
+
+@media screen and (max-width: 1058px) {
+    #navbar .navbar-main-menu {
+        display: none;
+    }
+}
