@@ -76,8 +76,8 @@ hortis.evaluateFilter = function (that, combinedFilterInput) {
         }
     }
     that.allOutput.value = prevOutput;
-    // that.idle.value = true;
-    // idle marking is done globally in fluid.bipartite.render - probably need some some standard utility for this
+    that.idle.value = true;
+    that.rendered.value = true;
 };
 
 hortis.scheduleFilter = function (that, combinedFilterInput, idle) {
@@ -251,7 +251,7 @@ fluid.defaults("hortis.autocompleteFilter", {
         <div class="%rootClass">
             <label class="imerss-filter-title" for="%controlId">%filterName:</label>
             <div class="imerss-filter-body imerss-filter-autocomplete">
-                <div class="imerss-filter-clear imerss-hidden"><svg width="24" height="24">
+                <div class="imerss-filter-clear imerss-basic-tooltip imerss-hidden" title="Reset this filter"><svg width="24" height="24">
                         <use href="#x-circle-close" />
                     </svg>
                 </div>

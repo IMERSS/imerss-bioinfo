@@ -140,6 +140,8 @@ hortis.vizLoader.bindResources = async function (that) {
         that.obsRows.value = obs;
         that.resourcesLoaded.value = true;
         that.events.onResourcesLoaded.fire();
+        // TODO: Schedule this in more satisfactory way - need to hit filter clear or any other late rendering
+        $(".imerss-basic-tooltip").tooltip();
     });
 };
 

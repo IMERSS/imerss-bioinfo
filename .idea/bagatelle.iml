@@ -44,5 +44,7 @@
     <orderEntry type="module" module-name="bc-bryo-atlas" />
     <orderEntry type="module" module-name="bc-bryo-atlas" />
     <orderEntry type="module" module-name="alien-signals" />
+    <orderEntry type="module" module-name="preact" />
+    <orderEntry type="module" module-name="htm" />
   </component>
 </module>

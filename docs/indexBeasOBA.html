@@ -47,6 +47,12 @@
                     <path d="M16 8L12 12M12 12L8 16M12 12L8 8M12 12L16 16" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <circle cx="12" cy="12" r="10" fill="none" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </symbol>
+                <symbol id="fullscreen" viewBox="0 0 24 24">
+                    <path d="M9 4H4L4 9M20 9V4L15 4M15 20H20L20 15M4 15L4 20L9.00002 20" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </symbol>
+                <symbol id="fullscreen-exit" viewBox="0 0 32 32" stroke-width="2" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 12 L12 12 12 4 M20 4 L20 12 28 12 M4 20 L12 20 12 28 M28 20 L20 20 20 28" />
+                </symbol>
             </defs>
         </svg>
     </head>
@@ -95,7 +101,7 @@
                     <ul id="superfish-larch" class="menu sf-menu sf-menu-og-273436 sf-horizontal sf-style-none sf-total-items-5 sf-parent-items-0 sf-single-items-5 sf-js-enabled sf-shadow">
                         <li id="menu-89556-larch" class="first odd sf-item-1 sf-depth-1 sf-no-children"><a href="https://agsci.oregonstate.edu/bee-atlas/oba-discoveries" class="sf-depth-1">Discoveries</a></li>
                         <li id="menu-89566-larch" class="middle even sf-item-2 sf-depth-1 sf-no-children"><a href="https://agsci.oregonstate.edu/bee-atlas/frequently-asked-questions" class="sf-depth-1">FAQ</a></li>
-                        <li id="menu-89576-larch" class="middle odd sf-item-3 sf-depth-1 sf-no-children"><a href="#">Plant-Pollinator Interactions</a></li>
+                        <li id="menu-89576-larch" class="middle odd sf-item-3 sf-depth-1 sf-no-children"><a href="#">Melittoflora</a></li>
                         <li id="menu-89571-larch" class="middle even sf-item-4 sf-depth-1 sf-no-children"><a href="https://extension.oregonstate.edu/master-melittologist" title="" class="sf-depth-1">Master Melittologist Program</a></li>
                         <li id="menu-89561-larch" class="last odd sf-item-5 sf-depth-1 sf-no-children"><a href="https://agsci.oregonstate.edu/bee-atlas/donate" class="sf-depth-1">Donate</a></li>
                     </ul>
@@ -105,7 +111,7 @@
     </header>
     <ol class="breadcrumb">
         <li>Oregon Bee Atlas</li>
-        <li>Plant-Pollinator Interactions</li>
+        <li>Melittoflora &ndash; Plant-Pollinator Interactions</li>
     </ol>
     <section id="content-main">
         <div class="imerss-container">
@@ -155,13 +161,20 @@
                 </div>
 
                 <div class="imerss-taxa imerss-nodismiss-map">
-
                     <div class="imerss-taxonDisplay">
                         <div class="taxonDisplay-row"></div>
                     </div>
-
                 </div>
-
+                <div class="imerss-controls imerss-nodismiss-map">
+                    <div class="imerss-fullscreen">
+                        <svg width="24" height="24" class="imerss-fullscreen-control imerss-basic-tooltip" title="Open in full-screen mode">
+                            <use href="#fullscreen" />
+                        </svg>
+                        <svg width="24" height="24" class="imerss-fullscreen-exit-control imerss-basic-tooltip" title="Exit full-screen mode">
+                            <use href="#fullscreen-exit" />
+                        </svg>
+                    </div>
+                </div>
             </div>
             <div class="imerss-checklists">
                 <div class="imerss-pollinators imerss-checklist-holder">

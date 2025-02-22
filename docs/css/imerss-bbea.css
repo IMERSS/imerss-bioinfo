@@ -10,6 +10,8 @@ body {
 .imerss-map-holder {
     height: 100%;
     width: 50%;
+    display: flex;
+    flex-direction: column;
 }
 
 .imerss-map-and-taxa {
@@ -260,6 +262,29 @@ body {
 
 .ui-tabs .ui-tabs-panel {
     padding: 0.5em;
+}
+
+.imerss-mobile-warning {
+    display: none;
+    font-size: smaller;
+    margin: 2px;
+}
+
+@media screen and (max-width: 800px) {
+    .imerss-checklists {
+        display: none;
+    }
+    .imerss-mobile-warning {
+        display: block;
+    }
+    .imerss-map-and-taxa {
+        flex-direction: column;
+        height: 100%
+    }
+    .imerss-map-holder {
+        width: 100%;
+    }
+
 }
 
 

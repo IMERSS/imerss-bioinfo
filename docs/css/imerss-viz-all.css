@@ -710,6 +710,11 @@ a.ui-button:active,
     contain: paint; /* Makes sure loading indicator is clipped */
 }
 
+/** To prevent black content in fullscreen mode - https://stackoverflow.com/questions/16163089/background-element-goes-black-when-entering-fullscreen-with-html5 **/
+.imerss-container::backdrop {
+    background-color: rgba(255,255,255,0);
+}
+
 .imerss-container *,
 .imerss-container *:before,
 .imerss-container *:after {
@@ -1057,12 +1062,34 @@ a.ui-button:active,
 }
 
 .imerss-autocomplete-row label {
-    font-size: 1.3rem;
+    font-size: 1.3em;
     font-weight: bold;
 }
 
 .autocomplete__menu {
     max-height: 600px;
+}
+
+.imerss-controls {
+    margin-left: auto;
+    margin-right: 1em;
+    margin-top: 6px;
+}
+
+.imerss-fullscreen-control:hover {
+    background: #d0d7de33;
+}
+
+.imerss-fullscreen-exit-control {
+    display: none;
+}
+
+.imerss-fullscreen-mode .imerss-fullscreen-control {
+    display: none;
+}
+
+.imerss-fullscreen-mode .imerss-fullscreen-exit-control {
+    display: block;
 }
 
 

@@ -43,3 +43,7 @@ input[type="radio"], input[type="checkbox"] {
         display: none;
     }
 }
+
+.imerss-fullscreen-mode #navbar, .imerss-fullscreen-mode .breadcrumb {
+    display: none;
+}

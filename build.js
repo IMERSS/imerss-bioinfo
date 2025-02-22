@@ -79,6 +79,7 @@ const buildIndex = {
         "node_modules/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js",
         "src/client/css/mapbox-gl-draw.css", // has our own overrides
         "node_modules/papaparse/papaparse.min.js",
+        "node_modules/pako/dist/pako_inflate.min.js",
         "node_modules/pretty-checkbox/dist/pretty-checkbox.min.css",
         "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js",
         "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css",

@@ -19,10 +19,10 @@ fluid.defaults("hortis.beaVizLoader", {
         filterControls: ".imerss-filter-controls",
         filters: ".imerss-main-filters",
         loadingIndicator: ".bee-loading-container",
-        bbeaFilters: ".imerss-bbea-filters"
+        bbeaFilters: ".imerss-bbea-filters",
+        fullScreen: ".imerss-fullscreen"
     },
     members: {
-        // Flag set by bipartite renderer to indicate initial view is fully rendered
         rendered: "@expand:signal()",
         idle: "@expand:signal(true)",
         filteredObs: "{filters}.allOutput",
@@ -34,8 +34,6 @@ fluid.defaults("hortis.beaVizLoader", {
 
         //`@expand:fluid.computed(hortis.filterObsByTwoTaxa, {that}.filteredObs,
         //    {plantChecklist}.rowFocus, {pollChecklist}.rowFocus)`
-    },
-    invokers: {
     },
     components: {
         ecoL3Loader: {
@@ -64,7 +62,8 @@ fluid.defaults("hortis.beaVizLoader", {
             options: {
                 members: {
                     allInput: "{vizLoader}.obsRows",
-                    idle: "{vizLoader}.idle"
+                    rendered: "{hortis.vizLoader}.rendered",
+                    idle: "{hortis.vizLoader}.idle",
                 }
             }
         },
@@ -142,8 +141,6 @@ fluid.defaults("hortis.beaVizLoader", {
             container: "{that}.dom.bipartite",
             options: {
                 members: {
-                    rendered: "{hortis.vizLoader}.rendered",
-                    idle: "{hortis.vizLoader}.idle",
                     // TODO: Split drawInteractions render prepare back out into interactions
                     bipartiteRows: "{drawInteractions}.bipartiteRows",
                     beeSelection: "{pollChecklist}.rowSelection",
@@ -151,6 +148,13 @@ fluid.defaults("hortis.beaVizLoader", {
                     plantSelection: "{plantChecklist}.rowSelection",
                     plantIdToEntry: "{plantChecklist}.idToEntry"
                 }
+            }
+        },
+        fullScreenControl: {
+            type: "hortis.fullScreenControl",
+            container: "{that}.dom.fullScreen",
+            options: {
+                fullScreenElement: "{vizLoader}.container.0"
             }
         }
     }
@@ -160,6 +164,35 @@ hortis.beaVizLoader.hideLoadingIndicator = function () {
     const container = document.querySelector(".bee-loading-container");
     container.classList.add("bee-loading-container-hidden");
     window.setTimeout(() => container.remove(), 1000);
+};
+
+fluid.defaults("hortis.fullScreenControl", {
+    gradeNames: "fluid.viewComponent",
+    members: {
+        enabled: "@expand:signal(false)",
+        fullScreenEffect: "@expand:fluid.effect(hortis.fullScreenEffect, {that}.enabled, {that}.options.fullScreenElement)"
+    },
+    listeners: {
+        "onCreate.bind": "hortis.fullScreenControl.bind({that}.container, {that}.enabled)"
+    }
+});
+
+hortis.fullScreenEffect = async function (enabled, fullScreenElement) {
+    if (enabled) {
+        await fullScreenElement.requestFullscreen();
+    } else {
+        try {
+            await document.exitFullscreen();
+        } catch (e) {}
+    }
+};
+
+hortis.fullScreenControl.bind = function (container, enabled) {
+    const body = document.querySelector("body");
+    container.click(() => {
+        enabled.value = !enabled.value;
+        hortis.toggleClass(body, "imerss-fullscreen-mode", enabled.value);
+    });
 };
 
 hortis.twoTaxaFromObs = function (filteredObs, rowById) {
@@ -338,7 +371,8 @@ hortis.pollColours = {
         "Apidae": "#377EB8",
         "Colletidae": "#4DAF4A",
         "Megachilidae": "#FF7F00",
-        "Halictidae": "#984EA3"
+        "Halictidae": "#984EA3",
+        "Melittidae": "#ECC846"
     }
 };
 
@@ -422,8 +456,6 @@ hortis.bipartite.render = function (that, svgNode, containerWidth, bipartiteRows
 
     svgNode.setAttribute("height", renderedHeight);
     svgNode.setAttribute("width", renderedWidth);
-    that.rendered.value = true;
-    that.idle.value = true;
 };
 
 hortis.interactionMarkup =
