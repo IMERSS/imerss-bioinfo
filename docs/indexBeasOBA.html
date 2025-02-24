@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Oregon Bee Atlas Plant-Pollinator Interactions</title>
+        <title>Melittoflora &ndash; Oregon Bee Atlas Plant-Pollinator Interactions</title>
 
         <!-- Looks like this comes from here - use CDN since it refers to relative fonts
         https://github.com/Templarian/MaterialDesign-Webfont/releases/tag/v2.0.46 -->
@@ -160,7 +160,10 @@
                     </div>
                 </div>
 
-                <div class="imerss-taxa imerss-nodismiss-map">
+                <div class="imerss-info-panel imerss-nodismiss-map">
+                    <div class="imerss-collector-report imerss-hidden">
+                        <div>A volunteer report is available:</div><a href="#"></a>
+                    </div>
                     <div class="imerss-taxonDisplay">
                         <div class="taxonDisplay-row"></div>
                     </div>
@@ -227,8 +230,8 @@
         <script>
             hortis.vizLoaderWithMap(".imerss-container", {
                 gradeNames: "hortis.beaVizLoader",
-                obsFile: "data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.csv",
-                taxaFile: "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.csv",
+                obsFile: "data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz",
+                taxaFile: "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz",
                 ecoL3File: "data/b-team/us-eco-l3-regions.csv",
                 mapGrades: "hortis.bbeaLibreMap",
                 resourceBase: "src/client"

@@ -5,6 +5,7 @@
         "taxonName": "Taxon name",
         "ambiguousNameMatch": "ambiguousNameMatch",
         "nameStatus": "nameStatus",
+        "commonName": "commonName",
         "authority": "Author",
         "kingdom": "Kingdom",
         "phylum": "Phylum",

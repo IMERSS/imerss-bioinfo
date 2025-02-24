@@ -148,7 +148,7 @@
                         displaying the plant-pollinator interaction network requires more space than is available on a mobile device.
                     </div>
                 </div>
-                <div class="imerss-filter-panel">
+                <div class="imerss-filter-panel" f-id="filter-panel">
                     <div class="imerss-filters imerss-main-filters">
                     </div>
                     <div class="imerss-filter-controls">
@@ -161,7 +161,10 @@
                     </div>
                 </div>
 
-                <div class="imerss-taxa imerss-nodismiss-map">
+                <div class="imerss-info-panel imerss-nodismiss-map">
+                    <div class="imerss-collector-report imerss-hidden">
+                        <div>A volunteer report is available:</div><a href="#"></a>
+                    </div>
                     <div class="imerss-taxonDisplay">
                         <div class="taxonDisplay-row"></div>
                     </div>
@@ -227,8 +230,8 @@
         <script>
             hortis.vizLoaderWithMap(".imerss-container", {
                 gradeNames: "hortis.beaVizLoader",
-                obsFile: "data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.csv",
-                taxaFile: "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.csv",
+                obsFile: "data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz",
+                taxaFile: "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz",
                 ecoL3File: "data/b-team/us-eco-l3-regions.csv",
                 resourceBase: "src/client"
             });

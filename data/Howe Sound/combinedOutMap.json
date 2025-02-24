@@ -5,6 +5,7 @@
         "taxonName": "Taxon name",
         "ambiguousNameMatch": "ambiguousNameMatch",
         "nameStatus": "nameStatus",
+        "commonName": "commonName",
         "authority": "Author",
         "observationCount": "Observation count",
         "coords": "Coordinates",
@@ -51,9 +52,9 @@
     },
     "datasets": {
         "HOWE": {
-            "name": "Howe Sound Gridded Data",
-            "input": "E:/source/gits/bagatelle/data/Howe Sound/gridded_plants_WGS84.csv",
-            "map": "E:/source/gits/bagatelle/data/Howe Sound/Howe-Sound-map-2023.json",
+            "name": "Howe Sound Vascular Plants 2024",
+            "input": "E:/source/gits/bagatelle/data/Howe Sound/Howe_Sound_vascular_plant_records_consolidated_2024-11-14.csv",
+            "map": "E:/source/gits/bagatelle/data/Howe Sound/Howe-Sound-map-2025.json",
             "outMap": "E:/source/gits/bagatelle/data/Howe Sound/Howe-Sound-out-map.json",
             "colour": "#931362",
             "datasetId": "HOWE"

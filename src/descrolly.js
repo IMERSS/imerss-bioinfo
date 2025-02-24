@@ -49,7 +49,11 @@ hortis.applyTaxaForKey = async function (that, taxaStringOrArray, label, contain
         // Copied from taxonomise.js hortis.applyObservations
         // TODO: Disuse in favour of modern system applying phyla, perhaps most helpfully in config file
         const invertedId = applySwaps ? invertedSwaps[san] : null;
-        const looked = invertedId && await source.get({id: invertedId}) || await source.get({name: san});
+        const query = invertedId ? {id: invertedId} : {name: san};
+        if (query.name && config.phylum) {
+            query.phylum = config.phylum;
+        }
+        const looked = await source.get(query);
         if (looked.doc) {
             const taxonId = looked.doc.id;
             const row = reintById[taxonId];

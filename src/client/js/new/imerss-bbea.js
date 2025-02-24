@@ -20,7 +20,8 @@ fluid.defaults("hortis.beaVizLoader", {
         filters: ".imerss-main-filters",
         loadingIndicator: ".bee-loading-container",
         bbeaFilters: ".imerss-bbea-filters",
-        fullScreen: ".imerss-fullscreen"
+        fullScreen: ".imerss-fullscreen",
+        collectorReport: ".imerss-collector-report"
     },
     members: {
         rendered: "@expand:signal()",
@@ -37,9 +38,18 @@ fluid.defaults("hortis.beaVizLoader", {
     },
     components: {
         ecoL3Loader: {
-            type: "hortis.urlCsvReader",
+            type: "hortis.csvReader",
             options: {
                 url: "{vizLoader}.options.ecoL3File"
+            }
+        },
+        collectorReportLinker: {
+            type: "hortis.collectorReportLinker",
+            container: "{that}.dom.collectorReport",
+            options: {
+                members: {
+                    collectorName: "{filters}.collectorFilter.filterState"
+                }
             }
         },
         filterControls: {
@@ -194,6 +204,49 @@ hortis.fullScreenControl.bind = function (container, enabled) {
         hortis.toggleClass(body, "imerss-fullscreen-mode", enabled.value);
     });
 };
+
+fluid.defaults("hortis.collectorReportLinker", {
+    gradeNames: "fluid.stringTemplateRenderingView",
+    markup: {
+        container: `
+        <div>
+            <div>A volunteer report is available:</div><a href="%target" target="_blank">%linkText</a><span class="external-link"></span>
+        </div>
+        `,
+        linkText: "%collectorName Report (2023)",
+        linkTarget: "https://oregon-bee-project.github.io/melittoflora/reports/%collectorNameCond_Report_2023.pdf"
+    },
+    members: {
+        collectorLink: "@expand:fluid.computed(hortis.collectorReportLinker.nameToLink, {that}.collectorName, {that}.options.markup.linkTarget)",
+        collectorLinkValid: "@expand:signal(false)",
+        // Prime case for "&" syntax ?
+        checkCollectorLinkValid: "@expand:fluid.effect(hortis.collectorReportLinker.checkLinkValid, {that}.collectorName, {that}.collectorLink, {that})",
+        showControl: "@expand:fluid.effect(hortis.toggleClass, {that}.container.0, imerss-hidden, {that}.collectorLinkValid, true)",
+        renderModel: "@expand:fluid.computed(hortis.collectorReportLinker.renderModel, {that}.collectorName, {that}.collectorLink, {that}.options.markup.linkText)"
+    }
+});
+
+hortis.collectorReportLinker.nameToLink = function (collectorName, linkTargetTemplate) {
+    return collectorName && fluid.stringTemplate(linkTargetTemplate, {collectorNameCond: collectorName.replaceAll(" ", "")});
+};
+
+hortis.collectorReportLinker.checkLinkValid = async function (collectorName, collectorLink, that) {
+    const collectorLinkValid = that.collectorLinkValid;
+    collectorLinkValid.value = false;
+    try {
+        if (collectorLink) {
+            const response = await fetch(collectorLink);
+            if (response.ok) {
+                collectorLinkValid.value = true;
+            }
+        }
+    } catch (e) {}
+};
+
+hortis.collectorReportLinker.renderModel = (collectorName, collectorLink, linkTextTemplate) => ({
+    target: collectorLink,
+    linkText: fluid.stringTemplate(linkTextTemplate, {collectorName})
+});
 
 hortis.twoTaxaFromObs = function (filteredObs, rowById) {
     const plantIds = {},

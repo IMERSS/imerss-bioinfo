@@ -1,0 +1,26 @@
+{
+    "columns": {
+        "taxonName": "%scientificName",
+        "authority": "%scientificNameAuthorship",
+        "institutionCode": "%institutionCode",
+        "catalogueNumber": "%catalogNumber",
+        "dateObserved": "%eventDate",
+        "recordedBy": "%recordedBy",
+        "locality": "%locality",
+        "latitude": "%decimalLatitude",
+        "longitude": "%decimalLongitude",
+        "individualCount": "%individualCount",
+        "iNaturalistObsLink": "%occurrenceID",
+        "kingdom": "%kingdom",
+        "phylum": "%phylum",
+        "class": "%class",
+        "order": "%order",
+        "suborder": "%suborder",
+        "infraorder": "%infraorder",
+        "family": "%family",
+        "genus": "%genus"
+    },
+    "datasetId": "HOWE",
+    "datasetClass": "naturalist",
+    "observationId": "%datasetId:%rowNumber"
+}

@@ -1,0 +1,7 @@
+{
+    scrollyInput: "%imerss-bioinfo/data/Howe Sound/Status-plotData-2025.json",
+    taxaInput: "%imerss-bioinfo/data/Howe Sound/Howe-Sound-reintegrated-2025.csv",
+    taxaMap: "%imerss-bioinfo/data/Howe Sound/combinedOutMap.json",
+    scrollyFeatures: "%imerss-bioinfo/data/Howe Sound/scrollyFeatures-Status-2025.json",
+    phylum: "Tracheophyta"
+}

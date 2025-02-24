@@ -40,6 +40,8 @@ hortis.assignedFromInput = function (inputFile) {
 
 const outputFile = parsedArgs.o || hortis.assignedFromInput(inputFile);
 
+const fieldName = parsedArgs.field;
+
 const source = hortis.iNatTaxonSource();
 
 hortis.lowRanks = ["kingdom", "phylum", "subphylum", "superclass", "class", "subclass", "superorder", "order",
@@ -77,6 +79,30 @@ hortis.queryFromLichenRow = function (row) {
     return {name, phylum};
 };
 
+hortis.unscrewArjanName = function (name) {
+    const words = name.split(" ");
+    let useWords = 2;
+    if (words.length > 2) {
+        if (words[3] === "var." || words[3] === "subsp.") {
+            useWords = 4;
+        }
+    }
+    return words.slice(0, useWords).join(" ");
+};
+
+hortis.queryFromArjanRow = function (row) {
+    const prelim = hortis.unscrewArjanName(row.currentSpeciesNameAlgaeBaseUnlessSpecified);
+    const name = hortis.sanitizeSpeciesName(prelim);
+    const phylum = "Ochrophyta";
+    return {name, phylum};
+};
+
+hortis.queryFromDiatomRow = function (row) {
+    const name = hortis.sanitizeSpeciesName(row[fieldName || "Taxon"]);
+    const phylum = "Ochrophyta";
+    return {name, phylum};
+};
+
 hortis.queryFromLichenXRow = function (row) {
     const name = hortis.sanitizeSpeciesName(row["reference.taxa"]);
     const phylum = "Ascomycota";
@@ -84,7 +110,7 @@ hortis.queryFromLichenXRow = function (row) {
 };
 
 hortis.queryFromLichenNRow = function (row) {
-    const name = hortis.sanitizeSpeciesName(row.Taxon);
+    const name = hortis.sanitizeSpeciesName(row[fieldName || "Taxon"]);
     const phylum = "Ascomycota";
     return {name, phylum};
 };
@@ -148,52 +174,55 @@ hortis.obsIdFromSummaryRow2023 = function (row) {
 // One-off script to update taxonomies and iNaturalist ids from files produced in Andrew's 2022 run of Galiano data
 
 hortis.applyName = async function (row) {
-    const query = hortis.queryFromSummaryRow2023(row);
+    //const query = hortis.queryFromSummaryRow2023(row);
     //const query = hortis.queryFromGBIFRow(row);
-    //const query = hortis.queryFromCPNWHRow(row);
+    //const query = hortis.queryFromArjanRow(row);
     //const query = hortis.queryFromLichenNRow(row);
     //const query = hortis.queryFromDwcaRow(row);
+    const query = hortis.queryFromDiatomRow(row);
+    let goodRow;
 
     const looked = await source.get(query);
     //    console.log("Got document ", looked);
     if (looked && looked.doc) {
-        row["Name Status"] = looked.doc.nameStatus;
-        row["Referred iNaturalist Id"] = looked.doc.id;
-        row["Referred iNaturalist Name"] = looked.doc.name;
+        row["Name.Status"] = looked.doc.nameStatus;
+        row["Referred.iNaturalist.Id"] = looked.doc.id;
+        row["Referred.iNaturalist.Name"] = looked.doc.name;
         await hortis.iNat.getRanks(looked.doc.id, row, source.byId, hortis.ranks); // uncomment for Dunwiddie, EFlora
         if (row.commonName === "") {
             const lookedId = await source.get({id: looked.doc.id});
             row.commonName = lookedId?.doc.preferred_common_name;
         }
+        goodRow = row;
     } else {
-        row["Name Status"] = "unknown";
+        row["Name.Status"] = "unknown";
     }
     if (row.ID !== undefined) {
         if (row.ID > 0) {
             try {
                 const lookedId = await source.get({id: row.ID});
-                row["Indexed iNaturalist Name"] = lookedId?.doc?.name || "unknown";
+                row["Indexed.iNaturalist.Name"] = lookedId?.doc?.name || "unknown";
             } catch (e) {
                 console.log("Got error: ", e);
-                row["Indexed iNaturalist Name"] = "error";
+                row["Indexed.iNaturalist.Name"] = "error";
                 if (e.statusCode !== 404) {
                     throw e;
                 }
             }
 
         } else {
-            row["Indexed iNaturalist Name"] = "";
+            row["Indexed.iNaturalist.Name"] = "";
         }
     }
     const obsId = hortis.obsIdFromSummaryRow2023(row);
     if (obsId) {
-        row["Observation Taxon Name"] = "error";
+        row["Observation.Taxon.Name"] = "error";
         if (+obsId > 0) {
             try {
                 const obs = await source.get({obsId: obsId});
                 if (obs.doc.results.length === 1) {
                     const name = obs.doc.results[0].taxon.name;
-                    row["Observation Taxon Name"] = name;
+                    row["Observation.Taxon.Name"] = name;
                 }
             }
             catch (e) {
@@ -201,6 +230,7 @@ hortis.applyName = async function (row) {
             }
         }
     }
+    return goodRow;
 };
 
 hortis.unscrewGBIFName = function (name) {
@@ -214,12 +244,16 @@ hortis.unscrewGBIFName = function (name) {
     return outWords.join(" ");
 };
 
+
+
 Promise.all([reader.completionPromise, source.events.onCreate]).then(async function () {
     const mapped = [];
+    let goodRow;
     for (let i = 0; i < reader.rows.length; ++i) {
         console.log("Processing row ", i);
         const row = reader.rows[i];
-        await hortis.applyName(row);
+        const thisGood = await hortis.applyName(row);
+        goodRow ||= thisGood;
         // TODO: produce mapping functions for these older forms of data
         /*
         if (row.infraTaxonName) {
@@ -231,5 +265,5 @@ Promise.all([reader.completionPromise, source.events.onCreate]).then(async funct
         */
         mapped.push(row);
     }
-    hortis.writeCSV(fluid.module.resolvePath(outputFile), Object.keys(mapped[0]), mapped, fluid.promise());
+    hortis.writeCSV(fluid.module.resolvePath(outputFile), Object.keys(goodRow), mapped, fluid.promise());
 });

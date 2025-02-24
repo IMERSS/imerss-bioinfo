@@ -7,7 +7,7 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
-/* global Papa, maplibregl, preactSignalsCore */
+/* global Papa, maplibregl, preactSignalsCore, pako */
 
 "use strict";
 
@@ -51,34 +51,44 @@ Object.defineProperty(fluid, "log", {
     }
 });
 
+hortis.inflateUint8Array = async function (url) {
+    const response = await fetch(url);
+
+    const arrayBuffer = await response.arrayBuffer();
+    const byteArray = new Uint8Array(arrayBuffer);
+
+    const inflated = pako.inflate(byteArray, { to: "string" });
+    return inflated;
+};
+
 hortis.toggleClass = function (container, clazz, value, inverse) {
     container.classList[value ^ inverse ? "add" : "remove"](clazz);
 };
 
-hortis.csvReader.parse = function (that, csvOptions, url) {
-    const options = {
-        ...csvOptions,
-        complete: function (results) {
-            that.parsed = results;
-            that.data = results.data;
-            that.headers = results.meta.fields;
-            that.completionPromise.resolve(that.data);
-            that.rows.value = that.data;
-        },
-        error: function (err) {
-            that.completionPromise.reject();
-            fluid.fail("Error parsing CSV file ", url, ": ", err);
-        }
+hortis.csvReader.parse = async function (that, csvOptions, url) {
+    const complete = function (results) {
+        that.parsed = results;
+        that.data = results.data;
+        that.headers = results.meta.fields;
+        that.completionPromise.resolve(that.data);
+        that.rows.value = that.data;
     };
-    Papa.parse(url, options);
-};
-
-fluid.defaults("hortis.urlCsvReader", {
-    gradeNames: "hortis.csvReader",
-    csvOptions: {
-        download: true
+    const error = function (err) {
+        that.completionPromise.reject();
+        fluid.fail("Error parsing CSV file ", url, ": ", err);
+    };
+    const download = {download: true};
+    const downloadOptions = {...csvOptions, ...download, complete, error};
+    if (url.endsWith(".csv")) {
+        Papa.parse(url, downloadOptions);
+    } else if (url.endsWith(".viz")) {
+        const data = await hortis.inflateUint8Array(url);
+        const results = Papa.parse(data, {...csvOptions});
+        complete(results);
+    } else {
+        fluid.fail("Unrecognised CSV URL suffix for ", url);
     }
-});
+};
 
 fluid.defaults("hortis.vizLoader", {
     gradeNames: ["fluid.component"],
@@ -86,13 +96,13 @@ fluid.defaults("hortis.vizLoader", {
     // taxaFile
     components: {
         taxaLoader: {
-            type: "hortis.urlCsvReader",
+            type: "hortis.csvReader",
             options: {
                 url: "{vizLoader}.options.taxaFile"
             }
         },
         obsLoader: {
-            type: "hortis.urlCsvReader",
+            type: "hortis.csvReader",
             options: {
                 url: "{vizLoader}.options.obsFile"
             }
@@ -714,7 +724,7 @@ fluid.defaults("hortis.libreMap.usEcoL3Tiles", {
             tileSize: 512,
             maxzoom: 8,
             paint: {
-                "raster-opacity": 0.3,
+                "raster-opacity": 0.3
             },
             metadata: {
                 sortKey: 1

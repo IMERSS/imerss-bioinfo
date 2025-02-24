@@ -162,17 +162,11 @@ const buildIndex = {
         src: "data/b-team/us-eco-l3-regions.csv",
         dest: "docs/data/b-team/us-eco-l3-regions.csv"
     }, {
-        src: "data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.csv",
-        dest: "docs/data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.csv"
+        src: "data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz",
+        dest: "docs/data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz"
     }, {
-        src: "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.csv",
-        dest: "docs/data/b-team/plant-pollinators-OBA-2025-assigned-taxa.csv"
-    }, {
-        src: "data/b-team/plant-pollinators-OBA-2-assigned-subset-labels.csv",
-        dest: "docs/data/b-team/plant-pollinators-OBA-2-assigned-subset-labels.csv"
-    }, {
-        src: "data/b-team/plant-pollinators-OBA-2-assigned-taxa.csv",
-        dest: "docs/data/b-team/plant-pollinators-OBA-2-assigned-taxa.csv"
+        src: "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz",
+        dest: "docs/data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz"
     }, {
         src: "data/b-team/us-eco-l3-regions.csv",
         dest: "docs/data/b-team/us-eco-l3-regions.csv"
