@@ -742,6 +742,10 @@ a.ui-button:active,
     position: absolute;
 }
 
+.imerss-info-panel {
+    display: flex;
+}
+
 .imerss-legend-preview {
     width: 18px;
     height: 18px;
@@ -1093,6 +1097,16 @@ a.ui-button:active,
     display: block;
 }
 
+.imerss-container .autocomplete__hint, .imerss-filters .autocomplete__input, .imerss-filters .autocomplete__option {
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.imerss-container .autocomplete__input--default {
+    padding: 2px 4px 2px 4px;
+    border-width: 1px;
+    width: 15em;
+}
 
 .imerss-filter-panel {
     padding: 2px 1rem 2px 1rem;
@@ -1107,7 +1121,7 @@ a.ui-button:active,
 
 .imerss-filters {
     height: 100%;
-    width: 20em;
+    width: 22em;
     overflow-y: auto;
     padding-right: 0.5em;
 }
@@ -1139,7 +1153,7 @@ a.ui-button:active,
 }
 
 .imerss-filter-body {
-    padding-left: 1rem;
+    padding-left: 16px;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -1168,15 +1182,43 @@ a.ui-button:active,
     display: none;
 }
 
-.imerss-filters .autocomplete__hint, .imerss-filters .autocomplete__input, .imerss-filters .autocomplete__option {
-    font-size: 16px;
-    line-height: 1.25;
+.imerss-free-region-filter {
+    display: flex;
+    flex-direction: column;
 }
 
-.imerss-filters .autocomplete__input--default {
-    padding: 2px 4px 2px 4px;
-    border-width: 1px;
-    width: 15em;
+.imerss-free-region-filter-holder {
+    position: relative;
+}
+
+.imerss-free-region-filter .imerss-filter-clear {
+    top: -1px;
+}
+
+.imerss-free-region-control {
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.imerss-free-region-control .imerss-filter-body {
+    overflow-y: scroll;
+    height: 6.5em;
+}
+
+.imerss-free-region-control .imerss-filter-title {
+    display: none;
+}
+
+.imerss-region-field {
+    font-size: 9px;
+    margin-bottom: 2px;
+}
+
+/** Reestablish .imerss-filter-body by reoverriding .imerss-container .autocomplete__input--default def **/
+.imerss-container .imerss-free-region-filter .autocomplete__input--default {
+    margin-left: 16px;
+    margin-bottom: 2px;
 }
 
 .imerss-region-filter-rows {

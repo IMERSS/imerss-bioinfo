@@ -174,12 +174,15 @@ fluid.spliceContainer = function (target, source, elideParent) {
 };
 
 // TODO: Could move to HTM's parser using virtual DOM for tree building
-fluid.renderContainerSplice = function (parentContainer, elideParent, hasRoot, renderMarkup) {
+fluid.renderContainerSplice = function (parentContainer, elideParent, hasRoot, renderMarkup, that) {
     const resolvedContainer = fluid.validateContainer(parentContainer);
     effect ( () => {
         const containerMarkup = renderMarkup();
         const template = fluid.parseMarkup(containerMarkup, true);
         fluid.spliceContainer(resolvedContainer, template, elideParent);
+        if (that.renderModel.value !== undefined) {
+            that.templateRoot.value = template;
+        }
     });
     return parentContainer;
 };
@@ -207,13 +210,14 @@ fluid.defaults("fluid.stringTemplateRenderingView", {
     },
     invokers: {
         renderMarkup: "fluid.renderStringTemplate({that}.options.markup, {that}.renderModel)",
-        renderContainer: "fluid.renderContainerSplice({that}.options.parentContainer, {that}.options.elideParent, {that}.options.hasRoot, {that}.renderMarkup)",
+        renderContainer: "fluid.renderContainerSplice({that}.options.parentContainer, {that}.options.elideParent, {that}.options.hasRoot, {that}.renderMarkup, {that})",
         // Blast this unnecessary invoker definition
         addToParent: null
     },
     elideParent: true,
     hasRoot: true,
     members: {
+        templateRoot: "@expand:signal()",
         // Need an blank default so that initial rendering effect is triggered
         renderModel: "@expand:fluid.computed(fluid.blankRenderModel)"
     }

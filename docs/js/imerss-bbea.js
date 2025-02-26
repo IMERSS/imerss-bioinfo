@@ -37,10 +37,10 @@ fluid.defaults("hortis.beaVizLoader", {
         //    {plantChecklist}.rowFocus, {pollChecklist}.rowFocus)`
     },
     components: {
-        ecoL3Loader: {
+        regionIndirection: {
             type: "hortis.csvReader",
             options: {
-                url: "{vizLoader}.options.ecoL3File"
+                url: "{vizLoader}.options.regionIndirectionFile"
             }
         },
         collectorReportLinker: {
@@ -73,7 +73,7 @@ fluid.defaults("hortis.beaVizLoader", {
                 members: {
                     allInput: "{vizLoader}.obsRows",
                     rendered: "{hortis.vizLoader}.rendered",
-                    idle: "{hortis.vizLoader}.idle",
+                    idle: "{hortis.vizLoader}.idle"
                 }
             }
         },
@@ -179,7 +179,7 @@ hortis.beaVizLoader.hideLoadingIndicator = function () {
 fluid.defaults("hortis.fullScreenControl", {
     gradeNames: "fluid.viewComponent",
     members: {
-        enabled: "@expand:signal(false)",
+        enabled: "@expand:signal()",
         fullScreenEffect: "@expand:fluid.effect(hortis.fullScreenEffect, {that}.enabled, {that}.options.fullScreenElement)"
     },
     listeners: {
@@ -1132,7 +1132,17 @@ hortis.bbeaFiltersTemplate = `
     <div class="imerss-filters">
         <div class="imerss-filter"></div>
         <div class="imerss-collector-filter imerss-filter"></div>
-        <div class="imerss-monument-filter imerss-filter"></div>
+        <div class="imerss-free-region-filter imerss-filter">
+            <div class="imerss-filter-title">Filter by region:</div>
+            <div class="imerss-free-region-filter-holder">
+                <input class="imerss-free-region-input autocomplete__input autocomplete__input--default" aria-autocomplete="list" autocomplete="off" placeholder="" type="text" role="combobox" spellcheck="false">
+                <div class="imerss-filter-clear imerss-basic-tooltip imerss-hidden" title="Reset this filter"><svg width="24" height="24">
+                       <use href="#x-circle-close" />
+                    </svg>
+                </div>
+            </div>
+            <div class="imerss-free-region-control"></div>
+        </div>
         <div class="imerss-l3eco-filter imerss-filter"></div>
         <div class="imerss-phenology-filter imerss-filter"></div>
         <div class="imerss-elevation-filter imerss-filter"></div>
@@ -1150,7 +1160,7 @@ fluid.defaults("hortis.bbeaFilters", {
     },
     selectors: {
         collectorFilter: ".imerss-collector-filter",
-        monumentFilter: ".imerss-monument-filter",
+        freeRegionFilter: ".imerss-free-region-filter",
         l3ecoFilter: ".imerss-l3eco-filter",
         phenologyFilter: ".imerss-phenology-filter",
         elevationFilter: ".imerss-elevation-filter"
@@ -1165,31 +1175,25 @@ fluid.defaults("hortis.bbeaFilters", {
                 fieldName: "recordedBy"
             }
         },
-        monumentFilter: {
-            type: "hortis.regionFilter",
-            container: "{that}.dom.monumentFilter",
+        freeRegionFilter: {
+            type: "hortis.freeRegionFilter",
+            container: "{that}.dom.freeRegionFilter",
             options: {
-                filterName: "Monument",
-                fieldName: "monument"
+                fieldNames: ["US Ecoregions Level III"],
+                filterName: "Filter by regions",
+                members: {
+                    indirectionRows: "{regionIndirection}.rows"
+                }
             }
         },
         l3ecoFilter: {
             type: "hortis.regionFilter",
             container: "{that}.dom.l3ecoFilter",
             options: {
-                gradeNames: "hortis.regionFilter.withLookup",
                 filterName: "L3 ecoregion",
-                fieldName: "US_L3CODE",
-                idField: "US_L3CODE",
-                nameField: "US_L3NAME",
+                fieldNames: ["US Ecoregions Level III"],
                 members: {
-                    indirection: "{ecoL3Loader}.rows"
-                },
-                invokers: {
-                    idToLabel: {
-                        args: ["{that}", "{arguments}.0"],
-                        func: (that, id) => `${id}. ${that.lookupId(id)}`
-                    }
+                    indirectionRows: "{regionIndirection}.rows"
                 }
             }
         },

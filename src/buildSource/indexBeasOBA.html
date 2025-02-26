@@ -78,7 +78,8 @@
 
                     <div class="navbar-group navbar-col">
                         <div class="navbar-group-middle navbar-vcol">
-                            <span class="group-parent"><a class="parent-site" href="https://agsci.oregonstate.edu"> College of Agricultural Sciences</a> <span class="group-header-separator">»</span> </span><a class="group" href="/bee-atlas">Oregon Bee Atlas</a>          </div>
+                            <span class="group-parent"><a class="parent-site" href="https://agsci.oregonstate.edu"> College of Agricultural Sciences</a> <span class="group-header-separator">»</span> </span>
+                            <a class="group" href="https://agsci.oregonstate.edu/bee-atlas">Oregon Bee Atlas</a>          </div>
                     </div>
 
                     <div class="navbar-upper-nav navbar-col">
@@ -95,28 +96,13 @@
                     </div>
                 </div>
             </div>
-
-            <div class="navbar-main-menu">
-                <div class="main-menu" role="navigation">
-                    <ul id="superfish-larch" class="menu sf-menu sf-menu-og-273436 sf-horizontal sf-style-none sf-total-items-5 sf-parent-items-0 sf-single-items-5 sf-js-enabled sf-shadow">
-                        <li id="menu-89556-larch" class="first odd sf-item-1 sf-depth-1 sf-no-children"><a href="https://agsci.oregonstate.edu/bee-atlas/oba-discoveries" class="sf-depth-1">Discoveries</a></li>
-                        <li id="menu-89566-larch" class="middle even sf-item-2 sf-depth-1 sf-no-children"><a href="https://agsci.oregonstate.edu/bee-atlas/frequently-asked-questions" class="sf-depth-1">FAQ</a></li>
-                        <li id="menu-89576-larch" class="middle odd sf-item-3 sf-depth-1 sf-no-children"><a href="#">Melittoflora</a></li>
-                        <li id="menu-89571-larch" class="middle even sf-item-4 sf-depth-1 sf-no-children"><a href="https://extension.oregonstate.edu/master-melittologist" title="" class="sf-depth-1">Master Melittologist Program</a></li>
-                        <li id="menu-89561-larch" class="last odd sf-item-5 sf-depth-1 sf-no-children"><a href="https://agsci.oregonstate.edu/bee-atlas/donate" class="sf-depth-1">Donate</a></li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </header>
-    <ol class="breadcrumb">
-        <li>Oregon Bee Atlas</li>
-        <li>Melittoflora &ndash; Plant-Pollinator Interactions</li>
-    </ol>
+
     <section id="content-main">
         <div class="imerss-container">
             <div class="bee-loading-container">
-                <div class="loading-message">Plant-Pollinator Interactions Visualization Tool Loading</div>
+                <div class="loading-message"><div>Melittoflora</div> <div>Plant-Pollinator Interactions Visualization Tool Loading</div></div>
                 <div class="bee">
                     <div class="bee-body">
                         <div class="line"></div>
@@ -145,6 +131,10 @@
 
                 <div class="imerss-map-holder imerss-nodismiss-map">
                     <div class="imerss-map">
+                    </div>
+                    <div class="imerss-mobile-warning">
+                        This visualisation is best viewed on a desktop browser. Whilst basic mapping and filtering is available in this view,
+                        displaying the plant-pollinator interaction network requires more space than is available on a mobile device.
                     </div>
                 </div>
                 <div class="imerss-filter-panel">
@@ -223,8 +213,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
+        <div class="imerss-dataset-version">Dataset Revision 6 - Updated January 30th, 2025</div>
     </section>
 
         <script>
@@ -232,7 +222,7 @@
                 gradeNames: "hortis.beaVizLoader",
                 obsFile: "data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz",
                 taxaFile: "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz",
-                ecoL3File: "data/b-team/us-eco-l3-regions.csv",
+                regionIndirectionFile: "data/b-team/regionIndirection.csv",
                 mapGrades: "hortis.bbeaLibreMap",
                 resourceBase: "src/client"
             });

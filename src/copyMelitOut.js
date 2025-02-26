@@ -38,7 +38,7 @@ const config = {
 
         "%imerss-bioinfo/docs/data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz",
         "%imerss-bioinfo/docs/data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz",
-        "%imerss-bioinfo/docs/data/b-team/us-eco-l3-regions.csv"
+        "%imerss-bioinfo/docs/data/b-team/regionIndirection.csv"
     ]
 };
 

@@ -149,7 +149,7 @@ fluid.defaults("hortis.obsDrivenFilter", {
 });
 
 fluid.defaults("hortis.regionFilter", {
-    gradeNames: ["hortis.filter", "hortis.obsDrivenFilter", "hortis.repeatingRowFilter", "fluid.stringTemplateRenderingView"],
+    gradeNames: ["hortis.filter", "hortis.repeatingRowFilter", "fluid.stringTemplateRenderingView"],
     markup: {
         container: `
         <div class="imerss-region-filter">
@@ -158,17 +158,18 @@ fluid.defaults("hortis.regionFilter", {
         </div>
         `
     },
-    // fieldName
+    freeFilter: false,
+    // fieldNames
     // filterName
     members: {
-        values: "@expand:fluid.computed(hortis.regionFilter.computeValues, {that}.obsRows, {that}.options.fieldName)",
+        indirectionRows: "@expand:signal([])",
+        filterRows: "@expand:fluid.computed(hortis.regionFilter.computeFilterRows, {that}.indirectionRows, {that}.options.fieldNames, {that}.options.freeFilter)",
         filterState: "@expand:signal({})",
-        renderModel: `@expand:fluid.computed(hortis.regionFilter.renderModel, {that}.values,
-            {that}.idToLabel, {that}.options.markup, {that}.options.filterName)`
+        renderModel: `@expand:fluid.computed(hortis.regionFilter.renderModel, {that}.filterRows,
+            {that}.options.markup, {that}.options.filterName, {that}.options.freeFilter)`
     },
     invokers: {
-        idToLabel: "fluid.identity",
-        doFilter: "hortis.regionFilter.doFilter({that}.options.fieldName, {arguments}.0, {arguments}.1)",
+        doFilter: "hortis.regionFilter.doFilter({that}.filterRows.value, {arguments}.0, {arguments}.1)",
         reset: "hortis.regionFilter.reset({that})"
     },
     listeners: {
@@ -176,10 +177,16 @@ fluid.defaults("hortis.regionFilter", {
     }
 });
 
-hortis.regionFilter.doFilter = function (fieldName, obsRows, filterState) {
-    const none = Object.keys(filterState).length === 0;
+hortis.regionFilter.doFilter = function (filterRows, obsRows, filterState) {
+    const filterStateRows = Object.keys(filterState);
+    const none = filterStateRows.length === 0;
 
-    return none ? obsRows : obsRows.filter(row => filterState[row[fieldName]]);
+    return none ? obsRows : obsRows.filter(obsRow => {
+        return filterStateRows.some(iIndex => {
+            const iRow = filterRows[iIndex];
+            return obsRow[iRow.regionField] === iRow.id;
+        });
+    });
 };
 
 hortis.regionFilter.reset = function (that) {
@@ -203,41 +210,79 @@ hortis.regionFilter.bindClick = function (that) {
     });
 };
 
-
-fluid.defaults("hortis.regionFilter.withLookup", {
-    // idField,
-    // nameField
-    members: {
-        indirection: "@expand:signal([])"
-    },
-    invokers: {
-        lookupId: "hortis.regionFilter.withLookup.lookupId({that}, {arguments}.0)",
-        idToLabel: "{that}.lookupId({arguments}.0)"
-    }
-});
-
-hortis.regionFilter.withLookup.lookupId = function (that, id) {
-    const rows = that.indirection.value;
-    return rows.find(row => row[that.options.idField] === id)?.[that.options.nameField];
+// Compute the subset of indirectionRows that will be rendered in this filter
+hortis.regionFilter.computeFilterRows = function (indirectionRows, fieldNames, freeFilter) {
+    return indirectionRows.filter(row => fieldNames.includes(row.regionField) ^ freeFilter);
 };
 
-// Compute an array of the distinct values of the field found in the obs
-hortis.regionFilter.computeValues = function (obsRows, fieldName) {
-    const values = {};
-    obsRows.forEach(row => {
-        const value = row[fieldName];
-        if (value !== undefined && value !== "") {
-            values[value] = true;
-        }
-    });
-    return Object.keys(values);
-};
-
-hortis.regionFilter.renderModel = function (values, idToLabel, markup, filterName) {
+hortis.regionFilter.renderModel = function (filterRows, markup, filterName, freeFilter) {
+    const rowToLabel = freeFilter ? row => `${row.label} - <span class="imerss-region-field">${row.regionField}</span>` : row => row.label;
     return {
         filterName,
-        rows: values.map(value => hortis.repeatingRowFilter.renderRow(markup.row, idToLabel(value), value)).join("\n")
+        rows: filterRows.map((iRow, index) => hortis.repeatingRowFilter.renderRow(markup.row, rowToLabel(iRow, freeFilter), index)).join("\n")
     };
+};
+
+/** TODO: The markup for this component needs to be supplied upstream (e.g. in bbeaFiltersTemplate) since
+ * we can't trust ourselves to render it recursively
+ */
+
+fluid.defaults("hortis.freeRegionFilter", {
+    gradeNames: "fluid.viewComponent",
+    selectors: {
+        freeRegionInput: ".imerss-free-region-input",
+        freeRegionControl: ".imerss-free-region-control",
+        filterBody: ".imerss-region-filter-rows",
+        clearFilter: ".imerss-filter-clear"
+    },
+    members: {
+        regionFilterState: "@expand:signal(null)",
+        regionFilterEffect: "@expand:fluid.effect(hortis.freeRegionFilter.applyFilter, {that}.regionFilterState, {that}.dom, {regionFilter}.templateRoot)"
+    },
+    components: {
+        filter: {
+            type: "hortis.regionFilter",
+            container: "{freeRegionFilter}.dom.freeRegionControl",
+            options: {
+                members: {
+                    indirectionRows: "{freeRegionFilter}.indirectionRows"
+                },
+                freeFilter: true,
+                fieldNames: "{freeRegionFilter}.options.fieldNames"
+            }
+        }
+    },
+    listeners: {
+        "onCreate.bindEvents": "hortis.freeRegionFilter.bindEvents",
+        "onCreate.bindClearClick": {
+            func: (that) => that.dom.locate("clearFilter").on("click", () => {
+                that.dom.locate("freeRegionInput")[0].value = "";
+                that.regionFilterState.value = null;
+            })
+        },
+        "onCreate.bindShowClear": {
+            args: ["{that}.dom.clearFilter.0", "{that}.regionFilterState"],
+            func: (node, filterState) => effect(() => hortis.toggleClass(node, "imerss-hidden", !filterState.value))
+        }
+    },
+});
+
+hortis.freeRegionFilter.bindEvents = function (that) {
+    const input = that.locate("freeRegionInput")[0];
+    input.addEventListener("input", () => that.regionFilterState.value = input.value);
+};
+
+hortis.freeRegionFilter.applyFilter = function (filterState, dom) {
+    const filterBody = dom.locate("filterBody")[0];
+    let words = [];
+    if (typeof(filterState) === "string") {
+        words = filterState.split(" ").filter(word => word.trim().toLowerCase());
+    }
+    const rows = [...filterBody.querySelectorAll(".imerss-filter-row")].map(row => ({row, text: row.innerText.toLowerCase()}));
+    rows.forEach(({row, text}) => {
+        const match = words.length === 0 || words.every(word => text.includes(word));
+        row.style.display = match ? "flex" : "none";
+    });
 };
 
 fluid.defaults("hortis.autocompleteFilter", {

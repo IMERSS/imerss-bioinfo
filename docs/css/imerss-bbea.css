@@ -292,6 +292,14 @@ body {
 
 }
 
+.imerss-dataset-version {
+    display: flex;
+    justify-content: end;
+    font-size: small;
+    position: absolute;
+    bottom: -16px;
+    right: 6px;
+}
 
 /* Bee loading indicator adapted from https://codepen.io/Huyyy/pen/mdymXBr */
 
@@ -304,6 +312,9 @@ body {
     left: 0;
     right: 0;
     width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .bee-loading-container {

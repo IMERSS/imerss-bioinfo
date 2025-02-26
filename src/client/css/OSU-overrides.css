@@ -1,26 +1,65 @@
 #navbar {
     width: 100%;
     /** Weird height definitions are required to reduce jank on startup - perhaps viz content is oversized **/
-    min-height: 168px;
-    max-height: 168px;
+    min-height: 130px;
+    max-height: 130px;
     display: flex;
     flex-direction: column;
+}
+
+/** This is the cutpoint taken from OSU.css **/
+@media screen and (max-width: 1020px) {
+    #navbar {
+        min-height: 202px;
+        max-height: 202px;
+    }
 }
 
 .breadcrumb {
     margin-bottom: 5px;
 }
 
+body {
+    font-size: unset;
+    line-height: unset;
+}
+
+html {
+    font-size: unset;
+}
+
 #content-main {
     margin-top: 6px;
     margin-left: 15px;
     margin-right: 15px;
+    height: 100%;
+}
+
+.imerss-filter-panel {
+    padding-top: 0;
+}
+
+.imerss-filters:first-child {
+    margin-top: -3px;
+}
+
+.imerss-filters {
+    width: 23em;
+}
+
+.imerss-record-reporter {
+    padding-top: 0;
 }
 
 /** Override bogus definition from OSU core styles */
 
 input[type="radio"], input[type="checkbox"] {
     margin: 0;
+}
+
+label {
+    display: revert;
+    font-weight: revert;
 }
 
 @font-face {

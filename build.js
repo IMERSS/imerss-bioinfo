@@ -159,17 +159,14 @@ const buildIndex = {
         src: "data/Pepiowelh/Life.json.lz4",
         dest: "docs/data/Pepiowelh/Life.json.lz4"
     }, {
-        src: "data/b-team/us-eco-l3-regions.csv",
-        dest: "docs/data/b-team/us-eco-l3-regions.csv"
-    }, {
         src: "data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz",
         dest: "docs/data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz"
     }, {
         src: "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz",
         dest: "docs/data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz"
     }, {
-        src: "data/b-team/us-eco-l3-regions.csv",
-        dest: "docs/data/b-team/us-eco-l3-regions.csv"
+        src: "data/b-team/regionIndirection.csv",
+        dest: "docs/data/b-team/regionIndirection.csv"
     }, {
         src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv",
         dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv"
