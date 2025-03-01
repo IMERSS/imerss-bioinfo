@@ -744,6 +744,8 @@ a.ui-button:active,
 
 .imerss-info-panel {
     display: flex;
+    width: 15%;
+    padding-right: 8px;
 }
 
 .imerss-legend-preview {
@@ -1076,8 +1078,6 @@ a.ui-button:active,
 }
 
 .imerss-controls {
-    margin-left: auto;
-    margin-right: 1em;
     margin-top: 6px;
 }
 
@@ -1112,6 +1112,7 @@ a.ui-button:active,
     padding: 2px 1rem 2px 1rem;
     display: flex;
     flex-direction: column;
+    width: 35%;
 }
 
 .imerss-filter {
@@ -1121,7 +1122,7 @@ a.ui-button:active,
 
 .imerss-filters {
     height: 100%;
-    width: 22em;
+    width: 100%;
     overflow-y: auto;
     padding-right: 0.5em;
 }
@@ -1323,6 +1324,7 @@ a.ui-button:active,
     overflow-y: auto;
     /** Otherwise top checkbox gets clipped */
     padding-top: 2px;
+    padding-right: 4px;
 }
 
 .imerss-checklist p {

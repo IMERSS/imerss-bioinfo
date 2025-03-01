@@ -12,6 +12,7 @@ body {
     width: 50%;
     display: flex;
     flex-direction: column;
+    margin-top: 4px;
 }
 
 .imerss-map-and-taxa {

@@ -236,8 +236,10 @@ fluid.defaults("hortis.freeRegionFilter", {
         clearFilter: ".imerss-filter-clear"
     },
     members: {
+        inputFocused: "@expand:signal(false)",
         regionFilterState: "@expand:signal(null)",
-        regionFilterEffect: "@expand:fluid.effect(hortis.freeRegionFilter.applyFilter, {that}.regionFilterState, {that}.dom, {regionFilter}.templateRoot)"
+        regionFilterEffect: "@expand:fluid.effect(hortis.freeRegionFilter.applyFilter, {that}.regionFilterState, {that}.dom, {regionFilter}.templateRoot)",
+        inputFocusEffect: "@expand:fluid.effect(hortis.toggleClass, {that}.dom.freeRegionInput.0, autocomplete__input--focused, {that}.inputFocused)"
     },
     components: {
         filter: {
@@ -270,6 +272,8 @@ fluid.defaults("hortis.freeRegionFilter", {
 hortis.freeRegionFilter.bindEvents = function (that) {
     const input = that.locate("freeRegionInput")[0];
     input.addEventListener("input", () => that.regionFilterState.value = input.value);
+    input.addEventListener("focus", () => that.inputFocused.value = true);
+    input.addEventListener("blur", () => that.inputFocused.value = false);
 };
 
 hortis.freeRegionFilter.applyFilter = function (filterState, dom) {

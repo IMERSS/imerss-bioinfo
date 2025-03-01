@@ -30,6 +30,9 @@ const config = {
         "%imerss-bioinfo/docs/css/OSU-superfish.css",
         "%imerss-bioinfo/docs/css/OSU-overrides.css",
 
+        "%imerss-bioinfo/docs/fonts/OSU/Stratum2WebBold.woff2",
+        "%imerss-bioinfo/docs/fonts/OSU/Stratum2WebLight.woff2",
+
         "%imerss-bioinfo/docs/js/jquery.js",
         "%imerss-bioinfo/docs/js/imerss-viz-lib.js",
         "%imerss-bioinfo/docs/js/imerss-viz-new-core.js",

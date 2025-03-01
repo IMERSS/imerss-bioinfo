@@ -213,8 +213,8 @@ fluid.defaults("hortis.collectorReportLinker", {
             <div>A volunteer report is available:</div><a href="%target" target="_blank">%linkText</a><span class="external-link"></span>
         </div>
         `,
-        linkText: "%collectorName Report (2023)",
-        linkTarget: "https://oregon-bee-project.github.io/melittoflora/reports/%collectorNameCond_Report_2023.pdf"
+        linkText: "%collectorName Summary (2023)",
+        linkTarget: "https://oregon-bee-project.github.io/melittoflora/reports/%collectorNameCond_Summary_2023.pdf"
     },
     members: {
         collectorLink: "@expand:fluid.computed(hortis.collectorReportLinker.nameToLink, {that}.collectorName, {that}.options.markup.linkTarget)",
@@ -227,7 +227,7 @@ fluid.defaults("hortis.collectorReportLinker", {
 });
 
 hortis.collectorReportLinker.nameToLink = function (collectorName, linkTargetTemplate) {
-    return collectorName && fluid.stringTemplate(linkTargetTemplate, {collectorNameCond: collectorName.replaceAll(" ", "")});
+    return collectorName && fluid.stringTemplate(linkTargetTemplate, {collectorNameCond: collectorName.replaceAll(" ", "_").replaceAll("|", "and")});
 };
 
 hortis.collectorReportLinker.checkLinkValid = async function (collectorName, collectorLink, that) {

@@ -25,7 +25,9 @@ imerss.bipartitePP = function (data, svg, width, height, options) { // eslint-di
     const {sortedBeeNames, sortedPlantNames, beeColors, FigureLabel} = options;
 
     // Ensure we layout width short by this so we don't jank if/when browser relays out to produce vertical scrollbar
-    const ScrollbarWidth = 24;
+    // Was value 24 - as of 27/2/25 everything seems to be now laying out too short
+    const WidthAdjust = -12;
+    const HeightAdjust = 16;
 
     // const IndivFigSizeX = 400; // here will become = IndivFigSizeX
     // const IndivFigSizeY = 1000; // here will become = IndivFigSizeY
@@ -102,8 +104,8 @@ imerss.bipartitePP = function (data, svg, width, height, options) { // eslint-di
     //RowPos <- rep(floor(seq(from = 50, by = HPerPlot, length = mp[a])),
     //              each = mp[2])
 
-    const MainFigSizeX = Math.max(width - LeftSidePadding - RightSidePadding - ScrollbarWidth, MinFigWidth);
-    const MainFigSizeY = Math.max(height, sortedBeeNames.length * 20, sortedPlantNames.length * 20) - RowPos;
+    const MainFigSizeX = Math.max(width - LeftSidePadding - RightSidePadding - WidthAdjust, MinFigWidth);
+    const MainFigSizeY = Math.max(height, sortedBeeNames.length * 20, sortedPlantNames.length * 20) - RowPos - HeightAdjust;
 
     function sort(sortOrder) {
         return function (a,b) {
