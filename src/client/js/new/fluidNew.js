@@ -180,9 +180,11 @@ fluid.renderContainerSplice = function (parentContainer, elideParent, hasRoot, r
         const containerMarkup = renderMarkup();
         const template = fluid.parseMarkup(containerMarkup, true);
         fluid.spliceContainer(resolvedContainer, template, elideParent);
+        // Allow an effect to wait for rendering
         if (that.renderModel.value !== undefined) {
             that.templateRoot.value = template;
         }
+        that.events.onRendered.fire(that);
     });
     return parentContainer;
 };
@@ -212,11 +214,16 @@ fluid.defaults("fluid.stringTemplateRenderingView", {
         renderMarkup: "fluid.renderStringTemplate({that}.options.markup, {that}.renderModel)",
         renderContainer: "fluid.renderContainerSplice({that}.options.parentContainer, {that}.options.elideParent, {that}.options.hasRoot, {that}.renderMarkup, {that})",
         // Blast this unnecessary invoker definition
-        addToParent: null
+        addToParent: null,
+    },
+    // Stopgap so we can wait to create children in old world for single initial rendering
+    events: {
+        onRendered: null
     },
     elideParent: true,
     hasRoot: true,
     members: {
+        // So that clients can wait for template to have been rendered
         templateRoot: "@expand:signal()",
         // Need an blank default so that initial rendering effect is triggered
         renderModel: "@expand:fluid.computed(fluid.blankRenderModel)"

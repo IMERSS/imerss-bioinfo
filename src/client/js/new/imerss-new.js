@@ -120,11 +120,12 @@ fluid.defaults("hortis.vizLoader", {
         onResourcesLoaded: null
     },
     members: {
+        rendered: "@expand:signal()",
+        idle: "@expand:signal(true)",
         resourcesLoaded: "@expand:signal()",
         taxaRows: "@expand:signal()",
         obsRows: "@expand:signal()",
-        // Overridden by overall loader def to equal {filters}.allOutput
-        filteredObs: "{that}.obsRows",
+        filteredObs: "{filters}.allOutput",
         // Proposed syntax: @compute:hortis.filterObs(*{that}.obs, {that}.obsFilter, *{that}.obsFilterVersion)
         finalFilteredObs: "@expand:fluid.computed({that}.filterObsByTaxa, {that}.filteredObs)"
     },
@@ -140,7 +141,7 @@ fluid.defaults("hortis.vizLoader", {
     }
 });
 
-// Do this by hand since we will have compressed viz one day
+// Do this by hand since we will have all-in-one compressed viz one day
 hortis.vizLoader.bindResources = async function (that) {
     const resourceLoaders = fluid.queryIoCSelector(that, "hortis.bareResourceLoader", true);
     const promises = resourceLoaders.map(resourceLoader => resourceLoader.completionPromise);
@@ -150,8 +151,11 @@ hortis.vizLoader.bindResources = async function (that) {
         that.obsRows.value = obs;
         that.resourcesLoaded.value = true;
         that.events.onResourcesLoaded.fire();
-        // TODO: Schedule this in more satisfactory way - need to hit filter clear or any other late rendering
-        $(".imerss-basic-tooltip").tooltip();
+        $(".imerss-container").tooltip({
+            position: {
+                my: "left top+5"
+            }
+        });
     });
 };
 
@@ -868,25 +872,6 @@ hortis.libreMap.withObsGrid.drawLegend = function (map, gridSignal, gridVisibleS
     fluid.effect(isVisible => hortis.toggleClass(container, "imerss-hidden", !isVisible), gridVisibleSignal);
 
     return {container};
-};
-
-hortis.capitalize = function (string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-hortis.renderTaxonTooltip = function (that, hoverId) {
-    const row = that.rowById.value[hoverId];
-    const terms = {
-        imgUrl: row.iNaturalistTaxonImage || ""
-    };
-    if (row.rank) {
-        terms.taxonRank = hortis.capitalize(row.rank);
-    } else {
-        terms.taxonRank = "Species";
-    }
-    const names = [(row.taxonName || row.iNaturalistTaxonName), row.commonName, row.hulqName].filter(name => name);
-    terms.taxonNames = names.join(" / ");
-    return fluid.stringTemplate(hortis.taxonTooltipTemplate, terms);
 };
 
 // cf. hortis.libreMap.bindRegionSelect in reknit-client.js

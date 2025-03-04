@@ -26,7 +26,9 @@ timedWrite(lookupMismatchSummary, "lookupMismatchSummary.csv")
 
 cat("Selected ", sum(joined$inBioBlitz, na.rm = TRUE), " observations from set in BioBlitz")
 
-filteredDown <- joined[, !names(joined) %in% c("kingdom", "phylum", "class", "order", "suborder", "family", "genus", "specificEpithet", "infraspecificEpithet", 
+datasetName <- joined$datasetName
+
+filteredDown <- joined[, !names(joined) %in% c("datasetName", "kingdom", "phylum", "class", "order", "suborder", "family", "genus", "specificEpithet", "infraspecificEpithet", 
                                                "taxonRank", "bibliographicCitation", "scientificNameAuthorship", "nationalStatus", "provincialStatus",
                                                "year", "month", "day","basisOfRecord", "occurrenceStatus", "inSummary",
                                                "island", "stateProvince", "country", "countryCode", "associatedReferences"
@@ -36,7 +38,18 @@ filteredDown <- joined[, !names(joined) %in% c("kingdom", "phylum", "class", "or
 emptyCols <- colSums(is.na(filteredDown)) == nrow(filteredDown)
 filteredDown2 <- filteredDown[!emptyCols]
 
+uniqueDatasets = unique(datasetName)
+datasetIndex = match(datasetName, uniqueDatasets)
+filteredDown2$dataset = datasetIndex
+
 timedWrite(filteredDown2, "Galiano_Island_vascular_plant_records_consolidated-prepared.csv")
+
+
+indirectionRows <- data.frame(regionField = "dataset", id = 1:length(uniqueDataSets), label = uniqueDatasets)
+indirectionRows$datasetClass <- ifelse(indirectionRows$label == "iNaturalist", "citizen", "naturalist")
+
+timedWrite(indirectionRows, "regionIndirection.csv")
+
 
 rawSummary <- timedFread("Galiano_Island_vascular_plant_records_consolidated-assigned-taxa.csv")
 

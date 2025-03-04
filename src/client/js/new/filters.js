@@ -162,6 +162,7 @@ fluid.defaults("hortis.regionFilter", {
     // fieldNames
     // filterName
     members: {
+        // Rows with members {regionField, id, label} where regionField is the obs column, id is the value found there, label is the label to be rendered for it
         indirectionRows: "@expand:signal([])",
         filterRows: "@expand:fluid.computed(hortis.regionFilter.computeFilterRows, {that}.indirectionRows, {that}.options.fieldNames, {that}.options.freeFilter)",
         filterState: "@expand:signal({})",

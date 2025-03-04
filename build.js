@@ -173,7 +173,10 @@ const buildIndex = {
     }, {
         src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared-taxa.csv",
         dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared-taxa.csv"
-    }]
+    },  {
+        src: "data/Galiano 2023 BioBlitz/regionIndirection.csv",
+        dest: "docs/data/Galiano 2023 BioBlitz/regionIndirection.csv"
+    }, ]
 };
 
 // These two taken from reknit.js

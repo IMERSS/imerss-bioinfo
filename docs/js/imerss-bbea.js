@@ -24,17 +24,11 @@ fluid.defaults("hortis.beaVizLoader", {
         collectorReport: ".imerss-collector-report"
     },
     members: {
-        rendered: "@expand:signal()",
-        idle: "@expand:signal(true)",
-        filteredObs: "{filters}.allOutput",
         taxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.filteredObs, {taxa}.rowById)",
         allTaxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.obsRows, {taxa}.rowById)",
         // Funny hack since this is computed in an effect by interactions - review this
         finalFilteredObs: "@expand:signal()",
         hideLoadingIndicator: "@expand:fluid.effect(hortis.beaVizLoader.hideLoadingIndicator, {that}.rendered)"
-
-        //`@expand:fluid.computed(hortis.filterObsByTwoTaxa, {that}.filteredObs,
-        //    {plantChecklist}.rowFocus, {pollChecklist}.rowFocus)`
     },
     components: {
         regionIndirection: {

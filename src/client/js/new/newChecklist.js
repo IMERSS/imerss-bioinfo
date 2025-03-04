@@ -118,7 +118,8 @@ hortis.checklistItem = function (entry, options, state) {
     const footer = "</li>";
     const fold = options.unfoldable ? hortis.rowFold(rowid, rowState.folded) : "";
     const check = options.selectable ? hortis.rowCheckbox(id, rowState.selected) : "";
-    return header + fold + check + name + subList + footer;
+    const decoration = options.decoration ? options.decoration(record) : "";
+    return header + fold + check + decoration + name + subList + footer;
 };
 
 hortis.checklistList = function (entries, options, state) {
@@ -510,6 +511,7 @@ hortis.checklist.idToState = function (that, idToStateUI, rootEntry, rowFocus) {
 hortis.checklist.generate = function (that, element, idToState, rootEntry, selectedId) {
     const selectable = that.options.selectable,
         unfoldable = that.options.unfoldable,
+        decoration = that.decoration,
         simple = !!that.options.filterRanks;
 
     const rootEntries = rootEntry.children;
@@ -518,6 +520,7 @@ hortis.checklist.generate = function (that, element, idToState, rootEntry, selec
         simple,
         selectable,
         unfoldable,
+        decoration,
         accessRow: that.accessRow
     };
     const state = {

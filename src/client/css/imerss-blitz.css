@@ -25,6 +25,7 @@ body {
 
 .imerss-filter-panel {
     height: 30%;
+    width: 100%;
 }
 
 .imerss-filters {
@@ -58,10 +59,6 @@ body {
     height: calc(100% - 8em)
 }
 
-.imerss-tooltip div.text {
-    max-width: 20rem;
-}
-
 .autocomplete__menu {
     top: 1.5em;
     width: calc(35vw);
@@ -70,13 +67,32 @@ body {
 
 .imerss-blitz-records {
     display: flex;
+    justify-content: space-around;
+    min-height: 0;
 }
 
-.imerss-blitz-records > * {
+.imerss-records {
     padding: 1rem;
+    margin: 2px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 6px;
+    background-color: #d0d7de33;
+    border: none;
+}
+
+button.imerss-records {
+    cursor: pointer;
+}
+
+button.imerss-records:hover {
+    background: #eee;
+}
+
+button.imerss-records.selected {
+    border: 1px;
+    background: #ccc;
 }
 
 .imerss-blitz-records .records-label {

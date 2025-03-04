@@ -32,7 +32,7 @@ body {
 
 /** Quick hack to deal with the fact we can't quickly suppress spacing for non-unfoldable root */
 .imerss-checklist {
-    margin-left: -20px;
+    margin-left: -10px;
 }
 
 .checklist-rank-order > p {

@@ -18,7 +18,6 @@ fluid.defaults("hortis.standardVizLoader", {
         checklist: ".imerss-main-checklist"
     },
     members: {
-        filteredObs: "{filters}.allOutput",
         taxaFromObs: "@expand:fluid.computed(hortis.taxaFromObs, {that}.filteredObs, {taxa}.rowById)",
         allTaxaFromObs: "@expand:fluid.computed(hortis.taxaFromObs, {that}.obsRows, {taxa}.rowById)"
     },
@@ -42,7 +41,9 @@ fluid.defaults("hortis.standardVizLoader", {
             container: "{that}.dom.filters",
             options: {
                 members: {
-                    allInput: "{vizLoader}.obsRows"
+                    allInput: "{vizLoader}.obsRows",
+                    rendered: "{hortis.vizLoader}.rendered",
+                    idle: "{hortis.vizLoader}.idle"
                 }
             }
         },
@@ -68,7 +69,8 @@ fluid.defaults("hortis.standardVizLoader", {
                 gradeNames: ["hortis.checklist.withCopy"],
                 rootId: 48460, // Life
                 filterRanks: ["epifamily", "family", "tribe", "genus", "subgenus", "species"],
-                disclosableRanks: ["tribe", "genus", "subgenus", "species"],
+                disclosableRanks: [],
+                // disclosableRanks: ["tribe", "genus", "subgenus", "species"],
                 copyChecklistRanks: ["genus", "species"],
                 selectable: false,
                 unfoldable: true,
