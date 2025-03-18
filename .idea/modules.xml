@@ -12,6 +12,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/bagatelle.iml" filepath="$PROJECT_DIR$/.idea/bagatelle.iml" />
       <module fileurl="file://$PROJECT_DIR$/../bc-bryo-atlas/.idea/bc-bryo-atlas.iml" filepath="$PROJECT_DIR$/../bc-bryo-atlas/.idea/bc-bryo-atlas.iml" />
       <module fileurl="file://$PROJECT_DIR$/../bc-bryo-atlas3/.idea/bc-bryo-atlas3.iml" filepath="$PROJECT_DIR$/../bc-bryo-atlas3/.idea/bc-bryo-atlas3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../beautifulhugo/.idea/beautifulhugo.iml" filepath="$PROJECT_DIR$/../beautifulhugo/.idea/beautifulhugo.iml" />
       <module fileurl="file://$PROJECT_DIR$/../fluid-infusion-6/.idea/fluid-infusion-6.iml" filepath="$PROJECT_DIR$/../fluid-infusion-6/.idea/fluid-infusion-6.iml" />
       <module fileurl="file://$PROJECT_DIR$/../forgiving-data/.idea/forgiving-data.iml" filepath="$PROJECT_DIR$/../forgiving-data/.idea/forgiving-data.iml" />
       <module fileurl="file://$PROJECT_DIR$/../galiano-bioblitz-2023/.idea/galiano-bioblitz-2023.iml" filepath="$PROJECT_DIR$/../galiano-bioblitz-2023/.idea/galiano-bioblitz-2023.iml" />
@@ -25,12 +26,14 @@
       <module fileurl="file://$PROJECT_DIR$/../knitting-data-communities/.idea/knitting-data-communities.iml" filepath="$PROJECT_DIR$/../knitting-data-communities/.idea/knitting-data-communities.iml" />
       <module fileurl="file://$PROJECT_DIR$/../maxwell/.idea/maxwell.iml" filepath="$PROJECT_DIR$/../maxwell/.idea/maxwell.iml" />
       <module fileurl="file://$PROJECT_DIR$/../melittoflora/.idea/melittoflora.iml" filepath="$PROJECT_DIR$/../melittoflora/.idea/melittoflora.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ponder/.idea/ponder.iml" filepath="$PROJECT_DIR$/../ponder/.idea/ponder.iml" />
       <module fileurl="file://$PROJECT_DIR$/../preact/.idea/preact.iml" filepath="$PROJECT_DIR$/../preact/.idea/preact.iml" />
       <module fileurl="file://$PROJECT_DIR$/../preact-signals/.idea/preact-signals.iml" filepath="$PROJECT_DIR$/../preact-signals/.idea/preact-signals.iml" />
       <module fileurl="file://$PROJECT_DIR$/../qunit/.idea/qunit.iml" filepath="$PROJECT_DIR$/../qunit/.idea/qunit.iml" />
       <module fileurl="file://$PROJECT_DIR$/../r-scrollytelling-template/.idea/r-scrollytelling-template.iml" filepath="$PROJECT_DIR$/../r-scrollytelling-template/.idea/r-scrollytelling-template.iml" />
       <module fileurl="file://$PROJECT_DIR$/../sewa-e-kheti/.idea/sewa-e-kheti.iml" filepath="$PROJECT_DIR$/../sewa-e-kheti/.idea/sewa-e-kheti.iml" />
       <module fileurl="file://$PROJECT_DIR$/../sewa-saamarth/.idea/sewa-saamarth.iml" filepath="$PROJECT_DIR$/../sewa-saamarth/.idea/sewa-saamarth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../vue/.idea/vue.iml" filepath="$PROJECT_DIR$/../vue/.idea/vue.iml" />
       <module fileurl="file://$PROJECT_DIR$/../xetthecum-storymap/.idea/xetthecum-storymap.iml" filepath="$PROJECT_DIR$/../xetthecum-storymap/.idea/xetthecum-storymap.iml" />
       <module fileurl="file://$PROJECT_DIR$/../xetthecum-storymap-scrolly/.idea/xetthecum-storymap-scrolly.iml" filepath="$PROJECT_DIR$/../xetthecum-storymap-scrolly/.idea/xetthecum-storymap-scrolly.iml" />
       <module fileurl="file://$PROJECT_DIR$/../xetthecum-storymap-story/.idea/xetthecum-storymap-story.iml" filepath="$PROJECT_DIR$/../xetthecum-storymap-story/.idea/xetthecum-storymap-story.iml" />

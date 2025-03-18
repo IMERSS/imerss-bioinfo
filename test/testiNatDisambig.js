@@ -18,6 +18,7 @@ require("../src/iNaturalist/taxonAPI.js");
 // {name: "Henricia aspera aspera", phylum: "Echinodermata", rank: "species"} - should be good even though rank is not species
 // {name: "Prunella vulgaris vulgaris", phylum: "Tracheophyta", rank: "species"}
 // {name: "Anthidiellum robertsoni", phylum: "Tracheophyta"}
+// {name: "Mytilus edulis", phylum: "Mollusca", rank: "complex"} // should get 1108240
 
 const source = hortis.iNatTaxonSource({
     disableNameCache: true
@@ -25,7 +26,7 @@ const source = hortis.iNatTaxonSource({
 
 const testSource = async function () {
     try {
-        const query = {name: "Anthidiellum robertsoni", phylum: "Arthropoda"};
+        const query = {name: "Mytilus edulis", phylum: "Mollusca", rank: "complex"};
         const result = await source.get(query);
         console.log(result);
         const byId = await source.get({id: result.doc.id});

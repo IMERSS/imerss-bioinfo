@@ -287,7 +287,7 @@ fluid.defaults("hortis.cachediNatTaxonByName", {
 
 // Highest iNat rank is 100 for Life - we want the most specific taxon of those selected
 hortis.scoreNameMatch = async function (result, query, byIdSource) {
-    let score = (query.name === result.matched_term ? 512 : 0) + (query.name === result.name ? 256 : 0) + (256 - result.rank_level);
+    let score = (query.name === result.matched_term ? 512 : 0) + (query.name === result.name ? 256 : 0) + (128 - result.rank_level);
     if (query.rank) {
         // An exact name match is more important than a rank match
         if (query.rank === result.rank) {

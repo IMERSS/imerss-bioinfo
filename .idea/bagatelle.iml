@@ -47,5 +47,8 @@
     <orderEntry type="module" module-name="preact" />
     <orderEntry type="module" module-name="htm" />
     <orderEntry type="module" module-name="melittoflora" />
+    <orderEntry type="module" module-name="vue" />
+    <orderEntry type="module" module-name="ponder" />
+    <orderEntry type="module" module-name="beautifulhugo" />
   </component>
 </module>

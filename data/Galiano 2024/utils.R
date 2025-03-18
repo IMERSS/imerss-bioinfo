@@ -11,7 +11,7 @@ timedRead <- function (toread) {
 
 timedFread <- function (toread) {
   start <- Sys.time()
-  frame <- data.table::fread(toread)
+  frame <- data.table::fread(toread,quote = "",encoding = 'UTF-8')
   end <- Sys.time()
   cat("Read ", nrow(frame), " rows from ", toread, " in ", (end - start), "s")
   frame

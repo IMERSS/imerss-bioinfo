@@ -185,7 +185,7 @@ hortis.applyName = async function (row, phylum, rank, invertedSwaps, allTaxa, un
 
     const assign = function (row, field, value) {
         // eslint-disable-next-line eqeqeq
-        if (row[field] !== undefined && row[field] != value) {
+        if (row[field] && row[field] != value) {
             console.log(`Inconsistency in reintegrated data - assigning ${value} to field ${field} over existing value ${row[field]}`);
             console.log("Row: ", row);
         }

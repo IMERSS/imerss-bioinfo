@@ -13,6 +13,8 @@ require("./dataProcessing/writeCSV.js");
 require("./iNaturalist/obsAPI.js");
 require("./iNaturalist/taxonAPI.js");
 
+// Get token from https://www.inaturalist.org/users/api_token
+
 const hortis = fluid.registerNamespace("hortis");
 
 hortis.iNatProjects = {

@@ -7,6 +7,7 @@
     <mapping directory="$PROJECT_DIR$/../alien-signals" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../b-team" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../bc-bryo-atlas" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../beautifulhugo" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../galiano-marine-animal-atlas" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../howe-sound-mapping" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../htm" vcs="Git" />
@@ -14,9 +15,11 @@
     <mapping directory="$PROJECT_DIR$/../knitting-data-communities" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../maxwell" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../melittoflora" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../ponder" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../preact" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../r-scrollytelling-template" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../sewa-saamarth" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../vue" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../xetthecum-storymap" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../xetthecum-storymap-scrolly" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../xetthecum-storymap-story" vcs="Git" />
