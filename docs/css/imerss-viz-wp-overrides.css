@@ -91,6 +91,11 @@ table {
     margin-top: 2px;
 }
 
+/** Override absolutely insane hardbaked style emitted in index by WP which prevents stem of exclamation mark rendering **/
+.fl-imerss-container path {
+    stroke: unset;
+}
+
 /* AS requested these override in the global nav */
 
 .nav li li {

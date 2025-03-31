@@ -21,6 +21,26 @@ hortis.renderSpeciesName = function (name) {
     return name.replace(hortis.annoteRegex, "<span class=\"checklist-annote\">$1</span>");
 };
 
+// last ditch backport
+
+hortis.blitzChecklistRowDecorators = {
+    confirmed: `
+    <svg width="18" height="18" class="imerss-checklist-decoration" title="Confirmed: This historical observation has been confirmed by a contributor to the Biodiversity Galiano project">
+        <use href="#tick" />
+    </svg>
+    `,
+    unconfirmed: `
+    <svg width="18" height="18" class="imerss-checklist-decoration" title="Unconfirmed: This historical observation is yet to be confirmed by a contributor to the Biodiversity Galiano project">
+        <use href="#question" />
+    </svg>
+    `,
+    new: `
+    <svg width="18" height="18" class="imerss-checklist-decoration" title="New: A contributor to the Biodiversity Galiano project has observed a new taxon not seen in the historical record">
+        <use href="#exclamation" />
+    </svg>
+    `
+};
+
 hortis.checklistItem = function (entry, selectedId, simple) {
     const record = entry.row;
     // var focusProp = record.focusCount / record.childCount;
@@ -43,7 +63,8 @@ hortis.checklistItem = function (entry, selectedId, simple) {
     }
     const subList = hortis.checklistList(entry.children, selectedId, simple);
     const footer = "</li>";
-    return header + name + subList + footer;
+    const decoration = hortis.blitzChecklistRowDecorators[record.filterReportingStatus] || "";
+    return header + decoration + name + subList + footer;
 };
 
 hortis.checklistList = function (entries, selectedId, simple) {
@@ -190,4 +211,3 @@ hortis.checklist.bindHover = function (that, layoutHolder) {
         layoutHolder.events.changeLayoutId.fire(id);
     });
 };
-

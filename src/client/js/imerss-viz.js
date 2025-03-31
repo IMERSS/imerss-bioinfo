@@ -134,6 +134,12 @@ hortis.sunburstLoader.renderMarkup = function (container, template, renderMarkup
             container[0].appendChild(root.firstChild);
         }
     }
+    // WordPress is ancient and still uses the 2nd
+    $(".imerss-container, .fl-imerss-container").tooltip({
+        position: {
+            my: "left top+5"
+        }
+    });
 };
 
 hortis.colouringGrades = {
@@ -156,7 +162,6 @@ fluid.defaults("hortis.imerssTabs", {
     gradeNames: "hortis.tabs",
     tabIds: {
         simpleChecklist: "fli-tab-simple-checklist",
-        checklist: "fli-tab-checklist",
         sunburst: "fli-tab-sunburst"
     },
     model: {
@@ -261,12 +266,6 @@ fluid.defaults("hortis.sunburst", {
                         args: "{tabs}.model.selectedTab"
                     }
                 }
-            }
-        },
-        checklist: {
-            type: "hortis.checklist",
-            options: {
-                container: "{sunburst}.dom.checklist"
             }
         },
         simpleChecklist: {
@@ -1475,6 +1474,21 @@ hortis.assignNativeDataFlags = function (flatTree) {
     });
 };
 
+// Cribbed from hortis.blitzRecords.render in js/new/imerss-blitz.js
+// This field is read in checklist.js hortis.checklistItem
+hortis.assignFilterReportingStatus = function (flatTree) {
+    flatTree.forEach(row => {
+        if (row.reportingStatus === "confirmed") {
+            row.filterReportingStatus = "confirmed";
+        } else if (row.reportingStatus === "reported") {
+            row.filterReportingStatus = "unconfirmed";
+        } else if (row.reportingStatus?.startsWith("new")) {
+            // OCTOPOKHO: Side effect initialising filterReportingStatus
+            row.filterReportingStatus = "new";
+        }
+    });
+};
+
 hortis.flattenTreeRecurse = function (tree, toAppend, depth) {
     let childCount = 0;
     tree.children.forEach(function (child) {
@@ -1505,6 +1519,7 @@ hortis.flattenTree = function (that, tree) {
     // Again - wot no polymorphism?
     // One day, again some kind of "data access event chain"
     hortis.assignNativeDataFlags(flat);
+    hortis.assignFilterReportingStatus(flat);
     that.applyPhyloMap(flat);
     return flat;
 };

@@ -238,6 +238,7 @@ hortis.blitzRecords.render = function (taxaById) {
             row.filterReportingStatus = "unconfirmed";
         } else if (row.reportingStatus.startsWith("new")) {
             ++model.newRecords;
+            // OCTOPOKHO: Side effect initialising filterReportingStatus
             row.filterReportingStatus = "new";
         }
     });

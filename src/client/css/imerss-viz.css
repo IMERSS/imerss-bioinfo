@@ -49,14 +49,9 @@
     margin-top: -1rem;
 }
 
-
-
 .imerss-viz-dimens {
     height: var(--imerss-sun-height);
-    /** Overrides width: 480px which is now in core, probably shou */
-    width: auto;
 }
-
 
 .imerss-back {
     border: 2px solid black;
