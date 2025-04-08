@@ -15,12 +15,6 @@ fluid.defaults("hortis.blitzVizLoader", {
     },
     mapGrades: ["hortis.vizLibreMap"],
     components: {
-        regionIndirection: {
-            type: "hortis.csvReader",
-            options: {
-                url: "{vizLoader}.options.regionIndirectionFile"
-            }
-        },
         blitzRecords: {
             type: "hortis.blitzRecords",
             container: "{vizLoader}.dom.blitzRecords"

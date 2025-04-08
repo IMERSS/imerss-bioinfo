@@ -17,11 +17,23 @@ fluid.defaults("hortis.standardVizLoader", {
         filters: ".imerss-main-filters",
         checklist: ".imerss-main-checklist"
     },
+    gridResolution: 100,
     members: {
         taxaFromObs: "@expand:fluid.computed(hortis.taxaFromObs, {that}.filteredObs, {taxa}.rowById)",
         allTaxaFromObs: "@expand:fluid.computed(hortis.taxaFromObs, {that}.obsRows, {taxa}.rowById)"
     },
     components: {
+        map: {
+            options: {
+                gridResolution: "{vizLoader}.options.gridResolution"
+            }
+        },
+        regionIndirection: {
+            type: "hortis.csvReader",
+            options: {
+                url: "{vizLoader}.options.regionIndirectionFile"
+            }
+        },
         filterControls: {
             type: "hortis.filterControls",
             container: "{that}.dom.filterControls"

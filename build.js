@@ -176,7 +176,17 @@ const buildIndex = {
     },  {
         src: "data/Galiano 2023 BioBlitz/regionIndirection.csv",
         dest: "docs/data/Galiano 2023 BioBlitz/regionIndirection.csv"
-    }, ]
+    }, {
+        src: "data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-prepared.csv",
+        dest: "docs/data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-prepared.csv"
+    }, {
+        src: "data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-assigned-taxa.csv",
+        dest: "docs/data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-assigned-taxa.csv"
+    },  {
+        src: "data/dataPaper-II/regionIndirection.csv",
+        dest: "docs/data/dataPaper-II/regionIndirection.csv"
+    }
+    ]
 };
 
 // These two taken from reknit.js

@@ -15,12 +15,6 @@ fluid.defaults("hortis.blitzVizLoader", {
     },
     mapGrades: ["hortis.vizLibreMap"],
     components: {
-        regionIndirection: {
-            type: "hortis.csvReader",
-            options: {
-                url: "{vizLoader}.options.regionIndirectionFile"
-            }
-        },
         blitzRecords: {
             type: "hortis.blitzRecords",
             container: "{vizLoader}.dom.blitzRecords"
@@ -37,17 +31,17 @@ fluid.defaults("hortis.blitzVizLoader", {
 
 hortis.blitzChecklistRowDecorators = {
     confirmed: `
-    <svg width="18" height="18" class="imerss-checklist-decoration" title="Confirmed: This historical observation has been confirmed by a contributor to the Biodiversity Galiano project">
+    <svg width="18" height="18" class="imerss-checklist-decoration" title="Confirmed: This historical record has been confirmed by a project contributor">
         <use href="#tick" />
     </svg>
     `,
     unconfirmed: `
-    <svg width="18" height="18" class="imerss-checklist-decoration" title="Unconfirmed: This historical observation is yet to be confirmed by a contributor to the Biodiversity Galiano project">
+    <svg width="18" height="18" class="imerss-checklist-decoration" title="Unconfirmed: This historical record is yet to be confirmed by a project contributor">
         <use href="#question" />
     </svg>
     `,
     new: `
-    <svg width="18" height="18" class="imerss-checklist-decoration" title="New: A contributor to the Biodiversity Galiano project has observed a new taxon not seen in the historical record">
+    <svg width="18" height="18" class="imerss-checklist-decoration" title="New: This record is a new report from a project contributor">
         <use href="#exclamation" />
     </svg>
     `

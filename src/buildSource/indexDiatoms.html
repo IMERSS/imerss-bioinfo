@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Diatoms of the Salish Sea</title>
+
+        <!-- Looks like this comes from here - use CDN since it refers to relative fonts
+        https://github.com/Templarian/MaterialDesign-Webfont/releases/tag/v2.0.46 -->
+        <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+
+        <script src="https://unpkg.com/d3@5.9.2/dist/d3.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="css/imerss-viz-lib.css"/>
+        <link rel="stylesheet" type="text/css" href="css/imerss-viz-new-core.css"/>
+        <link rel="stylesheet" type="text/css" href="css/imerss-viz-new.css"/>
+        <link rel="stylesheet" type="text/css" href="css/imerss-blitz.css"/>
+
+        <script src="js/jquery.js"></script>
+        <script src="js/imerss-viz-lib.js"></script>
+        <script src="js/imerss-viz-new-core.js"></script>
+        <script src="js/imerss-viz-new.js"></script>
+        <script src="js/imerss-viz.js"></script>
+        <script src="js/imerss-blitz.js"></script>
+
+        <svg id="inline-svg">
+            <defs>
+                <symbol id="filter-reset" viewBox="0 0 32 32">
+                    <path d="M22.5,9A7.4522,7.4522,0,0,0,16,12.792V8H14v8h8V14H17.6167A5.4941,5.4941,0,1,1,22.5,22H22v2h.5a7.5,7.5,0,0,0,0-15Z"/>
+                    <path d="M26,6H4V9.171l7.4142,7.4143L12,17.171V26h4V24h2v2a2,2,0,0,1-2,2H12a2,2,0,0,1-2-2V18L2.5858,10.5853A2,2,0,0,1,2,9.171V6A2,2,0,0,1,4,4H26Z"/>
+                </symbol>
+                <symbol id="copy-clipboard" viewBox="0 0 32 32">
+                    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                </symbol>
+                <symbol id="copy-check" viewBox="0 0 32 32">
+                    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                </symbol>
+                <symbol id="x-circle-close" viewBox="0 0 24 24">
+                    <path d="M16 8L12 12M12 12L8 16M12 12L8 8M12 12L16 16" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </symbol>
+
+            </defs>
+        </svg>
+    </head>
+
+    <body>
+    <div class="imerss-container">
+        <div class="imerss-blitz-left">
+            <h2>Diatoms of the Salish Sea</h2>
+            <div class="imerss-main-tabs imerss-tabs ui-tabs ui-widget ui-widget-content">
+                <ul class="ui-tabs-nav" role="tablist">
+                    <li class="ui-tabs-tab ui-tab ui-state-default ui-tabs-active">
+                        <a class="ui-tabs-anchor" href="#fli-tab-map">Map</a>
+                    </li>
+                    <li class="ui-tabs-tab ui-tab ui-state-default">
+                        <a class="ui-tabs-anchor" href="#fli-tab-checklist">Checklist</a>
+                    </li>
+                    <li class="ui-tabs-tab ui-tab ui-state-default">
+                        <a class="ui-tabs-anchor" href="#fli-tab-grid">Grid</a>
+                    </li>
+                    <li class="ui-tabs-tab ui-tab ui-state-default">
+                        <a class="ui-tabs-anchor" href="#fli-tab-wol">Web of Life</a>
+                    </li>
+                </ul>
+                <div id="fli-tab-map" class="imerss-tab-panel">
+                    <div class="imerss-map-holder imerss-nodismiss-map">
+                        <div class="imerss-map">
+                        </div>
+                    </div>
+                </div>
+                <div id="fli-tab-checklist" class="imerss-tab-panel">
+                    <div class="imerss-main-checklist imerss-checklist-holder">
+                        <div class="imerss-panel-label"><span>Species</span><span class="imerss-copy-checklist"><svg width="32" height="32" >
+                            <use href="#copy-clipboard" />
+                        </svg></span>
+                        </div>
+
+                        <div class="imerss-checklist">
+                        </div>
+                    </div>
+                </div>
+                <div id="fli-tab-grid" class="imerss-tab-panel">
+                </div>
+                <div id="fli-tab-wol" class="imerss-tab-panel">
+                </div>
+                <div class="imerss-blitz-records">
+                </div>
+            </div>
+        </div>
+        <div class="imerss-blitz-right">
+
+            <div class="imerss-filter-panel">
+                <div class="imerss-filters imerss-main-filters">
+                </div>
+                <div class="imerss-filter-controls">
+                    <svg width="24" height="24" class="imerss-reset-filter" title="Reset all filters">
+                        <use href="#filter-reset" />
+                    </svg>
+                    <div>Reset filters</div>
+                </div>
+                <div class="imerss-record-reporter">
+                </div>
+            </div>
+            <div class="mxcw-content">
+
+            </div>
+            <div class="imerss-blitz-widgets">
+                <div class="imerss-taxonDisplay">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        hortis.blitzVizLoader(".imerss-container", {
+            obsFile: "data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-prepared.csv",
+            taxaFile: "data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-assigned-taxa.csv",
+            regionIndirectionFile: "data/dataPaper-II/regionIndirection.csv",
+            mapGrades: ["hortis.vizLibreMap"],
+            gridResolution: 2000,
+            resourceBase: "src/client"
+        });
+    </script>
+    </body>
+</html>
