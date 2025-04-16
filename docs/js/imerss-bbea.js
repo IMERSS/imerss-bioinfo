@@ -24,6 +24,7 @@ fluid.defaults("hortis.beaVizLoader", {
         collectorReport: ".imerss-collector-report"
     },
     members: {
+        filteredObs: "{filters}.allOutput",
         taxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.filteredObs, {taxa}.rowById)",
         allTaxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.obsRows, {taxa}.rowById)",
         // Funny hack since this is computed in an effect by interactions - review this
