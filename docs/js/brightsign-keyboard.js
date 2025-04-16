@@ -2,7 +2,7 @@
 
 /* global SimpleKeyboard */
 
-//if (navigator.userAgent.includes("BrightSign")) {
+if (navigator.userAgent.includes("BrightSign")) {
 
     const keyboardContainer = document.createElement("div");
     keyboardContainer.className = "simple-keyboard";
@@ -119,4 +119,4 @@
 
     document.head.appendChild(script);
 
-//}
+}
