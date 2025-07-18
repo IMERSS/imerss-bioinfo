@@ -1,0 +1,844 @@
+id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
+48460,,Life,life,stateofmatter,https://inaturalist-open-data.s3.amazonaws.com/photos/347064198/medium.jpeg
+48222,48460,Chromista,"kelp, diatoms, and allies",kingdom,https://inaturalist-open-data.s3.amazonaws.com/photos/131300/medium.jpg
+48221,48222,Ochrophyta,,phylum,https://inaturalist-open-data.s3.amazonaws.com/photos/41475016/medium.jpg
+123880,48221,Bacillariophyceae,Diatoms,class,https://inaturalist-open-data.s3.amazonaws.com/photos/82186/medium.jpg
+123873,123880,Triceratiales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/55431569/medium.jpeg
+152264,123880,Aulacoseirales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/993689/medium.jpeg
+152272,123880,Rhizosoleniales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/2307922/medium.jpg
+1269706,123880,Hobaniella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5922432/medium.jpg
+1608800,123880,Actinoneis,,genus,
+50420,123880,Coscinodiscales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/10464030/medium.jpeg
+51505,123880,Fragilariales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/4436466/medium.jpg
+123863,123880,Chaetocerotales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/1672639/medium.jpg
+123868,123880,Biddulphiales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/5927295/medium.jpg
+123874,123873,Triceratiaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/56279659/medium.jpg
+123881,123880,Cymbellales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/250160521/medium.jpg
+123884,123880,Naviculales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/72207471/medium.jpg
+152239,123880,Licmophorales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/1177141/medium.JPG
+152263,123880,Asterolamprales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/79346720/medium.jpg
+152265,123880,Corethrales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/14535543/medium.jpeg
+152266,123880,Cymatosirales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/1405339/medium.jpg
+152268,123880,Hemiaulales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/135618887/medium.jpg
+152271,123880,Paraliales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/1443785/medium.jpg
+152274,123880,Stictodiscales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/21741760/medium.jpeg
+152275,123880,Thalassiosirales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/39460684/medium.jpg
+152679,123880,Bacillariales,,order,https://static.inaturalist.org/photos/248823230/medium.jpg
+152681,123880,Cyclophorales,,order,
+152683,123880,Eunotiales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/3540533/medium.jpg
+152684,123880,Lyrellales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/3880027/medium.jpeg
+152685,123880,Mastogloiales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/4419231/medium.jpg
+152688,123880,Rhabdonematales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/123828873/medium.png
+152691,123880,Rhopalodiales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/993685/medium.jpeg
+152692,123880,Striatellales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/129025159/medium.png
+152693,123880,Surirellales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/2339419/medium.jpg
+152694,123880,Thalassionematales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/1315594/medium.jpg
+152695,123880,Thalassiophysales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/449576/medium.jpg
+152696,123880,Toxariales,,order,https://static.inaturalist.org/photos/12786141/medium.jpg
+203622,152272,Rhizosoleniaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/2307922/medium.jpg
+359955,152264,Aulacoseiraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/993689/medium.jpeg
+841868,123880,Stellarimales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/29746570/medium.jpeg
+1043961,123880,Melosirales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/89521533/medium.jpg
+1267976,123880,Cocconeidales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/18720819/medium.jpg
+1267978,123880,Plagiogrammales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/333408358/medium.jpg
+1268184,123880,Rhaphoneidales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/2899715/medium.jpeg
+1268258,123880,Eupodiscales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/21305860/medium.jpg
+1268259,123880,Lithodesmiales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/1544635/medium.jpg
+1268260,123880,Stephanodiscales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/40357178/medium.jpg
+1268264,123880,Stephanopyxales,,order,https://inaturalist-open-data.s3.amazonaws.com/photos/3125551/medium.jpeg
+1269705,1269706,Hobaniella longicruris,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5922432/medium.jpg
+1271509,152272,Probosciaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/2899682/medium.jpeg
+1608801,1608800,Actinoneis lorenziana,,species,
+50421,50420,Hemidiscaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/3861672/medium.jpg
+51506,51505,Fragilariaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/4436466/medium.jpg
+71652,841868,Trigoniaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/29746570/medium.jpeg
+123864,123863,Chaetocerotaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1672639/medium.jpg
+123866,50420,Coscinodiscaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/82379/medium.png
+123869,123868,Biddulphiaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/6025592/medium.jpg
+123877,1043961,Melosiraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1530463/medium.jpg
+123882,123881,Cymbellaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/250160521/medium.jpg
+123887,123881,Gomphonemataceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/40336087/medium.jpg
+153215,152683,Eunotiaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/3540533/medium.jpg
+200862,152679,Bacillariaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/11625105/medium.jpg
+203614,152239,Licmophoraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1177141/medium.JPG
+203620,152268,Hemiaulaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/135618887/medium.jpg
+203621,203622,Dactyliosolen,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1503106/medium.jpg
+203624,123863,Leptocylindraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1619652/medium.jpg
+203626,203622,Rhizosolenia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2307922/medium.jpg
+203629,1268264,Stephanopyxidaceae,,family,https://static.inaturalist.org/photos/20339776/medium.jpg
+203656,152693,Surirellaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/2339419/medium.jpg
+203661,152694,Thalassionemataceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1315594/medium.jpg
+246075,152691,Rhopalodiaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/993685/medium.jpeg
+325543,152695,Catenulaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/449576/medium.jpg
+326203,123881,Rhoicospheniaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/40818326/medium.jpg
+326253,152275,Skeletonemataceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1619736/medium.jpg
+326259,152271,Paraliaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1443785/medium.jpg
+339332,152688,Tabellariaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/6584106/medium.jpg
+339334,1267976,Cocconeidaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/993684/medium.jpg
+339335,152685,Achnanthaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/4680451/medium.jpeg
+341616,152275,Thalassiosiraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/3052439/medium.jpeg
+345146,1267976,Achnanthidiaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/8145998/medium.jpg
+345387,203622,Guinardia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5922492/medium.jpg
+345477,1268260,Stephanodiscaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/39460684/medium.jpg
+345482,152265,Corethraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/14535543/medium.jpeg
+345498,152275,Lauderiaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/10513884/medium.jpeg
+345518,1268259,Lithodesmiaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1544635/medium.jpg
+359954,359955,Aulacoseira,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/162206813/medium.jpg
+359961,152693,Entomoneidaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/2355270/medium.jpg
+359985,152685,Mastogloiaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/4419231/medium.jpg
+359999,152692,Striatellaceae,,family,https://static.inaturalist.org/photos/32158766/medium.jpg
+360001,1268184,Rhaphoneidaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/2899715/medium.jpeg
+416665,152266,Cymatosiraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1405339/medium.jpg
+417727,1271509,Proboscia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2824303/medium.jpeg
+447203,1268258,Eupodiscaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1428717/medium.jpg
+447206,50420,Heliopeltaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/30818554/medium.jpg
+469826,152263,Asterolampraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/79346720/medium.jpg
+481207,1043961,Hyalodiscaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/89521533/medium.jpg
+481210,1268259,Bellerocheaceae,,family,https://static.inaturalist.org/photos/266843337/medium.jpg
+485330,203622,Pseudosolenia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2666498/medium.jpeg
+493914,152684,Lyrellaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/3880027/medium.jpeg
+493945,203622,Neocalyptrella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2898607/medium.jpeg
+521737,50420,Aulacodiscaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/349972111/medium.jpg
+544133,152271,Radialiplicataceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/21741122/medium.jpg
+544164,123884,Kobayasiella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/8145272/medium.jpg
+550500,123881,Anomoeoneidaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/40838334/medium.jpg
+553697,152688,Rhabdonemataceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/9168292/medium.jpg
+623139,123868,Attheyaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/12595789/medium.jpg
+971448,152696,Toxariaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/146392420/medium.jpg
+1232317,152274,Stictodiscaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/119415437/medium.jpg
+1268482,152239,Ulnariaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/18539252/medium.jpg
+1269700,152268,Isthmiaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/6414022/medium.jpg
+1269701,1268258,Odontellaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/113387802/medium.jpg
+1269709,1268258,Parodontellaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/3343692/medium.jpeg
+1269851,841868,Stellarimaceae,,family,
+1270103,152681,Entopylaceae,,family,
+1270107,51505,Staurosiraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/3868859/medium.jpg
+1270109,1268184,Asterionellopsidaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/353397741/medium.jpg
+1270734,152688,Grammatophoraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/135482994/medium.jpg
+1271411,1267978,Plagiogrammaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/333408358/medium.jpg
+1271413,1268184,Psammodiscaceae,,family,
+1400589,123874,Auliscus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/211735197/medium.jpg
+50418,50421,Actinocyclus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3861672/medium.jpg
+51504,1268482,Ctenophora,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1530676/medium.png
+123862,123864,Chaetoceros,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/82380/medium.png
+123865,123866,Coscinodiscus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/82379/medium.png
+123867,1269700,Isthmia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6414021/medium.jpg
+123871,1269701,Odontella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/21305860/medium.jpg
+123875,123877,Melosira,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/103982357/medium.jpg
+123878,123882,Cymbella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/250160521/medium.jpg
+123885,123884,Pleurosigmataceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/5083240/medium.jpg
+123886,123887,Gomphonema,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/40546197/medium.jpg
+123888,1268482,Synedra,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/54783621/medium.jpg
+123889,339332,Asterionella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/82188/medium.jpg
+153214,153215,Actinella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/18924804/medium.jpg
+173725,123884,Plagiotropidaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/5896099/medium.jpg
+200864,200862,Bacillaria,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1344997/medium.jpg
+200878,51506,Fragilaria,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4436466/medium.jpg
+203613,203614,Licmophora,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/79486103/medium.jpg
+203619,203620,Eucampia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2075816/medium.jpg
+203623,203624,Leptocylindrus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1619652/medium.jpg
+203628,203629,Stephanopyxis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3125551/medium.jpeg
+203630,1270109,Asterionellopsis,,genus,https://static.inaturalist.org/photos/4999001/medium.jpg
+203655,203656,Surirella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/35609579/medium.jpg
+203660,203661,Thalassionema,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1315594/medium.jpg
+203811,123884,Naviculaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/715201/medium.jpg
+204579,123882,Didymosphenia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/285954721/medium.jpg
+244796,123884,Pinnulariaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/5083264/medium.jpg
+244899,153215,Eunotia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/173862688/medium.jpg
+246074,246075,Epithemia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/993685/medium.jpeg
+311291,200862,Nitzschia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/24827423/medium.jpg
+324302,200862,Hantzschia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/288642946/medium.jpg
+324304,123884,Amphipleuraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/5083376/medium.jpg
+325558,325543,Amphora,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/449576/medium.jpg
+326201,123884,Stauroneidaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/4417810/medium.png
+326202,326203,Rhoicosphenia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/8148458/medium.jpg
+326230,200862,Pseudo-nitzschia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/756685/medium.jpg
+326250,200862,Fragilariopsis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6414002/medium.jpg
+326254,326253,Skeletonema,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1619736/medium.jpg
+326255,200862,Cylindrotheca,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6413896/medium.jpg
+326260,326259,Paralia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1443785/medium.jpg
+339303,339332,Tabellaria,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6584106/medium.jpg
+339306,339334,Cocconeis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/993684/medium.jpg
+339308,339335,Achnanthes,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4680451/medium.jpeg
+341617,341616,Thalassiosira,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3052439/medium.jpeg
+345020,203661,Thalassiothrix,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1368855/medium.jpg
+345074,447206,Actinoptychus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/288598459/medium.jpg
+345147,345146,Achnanthidium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/18720819/medium.jpg
+345199,345477,Cyclotella,,genus,https://static.inaturalist.org/photos/356952664/medium.jpg
+345228,345482,Corethron,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/14535543/medium.jpeg
+345360,345498,Lauderia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/10513884/medium.jpeg
+345374,203620,Hemiaulus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2158916/medium.jpg
+345448,345518,Ditylum,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/12916064/medium.jpg
+345524,339332,Diatoma,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/7890210/medium.jpg
+345802,123884,Diploneidaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/3565789/medium.jpeg
+345803,123887,Encyonema,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4426605/medium.jpg
+345814,123884,Sellaphoraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/5083409/medium.jpg
+345828,200862,Tryblionella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/287260407/medium.jpg
+345833,1268482,Tabularia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4788931/medium.jpg
+345834,1270107,Staurosira,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4388138/medium.jpg
+345840,345146,Planothidium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4441549/medium.jpg
+345847,1270107,Pseudostaurosira,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4388048/medium.jpg
+345914,123884,Diadesmidaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/8046588/medium.jpg
+348085,345518,Lithodesmium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/756729/medium.jpg
+357563,203656,Campylodiscus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5083306/medium.jpg
+359960,359961,Entomoneis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/178122250/medium.jpg
+359984,359985,Mastogloia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4419231/medium.jpg
+359989,1270107,Opephora,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/21777774/medium.jpg
+359998,1270734,Grammatophora,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/260413520/medium.jpg
+360000,360001,Delphineis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6413921/medium.jpg
+360013,345146,Astartiella,,genus,
+362370,345477,Stephanodiscus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/39460684/medium.jpg
+362385,359954,Aulacoseira ambigua,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/993689/medium.jpeg
+362436,1268482,Ulnaria,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3868882/medium.jpg
+367352,345477,Discostella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/8145086/medium.jpg
+372658,123869,Biddulphia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5927295/medium.jpg
+372660,359999,Striatella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/34036549/medium.jpg
+415209,123884,Berkeleyaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/13483775/medium.jpg
+416664,416665,Plagiogrammopsis,,genus,
+416666,345387,Guinardia striata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5922492/medium.jpg
+423791,203626,Rhizosolenia imbricata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1328816/medium.jpg
+423799,345387,Guinardia flaccida,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1369833/medium.jpg
+429201,203621,Dactyliosolen fragilissimus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1503106/medium.jpg
+429202,345387,Guinardia delicatula,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5922491/medium.jpg
+429989,123864,Bacteriastrum,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2943256/medium.jpeg
+448295,203620,Cerataulina,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/12594768/medium.jpg
+468060,341616,Detonula,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2076158/medium.jpg
+468497,447203,Pleurosira,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1428717/medium.jpg
+469815,469826,Asteromphalus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/79346720/medium.jpg
+471475,123882,Encyonopsis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/40399210/medium.jpg
+471702,359954,Aulacoseira granulata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/204642484/medium.jpg
+474246,1268482,Hannaea,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2416075/medium.jpg
+475132,359954,Aulacoseira islandica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2491255/medium.jpg
+475144,123884,Brachysiraceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/3868537/medium.jpg
+481206,481207,Podosira,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/21740776/medium.jpg
+481209,481210,Bellerochea,,genus,https://static.inaturalist.org/photos/266843337/medium.jpg
+481392,485330,Pseudosolenia calcar-avis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2666498/medium.jpeg
+484133,203621,Dactyliosolen blavyanus,,species,
+484704,417727,Proboscia alata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2824303/medium.jpeg
+491389,203656,Petrodictyon,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3292537/medium.jpeg
+493912,360001,Rhaphoneis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2899715/medium.jpeg
+493915,493914,Lyrella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/34036545/medium.jpg
+493946,493945,Neocalyptrella robusta,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2898607/medium.jpeg
+496887,123884,Scoliotropidaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/58002767/medium.jpg
+497006,481207,Hyalodiscus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/21740751/medium.jpg
+498990,1270107,Staurosirella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/8177423/medium.jpg
+499003,339332,Meridion,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4387122/medium.jpg
+504266,345146,Lemnicola,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4427300/medium.jpg
+505393,203656,Stenopterobia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/19017935/medium.jpg
+506347,325543,Halamphora,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4784732/medium.jpg
+521677,341616,Minidiscus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/298160254/medium.jpg
+521734,1232317,Arachnoidiscus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/51365371/medium.jpeg
+521736,521737,Aulacodiscus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/21739126/medium.jpg
+522083,341616,Planktoniella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5922423/medium.jpg
+533609,359954,Aulacoseira distans,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21740859/medium.jpg
+533653,345146,Karayevia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/83465964/medium.jpg
+533682,345146,Psammothidium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/7416756/medium.png
+542141,51506,Fragilariforma,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/7984007/medium.jpg
+544124,544133,Ellerbeckia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/7416929/medium.jpg
+544148,339335,Platessa,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/18783039/medium.jpg
+544150,550500,Adlafia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/147407023/medium.jpg
+544196,200862,Psammodictyon,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/21733852/medium.jpeg
+548137,544164,Kobayasiella subtilissima,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/193241913/medium.jpeg
+550497,550500,Staurophora,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/33465461/medium.jpg
+553696,553697,Rhabdonema,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/9169309/medium.jpg
+623140,623139,Attheya,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/455018038/medium.jpeg
+713405,359954,Aulacoseira subarctica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18685379/medium.jpg
+714105,203656,Iconella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/18608547/medium.jpg
+714519,359954,Aulacoseira italica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18561067/medium.jpg
+841859,71652,Trigonium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/29746570/medium.jpeg
+970049,345477,Pantocsekiella,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/40357178/medium.jpg
+970087,203626,Rhizosolenia hebetata,,species,
+970091,203626,Rhizosolenia styliformis,,species,
+970651,1270103,Gephyria,,genus,
+970661,326203,Gomphonemopsis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/332019581/medium.jpg
+970815,123884,Proschkiniaceae,,family,https://inaturalist-open-data.s3.amazonaws.com/photos/330306386/medium.jpg
+970958,493914,Petroneis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/419199254/medium.jpg
+971447,971448,Toxarium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/146392420/medium.jpg
+984497,1269709,Trieres,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3343692/medium.jpeg
+987993,1270109,Asteroplanus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/353397741/medium.jpg
+989203,341616,Conticribra,,genus,
+990473,203621,Dactyliosolen phuketensis,,species,
+1017678,1269851,Stellarima,,genus,
+1018731,341616,Bacterosira,,genus,
+1112277,51506,Odontidium,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/239886497/medium.jpg
+1125517,469826,Asterolampra,,genus,
+1268518,203629,Eupyxidicula,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/12747180/medium.jpg
+1269043,123884,Metascolioneidaceae,,family,
+1269702,1269701,Amphitetras,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/205546984/medium.jpg
+1269707,447203,Zygoceros,,genus,
+1269822,203621,Dactyliosolen mediterraneus,,species,
+1270152,51506,Sarcophagodes,,genus,
+1270764,553697,Hyalosira,,genus,
+1271099,341616,Shionodiscus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/245156878/medium.jpg
+1271412,1271411,Plagiogramma,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/333408358/medium.jpg
+1271500,1271413,Psammodiscus,,genus,
+1271526,1269701,Pseudictyota,,genus,
+1271530,447203,Amphipentas,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/178110938/medium.jpeg
+1400590,1400589,Auliscus sculptus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/362212923/medium.jpg
+1415328,359985,Tetramphora,,genus,
+1424508,416665,Arcocellulus,,genus,
+1424553,416665,Extubocellulus,,genus,
+1435554,326203,Gomphoseptatum,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/332509589/medium.jpg
+1509820,200862,Homoeocladia,,genus,
+1568266,416665,Campylosira,,genus,https://static.inaturalist.org/photos/394850296/medium.jpg
+1589292,1271411,Psammogramma,,genus,
+1589298,203624,Tenuicylindrus,,genus,
+1589515,326203,Chelonicola,,genus,
+1608806,339334,Amphicocconeis,,genus,
+123883,203811,Gyrosigma,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5083267/medium.jpg
+202631,204579,Didymosphenia geminata,Didymo,species,https://inaturalist-open-data.s3.amazonaws.com/photos/39934238/medium.jpg
+203608,123885,Pleurosigma,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5083240/medium.jpg
+203738,326260,Paralia sulcata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/256867488/medium.png
+203739,326255,Cylindrotheca closterium,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6413896/medium.jpg
+203742,326254,Skeletonema costatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/59351645/medium.jpg
+203808,203811,Navicula,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/18808109/medium.jpg
+244797,244796,Pinnularia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5083264/medium.jpg
+320115,326230,Pseudo-nitzschia delicatissima,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/13355469/medium.jpg
+320116,326230,Pseudo-nitzschia multiseries,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21735203/medium.jpg
+320117,326230,Pseudo-nitzschia pseudodelicatissima,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/107436233/medium.jpg
+320118,326230,Pseudo-nitzschia pungens,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11569644/medium.jpeg
+320119,326230,Pseudo-nitzschia seriata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/756618/medium.jpg
+324303,324304,Frustulia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5083376/medium.jpg
+325515,123875,Melosira varians,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/448824/medium.jpg
+325542,325558,Amphora ovalis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/449576/medium.jpg
+326200,326201,Craticula,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/105556790/medium.jpg
+332990,326230,Pseudo-nitzschia americana,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4391332/medium.jpeg
+333685,123886,Gomphonema acuminatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18362004/medium.jpg
+345008,345828,Tryblionella hungarica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/287260407/medium.jpg
+345027,345833,Tabularia fasciculata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18539252/medium.jpg
+345040,345834,Staurosira construens,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/19101241/medium.jpg
+345070,345147,Achnanthidium minutissimum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18720819/medium.jpg
+345102,326202,Rhoicosphenia abbreviata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7970075/medium.jpg
+345115,345847,Pseudostaurosira brevistriata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4388048/medium.jpg
+345151,345840,Planothidium lanceolatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8023871/medium.jpg
+345189,311291,Nitzschia sigma,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5083406/medium.jpg
+345191,311291,Nitzschia palea,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1530648/medium.jpg
+345192,311291,Nitzschia frustulum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/239274565/medium.jpg
+345194,311291,Nitzschia filiformis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21733548/medium.jpg
+345200,123878,Cymbella mexicana,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7890560/medium.png
+345201,123878,Cymbella cistula,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21745631/medium.jpg
+345214,51504,Ctenophora pulchella,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8107915/medium.jpg
+345238,339306,Cocconeis placentula,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7969972/medium.jpg
+345240,339306,Cocconeis pediculus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7890609/medium.jpg
+345288,123889,Asterionella formosa,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2080623/medium.jpg
+345418,200878,Fragilaria vaucheriae,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18528162/medium.jpg
+345419,200878,Fragilaria crotonensis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4425347/medium.jpg
+345512,200878,Fragilaria capucina,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6414009/medium.jpg
+345794,203811,Caloneis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/8148155/medium.jpg
+345801,345802,Diploneis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/204269123/medium.jpg
+345812,345814,Fallacia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/147508585/medium.jpg
+345835,326201,Stauroneis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/18839730/medium.jpg
+345845,345814,Sellaphora,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/147417107/medium.jpg
+345915,345914,Luticola,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/8046588/medium.jpg
+345924,123886,Gomphonema subclavatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/40583534/medium.jpg
+348140,123867,Isthmia nervosa,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6414021/medium.jpg
+355484,468497,Pleurosira laevis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1428717/medium.jpg
+359933,359960,Entomoneis alata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/153680788/medium.jpg
+359945,345828,Tryblionella acuminata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21733777/medium.jpg
+359948,123871,Odontella aurita,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21745454/medium.png
+359956,123875,Melosira lineata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1530463/medium.jpg
+359958,345803,Encyonema minutum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18516330/medium.jpg
+359963,311291,Nitzschia scalpelliformis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21733777/medium.jpg
+359964,345840,Planothidium hauckianum,,species,https://static.inaturalist.org/photos/33613564/medium.jpg
+359968,341617,Thalassiosira nordenskioeldii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14536703/medium.jpeg
+359982,339306,Cocconeis californica,,species,
+359983,203613,Licmophora lyngbyei,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21779171/medium.jpg
+359990,50418,Actinocyclus octonarius,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/410114140/medium.jpg
+359992,339306,Cocconeis scutellum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21732370/medium.jpg
+359993,359998,Grammatophora marina,,species,https://static.inaturalist.org/photos/216171148/medium.jpeg
+359994,360000,Delphineis surirella,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/173004329/medium.jpeg
+359995,203660,Thalassionema nitzschioides,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1544626/medium.jpg
+359996,341617,Thalassiosira eccentrica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8160326/medium.jpeg
+359997,359960,Entomoneis paludosa,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/31954934/medium.jpg
+360004,345828,Tryblionella granulata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/86440584/medium.jpg
+360006,311291,Nitzschia pusilla,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21733015/medium.jpg
+360014,203811,Trachyneis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/29805006/medium.jpeg
+367353,367352,Discostella stelligera,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8145086/medium.jpg
+372546,372658,Biddulphia biddulphiana,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5927295/medium.jpg
+372659,372660,Striatella unipunctata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/136241972/medium.jpg
+411115,123862,Chaetoceros diadema,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21738890/medium.jpg
+411124,123862,Chaetoceros atlanticus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21738794/medium.jpg
+411125,123862,Chaetoceros brevis,,species,
+411126,123862,Chaetoceros socialis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1328763/medium.jpg
+411127,123862,Chaetoceros costatus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/171489343/medium.jpg
+411128,123862,Chaetoceros teres,,species,
+411129,123862,Chaetoceros peruvianus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2560310/medium.jpeg
+411130,123862,Chaetoceros protuberans,,species,
+411131,123862,Chaetoceros constrictus,,species,
+415040,415209,Berkeleya,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1488583/medium.jpg
+418445,123862,Chaetoceros danicus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1345023/medium.jpg
+423795,123862,Chaetoceros affinis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5927647/medium.jpg
+424382,123865,Coscinodiscus radiatus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12594871/medium.jpg
+424383,123865,Coscinodiscus oculus-iridis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1368866/medium.jpg
+424384,123865,Coscinodiscus centralis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1397708/medium.jpg
+424386,416664,Plagiogrammopsis vanheurckii,,species,
+424387,345448,Ditylum brightwellii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1544635/medium.jpg
+428503,203630,Asterionellopsis glacialis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/13665665/medium.jpeg
+429984,429989,Bacteriastrum delicatulum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2899659/medium.jpeg
+430064,345524,Diatoma vulgaris,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7890215/medium.jpg
+437499,123862,Chaetoceros convolutus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12927114/medium.jpg
+437720,123862,Chaetoceros debilis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1672639/medium.jpg
+446735,123862,Chaetoceros decipiens,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12959132/medium.jpeg
+448287,123862,Chaetoceros didymus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5889635/medium.jpg
+448296,448295,Cerataulina pelagica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12594768/medium.jpg
+460262,123875,Melosira nummuloides,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5922470/medium.jpg
+468045,203619,Eucampia zodiacus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2075816/medium.jpg
+468053,468060,Detonula pumila,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2076158/medium.jpg
+468655,345374,Hemiaulus hauckii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2158917/medium.jpg
+469821,311291,Nitzschia longissima,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2158564/medium.jpg
+469827,203623,Leptocylindrus minimus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5889415/medium.jpg
+470480,203628,Stephanopyxis palmeriana,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2186492/medium.jpg
+470488,341617,Thalassiosira angustelineata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12595279/medium.jpeg
+471341,203655,Surirella robusta,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3455562/medium.jpg
+471485,123878,Cymbella lanceolata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6413907/medium.jpg
+471703,359954,Aulacoseira granulata angustissima,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/8164116/medium.jpg
+474014,203613,Licmophora flabellata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2392648/medium.jpg
+474032,123886,Gomphonema constrictum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21745711/medium.jpg
+475141,244899,Eunotia minor,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8144959/medium.jpg
+475143,475144,Brachysira,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/3868537/medium.jpg
+475747,345074,Actinoptychus senarius,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/349909991/medium.jpg
+479914,311291,Nitzschia reversa,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4680463/medium.jpeg
+481197,348085,Lithodesmium undulatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21740442/medium.png
+484134,345228,Corethron hystrix,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14535543/medium.jpeg
+484138,493912,Rhaphoneis amphiceros,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2899715/medium.jpeg
+484143,173725,Meuniera,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5924652/medium.jpg
+484944,341617,Thalassiosira subtilis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2266617/medium.jpg
+485231,203811,Haslea,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/18823426/medium.jpg
+486513,429989,Bacteriastrum hyalinum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2943256/medium.jpeg
+488049,123862,Chaetoceros compressus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3019565/medium.jpeg
+488050,123862,Chaetoceros densus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3019626/medium.jpeg
+488075,203628,Stephanopyxis nipponica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7785029/medium.jpeg
+488947,341617,Thalassiosira punctigera,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3137864/medium.jpeg
+490536,493915,Lyrella lyra,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3191463/medium.jpeg
+492465,345803,Encyonema silesiacum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3868467/medium.jpg
+492475,311291,Nitzschia dissipata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8148103/medium.jpg
+492477,311291,Nitzschia microcephala,,species,
+492492,499003,Meridion circulare,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/110353281/medium.jpg
+492539,345199,Cyclotella striata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21742219/medium.jpeg
+492540,362370,Stephanodiscus astraea,,species,
+493504,345074,Actinoptychus splendens,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3276180/medium.jpeg
+494442,345147,Achnanthidium affine,,species,
+494448,345840,Planothidium dubium,,species,
+494456,345828,Tryblionella angustata,,species,
+494473,123886,Gomphonema intricatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/45057821/medium.jpg
+494487,498990,Staurosirella pinnata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18677241/medium.jpg
+494500,339303,Tabellaria fenestrata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6584106/medium.jpg
+494501,339303,Tabellaria flocculosa,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/153609657/medium.jpeg
+494504,246074,Epithemia adnata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7969608/medium.jpg
+494506,246074,Epithemia argus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7947587/medium.jpg
+496834,50418,Actinocyclus normanii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/87337536/medium.jpg
+496856,362436,Ulnaria ulna,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7968880/medium.jpg
+496863,362436,Ulnaria amphirhynchus,,species,https://static.inaturalist.org/photos/270083706/medium.png
+496865,496887,Biremis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/58002767/medium.jpg
+504135,123862,Chaetoceros curvisetus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4670978/medium.jpeg
+506343,506347,Halamphora holsatica,,species,
+506344,506347,Halamphora cymbifera,,species,
+508783,345360,Lauderia annulata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/10513884/medium.jpeg
+521234,326254,Skeletonema japonicum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5896283/medium.jpg
+521285,203811,Membraneis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5896105/medium.jpg
+521675,522083,Planktoniella sol,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5922423/medium.jpg
+521678,203623,Leptocylindrus danicus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5922477/medium.jpg
+521735,469815,Asteromphalus heptactis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/416396654/medium.jpg
+521745,123862,Chaetoceros laciniosus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6246570/medium.jpeg
+521747,123862,Chaetoceros lorenzianus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5927637/medium.jpg
+521748,123862,Chaetoceros concavicornis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5927652/medium.jpg
+521749,123862,Chaetoceros radicans,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5927664/medium.jpg
+526978,123865,Coscinodiscus concinnus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6168578/medium.jpg
+533658,311291,Nitzschia aequorea,,species,
+533660,311291,Nitzschia inconspicua,,species,
+534331,341617,Thalassiosira aestivalis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6407813/medium.jpeg
+534336,123862,Chaetoceros similis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6408050/medium.jpeg
+534337,345020,Thalassiothrix longissima,,species,
+534459,326250,Fragilariopsis oceanica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6414007/medium.jpg
+544176,173725,Plagiotropis,,genus,https://static.inaturalist.org/photos/154210575/medium.jpg
+544179,326201,Prestauroneis,,genus,
+546877,246074,Epithemia turgida,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7969827/medium.jpg
+546964,362436,Ulnaria acus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7985091/medium.jpg
+547456,123865,Coscinodiscus curvatulus,,species,
+548460,311291,Nitzschia vermicularis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21733847/medium.jpg
+549788,123865,Coscinodiscus wailesii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21739732/medium.jpg
+549893,341617,Thalassiosira pacifica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/245987853/medium.jpg
+553701,553696,Rhabdonema arcuatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21779591/medium.jpg
+556898,553696,Rhabdonema adriaticum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9168292/medium.jpg
+570485,123865,Coscinodiscus granii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12594976/medium.jpeg
+623138,623140,Attheya septentrionalis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12595789/medium.jpg
+713258,471475,Encyonopsis microcephala,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18574881/medium.jpg
+714190,246074,Epithemia gibba,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2225856/medium.jpg
+714192,244899,Eunotia arcus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18898390/medium.jpg
+714199,153214,Actinella punctata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18924804/medium.jpg
+714986,498990,Staurosirella martyi,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/19098953/medium.jpg
+739103,360000,Delphineis angustata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11753227/medium.jpg
+841425,841859,Trigonium arcticum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/29746570/medium.jpeg
+888461,474246,Hannaea arcus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/203952501/medium.jpg
+889432,123878,Cymbella aspera,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/40278580/medium.jpg
+895698,345524,Diatoma elongata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/43602249/medium.jpg
+915661,521734,Arachnoidiscus ehrenbergii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/51365329/medium.jpeg
+918411,341617,Thalassiosira pseudonana,,species,
+936703,244899,Eunotia sudetica,,species,https://static.inaturalist.org/photos/273706232/medium.png
+944665,345847,Pseudostaurosira paucistriata,,species,
+944705,1270152,Gedaniella panicellus,,species,
+969986,123865,Coscinodiscus marginatus,,species,
+969989,123865,Coscinodiscus divisus,,species,
+969990,123865,Coscinodiscus asteromphalus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/211868021/medium.jpeg
+969994,481209,Bellerochea malleus,,species,https://static.inaturalist.org/photos/266843337/medium.jpg
+969997,50418,Actinocyclus subtilis,,species,
+969998,50418,Actinocyclus kuetzingii,,species,
+970008,123862,Chaetoceros tortissimus,,species,
+970009,123862,Chaetoceros simplex,,species,
+970011,123862,Chaetoceros subtilis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/459792017/medium.jpg
+970017,123865,Coscinodiscus gigas,,species,
+970021,123865,Coscinodiscus perforatus,,species,
+970023,123865,Coscinodiscus rothii,,species,
+970024,123865,Coscinodiscus sublineatus,,species,
+970083,481206,Podosira stelligera,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/362918753/medium.jpeg
+970148,505393,Stenopterobia intermedia,,species,
+970151,341617,Thalassiosira gravida,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/7443855/medium.jpg
+970152,341617,Thalassiosira lundiana,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/246231082/medium.jpg
+970153,341617,Thalassiosira leptopus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/107436338/medium.jpg
+970169,325558,Amphora lineolata,,species,
+970170,325558,Amphora graeffeana,,species,
+970174,325558,Amphora mexicana,,species,
+970266,357563,Campylodiscus bicostatus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/332346992/medium.jpg
+970270,339306,Cocconeis pellucida,,species,
+970272,339306,Cocconeis pseudomarginata,,species,
+970273,339306,Cocconeis disculus,,species,
+970643,345833,Tabularia investiens,,species,
+970650,970651,Gephyria media,,species,
+970660,970661,Gomphonemopsis exigua,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/332019581/medium.jpg
+970705,324302,Hantzschia virgata,,species,
+970729,359998,Grammatophora hamulifera,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/215801424/medium.jpeg
+970799,359984,Mastogloia splendida,,species,
+970814,970815,Proschkinia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/330306386/medium.jpg
+970957,970958,Petroneis humerosa,,species,
+971137,311291,Nitzschia bilobata,,species,
+971218,311291,Nitzschia hybrida,,species,
+971225,544196,Psammodictyon panduriforme,,species,
+971227,311291,Nitzschia obtusa,,species,
+971238,311291,Nitzschia spathulata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/340184111/medium.jpg
+971248,415209,Parlibellus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/459725221/medium.jpg
+971400,326202,Rhoicosphenia marina,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/332737359/medium.jpg
+971413,550497,Staurophora wislouchii,,species,
+971415,491389,Petrodictyon gemma,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/144862144/medium.jpeg
+971435,203655,Surirella striatula,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/100092440/medium.jpg
+971461,971447,Toxarium undulatum,,species,
+971467,203660,Thalassionema frauenfeldii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/107436335/medium.jpg
+971471,345828,Tryblionella coarctata,,species,
+971491,339303,Tabellaria quadriseptata,,species,
+987045,345840,Achnantheiopsis fragilarioides,,species,
+987109,544150,Adlafia minuscula,,species,
+987479,325558,Amphora proteus,,species,
+987989,987993,Asteroplanus karianus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/353397741/medium.jpg
+988154,623140,Attheya longicornis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/472581399/medium.jpg
+988731,123862,Chaetoceros borealis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/214332031/medium.jpeg
+988734,123862,Chaetoceros ceratosporus,,species,
+988737,123862,Chaetoceros crinitus,,species,
+988738,123862,Chaetoceros ingolfianus,,species,
+988740,123862,Chaetoceros externus,,species,
+988741,123862,Chaetoceros eibenii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/362056025/medium.jpg
+988743,123862,Chaetoceros seiracanthus,,species,
+988745,123862,Chaetoceros pseudocrinitus,,species,
+988747,123862,Chaetoceros lauderi,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/381756256/medium.jpg
+988754,123862,Chaetoceros tenuissimus,,species,
+989075,339306,Cocconeis costata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/286967608/medium.jpg
+989079,339306,Cocconeis stauroneiformis,,species,
+989201,989203,Conticribra guillardii,,species,
+991173,345803,Encyonema gracile,,species,
+991360,203619,Eucampia groenlandica,,species,
+991415,244899,Eunotia exigua,,species,https://static.inaturalist.org/photos/273706820/medium.png
+991610,326250,Fragilariopsis cylindrus,,species,
+991615,542141,Fragilariforma bicapitata,,species,
+992202,970661,Gomphonemopsis pseudexigua,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/332138550/medium.jpg
+992225,359998,Grammatophora oceanica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/333155360/medium.jpg
+996075,339308,Achnanthes parvula,,species,
+996081,345147,Achnanthidium exile,,species,
+996083,345147,Achnanthidium pyrenaicum,,species,
+996110,325558,Amphora laevis,,species,
+996151,345833,Tabularia tabulata,,species,
+996172,341617,Thalassiosira angulata,,species,
+996373,345834,Staurosira subsalina,,species,
+997100,203613,Licmophora gracilis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/454511833/medium.jpg
+997102,203613,Licmophora communis,,species,
+1000161,498990,Martyana schulzii,,species,
+1000172,359984,Mastogloia exigua,,species,
+1000308,123875,Melosira undulata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/408810759/medium.jpg
+1001080,311291,Nitzschia tubicola,,species,
+1005526,970958,Petroneis latissima,,species,
+1006183,345840,Planothidium capitatum,,species,
+1016707,326254,Skeletonema marinoi,,species,
+1017662,550497,Staurophora amphioxys,,species,
+1017677,1017678,Stellarima stellaris,,species,
+1018727,341617,Thalassiosira baltica,,species,
+1018729,1018731,Bacterosira constricta,,species,
+1018740,341617,Thalassiosira minima,,species,
+1018984,984497,Trieres mobiliensis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2532546/medium.jpeg
+1100778,339308,Achnanthes subconstricta,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/79699639/medium.jpg
+1112276,1112277,Odontidium hyemale,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21775870/medium.jpg
+1112279,1112277,Odontidium mesodon,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2491250/medium.jpg
+1112283,1112277,Odontidium anceps,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/449029485/medium.png
+1125489,521677,Minidiscus trioculatus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/298160254/medium.jpg
+1125490,521677,Minidiscus chilensis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/298237449/medium.jpg
+1125510,448295,Cerataulina bicornis,,species,
+1125516,1125517,Asterolampra marylandica,,species,
+1132329,123862,Chaetoceros neogracilis,,species,
+1267576,359998,Grammatophora serpentina,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/146777728/medium.jpg
+1268470,200864,Bacillaria paxillifera,carpenter's rule diatom,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11624974/medium.jpg
+1268528,1268518,Eupyxidicula turris,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/12747178/medium.jpg
+1268550,345828,Tryblionella punctata,,species,
+1268559,345828,Tryblionella hantzschiana,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/148773824/medium.jpg
+1268576,326230,Pseudo-nitzschia lineola,,species,
+1268676,544148,Platessa conspicua,,species,
+1268680,345147,Achnanthidium lineare,,species,
+1268694,339306,Cocconeis lineata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/993684/medium.jpg
+1268871,203811,Pseudogomphonema,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/331758672/medium.jpg
+1268897,339308,Achnanthes adnata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/54791230/medium.jpg
+1268902,533682,Psammothidium kryophilum,,species,
+1268918,339308,Achnanthes lemmermannii,,species,
+1268921,339308,Achnanthes armillaris,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/157897490/medium.jpg
+1269150,203811,Placogeia,,genus,
+1269216,359960,Entomoneis gigantea,,species,
+1269227,1269043,Metascolioneis,,genus,
+1269412,246074,Epithemia gibberula,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/289072098/medium.jpg
+1269414,246074,Epithemia musculus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/393641569/medium.jpg
+1269431,714105,Iconella delicatissima,,species,
+1269458,203655,Surirella recedens,,species,
+1269459,357563,Campylodiscus neofastuosus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21800932/medium.jpg
+1269579,714105,Iconella splendida,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18608547/medium.jpg
+1269620,506347,Halamphora acutiuscula,,species,
+1269623,506347,Halamphora costata,,species,
+1269624,506347,Halamphora eunotia,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21785322/medium.jpg
+1269625,506347,Halamphora exigua,,species,
+1269629,506347,Halamphora hyalina,,species,
+1269631,203811,Seminavis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/203873944/medium.jpg
+1269703,1269702,Amphitetras antediluviana,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/406755478/medium.jpg
+1269708,1269707,Zygoceros rhombus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2899818/medium.jpeg
+1269787,123862,Chaetoceros willei,,species,
+1269820,123862,Chaetoceros pseudocurvisetus,,species,
+1269826,345374,Hemiaulus chinensis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/107435638/medium.jpg
+1269829,345228,Corethron pennatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/107435511/medium.jpg
+1269855,123865,Coscinodiscus pavillardii,,species,
+1270114,345834,Staurosira venter,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/392489287/medium.jpg
+1270117,200878,Fragilaria rumpens,,species,
+1270126,345834,Staurosira leptostauron,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8177423/medium.jpg
+1270140,498990,Staurosirella mutabilis,,species,
+1270293,123888,Synedra gaillonii,,species,
+1270294,123888,Synedra camtschatica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/331481757/medium.jpg
+1270766,1270764,Hyalosira delicatula,,species,
+1270813,497006,Hyalodiscus laevis,,species,
+1270829,326260,Paralia marina,,species,
+1270837,123871,Odontella turgida,,species,
+1270838,989203,Conticribra weissflogii,,species,
+1270903,970049,Pantocsekiella ocellata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/40357178/medium.jpg
+1271106,521677,Minidiscus proschkinae,,species,
+1271498,1271500,Psammodiscus nitidus,,species,
+1271502,360000,Delphineis minutissima,,species,
+1271529,1271526,Pseudictyota dubia,,species,
+1271531,1271530,Amphipentas pentacrinus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/178110938/medium.jpeg
+1318728,326255,Cylindrotheca fusiformis,,species,
+1340155,359998,Grammatophora angulosa,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/173252191/medium.jpeg
+1404857,203613,Licmophora ehrenbergii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/342977805/medium.jpg
+1404858,203613,Licmophora juergensii,,species,
+1404874,203613,Licmophora hyalina,,species,
+1411650,359998,Grammatophora macilenta,,species,
+1424506,325558,Amphora abludens,,species,
+1424507,325558,Amphora helenensis,,species,
+1424557,1424553,Extubocellulus spinifer,,species,
+1424566,497006,Hyalodiscus scoticus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/247240298/medium.jpg
+1424567,203613,Licmophora paradoxa,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/342769861/medium.jpg
+1424970,311291,Nitzschia dubiiformis,,species,
+1424973,341617,Thalassiosira tenera,,species,
+1424975,341617,Thalassiosira oceanica,,species,
+1424977,341617,Thalassiosira curviseriata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/244530223/medium.jpg
+1424979,506347,Halamphora nagumoi,,species,
+1425673,123889,Asterionella bleakeleyi,,species,
+1429508,1271099,Shionodiscus oestrupii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/245149124/medium.jpg
+1430448,1271099,Shionodiscus trifultus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/245923495/medium.jpg
+1430773,341617,Thalassiosira conferta,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/246492220/medium.jpg
+1435555,1435554,Gomphoseptatum aestuarii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/332509589/medium.jpg
+1436578,123885,Rhoicosigma,,genus,
+1450877,311291,Nitzschia paleaeformis,,species,
+1450880,311291,Nitzschia supralitorea,,species,
+1464070,123871,Odontella obtusa,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/359680963/medium.jpg
+1465254,325558,Amphora vixvisibilis,,species,
+1465264,345828,Tryblionella gaoana,,species,
+1499081,345074,Actinoptychus adriaticus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/324218241/medium.jpg
+1505958,970958,Petroneis granulata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/419199254/medium.jpg
+1507588,1271412,Plagiogramma staurophorum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/333408358/medium.jpg
+1509403,544124,Ellerbeckia sol,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/334640925/medium.jpg
+1509803,311291,Nitzschia adhaerens,,species,
+1509806,341617,Thalassiosira antarctica,,species,
+1509808,341617,Thalassiosira minuscula,,species,
+1509818,493915,Lyrella hennedyi,,species,
+1509821,1509820,Homoeocladia nanodissipata,,species,
+1509990,311291,Nitzschia traheaformis,,species,
+1516526,200864,Bacillaria socialis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/339078216/medium.jpg
+1521436,203613,Licmophora abbreviata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/343151732/medium.jpg
+1530535,521736,Aulacodiscus kittonii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/350137449/medium.jpg
+1539167,1568266,Campylosira cymbelliformis,,species,https://static.inaturalist.org/photos/394850296/medium.jpg
+1540463,1271099,Shionodiscus poroirregulatus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/357568624/medium.jpg
+1543255,123867,Isthmia enervis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/362196210/medium.jpg
+1566239,506347,Halamphora turgida,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/415326018/medium.jpg
+1567600,359989,Opephora schwartzii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/449827928/medium.jpg
+1569671,345199,Cyclotella litoralis,,species,
+1577358,200878,Fragilaria striatula,,species,
+1577960,50418,Actinocyclus tenuissimus,,species,
+1579765,714105,Iconella elegans,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18667617/medium.jpg
+1589221,521677,Minidiscus spinulatus,,species,
+1589228,311291,Nitzschia ligowskii,,species,
+1589293,1589292,Psammogramma vigoensis,,species,
+1589300,1589298,Tenuicylindrus belgicus,,species,
+1589304,1415328,Tetramphora sulcata,,species,
+1589504,1271412,Plagiogramma tsawwassen,,species,
+1589510,1424508,Arcocellulus cornucervis,,species,
+1589517,326260,Paralia longispina,,complex,
+1589521,311291,Nitzschia medioconstricta,,species,
+1589528,1509820,Homoeocladia volvendirostrata,,species,
+1589598,326230,Pseudo-nitzschia linea,,species,
+1589599,1271099,Shionodiscus bioculatus,,species,
+1589600,326254,Skeletonema dohrnii,,species,
+1591199,311291,Nitzschia bicapitata,,species,
+1598953,339308,Achnanthes elongata,,species,
+1599270,326202,Rhoicosphenia genuflexa,,species,
+1602334,1435554,Gomphoseptatum pseudoseptatum,,species,
+1603435,339306,Cocconeis notata,,species,
+1603464,339306,Cocconeis kerguelensis,,species,
+1603740,1271099,Shionodiscus endoseriatus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/466068386/medium.jpg
+1603847,339306,Cocconeis fasciolata,,species,
+1604033,341617,Thalassiosira allenii,,species,
+1604312,341617,Thalassiosira tealata,,species,
+1604400,341617,Thalassiosira visurgis,,species,
+1606966,123875,Melosira inflexa,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4219952/medium.jpeg
+1608798,339308,Achnanthes groenlandica,,species,
+1608799,50418,Actinocyclus curvatulus,,species,
+1608803,345074,Actinoptychus maculatus,,species,
+1608807,1608806,Amphicocconeis disculoides,,species,
+1608810,325558,Amphora arcus,,species,
+1608811,325558,Amphora arenicola,,species,
+1608812,325558,Amphora binodis,,species,
+1608814,325558,Amphora dubia,,species,
+1608816,325558,Amphora laevissima,,species,
+1608818,325558,Amphora lanceolata,,species,
+1608819,325558,Amphora marina,,species,
+1608820,325558,Amphora pusio,,species,
+1608822,325558,Amphora truncata,,species,
+1608823,360013,Astartiella stroemii,,species,
+1608824,123889,Asterionella notata,,species,
+1608825,469815,Asteromphalus arachne,,species,
+1608826,521736,Aulacodiscus oregonus,,species,
+1608827,203811,Austariella,,genus,
+1608829,123871,Odontella litigiosa,,species,
+1610279,339306,Cocconeis dirupta,,species,
+1610497,1271412,Plagiogramma minus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/472806592/medium.jpg
+1610844,493915,Lyrella clavata,,species,
+1612910,339306,Cocconeis pinnata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/475035670/medium.jpg
+311562,324303,Frustulia rhomboides,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/449564/medium.jpg
+345041,345835,Stauroneis phoenicenteron,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8046965/medium.jpg
+345067,339308,Achnanthes brevipes intermedia,,variety,
+345090,345845,Sellaphora pupula,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3868854/medium.jpg
+345314,203808,Navicula menisculus,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3868617/medium.jpg
+345316,203808,Navicula cincta,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21793844/medium.jpg
+345385,123883,Gyrosigma acuminatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4415474/medium.jpg
+345488,203808,Navicula viridula,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/392496943/medium.jpg
+345522,345801,Diploneis smithii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5654971/medium.jpg
+359939,203808,Navicula gregaria,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/222738144/medium.jpg
+359942,203808,Navicula peregrina,,species,https://static.inaturalist.org/photos/270591295/medium.jpg
+359943,203808,Navicula salinarum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4441522/medium.jpg
+359944,203808,Navicula tripunctata,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8055169/medium.jpg
+359978,123883,Gyrosigma balticum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21797665/medium.jpg
+359981,345794,Caloneis westii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/138689565/medium.jpg
+360010,203608,Pleurosigma formosum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21799987/medium.jpg
+360011,360014,Trachyneis aspera,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/29805006/medium.jpeg
+428635,123883,Gyrosigma fasciola,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3190908/medium.jpeg
+484128,484143,Meuniera membranacea,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5924652/medium.jpg
+485228,544176,Plagiotropis lepidoptera,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/56959756/medium.jpg
+492497,203808,Navicula cryptocephala,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21793923/medium.jpg
+492520,244797,Pinnularia biceps,,species,
+492526,123883,Gyrosigma scalproides,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21797720/medium.jpg
+494494,345915,Luticola cohnii,,species,
+494495,345801,Diploneis elliptica,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5654969/medium.jpg
+496852,475143,Brachysira microcephala,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3868537/medium.jpg
+496854,203808,Navicula rhynchocephala,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3868625/medium.jpg
+508779,415040,Berkeleya rutilans,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21784944/medium.jpg
+521233,521285,Membraneis challengeri,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5896105/medium.jpg
+521674,203608,Pleurosigma normanii,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5922406/medium.jpg
+533612,339306,Cocconeis placentula klinoraphis,,variety,
+533672,345840,Planothidium hauckianum rostratum,,variety,
+544178,544179,Prestauroneis integra,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/21789641/medium.jpg
+547181,123883,Gyrosigma attenuatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8018638/medium.jpg
+548361,244797,Pinnularia microstauron,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8238003/medium.jpg
+553702,553696,Rhabdonema arcuatum robustum,,variety,
+843531,345801,Diploneis subovalis,,species,
+868219,203808,Navicula heufleri,,species,
+970240,345794,Caloneis alpestris,,species,
+970248,345794,Caloneis liber,,species,
+970261,345794,Caloneis latiuscula,,species,
+970279,339306,Cocconeis heteroidea curvirotunda,,variety,
+970601,345801,Diploneis suborbicularis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/413786317/medium.jpg
+970614,345801,Diploneis bombus,,species,
+970701,123883,Gyrosigma strigilis,,species,
+970704,485231,Haslea crucigera,,species,
+970832,203808,Navicula distans,,species,
+971077,203808,Navicula cancellata,,species,
+971078,496865,Biremis ambigua,,species,
+971236,311291,Nitzschia sigma rigida,,variety,
+971381,244797,Pinnularia legumen,,species,
+971394,203608,Pleurosigma elongatum,,species,
+971397,203608,Pleurosigma delicatulum,,species,
+971398,203608,Pleurosigma angulatum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/362057943/medium.jpg
+989481,326200,Craticula ambigua,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/203272114/medium.jpg
+990765,345801,Diploneis interrupta,,species,
+991554,345812,Fallacia litoricola,,species,
+991555,345812,Fallacia forcipata,,species,
+1000875,203808,Navicula crucifera,,species,
+1000878,203808,Navicula digitoradiata,,species,
+1000881,203808,Navicula flanatica,,species,
+1000892,203808,Navicula meniscus,,species,
+1000896,203808,Navicula perminuta,,species,
+1000897,203808,Navicula palpebralis,,species,
+1000908,203808,Navicula salinicola,,species,
+1125483,203608,Pleurosigma acutum,,species,
+1125484,203608,Pleurosigma decorum,,species,
+1125485,203608,Pleurosigma intermedium,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/422570444/medium.jpg
+1157565,345812,Fallacia nummularia,,species,
+1269084,544179,Prestauroneis crucicula,,species,
+1269112,203808,Navicula phyllepta,,species,
+1269151,1269150,Placogeia similis,,species,
+1269153,485231,Haslea spicula,,species,
+1269159,203808,Navicula septentrionalis,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5924688/medium.jpg
+1269161,203808,Navicula rostellata,,species,
+1269228,1269227,Metascolioneis tumida,,species,
+1269630,1269631,Seminavis macilenta,,species,
+1269692,1269631,Seminavis ventricosa,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/427708083/medium.jpg
+1404875,203808,Navicula directa,,species,
+1416970,244797,Pinnularia transversa,,species,
+1424564,485231,Haslea howeana,,species,
+1424565,485231,Haslea pseudostrearia,,species,
+1436581,1436578,Rhoicosigma arcticum,,species,
+1464071,1269631,Seminavis robusta,,species,
+1465269,971248,Parlibellus delognei,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/459725221/medium.jpg
+1465272,485231,Haslea avium,,species,
+1465274,970814,Proschkinia complanatula,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/330306386/medium.jpg
+1465276,1268871,Pseudogomphonema kamtschaticum,,species,https://inaturalist-open-data.s3.amazonaws.com/photos/331758672/medium.jpg
+1499082,345074,Actinoptychus adriaticus pumila,,variety,https://inaturalist-open-data.s3.amazonaws.com/photos/324220663/medium.png
+1509814,971248,Parlibellus hamulifer,,species,
+1509815,123883,Gyrosigma limosum,,species,
+1509816,203808,Navicula agatkae,,species,
+1564976,345801,Diploneis crabro,,species,
+1572140,1436578,Rhoicosigma compactum,,species,
+1589222,203808,Navicula arenaria,,species,
+1589223,203808,Navicula brunelii,,species,
+1589225,203808,Navicula concordia,,species,
+1589226,203808,Navicula flagellifera,,species,
+1589525,203808,Navicula criophiliforma,,species,
+1589526,345812,Fallacia hodgeana,,species,
+1599376,971248,Parlibellus berkeleyi,,species,
+1603511,339306,Cocconeis scutellum posidoniae,,variety,
+1603722,123883,Gyrosigma arcuatum,,species,
+1608821,325558,Amphora pusio parvula,,variety,
+1608828,1608827,Austariella jamalinensis,,species,
+1608830,345794,Caloneis brevis,,species,
+1610618,359998,Grammatophora oceanica subtilissima,,variety,
+1020320,345845,Sellaphora pupula capitata,,form,
+1269070,123883,Gyrosigma fasciola tenuirostris,,variety,
+1465270,971248,Parlibellus delognei ellipticus,,form,
+1608831,345794,Caloneis brevis elliptica,,variety,
+1608832,345794,Caloneis brevis vexans,,variety,

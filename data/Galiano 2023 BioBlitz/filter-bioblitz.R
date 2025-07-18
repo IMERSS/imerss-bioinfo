@@ -1,7 +1,7 @@
 library(geojsonsf)
 library(sf)
 
-source("./utils.R")
+source("../Rscripts/utils.R")
 
 raw <- timedFread("Galiano_Island_vascular_plant_records_consolidated.csv")
 

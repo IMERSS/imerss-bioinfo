@@ -15,6 +15,8 @@ const buildIndex = {
         "node_modules/infusion/src/lib/jquery/ui/css/default-theme/tooltip.css",
         "node_modules/infusion/src/lib/jquery/ui/css/default-theme/theme.css",
         "node_modules/jquery-ui/themes/base/tabs.css",
+        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js",
+        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css",
         //        "node_modules/infusion/src/lib/jquery/core/js/jquery.js",
         "src/client/css/imerss-core.css",
         "src/lib/signals-core.min.js",
@@ -47,8 +49,6 @@ const buildIndex = {
     ],
     oldSource: [
         "src/client/css/imerss-viz.css",
-        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js",
-        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css",
         "src/auxBuild/restoreJQuery.js",
         "src/lib/jquery-ui-widgets-tabs.js",
         "src/lib/lz4.js",
@@ -81,8 +81,6 @@ const buildIndex = {
         "node_modules/papaparse/papaparse.min.js",
         "node_modules/pako/dist/pako_inflate.min.js",
         "node_modules/pretty-checkbox/dist/pretty-checkbox.min.css",
-        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.js",
-        "node_modules/accessible-autocomplete/dist/accessible-autocomplete.min.css",
         "node_modules/@stanko/dual-range-input/dist/index.css",
         "src/lib/jquery-ui-widgets-tabs.js",
         "src/lib/point-in-polygon.js",
@@ -159,6 +157,9 @@ const buildIndex = {
         src: "data/Pepiowelh/Life.json.lz4",
         dest: "docs/data/Pepiowelh/Life.json.lz4"
     }, {
+        src: "src/lib/brightsign-keyboard.js",
+        dest: "docs/js/brightsign-keyboard.js"
+    }, {
         src: "data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz",
         dest: "docs/data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz"
     }, {
@@ -185,7 +186,17 @@ const buildIndex = {
     },  {
         src: "data/Galiano 2023 BioBlitz/regionIndirection.csv",
         dest: "docs/data/Galiano 2023 BioBlitz/regionIndirection.csv"
-    }, ]
+    }, {
+        src: "data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-prepared.csv",
+        dest: "docs/data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-prepared.csv"
+    }, {
+        src: "data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-assigned-taxa.csv",
+        dest: "docs/data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-assigned-taxa.csv"
+    },  {
+        src: "data/dataPaper-II/regionIndirection.csv",
+        dest: "docs/data/dataPaper-II/regionIndirection.csv"
+    }
+    ]
 };
 
 // These two taken from reknit.js

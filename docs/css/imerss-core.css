@@ -378,7 +378,7 @@
 }
 
 .autocomplete__menu {
-    max-height: 600px;
+    border: 2px solid #0b0c0c;
 }
 
 .imerss-controls {

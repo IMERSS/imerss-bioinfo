@@ -1,6 +1,6 @@
 library(dplyr)
 
-source("./utils.R")
+source("../Rscripts/utils.R")
 
 rawRecords <- timedFread("Galiano_Island_vascular_plant_records_consolidated-assigned.csv")
 # To check against all summary
@@ -45,7 +45,7 @@ filteredDown2$dataset = datasetIndex
 timedWrite(filteredDown2, "Galiano_Island_vascular_plant_records_consolidated-prepared.csv")
 
 
-indirectionRows <- data.frame(regionField = "dataset", id = 1:length(uniqueDataSets), label = uniqueDatasets)
+indirectionRows <- data.frame(regionField = "dataset", id = 1:length(uniqueDatasets), label = uniqueDatasets)
 indirectionRows$datasetClass <- ifelse(indirectionRows$label == "iNaturalist", "citizen", "naturalist")
 
 timedWrite(indirectionRows, "regionIndirection.csv")

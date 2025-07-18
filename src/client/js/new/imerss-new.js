@@ -125,7 +125,8 @@ fluid.defaults("hortis.vizLoader", {
         resourcesLoaded: "@expand:signal()",
         taxaRows: "@expand:signal()",
         obsRows: "@expand:signal()",
-        filteredObs: "{filters}.allOutput",
+        // Don't put filters here - Xetthecum doesn't have any and hortis.filters doesn't have any base grades
+        filteredObs: "{that}.obsRows",
         // Proposed syntax: @compute:hortis.filterObs(*{that}.obs, {that}.obsFilter, *{that}.obsFilterVersion)
         finalFilteredObs: "@expand:fluid.computed({that}.filterObsByTaxa, {that}.filteredObs)"
     },
