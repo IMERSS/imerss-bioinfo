@@ -114,6 +114,39 @@ hortis.iNatProjects = {
         },
         outputFile: "data/Howe Sound/iNaturalist_Mammalia_Amphibia_Reptilia_Context_Catalogue_%Date.csv"
     },
+    SaanichVascular: {
+        paramMap: {
+            swlat: 48.3,
+            swlng: -123.609,
+            nelat: 48.72,
+            nelng: -123.194,
+            taxon_id: 211194, // Tracheophyta
+            quality_grade: ""
+        },
+        outputFile: "data/Janszen/Saanich_iNaturalist_Tracheophyta_Catalogue_%Date.csv"
+    },
+    OuterGulfIslandsVascular: {
+        paramMap: {
+            swlat: 48.694,
+            swlng: -123.614,
+            nelat: 49.025,
+            nelng: -123.033,
+            taxon_id: 211194, // Tracheophyta
+            quality_grade: ""
+        },
+        outputFile: "data/Janszen/Outer_Gulf_Islands_iNaturalist_Tracheophyta_Catalogue_%Date.csv"
+    },
+    SaltSpringVascular: {
+        paramMap: {
+            swlat: 48.704,
+            swlng: -123.608,
+            nelat: 48.95,
+            nelng: -123.355,
+            taxon_id: 211194, // Tracheophyta
+            quality_grade: ""
+        },
+        outputFile: "data/Janszen/Salt_Spring_iNaturalist_Tracheophyta_Catalogue_%Date.csv"
+    },
     TexadaVascular: {
         paramMap: {
             place_id: 205178,

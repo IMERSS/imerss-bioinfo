@@ -121,6 +121,12 @@ hortis.queryFromEFloraRow = function (row) {
     return {name, phylum};
 };
 
+hortis.queryFromJanszenRow = function (row) {
+    const name = hortis.sanitizeSpeciesName(row.ScientificName);
+    const phylum = "Tracheophyta";
+    return {name, phylum};
+};
+
 hortis.queryFromCPNWHRow = function (row) {
     const name = hortis.sanitizeSpeciesName(row["Accepted.Name"] || row["Scientific.Name"]);
     const phylum = "Tracheophyta";
@@ -179,7 +185,8 @@ hortis.applyName = async function (row) {
     //const query = hortis.queryFromArjanRow(row);
     //const query = hortis.queryFromLichenNRow(row);
     //const query = hortis.queryFromDwcaRow(row);
-    const query = hortis.queryFromDiatomRow(row);
+    //const query = hortis.queryFromDiatomRow(row);
+    const query = hortis.queryFromJanszenRow(row);
     let goodRow;
 
     const looked = await source.get(query);

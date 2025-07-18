@@ -17,6 +17,10 @@ require("kettle"); // for kettle.dataSource.URL
 
 hortis.ranks = fluid.freezeRecursive(fluid.require("%imerss-bioinfo/data/ranks.json"));
 
+hortis.iNatPhyla = {
+    "Bacillariophyta": "Ochrophyta"
+};
+
 hortis.sanitizeSpeciesName = function (name) {
     name = name.trim();
     // Examples such as Blidingia spp., including Blidingia minima var. vexata
@@ -431,6 +435,11 @@ fluid.defaults("hortis.iNatTaxonSource", {
     }
 });
 
+hortis.iNatTaxonSource.adaptNameQuery = function (query) {
+    const looked = hortis.iNatPhyla[query.phylum];
+    return looked ? {...query, phylum: looked} : query;
+};
+
 /** Accepts queries either by name or by id, forwarding to the two raw API sources which are attached.
  * In the case of a by id query, it is sent direct.
  * In the case of a by name query, we look at the first result in the list and attempt to look it up by id and then
@@ -448,7 +457,10 @@ hortis.iNatTaxonSource.read = async function (that, payload, options) {
     if (query.id) {
         doc = await that.byId.get(query);
     } else if (query.name) {
-        doc = await that.byName.get(query);
+        // Annoyingly this is the only point of interception at the front of name queries. Many phyla are
+        // mismatched between iNat and other sources
+        const adapted = hortis.iNatTaxonSource.adaptNameQuery(query);
+        doc = await that.byName.get(adapted);
     } else if (query.obsId) {
         doc = await that.obsById.get({id: query.obsId});
     }

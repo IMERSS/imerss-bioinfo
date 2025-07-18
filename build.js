@@ -168,6 +168,15 @@ const buildIndex = {
         src: "data/b-team/regionIndirection.csv",
         dest: "docs/data/b-team/regionIndirection.csv"
     }, {
+        src: "data/b-team/plant-pollinators-WaBA-2025-labels.csv",
+        dest: "docs/data/b-team/plant-pollinators-WaBA-2025-labels.csv"
+    }, {
+        src: "data/b-team/plant-pollinators-WaBA-2025-assigned-taxa.csv",
+        dest: "docs/data/b-team/plant-pollinators-WaBA-2025-assigned-taxa.csv"
+    }, {
+        src: "data/b-team/plant-pollinators-WaBA-2025-regionIndirection.csv",
+        dest: "docs/data/b-team/plant-pollinators-WaBA-2025-regionIndirection.csv"
+    }, {
         src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv",
         dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv"
     }, {
@@ -224,9 +233,9 @@ const filesToContentHash = function (allFiles, extension) {
         return file.endsWith(extension);
     });
     // console.log("Computed content hash ", extFiles, " for extension ", extension);
-    const hash = fluid.transform(fluid.arrayToHash(extFiles), function (troo, filename) {
-        return fs.readFileSync(filename, "utf8");
-    });
+    const hash = Object.fromEntries(
+        extFiles.map(filename => [filename, fs.readFileSync(filename, "utf8")])
+    );
     return hash;
 };
 

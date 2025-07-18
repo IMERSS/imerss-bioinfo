@@ -56,6 +56,7 @@ const strategies = {
         iNatId: "iNaturalistTaxonId",
         nameStatus: "nameStatus",
         assignedINatName: "iNaturalistTaxonName",
+        assignRanks: ["kingdom", "phylum", "class", "order", "family", "genus"],
         sanitize: true
     },
     // Has been reintegrated already, info should match and we just need to compute and assign higher taxa
@@ -173,10 +174,12 @@ hortis.storeTaxon = async function (allTaxa, taxonDoc, inSummary) {
 };
 
 // Note: This is the beginning of "new marmalisation" - hortis.iNat.addTaxonInfo used to be called in the marmaliser
-hortis.applyName = async function (row, phylum, rank, invertedSwaps, allTaxa, unmappedTaxa, strategyRec) {
+hortis.applyName = async function (row, index, phylum, rank, invertedSwaps, allTaxa, unmappedTaxa, strategyRec) {
     const s = strategyRec;
-    const fieldName = s.iNatName;
-    const rawName = row[fieldName];
+    const rawName = row[s.iNatName] || row[s.rawName];
+    if (!rawName) {
+        fluid.fail(`Couldn't get taxon name for row ${index} from field names ${s.iNatName} or ${s.rawName}`);
+    }
     const iNatName = invertedSwaps[rawName]?.preferred || rawName;
     const saneName = s.sanitize ? hortis.sanitizeSpeciesName(iNatName) : iNatName;
     const looked = await source.get({name: saneName, phylum, rank});
@@ -196,6 +199,9 @@ hortis.applyName = async function (row, phylum, rank, invertedSwaps, allTaxa, un
         const id = looked.doc.id;
         assign(row, s.iNatId, id);
         assign(row, s.assignedINatName, looked.doc.name);
+        if (strategyRec.assignRanks) {
+            await hortis.iNat.getRanks(looked.doc.id, row, source.byId, strategyRec.assignRanks);
+        }
         const existing = allTaxa[id];
         if (!existing) {
             const taxonDoc = await source.get({id: id});
@@ -242,14 +248,14 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
         }
         const row = reader.rows[i];
         if (strategy === "bees") {
-            await hortis.applyName(row, "Tracheophyta", null, invertedSwaps, taxa, unmappedTaxa, strategyBigRec.plant);
-            await hortis.applyName(row, "Arthropoda", null, invertedSwaps, taxa, unmappedTaxa, strategyBigRec.pollinator);
+            await hortis.applyName(row, i, "Tracheophyta", null, invertedSwaps, taxa, unmappedTaxa, strategyBigRec.plant);
+            await hortis.applyName(row, i, "Arthropoda", null, invertedSwaps, taxa, unmappedTaxa, strategyBigRec.pollinator);
         } else if (strategy === "reintegrated") {
-            await hortis.applyName(row, row.Phylum, row.Rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
+            await hortis.applyName(row, i, row.Phylum, row.Rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         } else if (strategy === "DwC") {
-            await hortis.applyName(row, row.phylum, row.taxonRank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
+            await hortis.applyName(row, i, row.phylum, row.taxonRank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         } else if (strategy === "iNat") {
-            await hortis.applyName(row, row.phylum, row.taxon_rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
+            await hortis.applyName(row, i, row.phylum, row.taxon_rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         }
 
         mapped.push(row);
