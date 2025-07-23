@@ -1,10 +1,10 @@
-First round of exports GBIF_2022_Plantae_DwC taken from 
+First round of exports GBIF_2022_Plantae_DwC taken from
 adfsimon-bioinfo/tree/main/Howe_Sound/4_consolidate_records/Records/Raw/GBIF_2022_Plantae.csv
 
-Tracheophyta_review_summary_2022-12-14 taken from 
+Tracheophyta_review_summary_2022-12-14 taken from
 adfsimon-bioinfo/Howe_Sound/2_review/Plantae_et_Chromista/vascular_plants/summaries/Tracheophyta_review_summary_2022-12-14.csv
 
-Second round 
+Second round
 
 adfsimon-bioinfo/blob/main/Howe_Sound/4_consolidate_records/Records/Digitized/DwC/AHSBR_CNABH_data_spatial_query_2023-03-03_DwC.csv
 
@@ -12,14 +12,14 @@ adfsimon-bioinfo/blob/main/Howe_Sound/4_consolidate_records/Records/Digitized/Dw
 Newer data source:
 https://github.com/IMERSS/adfsimon-bioinfo/blob/main/Howe_Sound/consolidate_records/Plantae_et_Chromista/vascular_plants/synthesized/Howe_Sound_vascular_plant_records_consolidated.csv
 
-BEC vignette taken from 
+BEC vignette taken from
 IMERSS/howe-sound-mapping/blob/main/tabular_data/1km_gridded_vascular_plant_records_2022-12-24_WGS84.csv
 
 Newer update from
 IMERSS/adfsimon-bioinfo/blob/main/Howe_Sound/analyse/outputs/gridded_plants_WGS84.csv
 
 
-Study area taken from 
+Study area taken from
 https://github.com/IMERSS/adfsimon-bioinfo/blob/main/Howe_Sound/study_area/Howe_Sound_project_area.geojson
 
 GBIF HSBR query:
@@ -37,7 +37,7 @@ Even simplifying project area to 5% is too big.
 
 Finally got DOI https://doi.org/10.15468/dl.f6ajrp for Mammalia Amphibia Reptilia
 
-Now using Howe_Sound_context_area_much_simplified.geojson - get 
+Now using Howe_Sound_context_area_much_simplified.geojson - get
 GBIF.org (15 November 2023) GBIF Occurrence Download https://doi.org/10.15468/dl.k8mv76
 
 Annoyingly the 15 November 2023 query omitted Amphibia - this was the text:
@@ -48,6 +48,18 @@ Has coordinate true
 Has geospatial issue false
 Occurrence status present
 Scientific name Mammalia Squamata Crocodylia Testudines Sphenodontia  <-- ADD AMPHIBIA HERE
+
+Reptilia download of 2024-07-02 was allocated https://doi.org/10.15468/dl.x3f6ee
+Polygon as before, Amphibia added:
+Geometry MULTIPOLYGON(((-123.45452 48.45021,-123.24904 48.51411,-123.04264 48.44585,-122.89529 48.38311,-122.77556 48.39343,-122.68505 48.47058,-122.53557 48.51086,-122.33404 49.01793,-122.19265 49.05693,-122.0415 49.63551,-121.49381 50.37661,-121.62751 50.99611,-122.29991 51.06895,-122.53395 51.21685,-122.66234 51.15671,-123.08652 51.23147,-123.20029 51.07383,-123.84225 50.8593,-124.03727 50.48225,-124.88401 49.66801,-125.15705 49.54775,-124.49559 48.84927,-123.90401 48.58074,-123.56596 48.42635,-123.45452 48.45021)))
+Has coordinate true
+Has geospatial issue false
+Occurrence status present
+Scientific name Mammalia Squamata Crocodylia Testudines Sphenodontia Amphibia
+
+Fresh
+
+
 
 Got fresh Christmas Eve GBIF download of
 

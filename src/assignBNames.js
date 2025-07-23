@@ -51,13 +51,16 @@ const strategies = {
         }
     },
     DwC: {
-        iNatName: "scientificName",
-        rawName: "scientificName",
+        iNatName: "verbatimScientificName",
+        rawName: "verbatimScientificName",
         iNatId: "iNaturalistTaxonId",
         nameStatus: "nameStatus",
         assignedINatName: "iNaturalistTaxonName",
         assignRanks: ["kingdom", "phylum", "class", "order", "family", "genus"],
-        sanitize: true
+        sanitize: true,
+        csvOptions: {
+            separator: "\t"
+        }
     },
     // Has been reintegrated already, info should match and we just need to compute and assign higher taxa
     reintegrated: {
@@ -90,10 +93,6 @@ const outputTaxaFile = parsedArgs.taxa || inputTrunk + "-assigned-taxa.csv";
 
 const mismatchFile = parsedArgs.mismatches || inputTrunk + "-mismatches.csv";
 
-const reader = hortis.csvReaderWithoutMap({
-    inputFile: inputFile
-});
-
 const swapsReader = hortis.csvReaderWithMap({
     inputFile: swapsFile,
     mapColumns: {
@@ -116,6 +115,12 @@ if (!strategy) {
 
 console.log("Applying strategy ", strategy);
 const strategyBigRec = strategies[strategy];
+
+
+const reader = hortis.csvReaderWithoutMap({
+    inputFile: inputFile,
+    csvOptions: strategyBigRec.csvOptions
+});
 
 
 // Added in Epifamily so we can include Bees [Epifamily Anthophila]
@@ -177,7 +182,7 @@ hortis.storeTaxon = async function (allTaxa, taxonDoc, inSummary) {
 hortis.applyName = async function (row, index, phylum, rank, invertedSwaps, allTaxa, unmappedTaxa, strategyRec) {
     const s = strategyRec;
     const rawName = row[s.iNatName] || row[s.rawName];
-    if (!rawName) {
+    if (rawName === undefined) {
         fluid.fail(`Couldn't get taxon name for row ${index} from field names ${s.iNatName} or ${s.rawName}`);
     }
     const iNatName = invertedSwaps[rawName]?.preferred || rawName;
