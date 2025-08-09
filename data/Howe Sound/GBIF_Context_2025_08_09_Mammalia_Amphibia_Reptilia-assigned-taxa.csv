@@ -1,0 +1,505 @@
+id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
+48460,,Life,life,stateofmatter,https://inaturalist-open-data.s3.amazonaws.com/photos/347064198/medium.jpeg
+1,48460,Animalia,Animals,kingdom,https://inaturalist-open-data.s3.amazonaws.com/photos/80678745/medium.jpg
+2,1,Chordata,Chordates,phylum,https://inaturalist-open-data.s3.amazonaws.com/photos/80551845/medium.jpg
+355675,2,Vertebrata,Vertebrates,subphylum,https://inaturalist-open-data.s3.amazonaws.com/photos/80551642/medium.jpg
+20978,355675,Amphibia,Amphibians,class,https://static.inaturalist.org/photos/20797296/medium.jpg
+26036,355675,Reptilia,Reptiles,class,https://static.inaturalist.org/photos/29214589/medium.jpg
+40151,355675,Mammalia,Mammals,class,https://inaturalist-open-data.s3.amazonaws.com/photos/80551250/medium.jpg
+20979,20978,Anura,Frogs and Toads,order,https://inaturalist-open-data.s3.amazonaws.com/photos/2261717/medium.jpg
+26039,26036,Crocodylia,Crocodilians,order,https://static.inaturalist.org/photos/33292476/medium.jpg
+26172,26036,Squamata,Snakes and Lizards,order,https://inaturalist-open-data.s3.amazonaws.com/photos/28516312/medium.jpeg
+26718,20978,Caudata,Salamanders,order,https://inaturalist-open-data.s3.amazonaws.com/photos/126774452/medium.jpeg
+39532,26036,Testudines,Turtles and Tortoises,order,https://static.inaturalist.org/photos/25646660/medium.jpeg
+21359,20979,Bufonidae,True Toads,family,https://inaturalist-open-data.s3.amazonaws.com/photos/14443240/medium.jpg
+23540,20979,Hylidae,Tree Frogs and Allies,family,https://static.inaturalist.org/photos/646307/medium.jpg
+25473,20979,Ranidae,Typical Frogs,family,https://inaturalist-open-data.s3.amazonaws.com/photos/17781494/medium.jpeg
+26041,26039,Crocodylidae,Crocodiles,family,https://inaturalist-open-data.s3.amazonaws.com/photos/8194566/medium.jpg
+26720,26718,Ambystomatidae,Mole Salamanders,family,https://static.inaturalist.org/photos/20209480/medium.jpg
+26909,26718,Plethodontidae,Lungless Salamanders,family,https://inaturalist-open-data.s3.amazonaws.com/photos/13031788/medium.jpg
+27701,26718,Salamandridae,Newts,family,https://static.inaturalist.org/photos/100156624/medium.jpg
+39680,39532,Chelydridae,Snapping Turtles,family,https://inaturalist-open-data.s3.amazonaws.com/photos/397483082/medium.jpg
+39699,39532,Kinosternidae,American Mud and Musk Turtles,family,https://static.inaturalist.org/photos/174462071/medium.jpg
+39760,39532,Emydidae,Pond and Box Turtles,family,https://static.inaturalist.org/photos/9316497/medium.jpg
+39886,39532,Geoemydidae,"Eurasian Pond, River, and Neotropical Wood Turtles",family,https://static.inaturalist.org/photos/7672812/medium.jpg
+476982,20979,Ascaphidae,Tailed Frogs,family,https://inaturalist-open-data.s3.amazonaws.com/photos/6210819/medium.jpg
+21360,21359,Bufo,Old World Toads,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/49481828/medium.jpeg
+24542,476982,Ascaphus,,genus,https://static.inaturalist.org/photos/31438143/medium.jpg
+25474,25473,Rana,Pond Frogs,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/359250602/medium.jpg
+26042,26041,Crocodylus,Typical Crocodiles,genus,https://static.inaturalist.org/photos/26016568/medium.jpg
+26504,26172,Colubridae,Colubrid Snakes,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1813733/medium.jpg
+26721,26720,Ambystoma,Mole Salamanders,genus,https://static.inaturalist.org/photos/255185366/medium.jpg
+26816,26720,Dicamptodon,Pacific Giant Salamanders,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5694478/medium.jpg
+30667,26172,Viperidae,Vipers,family,https://static.inaturalist.org/photos/209465106/medium.jpg
+32080,26172,Boidae,Boas,family,https://inaturalist-open-data.s3.amazonaws.com/photos/7224349/medium.jpeg
+39657,39532,Cheloniidae,Typical Sea Turtles,family,https://static.inaturalist.org/photos/177739424/medium.jpg
+39681,39680,Chelydra,Typical Snapping Turtles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/25569899/medium.jpeg
+42540,40151,Didelphimorphia,Opossums,order,https://inaturalist-open-data.s3.amazonaws.com/photos/77222685/medium.jpg
+60340,25473,Lithobates,American Water Frogs,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/45231910/medium.jpg
+64747,21359,Anaxyrus,North American Toads,genus,https://static.inaturalist.org/photos/13935922/medium.jpg
+64819,21359,Rhinella,Beaked Toads,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/35849/medium.jpg
+797544,39760,Deirochelyinae,Deirochelyine Turtles,subfamily,https://inaturalist-open-data.s3.amazonaws.com/photos/128112196/medium.jpg
+24253,23540,Pseudacris,Chorus Frogs,genus,https://static.inaturalist.org/photos/79606/medium.jpg
+24543,24542,Ascaphus truei,Coastal Tailed Frog,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5710720/medium.jpg
+25542,25474,Rana pretiosa,Oregon Spotted Frog,species,https://inaturalist-open-data.s3.amazonaws.com/photos/29679535/medium.jpg
+25545,25474,Rana aurora,Northern Red-legged Frog,species,https://inaturalist-open-data.s3.amazonaws.com/photos/13807209/medium.jpg
+25588,25474,Rana luteiventris,Columbia Spotted Frog,species,https://static.inaturalist.org/photos/427597198/medium.jpg
+26079,26042,Crocodylus johnstoni,Freshwater Crocodile,species,https://inaturalist-open-data.s3.amazonaws.com/photos/40574453/medium.jpeg
+26747,26721,Ambystoma gracile,Northwestern Salamander,species,https://static.inaturalist.org/photos/32416190/medium.jpg
+26754,26721,Ambystoma macrodactylum,Long-toed Salamander,species,https://inaturalist-open-data.s3.amazonaws.com/photos/30262875/medium.jpg
+26790,26721,Ambystoma maculatum,Spotted Salamander,species,https://static.inaturalist.org/photos/245633300/medium.jpg
+26822,26816,Dicamptodon tenebrosus,Coastal Giant Salamander,species,https://inaturalist-open-data.s3.amazonaws.com/photos/404409290/medium.jpeg
+26823,26816,Dicamptodon ensatus,California Giant Salamander,species,https://static.inaturalist.org/photos/280490875/medium.jpg
+27135,26909,Plethodon,Woodland Salamanders,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/33713345/medium.jpg
+27248,26909,Ensatina,Ensatinas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/61263716/medium.jpg
+27422,26909,Aneides,Climbing Salamanders,genus,https://static.inaturalist.org/photos/12739619/medium.jpg
+27816,27701,Taricha,Pacific Newts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/13979999/medium.jpeg
+31888,26172,Anguidae,Glass and Alligator Lizards,family,https://inaturalist-open-data.s3.amazonaws.com/photos/5874582/medium.jpeg
+35360,26172,Lacertidae,Wall Lizards,family,https://inaturalist-open-data.s3.amazonaws.com/photos/13801329/medium.jpeg
+39392,26172,Varanidae,Monitor Lizards,family,https://static.inaturalist.org/photos/87261401/medium.jpeg
+39682,39681,Chelydra serpentina,Common Snapping Turtle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/352641070/medium.jpg
+39702,39699,Sternotherus,Musk Turtles,genus,https://static.inaturalist.org/photos/9585336/medium.jpg
+39770,39760,Chrysemys,Painted Turtles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/2406339/medium.jpg
+39776,39760,Trachemys,Sliders,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/13590/medium.jpg
+39820,39760,Pseudemys,Cooters,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/22477/medium.jpg
+39844,39760,Graptemys,Map Turtles,genus,https://static.inaturalist.org/photos/174943/medium.jpg
+39967,39886,Mauremys,Old World Pond Turtles and Allies,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/25295/medium.jpg
+40268,40151,Chiroptera,Bats,order,https://inaturalist-open-data.s3.amazonaws.com/photos/874760/medium.JPG
+41573,40151,Carnivora,Carnivorans,order,https://inaturalist-open-data.s3.amazonaws.com/photos/9859099/medium.jpg
+42541,42540,Didelphidae,Opossums,family,https://inaturalist-open-data.s3.amazonaws.com/photos/2443002/medium.jpg
+43094,40151,Lagomorpha,Lagomorphs,order,https://inaturalist-open-data.s3.amazonaws.com/photos/253181392/medium.jpg
+43327,40151,Perissodactyla,Odd-toed Ungulates,order,https://inaturalist-open-data.s3.amazonaws.com/photos/27606643/medium.jpg
+43367,40151,Primates,Primates,order,https://inaturalist-open-data.s3.amazonaws.com/photos/80550919/medium.jpg
+43691,40151,Proboscidea,Proboscideans,order,https://inaturalist-open-data.s3.amazonaws.com/photos/8386350/medium.jpg
+43698,40151,Rodentia,Rodents,order,https://inaturalist-open-data.s3.amazonaws.com/photos/24165841/medium.jpg
+64970,64747,Anaxyrus boreas,Western Toad,species,https://static.inaturalist.org/photos/320653681/medium.jpg
+65979,60340,Lithobates catesbeianus,American Bullfrog,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4654051/medium.jpg
+65982,60340,Lithobates clamitans,Green Frog,species,https://static.inaturalist.org/photos/7660373/medium.jpg
+66003,60340,Lithobates pipiens,Northern Leopard Frog,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1304/medium.jpg
+66012,60340,Lithobates sylvaticus,Wood Frog,species,https://inaturalist-open-data.s3.amazonaws.com/photos/240940498/medium.jpg
+67639,40151,Cingulata,Armadillos,order,https://inaturalist-open-data.s3.amazonaws.com/photos/4238749/medium.jpg
+152870,40151,Artiodactyla,Even-toed Ungulates and Cetaceans,order,https://static.inaturalist.org/photos/55091764/medium.jpg
+533971,40151,Eulipotyphla,"Shrews, Moles, Hedgehogs, and Allies",order,https://static.inaturalist.org/photos/29877577/medium.jpeg
+553515,64819,Rhinella marina,Cane Toad,species,https://inaturalist-open-data.s3.amazonaws.com/photos/28767824/medium.jpg
+1633755,27701,Mesotriton,Alpine Newts,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/20121/medium.jpg
+24259,24253,Pseudacris regilla,Pacific chorus frog,species,https://inaturalist-open-data.s3.amazonaws.com/photos/173430494/medium.jpg
+26914,26504,Contia,Sharp-tailed Snakes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/185691679/medium.jpeg
+27030,26504,Coluber,North American racers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/36818/medium.jpg
+27194,27135,Plethodon vehiculum,Western Red-backed Salamander,species,https://static.inaturalist.org/photos/33415424/medium.jpg
+27250,27248,Ensatina eschscholtzii,Ensatina,species,https://static.inaturalist.org/photos/320656354/medium.jpg
+27423,27422,Aneides vagrans,Wandering Salamander,species,https://static.inaturalist.org/photos/24040378/medium.jpeg
+27431,27422,Aneides ferreus,Clouded Salamander,species,https://static.inaturalist.org/photos/354491283/medium.jpg
+27826,27816,Taricha granulosa,Rough-skinned Newt,species,https://static.inaturalist.org/photos/317751797/medium.jpeg
+28339,26504,Thamnophis,Garter Snakes,genus,https://static.inaturalist.org/photos/1348028/medium.JPG
+29033,26504,Pituophis,"Pine, Gopher, and Bullsnakes",genus,https://inaturalist-open-data.s3.amazonaws.com/photos/198640788/medium.jpg
+29299,26504,Nerodia,Watersnakes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/22851746/medium.jpg
+30692,30667,Crotalus,Rattlesnakes,genus,https://static.inaturalist.org/photos/29329883/medium.jpeg
+32103,32080,Charina,Rubber Boas,genus,https://static.inaturalist.org/photos/72791805/medium.jpeg
+32211,32080,Eunectes,Anacondas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/245546060/medium.jpg
+36074,26172,Phrynosomatidae,Phrynosomatid Lizards,family,https://inaturalist-open-data.s3.amazonaws.com/photos/5807556/medium.jpg
+39393,39392,Varanus,Monitor Lizards,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/31528252/medium.jpg
+39664,39657,Caretta,Loggerhead sea turtles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/228915423/medium.jpg
+39669,39657,Lepidochelys,Ridley Sea Turtles,genus,https://static.inaturalist.org/photos/10297329/medium.jpeg
+39705,39702,Sternotherus minor,Loggerhead Musk Turtle,species,https://static.inaturalist.org/photos/25869752/medium.jpeg
+39771,39770,Chrysemys picta,Painted Turtle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9927445/medium.jpg
+39782,39776,Trachemys scripta,Pond Slider,species,https://inaturalist-open-data.s3.amazonaws.com/photos/120834277/medium.jpg
+39824,39820,Pseudemys nelsoni,Florida Red-bellied Cooter,species,https://static.inaturalist.org/photos/19887010/medium.jpg
+39830,39820,Pseudemys concinna,River Cooter,species,https://inaturalist-open-data.s3.amazonaws.com/photos/48806880/medium.jpg
+39847,39844,Graptemys pseudogeographica,False Map Turtle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/330780522/medium.jpeg
+39913,39967,Mauremys reevesii,Chinese Pond Turtle,species,https://static.inaturalist.org/photos/479321340/medium.jpg
+39976,39967,Mauremys leprosa,Mediterranean Turtle,species,https://static.inaturalist.org/photos/383157297/medium.jpg
+41636,41573,Ursidae,Bears,family,https://inaturalist-open-data.s3.amazonaws.com/photos/6362563/medium.jpg
+41660,41573,Procyonidae,"Raccoons, Coatis, and Allies",family,https://inaturalist-open-data.s3.amazonaws.com/photos/293156528/medium.jpg
+41770,41573,Mustelidae,Mustelids,family,https://inaturalist-open-data.s3.amazonaws.com/photos/154469560/medium.jpeg
+41871,41573,Mephitidae,Skunks and Stink-badgers,family,https://inaturalist-open-data.s3.amazonaws.com/photos/4172/medium.jpg
+41944,41573,Felidae,Felids,family,https://inaturalist-open-data.s3.amazonaws.com/photos/210735004/medium.jpg
+42043,41573,Canidae,Canids,family,https://static.inaturalist.org/photos/254147363/medium.jpg
+43095,43094,Leporidae,Hares and Rabbits,family,https://inaturalist-open-data.s3.amazonaws.com/photos/207726062/medium.jpeg
+43169,43094,Ochotonidae,Pikas,family,https://inaturalist-open-data.s3.amazonaws.com/photos/22513999/medium.jpg
+43328,43327,Equidae,Equines,family,https://inaturalist-open-data.s3.amazonaws.com/photos/23672580/medium.jpeg
+43692,43691,Elephantidae,Elephants,family,https://inaturalist-open-data.s3.amazonaws.com/photos/46235912/medium.jpeg
+47069,67639,Dasypodidae,Long-nosed Armadillos,family,https://static.inaturalist.org/photos/5859039/medium.jpg
+59649,26504,Pantherophis,North American Ratsnakes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/149943221/medium.jpg
+196978,64747,Anaxyrus boreas boreas,Boreal Toad,subspecies,https://static.inaturalist.org/photos/143395933/medium.jpeg
+200152,26172,Anolidae,Anoles,family,https://inaturalist-open-data.s3.amazonaws.com/photos/44877533/medium.jpeg
+236921,26721,Ambystoma macrodactylum macrodactylum,Western Long-toed Salamander,subspecies,https://static.inaturalist.org/photos/35178739/medium.jpeg
+371940,39844,Graptemys ouachitensis,Ouachita Map Turtle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/98229839/medium.jpg
+1633756,1633755,Mesotriton alpestris,Alpine Newt,species,https://inaturalist-open-data.s3.amazonaws.com/photos/63934931/medium.jpeg
+26916,26914,Contia tenuis,Common Sharp-tailed Snake,species,https://inaturalist-open-data.s3.amazonaws.com/photos/31519618/medium.jpg
+27137,27030,Coluber constrictor,North American Racer,species,https://static.inaturalist.org/photos/105329578/medium.jpg
+28362,28339,Thamnophis sirtalis,Common Garter Snake,species,https://inaturalist-open-data.s3.amazonaws.com/photos/3263522/medium.JPG
+28389,28339,Thamnophis ordinoides,Northwestern Garter Snake,species,https://static.inaturalist.org/photos/351287277/medium.jpg
+28398,28339,Thamnophis elegans,Western Terrestrial Garter Snake,species,https://inaturalist-open-data.s3.amazonaws.com/photos/48379/medium.jpg
+28425,28339,Thamnophis couchii,Sierra Garter Snake,species,https://static.inaturalist.org/photos/505470042/medium.jpg
+29044,29033,Pituophis catenifer,Gopher Snake,species,https://inaturalist-open-data.s3.amazonaws.com/photos/389786008/medium.jpeg
+29305,29299,Nerodia sipedon,Common Watersnake,species,https://inaturalist-open-data.s3.amazonaws.com/photos/222925393/medium.jpg
+32049,31888,Elgaria,Western Alligator Lizards,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/19680/medium.jpg
+32213,32211,Eunectes murinus,Green Anaconda,species,https://static.inaturalist.org/photos/253683723/medium.jpeg
+35526,35360,Podarcis,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/112166/medium.jpg
+36362,200152,Anolis,Anoles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/16465753/medium.jpg
+39665,39664,Caretta caretta,Loggerhead Sea Turtle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/176772831/medium.jpeg
+39670,39669,Lepidochelys olivacea,Olive Ridley Sea Turtle,species,https://static.inaturalist.org/photos/154666409/medium.jpeg
+39772,39770,Chrysemys picta marginata,Midland Painted Turtle,subspecies,https://static.inaturalist.org/photos/92206776/medium.jpg
+39773,39770,Chrysemys picta bellii,Western Painted Turtle,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/53452380/medium.jpeg
+39775,39770,Chrysemys picta picta,Eastern Painted Turtle,subspecies,https://static.inaturalist.org/photos/362444997/medium.jpg
+39793,39776,Trachemys scripta scripta,Yellow-bellied Slider,subspecies,https://static.inaturalist.org/photos/267131508/medium.jpg
+39849,39844,Graptemys pseudogeographica kohnii,Mississippi Map Turtle,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/51688242/medium.jpg
+41661,41660,Procyon,Raccoons,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/146276101/medium.jpg
+41687,41573,Phocidae,Earless Seals,family,https://inaturalist-open-data.s3.amazonaws.com/photos/452733249/medium.jpg
+41736,41573,Otariidae,Eared Seals,family,https://inaturalist-open-data.s3.amazonaws.com/photos/17940763/medium.jpg
+41764,41573,Odobenidae,Walruses,family,https://inaturalist-open-data.s3.amazonaws.com/photos/207443116/medium.jpg
+42044,42043,Canis,Wolves and Dogs,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/13367754/medium.jpg
+42054,42043,Vulpes,Typical Foxes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6568074/medium.jpg
+42118,152870,Suidae,Suids,family,https://inaturalist-open-data.s3.amazonaws.com/photos/10721393/medium.jpeg
+42158,152870,Cervidae,Deer,family,https://static.inaturalist.org/photos/11328568/medium.jpg
+42241,152870,Bovidae,Bovids,family,https://inaturalist-open-data.s3.amazonaws.com/photos/7642/medium.jpg
+43096,43095,Sylvilagus,Cottontail Rabbits,genus,https://static.inaturalist.org/photos/27674312/medium.jpg
+43117,43095,Lepus,Hares and Jackrabbits,genus,https://static.inaturalist.org/photos/5988922/medium.jpg
+43150,43095,Oryctolagus,European Rabbits,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/137362674/medium.jpg
+43170,43169,Ochotona,Pikas,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/22513999/medium.jpg
+43329,43328,Equus,Equines,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/23672580/medium.jpeg
+43734,43698,Aplodontiidae,Mountain Beavers,family,https://inaturalist-open-data.s3.amazonaws.com/photos/151342594/medium.jpeg
+43791,43698,Castoridae,Beavers,family,https://inaturalist-open-data.s3.amazonaws.com/photos/10837592/medium.jpeg
+45933,43698,Sciuridae,Squirrels,family,https://static.inaturalist.org/photos/57429066/medium.jpg
+46341,533971,Soricidae,Shrews,family,https://inaturalist-open-data.s3.amazonaws.com/photos/33510115/medium.jpg
+46927,533971,Talpidae,Moles and Desmans,family,https://inaturalist-open-data.s3.amazonaws.com/photos/32423681/medium.jpg
+47070,47069,Dasypus,Long-nosed Armadillos,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4238749/medium.jpg
+48268,30692,Crotalus oreganus,Western Rattlesnake,species,https://inaturalist-open-data.s3.amazonaws.com/photos/391040742/medium.jpeg
+51271,39776,Trachemys scripta elegans,Red-eared Slider,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/107072446/medium.jpg
+71085,39393,Varanus niloticus,Nile Monitor,species,https://inaturalist-open-data.s3.amazonaws.com/photos/144153390/medium.jpg
+73844,39669,Lepidochelys kempii,Kemp's Ridley Sea Turtle,species,https://static.inaturalist.org/photos/24228862/medium.jpg
+123959,27248,Ensatina eschscholtzii oregonensis,Oregon Ensatina,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/241316270/medium.jpg
+152871,152870,Cetacea,Cetaceans,infraorder,https://inaturalist-open-data.s3.amazonaws.com/photos/341568278/medium.jpeg
+201599,43692,Mammuthus,Mammoths,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/318777/medium.jpeg
+238783,27816,Taricha granulosa granulosa,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/749493/medium.jpg
+243962,32103,Charina bottae,Northern Rubber Boa,species,https://static.inaturalist.org/photos/510368416/medium.jpg
+28363,28339,Thamnophis sirtalis pickeringii,Puget Sound Garter Snake,subspecies,https://static.inaturalist.org/photos/351317359/medium.jpg
+28365,28339,Thamnophis sirtalis sirtalis,Eastern Garter Snake,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/28532243/medium.jpeg
+28371,28339,Thamnophis sirtalis fitchi,Valley Garter Snake,subspecies,https://static.inaturalist.org/photos/27280467/medium.jpg
+28375,28339,Thamnophis sirtalis concinnus,Red-spotted Garter Snake,subspecies,https://static.inaturalist.org/photos/510369904/medium.jpg
+28403,28339,Thamnophis elegans vagrans,Wandering Garter Snake,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/3624/medium.jpg
+29049,29033,Pituophis catenifer deserticola,Great Basin Gopher Snake,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/121093615/medium.jpg
+32064,32049,Elgaria coerulea,Northern Alligator Lizard,species,https://inaturalist-open-data.s3.amazonaws.com/photos/19546057/medium.jpg
+36141,36074,Sceloporus,Spiny Lizards,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5807556/medium.jpg
+40269,40268,Vespertilionidae,Evening Bats,family,https://inaturalist-open-data.s3.amazonaws.com/photos/54080/medium.jpg
+41637,41636,Ursus,Holarctic Bears,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/19021792/medium.jpg
+41663,41661,Procyon lotor,Common Raccoon,species,https://inaturalist-open-data.s3.amazonaws.com/photos/46439025/medium.jpg
+41697,41687,Histriophoca,Ribbon Seals,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/47434757/medium.jpg
+41707,41687,Phoca,common seals,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/17353/medium.jpg
+41727,41687,Mirounga,Elephant Seals,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/14020401/medium.jpeg
+41732,41687,Halichoerus,Grey Seals,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/478781323/medium.jpg
+41737,41736,Zalophus,"California, Galápagos, and Japanese Sea Lions",genus,https://static.inaturalist.org/photos/39635759/medium.jpg
+41754,41736,Eumetopias,Steller Sea Lions,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/61012954/medium.jpg
+41756,41736,Callorhinus,Northern Fur Seals,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/35836/medium.jpg
+41765,41764,Odobenus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/65857/medium.jpg
+41775,41770,Lontra,New World River Otters,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11523/medium.jpg
+41790,41770,Martes,Martens,genus,https://static.inaturalist.org/photos/72664091/medium.jpeg
+41801,41770,Mustela,Typical weasels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/12718754/medium.jpeg
+41851,41770,Gulo,Wolverines,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/20822/medium.jpg
+41859,41770,Enhydra,sea otters,genus,https://static.inaturalist.org/photos/25897211/medium.jpg
+41878,41871,Mephitis,Striped and Hooded Skunks,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/50232085/medium.jpg
+41881,41871,Spilogale,Spotted Skunks,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/32155931/medium.jpg
+41956,41944,Felis,Palearctic and African Small Cats,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11644095/medium.jpg
+41973,41944,Lynx,Lynxes,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/306563644/medium.jpg
+42006,41944,Puma,Mountain Lions,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/9834553/medium.jpg
+42048,42044,Canis lupus,Gray Wolf,species,https://inaturalist-open-data.s3.amazonaws.com/photos/43410580/medium.jpg
+42051,42044,Canis latrans,Coyote,species,https://static.inaturalist.org/photos/10963085/medium.jpg
+42069,42054,Vulpes vulpes,Red Fox,species,https://static.inaturalist.org/photos/265916780/medium.jpg
+42646,42541,Didelphis,Large American Opossums,genus,https://static.inaturalist.org/photos/111578327/medium.jpeg
+43111,43096,Sylvilagus floridanus,Eastern Cottontail,species,https://static.inaturalist.org/photos/324600760/medium.jpg
+43151,43150,Oryctolagus cuniculus,European Rabbit,species,https://inaturalist-open-data.s3.amazonaws.com/photos/520690657/medium.jpg
+43735,43734,Aplodontia,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/241354343/medium.jpg
+43792,43791,Castor,Beavers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/6359/medium.jpg
+44185,43698,Muridae,Old World Mice and Rats,family,https://inaturalist-open-data.s3.amazonaws.com/photos/331198558/medium.jpg
+48267,30692,Crotalus oreganus oreganus,Northern Pacific Rattlesnake,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/764916/medium.jpg
+51440,29033,Pituophis catenifer catenifer,Pacific Gopher Snake,subspecies,https://static.inaturalist.org/photos/351774543/medium.jpg
+55986,43698,Cricetidae,"Hamsters, Voles, Lemmings, and Allies",family,https://inaturalist-open-data.s3.amazonaws.com/photos/13666801/medium.jpg
+55990,35526,Podarcis muralis,Common Wall Lizard,species,https://inaturalist-open-data.s3.amazonaws.com/photos/129028289/medium.jpg
+59644,59649,Pantherophis alleghaniensis,Eastern Ratsnake,species,https://inaturalist-open-data.s3.amazonaws.com/photos/5211489/medium.jpeg
+116461,36362,Anolis sagrei,Brown Anole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/22869683/medium.jpg
+200661,27030,Coluber constrictor mormon,Western Yellow-bellied Racer,subspecies,https://static.inaturalist.org/photos/269042448/medium.jpg
+201592,201599,Mammuthus columbi,Columbian Mammoth,species,https://inaturalist-open-data.s3.amazonaws.com/photos/173604512/medium.jpg
+209233,43329,Equus caballus,Domestic Horse,species,https://inaturalist-open-data.s3.amazonaws.com/photos/23672580/medium.jpeg
+337045,35526,Podarcis siculus,Italian Wall Lizard,species,https://inaturalist-open-data.s3.amazonaws.com/photos/158501584/medium.jpg
+453110,41770,Pekania,Fishers,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5693/medium.jpg
+846053,43698,Zapodidae,Jumping Mice,family,https://inaturalist-open-data.s3.amazonaws.com/photos/7166904/medium.jpg
+1264428,41770,Neogale,New World Weasels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/120844035/medium.jpg
+1431524,43117,Lepus,Snow Hares,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/107159150/medium.jpeg
+32065,32049,Elgaria coerulea principis,Northwestern Alligator Lizard,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/44528691/medium.jpg
+35627,35526,Podarcis muralis nigriventris,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/57715125/medium.jpg
+35631,35526,Podarcis muralis maculiventris,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/111822833/medium.jpg
+36204,36141,Sceloporus occidentalis,Western Fence Lizard,species,https://inaturalist-open-data.s3.amazonaws.com/photos/36416485/medium.jpeg
+41476,152870,Eschrichtiidae,Grey Whales,family,https://inaturalist-open-data.s3.amazonaws.com/photos/26307114/medium.jpeg
+41546,152870,Balaenopteridae,Rorquals,family,https://static.inaturalist.org/photos/39849207/medium.jpg
+41638,41637,Ursus americanus,American Black Bear,species,https://static.inaturalist.org/photos/307636014/medium.jpg
+41641,41637,Ursus arctos,Brown Bear,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1491897/medium.jpg
+41698,41697,Histriophoca fasciata,Ribbon Seal,species,https://inaturalist-open-data.s3.amazonaws.com/photos/510976126/medium.jpg
+41708,41707,Phoca vitulina,Harbor Seal,species,https://inaturalist-open-data.s3.amazonaws.com/photos/190781322/medium.jpg
+41728,41727,Mirounga angustirostris,Northern Elephant Seal,species,https://inaturalist-open-data.s3.amazonaws.com/photos/924/medium.jpg
+41733,41732,Halichoerus grypus,Grey Seal,species,https://static.inaturalist.org/photos/11914440/medium.jpg
+41740,41737,Zalophus californianus,California Sea Lion,species,https://static.inaturalist.org/photos/11888923/medium.png
+41755,41754,Eumetopias jubatus,Steller Sea Lion,species,https://inaturalist-open-data.s3.amazonaws.com/photos/61012945/medium.jpg
+41757,41756,Callorhinus ursinus,Northern Fur Seal,species,https://inaturalist-open-data.s3.amazonaws.com/photos/347525064/medium.jpg
+41766,41765,Odobenus rosmarus,Walrus,species,https://inaturalist-open-data.s3.amazonaws.com/photos/65857/medium.jpg
+41777,41775,Lontra canadensis,North American River Otter,species,https://static.inaturalist.org/photos/99994014/medium.jpg
+41779,41775,Lontra provocax,Southern River Otter,species,https://inaturalist-open-data.s3.amazonaws.com/photos/38082946/medium.jpg
+41808,41801,Mustela erminea,Eurasian Stoat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/28088093/medium.jpeg
+41812,41801,Mustela putorius,Western Polecat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/49274/medium.jpg
+41852,41851,Gulo gulo,Wolverine,species,https://inaturalist-open-data.s3.amazonaws.com/photos/231350524/medium.jpeg
+41860,41859,Enhydra lutris,Sea Otter,species,https://inaturalist-open-data.s3.amazonaws.com/photos/311432614/medium.jpg
+41880,41878,Mephitis mephitis,Striped Skunk,species,https://inaturalist-open-data.s3.amazonaws.com/photos/233452676/medium.jpg
+41882,41881,Spilogale putorius,Alleghanian Spotted Skunk,species,https://static.inaturalist.org/photos/33095497/medium.jpg
+41974,41973,Lynx canadensis,Canada Lynx,species,https://static.inaturalist.org/photos/116298857/medium.jpeg
+41976,41973,Lynx rufus,Bobcat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/60028871/medium.jpg
+42007,42006,Puma concolor,Mountain Lion,species,https://inaturalist-open-data.s3.amazonaws.com/photos/9834553/medium.jpg
+42649,42646,Didelphis marsupialis,Southern Opossum,species,https://inaturalist-open-data.s3.amazonaws.com/photos/69504377/medium.jpg
+42652,42646,Didelphis virginiana,Virginia Opossum,species,https://inaturalist-open-data.s3.amazonaws.com/photos/35041373/medium.jpeg
+43128,43117,Lepus europaeus,Brown Hare,species,https://static.inaturalist.org/photos/3849124/medium.jpg
+43132,43117,Lepus americanus,Snowshoe Hare,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4361135/medium.jpeg
+43188,43170,Ochotona princeps,American Pika,species,https://inaturalist-open-data.s3.amazonaws.com/photos/49236748/medium.jpg
+43399,43367,Cebidae,Cebid Monkeys,family,https://static.inaturalist.org/photos/16913960/medium.jpg
+43736,43735,Aplodontia rufa,Mountain Beaver,species,https://inaturalist-open-data.s3.amazonaws.com/photos/179466248/medium.jpg
+43794,43792,Castor canadensis,American Beaver,species,https://static.inaturalist.org/photos/139683466/medium.jpeg
+43839,846053,Zapus,,genus,https://static.inaturalist.org/photos/13014/medium.jpg
+43909,43698,Echimyidae,Spiny Rats and Hutias,family,https://static.inaturalist.org/photos/57625548/medium.jpeg
+44010,43698,Erethizontidae,New World Porcupines,family,https://inaturalist-open-data.s3.amazonaws.com/photos/1089/medium.jpg
+58393,41881,Spilogale gracilis,Western Spotted Skunk,species,https://static.inaturalist.org/photos/49538663/medium.jpg
+118552,41956,Felis catus,Domestic Cat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/129658776/medium.jpg
+146602,42044,Canis latrans lestes,Mountain Coyote,subspecies,https://static.inaturalist.org/photos/3706592/medium.jpg
+147081,42044,Canis latrans incolatus,Northern Coyote,subspecies,https://static.inaturalist.org/photos/10625777/medium.jpg
+202086,42044,Canis familiaris familiaris,Western Domestic Dog,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/147773171/medium.jpg
+234846,42044,Canis lupus occidentalis,Northwestern Wolf,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/60788246/medium.jpg
+239011,42054,Vulpes vulpes cascadensis,Cascade Red Fox,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/325919182/medium.jpg
+334341,43150,Oryctolagus cuniculus domesticus,Domestic Rabbit,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/262129758/medium.jpg
+453109,453110,Pekania pennanti,Fisher,species,https://inaturalist-open-data.s3.amazonaws.com/photos/194542859/medium.jpeg
+453111,41790,Martes caurina,Pacific Marten,species,https://inaturalist-open-data.s3.amazonaws.com/photos/113259160/medium.jpeg
+547190,42044,Canis lupus crassodon,Coastal Wolf,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/161788080/medium.jpeg
+936564,41661,Procyon lotor pacificus,Pacific Northwest Raccoon,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/39546787/medium.jpeg
+936566,41661,Procyon lotor vancouverensis,Vancouver Island Raccoon,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/4526357/medium.jpg
+1264427,41801,Mustela richardsonii,American Ermine,species,https://inaturalist-open-data.s3.amazonaws.com/photos/162860275/medium.jpg
+1264431,1264428,Neogale frenata,Long-tailed Weasel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/185569897/medium.jpg
+1264432,1264428,Neogale vison,American Mink,species,https://inaturalist-open-data.s3.amazonaws.com/photos/181264783/medium.jpeg
+36205,36141,Sceloporus occidentalis occidentalis,Northwestern Fence Lizard,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/85524/medium.jpg
+40270,40269,Myotis,Mouse-eared Bats,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/31182/medium.jpg
+41401,152870,Ziphiidae,Beaked Whales,family,https://static.inaturalist.org/photos/97154617/medium.jpg
+41434,152870,Physeteridae,True Sperm Whales,family,https://inaturalist-open-data.s3.amazonaws.com/photos/2999981/medium.jpg
+41437,152870,Phocoenidae,Porpoises,family,https://inaturalist-open-data.s3.amazonaws.com/photos/105623447/medium.jpg
+41477,41476,Eschrichtius,Grey whales,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/33489255/medium.jpg
+41479,152870,Delphinidae,Oceanic Dolphins,family,https://inaturalist-open-data.s3.amazonaws.com/photos/9861/medium.jpg
+41547,41546,Balaenoptera,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/255463958/medium.jpg
+41565,41546,Megaptera,Humpback Whales,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/153240222/medium.jpg
+42126,42118,Sus,Boars and Warty Pigs,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/5740/medium.jpg
+42159,42158,Dama,European and Persian Fallow Deer,genus,https://static.inaturalist.org/photos/10173106/medium.jpeg
+42196,42158,Alces,True Moose,genus,https://static.inaturalist.org/photos/335160686/medium.jpg
+42205,42158,Cervus,Typical Old World Deer and Elk,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11065858/medium.jpg
+42219,42158,Odocoileus,White-tailed and Mule Deer,genus,https://static.inaturalist.org/photos/11328568/medium.jpg
+42348,42241,Capra,Goats,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/288397869/medium.jpg
+42387,42241,Ovis,Sheep,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/32200962/medium.jpg
+42396,42241,Bos,Cattle,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11478901/medium.jpg
+42406,42241,Bison,Bison,genus,https://static.inaturalist.org/photos/34662477/medium.png
+42413,42241,Oreamnos,Mountain Goats,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/11469669/medium.jpg
+43844,43839,Zapus trinotatus,Northern Pacific Jumping Mouse,species,https://inaturalist-open-data.s3.amazonaws.com/photos/46458669/medium.jpeg
+45994,45933,Sciurus,Tree Squirrels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/126240161/medium.jpg
+46078,45933,Marmota,Marmots,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/33117488/medium.jpg
+46257,45933,Tamiasciurus,Pine Squirrels,genus,https://static.inaturalist.org/photos/6023242/medium.jpg
+46265,45933,Glaucomys,New World Flying Squirrels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/35839/medium.jpg
+46342,46341,Sorex,Long-tailed Shrews,genus,https://static.inaturalist.org/photos/8605957/medium.jpeg
+46993,46927,Scapanus,Western Moles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/220994710/medium.jpg
+47050,46927,Neurotrichus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/19953/medium.jpg
+117766,41707,Phoca vitulina richardii,Pacific Harbor Seal,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/231409105/medium.jpg
+125461,41637,Ursus arctos horribilis,Grizzly Bear,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/263717384/medium.jpg
+132832,41637,Ursus americanus cinnamomum,Pacific Black Bear,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/63881460/medium.jpg
+132842,41637,Ursus americanus vancouveri,Vancouver Island Black Bear,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/309475463/medium.jpeg
+133061,41859,Enhydra lutris kenyoni,Northern Sea Otter,subspecies,https://static.inaturalist.org/photos/293388397/medium.jpg
+143589,42006,Puma concolor couguar,North American Mountain Lion,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/128892645/medium.jpg
+179940,45933,Callospermophilus,Mountain Striped Ground Squirrels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/4338362/medium.jpg
+179977,45933,Urocitellus,Long-tailed Ground Squirrels,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/32860655/medium.jpeg
+197808,45933,Neotamias,Western Chipmunks,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/293503893/medium.jpg
+198086,47070,Dasypus novemcinctus mexicanus,East Mexican Nine-banded Armadillo,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/654723/medium.JPG
+235651,42646,Didelphis virginiana virginiana,Eastern Virginia Opossum,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/64338037/medium.jpeg
+236285,41851,Gulo gulo luscus,American Wolverine,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/133329368/medium.jpg
+236660,43117,Lepus americanus washingtonii,Washington Snowshoe Hare,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/7783458/medium.jpg
+236797,41775,Lontra canadensis mira,Prince of Wales River Otter,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/104300886/medium.jpg
+236798,41775,Lontra canadensis pacifica,Western River Otter,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/124279112/medium.jpg
+446614,41754,Eumetopias jubatus monteriensis,Eastern Steller Sea Lion,subspecies,https://static.inaturalist.org/photos/171853931/medium.jpg
+632299,41973,Lynx rufus fasciatus,Western Bobcat,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/453577517/medium.jpeg
+1265122,41790,Martes caurina caurina,Pacific Marten,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/93991196/medium.jpeg
+1265170,1264428,Neogale frenata altifrontalis,Northwestern Long-tailed Weasel,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/10319304/medium.jpeg
+1265181,1264428,Neogale vison energumenos,Pacific Mink,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/245336981/medium.jpg
+1265233,41801,Mustela richardsonii anguinae,Vancouver Island Weasel,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/170004721/medium.jpeg
+1265236,41801,Mustela richardsonii cicognanii,Bonaparte's Weasel,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/5429579/medium.jpg
+1265399,41878,Mephitis mephitis hudsonica,Northern Plains Striped Skunk,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/206429043/medium.jpg
+1265496,41878,Mephitis mephitis spissigrada,Puget Sound Striped Skunk,subspecies,
+1265501,41881,Spilogale gracilis latifrons,British Columbia Spotted Skunk,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/197568833/medium.jpg
+1271164,1264428,Neogale vison evagor,Vancouver Island Mink,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/208828338/medium.jpeg
+1271401,41801,Mustela richardsonii richardsonii,Canadian Stoat,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/154071982/medium.jpg
+1271404,41801,Mustela richardsonii fallenda,Kulshan Stoat,subspecies,
+1271406,41801,Mustela richardsonii invicta,Little Rocky Mountain Weasel,subspecies,
+1623641,43117,Lepus americanus cascadensis,,subspecies,
+1623642,43117,Lepus americanus columbiensis,,subspecies,
+1623643,43117,Lepus americanus dalli,,subspecies,
+1623648,43117,Lepus americanus virginianus,,subspecies,
+40477,40269,Eptesicus,House Bats,genus,https://static.inaturalist.org/photos/29684471/medium.jpg
+40516,40269,Lasiurus,Hairy-tailed Bats,genus,https://static.inaturalist.org/photos/1338098/medium.jpg
+40628,40269,Lasionycteris,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/64436/medium.jpg
+40630,40269,Euderma,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/171810/medium.jpg
+41402,41401,Mesoplodon,Mesoplodont Beaked Whales,genus,https://static.inaturalist.org/photos/1266669/medium.
+41435,41434,Physeter,True Sperm Whales,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/116302906/medium.jpg
+41438,41437,Phocoena,Typical Porpoises,genus,https://static.inaturalist.org/photos/116545345/medium.jpeg
+41445,41437,Phocoenoides,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/22752/medium.jpg
+41478,41477,Eschrichtius robustus,Grey Whale,species,https://inaturalist-open-data.s3.amazonaws.com/photos/98429162/medium.jpg
+41520,41479,Orcinus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/360303852/medium.jpg
+41550,41547,Balaenoptera acutorostrata,Common Minke Whale,species,https://static.inaturalist.org/photos/216412632/medium.jpeg
+41562,41547,Balaenoptera physalus,Fin Whale,species,https://inaturalist-open-data.s3.amazonaws.com/photos/13381641/medium.jpg
+41566,41565,Megaptera novaeangliae,Humpback Whale,species,https://inaturalist-open-data.s3.amazonaws.com/photos/255461843/medium.jpg
+42134,42126,Sus scrofa,Wild Boar,species,https://inaturalist-open-data.s3.amazonaws.com/photos/414500081/medium.jpg
+42161,42159,Dama dama,European Fallow Deer,species,https://inaturalist-open-data.s3.amazonaws.com/photos/169989920/medium.jpeg
+42210,42205,Cervus nippon,Sika Deer,species,https://inaturalist-open-data.s3.amazonaws.com/photos/186070135/medium.jpg
+42220,42219,Odocoileus hemionus,Mule Deer,species,https://inaturalist-open-data.s3.amazonaws.com/photos/42633041/medium.jpg
+42223,42219,Odocoileus virginianus,White-tailed Deer,species,https://inaturalist-open-data.s3.amazonaws.com/photos/110157765/medium.jpg
+42391,42387,Ovis canadensis,Bighorn Sheep,species,https://inaturalist-open-data.s3.amazonaws.com/photos/61523007/medium.jpg
+42414,42413,Oreamnos americanus,Mountain Goat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/18929544/medium.jpeg
+43429,43399,Cebus,Gracile Capuchins,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/31767005/medium.jpg
+44025,44010,Erethizon,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/48980555/medium.jpg
+44259,55986,Microtus,Meadow Voles,genus,https://static.inaturalist.org/photos/15861131/medium.jpeg
+44349,55986,Peromyscus,North American Deer Mice,genus,https://static.inaturalist.org/photos/246642517/medium.jpg
+44540,44185,Rattus,Old World Rats,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/86967197/medium.jpeg
+44678,44185,Mus,Typical Old World Mice,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/1182624/medium.jpg
+44737,55986,Neotoma,Woodrats,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/178872/medium.jpg
+45762,55986,Ondatra,Common Muskrats,genus,https://static.inaturalist.org/photos/109319291/medium.jpg
+46259,46257,Tamiasciurus douglasii,Douglas' Squirrel,species,https://static.inaturalist.org/photos/71588010/medium.jpg
+46260,46257,Tamiasciurus hudsonicus,American Red Squirrel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/113299756/medium.jpg
+46266,46265,Glaucomys sabrinus,Northern Flying Squirrel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/15899070/medium.jpg
+46503,46342,Sorex trowbridgii,Trowbridge's Shrew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1978613/medium.JPG
+47007,46993,Scapanus orarius,Coast Mole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/110578286/medium.jpg
+47010,46993,Scapanus townsendii,Townsend's Mole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/83060025/medium.jpeg
+47051,47050,Neurotrichus gibbsii,American Shrewmole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/334049196/medium.jpeg
+71833,40269,Corynorhinus,American Big-eared Bats,genus,https://static.inaturalist.org/photos/113737386/medium.jpeg
+74113,42396,Bos taurus,Domestic Cattle,species,https://inaturalist-open-data.s3.amazonaws.com/photos/408007934/medium.jpeg
+121578,42387,Ovis aries,Domestic Sheep,species,https://inaturalist-open-data.s3.amazonaws.com/photos/306482449/medium.jpg
+123070,42348,Capra hircus,Domestic Goat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6035700/medium.jpeg
+179998,179977,Urocitellus columbianus,Columbian Ground Squirrel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/317315970/medium.jpg
+180009,179940,Callospermophilus saturatus,Cascade Golden-mantled Ground Squirrel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4338362/medium.jpg
+180010,179940,Callospermophilus lateralis,Golden-mantled Ground Squirrel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2519439/medium.JPG
+201586,42406,Bison antiquus,Ancient Bison,species,https://inaturalist-open-data.s3.amazonaws.com/photos/232782/medium.jpg
+204113,42205,Cervus elaphus,Red Deer,species,https://static.inaturalist.org/photos/458035243/medium.jpeg
+204114,42205,Cervus canadensis,Wapiti,species,https://inaturalist-open-data.s3.amazonaws.com/photos/115009764/medium.jpg
+225740,197808,Neotamias amoenus,Yellow-pine Chipmunk,species,https://static.inaturalist.org/photos/208389576/medium.jpeg
+225743,197808,Neotamias minimus,Least Chipmunk,species,https://inaturalist-open-data.s3.amazonaws.com/photos/28601082/medium.jpg
+225756,197808,Neotamias townsendii,Townsend's Chipmunk,species,https://inaturalist-open-data.s3.amazonaws.com/photos/19907/medium.jpg
+522193,42196,Alces alces,Moose,species,https://static.inaturalist.org/photos/50993822/medium.jpg
+901519,43839,Zapus trinotatus trinotatus,,subspecies,
+1317329,55986,Clethrionomys,Red-backed Voles,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/60186553/medium.jpeg
+1431385,40270,Myotis,,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/247381916/medium.jpeg
+1431400,46342,Sorex,,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/55543232/medium.jpeg
+1431495,45994,Sciurus,Palearctic Tree Squirrels,subgenus,https://inaturalist-open-data.s3.amazonaws.com/photos/244203536/medium.jpeg
+1596099,55986,Mictomys,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/403590/medium.jpg
+40325,40270,Myotis yumanensis,Yuma Myotis,species,https://inaturalist-open-data.s3.amazonaws.com/photos/546851/medium.jpg
+40342,40270,Myotis californicus,California Myotis,species,https://inaturalist-open-data.s3.amazonaws.com/photos/2400863/medium.jpg
+40344,40270,Myotis volans,Long-legged Myotis,species,https://inaturalist-open-data.s3.amazonaws.com/photos/41073880/medium.jpg
+40345,40270,Myotis keenii,Keen's Myotis,species,https://inaturalist-open-data.s3.amazonaws.com/photos/156731540/medium.jpg
+40346,40270,Myotis lucifugus,Little Brown Bat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11540852/medium.jpg
+40347,40270,Myotis thysanodes,Fringed Myotis,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11846142/medium.jpeg
+40354,40270,Myotis evotis,Long-eared Myotis,species,https://inaturalist-open-data.s3.amazonaws.com/photos/313942227/medium.jpg
+40629,40628,Lasionycteris noctivagans,Silver-haired Bat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/57195131/medium.jpg
+40631,40630,Euderma maculatum,Spotted Bat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/171810/medium.jpg
+41410,41402,Mesoplodon stejnegeri,Bering Sea Beaked Whale,species,https://inaturalist-open-data.s3.amazonaws.com/photos/370549860/medium.jpg
+41440,41438,Phocoena phocoena,Harbour Porpoise,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11936580/medium.jpg
+41446,41445,Phocoenoides dalli,Dall's Porpoise,species,https://inaturalist-open-data.s3.amazonaws.com/photos/22713235/medium.jpeg
+41521,41520,Orcinus orca,Orca,species,https://inaturalist-open-data.s3.amazonaws.com/photos/360303852/medium.jpg
+41533,41479,Feresa,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/129794/medium.jpg
+41538,41479,Pseudorca,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/65708/medium.jpg
+41540,41479,Grampus,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/78880739/medium.jpg
+42221,42219,Odocoileus hemionus columbianus,Columbian Black-tailed Deer,subspecies,https://static.inaturalist.org/photos/26270120/medium.jpg
+43432,43429,Cebus capucinus,Colombian White-throated Capuchin,species,https://inaturalist-open-data.s3.amazonaws.com/photos/19206187/medium.jpg
+43433,43429,Cebus albifrons,White-fronted Capuchin,species,https://inaturalist-open-data.s3.amazonaws.com/photos/286388964/medium.jpg
+43996,43909,Myocastor,Coypus,genus,https://static.inaturalist.org/photos/128025006/medium.jpeg
+44026,44025,Erethizon dorsatum,North American Porcupine,species,https://inaturalist-open-data.s3.amazonaws.com/photos/233173121/medium.jpeg
+44387,44349,Peromyscus keeni,Northwestern Deer Mouse,species,https://inaturalist-open-data.s3.amazonaws.com/photos/16716716/medium.jpg
+44396,44349,Peromyscus maniculatus,Eastern Deermouse,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14118934/medium.jpg
+44575,44540,Rattus rattus,Black Rat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/103883559/medium.jpeg
+44576,44540,Rattus norvegicus,Brown Rat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/1937464/medium.jpg
+45763,45762,Ondatra zibethicus,Muskrat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/493463450/medium.jpg
+46017,45994,Sciurus carolinensis,Eastern Gray Squirrel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/22144449/medium.jpg
+46020,45994,Sciurus niger,Eastern Fox Squirrel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/337444041/medium.jpeg
+46023,45994,Sciurus griseus,Western Gray Squirrel,species,https://inaturalist-open-data.s3.amazonaws.com/photos/266432875/medium.jpg
+46086,46078,Marmota flaviventris,Yellow-bellied Marmot,species,https://inaturalist-open-data.s3.amazonaws.com/photos/32635/medium.jpg
+46087,46078,Marmota caligata,Hoary Marmot,species,https://inaturalist-open-data.s3.amazonaws.com/photos/221632356/medium.jpg
+46091,46078,Marmota vancouverensis,Vancouver Island Marmot,species,https://inaturalist-open-data.s3.amazonaws.com/photos/31330861/medium.jpg
+46348,46342,Sorex vagrans,Vagrant Shrew,species,https://static.inaturalist.org/photos/465245102/medium.png
+46352,46342,Sorex pacificus,Pacific Shrew,species,https://static.inaturalist.org/photos/280063761/medium.jpg
+46456,46342,Sorex monticolus,Dusky Shrew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/15770379/medium.jpg
+59815,46342,Sorex cinereus,Masked Shrew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8291785/medium.jpg
+68093,40270,Myotis ciliolabrum,Western Small-footed Myotis,species,https://inaturalist-open-data.s3.amazonaws.com/photos/50245212/medium.jpg
+74205,71833,Corynorhinus townsendii,Townsend's Big-eared Bat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/346887429/medium.jpg
+74890,41435,Physeter macrocephalus,Sperm Whale,species,https://inaturalist-open-data.s3.amazonaws.com/photos/28629750/medium.jpg
+75088,46342,Sorex rohweri,Olympic Shrew,species,https://static.inaturalist.org/photos/93912620/medium.jpeg
+143865,42219,Odocoileus hemionus hemionus,Rocky Mountain Mule Deer,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/11191186/medium.jpg
+182715,42219,Odocoileus hemionus sitkensis,Sitka Black-tailed Deer,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/81551934/medium.jpg
+209461,41547,Balaenoptera acutorostrata scammoni,North Pacific Minke Whale,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/420649362/medium.jpeg
+324492,42126,Sus scrofa domesticus,Domestic Pig,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/267631414/medium.jpeg
+340942,42387,Ovis aries musimon,European Mouflon,subspecies,https://static.inaturalist.org/photos/45828139/medium.jpeg
+564777,42205,Cervus canadensis canadensis,American Elk,subspecies,https://static.inaturalist.org/photos/175053786/medium.jpg
+566550,42205,Cervus canadensis roosevelti,Roosevelt Elk,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/436812610/medium.jpg
+568688,46257,Tamiasciurus douglasii mollipilosus,Soft-haired Squirrel,subspecies,
+568689,46257,Tamiasciurus douglasii douglasii,,subspecies,https://static.inaturalist.org/photos/71588010/medium.jpg
+698503,42387,Ovis aries aries,Domestic Sheep,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/273332977/medium.jpg
+705329,41565,Megaptera novaeangliae kuzira,North Pacific Humpback Whale,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/237436427/medium.jpg
+733409,42205,Cervus nippon keramae,Kerama Sika Deer,subspecies,https://static.inaturalist.org/photos/19910232/medium.jpg
+852462,42196,Alces alces andersoni,Northwestern Moose,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/28050233/medium.jpg
+1054862,47050,Neurotrichus gibbsii gibbsii,,subspecies,
+1055482,46265,Glaucomys oregonensis oregonensis,Humboldt's Flying Squirrel,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/114838844/medium.jpg
+1256665,46257,Tamiasciurus hudsonicus lanuginosus,Vancouver Island Red Squirrel,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/222346665/medium.jpeg
+1256727,46257,Tamiasciurus hudsonicus streatori,,subspecies,https://static.inaturalist.org/photos/315157748/medium.png
+1317295,41479,Sagmatias,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/151457802/medium.jpg
+1370754,46342,Sorex obscurus,Northern Montane Shrew,species,
+1431239,44349,Peromyscus sonoriensis,Western Deer Mouse,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14784248/medium.jpg
+1431274,1317329,Clethrionomys gapperi,Southern Red-backed Vole,species,https://static.inaturalist.org/photos/9268043/medium.jpg
+1431854,44259,Microtus,,subgenus,https://static.inaturalist.org/photos/348284816/medium.jpeg
+1596227,1596099,Mictomys borealis,Northern Bog Lemming,species,https://inaturalist-open-data.s3.amazonaws.com/photos/253325613/medium.jpg
+1624166,46265,Glaucomys sabrinus alpinus,,subspecies,
+40509,40477,Eptesicus fuscus,Big Brown Bat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/11370649/medium.jpg
+40523,40516,Lasiurus cinereus,Hoary Bat,species,https://static.inaturalist.org/photos/1338098/medium.jpg
+41539,41538,Pseudorca crassidens,False Killer Whale,species,https://inaturalist-open-data.s3.amazonaws.com/photos/457666343/medium.jpg
+41541,41540,Grampus griseus,Risso's Dolphin,species,https://inaturalist-open-data.s3.amazonaws.com/photos/246061055/medium.jpg
+43997,43996,Myocastor coypus,Coypu,species,https://inaturalist-open-data.s3.amazonaws.com/photos/136260379/medium.jpeg
+44298,44259,Microtus townsendii,Townsend's Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/44408548/medium.jpg
+44307,44259,Microtus longicaudus,Long-tailed Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4296294/medium.jpeg
+44311,44259,Microtus pennsylvanicus,Eastern Meadow Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6559208/medium.jpeg
+44318,44259,Microtus oregoni,Creeping Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/19267537/medium.jpeg
+44323,44259,Microtus richardsoni,North American Water Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/78683/medium.jpg
+44705,44678,Mus musculus,House Mouse,species,https://inaturalist-open-data.s3.amazonaws.com/photos/114043454/medium.jpg
+44761,44737,Neotoma cinerea,Bushy-tailed Woodrat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/178872/medium.jpg
+46355,46342,Sorex palustris,Northern Water Shrew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/155803658/medium.jpeg
+46446,46342,Sorex bendirii,Bendire's Shrew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/116663520/medium.jpeg
+201545,46342,Sorex cinereus cinereus,,subspecies,
+235453,71833,Corynorhinus townsendii townsendii,Townsend's Western Big-eared Bat,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/1017855/medium.jpg
+238592,46342,Sorex cinereus streatori,,subspecies,
+342795,40270,Myotis californicus caurinus,,subspecies,
+345876,46342,Sorex vagrans vagrans,,subspecies,
+623441,41438,Phocoena phocoena vomerina,Pacific Harbour Porpoise,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/260865033/medium.jpg
+857085,45994,Sciurus carolinensis pennsylvanicus,Pennsylvania Gray Squirrel,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/58938935/medium.jpg
+1180655,44540,Rattus norvegicus domestica,Domestic Brown Rat,form,https://inaturalist-open-data.s3.amazonaws.com/photos/234754070/medium.jpg
+1306016,41445,Phocoenoides dalli dalli,Dall's Porpoise,subspecies,https://static.inaturalist.org/photos/166591389/medium.jpeg
+1368491,1317295,Sagmatias obliquidens,Pacific White-sided Dolphin,species,https://static.inaturalist.org/photos/116345110/medium.jpg
+1380800,45762,Ondatra zibethicus occipitalis,,subspecies,
+1380801,45762,Ondatra zibethicus osoyoosensis,Rocky Mountain Muskrat,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/266671144/medium.jpg
+1431621,44259,Microtus drummondii,Western Meadow Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/411429470/medium.jpeg
+1431805,1317329,Clethrionomys gapperi occidentalis,Washington Southern Red-backed Vole,subspecies,
+1487183,46078,Marmota flaviventris avara,,subspecies,
+1523001,46342,Sorex vagrans isolatus,Vancouver Island Vagrant Shrew,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/31986453/medium.jpg
+1527664,44349,Peromyscus keeni triangularis,Triangle Island Deermouse,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/402146564/medium.jpg
+1566838,46078,Marmota caligata cascadensis,Cascade Hoary Marmot,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/545245174/medium.jpg
+1566839,46078,Marmota caligata okanagana,Montana Hoary Marmot,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/287463902/medium.jpg
+1568198,46342,Sorex monticolus isolatus,,subspecies,
+1568206,46342,Sorex monticolus setosus,,subspecies,
+1602531,41520,Orcinus orca ater,Resident Killer Whale,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/474261391/medium.jpg
+1602533,41520,Orcinus orca rectipinnus,Bigg's Killer Whale,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/282691010/medium.jpeg
+1626137,1317329,Clethrionomys gapperi caurinus,,subspecies,
+1626155,1317329,Clethrionomys gapperi saturatus,,subspecies,
+198042,40516,Lasiurus cinereus cinereus,North American Hoary Bat,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/296344/medium.jpg
+237295,44259,Microtus townsendii pugeti,,subspecies,https://static.inaturalist.org/photos/81071173/medium.jpeg
+342171,44678,Mus musculus domesticus,Western European House Mouse,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/38277819/medium.jpg
+342796,40477,Eptesicus fuscus bernardinus,,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/46219554/medium.jpg
+1127759,44259,Microtus montanus canescens,,subspecies,
+1626260,44737,Neotoma cinerea occidentalis,,subspecies,
