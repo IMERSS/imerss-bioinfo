@@ -414,7 +414,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 43432,43429,Cebus capucinus,Colombian White-throated Capuchin,species,https://inaturalist-open-data.s3.amazonaws.com/photos/19206187/medium.jpg
 43433,43429,Cebus albifrons,White-fronted Capuchin,species,https://inaturalist-open-data.s3.amazonaws.com/photos/286388964/medium.jpg
 43996,43909,Myocastor,Coypus,genus,https://static.inaturalist.org/photos/128025006/medium.jpeg
-44026,44025,Erethizon dorsatum,North American Porcupine,species,https://inaturalist-open-data.s3.amazonaws.com/photos/10828026/medium.jpg
+44026,44025,Erethizon dorsatum,North American Porcupine,species,https://inaturalist-open-data.s3.amazonaws.com/photos/233173121/medium.jpeg
 44387,44349,Peromyscus keeni,Northwestern Deer Mouse,species,https://inaturalist-open-data.s3.amazonaws.com/photos/16716716/medium.jpg
 44396,44349,Peromyscus maniculatus,Eastern Deermouse,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14118934/medium.jpg
 44575,44540,Rattus rattus,Black Rat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/103883559/medium.jpeg
@@ -428,7 +428,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 46091,46078,Marmota vancouverensis,Vancouver Island Marmot,species,https://inaturalist-open-data.s3.amazonaws.com/photos/31330861/medium.jpg
 46348,46342,Sorex vagrans,Vagrant Shrew,species,https://static.inaturalist.org/photos/465245102/medium.png
 46352,46342,Sorex pacificus,Pacific Shrew,species,https://static.inaturalist.org/photos/280063761/medium.jpg
-46456,46342,Sorex monticolus,Southern Montane Shrew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/15770379/medium.jpg
+46456,46342,Sorex monticolus,Dusky Shrew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/15770379/medium.jpg
 59815,46342,Sorex cinereus,Masked Shrew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/8291785/medium.jpg
 68093,40270,Myotis ciliolabrum,Western Small-footed Myotis,species,https://inaturalist-open-data.s3.amazonaws.com/photos/50245212/medium.jpg
 74205,71833,Corynorhinus townsendii,Townsend's Big-eared Bat,species,https://inaturalist-open-data.s3.amazonaws.com/photos/346887429/medium.jpg
@@ -452,7 +452,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 1256665,46257,Tamiasciurus hudsonicus lanuginosus,Vancouver Island Red Squirrel,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/222346665/medium.jpeg
 1256727,46257,Tamiasciurus hudsonicus streatori,,subspecies,https://static.inaturalist.org/photos/315157748/medium.png
 1317295,41479,Sagmatias,,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/151457802/medium.jpg
-1370754,46342,Sorex obscurus,Northern Montane Shrew,species,https://inaturalist-open-data.s3.amazonaws.com/photos/24417058/medium.jpeg
+1370754,46342,Sorex obscurus,Northern Montane Shrew,species,
 1431239,44349,Peromyscus sonoriensis,Western Deer Mouse,species,https://inaturalist-open-data.s3.amazonaws.com/photos/14784248/medium.jpg
 1431274,1317329,Clethrionomys gapperi,Southern Red-backed Vole,species,https://static.inaturalist.org/photos/9268043/medium.jpg
 1431854,44259,Microtus,,subgenus,https://static.inaturalist.org/photos/348284816/medium.jpeg
@@ -464,7 +464,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 41541,41540,Grampus griseus,Risso's Dolphin,species,https://inaturalist-open-data.s3.amazonaws.com/photos/246061055/medium.jpg
 43997,43996,Myocastor coypus,Coypu,species,https://inaturalist-open-data.s3.amazonaws.com/photos/136260379/medium.jpeg
 44298,44259,Microtus townsendii,Townsend's Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/44408548/medium.jpg
-44307,44259,Microtus longicaudus,Long-tailed Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4296298/medium.jpeg
+44307,44259,Microtus longicaudus,Long-tailed Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4296294/medium.jpeg
 44311,44259,Microtus pennsylvanicus,Eastern Meadow Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/6559208/medium.jpeg
 44318,44259,Microtus oregoni,Creeping Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/19267537/medium.jpeg
 44323,44259,Microtus richardsoni,North American Water Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/78683/medium.jpg
@@ -478,7 +478,7 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 342795,40270,Myotis californicus caurinus,,subspecies,
 345876,46342,Sorex vagrans vagrans,,subspecies,
 623441,41438,Phocoena phocoena vomerina,Pacific Harbour Porpoise,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/260865033/medium.jpg
-857085,45994,Sciurus carolinensis pennsylvanicus,Northern Grey Squirrel,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/58938935/medium.jpg
+857085,45994,Sciurus carolinensis pennsylvanicus,Pennsylvania Gray Squirrel,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/58938935/medium.jpg
 1180655,44540,Rattus norvegicus domestica,Domestic Brown Rat,form,https://inaturalist-open-data.s3.amazonaws.com/photos/234754070/medium.jpg
 1306016,41445,Phocoenoides dalli dalli,Dall's Porpoise,subspecies,https://static.inaturalist.org/photos/166591389/medium.jpeg
 1368491,1317295,Sagmatias obliquidens,Pacific White-sided Dolphin,species,https://static.inaturalist.org/photos/116345110/medium.jpg
@@ -487,14 +487,16 @@ id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage
 1431621,44259,Microtus drummondii,Western Meadow Vole,species,https://inaturalist-open-data.s3.amazonaws.com/photos/411429470/medium.jpeg
 1431805,1317329,Clethrionomys gapperi occidentalis,Washington Southern Red-backed Vole,subspecies,
 1487183,46078,Marmota flaviventris avara,,subspecies,
+1523001,46342,Sorex vagrans isolatus,Vancouver Island Vagrant Shrew,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/31986453/medium.jpg
 1527664,44349,Peromyscus keeni triangularis,Triangle Island Deermouse,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/402146564/medium.jpg
 1566838,46078,Marmota caligata cascadensis,Cascade Hoary Marmot,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/545245174/medium.jpg
 1566839,46078,Marmota caligata okanagana,Montana Hoary Marmot,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/287463902/medium.jpg
+1568198,46342,Sorex monticolus isolatus,,subspecies,
+1568206,46342,Sorex monticolus setosus,,subspecies,
 1602531,41520,Orcinus orca ater,Resident Killer Whale,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/474261391/medium.jpg
 1602533,41520,Orcinus orca rectipinnus,Bigg's Killer Whale,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/282691010/medium.jpeg
 1626137,1317329,Clethrionomys gapperi caurinus,,subspecies,
 1626155,1317329,Clethrionomys gapperi saturatus,,subspecies,
-1638948,46342,Sorex pacificus isolatus,Vancouver Island Vagrant Shrew,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/31986453/medium.jpg
 1638950,46342,Sorex pacificus setosus,,subspecies,
 198042,40516,Lasiurus cinereus cinereus,North American Hoary Bat,subspecies,https://inaturalist-open-data.s3.amazonaws.com/photos/296344/medium.jpg
 237295,44259,Microtus townsendii pugeti,,subspecies,https://static.inaturalist.org/photos/81071173/medium.jpeg
