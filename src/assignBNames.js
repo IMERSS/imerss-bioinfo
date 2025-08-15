@@ -56,7 +56,7 @@ const strategies = {
         iNatId: "iNaturalistTaxonId",
         nameStatus: "nameStatus",
         assignedINatName: "iNaturalistTaxonName",
-        assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "genus"],
+        assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus"],
         sanitize: true,
         csvOptions: {
             separator: "\t"
