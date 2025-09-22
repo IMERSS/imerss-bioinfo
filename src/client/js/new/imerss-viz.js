@@ -19,7 +19,7 @@ fluid.defaults("hortis.standardVizLoader", {
     },
     gridResolution: 100,
     members: {
-        filteredObs: "{filters}.allOutput",
+        filteredObs: "{obsFilters}.allOutput",
         taxaFromObs: "@expand:fluid.computed(hortis.taxaFromObs, {that}.filteredObs, {taxa}.rowById)",
         allTaxaFromObs: "@expand:fluid.computed(hortis.taxaFromObs, {that}.obsRows, {taxa}.rowById)"
     },

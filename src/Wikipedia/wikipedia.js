@@ -16,6 +16,9 @@ fluid.defaults("hortis.wikipediaExtracts", {
     termMap: {
         name: "%name"
     },
+    headers: {
+        "User-Agent": "IMERSSBot/1.0 (https://imerss.org;amb26wiki@ponder.org.uk)"
+    },
     listeners: {
         "onRead.extract": {
             priority: "after:encoding",

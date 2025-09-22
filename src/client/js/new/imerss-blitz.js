@@ -64,7 +64,7 @@ hortis.blitzFiltersTemplate = `
 `;
 
 fluid.defaults("hortis.blitzFilters", {
-    gradeNames: ["hortis.filters", "fluid.stringTemplateRenderingView"],
+    gradeNames: ["hortis.obsFilters", "fluid.stringTemplateRenderingView"],
     markup: { // Clearly unsatisfactory, have to move over to preactish rendering before long
         container: hortis.blitzFiltersTemplate,
         fallbackContainer: hortis.blitzFiltersTemplate
@@ -80,7 +80,7 @@ fluid.defaults("hortis.blitzFilters", {
     components: {
         filterRoot: "{vizLoader}",
         taxonFilter: {
-            type: "hortis.taxonFilter",
+            type: "hortis.taxonObsFilter",
             container: "{that}.dom.taxonFilter",
             options: {
                 filterName: "Search Species",

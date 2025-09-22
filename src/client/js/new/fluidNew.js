@@ -189,7 +189,7 @@ fluid.renderContainerSplice = function (parentContainer, elideParent, hasRoot, r
     return parentContainer;
 };
 
-fluid.renderStringTemplate = function (markup, renderModelSignal) {
+fluid.renderStringTemplateContainer = function (markup, renderModelSignal) {
     const renderModel = renderModelSignal.value;
     return renderModel === undefined ? markup.fallbackContainer : fluid.stringTemplate(markup.container, renderModel);
 };
@@ -211,10 +211,10 @@ fluid.defaults("fluid.stringTemplateRenderingView", {
         fallbackContainer: "<div></div>"
     },
     invokers: {
-        renderMarkup: "fluid.renderStringTemplate({that}.options.markup, {that}.renderModel)",
+        renderMarkup: "fluid.renderStringTemplateContainer({that}.options.markup, {that}.renderModel)",
         renderContainer: "fluid.renderContainerSplice({that}.options.parentContainer, {that}.options.elideParent, {that}.options.hasRoot, {that}.renderMarkup, {that})",
         // Blast this unnecessary invoker definition
-        addToParent: null,
+        addToParent: null
     },
     // Stopgap so we can wait to create children in old world for single initial rendering
     events: {

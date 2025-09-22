@@ -20,6 +20,10 @@ var {signal, computed, effect, batch} = preactSignalsCore;
 
 fluid.defaults("hortis.filter", {
     // gradeNames: "fluid.component",
+});
+
+fluid.defaults("hortis.obsFilter", {
+    gradeNames: "hortis.filter",
     members: {
         filterInput: null, // must be overridden
         filterOutput: null // must be overridden
@@ -30,7 +34,7 @@ fluid.defaults("hortis.filter", {
     }
 });
 
-fluid.defaults("hortis.filters", {
+fluid.defaults("hortis.obsFilters", {
     // gradeNames: "fluid.component",
     components: {
         filterRoot: "{that}"
@@ -48,7 +52,7 @@ fluid.defaults("hortis.filters", {
 
 hortis.combinedFilterInput = function (that) {
     return computed( () => {
-        const filterComps = fluid.queryIoCSelector(that.filterRoot, "hortis.filter", false);
+        const filterComps = fluid.queryIoCSelector(that.filterRoot, "hortis.obsFilter", false);
 
         const filterStates = filterComps.map(comp => comp.filterState);
 
@@ -143,13 +147,14 @@ hortis.repeatingRowFilter.renderRow = function (template, rowLabel, rowId) {
 };
 
 fluid.defaults("hortis.obsDrivenFilter", {
+    gradeNames: ["hortis.obsFilter"],
     members: {
-        obsRows: "{hortis.filters}.obsRows"
+        obsRows: "{hortis.obsFilters}.obsRows"
     }
 });
 
 fluid.defaults("hortis.regionFilter", {
-    gradeNames: ["hortis.filter", "hortis.repeatingRowFilter", "fluid.stringTemplateRenderingView"],
+    gradeNames: ["hortis.obsFilter", "hortis.repeatingRowFilter", "fluid.stringTemplateRenderingView"],
     markup: {
         container: `
         <div class="imerss-region-filter">
@@ -291,11 +296,11 @@ hortis.freeRegionFilter.applyFilter = function (filterState, dom) {
 };
 
 fluid.defaults("hortis.autocompleteFilter", {
-    gradeNames: ["hortis.filter", "hortis.obsDrivenFilter", "fluid.stringTemplateRenderingView"],
-    // fieldName
+    gradeNames: ["hortis.filter", "fluid.stringTemplateRenderingView"],
     // filterName
     // controlId
     // rootClass
+    // [fieldName used in subclasses]
     markup: {
         container: `
         <div class="%rootClass">
@@ -314,7 +319,6 @@ fluid.defaults("hortis.autocompleteFilter", {
         clearFilter: ".imerss-filter-clear"
     },
     members: {
-        // obsRows:
         filterState: "@expand:signal(null)",
         renderModel: `@expand:fluid.computed(hortis.autocompleteFilter.renderModel, 
             {that}.options.filterName, {that}.options.controlId, {that}.options.rootClass)`
@@ -335,7 +339,10 @@ fluid.defaults("hortis.autocompleteFilter", {
                 listeners: {
                     onConfirm: {
                         args: ["{filter}", "{arguments}.0"],
-                        func: (filter, selection) => filter.filterState.value = selection
+                        func: (filter, selection) => {
+                            console.log("Setting filter state to ", selection);
+                            filter.filterState.value = selection;
+                        }
                     }
                 },
                 invokers: {
@@ -373,7 +380,7 @@ hortis.autocompleteFilter.renderModel = function (filterName, controlId, rootCla
 // Collectors filter
 
 fluid.defaults("hortis.collectorFilter", {
-    gradeNames: ["hortis.autocompleteFilter"],
+    gradeNames: ["hortis.autocompleteFilter", "hortis.obsDrivenFilter"],
     controlId: "fli-imerss-collector",
     rootClass: "imerss-collector-filter",
     members: {
@@ -409,11 +416,11 @@ hortis.queryAutocompleteCollector = function (allCollectors, query, callback) {
 // Taxon filter
 
 fluid.defaults("hortis.taxonFilter", {
-    gradeNames: ["hortis.autocompleteFilter"],
+    gradeNames: ["hortis.autocompleteFilter", "hortis.filter"],
     controlId: "fli-imerss-taxonFilter",
     rootClass: "imerss-taxon-filter",
     components: {
-        taxa: "{hortis.taxa}",
+        taxonNameLookup: "{hortis.taxonNameLookup}",
         autocomplete: {
             options: {
                 invokers: {
@@ -424,20 +431,26 @@ fluid.defaults("hortis.taxonFilter", {
         }
     },
     invokers: {
-        doFilter: "hortis.taxonFilter.doFilter({arguments}.0, {arguments}.1, {that}.taxa.rowById.value)",
-        queryAutocomplete: "hortis.queryAutocompleteTaxon({taxa}.lookupTaxon, {arguments}.0, {arguments}.1, {autocomplete}.options.maxSuggestions)"
+        doFilter: "hortis.taxonObsFilter.doFilter({arguments}.0, {arguments}.1, {that}.taxa.rowById.value)",
+        queryAutocomplete: "hortis.queryAutocompleteTaxon({taxonNameLookup}.lookupTaxon, {arguments}.0, {arguments}.1, {autocomplete}.options.maxSuggestions)"
     }
 });
 
-hortis.computeAllCollectors = function (obsRows, fieldName) {
-    const collectors = {};
-    obsRows.forEach(row => {
-        row[fieldName].split(";").map(lump => lump.trim()).map(trimmed => collectors[trimmed] = true);
-    });
-    return Object.keys(collectors);
+
+hortis.queryAutocompleteTaxon = function (lookupTaxon, query, callback, maxSuggestions) {
+    const output = lookupTaxon(query, maxSuggestions);
+    callback(output);
 };
 
-hortis.taxonFilter.doFilter = function (obsRows, filterState, taxonRowById) {
+
+fluid.defaults("hortis.taxonObsFilter", {
+    gradeNames: ["hortis.taxonFilter", "hortis.obsFilter"],
+    invokers: {
+        doFilter: "hortis.taxonObsFilter.doFilter({arguments}.0, {arguments}.1, {that}.taxa.rowById.value)"
+    }
+});
+
+hortis.taxonObsFilter.doFilter = function (obsRows, filterState, taxonRowById) {
     const all = !(filterState);
     const filterRoot = filterState?.id;
     const includeRow = function (obsRow) {
@@ -451,9 +464,4 @@ hortis.taxonFilter.doFilter = function (obsRows, filterState, taxonRowById) {
         return false;
     };
     return all ? obsRows : obsRows.filter(includeRow);
-};
-
-hortis.queryAutocompleteTaxon = function (lookupTaxon, query, callback, maxSuggestions) {
-    const output = lookupTaxon(query, maxSuggestions);
-    callback(output);
 };

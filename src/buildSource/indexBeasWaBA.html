@@ -44,6 +44,9 @@
                 <symbol id="copy-clipboard" viewBox="0 0 32 32">
                     <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
                 </symbol>
+                <symbol id="download" viewBox="0 -960 960 960">
+                    <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/>
+                </symbol>
                 <symbol id="copy-check" viewBox="0 0 32 32">
                     <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
                 </symbol>
@@ -56,6 +59,9 @@
                 </symbol>
                 <symbol id="fullscreen-exit" viewBox="0 0 32 32" stroke-width="2" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 12 L12 12 12 4 M20 4 L20 12 28 12 M4 20 L12 20 12 28 M28 20 L20 20 20 28" />
+                </symbol>
+                <symbol id="search-icon" viewBox="0 0 24 24" stroke="currentColor" fill="none">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </symbol>
             </defs>
         </svg>
@@ -176,9 +182,11 @@
             </div>
             <div class="imerss-checklists">
                 <div class="imerss-pollinators imerss-checklist-holder">
-                    <div class="imerss-panel-label"><span>Bees</span><span class="imerss-copy-checklist"><svg width="32" height="32" >
-                            <use href="#copy-clipboard" />
+                    <div class="imerss-panel-label"><span>Bees</span>
+                        <span class="imerss-download-checklist imerss-basic-tooltip" title="Download checklist as CSV"><svg width="24" height="24" >
+                            <use href="#download" />
                         </svg></span>
+                        <span class="imerss-search-checklist"></span>
                     </div>
                     <div class="imerss-bbea-filters">
                     </div>
@@ -210,15 +218,18 @@
                     </div>
                 </div>
                 <div class="imerss-plants imerss-checklist-holder">
-                    <div class="imerss-panel-label"><span>Plants</span><span class="imerss-copy-checklist"><svg width="32" height="32" >
-                            <use href="#copy-clipboard" />
+                    <div class="imerss-panel-label"><span>Plants</span>
+                        <span class="imerss-download-checklist imerss-basic-tooltip" title="Download checklist as CSV"><svg width="24" height="24" >
+                            <use href="#download" />
                         </svg></span>
+                        <span class="imerss-search-checklist"></span>
                     </div>
                     <div class="imerss-checklist">
                     </div>
                 </div>
             </div>
         </div>
+        <div class="imerss-software-version">Software Version 1.1 - Updated September 22nd, 2025</div>
         <div class="imerss-dataset-version">Dataset Revision V0 - Updated July 3rd, 2025</div>
     </section>
 

@@ -24,7 +24,7 @@ fluid.defaults("hortis.beaVizLoader", {
         collectorReport: ".imerss-collector-report"
     },
     members: {
-        filteredObs: "{filters}.allOutput",
+        filteredObs: "{obsFilters}.allOutput",
         taxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.filteredObs, {taxa}.rowById)",
         allTaxaFromObs: "@expand:fluid.computed(hortis.twoTaxaFromObs, {that}.obsRows, {taxa}.rowById)",
         // Funny hack since this is computed in an effect by interactions - review this
@@ -43,7 +43,7 @@ fluid.defaults("hortis.beaVizLoader", {
             container: "{that}.dom.collectorReport",
             options: {
                 members: {
-                    collectorName: "{filters}.collectorFilter.filterState"
+                    collectorName: "{obsFilters}.collectorFilter.filterState"
                 }
             }
         },
@@ -61,7 +61,7 @@ fluid.defaults("hortis.beaVizLoader", {
                 }
             }
         },
-        filters: {
+        obsFilters: {
             type: "hortis.bbeaFilters",
             container: "{that}.dom.filters",
             options: {
@@ -76,7 +76,7 @@ fluid.defaults("hortis.beaVizLoader", {
             type: "hortis.checklist.withHolder",
             container: ".imerss-pollinators",
             options: {
-                gradeNames: ["hortis.checklist.withOBA", "hortis.checklist.withCopy"],
+                gradeNames: ["hortis.checklist.withOBA", "hortis.checklist.withDownload", "hortis.checklist.withSearch"],
                 rootId: 1,
                 filterRanks: ["epifamily", "family", "tribe", "genus", "subgenus", "species"],
                 disclosableRanks: ["tribe", "genus", "subgenus", "species"],
@@ -84,6 +84,7 @@ fluid.defaults("hortis.beaVizLoader", {
                 selectable: true,
                 unfoldable: true,
                 copyButtonMessage: "Copy %rows bee taxa to clipboard",
+                searchControlId: "fli-imerss-bee-search",
                 members: {
                     rowById: "{taxa}.rowById",
                     rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, pollRowFocus)"
@@ -98,7 +99,7 @@ fluid.defaults("hortis.beaVizLoader", {
             type: "hortis.checklist.withHolder",
             container: ".imerss-plants",
             options: {
-                gradeNames: ["hortis.checklist.withOBA", "hortis.checklist.withCopy"],
+                gradeNames: ["hortis.checklist.withOBA", "hortis.checklist.withDownload", "hortis.checklist.withSearch"],
                 rootId: 47126,
                 filterRanks: ["kingdom", "order", "family", "genus"],
                 disclosableRanks: ["family", "genus"],
@@ -106,6 +107,7 @@ fluid.defaults("hortis.beaVizLoader", {
                 selectable: true,
                 unfoldable: true,
                 copyButtonMessage: "Copy %rows plant taxa to clipboard",
+                searchControlId: "fli-imerss-plant-search",
                 members: {
                     rowById: "{taxa}.rowById",
                     rowFocus: "@expand:fluid.derefSignal({vizLoader}.taxaFromObs, plantRowFocus)"
@@ -345,12 +347,12 @@ hortis.findAncestor = function (row, selection) {
 };
 
 hortis.ancestorHitCache = function (selection, rowById) {
-    const taxonToAncestor = {};
+    const taxonToAncestor = {0: "0"};
     return {
         taxonToAncestor,
         get: function (taxonId) {
             const existing = taxonToAncestor[taxonId];
-            if (existing) {
+            if (existing !== undefined) {
                 return existing;
             } else {
                 const row = rowById[taxonId];
@@ -362,6 +364,14 @@ hortis.ancestorHitCache = function (selection, rowById) {
     };
 };
 
+/** Count plant-pollinator interactions for the current taxonomic selection
+ *
+ * @param {hortis.interactions} that - The interactions component
+ * @param {obsRow[]} rows - The full set of observation rows
+ * @param {Object<key, true>} plantSelection - The currently selected plant taxa
+ * @param {Object<key, true>} pollSelection - The currently selected pollinator taxa
+ * @return {Object<int, int>} - Hash bins keyed by integer cross key to interaction count.
+ */
 hortis.interactions.count = function (that, rows, plantSelection, pollSelection) {
     const rowById = that.rowById.peek();
     const allSelection = {...plantSelection, ...pollSelection};
@@ -629,7 +639,8 @@ hortis.drawInteractions.render = function (that, interactions, crossTable, rowBy
     const now = Date.now();
 
     const filterZero = function (taxonIds, counts) {
-        fluid.remove_if(taxonIds, id => counts[id] === undefined);
+        // eslint-disable-next-line eqeqeq
+        fluid.remove_if(taxonIds, id => counts[id] === undefined || id == 0);
         taxonIds.sort((ea, eb) => counts[eb] - counts[ea]);
     };
 
@@ -677,7 +688,9 @@ hortis.drawInteractions.render = function (that, interactions, crossTable, rowBy
 
         const plantRow = rowById[plantId];
         const pollRow = rowById[pollId];
-        bipartiteRows.push([pollRow.iNaturalistTaxonName, plantRow.iNaturalistTaxonName, count]);
+        if (plantRow && pollRow) {
+            bipartiteRows.push([pollRow.iNaturalistTaxonName, plantRow.iNaturalistTaxonName, count]);
+        }
     });
 
     const delay = Date.now() - now;
@@ -1145,7 +1158,7 @@ hortis.bbeaFiltersTemplate = `
 `;
 
 fluid.defaults("hortis.bbeaFilters", {
-    gradeNames: ["hortis.filters", "fluid.stringTemplateRenderingView"],
+    gradeNames: ["hortis.obsFilters", "fluid.stringTemplateRenderingView"],
     markup: { // Clearly unsatisfactory, have to move over to preactish rendering before long
         container: hortis.bbeaFiltersTemplate,
         fallbackContainer: hortis.bbeaFiltersTemplate

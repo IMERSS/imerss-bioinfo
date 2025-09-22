@@ -302,6 +302,15 @@ body {
     right: 6px;
 }
 
+.imerss-software-version {
+    display: flex;
+    justify-content: start;
+    font-size: small;
+    position: absolute;
+    bottom: -16px;
+    left: 6px;
+}
+
 /* Bee loading indicator adapted from https://codepen.io/Huyyy/pen/mdymXBr */
 
 .loading-message {

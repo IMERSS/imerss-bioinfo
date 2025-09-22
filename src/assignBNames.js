@@ -216,6 +216,8 @@ hortis.applyName = async function (row, index, phylum, rank, invertedSwaps, allT
         // Can't recall what this field did
         // hortis.addName(allTaxa, id, iNatName, looked.doc.nameStatus);
     } else {
+        assign(row, s.iNatId, 0);
+        assign(row, s.assignedINatName, "");
         row[s.nameStatus] = "unknown";
         unmappedTaxa[iNatName] = {scientificName};
     }

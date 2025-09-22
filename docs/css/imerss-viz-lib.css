@@ -719,6 +719,9 @@ a.ui-button:active,
 .imerss-container *:before,
 .imerss-container *:after {
     box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
 }
 
 .imerss-container ::-webkit-scrollbar {
@@ -1097,14 +1100,21 @@ a.ui-button:active,
     display: block;
 }
 
-.imerss-container .autocomplete__hint, .imerss-filters .autocomplete__input, .imerss-filters .autocomplete__option {
+.imerss-container .autocomplete__hint, .imerss-container .autocomplete__input, .imerss-container .autocomplete__option {
     font-size: 16px;
     line-height: 1.25;
+}
+
+.autocomplete__option--odd {
+    background-color: #f4f4f4;
 }
 
 .imerss-container .autocomplete__input--default {
     padding: 2px 4px 2px 4px;
     border-width: 1px;
+}
+
+.imerss-filter-panel .autocomplete__input--default {
     width: 15em;
 }
 
@@ -1125,6 +1135,11 @@ a.ui-button:active,
     width: 100%;
     overflow-y: auto;
     padding-right: 0.5em;
+}
+
+.imerss-filter-autocomplete {
+    display: flex;
+    width: 100%;
 }
 
 .imerss-filter-controls {
@@ -1278,6 +1293,36 @@ a.ui-button:active,
     overflow: auto;
 }
 
+.imerss-search-checklist {
+    position: relative;
+    width: 100%;
+}
+
+.imerss-search-checklist .autocomplete__wrapper {
+    display: flex;
+    width: 100%;
+}
+
+/** Re-override our existing override of autocomplete's internal styles from line 412 */
+.imerss-container .imerss-search-checklist input {
+    border-radius: 100px;
+    border-color: #e5e7eb;
+    border-width: 1px;
+    background-color: #f3f4f6;
+    padding: 3px 5px 3px 2.5rem;
+    width: calc(100% - 20px)
+}
+
+.imerss-search-checklist svg {
+    left: 0;
+    top: 1px;
+    position: absolute;
+    pointer-events: none;
+    align-items: center;
+    padding-left: 0.7rem;
+    color: #636c76;
+}
+
 /** These "panels" currently only exist in the old-style jQuery tabbed panes. This definition is here to make
  * Xetthecum phase II panel labels show up in the right place but might be helpful in future.
  * These two uses of "imerss-panel-label" (in Xetthecum and BBEAS) are unconnected.
@@ -1289,7 +1334,24 @@ a.ui-button:active,
 .imerss-panel-label {
     font-size: 1.5rem;
     padding-bottom: 5px;
+    padding-top: 2px;
+    display: flex;
+    align-items: center;
 }
+
+.imerss-download-checklist {
+    display: flex;
+    fill: #636c76;
+    cursor: pointer;
+    border-radius: 6px;
+    margin: 0px 5px 0px 4px;
+}
+
+.imerss-download-checklist:hover {
+    background: #d0d7de33;
+}
+
+/** Old "copy to clipboard" interaction - now disused */
 
 .imerss-copy-checklist {
     display: inline-block;
@@ -1305,6 +1367,7 @@ a.ui-button:active,
     border-radius: 6px;
     position: relative;
     top: 3px;
+    margin-right: 20px;
 }
 
 .imerss-copy-checklist-copied {

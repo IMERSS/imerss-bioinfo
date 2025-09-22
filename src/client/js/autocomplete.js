@@ -15,6 +15,7 @@ var hortis = fluid.registerNamespace("hortis");
 
 fluid.defaults("hortis.autocomplete", {
     gradeNames: ["fluid.newViewComponent"],
+    // id: Must be supplied to forward to autocomplete constructor
     listeners: {
         "onCreate.render": "hortis.autocomplete.render"
     },

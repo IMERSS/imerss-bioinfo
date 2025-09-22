@@ -1,4 +1,4 @@
-"regionField","id","label"
+regionField,id,label
 BLM District Boundaries,1,Spokane District Office
 BLM District Boundaries,2,Vale District Office
 BLM Field Office Boundaries,1,Spokane Wenatchee Field Office
@@ -87,19 +87,20 @@ USA Counties,17,Kittitas County
 USA Counties,18,Klickitat County
 USA Counties,19,Lewis County
 USA Counties,20,Lincoln County
-USA Counties,21,Okanogan County
-USA Counties,22,Pend Oreille County
-USA Counties,23,Pierce County
-USA Counties,24,San Juan County
-USA Counties,25,Skagit County
-USA Counties,26,Skamania County
-USA Counties,27,Snohomish County
-USA Counties,28,Spokane County
-USA Counties,29,Stevens County
-USA Counties,30,Thurston County
-USA Counties,31,Whatcom County
-USA Counties,32,Whitman County
-USA Counties,33,Yakima County
+USA Counties,21,Mason County
+USA Counties,22,Okanogan County
+USA Counties,23,Pend Oreille County
+USA Counties,24,Pierce County
+USA Counties,25,San Juan County
+USA Counties,26,Skagit County
+USA Counties,27,Skamania County
+USA Counties,28,Snohomish County
+USA Counties,29,Spokane County
+USA Counties,30,Stevens County
+USA Counties,31,Thurston County
+USA Counties,32,Whatcom County
+USA Counties,33,Whitman County
+USA Counties,34,Yakima County
 Forest Service National Forest Boundaries,1,Gifford Pinchot National Forest
 Forest Service National Forest Boundaries,2,Mt. Baker-Snoqualmie National Forest
 Forest Service National Forest Boundaries,3,Olympic National Forest

@@ -339,28 +339,23 @@ hortis.bindTaxonHover = function (that, layoutHolder) {
     });
 };
 
-fluid.defaults("hortis.taxa", {
+fluid.defaults("hortis.taxonNameLookup", {
     gradeNames: "fluid.component",
-    members: {
-        // rows: injected
-        rowByIdPre:   "@expand:fluid.computed(hortis.indexTree, {that}.rows)",
-        // Note, actually just fills in entries in rows - we claim the output is rowById because it is what is consumed everywhere
-        rowById:   "@expand:fluid.computed(hortis.taxa.map, {that}.rows, {that}.rowByIdPre)",
-        entries:   "@expand:fluid.computed(hortis.computeEntries, {that}.rows, {that}.acceptRow)",
-        entryById: "@expand:fluid.computed(hortis.indexEntries, {that}.entries)"
-    },
     invokers: {
-        // Currently disused - we may one day want to support pre-filtering of taxa - perhaps we will supply "entries" as an argument to lookupTaxon
-        acceptRow: "hortis.acceptTaxonRow({that}, {arguments}.0)",
         //                                                     query, maxSuggestions
-        lookupTaxon: "hortis.lookupTaxon({that}.entries.value, {arguments}.0, {arguments}.1)"
+        lookupTaxon: "hortis.lookupTaxon({that}.rows.value, {arguments}.0, {arguments}.1)"
     }
 });
 
-hortis.acceptTaxonRow = function (/*that, row*/) {
-    // TODO: in Sunburst used to check nativeData
-    return true;
-};
+fluid.defaults("hortis.taxa", {
+    gradeNames: "hortis.taxonNameLookup",
+    members: {
+        // rows: injected
+        rowByIdPre:   "@expand:fluid.computed(hortis.indexTaxaById, {that}.rows)",
+        // Note, actually just fills in entries in rows - we claim the output is rowById because it is what is consumed everywhere
+        rowById:   "@expand:fluid.computed(hortis.taxa.map, {that}.rows, {that}.rowByIdPre)"
+    }
+});
 
 hortis.nameOverrides = {
     "Chromista": "Chromists"
@@ -384,13 +379,12 @@ hortis.autocompleteSuggestionForTaxonRow = function (row) {
     return hortis.autocompleteInputForTaxonRow(row) + (row.childCount > 1 ? " (" + row.childCount + " species)" : "");
 };
 
-hortis.lookupTaxon = function (entries, query, maxSuggestions) {
+hortis.lookupTaxon = function (rows, query, maxSuggestions) {
     maxSuggestions = maxSuggestions || 1;
     const output = [];
     query = query.toLowerCase();
-    for (let i = 0; i < entries.length; ++i) {
-        const entry = entries[i],
-            row = entry.row;
+    for (let i = 0; i < rows.length; ++i) {
+        const row = rows[i];
         const display = hortis.autocompleteInputForTaxonRow(row);
         if (display.toLowerCase().indexOf(query) !== -1) {
             output.push(row);
@@ -402,35 +396,8 @@ hortis.lookupTaxon = function (entries, query, maxSuggestions) {
     return maxSuggestions === 1 ? output[0] : output;
 };
 
-// Accepts array of rows and returns array of "entries", where entry is {row, children: array of entry}
-// Identical algorithm as for hortis.filterRanks - no doubt a functional programmer would fold this up
-// Was hortis.computeSunburstEntries
-hortis.computeEntries = function (rows, acceptRow) {
-    const togo = [];
-    fluid.each(rows, function (row) {
-        if (acceptRow(row)) {
-            togo.push({
-                row: row,
-                children: hortis.computeEntries(row.children, acceptRow)
-            });
-        } else {
-            const dChildren = hortis.computeEntries(row.children, acceptRow);
-            Array.prototype.push.apply(togo, dChildren);
-        }
-    });
-    return hortis.sortChecklistLevel(togo);
-};
-
-hortis.indexEntries = function (entries) {
-    const index = {};
-    entries.forEach(function (entry) {
-        index[entry.row.id] = entry;
-    });
-    return index;
-};
-
 // Copied from imerss-viz.js
-hortis.indexTree = function (flatTree) {
+hortis.indexTaxaById = function (flatTree) {
     const index = {};
     flatTree.forEach(function (row) {
         index[row.id] = row;
@@ -438,6 +405,8 @@ hortis.indexTree = function (flatTree) {
     return index;
 };
 
+// Left over from imerss-viz.js - looks like still disused in "new" since nothing reads childCount and this should
+// doubtless be done in "entries".
 // cf. hortis.flattenTreeRecurse - the tree now comes in flat and sorted
 hortis.taxa.map = function (rows, byId) {
     rows.forEach((row, i) => {
@@ -466,13 +435,12 @@ hortis.taxa.map = function (rows, byId) {
 
 // Holds model state shared with checklist and index - TODO rename after purpose, "layout" used to refer to sunburst root
 fluid.defaults("hortis.layoutHolder", {
-    gradeNames: ["fluid.modelComponent", "hortis.withTooltip"],
+    gradeNames: ["fluid.component", "hortis.withTooltip"],
     tooltipKey: "hoverId",
     events: {
         taxonSelect: null
     },
     members: {
-        // isAtRoot computed
         // entryById -> rowById now injected
         taxonHistory: "@expand:signal([])", // currently unused, inherit from blitz etc.
         historyIndex: "@expand:signal(0)",
@@ -485,13 +453,6 @@ fluid.defaults("hortis.layoutHolder", {
         hoverId: "@expand:signal(null)"
     },
     // rootId
-    modelRelay: {
-        isAtRoot: {
-            target: "isAtRoot",
-            args: ["{that}.model.layoutId", "{that}.options.rootId"],
-            func: (x, y) => x === y
-        }
-    },
     invokers: {
         renderTooltip: "hortis.renderTaxonTooltip({that}, {arguments}.0)"
     }
