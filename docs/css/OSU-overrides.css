@@ -48,10 +48,6 @@ input[type="radio"], input[type="checkbox"] {
     margin: 0;
 }
 
-.imerss-search-checklist svg {
-    top: -2px;
-}
-
 label {
     display: revert;
     font-weight: revert;

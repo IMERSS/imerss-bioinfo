@@ -619,7 +619,7 @@
 
 .imerss-search-checklist svg {
     left: 0;
-    top: 1px;
+    top: -2px;
     position: absolute;
     pointer-events: none;
     align-items: center;
@@ -643,7 +643,7 @@
     align-items: center;
 }
 
-.imerss-download-checklist {
+.imerss-download-button {
     display: flex;
     fill: #636c76;
     cursor: pointer;
@@ -651,7 +651,7 @@
     margin: 0px 5px 0px 4px;
 }
 
-.imerss-download-checklist:hover {
+.imerss-download-button:hover {
     background: #d0d7de33;
 }
 

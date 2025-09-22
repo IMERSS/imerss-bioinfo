@@ -352,7 +352,7 @@ fluid.defaults("hortis.checklist.withOBA", {
 
 fluid.defaults("hortis.checklist.withDownload", {
     selectors: {
-        downloadButton: ".imerss-download-checklist"
+        downloadButton: ".imerss-download-button"
     },
     members: {
         allLeaves: "@expand:fluid.computed(hortis.checklist.computeLeaves, {that}.idToEntry, {that}.rowSelection, {that}.options.copyChecklistRanks)"
@@ -366,16 +366,6 @@ hortis.checklist.withDownload.bindClick = function (that) {
     that.dom.locate("downloadButton").on("click", () =>
         hortis.checklist.withDownload.triggerDownload(that)
     );
-};
-
-// Approach taken from https://stackoverflow.com/a/64908345/1381443
-hortis.triggerDownload = function (content, mimeType, filename) {
-    const a = document.createElement("a");
-    const blob = new Blob([content], {type: mimeType});
-    const url = URL.createObjectURL(blob);
-    a.setAttribute("href", url);
-    a.setAttribute("download", filename);
-    a.click(); // Start downloading
 };
 
 hortis.checklist.withDownload.triggerDownload = function (checklist) {

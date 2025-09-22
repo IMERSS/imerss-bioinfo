@@ -160,6 +160,15 @@ hortis.vizLoader.bindResources = async function (that) {
     });
 };
 
+// Approach taken from https://stackoverflow.com/a/64908345/1381443
+hortis.triggerDownload = function (content, mimeType, filename) {
+    const a = document.createElement("a");
+    const blob = new Blob([content], {type: mimeType});
+    const url = URL.createObjectURL(blob);
+    a.setAttribute("href", url);
+    a.setAttribute("download", filename);
+    a.click(); // Start downloading
+};
 
 hortis.taxonTooltipTemplate =
 `<div class="imerss-tooltip">

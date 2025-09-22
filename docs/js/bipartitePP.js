@@ -115,6 +115,8 @@ imerss.bipartitePP = function (data, svg, width, height, options) { // eslint-di
 
     svg.html("");
 
+    svg.append("rect").attr("width", "100%").attr("height", "100%").attr("fill", "white");
+
     const g1 = svg.append("g").attr("transform", `translate(${ColPos},${RowPos})`);
 
     const bp1 = viz.bP()

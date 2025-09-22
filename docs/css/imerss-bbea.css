@@ -233,10 +233,17 @@ body {
     height: 100%;
     width: 100%;
     font-size: 14px;
+    position: relative;
 }
 
 .imerss-bipartite svg {
     display: block;
+}
+
+.imerss-bipartite .imerss-download-button {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .bipartite-label {

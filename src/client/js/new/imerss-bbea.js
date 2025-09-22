@@ -1,6 +1,6 @@
 "use strict";
 
-/* global preactSignalsCore, imerss, d3 */
+/* global preactSignalsCore, imerss, d3, domtoimage */
 
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
@@ -462,7 +462,8 @@ hortis.computeRankColours = function (selection, colourIndex, idToEntry) {
 fluid.defaults("hortis.bipartite", {
     gradeNames: "fluid.viewComponent",
     selectors: {
-        svg: "svg"
+        svg: "svg",
+        downloadButton: ".imerss-download-button"
     },
     members: {
         bipartiteRows: "@expand:signal()",
@@ -475,7 +476,8 @@ fluid.defaults("hortis.bipartite", {
         render: "@expand:fluid.effect(hortis.bipartite.render, {that}, {that}.dom.svg.0, {that}.containerWidth, {that}.bipartiteRows, {that}.beeIdToEntry, {that}.plantIdToEntry)"
     },
     listeners: {
-        "onCreate.listenWidth": "hortis.bipartite.listenWidth({that}.container.0, {that}.containerWidth)"
+        "onCreate.listenWidth": "hortis.bipartite.listenWidth({that}.container.0, {that}.containerWidth)",
+        "onCreate.downloadButton": "hortis.bipartite.downloadButton({that}, {that}.dom.downloadButton, {that}.dom.svg)"
     }
 });
 
@@ -491,6 +493,43 @@ hortis.bipartite.listenWidth = function (containerNode, widthSignal) {
     observer.observe(containerNode);
 };
 
+
+hortis.loadImage = async url => {
+    const $img = document.createElement("img");
+    $img.src = url;
+    return new Promise((resolve) => {
+        $img.onload = () => resolve($img);
+        $img.onerror = e => {
+            console.log("Got error ", e);
+        };
+        $img.src = url;
+    });
+};
+
+hortis.getCanvasBlob = async (svgURL, { format, quality, scale }) => {
+    const img = await hortis.loadImage(svgURL);
+
+    const $canvas = document.createElement("canvas");
+    $canvas.width = img.naturalWidth * scale;
+    $canvas.height = img.naturalHeight * scale;
+    $canvas.getContext("2d").drawImage(img, 0, 0, img.naturalWidth * scale, img.naturalHeight * scale);
+
+    const blob = await new Promise(resolve => $canvas.toBlob(resolve, `image/${format}`, quality));
+    return blob;
+};
+
+hortis.bipartite.downloadButton = function (bipartite, button, svg) {
+    button.on("click", async () => {
+        const dataHeader = "data:image/svg+xml;charset=utf-8";
+        const serializeAsXML = $e => (new XMLSerializer()).serializeToString($e);
+        const encodeAsUTF8 = s => `${dataHeader},${encodeURIComponent(s)}`;
+        const $svg = svg[0];
+        const svgURL = encodeAsUTF8(serializeAsXML($svg));
+
+        const blob = await hortis.getCanvasBlob(svgURL, {format: "png", scale: 4});
+        hortis.triggerDownload(blob, "image/png", "bipartite.png");
+    });
+};
 
 hortis.bipartite.render = function (that, svgNode, containerWidth, bipartiteRows, beeIdToEntry, plantIdToEntry) {
     const svg = d3.select(svgNode);
