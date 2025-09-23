@@ -1,0 +1,307 @@
+regionField,id,label
+BLM District Boundaries,1,Spokane District Office
+BLM District Boundaries,2,Nw Oregon District Office
+BLM District Boundaries,3,Prineville District Office
+BLM District Boundaries,4,Lakeview District Office
+BLM District Boundaries,5,Coos Bay District Office
+BLM District Boundaries,6,Boise District Office
+BLM District Boundaries,7,Northern California District
+BLM District Boundaries,8,Roseburg District Office
+BLM District Boundaries,9,Vale District Office
+BLM District Boundaries,10,Medford District Office
+BLM District Boundaries,11,Winnemucca District
+BLM District Boundaries,12,Burns District Office
+BLM Field Office Boundaries,1,Nw Oregon Tillamook Field Office
+BLM Field Office Boundaries,2,Redding Field Office
+BLM Field Office Boundaries,3,Vale Malheur Field Office
+BLM Field Office Boundaries,4,Nw Oregon Marys Peak Field Office
+BLM Field Office Boundaries,5,Medford Butte Falls Field Office
+BLM Field Office Boundaries,6,Nw Oregon Upper Willamette Field Office
+BLM Field Office Boundaries,7,Nw Oregon Cascades Field Office
+BLM Field Office Boundaries,8,Coos Bay Myrtlewood Field Office
+BLM Field Office Boundaries,9,Lakeview Klamath Falls Field Office
+BLM Field Office Boundaries,10,Applegate Field Office
+BLM Field Office Boundaries,11,Spokane Wenatchee Field Office
+BLM Field Office Boundaries,12,Medford Ashland Field Office
+BLM Field Office Boundaries,13,Burns Three Rivers Field Office
+BLM Field Office Boundaries,14,Prineville Deschutes Field Office
+BLM Field Office Boundaries,15,Nw Oregon Siuslaw Field Office
+BLM Field Office Boundaries,16,Four Rivers Field Office
+BLM Field Office Boundaries,17,Medford Grants Pass Field Office
+BLM Field Office Boundaries,18,Vale Baker Field Office
+BLM Field Office Boundaries,19,Arcata Field Office
+BLM Field Office Boundaries,20,Lakeview District Lakeview Field Offi
+BLM Field Office Boundaries,21,Coos Bay Umpqua Field Office
+BLM Field Office Boundaries,22,Burns Andrews Field Office
+BLM Field Office Boundaries,23,Roseburg District South River Fo
+BLM Field Office Boundaries,24,Roseburg District Swiftwater Fo
+BLM Field Office Boundaries,25,Prineville Central Oregon Field Offic
+BLM Field Office Boundaries,26,Humboldt River Field Office
+BLM Field Office Boundaries,27,Spokane Border Field Office
+US Ecoregions Level IV,1,1f. Willapa Hills
+US Ecoregions Level IV,2,1a. Coastal Lowlands
+US Ecoregions Level IV,3,1b. Coastal Uplands
+US Ecoregions Level IV,4,1d. Volcanics
+US Ecoregions Level IV,5,1g. Mid-Coastal Sedimentary
+US Ecoregions Level IV,6,1h. Southern Oregon Coastal Mountains
+US Ecoregions Level IV,7,2c. San Juan Islands
+US Ecoregions Level IV,8,2g. Southern Puget Prairies
+US Ecoregions Level IV,9,3a. Portland/Vancouver Basin
+US Ecoregions Level IV,10,3b. Willamette River and Tributaries Gallery Forest
+US Ecoregions Level IV,11,3c. Prairie Terraces
+US Ecoregions Level IV,12,3d. Valley Foothills
+US Ecoregions Level IV,13,4a. Western Cascades Lowlands and Valleys
+US Ecoregions Level IV,14,4b. Western Cascades Montane Highlands
+US Ecoregions Level IV,15,4c. Cascade Crest Montane Forest
+US Ecoregions Level IV,16,4d. Cascade Subalpine/Alpine
+US Ecoregions Level IV,17,4e. High Southern Cascades Montane Forest
+US Ecoregions Level IV,18,4f. Low Southern Cascades Mixed Conifer Forest
+US Ecoregions Level IV,19,9c. Oak/Conifer Foothills
+US Ecoregions Level IV,20,9b. Grand Fir Mixed Forest
+US Ecoregions Level IV,21,9d. Ponderosa Pine/Bitterbrush Woodland
+US Ecoregions Level IV,22,9e. Pumice Plateau
+US Ecoregions Level IV,23,9f. Pumice Plateau Basins
+US Ecoregions Level IV,24,9g. Klamath/Goose Lake Basins
+US Ecoregions Level IV,25,9h. Fremont Pine/Fir Forest
+US Ecoregions Level IV,26,9i. Southern Cascades Slope
+US Ecoregions Level IV,27,9j. Klamath Juniper Woodland/Devils Garden
+US Ecoregions Level IV,28,9t. Old Cascades
+US Ecoregions Level IV,29,9m. Warner Mountains
+US Ecoregions Level IV,30,10a. Channeled Scablands
+US Ecoregions Level IV,31,10e. Pleistocene Lake Basins
+US Ecoregions Level IV,32,10f. Dissected Loess Uplands
+US Ecoregions Level IV,33,10g. Yakima Folds
+US Ecoregions Level IV,34,10c. Umatilla Plateau
+US Ecoregions Level IV,35,10i. Deep Loess Foothills
+US Ecoregions Level IV,36,10k. Deschutes/John Day Canyons
+US Ecoregions Level IV,37,10n. Umatilla Dissected Uplands
+US Ecoregions Level IV,38,11g. Canyons and Dissected Uplands
+US Ecoregions Level IV,39,11i. Continental Zone Foothills
+US Ecoregions Level IV,40,11a. John Day/Clarno Uplands
+US Ecoregions Level IV,41,11b. John Day/Clarno Highlands
+US Ecoregions Level IV,42,11c. Maritime-Influenced Zone
+US Ecoregions Level IV,43,11d. Melange
+US Ecoregions Level IV,44,11e. Wallowas/Seven Devils Mountains
+US Ecoregions Level IV,45,11f. Canyons and Dissected Highlands
+US Ecoregions Level IV,46,11h. Continental Zone Highlands
+US Ecoregions Level IV,47,11k. Blue Mountain Basins
+US Ecoregions Level IV,48,11l. Mesic Forest Zone
+US Ecoregions Level IV,49,11m. Subalpine-Alpine Zone
+US Ecoregions Level IV,50,11n. Deschutes River Valley
+US Ecoregions Level IV,51,11o. Cold Basins
+US Ecoregions Level IV,52,12a. Treasure Valley
+US Ecoregions Level IV,53,12j. Unwooded Alkaline Foothills
+US Ecoregions Level IV,54,77h. Chiwaukum Hills and Lowlands
+US Ecoregions Level IV,55,78a. Rogue/Illinois/Scott Valleys
+US Ecoregions Level IV,56,78b. Oak Savanna Foothills
+US Ecoregions Level IV,57,78c. Umpqua Interior Foothills
+US Ecoregions Level IV,58,78d. Serpentine Siskiyous
+US Ecoregions Level IV,59,78e. Inland Siskiyous
+US Ecoregions Level IV,60,78f. Coastal Siskiyous
+US Ecoregions Level IV,61,78h. Border High-Siskiyous
+US Ecoregions Level IV,62,78g. Klamath River Ridges
+US Ecoregions Level IV,63,78i. Western Klamath Low Elevation Forests
+US Ecoregions Level IV,64,80a. Dissected High Lava Plateau
+US Ecoregions Level IV,65,80d. Pluvial Lake Basins
+US Ecoregions Level IV,66,80e. High Desert Wetlands
+US Ecoregions Level IV,67,80f. Owyhee Uplands and Canyons
+US Ecoregions Level IV,68,80g. High Lava Plains
+US Ecoregions Level IV,69,80j. Semiarid Uplands
+US Ecoregions Level IV,70,80k. Partly Forested Mountains
+US Ecoregions Level IV,71,80l. Salt Shrub Valleys
+US Ecoregions Level IV,72,80m. Barren Playas
+US Ecoregions Level III,1,1. Coast Range
+US Ecoregions Level III,2,2. Puget Lowland
+US Ecoregions Level III,3,3. Willamette Valley
+US Ecoregions Level III,4,4. Cascades
+US Ecoregions Level III,5,9. Eastern Cascades Slopes and Foothills
+US Ecoregions Level III,6,10. Columbia Plateau
+US Ecoregions Level III,7,11. Blue Mountains
+US Ecoregions Level III,8,12. Snake River Plain
+US Ecoregions Level III,9,77. North Cascades
+US Ecoregions Level III,10,78. Klamath Mountains/California High North Coast Range
+US Ecoregions Level III,11,80. Northern Basin and Range
+Deschutes Land Trust Preserves Easements,1,Camp Polk Meadow Preserve
+Deschutes Land Trust Preserves Easements,2,Metolius Preserve
+Deschutes Land Trust Preserves Easements,3,Whychus Canyon Preserve addition
+Deschutes Land Trust Preserves Easements,4,Whychus Canyon Preserve
+Deschutes Land Trust Preserves Easements,5,Priday Ranch
+BLM National Monuments,1,San Juan Islands National Monument
+BLM National Monuments,2,Steens Mountain Cooperative Management and Protection Area
+BLM National Monuments,3,Cascade-Siskiyou National Monument
+National Park Service Park Boundaries,1,John Day Fossil Beds National Monument
+National Park Service Park Boundaries,2,Crater Lake National Park
+National Park Service Park Boundaries,3,Oregon Caves National Monument and Preserve
+National Wildlife Refuge Boundaries,1,Ankeny National Wildlife Refuge
+National Wildlife Refuge Boundaries,2,Bandon Marsh National Wildlife Refuge
+National Wildlife Refuge Boundaries,3,Hanford Reach National Monument/Saddle Mountain National Wildlife Refuge
+National Wildlife Refuge Boundaries,4,Hart Mountain National Antelope Refuge
+National Wildlife Refuge Boundaries,5,Klamath Marsh National Wildlife Refuge
+National Wildlife Refuge Boundaries,6,Lower Klamath National Wildlife Refuge
+National Wildlife Refuge Boundaries,7,Malheur National Wildlife Refuge
+National Wildlife Refuge Boundaries,8,Mckay Creek National Wildlife Refuge
+National Wildlife Refuge Boundaries,9,Nestucca Bay National Wildlife Refuge
+National Wildlife Refuge Boundaries,10,Oregon Islands National Wildlife Refuge
+National Wildlife Refuge Boundaries,11,Ridgefield National Wildlife Refuge
+National Wildlife Refuge Boundaries,12,Sheldon National Wildlife Refuge
+National Wildlife Refuge Boundaries,13,Tualatin River National Wildlife Refuge
+National Wildlife Refuge Boundaries,14,Umatilla National Wildlife Refuge
+National Wildlife Refuge Boundaries,15,Upper Klamath National Wildlife Refuge
+National Wildlife Refuge Boundaries,16,William L. Finley National Wildlife Refuge
+Columbia River Gorge National Scenic Area Boundary,1,Columbia River Gorge National Scenic Area
+Oregon State Parks,1,Rough and Ready
+Oregon State Parks,2,Elk Creek Tunnel Forest
+Oregon State Parks,3,Emigrant Springs
+Oregon State Parks,4,Peter Skene Ogden
+Oregon State Parks,5,Oceanside Beach
+Oregon State Parks,6,J.S. Burres
+Oregon State Parks,7,Carl G. Washburne
+Oregon State Parks,8,Heceta Head Lighthouse
+Oregon State Parks,9,Farewell Bend
+Oregon State Parks,10,William M. Tugman
+Oregon State Parks,11,Elijah Bristow
+Oregon State Parks,12,The Cove Palisades
+Oregon State Parks,13,Cline Falls
+Oregon State Parks,14,Sidney Access
+Oregon State Parks,15,Bald Peak
+Oregon State Parks,16,Battle Mountain Forest
+Oregon State Parks,17,Blue Mountain Forest
+Oregon State Parks,18,Prineville Reservoir
+Oregon State Parks,19,Golden and Silver Falls
+Oregon State Parks,20,Pengra Access
+Oregon State Parks,21,Saddle Mountain
+Oregon State Parks,22,Oswald West
+Oregon State Parks,23,Tou Velle
+Oregon State Parks,24,Jessie M. Honeyman
+Oregon State Parks,25,Cape Blanco
+Oregon State Parks,26,Pilot Butte
+Oregon State Parks,27,H.B. Van Duzer Forest
+Oregon State Parks,28,Bob Straub
+Oregon State Parks,29,Mayer
+Oregon State Parks,30,Yachats
+Oregon State Parks,31,Memaloose
+Oregon State Parks,32,John Yeon
+Oregon State Parks,33,White River Falls
+Oregon State Parks,34,Illinois River Forks
+Oregon State Parks,35,Molalla River
+Oregon State Parks,36,Champoeg
+Oregon State Parks,37,Tumalo
+Oregon State Parks,38,Willamette Mission
+Oregon State Parks,39,Umpqua Lighthouse
+Oregon State Parks,40,Cape Lookout
+Oregon State Parks,41,Brian Booth
+Oregon State Parks,42,Deschutes River
+Oregon State Parks,43,Fort Stevens
+Oregon State Parks,44,Goose Lake
+Oregon State Parks,45,Historic Columbia River Highway
+Oregon State Parks,46,Lake Owyhee
+Oregon State Parks,47,Luckiamute
+Oregon State Parks,48,Succor Creek
+Oregon State Parks,49,Rooster Rock
+Oregon State Parks,50,Cottonwood Canyon
+Oregon State Parks,51,Hug Point
+Oregon State Parks,52,Booth
+Oregon State Parks,53,Ukiah-Dale Forest
+Oregon State Parks,54,Ochoco
+Oregon State Parks,55,Parrett Mountain Access
+Oregon State Parks,56,Driftwood Beach
+Oregon State Parks,57,Arizona Beach
+Oregon State Parks,58,Silver Falls
+Oregon State Parks,59,Del Rey Beach
+Oregon State Parks,60,Harris Beach
+Oregon State Parks,61,Devil's Lake
+Oregon State Parks,62,Gleneden Beach
+Oregon State Parks,63,Clay Myers
+Oregon State Parks,64,Shore Acres
+Oregon State Parks,65,Humbug Mountain
+Oregon State Parks,66,Port Orford Heads
+Oregon State Parks,67,Paradise Point
+Oregon State Parks,68,Yaquina Bay
+Oregon State Parks,69,Fort Rock
+Oregon State Parks,70,Pistol River
+Oregon State Parks,71,Samuel H. Boardman
+Oregon State Parks,72,Cape Sebastian
+Oregon State Parks,73,McVay Rock
+Oregon State Parks,74,Boiler Bay
+Oregon State Parks,75,Otter Crest
+Oregon State Parks,76,Crissey Field
+Oregon State Parks,77,Sarah Helmick
+Oregon State Parks,78,Nehalem Bay
+Oregon State Parks,79,Wallowa Lake
+Oregon State Parks,80,Smith Rock
+Oregon State Parks,81,South Beach
+Oregon State Parks,82,Minam
+Oregon State Parks,83,Sitka Sedge
+Oregon State Parks,84,Unity Forest
+Oregon State Parks,85,Otter Point
+Oregon State Parks,86,Hilgard Junction
+Oregon State Parks,87,Tryon Creek
+Pine Creek Outer Boundary,1,Pine Creek Outer Boundary
+Warm Springs Boundary,1,Warm Springs Reservation
+USA Counties,1,Del Norte County
+USA Counties,2,Modoc County
+USA Counties,3,Siskiyou County
+USA Counties,4,Washington County
+USA Counties,5,Humboldt County
+USA Counties,6,Baker County
+USA Counties,7,Benton County
+USA Counties,8,Clackamas County
+USA Counties,9,Clatsop County
+USA Counties,10,Columbia County
+USA Counties,11,Coos County
+USA Counties,12,Crook County
+USA Counties,13,Curry County
+USA Counties,14,Deschutes County
+USA Counties,15,Douglas County
+USA Counties,16,Gilliam County
+USA Counties,17,Grant County
+USA Counties,18,Harney County
+USA Counties,19,Hood River County
+USA Counties,20,Jackson County
+USA Counties,21,Jefferson County
+USA Counties,22,Josephine County
+USA Counties,23,Klamath County
+USA Counties,24,Lake County
+USA Counties,25,Lane County
+USA Counties,26,Lincoln County
+USA Counties,27,Linn County
+USA Counties,28,Malheur County
+USA Counties,29,Marion County
+USA Counties,30,Morrow County
+USA Counties,31,Multnomah County
+USA Counties,32,Polk County
+USA Counties,33,Sherman County
+USA Counties,34,Tillamook County
+USA Counties,35,Umatilla County
+USA Counties,36,Union County
+USA Counties,37,Wallowa County
+USA Counties,38,Wasco County
+USA Counties,39,Wheeler County
+USA Counties,40,Yamhill County
+USA Counties,41,Asotin County
+USA Counties,42,Chelan County
+USA Counties,43,Clark County
+USA Counties,44,Cowlitz County
+USA Counties,45,Franklin County
+USA Counties,46,Grays Harbor County
+USA Counties,47,Kittitas County
+USA Counties,48,Klickitat County
+USA Counties,49,San Juan County
+USA Counties,50,Thurston County
+USA Counties,51,Walla Walla County
+USA Counties,52,Yakima County
+Forest Service National Forest Boundaries,1,Klamath National Forest
+Forest Service National Forest Boundaries,2,Six Rivers National Forest
+Forest Service National Forest Boundaries,3,Deschutes National Forest
+Forest Service National Forest Boundaries,4,Fremont-Winema National Forest
+Forest Service National Forest Boundaries,5,Malheur National Forest
+Forest Service National Forest Boundaries,6,Mt. Hood National Forest
+Forest Service National Forest Boundaries,7,Ochoco National Forest
+Forest Service National Forest Boundaries,8,Rogue River-Siskiyou National Forests
+Forest Service National Forest Boundaries,9,Siuslaw National Forest
+Forest Service National Forest Boundaries,10,Umatilla National Forest
+Forest Service National Forest Boundaries,11,Umpqua National Forest
+Forest Service National Forest Boundaries,12,Wallowa-Whitman National Forest
+Forest Service National Forest Boundaries,13,Okanogan-Wenatchee National Forest
+Forest Service National Forest Boundaries,14,Willamette National Forest
+Forest Service National Forest Boundaries,15,Columbia River Gorge National Scenic Area

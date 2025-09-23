@@ -190,7 +190,7 @@
             <div class="imerss-checklists">
                 <div class="imerss-pollinators imerss-checklist-holder">
                     <div class="imerss-panel-label"><span>Bees</span>
-                        <span class="imerss-download-checklist imerss-basic-tooltip" title="Download checklist as CSV"><svg width="24" height="24" >
+                        <span class="imerss-download-button imerss-basic-tooltip" title="Download checklist as CSV"><svg width="24" height="24" >
                             <use href="#download" />
                         </svg></span>
                         <span class="imerss-search-checklist"></span>
@@ -229,7 +229,7 @@
                 </div>
                 <div class="imerss-plants imerss-checklist-holder">
                     <div class="imerss-panel-label"><span>Plants</span>
-                        <span class="imerss-download-checklist imerss-basic-tooltip" title="Download checklist as CSV"><svg width="24" height="24" >
+                        <span class="imerss-download-button imerss-basic-tooltip" title="Download checklist as CSV"><svg width="24" height="24" >
                             <use href="#download" />
                         </svg></span>
                         <span class="imerss-search-checklist"></span>
@@ -243,9 +243,9 @@
         <script>
             hortis.vizLoaderWithMap(".imerss-container", {
                 gradeNames: "hortis.beaVizLoader",
-                obsFile: "data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz",
+                obsFile: "data/b-team/plant-pollinators-OBA-2025-labels.viz",
                 taxaFile: "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz",
-                regionIndirectionFile: "data/b-team/regionIndirection.csv",
+                regionIndirectionFile: "data/b-team/plant-pollinators-OBA-2025-regionIndirection.csv",
                 resourceBase: "src/client"
             });
         </script>

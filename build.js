@@ -160,14 +160,14 @@ const buildIndex = {
         src: "src/lib/brightsign-keyboard.js",
         dest: "docs/js/brightsign-keyboard.js"
     }, {
-        src: "data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz",
-        dest: "docs/data/b-team/plant-pollinators-OBA-2025-assigned-subset-labels.viz"
+        src: "data/b-team/plant-pollinators-OBA-2025-labels.viz",
+        dest: "docs/data/b-team/plant-pollinators-OBA-2025-labels.viz"
     }, {
         src: "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz",
         dest: "docs/data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz"
     }, {
-        src: "data/b-team/regionIndirection.csv",
-        dest: "docs/data/b-team/regionIndirection.csv"
+        src: "data/b-team/plant-pollinators-OBA-2025-regionIndirection.csv",
+        dest: "docs/data/b-team/plant-pollinators-OBA-2025-regionIndirection.csv"
     }, {
         src: "data/b-team/plant-pollinators-WaBA-2025-labels.csv",
         dest: "docs/data/b-team/plant-pollinators-WaBA-2025-labels.csv"

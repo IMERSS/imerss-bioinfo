@@ -1,6 +1,6 @@
 "use strict";
 
-/* global preactSignalsCore, imerss, d3, domtoimage */
+/* global preactSignalsCore, imerss, d3 */
 
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
@@ -347,7 +347,7 @@ hortis.findAncestor = function (row, selection) {
 };
 
 hortis.ancestorHitCache = function (selection, rowById) {
-    const taxonToAncestor = {0: "0"};
+    const taxonToAncestor = {};
     return {
         taxonToAncestor,
         get: function (taxonId) {
@@ -355,7 +355,8 @@ hortis.ancestorHitCache = function (selection, rowById) {
             if (existing !== undefined) {
                 return existing;
             } else {
-                const row = rowById[taxonId];
+                // eslint-disable-next-line eqeqeq
+                const row = taxonId == 0 ? hortis.checklist.NO_TAXON_ROW : rowById[taxonId];
                 const computed = hortis.findAncestor(row, selection);
                 taxonToAncestor[taxonId] = computed;
                 return computed;
@@ -374,8 +375,8 @@ hortis.ancestorHitCache = function (selection, rowById) {
  */
 hortis.interactions.count = function (that, rows, plantSelection, pollSelection) {
     const rowById = that.rowById.peek();
-    const allSelection = {...plantSelection, ...pollSelection};
-    const ancestorCache = hortis.ancestorHitCache(allSelection, rowById);
+    const plantCache = hortis.ancestorHitCache(plantSelection, rowById);
+    const pollCache = hortis.ancestorHitCache(pollSelection, rowById);
 
     const crossTable = {};
     const plantCounts = {counts: {}, max: 0};
@@ -391,8 +392,8 @@ hortis.interactions.count = function (that, rows, plantSelection, pollSelection)
         rows.forEach(function (row) {
             const {pollinatorINatId: pollId, plantINatId: plantId} = row;
             if (plantId && pollId) {
-                const plantCountKey = ancestorCache.get(plantId);
-                const pollCountKey = ancestorCache.get(pollId);
+                const plantCountKey = plantCache.get(plantId);
+                const pollCountKey = pollCache.get(pollId);
                 if (plantCountKey && pollCountKey) {
                     const key = hortis.intIdsToKey(plantCountKey, pollCountKey);
 
@@ -441,7 +442,7 @@ hortis.plantColours = {
 };
 
 hortis.computeRankColours = function (selection, colourIndex, idToEntry) {
-    const entries = Object.keys(selection).map(id => idToEntry[id]);
+    const entries = Object.keys(selection).map(id => idToEntry[id]).filter(entry => entry);
     const rows = entries.sort((a, b) => a.index - b.index).map(entry => entry.row);
     const colourEntries = rows.map(row => {
         let togo = [row.iNaturalistTaxonName, null];
@@ -493,6 +494,20 @@ hortis.bipartite.listenWidth = function (containerNode, widthSignal) {
     observer.observe(containerNode);
 };
 
+// This gets injected into a rendered bipartite diagram - keep in step with imerss-bbea.css etc.
+hortis.bipartite.css = `
+<style>
+    svg {
+        font-size: 14px;
+        font-family: Arial,Helvetica,sans-serif;
+    }
+    .bipartite-label {
+        font-size: 18px;
+        font-weight: 500;
+    }
+</style>
+`;
+
 
 hortis.loadImage = async url => {
     const $img = document.createElement("img");
@@ -518,11 +533,17 @@ hortis.getCanvasBlob = async (svgURL, { format, quality, scale }) => {
     return blob;
 };
 
+function injectSvgStyle(svgText, style) {
+    return svgText.replace(/(<svg[^>]*>)/, `$1${style}`);
+}
+
 hortis.bipartite.downloadButton = function (bipartite, button, svg) {
     button.on("click", async () => {
         const dataHeader = "data:image/svg+xml;charset=utf-8";
         const serializeAsXML = $e => (new XMLSerializer()).serializeToString($e);
-        const encodeAsUTF8 = s => `${dataHeader},${encodeURIComponent(s)}`;
+        const encodeAsUTF8 = s => {
+            return `${dataHeader},${encodeURIComponent(injectSvgStyle(s, hortis.bipartite.css))}`;
+        };
         const $svg = svg[0];
         const svgURL = encodeAsUTF8(serializeAsXML($svg));
 

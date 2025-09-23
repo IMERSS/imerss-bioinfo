@@ -366,6 +366,43 @@ fluid.defaults("hortis.taxa", {
     }
 });
 
+// Copied from imerss-viz.js
+hortis.indexTaxaById = function (flatTree) {
+    const index = {};
+    flatTree.forEach(function (row) {
+        index[row.id] = row;
+    });
+    return index;
+};
+
+// Left over from imerss-viz.js - looks like still disused in "new" since nothing reads childCount and this should
+// doubtless be done in "entries".
+// cf. hortis.flattenTreeRecurse - the tree now comes in flat and sorted
+hortis.taxa.map = function (rows, byId) {
+    rows.forEach((row, i) => {
+        row.flatIndex = i;
+        if (!row.children) {
+            row.children = []; // conform to standard of imerss-viz.js, this may get initialised by fluid.pushArray
+        }
+        if (row.parentId) {
+            const parent = byId[row.parentId];
+            row.parent = parent;
+            fluid.pushArray(parent, "children", row);
+        }
+    });
+    const assignDepth = function (node, childCount, depth) {
+        node.depth = depth;
+        // TODO: source this from summary properly
+        const isLeaf = node.children.length === 0;
+        node.childCount = node.children.reduce((childCount, child) => assignDepth(child, childCount, depth + 1), isLeaf ? 1 : 0);
+        return node.childCount + childCount;
+    };
+    if (rows.length > 0) {
+        assignDepth(rows[0], 0, 0);
+    }
+    return byId;
+};
+
 hortis.nameOverrides = {
     "Chromista": "Chromists"
 };
@@ -403,43 +440,6 @@ hortis.lookupTaxon = function (rows, query, maxSuggestions) {
         }
     }
     return maxSuggestions === 1 ? output[0] : output;
-};
-
-// Copied from imerss-viz.js
-hortis.indexTaxaById = function (flatTree) {
-    const index = {};
-    flatTree.forEach(function (row) {
-        index[row.id] = row;
-    });
-    return index;
-};
-
-// Left over from imerss-viz.js - looks like still disused in "new" since nothing reads childCount and this should
-// doubtless be done in "entries".
-// cf. hortis.flattenTreeRecurse - the tree now comes in flat and sorted
-hortis.taxa.map = function (rows, byId) {
-    rows.forEach((row, i) => {
-        row.flatIndex = i;
-        if (!row.children) {
-            row.children = []; // conform to standard of imerss-viz.js, this may get initialised by fluid.pushArray
-        }
-        if (row.parentId) {
-            const parent = byId[row.parentId];
-            row.parent = parent;
-            fluid.pushArray(parent, "children", row);
-        }
-    });
-    const assignDepth = function (node, childCount, depth) {
-        node.depth = depth;
-        // TODO: source this from summary properly
-        const isLeaf = node.children.length === 0;
-        node.childCount = node.children.reduce((childCount, child) => assignDepth(child, childCount, depth + 1), isLeaf ? 1 : 0);
-        return node.childCount + childCount;
-    };
-    if (rows.length > 0) {
-        assignDepth(rows[0], 0, 0);
-    }
-    return byId;
 };
 
 // Holds model state shared with checklist and index - TODO rename after purpose, "layout" used to refer to sunburst root
