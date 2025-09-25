@@ -594,7 +594,7 @@ hortis.checklist.subscribeSelected = function (that, selectedIdSignal, rowByIdSi
 // TODO not currently used - we always seem to have a real root, recheck this
 hortis.checklist.ROOT_ID = Number.NEGATIVE_INFINITY;
 
-hortis.checklist.NO_TAXON_ROW = Object.freeze({id: "0", taxonName: "None"});
+hortis.checklist.NO_TAXON_ROW = Object.freeze({id: "0", taxonName: "None", children: []});
 
 hortis.checklist.computeRootEntry = function (that, rowById, rootId, filterTaxonomy) {
     // TODO: Use of ROOT_ID to display polyphyletic set needed?

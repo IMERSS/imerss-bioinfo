@@ -291,15 +291,17 @@ fluid.defaults("hortis.cachediNatTaxonByName", {
 
 // Highest iNat rank is 100 for Life - we want the most specific taxon of those selected
 hortis.scoreNameMatch = async function (result, query, byIdSource) {
-    let score = (query.name === result.matched_term ? 512 : 0) + (query.name === result.name ? 256 : 0) + (128 - result.rank_level);
+    // Extra branch in result.name copes with Pentagramma triangularis -> Pentagramma triangularis triangularis
+    let score = (query.name === result.matched_term ? 512 : 0)
+        + (query.name === result.name || result.name.startsWith(query.name) ? 256 : 0) + (128 - result.rank_level);
     if (query.rank) {
         // An exact name match is more important than a rank match
         if (query.rank === result.rank) {
             score |= 128;
         }
     }
-    // Don't hit the DB for any results which are not already an exact match for the query
-    if (query.phylum && (score & 512)) {
+    // Don't hit the DB for any results which are not already an exact(ish) match for the query
+    if (query.phylum && (score & (512 | 256))) {
         const rankTarget = {};
         await hortis.iNat.getRanks(result.id, rankTarget, byIdSource, ["phylum"]);
         if (query.phylum === rankTarget.phylum) {
