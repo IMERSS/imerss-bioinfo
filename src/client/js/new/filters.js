@@ -272,7 +272,7 @@ fluid.defaults("hortis.freeRegionFilter", {
             args: ["{that}.dom.clearFilter.0", "{that}.regionFilterState"],
             func: (node, filterState) => effect(() => hortis.toggleClass(node, "imerss-hidden", !filterState.value))
         }
-    },
+    }
 });
 
 hortis.freeRegionFilter.bindEvents = function (that) {

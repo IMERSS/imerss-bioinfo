@@ -63,6 +63,8 @@ fluid.defaults("hortis.dualRangeInput", {
     }
 });
 
+// Adapted from sample at https://muffinman.io/blog/native-dual-range-input/
+
 class DualRangeInput {
     $min;
     $max;

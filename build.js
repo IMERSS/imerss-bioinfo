@@ -8,6 +8,9 @@ const fluid = require("infusion");
 const terser = require("terser");
 const path = require("path");
 
+// const fluid6 = require("./infusion-6.js");
+// console.log(fluid6);
+
 const buildIndex = {
     libSource: [
         "node_modules/infusion/src/framework/core/css/fluid.css",

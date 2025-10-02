@@ -43,6 +43,11 @@
 }
 
 /** Account for slightly higher base font */
+
+.imerss-checklist .pretty {
+    line-height: 1;
+}
+
 .pretty {
     line-height: 0.95;
 }
