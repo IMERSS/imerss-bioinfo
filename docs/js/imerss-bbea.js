@@ -969,7 +969,7 @@ hortis.renderBbeaGridTooltip = function (that, grid, rowById, cellId) {
 };
 
 fluid.defaults("hortis.sexFilter", {
-    gradeNames: ["hortis.filter", "fluid.stringTemplateRenderingView"],
+    gradeNames: ["hortis.obsFilter", "fluid.stringTemplateRenderingView"],
     markup: {
         container: `
         <div class="imerss-sex-filter">
