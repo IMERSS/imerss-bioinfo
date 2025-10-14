@@ -121,11 +121,19 @@ US Ecoregions Level III,8,12. Snake River Plain
 US Ecoregions Level III,9,77. North Cascades
 US Ecoregions Level III,10,78. Klamath Mountains/California High North Coast Range
 US Ecoregions Level III,11,80. Northern Basin and Range
+Columbia Land Trust Boundaries,1,Rainbow Farms
+Columbia Land Trust Boundaries,2,Mill Creek Ridge
+Columbia Land Trust Boundaries,3,Four Sisters
 Deschutes Land Trust Preserves Easements,1,Camp Polk Meadow Preserve
 Deschutes Land Trust Preserves Easements,2,Metolius Preserve
 Deschutes Land Trust Preserves Easements,3,Whychus Canyon Preserve addition
 Deschutes Land Trust Preserves Easements,4,Whychus Canyon Preserve
 Deschutes Land Trust Preserves Easements,5,Priday Ranch
+GreenBelt Land Trust Land Holdings,1,Evergreen
+GreenBelt Land Trust Land Holdings,2,Bald Hill Farm-BPA
+GreenBelt Land Trust Land Holdings,3,Bald Hill Farm-OWEB
+GreenBelt Land Trust Land Holdings,4,Luckiamute Meadows
+GreenBelt Land Trust Land Holdings,5,Kingston Prairie Fee
 BLM National Monuments,1,San Juan Islands National Monument
 BLM National Monuments,2,Steens Mountain Cooperative Management and Protection Area
 BLM National Monuments,3,Cascade-Siskiyou National Monument
@@ -149,6 +157,7 @@ National Wildlife Refuge Boundaries,14,Umatilla National Wildlife Refuge
 National Wildlife Refuge Boundaries,15,Upper Klamath National Wildlife Refuge
 National Wildlife Refuge Boundaries,16,William L. Finley National Wildlife Refuge
 Columbia River Gorge National Scenic Area Boundary,1,Columbia River Gorge National Scenic Area
+Pine Creek Conservation Area,1,Pine Creek Outer Boundary
 Oregon State Parks,1,Rough and Ready
 Oregon State Parks,2,Elk Creek Tunnel Forest
 Oregon State Parks,3,Emigrant Springs
@@ -236,6 +245,12 @@ Oregon State Parks,84,Unity Forest
 Oregon State Parks,85,Otter Point
 Oregon State Parks,86,Hilgard Junction
 Oregon State Parks,87,Tryon Creek
+TNC OSU Research Permit Lands,1,Camassia
+TNC OSU Research Permit Lands,2,Tom Mccall At Rowena
+TNC OSU Research Permit Lands,3,Sycan Marsh
+TNC OSU Research Permit Lands,4,Zumwalt Prairie
+TNC OSU Research Permit Lands,5,Cascade Head
+TNC OSU Research Permit Lands,6,Table Rocks
 Pine Creek Outer Boundary,1,Pine Creek Outer Boundary
 Warm Springs Boundary,1,Warm Springs Reservation
 USA Counties,1,Del Norte County
