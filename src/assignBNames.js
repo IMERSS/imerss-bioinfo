@@ -23,6 +23,20 @@ hortis.handleFailure = function () {
 
 fluid.failureEvent.addListener(hortis.handleFailure, "hortis", "before:fail");
 
+/**
+ * Extracts the "trunk" portion of an input file path by removing the file extension
+ * and, if present, the last hyphen-separated suffix after the last slash.
+ *
+ * The function determines the position to truncate the string by:
+ * - Finding the last position of a period (.) for the file extension.
+ * - Finding the last position of a hyphen (-).
+ * - Finding the last position of a slash (/).
+ * If the last hyphen is not present or occurs before the last slash, truncation occurs at the last period.
+ * Otherwise, truncation occurs at the last hyphen.
+ *
+ * @param {String} inputFile - The input file path to process.
+ * @return {String} The trunk portion of the input file path.
+ */
 hortis.inputFileToTrunk = function (inputFile) {
     const lastdotpos = inputFile.lastIndexOf(".");
     const lasthypos = inputFile.lastIndexOf("-");

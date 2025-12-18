@@ -172,11 +172,11 @@ const buildIndex = {
         src: "data/b-team/plant-pollinators-OBA-2025-regionIndirection.csv",
         dest: "docs/data/b-team/plant-pollinators-OBA-2025-regionIndirection.csv"
     }, {
-        src: "data/b-team/plant-pollinators-WaBA-2025-labels.csv",
-        dest: "docs/data/b-team/plant-pollinators-WaBA-2025-labels.csv"
+        src: "data/b-team/plant-pollinators-WaBA-2025-labels.viz",
+        dest: "docs/data/b-team/plant-pollinators-WaBA-2025-labels.viz"
     }, {
-        src: "data/b-team/plant-pollinators-WaBA-2025-assigned-taxa.csv",
-        dest: "docs/data/b-team/plant-pollinators-WaBA-2025-assigned-taxa.csv"
+        src: "data/b-team/plant-pollinators-WaBA-2025-assigned-taxa.viz",
+        dest: "docs/data/b-team/plant-pollinators-WaBA-2025-assigned-taxa.viz"
     }, {
         src: "data/b-team/plant-pollinators-WaBA-2025-regionIndirection.csv",
         dest: "docs/data/b-team/plant-pollinators-WaBA-2025-regionIndirection.csv"

@@ -58,54 +58,45 @@ US Ecoregions Level III,6,10. Columbia Plateau
 US Ecoregions Level III,7,11. Blue Mountains
 US Ecoregions Level III,8,15. Northern Rockies
 US Ecoregions Level III,9,77. North Cascades
-BLM National Monuments,1,San Juan Islands National Monument
-National Park Service Park Boundaries,1,Olympic National Park
-National Park Service Park Boundaries,2,Ebey's Landing National Historical Reserve
-National Park Service Park Boundaries,3,Fort Vancouver National Historic Site
-National Wildlife Refuge Boundaries,1,Captain John Rapids Satellite Facility
-National Wildlife Refuge Boundaries,2,Hanford Reach National Monument/Saddle Mountain National Wildlife Refuge
-National Wildlife Refuge Boundaries,3,Lenore Game Range
-National Wildlife Refuge Boundaries,4,Sunnyside Wildlife Management Area
-Columbia River Gorge National Scenic Area Boundary,1,Columbia River Gorge National Scenic Area
-USA Counties,1,Asotin County
-USA Counties,2,Benton County
-USA Counties,3,Chelan County
-USA Counties,4,Clallam County
-USA Counties,5,Clark County
-USA Counties,6,Columbia County
-USA Counties,7,Douglas County
-USA Counties,8,Ferry County
-USA Counties,9,Franklin County
-USA Counties,10,Garfield County
-USA Counties,11,Grant County
-USA Counties,12,Grays Harbor County
-USA Counties,13,Island County
-USA Counties,14,Jefferson County
-USA Counties,15,King County
-USA Counties,16,Kitsap County
-USA Counties,17,Kittitas County
-USA Counties,18,Klickitat County
-USA Counties,19,Lewis County
-USA Counties,20,Lincoln County
-USA Counties,21,Mason County
-USA Counties,22,Okanogan County
-USA Counties,23,Pend Oreille County
-USA Counties,24,Pierce County
-USA Counties,25,San Juan County
-USA Counties,26,Skagit County
-USA Counties,27,Skamania County
-USA Counties,28,Snohomish County
-USA Counties,29,Spokane County
-USA Counties,30,Stevens County
-USA Counties,31,Thurston County
-USA Counties,32,Whatcom County
-USA Counties,33,Whitman County
-USA Counties,34,Yakima County
-Forest Service National Forest Boundaries,1,Gifford Pinchot National Forest
-Forest Service National Forest Boundaries,2,Mt. Baker-Snoqualmie National Forest
-Forest Service National Forest Boundaries,3,Olympic National Forest
-Forest Service National Forest Boundaries,4,Umatilla National Forest
-Forest Service National Forest Boundaries,5,Okanogan-Wenatchee National Forest
-Forest Service National Forest Boundaries,6,Colville National Forest
-Forest Service National Forest Boundaries,7,Columbia River Gorge National Scenic Area
-Forest Service National Forest Boundaries,8,Idaho Panhandle National Forests
+WDFW Wildlife Areas,1,4-O Ranch
+WDFW Wildlife Areas,2,Asotin Creek
+WDFW Wildlife Areas,3,Grouse Flats
+WDFW Wildlife Areas,4,Chief Joseph
+WDFW Wildlife Areas,5,Waikiki Springs
+WDFW Wildlife Areas,6,W.T. Wooten
+WDFW Wildlife Areas,7,Quincy Lakes
+WDFW Wildlife Areas,8,Lower Crab Creek
+WDFW Wildlife Areas,9,Desert
+WDFW Wildlife Areas,10,Gloyd Seeps
+WDFW Wildlife Areas,11,Sun Lakes
+WDFW Wildlife Areas,12,Banks Lake
+WDFW Wildlife Areas,13,Methow
+WDFW Wildlife Areas,14,Big Bend
+WDFW Wildlife Areas,15,Swakane
+WDFW Wildlife Areas,16,Colockum
+WDFW Wildlife Areas,17,Wenas
+WDFW Wildlife Areas,18,L.T. Murray
+WDFW Wildlife Areas,19,Whiskey Dick
+WDFW Wildlife Areas,20,Teanaway Valley
+WDFW Wildlife Areas,21,Oak Creek
+WDFW Wildlife Areas,22,Cowiche
+WDFW Wildlife Areas,23,Sunnyside
+WDFW Wildlife Areas,24,Byron
+WDFW Wildlife Areas,25,Windmill Ranch
+WDFW Wildlife Areas,26,Simcoe Mountains
+WDFW Wildlife Areas,27,Scatter Creek
+WDFW Wildlife Areas,28,West Rocky Prairie
+WDFW Wildlife Areas,29,Anderson Homestead
+WDFW Wildlife Areas,30,Dungeness
+WDFW Wildlife Areas,31,Morse Creek
+WDFW Wildlife Areas,32,Discovery Bay
+WA State Parks,1,Fort Casey Historical State Park
+WA State Parks,2,Fort Flagler Historical State Park
+WA State Parks,3,Fort Worden Historical State Park
+WA State Parks,4,Ginkgo Petrified Forest State Park
+WA State Parks,5,Lake Wenatchee State Park
+WA State Parks,6,Larrabee State Park
+WA State Parks,7,Mount Spokane State Park
+WA State Parks,8,Palouse to Cascades State Park Trail
+WA State Parks,9,Steptoe Butte State Park Heritage Site
+WA State Parks,10,Sun Lakes-Dry Falls State Park
