@@ -1,9 +1,10 @@
 library(googledrive)
 library(data.table)
 
-timedRead <- function (toread) {
+timedRead <- function (toread, options = list()) {
+  encoding <- if (!is.null(options$encoding)) options$encoding else "UTF-8"
   start <- Sys.time()
-  frame <- read.csv(toread)
+  frame <- read.csv(toread, encoding = encoding, colClasses=c("character"), na.strings = c("", "NA"))
   end <- Sys.time()
   cat("Read ", nrow(frame), " rows from ", toread, " in ", (end - start), "s")
   frame

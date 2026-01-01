@@ -18,10 +18,21 @@ const hortis = fluid.registerNamespace("hortis");
 fluid.setLogging(true);
 
 hortis.handleFailure = function () {
-    process.exit(1);
+//    process.exit(1);
 };
 
-fluid.failureEvent.addListener(hortis.handleFailure, "hortis", "before:fail");
+// Override this one from module fluid.js so that we continue in the face of socket hangup
+fluid.handleUncaughtException = function () {
+    console.log("Received uncaught exception");
+};
+
+// fluid.failureEvent.addListener(hortis.handleFailure, "hortis", "before:fail");
+
+/** Catch socket hangup issues
+ */
+process.on("uncaughtException", function onUncaughtException(err) {
+    fluid.log("Uncaught exception", err);
+});
 
 /**
  * Extracts the "trunk" portion of an input file path by removing the file extension

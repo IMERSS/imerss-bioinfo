@@ -102,7 +102,7 @@ hortis.iNat.parentTaxaIds = function (taxonDoc) {
 
 fluid.defaults("hortis.iNatAPILimiter", {
     gradeNames: ["fluid.dataSource.rateLimiter", "fluid.resolveRootSingle"],
-    rateLimit: 1700,
+    rateLimit: 2000,
     singleRootType: "hortis.iNatAPILimiter"
 });
 
