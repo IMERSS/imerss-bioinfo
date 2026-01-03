@@ -26,10 +26,19 @@ fluid.handleUncaughtException = function () {
     console.log("Received uncaught exception");
 };
 
-// fluid.failureEvent.addListener(hortis.handleFailure, "hortis", "before:fail");
+fluid.onUncaughtException.addListener(fluid.handleUncaughtException, "fail",
+    fluid.handlerPriorities.uncaughtException.fail);
 
 /** Catch socket hangup issues
  */
+process.on("unhandledRejection", (reason, promise) => {
+    debugger;
+    console.log("Unhandled Rejection at:", promise, "reason:", reason);
+});
+
+// fluid.failureEvent.addListener(hortis.handleFailure, "hortis", "before:fail");
+
+
 process.on("uncaughtException", function onUncaughtException(err) {
     fluid.log("Uncaught exception", err);
 });

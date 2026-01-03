@@ -195,7 +195,15 @@ hortis.cachedApiSource.read = async function (that, payload, options) {
                 console.log("Staleness is " + moment.duration(staleness).humanize() + " so fetching live document");
             }
         }
-        const live = await that.apiSource.get(query);
+        let live;
+        try {
+            live = await that.apiSource.get(query);
+        } catch (e) {
+            console.log("Got API error ", e);
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            debugger;
+            live = await that.apiSource.get(query);
+        }
         const writer = async function (query, toWrite) {
             if (toWrite.doc) { // Only write to db if we got live
                 await that.dbSource.set(query, toWrite);

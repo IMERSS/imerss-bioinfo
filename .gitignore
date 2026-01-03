@@ -12,3 +12,5 @@ data/Janszen/**
 data/iNaturalist/taxa.db/
 
 .DS_Store
+
+jwt.json
