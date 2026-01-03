@@ -110,7 +110,8 @@ const strategies = {
         rawName: "scientific_name",
         iNatId: "taxon_id",
         nameStatus: "nameStatus",
-        assignedINatName: "scientific_name"
+        assignedINatName: "scientific_name",
+        assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus"]
     }
 };
 
