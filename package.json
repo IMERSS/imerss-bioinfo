@@ -1,7 +1,7 @@
 {
     "name": "imerss-bioinfo",
     "description": "Working data of the IMERSS biodiversity informatics working group, together with algorithms",
-    "version": "1.12.0",
+    "version": "1.13.0",
     "author": "Antranig Basman",
     "scripts": {
         "lint": "fluid-lint-all",
@@ -29,7 +29,6 @@
         "moment-timezone": "0.5.43",
         "jsep": "EricSmekens/jsep#25fcb53",
         "minimist": "1.2.8",
-        "lz4": "0.6.5",
         "pako": "2.1.0",
         "json5": "2.2.3",
         "accessible-autocomplete": "2.0.4",
@@ -44,6 +43,9 @@
         "eslint-config-fluid": "2.1.1",
         "fluid-lint-all": "1.2.10",
         "node-jqunit": "1.1.9"
+    },
+    "optionalDependencies": {
+        "lz4": "0.6.5"
     },
     "repository": {
         "type": "git",
