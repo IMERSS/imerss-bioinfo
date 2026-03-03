@@ -722,11 +722,13 @@ hortis.checklist.computeLeaves = function (idToEntry, selection, copyChecklistRa
         }
     };
     const appendLeaves = function (id) {
-        const entry = idToEntry[id];
-        if (entry.children.length === 0) {
-            leaves[entry.row.id] = entry.row;
-        } else {
-            entry.children.forEach(child => appendLeaves(child.row.id));
+        if (id !== "0") { // NO_TAXON entry - no taxon may be recorded e.g. for a bee with no plant
+            const entry = idToEntry[id];
+            if (entry.children.length === 0) {
+                leaves[entry.row.id] = entry.row;
+            } else {
+                entry.children.forEach(child => appendLeaves(child.row.id));
+            }
         }
     };
 
