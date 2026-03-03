@@ -79,7 +79,7 @@ fluid.defaults("hortis.standardVizLoader", {
             type: "hortis.checklist.withHolder",
             container: "{that}.dom.checklist",
             options: {
-                gradeNames: ["hortis.checklist.withCopy"],
+                gradeNames: ["hortis.checklist.withDownload", "hortis.checklist.withSearch"],
                 rootId: 48460, // Life
                 filterRanks: ["epifamily", "family", "tribe", "genus", "subgenus", "species"],
                 disclosableRanks: [],
@@ -87,6 +87,7 @@ fluid.defaults("hortis.standardVizLoader", {
                 copyChecklistRanks: ["genus", "species"],
                 selectable: false,
                 unfoldable: true,
+                searchControlId: "fli-imerss-checklist-search",
                 copyButtonMessage: "Copy %rows taxa to clipboard",
                 members: {
                     rowById: "{taxa}.rowById",

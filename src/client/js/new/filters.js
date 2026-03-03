@@ -170,6 +170,7 @@ fluid.defaults("hortis.regionFilter", {
         // Rows with members {regionField, id, label} where regionField is the obs column, id is the value found there, label is the label to be rendered for it
         indirectionRows: "@expand:signal([])",
         filterRows: "@expand:fluid.computed(hortis.regionFilter.computeFilterRows, {that}.indirectionRows, {that}.options.fieldNames, {that}.options.freeFilter)",
+        // Free hash of region keys to true
         filterState: "@expand:signal({})",
         renderModel: `@expand:fluid.computed(hortis.regionFilter.renderModel, {that}.filterRows,
             {that}.options.markup, {that}.options.filterName, {that}.options.freeFilter)`
@@ -201,18 +202,29 @@ hortis.regionFilter.reset = function (that) {
     hortis.resetChecks(that.container[0]);
 };
 
+/**
+ * Updates the filter state for a region filter component.
+ *
+ * @param {hortis.regionFilter} that - The region filter component instance.
+ * @param {String|Number} id - The identifier for the filter row to update.
+ * @param {Boolean} selected - Whether the filter row is selected
+ */
+hortis.regionFilter.update = function (that, id, selected) {
+    const filterState = {...that.filterState.value};
+    if (selected) {
+        filterState[id] = true;
+    } else {
+        delete filterState[id];
+    }
+    that.filterState.value = filterState;
+};
+
 // cf. hortis.checklist.bindCheckboxClick
 hortis.regionFilter.bindClick = function (that) {
     that.container.on("click", ".pretty input", function () {
         const id = this.dataset.rowId;
         fluid.log("Filter clicked with row " + id);
-        const filterState = {...that.filterState.value};
-        if (this.checked) {
-            filterState[id] = true;
-        } else {
-            delete filterState[id];
-        }
-        that.filterState.value = filterState;
+        hortis.regionFilter.update(that, id, this.checked);
     });
 };
 
@@ -270,7 +282,7 @@ fluid.defaults("hortis.freeRegionFilter", {
         },
         "onCreate.bindShowClear": {
             args: ["{that}.dom.clearFilter.0", "{that}.regionFilterState"],
-            func: (node, filterState) => effect(() => hortis.toggleClass(node, "imerss-hidden", !filterState.value))
+            func: (node, filterState) => effect(() => hortis.toggleClass(node, "fl-hidden", !filterState.value))
         }
     }
 });
@@ -306,7 +318,7 @@ fluid.defaults("hortis.autocompleteFilter", {
         <div class="%rootClass">
             <label class="imerss-filter-title" for="%controlId">%filterName:</label>
             <div class="imerss-filter-body imerss-filter-autocomplete">
-                <div class="imerss-filter-clear imerss-basic-tooltip imerss-hidden" title="Reset this filter"><svg width="24" height="24">
+                <div class="imerss-filter-clear imerss-basic-tooltip fl-hidden" title="Reset this filter"><svg width="24" height="24">
                         <use href="#x-circle-close" />
                     </svg>
                 </div>
@@ -360,7 +372,7 @@ fluid.defaults("hortis.autocompleteFilter", {
         },
         "onCreate.bindShowClear": {
             args: ["{that}.dom.clearFilter.0", "{that}.filterState"],
-            func: (node, filterState) => effect(() => hortis.toggleClass(node, "imerss-hidden", !filterState.value))
+            func: (node, filterState) => effect(() => hortis.toggleClass(node, "fl-hidden", !filterState.value))
         }
     }
 });

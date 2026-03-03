@@ -96,6 +96,15 @@ const strategies = {
             separator: "\t"
         }
     },
+    DwCA: { // The form that Howe Sound is in
+        iNatName: "scientificName",
+        rawName: "scientificName",
+        iNatId: "iNaturalistTaxonId",
+        nameStatus: "nameStatus",
+        assignedINatName: "iNaturalistTaxonName",
+        assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus"],
+        sanitize: true
+    },
     // Has been reintegrated already, info should match and we just need to compute and assign higher taxa
     reintegrated: {
         iNatName: "iNaturalist taxon name",
@@ -294,7 +303,7 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
             await hortis.applyName(row, i, "Arthropoda", null, invertedSwaps, taxa, unmappedTaxa, strategyBigRec.pollinator);
         } else if (strategy === "reintegrated") {
             await hortis.applyName(row, i, row.Phylum, row.Rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
-        } else if (strategy === "DwC") {
+        } else if (strategy === "DwC" || strategy === "DwCA") {
             await hortis.applyName(row, i, row.phylum, row.taxonRank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         } else if (strategy === "iNat") {
             await hortis.applyName(row, i, row.phylum, row.taxon_rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);

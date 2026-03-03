@@ -79,14 +79,6 @@ fluid.defaults("hortis.blitzFilters", {
     },
     components: {
         filterRoot: "{vizLoader}",
-        taxonFilter: {
-            type: "hortis.taxonObsFilter",
-            container: "{that}.dom.taxonFilter",
-            options: {
-                filterName: "Search Species",
-                fieldName: "datasetName"
-            }
-        },
         collectorFilter: {
             type: "hortis.collectorFilter",
             container: "{that}.dom.collectorFilter",

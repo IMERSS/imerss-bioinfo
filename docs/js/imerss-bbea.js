@@ -218,7 +218,7 @@ fluid.defaults("hortis.collectorReportLinker", {
         collectorLinkValid: "@expand:signal(false)",
         // Prime case for "&" syntax ?
         checkCollectorLinkValid: "@expand:fluid.effect(hortis.collectorReportLinker.checkLinkValid, {that}.collectorName, {that}.collectorLink, {that})",
-        showControl: "@expand:fluid.effect(hortis.toggleClass, {that}.container.0, imerss-hidden, {that}.collectorLinkValid, true)",
+        showControl: "@expand:fluid.effect(hortis.toggleClass, {that}.container.0, fl-hidden, {that}.collectorLinkValid, true)",
         renderModel: "@expand:fluid.computed(hortis.collectorReportLinker.renderModel, {that}.collectorName, {that}.collectorLink, {that}.options.markup.linkText)"
     }
 });
@@ -935,7 +935,10 @@ fluid.defaults("hortis.bbeaLibreMap", {
         obsQuantiser: {
             type: "hortis.obsQuantiser",
             options: {
-                gradeNames: "hortis.bbeaObsQuantiser"
+                gradeNames: "hortis.bbeaObsQuantiser",
+                members: {
+                    baseLatitude: "@expand:signal(44)",
+                }
             }
         }
     }
@@ -1204,7 +1207,7 @@ hortis.bbeaFiltersTemplate = `
             <div class="imerss-filter-title">Filter by region:</div>
             <div class="imerss-free-region-filter-holder">
                 <input class="imerss-free-region-input autocomplete__input autocomplete__input--default" aria-autocomplete="list" autocomplete="off" placeholder="" type="text" role="combobox" spellcheck="false">
-                <div class="imerss-filter-clear imerss-basic-tooltip imerss-hidden" title="Reset this filter"><svg width="24" height="24">
+                <div class="imerss-filter-clear imerss-basic-tooltip fl-hidden" title="Reset this filter"><svg width="24" height="24">
                        <use href="#x-circle-close" />
                     </svg>
                 </div>

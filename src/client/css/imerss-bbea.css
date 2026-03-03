@@ -185,10 +185,6 @@ body {
 }
 
 
-.imerss-collector-report.imerss-hidden {
-    display: none;
-}
-
 .imerss-sex-filter-checks {
     display: flex;
     flex-direction: row;

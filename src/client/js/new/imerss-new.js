@@ -476,9 +476,9 @@ fluid.defaults("hortis.vizLoaderWithMap", {
     components: {
         map: {
             type: "hortis.libreMap",
-            container: "{that}.dom.map",
             options: {
-                gradeNames: "{vizLoader}.options.mapGrades"
+                gradeNames: "{vizLoader}.options.mapGrades",
+                container: "{vizLoader}.dom.map"
             }
         }
     }
@@ -772,6 +772,7 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
         // cf. maxwell.legendKey.addLegendControl in reknit-client.js - produces a DOM node immediately, renders as effect
         control: "@expand:hortis.libreMap.withObsGrid.addLegendControl({map}, {that}.options.legendPosition)",
 
+        obsGridLoaded: "@expand:signal()",
         hoverCell: "@expand:signal(null)",
         gridVisible: "@expand:signal(true)"
     },
@@ -840,7 +841,15 @@ hortis.libreMap.withObsGrid.drawLegend = function (map, gridSignal, gridVisibleS
     };
 
     fluid.effect(renderLegend, gridSignal);
-    fluid.effect(isVisible => hortis.toggleClass(container, "imerss-hidden", !isVisible), gridVisibleSignal);
+    fluid.effect(isVisible => {
+        hortis.toggleClass(container, "fl-hidden", !isVisible);
+    }, gridVisibleSignal);
+
+    fluid.effect(isVisible => {
+        // cf reknitr.updateActiveMapPane in reknit-client.js
+        const origOpacity = map.options.fillOpacity;
+        map.map.setPaintProperty("obsgrid-layer", "fill-opacity", isVisible ? origOpacity : 0);
+    }, gridVisibleSignal, map.obsGridLoaded);
 
     return {container};
 };
@@ -929,7 +938,11 @@ hortis.libreMap.updateObsGrid = function (map, obsQuantiser, grid) {
         map.map.addLayer(layer);
         // TODO: Rather unsatisfactory, but we assume that this is the point we have all layers we are expecting to
         // Really need a dedicated addLayer wrapper
+        // Recall that the primary purpose of this sort was to ensure that all the numerous layers inserted by the
+        // MapboxDraw plugin end up floating on top of ours, which through not having the sortKey in metadata will be
+        // sorted to Infinity and hence pop onto the front.
         map.sortLayers();
+        map.obsGridLoaded.value = true;
     }
 
 };
@@ -1006,6 +1019,7 @@ hortis.indexObs = function (bucket, row, index) {
 
 fluid.defaults("hortis.obsQuantiser", {
     gradeNames: "fluid.modelComponent",
+    /** Grid resolution in metres */
     gridResolution: 100,
     members: {
         // Not invokers for performance
@@ -1014,7 +1028,7 @@ fluid.defaults("hortis.obsQuantiser", {
         // Contains unbound references to vizLoader - in time we want to break this and inject these manually:
         // obsRows
         // filteredObsRows
-        baseLatitude: "@expand:signal(37.5)",
+        baseLatitude: "@expand:signal(49)",
         longResolution: "@expand:fluid.computed(hortis.metresToLong, {that}.options.gridResolution, {that}.baseLatitude)",
         latResolution: "@expand:fluid.computed(hortis.longToLat, {that}.longResolution, {that}.baseLatitude)",
         maxBounds: "@expand:fluid.computed(hortis.obsBounds, {vizLoader}.obsRows)",

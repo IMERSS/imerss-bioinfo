@@ -1194,10 +1194,6 @@ a.ui-button:active,
     background: #d0d7de33;
 }
 
-.imerss-filter-clear.imerss-hidden {
-    display: none;
-}
-
 .imerss-free-region-filter {
     display: flex;
     flex-direction: column;
