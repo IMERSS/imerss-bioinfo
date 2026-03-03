@@ -937,7 +937,7 @@ fluid.defaults("hortis.bbeaLibreMap", {
             options: {
                 gradeNames: "hortis.bbeaObsQuantiser",
                 members: {
-                    baseLatitude: "@expand:signal(44)",
+                    baseLatitude: "@expand:signal(44)"
                 }
             }
         }
