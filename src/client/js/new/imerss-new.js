@@ -766,7 +766,7 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
         // TODO: "Trundling dereferencer" in the framework
         gridBounds: "@expand:fluid.derefSignal({obsQuantiser}.grid, bounds)",
         updateObsGrid: "@expand:fluid.effect(hortis.libreMap.updateObsGrid, {that}, {obsQuantiser}, {obsQuantiser}.grid, {that}.mapLoaded)",
-        fitBounds: "@expand:fluid.effect(hortis.libreMap.fitBounds, {that}, {that}.gridBounds, {that}.mapLoaded)",
+        zoomToObsBoundsEffect: "@expand:fluid.effect(hortis.libreMap.fitBounds, {that}, {that}.gridBounds, {that}.mapLoaded, {that}.zoomToObsBounds)",
 
         memoStops: "@expand:fluid.colour.memoStops({that}.options.fillStops, 256)",
         // cf. maxwell.legendKey.addLegendControl in reknit-client.js - produces a DOM node immediately, renders as effect
@@ -774,7 +774,8 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
 
         obsGridLoaded: "@expand:signal()",
         hoverCell: "@expand:signal(null)",
-        gridVisible: "@expand:signal(true)"
+        gridVisible: "@expand:signal(true)",
+        zoomToObsBounds: "@expand:signal(true)"
     },
     invokers: {
         drawObsGridLegend: "hortis.libreMap.withObsGrid.drawLegend({map}, {obsQuantiser}.grid, {that}.gridVisible)"

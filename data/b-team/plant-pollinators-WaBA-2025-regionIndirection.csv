@@ -4,51 +4,56 @@ BLM District Boundaries,2,Vale District Office
 BLM Field Office Boundaries,1,Spokane Wenatchee Field Office
 BLM Field Office Boundaries,2,Vale Baker Field Office
 BLM Field Office Boundaries,3,Spokane Border Field Office
-US Ecoregions Level IV,1,1b. Coastal Uplands
-US Ecoregions Level IV,2,1c. Low Olympics
-US Ecoregions Level IV,3,1d. Volcanics
-US Ecoregions Level IV,4,1e. Outwash
-US Ecoregions Level IV,5,2a. Fraser Lowland
-US Ecoregions Level IV,6,2b. Eastern Puget Riverine Lowlands
-US Ecoregions Level IV,7,2c. San Juan Islands
-US Ecoregions Level IV,8,2d. Olympic Rainshadow
-US Ecoregions Level IV,9,2e. Eastern Puget Uplands
-US Ecoregions Level IV,10,2f. Central Puget Lowland
-US Ecoregions Level IV,11,2g. Southern Puget Prairies
-US Ecoregions Level IV,12,3a. Portland/Vancouver Basin
-US Ecoregions Level IV,13,4a. Western Cascades Lowlands and Valleys
-US Ecoregions Level IV,14,4b. Western Cascades Montane Highlands
-US Ecoregions Level IV,15,4d. Cascade Subalpine/Alpine
-US Ecoregions Level IV,16,9a. Yakima Plateau and Slopes
-US Ecoregions Level IV,17,9b. Grand Fir Mixed Forest
-US Ecoregions Level IV,18,9c. Oak/Conifer Foothills
-US Ecoregions Level IV,19,10a. Channeled Scablands
-US Ecoregions Level IV,20,10b. Loess Islands
-US Ecoregions Level IV,21,10d. Okanogan Drift Hills
-US Ecoregions Level IV,22,10e. Pleistocene Lake Basins
-US Ecoregions Level IV,23,10f. Dissected Loess Uplands
-US Ecoregions Level IV,24,10g. Yakima Folds
-US Ecoregions Level IV,25,10h. Palouse Hills
-US Ecoregions Level IV,26,10i. Deep Loess Foothills
-US Ecoregions Level IV,27,10l. Lower Snake and Clearwater Canyons
-US Ecoregions Level IV,28,10m. Okanogan Valley
-US Ecoregions Level IV,29,11f. Canyons and Dissected Highlands
-US Ecoregions Level IV,30,11g. Canyons and Dissected Uplands
-US Ecoregions Level IV,31,11l. Mesic Forest Zone
-US Ecoregions Level IV,32,15r. Okanogan-Colville Xeric Valleys and Foothills
-US Ecoregions Level IV,33,15s. Spokane Valley Outwash Plains
-US Ecoregions Level IV,34,15w. Western Selkirk Maritime Forest
-US Ecoregions Level IV,35,15x. Okanogan Highland Dry Forest
-US Ecoregions Level IV,36,15y. Selkirk Mountains
-US Ecoregions Level IV,37,77a. North Cascades Lowland Forests
-US Ecoregions Level IV,38,77b. North Cascades Highland Forests
-US Ecoregions Level IV,39,77c. North Cascades Subalpine/Alpine
-US Ecoregions Level IV,40,77d. Pasayten/Sawtooth Highlands
-US Ecoregions Level IV,41,77e. Okanogan Pine/Fir Hills
-US Ecoregions Level IV,42,77f. Chelan Tephra Hills
-US Ecoregions Level IV,43,77g. Wenatchee/Chelan Highlands
-US Ecoregions Level IV,44,77h. Chiwaukum Hills and Lowlands
-US Ecoregions Level IV,45,77i. High Olympics
+US Ecoregions Level IV,1,1a. Coastal Lowlands
+US Ecoregions Level IV,2,1b. Coastal Uplands
+US Ecoregions Level IV,3,1c. Low Olympics
+US Ecoregions Level IV,4,1d. Volcanics
+US Ecoregions Level IV,5,1e. Outwash
+US Ecoregions Level IV,6,1f. Willapa Hills
+US Ecoregions Level IV,7,2a. Fraser Lowland
+US Ecoregions Level IV,8,2b. Eastern Puget Riverine Lowlands
+US Ecoregions Level IV,9,2c. San Juan Islands
+US Ecoregions Level IV,10,2d. Olympic Rainshadow
+US Ecoregions Level IV,11,2e. Eastern Puget Uplands
+US Ecoregions Level IV,12,2f. Central Puget Lowland
+US Ecoregions Level IV,13,2g. Southern Puget Prairies
+US Ecoregions Level IV,14,2h. Cowlitz/Chehalis Foothills
+US Ecoregions Level IV,15,2i. Cowlitz/Newaukum Prairie Floodplains
+US Ecoregions Level IV,16,3a. Portland/Vancouver Basin
+US Ecoregions Level IV,17,3d. Valley Foothills
+US Ecoregions Level IV,18,4a. Western Cascades Lowlands and Valleys
+US Ecoregions Level IV,19,4b. Western Cascades Montane Highlands
+US Ecoregions Level IV,20,4d. Cascade Subalpine/Alpine
+US Ecoregions Level IV,21,9a. Yakima Plateau and Slopes
+US Ecoregions Level IV,22,9b. Grand Fir Mixed Forest
+US Ecoregions Level IV,23,9c. Oak/Conifer Foothills
+US Ecoregions Level IV,24,10a. Channeled Scablands
+US Ecoregions Level IV,25,10b. Loess Islands
+US Ecoregions Level IV,26,10d. Okanogan Drift Hills
+US Ecoregions Level IV,27,10e. Pleistocene Lake Basins
+US Ecoregions Level IV,28,10f. Dissected Loess Uplands
+US Ecoregions Level IV,29,10g. Yakima Folds
+US Ecoregions Level IV,30,10h. Palouse Hills
+US Ecoregions Level IV,31,10i. Deep Loess Foothills
+US Ecoregions Level IV,32,10l. Lower Snake and Clearwater Canyons
+US Ecoregions Level IV,33,10m. Okanogan Valley
+US Ecoregions Level IV,34,11f. Canyons and Dissected Highlands
+US Ecoregions Level IV,35,11g. Canyons and Dissected Uplands
+US Ecoregions Level IV,36,11l. Mesic Forest Zone
+US Ecoregions Level IV,37,15r. Okanogan-Colville Xeric Valleys and Foothills
+US Ecoregions Level IV,38,15s. Spokane Valley Outwash Plains
+US Ecoregions Level IV,39,15w. Western Selkirk Maritime Forest
+US Ecoregions Level IV,40,15x. Okanogan Highland Dry Forest
+US Ecoregions Level IV,41,15y. Selkirk Mountains
+US Ecoregions Level IV,42,77a. North Cascades Lowland Forests
+US Ecoregions Level IV,43,77b. North Cascades Highland Forests
+US Ecoregions Level IV,44,77c. North Cascades Subalpine/Alpine
+US Ecoregions Level IV,45,77d. Pasayten/Sawtooth Highlands
+US Ecoregions Level IV,46,77e. Okanogan Pine/Fir Hills
+US Ecoregions Level IV,47,77f. Chelan Tephra Hills
+US Ecoregions Level IV,48,77g. Wenatchee/Chelan Highlands
+US Ecoregions Level IV,49,77h. Chiwaukum Hills and Lowlands
+US Ecoregions Level IV,50,77i. High Olympics
 US Ecoregions Level III,1,1. Coast Range
 US Ecoregions Level III,2,2. Puget Lowland
 US Ecoregions Level III,3,3. Willamette Valley
@@ -59,45 +64,60 @@ US Ecoregions Level III,7,11. Blue Mountains
 US Ecoregions Level III,8,15. Northern Rockies
 US Ecoregions Level III,9,77. North Cascades
 WA DNR Managed Land Parcels,1,Department of Natural Resources
+WA DNR Managed Land Parcels,2,Larkspur Meadows Nap
+WA DNR Managed Land Parcels,3,Teanaway Com Forest
 WDFW Wildlife Areas,1,4-O Ranch
 WDFW Wildlife Areas,2,Asotin Creek
 WDFW Wildlife Areas,3,Grouse Flats
 WDFW Wildlife Areas,4,Chief Joseph
-WDFW Wildlife Areas,5,Waikiki Springs
-WDFW Wildlife Areas,6,W.T. Wooten
-WDFW Wildlife Areas,7,Quincy Lakes
-WDFW Wildlife Areas,8,Lower Crab Creek
-WDFW Wildlife Areas,9,Desert
-WDFW Wildlife Areas,10,Gloyd Seeps
-WDFW Wildlife Areas,11,Sun Lakes
-WDFW Wildlife Areas,12,Banks Lake
-WDFW Wildlife Areas,13,Methow
-WDFW Wildlife Areas,14,Big Bend
-WDFW Wildlife Areas,15,Swakane
-WDFW Wildlife Areas,16,Colockum
-WDFW Wildlife Areas,17,Wenas
-WDFW Wildlife Areas,18,L.T. Murray
-WDFW Wildlife Areas,19,Whiskey Dick
-WDFW Wildlife Areas,20,Teanaway Valley
-WDFW Wildlife Areas,21,Oak Creek
-WDFW Wildlife Areas,22,Cowiche
-WDFW Wildlife Areas,23,Sunnyside
-WDFW Wildlife Areas,24,Byron
-WDFW Wildlife Areas,25,Windmill Ranch
-WDFW Wildlife Areas,26,Simcoe Mountains
-WDFW Wildlife Areas,27,Scatter Creek
-WDFW Wildlife Areas,28,West Rocky Prairie
-WDFW Wildlife Areas,29,Anderson Homestead
-WDFW Wildlife Areas,30,Dungeness
-WDFW Wildlife Areas,31,Morse Creek
-WDFW Wildlife Areas,32,Discovery Bay
-WA State Parks,1,Fort Casey Historical State Park
-WA State Parks,2,Fort Flagler Historical State Park
-WA State Parks,3,Fort Worden Historical State Park
-WA State Parks,4,Ginkgo Petrified Forest State Park
-WA State Parks,5,Lake Wenatchee State Park
-WA State Parks,6,Larrabee State Park
-WA State Parks,7,Mount Spokane State Park
-WA State Parks,8,Palouse to Cascades State Park Trail
-WA State Parks,9,Steptoe Butte State Park Heritage Site
-WA State Parks,10,Sun Lakes-Dry Falls State Park
+WDFW Wildlife Areas,5,Sherman Creek
+WDFW Wildlife Areas,6,Waikiki Springs
+WDFW Wildlife Areas,7,W.T. Wooten
+WDFW Wildlife Areas,8,Quincy Lakes
+WDFW Wildlife Areas,9,Lower Crab Creek
+WDFW Wildlife Areas,10,Seep Lakes
+WDFW Wildlife Areas,11,Desert
+WDFW Wildlife Areas,12,Gloyd Seeps
+WDFW Wildlife Areas,13,Billy Clapp Lake
+WDFW Wildlife Areas,14,Sun Lakes
+WDFW Wildlife Areas,15,Banks Lake
+WDFW Wildlife Areas,16,Methow
+WDFW Wildlife Areas,17,Big Valley
+WDFW Wildlife Areas,18,Sinlahekin
+WDFW Wildlife Areas,19,Big Bend
+WDFW Wildlife Areas,20,Swakane
+WDFW Wildlife Areas,21,Beebe Springs
+WDFW Wildlife Areas,22,Colockum
+WDFW Wildlife Areas,23,Wenas
+WDFW Wildlife Areas,24,L.T. Murray
+WDFW Wildlife Areas,25,Whiskey Dick
+WDFW Wildlife Areas,26,Teanaway Valley
+WDFW Wildlife Areas,27,Oak Creek
+WDFW Wildlife Areas,28,Cowiche
+WDFW Wildlife Areas,29,Sunnyside
+WDFW Wildlife Areas,30,Byron
+WDFW Wildlife Areas,31,Windmill Ranch
+WDFW Wildlife Areas,32,Mesa Lake
+WDFW Wildlife Areas,33,Simcoe Mountains
+WDFW Wildlife Areas,34,Scatter Creek
+WDFW Wildlife Areas,35,West Rocky Prairie
+WDFW Wildlife Areas,36,Anderson Homestead
+WDFW Wildlife Areas,37,Dungeness
+WDFW Wildlife Areas,38,Morse Creek
+WDFW Wildlife Areas,39,Discovery Bay
+WA State Parks,1,Beacon Rock State Park
+WA State Parks,2,Brooks Memorial State Park
+WA State Parks,3,Deception Pass State Park
+WA State Parks,4,Fort Casey Historical State Park
+WA State Parks,5,Fort Flagler Historical State Park
+WA State Parks,6,Fort Worden Historical State Park
+WA State Parks,7,Ginkgo Petrified Forest State Park
+WA State Parks,8,Lake Wenatchee State Park
+WA State Parks,9,Larrabee State Park
+WA State Parks,10,Mount Spokane State Park
+WA State Parks,11,Palouse to Cascades State Park Trail
+WA State Parks,12,Potholes State Park
+WA State Parks,13,Riverside State Park
+WA State Parks,14,Steamboat Rock State Park
+WA State Parks,15,Steptoe Butte State Park Heritage Site
+WA State Parks,16,Sun Lakes-Dry Falls State Park

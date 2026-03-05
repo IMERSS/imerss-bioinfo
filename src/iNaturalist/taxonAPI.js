@@ -300,8 +300,10 @@ fluid.defaults("hortis.cachediNatTaxonByName", {
 // Highest iNat rank is 100 for Life - we want the most specific taxon of those selected
 hortis.scoreNameMatch = async function (result, query, byIdSource) {
     // Extra branch in result.name copes with Pentagramma triangularis -> Pentagramma triangularis triangularis
-    let score = (query.name === result.matched_term ? 512 : 0)
-        + (query.name === result.name || result.name.startsWith(query.name) ? 256 : 0) + (128 - result.rank_level);
+    // Extra top branch copes with Halictus with null rank
+    let score = (query.name === result.name ? 1024 : 0) +
+        (query.name === result.matched_term  ? 512 : 0) +
+        (result.name.startsWith(query.name) ? 256 : 0) + (128 - result.rank_level);
     if (query.rank) {
         // An exact name match is more important than a rank match
         if (query.rank === result.rank) {
@@ -309,11 +311,11 @@ hortis.scoreNameMatch = async function (result, query, byIdSource) {
         }
     }
     // Don't hit the DB for any results which are not already an exact(ish) match for the query
-    if (query.phylum && (score & (512 | 256))) {
+    if (query.phylum && (score & (1024 | 512 | 256))) {
         const rankTarget = {};
         await hortis.iNat.getRanks(result.id, rankTarget, byIdSource, ["phylum"]);
         if (query.phylum === rankTarget.phylum) {
-            score |= 1024;
+            score |= 2048;
         }
     }
     return score;
@@ -339,6 +341,9 @@ hortis.topScoreRun = function (results) {
 hortis.bestNameMatch = async function (results, query, byIdSource) {
     await hortis.asyncForEach(results, async result => result.$score = await hortis.scoreNameMatch(result, query, byIdSource));
     const sorted = results.sort((a, b) => b.$score - a.$score);
+    if (hortis.dumpiNatNameScores) {
+        console.log(sorted.map(oneRecord => ({$score: oneRecord.$score.toString(2), ...fluid.filterKeys(oneRecord, ["name", "id", "rank", "matched_term"])})));
+    }
     const run = hortis.topScoreRun(sorted);
     const togo = sorted[0];
     if (run > 0) {
@@ -359,7 +364,7 @@ hortis.cachediNatTaxonByName.upgradeLiveDocument = async function (byIdSource, q
         const record = await hortis.bestNameMatch(live.results, query, byIdSource);
         const doc = fluid.filterKeys(record, ["name", "matched_term", "rank", "id"]);
         doc.ambiguousNameMatch = !!record.$ambiguous;
-        doc.phylumMatch = !!(record.$score & 1024);
+        doc.phylumMatch = !!(record.$score & 2048);
 
         // const byIdBack = await byIdSource.get({id: doc.id});
 

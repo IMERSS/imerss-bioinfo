@@ -21,14 +21,17 @@ require("../src/iNaturalist/taxonAPI.js");
 // {name: "Mytilus edulis", phylum: "Mollusca", rank: "complex"} // should get 1108240
 // {name: "Didymosphenia geminata", phylum: "Ochrophyta", rank: "species"}
 // {name: "Pentagramma triangularis", phylum: "Tracheophyta", rank: "species"} // should get ssp
+// {name: "Halictus", phylum: "Arthropoda"} // should get genus or subgenus
 
 const source = hortis.iNatTaxonSource({
     disableNameCache: true
 });
 
+hortis.dumpiNatNameScores = true;
+
 const testSource = async function () {
     try {
-        const query = {name: "Pentagramma triangularis", phylum: "Tracheophyta", rank: "species"};
+        const query = {name: "Coelioxys octodentata", phylum: "Arthropoda"};
         const result = await source.get(query);
         console.log(result);
         const byId = await source.get({id: result.doc.id});

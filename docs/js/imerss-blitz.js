@@ -57,7 +57,6 @@ hortis.makeBlitzChecklistRowDecorator = function () {
 hortis.blitzFiltersTemplate = `
     <div class="imerss-filters">
         <div class="imerss-filter"></div>
-        <div class="imerss-taxon-filter imerss-filter"></div>
         <div class="imerss-collector-filter imerss-filter"></div>
         <div class="imerss-dataset-filter imerss-filter"></div>
     </div>
@@ -73,7 +72,6 @@ fluid.defaults("hortis.blitzFilters", {
         obsRows: "{vizLoader}.obsRows"
     },
     selectors: {
-        taxonFilter: ".imerss-taxon-filter",
         collectorFilter: ".imerss-collector-filter",
         datasetFilter: ".imerss-dataset-filter"
     },

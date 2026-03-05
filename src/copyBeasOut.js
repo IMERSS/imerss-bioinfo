@@ -2,6 +2,8 @@
 
 "use strict";
 
+// Note obsolete - production viz uses copyMelitOut.js
+
 const fs = require("fs-extra"),
     path = require("path"),
     fluid = require("infusion");

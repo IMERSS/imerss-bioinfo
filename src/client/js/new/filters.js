@@ -123,9 +123,20 @@ fluid.defaults("hortis.recordReporter", {
     }
 });
 
-hortis.recordReporter.renderModel = (filteredRows, allRows) => ({
+fluid.defaults("hortis.recordAndTaxaReporter", {
+    gradeNames: "fluid.stringTemplateRenderingView",
+    members: {
+        renderModel: "@expand:fluid.computed(hortis.recordReporter.renderModel, {that}.filteredRows, {that}.allRows, {that}.taxa)"
+    },
+    markup: {
+        container: "<div>Displaying %filteredRows of %allRows records for %taxa taxa</div>"
+    }
+});
+
+hortis.recordReporter.renderModel = (filteredRows, allRows, taxa) => ({
     filteredRows: filteredRows.length,
-    allRows: allRows.length
+    allRows: allRows.length,
+    taxa: taxa && Object.keys(taxa).length
 });
 
 fluid.defaults("hortis.repeatingRowFilter", {
@@ -170,7 +181,7 @@ fluid.defaults("hortis.regionFilter", {
         // Rows with members {regionField, id, label} where regionField is the obs column, id is the value found there, label is the label to be rendered for it
         indirectionRows: "@expand:signal([])",
         filterRows: "@expand:fluid.computed(hortis.regionFilter.computeFilterRows, {that}.indirectionRows, {that}.options.fieldNames, {that}.options.freeFilter)",
-        // Free hash of region keys to true
+        // Free hash of region keys (indirection table row index) to true
         filterState: "@expand:signal({})",
         renderModel: `@expand:fluid.computed(hortis.regionFilter.renderModel, {that}.filterRows,
             {that}.options.markup, {that}.options.filterName, {that}.options.freeFilter)`
@@ -206,7 +217,7 @@ hortis.regionFilter.reset = function (that) {
  * Updates the filter state for a region filter component.
  *
  * @param {hortis.regionFilter} that - The region filter component instance.
- * @param {String|Number} id - The identifier for the filter row to update.
+ * @param {Number} id - The identifier (indirection table row index) for the filter row to update.
  * @param {Boolean} selected - Whether the filter row is selected
  */
 hortis.regionFilter.update = function (that, id, selected) {
@@ -244,7 +255,9 @@ hortis.regionFilter.renderModel = function (filterRows, markup, filterName, free
 /** TODO: The markup for this component needs to be supplied upstream (e.g. in bbeaFiltersTemplate) since
  * we can't trust ourselves to render it recursively
  */
-
+// A region filter aggregating multiple region columns into a freely browseable list.
+// After accepting indirectionRows, it accepts a set of fieldNames which hold regions which are to be *excluded* from the
+// browseable list.
 fluid.defaults("hortis.freeRegionFilter", {
     gradeNames: "fluid.viewComponent",
     selectors: {
@@ -254,6 +267,7 @@ fluid.defaults("hortis.freeRegionFilter", {
         clearFilter: ".imerss-filter-clear"
     },
     members: {
+        // In this case our fieldNames is a set of columns to *exclude* from the browseable list
         inputFocused: "@expand:signal(false)",
         regionFilterState: "@expand:signal(null)",
         regionFilterEffect: "@expand:fluid.effect(hortis.freeRegionFilter.applyFilter, {that}.regionFilterState, {that}.dom, {regionFilter}.templateRoot)",
