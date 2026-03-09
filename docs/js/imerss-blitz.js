@@ -99,6 +99,61 @@ fluid.defaults("hortis.blitzFilters", {
     }
 });
 
+fluid.defaults("hortis.statusFilter", {
+    gradeNames: ["fluid.component", "hortis.obsFilter"],
+    invokers: {                                 // obsRows, filterState
+        doFilter: "hortis.statusFilter.doFilter({arguments}.0, {arguments}.1, {that}.taxaById.value)",
+        reset: "hortis.statusFilter.reset({that})"
+    },
+    members: {
+        queryCache: "@expand:fluid.computed(hortis.statusFilter.queryCache, {that}.taxaById)",
+        // cf. Strategy in "hortis.sexFilter" - can we do any better?
+        confirmed: "@expand:signal(false)",
+        unconfirmed: "@expand:signal(false)",
+        new: "@expand:signal(false)",
+        isActive: "@expand:signal(true)",
+
+        filterState: "@expand:fluid.computed(hortis.statusFilter.toState, {that}.confirmed, {that}.unconfirmed, {that}.new, {that}.isActive, {that}.queryCache)"
+        // taxaById: "{taxa}.rowById"
+    }
+});
+
+hortis.statusFilter.toState = function (confirmed, unconfirmed, noo, isActive) {
+    return isActive ? {confirmed, unconfirmed, new: noo} : {confirmed: false, unconfirmed: false, new: false};
+};
+
+hortis.statusFilter.doFilter = function (obsRows, filterState, taxaById) {
+    const count = filterState.confirmed + filterState.unconfirmed + filterState.new;
+    const all = count === 0 || count === 3;
+    return all ? obsRows : obsRows.filter(obsRow => {
+        const taxonRow = taxaById[obsRow.iNaturalistTaxonId];
+        return filterState.confirmed && taxonRow.filterReportingStatus === "confirmed"
+            || filterState.unconfirmed && taxonRow.filterReportingStatus === "unconfirmed"
+            || filterState.new && taxonRow.filterReportingStatus === "new";
+    });
+};
+
+hortis.statusFilter.queryCache = function (taxaById) {
+    // OCTOPOKHO: Side effect initialising filterReportingStatus
+    const taxaRows = Object.values(taxaById);
+    Object.values(taxaById).forEach(row => {
+        if (row.reportingStatus === "confirmed") {
+            row.filterReportingStatus = "confirmed";
+        } else if (row.reportingStatus === "reported") {
+            row.filterReportingStatus = "unconfirmed";
+        } else if (row.reportingStatus.startsWith("new")) {
+            row.filterReportingStatus = "new";
+        }
+    });
+    return taxaRows.length;
+};
+
+hortis.statusFilter.reset = function (that) {
+    that.confirmed.value = false;
+    that.unconfirmed.value = false;
+    that.new.value = false;
+};
+
 hortis.blitzRecordsTemplate = `
     <div class="imerss-blitz-records">
         <div class="imerss-records-historical imerss-records">
@@ -121,7 +176,7 @@ hortis.blitzRecordsTemplate = `
 `;
 
 fluid.defaults("hortis.blitzRecords", {
-    gradeNames: ["fluid.stringTemplateRenderingView", "hortis.filter", "hortis.obsDrivenFilter"],
+    gradeNames: ["fluid.stringTemplateRenderingView", "hortis.statusFilter", "hortis.obsDrivenFilter"],
     markup: { // Clearly unsatisfactory, have to move over to preactish rendering before long
         container: hortis.blitzRecordsTemplate
     },
@@ -135,10 +190,7 @@ fluid.defaults("hortis.blitzRecords", {
     events: {
         onRendered: null
     },
-    invokers: {                                 // obsRows, filterState
-        doFilter: "hortis.blitzRecords.doFilter({arguments}.0, {arguments}.1, {that}.taxaById.value)",
-        reset: "hortis.blitzRecords.reset({that})"
-    },
+
     components: {
         confirmedButton: {
             type: "hortis.toggleButton",
@@ -172,37 +224,10 @@ fluid.defaults("hortis.blitzRecords", {
         }
     },
     members: {
-        // cf. Strategy in "hortis.sexFilter" - can we do any better?
-        confirmed: "@expand:signal(false)",
-        unconfirmed: "@expand:signal(false)",
-        new: "@expand:signal(false)",
-
-        filterState: "@expand:fluid.computed(hortis.blitzRecords.toState, {that}.confirmed, {that}.unconfirmed, {that}.new)",
-        taxaById: "{taxa}.rowById",
-        renderModel: "@expand:fluid.computed(hortis.blitzRecords.render, {that}.taxaById)"
+        renderModel: "@expand:fluid.computed(hortis.blitzRecords.render, {that}.taxaById)",
+        taxaById: "{taxa}.rowById"
     }
 });
-
-hortis.blitzRecords.doFilter = function (obsRows, filterState, taxaById) {
-    const count = filterState.confirmed + filterState.unconfirmed + filterState.new;
-    const all = count === 0 || count === 3;
-    return all ? obsRows : obsRows.filter(obsRow => {
-        const taxonRow = taxaById[obsRow.iNaturalistTaxonId];
-        return filterState.confirmed && taxonRow.filterReportingStatus === "confirmed"
-        || filterState.unconfirmed && taxonRow.filterReportingStatus === "unconfirmed"
-        || filterState.new && taxonRow.filterReportingStatus === "new";
-    });
-};
-
-hortis.blitzRecords.reset = function (that) {
-    that.confirmed = false;
-    that.unconfirmed = false;
-    that.new = false;
-};
-
-hortis.blitzRecords.toState = function (confirmed, unconfirmed, noo) {
-    return {confirmed, unconfirmed, new: noo};
-};
 
 hortis.blitzRecords.render = function (taxaById) {
     const model = {
@@ -212,18 +237,14 @@ hortis.blitzRecords.render = function (taxaById) {
         newRecords: 0
     };
     Object.values(taxaById).forEach(row => {
-        if (row.reportingStatus === "confirmed") {
+        if (row.filterReportingStatus === "confirmed") {
             ++model.confirmedRecords;
             ++model.historicalRecords;
-            row.filterReportingStatus = "confirmed";
-        } else if (row.reportingStatus === "reported") {
+        } else if (row.filterReportingStatus === "reported") {
             ++model.unconfirmedRecords;
             ++model.historicalRecords;
-            row.filterReportingStatus = "unconfirmed";
-        } else if (row.reportingStatus.startsWith("new")) {
+        } else if (row.filterReportingStatus === "new") {
             ++model.newRecords;
-            // OCTOPOKHO: Side effect initialising filterReportingStatus
-            row.filterReportingStatus = "new";
         }
     });
     return model;

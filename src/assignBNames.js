@@ -105,6 +105,15 @@ const strategies = {
         assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus"],
         sanitize: true
     },
+    DwCR: { // Reduced DwC as it comes direct from GBIF
+        iNatName: "species",
+        rawName: "species",
+        iNatId: "iNaturalistTaxonId",
+        nameStatus: "nameStatus",
+        assignedINatName: "iNaturalistTaxonName",
+        assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus"],
+        sanitize: true
+    },
     // Has been reintegrated already, info should match and we just need to compute and assign higher taxa
     reintegrated: {
         iNatName: "iNaturalist taxon name",
@@ -303,7 +312,7 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
             await hortis.applyName(row, i, "Arthropoda", null, invertedSwaps, taxa, unmappedTaxa, strategyBigRec.pollinator);
         } else if (strategy === "reintegrated") {
             await hortis.applyName(row, i, row.Phylum, row.Rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
-        } else if (strategy === "DwC" || strategy === "DwCA") {
+        } else if (strategy.startsWith("DwC")) {
             await hortis.applyName(row, i, row.phylum, row.taxonRank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         } else if (strategy === "iNat") {
             await hortis.applyName(row, i, row.phylum, row.taxon_rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);

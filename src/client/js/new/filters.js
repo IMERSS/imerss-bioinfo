@@ -18,6 +18,7 @@ var hortis = fluid.registerNamespace("hortis");
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var {signal, computed, effect, batch} = preactSignalsCore;
 
+// TODO: Unclear now what is distinction between obsFilter and filter - it seems that a "filter" is resettable
 fluid.defaults("hortis.filter", {
     // gradeNames: "fluid.component",
 });
@@ -126,7 +127,7 @@ fluid.defaults("hortis.recordReporter", {
 fluid.defaults("hortis.recordAndTaxaReporter", {
     gradeNames: "fluid.stringTemplateRenderingView",
     members: {
-        renderModel: "@expand:fluid.computed(hortis.recordReporter.renderModel, {that}.filteredRows, {that}.allRows, {that}.taxa)"
+        renderModel: "@expand:fluid.computed(hortis.recordAndTaxaReporter.renderModel, {that}.filteredRows, {that}.allRows, {that}.taxa, {that}.taxaById)"
     },
     markup: {
         container: "<div>Displaying %filteredRows of %allRows records for %taxa taxa</div>"
@@ -137,6 +138,12 @@ hortis.recordReporter.renderModel = (filteredRows, allRows, taxa) => ({
     filteredRows: filteredRows.length,
     allRows: allRows.length,
     taxa: taxa && Object.keys(taxa).length
+});
+
+hortis.recordAndTaxaReporter.renderModel = (filteredRows, allRows, taxa, taxaById) => ({
+    filteredRows: filteredRows.length,
+    allRows: allRows.length,
+    taxa: Object.keys(taxa).filter(id => taxaById[id].inSummary).length
 });
 
 fluid.defaults("hortis.repeatingRowFilter", {
@@ -157,6 +164,8 @@ hortis.repeatingRowFilter.renderRow = function (template, rowLabel, rowId) {
     });
 };
 
+// Receives obsRows from a standardised location - dubious because of "members" options merging bug which implies
+// expansion happens before merging for those. As a result "statusFilter" doesn't derive from this.
 fluid.defaults("hortis.obsDrivenFilter", {
     gradeNames: ["hortis.obsFilter"],
     members: {

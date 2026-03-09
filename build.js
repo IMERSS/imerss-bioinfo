@@ -181,6 +181,15 @@ const buildIndex = {
         src: "data/b-team/plant-pollinators-WaBA-2025-regionIndirection.csv",
         dest: "docs/data/b-team/plant-pollinators-WaBA-2025-regionIndirection.csv"
     }, {
+        src: "data/b-team/plant-pollinators-BCBA-labels.viz",
+        dest: "docs/data/b-team/plant-pollinators-BCBA-labels.viz"
+    }, {
+        src: "data/b-team/plant-pollinators-BCBA-assigned-taxa.viz",
+        dest: "docs/data/b-team/plant-pollinators-BCBA-assigned-taxa.viz"
+    }, {
+        src: "data/b-team/plant-pollinators-BCBA-regionIndirection.csv",
+        dest: "docs/data/b-team/plant-pollinators-BCBA-regionIndirection.csv"
+    }, {
         src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv",
         dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv"
     }, {
