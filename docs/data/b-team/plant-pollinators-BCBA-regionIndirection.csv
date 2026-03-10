@@ -1,10 +1,5 @@
 regionField,id,label
-BC Ecoregions,1,Okh - Okanogan Highland
-BC Ecoregions,2,Srt - Southern Rocky Mountain Trench
-BC Ecoregions,3,Pac - Pacific Ranges
-BC Ecoregions,4,Top - Thompson-Okanagan Plateau
-BC Ecoregions,5,Ncr - Northern Cascade Ranges
-BC Ecoregions,6,Evi - Eastern Vancouver Island
-BC Ecoregions,7,Lom - Lower Mainland
-BC Ecoregions,8,Gpb - Georgia-Puget Basin
-BC Ecoregions,9,Sbf - Selkirk-Bitterroot Foothills
+BC Ecoprovinces,1,Sim - Southern Interior Mountains
+BC Ecoprovinces,2,Soi - Southern Interior
+BC Ecoprovinces,3,Com - Coast and Mountains
+BC Ecoprovinces,4,Ged - Georgia Depression
