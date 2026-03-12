@@ -22,6 +22,8 @@ require("../src/iNaturalist/taxonAPI.js");
 // {name: "Didymosphenia geminata", phylum: "Ochrophyta", rank: "species"}
 // {name: "Pentagramma triangularis", phylum: "Tracheophyta", rank: "species"} // should get ssp
 // {name: "Halictus", phylum: "Arthropoda"} // should get genus or subgenus
+// {name: "Coelioxys octodentata", phylum: "Arthropoda"};
+// {name: "Thinopyrum intermedium barbulatum", phylum: "Anthophyta"}; // Test phylum remapping
 
 const source = hortis.iNatTaxonSource({
     disableNameCache: true
@@ -31,7 +33,7 @@ hortis.dumpiNatNameScores = true;
 
 const testSource = async function () {
     try {
-        const query = {name: "Coelioxys octodentata", phylum: "Arthropoda"};
+        const query = {name: "Trichia favoginea", phylum: "Anthophyta"};
         const result = await source.get(query);
         console.log(result);
         const byId = await source.get({id: result.doc.id});

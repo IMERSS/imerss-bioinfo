@@ -234,3 +234,66 @@ fluid.blankRenderModel = function () {
     const blankSignal = signal(true);
     return blankSignal.value;
 };
+
+/**
+ * Fetches data from a given URL and processes the response using a provided strategy function.
+ * Whilst the fetch is pending, the signal is set to an "unavailable" state.
+ * If the fetch fails, the signal is set to an "unavailable" state with an error message.
+ *
+ * @param {String} url - The URL to fetch data from.
+ * @param {RequestInit} [options] - Optional fetch configuration options.
+ * @param {Function} strategy - An async function to process the response.
+ * @return {Signal<any>} A signal containing the processed data or an "unavailable" state.
+ */
+fluid.fetch = function (url, options, strategy) {
+    const togo = signal(undefined);
+    const assignResult = data => {
+        try {
+            togo.value = data;
+        } catch (e) { // Don't use catch's error handler since this will swallow it
+            fluid.fail("Error assigning I/O result: ", e);
+            throw e;
+        }
+    };
+    fetch(url, {...options, ...fluid.cacheOptions})
+        .then(response => {
+            if (!response.ok) {
+                fluid.log(`HTTP error ${response.status} for URL ${url}`);
+            } else {
+                return strategy(response);
+            }
+        })
+        .then(data => {
+            assignResult(data);
+        })
+        .catch(err => {
+            fluid.log(`I/O failure for URL ${url} - ${err}`);
+        });
+    return togo;
+};
+
+/**
+ * Fetches text data from a given URL and stores the result in a signal.
+ * Whilst the fetch is pending, the signal is set to an "unavailable" state.
+ * If the fetch fails, the signal is set to an "unavailable" state with an error message.
+ *
+ * @param {String} url - The URL to fetch text data from.
+ * @param {RequestInit} [options] - Optional fetch configuration options.
+ * @return {Signal<String>} A signal containing the fetched text data or an "unavailable" state.
+ */
+fluid.fetchText = function (url, options) {
+    return fluid.fetch(url, options, async response => response.text());
+};
+
+/**
+ * Fetches JSON data from a given URL and stores the result in a signal.
+ * Whilst the fetch is pending, the signal is set to an "unavailable" state.
+ * If the fetch fails, the signal is set to an "unavailable" state with an error message.
+ *
+ * @param {String} url - The URL to fetch JSON data from.
+ * @param {RequestInit} [options] - Optional fetch configuration options.
+ * @return {Signal<Object>} A signal containing the fetched JSON data or an "unavailable" state.
+ */
+fluid.fetchJSON = function (url, options) {
+    return fluid.fetch(url, options, async response => response.json());
+};

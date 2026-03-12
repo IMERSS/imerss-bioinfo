@@ -133,9 +133,12 @@ const strategies = {
     }
 };
 
-const parsedArgs = minimist(process.argv.slice(2), {boolean: Object.keys(strategies)});
+const parsedArgs = minimist(process.argv.slice(2), {boolean: [...Object.keys(strategies), "noRank"]});
 
 const swapsFile = parsedArgs.swaps || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/taxon-swaps-2025.csv");
+
+const noRank = parsedArgs.noRank;
+console.log("Got noRank", noRank);
 
 const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/plant-pollinators-Carril-normalised.csv");
 
@@ -156,7 +159,7 @@ const swapsReader = hortis.csvReaderWithMap({
 });
 
 const source = hortis.iNatTaxonSource({
-//    disableNameCache: true
+    disableNameCache: true
 });
 
 
@@ -232,12 +235,13 @@ hortis.storeTaxon = async function (allTaxa, taxonDoc, inSummary) {
 };
 
 // Note: This is the beginning of "new marmalisation" - hortis.iNat.addTaxonInfo used to be called in the marmaliser
-hortis.applyName = async function (row, index, phylum, rank, invertedSwaps, allTaxa, unmappedTaxa, strategyRec) {
+hortis.applyName = async function (row, index, phylum, inRank, invertedSwaps, allTaxa, unmappedTaxa, strategyRec) {
     const s = strategyRec;
     const rawName = row[s.iNatName] || row[s.rawName];
     if (rawName === undefined) {
         fluid.fail(`Couldn't get taxon name for row ${index} from field names ${s.iNatName} or ${s.rawName}`);
     }
+    const rank = noRank ? undefined : inRank;
     const iNatName = invertedSwaps[rawName]?.preferred || rawName;
     const saneName = s.sanitize ? hortis.sanitizeSpeciesName(iNatName) : iNatName;
     const looked = await source.get({name: saneName, phylum, rank});
@@ -258,7 +262,7 @@ hortis.applyName = async function (row, index, phylum, rank, invertedSwaps, allT
         assign(row, s.iNatId, id);
         assign(row, s.assignedINatName, looked.doc.name);
         if (strategyRec.assignRanks) {
-            await hortis.iNat.getRanks(looked.doc.id, row, source.byId, strategyRec.assignRanks);
+            await hortis.iNat.getRanks(looked.doc.id, row, source.byId, strategyRec.assignRanks, scientificName);
         }
         const existing = allTaxa[id];
         if (!existing) {

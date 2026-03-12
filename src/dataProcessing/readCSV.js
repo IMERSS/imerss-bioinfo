@@ -86,7 +86,7 @@ fluid.defaults("hortis.csvFileReader", {
 
 hortis.csvFileReader.openFileStream = function (that) {
     that.rowStream = fs.createReadStream(that.options.inputFile)
-        .pipe(removeBOM("utf-8"))
+        // .pipe(removeBOM("utf-8"))
         .pipe(csvModule(that.options.csvOptions)
         );
 };

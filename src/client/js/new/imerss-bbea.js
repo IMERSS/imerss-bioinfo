@@ -42,6 +42,7 @@ fluid.defaults("hortis.beaVizLoader", {
             type: "hortis.collectorReportLinker",
             container: "{that}.dom.collectorReport",
             options: {
+                stateCode: "{beaVizLoader}.options.stateCode",
                 members: {
                     collectorName: "{obsFilters}.collectorFilter.filterState"
                 }
@@ -204,46 +205,44 @@ hortis.fullScreenControl.bind = function (container, enabled) {
 
 fluid.defaults("hortis.collectorReportLinker", {
     gradeNames: "fluid.stringTemplateRenderingView",
+    // stateCode
     markup: {
         container: `
         <div>
-            <div>A volunteer report is available:</div><a href="%target" target="_blank">%linkText</a><span class="external-link"></span>
+            <div>Volunteer reports available:</div><div>%reports</div>
         </div>
         `,
-        linkText: "%collectorName Summary (2023)",
-        linkTarget: "https://oregon-bee-project.github.io/melittoflora/reports/%collectorNameCond_Summary_2023.pdf"
+        linkText: "%collectorName %state Summary (%year)",
+        linkTarget: "https://oregon-bee-project.github.io/melittoflora/reports/%reportPath"
     },
     members: {
-        collectorLink: "@expand:fluid.computed(hortis.collectorReportLinker.nameToLink, {that}.collectorName, {that}.options.markup.linkTarget)",
-        collectorLinkValid: "@expand:signal(false)",
-        // Prime case for "&" syntax ?
-        checkCollectorLinkValid: "@expand:fluid.effect(hortis.collectorReportLinker.checkLinkValid, {that}.collectorName, {that}.collectorLink, {that})",
-        showControl: "@expand:fluid.effect(hortis.toggleClass, {that}.container.0, fl-hidden, {that}.collectorLinkValid, true)",
-        renderModel: "@expand:fluid.computed(hortis.collectorReportLinker.renderModel, {that}.collectorName, {that}.collectorLink, {that}.options.markup.linkText)"
+        // collectorName
+        reportIndex: "@expand:fluid.fetchJSON(https://oregon-bee-project.github.io/melittoflora/reportIndex.json)",
+        collectorReports: "@expand:fluid.computed(hortis.findCollectorReports, {that}.collectorName, {that}.reportIndex, {that}.options.stateCode)",
+        showControl: "@expand:fluid.effect(hortis.toggleClass, {that}.container.0, fl-hidden, {that}.collectorReports, true)",
+        renderModel: "@expand:fluid.computed(hortis.collectorReportLinker.renderModel, {that}.collectorName, {that}.collectorReports, {that}.options.markup.linkText, {that}.options.markup.linkTarget)"
     }
 });
 
-hortis.collectorReportLinker.nameToLink = function (collectorName, linkTargetTemplate) {
-    return collectorName && fluid.stringTemplate(linkTargetTemplate, {collectorNameCond: collectorName.replaceAll(" ", "_").replaceAll("|", "and")});
+hortis.findCollectorReports = function (collectorName, reportIndex, stateCode) {
+    if (collectorName) {
+        const collectorNorm = collectorName.replaceAll("|", "and");
+        const reports = reportIndex[collectorNorm];
+        return reports ? (stateCode ? reports.filter(oneReport => oneReport.state === stateCode) : reports) : null;
+    } else {
+        return undefined;
+    }
 };
 
-hortis.collectorReportLinker.checkLinkValid = async function (collectorName, collectorLink, that) {
-    const collectorLinkValid = that.collectorLinkValid;
-    collectorLinkValid.value = false;
-    try {
-        if (collectorLink) {
-            const response = await fetch(collectorLink);
-            if (response.ok) {
-                collectorLinkValid.value = true;
-            }
-        }
-    } catch (e) {}
+hortis.collectorReportLinker.renderModel = function (collectorName, collectorReports, linkTextTemplate, linkTargetTemplate) {
+    const linkTemplate = `<a href="%target" target="_blank">%linkText</a><span className="external-link"></span>`;
+    return {
+        reports: collectorReports.map(({state, year, report}) => fluid.stringTemplate(linkTemplate, {
+            target: fluid.stringTemplate(linkTargetTemplate, {reportPath: report}),
+            linkText: fluid.stringTemplate(linkTextTemplate, {collectorName, state, year})
+        })).join("\n")
+    };
 };
-
-hortis.collectorReportLinker.renderModel = (collectorName, collectorLink, linkTextTemplate) => ({
-    target: collectorLink,
-    linkText: fluid.stringTemplate(linkTextTemplate, {collectorName})
-});
 
 hortis.twoTaxaFromObs = function (filteredObs, rowById) {
     const plantIds = {},

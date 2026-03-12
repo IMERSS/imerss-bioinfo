@@ -17,8 +17,18 @@ require("kettle"); // for kettle.dataSource.URL
 
 hortis.ranks = fluid.freezeRecursive(fluid.require("%imerss-bioinfo/data/ranks.json"));
 
+// Normalisation table of phyla onto iNat's preferred ones - this is done when intercepting a name query to ensure
+// we don't throw out a query result because of a phylum mismatch - most obsolete funga arose in the BC CDC dataset
 hortis.iNatPhyla = {
-    "Bacillariophyta": "Ochrophyta"
+    "Bacillariophyta": "Ochrophyta",
+    "Anthophyta": "Tracheophyta",
+    "Filicinophyta": "Tracheophyta",
+    "Lycophyta": "Tracheophyta",
+    "Sphenophyta": "Tracheophyta",
+    "Craniata": "Chordata",
+    "Coniferophyta": "Pinophyta",
+    "Hepatophyta": "Marchantiophyta",
+    "Zygomycota": "Mucoromycota"
 };
 
 hortis.sanitizeSpeciesName = function (name) {
@@ -600,9 +610,10 @@ hortis.iNat.getAncestry = async function (id, byIdSource) {
  * @param {fluid.dataSource} byIdSource - The taxon source
  * @param {Array<String>} [fields] - [optional] If supplied, only the taxa whose keys are listed in this structure will be
  * fetched into `rankTarget` - these are uncapitalized
+ * @param {String} [scientificName] - [optional] The taxon's primary name, for debugging purposes
  * @return {Promise<Object>} The structure `rankTarget` with higher taxa filled in
  */
-hortis.iNat.getRanks = async function (id, rankTarget, byIdSource, fields) {
+hortis.iNat.getRanks = async function (id, rankTarget, byIdSource, fields, scientificName) {
     const allDocs = await hortis.iNat.getAncestry(id, byIdSource);
     const indexed = {};
     const taxonIsComplex = allDocs[0].doc.rank === "complex";
@@ -624,7 +635,7 @@ hortis.iNat.getRanks = async function (id, rankTarget, byIdSource, fields) {
             const thisRank = indexed[rank];
             const oldTarget = rankTarget[targetRank];
             if (thisRank && oldTarget && oldTarget !== thisRank) {
-                console.log("Replacing " + targetRank + " " + oldTarget + " with " + thisRank + " for taxon " + (rankTarget.taxonName || rankTarget["Referred iNaturalist Name"]));
+                console.log("Replacing " + targetRank + " " + oldTarget + " with " + thisRank + " for taxon " + scientificName);
             }
             rankTarget[targetRank] = thisRank || "";
         }

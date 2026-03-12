@@ -61,10 +61,6 @@ hortis.inflateUint8Array = async function (url) {
     return inflated;
 };
 
-hortis.toggleClass = function (container, clazz, value, inverse) {
-    container.classList[value ^ inverse ? "add" : "remove"](clazz);
-};
-
 hortis.csvReader.parse = async function (that, csvOptions, url) {
     const complete = function (results) {
         that.parsed = results;
@@ -195,6 +191,19 @@ hortis.renderTaxonTooltip = function (that, hoverId) {
     return fluid.stringTemplate(hortis.taxonTooltipTemplate, terms);
 };
 
+/**
+ * Toggles a CSS class on a DOM element based on a boolean value.
+ *
+ * @param {HTMLElement} container - The DOM element to modify.
+ * @param {String} clazz - The CSS class to add or remove.
+ * @param {Boolean} value - If true, the class will be added; if false, it will be removed.
+ * @param {Boolean} [inverse] - If true, inverts the logic (adds the class when value is false).
+ *
+ * The class is added if (value XOR inverse) is true, otherwise it is removed.
+ */
+hortis.toggleClass = function (container, clazz, value, inverse) {
+    container.classList[!!value ^ inverse ? "add" : "remove"](clazz);
+};
 
 // Lifted from Infusion Tooltip.js
 hortis.isInDocument = function (node) {
@@ -403,7 +412,7 @@ hortis.taxa.map = function (rows, byId) {
     return byId;
 };
 
-hortis.nameOverrides = {
+hortis.taxonNameOverrides = {
     "Chromista": "Chromists"
 };
 
@@ -412,7 +421,7 @@ hortis.labelForRow = function (row, commonNames) {
     if (row.hulqName) {
         name += " - " + row.hulqName;
     }
-    name = hortis.nameOverrides[row.iNaturalistTaxonName] || name;
+    name = hortis.taxonNameOverrides[row.iNaturalistTaxonName] || name;
     return hortis.capitalize(name);
     // return row.rank ? (row.rank === "Life" ? "Life" : row.rank + ": " + name) : name;
 };
