@@ -25,10 +25,11 @@ hortis.iNatPhyla = {
     "Filicinophyta": "Tracheophyta",
     "Lycophyta": "Tracheophyta",
     "Sphenophyta": "Tracheophyta",
+    "Coniferophyta": "Tracheophyta",
     "Craniata": "Chordata",
-    "Coniferophyta": "Pinophyta",
     "Hepatophyta": "Marchantiophyta",
-    "Zygomycota": "Mucoromycota"
+    "Zygomycota": "Mucoromycota",
+    "Amoebozoa": "Mycetozoa" // BC CDC has this but some also remain behind in Mycetozoa
 };
 
 hortis.sanitizeSpeciesName = function (name) {
@@ -41,13 +42,8 @@ hortis.sanitizeSpeciesName = function (name) {
             name = name.substring(0, index);
         }
     });
-    // Unscrew scientificName entries which appear in GBIF which sometimes have authorities appended
-    const capPoint = name.search(/ [A-Z]/);
-    if (capPoint !== -1) {
-        name = name.slice(0, capPoint);
-    }
-    name = name.replace("�", "ue");
-    name = name.replace(/ (\(.*\))/g, "");
+    name = name.replace("�", "ue"); // normalise mangled umlauts
+    name = name.replace(/ (\(.*\))/g, ""); // Remove subgenus names
     name = name.replace(/ ('.*')/g, "");
     name = name.replace(" ssp.", "");
     name = name.replace(" subsp.", "");
@@ -69,7 +65,8 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace(" cfr. ", " ");
     name = name.replace(" cf ", " ");
     name = name.replace(" ?", " ");
-    name = name.replace(" x ", " × ");
+    name = name.replace(" x ", " × "); // No space to catch initial x
+    name = name.replace(/^x /, "× ");
     return name;
 };
 
@@ -313,7 +310,8 @@ hortis.scoreNameMatch = async function (result, query, byIdSource) {
     // Extra top branch copes with Halictus with null rank
     let score = (query.name === result.name ? 1024 : 0) +
         (query.name === result.matched_term  ? 512 : 0) +
-        (result.name.startsWith(query.name) ? 256 : 0) + (128 - result.rank_level);
+        ((result.name.startsWith(query.name) || query.name.startsWith(result.name)) ? 256 : 0) +
+        (128 - result.rank_level);
     if (query.rank) {
         // An exact name match is more important than a rank match
         if (query.rank === result.rank) {

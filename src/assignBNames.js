@@ -159,7 +159,7 @@ const swapsReader = hortis.csvReaderWithMap({
 });
 
 const source = hortis.iNatTaxonSource({
-    disableNameCache: true
+//     disableNameCache: true
 });
 
 

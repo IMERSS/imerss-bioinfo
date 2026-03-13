@@ -24,6 +24,9 @@ require("../src/iNaturalist/taxonAPI.js");
 // {name: "Halictus", phylum: "Arthropoda"} // should get genus or subgenus
 // {name: "Coelioxys octodentata", phylum: "Arthropoda"};
 // {name: "Thinopyrum intermedium barbulatum", phylum: "Anthophyta"}; // Test phylum remapping
+// {name: "Trichia favoginea", phylum: "Anthophyta"};
+// {name: "Abies amabilis", phylum: "Coniferophyta"};
+// {name: "x Elyhordeum stebbinsianum", phylum: "Tracheophyta"}; // Test normalisation, used to be a branch which axed after first later capital letter
 
 const source = hortis.iNatTaxonSource({
     disableNameCache: true
@@ -33,8 +36,8 @@ hortis.dumpiNatNameScores = true;
 
 const testSource = async function () {
     try {
-        const query = {name: "Trichia favoginea", phylum: "Anthophyta"};
-        const result = await source.get(query);
+        const query = {name: "Salix alba", phylum: "Tracheophyta"};
+        const result = await source.get({name: hortis.sanitizeSpeciesName(query.name), phylum: query.phylum, rank: query.rank});
         console.log(result);
         const byId = await source.get({id: result.doc.id});
         console.log(byId);
