@@ -72,6 +72,16 @@ hortis.rowFold = function (rowid, folded) {
 // In indeterminate state remove mdi-check from i
 // Problem: https://stackoverflow.com/questions/9366087/html-why-isnt-indeterminate-indeterminatetrue-respected
 
+/**
+ * Renders a checkbox input for a checklist row, including its state and associated markup.
+
+ * @param {String|Number} id - The unique identifier for the checklist row.
+ * @param {String} state - The selection state of the checkbox. Expected values: "selected", "unselected", or "indeterminate".
+ * @return {String} - The HTML markup string for the checkbox input and its container.
+
+ * The checkbox will be checked if state is "selected", and will have the indeterminate attribute if state is "indeterminate".
+ * The data-row-id attribute is set to the provided id for identification.
+ */
 hortis.rowCheckbox = function (id, state) {
     const checked = state === "selected" ? "checked" : "";
     const indeterminate = `indeterminate="${state === "indeterminate"}"`;

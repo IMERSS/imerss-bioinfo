@@ -784,7 +784,8 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
         obsGridLoaded: "@expand:signal()",
         hoverCell: "@expand:signal(null)",
         gridVisible: "@expand:signal(true)",
-        zoomToObsBounds: "@expand:signal(true)"
+        zoomToObsBounds: "@expand:signal(true)",
+        maxObsCountOverride: "@expand:signal()" // AS wanted to override the choropleth scaling from the History view
     },
     invokers: {
         drawObsGridLegend: "hortis.libreMap.withObsGrid.drawLegend({map}, {obsQuantiser}.grid, {that}.gridVisible)"
@@ -829,8 +830,9 @@ hortis.libreMap.withObsGrid.drawLegend = function (map, gridSignal, gridVisibleS
     const legendStopProps = fluid.iota(cstops + 1).map(stop => stop / cstops);
 
     const renderLegend = function (grid) {
+        const maxObsCount = map.maxObsCountOverride.value || grid.maxObsCount;
         // TODO: parameterise what the legend is with respect to
-        const propToLevel = prop => Math.floor(prop * grid.maxObsCount);
+        const propToLevel = prop => Math.floor(prop * maxObsCount);
         const regionMarkupRows = stops.map(function (stop) {
             const midProp = (legendStopProps[stop] + legendStopProps[stop + 1]) / 2;
             const colour = fluid.colour.lookupStop(map.memoStops, midProp);
@@ -894,7 +896,9 @@ hortis.libreMap.rectFromCorner = function (lat, long, latres, longres) {
 hortis.libreMap.obsGridFeature = function (map, obsQuantiser, grid) {
     const buckets = grid.buckets,
         latres = obsQuantiser.latResolution.value,
-        longres = obsQuantiser.longResolution.value;
+        longres = obsQuantiser.longResolution.value,
+        // OKTOPOKHO - old-style dynamic dependency which will cause re-render!
+        maxObsCount = map.maxObsCountOverride.value || grid.maxObsCount;
     return {
         type: "FeatureCollection",
         features: Object.entries(buckets).map(function ([key, bucket]) {
@@ -907,7 +911,7 @@ hortis.libreMap.obsGridFeature = function (map, obsQuantiser, grid) {
                 },
                 properties: {
                     cellId: key,
-                    obsprop: bucket.obsCount / grid.maxObsCount
+                    obsprop: bucket.obsCount / maxObsCount
                 }
             };
         })

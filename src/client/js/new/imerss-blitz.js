@@ -111,15 +111,14 @@ fluid.defaults("hortis.statusFilter", {
         confirmed: "@expand:signal(false)",
         unconfirmed: "@expand:signal(false)",
         new: "@expand:signal(false)",
-        isActive: "@expand:signal(true)",
 
-        filterState: "@expand:fluid.computed(hortis.statusFilter.toState, {that}.confirmed, {that}.unconfirmed, {that}.new, {that}.isActive, {that}.queryCache)"
+        filterState: "@expand:fluid.computed(hortis.statusFilter.toState, {that}.confirmed, {that}.unconfirmed, {that}.new, {that}.queryCache)"
         // taxaById: "{taxa}.rowById"
     }
 });
 
-hortis.statusFilter.toState = function (confirmed, unconfirmed, noo, isActive) {
-    return isActive ? {confirmed, unconfirmed, new: noo} : {confirmed: false, unconfirmed: false, new: false};
+hortis.statusFilter.toState = function (confirmed, unconfirmed, noo) {
+    return {confirmed, unconfirmed, new: noo};
 };
 
 hortis.statusFilter.doFilter = function (obsRows, filterState, taxaById) {

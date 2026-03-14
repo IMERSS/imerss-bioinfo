@@ -21,6 +21,9 @@ var {signal, computed, effect, batch} = preactSignalsCore;
 // TODO: Unclear now what is distinction between obsFilter and filter - it seems that a "filter" is resettable
 fluid.defaults("hortis.filter", {
     // gradeNames: "fluid.component",
+    members: {
+        isActive: "@expand:signal(true)"
+    }
 });
 
 fluid.defaults("hortis.obsFilter", {
@@ -56,25 +59,28 @@ hortis.combinedFilterInput = function (that) {
         const filterComps = fluid.queryIoCSelector(that.filterRoot, "hortis.obsFilter", false);
 
         const filterStates = filterComps.map(comp => comp.filterState);
+        const filtersActive = filterComps.map(comp => comp.isActive);
 
         const args = [that.allInput, ...filterStates];
         const {undefinedSignals} = fluid.processSignalArgs(args);
 
         return undefinedSignals ? fluid.unavailable({message: "Filter input unavailable"}) : {
             filterStates: filterStates.map(filterState => filterState.value),
+            filtersActive: filtersActive.map(filtersActive => filtersActive ? filtersActive.value : true),
             filterComps,
             allInput: that.allInput.value};
     });
 };
 
 hortis.evaluateFilter = function (that, combinedFilterInput) {
-    const {filterStates, filterComps, allInput} = combinedFilterInput;
+    const {filterStates, filterComps, filtersActive, allInput} = combinedFilterInput;
 
     let prevOutput = allInput;
 
     for (let i = 0; i < filterComps.length; ++i) {
         const filterComp = filterComps[i];
-        const filterOutput = filterComp.doFilter(prevOutput, filterStates[i]);
+        const filterActive = filtersActive[i];
+        const filterOutput = filterActive ? filterComp.doFilter(prevOutput, filterStates[i]) : prevOutput;
         prevOutput = filterOutput;
         if (fluid.isUnavailable(prevOutput)) {
             break;
@@ -157,10 +163,10 @@ fluid.defaults("hortis.repeatingRowFilter", {
     }
 });
 
-hortis.repeatingRowFilter.renderRow = function (template, rowLabel, rowId) {
+hortis.repeatingRowFilter.renderRow = function (template, rowLabel, rowId, state) {
     return fluid.stringTemplate(template, {
         rowLabel,
-        checkbox: hortis.rowCheckbox(rowId)
+        checkbox: hortis.rowCheckbox(rowId, state)
     });
 };
 
