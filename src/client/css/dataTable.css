@@ -1,0 +1,148 @@
+
+:root {
+    --data-table-bg: #0e1117;
+    --data-table-surface: #161b22;
+    --data-table-border: #2a2f3a;
+    --data-table-border-hover: #3d4450;
+    --data-table-text: #e2e6ed;
+    --data-table-text-dim: #7d8590;
+    --data-table-accent: #58a6ff;
+    --data-table-accent-dim: rgba(88, 166, 255, 0.12);
+    --data-table-row-hover: rgba(88, 166, 255, 0.06);
+    --data-table-radius: 8px;
+    --data-table-font: "DM Sans", sans-serif;
+}
+
+.hortis-dataTable {
+    height: 100%;
+    display: flex;
+}
+
+.hortis-dataTable-wrap {
+    flex: 1;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--data-table-border);
+    border-radius: var(--data-table-radius);
+    background: var(--data-table-surface);
+    display: flex;
+    flex-direction: column;
+}
+
+.hortis-dataTable-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.hortis-dataTable-scroll table {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.hortis-dataTable-scroll thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--data-table-surface);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--data-table-text-dim);
+    text-align: left;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--data-table-border);
+    white-space: nowrap;
+}
+
+.hortis-dataTable-scroll thead th.hortis-dataTable-num {
+    text-align: right;
+}
+
+.hortis-dataTable-scroll tbody td {
+    padding: 3px 10px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--data-table-border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hortis-dataTable-scroll tbody tr {
+    transition: background 0.15s ease;
+}
+
+.hortis-dataTable-scroll tbody tr:hover {
+    background: var(--data-table-row-hover);
+}
+
+.hortis-dataTable-scroll tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td.hortis-dataTable-num, th.hortis-dataTable-num {
+    text-align: right;
+    font-size: 12px;
+}
+
+/* ── Pagination bar ── */
+.hortis-dataTable-pagination {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-top: 1px solid var(--data-table-border);
+    font-size: 12px;
+    color: var(--data-table-text-dim);
+    user-select: none;
+}
+
+.hortis-dataTable-pageInfo {
+}
+
+.hortis-dataTable-pageControls {
+    display: flex;
+    gap: 4px;
+}
+
+.hortis-dataTable-pagination button {
+    font-family: var(--data-table-font);
+    font-size: 12px;
+    font-weight: 500;
+    background: transparent;
+    border: 1px solid var(--data-table-border);
+    border-radius: 6px;
+    color: var(--data-table-text-dim);
+    padding: 4px 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.hortis-dataTable-pagination button:hover:not(:disabled) {
+    border-color: var(--data-table-accent);
+    color: var(--data-table-accent);
+    background: var(--data-table-accent-dim);
+}
+
+.hortis-dataTable-pagination button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.hortis-dataTable-pagination button.hortis-dataTable-active {
+    border-color: var(--data-table-accent);
+    color: var(--data-table-accent);
+    background: var(--data-table-accent-dim);
+}
+
+/* Resize hint */
+.resize-hint {
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 11px;
+    font-family: var(--data-table-mono);
+    color: var(--data-table-text-dim);
+    opacity: 0.5;
+}

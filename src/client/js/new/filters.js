@@ -18,7 +18,7 @@ var hortis = fluid.registerNamespace("hortis");
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var {signal, computed, effect, batch} = preactSignalsCore;
 
-// TODO: Unclear now what is distinction between obsFilter and filter - it seems that a "filter" is resettable
+// TODO: Unclear now what is distinction between obsFilter and filter
 fluid.defaults("hortis.filter", {
     // gradeNames: "fluid.component",
     members: {

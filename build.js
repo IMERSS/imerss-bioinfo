@@ -81,6 +81,7 @@ const buildIndex = {
     newSource: [
         "node_modules/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js",
         "src/client/css/mapbox-gl-draw.css", // has our own overrides
+        "src/client/css/dataTable.css",
         "node_modules/papaparse/papaparse.min.js",
         "node_modules/pako/dist/pako_inflate.min.js",
         "node_modules/pretty-checkbox/dist/pretty-checkbox.min.css",
@@ -91,6 +92,7 @@ const buildIndex = {
         "src/client/js/new/filters.js",
         "src/client/js/new/polygon-draw.js",
         "src/client/js/new/dual-range-input.js",
+        "src/client/js/new/dataTable.js",
         "src/client/js/autocomplete.js",
         "src/client/js/tabs.js"
     ],

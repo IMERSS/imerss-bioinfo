@@ -362,6 +362,9 @@
     margin-top: 0.5rem;
 }
 
+.imerss-tooltip.imerss-grid-tooltip div.text {
+    max-width: none;
+}
 
 .imerss-autocomplete {
     width: 30em;
@@ -567,6 +570,11 @@
 .ui-tabs .ui-tabs-panel {
     display: flex;
     padding: 10px;
+}
+
+/** Override core definition in tooltip.css */
+.ui-tooltip {
+    max-width: none;
 }
 
 #fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {

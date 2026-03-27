@@ -51,7 +51,7 @@ fluid.defaults("hortis.libreMap.polygonFilter", {
 
 hortis.libreMap.polygonFilter.pointCache = function (obsRows) {
     // Taken from landlocked.js which seems to be only historical site feeding into point-in-polygon.js
-    obsRows.forEach(row => row.point = [hortis.parseFloat(row.decimalLongitude), hortis.parseFloat(row.decimalLatitude)]);
+    obsRows.forEach(row => row[hortis.pointSymbol] = [hortis.parseFloat(row.decimalLongitude), hortis.parseFloat(row.decimalLatitude)]);
 };
 
 hortis.libreMap.polygonFilter.doFilter = function (obsRows, filterState) {

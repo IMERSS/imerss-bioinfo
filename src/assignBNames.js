@@ -138,7 +138,6 @@ const parsedArgs = minimist(process.argv.slice(2), {boolean: [...Object.keys(str
 const swapsFile = parsedArgs.swaps || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/taxon-swaps-2025.csv");
 
 const noRank = parsedArgs.noRank;
-console.log("Got noRank", noRank);
 
 const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/plant-pollinators-Carril-normalised.csv");
 

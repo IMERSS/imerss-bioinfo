@@ -215,6 +215,7 @@ hortis.isInDocument = function (node) {
 };
 
 hortis.clearAllTooltips = function (that) {
+    return;
     hortis.clearTooltip(that);
     $(".ui-tooltip").remove();
     that[that.options.tooltipKey].value = null;
@@ -271,11 +272,15 @@ fluid.defaults("hortis.withTooltip", {
         renderTooltip: "fluid.notImplemented"
     },
     members: {
-        // hoverEvent applied manually
+        // hoverEvent applied manually in whatever event handler code updates the tooltipKey signal
         subscribeHover: "@expand:hortis.subscribeHover({that})"
     }
 });
 
+// Sensible naming for a standalone tooltip
+fluid.defaults("hortis.tooltip", {
+    gradeNames: ["fluid.component", "hortis.withTooltip"]
+});
 
 
 fluid.defaults("hortis.checkbox", {
@@ -543,13 +548,17 @@ fluid.defaults("hortis.libreMap", {
         }
     },
     events: {
-        onLoad: null
+        onLoad: null,
+        onClick: null
     },
     listeners: {
         "onLoad.setStyle": {
             priority: "last",
             listener: "hortis.libreMap.setStyle",
             args: ["{that}.map", "{that}.options.mapOptions", "{that}.mapLoaded"]
+        },
+        "onCreate.bindClick": {
+            listener: "hortis.libreMap.bindClick"
         }
     },
     invokers: {
@@ -558,7 +567,8 @@ fluid.defaults("hortis.libreMap", {
     members: {
         map: "@expand:hortis.libreMap.make({that}, {that}.events.onLoad, {that}.container.0)",
         mapLoaded: "@expand:signal()",
-        zoomControls: "@expand:hortis.libreMap.zoomControls({that}.map, {that}.options.zoomDuration, {that}.options.zoomControlsPosition)"
+        zoomControls: "@expand:hortis.libreMap.zoomControls({that}.map, {that}.options.zoomDuration, {that}.options.zoomControlsPosition)",
+        clickHandlers: []
     }
 });
 
@@ -582,6 +592,15 @@ hortis.libreMap.make = function (that, onLoad, container) {
         fluid.promise.fireTransformEvent(onLoad, null, {that});
     });
     return map;
+};
+
+hortis.libreMap.bindClick = function (that) {
+    that.map.on("click", e => {
+        const handled = that.clickHandlers.find(clickHandler => clickHandler.handle(e));
+        if (!handled) {
+            that.clickHandlers.forEach(clickHandler => clickHandler.reset());
+        }
+    });
 };
 
 hortis.libreMap.sortLayers = function (map) {
@@ -667,7 +686,7 @@ fluid.defaults("hortis.libreMap.withFillPatterns", {
         loadFillPatterns: "hortis.libreMap.loadFillPatterns({that}, {that}.options.fillPatternPath, {that}.options.fillPatterns)"
     },
     listeners: {
-        "onLoad.loadFillPatterns": "{that}.loadFillPatterns"
+        "load.loadFillPatterns": "{that}.loadFillPatterns"
     }
 });
 
@@ -755,26 +774,41 @@ hortis.libreMap.natureStops = [
 
 // TODO: Convert into subcomponent, possibly of something completely different - we may want one layer for each map, etc.
 fluid.defaults("hortis.libreMap.withObsGrid", {
-    gradeNames: ["hortis.withTooltip"],
-    tooltipKey: "hoverCell",
     fillStops: hortis.libreMap.viridisStops,
-    fillOpacity: 0.5,
+    fillOpacity: 0.6,
     outlineColour: "black",
     legendStops: 5,
     legendPosition: "bottom-right",
     gridResolution: 100,
     components: {
+        gridFilter: {
+            type: "hortis.obsGridFilter",
+            options: {
+                members: {
+                    filterState: "{withObsGrid}.selectedCell"
+                }
+            }
+        },
         obsQuantiser: {
             type: "hortis.obsQuantiser",
             options: {
                 gridResolution: "{hortis.libreMap}.options.gridResolution"
+            }
+        },
+        gridTooltip: {
+            type: "hortis.tooltip",
+            options: {
+                tooltipKey: "hoverCell",
+                members: {
+                    hoverCell: "{withObsGrid}.hoverCell"
+                }
             }
         }
     },
     members: {
         // TODO: "Trundling dereferencer" in the framework
         gridBounds: "@expand:fluid.derefSignal({obsQuantiser}.grid, bounds)",
-        updateObsGrid: "@expand:fluid.effect(hortis.libreMap.updateObsGrid, {that}, {obsQuantiser}, {obsQuantiser}.grid, {that}.mapLoaded)",
+        updateObsGrid: "@expand:fluid.effect(hortis.libreMap.updateObsGrid, {that}, {obsQuantiser}, {obsQuantiser}.grid, {that}.gridOpacity, {that}.mapLoaded)",
         zoomToObsBoundsEffect: "@expand:fluid.effect(hortis.libreMap.fitBounds, {that}, {that}.gridBounds, {that}.mapLoaded, {that}.zoomToObsBounds)",
 
         memoStops: "@expand:fluid.colour.memoStops({that}.options.fillStops, 256)",
@@ -783,7 +817,9 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
 
         obsGridLoaded: "@expand:signal()",
         hoverCell: "@expand:signal(null)",
+        selectedCell: "@expand:signal(null)",
         gridVisible: "@expand:signal(true)",
+        gridOpacity: "@expand:fluid.computed(hortis.libreMap.computeGridOpacity, {that}.gridVisible, {that}.options.fillOpacity)",
         zoomToObsBounds: "@expand:signal(true)",
         maxObsCountOverride: "@expand:signal()" // AS wanted to override the choropleth scaling from the History view
     },
@@ -795,6 +831,10 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
         "onCreate.bindGridSelect": "hortis.libreMap.bindGridSelect({that})"
     }
 });
+
+hortis.libreMap.computeGridOpacity = function (gridVisible, fillOpacity) {
+    return gridVisible ? fillOpacity : 0;
+};
 
 fluid.registerNamespace("hortis.legend");
 
@@ -866,20 +906,74 @@ hortis.libreMap.withObsGrid.drawLegend = function (map, gridSignal, gridVisibleS
     return {container};
 };
 
+fluid.registerNamespace("hortis.obsQuantiser");
+
+/**
+ * Converts a cell ID string to its corresponding latitude and longitude coordinates.
+ *
+ * @param {String} index - The cell ID in the format "latIndex|longIndex".
+ * @param {Number} latres - The grid resolution for latitude.
+ * @param {Number} longres - The grid resolution for longitude.
+ * @return {Array<Number>} An array containing the latitude and longitude coordinates [latitude, longitude].
+ */
+hortis.obsQuantiser.cellIdToCoord = function (index, latres, longres) {
+    const coords = index.split("|");
+    return [coords[0] * latres, coords[1] * longres];
+};
+
+/**
+ * Computes a unique cell ID string for a given latitude and longitude, based on grid resolution.
+ *
+ * @param {Number} lat - The latitude coordinate.
+ * @param {Number} long - The longitude coordinate.
+ * @param {Number} latres - The grid resolution for latitude.
+ * @param {Number} longres - The grid resolution for longitude.
+ * @return {String} The cell ID in the format "latIndex|longIndex".
+ */
+hortis.obsQuantiser.coordToCellId = function (lat, long, latres, longres) {
+    const latq = Math.floor(lat / latres);
+    const longq = Math.floor(long / longres);
+    return latq + "|" + longq;
+};
+
+/**
+ * Resolves a map event to the cell ID of the topmost visible feature at the event's point.
+ * @param {Map} map - The Mapbox/MapLibre map instance.
+ * @param {MapMouseEvent} e - A map mouse event containing a `point` property.
+ * @return {String|null} The cell ID, or null if no visible feature was found.
+ */
+hortis.libreMap.eventToCell = function (map, e) {
+    const features = map.queryRenderedFeatures(e.point);
+    const visibleFeatures = features.filter(feature => feature.layer.paint["fill-opacity"] > 0);
+    return visibleFeatures[0]?.properties.cellId || null;
+};
+
 // cf. hortis.libreMap.bindRegionSelect in reknit-client.js
 hortis.libreMap.bindGridSelect = function (that) {
     const map = that.map;
 
-    map.on("mousemove", (e) => {
-        const features = map.queryRenderedFeatures(e.point);
-        const visibleFeatures = features.filter(feature => feature.properties.cellId);
-        that.hoverEvent = e.originalEvent;
-        const cellId = visibleFeatures[0]?.properties.cellId || null;
+    map.on("mousemove", e => {
+        that.gridTooltip.hoverEvent = e.originalEvent;
+        const cellId = hortis.libreMap.eventToCell(map, e);
         that.hoverCell.value = cellId;
         map.getCanvas().style.cursor = cellId ? "default" : "";
     });
 
-    map.getCanvas().addEventListener("mouseleave", () => hortis.clearAllTooltips(that));
+    // Deal with potential for orthogonal selections - grid cell selection should stack with region selection
+    that.clickHandlers.push({
+        handle: e => {
+            const cellId = hortis.libreMap.eventToCell(map, e);
+            if (cellId) {
+                that.selectedCell.value = cellId;
+                return true;
+            }
+        },
+        reset: () => {
+            that.selectedCell.value = null;
+        }
+    });
+
+    map.getCanvas().addEventListener("mouseleave", () => hortis.clearAllTooltips(that.gridTooltip));
 };
 
 // GeoJSON-style (long, lat) polygon traversed anticlockwise
@@ -902,7 +996,7 @@ hortis.libreMap.obsGridFeature = function (map, obsQuantiser, grid) {
     return {
         type: "FeatureCollection",
         features: Object.entries(buckets).map(function ([key, bucket]) {
-            const [lat, long] = hortis.obsQuantiser.indexToCoord(key, latres, longres);
+            const [lat, long] = hortis.obsQuantiser.cellIdToCoord(key, latres, longres);
             return {
                 type: "Feature",
                 geometry: {
@@ -918,7 +1012,7 @@ hortis.libreMap.obsGridFeature = function (map, obsQuantiser, grid) {
     };
 };
 
-hortis.libreMap.updateObsGrid = function (map, obsQuantiser, grid) {
+hortis.libreMap.updateObsGrid = function (map, obsQuantiser, grid, gridOpacity) {
     const geojson = hortis.libreMap.obsGridFeature(map, obsQuantiser, grid);
 
     let source = map.map.getSource("obsgrid-source");
@@ -931,6 +1025,9 @@ hortis.libreMap.updateObsGrid = function (map, obsQuantiser, grid) {
         });
     }
 
+    // TODO: In future we will display all unselected grid cells as lower opacity
+    // const fillOpacity = map.options.fillOpacity; // selectedCell ? map.options.fillOpacity / 2 : map.options.fillOpacity;
+
     const layer = map.map.getLayer("obsgrid-layer");
     if (!layer) {
         const layer = {
@@ -942,7 +1039,7 @@ hortis.libreMap.updateObsGrid = function (map, obsQuantiser, grid) {
                     property: "obsprop",
                     stops: map.options.fillStops
                 },
-                "fill-opacity": map.options.fillOpacity,
+                "fill-opacity": gridOpacity,
                 "fill-outline-color": map.options.outlineColour
             },
             metadata: {
@@ -958,6 +1055,7 @@ hortis.libreMap.updateObsGrid = function (map, obsQuantiser, grid) {
         map.sortLayers();
         map.obsGridLoaded.value = true;
     }
+    map.map.setPaintProperty("obsgrid-layer", "fill-opacity", gridOpacity);
 
 };
 
@@ -1013,8 +1111,6 @@ hortis.longToLat = function (lng, lat) {
     return lng * longLength / latLength;
 };
 
-fluid.registerNamespace("hortis.obsQuantiser");
-
 hortis.obsQuantiser.initGrid = function () {
     const grid = {};
     grid.bounds = hortis.initBounds();
@@ -1030,6 +1126,8 @@ hortis.indexObs = function (bucket, row, index) {
     // "iNaturalist taxon ID" as seen in "assigned" data in Xetthecum story map
     fluid.pushArray(bucket.byTaxonId, row.iNaturalistTaxonId, index);
 };
+
+hortis.cellIdSymbol = Symbol("hortis.cellId");
 
 fluid.defaults("hortis.obsQuantiser", {
     gradeNames: "fluid.modelComponent",
@@ -1055,17 +1153,6 @@ fluid.defaults("hortis.obsQuantiser", {
     }
 });
 
-hortis.obsQuantiser.indexToCoord = function (index, latres, longres) {
-    const coords = index.split("|");
-    return [coords[0] * latres, coords[1] * longres];
-};
-
-hortis.obsQuantiser.coordToIndex = function (lat, long, latres, longres) {
-    const latq = Math.floor(lat / latres);
-    const longq = Math.floor(long / longres);
-    return latq + "|" + longq;
-};
-
 hortis.obsBounds = function (rows) {
     const bounds = hortis.initBounds();
     rows.forEach(function (row) {
@@ -1079,12 +1166,14 @@ hortis.obsQuantiser.indexObs = function (that, rows, latRes, longRes) {
 
     const now = Date.now();
     rows.forEach(function (row, index) {
-        const coordIndex = hortis.obsQuantiser.coordToIndex(row.decimalLatitude, row.decimalLongitude, latRes, longRes);
+        const cellId = hortis.obsQuantiser.coordToCellId(row.decimalLatitude, row.decimalLongitude, latRes, longRes);
+        // OCTOPOKHO - Put this cached value in to help with filtering
+        row[hortis.cellIdSymbol] = cellId;
         hortis.updateBounds(grid.bounds, row.decimalLatitude, row.decimalLongitude);
 
-        let bucket = grid.buckets[coordIndex];
+        let bucket = grid.buckets[cellId];
         if (!bucket) {
-            bucket = grid.buckets[coordIndex] = that.newBucket();
+            bucket = grid.buckets[cellId] = that.newBucket();
         }
         bucket.obsCount++;
         grid.maxObsCount = Math.max(grid.maxObsCount, bucket.obsCount);
@@ -1101,6 +1190,25 @@ hortis.obsQuantiser.indexObs = function (that, rows, latRes, longRes) {
 
     return grid;
 };
+
+
+
+fluid.defaults("hortis.obsGridFilter", {
+    gradeNames: ["fluid.component", "hortis.obsFilter"],
+    invokers: {
+        doFilter: "hortis.obsGridFilter.doFilter({obsQuantiser}, {arguments}.0, {arguments}.1)",
+        reset: "hortis.obsGridFilter.reset({that})"
+    }
+});
+
+hortis.obsGridFilter.doFilter = function (obsQuantiser, obsRows, selectedCell) {
+    return selectedCell === null ? obsRows : obsRows.filter(obsRow => obsRow[hortis.cellIdSymbol] === selectedCell);
+};
+
+hortis.obsGridFilter.reset = function (that) {
+    that.filterState.value = null;
+};
+
 
 fluid.defaults("hortis.libreObsMap", {
     gradeNames: ["hortis.libreMap", "hortis.libreMap.withObsGrid"]

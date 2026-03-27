@@ -16,10 +16,12 @@ hortis.countTrue = function (array) {
     return array.reduce(function (a, c) {return a + c;}, 0);
 };
 
+hortis.pointSymbol = Symbol("point");
+
 hortis.intersections = 0;
 
 hortis.intersectsFeature = function (feature, mappedRow) {
-    if (!hortis.isPoint(mappedRow.point)) {
+    if (!hortis.isPoint(mappedRow[hortis.pointSymbol])) {
         return false;
     } else {
         const reject = function (message) {
@@ -28,7 +30,7 @@ hortis.intersectsFeature = function (feature, mappedRow) {
         const intersectPolygon = function (polyPolygon) {
             const intersects = polyPolygon.map(function (polygon) {
                 ++hortis.intersections;
-                return hortis.pointInPolygon(mappedRow.point, polygon);
+                return hortis.pointInPolygon(mappedRow[hortis.pointSymbol], polygon);
             });
             const count = hortis.countTrue(intersects);
             return count % 2;

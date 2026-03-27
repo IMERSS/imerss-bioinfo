@@ -111,7 +111,7 @@ hortis.taxaFromObs = function (filteredObs, rowById) {
 };
 
 hortis.mapGridTooltipTemplate =
-    `<div class="imerss-tooltip imerss-bbea-grid-tooltip">
+    `<div class="imerss-tooltip imerss-grid-tooltip">
     <div><b>Observations:</b> %obsCount</div>
     <div class="text"><b>Taxa:</b> %taxonCount<div>%taxa</div></div>
     %footer
@@ -119,8 +119,14 @@ hortis.mapGridTooltipTemplate =
 
 fluid.defaults("hortis.vizLibreMap", {
     gradeNames: ["hortis.libreObsMap", "hortis.libreMap.withTiles", "hortis.libreMap.streetmapTiles", "hortis.libreMap.withPolygonDraw"],
-    invokers: {
-        renderTooltip: "hortis.renderVizGridTooltip({that}, {obsQuantiser}.grid.value, {taxa}.rowById.value, {arguments}.0)"
+    components: {
+        gridTooltip: {
+            options: {
+                invokers: {
+                    renderTooltip: "hortis.renderVizGridTooltip({that}, {obsQuantiser}.grid.value, {taxa}.rowById.value, {arguments}.0)"
+                }
+            }
+        }
     },
     gridResolution: 30,
     legendPosition: "bottom-left"
