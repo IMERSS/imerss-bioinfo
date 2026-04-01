@@ -130,6 +130,14 @@ const strategies = {
         nameStatus: "nameStatus",
         assignedINatName: "scientific_name",
         assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus"]
+    },
+    Saanich: {
+        iNatName: "iNaturalistTaxonName",
+        rawName: "iNaturalistTaxonName",
+        iNatId: "iNaturalistTaxonId",
+        nameStatus: "nameStatus",
+        assignedINatName: "iNaturalistTaxonName",
+        assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus"]
     }
 };
 
@@ -319,6 +327,8 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
             await hortis.applyName(row, i, row.phylum, row.taxonRank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         } else if (strategy === "iNat") {
             await hortis.applyName(row, i, row.phylum, row.taxon_rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
+        } else if (strategy === "Saanich") {
+            await hortis.applyName(row, i, "Tracheophyta", "species", invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
         }
 
         mapped.push(row);
