@@ -36,7 +36,7 @@ hortis.dumpiNatNameScores = true;
 
 const testSource = async function () {
     try {
-        const query = {name: "Pentagramma triangularis", phylum: "Tracheophyta", rank: "species"};
+        const query = {name: "Stachys cooleyae", phylum: "Tracheophyta", rank: "species"};
         const result = await source.get({name: hortis.sanitizeSpeciesName(query.name), phylum: query.phylum, rank: query.rank});
         console.log(result);
         const byId = await source.get({id: result.doc.id});

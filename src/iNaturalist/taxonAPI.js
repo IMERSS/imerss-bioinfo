@@ -157,7 +157,7 @@ hortis.DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 fluid.defaults("hortis.cachedApiSource", {
     gradeNames: ["fluid.dataSource", "fluid.dataSource.noencoding"],
-    refreshInDays: 70,
+    refreshInDays: 120,
     disableCache: false,
     components: {
         inMemorySource: {
@@ -304,6 +304,43 @@ fluid.defaults("hortis.cachediNatTaxonByName", {
     }
 });
 
+// See https://claude.ai/chat/edbdf9bc-1bb1-490f-99c4-19d8aff5ff22
+hortis.genusMatch = function (a, b) {
+    let i = 0;
+    const len = Math.min(a.length, b.length);
+
+    while (i < len && a[i] === b[i]) {
+        i++;
+    }
+
+    const aEnded = i === a.length;
+    const bEnded = i === b.length;
+
+    if (aEnded && bEnded) {
+        // Identical strings — the whole thing is the prefix (genus name alone)
+        return a;
+    }
+
+    if (aEnded || bEnded) {
+        // One string is a prefix of the other — the longer one must have whitespace here
+        const longer = aEnded ? b : a;
+        if (/\s/.test(longer[i])) {
+            return a.slice(0, i);
+        }
+        // No whitespace — the shorter string is a truncated word, not a complete genus
+        // Fall through to walk-back logic
+    }
+
+    // Diverged mid-match or failed the end-of-string check — walk back to last whitespace
+    let j = i;
+    while (j > 0 && !/\s/.test(a[j - 1])) {
+        j--;
+    }
+
+    // Return everything before the whitespace
+    return j > 0 ? a.slice(0, j - 1) : "";
+}
+
 // Highest iNat rank is 100 for Life - we want the most specific taxon of those selected
 hortis.scoreNameMatch = async function (result, query, byIdSource) {
     // Extra branch in result.name copes with Pentagramma triangularis -> Pentagramma triangularis triangularis
@@ -319,7 +356,7 @@ hortis.scoreNameMatch = async function (result, query, byIdSource) {
         }
     }
     // Don't hit the DB for any results which are not already an exact(ish) match for the query
-    if (query.phylum && (score & (1024 | 512 | 256))) {
+    if (query.phylum && ((score & (1024 | 512 | 256)) || hortis.genusMatch(query.name, result.name))) {
         const rankTarget = {};
         await hortis.iNat.getRanks(result.id, rankTarget, byIdSource, ["phylum"]);
         if (query.phylum === rankTarget.phylum) {

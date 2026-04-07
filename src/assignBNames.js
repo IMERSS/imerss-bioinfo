@@ -102,7 +102,7 @@ const strategies = {
         iNatId: "iNaturalistTaxonId",
         nameStatus: "nameStatus",
         assignedINatName: "iNaturalistTaxonName",
-        assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus"],
+        assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus", "species", "subspecies", "commonName"],
         sanitize: true
     },
     DwCR: { // Reduced DwC as it comes direct from GBIF
@@ -137,7 +137,8 @@ const strategies = {
         iNatId: "iNaturalistTaxonId",
         nameStatus: "nameStatus",
         assignedINatName: "iNaturalistTaxonName",
-        assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus"]
+        assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus"],
+        sanitize: true
     }
 };
 
