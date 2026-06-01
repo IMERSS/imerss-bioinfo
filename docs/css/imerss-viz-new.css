@@ -168,6 +168,27 @@
     border-bottom: none;
 }
 
+:root {
+    --datatable-scrollbar-width: 12px;
+}
+
+.hortis-dataTable-wrap ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: var(--datatable-scrollbar-width);
+    background-color: #eee
+}
+
+.hortis-dataTable-wrap ::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #C1C1C1;
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+.hortis-dataTable-wrap ::-webkit-scrollbar-thumb:hover {
+    background-color: #A8A8A8;
+}
+
+
 td.hortis-dataTable-num, th.hortis-dataTable-num {
     text-align: right;
     font-size: 12px;
@@ -232,6 +253,62 @@ td.hortis-dataTable-num, th.hortis-dataTable-num {
     font-family: var(--data-table-mono);
     color: var(--data-table-text-dim);
     opacity: 0.5;
+}
+
+.resize-bar {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    user-select: none;
+    -webkit-user-select: none;
+
+    /* Hit-target: easy to grab. The visible ridge is just the border. */
+    --bar-hit-size: 12px;
+    --bar-ridge-width: 4px;
+    --bar-color: rgba(128, 128, 128, 0.35);
+    --bar-color-hover: rgba(128, 128, 128, 0.6);
+    --bar-color-active: rgba(128, 128, 128, 0.8);
+}
+
+.resize-bar--horizontal {
+    width: var(--bar-hit-size);
+    cursor: col-resize;
+
+    /* Collapse the box to zero width; the border is the entire visible element.
+       Offset left by half the border width so it sits centred in the hit target. */
+    border-left: var(--bar-ridge-width) ridge var(--bar-color);
+    box-sizing: border-box;
+    padding-left: calc(var(--bar-hit-size) / 2 - var(--bar-ridge-width) / 2);
+}
+
+.resize-bar--vertical {
+    height: var(--bar-hit-size);
+    cursor: row-resize;
+
+    border-top: var(--bar-ridge-width) ridge var(--bar-color);
+    box-sizing: border-box;
+    padding-top: calc(var(--bar-hit-size) / 2 - var(--bar-ridge-width) / 2);
+}
+
+.resize-bar--hover {
+    --bar-color: var(--bar-color-hover);
+}
+
+.resize-bar--active {
+    --bar-color: var(--bar-color-active);
+}
+
+.resize-bar:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .resize-bar {
+        --bar-color: rgba(255, 255, 255, 0.2);
+        --bar-color-hover: rgba(255, 255, 255, 0.4);
+        --bar-color-active: rgba(255, 255, 255, 0.6);
+    }
 }
 /**
  * pretty-checkbox.css

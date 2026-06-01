@@ -74,11 +74,10 @@ hortis.rowFold = function (rowid, folded) {
 
 /**
  * Renders a checkbox input for a checklist row, including its state and associated markup.
-
  * @param {String|Number} id - The unique identifier for the checklist row.
  * @param {String} state - The selection state of the checkbox. Expected values: "selected", "unselected", or "indeterminate".
  * @return {String} - The HTML markup string for the checkbox input and its container.
-
+ *
  * The checkbox will be checked if state is "selected", and will have the indeterminate attribute if state is "indeterminate".
  * The data-row-id attribute is set to the provided id for identification.
  */
@@ -290,7 +289,7 @@ fluid.defaults("hortis.checklist.withSearch", {
         search: {
             // Repurpose "filter" component largely because it has a consistent autocomplete setup - we eliminate "clear" functionality
             // and rely on its "filterState" for integration
-            type: "fluid.checklist.search",
+            type: "hortis.checklist.search",
             container: "{that}.dom.search",
             options: {
                 controlId: "{withSearch}.options.searchControlId",
@@ -303,11 +302,30 @@ fluid.defaults("hortis.checklist.withSearch", {
     }
 });
 
+fluid.defaults("hortis.checklist.withSingleSearch", {
+    components: {
+        search: {
+            options: {
+                // Reoverride the original grade again so that we pick up its own override of the core markup for an autocompleteFilter
+                gradeNames: ["hortis.taxonObsFilter", "hortis.checklist.search"],
+                defeatSearchSelect: true,
+                members: {
+                    rowById: "{checklist}.rowById"
+                }
+            }
+        }
+    }
+});
+
 hortis.checklist.idToEntryToRows = idToEntry => Object.values(idToEntry).map(entry => entry.row).filter(row => row.id !== 0);
 
 hortis.duffFilterState = null;
 
 hortis.checklist.searchSelect = function (filterState, search, checklist) {
+    // Hack since we can't override an effect
+    if (search.options.defeatSearchSelect) {
+        return;
+    }
     if (filterState === hortis.duffFilterState) {
         console.log("Got duff notification from preact-signals");
     } else if (filterState) {
@@ -323,13 +341,18 @@ hortis.checklist.searchSelect = function (filterState, search, checklist) {
     }
 };
 
-fluid.defaults("fluid.checklist.search", {
+// Note that hortis.taxonFilter is just a hortis.filter so that this can be repurposed in BBEAS to have its selection
+// model punch through to the checklist rather than directly be trawled in as a general hortis.obsFilter
+fluid.defaults("hortis.checklist.search", {
     gradeNames: "hortis.taxonFilter",
     markup: {
         container: `
         <span>
             <span class="imerss-filter-autocomplete">
-                <span class="imerss-filter-clear"></span>
+                <div class="imerss-filter-clear imerss-basic-tooltip fl-hidden" title="Reset this filter"><svg width="24" height="24">
+                        <use href="#x-circle-close" />
+                    </svg>
+                </div>
             </span>
             <svg width="32" height="32" >
                 <use href="#search-icon" />
@@ -558,8 +581,11 @@ hortis.checklist.check = function (checklist, id, checked) {
 // TODO: Pretty ropy, should use that.rootId
 hortis.checklist.reset = function (checklist) {
     // TODO: Somehow the root entry itself is not populated
-    const rootId = checklist.rootEntry.value.children[0].row.id;
-    hortis.checklist.check(checklist, rootId, false);
+    const rootChild = checklist.rootEntry.value.children[0];
+    if (rootChild) {
+        const rootId = rootChild.row.id;
+        hortis.checklist.check(checklist, rootId, false);
+    }
 };
 
 hortis.checklist.defaultFold = function (entry, unfoldable, foldByDefault) {

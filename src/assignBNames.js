@@ -102,7 +102,8 @@ const strategies = {
         iNatId: "iNaturalistTaxonId",
         nameStatus: "nameStatus",
         assignedINatName: "iNaturalistTaxonName",
-        assignRanks: ["kingdom", "phylum", "class", "order", "infraorder", "superfamily", "family", "subfamily", "genus", "species", "subspecies", "commonName"],
+        commonName: "commonName",
+        assignRanks: ["kingdom", "phylum", "subphylum", "class", "subclass", "superorder", "order", "infraorder", "superfamily", "family", "subfamily", "tribe", "genus", "species", "subspecies", "variety", "hybrid"],
         sanitize: true
     },
     DwCR: { // Reduced DwC as it comes direct from GBIF
@@ -258,17 +259,22 @@ hortis.applyName = async function (row, index, phylum, inRank, invertedSwaps, al
 
     const assign = function (row, field, value) {
         // eslint-disable-next-line eqeqeq
-        if (row[field] && row[field] != value) {
-            console.log(`Inconsistency in reintegrated data - assigning ${value} to field ${field} over existing value ${row[field]}`);
-            console.log("Row: ", row);
+        if (value !== undefined) {
+            if (row[field] && row[field] !== value) {
+                console.log(`Inconsistency in reintegrated data - assigning ${value} to field ${field} over existing value ${row[field]}`);
+                console.log("Row: ", row);
+            }
+            row[field] = value;
         }
-        row[field] = value;
     };
 
     if (looked && looked.doc && looked.doc.phylumMatch) {
         const id = looked.doc.id;
         assign(row, s.iNatId, id);
         assign(row, s.assignedINatName, looked.doc.name);
+        if (s.commonName) {
+            assign(row, s.commonName, looked.doc.commonName);
+        }
         if (strategyRec.assignRanks) {
             await hortis.iNat.getRanks(looked.doc.id, row, source.byId, strategyRec.assignRanks, scientificName);
         }

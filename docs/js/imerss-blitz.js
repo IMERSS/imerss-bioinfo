@@ -138,7 +138,7 @@ hortis.statusFilter.queryCache = function (taxaById) {
     Object.values(taxaById).forEach(row => {
         if (row.reportingStatus === "confirmed") {
             row.filterReportingStatus = "confirmed";
-        } else if (row.reportingStatus === "reported") {
+        } else if (row.reportingStatus === "reported" || row.reportingStatus === "unconfirmed") {
             row.filterReportingStatus = "unconfirmed";
         } else if (row.reportingStatus.startsWith("new")) {
             row.filterReportingStatus = "new";

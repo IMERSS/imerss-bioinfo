@@ -215,7 +215,6 @@ hortis.isInDocument = function (node) {
 };
 
 hortis.clearAllTooltips = function (that) {
-    return;
     hortis.clearTooltip(that);
     $(".ui-tooltip").remove();
     that[that.options.tooltipKey].value = null;
@@ -814,6 +813,8 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
         memoStops: "@expand:fluid.colour.memoStops({that}.options.fillStops, 256)",
         // cf. maxwell.legendKey.addLegendControl in reknit-client.js - produces a DOM node immediately, renders as effect
         control: "@expand:hortis.libreMap.withObsGrid.addLegendControl({map}, {that}.options.legendPosition)",
+        countTransform: x => x,
+        inverseCountTransform: x => x,
 
         obsGridLoaded: "@expand:signal()",
         hoverCell: "@expand:signal(null)",
@@ -872,7 +873,7 @@ hortis.libreMap.withObsGrid.drawLegend = function (map, gridSignal, gridVisibleS
     const renderLegend = function (grid) {
         const maxObsCount = map.maxObsCountOverride.value || grid.maxObsCount;
         // TODO: parameterise what the legend is with respect to
-        const propToLevel = prop => Math.floor(prop * maxObsCount);
+        const propToLevel = prop => prop >= 1 ? maxObsCount : Math.round(map.inverseCountTransform(prop, maxObsCount) * maxObsCount);
         const regionMarkupRows = stops.map(function (stop) {
             const midProp = (legendStopProps[stop] + legendStopProps[stop + 1]) / 2;
             const colour = fluid.colour.lookupStop(map.memoStops, midProp);
@@ -993,6 +994,10 @@ hortis.libreMap.obsGridFeature = function (map, obsQuantiser, grid) {
         longres = obsQuantiser.longResolution.value,
         // OKTOPOKHO - old-style dynamic dependency which will cause re-render!
         maxObsCount = map.maxObsCountOverride.value || grid.maxObsCount;
+    // Useful for estimating distribution parameters for grid counts
+    // const props = Object.values(buckets).map( bucket => bucket.obsCount / maxObsCount);
+    // console.log(props.join(", "));
+
     return {
         type: "FeatureCollection",
         features: Object.entries(buckets).map(function ([key, bucket]) {
@@ -1005,7 +1010,7 @@ hortis.libreMap.obsGridFeature = function (map, obsQuantiser, grid) {
                 },
                 properties: {
                     cellId: key,
-                    obsprop: bucket.obsCount / maxObsCount
+                    obsprop: map.countTransform(bucket.obsCount / maxObsCount, maxObsCount)
                 }
             };
         })
@@ -1169,15 +1174,17 @@ hortis.obsQuantiser.indexObs = function (that, rows, latRes, longRes) {
         const cellId = hortis.obsQuantiser.coordToCellId(row.decimalLatitude, row.decimalLongitude, latRes, longRes);
         // OCTOPOKHO - Put this cached value in to help with filtering
         row[hortis.cellIdSymbol] = cellId;
-        hortis.updateBounds(grid.bounds, row.decimalLatitude, row.decimalLongitude);
+        if (cellId !== "0|0") { // TODO: More principled way of detecting obs without coordinates = note that ""/0.5 === 0!
+            hortis.updateBounds(grid.bounds, row.decimalLatitude, row.decimalLongitude);
 
-        let bucket = grid.buckets[cellId];
-        if (!bucket) {
-            bucket = grid.buckets[cellId] = that.newBucket();
+            let bucket = grid.buckets[cellId];
+            if (!bucket) {
+                bucket = grid.buckets[cellId] = that.newBucket();
+            }
+            bucket.obsCount++;
+            grid.maxObsCount = Math.max(grid.maxObsCount, bucket.obsCount);
+            that.indexObs(bucket, row, index);
         }
-        bucket.obsCount++;
-        grid.maxObsCount = Math.max(grid.maxObsCount, bucket.obsCount);
-        that.indexObs(bucket, row, index);
     });
     if (rows.length === 0) {
         grid.bounds = [...that.maxBounds.value];

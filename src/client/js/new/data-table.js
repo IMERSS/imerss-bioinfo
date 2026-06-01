@@ -77,6 +77,16 @@ hortis.dataTable.totalPages = function (rowCount, rowsPerPage) {
 
 // ── Cell rendering ──
 
+hortis.dataTable.defaultFormatter = function (value) {
+    if (typeof(value) === "string") {
+        const encoded = fluid.XMLEncode(value);
+        return (encoded.startsWith("http://") || encoded.startsWith("https://")) ?
+            `<a href="${encoded}" target="_blank">${encoded}</a>` : encoded;
+    } else {
+        return value;
+    }
+};
+
 /**
  * Render a single cell value for the given column definition and row.
  * @param {Object} col - Column definition from options.columns
@@ -87,8 +97,9 @@ hortis.dataTable.renderCell = function (col, row) {
     const raw = row[col.key];
     if (typeof col.formatter === "function") {
         return col.formatter(raw, row);
+    } else {
+        return hortis.dataTable.defaultFormatter(String(raw ?? ""));
     }
-    return fluid.XMLEncode(String(raw ?? ""));
 };
 
 // ── Full render ──
@@ -100,9 +111,10 @@ hortis.dataTable.renderCell = function (col, row) {
  * @param {Number} rowsPerPage - Rows that fit
  */
 hortis.dataTable.render = function (that, rows, rowsPerPage) {
+    const firstRow = rows[0];
 
     // TODO: Get order/schematic information from that.options.columns
-    const columns = Object.keys(rows[0]).map(key => ({key, label: key}));
+    const columns = firstRow ? Object.keys(firstRow).map(key => ({key, label: key})) : [];
 
     hortis.dataTable.buildHead(that, columns);
 

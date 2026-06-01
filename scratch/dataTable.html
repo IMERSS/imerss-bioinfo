@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hortis.dataTable � Infusion Component</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+        :root {
+            --bg: #0e1117;
+            --surface: #161b22;
+            --border: #2a2f3a;
+            --border-hover: #3d4450;
+            --text: #e2e6ed;
+            --text-dim: #7d8590;
+            --accent: #58a6ff;
+            --accent-dim: rgba(88, 166, 255, 0.12);
+            --row-hover: rgba(88, 166, 255, 0.06);
+            --radius: 8px;
+            --font: "DM Sans", sans-serif;
+            --mono: "JetBrains Mono", monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            gap: 16px;
+            overflow: hidden;
+        }
+
+        .hortis-dataTable-wrap {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hortis-dataTable-scroll {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .hortis-dataTable-scroll table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .hortis-dataTable-scroll thead th {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: var(--surface);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-dim);
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .hortis-dataTable-scroll thead th.hortis-dataTable-num {
+            text-align: right;
+        }
+
+        .hortis-dataTable-scroll tbody td {
+            padding: 10px 16px;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .hortis-dataTable-scroll tbody tr {
+            transition: background 0.15s ease;
+        }
+
+        .hortis-dataTable-scroll tbody tr:hover {
+            background: var(--row-hover);
+        }
+
+        .hortis-dataTable-scroll tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        td.hortis-dataTable-num, th.hortis-dataTable-num {
+            text-align: right;
+            font-family: var(--mono);
+            font-size: 12px;
+        }
+
+        /* -- Pagination bar -- */
+        .hortis-dataTable-pagination {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-dim);
+            user-select: none;
+        }
+
+        .hortis-dataTable-pageInfo {
+            font-family: var(--mono);
+        }
+
+        .hortis-dataTable-pageControls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .hortis-dataTable-pagination button {
+            font-family: var(--font);
+            font-size: 12px;
+            font-weight: 500;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            padding: 4px 12px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .hortis-dataTable-pagination button:hover:not(:disabled) {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        .hortis-dataTable-pagination button:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .hortis-dataTable-pagination button.hortis-dataTable-active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        /* Resize hint */
+        .resize-hint {
+            flex-shrink: 0;
+            text-align: center;
+            font-size: 11px;
+            font-family: var(--mono);
+            color: var(--text-dim);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="hortis-dataTable" id="myTable">
+    <div class="hortis-dataTable-wrap">
+        <div class="hortis-dataTable-scroll">
+            <table>
+                <thead class="hortis-dataTable-head"></thead>
+                <tbody class="hortis-dataTable-body"></tbody>
+            </table>
+        </div>
+        <div class="hortis-dataTable-pagination">
+            <span class="hortis-dataTable-pageInfo"></span>
+            <div class="hortis-dataTable-pageControls"></div>
+        </div>
+    </div>
+</div>
+
+<div class="resize-hint">Resize the window � rows per page adapt automatically</div>
+
+<script src="https://cdn.jsdelivr.net/npm/infusion@4.8.0/dist/infusion-framework.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@preact/signals-core@1.14.0/dist/signals-core.min.js"></script>
+
+<script>
+    "use strict";
+
+    // ------------------------------------------------------------------------------
+    // Expose preact-signals primitives into global scope for @expand references
+    // ------------------------------------------------------------------------------
+
+    var signalsCore = window.preactSignalsCore;
+    var signal = signalsCore.signal;
+    var effect = signalsCore.effect;
+
+    // ------------------------------------------------------------------------------
+    // hortis.dataTable � Infusion component
+    // ------------------------------------------------------------------------------
+
+    fluid.registerNamespace("hortis.dataTable");
+
+    // -- Markup generation --
+
+    /**
+     * Build the thead markup from column definitions and inject it.
+     * @param {Object} that - The component instance
+     */
+    hortis.dataTable.buildHead = function (that) {
+        var columns = that.options.columns;
+        var html = "<tr>";
+        for (var i = 0; i < columns.length; i++) {
+            var col = columns[i];
+            var cls = col.numeric ? " class=\"hortis-dataTable-num\"" : "";
+            var style = col.width ? " style=\"width:" + col.width + "\"" : "";
+            html += "<th" + cls + style + ">" + hortis.dataTable.escapeHTML(col.label) + "</th>";
+        }
+        html += "</tr>";
+        that.dom.locate("head").html(html);
+    };
+
+    /**
+     * Escape a string for safe insertion into HTML.
+     * @param {String} str
+     * @return {String}
+     */
+    hortis.dataTable.escapeHTML = function (str) {
+        var div = document.createElement("div");
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+    };
+
+    // -- Row-height measurement --
+
+    /**
+     * Measure the natural rendered height of a single table row.
+     * Called once at init; the result is cached on `that.cachedRowHeight`.
+     * @param {Object} that - The component instance
+     * @return {Number} Row height in pixels
+     */
+    hortis.dataTable.measureRowHeight = function (that) {
+        var colCount = that.options.columns.length;
+        var tbody = that.dom.locate("tbody")[0];
+        var tr = document.createElement("tr");
+        var cells = "";
+        for (var i = 0; i < colCount; i++) {
+            cells += "<td>&nbsp;</td>";
+        }
+        tr.innerHTML = cells;
+        tbody.appendChild(tr);
+        var h = tr.getBoundingClientRect().height;
+        tbody.removeChild(tr);
+        return h || 37;
+    };
+
+    // -- Pagination arithmetic --
+
+    /**
+     * Calculate how many body rows fit in the available scroll area.
+     * @param {Object} that - The component instance
+     * @return {Number}
+     */
+    hortis.dataTable.calcRowsPerPage = function (that) {
+        var scrollEl = that.dom.locate("scrollEl")[0];
+        var scrollHeight = scrollEl.clientHeight;
+        var thead = scrollEl.querySelector("thead");
+        var theadH = thead ? thead.getBoundingClientRect().height : 38;
+        var available = scrollHeight - theadH;
+        var count = Math.floor(available / that.cachedRowHeight);
+        return Math.max(count, 1);
+    };
+
+    /**
+     * Return the total number of pages.
+     * @param {Number} rowCount - Total rows
+     * @param {Number} rowsPerPage
+     * @return {Number}
+     */
+    hortis.dataTable.totalPages = function (rowCount, rowsPerPage) {
+        return Math.ceil(rowCount / rowsPerPage) || 1;
+    };
+
+    // -- Cell rendering --
+
+    /**
+     * Render a single cell value for the given column definition and row.
+     * @param {Object} col - Column definition from options.columns
+     * @param {Object} row - The data row
+     * @return {String} HTML string for the cell contents
+     */
+    hortis.dataTable.renderCell = function (col, row) {
+        var raw = row[col.key];
+        if (typeof col.formatter === "function") {
+            return col.formatter(raw, row);
+        }
+        return hortis.dataTable.escapeHTML(String(raw != null ? raw : ""));
+    };
+
+    // -- Full render --
+
+    /**
+     * Render the current page of data rows and the pagination controls.
+     * @param {Object} that - The component instance
+     * @param {Object[]} data - The current rows array
+     * @param {Number} rowsPerPage - Rows that fit
+     */
+    hortis.dataTable.render = function (that, data, rowsPerPage) {
+        var columns = that.options.columns;
+        var totalPages = hortis.dataTable.totalPages(data.length, rowsPerPage);
+
+        if (that.currentPage > totalPages) {
+            that.currentPage = totalPages;
+        }
+
+        var start = (that.currentPage - 1) * rowsPerPage;
+        var end = Math.min(start + rowsPerPage, data.length);
+        var slice = data.slice(start, end);
+
+        // Body rows
+        var html = "";
+        for (var i = 0; i < slice.length; i++) {
+            html += "<tr>";
+            for (var c = 0; c < columns.length; c++) {
+                var col = columns[c];
+                var cls = col.numeric ? " class=\"hortis-dataTable-num\"" : "";
+                html += "<td" + cls + ">" + hortis.dataTable.renderCell(col, slice[i]) + "</td>";
+            }
+            html += "</tr>";
+        }
+        that.dom.locate("tbody").html(html);
+
+        // Page info
+        var pageInfoEl = that.dom.locate("pageInfo");
+        if (data.length > 0) {
+            pageInfoEl.text((start + 1) + "\u2013" + end + " of " + data.length
+                + "  \u00b7  page " + that.currentPage + "/" + totalPages);
+        } else {
+            pageInfoEl.text("No data");
+        }
+
+        // Pagination controls
+        hortis.dataTable.renderPagination(that, totalPages);
+    };
+
+    /**
+     * Render the pagination button strip and attach click handlers.
+     * @param {Object} that - The component instance
+     * @param {Number} totalPages
+     */
+    hortis.dataTable.renderPagination = function (that, totalPages) {
+        var btns = "";
+        btns += "<button class=\"hortis-dataTable-prev\"" + (that.currentPage <= 1 ? " disabled" : "") + ">\u2190 Prev</button>";
+
+        var windowSize = that.options.pageWindowSize;
+        var pStart = Math.max(1, that.currentPage - Math.floor(windowSize / 2));
+        var pEnd = Math.min(totalPages, pStart + windowSize - 1);
+        if (pEnd - pStart < windowSize - 1) {
+            pStart = Math.max(1, pEnd - windowSize + 1);
+        }
+
+        for (var p = pStart; p <= pEnd; p++) {
+            btns += "<button class=\"hortis-dataTable-pg"
+                + (p === that.currentPage ? " hortis-dataTable-active" : "")
+                + "\" data-page=\"" + p + "\">" + p + "</button>";
+        }
+
+        btns += "<button class=\"hortis-dataTable-next\"" + (that.currentPage >= totalPages ? " disabled" : "") + ">Next \u2192</button>";
+
+        var controlsEl = that.dom.locate("pageControls");
+        controlsEl.html(btns);
+
+        hortis.dataTable.bindPaginationEvents(that, totalPages);
+    };
+
+    /**
+     * Attach click listeners to the rendered pagination buttons.
+     * @param {Object} that - The component instance
+     * @param {Number} totalPages
+     */
+    hortis.dataTable.bindPaginationEvents = function (that, totalPages) {
+        var controlsEl = that.dom.locate("pageControls")[0];
+        controlsEl.querySelector(".hortis-dataTable-prev").addEventListener("click", function () {
+            if (that.currentPage > 1) {
+                that.currentPage--;
+                hortis.dataTable.render(that, that.rows.value, hortis.dataTable.calcRowsPerPage(that));
+            }
+        });
+        controlsEl.querySelector(".hortis-dataTable-next").addEventListener("click", function () {
+            if (that.currentPage < totalPages) {
+                that.currentPage++;
+                hortis.dataTable.render(that, that.rows.value, hortis.dataTable.calcRowsPerPage(that));
+            }
+        });
+        var pgBtns = controlsEl.querySelectorAll(".hortis-dataTable-pg");
+        for (var j = 0; j < pgBtns.length; j++) {
+            pgBtns[j].addEventListener("click", function () {
+                that.currentPage = parseInt(this.getAttribute("data-page"), 10);
+                hortis.dataTable.render(that, that.rows.value, hortis.dataTable.calcRowsPerPage(that));
+            });
+        }
+    };
+
+    // -- Resize handling --
+
+    /**
+     * Attach a ResizeObserver to the scroll element. On resize, increment
+     * the resizeCount signal to trigger the reactive effect.
+     * @param {Object} that - The component instance
+     */
+    hortis.dataTable.bindResize = function (that) {
+        that.resizeObserver = new ResizeObserver(function () {
+            that.resizeCount.value = that.resizeCount.peek() + 1;
+        });
+        that.resizeObserver.observe(that.dom.locate("scrollEl")[0]);
+    };
+
+    // -- Reactive effect --
+
+    /**
+     * Set up a preact-signals effect that re-renders whenever
+     * `that.rows` or `that.resizeCount` change.
+     * @param {Object} that - The component instance
+     */
+    hortis.dataTable.bindEffect = function (that) {
+        that.disposeEffect = effect(function () {
+            // Read both signals to establish subscriptions
+            var data = that.rows.value;
+            var _resize = that.resizeCount.value; // eslint-disable-line no-unused-vars
+
+            var rowsPerPage = hortis.dataTable.calcRowsPerPage(that);
+            hortis.dataTable.render(that, data, rowsPerPage);
+        });
+    };
+
+    // -- Lifecycle --
+
+    /**
+     * onCreate listener � build the head, measure row height,
+     * wire up the ResizeObserver, and start the reactive effect.
+     * @param {Object} that - The component instance
+     */
+    hortis.dataTable.onCreate = function (that) {
+        that.currentPage = 1;
+
+        hortis.dataTable.buildHead(that);
+        that.cachedRowHeight = hortis.dataTable.measureRowHeight(that);
+        hortis.dataTable.bindResize(that);
+        hortis.dataTable.bindEffect(that);
+    };
+
+    /**
+     * onDestroy listener � disconnect the ResizeObserver and dispose the effect.
+     * @param {Object} that - The component instance
+     */
+    hortis.dataTable.onDestroy = function (that) {
+        if (that.resizeObserver) {
+            that.resizeObserver.disconnect();
+        }
+        if (that.disposeEffect) {
+            that.disposeEffect();
+        }
+    };
+
+    // ------------------------------------------------------------------------------
+    // fluid.defaults � component registration
+    // ------------------------------------------------------------------------------
+
+    fluid.defaults("hortis.dataTable", {
+        gradeNames: ["fluid.viewComponent"],
+
+        members: {
+            rows: "@expand:signal({that}.options.data)",
+            resizeCount: "@expand:signal(0)",
+            currentPage: 1,
+            cachedRowHeight: 37
+        },
+
+        selectors: {
+            scrollEl: ".hortis-dataTable-scroll",
+            head: ".hortis-dataTable-head",
+            tbody: ".hortis-dataTable-body",
+            pageInfo: ".hortis-dataTable-pageInfo",
+            pageControls: ".hortis-dataTable-pageControls"
+        },
+
+        columns: [],
+        data: [],
+        pageWindowSize: 5,
+
+        listeners: {
+            "onCreate.init": {
+                funcName: "hortis.dataTable.onCreate",
+                args: ["{that}"]
+            },
+            "onDestroy.cleanup": {
+                funcName: "hortis.dataTable.onDestroy",
+                args: ["{that}"]
+            }
+        }
+    });
+
+
+    // ------------------------------------------------------------------------------
+    // Demo: instantiate with sample employee data
+    // ------------------------------------------------------------------------------
+
+    (function () {
+        "use strict";
+
+        var FIRST_NAMES = [
+            "Alice", "Bob", "Clara", "David", "Eva", "Frank", "Grace", "Henry",
+            "Iris", "Jack", "Kara", "Liam", "Mia", "Noah", "Olivia", "Paul",
+            "Quinn", "Rosa", "Sam", "Tina", "Uma", "Vic", "Wendy", "Xander",
+            "Yara", "Zane", "Amara", "Blake", "Cleo", "Dante"
+        ];
+
+        var LAST_NAMES = [
+            "Chen", "Torres", "Nakamura", "Okafor", "Patel", "Johansson",
+            "Kim", "Novak", "Adeyemi", "Petrov", "Larsson", "Tanaka",
+            "Fernandez", "Osei", "Lindqvist", "Yamamoto", "Gupta", "Moreau",
+            "Andersen", "Kowalski"
+        ];
+
+        var DEPARTMENTS = ["Engineering", "Design", "Marketing", "Sales", "Finance", "Operations", "Legal", "HR"];
+        var ROLES = ["Lead", "Senior", "Mid", "Junior", "Intern", "Manager", "Director"];
+        var STATUSES = ["active", "inactive", "pending"];
+
+        /**
+         * @param {Number} n
+         * @return {Object[]}
+         */
+        function generateData(n) {
+            var rows = [];
+            for (var i = 0; i < n; i++) {
+                var first = FIRST_NAMES[i % FIRST_NAMES.length];
+                var last = LAST_NAMES[i % LAST_NAMES.length];
+                rows.push({
+                    id: i + 1,
+                    name: first + " " + last,
+                    email: first.toLowerCase() + "." + last.toLowerCase() + "@example.com",
+                    department: DEPARTMENTS[i % DEPARTMENTS.length],
+                    role: ROLES[i % ROLES.length],
+                    status: STATUSES[i % STATUSES.length],
+                    salary: 45000 + Math.floor(Math.random() * 80000),
+                    joined: 2018 + (i % 7)
+                });
+            }
+            return rows;
+        }
+
+        var sampleData = generateData(120);
+
+        var STATUS_COLOURS = {
+            active:   { bg: "rgba(63, 185, 80, 0.15)",  fg: "#3fb950" },
+            inactive: { bg: "rgba(139, 148, 158, 0.15)", fg: "#8b949e" },
+            pending:  { bg: "rgba(210, 153, 34, 0.15)",  fg: "#d29922" }
+        };
+
+        var columns = [
+            { key: "id",         label: "#",          width: "6%",  numeric: true },
+            { key: "name",       label: "Name",       width: "18%" },
+            { key: "email",      label: "Email",      width: "22%",
+                formatter: function (val) {
+                    return "<span style=\"color:var(--accent)\">" + hortis.dataTable.escapeHTML(String(val)) + "</span>";
+                }
+            },
+            { key: "department", label: "Department", width: "14%" },
+            { key: "role",       label: "Role",       width: "12%" },
+            { key: "status",     label: "Status",     width: "10%",
+                formatter: function (val) {
+                    var c = STATUS_COLOURS[val] || STATUS_COLOURS.inactive;
+                    var label = val.charAt(0).toUpperCase() + val.slice(1);
+                    return "<span style=\"display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;"
+                        + "font-weight:500;letter-spacing:0.02em;background:" + c.bg + ";color:" + c.fg + "\">"
+                        + hortis.dataTable.escapeHTML(label) + "</span>";
+                }
+            },
+            { key: "salary",     label: "Salary",     width: "10%", numeric: true,
+                formatter: function (val) {
+                    return "$" + Number(val).toLocaleString("en-US");
+                }
+            },
+            { key: "joined",     label: "Joined",     width: "8%",  numeric: true }
+        ];
+
+        // Instantiate the Infusion component
+        window.myTable = hortis.dataTable("#myTable", {
+            columns: columns,
+            data: sampleData
+        });
+
+        // Demo: swap data via signal after 0ms to prove reactivity
+        // e.g. window.myTable.rows.value = newData;
+    })();
+</script>
+</body>
+</html>

@@ -27,6 +27,8 @@ require("../src/iNaturalist/taxonAPI.js");
 // {name: "Trichia favoginea", phylum: "Anthophyta"};
 // {name: "Abies amabilis", phylum: "Coniferophyta"};
 // {name: "x Elyhordeum stebbinsianum", phylum: "Tracheophyta"}; // Test normalisation, used to be a branch which axed after first later capital letter
+// {name: "Stachys cooleyae", phylum: "Tracheophyta", rank: "species"};
+// {name: "Aphanes occidentalis", phylum: "Tracheophyta", rank: "species"}; - can't tell the difference between Alchemilla arvensis and Alchemilla occidentalis, clearly should be latter
 
 const source = hortis.iNatTaxonSource({
     disableNameCache: true
@@ -36,7 +38,7 @@ hortis.dumpiNatNameScores = true;
 
 const testSource = async function () {
     try {
-        const query = {name: "Stachys cooleyae", phylum: "Tracheophyta", rank: "species"};
+        const query = {name: "Aphanes occidentalis", phylum: "Tracheophyta", rank: "species"};
         const result = await source.get({name: hortis.sanitizeSpeciesName(query.name), phylum: query.phylum, rank: query.rank});
         console.log(result);
         const byId = await source.get({id: result.doc.id});

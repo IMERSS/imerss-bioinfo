@@ -46,6 +46,7 @@ hortis.sanitizeSpeciesName = function (name) {
     name = name.replace(/ (\(.*\))/g, ""); // Remove subgenus names
     name = name.replace(/ ('.*')/g, "");
     name = name.replace(" ssp.", "");
+    name = name.replace(" subs.", "");
     name = name.replace(" subsp.", "");
     name = name.replace(" grp.", "");
     name = name.replace(" grp", "");

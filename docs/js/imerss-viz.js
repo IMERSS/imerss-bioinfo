@@ -79,7 +79,7 @@ fluid.defaults("hortis.standardVizLoader", {
             type: "hortis.checklist.withHolder",
             container: "{that}.dom.checklist",
             options: {
-                gradeNames: ["hortis.checklist.withDownload", "hortis.checklist.withSearch"],
+                gradeNames: ["hortis.checklist.withDownload", "hortis.checklist.withSearch", "hortis.checklist.withSingleSearch"],
                 rootId: 48460, // Life
                 filterRanks: ["epifamily", "family", "tribe", "genus", "subgenus", "species"],
                 disclosableRanks: [],

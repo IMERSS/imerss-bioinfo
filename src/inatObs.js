@@ -15,6 +15,8 @@ require("./iNaturalist/taxonAPI.js");
 
 // Get token from https://www.inaturalist.org/users/api_token
 
+// Writes scratch data for one obs to obsoutput.json and final scratch output to obsoutput.csv
+
 const hortis = fluid.registerNamespace("hortis");
 
 hortis.iNatProjects = {

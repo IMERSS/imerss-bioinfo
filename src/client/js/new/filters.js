@@ -18,7 +18,9 @@ var hortis = fluid.registerNamespace("hortis");
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var {signal, computed, effect, batch} = preactSignalsCore;
 
-// TODO: Unclear now what is distinction between obsFilter and filter
+// More abstract base grade created for "filter" to deal with things that do some kind of filtering with filterState
+// but should not be picked up by hortis.obsFilters general trawl for hortis.obsFilter - e.g. our repurposing
+// of hortis.checklist.filter as something which
 fluid.defaults("hortis.filter", {
     // gradeNames: "fluid.component",
     members: {
@@ -29,8 +31,7 @@ fluid.defaults("hortis.filter", {
 fluid.defaults("hortis.obsFilter", {
     gradeNames: "hortis.filter",
     members: {
-        filterInput: null, // must be overridden
-        filterOutput: null // must be overridden
+        // filterState - must be implemented
     },
     invokers: {
         // doFilter
@@ -456,6 +457,8 @@ hortis.queryAutocompleteCollector = function (allCollectors, query, callback) {
 
 // Taxon filter
 
+// Note that this is not a hortis.obsFilter so that "hortis.checklist.search" can be one, so that its search action
+// can punch through to the checklist rather than acting directly by itself.
 fluid.defaults("hortis.taxonFilter", {
     gradeNames: ["hortis.autocompleteFilter", "hortis.filter"],
     controlId: "fli-imerss-taxonFilter",
@@ -472,7 +475,6 @@ fluid.defaults("hortis.taxonFilter", {
         }
     },
     invokers: {
-        doFilter: "hortis.taxonObsFilter.doFilter({arguments}.0, {arguments}.1, {that}.taxa.rowById.value)",
         queryAutocomplete: "hortis.queryAutocompleteTaxon({taxonNameLookup}.lookupTaxon, {arguments}.0, {arguments}.1, {autocomplete}.options.maxSuggestions)"
     }
 });
@@ -486,8 +488,11 @@ hortis.queryAutocompleteTaxon = function (lookupTaxon, query, callback, maxSugge
 
 fluid.defaults("hortis.taxonObsFilter", {
     gradeNames: ["hortis.taxonFilter", "hortis.obsFilter"],
+    members: {
+        // rowById
+    },
     invokers: {
-        doFilter: "hortis.taxonObsFilter.doFilter({arguments}.0, {arguments}.1, {that}.taxa.rowById.value)"
+        doFilter: "hortis.taxonObsFilter.doFilter({arguments}.0, {arguments}.1, {that}.rowById.value)"
     }
 });
 

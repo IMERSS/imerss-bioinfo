@@ -926,11 +926,15 @@ hortis.bbeaGridTooltipTemplate =
 
 fluid.defaults("hortis.bbeaLibreMap", {
     gradeNames: ["hortis.libreObsMap", "hortis.libreMap.withTiles", "hortis.libreMap.streetmapTiles", "hortis.libreMap.usEcoL3Tiles", "hortis.libreMap.withPolygonDraw"],
-    invokers: {
-        renderTooltip: "hortis.renderBbeaGridTooltip({that}, {obsQuantiser}.grid.value, {taxa}.rowById.value, {arguments}.0)"
-    },
     gridResolution: 6000,
     components: {
+        gridTooltip: {
+            options: {
+                invokers: {
+                    renderTooltip: "hortis.renderBbeaGridTooltip({that}, {obsQuantiser}.grid.value, {taxa}.rowById.value, {arguments}.0)"
+                }
+            }
+        },
         obsQuantiser: {
             type: "hortis.obsQuantiser",
             options: {

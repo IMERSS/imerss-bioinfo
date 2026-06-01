@@ -6,6 +6,12 @@ package-lock.json
 .idea/
 .Rhistory
 
+marmalised.json
+obsoutput.csv
+obsoutput.json
+
+moduleOverrides.json5
+
 data/Galiano 2024/bigdata/**
 data/Janszen/**
 
