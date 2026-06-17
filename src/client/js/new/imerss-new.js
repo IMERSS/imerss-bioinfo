@@ -166,31 +166,6 @@ hortis.triggerDownload = function (content, mimeType, filename) {
     a.click(); // Start downloading
 };
 
-hortis.taxonTooltipTemplate =
-`<div class="imerss-tooltip">
-    <div class="imerss-photo" style="background-image: url(%imgUrl)"></div>
-    <div class="text"><b>%taxonRank:</b> %taxonNames</div>
-</div>`;
-
-hortis.capitalize = function (string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-hortis.renderTaxonTooltip = function (that, hoverId) {
-    const row = that.rowById.value[hoverId];
-    const terms = {
-        imgUrl: row.iNaturalistTaxonImage || ""
-    };
-    if (row.rank) {
-        terms.taxonRank = hortis.capitalize(row.rank);
-    } else {
-        terms.taxonRank = "Species";
-    }
-    const names = [(row.taxonName || row.iNaturalistTaxonName), row.commonName, row.hulqName].filter(name => name);
-    terms.taxonNames = names.join(" / ");
-    return fluid.stringTemplate(hortis.taxonTooltipTemplate, terms);
-};
-
 /**
  * Toggles a CSS class on a DOM element based on a boolean value.
  *
@@ -233,7 +208,7 @@ hortis.clearTooltip = function (that) {
 };
 
 hortis.updateTooltip = function (that, id) {
-    const content = id ? that.renderTooltip(id) : null;
+    const content = fluid.isValue(id) ? that.renderTooltip(id) : null;
     hortis.clearTooltip(that);
 
     if (content) {
@@ -344,23 +319,6 @@ hortis.taxaFromObs = function (filteredObs, rowById) {
 };
 
 
-// TODO: This does both hover and click - for interactions we just want hover
-hortis.bindTaxonHover = function (that, layoutHolder) {
-    const hoverable = that.options.selectors.hoverable;
-    that.container.on("mouseenter", hoverable, function (e) {
-        const id = this.dataset.rowId;
-        layoutHolder.hoverEvent = e;
-        layoutHolder.hoverId.value = id;
-    });
-    that.container.on("mouseleave", hoverable, function () {
-        layoutHolder.hoverId.value = null;
-    });
-    that.container.on("click", hoverable, function () {
-        const id = this.dataset.rowId;
-        layoutHolder.events.taxonSelect.fire(id);
-    });
-};
-
 fluid.defaults("hortis.taxonNameLookup", {
     gradeNames: "fluid.component",
     invokers: {
@@ -374,7 +332,7 @@ fluid.defaults("hortis.taxa", {
     members: {
         // rows: injected
         rowByIdPre:   "@expand:fluid.computed(hortis.indexTaxaById, {that}.rows)",
-        // Note, actually just fills in entries in rows - we claim the output is rowById because it is what is consumed everywhere
+        // Note, actually just fills in childCount, parent in rows - we claim the output is rowById because it is what is consumed everywhere
         rowById:   "@expand:fluid.computed(hortis.taxa.map, {that}.rows, {that}.rowByIdPre)"
     }
 });
@@ -420,7 +378,7 @@ hortis.taxonNameOverrides = {
     "Chromista": "Chromists"
 };
 
-hortis.labelForRow = function (row, commonNames) {
+hortis.labelForAutocompleteRow = function (row, commonNames) {
     let name = commonNames && row.commonName ? row.commonName : row.iNaturalistTaxonName;
     if (row.hulqName) {
         name += " - " + row.hulqName;
@@ -431,7 +389,7 @@ hortis.labelForRow = function (row, commonNames) {
 };
 
 hortis.autocompleteInputForTaxonRow = function (row) {
-    return row ? hortis.labelForRow(row) + (row.commonName ? " (" + row.commonName + ")" : "") : row;
+    return row ? hortis.labelForAutocompleteRow(row) + (row.commonName ? " (" + row.commonName + ")" : "") : row;
 };
 
 hortis.autocompleteSuggestionForTaxonRow = function (row) {
@@ -455,15 +413,100 @@ hortis.lookupTaxon = function (rows, query, maxSuggestions) {
     return maxSuggestions === 1 ? output[0] : output;
 };
 
-// Holds model state shared with checklist and index - TODO rename after purpose, "layout" used to refer to sunburst root
-fluid.defaults("hortis.layoutHolder", {
+// Taxon info display
+
+hortis.iNatExtern = "<a href=\"%iNatLink\" target=\"_blank\" class=\"taxonDisplay-iNat-extern\">iNaturalist<span class=\"external-link\"></span></a>";
+
+
+hortis.imageTemplate =
+    "<div class=\"taxonDisplay-image-holder\">" +
+    "<div class=\"imerss-photo\" style=\"background-image: url(%imgUrl)\"/>" +
+    "%iNatExtern" +
+    "</div></div>";
+
+hortis.idToTaxonLink = function (taxonId) {
+    return "https://www.inaturalist.org/taxa/" + taxonId;
+};
+
+hortis.renderTaxonImage = function (url, taxonId) {
+    const imageMarkup = fluid.stringTemplate(hortis.imageTemplate, {
+        imgUrl: url,
+        iNatExtern: taxonId ? fluid.stringTemplate(hortis.iNatExtern, {
+            iNatLink: hortis.idToTaxonLink(taxonId)
+        }) : ""
+    });
+    return imageMarkup;
+};
+
+// Taxon tooltip support
+
+hortis.taxonTooltipTemplate =
+    `<div class="imerss-tooltip">
+    <div class="imerss-photo" style="background-image: url(%imgUrl)"></div>
+    <div class="text"><b>%taxonRank:</b> %taxonNames</div>
+</div>`;
+
+hortis.capitalize = function (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+hortis.renderTaxonTooltip = function (that, hoverId) {
+    const row = that.rowById.value[hoverId];
+    const terms = {
+        imgUrl: row.iNaturalistTaxonImage || ""
+    };
+    if (row.rank) {
+        terms.taxonRank = hortis.capitalize(row.rank);
+    } else {
+        terms.taxonRank = "Species";
+    }
+    const names = [(row.taxonName || row.iNaturalistTaxonName), row.commonName, row.hulqName].filter(name => name);
+    terms.taxonNames = names.join(" / ");
+    return fluid.stringTemplate(hortis.taxonTooltipTemplate, terms);
+};
+
+
+fluid.defaults("hortis.withTaxonHover", {
     gradeNames: ["fluid.component", "hortis.withTooltip"],
     tooltipKey: "hoverId",
     events: {
-        taxonSelect: null
+        taxonSelect: null // fired by bindTaxonHover, ignored if not selectable
     },
     members: {
-        // entryById -> rowById now injected
+        hoverId: "@expand:signal(null)"
+        // rowById
+    },
+    invokers: {
+        renderTooltip: "hortis.renderTaxonTooltip({that}, {arguments}.0)"
+    },
+    listeners: {
+        "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {withTaxonHover})"
+    }
+});
+
+// TODO: This does both hover and click - for interactions we just want hover
+hortis.bindTaxonHover = function (that, withTaxonHover) {
+    const hoverable = that.options.selectors.hoverable;
+    that.container.on("mouseenter", hoverable, function (e) {
+        const id = this.dataset.rowId;
+        withTaxonHover.hoverEvent = e;
+        withTaxonHover.hoverId.value = id;
+    });
+    that.container.on("mouseleave", hoverable, function () {
+        withTaxonHover.hoverId.value = null;
+    });
+    that.container.on("click", hoverable, function () {
+        const id = this.dataset.rowId;
+        withTaxonHover.events.taxonSelect.fire(id);
+    });
+};
+
+
+// Holds model state shared with checklist and index - TODO rename after purpose, "layout" used to refer to sunburst root
+fluid.defaults("hortis.layoutHolder", {
+    gradeNames: "hortis.withTaxonHover",
+    members: {
+        // rowById now injected
         taxonHistory: "@expand:signal([])", // currently unused, inherit from blitz etc.
         historyIndex: "@expand:signal(0)",
 
@@ -471,13 +514,9 @@ fluid.defaults("hortis.layoutHolder", {
         rowFocus: "@expand:signal({})", // non-taxon based selection external to the checklist, e.g. derived from filtered Obs
         rowSelection: "@expand:signal({})", // taxon-based selection from the checklist - will be subset of rowFocus
 
-        selectedId: "@expand:signal(null)",
-        hoverId: "@expand:signal(null)"
-    },
-    // rootId
-    invokers: {
-        renderTooltip: "hortis.renderTaxonTooltip({that}, {arguments}.0)"
+        selectedId: "@expand:signal(null)"
     }
+    // rootId
 });
 
 
@@ -801,6 +840,7 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
                 members: {
                     hoverCell: "{withObsGrid}.hoverCell"
                 }
+                // Client needs to override renderTooltip
             }
         }
     },
@@ -812,7 +852,7 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
 
         memoStops: "@expand:fluid.colour.memoStops({that}.options.fillStops, 256)",
         // cf. maxwell.legendKey.addLegendControl in reknit-client.js - produces a DOM node immediately, renders as effect
-        control: "@expand:hortis.libreMap.withObsGrid.addLegendControl({map}, {that}.options.legendPosition)",
+        control: "@expand:hortis.libreMap.addLegendControl({map}, {that}.options.legendPosition, {that}.drawObsGridLegend, {that}.gridVisible)",
         countTransform: x => x,
         inverseCountTransform: x => x,
 
@@ -826,7 +866,6 @@ fluid.defaults("hortis.libreMap.withObsGrid", {
     },
     invokers: {
         drawObsGridLegend: "hortis.libreMap.withObsGrid.drawLegend({map}, {obsQuantiser}.grid, {that}.gridVisible)"
-        // Client needs to override renderTooltip
     },
     listeners: {
         "onCreate.bindGridSelect": "hortis.libreMap.bindGridSelect({that})"
@@ -848,13 +887,17 @@ hortis.legend.rowTemplate = `
 
 // Very similar to maxwell.legendKey.addLegendControl and in practice generic, see if we can fold up - parameterised by
 // rendering function, whatever signal args it has, and also visibility func
-hortis.libreMap.withObsGrid.addLegendControl = function (map, legendPosition) {
-    const control = map.drawObsGridLegend();
+hortis.libreMap.addLegendControl = function (map, legendPosition, drawLegend, visibleSignal) {
+    const control = drawLegend();
     control.onAdd = () => control.container;
     control.onRemove = () => {
         console.log("Cleaning up legend attached to ", control.container);
         control.cleanup();
     };
+
+    fluid.effect(isVisible => {
+        hortis.toggleClass(control.container, "fl-hidden", !isVisible);
+    }, visibleSignal);
 
     map.map.addControl(control, legendPosition);
 
@@ -894,9 +937,6 @@ hortis.libreMap.withObsGrid.drawLegend = function (map, gridSignal, gridVisibleS
     };
 
     fluid.effect(renderLegend, gridSignal);
-    fluid.effect(isVisible => {
-        hortis.toggleClass(container, "fl-hidden", !isVisible);
-    }, gridVisibleSignal);
 
     fluid.effect(isVisible => {
         // cf reknitr.updateActiveMapPane in reknit-client.js
@@ -938,15 +978,18 @@ hortis.obsQuantiser.coordToCellId = function (lat, long, latres, longres) {
 };
 
 /**
- * Resolves a map event to the cell ID of the topmost visible feature at the event's point.
+ * Resolves a map event to a property value of the topmost visible feature at the event's point.
  * @param {Map} map - The Mapbox/MapLibre map instance.
  * @param {MapMouseEvent} e - A map mouse event containing a `point` property.
+ * @param {String} propName - The name of the property to dereference
  * @return {String|null} The cell ID, or null if no visible feature was found.
  */
-hortis.libreMap.eventToCell = function (map, e) {
+hortis.libreMap.eventToProp = function (map, e, propName) {
     const features = map.queryRenderedFeatures(e.point);
-    const visibleFeatures = features.filter(feature => feature.layer.paint["fill-opacity"] > 0);
-    return visibleFeatures[0]?.properties.cellId || null;
+    const visibleFeatures = features.filter(feature =>
+        feature.layer.paint["fill-opacity"] > 0 ||
+        feature.layer.paint["circle-opacity"] > 0);
+    return visibleFeatures[0]?.properties[propName] ?? null;
 };
 
 // cf. hortis.libreMap.bindRegionSelect in reknit-client.js
@@ -954,16 +997,18 @@ hortis.libreMap.bindGridSelect = function (that) {
     const map = that.map;
 
     map.on("mousemove", e => {
-        that.gridTooltip.hoverEvent = e.originalEvent;
-        const cellId = hortis.libreMap.eventToCell(map, e);
-        that.hoverCell.value = cellId;
-        map.getCanvas().style.cursor = cellId ? "default" : "";
+        if (that.gridVisible.value) {
+            that.gridTooltip.hoverEvent = e.originalEvent;
+            const cellId = hortis.libreMap.eventToProp(map, e, "cellId");
+            that.hoverCell.value = cellId;
+            map.getCanvas().style.cursor = cellId ? "default" : "";
+        }
     });
 
     // Deal with potential for orthogonal selections - grid cell selection should stack with region selection
     that.clickHandlers.push({
         handle: e => {
-            const cellId = hortis.libreMap.eventToCell(map, e);
+            const cellId = hortis.libreMap.eventToProp(map, e, "cellId");
             if (cellId) {
                 that.selectedCell.value = cellId;
                 return true;

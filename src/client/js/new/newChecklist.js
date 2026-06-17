@@ -267,7 +267,7 @@ fluid.defaults("hortis.checklist", {
         renderEffect: "@expand:fluid.effect(fluid.identity, {that}.idToState)"
     },
     listeners: {
-        "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {layoutHolder})",
+        "onCreate.bindTaxonHover": "hortis.bindTaxonHover({that}, {withTaxonHover})",
         "onCreate.bindCheckboxClick": "hortis.checklist.bindCheckboxClick({that}, {that}.dom.checklist)"
     }
 });
@@ -341,10 +341,10 @@ hortis.checklist.searchSelect = function (filterState, search, checklist) {
     }
 };
 
-// Note that hortis.taxonFilter is just a hortis.filter so that this can be repurposed in BBEAS to have its selection
+// Note that hortis.autocompleteTaxonFilter is just a hortis.filter so that this can be repurposed in BBEAS to have its selection
 // model punch through to the checklist rather than directly be trawled in as a general hortis.obsFilter
 fluid.defaults("hortis.checklist.search", {
-    gradeNames: "hortis.taxonFilter",
+    gradeNames: "hortis.autocompleteTaxonFilter",
     markup: {
         container: `
         <span>

@@ -12,10 +12,11 @@ var {} = preactSignalsCore;
 fluid.defaults("hortis.standardVizLoader", {
     gradeNames: "hortis.vizLoaderWithMap",
     selectors: {
-        recordReporter: ".imerss-record-reporter",
-        filterControls: ".imerss-filter-controls",
-        filters: ".imerss-main-filters",
-        checklist: ".imerss-main-checklist"
+        recordReporter: ".imerss-filter-panel .imerss-record-reporter",
+        // Refine this so we could have another .imerss-filter-controls elsewhere
+        filterControls: ".imerss-filter-panel .imerss-filter-controls",
+        filters: ".imerss-filter-panel .imerss-main-filters",
+        checklist: ".imerss-filter-panel .imerss-main-checklist"
     },
     gridResolution: 100,
     members: {

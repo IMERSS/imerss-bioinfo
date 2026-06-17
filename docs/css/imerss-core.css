@@ -80,6 +80,7 @@
     width: 10em;
     margin-left: auto;
     margin-right: 10px;
+    margin-top: 8px;
     background: #555e;
     pointer-events: all;
     display: flex;
@@ -625,13 +626,13 @@
     width: calc(100% - 20px)
 }
 
+/*
 .imerss-search-checklist svg {
     position: absolute;
     margin-left: 2rem;
 }
+ */
 
-/* This was the old contents of this - unclear for what environment, but stuffs up horribly in Saanich, Howe etc. where
-styling should agree with that of other filters
 .imerss-search-checklist svg {
     left: 0;
     top: -2px;
@@ -641,7 +642,6 @@ styling should agree with that of other filters
     padding-left: 0.7rem;
     color: #636c76;
 }
- */
 
 /** These "panels" currently only exist in the old-style jQuery tabbed panes. This definition is here to make
  * Xetthecum phase II panel labels show up in the right place but might be helpful in future.

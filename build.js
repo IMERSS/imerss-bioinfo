@@ -131,6 +131,9 @@ const buildIndex = {
         src: "src/client/js/new/imerss-blitz.js",
         dest: "docs/js/imerss-blitz.js"
     }, {
+        src: "src/client/js/new/imerss-plants.js",
+        dest: "docs/js/imerss-plants.js"
+    }, {
         src: "src/lib/vizjs.js",
         dest: "docs/js/vizjs.js"
     }, {
@@ -279,13 +282,7 @@ const minify = async function (hash, filename) {
     });
 };
 
-const buildFromFiles = async function (buildIndex) {
-    const allOldFiles = buildIndex.libSource.concat(buildIndex.oldSource);
-    console.log("allOldFiles ", allOldFiles);
-
-    const oldJsHash = filesToContentHash(allOldFiles, ".js");
-    const allOldJsHash = fluid.extend({header: buildIndex.codeHeader}, oldJsHash, {footer: buildIndex.codeFooter});
-    const minifiedAllOld = await minify(allOldJsHash, "imerss-viz-all.js");
+const buildStory = async function (buildIndex) {
 
     // imerss-viz-lib.js contains just upstream libraries we depend on, to support reasonably easy deploy of "new" framework
     const libJsHash = filesToContentHash(buildIndex.libSource, ".js");
@@ -300,19 +297,12 @@ const buildFromFiles = async function (buildIndex) {
     console.log("newFiles ", buildIndex.newSource);
     const newJs = await minify(newJsHash, "imerss-viz-new.js");
 
-    fs.removeSync("docs");
-    fs.ensureDirSync("docs/js");
-    fs.writeFileSync("docs/js/imerss-viz-all.js", minifiedAllOld.code, "utf8");
-    fs.writeFileSync("docs/js/imerss-viz-all.js.map", minifiedAllOld.map);
     fs.writeFileSync("docs/js/imerss-viz-lib.js", minifiedLib.code, "utf8");
     fs.writeFileSync("docs/js/imerss-viz-lib.js.map", minifiedLib.map);
     fs.writeFileSync("docs/js/imerss-viz-new-core.js", newCoreJs.code, "utf8");
     fs.writeFileSync("docs/js/imerss-viz-new-core.js.map", newCoreJs.map);
     fs.writeFileSync("docs/js/imerss-viz-new.js", newJs.code, "utf8");
     fs.writeFileSync("docs/js/imerss-viz-new.js.map", newJs.map);
-
-    const allOldCssHash = filesToContentHash(allOldFiles, ".css");
-    const allOldCssConcat = String.prototype.concat.apply("", Object.values(allOldCssHash));
 
     const cssLibHash = filesToContentHash(buildIndex.libSource, ".css");
     const cssLibConcat = String.prototype.concat.apply("", Object.values(cssLibHash));
@@ -323,11 +313,33 @@ const buildFromFiles = async function (buildIndex) {
     const cssNewHash = filesToContentHash(buildIndex.newSource, ".css");
     const cssNewConcat = String.prototype.concat.apply("", Object.values(cssNewHash));
 
-    fs.ensureDirSync("docs/css");
-    fs.writeFileSync("docs/css/imerss-viz-all.css", allOldCssConcat);
     fs.writeFileSync("docs/css/imerss-viz-lib.css", cssLibConcat);
     fs.writeFileSync("docs/css/imerss-viz-new-core.css", cssNewCoreConcat);
     fs.writeFileSync("docs/css/imerss-viz-new.css", cssNewConcat);
+
+};
+
+const buildFromFiles = async function (buildIndex) {
+    const allOldFiles = buildIndex.libSource.concat(buildIndex.oldSource);
+    console.log("allOldFiles ", allOldFiles);
+
+    const oldJsHash = filesToContentHash(allOldFiles, ".js");
+    const allOldJsHash = fluid.extend({header: buildIndex.codeHeader}, oldJsHash, {footer: buildIndex.codeFooter});
+    const minifiedAllOld = await minify(allOldJsHash, "imerss-viz-all.js");
+
+    fs.removeSync("docs");
+    fs.ensureDirSync("docs/js");
+    fs.writeFileSync("docs/js/imerss-viz-all.js", minifiedAllOld.code, "utf8");
+    fs.writeFileSync("docs/js/imerss-viz-all.js.map", minifiedAllOld.map);
+
+
+    const allOldCssHash = filesToContentHash(allOldFiles, ".css");
+    const allOldCssConcat = String.prototype.concat.apply("", Object.values(allOldCssHash));
+
+    fs.ensureDirSync("docs/css");
+    fs.writeFileSync("docs/css/imerss-viz-all.css", allOldCssConcat);
+
+    await buildStory(buildIndex);
 
     buildIndex.copy.forEach(function (oneCopy) {
         copyDep(oneCopy.src, oneCopy.dest);
@@ -337,6 +349,8 @@ const buildFromFiles = async function (buildIndex) {
 
 fluid.setLogging(true);
 
-buildFromFiles(buildIndex).then(null, function (error) {
+const buildFn = process.argv[2] === "story" ? buildStory : buildFromFiles;
+
+buildFn(buildIndex).then(null, function (error) {
     console.log(error);
 });

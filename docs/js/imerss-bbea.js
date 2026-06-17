@@ -1,14 +1,9 @@
 "use strict";
 
-/* global preactSignalsCore, imerss, d3 */
+/* global imerss, d3 */
 
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
-
-// noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
-var {} = preactSignalsCore;
-
-fluid.setLogging(true);
 
 fluid.defaults("hortis.beaVizLoader", {
     mapGrades: ["hortis.bbeaLibreMap"],

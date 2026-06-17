@@ -12,19 +12,94 @@ fluid.XMLEncode = function (text) {
     return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;");
 };
 
+// ── Sort helpers ──
+
 /**
- * Build the thead markup from column definitions and inject it.
- * @param {Object} that - The component instance
- * @param {Object[]} columns - Column information array
+ * Return an SVG <use> element string for the given symbol id.
+ * @param {String} id - The symbol id to reference
+ * @return {String} - SVG markup string
  */
-hortis.dataTable.buildHead = function (that, columns) {
-    const html = columns.map(col => {
+hortis.dataTable.svgIcon = function (id) {
+    return `<svg class="hortis-dataTable-icon"><use href="#${id}"/></svg>`;
+};
+
+/**
+ * Return the sort icon symbol id for a column given current sort state.
+ * @param {String} key - The column key
+ * @param {String|null} sortColumn - The currently sorted column key
+ * @param {Number} sortDirection - 1 for ascending, -1 for descending
+ * @return {String} - Symbol id string
+ */
+hortis.dataTable.sortIconId = function (key, sortColumn, sortDirection) {
+    if (key !== sortColumn) {
+        return "sortable";
+    } else if (sortDirection === 1) {
+        return "sort-ascending";
+    } else {
+        return "sort-descending";
+    }
+};
+
+/**
+ * Sort a rows array by the given column key and direction.
+ * @param {Object[]} rows - The rows to sort
+ * @param {String} key - The column key to sort by
+ * @param {Number} direction - 1 for ascending, -1 for descending
+ * @return {Object[]} - A new sorted array
+ */
+hortis.dataTable.sortRows = function (rows, key, direction) {
+    return rows.slice().sort(function (a, b) {
+        const av = a[key] ?? "";
+        const bv = b[key] ?? "";
+        if (av < bv) {
+            return -direction;
+        } else if (av > bv) {
+            return direction;
+        } else {
+            return 0;
+        }
+    });
+};
+
+
+/**
+ * @callback FormatterCallback
+ * @param {Any} value - The cell value.
+ * @param {Object} row - The row data object.
+ * @return {String} - The formatted cell string.
+ */
+
+/**
+ * @typedef {Object} ColumnInfo
+ * @property {String} key - The property name in the data row for this column.
+ * @property {String} label - The column header label.
+ * @property {Boolean} [numeric] - Whether the column is numeric (optional).
+ * @property {String} [width] - CSS width for the column (optional).
+ * @property {FormatterCallback} [formatter] - Custom cell formatter function (optional).
+ */
+
+/**
+ * Build the thead markup from column definitions, injecting sort controls
+ * when the table is sortable.
+ * @param {Object} that - The component instance
+ * @param {ColumnInfo[]} columns - Column information array
+ * @param {String|null} sortColumn - The currently sorted column key
+ * @param {Number} sortDirection - 1 ascending, -1 descending
+ */
+hortis.dataTable.buildHead = function (that, columns, sortColumn, sortDirection) {
+    const html = columns.map(function (col) {
         const cls = col.numeric ? ` class="hortis-dataTable-num"` : "";
         const style = col.width ? ` style="width:${col.width}"` : "";
-        return `<th${cls}${style}>${fluid.XMLEncode(col.label)}</th>`;
+        const icon = that.options.sortable
+            ? `<button class="hortis-dataTable-sort" data-key="${fluid.XMLEncode(col.key)}" aria-label="Sort by ${fluid.XMLEncode(col.label)}">${hortis.dataTable.svgIcon(hortis.dataTable.sortIconId(col.key, sortColumn, sortDirection))}</button>`
+            : "";
+        return `<th${cls}${style}><div class="hortis-dataTable-sort-wrap">${fluid.XMLEncode(col.label)}${icon}</div></th>`;
     }).join("");
     const head = that.container[0].querySelector("thead");
     head.innerHTML = `<tr>${html}</tr>`;
+    if (that.options.sortable) {
+        hortis.dataTable.bindSortEvents(that);
+    }
 };
 
 // ── Row-height measurement ──
@@ -89,7 +164,7 @@ hortis.dataTable.defaultFormatter = function (value) {
 
 /**
  * Render a single cell value for the given column definition and row.
- * @param {Object} col - Column definition from options.columns
+ * @param {ColumnInfo} col - Column definition from options.columns
  * @param {Object} row - The data row
  * @return {String} HTML string for the cell contents
  */
@@ -102,49 +177,74 @@ hortis.dataTable.renderCell = function (col, row) {
     }
 };
 
+hortis.dataTable.defaultColumns = function (rows, staticColumns) {
+    if (staticColumns && staticColumns.length > 0) {
+        return staticColumns;
+    } else {
+        const firstRow = rows[0];
+        return firstRow ? Object.keys(firstRow).map(key => ({key, label: key})) : [];
+    }
+};
+
 // ── Full render ──
 
 /**
- * Render the current page of data rows and the pagination controls.
+ * Render the current page of data rows and the pagination controls,
+ * applying sort and selection when enabled.
  * @param {Object} that - The component instance
  * @param {Object[]} rows - The current rows array
- * @param {Number} rowsPerPage - Rows that fit
+ * @param {ColumnInfo[]} columns - Column formatting information
+ * @param {Number} rowsPerPage - Number of rows that fit
  */
-hortis.dataTable.render = function (that, rows, rowsPerPage) {
-    const firstRow = rows[0];
+hortis.dataTable.render = function (that, rows, columns, rowsPerPage) {
+    const sortColumn = that.sortColumn.value,
+        sortDirection = that.sortDirection.value,
+        selectedRow = that.selectedRow.value;
+    const displayRows = sortColumn ? hortis.dataTable.sortRows(rows, sortColumn, sortDirection) : rows;
 
-    // TODO: Get order/schematic information from that.options.columns
-    const columns = firstRow ? Object.keys(firstRow).map(key => ({key, label: key})) : [];
+    hortis.dataTable.buildHead(that, columns, sortColumn, sortDirection);
 
-    hortis.dataTable.buildHead(that, columns);
-
-    const totalPages = hortis.dataTable.totalPages(rows.length, rowsPerPage);
+    const totalPages = hortis.dataTable.totalPages(displayRows.length, rowsPerPage);
 
     if (that.currentPage > totalPages) {
         that.currentPage = totalPages;
     }
 
     const start = (that.currentPage - 1) * rowsPerPage;
-    const end = Math.min(start + rowsPerPage, rows.length);
-    const slice = rows.slice(start, end);
+    const end = Math.min(start + rowsPerPage, displayRows.length);
+    const slice = displayRows.slice(start, end);
 
-    // Body rows
-    const bodyHTML = slice.map(row =>
-        `<tr>${columns.map(col => {
+    const selectCol = that.options.rowSelectable
+        ? `<th class="hortis-dataTable-select-cell"></th>`
+        : "";
+
+    const bodyHTML = slice.map(function (row) {
+        const checkCell = that.options.rowSelectable ? hortis.dataTable.renderCheckboxCell(row, selectedRow) : "";
+        const cells = columns.map(function (col) {
             const cls = col.numeric ? ` class="hortis-dataTable-num"` : "";
             return `<td${cls}>${hortis.dataTable.renderCell(col, row)}</td>`;
-        }).join("")}</tr>`
-    ).join("");
+        }).join("");
+        const selectedCls = row === selectedRow ? ` class="hortis-dataTable-selected-row"` : "";
+        return `<tr${selectedCls}>${checkCell}${cells}</tr>`;
+    }).join("");
+
+    const head = that.container[0].querySelector("thead tr");
+    if (that.options.rowSelectable && head && !head.querySelector(".hortis-dataTable-select-cell")) {
+        head.insertAdjacentHTML("afterbegin", selectCol);
+    }
+
     that.dom.locate("tbody")[0].innerHTML = bodyHTML;
 
-    // Page info
+    if (that.options.rowSelectable) {
+        hortis.dataTable.bindRowSelectEvents(that, slice);
+    }
+
     const pageInfoEl = that.dom.locate("pageInfo");
-    pageInfoEl.text(rows.length > 0
-        ? `${start + 1}\u2013${end} of ${rows.length}  \u00b7  page ${that.currentPage}/${totalPages}`
+    pageInfoEl.text(displayRows.length > 0
+        ? `${start + 1}\u2013${end} of ${displayRows.length}  \u00b7  page ${that.currentPage}/${totalPages}`
         : "No data"
     );
 
-    // Pagination controls
     hortis.dataTable.renderPagination(that, totalPages);
 };
 
@@ -184,7 +284,7 @@ hortis.dataTable.renderPagination = function (that, totalPages) {
  * @param {Object} that - The component instance
  */
 hortis.dataTable.rerender = function (that) {
-    hortis.dataTable.render(that, that.rows.value, hortis.dataTable.calcRowsPerPage(that));
+    hortis.dataTable.render(that, that.rows.value, that.columns.value, hortis.dataTable.calcRowsPerPage(that));
 };
 
 /**
@@ -217,6 +317,59 @@ hortis.dataTable.bindPaginationEvents = function (that, totalPages) {
     }
 };
 
+/**
+ * Attach click listeners to sort buttons in the thead.
+ * Toggles direction when the same column is clicked again.
+ * @param {Object} that - The component instance
+ */
+hortis.dataTable.bindSortEvents = function (that) {
+    const head = that.container[0].querySelector("thead");
+    for (const btn of head.querySelectorAll(".hortis-dataTable-sort")) {
+        btn.addEventListener("click", function () {
+            const key = btn.dataset.key;
+            if (that.sortColumn.value === key) {
+                that.sortDirection.value = that.sortDirection.value * -1;
+            } else {
+                that.sortColumn.value = key;
+                that.sortDirection.value = 1;
+            }
+        });
+    }
+};
+
+// ── Row selection ──
+
+/**
+ * Render a checkbox cell for row selection.
+ * @param {Object} row - The row data object
+ * @param {Object|null} selectedRow - The currently selected row, or null
+ * @return {String} - HTML string for the checkbox cell
+ */
+hortis.dataTable.renderCheckboxCell = function (row, selectedRow) {
+    const checked = row === selectedRow ? " checked" : "";
+    return `<td class="hortis-dataTable-select-cell"><input type="checkbox" class="hortis-dataTable-row-check"${checked}/></td>`;
+};
+
+/**
+ * Attach click listeners to row checkboxes in the tbody.
+ * Sets selectedRow signal; clicking an already-selected row deselects it.
+ * @param {Object} that - The component instance
+ * @param {Object[]} slice - The currently rendered row slice
+ */
+hortis.dataTable.bindRowSelectEvents = function (that, slice) {
+    const tbody = that.dom.locate("tbody")[0];
+    const checkboxes = tbody.querySelectorAll(".hortis-dataTable-row-check");
+    checkboxes.forEach(function (checkbox, i) {
+        checkbox.addEventListener("change", function () {
+            if (checkbox.checked) {
+                that.selectedRow.value = slice[i];
+            } else {
+                that.selectedRow.value = null;
+            }
+        });
+    });
+};
+
 // ── Resize handling ──
 
 /**
@@ -234,15 +387,15 @@ hortis.dataTable.bindResize = function (that) {
 // ── Reactive effect ──
 
 /**
- * Set up a preact-signals effect that re-renders whenever
- * `that.rows` or `that.resizeCount` change.
+ * Set up a preact-signals effect that re-renders whenever rows, columns,
+ * sort state, selection, or resize change.
  * @param {Object} that - The component instance
  */
-hortis.dataTable.bindEffect = function (that) {
-    that.disposeEffect = fluid.effect((rows) => {
+hortis.dataTable.bindRenderEffect = function (that) {
+    that.disposeRenderEffect = fluid.effect(function (rows, columns) {
         const rowsPerPage = hortis.dataTable.calcRowsPerPage(that);
-        hortis.dataTable.render(that, rows, rowsPerPage);
-    }, that.rows, that.resizeCount);
+        hortis.dataTable.render(that, rows, columns, rowsPerPage);
+    }, that.rows, that.columns, that.sortColumn, that.sortDirection, that.selectedRow, that.resizeCount);
 };
 
 // ── Lifecycle ──
@@ -256,7 +409,7 @@ hortis.dataTable.onCreate = function (that) {
     that.currentPage = 1;
 
     hortis.dataTable.bindResize(that);
-    hortis.dataTable.bindEffect(that);
+    hortis.dataTable.bindRenderEffect(that);
 };
 
 /**
@@ -265,7 +418,7 @@ hortis.dataTable.onCreate = function (that) {
  */
 hortis.dataTable.onDestroy = function (that) {
     that.resizeObserver?.disconnect();
-    that.disposeEffect?.();
+    that.disposeRenderEffect?.();
 };
 
 hortis.dataTable.markup = `
@@ -296,6 +449,10 @@ fluid.defaults("hortis.dataTable", {
 
     members: {
         rows: "@expand:signal()",
+        columns: "@expand:fluid.computed(hortis.dataTable.defaultColumns, {that}.rows, {that}.options.columns)",
+        selectedRow: "@expand:signal(null)",
+        sortColumn: "@expand:signal(null)",
+        sortDirection: "@expand:signal(1)",
         resizeCount: "@expand:signal(0)",
         currentPage: 1,
         cachedRowHeight: 0
@@ -310,6 +467,8 @@ fluid.defaults("hortis.dataTable", {
 
     columns: [],
     pageWindowSize: 5,
+    sortable: false,
+    rowSelectable: false,
 
     listeners: {
         "onCreate.init": {

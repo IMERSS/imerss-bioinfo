@@ -39,14 +39,19 @@ fluid.defaults("hortis.obsFilter", {
     }
 });
 
-fluid.defaults("hortis.obsFilters", {
+fluid.defaults("hortis.taxaFilter", {
+    gradeNames: "hortis.filter"
+});
+
+fluid.defaults("hortis.filters", {
     // gradeNames: "fluid.component",
     components: {
         filterRoot: "{that}"
     },
     members: {
-        allInput: "{vizLoader}.obsRows",
-        combinedFilterInput: "@expand:hortis.combinedFilterInput({that})",
+        // allInput
+        combinedFilterInput: "@expand:hortis.combinedFilterInput({that}, {that}.options.filterGradeName)",
+        rendered: "@expand:signal()",
         idle: "@expand:signal(true)",
         lastEvaluatedInput: null,
         scheduleFilter: "@expand:fluid.effect(hortis.scheduleFilter, {that}, {that}.combinedFilterInput, {that}.idle)",
@@ -55,9 +60,25 @@ fluid.defaults("hortis.obsFilters", {
     }
 });
 
-hortis.combinedFilterInput = function (that) {
+fluid.defaults("hortis.obsFilters", {
+    gradeNames: "hortis.filters",
+    filterGradeName: "hortis.obsFilter",
+    members: {
+        allInput: "{vizLoader}.obsRows"
+    }
+});
+
+fluid.defaults("hortis.taxaFilters", {
+    gradeNames: "hortis.filters",
+    filterGradeName: "hortis.taxaFilter",
+    members: {
+        allInput: "{vizLoader}.taxaRows"
+    }
+});
+
+hortis.combinedFilterInput = function (that, filterGradeName) {
     return computed( () => {
-        const filterComps = fluid.queryIoCSelector(that.filterRoot, "hortis.obsFilter", false);
+        const filterComps = fluid.queryIoCSelector(that.filterRoot, filterGradeName, false);
 
         const filterStates = filterComps.map(comp => comp.filterState);
         const filtersActive = filterComps.map(comp => comp.isActive);
@@ -180,6 +201,86 @@ fluid.defaults("hortis.obsDrivenFilter", {
     }
 });
 
+fluid.defaults("hortis.valueFilter", {
+    gradeNames: ["hortis.filter", "hortis.repeatingRowFilter", "fluid.stringTemplateRenderingView"],
+    markup: {
+        container: `
+        <div class="imerss-value-filter">
+            <div class="imerss-filter-title">%filterName:</div>
+            <div class="imerss-filter-body imerss-value-filter-rows">%rows</div>
+        </div>
+        `
+    },
+    // fieldName
+    // fieldValues, fieldLabels
+    fieldLabels: "{that}.options.fieldValues",
+    // filterName
+    members: {
+        // Free hash of region keys (indirection table row index) to true
+        filterState: "@expand:signal({})",
+        renderModel: `@expand:fluid.computed(hortis.valueFilter.renderModel, {that}.options.markup, {that}.options.filterName,
+                          {that}.options.fieldValues, {that}.options.fieldLabels)`
+    },
+    invokers: {
+        doFilter: "hortis.valueFilter.doFilter({that}.options.fieldName, {arguments}.0, {arguments}.1)",
+        reset: "hortis.valueFilter.reset({that})"
+    },
+    listeners: {
+        "onCreate.bindClick": "hortis.valueFilter.bindClick"
+    }
+});
+
+hortis.valueFilter.renderModel = function (markup, filterName, fieldValues, fieldLabels) {
+    return {
+        filterName,
+        rows: fieldLabels.map((label, index) => hortis.repeatingRowFilter.renderRow(markup.row, label, fieldValues[index])).join("\n")
+    };
+};
+
+hortis.valueFilter.doFilter = function (fieldName, rows, filterState) {
+    const filterStateRows = Object.keys(filterState);
+    const none = filterStateRows.length === 0;
+
+    return none ? rows : rows.filter(row => {
+        return filterStateRows.some(fieldValue => {
+            return row[fieldName] === fieldValue;
+        });
+    });
+};
+
+hortis.valueFilter.reset = function (that) {
+    that.filterState.value = {};
+    // TODO: preactish rendering with signals
+    hortis.resetChecks(that.container[0]);
+};
+
+
+/**
+ * Updates the filter state for a value-based filter component.
+ *
+ * @param {hortis.filter} that - The filter component instance.
+ * @param {Number} id - The ide for the filter row to update.
+ * @param {Boolean} selected - Whether the filter row is selected
+ */
+hortis.valueFilter.update = function (that, id, selected) {
+    const filterState = {...that.filterState.value};
+    if (selected) {
+        filterState[id] = true;
+    } else {
+        delete filterState[id];
+    }
+    that.filterState.value = filterState;
+};
+
+// cf. hortis.checklist.bindCheckboxClick
+hortis.valueFilter.bindClick = function (that) {
+    that.container.on("click", ".pretty input", function () {
+        const id = this.dataset.rowId;
+        fluid.log("Filter clicked with row " + id);
+        hortis.valueFilter.update(that, id, this.checked);
+    });
+};
+
 fluid.defaults("hortis.regionFilter", {
     gradeNames: ["hortis.obsFilter", "hortis.repeatingRowFilter", "fluid.stringTemplateRenderingView"],
     markup: {
@@ -204,10 +305,10 @@ fluid.defaults("hortis.regionFilter", {
     },
     invokers: {
         doFilter: "hortis.regionFilter.doFilter({that}.filterRows.value, {arguments}.0, {arguments}.1)",
-        reset: "hortis.regionFilter.reset({that})"
+        reset: "hortis.valueFilter.reset({that})"
     },
     listeners: {
-        "onCreate.bindClick": "hortis.regionFilter.bindClick"
+        "onCreate.bindClick": "hortis.valueFilter.bindClick"
     }
 });
 
@@ -220,38 +321,6 @@ hortis.regionFilter.doFilter = function (filterRows, obsRows, filterState) {
             const iRow = filterRows[iIndex];
             return obsRow[iRow.regionField] === iRow.id;
         });
-    });
-};
-
-hortis.regionFilter.reset = function (that) {
-    that.filterState.value = {};
-    // TODO: preactish rendering with signals
-    hortis.resetChecks(that.container[0]);
-};
-
-/**
- * Updates the filter state for a region filter component.
- *
- * @param {hortis.regionFilter} that - The region filter component instance.
- * @param {Number} id - The identifier (indirection table row index) for the filter row to update.
- * @param {Boolean} selected - Whether the filter row is selected
- */
-hortis.regionFilter.update = function (that, id, selected) {
-    const filterState = {...that.filterState.value};
-    if (selected) {
-        filterState[id] = true;
-    } else {
-        delete filterState[id];
-    }
-    that.filterState.value = filterState;
-};
-
-// cf. hortis.checklist.bindCheckboxClick
-hortis.regionFilter.bindClick = function (that) {
-    that.container.on("click", ".pretty input", function () {
-        const id = this.dataset.rowId;
-        fluid.log("Filter clicked with row " + id);
-        hortis.regionFilter.update(that, id, this.checked);
     });
 };
 
@@ -459,7 +528,7 @@ hortis.queryAutocompleteCollector = function (allCollectors, query, callback) {
 
 // Note that this is not a hortis.obsFilter so that "hortis.checklist.search" can be one, so that its search action
 // can punch through to the checklist rather than acting directly by itself.
-fluid.defaults("hortis.taxonFilter", {
+fluid.defaults("hortis.autocompleteTaxonFilter", {
     gradeNames: ["hortis.autocompleteFilter", "hortis.filter"],
     controlId: "fli-imerss-taxonFilter",
     rootClass: "imerss-taxon-filter",
@@ -486,17 +555,17 @@ hortis.queryAutocompleteTaxon = function (lookupTaxon, query, callback, maxSugge
 };
 
 
-fluid.defaults("hortis.taxonObsFilter", {
-    gradeNames: ["hortis.taxonFilter", "hortis.obsFilter"],
+fluid.defaults("hortis.autocompleteTaxonObsFilter", {
+    gradeNames: ["hortis.autocompleteTaxonFilter", "hortis.obsFilter"],
     members: {
         // rowById
     },
     invokers: {
-        doFilter: "hortis.taxonObsFilter.doFilter({arguments}.0, {arguments}.1, {that}.rowById.value)"
+        doFilter: "hortis.filterObsBySingleTaxon({arguments}.0, {arguments}.1, {that}.rowById.value)"
     }
 });
 
-hortis.taxonObsFilter.doFilter = function (obsRows, filterState, taxonRowById) {
+hortis.filterObsBySingleTaxon = function (obsRows, filterState, taxonRowById) {
     const all = !(filterState);
     const filterRoot = filterState?.id;
     const includeRow = function (obsRow) {

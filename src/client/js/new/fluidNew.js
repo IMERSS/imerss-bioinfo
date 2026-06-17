@@ -140,7 +140,10 @@ fluid.delegatedSignal = function (outerSignal, onWrite, onReset) {
 // The guts of fluid.container without the endless wrapping, unwrapping and overwriting of arguments
 // We assume that all containers came out of the DOM binder
 fluid.validateContainer = function (container) {
-    if (!container || !container.jquery || container.length !== 1) {
+    // Special passthrough for Solow controls which have to bust out and use a global selector
+    if (typeof(container) === "string") {
+        return document.querySelector(container);
+    } else if (!container || !container.jquery || container.length !== 1) {
         const selector = container?.selector;
         const count = container.length !== undefined ? container.length : 0;
         const extraMessages = container.selectorName ? [" with selector name " + container.selectorName +

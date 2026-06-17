@@ -90,12 +90,10 @@
     --data-table-bg: #0e1117;
     --data-table-surface: #161b22;
     --data-table-border: #2a2f3a;
-    --data-table-border-hover: #3d4450;
     --data-table-text: #e2e6ed;
     --data-table-text-dim: #7d8590;
     --data-table-accent: #58a6ff;
     --data-table-accent-dim: rgba(88, 166, 255, 0.12);
-    --data-table-row-hover: rgba(88, 166, 255, 0.06);
     --data-table-radius: 8px;
     --data-table-font: "DM Sans", sans-serif;
 }
@@ -104,6 +102,29 @@
     height: 100%;
     display: flex;
 }
+
+.hortis-dataTable-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.hortis-dataTable-sort {
+    line-height: 0;
+}
+
+.hortis-dataTable-sort-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.hortis-dataTable-selected-row {
+    background-color: #a5d6ff;
+}
+
+.hortis-dataTable-row-check {
+    display: block;
+}
+
 
 .hortis-dataTable-wrap {
     flex: 1;
@@ -158,10 +179,6 @@
 
 .hortis-dataTable-scroll tbody tr {
     transition: background 0.15s ease;
-}
-
-.hortis-dataTable-scroll tbody tr:hover {
-    background: var(--data-table-row-hover);
 }
 
 .hortis-dataTable-scroll tbody tr:last-child td {
@@ -243,16 +260,6 @@ td.hortis-dataTable-num, th.hortis-dataTable-num {
     border-color: var(--data-table-accent);
     color: var(--data-table-accent);
     background: var(--data-table-accent-dim);
-}
-
-/* Resize hint */
-.resize-hint {
-    flex-shrink: 0;
-    text-align: center;
-    font-size: 11px;
-    font-family: var(--data-table-mono);
-    color: var(--data-table-text-dim);
-    opacity: 0.5;
 }
 
 .resize-bar {
