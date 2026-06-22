@@ -313,7 +313,7 @@ hortis.closeParentTaxa = function (rowFocus, rowById) {
 hortis.taxaFromObs = function (filteredObs, rowById) {
     const taxonIds = {};
     filteredObs.forEach(row => {
-        taxonIds[row["iNaturalist taxon ID"]] = true;
+        taxonIds[hortis.rowToLinkTaxonId(row)] = true;
     });
     return hortis.closeParentTaxa(taxonIds, rowById);
 };
@@ -374,16 +374,11 @@ hortis.taxa.map = function (rows, byId) {
     return byId;
 };
 
-hortis.taxonNameOverrides = {
-    "Chromista": "Chromists"
-};
-
-hortis.labelForAutocompleteRow = function (row, commonNames) {
-    let name = commonNames && row.commonName ? row.commonName : row.iNaturalistTaxonName;
+hortis.labelForAutocompleteRow = function (row) {
+    let name = hortis.rowToScientific(row);
     if (row.hulqName) {
         name += " - " + row.hulqName;
     }
-    name = hortis.taxonNameOverrides[row.iNaturalistTaxonName] || name;
     return hortis.capitalize(name);
     // return row.rank ? (row.rank === "Life" ? "Life" : row.rank + ": " + name) : name;
 };
@@ -428,6 +423,7 @@ hortis.idToTaxonLink = function (taxonId) {
     return "https://www.inaturalist.org/taxa/" + taxonId;
 };
 
+// Currently used in solowControls.js
 hortis.renderTaxonImage = function (url, taxonId) {
     const imageMarkup = fluid.stringTemplate(hortis.imageTemplate, {
         imgUrl: url,
@@ -453,14 +449,14 @@ hortis.capitalize = function (string) {
 hortis.renderTaxonTooltip = function (that, hoverId) {
     const row = that.rowById.value[hoverId];
     const terms = {
-        imgUrl: row.iNaturalistTaxonImage || ""
+        imgUrl: hortis.rowToLinkTaxonImage(row) || ""
     };
     if (row.rank) {
         terms.taxonRank = hortis.capitalize(row.rank);
     } else {
         terms.taxonRank = "Species";
     }
-    const names = [(row.taxonName || row.iNaturalistTaxonName), row.commonName, row.hulqName].filter(name => name);
+    const names = [hortis.rowToScientific(row), row.commonName, row.hulqName].filter(name => name);
     terms.taxonNames = names.join(" / ");
     return fluid.stringTemplate(hortis.taxonTooltipTemplate, terms);
 };
@@ -1174,7 +1170,7 @@ hortis.gridBucket = () => ({obsCount: 0, byTaxonId: {}});
 hortis.indexObs = function (bucket, row, index) {
     // TODO: some kind of mapping for standard rows, lightweight version of readCSVWithMap - current standard is for
     // "iNaturalist taxon ID" as seen in "assigned" data in Xetthecum story map
-    fluid.pushArray(bucket.byTaxonId, row.iNaturalistTaxonId, index);
+    fluid.pushArray(bucket.byTaxonId, hortis.rowToLinkTaxonId(row), index);
 };
 
 hortis.cellIdSymbol = Symbol("hortis.cellId");

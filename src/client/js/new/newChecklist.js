@@ -41,7 +41,19 @@ hortis.encodeHTML = function (str) {
 };
 
 hortis.rowToScientific = function (row) {
-    return row.taxonName || row.iNaturalistTaxonName;
+    return row.taxonName || row.iNaturalistTaxonName || row.linkTaxonName;
+};
+
+hortis.rowToLinkTaxonName = function (row) {
+    return row.iNaturalistTaxonName || row.linkTaxonName;
+};
+
+hortis.rowToLinkTaxonImage = function (row) {
+    return row.iNaturalistTaxonImage || row.linkTaxonImage;
+};
+
+hortis.rowToLinkTaxonId = function (row) {
+    return row.linkTaxonId ?? row.iNaturalistTaxonId;
 };
 
 hortis.accessRowHulq = function (row) {
@@ -272,6 +284,7 @@ fluid.defaults("hortis.checklist", {
     }
 });
 
+// Used in BBEAS so that when you do a search, it punches through into an accreting multiple selection in the checklist
 fluid.defaults("hortis.checklist.withSearch", {
     selectors: {
         search: ".imerss-search-checklist"
@@ -302,12 +315,13 @@ fluid.defaults("hortis.checklist.withSearch", {
     }
 });
 
+// The one used in Story configurations, such that when you do a search, it becomes a global filter for just that taxon
 fluid.defaults("hortis.checklist.withSingleSearch", {
     components: {
         search: {
             options: {
                 // Reoverride the original grade again so that we pick up its own override of the core markup for an autocompleteFilter
-                gradeNames: ["hortis.taxonObsFilter", "hortis.checklist.search"],
+                gradeNames: ["hortis.autocompleteTaxonObsFilter", "hortis.checklist.search"],
                 defeatSearchSelect: true,
                 members: {
                     rowById: "{checklist}.rowById"
@@ -771,5 +785,5 @@ hortis.checklist.computeLeaves = function (idToEntry, selection, copyChecklistRa
     Object.keys(selection).forEach(id => appendLeaves(id));
     Object.values(leaves).map(leaf => strikeParents(leaf));
     const rankFiltered = Object.values(leaves).filter(leaf => copyChecklistRanks.includes(leaf.rank));
-    return rankFiltered.map(leaf => leaf.iNaturalistTaxonName).sort();
+    return rankFiltered.map(leaf => hortis.rowToScientific(leaf)).sort();
 };

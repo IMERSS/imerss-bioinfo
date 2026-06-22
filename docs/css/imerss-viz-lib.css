@@ -1322,14 +1322,13 @@ a.ui-button:active,
     width: calc(100% - 20px)
 }
 
-/*
-.imerss-search-checklist svg {
-    position: absolute;
-    margin-left: 2rem;
+/** This one hits the close box next to the filter */
+.imerss-search-checklist .imerss-filter-clear {
+    right: -12px;
 }
- */
 
-.imerss-search-checklist svg {
+/** This one hits the magnifying glass icon inside the search box */
+.imerss-search-checklist > svg {
     left: 0;
     top: -2px;
     position: absolute;
