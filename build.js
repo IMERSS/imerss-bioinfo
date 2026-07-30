@@ -179,14 +179,14 @@ const buildIndex = {
         src: "data/b-team/plant-pollinators-OBA-2025-regionIndirection.csv",
         dest: "docs/data/b-team/plant-pollinators-OBA-2025-regionIndirection.csv"
     }, {
-        src: "data/b-team/plant-pollinators-WaBA-2025-labels.viz",
-        dest: "docs/data/b-team/plant-pollinators-WaBA-2025-labels.viz"
+        src: "data/b-team/plant-pollinators-WaBA-2026-labels.viz",
+        dest: "docs/data/b-team/plant-pollinators-WaBA-2026-labels.viz"
     }, {
-        src: "data/b-team/plant-pollinators-WaBA-2025-assigned-taxa.viz",
-        dest: "docs/data/b-team/plant-pollinators-WaBA-2025-assigned-taxa.viz"
+        src: "data/b-team/plant-pollinators-WaBA-2026-assigned-taxa.viz",
+        dest: "docs/data/b-team/plant-pollinators-WaBA-2026-assigned-taxa.viz"
     }, {
-        src: "data/b-team/plant-pollinators-WaBA-2025-regionIndirection.csv",
-        dest: "docs/data/b-team/plant-pollinators-WaBA-2025-regionIndirection.csv"
+        src: "data/b-team/plant-pollinators-WaBA-2026-regionIndirection.csv",
+        dest: "docs/data/b-team/plant-pollinators-WaBA-2026-regionIndirection.csv"
     }, {
         src: "data/b-team/plant-pollinators-BCBA-labels.viz",
         dest: "docs/data/b-team/plant-pollinators-BCBA-labels.viz"
