@@ -601,6 +601,7 @@ fluid.defaults("hortis.libreMap", {
     members: {
         map: "@expand:hortis.libreMap.make({that}, {that}.events.onLoad, {that}.container.0)",
         mapLoaded: "@expand:signal()",
+        zoomSignal: "@expand:signal()",
         zoomControls: "@expand:hortis.libreMap.zoomControls({that}.map, {that}.options.zoomDuration, {that}.options.zoomControlsPosition)",
         clickHandlers: []
     }
@@ -624,6 +625,9 @@ hortis.libreMap.make = function (that, onLoad, container) {
     map.on("load", function () {
         console.log("Map loaded");
         fluid.promise.fireTransformEvent(onLoad, null, {that});
+    });
+    map.on("zoom", () => {
+        that.zoomSignal.value = that.map.getZoom();
     });
     return map;
 };
@@ -747,6 +751,20 @@ fluid.defaults("hortis.libreMap.streetmapTiles", {
             tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
             attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors",
             tileSize: 256,
+            metadata: {
+                sortKey: 0
+            }
+        }
+    }
+});
+
+fluid.defaults("hortis.libreMap.esriTiles", {
+    tileSets: {
+        baseMap: {
+            "tiles": ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
+            attribution: "ESRI &copy; <a href='http://www.esri.com'>ESRI</a>",
+            tileSize: 256,
+            maxzoom: 18,
             metadata: {
                 sortKey: 0
             }
