@@ -6,6 +6,10 @@
 
         <title>Melittoflora &ndash; Oregon Bee Atlas Plant-Pollinator Interactions</title>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
         <!-- Cloudflare Web Analytics -->
         <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "2901dd2a6ed44260a89af92f9e32e34b"}'></script>
         <!-- End Cloudflare Web Analytics -->
@@ -63,6 +67,18 @@
                 <symbol id="search-icon" viewBox="0 0 24 24" stroke="currentColor" fill="none">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </symbol>
+                <symbol id="mf-i-chev" viewBox="0 0 16 16">
+                    <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </symbol>
+                <symbol id="mf-i-search" viewBox="0 0 16 16">
+                    <circle cx="7" cy="7" r="4.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.4 10.4L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </symbol>
+                <symbol id="mf-i-download" viewBox="0 0 16 16">
+                    <path d="M8 2v8M4.6 6.8L8 10.2l3.4-3.4M2.6 13h10.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </symbol>
+                <symbol id="mf-i-reset" viewBox="0 0 16 16">
+                    <path d="M13.5 8a5.5 5.5 0 1 1-1.7-3.96M13.4 1.6v3.2h-3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </symbol>
             </defs>
         </svg>
     </head>
@@ -111,7 +127,7 @@
     </header>
 
     <section id="content-main">
-        <div class="imerss-container">
+        <div class="imerss-container mf">
             <div class="bee-loading-container">
                 <div class="loading-message"><div>Melittoflora</div> <div>Plant-Pollinator Interactions Visualization Tool Loading</div></div>
                 <div class="bee">
@@ -138,102 +154,244 @@
                     </div>
                 </div>
             </div>
-            <div class="imerss-map-and-taxa">
 
-                <div class="imerss-map-holder imerss-nodismiss-map">
-                    <div class="imerss-map">
+            <div class="mf-shell">
+
+                <!-- Filters: a concertina of collapsible sections -->
+                <section class="mf-pane mf-pane-filters" aria-label="Filters">
+                    <div class="mf-panehead">
+                        <h2>Filters</h2>
+                        <span class="imerss-filter-controls">
+                            <button class="mf-linkbtn imerss-reset-filter" type="button" title="Reset all filters and selections">
+                                <svg width="13" height="13" aria-hidden="true"><use href="#mf-i-reset"/></svg> Reset
+                            </button>
+                        </span>
+                        <button class="mf-linkbtn imerss-collapse-facets" type="button" title="Close every filter section">Collapse all</button>
                     </div>
-                    <div class="imerss-mobile-warning">
-                        This visualisation is best viewed on a desktop browser. Whilst basic mapping and filtering is available in this view,
-                        displaying the plant-pollinator interaction network requires more space than is available on a mobile device.
+
+                    <div class="mf-facets imerss-facets">
+
+                        <section class="mf-facet" data-facet="collector">
+                            <h3 class="mf-facet-h">
+                                <button class="mf-facet-head" type="button" aria-expanded="false" aria-controls="mf-f-coll">
+                                    <svg class="mf-facet-chev" width="14" height="14" aria-hidden="true"><use href="#mf-i-chev"/></svg>
+                                    <span class="mf-facet-name">Collector</span>
+                                    <span class="mf-facet-state" data-state hidden></span>
+                                </button>
+                            </h3>
+                            <div class="mf-facet-body" id="mf-f-coll" hidden>
+                                <div class="imerss-collector-filter"></div>
+                                <div class="imerss-collector-report fl-hidden"></div>
+                            </div>
+                        </section>
+
+                        <section class="mf-facet" data-facet="region">
+                            <h3 class="mf-facet-h">
+                                <button class="mf-facet-head" type="button" aria-expanded="false" aria-controls="mf-f-region">
+                                    <svg class="mf-facet-chev" width="14" height="14" aria-hidden="true"><use href="#mf-i-chev"/></svg>
+                                    <span class="mf-facet-name">Region</span>
+                                    <span class="mf-facet-state" data-state hidden></span>
+                                </button>
+                            </h3>
+                            <div class="mf-facet-body" id="mf-f-region" hidden>
+                                <div class="imerss-region-filter"></div>
+                            </div>
+                        </section>
+
+                        <section class="mf-facet" data-facet="phenology">
+                            <h3 class="mf-facet-h">
+                                <button class="mf-facet-head" type="button" aria-expanded="false" aria-controls="mf-f-phen">
+                                    <svg class="mf-facet-chev" width="14" height="14" aria-hidden="true"><use href="#mf-i-chev"/></svg>
+                                    <span class="mf-facet-name">Phenology</span>
+                                    <span class="mf-facet-state" data-state hidden></span>
+                                </button>
+                            </h3>
+                            <div class="mf-facet-body" id="mf-f-phen" hidden>
+                                <div class="imerss-phenology-filter"></div>
+                            </div>
+                        </section>
+
+                        <section class="mf-facet" data-facet="elevation">
+                            <h3 class="mf-facet-h">
+                                <button class="mf-facet-head" type="button" aria-expanded="false" aria-controls="mf-f-elev">
+                                    <svg class="mf-facet-chev" width="14" height="14" aria-hidden="true"><use href="#mf-i-chev"/></svg>
+                                    <span class="mf-facet-name">Elevation</span>
+                                    <span class="mf-facet-state" data-state hidden></span>
+                                </button>
+                            </h3>
+                            <div class="mf-facet-body" id="mf-f-elev" hidden>
+                                <div class="imerss-elevation-filter"></div>
+                            </div>
+                        </section>
+
+                        <section class="mf-facet" data-facet="bees">
+                            <h3 class="mf-facet-h">
+                                <button class="mf-facet-head" type="button" aria-expanded="false" aria-controls="mf-f-bees">
+                                    <svg class="mf-facet-chev" width="14" height="14" aria-hidden="true"><use href="#mf-i-chev"/></svg>
+                                    <span class="mf-facet-name">Bees</span>
+                                    <span class="mf-facet-state" data-state hidden></span>
+                                </button>
+                            </h3>
+                            <div class="mf-facet-body" id="mf-f-bees" hidden>
+                                <div class="imerss-pollinators imerss-checklist-holder">
+                                    <span class="imerss-search-checklist"></span>
+                                    <div class="imerss-bbea-filters"></div>
+                                    <div class="mf-rankfold imerss-rank-fold"></div>
+                                    <div class="mf-scroll mf-tree imerss-checklist"></div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="mf-facet" data-facet="plants">
+                            <h3 class="mf-facet-h">
+                                <button class="mf-facet-head" type="button" aria-expanded="false" aria-controls="mf-f-plants">
+                                    <svg class="mf-facet-chev" width="14" height="14" aria-hidden="true"><use href="#mf-i-chev"/></svg>
+                                    <span class="mf-facet-name">Plants</span>
+                                    <span class="mf-facet-state" data-state hidden></span>
+                                </button>
+                            </h3>
+                            <div class="mf-facet-body" id="mf-f-plants" hidden>
+                                <div class="imerss-plants imerss-checklist-holder">
+                                    <span class="imerss-search-checklist"></span>
+                                    <div class="mf-rankfold imerss-rank-fold"></div>
+                                    <div class="mf-scroll mf-tree imerss-checklist"></div>
+                                </div>
+                            </div>
+                        </section>
+
                     </div>
-                </div>
-                <div class="imerss-filter-panel">
-                    <div class="imerss-filters imerss-main-filters">
-                    </div>
-                    <div class="imerss-filter-controls">
-                        <svg width="24" height="24" class="imerss-reset-filter">
-                            <use href="#filter-reset" />
-                        </svg>
-                        <div>Reset filters</div>
-                    </div>
-                    <div class="imerss-record-reporter">
-                    </div>
+                </section>
+
+                <div class="mf-grip mf-grip-v" id="mf-grip-filters" data-axis="x" data-var="--mf-col-filters"
+                     data-min="240" data-max="560" data-flag="f-closed" role="separator"
+                     aria-orientation="vertical" tabindex="0" aria-label="Resize or collapse filters">
+                    <button class="mf-grip-tab" type="button" aria-label="Collapse filters" title="Collapse filters">
+                        <svg width="11" height="11" aria-hidden="true"><use href="#mf-i-chev"/></svg>
+                    </button>
                 </div>
 
-                <div class="imerss-info-panel imerss-nodismiss-map">
-                    <div class="imerss-collector-report fl-hidden">
-                        <div>A volunteer report is available:</div><a href="#"></a>
-                    </div>
-                    <div class="imerss-taxonDisplay">
-                        <div class="taxonDisplay-row"></div>
-                    </div>
-                </div>
-                <div class="imerss-controls imerss-nodismiss-map">
-                    <div class="imerss-fullscreen">
-                        <svg width="24" height="24" class="imerss-fullscreen-control imerss-basic-tooltip" title="Open in full-screen mode">
-                            <use href="#fullscreen" />
-                        </svg>
-                        <svg width="24" height="24" class="imerss-fullscreen-exit-control imerss-basic-tooltip" title="Exit full-screen mode">
-                            <use href="#fullscreen-exit" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="imerss-checklists">
-                <div class="imerss-pollinators imerss-checklist-holder">
-                    <div class="imerss-panel-label"><span>Bees</span>
-                        <span class="imerss-download-button imerss-basic-tooltip" title="Download checklist as CSV"><svg width="24" height="24" >
-                            <use href="#download" />
-                        </svg></span>
-                        <span class="imerss-search-checklist"></span>
-                    </div>
-                    <div class="imerss-bbea-filters">
-                    </div>
-                    <div class="imerss-checklist">
-                    </div>
-                </div>
-                <div class="imerss-interactions">
-                    <div class="imerss-panel-label">Interactions</div>
+                <!-- Map over the tabbed views -->
+                <div class="mf-middle">
 
-                    <div class="imerss-tabs ui-tabs ui-widget ui-widget-content">
-                        <ul class="ui-tabs-nav" role="tablist">
-                            <li class="ui-tabs-tab ui-tab ui-state-default ui-tabs-active">
-                                <a class="ui-tabs-anchor" href="#fli-tab-bipartite">Network View</a>
-                            </li>
-                            <li class="ui-tabs-tab ui-tab ui-state-default">
-                                <a class="ui-tabs-anchor" href="#fli-tab-matrix">Matrix View</a>
-                            </li>
-                        </ul>
-                        <div id="fli-tab-bipartite" class="imerss-tab-panel">
+                    <section class="mf-pane mf-pane-map" aria-label="Map">
+                        <div class="mf-panehead">
+                            <h2>Map</h2>
+                            <div class="imerss-fullscreen">
+                                <button class="mf-iconbtn imerss-fullscreen-control" type="button" title="Open in full-screen mode" aria-label="Open in full-screen mode">
+                                    <svg width="18" height="18" aria-hidden="true"><use href="#fullscreen"/></svg>
+                                </button>
+                                <button class="mf-iconbtn imerss-fullscreen-exit-control" type="button" title="Exit full-screen mode" aria-label="Exit full-screen mode">
+                                    <svg width="18" height="18" aria-hidden="true"><use href="#fullscreen-exit"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mf-mount mf-mount-map imerss-map-holder">
+                            <div class="imerss-map"></div>
+                        </div>
+                        <div class="imerss-mobile-warning">
+                            This visualisation is best viewed on a desktop browser. Whilst basic mapping and filtering is available in this view,
+                            displaying the plant-pollinator interaction network requires more space than is available on a mobile device.
+                        </div>
+                        <div class="mf-reporter imerss-record-reporter"></div>
+                    </section>
+
+                    <div class="mf-grip mf-grip-h" id="mf-grip-strata" data-axis="y" data-flag="s-closed" role="separator"
+                         aria-orientation="horizontal" tabindex="0" aria-label="Resize or collapse views">
+                        <button class="mf-grip-tab" type="button" aria-label="Collapse views" title="Collapse views">
+                            <svg width="11" height="11" aria-hidden="true"><use href="#mf-i-chev"/></svg>
+                        </button>
+                    </div>
+
+                    <section class="mf-pane mf-pane-views" aria-label="Views">
+                        <div class="mf-tabstrip">
+                            <div class="mf-tabs" role="tablist">
+                                <button class="mf-tab mf-tab-on" type="button" role="tab" aria-selected="true" data-tab="net">Network</button>
+                                <button class="mf-tab" type="button" role="tab" aria-selected="false" data-tab="mtx">Matrix</button>
+                                <button class="mf-tab" type="button" role="tab" aria-selected="false" data-tab="bees">Bee list</button>
+                                <button class="mf-tab" type="button" role="tab" aria-selected="false" data-tab="plants">Plant list</button>
+                                <button class="mf-tab" type="button" role="tab" aria-selected="false" data-tab="abund">Bee abundance</button>
+                                <button class="mf-tab" type="button" role="tab" aria-selected="false" data-tab="seed">Seed mix evaluator</button>
+                            </div>
+                            <button class="mf-iconbtn imerss-view-download" type="button" title="Download this view" aria-label="Download this view">
+                                <svg width="15" height="15" aria-hidden="true"><use href="#mf-i-download"/></svg>
+                            </button>
+                        </div>
+
+                        <div class="mf-mount mf-mount-net" data-panel="net" role="tabpanel">
                             <div class="imerss-bipartite">
-                                <svg width="32" height="2048">
-                                </svg>
-                                <span class="imerss-download-button imerss-basic-tooltip" title="Download network as PNG"><svg width="24" height="24" >
-                                    <use href="#download" />
-                                </svg></span>
+                                <svg width="32" height="2048"></svg>
                             </div>
                         </div>
-                        <div id="fli-tab-matrix" class="imerss-tab-panel">
-                            <div class="imerss-interactions-holder">
+
+                        <div class="mf-mount mf-mount-net" data-panel="mtx" role="tabpanel" hidden>
+                            <div class="imerss-interactions-holder"></div>
+                        </div>
+
+                        <div class="mf-mount mf-mount-pad imerss-bee-list" data-panel="bees" role="tabpanel" hidden>
+                            <div class="mf-listbar">
+                                <span class="mf-listbar-label">Arrange</span>
+                                <div class="mf-seg" role="group" aria-label="Arrange bee list">
+                                    <button class="mf-seg-btn mf-seg-on" type="button" data-arrange="family">By family</button>
+                                    <button class="mf-seg-btn" type="button" data-arrange="flat">A &ndash; Z</button>
+                                </div>
+                                <span class="mf-listbar-count"></span>
+                            </div>
+                            <div class="mf-listbody"></div>
+                        </div>
+
+                        <div class="mf-mount mf-mount-pad imerss-plant-list" data-panel="plants" role="tabpanel" hidden>
+                            <div class="mf-listbar">
+                                <span class="mf-listbar-label">Arrange</span>
+                                <div class="mf-seg" role="group" aria-label="Arrange plant list">
+                                    <button class="mf-seg-btn mf-seg-on" type="button" data-arrange="family">By family</button>
+                                    <button class="mf-seg-btn" type="button" data-arrange="flat">A &ndash; Z</button>
+                                </div>
+                                <span class="mf-listbar-count"></span>
+                            </div>
+                            <div class="mf-listbody"></div>
+                        </div>
+
+                        <div class="mf-mount mf-mount-pad imerss-bee-abundance" data-panel="abund" role="tabpanel" hidden>
+                            <div class="mf-listbar">
+                                <span class="mf-key" title="Bee families, as coloured throughout"></span>
+                            </div>
+                            <div class="mf-listbody mf-charts"></div>
+                        </div>
+
+                        <div class="mf-mount mf-mount-pad imerss-seed-mix" data-panel="seed" role="tabpanel" hidden>
+                            <div class="mf-seedwrap">
+                                <div class="mf-seedcol">
+                                    <div class="mf-seedtop">
+                                        <p class="mf-seedhead">Plants in your seed mix</p>
+                                        <button class="mf-linkbtn imerss-seed-reset" type="button" title="Restore the established plants and clear any added ones">
+                                            <svg width="13" height="13" aria-hidden="true"><use href="#mf-i-reset"/></svg> Reset mix
+                                        </button>
+                                    </div>
+                                    <p class="mf-seednote"></p>
+                                    <div class="mf-combo">
+                                        <svg class="mf-combo-icon" width="14" height="14" aria-hidden="true"><use href="#mf-i-search"/></svg>
+                                        <input type="search" class="mf-combo-input mf-seed-search" placeholder="Search plants" aria-label="Search plants" autocomplete="off" spellcheck="false">
+                                    </div>
+                                    <div class="mf-listbody mf-seed-list"></div>
+                                </div>
+                                <div class="mf-seedcol mf-seedcol-out">
+                                    <p class="mf-seedhead">Habitat provided</p>
+                                    <div class="mf-meter"><div class="mf-meter-fill"></div></div>
+                                    <p class="mf-seedread"></p>
+                                    <div class="mf-seedchart-holder"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="imerss-plants imerss-checklist-holder">
-                    <div class="imerss-panel-label"><span>Plants</span>
-                        <span class="imerss-download-button imerss-basic-tooltip" title="Download checklist as CSV"><svg width="24" height="24" >
-                            <use href="#download" />
-                        </svg></span>
-                        <span class="imerss-search-checklist"></span>
-                    </div>
-                    <div class="imerss-checklist">
-                    </div>
+                    </section>
+
                 </div>
             </div>
+
+            <footer class="mf-colophon">
+                <span>Software Version 1.2 - Updated February 17th, 2026</span>
+                <span>Dataset Revision V3 - Updated February 17th, 2026</span>
+            </footer>
         </div>
-        <div class="imerss-software-version">Software Version 1.2 - Updated February 17th, 2026</div>
-        <div class="imerss-dataset-version">Dataset Revision V3 - Updated February 17th, 2026</div>
     </section>
 
         <script>

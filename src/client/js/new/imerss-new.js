@@ -893,7 +893,7 @@ hortis.libreMap.computeGridOpacity = function (gridVisible, fillOpacity) {
 fluid.registerNamespace("hortis.legend");
 
 hortis.legend.rowTemplate = `
-<div class="imerss-legend-row">
+<div class="imerss-legend-row" title="%rowTitle">
     <span class="imerss-legend-icon"></span>
     <span class="imerss-legend-preview %previewClass" style="%previewStyle"></span>
     <span class="imerss-legend-label">%keyLabel</span>
@@ -937,16 +937,17 @@ hortis.libreMap.withObsGrid.drawLegend = function (map, gridSignal, gridVisibleS
             const label = propToLevel(legendStopProps[stop]) + " - " + propToLevel(legendStopProps[stop + 1]);
             return fluid.stringTemplate(hortis.legend.rowTemplate, {
                 previewStyle: "background-color: " + colour,
-                keyLabel: label
+                keyLabel: label,
+                rowTitle: "Grid cells holding " + label + " observations"
             });
         });
         const longRes = quant.longResolution.value;
         const baseLat = quant.baseLatitude.value;
         const longLen = Math.round(longRes * hortis.longitudeLength(baseLat));
 
-        const markup = `<div class="imerss-legend-title">Observation count</div>` +
+        const markup = `<div class="imerss-legend-title" title="Number of observations falling within each grid cell">Observation count</div>` +
             regionMarkupRows.join("\n") +
-            `<div class="imerss-legend-cell-size">Cell size: ${longLen}m</div>`;
+            `<div class="imerss-legend-cell-size" title="Width of each grid cell in metres">Cell size: ${longLen}m</div>`;
         container.innerHTML = markup;
     };
 

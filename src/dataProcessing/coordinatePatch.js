@@ -57,7 +57,7 @@ hortis.dumpObsMatch = function (match) {
  * @param {Object} patchRow - One row of the patch file
  * @param {ObsRow[]} obsRows - All observation rows
  * @param {String} loc - A diagnostic string indicating the location of the `patchRow`
- * @return {ObsRow|Null} The best matching observation row, or null
+ * @return {ObsRow|null} The best matching observation row, or null
  */
 hortis.matchCoordinatePatch = function (patchRow, obsRows, loc) {
     const matches = [];

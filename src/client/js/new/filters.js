@@ -28,16 +28,77 @@ fluid.defaults("hortis.filter", {
     }
 });
 
+/**
+ * A summary of how many of a filter's settings are active, suitable for display in a badge beside its controls.
+ * @typedef {Object} FilterSummary
+ * @property {Number} count - The number of active settings, 0 if the filter is inactive
+ * @property {String} title - A description of the active settings, suitable for a tooltip
+ * @property {Boolean} [dot] - `true` if the count is not meaningful to the user and a plain marker should be shown instead
+ */
+
+// A component which acts as a filter in the UI and can summarise its active settings. Badges summing these summaries
+// are shown by hortis.filterConcertina in the header of whichever section of the concertina holds the filter's
+// container, and are ignored by UIs which have no place for them.
+fluid.defaults("hortis.summarisedFilter", {
+    members: {
+        // filterSummary: Signal<FilterSummary> - should be implemented
+    }
+});
+
 fluid.defaults("hortis.obsFilter", {
-    gradeNames: "hortis.filter",
+    gradeNames: ["hortis.filter", "hortis.summarisedFilter"],
     members: {
         // filterState - must be implemented
+        // filterSummary - should be implemented, see hortis.summarisedFilter
     },
     invokers: {
         // doFilter
         // reset
     }
 });
+
+/**
+ * Render an integer with thousands separators.
+ * @param {Number} value - The integer to be rendered
+ * @return {String} The value grouped in threes, e.g. "3,000"
+ */
+hortis.formatInt = function (value) {
+    return Math.round(value).toLocaleString("en-US");
+};
+
+/**
+ * Pluralise a noun according to a count.
+ * @param {Number} count - The count
+ * @param {String} noun - The singular form of the noun
+ * @param {String} [nouns] - The plural form of the noun, defaulting to the singular with "s" appended
+ * @return {String} The count followed by the appropriate form of the noun
+ */
+hortis.plural = function (count, noun, nouns = noun + "s") {
+    return hortis.formatInt(count) + " " + (count === 1 ? noun : nouns);
+};
+
+/**
+ * Summarise a filter whose active settings can simply be counted.
+ * @param {Number} count - The number of active settings
+ * @param {String[]} nouns - The singular and plural nouns for one of the settings
+ * @return {FilterSummary} The summary of the filter
+ */
+hortis.countSummary = function (count, nouns) {
+    return {
+        count,
+        title: hortis.plural(count, nouns[0], nouns[1]) + " selected"
+    };
+};
+
+/**
+ * Summarise a filter whose state is a hash of selected keys to `true`.
+ * @param {Object<String, Boolean>} filterState - The filter state
+ * @param {String[]} nouns - The singular and plural nouns for one of the keys
+ * @return {FilterSummary} The summary of the filter
+ */
+hortis.keyCountSummary = function (filterState, nouns) {
+    return hortis.countSummary(Object.keys(filterState).length, nouns);
+};
 
 fluid.defaults("hortis.taxaFilter", {
     gradeNames: "hortis.filter"
@@ -292,6 +353,7 @@ fluid.defaults("hortis.regionFilter", {
         `
     },
     freeFilter: false,
+    summaryNouns: ["region", "regions"],
     // fieldNames
     // filterName
     members: {
@@ -301,7 +363,8 @@ fluid.defaults("hortis.regionFilter", {
         // Free hash of region keys (indirection table row index) to true
         filterState: "@expand:signal({})",
         renderModel: `@expand:fluid.computed(hortis.regionFilter.renderModel, {that}.filterRows,
-            {that}.options.markup, {that}.options.filterName, {that}.options.freeFilter)`
+            {that}.options.markup, {that}.options.filterName, {that}.options.freeFilter)`,
+        filterSummary: "@expand:fluid.computed(hortis.keyCountSummary, {that}.filterState, {that}.options.summaryNouns)"
     },
     invokers: {
         doFilter: "hortis.regionFilter.doFilter({that}.filterRows.value, {arguments}.0, {arguments}.1)",
@@ -406,6 +469,214 @@ hortis.freeRegionFilter.applyFilter = function (filterState, dom) {
     });
 };
 
+// A region filter presenting every row of the indirection table, grouped under its region field (e.g.
+// "BLM District Boundaries") as a set of unfoldable groups, together with a free text search over region labels.
+// Selections are ORed within a group and ANDed between groups.
+fluid.defaults("hortis.groupedRegionFilter", {
+    gradeNames: ["hortis.obsFilter", "fluid.stringTemplateRenderingView"],
+    markup: {
+        container: `
+        <div class="imerss-grouped-region-filter">
+            <label class="imerss-filter-title" for="%controlId">%filterName</label>
+            <div class="mf-combo">
+                <svg class="mf-combo-icon" width="14" height="14" aria-hidden="true"><use href="#mf-i-search"/></svg>
+                <input type="search" id="%controlId" class="mf-combo-input imerss-region-search" placeholder="Filter by region" autocomplete="off" spellcheck="false">
+            </div>
+            <div class="mf-scroll mf-groups">%groups</div>
+        </div>
+        `,
+        group: `
+        <div class="mf-group" data-group="%groupIndex">
+            <button type="button" class="mf-group-head" aria-expanded="false" data-open="false">
+                <svg class="mf-node-chev" width="12" height="12" aria-hidden="true"><use href="#mf-i-chev"/></svg>
+                <span class="mf-group-name">%groupName</span>
+                <span class="mf-group-state" hidden></span>
+                <span class="mf-group-count" title="%total regions of type %groupName">%total</span>
+            </button>
+            <div class="mf-group-body" hidden>%rows</div>
+        </div>
+        `,
+        row: `
+        <label class="mf-check"><input type="checkbox" class="imerss-region-check" data-row-id="%rowId"><span>%rowLabel</span></label>
+        `
+    },
+    controlId: "fli-imerss-region-search",
+    filterName: "Region",
+    // Region fields whose groups are listed first
+    leadingFields: [],
+    summaryNouns: ["region", "regions"],
+    members: {
+        // Rows with members {regionField, id, label} as for hortis.regionFilter
+        indirectionRows: "@expand:signal()",
+        groups: "@expand:fluid.computed(hortis.groupedRegionFilter.computeGroups, {that}.indirectionRows, {that}.options.leadingFields)",
+        // Free hash of indirection table row index to true
+        filterState: "@expand:signal({})",
+        query: "@expand:signal(null)", // null rather than empty string, which the expander can't express
+        filterSummary: "@expand:fluid.computed(hortis.keyCountSummary, {that}.filterState, {that}.options.summaryNouns)",
+        renderModel: `@expand:fluid.computed(hortis.groupedRegionFilter.renderModel, {that}.groups, {that}.options.markup,
+            {that}.options.filterName, {that}.options.controlId)`,
+        renderGroupState: "@expand:fluid.effect(hortis.groupedRegionFilter.renderGroupState, {that}, {that}.filterState, {that}.groups, {that}.templateRoot)",
+        applyQuery: "@expand:fluid.effect(hortis.groupedRegionFilter.applyQuery, {that}, {that}.query, {that}.templateRoot)"
+    },
+    invokers: {
+        doFilter: "hortis.groupedRegionFilter.doFilter({that}.indirectionRows.value, {arguments}.0, {arguments}.1)",
+        reset: "hortis.groupedRegionFilter.reset({that})"
+    },
+    listeners: {
+        "onCreate.bindEvents": "hortis.groupedRegionFilter.bindEvents"
+    }
+});
+
+/**
+ * Arrange the rows of the region indirection table into groups, one for each region field.
+ * @param {Object[]} indirectionRows - Rows of the indirection table, each with members `regionField`, `id` and `label`
+ * @param {String[]} leadingFields - Region fields whose groups are to be listed first, in this order
+ * @return {Object[]} Array of groups, each with members `regionField` and `rows`, where each of `rows` holds
+ * the indirection `row` and its `index` in the indirection table
+ */
+hortis.groupedRegionFilter.computeGroups = function (indirectionRows, leadingFields) {
+    const byField = {};
+    const fieldOrder = [];
+    indirectionRows.forEach((row, index) => {
+        if (byField[row.regionField] === undefined) {
+            byField[row.regionField] = [];
+            fieldOrder.push(row.regionField);
+        }
+        byField[row.regionField].push({row, index});
+    });
+    const leading = leadingFields.filter(field => byField[field] !== undefined);
+    const trailing = fieldOrder.filter(field => !leading.includes(field));
+    return [...leading, ...trailing].map(regionField => ({
+        regionField,
+        rows: byField[regionField].sort((rowa, rowb) => rowa.row.label.localeCompare(rowb.row.label, undefined, {numeric: true}))
+    }));
+};
+
+/**
+ * Compute the render model for a grouped region filter.
+ * @param {Object[]} groups - The groups as computed by `hortis.groupedRegionFilter.computeGroups`
+ * @param {Object} markup - The component's markup templates
+ * @param {String} filterName - The (visually hidden) label for the region search box
+ * @param {String} controlId - The id to be allocated to the region search box
+ * @return {Object} Render model for the container template
+ */
+hortis.groupedRegionFilter.renderModel = function (groups, markup, filterName, controlId) {
+    const renderGroup = (group, groupIndex) => fluid.stringTemplate(markup.group, {
+        groupIndex,
+        groupName: hortis.encodeHTML(group.regionField),
+        total: group.rows.length,
+        rows: group.rows.map(({row, index}) => fluid.stringTemplate(markup.row, {
+            rowId: index,
+            rowLabel: hortis.encodeHTML(row.label)
+        })).join("")
+    });
+    return {
+        filterName,
+        controlId,
+        groups: groups.map(renderGroup).join("\n")
+    };
+};
+
+/**
+ * Filter observations by the selected regions - ORing within each region field and ANDing between region fields.
+ * @param {Object[]} indirectionRows - Rows of the indirection table
+ * @param {Object[]} obsRows - The observation rows to be filtered
+ * @param {Object<String, Boolean>} filterState - Hash of selected indirection row indices to `true`
+ * @return {Object[]} The filtered observation rows
+ */
+hortis.groupedRegionFilter.doFilter = function (indirectionRows, obsRows, filterState) {
+    const selected = Object.keys(filterState);
+    let togo = obsRows;
+    if (selected.length > 0) {
+        const byField = {};
+        selected.forEach(index => {
+            const iRow = indirectionRows[index];
+            fluid.pushArray(byField, iRow.regionField, iRow.id);
+        });
+        const fieldEntries = Object.entries(byField);
+        togo = obsRows.filter(obsRow => fieldEntries.every(([regionField, ids]) => ids.includes(obsRow[regionField])));
+    }
+    return togo;
+};
+
+hortis.groupedRegionFilter.reset = function (that) {
+    that.filterState.value = {};
+    that.query.value = null;
+    const root = that.container[0];
+    root.querySelectorAll(".imerss-region-check").forEach(check => check.checked = false);
+    const search = root.querySelector(".imerss-region-search");
+    if (search) {
+        search.value = "";
+    }
+};
+
+/**
+ * Display in each group's header the number of regions selected within it.
+ * @param {hortis.groupedRegionFilter} that - The filter component
+ * @param {Object<String, Boolean>} filterState - Hash of selected indirection row indices to `true`
+ * @param {Object[]} groups - The groups as computed by `hortis.groupedRegionFilter.computeGroups`
+ */
+hortis.groupedRegionFilter.renderGroupState = function (that, filterState, groups) {
+    const root = that.container[0];
+    groups.forEach((group, groupIndex) => {
+        const badge = root.querySelector(`[data-group="${groupIndex}"] .mf-group-state`);
+        if (badge) {
+            const count = group.rows.filter(({index}) => filterState[index]).length;
+            badge.hidden = count === 0;
+            badge.textContent = String(count);
+            badge.setAttribute("title", `${count} selected region${count === 1 ? "" : "s"} of type ${group.regionField}`);
+        }
+    });
+};
+
+/**
+ * Show only those regions whose labels match all of the words in the search box. Whilst a search is in progress,
+ * groups with matches are unfolded and those without are hidden.
+ * @param {hortis.groupedRegionFilter} that - The filter component
+ * @param {String|null} query - The contents of the search box, or `null` if it has not been used
+ */
+hortis.groupedRegionFilter.applyQuery = function (that, query) {
+    const words = (query || "").toLowerCase().split(" ").filter(word => word.trim().length > 0);
+    const searching = words.length > 0;
+    const root = that.container[0];
+    root.querySelectorAll(".mf-group").forEach(groupNode => {
+        const head = groupNode.querySelector(".mf-group-head");
+        const body = groupNode.querySelector(".mf-group-body");
+        let matches = 0;
+        body.querySelectorAll(".mf-check").forEach(row => {
+            const text = row.textContent.toLowerCase();
+            const match = words.every(word => text.includes(word));
+            row.classList.toggle("mf-check-hidden", !match);
+            matches += match ? 1 : 0;
+        });
+        if (searching) {
+            groupNode.hidden = matches === 0;
+            body.hidden = false;
+            head.setAttribute("aria-expanded", "true");
+        } else {
+            const open = head.dataset.open === "true";
+            groupNode.hidden = false;
+            body.hidden = !open;
+            head.setAttribute("aria-expanded", open ? "true" : "false");
+        }
+    });
+};
+
+hortis.groupedRegionFilter.bindEvents = function (that) {
+    that.container.on("click", ".mf-group-head", function () {
+        const open = this.getAttribute("aria-expanded") === "true";
+        this.setAttribute("aria-expanded", open ? "false" : "true");
+        this.dataset.open = open ? "false" : "true";
+        this.parentNode.querySelector(".mf-group-body").hidden = open;
+    });
+    that.container.on("change", ".imerss-region-check", function () {
+        hortis.valueFilter.update(that, this.dataset.rowId, this.checked);
+    });
+    that.container.on("input", ".imerss-region-search", function () {
+        that.query.value = this.value;
+    });
+};
+
 fluid.defaults("hortis.autocompleteFilter", {
     gradeNames: ["hortis.filter", "fluid.stringTemplateRenderingView"],
     // filterName
@@ -432,7 +703,8 @@ fluid.defaults("hortis.autocompleteFilter", {
     members: {
         filterState: "@expand:signal(null)",
         renderModel: `@expand:fluid.computed(hortis.autocompleteFilter.renderModel, 
-            {that}.options.filterName, {that}.options.controlId, {that}.options.rootClass)`
+            {that}.options.filterName, {that}.options.controlId, {that}.options.rootClass)`,
+        filterSummary: "@expand:fluid.computed(hortis.autocompleteFilter.summarise, {that}.filterState, {that}.options.filterName)"
     },
     invokers: {
         reset: "hortis.autocompleteFilter.reset({that})"
@@ -479,6 +751,19 @@ fluid.defaults("hortis.autocompleteFilter", {
 hortis.autocompleteFilter.reset = function (that) {
     that.filterState.value = "";
     that.container.find("#" + that.options.controlId).val("");
+};
+
+/**
+ * Summarise an autocomplete filter, which is active when any value has been chosen.
+ * @param {any} filterState - The chosen value, or a falsy value if none has been chosen
+ * @param {String} filterName - The name of the filter
+ * @return {FilterSummary} The summary of the filter
+ */
+hortis.autocompleteFilter.summarise = function (filterState, filterName) {
+    return {
+        count: filterState ? 1 : 0,
+        title: "Filtering by a single " + filterName.toLowerCase()
+    };
 };
 
 // Isn't this awkward, because it is a "computed" it needs some kind of signal to get it going. In future, all

@@ -89,7 +89,7 @@ hortis.leafletMap.showSelectedRegions = function (map, selectedRegions) {
 
 
 /** Computes a set of flags based on a selected region key and hash of regions
- * @param {String|Null} selectedRegion - The currently selected region or null
+ * @param {String|null} selectedRegion - The currently selected region or null
  * @param {Object} regions - Hash of regions
  * @return {Object<String, Boolean>} - Hash of regions to flags
  */

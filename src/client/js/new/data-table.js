@@ -64,7 +64,7 @@ hortis.dataTable.sortRows = function (rows, key, direction) {
 
 /**
  * @callback FormatterCallback
- * @param {Any} value - The cell value.
+ * @param {any} value - The cell value.
  * @param {Object} row - The row data object.
  * @return {String} - The formatted cell string.
  */

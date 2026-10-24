@@ -592,6 +592,124 @@ hortis.checklist.check = function (checklist, id, checked) {
     });
 };
 
+/**
+ * Fold or unfold every row of a checklist so that it is displayed down to a particular taxonomic rank.
+ * When expanding, every row ranked above the target rank is unfolded so that rows at the target rank become visible.
+ * When collapsing, every row ranked at or below the target rank is folded so that no deeper rows are visible. Rows
+ * which the operation does not address keep their current fold state.
+ * @param {hortis.checklist} checklist - The checklist to be updated
+ * @param {String} rank - The target rank, which must be one of the checklist's `filterRanks`
+ * @param {Boolean} expand - `true` to expand all rows to the target rank, `false` to collapse all rows to it
+ */
+hortis.checklist.foldToRank = function (checklist, rank, expand) {
+    const ranks = checklist.options.filterRanks;
+    const targetIndex = ranks.indexOf(rank);
+    const idToStateUp = fluid.copy(checklist.idToStateUI.value);
+    const visit = function (entry, parentShows) {
+        const state = idToStateUp[entry.row.id];
+        // eslint-disable-next-line eqeqeq
+        if (state && entry.row.id != 0) { // Rows outside the current focus have no state, nor does NO_TAXON_ROW
+            const hasChildren = entry.children.length > 0;
+            const rankIndex = ranks.indexOf(entry.row.rank);
+            if (!parentShows) {
+                state.folded = "hidden";
+            } else if (!hasChildren) {
+                state.folded = "fixed";
+            } else if (state.folded !== "fixed") { // Top-level rows are fixed open and are left alone
+                if (expand && rankIndex < targetIndex) {
+                    state.folded = "unfolded";
+                } else if (!expand && rankIndex >= targetIndex) {
+                    state.folded = "folded";
+                } else if (state.folded === "hidden") {
+                    state.folded = "folded";
+                }
+            }
+            const shows = parentShows && state.folded !== "folded" && state.folded !== "hidden";
+            entry.children.forEach(child => visit(child, shows));
+        }
+    };
+    checklist.rootEntry.value.children.forEach(entry => visit(entry, true));
+    checklist.idToStateUI.value = idToStateUp;
+    checklist.scheduleRender.value = true;
+};
+
+/**
+ * Count the rows which the user has explicitly selected in a checklist - that is, selected rows whose parent is
+ * not itself selected.
+ * @param {Object<String, Object>} idToState - The checklist's map of row id to its selection and fold state
+ * @param {Object<String, Object>} idToEntry - The checklist's map of row id to its checklist entry
+ * @return {Number} The number of explicitly selected rows
+ */
+hortis.checklist.countSelected = function (idToState, idToEntry) {
+    let count = 0;
+    fluid.each(idToState, (state, id) => {
+        if (state.selected === "selected") {
+            const parentRow = idToEntry[id]?.parent?.row;
+            const parentSelected = parentRow ? idToState[parentRow.id]?.selected === "selected" : false;
+            if (!parentSelected) {
+                ++count;
+            }
+        }
+    });
+    return count;
+};
+
+// Allows a selectable checklist to summarise its selection as a filter - see hortis.summarisedFilter
+fluid.defaults("hortis.checklist.withFilterSummary", {
+    gradeNames: "hortis.summarisedFilter",
+    summaryNouns: ["taxon", "taxa"],
+    members: {
+        filterSummary: "@expand:fluid.computed(hortis.checklist.filterSummary, {that}, {that}.idToState, {that}.options.summaryNouns)"
+    }
+});
+
+/**
+ * Summarise a checklist's selection by the number of rows which the user has explicitly selected.
+ * @param {hortis.checklist} checklist - The checklist, whose volatile `idToEntry` is consulted
+ * @param {Object<String, Object>} idToState - The checklist's map of row id to its selection and fold state
+ * @param {String[]} summaryNouns - The singular and plural nouns for one of the checklist's rows
+ * @return {FilterSummary} The summary of the selection
+ */
+hortis.checklist.filterSummary = function (checklist, idToState, summaryNouns) {
+    return hortis.countSummary(hortis.checklist.countSelected(idToState, checklist.idToEntry), summaryNouns);
+};
+
+// Adds a pair of controls allowing all rows of the checklist to be expanded or collapsed to a chosen taxonomic rank
+fluid.defaults("hortis.checklist.withRankFold", {
+    selectors: {
+        rankFold: ".imerss-rank-fold"
+    },
+    // The ranks offered by the controls - defaults to all filterRanks other than the topmost
+    foldRanks: null,
+    markup: {
+        rankFold: `
+        <select class="mf-select imerss-expand-to" aria-label="Expand all rows to a taxonomic rank">
+            <option value="" selected disabled>Expand all to&hellip;</option>%options
+        </select>
+        <select class="mf-select imerss-collapse-to" aria-label="Collapse all rows to a taxonomic rank">
+            <option value="" selected disabled>Collapse all to&hellip;</option>%options
+        </select>`,
+        rankOption: "<option value=\"%rank\">%label</option>"
+    },
+    listeners: {
+        "onCreate.renderRankFold": "hortis.checklist.withRankFold.render({that}, {that}.dom.rankFold)"
+    }
+});
+
+hortis.checklist.withRankFold.render = function (that, holder) {
+    const foldRanks = that.options.foldRanks || that.options.filterRanks.slice(1);
+    const options = foldRanks.map(rank => fluid.stringTemplate(that.options.markup.rankOption, {
+        rank,
+        label: hortis.capitalize(rank)
+    })).join("");
+    holder.html(fluid.stringTemplate(that.options.markup.rankFold, {options}));
+    holder.on("change", "select", function () {
+        const expand = this.classList.contains("imerss-expand-to");
+        hortis.checklist.foldToRank(that, this.value, expand);
+        this.value = "";
+    });
+};
+
 // TODO: Pretty ropy, should use that.rootId
 hortis.checklist.reset = function (checklist) {
     // TODO: Somehow the root entry itself is not populated
