@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>BBEA map on Infusion 6 tests</title>
+
+        <!-- Run from the bagatelle checkout with
+             node ../fluid-infusion-6/tests/test-core/qunit/js/fqunit-cli.js test/i6/html/BbeaMapTests.html
+             This assumes a sibling checkout of Infusion 6 as fluid-infusion-6 -->
+
+        <script src="../../../../fluid-infusion-6/src/framework/core/js/FluidCore.js"></script>
+        <script src="../../../../fluid-infusion-6/src/framework/core/js/FluidSignals.js"></script>
+        <script src="../../../../fluid-infusion-6/src/framework/core/js/Fluid.js"></script>
+        <script src="../../../../fluid-infusion-6/src/framework/core/js/FluidIL.js"></script>
+        <script src="../../../../fluid-infusion-6/src/framework/core/js/template-parser.js"></script>
+        <script src="../../../../fluid-infusion-6/src/framework/core/js/FluidView.js"></script>
+        <script src="../../../../fluid-infusion-6/src/framework/core/js/FluidPTF.js"></script>
+        <script src="../../../../fluid-infusion-6/src/framework/core/js/FluidView-browser.js"></script>
+
+        <script src="../../../../fluid-infusion-6/tests/lib/qunit/js/qunit.js"></script>
+        <script src="../../../../fluid-infusion-6/tests/test-core/qunit/js/qunit-fluid.js"></script>
+
+        <script src="../../../src/lib/point-in-polygon.js"></script>
+        <script src="../../../src/geom/geoJSON.js"></script>
+        <script src="../../../src/client/js/i6/imerss-core.js"></script>
+        <script src="../../../src/client/js/i6/tooltip.js"></script>
+        <script src="../../../src/client/js/i6/filters.js"></script>
+        <script src="../../../src/client/js/i6/dualRangeInput.js"></script>
+        <script src="../../../src/client/js/i6/checklist.js"></script>
+        <script src="../../../src/client/js/i6/libreMap.js"></script>
+        <script src="../../../src/client/js/i6/polygonDraw.js"></script>
+        <script src="../../../src/client/js/i6/imerss-bbea.js"></script>
+
+        <script src="../../../src/client/js/colour.js"></script>
+        <script src="../../../src/client/js/i6/shell.js"></script>
+        <script src="../../../src/client/js/i6/views.js"></script>
+        <script src="../js/BbeaMapTests.js"></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture">
+            <div class="imerss-container">
+                <span class="imerss-filter-controls"></span>
+                <div class="imerss-collector-filter"></div>
+                <div class="imerss-region-filter"></div>
+                <div class="imerss-bbea-filters"></div>
+                <div class="imerss-phenology-filter"></div>
+                <div class="imerss-elevation-filter"></div>
+                <div class="imerss-pollinators imerss-checklist-holder">
+                    <span class="imerss-search-checklist"></span>
+                    <div class="mf-rankfold imerss-rank-fold"></div>
+                    <div class="mf-scroll mf-tree imerss-checklist"></div>
+                </div>
+                <div class="imerss-plants imerss-checklist-holder">
+                    <span class="imerss-search-checklist"></span>
+                    <div class="mf-rankfold imerss-rank-fold"></div>
+                    <div class="mf-scroll mf-tree imerss-checklist"></div>
+                </div>
+                <div class="mf-reporter imerss-record-reporter"></div>
+                <div class="imerss-map"></div>
+            </div>
+        </div>
+    </body>
+</html>

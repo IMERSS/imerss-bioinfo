@@ -1,0 +1,27 @@
+/* Styles needed by the visualisations ported to Infusion 6 - see src/client/js/i6. Restricted to CSS of the
+   Baseline "Widely available" profile */
+
+/* The element of a tooltip placed by hortis.withTooltip - Popper supplies its position, replacing jQuery UI's tooltip */
+.imerss-tooltip-holder {
+    z-index: 1000;
+    max-width: 360px;
+    padding: 6px 8px;
+    background: #fff;
+    color: #222;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    font-size: 14px;
+    line-height: 1.35;
+    /* The tooltip follows the pointer, so must not intercept the events which drive it */
+    pointer-events: none;
+}
+
+.imerss-tooltip-holder[hidden] {
+    display: none;
+}
+
+/* Formerly supplied by Infusion 4's fluid.css, on which the port no longer depends */
+.fl-hidden {
+    display: none !important;
+}

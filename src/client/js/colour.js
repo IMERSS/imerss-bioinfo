@@ -23,9 +23,7 @@ fluid.colour.hexToArray = function (hex) {
         fluid.fail("hex colour must begin with # - " + hex);
     }
     hex = hex.substring(1);
-    const digits = fluid.transform(hex.split(""), function (ch) {
-        return parseInt(ch, 16);
-    });
+    const digits = hex.split("").map(ch => parseInt(ch, 16));
     const indirect = fluid.colour.hexIndirect[hex.length];
     if (!indirect) {
         fluid.fail("Unsupported number of hex digits in " + hex + ": can only supply " + Object.keys(fluid.colour.hexIndirect).join(", ") + " digits");
@@ -43,10 +41,10 @@ fluid.colour.arrayToString = function (array) {
 };
 
 fluid.colour.interpolate = function (f, c1, c2) {
-    return fluid.transform([
+    return [
         (1 - f) * c1[0] + f * c2[0],
         (1 - f) * c1[1] + f * c2[1],
-        (1 - f) * c1[2] + f * c2[2]], Math.round);
+        (1 - f) * c1[2] + f * c2[2]].map(component => Math.round(component));
 };
 
 fluid.colour.interpolateStops = function (stops, value) {

@@ -32,7 +32,8 @@
         "json5": "2.2.3",
         "accessible-autocomplete": "2.0.4",
         "@stanko/dual-range-input": "1.0.0",
-        "jquery-ui": "1.13.2"
+        "jquery-ui": "1.13.2",
+        "@popperjs/core": "2.11.8"
     },
     "devDependencies": {
         "terser": "5.26.0",
