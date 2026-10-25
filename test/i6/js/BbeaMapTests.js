@@ -202,6 +202,38 @@ QUnit.test("Fill patterns are loaded before the style is applied", async functio
     that.destroy();
 });
 
+hortis.tests.addMarker = function (map) {
+    map.log.push("marker");
+    return new Promise(resolve => setTimeout(resolve, 5));
+};
+
+QUnit.test("A layer may insert a stage into start-up, and the ready map can be awaited", async function (assert) {
+    const that = hortis.tests.mapLoader({
+        map: {
+            $component: {
+                readyMap: {
+                    $effect: [{
+                        namespace: "marker",
+                        priority: "before:applyStyle",
+                        func: "hortis.tests.addMarker",
+                        args: "{$payload}"
+                    }]
+                }
+            }
+        }
+    });
+    fluid.cell.stabilize();
+    const map = fluid.peek(hortis.tests.maps);
+    map.isLoaded = true;
+    map.fire("load");
+    await fluid.cell.settle();
+    assert.strictEqual(that.map.readyMap, map, "Ready map available once start-up has settled");
+    assert.ok(hortis.tests.indexOfLog(map, "marker") < hortis.tests.indexOfLog(map, "setStyle"), "Inserted stage runs before the style is applied");
+    assert.ok(hortis.tests.indexOfLog(map, "fitBounds") > hortis.tests.indexOfLog(map, "setStyle"), "Map zoomed to observations once ready");
+    assert.equal(map.log.filter(entry => entry === "setStyle").length, 1, "Style applied exactly once");
+    that.destroy();
+});
+
 QUnit.test("Clicking a grid cell filters observations, and clicking elsewhere resets it", async function (assert) {
     const that = hortis.tests.mapLoader();
     fluid.cell.stabilize();

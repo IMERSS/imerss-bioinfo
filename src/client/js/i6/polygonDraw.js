@@ -52,7 +52,7 @@ fluid.def("hortis.libreMap.polygonFilter", {
     // Bound to the styled map, since MapboxDraw's layers would not survive the application of the map's style
     mapboxDraw: {
         $bindable: {
-            bind: "hortis.libreMap.polygonFilter.makeDraw({self}, {libreMap}.styledMap, {self}.mapboxDrawOptions, {global}.MapboxDraw)",
+            bind: "hortis.libreMap.polygonFilter.makeDraw({self}, {libreMap}.readyMap, {self}.mapboxDrawOptions, {global}.MapboxDraw)",
             unbind: "hortis.libreMap.polygonFilter.removeDraw({boundValue})",
             onceOnly: true
         }

@@ -14,10 +14,11 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 // In Infusion 4 the map's start-up was sequenced by events: maplibre's "load" fired the transforming promise event
 // onLoad, whose listeners loaded fill patterns, and whose last listener applied the real style and, on "styledata",
 // wrote a mapLoaded signal on which every effect touching the style was gated by a throwaway argument.
-// Here each stage of readiness is a bindable holding the map once that stage is reached, and unavailable before -
-//     map -> loadedMap -> fillPatternsLoaded -> styledMap
-// so that every effect touching the style simply takes `styledMap` as its argument, and ordering falls out of
-// availability rather than listener priorities.
+// Here the same sequence is the composite effect `readyMap`, whose namespaced listener records
+//     load -> loadFillPatterns -> applyStyle
+// each receive the map as their {$payload}, possibly once a promise resolves - see FLUID-7028. A layer may displace any
+// of these stages, or insert one of its own with a priority such as "before:applyStyle". `readyMap` holds the map once
+// the chain completes, and is pending before, so that every effect touching the style simply takes it as its argument.
 
 // noinspection ES6ConvertVarToLetConst // otherwise this is a duplicate on minifying
 var hortis = fluid.registerNamespace("hortis");
@@ -47,23 +48,24 @@ fluid.def("hortis.libreMap", {
             onceOnly: true
         }
     },
-    loadedMap: {
-        $bindable: {
-            bind: "hortis.libreMap.whenLoaded({self}.map)"
-        }
-    },
-    fillPatternsLoaded: {
-        $bindable: {
-            bind: "hortis.libreMap.loadFillPatterns({self}.loadedMap, {self}.fillPatternPath, {self}.fillPatterns, {self}.fillPatternPixelRatio)"
-        }
-    },
-    // The real style is applied once fill patterns are loaded, since a style referring to them can't be interpreted
-    // before. It is applied only once, since applying it again would remove every source and layer added since
-    styledMap: {
-        $bindable: {
-            bind: "hortis.libreMap.applyStyle({self}.loadedMap, {self}.style, {self}.fillPatternsLoaded)",
-            onceOnly: true
-        }
+    // The map once it has loaded and its real style has applied. The style is applied once fill patterns are loaded,
+    // since a style referring to them can't be interpreted before
+    readyMap: {
+        $effect: [{
+            namespace: "load",
+            func: "hortis.libreMap.whenLoaded",
+            args: "{self}.map"
+        }, {
+            namespace: "loadFillPatterns",
+            priority: "after:load",
+            func: "hortis.libreMap.loadFillPatterns",
+            args: ["{$payload}", "{self}.fillPatternPath", "{self}.fillPatterns", "{self}.fillPatternPixelRatio"]
+        }, {
+            namespace: "applyStyle",
+            priority: "after:loadFillPatterns",
+            func: "hortis.libreMap.applyStyle",
+            args: ["{$payload}", "{self}.style"]
+        }]
     },
     zoom: {
         $bindable: {
@@ -108,18 +110,12 @@ hortis.libreMap.destroy = function (map) {
 /**
  * Wait for a map to load.
  * @param {maplibregl.Map} map - The map
- * @return {Cell<maplibregl.Map>} A cell holding the map once it has loaded
+ * @return {maplibregl.Map|Promise<maplibregl.Map>} The map if it has loaded, or else a promise for it once it has
  */
 hortis.libreMap.whenLoaded = function (map) {
-    const togo = fluid.cell(fluid.unavailable({message: "Map is loading", variety: "pending"}), {name: "Loaded map"});
-    if (map.loaded()) {
-        togo.set(map);
-    } else {
-        // Very long-standing bugs with mapbox load event: https://github.com/mapbox/mapbox-gl-js/issues/6707
-        // and https://github.com/mapbox/mapbox-gl-js/issues/9779
-        map.once("load", () => togo.set(map));
-    }
-    return togo;
+    // Very long-standing bugs with mapbox load event: https://github.com/mapbox/mapbox-gl-js/issues/6707
+    // and https://github.com/mapbox/mapbox-gl-js/issues/9779
+    return map.loaded() ? map : new Promise(resolve => map.once("load", () => resolve(map)));
 };
 
 /**
@@ -128,37 +124,30 @@ hortis.libreMap.whenLoaded = function (map) {
  * @param {String} fillPatternPath - The path holding the fill pattern images, each named by its fill pattern with suffix .png
  * @param {Object<String, any>} fillPatterns - The fill patterns to be loaded, as keys
  * @param {Number} pixelRatio - The pixel ratio with which the images are to be drawn
- * @return {Cell<Boolean>} A cell holding `true` once every image has been added to the map
+ * @return {Promise<maplibregl.Map>} A promise for the map once every image has been added to it
  */
 hortis.libreMap.loadFillPatterns = function (map, fillPatternPath, fillPatterns, pixelRatio) {
-    const togo = fluid.cell(fluid.unavailable({message: "Fill patterns are loading", variety: "pending"}), {name: "Fill patterns loaded"});
     const loadOne = async fillPattern => {
         const image = await map.loadImage(fillPatternPath + fillPattern + ".png");
         // Explained in https://github.com/mapbox/mapbox-gl-js/pull/9372
         map.addImage(fillPattern, image.data, {pixelRatio});
     };
-    Promise.all(Object.keys(fillPatterns).map(loadOne)).then(
-        () => togo.set(true),
-        err => togo.set(fluid.unavailable({message: "Error loading fill patterns: " + err, variety: "error"})));
-    return togo;
+    return Promise.all(Object.keys(fillPatterns).map(loadOne)).then(() => map);
 };
 
 /**
  * Apply a style to a loaded map.
  * @param {maplibregl.Map} map - The loaded map
  * @param {Object} style - The style to be applied
- * @return {Cell<maplibregl.Map>} A cell holding the map once the style has been applied
+ * @return {maplibregl.Map|Promise<maplibregl.Map>} The map if the style applied at once, or else a promise for it once
+ * the style has applied
  */
 hortis.libreMap.applyStyle = function (map, style) {
-    const togo = fluid.cell(fluid.unavailable({message: "Map style is being applied", variety: "pending"}), {name: "Styled map"});
-    map.once("styledata", () => togo.set(map));
+    const togo = new Promise(resolve => map.once("styledata", () => resolve(map)));
     // Without diff: false, a style identical to the current one, e.g. the blank style of a map whose layers are all added
     // later, is diffed to nothing and no "styledata" event is ever fired
     map.setStyle(fluid.copy(style), {diff: false});
-    if (map.isStyleLoaded()) {
-        togo.set(map);
-    }
-    return togo;
+    return map.isStyleLoaded() ? map : togo;
 };
 
 /**
@@ -240,7 +229,7 @@ hortis.libreMap.zoomControls = function (map, maplibregl, zoomDuration, zoomCont
 
 fluid.def("hortis.libreMap.withTiles", {
     // tileSets: Object<String, TileSet>
-    addTiles: "$effect:hortis.libreMap.addTileLayers({self}, {self}.styledMap, {self}.tileSets)"
+    addTiles: "$effect:hortis.libreMap.addTileLayers({self}, {self}.readyMap, {self}.tileSets)"
 });
 
 hortis.libreMap.addTileLayers = function (that, map, tileSets) {
@@ -515,8 +504,8 @@ fluid.def("hortis.libreMap.withObsGrid", {
     gridBounds: "{self}.obsQuantiser.grid.bounds",
     gridFeature: `$compute:hortis.libreMap.obsGridFeature({self}.obsQuantiser.grid, {self}.obsQuantiser.latResolution,
         {self}.obsQuantiser.longResolution, {self}.maxObsCountOverride, {self}.countTransform)`,
-    updateObsGrid: "$effect:hortis.libreMap.updateObsGrid({self}, {self}.styledMap, {self}.gridFeature, {self}.gridOpacity)",
-    zoomToObsBoundsEffect: "$effect:hortis.libreMap.fitBounds({self}.styledMap, {self}.gridBounds, {self}.zoomToObsBounds, {self}.zoomDuration)"
+    updateObsGrid: "$effect:hortis.libreMap.updateObsGrid({self}, {self}.readyMap, {self}.gridFeature, {self}.gridOpacity)",
+    zoomToObsBoundsEffect: "$effect:hortis.libreMap.fitBounds({self}.readyMap, {self}.gridBounds, {self}.zoomToObsBounds, {self}.zoomDuration)"
 });
 
 hortis.libreMap.computeGridOpacity = function (gridVisible, fillOpacity) {
