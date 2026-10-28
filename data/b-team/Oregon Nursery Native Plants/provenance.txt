@@ -1,0 +1,28 @@
+Oregon nursery native plant lists, downloaded 2026-10-28 from OregonFlora
+Project page: https://oregonflora.org/projects/index.php?pid=4
+
+Clearwater Native Plant Nursery.csv
+    https://oregonflora.org/ident/rpc/api.php?export=csv&clid=14946&pid=4&dynclid=-1
+Echo Valley Natives.csv
+    https://oregonflora.org/ident/rpc/api.php?export=csv&clid=14940&pid=4&dynclid=-1
+Great Basin Nursery.csv
+    https://oregonflora.org/ident/rpc/api.php?export=csv&clid=14945&pid=4&dynclid=-1
+Humble Roots Nursery.csv
+    https://oregonflora.org/ident/rpc/api.php?export=csv&clid=14938&pid=4&dynclid=-1
+Klamath-Siskiyou Native Seeds.csv
+    https://oregonflora.org/ident/rpc/api.php?export=csv&clid=14939&pid=4&dynclid=-1
+Sauvie Island Natives.csv
+    https://oregonflora.org/ident/rpc/api.php?export=csv&clid=14937&pid=4&dynclid=-1
+Scholls Valley Native Nursery.csv
+    https://oregonflora.org/ident/rpc/api.php?export=csv&clid=14941&pid=4&dynclid=-1
+Sevenoaks Native Nursery.csv
+    https://oregonflora.org/ident/rpc/api.php?export=csv&clid=14942&pid=4&dynclid=-1
+Shonnard's Nursery.csv
+    https://oregonflora.org/ident/rpc/api.php?export=csv&clid=14947&pid=4&dynclid=-1
+Sparrowhawk Native Plants.csv
+    https://oregonflora.org/ident/rpc/api.php?export=csv&clid=14952&pid=4&dynclid=-1
+Wintercreek Nursery.csv
+    https://oregonflora.org/ident/rpc/api.php?export=csv&clid=14935&pid=4&dynclid=-1
+
+All Nurseries.csv
+    Merge of the above files with a leading Nursery column
