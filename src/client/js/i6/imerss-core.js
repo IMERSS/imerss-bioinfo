@@ -157,8 +157,7 @@ hortis.inflateUint8Array = async function (url) {
     return pako.inflate(byteArray, {to: "string"});
 };
 
-// A loader for a CSV file at `url` - this is one of the ways the port resolves the Infusion 6 gap G1 in
-// a-scratch/reports/requirements-imerss.md of the Infusion 6 repository, by returning a cell from a $compute
+// A loader for a CSV file at `url`. Its `parsed` member is pending until the file has been loaded and parsed
 fluid.def("hortis.csvReader", {
     $layers: "fluid.component",
     // url: String
@@ -175,21 +174,22 @@ fluid.def("hortis.csvReader", {
  * Load and parse a CSV file, either plain (".csv") or deflated (".viz").
  * @param {String} url - The URL of the file
  * @param {Object} csvOptions - Options for Papa Parse
- * @return {Cell<Object>} A cell holding Papa Parse's results, with members `data` and `meta`, which is unavailable
- * until the file has been loaded and parsed
+ * @return {Promise<Object>} A promise for Papa Parse's results, with members `data` and `meta`, or for an unavailable
+ * value if the file could not be loaded or parsed
  */
 hortis.csvReader.load = function (url, csvOptions) {
-    const togo = fluid.cell(fluid.unavailable({message: "Pending I/O for CSV file " + url, variety: "pending"}),
-        {name: "CSV file " + url});
-    const fail = err => togo.set(fluid.unavailable({message: "Error parsing CSV file " + url + ": " + err, variety: "error"}));
+    const fail = err => fluid.unavailable({message: "Error parsing CSV file " + url + ": " + err, variety: "error"});
+    let parsed;
     if (url.endsWith(".csv")) {
-        Papa.parse(url, {...csvOptions, download: true, complete: results => togo.set(results), error: fail});
+        parsed = new Promise((resolve, reject) => {
+            Papa.parse(url, {...csvOptions, download: true, complete: resolve, error: reject});
+        });
     } else if (url.endsWith(".viz")) {
-        hortis.inflateUint8Array(url).then(data => togo.set(Papa.parse(data, {...csvOptions})), fail);
+        parsed = hortis.inflateUint8Array(url).then(data => Papa.parse(data, {...csvOptions}));
     } else {
-        fail("Unrecognised CSV URL suffix");
+        parsed = Promise.reject("Unrecognised CSV URL suffix");
     }
-    return togo;
+    return parsed.catch(fail);
 };
 
 

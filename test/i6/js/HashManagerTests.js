@@ -76,3 +76,30 @@ QUnit.test("Initial hash is read without being pushed back", function (assert) {
     fluid.cell.stabilize();
     assert.equal(win.listenerCount(), 0, "Listeners removed on destruction");
 });
+
+QUnit.test("Changes arriving from the URL do not reach pushState", function (assert) {
+    const win = hortis.tests.currentWindow = hortis.tests.fakeWindow("#pane:History");
+    const original = hortis.hashManager.pushState;
+    let runs = 0;
+    hortis.hashManager.pushState = function (...args) {
+        ++runs;
+        return original(...args);
+    };
+    try {
+        const that = hortis.tests.hashManager();
+        fluid.cell.stabilize();
+        const initialRuns = runs;
+        win.navigate("#pane:Status");
+        fluid.cell.stabilize();
+        assert.deepEqual({...that.hash}, {pane: "Status"}, "Navigation read into model");
+        assert.equal(runs, initialRuns, "pushState is not run for a change with source \"hash\"");
+        that.hash.region = "Gambier";
+        fluid.cell.stabilize();
+        assert.equal(runs, initialRuns + 1, "pushState runs for a later model change");
+        assert.deepEqual(win.pushed, ["#pane:Status&region:Gambier"], "The later change is pushed");
+        that.destroy();
+        fluid.cell.stabilize();
+    } finally {
+        hortis.hashManager.pushState = original;
+    }
+});

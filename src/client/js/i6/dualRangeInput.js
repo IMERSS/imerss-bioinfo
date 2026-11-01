@@ -64,7 +64,15 @@ fluid.def("hortis.dualRangeInput", {
             onceOnly: true
         }
     },
-    updateControl: "$effect:hortis.dualRangeInput.updateControl({self}.control, {self}.range, {self}.minRange, {self}.maxRange)"
+    // Moves the inputs to the range and its bounds. A change the user made through the inputs is already shown by them,
+    // and is not written back
+    updateControl: {
+        $effect: {
+            func: "hortis.dualRangeInput.updateControl",
+            args: ["{self}.control", "{self}.range", "{self}.minRange", "{self}.maxRange"],
+            excludeSource: "self"
+        }
+    }
 });
 
 hortis.dualRangeInput.input = function (event, that, which) {

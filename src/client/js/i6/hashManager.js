@@ -32,11 +32,16 @@ fluid.def("hortis.hashManager", {
         }
     },
     // Writes `hash` into the URL. This waits on the listener, so that the hash first read from the URL is not
-    // overwritten. Since it compares against the URL's current hash, it neither echoes a change which arrived from the
-    // URL, nor needs to exclude the initial value as Infusion 4's excludeSource: "init" did. Source tracking with
-    // excludeSource: "hash" would be the natural expression of the former, but see gap G2 in
-    // a-scratch/reports/requirements-imerss.md of the Infusion 6 repository
-    pushState: "$effect:hortis.hashManager.pushState({self}.hash, {self}.window, {self}.hashListener)"
+    // overwritten. Changes which arrived from the URL carry the source "hash", and are not echoed back to it. Since
+    // an effect always runs once its arguments are available, it also compares against the URL's current hash, in
+    // place of Infusion 4's excludeSource: "init"
+    pushState: {
+        $effect: {
+            func: "hortis.hashManager.pushState",
+            args: ["{self}.hash", "{self}.window", "{self}.hashListener"],
+            excludeSource: "hash"
+        }
+    }
 });
 
 hortis.hashManager.parseSegment = function (segment) {

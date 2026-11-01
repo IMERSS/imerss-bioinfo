@@ -73,41 +73,21 @@ fluid.def("hortis.filters", {
     $layers: "fluid.component",
     // allInput: Object[]
     // filterComps: Component[] - the filters to be applied, typically found by a selector reference
-    // Holds the previous output, so that an evaluation yielding the same rows yields the same array
-    outputCache: "$compute:hortis.filters.makeCache()",
-    allOutput: "$compute:hortis.filters.evaluate({self}.allInput, {self}.filterComps, {self}.outputCache)"
+    allOutput: "$compute:hortis.filters.evaluate({self}.allInput, {self}.filterComps)"
 });
 
-hortis.filters.makeCache = () => ({});
-
 /**
- * Determine whether two arrays hold identical elements in the same order.
- * @param {Array} a - The first array
- * @param {Array} b - The second array
- * @return {Boolean} `true` if the arrays have the same length and identical elements
- */
-hortis.shallowArrayEquals = function (a, b) {
-    return a.length === b.length && a.every((element, i) => element === b[i]);
-};
-
-/**
- * Apply each active filter in turn to the rows output by the previous one.
- * The selector supplying the filters is redelivered as a fresh array whenever components beneath its root turn over,
- * e.g. when the source of a $for is written, which reruns this evaluation with unchanged filters. So that this does
- * not propagate through the whole visualisation, the previous output array is returned if it holds the same rows.
+ * Apply each active filter in turn to the rows output by the previous one. Each filter's `isActive` and `filterState`
+ * are read through its proxy, so that a change in any of them reruns the chain.
  * @param {Object[]} allInput - The rows to be filtered
  * @param {Component[]} filterComps - The filters, each bearing `isActive`, `filterState` and the method `doFilter`
- * @param {Object} outputCache - Mutable cache holding the previous output at `output`
  * @return {Object[]} The rows surviving all active filters
  */
-hortis.filters.evaluate = function (allInput, filterComps, outputCache) {
+hortis.filters.evaluate = function (allInput, filterComps) {
     const now = Date.now();
     const output = filterComps.reduce((rows, filterComp) => filterComp.isActive ? filterComp.doFilter(rows, filterComp.filterState) : rows, allInput);
     fluid.log("Filtered " + allInput.length + " rows to " + output.length + " through " + filterComps.length + " filters in " + (Date.now() - now) + " ms");
-    const previous = outputCache.output;
-    const togo = previous && hortis.shallowArrayEquals(previous, output) ? previous : output;
-    outputCache.output = togo;
-    return togo;
+    return output;
 };
 
 fluid.def("hortis.obsFilters", {
@@ -217,13 +197,10 @@ fluid.def("hortis.phenologyFilter", {
     }
 });
 
-// The row for one month. A template's live state write-back to a $for iteration variable currently writes only to the
-// row and not through to the variable's source, so the checkbox is bound to a read-only copy of the record's state, and
-// the user's change is written through the proxy, which does reach the source
+// The row for one month. Its checkbox's live state is written back through the $for iteration variable to the
+// filter's state
 fluid.def("hortis.phenologyFilter.row", {
     $layers: "fluid.component",
-    isChecked: "$compute:fluid.identity({self}.range.checked)",
-    setChecked: "$method:hortis.phenologyFilter.setChecked({self}, {0}:event)",
     view: {
         $component: {
             $layers: "fluid.templateViewComponent",
@@ -231,7 +208,7 @@ fluid.def("hortis.phenologyFilter.row", {
         <div class="imerss-filter-row">
             <div class="imerss-row-checkbox">
                 <span class="pretty p-icon">
-                    <input type="checkbox" class="checklist-check" checked="@{isChecked}" @onchange="{self}.setChecked({0})"/>
+                    <input type="checkbox" class="checklist-check" checked="@{range.checked}"/>
                     <span class="state p-success">
                         <i class="icon mdi mdi-check"></i>
                         <label></label>
@@ -243,10 +220,6 @@ fluid.def("hortis.phenologyFilter.row", {
         }
     }
 });
-
-hortis.phenologyFilter.setChecked = function (row, event) {
-    row.range.checked = event.target.checked;
-};
 
 /**
  * Compute the month of each observation.
