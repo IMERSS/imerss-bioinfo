@@ -91,6 +91,7 @@ fluid.defaults("hortis.blitzFilters", {
             options: {
                 filterName: "Dataset",
                 fieldNames: ["dataset"],
+                summaryNouns: ["dataset", "datasets"],
                 members: {
                     indirectionRows: "{regionIndirection}.rows"
                 }
@@ -112,13 +113,24 @@ fluid.defaults("hortis.statusFilter", {
         unconfirmed: "@expand:signal(false)",
         new: "@expand:signal(false)",
 
-        filterState: "@expand:fluid.computed(hortis.statusFilter.toState, {that}.confirmed, {that}.unconfirmed, {that}.new, {that}.queryCache)"
+        filterState: "@expand:fluid.computed(hortis.statusFilter.toState, {that}.confirmed, {that}.unconfirmed, {that}.new, {that}.queryCache)",
+        filterSummary: "@expand:fluid.computed(hortis.statusFilter.summarise, {that}.filterState)"
         // taxaById: "{taxa}.rowById"
     }
 });
 
 hortis.statusFilter.toState = function (confirmed, unconfirmed, noo) {
     return {confirmed, unconfirmed, new: noo};
+};
+
+/**
+ * Summarise the status filter by the number of record statuses selected.
+ * @param {Object} filterState - The filter state, with Boolean members `confirmed`, `unconfirmed` and `new`
+ * @return {FilterSummary} The summary of the filter
+ */
+hortis.statusFilter.summarise = function (filterState) {
+    const count = filterState.confirmed + filterState.unconfirmed + filterState.new;
+    return hortis.countSummary(count, ["record status", "record statuses"]);
 };
 
 hortis.statusFilter.doFilter = function (obsRows, filterState, taxaById) {
@@ -223,7 +235,8 @@ fluid.defaults("hortis.blitzRecords", {
         }
     },
     members: {
-        renderModel: "@expand:fluid.computed(hortis.blitzRecords.render, {that}.taxaById)",
+        // queryCache is a dependency since it initialises the filterReportingStatus which is counted
+        renderModel: "@expand:fluid.computed(hortis.blitzRecords.render, {that}.taxaById, {that}.queryCache)",
         taxaById: "{taxa}.rowById"
     }
 });
@@ -239,7 +252,7 @@ hortis.blitzRecords.render = function (taxaById) {
         if (row.filterReportingStatus === "confirmed") {
             ++model.confirmedRecords;
             ++model.historicalRecords;
-        } else if (row.filterReportingStatus === "reported") {
+        } else if (row.filterReportingStatus === "unconfirmed") {
             ++model.unconfirmedRecords;
             ++model.historicalRecords;
         } else if (row.filterReportingStatus === "new") {
