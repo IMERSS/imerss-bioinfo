@@ -16,7 +16,8 @@ fluid.defaults("hortis.standardVizLoader", {
         // Refine this so we could have another .imerss-filter-controls elsewhere
         filterControls: ".imerss-filter-panel .imerss-filter-controls",
         filters: ".imerss-filter-panel .imerss-main-filters",
-        checklist: ".imerss-filter-panel .imerss-main-checklist"
+        // Not scoped to the filter panel since some pages hold the checklist in its own tab
+        checklist: ".imerss-main-checklist"
     },
     gridResolution: 100,
     members: {

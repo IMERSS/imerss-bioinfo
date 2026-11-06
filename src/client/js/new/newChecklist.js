@@ -328,8 +328,23 @@ fluid.defaults("hortis.checklist.withSingleSearch", {
                 }
             }
         }
+    },
+    listeners: {
+        "taxonSelect.selectInSearch": "hortis.checklist.withSingleSearch.selectInSearch({that}, {arguments}.0)"
     }
 });
+
+/**
+ * Route a click on a taxon in the checklist to its search, so that it becomes the same global filter as if it had been
+ * picked from the search's autocomplete.
+ * @param {hortis.checklist} checklist - The checklist
+ * @param {String} id - The id of the clicked taxon
+ */
+hortis.checklist.withSingleSearch.selectInSearch = function (checklist, id) {
+    checklist.search.select(checklist.rowById.value[id]);
+    // The clicked row is about to be rerendered, so it will never receive the mouseleave which would dismiss its tooltip
+    checklist.hoverId.value = null;
+};
 
 hortis.checklist.idToEntryToRows = idToEntry => Object.values(idToEntry).map(entry => entry.row).filter(row => row.id !== 0);
 

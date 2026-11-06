@@ -1,5 +1,14 @@
+/* ══════════════════════════════════════════════════════════════════════
+   Melittoflora shell
+
+   Two columns: a single filter concertina on the left, map over tabbed
+   views on the right, with draggable, collapsible bars between. The shell's
+   own selectors are scoped under .mf (borne by .imerss-container) so that
+   nothing reaches OSU.css.
+   ══════════════════════════════════════════════════════════════════ */
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Source Sans 3", "Segoe UI", system-ui, Arial, Helvetica, sans-serif;
     display: flex;
     flex-flow: column;
     margin: 8px;
@@ -7,32 +16,553 @@ body {
     overflow: hidden
 }
 
-.imerss-map-holder {
-    height: 100%;
-    width: 50%;
+/* The OSU page wrapper in deployed pages */
+#content-main {
+    flex: 1 1 auto;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-    margin-top: 4px;
 }
 
-.imerss-map-and-taxa {
-    height: 40%;
+.mf {
+    --mf-canvas:    #e6e9eb;
+    --mf-panel:     #ffffff;
+    --mf-sink:      #f4f6f7;
+    --mf-rule:      #d3d9dc;
+    --mf-rule-soft: #e7ebed;
+
+    --mf-ink:       #1f2528;
+    --mf-ink-2:     #59656c;
+    --mf-ink-3:     #8d989e;
+
+    --mf-accent:     #d73f09;
+    --mf-accent-ink: #a72f06;
+    --mf-accent-wash:#fdefea;
+
+    --mf-link:      #8f76bd;
+    --mf-link-soft: #c3b3dd;
+
+    --mf-grip:   9px;
+    --mf-radius: 3px;
+    --mf-shadow: 0 1px 2px rgba(20, 30, 36, .08);
+
+    --mf-col-filters: 330px;
+    --mf-row-map:     46fr;
+    --mf-row-net:     54fr;
+
+    flex: 1 1 auto;
+    min-height: 0;
+    background: var(--mf-canvas);
+    color: var(--mf-ink);
+    font: 400 15px/1.45 "Source Sans 3", "Segoe UI", system-ui, Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
-.imerss-checklists {
-    display: flex;
-    flex-direction: row;
-    height: 60%;
+/* Beat the flex column layout of .imerss-container in imerss-core.css */
+.imerss-container.mf {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
     overflow: hidden;
 }
 
-.imerss-checklists * {
-    box-sizing: border-box;
+/* Several rules here and in imerss-core.css set `display`, which would otherwise beat `hidden` */
+.mf [hidden] { display: none !important; }
+
+.mf h2, .mf h3 { margin: 0; }
+.mf p { margin: 0; }
+
+.mf :where(button, input, select, [tabindex]):focus-visible {
+    outline: 2px solid var(--mf-accent);
+    outline-offset: 1px;
+    border-radius: 2px;
 }
 
-/** Quick hack to deal with the fact we can't quickly suppress spacing for non-unfoldable root */
-.imerss-checklist {
-    margin-left: -10px;
+/* ─── Layout ──────────────────────────────────────────────────────── */
+
+.mf-shell {
+    display: grid;
+    grid-template-columns: var(--mf-col-filters) var(--mf-grip) minmax(0, 1fr);
+    min-height: 0;
+}
+
+.mf-middle {
+    display: grid;
+    grid-template-rows: var(--mf-row-map) var(--mf-grip) var(--mf-row-net);
+    min-width: 0;
+    min-height: 0;
+}
+
+.mf-shell.mf-f-closed { --mf-col-filters: 0px; }
+.mf-middle.mf-s-closed { grid-template-rows: minmax(0, 1fr) var(--mf-grip) 0; }
+
+.mf-dragging, .mf-dragging * { user-select: none; }
+
+.mf-pane {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    background: var(--mf-panel);
+}
+
+.mf-panehead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: none;
+    padding: 9px 12px 8px;
+    border-bottom: 1px solid var(--mf-rule-soft);
+}
+
+.mf .mf-panehead h2 {
+    margin-right: auto;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.005em;
+    text-transform: none;
+    color: var(--mf-ink);
+}
+
+/* ─── Grips ───────────────────────────────────────────────────────── */
+
+.mf-grip { position: relative; flex: none; background: var(--mf-canvas); }
+.mf-grip-v { cursor: col-resize; }
+.mf-grip-h { cursor: row-resize; }
+
+.mf-grip::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--mf-accent);
+    opacity: 0;
+    transition: opacity .12s;
+    pointer-events: none;
+}
+
+.mf-grip:hover::after,
+.mf-grip:focus-visible::after { opacity: .28; }
+
+.mf .mf-grip-tab {
+    position: absolute;
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--mf-rule);
+    border-radius: 8px;
+    background: var(--mf-panel);
+    color: var(--mf-ink-2);
+    box-shadow: var(--mf-shadow);
+    cursor: pointer;
+}
+
+.mf-grip-v .mf-grip-tab {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 17px;
+    height: 34px;
+}
+
+.mf-grip-h .mf-grip-tab {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 34px;
+    height: 17px;
+}
+
+.mf .mf-grip-tab:hover { color: var(--mf-accent); border-color: var(--mf-accent); }
+.mf-grip-tab svg { transition: transform .18s ease; }
+
+#mf-grip-filters .mf-grip-tab svg { transform: rotate(180deg); }
+#mf-grip-filters.mf-closed .mf-grip-tab svg { transform: rotate(0deg); }
+#mf-grip-strata .mf-grip-tab svg { transform: rotate(90deg); }
+#mf-grip-strata.mf-closed .mf-grip-tab svg { transform: rotate(-90deg); }
+
+/* A collapsed pane leaves the grip on the window edge; pull the tab inboard */
+.mf-shell.mf-f-closed #mf-grip-filters .mf-grip-tab { left: 0; transform: none; }
+.mf-middle.mf-s-closed #mf-grip-strata .mf-grip-tab { top: auto; bottom: 0; transform: translateX(-50%); }
+
+/* ─── Buttons ─────────────────────────────────────────────────────── */
+
+.mf .mf-linkbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 6px;
+    border: 0;
+    border-radius: var(--mf-radius);
+    background: none;
+    color: var(--mf-ink-2);
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.mf .mf-linkbtn:hover { color: var(--mf-accent); background: var(--mf-accent-wash); }
+
+.mf .mf-iconbtn {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: var(--mf-radius);
+    background: none;
+    color: var(--mf-ink-2);
+    cursor: pointer;
+}
+
+.mf .mf-iconbtn:hover { color: var(--mf-accent); background: var(--mf-accent-wash); }
+
+.mf .imerss-fullscreen { display: flex; }
+.mf .imerss-fullscreen-exit-control { display: none; }
+.imerss-fullscreen-mode .mf .imerss-fullscreen-control { display: none; }
+.imerss-fullscreen-mode .mf .imerss-fullscreen-exit-control { display: grid; }
+
+.mf-select {
+    min-width: 0;
+    flex: 1 1 0;
+    padding: 3px 4px;
+    border: 1px solid var(--mf-rule);
+    border-radius: var(--mf-radius);
+    background: var(--mf-panel);
+    color: var(--mf-ink-2);
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.3;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.mf-select:hover { border-color: var(--mf-accent); }
+
+/* ─── Filter concertina ───────────────────────────────────────────── */
+
+.mf-facets { flex: 1; overflow: auto; }
+.mf-facet { border-bottom: 1px solid var(--mf-rule-soft); }
+.mf-facet-h { font: inherit; }
+
+.mf .mf-facet-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 0;
+    background: none;
+    color: var(--mf-ink);
+    text-align: left;
+    cursor: pointer;
+}
+
+.mf .mf-facet-head:hover { background: var(--mf-sink); }
+
+.mf-facet-chev {
+    flex: none;
+    color: var(--mf-ink-3);
+    transition: transform .16s ease;
+}
+
+.mf-facet-head[aria-expanded="true"] .mf-facet-chev {
+    transform: rotate(90deg);
+    color: var(--mf-ink-2);
+}
+
+.mf-facet-name { font-size: 15px; font-weight: 600; }
+
+.mf-facet-state {
+    margin-left: auto;
+    min-width: 19px;
+    height: 19px;
+    padding: 0 6px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: var(--mf-accent);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.mf-facet-state-dot { min-width: 9px; width: 9px; height: 9px; padding: 0; }
+.mf-facet-live > .mf-facet-h .mf-facet-name { color: var(--mf-accent-ink); }
+.mf-facet-body { padding: 0 12px 14px 32px; font-size: 13.5px; }
+
+/* Each facet's header names its filter, so the filters' own titles are kept only for screen readers */
+.mf-facet-body .imerss-filter-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.mf-facet-body .imerss-filter-body {
+    padding-left: 0;
+    font-size: inherit;
+}
+
+/* ─── Controls ────────────────────────────────────────────────────── */
+
+.mf-combo { position: relative; display: block; margin-bottom: 8px; }
+
+.mf-combo-icon {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--mf-ink-3);
+    pointer-events: none;
+}
+
+.mf .mf-combo-input {
+    width: 100%;
+    padding: 6px 8px 6px 27px;
+    border: 1px solid var(--mf-rule);
+    border-radius: var(--mf-radius);
+    background: var(--mf-panel);
+    color: var(--mf-ink);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.3;
+    font-family: inherit;
+}
+
+.mf-combo-input::placeholder { color: var(--mf-ink-3); }
+
+.mf .mf-combo-input:focus {
+    border-color: var(--mf-accent);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--mf-accent-wash);
+}
+
+/* The autocomplete widgets used by the collector filter and the taxon searches */
+.mf-facet .autocomplete__wrapper {
+    width: 100%;
+}
+
+.mf .mf-facet .autocomplete__input {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid var(--mf-rule);
+    border-radius: var(--mf-radius);
+    background: var(--mf-panel);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.3;
+    font-family: inherit;
+}
+
+.mf .mf-facet .autocomplete__input--focused {
+    border-color: var(--mf-accent);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--mf-accent-wash);
+}
+
+.mf-facet .imerss-filter-autocomplete {
+    position: relative;
+}
+
+.mf-facet .imerss-filter-clear {
+    top: 50%;
+    right: 3px;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%);
+}
+
+.mf-facet .imerss-filter-clear svg {
+    width: 18px;
+    height: 18px;
+}
+
+.mf-facet .imerss-search-checklist {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.mf .mf-facet .imerss-search-checklist input {
+    padding-left: 27px;
+    width: 100%;
+    border-radius: var(--mf-radius);
+    border-color: var(--mf-rule);
+    background-color: var(--mf-panel);
+}
+
+.mf-facet .imerss-search-checklist > svg {
+    left: 7px;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    transform: translateY(-50%);
+    color: var(--mf-ink-3);
+}
+
+.mf-facet .imerss-search-checklist .imerss-filter-clear {
+    right: 3px;
+}
+
+/* Filters within facets carry .imerss-filter from their slots, whose separators the facets now provide */
+.mf-facet .imerss-filter {
+    padding: 0;
+    margin: 0;
+    border-bottom: 0;
+}
+
+.mf-inline, .mf-facet .imerss-filter.mf-inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+.mf-inline-label { font-size: 13px; color: var(--mf-ink-2); }
+
+.mf-inline-check {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.mf-rankfold {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.mf-scroll {
+    max-height: 210px;
+    overflow: auto;
+    border: 1px solid var(--mf-rule-soft);
+    border-radius: var(--mf-radius);
+    padding: 4px;
+    background: var(--mf-sink);
+}
+
+.mf-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    padding: 3px 4px;
+    border-radius: var(--mf-radius);
+    font-size: 13.5px;
+    line-height: 1.35;
+    cursor: pointer;
+}
+
+.mf-check:hover { background: var(--mf-panel); }
+.mf-check span { min-width: 0; }
+.mf .mf-check-hidden { display: none; }
+
+.mf input[type="checkbox"]:not(.checklist-check) {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    margin: 2px 0 0;
+    accent-color: var(--mf-accent);
+}
+
+/* Grouped region list */
+.mf-groups { max-height: 280px; padding: 3px; }
+
+.mf .mf-group-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 4px;
+    border: 0;
+    border-radius: var(--mf-radius);
+    background: none;
+    color: var(--mf-ink);
+    font-weight: 600;
+    font-size: 13.5px;
+    line-height: 1.35;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.mf .mf-group-head:hover { background: var(--mf-panel); }
+.mf-group-head[aria-expanded="true"] > .mf-node-chev { transform: rotate(90deg); }
+.mf-node-chev { flex: none; color: var(--mf-ink-3); transition: transform .16s ease; }
+.mf-group-name { min-width: 0; }
+
+.mf-group-count {
+    margin-left: auto;
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--mf-ink-3);
+    font-variant-numeric: tabular-nums;
+}
+
+.mf-group-state {
+    margin-left: auto;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 5px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    background: var(--mf-accent);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.mf-group-state:not([hidden]) + .mf-group-count { margin-left: 4px; }
+.mf-group-body { padding-left: 18px; }
+
+/* Phenology and elevation filters */
+.mf-facet .imerss-phenology-filter .imerss-filter-body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-flow: row;
+    gap: 2px 12px;
+}
+
+.mf-facet .imerss-phenology-label {
+    width: auto;
+    margin-right: 0;
+}
+
+.mf-facet .imerss-elevation-filter .imerss-filter-body {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.mf-facet .dual-range-values {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--mf-ink-2);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Taxonomic checklists within the Bees and Plants sections */
+.mf-facet .imerss-checklist-holder {
+    height: auto;
+    padding: 0;
+    overflow: visible;
+}
+
+.mf-facet .imerss-checklist.mf-tree {
+    height: auto;
+    max-height: 45vh;
+    padding: 5px 4px;
+    font-size: 13.5px;
+    line-height: 1.4;
 }
 
 .checklist-rank-order > p {
@@ -43,27 +573,288 @@ body {
     text-transform: none;
 }
 
-.imerss-pollinators {
-    width: 25%;
-    min-width: 25%;
+.imerss-collector-report {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--mf-ink-2);
 }
 
-.imerss-interactions {
-    padding: 0.5em;
-    width: 45%;
-    height: 100%;
+/* ─── Tabs ────────────────────────────────────────────────────────── */
+
+/* Traditional tab chrome: raised boxes sitting on the pane's top rule,
+   with the selected tab joined to the body below it */
+.mf-tabstrip {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    flex: none;
+    padding: 7px 12px 0;
+    border-bottom: 1px solid var(--mf-rule);
+    background: var(--mf-sink);
+}
+
+.mf-tabs { display: flex; gap: 3px; margin-right: auto; flex-wrap: wrap; }
+
+.mf .mf-tab {
+    position: relative;
+    bottom: -1px;
+    padding: 6px 12px 7px;
+    border: 1px solid var(--mf-rule);
+    border-radius: var(--mf-radius) var(--mf-radius) 0 0;
+    background: var(--mf-canvas);
+    color: var(--mf-ink-2);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.mf .mf-tab:hover { color: var(--mf-ink); background: var(--mf-rule-soft); }
+
+.mf .mf-tab-on, .mf .mf-tab-on:hover {
+    background: var(--mf-panel);
+    border-bottom-color: var(--mf-panel);
+    color: var(--mf-ink);
+    box-shadow: inset 0 2px 0 var(--mf-accent);
+}
+
+.mf-tabstrip .mf-iconbtn { margin-bottom: 4px; }
+
+/* ─── Mount points for the map and views ──────────────────────────── */
+
+.mf-mount { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+.mf-mount-net { display: flex; padding: 6px 12px 12px; }
+
+.mf-reporter {
+    flex: none;
+    padding: 7px 12px 8px;
+    border-top: 1px solid var(--mf-rule-soft);
+    font-size: 13px;
+    color: var(--mf-ink-2);
+    font-variant-numeric: tabular-nums;
+}
+
+.mf-reporter b { color: var(--mf-ink); }
+
+.mf-colophon {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 5px 12px 6px;
+    border-top: 1px solid var(--mf-rule);
+    background: var(--mf-panel);
+    font-size: 11.5px;
+    color: var(--mf-ink-3);
+}
+
+.mf-colophon:empty { display: none; }
+
+/* ─── List views ──────────────────────────────────────────────────── */
+
+.mf-mount-pad {
     display: flex;
     flex-direction: column;
+    padding: 0;
 }
 
-.imerss-plants {
-    width: 30%;
-    min-width: 30%;
+.mf-listbar {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex: none;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--mf-rule-soft);
 }
 
-.imerss-plants.imerss-checklist-holder {
-    padding-right: 0;
+.mf-listbar-label { font-size: 13px; color: var(--mf-ink-2); }
+
+.mf-listbar-count {
+    margin-left: auto;
+    font-size: 12.5px;
+    color: var(--mf-ink-3);
+    font-variant-numeric: tabular-nums;
 }
+
+.mf-seg {
+    display: flex;
+    border: 1px solid var(--mf-rule);
+    border-radius: var(--mf-radius);
+    overflow: hidden;
+}
+
+.mf .mf-seg-btn {
+    padding: 4px 11px 5px;
+    border: 0;
+    border-right: 1px solid var(--mf-rule);
+    background: var(--mf-panel);
+    color: var(--mf-ink-2);
+    font-weight: 600;
+    font-size: 12.5px;
+    line-height: 1.2;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.mf .mf-seg-btn:last-child { border-right: 0; }
+.mf .mf-seg-btn:hover { background: var(--mf-sink); color: var(--mf-ink); }
+.mf .mf-seg-on, .mf .mf-seg-on:hover { background: var(--mf-accent); color: #ffffff; }
+
+.mf-listbody { flex: 1; overflow: auto; padding: 10px 12px 16px; }
+
+/* Lists read straight down, one taxon per line */
+.mf-taxa {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+}
+
+/* The seed mix list keeps its columns: it is a picker, not a checklist */
+.mf-taxa-cols {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 0 18px;
+}
+
+.mf-famhead {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 10px 0 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--mf-rule-soft);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: .01em;
+}
+
+.mf-famhead:first-child { margin-top: 0; }
+.mf-famhead b { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+.mf-famhead i { margin-left: auto; font-style: normal; font-weight: 400; color: var(--mf-ink-3); }
+
+.mf-taxon {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    padding: 2px 3px;
+    border-radius: var(--mf-radius);
+    font-size: 13.5px;
+}
+
+label.mf-taxon { cursor: pointer; }
+.mf-taxon:hover { background: var(--mf-sink); }
+.mf-taxon em { font-style: italic; }
+.mf-taxon span { min-width: 0; }
+
+.mf-taxon i {
+    margin-left: auto;
+    padding-left: 14px;
+    font-style: normal;
+    font-size: 12px;
+    color: var(--mf-ink-3);
+    font-variant-numeric: tabular-nums;
+}
+
+.mf-empty { color: var(--mf-ink-3); font-size: 13.5px; }
+.mf-rank { font-size: 12px; color: var(--mf-ink-3); }
+
+/* ─── Charts ──────────────────────────────────────────────────────── */
+
+.mf-key { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; }
+.mf-key > span { display: inline-flex; align-items: center; gap: 5px; color: var(--mf-ink-2); }
+.mf-key b { width: 10px; height: 10px; border-radius: 2px; }
+
+.mf-charts { display: grid; gap: 14px; align-content: start; }
+.mf-chart { display: block; }
+
+.mf-chart-title { fill: var(--mf-ink); font-size: 13px; font-weight: 700; }
+.mf-chart-grid { stroke: var(--mf-rule-soft); stroke-width: 1; }
+.mf-chart-axis-line { stroke: var(--mf-rule); stroke-width: 1; }
+.mf-chart-tick { fill: var(--mf-ink-3); font-size: 10.5px; }
+.mf-chart-label { fill: var(--mf-ink-2); font-size: 10.5px; }
+.mf-chart-axis { fill: var(--mf-ink-2); font-size: 11.5px; font-weight: 600; }
+.mf-chart-track { fill: var(--mf-rule-soft); }
+
+/* ─── Seed mix evaluator ──────────────────────────────────────────── */
+
+.mf-seedwrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    min-height: 0;
+    flex: 1;
+}
+
+.mf-seedcol { display: flex; flex-direction: column; min-height: 0; padding: 10px 12px 0; }
+.mf-seedcol-out { border-left: 1px solid var(--mf-rule-soft); overflow: auto; padding-bottom: 14px; }
+.mf-seedcol .mf-listbody { padding: 6px 0 14px; }
+.mf-seedcol .mf-combo { margin: 8px 0 0; }
+
+.mf-seedtop { display: flex; align-items: center; justify-content: space-between; }
+.mf-seedhead { font-size: 13px; font-weight: 700; }
+
+.mf-seednote {
+    margin: 2px 0 0;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--mf-ink-2);
+}
+
+.mf-seedgroup {
+    margin: 9px 0 3px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--mf-ink-2);
+}
+
+.mf-seedgroup:first-child { margin-top: 0; }
+
+.mf-meter {
+    height: 13px;
+    margin: 9px 0 6px;
+    border-radius: 7px;
+    background: var(--mf-rule-soft);
+    overflow: hidden;
+}
+
+.mf-meter-fill {
+    width: 0;
+    height: 100%;
+    border-radius: 7px;
+    background: var(--mf-link);
+    transition: width .2s ease;
+}
+
+.mf-seedread { font-size: 13px; color: var(--mf-ink-2); }
+.mf-seedread b { color: var(--mf-ink); font-variant-numeric: tabular-nums; }
+.mf-seedchart { display: block; margin-top: 10px; max-width: 100%; height: auto; }
+
+@media (max-width: 1100px) {
+    .mf-seedwrap { grid-template-columns: minmax(0, 1fr); }
+    .mf-seedcol-out { border-left: 0; border-top: 1px solid var(--mf-rule-soft); }
+}
+
+/* ─── Narrow screens ──────────────────────────────────────────────── */
+
+.imerss-mobile-warning {
+    display: none;
+    font-size: smaller;
+    margin: 2px;
+}
+
+@media screen and (max-width: 860px) {
+    .mf-shell { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+    .mf-pane-filters { max-height: 40vh; }
+    .mf-middle { grid-template-rows: minmax(0, 1fr); }
+    .mf-pane-views { display: none; }
+    .mf-grip { display: none; }
+    .imerss-mobile-warning { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mf * { transition: none !important; }
+}
+
+/* ─── Interaction matrix and network ──────────────────────────────── */
 
 .imerss-interactions-holder {
     height: 100%;
@@ -180,46 +971,6 @@ body {
     font-size: 15px;
 }
 
-.imerss-taxonDisplay {
-    display: none;
-}
-
-
-.imerss-sex-filter-checks {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.imerss-sex-filter-checks > div {
-    display: flex;
-    padding-left: 5px;
-}
-
-.imerss-l3eco-filter .imerss-filter-body {
-    height: 6em;
-}
-
-.imerss-filter-row .imerss-row-label, .imerss-phenology-range {
-    padding-right: 0.5rem;
-}
-
-.imerss-phenology-label {
-    padding-right: 0.5rem;
-    margin-right: auto;
-    width: 4rem;
-}
-
-.imerss-phenology-filter .imerss-filter-body {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-rows: repeat(4, 1fr);
-}
-
-.imerss-elevation-filter .imerss-filter-body {
-    flex-direction: column;
-}
-
 .imerss-bbea-grid-tooltip div.text {
     max-width: initial;
 }
@@ -236,82 +987,9 @@ body {
     display: block;
 }
 
-.imerss-bipartite .imerss-download-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
 .bipartite-label {
     font-size: 18px;
     font-weight: 500;
-}
-
-/* Because the sex filter is here, transfer this padding below it */
-.imerss-pollinators .imerss-panel-label {
-    padding-bottom: 0
-}
-
-.imerss-pollinators .imerss-bbea-filters {
-    padding-bottom: 5px
-}
-
-/* Follow this illogical advice: https://stackoverflow.com/a/66689926/1381443 */
-.imerss-tabs {
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.imerss-tab-panel {
-    height: 100%;
-    min-height: 0;
-}
-
-.ui-tabs .ui-tabs-panel {
-    padding: 0.5em;
-}
-
-.imerss-mobile-warning {
-    display: none;
-    font-size: smaller;
-    margin: 2px;
-}
-
-@media screen and (max-width: 800px) {
-    .imerss-checklists {
-        display: none;
-    }
-    .imerss-mobile-warning {
-        display: block;
-    }
-    .imerss-map-and-taxa {
-        flex-direction: column;
-        height: 100%
-    }
-    .imerss-map-holder {
-        width: 100%;
-    }
-
-}
-
-.imerss-dataset-version {
-    display: flex;
-    justify-content: end;
-    font-size: small;
-    position: absolute;
-    bottom: -16px;
-    right: 6px;
-}
-
-.imerss-software-version {
-    display: flex;
-    justify-content: start;
-    font-size: small;
-    position: absolute;
-    bottom: -16px;
-    left: 6px;
 }
 
 /* Bee loading indicator adapted from https://codepen.io/Huyyy/pen/mdymXBr */
