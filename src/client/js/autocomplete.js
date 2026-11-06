@@ -26,7 +26,8 @@ fluid.defaults("hortis.autocomplete", {
     invokers: {
         query: "hortis.autocomplete.emptyQuery",
         renderSuggestion: "fluid.identity",
-        renderInputValue: "fluid.identity"
+        renderInputValue: "fluid.identity",
+        setSelection: "hortis.autocomplete.setSelection({that}, {arguments}.0)"
     },
     widgetOptions: {
         displayMenu: "overlay",
@@ -36,6 +37,27 @@ fluid.defaults("hortis.autocomplete", {
 
 hortis.autocomplete.emptyQuery = function (query, callback) {
     callback("");
+};
+
+/**
+ * Set the selection displayed by the widget from outside it, leaving it in the same state as if the user had picked
+ * this option from its menu and then moved focus away. The widget is an uncontrolled preact component whose constructor
+ * returns nothing, so we have to reach for the instance that preact 8 stores on its root node. Simply updating the
+ * input's value won't do since the widget polls for this and treats it as typing, which would open its menu.
+ * @param {fluid.component} that - The autocomplete component
+ * @param {any} option - The option to be selected, as supplied by the component's query
+ */
+hortis.autocomplete.setSelection = function (that, option) {
+    const widget = that.container[0].querySelector(".autocomplete__wrapper")._component;
+    widget.setState({
+        focused: null,
+        hovered: null,
+        menuOpen: false,
+        options: [option],
+        query: that.renderInputValue(option),
+        selected: null,
+        validChoiceMade: true
+    });
 };
 
 hortis.autocomplete.render = function (that) {

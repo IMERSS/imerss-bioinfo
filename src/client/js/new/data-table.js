@@ -120,34 +120,45 @@ hortis.dataTable.measureRowHeight = function (that) {
     return h;
 };
 
-// ── Pagination arithmetic ──
+// ── Scroll arithmetic ──
 
 /**
- * Calculate how many body rows fit in the available scroll area.
+ * Return the height in pixels of a body row, which all rows are assumed to share since their cells do not wrap.
  * @param {Object} that - The component instance
- * @return {Number} Number of body rows
+ * @return {Number} Row height in pixels
  */
-hortis.dataTable.calcRowsPerPage = function (that) {
-    const scrollEl = that.dom.locate("scrollEl")[0];
-    const thead = scrollEl.querySelector("thead");
-    const theadH = thead?.getBoundingClientRect().height ?? 38;
-    const available = scrollEl.clientHeight - theadH;
-
+hortis.dataTable.rowHeight = function (that) {
     if (!that.cachedRowHeight) {
         that.cachedRowHeight = hortis.dataTable.measureRowHeight(that);
     }
-
-    return Math.max(Math.floor(available / (that.cachedRowHeight || 37)), 1);
+    return that.cachedRowHeight || 37;
 };
 
 /**
- * Return the total number of pages.
- * @param {Number} rowCount - Total rows
- * @param {Number} rowsPerPage - Rows per page
- * @return {Number} Total number of pages
+ * Compute the part of the scrolling area which is not covered by the sticky header, and the rows which show within it.
+ * @param {Object} that - The component instance
+ * @return {Object} The extent, with Numbers `rowHeight`, `rowsPerView` for the rows that completely fit, `first` for
+ *     the index of the topmost row completely showing and `end` for the index after the bottommost one, and Booleans
+ *     `atStart` and `atEnd` for whether the area is scrolled to its limits
  */
-hortis.dataTable.totalPages = function (rowCount, rowsPerPage) {
-    return Math.ceil(rowCount / rowsPerPage) || 1;
+hortis.dataTable.viewExtent = function (that) {
+    const scrollEl = that.dom.locate("scrollEl")[0];
+    const total = that.displayRows.length;
+    const rowHeight = hortis.dataTable.rowHeight(that);
+    const theadH = scrollEl.querySelector("thead")?.getBoundingClientRect().height ?? 38;
+    const available = scrollEl.clientHeight - theadH;
+    const scrollTop = scrollEl.scrollTop;
+    // Allow for the browser's rounding of scrollTop, and count just the rows which completely show
+    const atEnd = scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 1;
+    const first = Math.min(Math.ceil((scrollTop - 1) / rowHeight), Math.max(total - 1, 0));
+    return {
+        rowHeight,
+        rowsPerView: Math.max(Math.floor(available / rowHeight), 1),
+        first,
+        end: atEnd ? total : Math.min(Math.floor((scrollTop + available + 1) / rowHeight), total),
+        atStart: scrollTop <= 0,
+        atEnd
+    };
 };
 
 // ── Cell rendering ──
@@ -189,132 +200,208 @@ hortis.dataTable.defaultColumns = function (rows, staticColumns) {
 // ── Full render ──
 
 /**
- * Render the current page of data rows and the pagination controls,
- * applying sort and selection when enabled.
+ * Render everything derived from the rows and columns, applying sort and selection when enabled, retaining the
+ * current scroll position.
  * @param {Object} that - The component instance
  * @param {Object[]} rows - The current rows array
  * @param {ColumnInfo[]} columns - Column formatting information
- * @param {Number} rowsPerPage - Number of rows that fit
  */
-hortis.dataTable.render = function (that, rows, columns, rowsPerPage) {
+hortis.dataTable.render = function (that, rows, columns) {
     const sortColumn = that.sortColumn.value,
-        sortDirection = that.sortDirection.value,
-        selectedRow = that.selectedRow.value;
-    const displayRows = sortColumn ? hortis.dataTable.sortRows(rows, sortColumn, sortDirection) : rows;
+        sortDirection = that.sortDirection.value;
+    that.displayRows = sortColumn ? hortis.dataTable.sortRows(rows, sortColumn, sortDirection) : rows;
+    that.displayColumns = columns;
+    if (rows !== that.lastRows) {
+        that.lastRows = rows;
+        that.columnWidths = [];
+    }
 
     hortis.dataTable.buildHead(that, columns, sortColumn, sortDirection);
 
-    const totalPages = hortis.dataTable.totalPages(displayRows.length, rowsPerPage);
-
-    if (that.currentPage > totalPages) {
-        that.currentPage = totalPages;
-    }
-
-    const start = (that.currentPage - 1) * rowsPerPage;
-    const end = Math.min(start + rowsPerPage, displayRows.length);
-    const slice = displayRows.slice(start, end);
-
-    const selectCol = that.options.rowSelectable
-        ? `<th class="hortis-dataTable-select-cell"></th>`
-        : "";
-
-    const bodyHTML = slice.map(function (row) {
-        const checkCell = that.options.rowSelectable ? hortis.dataTable.renderCheckboxCell(row, selectedRow) : "";
-        const cells = columns.map(function (col) {
-            const cls = col.numeric ? ` class="hortis-dataTable-num"` : "";
-            return `<td${cls}>${hortis.dataTable.renderCell(col, row)}</td>`;
-        }).join("");
-        const selectedCls = row === selectedRow ? ` class="hortis-dataTable-selected-row"` : "";
-        return `<tr${selectedCls}>${checkCell}${cells}</tr>`;
-    }).join("");
-
     const head = that.container[0].querySelector("thead tr");
     if (that.options.rowSelectable && head && !head.querySelector(".hortis-dataTable-select-cell")) {
-        head.insertAdjacentHTML("afterbegin", selectCol);
+        head.insertAdjacentHTML("afterbegin", `<th class="hortis-dataTable-select-cell"></th>`);
     }
+    hortis.dataTable.updateHeadHeight(that);
 
-    that.dom.locate("tbody")[0].innerHTML = bodyHTML;
-
-    if (that.options.rowSelectable) {
-        hortis.dataTable.bindRowSelectEvents(that, slice);
+    hortis.dataTable.renderRows(that, true);
+    // Correct the first estimate of the row height from real rows now that we have some, which also repositions them
+    if (hortis.dataTable.correctRowHeight(that)) {
+        hortis.dataTable.renderRows(that, true);
     }
-
-    const pageInfoEl = that.dom.locate("pageInfo");
-    pageInfoEl.text(displayRows.length > 0
-        ? `${start + 1}\u2013${end} of ${displayRows.length}  \u00b7  page ${that.currentPage}/${totalPages}`
-        : "No data"
-    );
-
-    hortis.dataTable.renderPagination(that, totalPages);
 };
 
 /**
- * Render the pagination button strip and attach click handlers.
+ * Publish the height of the table header to CSS so that it can confine the vertical scrollbar to the table body.
  * @param {Object} that - The component instance
- * @param {Number} totalPages - Total number of pages to render
  */
-hortis.dataTable.renderPagination = function (that, totalPages) {
-    const { pageWindowSize } = that.options;
-    let pStart = Math.max(1, that.currentPage - Math.floor(pageWindowSize / 2));
-    let pEnd = Math.min(totalPages, pStart + pageWindowSize - 1);
-    if (pEnd - pStart < pageWindowSize - 1) {
-        pStart = Math.max(1, pEnd - pageWindowSize + 1);
+hortis.dataTable.updateHeadHeight = function (that) {
+    const scrollEl = that.dom.locate("scrollEl")[0];
+    const height = scrollEl.querySelector("thead").getBoundingClientRect().height;
+    scrollEl.style.setProperty("--data-table-head-height", height + "px");
+};
+
+/**
+ * Update the cached row height from the rows that have been rendered, which may differ from our test row.
+ * @param {Object} that - The component instance
+ * @return {Boolean} `true` if the cached row height was changed
+ */
+hortis.dataTable.correctRowHeight = function (that) {
+    const trs = that.dom.locate("tbody")[0].querySelectorAll("tr:not(.hortis-dataTable-spacer)");
+    let changed = false;
+    if (trs.length > 1) {
+        // Measure between the tops of rows since the final row in the table has no border
+        const measured = (trs[trs.length - 1].getBoundingClientRect().top - trs[0].getBoundingClientRect().top) / (trs.length - 1);
+        if (measured > 0 && Math.abs(measured - that.cachedRowHeight) > 0.001) {
+            that.cachedRowHeight = measured;
+            changed = true;
+        }
     }
-
-    const prevDisabled = that.currentPage <= 1 ? " disabled" : "";
-    const nextDisabled = that.currentPage >= totalPages ? " disabled" : "";
-
-    const pageButtons = Array.from({ length: pEnd - pStart + 1 }, (_, i) => {
-        const p = pStart + i;
-        const active = p === that.currentPage ? " hortis-dataTable-active" : "";
-        return `<button class="hortis-dataTable-pg${active}" data-page="${p}">${p}</button>`;
-    }).join("");
-
-    that.dom.locate("pageControls").html(
-        `<button class="hortis-dataTable-prev"${prevDisabled}>\u2190 Prev</button>`
-        + pageButtons
-        + `<button class="hortis-dataTable-next"${nextDisabled}>Next \u2192</button>`
-    );
-
-    hortis.dataTable.bindPaginationEvents(that, totalPages);
+    return changed;
 };
 
 /**
- * Trigger a render using the current signal values. Used by pagination clicks.
- * @param {Object} that - The component instance
+ * Render a spacer row standing in for a run of rows which are not currently in the DOM.
+ * @param {Number} height - The height of the spacer in pixels
+ * @param {Number} columnCount - The number of columns in the table
+ * @return {String} - HTML string for the spacer, which is empty if there are no rows to stand in for
  */
-hortis.dataTable.rerender = function (that) {
-    hortis.dataTable.render(that, that.rows.value, that.columns.value, hortis.dataTable.calcRowsPerPage(that));
+hortis.dataTable.renderSpacer = function (height, columnCount) {
+    return height > 0 ? `<tr class="hortis-dataTable-spacer" style="height:${height}px"><td colspan="${columnCount}"></td></tr>` : "";
 };
 
 /**
- * Attach click listeners to the rendered pagination buttons.
+ * Render the rows around the current scroll position into the tbody, with spacers standing in for the others so that
+ * the scrollbar represents all of them, and update the display of the position.
  * @param {Object} that - The component instance
- * @param {Number} totalPages - Total number of pages rendered
+ * @param {Boolean} [force] - `true` if the rows must be rendered even if the same ones are already showing
  */
-hortis.dataTable.bindPaginationEvents = function (that, totalPages) {
+hortis.dataTable.renderRows = function (that, force) {
+    const rows = that.displayRows,
+        columns = that.displayColumns,
+        selectedRow = that.selectedRow.value,
+        total = rows.length;
+    const extent = hortis.dataTable.viewExtent(that);
+
+    // Rows are rendered in blocks either side of the view so that most scroll events have nothing to render
+    const blockSize = Math.max(extent.rowsPerView, that.options.minBlockSize);
+    const block = Math.floor(extent.first / blockSize);
+    const start = Math.max(block - 1, 0) * blockSize;
+    const end = Math.min((block + 3) * blockSize, total);
+
+    if (force || start !== that.renderedStart || end !== that.renderedEnd) {
+        that.renderedStart = start;
+        that.renderedEnd = end;
+        const slice = rows.slice(start, end);
+        const columnCount = columns.length + (that.options.rowSelectable ? 1 : 0);
+
+        const bodyHTML = slice.map(function (row) {
+            const checkCell = that.options.rowSelectable ? hortis.dataTable.renderCheckboxCell(row, selectedRow) : "";
+            const cells = columns.map(function (col) {
+                const cls = col.numeric ? ` class="hortis-dataTable-num"` : "";
+                return `<td${cls}>${hortis.dataTable.renderCell(col, row)}</td>`;
+            }).join("");
+            const selectedCls = row === selectedRow ? ` class="hortis-dataTable-selected-row"` : "";
+            return `<tr${selectedCls}>${checkCell}${cells}</tr>`;
+        }).join("");
+
+        that.dom.locate("tbody")[0].innerHTML = hortis.dataTable.renderSpacer(start * extent.rowHeight, columnCount)
+            + bodyHTML
+            + hortis.dataTable.renderSpacer((total - end) * extent.rowHeight, columnCount);
+
+        if (that.options.rowSelectable) {
+            hortis.dataTable.bindRowSelectEvents(that, slice);
+        }
+        hortis.dataTable.holdColumnWidths(that);
+    }
+    hortis.dataTable.updatePosition(that);
+};
+
+/**
+ * Stop columns jumping around as different rows are rendered during scrolling, by not letting any of them shrink. This
+ * is forgotten when the rows change.
+ * @param {Object} that - The component instance
+ */
+hortis.dataTable.holdColumnWidths = function (that) {
+    const wraps = that.container[0].querySelectorAll("thead .hortis-dataTable-sort-wrap");
+    wraps.forEach(function (wrap, i) {
+        const width = Math.max(that.columnWidths[i] || 0, wrap.getBoundingClientRect().width);
+        that.columnWidths[i] = width;
+        wrap.style.minWidth = width + "px";
+    });
+};
+
+/**
+ * Update the display of which rows are showing, and which navigation controls are available, from the scroll position.
+ * @param {Object} that - The component instance
+ */
+hortis.dataTable.updatePosition = function (that) {
+    const total = that.displayRows.length;
+    const extent = hortis.dataTable.viewExtent(that);
+    that.dom.locate("pageInfo").text(total > 0 ? `${extent.first + 1}\u2013${extent.end} of ${total}` : "No data");
+    const controls = that.dom.locate("pageControls")[0];
+    controls.querySelectorAll("[data-move=start], [data-move=prev]").forEach(button => button.disabled = extent.atStart);
+    controls.querySelectorAll("[data-move=next], [data-move=end]").forEach(button => button.disabled = extent.atEnd);
+};
+
+// ── Navigation ──
+
+/**
+ * Move the scroll position in response to one of the navigation controls. "prev" and "next" move by the rows that
+ * completely fit in the view.
+ * @param {Object} that - The component instance
+ * @param {String} move - The move to make, one of "start", "prev", "next" or "end"
+ */
+hortis.dataTable.navigate = function (that, move) {
+    const scrollEl = that.dom.locate("scrollEl")[0];
+    const extent = hortis.dataTable.viewExtent(that);
+    const targets = {
+        start: 0,
+        prev: (extent.first - extent.rowsPerView) * extent.rowHeight,
+        next: (extent.first + extent.rowsPerView) * extent.rowHeight,
+        end: scrollEl.scrollHeight
+    };
+    scrollEl.scrollTop = targets[move];
+    // No need to wait for scrolling to come to rest since this was a single move
+    hortis.dataTable.renderRows(that);
+};
+
+/**
+ * Render the navigation controls, which last for the lifetime of the component, and attach their click listener.
+ * @param {Object} that - The component instance
+ */
+hortis.dataTable.bindNavigation = function (that) {
     const controlsEl = that.dom.locate("pageControls")[0];
-
-    controlsEl.querySelector(".hortis-dataTable-prev").addEventListener("click", () => {
-        if (that.currentPage > 1) {
-            that.currentPage--;
-            hortis.dataTable.rerender(that);
+    controlsEl.innerHTML = `<button data-move="start">Start</button>`
+        + `<button data-move="prev">\u2190 Prev</button>`
+        + `<button data-move="next">Next \u2192</button>`
+        + `<button data-move="end">End</button>`;
+    controlsEl.addEventListener("click", function (e) {
+        const move = e.target.dataset.move;
+        if (move) {
+            hortis.dataTable.navigate(that, move);
         }
     });
+};
 
-    controlsEl.querySelector(".hortis-dataTable-next").addEventListener("click", () => {
-        if (that.currentPage < totalPages) {
-            that.currentPage++;
-            hortis.dataTable.rerender(that);
+/**
+ * Follow the scroll position - the display of the position is updated at most once per animation frame, whereas the
+ * rows are only rendered once scrolling comes to rest so that this doesn't hold up dragging the scrollbar.
+ * @param {Object} that - The component instance
+ */
+hortis.dataTable.bindScroll = function (that) {
+    that.dom.locate("scrollEl")[0].addEventListener("scroll", function () {
+        if (!that.scrollFrame) {
+            that.scrollFrame = requestAnimationFrame(function () {
+                that.scrollFrame = null;
+                hortis.dataTable.updatePosition(that);
+            });
         }
+        clearTimeout(that.scrollTimer);
+        that.scrollTimer = setTimeout(function () {
+            hortis.dataTable.renderRows(that);
+        }, that.options.scrollRestDelay);
     });
-
-    for (const btn of controlsEl.querySelectorAll(".hortis-dataTable-pg")) {
-        btn.addEventListener("click", () => {
-            that.currentPage = parseInt(btn.dataset.page, 10);
-            hortis.dataTable.rerender(that);
-        });
-    }
 };
 
 /**
@@ -393,32 +480,35 @@ hortis.dataTable.bindResize = function (that) {
  */
 hortis.dataTable.bindRenderEffect = function (that) {
     that.disposeRenderEffect = fluid.effect(function (rows, columns) {
-        const rowsPerPage = hortis.dataTable.calcRowsPerPage(that);
-        hortis.dataTable.render(that, rows, columns, rowsPerPage);
+        hortis.dataTable.render(that, rows, columns);
     }, that.rows, that.columns, that.sortColumn, that.sortDirection, that.selectedRow, that.resizeCount);
 };
 
 // ── Lifecycle ──
 
 /**
- * onCreate listener — build the head, measure row height,
- * wire up the ResizeObserver, and start the reactive effect.
+ * onCreate listener — render the navigation controls, wire up the scroll
+ * listener and ResizeObserver, and start the reactive effect.
  * @param {Object} that - The component instance
  */
 hortis.dataTable.onCreate = function (that) {
-    that.currentPage = 1;
-
+    hortis.dataTable.bindNavigation(that);
+    hortis.dataTable.bindScroll(that);
     hortis.dataTable.bindResize(that);
     hortis.dataTable.bindRenderEffect(that);
 };
 
 /**
- * onDestroy listener — disconnect the ResizeObserver and dispose the effect.
+ * onDestroy listener — disconnect the ResizeObserver, dispose the effect and cancel any pending scroll update.
  * @param {Object} that - The component instance
  */
 hortis.dataTable.onDestroy = function (that) {
     that.resizeObserver?.disconnect();
     that.disposeRenderEffect?.();
+    if (that.scrollFrame) {
+        cancelAnimationFrame(that.scrollFrame);
+    }
+    clearTimeout(that.scrollTimer);
 };
 
 hortis.dataTable.markup = `
@@ -454,8 +544,15 @@ fluid.defaults("hortis.dataTable", {
         sortColumn: "@expand:signal(null)",
         sortDirection: "@expand:signal(1)",
         resizeCount: "@expand:signal(0)",
-        currentPage: 1,
-        cachedRowHeight: 0
+        cachedRowHeight: 0,
+        displayRows: [], // The rows in their displayed order
+        displayColumns: [],
+        lastRows: null,
+        columnWidths: [],
+        renderedStart: 0,
+        renderedEnd: 0,
+        scrollFrame: null,
+        scrollTimer: null
     },
 
     selectors: {
@@ -466,7 +563,8 @@ fluid.defaults("hortis.dataTable", {
     },
 
     columns: [],
-    pageWindowSize: 5,
+    minBlockSize: 20, // Minimum number of rows rendered at a time, more are needed for a large view
+    scrollRestDelay: 100, // Time in ms without a scroll event after which scrolling is considered to have come to rest
     sortable: false,
     rowSelectable: false,
 

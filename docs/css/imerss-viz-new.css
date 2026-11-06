@@ -139,10 +139,11 @@
 }
 
 .hortis-dataTable-scroll {
-    flex: 1;
+    /* Zero basis so that the height of all the rows does not inflate any parent whose height depends on its content */
+    flex: 1 1 0px;
     min-height: 0;
     overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 .hortis-dataTable-scroll table {
@@ -178,11 +179,19 @@
 }
 
 .hortis-dataTable-scroll tbody tr {
+    /* All rows must share a height for hortis.dataTable.viewExtent - a few would otherwise come out half a pixel short */
+    height: 26.5px;
     transition: background 0.15s ease;
 }
 
 .hortis-dataTable-scroll tbody tr:last-child td {
     border-bottom: none;
+}
+
+/* Stands in for the rows which are not currently rendered */
+.hortis-dataTable-scroll tbody tr.hortis-dataTable-spacer td {
+    padding: 0;
+    border: none;
 }
 
 :root {
@@ -193,6 +202,16 @@
     -webkit-appearance: none;
     width: var(--datatable-scrollbar-width);
     background-color: #eee
+}
+
+/* Confine the vertical scrollbar to the table body - the sticky header is really inside the scrolling area */
+.hortis-dataTable-scroll::-webkit-scrollbar:vertical {
+    background-color: transparent;
+}
+
+.hortis-dataTable-scroll::-webkit-scrollbar-track:vertical {
+    margin-top: var(--data-table-head-height, 0);
+    background-color: #eee;
 }
 
 .hortis-dataTable-wrap ::-webkit-scrollbar-thumb {
@@ -254,12 +273,6 @@ td.hortis-dataTable-num, th.hortis-dataTable-num {
 .hortis-dataTable-pagination button:disabled {
     opacity: 0.3;
     cursor: default;
-}
-
-.hortis-dataTable-pagination button.hortis-dataTable-active {
-    border-color: var(--data-table-accent);
-    color: var(--data-table-accent);
-    background: var(--data-table-accent-dim);
 }
 
 .resize-bar {

@@ -1187,6 +1187,8 @@ a.ui-button:active,
 
 .imerss-filter-clear {
     position: absolute;
+    /* Precedes .autocomplete__wrapper, which is also positioned and would otherwise take its clicks */
+    z-index: 1;
     right: 5px;
     cursor: pointer;
     width: 28px;

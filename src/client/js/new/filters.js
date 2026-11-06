@@ -707,6 +707,7 @@ fluid.defaults("hortis.autocompleteFilter", {
         filterSummary: "@expand:fluid.computed(hortis.autocompleteFilter.summarise, {that}.filterState, {that}.options.filterName)"
     },
     invokers: {
+        select: "hortis.autocompleteFilter.select({that}, {arguments}.0)",
         reset: "hortis.autocompleteFilter.reset({that})"
     },
     components: {
@@ -747,6 +748,16 @@ fluid.defaults("hortis.autocompleteFilter", {
         }
     }
 });
+
+/**
+ * Select a value in the filter from outside its autocomplete, with the same result as the user picking it from the menu.
+ * @param {hortis.autocompleteFilter} that - The filter
+ * @param {any} selection - The value to be selected, of the same form as those supplied by the filter's `queryAutocomplete`
+ */
+hortis.autocompleteFilter.select = function (that, selection) {
+    that.filterState.value = selection;
+    that.autocomplete.setSelection(selection);
+};
 
 hortis.autocompleteFilter.reset = function (that) {
     that.filterState.value = "";
