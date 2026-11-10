@@ -115,7 +115,18 @@ hortis.libreMap.polygonFilter.makeDraw = function (that, map, mapboxDrawOptions,
         const modeChange = e => that.drawMode = e.mode;
         const listeners = {"draw.create": updateArea, "draw.delete": updateArea, "draw.update": updateArea, "draw.modechange": modeChange};
         Object.entries(listeners).forEach(([event, listener]) => map.on(event, listener));
-        togo = {map, draw, listeners};
+        // MapboxDraw's trash deletes only the polygons selected, and polygons restored from the URL are drawn unselected
+        // - so with none selected, the trash deletes them all. Heard before MapboxDraw's own handler, while the
+        // selection is still as the user left it
+        const trashButton = map.getContainer().querySelector(".mapbox-gl-draw_trash");
+        const trashAll = () => {
+            if (draw.getSelectedIds().length === 0 && draw.getAll().features.length > 0) {
+                draw.deleteAll();
+                updateArea();
+            }
+        };
+        trashButton?.addEventListener("click", trashAll, true);
+        togo = {map, draw, listeners, trashButton, trashAll};
     } else {
         togo = fluid.unavailable({message: "The MapboxDraw library is not loaded", variety: "config"});
     }
@@ -124,6 +135,7 @@ hortis.libreMap.polygonFilter.makeDraw = function (that, map, mapboxDrawOptions,
 
 hortis.libreMap.polygonFilter.removeDraw = function (record) {
     Object.entries(record.listeners).forEach(([event, listener]) => record.map.off(event, listener));
+    record.trashButton?.removeEventListener("click", record.trashAll, true);
     record.map.removeControl(record.draw);
 };
 
