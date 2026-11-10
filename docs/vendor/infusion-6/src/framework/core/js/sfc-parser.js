@@ -240,7 +240,6 @@ const sfcParserScope = function (fluid) {
 
         const tree = fluid.pushLezerChildren(null, cursor, text);
         fluid.defMapsFromTree(tree, state);
-        console.log("Parsed defMaps ", state.defMap);
         return state.defMap;
     };
 

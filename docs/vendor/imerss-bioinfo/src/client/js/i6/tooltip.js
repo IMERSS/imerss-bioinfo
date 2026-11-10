@@ -51,19 +51,36 @@ hortis.tooltip.content = function (that, hoverId) {
 // Distance in pixels of the tooltip from the pointer
 hortis.tooltip.pointerOffset = {x: 12, y: 8};
 
-// Popper lite omits the offset modifier, so displace the tooltip from the pointer with a minimal modifier of our own
+// Least distance in pixels to keep between the tooltip and the window's edge
+hortis.tooltip.windowMargin = 8;
+
+/**
+ * Displace a tooltip from the pointer, flipping it to the pointer's left if it would overflow the window's right
+ * edge, and lifting it if it would overflow the bottom. Popper lite omits the offset, flip and preventOverflow
+ * modifiers, so this does the work of all three for a tooltip at the pointer.
+ * @param {Object} options - Popper's arguments to a modifier
+ * @param {Object} options.state - Popper's state, whose `modifiersData.popperOffsets` are adjusted in place
+ */
+hortis.tooltip.placeAtPointer = function ({state}) {
+    const offsets = state.modifiersData.popperOffsets;
+    if (offsets) {
+        const {x: dx, y: dy} = hortis.tooltip.pointerOffset;
+        const {width, height} = state.rects.popper;
+        const window = state.elements.popper.ownerDocument.defaultView;
+        const margin = hortis.tooltip.windowMargin;
+        offsets.x = offsets.x + dx + width + margin <= window.innerWidth ?
+            offsets.x + dx : Math.max(margin, offsets.x - dx - width);
+        offsets.y = offsets.y + dy + height + margin <= window.innerHeight ?
+            offsets.y + dy : Math.max(margin, window.innerHeight - height - margin);
+    }
+};
+
 hortis.tooltip.pointerOffsetModifier = {
     name: "pointerOffset",
     enabled: true,
     phase: "main",
     requires: ["popperOffsets"],
-    fn: ({state}) => {
-        const offsets = state.modifiersData.popperOffsets;
-        if (offsets) {
-            offsets.x += hortis.tooltip.pointerOffset.x;
-            offsets.y += hortis.tooltip.pointerOffset.y;
-        }
-    }
+    fn: hortis.tooltip.placeAtPointer
 };
 
 /**
@@ -131,6 +148,123 @@ hortis.tooltip.show = function (tooltip, content, pos) {
     } else {
         node.hidden = true;
     }
+};
+
+/** Tooltips of elements bearing a title **/
+
+// Shows the title of whatever element is hovered within its scope in a tooltip of its own, in place of the browser's -
+// as jQuery UI's tooltip widget did for the Infusion 4 visualisations. Whilst an element is hovered, its title is held
+// in its attribute data-hortis-title, so that the browser shows nothing, and it is restored once the pointer leaves
+fluid.def("hortis.titleTooltips", {
+    $layers: "hortis.withTooltip",
+    // Selector for the elements within which titles are shown as tooltips
+    titleScope: ".imerss-container, .imerss-main",
+    renderTooltip: "$method:hortis.titleTooltips.render({0}:title)",
+    titleListeners: {
+        $bindable: {
+            bind: "hortis.titleTooltips.bind({self}, {global}.document, {self}.titleScope)",
+            unbind: "hortis.titleTooltips.unbind({boundValue})"
+        }
+    }
+});
+
+hortis.titleTooltips.render = function (title) {
+    return `<div class="imerss-tooltip imerss-title-tooltip">${hortis.encodeHTML(String(title))}</div>`;
+};
+
+/**
+ * Find the element whose title is to be shown for a hovered node - the nearest bearing a title, within the scope and
+ * not itself within a tooltip.
+ * @param {Node} target - The hovered node
+ * @param {String} scope - Selector for the elements within which titles are shown
+ * @return {Element|null} The titled element, if any
+ */
+hortis.titleTooltips.titled = function (target, scope) {
+    const element = target?.closest ? target.closest("[title], [data-hortis-title]") : null;
+    return element && element.closest(scope) && !element.closest(".imerss-tooltip-holder") ? element : null;
+};
+
+/**
+ * Take the title of a hovered element into its data-hortis-title attribute, so that the browser shows no tooltip of
+ * its own.
+ * @param {Element} element - The hovered element
+ * @return {String} The element's title
+ */
+hortis.titleTooltips.take = function (element) {
+    const title = element.getAttribute("title");
+    if (title !== null) {
+        element.setAttribute("data-hortis-title", title);
+        element.removeAttribute("title");
+    }
+    return element.getAttribute("data-hortis-title");
+};
+
+/**
+ * Restore the title of an element no longer hovered, unless it has been given a new one in the meantime.
+ * @param {Element} element - The element
+ */
+hortis.titleTooltips.restore = function (element) {
+    const title = element.getAttribute("data-hortis-title");
+    if (title !== null && element.getAttribute("title") === null) {
+        element.setAttribute("title", title);
+    }
+    element.removeAttribute("data-hortis-title");
+};
+
+/**
+ * Bind the listeners showing the titles of hovered elements. The tooltip is hidden on scrolling, since it would
+ * otherwise be left where the element was.
+ * @param {hortis.titleTooltips} that - The tooltips
+ * @param {Document} dokkument - The document
+ * @param {String} scope - Selector for the elements within which titles are shown
+ * @return {Object} A record of the listeners, to be supplied to `hortis.titleTooltips.unbind`
+ */
+hortis.titleTooltips.bind = function (that, dokkument, scope) {
+    const record = {dokkument, current: null};
+    const leave = () => {
+        if (record.current) {
+            hortis.titleTooltips.restore(record.current);
+            record.current = null;
+            that.hoverAt(null);
+        }
+    };
+    record.over = event => {
+        const element = hortis.titleTooltips.titled(event.target, scope);
+        if (element !== record.current) {
+            leave();
+            if (element) {
+                record.current = element;
+                const title = hortis.titleTooltips.take(element);
+                that.hoverAt(title || null, event);
+            }
+        }
+    };
+    record.move = event => {
+        if (record.current) {
+            that.hoverAt(record.current.getAttribute("data-hortis-title") || null, event);
+        }
+    };
+    record.out = event => {
+        if (record.current && !(event.relatedTarget && record.current.contains(event.relatedTarget))) {
+            leave();
+        }
+    };
+    record.leave = leave;
+    dokkument.addEventListener("mouseover", record.over);
+    dokkument.addEventListener("mousemove", record.move);
+    dokkument.addEventListener("mouseout", record.out);
+    dokkument.addEventListener("scroll", leave, true);
+    dokkument.addEventListener("mousedown", leave, true);
+    return record;
+};
+
+hortis.titleTooltips.unbind = function (record) {
+    record.leave();
+    record.dokkument.removeEventListener("mouseover", record.over);
+    record.dokkument.removeEventListener("mousemove", record.move);
+    record.dokkument.removeEventListener("mouseout", record.out);
+    record.dokkument.removeEventListener("scroll", record.leave, true);
+    record.dokkument.removeEventListener("mousedown", record.leave, true);
 };
 
 /** Taxon tooltips **/

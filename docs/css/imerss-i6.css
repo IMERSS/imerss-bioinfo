@@ -17,8 +17,64 @@
     pointer-events: none;
 }
 
+/* The tooltip of an element's title, shown by hortis.titleTooltips - a title may be broken over lines */
+.imerss-title-tooltip {
+    white-space: pre-line;
+}
+
 .imerss-tooltip-holder[hidden] {
     display: none;
+}
+
+/* The marker of an individual observation, shown by hortis.libreMap.withObsGrid in place of the grid once few
+   observations are in view. It fades in and out over hortis.libreMap.markerFadeDuration. The colours may be overridden
+   on any element enclosing the map */
+.imerss-obs-marker {
+    cursor: pointer;
+}
+
+.imerss-obs-marker .imerss-obs-marker-pin {
+    display: block;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+.imerss-obs-marker.imerss-obs-marker-visible .imerss-obs-marker-pin {
+    opacity: 1;
+}
+
+.imerss-obs-marker .imerss-obs-marker-pin path {
+    fill: var(--imerss-obs-marker-colour, #74ac00);
+    stroke: var(--imerss-obs-marker-stroke, #fff);
+    stroke-width: 1.5px;
+}
+
+.imerss-obs-marker .imerss-obs-marker-pin circle {
+    fill: var(--imerss-obs-marker-centre, #fff);
+}
+
+.imerss-obs-marker.imerss-obs-marker-selected .imerss-obs-marker-pin path {
+    fill: var(--imerss-obs-marker-selected-colour, #d4380d);
+}
+
+/* A tooltip which stays put for the pointer to cross to, e.g. to follow a link within it */
+.imerss-tooltip-holder.imerss-tooltip-interactive {
+    pointer-events: auto;
+}
+
+.imerss-obs-tooltip .imerss-obs-tooltip-link {
+    margin-top: 4px;
+}
+
+.imerss-obs-tooltip .imerss-obs-tooltip-link a {
+    color: #0b6e99;
+    text-decoration: underline;
+}
+
+.imerss-obs-tooltip .imerss-obs-tooltip-taxon {
+    font-style: italic;
+    font-weight: 600;
 }
 
 /* Formerly supplied by Infusion 4's fluid.css, on which the port no longer depends */

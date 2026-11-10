@@ -3200,10 +3200,8 @@ const $fluidILScope = function (fluid) {
             // These props may just be the id for a free component
 
             instance.instanceId = shadow.instanceId++;
-            console.log("Allocated instanceId " + instance.instanceId + " at site " + shadow.path);
             fluid.expandLayer(instance, flatMerged, shadow, []);
 
-            console.log("Disposing unallocated effects for path " + shadow.path + " at end of computeInstance");
             fluid.disposeLayerEffects(shadow);
             // Here Lies the Gap of the Queen of Sheba
             return instance;

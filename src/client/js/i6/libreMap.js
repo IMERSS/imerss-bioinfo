@@ -93,7 +93,7 @@ fluid.def("hortis.libreMap", {
     clickDispatch: {
         $bindable: {
             bind: "hortis.libreMap.bindClick({self}, {self}.map)",
-            unbind: "hortis.libreMap.untrack({boundValue})"
+            unbind: "hortis.libreMap.unbindClick({boundValue})"
         }
     },
     sortLayers: "$method:hortis.libreMap.sortLayers({0}:map)"
@@ -179,22 +179,55 @@ hortis.libreMap.untrack = function (record) {
     record.map.off(record.event, record.listener);
 };
 
+// How long in milliseconds after an area is drawn a click still belongs to the drawing, as the double click which ends a
+// shape arrives as several clicks
+hortis.libreMap.drawClickGrace = 500;
+
 /**
- * Dispatch clicks on a map to the click handlers currently registered with a map component.
+ * Dispatch clicks on a map to the click handlers currently registered with a map component - except those made while an
+ * area is being drawn, e.g. by hortis.libreMap.withPolygonDraw, which are left to the drawing tool. Otherwise each would
+ * select the map cell beneath it, narrowing the drawn area to that single cell. Any cell already selected is released
+ * when drawing starts, for the same reason.
  * @param {hortis.libreMap} that - The map component
  * @param {maplibregl.Map} map - The map
- * @return {Object} A record of the listener for `hortis.libreMap.untrack`
+ * @return {Object} A record of the listeners, to be supplied to `hortis.libreMap.unbindClick`
  */
 hortis.libreMap.bindClick = function (that, map) {
-    const listener = e => {
-        const handlers = that.clickHandlers;
-        const handled = handlers.find(handler => handler.handle(e));
-        if (!handled) {
-            handlers.forEach(handler => handler.resetSelection());
+    // Times are those of the window's performance clock, which also stamps each event as the browser creates it - a click
+    // ending a drawing may only be handled once the page has recomputed everything the drawn area filters, by when far
+    // longer than the grace may have passed
+    const performance = map.getContainer().ownerDocument.defaultView.performance;
+    const record = {map, drawing: false, drawingEnded: -Infinity};
+    record.modechange = ({mode}) => {
+        // Only while a shape is being drawn: clicking inside a finished shape puts the tool in its editing mode, where cells
+        // must still respond
+        const nowDrawing = mode.startsWith("draw_");
+        if (nowDrawing && !record.drawing) {
+            that.gridSelector?.reset();
+        }
+        if (record.drawing && !nowDrawing) {
+            record.drawingEnded = performance.now();
+        }
+        record.drawing = nowDrawing;
+    };
+    record.click = e => {
+        const clicked = e.originalEvent?.timeStamp ?? performance.now();
+        if (!record.drawing && clicked - record.drawingEnded > hortis.libreMap.drawClickGrace) {
+            const handlers = that.clickHandlers;
+            const handled = handlers.find(handler => handler.handle(e));
+            if (!handled) {
+                handlers.forEach(handler => handler.resetSelection());
+            }
         }
     };
-    map.on("click", listener);
-    return {map, event: "click", listener};
+    map.on("draw.modechange", record.modechange);
+    map.on("click", record.click);
+    return record;
+};
+
+hortis.libreMap.unbindClick = function (record) {
+    record.map.off("draw.modechange", record.modechange);
+    record.map.off("click", record.click);
 };
 
 // A component which handles clicks on a map, found by hortis.libreMap
@@ -715,7 +748,9 @@ hortis.libreMap.fitBounds = function (map, bounds, zoomToObsBounds, zoomDuration
 };
 
 /**
- * Resolves a map event to a property value of the topmost visible feature at the event's point.
+ * Resolves a map event to a property value of the topmost visible feature at the event's point - looking through any area
+ * drawn by MapboxDraw, whose layers are named "gl-draw-...", so that the map cells inside it can still be hovered over and
+ * selected.
  * @param {maplibregl.Map} map - The MapLibre map instance.
  * @param {MapMouseEvent} e - A map mouse event containing a `point` property.
  * @param {String} propName - The name of the property to dereference
@@ -723,9 +758,8 @@ hortis.libreMap.fitBounds = function (map, bounds, zoomToObsBounds, zoomDuration
  */
 hortis.libreMap.eventToProp = function (map, e, propName) {
     const features = map.queryRenderedFeatures(e.point);
-    const visibleFeatures = features.filter(feature =>
-        feature.layer.paint["fill-opacity"] > 0 ||
-        feature.layer.paint["circle-opacity"] > 0);
+    const visibleFeatures = features.filter(feature => !feature.layer.id.startsWith("gl-draw-") &&
+        (feature.layer.paint["fill-opacity"] > 0 || feature.layer.paint["circle-opacity"] > 0));
     return visibleFeatures[0]?.properties[propName] ?? null;
 };
 

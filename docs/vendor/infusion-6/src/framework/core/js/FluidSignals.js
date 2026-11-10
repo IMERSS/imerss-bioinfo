@@ -863,7 +863,11 @@ const $fluidSignalsScope = function (fluid) {
                 cell._state = state;
                 cell._dirtyFrom = dirtyFrom;
             } else {
-                cell._value = cell._value.staleValue;
+                // A pending value which resolved to its stale value restores it - a cell with no pending value, e.g.
+                // one never yet computed, has none to restore
+                if (fluid.isUnavailable(cell._value)) {
+                    cell._value = cell._value.staleValue;
+                }
                 if (cell._isEffect) {
                     cell._state = CacheDirty;
                 }
@@ -1066,8 +1070,10 @@ const $fluidSignalsScope = function (fluid) {
      *       or `null` if no unavailable values are found.
      */
     fluid.cell.mapSignalArgs = function (args, oldValue) {
-        // Reuse a pending unavailable with its staleValue if there is one
-        let unavailable = fluid.isPending(oldValue) ? oldValue : null;
+        // Reuse a pending unavailable with its staleValue if there is one. It is reused only if it is the cell's own -
+        // a proxy, e.g. onto a member of a component whose material is unavailable, reads as unavailable through it,
+        // but annotating it would write through it, overwriting the material at its site with a plain copy
+        let unavailable = fluid.isPending(oldValue) && !fluid.isProxy?.(oldValue) ? oldValue : null;
         let causes = null;
         for (let i = 0; i < args.length; ++i) {
             let arg = args[i];

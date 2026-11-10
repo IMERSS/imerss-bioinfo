@@ -262,24 +262,26 @@ const fluidViewScope = function (fluid) {
     };
 
     /**
-     * Find the node of a document's head after which a fresh injection is placed - the last node injected into it, or
-     * else its last `<fluid-import>`. Injections are so placed in the order they are made, before any stylesheet or
-     * script which the page holds after its imports, whether the head is still being parsed, as when a page boots in
-     * the browser, or complete, as when it is rendered under node - so that the cascade of a page's own stylesheets
-     * over those of its Single File Components is the same in its hydrated form as in its minimal one.
+     * Find the node after which a fresh injection is placed in a document - the last node injected into it, or else its
+     * last `<fluid-import>`, which may lie in its head or its body. Injections are so placed in the order they are made,
+     * after the bootstrap of Infusion and the imports which demand them and before any stylesheet or script which the
+     * page holds after its imports, whether the document is still being parsed, as when a page boots in the browser, or
+     * complete, as when it is rendered under node. So a hydrated page, whose injected scripts run as it is parsed, runs
+     * them only once Infusion is loaded, and the cascade of a page's own stylesheets over those of its Single File
+     * Components is the same in its hydrated form as in its minimal one.
      * @param {Document} dokkument - The document into which a node is injected.
      * @return {Node|null} The node after which it is placed, or `null` if it is to be appended to the head.
      */
     fluid.injectionAnchor = function (dokkument) {
         const last = dokkument.fluidLastInjected;
-        const imports = dokkument.head.querySelectorAll("fluid-import");
-        return last && last.isConnected !== false && last.parentNode === dokkument.head ? last :
+        const imports = dokkument.querySelectorAll("fluid-import");
+        return last && last.isConnected !== false && last.parentNode ? last :
             imports.length > 0 ? imports[imports.length - 1] : null;
     };
 
     /**
      * Connect a freshly built injection node to the document, replacing any existing node with the same id or else
-     * placing it in the document's head after the anchor found by `fluid.injectionAnchor`.
+     * placing it after the anchor found by `fluid.injectionAnchor`.
      * @param {Document} dokkument - The document into which the node is injected.
      * @param {Element|null} existing - Any existing node with the injection's id.
      * @param {Element} fresh - The fresh node, which must already carry the injection's id.
@@ -291,7 +293,7 @@ const fluidViewScope = function (fluid) {
         } else {
             const anchor = fluid.injectionAnchor(dokkument);
             if (anchor) {
-                dokkument.head.insertBefore(fresh, anchor.nextSibling);
+                anchor.parentNode.insertBefore(fresh, anchor.nextSibling);
             } else {
                 dokkument.head.appendChild(fresh);
             }
@@ -544,7 +546,6 @@ const fluidViewScope = function (fluid) {
     fluid.awaitLinkLoad = function (link, url) {
         return new Promise(resolve => {
             const done = outcome => {
-                console.log("CSS loaded for " + link.getAttribute("href"));
                 link.removeEventListener("load", onLoad);
                 link.removeEventListener("error", onError);
                 resolve(outcome);
@@ -1220,7 +1221,6 @@ const fluidViewScope = function (fluid) {
             const unavailable = fluid.unavailable(message);
             fluid.def(layerName, unavailable);
         };
-        console.log("sfcToInjRecs for layer ", layerName);
 
         /** @type {Object<String, InjectRecord>} */
         const injRecs = {};
@@ -1622,7 +1622,6 @@ const fluidViewScope = function (fluid) {
 
                     outcomes.filter(fluid.isUnavailable).forEach(outcome =>
                         fluid.log(fluid.logLevel.FAIL, `Injection failure for layer ${layerName}: `, outcome));
-                    console.log(`Injections for ${layerName} committed`);
                 } finally {
                     claimed.forEach(claim => claim.resolve());
                     injDone.set(true);
@@ -2004,7 +2003,6 @@ const fluidViewScope = function (fluid) {
                 fluid.applyOns(vnode, vnode.shadow, element, vnode.on, vTreeRec);
             }, [vnode.elementSignal], {
                 onDispose: () => {
-                    // console.log("Disposed event binding effect for vnode " + vnode._id);
                     fluid.removeDomListeners(vTreeRec);
                 },
                 name: `eventBindingEffect for vnode ${vnode._id}`
@@ -3053,7 +3051,6 @@ const fluidViewScope = function (fluid) {
         }
 
         const activateTemplate = tree => {
-            console.log("Disposing old templateEffects for " + shadow.path);
             fluid.disposeEffects(templateEffects);
             const togo = processVNode(tree);
             // TODO: In the end this will be done on parse of the SFC and folding its provenance onto the $imports layer property
@@ -3458,7 +3455,7 @@ const fluidViewScope = function (fluid) {
     fluid.renderView = function (self, container, vTree) {
         fluid.allocateDomId(container);
         fluid.subscribeOutputDocumentInjections(self, container.ownerDocument);
-        console.log(`renderView beginning for ${self[$m].path} with vTree ${vTree._id} container `, container.flDomId);
+        // console.log(`renderView beginning for ${self[$m].path} with vTree ${vTree._id} container `, container.flDomId);
         fluid.patchChildren(vTree, container, true);
     };
 

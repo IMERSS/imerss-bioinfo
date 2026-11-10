@@ -30,6 +30,10 @@
     align-items: center;
 }
 
+.hortis-dataTable-selectable-row {
+    cursor: pointer;
+}
+
 .hortis-dataTable-selected-row {
     background-color: #a5d6ff;
 }

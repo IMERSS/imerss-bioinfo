@@ -713,7 +713,6 @@ const $fluidScope = function (fluid) {
     const $t = fluid.proxySymbol;
 
     fluid.unavailableSymbol = Symbol("fluid.unavailableTarget");
-    const $u = fluid.unavailableSymbol;
 
     // A special symbol used to store nested metadata at any level of the mat - see diagram for use via "$m"
     fluid.metadataSymbol = Symbol("fluid.metadata");
@@ -745,12 +744,33 @@ const $fluidScope = function (fluid) {
         return proxy;
     };
 
-    // Intended to be used for object which has already passed fluid.isUnavailable
+    /**
+     * Recover the unavailable value fronted by a proxy which has passed `fluid.isUnavailable`, so that its members, e.g.
+     * `variety` and `causes`, may be read - reading through the proxy itself would read the proxy again, in the case of
+     * one made by `fluid.unavailableProxy`, or the material at the next path, in the case of a proxy onto the material of
+     * a component made by `fluid.proxyMat`. Each proxy is unwrapped through its target, which may itself be a signal,
+     * until the unavailable value is reached. A value which is not such a proxy is returned as it is.
+     * @param {any} target - The value, typically one which has passed `fluid.isUnavailable`
+     * @return {any} The unavailable value fronted by the proxy, or `target` if it fronts none
+     */
     fluid.deproxyUnavailable = function (target) {
-        return Object.getOwnPropertyDescriptor(target, $u) ? fluid.deSignal(target[$u]) : target;
+        let next = target;
+        // Bounded, in case a proxy were ever to front itself
+        for (let depth = 0; depth < 16 && fluid.isProxy(next); ++depth) {
+            next = fluid.deSignal(next[$t]);
+        }
+        return fluid.isUnavailable(next) && !fluid.isProxy(next) ? next : target;
     };
 
     fluid.unProxy = target => target?.[$t] ? target[$t] : target;
+
+    /**
+     * Determine whether a value is a proxy onto the material of a component or onto an unavailable value - see
+     * `fluid.proxyMat` and `fluid.unavailableProxy`.
+     * @param {any} value - The value to be tested
+     * @return {Boolean} `true` if the value is such a proxy
+     */
+    fluid.isProxy = value => !!value && typeof(value) === "object" && value[$t] !== undefined;
 
     fluid.deproxyAndDesignal = function (target) {
         const holder = target?.[$t];
