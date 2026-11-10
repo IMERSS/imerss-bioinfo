@@ -4,7 +4,7 @@
 
 fluid.registerNamespace("hortis.tests");
 
-QUnit.module("BBEA visualisation on Infusion 6 - shell and views");
+QUnit.module("BBEA visualisation on Infusion 6 - shell and views", {before: hortis.tests.loadAllImports});
 
 QUnit.config.reorder = false;
 
@@ -17,10 +17,18 @@ fluid.def("hortis.tests.viewsLoader", {
             rows: hortis.tests.regionIndirectionRows
         }
     },
-    collectorReportLinker: {
+    collectorFacet: {
         $component: {
-            reportIndex: {
-                "Charles Babbage": [{state: "OR", year: 2024, report: "babbage-2024.html"}]
+            body: {
+                $component: {
+                    collectorReportLinker: {
+                        $component: {
+                            reportIndex: {
+                                "Charles Babbage": [{state: "OR", year: 2024, report: "babbage-2024.html"}]
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -41,10 +49,10 @@ hortis.tests.selectTab = function (tabId) {
 hortis.tests.panel = tabId => qs(`[data-panel="${tabId}"]`);
 
 QUnit.test("Filter concertina", function (assert) {
-    const that = hortis.tests.viewsLoader();
+    const that = hortis.tests.viewsLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
-    const head = qs(".mf-facet[data-facet=\"bees\"] .mf-facet-head");
-    const body = qs("#mf-f-bees");
+    const head = qs(".imerss-facet[data-facet=\"bees\"] .imerss-facet-head");
+    const body = qs("#imerss-facet-bees");
     assert.ok(body.hidden, "Section initially closed");
     hortis.tests.dispatch(head, "click");
     assert.notOk(body.hidden, "Clicking its head opens a section");
@@ -52,27 +60,27 @@ QUnit.test("Filter concertina", function (assert) {
     hortis.tests.dispatch(qs(".imerss-collapse-facets"), "click");
     assert.ok(body.hidden, "Collapse all closes every section");
 
-    const badge = qs(".mf-facet[data-facet=\"bees\"] [data-state]");
+    const badge = qs(".imerss-facet[data-facet=\"bees\"] [data-state]");
     assert.ok(badge.hidden, "No badge whilst no bee filter is active");
-    that.obsFilters.sexFilter.filterState.female = true;
-    that.pollChecklist.check("10", true);
+    that.beeFacet.body.pollChecklist.extraFilter.filterState.female = true;
+    that.beeFacet.body.pollChecklist.check("10", true);
     fluid.cell.stabilize();
     assert.notOk(badge.hidden, "Badge shown once filters within the section are active");
     assert.equal(badge.textContent, "2", "Badge sums the sex filter and the bee checklist's selections");
-    const elevationBadge = qs(".mf-facet[data-facet=\"elevation\"] [data-state]");
-    that.obsFilters.elevationFilter.dualRangeInput.range.max = 500;
+    const elevationBadge = qs(".imerss-facet[data-facet=\"elevation\"] [data-state]");
+    that.elevationFacet.body.elevationFilter.dualRangeInput.range.max = 500;
     fluid.cell.stabilize();
-    assert.ok(elevationBadge.classList.contains("mf-facet-state-dot"), "The elevation filter's badge is a plain marker");
+    assert.ok(elevationBadge.classList.contains("imerss-facet-state-dot"), "The elevation filter's badge is a plain marker");
     that.destroy();
 });
 
 QUnit.test("View tabs and download", function (assert) {
-    const that = hortis.tests.viewsLoader();
+    const that = hortis.tests.viewsLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     assert.notOk(hortis.tests.panel("net").hidden, "Network panel shown initially");
     assert.ok(hortis.tests.panel("mtx").hidden, "Matrix panel hidden initially");
     hortis.tests.selectTab("mtx");
-    assert.equal(that.viewTabs.selectedTab, "mtx", "Tab selected");
+    assert.equal(that.bbeaViewTabs.selectedTab, "mtx", "Tab selected");
     assert.ok(hortis.tests.panel("net").hidden, "Network panel hidden");
     assert.notOk(hortis.tests.panel("mtx").hidden, "Matrix panel shown");
     assert.equal(qs(".imerss-view-download").getAttribute("title"), "Download the interaction counts as CSV", "Download button retitled");
@@ -91,7 +99,7 @@ QUnit.test("View tabs and download", function (assert) {
 });
 
 QUnit.test("Interaction matrix and its tooltips", function (assert) {
-    const that = hortis.tests.viewsLoader();
+    const that = hortis.tests.viewsLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     hortis.tests.selectTab("mtx");
     const labels = qsa(".imerss-plant-names .imerss-int-label").map(node => node.textContent);
@@ -109,46 +117,46 @@ QUnit.test("Interaction matrix and its tooltips", function (assert) {
     hortis.tests.dispatch(qs(".imerss-interactions-holder"), "mouseleave");
     assert.ok(tooltip.hidden, "Tooltip hidden when the pointer leaves the matrix");
 
-    that.pollChecklist.check("10", true);
+    that.beeFacet.body.pollChecklist.check("10", true);
     fluid.cell.stabilize();
     assert.equal(qsa(".imerss-poll-names .imerss-int-label").length, 1, "Selecting Apidae counts its interactions against the family");
     that.destroy();
 });
 
 QUnit.test("Taxon lists", function (assert) {
-    const that = hortis.tests.viewsLoader();
+    const that = hortis.tests.viewsLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     hortis.tests.selectTab("bees");
     const bees = qs(".imerss-bee-list");
-    assert.deepEqual(qsa(".mf-famhead span", bees).map(node => node.textContent), ["Apidae", "Andrenidae"],
+    assert.deepEqual(qsa(".imerss-famhead span", bees).map(node => node.textContent), ["Apidae", "Andrenidae"],
         "Families ordered by their numbers of observations");
-    assert.equal(qsa(".mf-taxon-name", bees).length, 3, "Each bee species listed");
-    assert.ok(qs(".mf-listbar-count", bees).textContent.includes("5 observations"), "Totals rendered");
-    hortis.tests.dispatch(qs(".mf-seg-btn[data-arrange=\"flat\"]", bees), "click");
+    assert.equal(qsa(".imerss-taxon-name", bees).length, 3, "Each bee species listed");
+    assert.ok(qs(".imerss-listbar-count", bees).textContent.includes("5 observations"), "Totals rendered");
+    hortis.tests.dispatch(qs(".imerss-seg-btn[data-arrange=\"flat\"]", bees), "click");
     assert.equal(that.beeList.arrange, "flat", "Arrangement switched");
-    assert.equal(qsa(".mf-famhead", bees).length, 0, "No family headings in the flat arrangement");
-    assert.deepEqual(qsa(".mf-taxon-name", bees).map(node => node.textContent), ["Andrena nigrihirta", "Bombus mixtus", "Bombus vosnesenskii"],
+    assert.equal(qsa(".imerss-famhead", bees).length, 0, "No family headings in the flat arrangement");
+    assert.deepEqual(qsa(".imerss-taxon-name", bees).map(node => node.textContent), ["Andrena nigrihirta", "Bombus mixtus", "Bombus vosnesenskii"],
         "Species listed alphabetically");
 
-    that.obsFilters.sexFilter.filterState.male = true;
+    that.beeFacet.body.pollChecklist.extraFilter.filterState.male = true;
     fluid.cell.stabilize();
-    assert.equal(qsa(".mf-taxon-name", bees).length, 2, "List follows the filters");
-    assert.equal(qs(".imerss-plant-list .mf-listbody").textContent, "", "The plant list, not showing, has not rendered");
+    assert.equal(qsa(".imerss-taxon-name", bees).length, 2, "List follows the filters");
+    assert.equal(qs(".imerss-plant-list .imerss-listbody").textContent, "", "The plant list, not showing, has not rendered");
     that.destroy();
 });
 
 QUnit.test("Bee abundance", function (assert) {
-    const that = hortis.tests.viewsLoader();
+    const that = hortis.tests.viewsLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     hortis.tests.selectTab("abund");
-    assert.equal(qsa(".imerss-bee-abundance svg.mf-chart").length, 3, "Charts drawn for families, genera and species");
+    assert.equal(qsa(".imerss-bee-abundance svg.imerss-chart").length, 3, "Charts drawn for families, genera and species");
     assert.deepEqual(qsa(".imerss-bee-abundance .mf-key > span > span").map(node => node.textContent), ["Apidae", "Andrenidae"],
         "Family key drawn");
     that.destroy();
 });
 
 QUnit.test("Seed mix evaluator", function (assert) {
-    const that = hortis.tests.viewsLoader();
+    const that = hortis.tests.viewsLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     hortis.tests.selectTab("seed");
     const seed = qs(".imerss-seed-mix");
@@ -161,7 +169,7 @@ QUnit.test("Seed mix evaluator", function (assert) {
     assert.deepEqual({...that.seedMix.added}, {"103": true}, "Ticking a plant adds it to the mix");
     assert.ok(qs(".mf-seedread", seed).textContent.startsWith("3 of 3 bee species supported"), "Rosa nutkana supports every bee");
 
-    that.obsFilters.regionFilter.filterState = {2: true}; // Cascades
+    that.regionFacet.body.regionFilter.filterState = {2: true}; // Cascades
     fluid.cell.stabilize();
     assert.ok(qs(".mf-seednote", seed).textContent.startsWith("Plants recorded under the current filters"), "A region defines a site");
     assert.ok(qs("input[data-seed=\"203\"]", seed).hasAttribute("checked"), "The plant recorded there is established and ticked");
@@ -171,11 +179,11 @@ QUnit.test("Seed mix evaluator", function (assert) {
 });
 
 QUnit.test("Collector reports and grips", function (assert) {
-    const that = hortis.tests.viewsLoader();
+    const that = hortis.tests.viewsLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     const report = qs(".imerss-collector-report");
     assert.ok(report.classList.contains("fl-hidden"), "Reports hidden whilst no collector is chosen");
-    that.obsFilters.collectorFilter.confirmAutocomplete("Charles Babbage");
+    that.collectorFacet.body.collectorFilter.confirmAutocomplete("Charles Babbage");
     fluid.cell.stabilize();
     assert.notOk(report.classList.contains("fl-hidden"), "Reports shown for a collector who has them");
     assert.equal(qs("a", report).getAttribute("href"), "https://oregon-bee-project.github.io/melittoflora/reports/babbage-2024.html",

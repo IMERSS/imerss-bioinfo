@@ -32,14 +32,22 @@ hortis.blankMapStyle = {
 
 fluid.def("hortis.libreMap", {
     $layers: "fluid.component",
-    // selector: String - the selector of the map's container in the page markup
-    zoomDuration: 1000,
+    // The duration in milliseconds of the map's smooth moves, e.g. fitting it to filtered observations
+    zoomDuration: 2000,
+    // The duration in milliseconds of a zoom by the map's zoom buttons
+    controlZoomDuration: 1000,
     zoomControlsPosition: "top-left",
     style: hortis.blankMapStyle,
     fillPatternPath: "",
     fillPatterns: {},
     fillPatternPixelRatio: 6,
-    mapContainer: "$compute:hortis.locateContainer({self}.selector, {global}.document)",
+    // The map renders into the markup its parent's template places at its @id, which the map then owns
+    view: {
+        $component: {
+            $layers: "fluid.viewComponent"
+        }
+    },
+    mapContainer: "{self}.view.renderedContainer",
     // Constructed exactly once - rebuilding the map would lose its camera, sources and controls
     map: {
         $bindable: {
@@ -75,7 +83,7 @@ fluid.def("hortis.libreMap", {
     },
     zoomControls: {
         $bindable: {
-            bind: "hortis.libreMap.zoomControls({self}.map, {global}.maplibregl, {self}.zoomDuration, {self}.zoomControlsPosition)",
+            bind: "hortis.libreMap.zoomControls({self}.map, {global}.maplibregl, {self}.controlZoomDuration, {self}.zoomControlsPosition)",
             onceOnly: true
         }
     },
@@ -500,17 +508,79 @@ fluid.def("hortis.libreMap.withObsGrid", {
             $layers: ["hortis.libreMap.gridSelector"]
         }
     },
-    gridOpacity: "$compute:hortis.libreMap.computeGridOpacity({self}.gridVisible, {self}.fillOpacity)",
+    // Once no more than this many filtered observations fall within the viewport, the grid fades away and each is shown
+    // by a marker instead - 0 never shows markers, except of a selected record
+    markerThreshold: 20,
+    // Markers are shown for observations within this proportion of the viewport's size beyond it, so that panning a
+    // little doesn't uncover unmarked observations
+    markerPadding: 0.5,
+    // The field holding the stable id of an observation, by which a selected record is held in the URL - an
+    // observation without one is identified by its index
+    recordIdField: "occurrenceID",
+    // The template of an observation's tooltip, and the global name of a function accepting (row, rowById) which
+    // computes the values of its %terms - by default taxonName, recordedBy, eventDate and linkMarkup. The values of
+    // terms ending in "Markup" are markup, and all others are text
+    obsTooltipTemplate: `<div class="imerss-tooltip imerss-obs-tooltip">
+    <div class="imerss-obs-tooltip-taxon">%taxonName</div>
+    <div><b>Recorded by:</b> %recordedBy</div>
+    <div><b>Date:</b> %eventDate</div>
+    %linkMarkup
+</div>`,
+    obsTooltipValues: "hortis.libreMap.obsTooltipValues",
+    // The map's viewport, written by the listener tracking it
+    viewBounds: null,
+    viewTracker: {
+        $bindable: {
+            bind: "hortis.libreMap.trackBounds({self}, {self}.map)",
+            unbind: "hortis.libreMap.untrackBounds({boundValue})"
+        }
+    },
+    viewportObs: "$compute:hortis.libreMap.viewportObs({self}.obsQuantiser.obsRows, {self}.viewBounds, {self}.markerPadding, {self}.markerThreshold)",
+    recordSelector: {
+        $component: {
+            $layers: ["hortis.libreMap.recordSelector"]
+        }
+    },
+    selectedRecord: "{self}.recordSelector.selectedRow",
+    showMarkers: "$compute:hortis.libreMap.showMarkers({self}.gridVisible, {self}.viewportObs.inView, {self}.markerThreshold, {self}.selectedRecord)",
+    markerRows: "$compute:hortis.libreMap.markerRows({self}.showMarkers, {self}.viewportObs.nearby, {self}.selectedRecord)",
+    markerTooltip: {
+        $component: {
+            $layers: "hortis.withTooltip",
+            renderTooltip: "$method:hortis.libreMap.renderObsTooltip({libreMap}.obsTooltipTemplate, {libreMap}.obsTooltipValues, {vizLoader}.taxa.rowById, {0}:row)"
+        }
+    },
+    markerLayer: {
+        $bindable: {
+            bind: "hortis.libreMap.makeMarkerLayer({self}, {self}.map, {global}.maplibregl)",
+            unbind: "hortis.libreMap.destroyMarkerLayer({boundValue})",
+            onceOnly: true
+        }
+    },
+    updateMarkers: "$effect:hortis.libreMap.updateMarkers({self}.markerLayer, {self}.readyMap, {self}.markerRows, {self}.selectedRecord)",
+    centreRecord: "$effect:hortis.libreMap.centreRecord({self}.readyMap, {self}.selectedRecord, {self}.zoomDuration)",
+    // Whether the grid is shown - it fades away whilst markers are shown in its place
+    gridShown: "$compute:hortis.libreMap.gridShown({self}.gridVisible, {self}.showMarkers)",
+    gridOpacity: "$compute:hortis.libreMap.computeGridOpacity({self}.gridShown, {self}.fillOpacity)",
     gridBounds: "{self}.obsQuantiser.grid.bounds",
     gridFeature: `$compute:hortis.libreMap.obsGridFeature({self}.obsQuantiser.grid, {self}.obsQuantiser.latResolution,
         {self}.obsQuantiser.longResolution, {self}.maxObsCountOverride, {self}.countTransform)`,
     updateObsGrid: "$effect:hortis.libreMap.updateObsGrid({self}, {self}.readyMap, {self}.gridFeature, {self}.gridOpacity)",
-    zoomToObsBoundsEffect: "$effect:hortis.libreMap.fitBounds({self}.readyMap, {self}.gridBounds, {self}.zoomToObsBounds, {self}.zoomDuration)"
+    // The camera, with members `center` and `zoom`, to which the map returns once no filter narrows the observations -
+    // if null, it is fitted to the bounds of all of them
+    homeCamera: null,
+    zoomToObsBoundsEffect: `$effect:hortis.libreMap.fitObs({self}.readyMap, {self}.gridBounds, {self}.zoomToObsBounds, {self}.zoomDuration,
+        {self}.homeCamera, {self}.obsQuantiser.obsRows.length, {self}.obsQuantiser.allObs.length)`
 });
 
-hortis.libreMap.computeGridOpacity = function (gridVisible, fillOpacity) {
-    return gridVisible ? fillOpacity : 0;
+hortis.libreMap.computeGridOpacity = function (gridShown, fillOpacity) {
+    return gridShown ? fillOpacity : 0;
 };
+
+hortis.libreMap.gridShown = (gridVisible, showMarkers) => gridVisible && !showMarkers;
+
+// The duration in milliseconds of the grid's fading in and out as markers replace it
+hortis.libreMap.gridFadeDuration = 400;
 
 // GeoJSON-style (long, lat) polygon traversed anticlockwise
 hortis.libreMap.rectFromCorner = function (lat, long, latres, longres) {
@@ -575,6 +645,7 @@ hortis.libreMap.updateObsGrid = function (that, map, geojson, gridOpacity) {
                     stops: that.fillStops
                 },
                 "fill-opacity": gridOpacity,
+                "fill-opacity-transition": {duration: hortis.libreMap.gridFadeDuration, delay: 0},
                 "fill-outline-color": that.outlineColour
             },
             metadata: {
@@ -589,6 +660,47 @@ hortis.libreMap.updateObsGrid = function (that, map, geojson, gridOpacity) {
 
 hortis.libreMap.swapBounds = function (bounds) {
     return bounds.map(coords => [coords[1], coords[0]]);
+};
+
+// Whether each map was last fitted to filtered observations, so that it returns to its home camera only once the
+// filters are cleared, and not as the page loads, when its camera is placed by other means, e.g. a story's panes
+hortis.libreMap.wasFiltered = new WeakMap();
+
+/**
+ * Move a map smoothly to show the filtered observations - fitted to their bounds while a filter narrows them, and back
+ * to its home camera once none does, if it has one, or else fitted to the bounds of them all.
+ * @param {maplibregl.Map} map - The loaded map
+ * @param {Number[][]} bounds - The bounds of the filtered observations, as [[lat, long], [lat, long]]
+ * @param {Boolean} zoomToObsBounds - Whether the map follows the observations at all
+ * @param {Number} zoomDuration - The duration in milliseconds of the move
+ * @param {Object|null} homeCamera - The camera, with members `center` and `zoom`, to return to, if any
+ * @param {Number} filteredCount - The number of filtered observations
+ * @param {Number} allCount - The number of all observations
+ */
+hortis.libreMap.fitObs = function (map, bounds, zoomToObsBounds, zoomDuration, homeCamera, filteredCount, allCount) {
+    const filtered = filteredCount !== allCount;
+    const wasFiltered = hortis.libreMap.wasFiltered.get(map);
+    hortis.libreMap.wasFiltered.set(map, filtered);
+    // A change of filters may change the layout around the map, e.g. a story page's panel describing a chosen taxon -
+    // a move begun before the map has taken up its new size lands away from where it was aimed
+    hortis.libreMap.afterLayout(map, () => {
+        if (filtered || !homeCamera) {
+            hortis.libreMap.fitBounds(map, bounds, zoomToObsBounds, zoomDuration);
+        } else if (zoomToObsBounds && wasFiltered) {
+            map.flyTo({center: homeCamera.center, zoom: homeCamera.zoom, duration: zoomDuration, essential: true});
+        }
+    });
+};
+
+/**
+ * Call a function once the layout around a map has settled - after two animation frames, by which time any change of
+ * the map's size which the same turn caused has been observed and applied to it.
+ * @param {maplibregl.Map} map - The map
+ * @param {Function} func - The function to call
+ */
+hortis.libreMap.afterLayout = function (map, func) {
+    const window = map.getContainer().ownerDocument.defaultView;
+    window.requestAnimationFrame(() => window.requestAnimationFrame(func));
 };
 
 hortis.libreMap.fitBounds = function (map, bounds, zoomToObsBounds, zoomDuration) {
@@ -620,8 +732,9 @@ hortis.libreMap.eventToProp = function (map, e, propName) {
 // Selects a grid cell when it is clicked, and filters observations to those in the selected cell. Selection of a cell
 // stacks with any other selection on the map, e.g. of a region
 fluid.def("hortis.libreMap.gridSelector", {
-    $layers: ["hortis.libreMap.clickHandler", "hortis.obsFilter", "hortis.withTooltip"],
+    $layers: ["hortis.libreMap.clickHandler", "hortis.obsFilter", "hortis.withTooltip", "hortis.urlMappedFilter"],
     filterState: null, // The id of the selected cell
+    urlKey: "cell",
     // The hovered cell is held at hoverId by hortis.withTooltip - by default no tooltip is shown for it
     renderTooltip: "$method:hortis.tooltip.none",
     filterSummary: "$compute:hortis.libreMap.gridSelector.summarise({self}.filterState)",
@@ -676,6 +789,507 @@ hortis.libreMap.gridSelector.unbindHover = function (record) {
     record.map.off("mouseout", record.leave);
 };
 
+/** Markers of individual observations **/
+
+/**
+ * Determine whether an observation has coordinates - one without has none, or the placeholder 0, 0.
+ * @param {Object} row - The observation
+ * @return {Boolean} `true` if the observation has coordinates
+ */
+hortis.libreMap.hasCoords = function (row) {
+    const lat = row.decimalLatitude, long = row.decimalLongitude;
+    return hortis.isValue(lat) && hortis.isValue(long) && lat !== "" && long !== "" &&
+        Number.isFinite(+lat) && Number.isFinite(+long) && !(+lat === 0 && +long === 0);
+};
+
+/**
+ * Track the bounds of a map's viewport, writing them into the map component whenever the map has moved or resized.
+ * @param {hortis.libreMap} that - The map component, whose `viewBounds` is written
+ * @param {maplibregl.Map} map - The map
+ * @return {Object} A record of the listener, to be supplied to `hortis.libreMap.untrackBounds`
+ */
+hortis.libreMap.trackBounds = function (that, map) {
+    const listener = () => {
+        const bounds = map.getBounds();
+        that.viewBounds = {west: bounds.getWest(), south: bounds.getSouth(), east: bounds.getEast(), north: bounds.getNorth()};
+    };
+    listener();
+    map.on("moveend", listener);
+    map.on("resize", listener);
+    return {map, listener};
+};
+
+hortis.libreMap.untrackBounds = function (record) {
+    record.map.off("moveend", record.listener);
+    record.map.off("resize", record.listener);
+};
+
+/**
+ * Find the observations within a map's viewport, and those near it.
+ * @param {Object[]} rows - The filtered observations
+ * @param {Object|null} bounds - The viewport, with members `west`, `south`, `east` and `north`, or null if unknown
+ * @param {Number} padding - The proportion of the viewport's size beyond it within which an observation is near it
+ * @param {Number} threshold - The number of observations within the viewport at most which markers are shown - no
+ * more than four times as many near ones are collected
+ * @return {Object} Members `inView`, the number of observations within the viewport, and `nearby`, those within or
+ * near it, up to the limit
+ */
+hortis.libreMap.viewportObs = function (rows, bounds, padding, threshold) {
+    const togo = {inView: 0, nearby: []};
+    if (bounds && threshold > 0) {
+        const latPad = (bounds.north - bounds.south) * padding, longPad = (bounds.east - bounds.west) * padding;
+        const limit = threshold * 4;
+        rows.forEach(row => {
+            if (hortis.libreMap.hasCoords(row)) {
+                const lat = +row.decimalLatitude, long = +row.decimalLongitude;
+                if (lat >= bounds.south - latPad && lat <= bounds.north + latPad && long >= bounds.west - longPad && long <= bounds.east + longPad) {
+                    if (lat >= bounds.south && lat <= bounds.north && long >= bounds.west && long <= bounds.east) {
+                        togo.inView++;
+                    }
+                    if (togo.nearby.length < limit) {
+                        togo.nearby.push(row);
+                    }
+                }
+            }
+        });
+    }
+    return togo;
+};
+
+/**
+ * Determine whether markers are shown in place of the grid - whilst a record is selected, or the grid is visible and
+ * few enough observations fall within the viewport.
+ * @param {Boolean} gridVisible - Whether the grid is visible
+ * @param {Number} inView - The number of filtered observations within the viewport
+ * @param {Number} threshold - The number of observations within the viewport at most which markers are shown
+ * @param {Object|null} selectedRecord - The selected record, if any
+ * @return {Boolean} `true` if markers are shown
+ */
+hortis.libreMap.showMarkers = function (gridVisible, inView, threshold, selectedRecord) {
+    return !!selectedRecord || gridVisible && inView > 0 && inView <= threshold;
+};
+
+/**
+ * Determine the observations shown by markers - the selected record alone if there is one.
+ * @param {Boolean} showMarkers - Whether markers are shown
+ * @param {Object[]} nearby - The filtered observations within or near the viewport
+ * @param {Object|null} selectedRecord - The selected record, if any
+ * @return {Object[]} The observations to be marked
+ */
+hortis.libreMap.markerRows = function (showMarkers, nearby, selectedRecord) {
+    const rows = selectedRecord ? [selectedRecord] : showMarkers ? nearby : [];
+    return rows.filter(hortis.libreMap.hasCoords);
+};
+
+hortis.libreMap.iNatObservationPattern = /^https?:\/\/(www\.)?inaturalist\.org\/observations\/\d+\/?$/;
+
+/**
+ * Render the link to an observation's record on iNaturalist, if its occurrence id is the URL of one.
+ * @param {Object} row - The observation
+ * @return {String} The link's markup, or the empty string if the observation is not from iNaturalist
+ */
+hortis.libreMap.iNatLinkMarkup = function (row) {
+    const url = String(row.occurrenceID ?? "").trim();
+    return hortis.libreMap.iNatObservationPattern.test(url) ?
+        `<div class="imerss-obs-tooltip-link"><a href="${hortis.encodeHTML(url)}" target="_blank" rel="noopener">View on iNaturalist</a></div>` : "";
+};
+
+/**
+ * Compute the values of the terms of an observation's tooltip.
+ * @param {Object} row - The observation
+ * @param {Object<String, TaxonRow>} rowById - Map of taxon id to taxon row
+ * @return {Object<String, String>} The values of the terms `taxonName`, `recordedBy` and `eventDate`, and the markup
+ * `linkMarkup` linking to the observation on iNaturalist if it is from there
+ */
+hortis.libreMap.obsTooltipValues = function (row, rowById) {
+    const taxon = rowById?.[hortis.rowToLinkTaxonId(row)];
+    return {
+        taxonName: (taxon ? hortis.rowToScientific(taxon) : null) || row.taxon_name || row.scientificName || "Unknown taxon",
+        recordedBy: row.recordedBy || "Unknown",
+        eventDate: row.eventDate || "Unknown",
+        linkMarkup: hortis.libreMap.iNatLinkMarkup(row)
+    };
+};
+
+/**
+ * Render the tooltip of an observation's marker.
+ * @param {String} template - The template of the tooltip, holding %terms
+ * @param {String} valuesFunc - The global name of a function accepting (row, rowById), computing the terms' values
+ * @param {Object<String, TaxonRow>} rowById - Map of taxon id to taxon row
+ * @param {Object} row - The hovered observation
+ * @return {String|null} The tooltip's markup
+ */
+hortis.libreMap.renderObsTooltip = function (template, valuesFunc, rowById, row) {
+    const values = fluid.getGlobalValue(valuesFunc)(row, rowById);
+    const encoded = Object.fromEntries(Object.entries(values).map(([key, value]) =>
+        [key, key.endsWith("Markup") ? String(value) : hortis.encodeHTML(String(value))]));
+    return hortis.stringTemplate(template, encoded);
+};
+
+// A marker in the traditional form, a circle tapering to a point at its base
+hortis.libreMap.markerMarkup = `<svg class="imerss-obs-marker-pin" viewBox="-1.5 -1.5 30 44" width="30" height="44" aria-hidden="true">
+    <path d="M13.5 0C6.04 0 0 6.04 0 13.5 0 23.63 13.5 41 13.5 41S27 23.63 27 13.5C27 6.04 20.96 0 13.5 0Z"/>
+    <circle cx="13.5" cy="13.5" r="5"/>
+</svg>`;
+
+// The duration in milliseconds of a marker's fading in and out - see .imerss-obs-marker in imerss-i6.css
+hortis.libreMap.markerFadeDuration = 400;
+
+/**
+ * The markers shown on a map, by the observation each marks.
+ * @typedef {Object} MarkerLayer
+ * @property {hortis.libreMap} that - The map component
+ * @property {maplibregl.Map} map - The map
+ * @property {Object} maplibregl - The MapLibre library
+ * @property {Window} window - The window holding the map
+ * @property {Map<Object, Object>} markers - Each observation's record of its marker, with members `marker`,
+ * `element` and, whilst it fades away, `removal`
+ * @property {Number|null} hideTimer - The timer hiding the tooltip once the pointer has left it and its marker
+ * @property {HTMLElement|null} tooltipNode - The tooltip's element, once bound by `hortis.libreMap.bindTooltipNode`
+ */
+
+/**
+ * Create the empty layer of markers of a map.
+ * @param {hortis.libreMap} that - The map component
+ * @param {maplibregl.Map} map - The map
+ * @param {Object} maplibregl - The MapLibre library
+ * @return {MarkerLayer} The layer
+ */
+hortis.libreMap.makeMarkerLayer = function (that, map, maplibregl) {
+    return {that, map, maplibregl, window: map.getContainer().ownerDocument.defaultView, markers: new Map(),
+        hideTimer: null, tooltipNode: null};
+};
+
+hortis.libreMap.destroyMarkerLayer = function (layer) {
+    hortis.libreMap.cancelTooltipHide(layer);
+    layer.markers.forEach(record => {
+        layer.window.clearTimeout(record.removal);
+        record.marker.remove();
+    });
+    layer.markers.clear();
+};
+
+// The time in milliseconds for which a marker's tooltip stays once the pointer has left both it and its marker
+hortis.libreMap.tooltipHideDelay = 350;
+
+hortis.libreMap.cancelTooltipHide = function (layer) {
+    layer.window.clearTimeout(layer.hideTimer);
+    layer.hideTimer = null;
+};
+
+/**
+ * Hide the tooltip of the markers once the pointer has stayed away from it and its marker for a moment.
+ * @param {MarkerLayer} layer - The layer of markers
+ */
+hortis.libreMap.scheduleTooltipHide = function (layer) {
+    hortis.libreMap.cancelTooltipHide(layer);
+    layer.hideTimer = layer.window.setTimeout(() => layer.that.markerTooltip.hoverAt(null), hortis.libreMap.tooltipHideDelay);
+};
+
+/**
+ * Make the tooltip of the markers take the pointer, holding it open whilst the pointer rests on it - once only, the
+ * first time a marker is shown, by which time the tooltip's element exists.
+ * @param {MarkerLayer} layer - The layer of markers
+ */
+hortis.libreMap.bindTooltipNode = function (layer) {
+    const node = layer.that.markerTooltip.tooltip?.node;
+    if (node && !layer.tooltipNode) {
+        layer.tooltipNode = node;
+        node.classList.add("imerss-tooltip-interactive");
+        node.addEventListener("mouseenter", () => hortis.libreMap.cancelTooltipHide(layer));
+        node.addEventListener("mouseleave", () => hortis.libreMap.scheduleTooltipHide(layer));
+    }
+};
+
+/**
+ * Create the marker of an observation, fading in, whose hovering shows the observation's tooltip and whose clicking
+ * selects it.
+ * @param {MarkerLayer} layer - The layer of markers
+ * @param {Object} row - The observation
+ * @return {Object} The marker's record, with members `marker` and `element`
+ */
+hortis.libreMap.addMarker = function (layer, row) {
+    const {that, map, maplibregl, window} = layer;
+    const element = window.document.createElement("div");
+    element.className = "imerss-obs-marker";
+    element.innerHTML = hortis.libreMap.markerMarkup;
+    hortis.libreMap.bindTooltipNode(layer);
+    // The tooltip stays where it was first shown, so that the pointer may cross to it, e.g. to follow its link
+    element.addEventListener("mouseenter", event => {
+        hortis.libreMap.cancelTooltipHide(layer);
+        that.markerTooltip.hoverAt(row, event);
+    });
+    element.addEventListener("mouseleave", () => hortis.libreMap.scheduleTooltipHide(layer));
+    element.addEventListener("click", () => that.recordSelector.select(row));
+    const marker = new maplibregl.Marker({element, anchor: "bottom"})
+        .setLngLat([+row.decimalLongitude, +row.decimalLatitude]).addTo(map);
+    // Once the marker is in the document with its initial opacity, so that it fades in
+    window.requestAnimationFrame(() => element.classList.add("imerss-obs-marker-visible"));
+    return {marker, element};
+};
+
+/**
+ * Fade away the marker of an observation, removing it once it has faded.
+ * @param {MarkerLayer} layer - The layer of markers
+ * @param {Object} row - The observation
+ * @param {Object} record - The marker's record
+ */
+hortis.libreMap.fadeMarker = function (layer, row, record) {
+    record.element.classList.remove("imerss-obs-marker-visible");
+    if (layer.that.markerTooltip.hoverId === row) {
+        layer.that.markerTooltip.hoverAt(null);
+    }
+    record.removal = layer.window.setTimeout(() => {
+        record.marker.remove();
+        layer.markers.delete(row);
+    }, hortis.libreMap.markerFadeDuration);
+};
+
+/**
+ * Bring the markers of a map into line with the observations to be marked - those of observations no longer marked
+ * fade away, and those of newly marked ones fade in.
+ * @param {MarkerLayer} layer - The layer of markers
+ * @param {maplibregl.Map} map - The loaded map, on which the markers wait
+ * @param {Object[]} rows - The observations to be marked
+ * @param {Object|null} selectedRecord - The selected record, whose marker is distinguished
+ */
+hortis.libreMap.updateMarkers = function (layer, map, rows, selectedRecord) {
+    const wanted = new Set(rows);
+    layer.markers.forEach((record, row) => {
+        if (!wanted.has(row) && !record.removal) {
+            hortis.libreMap.fadeMarker(layer, row, record);
+        }
+    });
+    rows.forEach(row => {
+        const existing = layer.markers.get(row);
+        if (existing) {
+            if (existing.removal) {
+                // Fading away, but wanted again
+                layer.window.clearTimeout(existing.removal);
+                existing.removal = null;
+                existing.element.classList.add("imerss-obs-marker-visible");
+            }
+        } else {
+            layer.markers.set(row, hortis.libreMap.addMarker(layer, row));
+        }
+    });
+    layer.markers.forEach((record, row) => hortis.toggleClass(record.element, "imerss-obs-marker-selected", row === selectedRecord));
+};
+
+/**
+ * Call a function once a map has stopped moving - after any smooth move begun in the same turn or once the layout has
+ * settled, e.g. by fitting the map to newly filtered observations, has finished.
+ * @param {maplibregl.Map} map - The map
+ * @param {Function} func - The function to call
+ */
+hortis.libreMap.whenStill = function (map, func) {
+    hortis.libreMap.afterLayout(map, () => {
+        if (map.isMoving()) {
+            map.once("moveend", () => hortis.libreMap.whenStill(map, func));
+        } else {
+            func();
+        }
+    });
+};
+
+/**
+ * Smoothly centre a map, without zooming, on a selected record, once any move in progress has finished.
+ * @param {maplibregl.Map} map - The loaded map
+ * @param {Object|null} row - The selected record, if any
+ * @param {Number} duration - The duration in milliseconds of the move
+ */
+hortis.libreMap.centreRecord = function (map, row, duration) {
+    if (row && hortis.libreMap.hasCoords(row)) {
+        hortis.libreMap.whenStill(map, () => map.easeTo({center: [+row.decimalLongitude, +row.decimalLatitude], duration, essential: true}));
+    }
+};
+
+// The record selected on the map or in a table of records, whose marker alone is shown. It is a filter, held in the
+// URL and reset with the others, but it narrows only the map - it is not among the filters narrowing the observations,
+// so that the table it was chosen from keeps its rows, and the map keeps its zoom
+fluid.def("hortis.libreMap.recordSelector", {
+    $layers: ["hortis.filter", "hortis.summarisedFilter", "hortis.urlMappedFilter", "hortis.libreMap.clickHandler"],
+    // The id of the selected record, as computed by hortis.libreMap.recordId
+    filterState: null,
+    urlKey: "record",
+    idField: "{libreMap}.recordIdField",
+    recordIndex: "$compute:hortis.libreMap.recordIndex({vizLoader}.obsRows, {self}.idField)",
+    selectedRow: "$compute:hortis.libreMap.recordSelector.selectedRow({self}.recordIndex, {self}.filterState)",
+    filterSummary: "$compute:hortis.libreMap.recordSelector.summarise({self}.filterState)",
+    // Toggles the selection of a record, or clears it if supplied null
+    select: "$method:hortis.libreMap.recordSelector.select({self}, {0}:row)",
+    reset: "$method:hortis.libreMap.recordSelector.reset({self})",
+    resetSelection: "$method:hortis.libreMap.recordSelector.reset({self})",
+    handle: "$method:hortis.libreMap.recordSelector.handle({0}:event)"
+});
+
+/**
+ * Compute the id of an observation - its value of the id field, or else its index.
+ * @param {Object} row - The observation
+ * @param {Number} index - Its index amongst all observations
+ * @param {String} idField - The field holding its id
+ * @return {String} The observation's id
+ */
+hortis.libreMap.recordId = function (row, index, idField) {
+    const id = row[idField];
+    return hortis.isValue(id) && id !== "" ? String(id) : "#" + index;
+};
+
+/**
+ * Index all observations by their ids.
+ * @param {Object[]} obsRows - All observations
+ * @param {String} idField - The field holding an observation's id
+ * @return {Object} Members `byId`, a Map of id to observation, and `ids`, a Map of observation to id
+ */
+hortis.libreMap.recordIndex = function (obsRows, idField) {
+    const byId = new Map(), ids = new Map();
+    obsRows.forEach((row, index) => {
+        const id = hortis.libreMap.recordId(row, index, idField);
+        // The first of any observations sharing an id wins, so that each id names one observation
+        if (!byId.has(id)) {
+            byId.set(id, row);
+        }
+        ids.set(row, id);
+    });
+    return {byId, ids};
+};
+
+hortis.libreMap.recordSelector.selectedRow = (recordIndex, filterState) => hortis.isValue(filterState) ? recordIndex.byId.get(filterState) ?? null : null;
+
+hortis.libreMap.recordSelector.summarise = function (filterState) {
+    return {count: hortis.isValue(filterState) ? 1 : 0, dot: true, title: "A record is selected"};
+};
+
+/**
+ * Toggle the selection of a record.
+ * @param {hortis.libreMap.recordSelector} that - The selector
+ * @param {Object|null} row - The record, or null to clear the selection
+ */
+hortis.libreMap.recordSelector.select = function (that, row) {
+    const id = row ? that.recordIndex.ids.get(row) : null;
+    that.filterState = hortis.isValue(id) && id !== that.filterState ? id : null;
+};
+
+hortis.libreMap.recordSelector.reset = function (that) {
+    that.filterState = null;
+};
+
+// A click on a marker is handled by the marker itself - it is claimed here so that it doesn't reset the selection
+hortis.libreMap.recordSelector.handle = event => !!event.originalEvent?.target?.closest?.(".imerss-obs-marker");
+
 fluid.def("hortis.libreObsMap", {
     $layers: ["hortis.libreMap.withObsGrid", "hortis.libreMap"]
 });
+
+// Adds to a map with an observation grid a legend showing the range of observation counts of each colour of its cells,
+// and the width of a cell
+fluid.def("hortis.libreMap.withObsGridLegend", {
+    legendStops: 5,
+    legendPosition: "bottom-right",
+    legendMarkup: `$compute:hortis.libreMap.obsGridLegendMarkup({self}.obsQuantiser.grid, {self}.fillStops, {self}.legendStops,
+        {self}.maxObsCountOverride, {self}.inverseCountTransform, {self}.obsQuantiser.longResolution, {self}.obsQuantiser.baseLatitude)`,
+    legend: {
+        $bindable: {
+            bind: "hortis.libreMap.addLegend({self}.readyMap, {self}.legendPosition, {global}.document)",
+            unbind: "hortis.libreMap.removeLegend({self}.readyMap, {boundValue})",
+            onceOnly: true
+        }
+    },
+    renderLegend: "$effect:hortis.libreMap.renderLegend({self}.legend, {self}.legendMarkup, {self}.gridShown)"
+});
+
+/**
+ * Add an empty legend to a map as a control.
+ * @param {maplibregl.Map} map - The map
+ * @param {String} legendPosition - The corner of the map holding the legend, e.g. "bottom-left"
+ * @param {Document} dokkument - The document holding the map
+ * @return {Object} The control, whose `container` is the legend's element
+ */
+hortis.libreMap.addLegend = function (map, legendPosition, dokkument) {
+    const container = dokkument.createElement("div");
+    container.classList.add("imerss-legend");
+    const control = {container, onAdd: () => container, onRemove: () => container.remove()};
+    map.addControl(control, legendPosition);
+    return control;
+};
+
+hortis.libreMap.removeLegend = function (map, control) {
+    map.removeControl(control);
+};
+
+hortis.libreMap.renderLegend = function (control, markup, gridVisible) {
+    control.container.innerHTML = markup;
+    hortis.toggleClass(control.container, "fl-hidden", !gridVisible);
+};
+
+hortis.libreMap.legendRowTemplate = `
+<div class="imerss-legend-row" title="%rowTitle">
+    <span class="imerss-legend-icon"></span>
+    <span class="imerss-legend-preview" style="%previewStyle"></span>
+    <span class="imerss-legend-label">%keyLabel</span>
+</div>`;
+
+/**
+ * Render the markup of the legend of an observation grid.
+ * @param {Object} grid - The grid, as computed by `hortis.obsQuantiser.indexObs`
+ * @param {Array[]} fillStops - The colour stops of the grid's cells
+ * @param {Number} legendStops - The number of rows of the legend
+ * @param {Number|null} maxObsCountOverride - A count to be taken as the maximum in place of the grid's own
+ * @param {String} inverseCountTransform - Global name of the inverse of the transform applied to each cell's proportion
+ * @param {Number} longResolution - The width of a cell in degrees of longitude
+ * @param {Number} baseLatitude - The latitude at which the width of a cell is measured
+ * @return {String} The legend's markup
+ */
+hortis.libreMap.obsGridLegendMarkup = function (grid, fillStops, legendStops, maxObsCountOverride, inverseCountTransform, longResolution, baseLatitude) {
+    const maxObsCount = maxObsCountOverride || grid.maxObsCount;
+    const inverse = fluid.getGlobalValue(inverseCountTransform);
+    const memoStops = fluid.colour.memoStops(fillStops, 256);
+    const props = fluid.iota(legendStops + 1).map(stop => stop / legendStops);
+    const propToLevel = prop => prop >= 1 ? maxObsCount : Math.round(inverse(prop, maxObsCount) * maxObsCount);
+    const rows = fluid.iota(legendStops).map(stop => {
+        const label = propToLevel(props[stop]) + " - " + propToLevel(props[stop + 1]);
+        return hortis.stringTemplate(hortis.libreMap.legendRowTemplate, {
+            previewStyle: "background-color: " + fluid.colour.lookupStop(memoStops, (props[stop] + props[stop + 1]) / 2),
+            keyLabel: label,
+            rowTitle: "Grid cells holding " + label + " observations"
+        });
+    });
+    const cellWidth = Math.round(longResolution * hortis.longitudeLength(baseLatitude));
+    return "<div class=\"imerss-legend-title\" title=\"Number of observations falling within each grid cell\">Observation count</div>" +
+        rows.join("\n") + `<div class="imerss-legend-cell-size" title="Width of each grid cell in metres">Cell size: ${cellWidth}m</div>`;
+};
+
+hortis.vizGridTooltipTemplate =
+`<div class="imerss-tooltip imerss-grid-tooltip">
+    <div><b>Observations:</b> %obsCount</div>
+    <div class="text"><b>Taxa:</b> %taxonCount<div>%taxa</div></div>
+    %footer
+</div>`;
+
+/**
+ * Render the tooltip of a grid cell, listing the ten taxa with the most observations in it.
+ * @param {Object} grid - The grid, whose `buckets` hold each cell's observations by taxon id
+ * @param {Object<String, TaxonRow>} rowById - Map of taxon id to taxon row
+ * @param {String} cellId - The id of the hovered cell
+ * @return {String|null} The tooltip's markup, or null if the cell holds no observations
+ */
+hortis.renderVizGridTooltip = function (grid, rowById, cellId) {
+    const bucket = grid.buckets[cellId];
+    let togo = null;
+    if (bucket) {
+        const rowTemplate = "<div>%taxonName: %obsCount observation%s</div>";
+        const rows = Object.entries(bucket.byTaxonId).map(([taxonId, obsIds]) => ({
+            taxonName: rowById[taxonId]?.iNaturalistTaxonName || "Unknown",
+            obsCount: obsIds.length,
+            s: obsIds.length === 1 ? "" : "s"
+        })).sort((rowa, rowb) => rowb.obsCount - rowa.obsCount);
+        const shown = rows.slice(0, 10);
+        togo = hortis.stringTemplate(hortis.vizGridTooltipTemplate, {
+            obsCount: bucket.obsCount,
+            taxonCount: rows.length,
+            taxa: shown.map(row => hortis.stringTemplate(rowTemplate, row)).join("\n"),
+            footer: rows.length > 10 ? "<div class=\"text\">...</div>" : ""
+        });
+    }
+    return togo;
+};

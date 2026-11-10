@@ -1,0 +1,13 @@
+{
+    "@mapbox/mapbox-gl-draw": "node_modules/@mapbox/mapbox-gl-draw",
+    "@popperjs/core": "node_modules/@popperjs/core",
+    "@stanko/dual-range-input": "node_modules/@stanko/dual-range-input",
+    "accessible-autocomplete": "node_modules/accessible-autocomplete",
+    "d3": "node_modules/d3",
+    "infusion": "node_modules/infusion",
+    "jquery-ui": "node_modules/jquery-ui",
+    "maplibre-gl": "node_modules/maplibre-gl",
+    "pako": "node_modules/pako",
+    "papaparse": "node_modules/papaparse",
+    "pretty-checkbox": "node_modules/pretty-checkbox"
+}

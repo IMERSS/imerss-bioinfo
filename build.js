@@ -2,14 +2,18 @@
 "use strict";
 
 const glob = require("glob"),
-    fs = require("fs-extra");
+    fs = require("fs-extra"),
+    childProcess = require("child_process");
 
-const fluid = require("infusion");
+const fluid = require("infusion"),
+    infusion6 = require("./src/infusion6.js");
 const terser = require("terser");
 const path = require("path");
 
-// const fluid6 = require("./infusion-6.js");
-// console.log(fluid6);
+// Builds into docs, for GitHub Pages, the older visualisations driven by .lz4 files, as imerss-viz-all.js, the bundles
+// of the "new" framework from which Xetthecum's story map is built, as imerss-viz-lib.js and imerss-viz-new-core.js,
+// and the pages of the newer visualisations ported to Infusion 6 together with the modules they depend upon - see
+// buildI6 below
 
 const buildIndex = {
     libSource: [
@@ -77,27 +81,6 @@ const buildIndex = {
         "src/client/js/new/imerss-new.js",
         "src/client/js/new/newChecklist.js"
     ],
-    // Full source for environments with strong focus on biodiversity info
-    newSource: [
-        "node_modules/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js",
-        "src/client/css/mapbox-gl-draw.css", // has our own overrides
-        "src/client/css/data-table.css",
-        "src/client/css/resize-bar.css",
-        "node_modules/papaparse/papaparse.min.js",
-        "node_modules/pako/dist/pako_inflate.min.js",
-        "node_modules/pretty-checkbox/dist/pretty-checkbox.min.css",
-        "node_modules/@stanko/dual-range-input/dist/index.css",
-        "src/lib/jquery-ui-widgets-tabs.js",
-        "src/lib/point-in-polygon.js",
-        "src/geom/geoJSON.js",
-        "src/client/js/new/filters.js",
-        "src/client/js/new/polygon-draw.js",
-        "src/client/js/new/dual-range-input.js",
-        "src/client/js/new/data-table.js",
-        "src/client/js/new/resize-bar.js",
-        "src/client/js/autocomplete.js",
-        "src/client/js/tabs.js"
-    ],
     codeHeader: "",
     codeFooter: "", // "\njQuery.noConflict()",
     copy: [{
@@ -118,24 +101,6 @@ const buildIndex = {
     }, {
         src: "src/client/fonts",
         dest: "docs/fonts"
-    }, {
-        src: "src/client/js/new/bipartitePP.js",
-        dest: "docs/js/bipartitePP.js"
-    }, {
-        src: "src/client/js/new/imerss-bbea.js",
-        dest: "docs/js/imerss-bbea.js"
-    }, {
-        src: "src/client/js/new/imerss-viz.js",
-        dest: "docs/js/imerss-viz.js"
-    }, {
-        src: "src/client/js/new/imerss-blitz.js",
-        dest: "docs/js/imerss-blitz.js"
-    }, {
-        src: "src/client/js/new/imerss-plants.js",
-        dest: "docs/js/imerss-plants.js"
-    }, {
-        src: "src/lib/vizjs.js",
-        dest: "docs/js/vizjs.js"
     }, {
         src: "src/buildSource/*.html",
         dest: "docs/"
@@ -214,8 +179,35 @@ const buildIndex = {
     },  {
         src: "data/dataPaper-II/regionIndirection.csv",
         dest: "docs/data/dataPaper-II/regionIndirection.csv"
+    }, {
+        src: "data/b-team/placeholder/*",
+        dest: "docs/data/b-team/placeholder"
+    }, {
+        src: "data/Galiano 2023 BioBlitz/placeholder/*",
+        dest: "docs/data/Galiano 2023 BioBlitz/placeholder"
+    }, {
+        src: "data/dataPaper-II/placeholder/*",
+        dest: "docs/data/dataPaper-II/placeholder"
     }
-    ]
+    ],
+    // The pages of the visualisations ported to Infusion 6, copied into docs from src/buildSource with the rest of its
+    // pages, each with the test verifying it - see buildI6
+    i6Pages: [{
+        page: "indexBeasBCBA.html",
+        verify: ["test/i6/bbeaHydrationRoundTrip.js", "docs", "indexBeasBCBA.html"]
+    }, {
+        page: "indexBeasOBA.html",
+        verify: ["test/i6/bbeaHydrationRoundTrip.js", "docs", "indexBeasOBA.html"]
+    }, {
+        page: "indexBeasWaBA.html",
+        verify: ["test/i6/bbeaHydrationRoundTrip.js", "docs", "indexBeasWaBA.html"]
+    }, {
+        page: "indexBlitz.html",
+        verify: ["test/i6/standardHydrationRoundTrip.js", "docs", "Blitz=indexBlitz.html"]
+    }, {
+        page: "indexDiatoms.html",
+        verify: ["test/i6/standardHydrationRoundTrip.js", "docs", "Diatoms=indexDiatoms.html"]
+    }]
 };
 
 // These two taken from reknit.js
@@ -282,6 +274,12 @@ const minify = async function (hash, filename) {
     });
 };
 
+/**
+ * Build the bundles of the "new" framework from which Xetthecum's story map is built - see the config.json5 of
+ * https://github.com/IMERSS/xetthecum-storymap-story, which copies them from docs
+ * @param {Object} buildIndex - The build index
+ * @return {Promise} A promise which resolves once the bundles are written
+ */
 const buildStory = async function (buildIndex) {
 
     // imerss-viz-lib.js contains just upstream libraries we depend on, to support reasonably easy deploy of "new" framework
@@ -293,16 +291,11 @@ const buildStory = async function (buildIndex) {
     console.log("newCoreFiles ", buildIndex.newCoreSource);
     const newCoreJs = await minify(newCoreJsHash, "imerss-viz-new-core.js");
 
-    const newJsHash = filesToContentHash(buildIndex.newSource, ".js");
-    console.log("newFiles ", buildIndex.newSource);
-    const newJs = await minify(newJsHash, "imerss-viz-new.js");
 
     fs.writeFileSync("docs/js/imerss-viz-lib.js", minifiedLib.code, "utf8");
     fs.writeFileSync("docs/js/imerss-viz-lib.js.map", minifiedLib.map);
     fs.writeFileSync("docs/js/imerss-viz-new-core.js", newCoreJs.code, "utf8");
     fs.writeFileSync("docs/js/imerss-viz-new-core.js.map", newCoreJs.map);
-    fs.writeFileSync("docs/js/imerss-viz-new.js", newJs.code, "utf8");
-    fs.writeFileSync("docs/js/imerss-viz-new.js.map", newJs.map);
 
     const cssLibHash = filesToContentHash(buildIndex.libSource, ".css");
     const cssLibConcat = String.prototype.concat.apply("", Object.values(cssLibHash));
@@ -310,12 +303,9 @@ const buildStory = async function (buildIndex) {
     const cssNewCoreHash = filesToContentHash(buildIndex.newCoreSource, ".css");
     const cssNewCoreConcat = String.prototype.concat.apply("", Object.values(cssNewCoreHash));
 
-    const cssNewHash = filesToContentHash(buildIndex.newSource, ".css");
-    const cssNewConcat = String.prototype.concat.apply("", Object.values(cssNewHash));
 
     fs.writeFileSync("docs/css/imerss-viz-lib.css", cssLibConcat);
     fs.writeFileSync("docs/css/imerss-viz-new-core.css", cssNewCoreConcat);
-    fs.writeFileSync("docs/css/imerss-viz-new.css", cssNewConcat);
 
 };
 
@@ -347,10 +337,73 @@ const buildFromFiles = async function (buildIndex) {
     fluid.log("Copied " + (buildIndex.copy.length + 2) + " files to " + fs.realpathSync("docs"));
 };
 
+/**
+ * Run a node script from this checkout in a child process, failing the build if it fails
+ * @param {String[]} args - The script and its arguments
+ */
+const runNode = function (args) {
+    console.log("Running node " + args.join(" "));
+    const result = childProcess.spawnSync(process.execPath, args, {stdio: ["ignore", "pipe", "inherit"], encoding: "utf8",
+        maxBuffer: 256 * 1024 * 1024});
+    const reported = (result.stdout || "").split("\n").filter(line => !line.startsWith("fluid.loadInContext"));
+    console.log(reported.slice(-12).join("\n"));
+    if (result.status !== 0) {
+        throw new Error("node " + args.join(" ") + " failed with status " + result.status);
+    }
+};
+
+/**
+ * Build into docs the pages of the visualisations ported to Infusion 6, already copied there from src/buildSource,
+ * where each is written as it is served from docs. Infusion 6's copyOut.js copies into docs/vendor the files of the
+ * modules each page depends upon, from this checkout and from Infusion 6 - installed by npm, or as named by moduleOverrides.json5 - and writes docs/fluid-modules.json
+ * locating them. Each page is then verified by its test, which checks that it renders identically in the browser
+ * whether booted from its minimal form or from its hydrated form, and that its hydration is reversed exactly by
+ * dehydrate.js. Finally each page is hydrated in place, with Infusion in its built form, so that it shows its
+ * rendering from placeholder data before it boots - the page as written in src/buildSource is recovered from it by
+ * dehydrate.js.
+ * @param {Object} buildIndex - The build index
+ * @param {Boolean} verify - `false` if the pages are not to be verified
+ */
+const buildI6 = function (buildIndex, verify) {
+    // Infusion 6 as installed by npm, or the checkout named for it by moduleOverrides.json5
+    const infusion6Dir = infusion6.dir();
+    const pages = buildIndex.i6Pages.map(record => path.join("docs", record.page));
+    // The stylesheets of the Oregon State University site hosting the atlases refer to its theme's fonts and images,
+    // which are served only there, and to forms of its fonts which are not held here
+    const sources = ["--source", "infusion-6=" + infusion6Dir, "--source", "imerss-bioinfo=.",
+        "--ignore-missing", "sites/all/", "--ignore-missing", "fonts/OSU/"];
+    // Copied once in the form booted by FluidBoot.js, which the minimal pages verified are written in, and once in
+    // the built form in which they are hydrated
+    runNode([path.join(infusion6Dir, "src/framework/server/copyOut.js"), ...pages, ...sources, "--framework", "boot"]);
+    runNode([path.join(infusion6Dir, "src/framework/server/copyOut.js"), ...pages, ...sources, "--framework", "built"]);
+    if (verify) {
+        buildIndex.i6Pages.forEach(record => runNode(record.verify));
+    }
+    pages.forEach(page => runNode([path.join(infusion6Dir, "src/framework/server/hydrate.js"), page, "-o", page, "--framework", "built"]));
+};
+
 fluid.setLogging(true);
 
-const buildFn = process.argv[2] === "story" ? buildStory : buildFromFiles;
+// Usage: node build.js [story|i6] [--no-verify]
+//   story        Build only the bundles from which Xetthecum's story map is built
+//   i6           Build only the pages ported to Infusion 6, into an existing docs
+//   --no-verify  Do not verify the pages ported to Infusion 6
+const mode = process.argv[2];
+const verify = !process.argv.includes("--no-verify");
 
-buildFn(buildIndex).then(null, function (error) {
+const build = async function (buildIndex) {
+    if (mode === "story") {
+        await buildStory(buildIndex);
+    } else if (mode === "i6") {
+        copyDep("src/buildSource/*.html", "docs/");
+        buildI6(buildIndex, verify);
+    } else {
+        await buildFromFiles(buildIndex);
+        buildI6(buildIndex, verify);
+    }
+};
+
+build(buildIndex).then(null, function (error) {
     console.log(error);
+    process.exitCode = 1;
 });

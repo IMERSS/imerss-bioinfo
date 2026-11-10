@@ -5,7 +5,9 @@
 // noinspection ES6ConvertVarToLetConst
 var fluid = fluid || require("infusion");
 
-if (typeof(require) !== "undefined") {
+// Loaded as a module by the node pipelines - a page rendered under node, which loads this as a script, has a require
+// but is not a module, and loads point-in-polygon.js itself
+if (typeof(module) !== "undefined" && typeof(require) !== "undefined") {
     require("../lib/point-in-polygon.js");
 }
 

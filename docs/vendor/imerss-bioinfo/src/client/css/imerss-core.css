@@ -1,0 +1,861 @@
+:root {
+    --imerss-scrollbar-width: 12px;
+}
+
+
+/** This block refers to standalone viz rather than story
+ */
+
+.imerss-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0; /* Essential otherwise it overflows */
+    contain: paint; /* Makes sure loading indicator is clipped */
+}
+
+/** To prevent black content in fullscreen mode - https://stackoverflow.com/questions/16163089/background-element-goes-black-when-entering-fullscreen-with-html5 **/
+.imerss-container::backdrop {
+    background-color: rgba(255,255,255,0);
+}
+
+.imerss-container *,
+.imerss-container *:before,
+.imerss-container *:after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+}
+
+.imerss-container ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: var(--imerss-scrollbar-width);
+    background-color: #eee
+}
+
+.imerss-container ::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #C1C1C1;
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+.imerss-container ::-webkit-scrollbar-thumb:hover {
+    background-color: #A8A8A8;
+}
+
+#inline-svg {
+    height: 0px;
+    position: absolute;
+}
+
+.imerss-info-panel {
+    display: flex;
+    width: 15%;
+    padding-right: 8px;
+}
+
+.imerss-legend-preview {
+    width: 18px;
+    height: 18px;
+    margin: 2px;
+    border: 1px solid gray;
+}
+
+.imerss-legend-label {
+    display: inline-block;
+    width: 8em;
+    margin-left: 6px;
+    position: relative;
+    top: 1px;
+}
+
+.imerss-legend-cell-size {
+    align-self: center;
+    font-size: 12px;
+    padding-top: 5px;
+}
+
+.imerss-legend {
+    width: 10em;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: 8px;
+    background: #555e;
+    pointer-events: all;
+    display: flex;
+    flex-direction: column;
+
+    /* This section taken from R Leaflet's ".info" */
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    /* background: #555; */
+    color: #eee;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    /* Solution from https://stackoverflow.com/a/21335440 */
+    visibility: visible;
+    transition-property: opacity, visibility;
+    transition-duration: 400ms;
+}
+
+.imerss-legend-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Styling for polygon draw */
+
+/* Notion from https://stackoverflow.com/questions/6312067/border-radius-background-color-cropped-border */
+.maplibregl-ctrl-group {
+    overflow: hidden;
+}
+
+.mapbox-gl-draw_ctrl-draw-btn:hover {
+    background-color: #eee;
+}
+
+.mapbox-gl-draw_ctrl-draw-btn.active {
+    background-color: #ccc;
+}
+
+.mapbox-gl-draw_ctrl-draw-btn.active:hover {
+    background-color: #ddd;
+}
+
+.mode-draw_polygon .maplibregl-canvas-container.maplibregl-interactive {
+    cursor: crosshair;
+}
+
+/* Styling for checkboxes with indeterminate value */
+/* Grabbed definition for default "checked" to apply to indeterminate checkboxes */
+.pretty input[indeterminate="true"]~.state label:after {
+    background-color: #bdc3c7!important;
+    transform: scale(.6);
+}
+
+/* Need to beat builtin definitions even though we are included earlier */
+.pretty.pretty .state label:after, .pretty.pretty .state label:before {
+    width: calc(1em + 0px);
+    height: calc(1em + 0px);
+}
+
+.pretty.pretty.p-icon .state .icon {
+    width: calc(1em + 0px);
+    height: calc(1em + 0px);
+}
+
+.pretty.pretty {
+    margin-right: 0.3em;
+    /* Cancel the wrapping behaviour at higher checklist level */
+    text-indent: 0;
+}
+
+
+.imerss-map-and-taxa {
+    display: flex;
+    /** Old viz do this in a column */
+    flex-direction: row;
+}
+
+.imerss-tabs-and-search {
+    display: flex;
+    flex-direction: column;
+}
+
+.imerss-taxa {
+    display: flex;
+    flex-direction: row;
+    /** Grabbed from Xetthecum's style produced by bootstrap */
+    font-family: Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+
+/* Refers to a viz map e.g. gridded rather than story which is .mxcw-map */
+.imerss-map {
+    height: 100%;
+    width: 100%;
+}
+
+
+.imerss-clickable {
+    cursor: pointer;
+}
+
+/** Inside, e.g. taxonDisplay-iNat-extern */
+
+.external-link {
+    width: 1em;
+    height: 0.9em;
+    display: inline-block;
+    background-image: url("../img/external-link.svg");
+    background-repeat: no-repeat;
+    background-size: 0.9em;
+    margin-left: 6px;
+    vertical-align: -1px;
+}
+
+.imerss-taxonDisplay {
+    /* height: calc(800px + 6rem); */ /* Viz dimens plus tab height */
+    /* width: 480px; */
+    width: 100%;
+    border: black solid 2px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    min-width: 320px;
+}
+
+/** Give some space but absorb space of empty key */
+.taxonDisplay-value.taxonDisplay-wikipediaSummary {
+    display: block;
+    margin-top: -12px;
+}
+
+.imerss-taxonDisplay p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    text-indent: -2em;
+    padding-left: 2em
+}
+
+.taxonDisplay-row {
+    padding: 10px 8px 6px 8px;
+    border-bottom: #ccc 2px solid;
+    width: auto;
+    min-width: 320px;
+}
+
+/* unindent nested rows a bit */
+.taxonDisplay-row .taxonDisplay-row {
+    margin-left: -0.5rem;
+}
+
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder .imerss-media-name {
+    padding-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.taxonDisplay-row .imerss-media-image {
+    padding-bottom: 5px;
+}
+
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder.taxonDisplay-row {
+    border-bottom: none;
+}
+
+.taxonDisplay-row.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder .taxonDisplay-row .taxonDisplay-key {
+    margin-left: 1rem;
+}
+
+.taxonDisplay-runon-header.taxonDisplay-expanded {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.taxonDisplay-empty-header {
+    border-bottom: none;
+}
+
+.taxonDisplay-empty-row .taxonDisplay-key {
+    display: none;
+}
+
+.taxonDisplay-key {
+    width: 12em;
+    margin-right: 4px;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.taxonDisplay-value {
+    width: 100%;
+}
+
+.taxonDisplay-expand {
+    width: 2rem;
+    background-size: 2rem;
+    height: 1rem;
+    background-image: url("../img/Arrow-down.svg");
+    cursor: pointer;
+    float: right;
+    /* From https://codepen.io/sosuke/pen/Pjoqqp */
+    filter: invert(57%) sepia(0%) saturate(6%) hue-rotate(187deg) brightness(94%) contrast(88%);
+}
+
+.taxonDisplay-unexpanded .taxonDisplay-expand {
+    background-image: url("../img/Arrow-down.svg");
+}
+
+.taxonDisplay-expanded .taxonDisplay-expand {
+    background-image: url("../img/Arrow-up.svg");
+}
+
+.taxonDisplay-runon-remainder.taxonDisplay-unexpanded {
+    display: none
+}
+
+.taxonDisplay-expandable-remainder {
+    padding-left: 20px;
+}
+
+.taxonDisplay-expandable-remainder.taxonDisplay-runon-remainder {
+    padding-left: 8px; /* Back to value in taxonDisplay-row */
+    padding-right: 0; /* Avoid right gap */
+    padding-top: 0;
+}
+
+.taxonDisplay-group > p {
+    display: none;
+}
+
+.taxonDisplay-runon-remainder > .taxonDisplay-key {
+    padding: 0;
+    margin: 0;
+}
+
+.taxonDisplay-image-holder {
+    position: relative;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.taxonDisplay-iNat-extern {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    background: #ddd;
+    padding: 4px;
+    padding-left: 6px;
+    color: black;
+}
+
+
+.imerss-photo {
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.imerss-photo-caption {
+    padding-left: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+}
+
+.imerss-tooltip .imerss-photo {
+    width: 165px;
+    height: 125px;
+    min-width: auto;
+}
+
+.imerss-tooltip div.text {
+    max-width: 165px;
+    margin-top: 0.5rem;
+}
+
+.imerss-tooltip.imerss-grid-tooltip div.text {
+    max-width: none;
+}
+
+.imerss-autocomplete {
+    width: 30em;
+    margin-left: 1rem;
+    display: inline-block;
+}
+
+.imerss-autocomplete-row {
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.imerss-autocomplete-row label {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.autocomplete__menu {
+    border: 2px solid #0b0c0c;
+}
+
+.imerss-controls {
+    margin-top: 6px;
+}
+
+.imerss-fullscreen-control:hover {
+    background: #d0d7de33;
+}
+
+.imerss-fullscreen-exit-control {
+    display: none;
+}
+
+.imerss-fullscreen-mode .imerss-fullscreen-control {
+    display: none;
+}
+
+.imerss-fullscreen-mode .imerss-fullscreen-exit-control {
+    display: block;
+}
+
+.imerss-container .autocomplete__hint, .imerss-container .autocomplete__input, .imerss-container .autocomplete__option {
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.autocomplete__option--odd {
+    background-color: #f4f4f4;
+}
+
+.imerss-container .autocomplete__input--default {
+    padding: 2px 4px 2px 4px;
+    border-width: 1px;
+}
+
+.imerss-filter-panel .autocomplete__input--default {
+    width: 15em;
+}
+
+.imerss-filter-panel {
+    padding: 2px 1rem 2px 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
+.imerss-filter {
+    padding: 2px 0 2px;
+    margin-top: -1px;
+    margin-bottom: 1px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #dbe3e7;
+}
+
+.imerss-filters {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    padding-right: 0.5em;
+}
+
+.imerss-filter-autocomplete {
+    display: flex;
+    width: 100%;
+}
+
+.imerss-filter-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.imerss-reset-filter {
+    cursor: pointer;
+    margin-right: 5px;
+    padding: 2px;
+    border-radius: 6px;
+}
+
+.imerss-reset-filter:hover {
+    /* outline: 1px solid gray;*/
+    background: #d0d7de33;
+}
+
+.imerss-record-reporter {
+    padding-top: 2px;
+}
+
+.imerss-filter-title {
+    font-size: smaller;
+}
+
+.imerss-filter-body {
+    padding-left: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: smaller;
+}
+
+.imerss-filter-clear {
+    position: absolute;
+    /* Precedes .autocomplete__wrapper, which is also positioned and would otherwise take its clicks */
+    z-index: 1;
+    right: 5px;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imerss-filter-clear:hover {
+    /** TODO consolidate these, e.g. imerss-reset-filter */
+    background: #d0d7de33;
+}
+
+.imerss-free-region-filter {
+    display: flex;
+    flex-direction: column;
+}
+
+.imerss-free-region-filter-holder {
+    position: relative;
+}
+
+.imerss-free-region-filter .imerss-filter-clear {
+    top: -1px;
+}
+
+.imerss-free-region-control {
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.imerss-free-region-control .imerss-filter-body {
+    overflow-y: scroll;
+    height: 6.5em;
+}
+
+.imerss-free-region-control .imerss-filter-title {
+    display: none;
+}
+
+.imerss-region-field {
+    font-size: 9px;
+    margin-bottom: 2px;
+}
+
+/** Reestablish .imerss-filter-body by reoverriding .imerss-container .autocomplete__input--default def **/
+.imerss-container .imerss-free-region-filter .autocomplete__input--default {
+    margin-left: 16px;
+    margin-bottom: 2px;
+}
+
+.imerss-region-filter-rows {
+    display: flex;
+    font-size: smaller;
+    flex-direction: column;
+    overflow-y: auto;
+    align-items: end;
+}
+
+.imerss-filter-row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    width: 100%;
+}
+
+/* Taken from muffinman article demo at https://muffinman.io/blog/native-dual-range-input/ */
+.dual-range-values {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    width: 100%
+}
+
+/** Override core definition in tabs.css to stop tab content overflowing
+ * TODO: Check that Xetthecum Phase III is still all right etc.
+ */
+.ui-tabs .ui-tabs-panel {
+    display: flex;
+    padding: 10px;
+}
+
+/** Override core definition in tooltip.css */
+.ui-tooltip {
+    max-width: none;
+}
+
+#fli-tab-checklist.ui-tabs-panel, #fli-tab-simple-checklist.ui-tabs-panel {
+    padding: 0;
+}
+
+.imerss-tabs .ui-state-active.ui-tabs-tab {
+    background: #fff;
+}
+
+.imerss-tabs .ui-state-active.ui-tabs-tab a {
+    background: #fff;
+    color: #444;
+}
+
+.imerss-checklist-holder {
+    height: 100%;
+    /** Xetthecum III overrides this to "auto" to remove horizontal scrollbar, but without it, all other environments
+     * have gap to the right of vertical scrollbar */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    overflow: auto;
+}
+
+.imerss-search-checklist {
+    position: relative;
+    width: 100%;
+}
+
+.imerss-search-checklist .autocomplete__wrapper {
+    display: flex;
+    width: 100%;
+}
+
+/** Re-override our existing override of autocomplete's internal styles from line 412 */
+.imerss-container .imerss-search-checklist input {
+    border-radius: 100px;
+    border-color: #e5e7eb;
+    border-width: 1px;
+    background-color: #f3f4f6;
+    padding: 3px 5px 3px 2.5rem;
+    width: calc(100% - 20px)
+}
+
+/** This one hits the close box next to the filter */
+.imerss-search-checklist .imerss-filter-clear {
+    right: -12px;
+}
+
+/** This one hits the magnifying glass icon inside the search box */
+.imerss-search-checklist > svg {
+    left: 0;
+    top: -2px;
+    position: absolute;
+    pointer-events: none;
+    align-items: center;
+    padding-left: 0.7rem;
+    color: #636c76;
+}
+
+/** These "panels" currently only exist in the old-style jQuery tabbed panes. This definition is here to make
+ * Xetthecum phase II panel labels show up in the right place but might be helpful in future.
+ * These two uses of "imerss-panel-label" (in Xetthecum and BBEAS) are unconnected.
+ */
+.imerss-panel {
+    position: relative;
+}
+
+.imerss-panel-label {
+    font-size: 1.5rem;
+    padding-bottom: 5px;
+    padding-top: 2px;
+    display: flex;
+    align-items: center;
+}
+
+.imerss-download-button {
+    display: flex;
+    fill: #636c76;
+    cursor: pointer;
+    border-radius: 6px;
+    margin: 0px 5px 0px 4px;
+}
+
+.imerss-download-button:hover {
+    background: #d0d7de33;
+}
+
+/** Old "copy to clipboard" interaction - now disused */
+
+.imerss-copy-checklist {
+    display: inline-block;
+    fill: #636c76;
+    margin-left: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    margin-top: -5px;
+    /* margin-top: -10px; */
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    border-radius: 6px;
+    position: relative;
+    top: 3px;
+    margin-right: 20px;
+}
+
+.imerss-copy-checklist-copied {
+    fill: #1a7f37;
+}
+
+.imerss-copy-checklist svg {
+    /** Ripped off from GitHub so positioning is a little wonky **/
+    vertical-align: top;
+}
+
+.imerss-copy-checklist:hover {
+    background: #d0d7de33;
+}
+
+.imerss-checklist {
+    height: 100%;
+    overflow-y: auto;
+    /** Otherwise top checkbox gets clipped */
+    padding-top: 2px;
+    padding-right: 4px;
+}
+
+.imerss-checklist p {
+    display: inline;
+    padding: 1px;
+}
+
+.imerss-checklist p:hover {
+    background: #dde;
+}
+
+.checklist-selected {
+    outline: 2px solid black;
+}
+
+.pretty.p-icon.checklist-fold-control .state .icon {
+    font-size: 1.5em;
+    top: -0.21em;
+    left: -0.16em;
+    width: 1em;
+    height: 1em;
+    opacity: 1;
+}
+
+.pretty.checklist-fold-control .state label:before {
+    border: none;
+}
+
+.pretty.checklist-fold-control {
+    margin-right: -1em;
+}
+
+/** Prevent this receiving mouseover so decoration can get tooltips */
+.pretty.checklist-fold-control:not(.active) {
+    pointer-events: none;
+}
+
+.pretty.checklist-fold-control.active {
+    cursor: pointer;
+    margin-right: -0.1em;
+    color: #555;
+}
+
+.imerss-checklist-decoration {
+    margin: -2px -0.3em -2px -0.8em;
+}
+
+.imerss-checklist ul {
+    margin-block-start: 0;
+    padding-inline-start: 0;
+    list-style-type: none;
+}
+
+.imerss-checklist-no-indent ul {
+    padding-inline-start: 0;
+}
+
+li.checklist-row {
+    /** TODO: We put in margin-left: 10px and padding-left: 20px for Xetthecum but this ruins highlighting - figure
+     * out why we did this
+     */
+    padding-left: 30px;
+    text-indent: -30px;
+}
+
+.imerss-checklist > ul {
+    padding: 0;
+}
+
+.imerss-checklist-up {
+    width: 1.5rem;
+    height: 1.5rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    background-image: url(../img/up-arrow.svg);
+    background-size: cover;
+    margin-bottom: 0.2rem;
+}
+
+.imerss-checklist-up:hover {
+    outline: 1px solid black;
+    outline-offset: 1px;
+}
+
+/* The checklist rank highlighting */
+
+.checklist-rank-life > p {
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.checklist-rank-kingdom > p {
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.checklist-rank-phylum > p {
+    text-transform: uppercase;
+    font-size: 1.1em;
+}
+
+.checklist-rank-class > p {
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 1.0em;
+}
+
+.checklist-rank-subclass > p {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.checklist-rank-order > p {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.checklist-rank-family > p {
+    text-transform: uppercase;
+    font-size: 1.0em;
+}
+
+.checklist-rank-genus > p {
+    font-size: 1.0em;
+    font-style: italic;
+}
+
+.checklist-rank-species > p {
+    font-size: 1.0em;
+    font-style: italic;
+}
+
+.checklist-annote {
+    font-style: normal
+}
+
+/* AS edict of 25th August 2024 - bold for phylum and kingdom names */
+
+.checklist-rank-phylum > .checklist-scientific-name {
+    font-weight: bold
+}
+
+.checklist-rank-kingdom > .checklist-scientific-name {
+    font-weight: bold
+}
+
+.imerss-checklist-holder .checklist-common-name {
+    font-style: normal
+}

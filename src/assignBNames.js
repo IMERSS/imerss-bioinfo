@@ -32,7 +32,6 @@ fluid.onUncaughtException.addListener(fluid.handleUncaughtException, "fail",
 /** Catch socket hangup issues
  */
 process.on("unhandledRejection", (reason, promise) => {
-    debugger;
     console.log("Unhandled Rejection at:", promise, "reason:", reason);
 });
 

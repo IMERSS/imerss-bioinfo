@@ -4,7 +4,12 @@
 
 fluid.registerNamespace("hortis.tests");
 
-QUnit.module("BBEA map on Infusion 6 - start-up sequence and grid");
+QUnit.module("BBEA map on Infusion 6 - start-up sequence and grid", {
+    before: async function () {
+        await hortis.tests.loadAllImports();
+        hortis.tests.installFakeMap();
+    }
+});
 
 QUnit.config.reorder = false;
 
@@ -96,14 +101,29 @@ hortis.tests.FakeMap = class {
     getCanvas() {
         return {style: {}};
     }
+    // hortis.libreMap reaches the window through the container, for its timers and animation frames - under node,
+    // whose DOM has no animation frames, these are faked by timeouts
+    getContainer() {
+        const requestAnimationFrame = typeof(window.requestAnimationFrame) === "function" ?
+            window.requestAnimationFrame.bind(window) : callback => setTimeout(callback, 1);
+        const defaultView = {
+            requestAnimationFrame,
+            setTimeout: (callback, delay) => setTimeout(callback, delay),
+            clearTimeout: id => clearTimeout(id)
+        };
+        return {ownerDocument: {defaultView}};
+    }
     remove() {
         this.removed = true;
     }
 };
 
-window.maplibregl = {
-    Map: hortis.tests.FakeMap,
-    NavigationControl: class {}
+// Installed once the SFCs are loaded, since in a real browser the SFC of the map loads MapLibre itself
+hortis.tests.installFakeMap = function () {
+    window.maplibregl = {
+        Map: hortis.tests.FakeMap,
+        NavigationControl: class {}
+    };
 };
 
 hortis.tests.taxaRows = [
@@ -126,9 +146,17 @@ fluid.def("hortis.tests.mapLoader", {
     taxaRows: hortis.tests.taxaRows,
     obsRows: hortis.tests.obsRows,
     // Don't fetch the index of volunteers' reports
-    collectorReportLinker: {
+    collectorFacet: {
         $component: {
-            reportIndex: {}
+            body: {
+                $component: {
+                    collectorReportLinker: {
+                        $component: {
+                            reportIndex: {}
+                        }
+                    }
+                }
+            }
         }
     }
 });
@@ -153,7 +181,7 @@ hortis.tests.waitFor = async function (predicate) {
 hortis.tests.indexOfLog = (map, entry) => map.log.indexOf(entry);
 
 QUnit.test("Start-up is sequenced by availability", async function (assert) {
-    const that = hortis.tests.mapLoader();
+    const that = hortis.tests.mapLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     const map = fluid.peek(hortis.tests.maps);
     assert.equal(hortis.tests.maps.length, 1, "Map constructed once");
@@ -183,6 +211,7 @@ QUnit.test("Start-up is sequenced by availability", async function (assert) {
 
 QUnit.test("Fill patterns are loaded before the style is applied", async function (assert) {
     const that = hortis.tests.mapLoader({
+        container: hortis.tests.root(),
         map: {
             $component: {
                 fillPatternPath: "img/",
@@ -209,6 +238,7 @@ hortis.tests.addMarker = function (map) {
 
 QUnit.test("A layer may insert a stage into start-up, and the ready map can be awaited", async function (assert) {
     const that = hortis.tests.mapLoader({
+        container: hortis.tests.root(),
         map: {
             $component: {
                 readyMap: {
@@ -228,6 +258,8 @@ QUnit.test("A layer may insert a stage into start-up, and the ready map can be a
     map.fire("load");
     await fluid.cell.settle();
     assert.strictEqual(that.map.readyMap, map, "Ready map available once start-up has settled");
+    // The map is fitted to the observations only once the layout has settled - see hortis.libreMap.afterLayout
+    await hortis.tests.waitFor(() => map.log.includes("fitBounds"));
     assert.ok(hortis.tests.indexOfLog(map, "marker") < hortis.tests.indexOfLog(map, "setStyle"), "Inserted stage runs before the style is applied");
     assert.ok(hortis.tests.indexOfLog(map, "fitBounds") > hortis.tests.indexOfLog(map, "setStyle"), "Map zoomed to observations once ready");
     assert.equal(map.log.filter(entry => entry === "setStyle").length, 1, "Style applied exactly once");
@@ -235,7 +267,7 @@ QUnit.test("A layer may insert a stage into start-up, and the ready map can be a
 });
 
 QUnit.test("Clicking a grid cell filters observations, and clicking elsewhere resets it", async function (assert) {
-    const that = hortis.tests.mapLoader();
+    const that = hortis.tests.mapLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     const map = fluid.peek(hortis.tests.maps);
     map.isLoaded = true;

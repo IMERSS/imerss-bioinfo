@@ -4,7 +4,10 @@
 
 fluid.registerNamespace("hortis.tests");
 
-QUnit.module("Hash manager on Infusion 6");
+// The page's module map is fetched as it boots, which is first awaited
+QUnit.module("Hash manager on Infusion 6", {
+    before: () => fluid.cell.settle()
+});
 
 QUnit.config.reorder = false;
 
@@ -37,17 +40,17 @@ hortis.tests.fakeWindow = function (initialHash) {
 };
 
 fluid.def("hortis.tests.hashManager", {
-    $layers: "hortis.hashManager",
+    $layers: "fluid.hashManager",
     window: "{global}.hortis.tests.currentWindow"
 });
 
 QUnit.test("Parsing and rendering", function (assert) {
-    const parsed = hortis.hashManager.parse("#pane:History&taxon:Bombus%20mixtus&filter:{\"a\":1}");
+    const parsed = fluid.hashManager.parse("#pane:History&taxon:Bombus%20mixtus&filter:{\"a\":1}");
     assert.deepEqual(parsed, {pane: "History", taxon: "Bombus mixtus", filter: {a: 1}}, "Hash parsed, including JSON values");
-    assert.equal(hortis.hashManager.render({pane: "History", taxon: null, filter: {a: 1}}), "#pane:History&filter:{\"a\":1}",
+    assert.equal(fluid.hashManager.render({pane: "History", taxon: null, filter: {a: 1}}), "#pane:History&filter:{\"a\":1}",
         "Record rendered, omitting null members");
-    assert.ok(hortis.hashManager.equivalent("#taxon:Bombus mixtus", "#taxon:Bombus%20mixtus"), "Encoding is ignored when comparing");
-    assert.ok(hortis.hashManager.equivalent("#", ""), "Empty hashes are equivalent");
+    assert.ok(fluid.hashManager.equivalent("#taxon:Bombus mixtus", "#taxon:Bombus%20mixtus"), "Encoding is ignored when comparing");
+    assert.ok(fluid.hashManager.equivalent("#", ""), "Empty hashes are equivalent");
 });
 
 QUnit.test("Initial hash is read without being pushed back", function (assert) {
@@ -79,9 +82,9 @@ QUnit.test("Initial hash is read without being pushed back", function (assert) {
 
 QUnit.test("Changes arriving from the URL do not reach pushState", function (assert) {
     const win = hortis.tests.currentWindow = hortis.tests.fakeWindow("#pane:History");
-    const original = hortis.hashManager.pushState;
+    const original = fluid.hashManager.pushState;
     let runs = 0;
-    hortis.hashManager.pushState = function (...args) {
+    fluid.hashManager.pushState = function (...args) {
         ++runs;
         return original(...args);
     };
@@ -100,6 +103,57 @@ QUnit.test("Changes arriving from the URL do not reach pushState", function (ass
         that.destroy();
         fluid.cell.stabilize();
     } finally {
-        hortis.hashManager.pushState = original;
+        fluid.hashManager.pushState = original;
     }
+});
+
+fluid.def("hortis.tests.hashReader", {
+    $layers: "fluid.component",
+    selectedPane: "{hashManager}.hash.pane",
+    region: "{hashManager}.hash.region",
+    paneRenders: [],
+    // Records each pane for which the component computes, as a rendering of the pane would
+    recordPane: "$effect:hortis.tests.recordPane({self}, {self}.selectedPane)"
+});
+
+hortis.tests.recordPane = function (that, selectedPane) {
+    that.paneRenders.push(selectedPane);
+};
+
+QUnit.test("Members referring to the URL's hash", function (assert) {
+    const win = hortis.tests.currentWindow = hortis.tests.fakeWindow("#pane:History");
+    // Stand in for the global manager, so that {hashManager} resolves to one mirroring the fake window
+    fluid.hashManager.instance.destroy();
+    fluid.cell.stabilize();
+    const manager = hortis.tests.hashManager();
+    fluid.cell.stabilize();
+    const that = hortis.tests.hashReader();
+    fluid.cell.stabilize();
+    assert.equal(that.selectedPane, "History", "Member begins with the URL's value");
+    assert.deepEqual([...that.paneRenders], ["History"], "Member was only ever computed from the URL");
+    assert.equal(that.region, undefined, "Member absent from the URL is undefined");
+
+    that.selectedPane = "Status";
+    fluid.cell.stabilize();
+    assert.equal(manager.hash.pane, "Status", "Writing the member writes into the hash");
+    assert.deepEqual(win.pushed, ["#pane:Status"], "and pushes it to the URL");
+
+    win.navigate("#pane:Protected&region:Gambier");
+    fluid.cell.stabilize();
+    assert.equal(that.selectedPane, "Protected", "Navigation changes the member");
+    assert.equal(that.region, "Gambier", "Navigation supplies a member formerly absent");
+    assert.equal(win.pushed.length, 1, "Navigation is not echoed back to the URL");
+
+    that.region = null;
+    fluid.cell.stabilize();
+    assert.deepEqual(win.pushed[1], "#pane:Protected", "Writing a member null removes it from the URL");
+    win.navigate("#pane:Overview");
+    fluid.cell.stabilize();
+    assert.equal(that.selectedPane, "Overview", "Navigation still reaches a member which has been written");
+
+    that.destroy();
+    manager.destroy();
+    fluid.cell.stabilize();
+    fluid.hashManager.instance = fluid.hashManager({window, hash: fluid.hashManager.parse(window.location.hash)});
+    fluid.cell.stabilize();
 });

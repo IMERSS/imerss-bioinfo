@@ -13,7 +13,9 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 //
 // Unlike the Infusion 4/preact-signals version, the checklist's state is split as for fluid.substrateTree:
 // - `defaultFolds` is computed from the filtered tree alone,
-// - `userState` holds only what the user has done - the set of selected rows, and any rows they have folded or unfolded,
+// - `filterState` holds the rows the user has selected, as the least set of taxon ids from which the selection follows -
+//   a selected row's descendants are selected with it, and are not listed - so that it may be held compactly in the URL,
+// - `userState` holds any rows the user has folded or unfolded,
 // - `idToState` is computed from both, deriving each row's indeterminate and hidden states.
 // No computation needs to know which of its inputs changed, nothing writes back into its own inputs, and the user's
 // selection survives any change in the rows in focus. The tree is rendered as a computed tree of VNodes rather than
@@ -85,27 +87,40 @@ fluid.def("hortis.checklist", {
     // Global name of the function deciding whether a row is displayed, accepting (row, filterRanks, rowFocus)
     acceptRow: "hortis.acceptChecklistRowAS",
     selectedId: null,
+    // Global name of a function accepting a taxon row and returning a VNode decorating its entry, or null if none
+    decorate: null,
+    // Method notified with the taxon id of a name clicked in the tree - by default, nothing happens
+    selectName: "$method:fluid.identity",
     entries: "$compute:hortis.checklist.computeEntries({self}.rowById, {self}.rootId, {self}.rowFocus, {self}.filterRanks, {self}.showRoot, {self}.acceptRow)",
     rootEntry: "{self}.entries.rootEntry",
     idToEntry: "{self}.entries.idToEntry",
     defaultFolds: "$compute:hortis.checklist.defaultFolds({self}.rootEntry, {self}.unfoldable, {self}.disclosableRanks)",
+    // Hash of the ids of the rows the user has selected to true, none of which descends from another
+    filterState: {
+        $reactiveRoot: {}
+    },
     userState: {
         $reactiveRoot: {
-            selected: {},
             folded: {}
         }
     },
-    idToState: "$compute:hortis.checklist.idToState({self}.rootEntry, {self}.defaultFolds, {self}.userState)",
+    idToState: "$compute:hortis.checklist.idToState({self}.rootEntry, {self}.defaultFolds, {self}.userState, {self}.filterState)",
     // The selection seen by the rest of the visualisation - all displayed rows if none is selected
     rowSelection: "$compute:hortis.checklist.checksToSelection({self}.idToState)",
     check: "$method:hortis.checklist.check({self}, {0}:id, {1}:checked)",
     toggleFold: "$method:hortis.checklist.toggleFold({self}, {0}:id)",
     foldToRank: "$method:hortis.checklist.foldToRank({self}, {0}:rank, {1}:expand)",
     reset: "$method:hortis.checklist.reset({self})",
-    view: {
+    // The tree of rows, rendered wherever a template designates it with @id="tree"
+    tree: {
         $component: {
-            $layers: "hortis.selectorContainerView",
-            templateTree: "$compute:hortis.checklist.renderTree({$parent}, {$parent}.rootEntry, {$parent}.idToState, {$parent}.selectedId)"
+            $layers: "fluid.component",
+            view: {
+                $component: {
+                    $layers: "fluid.viewComponent",
+                    templateTree: "$compute:hortis.checklist.renderTree({checklist}, {checklist}.rootEntry, {checklist}.idToState, {checklist}.selectedId)"
+                }
+            }
         }
     }
 });
@@ -187,29 +202,43 @@ hortis.checklist.defaultFolds = function (rootEntry, unfoldable, disclosableRank
 
 /**
  * Compute the state of every displayed row from its default fold state and what the user has done. A row is
- * "selected" if the user's selection includes it, else "indeterminate" if any of its descendants is selected. It is
- * "hidden" if any of its ancestors is folded.
+ * "selected" if the user's selection includes it or any of its ancestors, else "indeterminate" if any of its
+ * descendants is selected. It is "hidden" if any of its ancestors is folded.
  * @param {ChecklistEntry} rootEntry - The root entry
  * @param {Object<String, String>} defaultFolds - Map of taxon id to default fold state
- * @param {Object} userState - Members `selected`, a hash of selected taxon ids to `true`, and `folded`, a map of taxon id
- * to the fold state the user has chosen for it
+ * @param {Object} userState - Member `folded`, a map of taxon id to the fold state the user has chosen for it
+ * @param {Object<String, Boolean>} filterState - Hash of the ids of the rows the user has selected to `true`
  * @return {Object<String, RowState>} Map of taxon id to row state
  */
-hortis.checklist.idToState = function (rootEntry, defaultFolds, userState) {
+hortis.checklist.idToState = function (rootEntry, defaultFolds, userState, filterState) {
     const togo = {};
-    const visit = function (entry, ancestorFolded) {
+    const visit = function (entry, ancestorFolded, ancestorSelected) {
         const id = entry.row.id;
         const ownFold = defaultFolds[id] === "fixed" ? "fixed" : userState.folded[id] || defaultFolds[id];
         const hidden = ancestorFolded || id === "0";
         const childFolded = hidden || ownFold === "folded";
-        const childSelected = entry.children.map(child => visit(child, childFolded));
-        const selected = userState.selected[id] ? "selected" :
+        const ownSelected = ancestorSelected || !!filterState[id];
+        const childSelected = entry.children.map(child => visit(child, childFolded, ownSelected));
+        const selected = ownSelected ? "selected" :
             childSelected.some(state => state !== "unselected") ? "indeterminate" : "unselected";
         togo[id] = {selected, folded: hidden ? "hidden" : ownFold};
         return selected;
     };
-    rootEntry.children.forEach(entry => visit(entry, false));
+    rootEntry.children.forEach(entry => visit(entry, false, false));
     return togo;
+};
+
+/**
+ * Reduce a set of selected rows to the least set from which it follows, by omitting each row whose parent is selected.
+ * @param {Object<String, Boolean>} selected - Hash of the ids of selected rows to `true`
+ * @param {Object<String, ChecklistEntry>} idToEntry - Map of taxon id to entry
+ * @return {Object<String, Boolean>} Hash of the ids of the selected rows whose parents are not selected to `true`
+ */
+hortis.checklist.leastSelection = function (selected, idToEntry) {
+    return Object.fromEntries(Object.keys(selected).filter(id => {
+        const parentId = idToEntry[id]?.parent?.row?.id;
+        return !(parentId && selected[parentId]);
+    }).map(id => [id, true]));
 };
 
 /**
@@ -246,7 +275,10 @@ hortis.checklist.checksToSelection = function (idToState) {
 hortis.checklist.check = function (that, id, checked) {
     const idToEntry = that.idToEntry;
     const userState = that.userState;
-    const selected = {...userState.selected};
+    // Every row which is selected, including the displayed descendants of those the user selected - rows which are not
+    // displayed, e.g. since none of their observations survive the other filters, keep their selection
+    const selected = {...that.filterState, ...Object.fromEntries(Object.entries(that.idToState)
+        .filter(([, state]) => state.selected === "selected").map(([id]) => [id, true]))};
     const folded = {...userState.folded};
     const entry = idToEntry[id];
     const setState = function (entry) {
@@ -274,7 +306,8 @@ hortis.checklist.check = function (that, id, checked) {
         }
         parent = parent.parent;
     }
-    that.userState = {selected, folded};
+    that.filterState = hortis.checklist.leastSelection(selected, idToEntry);
+    that.userState = {folded};
 };
 
 /**
@@ -295,7 +328,7 @@ hortis.checklist.toggleFold = function (that, id) {
             }
         });
     }
-    that.userState = {selected: userState.selected, folded};
+    that.userState = {folded};
 };
 
 /**
@@ -325,11 +358,11 @@ hortis.checklist.foldToRank = function (that, rank, expand) {
             }
         }
     });
-    that.userState = {selected: userState.selected, folded};
+    that.userState = {folded};
 };
 
 hortis.checklist.reset = function (that) {
-    that.userState = {selected: {}, folded: that.userState.folded};
+    that.filterState = {};
 };
 
 /**
@@ -446,6 +479,7 @@ hortis.checklist.entryNode = function (entry, options, idToState) {
     return {tag: "li", attrs: {"class": "checklist-row checklist-rank-" + rank + selectedClass}, children: [
         ...(options.unfoldable ? [hortis.checklist.foldNode(id, rowState.folded)] : []),
         ...(options.selectable ? [hortis.checklist.checkboxNode(id, rowState.selected)] : []),
+        ...(options.decorate ? [options.decorate(row)].filter(node => node) : []),
         ...separated,
         ...(subList ? [subList] : [])
     ]};
@@ -464,7 +498,8 @@ hortis.checklist.listNode = function (entries, options, idToState) {
 };
 
 /**
- * Render the tree of a checklist. The root, which is elided onto the view's container, delegates clicks to
+ * Render the tree of a checklist, as the view of its `tree` subcomponent. The root, which is elided onto the view's
+ * container, delegates clicks to
  * `hortis.checklist.click`. Everything beneath it is marked verbatim so that it is not scanned for template bindings.
  * @param {hortis.checklist} that - The checklist
  * @param {ChecklistEntry} rootEntry - The root entry
@@ -477,12 +512,13 @@ hortis.checklist.renderTree = function (that, rootEntry, idToState, selectedId) 
         simple: !!that.filterRanks,
         selectable: that.selectable,
         unfoldable: that.unfoldable,
+        decorate: that.decorate ? fluid.getGlobalValue(that.decorate) : null,
         selectedId
     };
     const list = hortis.checklist.listNode(rootEntry.children, options, idToState);
-    const hover = "hortis.checklist.hover({0}, {self})";
+    const hover = "hortis.checklist.hover({0}, {checklist})";
     const root = {tag: "div", attrs: {
-        "@onclick": "hortis.checklist.click({0}, {self})",
+        "@onclick": "hortis.checklist.click({0}, {checklist})",
         "@onmouseover": hover,
         "@onmousemove": hover,
         "@onmouseleave": hover
@@ -498,10 +534,13 @@ hortis.checklist.renderTree = function (that, rootEntry, idToState, selectedId) 
 hortis.checklist.click = function (event, that) {
     const fold = event.target.closest(".checklist-fold-control.active");
     const check = event.target.closest("input.checklist-check");
+    const name = event.target.closest("p[data-row-id]");
     if (fold) {
         that.toggleFold(fold.dataset.rowId);
     } else if (check) {
         that.check(check.dataset.rowId, check.checked);
+    } else if (name) {
+        that.selectName(name.dataset.rowId);
     }
 };
 
@@ -523,7 +562,7 @@ hortis.checklist.hover = function (event, that) {
  */
 hortis.checklist.rankFoldTree = function (checklist, foldRanks) {
     const options = foldRanks.map(rank => ({tag: "option", attrs: {value: rank}, children: [{text: hortis.capitalize(rank)}]}));
-    const select = (clazz, label, prompt) => ({tag: "select", attrs: {"class": "mf-select " + clazz, "aria-label": label,
+    const select = (clazz, label, prompt) => ({tag: "select", attrs: {"class": "imerss-select " + clazz, "aria-label": label,
         "@onchange": "hortis.checklist.rankFoldChange({0}, {checklist})"}, children: [
         {tag: "option", attrs: {value: "", selected: "", disabled: ""}, children: [{text: prompt}]},
         ...options
@@ -549,8 +588,8 @@ fluid.def("hortis.checklist.withRankFold", {
             $layers: "fluid.component",
             view: {
                 $component: {
-                    $layers: "hortis.selectorContainerView",
-                    selector: "{checklist}.rankFoldSelector",
+                    $layers: "fluid.viewComponent",
+                    elideParent: false,
                     templateTree: "$compute:hortis.checklist.rankFoldTree({checklist}, {checklist}.foldRanks)"
                 }
             }
@@ -565,33 +604,10 @@ hortis.checklist.defaultFoldRanks = filterRanks => filterRanks.slice(1);
 // A search box over a checklist's displayed taxa - choosing a taxon selects it in the checklist, accreting a
 // multiple selection
 fluid.def("hortis.checklist.withSearch", {
-    // searchSelector: String - the selector of the search box's container in the page markup
     // searchControlId: String - the id of the search box
     search: {
         $component: {
             $layers: "hortis.checklist.search"
-        }
-    }
-});
-
-fluid.def("hortis.checklist.search", {
-    $layers: "hortis.autocompleteHost",
-    controlId: "{checklist}.searchControlId",
-    placeholder: "Search taxa ...",
-    minLength: 2,
-    renderSuggestion: "hortis.autocompleteSuggestionForTaxonRow",
-    renderInputValue: "hortis.autocompleteInputForTaxonRow",
-    rows: "$compute:hortis.checklist.entryRows({checklist}.idToEntry)",
-    queryAutocomplete: "$method:hortis.checklist.querySearch({self}.rows, {0}:query, {1}:callback, {self}.maxSuggestions)",
-    confirmAutocomplete: "$method:hortis.checklist.confirmSearch({checklist}, {self}.controlId, {0}:selection, {global}.document)",
-    view: {
-        $component: {
-            $layers: "hortis.selectorTemplateView",
-            selector: "{checklist}.searchSelector",
-            template: `<span>
-                <span class="imerss-filter-autocomplete"><div @id="autocomplete"></div></span>
-                <svg width="32" height="32"><use href="#search-icon"/></svg>
-            </span>`
         }
     }
 });
@@ -615,4 +631,41 @@ hortis.checklist.confirmSearch = function (checklist, controlId, selection, dokk
         // Clear the box once the widget has finished writing the confirmed value into it
         setTimeout(() => hortis.autocomplete.clear(dokkument, controlId), 0);
     }
+};
+
+// Adds a method `download`, which downloads as CSV the names of the leaf taxa selected in the checklist, or of all
+// those displayed if none is selected, which are of the ranks `copyChecklistRanks`
+fluid.def("hortis.checklist.withDownload", {
+    copyChecklistRanks: ["species"],
+    downloadFile: "taxa.csv",
+    allLeaves: "$compute:hortis.checklist.computeLeaves({self}.idToEntry, {self}.rowSelection, {self}.copyChecklistRanks)",
+    download: "$method:hortis.checklist.download({self}.allLeaves, {self}.downloadFile)"
+});
+
+/**
+ * Find the scientific names of the leaf taxa beneath a selection, of the given ranks.
+ * @param {Object<String, ChecklistEntry>} idToEntry - Map of taxon id to entry
+ * @param {Object<String, Boolean>} selection - The selected taxon ids
+ * @param {String[]} copyChecklistRanks - The ranks of the leaves to be listed
+ * @return {String[]} The sorted names of the leaves
+ */
+hortis.checklist.computeLeaves = function (idToEntry, selection, copyChecklistRanks) {
+    const leaves = {};
+    const appendLeaves = function (id) {
+        const entry = idToEntry[id];
+        // The NO_TAXON entry stands for no taxon, e.g. a bee recorded on no plant
+        if (entry && id !== "0") {
+            if (entry.children.length === 0) {
+                leaves[entry.row.id] = entry.row;
+            } else {
+                entry.children.forEach(child => appendLeaves(child.row.id));
+            }
+        }
+    };
+    Object.keys(selection).forEach(appendLeaves);
+    return Object.values(leaves).filter(leaf => copyChecklistRanks.includes(leaf.rank)).map(hortis.rowToScientific).sort();
+};
+
+hortis.checklist.download = function (allLeaves, downloadFile) {
+    hortis.triggerDownload(["taxon", ...allLeaves].join("\n"), "text/csv", downloadFile);
 };

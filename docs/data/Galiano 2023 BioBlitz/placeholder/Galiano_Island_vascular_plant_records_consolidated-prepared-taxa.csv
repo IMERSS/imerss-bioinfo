@@ -1,0 +1,23 @@
+id,parentId,iNaturalistTaxonName,commonName,rank,iNaturalistTaxonImage,reportingStatus,observation,inSummary
+48460,,Life,life,stateofmatter,https://inaturalist-open-data.s3.amazonaws.com/photos/347064198/medium.jpeg,,,
+47126,48460,Plantae,plants,kingdom,https://static.inaturalist.org/photos/221143410/medium.jpeg,,,
+211194,47126,Tracheophyta,vascular plants,phylum,https://inaturalist-open-data.s3.amazonaws.com/photos/78650848/medium.jpeg,,,
+47125,211194,Angiospermae,flowering plants,subphylum,https://inaturalist-open-data.s3.amazonaws.com/photos/6943609/medium.jpg,,,
+136329,211194,Pinopsida,conifers,class,https://inaturalist-open-data.s3.amazonaws.com/photos/8663614/medium.jpg,,,
+47124,47125,Magnoliopsida,dicots,class,https://static.inaturalist.org/photos/10307058/medium.jpg,,,
+47375,136329,Pinales,conifers,order,https://inaturalist-open-data.s3.amazonaws.com/photos/170033792/medium.jpg,,,
+47562,47375,Pinaceae,pine family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/275129245/medium.jpg,,,
+47605,47124,Asterales,"sunflowers, bellflowers, fanflowers, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/13529909/medium.jpg,,,
+47729,47124,Sapindales,"soapberries, cashews, mahoganies, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/54896742/medium.jpg,,,
+48232,47124,Ranunculales,"buttercups, poppies, and allies",order,https://inaturalist-open-data.s3.amazonaws.com/photos/10459/medium.jpg,,,
+47604,47605,Asteraceae,"sunflowers, daisies, asters, and allies",family,https://inaturalist-open-data.s3.amazonaws.com/photos/72961012/medium.jpg,,,
+49289,48232,Berberidaceae,barberry family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/14991/medium.jpg,,,
+58321,47729,Sapindaceae,soapberry family,family,https://inaturalist-open-data.s3.amazonaws.com/photos/27342760/medium.jpeg,,,
+47727,58321,Acer,maples,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/99147747/medium.jpg,,,
+54262,47562,Abies,firs,genus,https://inaturalist-open-data.s3.amazonaws.com/photos/108627343/medium.jpeg,,,
+48227,47727,Acer macrophyllum,bigleaf maple,species,https://inaturalist-open-data.s3.amazonaws.com/photos/105744044/medium.jpeg,confirmed,observed,1
+63690,54262,Abies grandis,grand fir,species,https://inaturalist-open-data.s3.amazonaws.com/photos/83838154/medium.jpeg,confirmed,observed,1
+52818,47604,Achillea,yarrows,genus,https://static.inaturalist.org/photos/19971995/medium.jpeg,,,
+71943,49289,Achlys,,genus,https://static.inaturalist.org/photos/121126/medium.JPG,,,
+75263,71943,Achlys triphylla,vanilla leaf,species,https://static.inaturalist.org/photos/3816738/medium.jpg,confirmed,observed,1
+52821,52818,Achillea millefolium,common yarrow,species,https://inaturalist-open-data.s3.amazonaws.com/photos/4902/medium.jpg,,,

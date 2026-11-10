@@ -1,0 +1,84 @@
+/* Styles needed by the visualisations ported to Infusion 6 - see src/client/js/i6. Restricted to CSS of the
+   Baseline "Widely available" profile */
+
+/* The element of a tooltip placed by hortis.withTooltip - Popper supplies its position, replacing jQuery UI's tooltip */
+.imerss-tooltip-holder {
+    z-index: 1000;
+    max-width: 360px;
+    padding: 6px 8px;
+    background: #fff;
+    color: #222;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    font-size: 14px;
+    line-height: 1.35;
+    /* The tooltip follows the pointer, so must not intercept the events which drive it */
+    pointer-events: none;
+}
+
+.imerss-tooltip-holder[hidden] {
+    display: none;
+}
+
+/* Formerly supplied by Infusion 4's fluid.css, on which the port no longer depends */
+.fl-hidden {
+    display: none !important;
+}
+
+/* Once loaded, the loading indicator fades and then ceases to intercept the pointer - it remains in the markup, since
+   it is part of the template of hortis.beaVizLoader rather than removed by script */
+.bee-loading-container-hidden {
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 1s ease-in, visibility 0s 1s;
+}
+
+/* A panel of hortis.pageTabs which is not selected - jQuery UI's own styles show every panel */
+.ui-tabs .ui-tabs-panel[hidden] {
+    display: none;
+}
+
+/* The dual range input of hortis-dualRangeInput.vue - its detents are marked on a strip above its track, and the
+   values chosen may be shown beneath its thumbs, following them as they are slid */
+.dual-range-holder {
+    position: relative;
+}
+
+.dual-range-ticks {
+    height: 6px;
+    margin: 0 calc(var(--dri-thumb-width, 20px) / 2);
+    background-repeat: no-repeat;
+}
+
+.dual-range-disabled .dual-range-input input {
+    cursor: not-allowed;
+}
+
+.dual-range-thumb-labels {
+    display: none;
+    position: relative;
+    height: 1.4em;
+    margin: 2px calc(var(--dri-thumb-width, 20px) / 2) 0;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.dual-range-thumb-labels.dual-range-thumb-labels-shown {
+    display: block;
+}
+
+/* The label of the lower value ends at its thumb and that of the upper begins at its thumb, so that they never
+   overlap, but each is held within the track */
+.dual-range-thumb-label {
+    position: absolute;
+    white-space: nowrap;
+}
+
+.dual-range-thumb-min {
+    transform: translateX(-100%);
+}
+
+.dual-range-thumb-max {
+    transform: translateX(0);
+}

@@ -1,0 +1,14 @@
+{
+    "@mapbox/mapbox-gl-draw": "vendor/@mapbox/mapbox-gl-draw",
+    "@popperjs/core": "vendor/@popperjs/core",
+    "@stanko/dual-range-input": "vendor/@stanko/dual-range-input",
+    "accessible-autocomplete": "vendor/accessible-autocomplete",
+    "d3": "vendor/d3",
+    "imerss-bioinfo": "vendor/imerss-bioinfo",
+    "infusion": "vendor/infusion",
+    "jquery-ui": "vendor/jquery-ui",
+    "maplibre-gl": "vendor/maplibre-gl",
+    "pako": "vendor/pako",
+    "papaparse": "vendor/papaparse",
+    "pretty-checkbox": "vendor/pretty-checkbox"
+}
