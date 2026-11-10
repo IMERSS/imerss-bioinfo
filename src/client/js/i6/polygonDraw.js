@@ -72,8 +72,19 @@ hortis.libreMap.polygonFilter.summarise = function (filterState) {
     return hortis.countSummary(filterState.length, ["polygon", "polygons"]);
 };
 
+/**
+ * Filter observations to those lying within any of the polygons drawn. The polygons arrive as component material, read
+ * through a proxy which tracks each access - since every observation is tested against every vertex of the polygons,
+ * their bare values are read instead, which is many times faster.
+ * @param {Object[]} obsRows - The observations
+ * @param {Object[]} filterState - The polygons drawn, as GeoJSON features, possibly as a proxy
+ * @param {Map<Object, Object>} pointCache - Map of each observation to its point, possibly as a proxy
+ * @return {Object[]} The observations within any of the polygons
+ */
 hortis.libreMap.polygonFilter.doFilter = function (obsRows, filterState, pointCache) {
-    return filterState.length === 0 ? obsRows : obsRows.filter(row => hortis.intersectsAnyFeature(filterState, pointCache.get(row)));
+    const features = fluid.unwrapProxy(filterState);
+    const points = fluid.unwrapProxy(pointCache);
+    return features.length === 0 ? obsRows : obsRows.filter(row => hortis.intersectsAnyFeature(features, points.get(row)));
 };
 
 hortis.libreMap.polygonFilter.reset = function (that) {
