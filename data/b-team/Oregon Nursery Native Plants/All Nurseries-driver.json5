@@ -1,0 +1,16 @@
+{
+    strategy: 'DwCA',
+    input: 'All Nurseries.csv',
+    swaps: '../taxon-swaps-2025.csv',
+    noRank: false,
+    overrides: {
+        phylumField: '',
+        rankField: '',
+        iNatName: 'ScientificName',
+        rawName: 'ScientificName',
+        phylum: 'Tracheophyta',
+    },
+    output: 'All Nurseries-assigned.csv',
+    taxa: 'All Nurseries-assigned-taxa.csv',
+    mismatches: 'All Nurseries-mismatches.csv',
+}

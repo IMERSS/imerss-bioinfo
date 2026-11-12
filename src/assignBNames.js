@@ -4,6 +4,9 @@
 
 const fluid = require("infusion");
 const minimist = require("minimist");
+const JSON5 = require("json5");
+const fs = require("fs");
+const path = require("path");
 
 fluid.require("%imerss-bioinfo");
 
@@ -142,23 +145,85 @@ const strategies = {
     }
 };
 
-const parsedArgs = minimist(process.argv.slice(2), {boolean: [...Object.keys(strategies), "noRank"]});
+// Strategy fields which may be overridden from the command line or a driver file
+const overridableFields = ["phylum", "phylumField", "rank", "rankField", "rawName", "iNatName"];
 
-const swapsFile = parsedArgs.swaps || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/taxon-swaps-2025.csv");
+// Paths held in a driver file, which are stored relative to the driver file's own directory
+const driverPaths = ["input", "swaps", "output", "taxa", "mismatches"];
 
-const noRank = parsedArgs.noRank;
+/**
+ * Load a driver file, resolving any paths it holds against the driver file's directory.
+ * @param {String} driverFile - Path to a JSON5 driver file
+ * @return {Object} The driver record with its paths made absolute
+ */
+hortis.readDriver = function (driverFile) {
+    const driver = JSON5.parse(fs.readFileSync(driverFile, "utf8"));
+    const driverDir = path.dirname(path.resolve(driverFile));
+    driverPaths.forEach(function (key) {
+        if (driver[key] !== undefined) {
+            driver[key] = path.resolve(driverDir, fluid.module.resolvePath(driver[key]));
+        }
+    });
+    return driver;
+};
 
-const inputFile = parsedArgs._[0] || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/plant-pollinators-Carril-normalised.csv");
+/**
+ * Write a driver file which will reproduce this run, with paths relative to the driver file's directory.
+ * @param {String} driverFile - Path at which to write the JSON5 driver file
+ * @param {Object} driver - The fully resolved driver record for this run
+ */
+hortis.writeDriver = function (driverFile, driver) {
+    const driverDir = path.dirname(path.resolve(driverFile));
+    const togo = fluid.copy(driver);
+    driverPaths.forEach(function (key) {
+        if (togo[key] !== undefined) {
+            togo[key] = path.relative(driverDir, path.resolve(fluid.module.resolvePath(togo[key]))).replace(/\\/g, "/");
+        }
+    });
+    fs.writeFileSync(driverFile, JSON5.stringify(togo, null, 4) + "\n");
+    console.log("Written driver file " + driverFile);
+};
 
-const inputTrunk = hortis.inputFileToTrunk(inputFile);
+const parsedArgs = minimist(process.argv.slice(2), {boolean: [...Object.keys(strategies), "noRank"], string: overridableFields});
 
-const outputFile = parsedArgs.o || inputTrunk + "-assigned.csv";
-const outputTaxaFile = parsedArgs.taxa || inputTrunk + "-assigned-taxa.csv";
+const fileDriver = parsedArgs.driver ? hortis.readDriver(parsedArgs.driver) : {};
 
-const mismatchFile = parsedArgs.mismatches || inputTrunk + "-mismatches.csv";
+const argStrategy = parsedArgs.strategy || Object.keys(strategies).find(strategy => parsedArgs[strategy]);
+
+const argOverrides = {};
+overridableFields.forEach(function (key) {
+    if (parsedArgs[key] !== undefined) {
+        argOverrides[key] = parsedArgs[key];
+    }
+});
+
+// Values supplied on the command line take priority over those in any driver file
+const driver = {
+    strategy: argStrategy || fileDriver.strategy,
+    input: parsedArgs._[0] || fileDriver.input || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/plant-pollinators-Carril-normalised.csv"),
+    swaps: parsedArgs.swaps || fileDriver.swaps || fluid.module.resolvePath("%imerss-bioinfo/data/b-team/taxon-swaps-2025.csv"),
+    noRank: parsedArgs.noRank || fileDriver.noRank || false,
+    // Default to DwC column names for phylum and rank - other layouts supply these via e.g. --phylumField, --rank
+    overrides: {phylumField: "phylum", rankField: "taxonRank", ...fileDriver.overrides, ...argOverrides}
+};
+
+if (!driver.strategy || !strategies[driver.strategy]) {
+    fluid.fail("Please supply strategy argument via --strategy=<name> or one of ", Object.keys(strategies).map(key => "--" + key).join(", "));
+}
+
+const inputTrunk = hortis.inputFileToTrunk(driver.input);
+
+driver.output = parsedArgs.o || fileDriver.output || inputTrunk + "-assigned.csv";
+driver.taxa = parsedArgs.taxa || fileDriver.taxa || inputTrunk + "-assigned-taxa.csv";
+driver.mismatches = parsedArgs.mismatches || fileDriver.mismatches || inputTrunk + "-mismatches.csv";
+
+const driverOutFile = parsedArgs.driverOut || inputTrunk + "-driver.json5";
+
+const strategy = driver.strategy;
+const noRank = driver.noRank;
 
 const swapsReader = hortis.csvReaderWithMap({
-    inputFile: swapsFile,
+    inputFile: driver.swaps,
     mapColumns: {
         "preferred": "Preferred name",
         "supplied": "Supplied name",
@@ -170,22 +235,25 @@ const source = hortis.iNatTaxonSource({
 //     disableNameCache: true
 });
 
-
-const strategy = Object.keys(strategies).find(strategy => parsedArgs[strategy]);
-
-if (!strategy) {
-    fluid.fail("Please supply strategy argument via one of ", Object.keys(strategies).map(key => "--" + key).join(", "));
-}
-
 console.log("Applying strategy ", strategy);
-const strategyBigRec = strategies[strategy];
-
+const strategyBigRec = strategy === "bees" ? strategies.bees : {...strategies[strategy], ...driver.overrides};
 
 const reader = hortis.csvReaderWithoutMap({
-    inputFile: inputFile,
+    inputFile: driver.input,
     csvOptions: strategyBigRec.csvOptions
 });
 
+/**
+ * Determine a value such as phylum or rank for a row, taking it from the configured field if present,
+ * falling back to any configured default.
+ * @param {Object} row - The row being processed
+ * @param {String} [field] - The name of the field holding the value
+ * @param {String} [defaultValue] - Value to use if the field is absent or empty
+ * @return {String} The resolved value, or undefined
+ */
+hortis.rowValue = function (row, field, defaultValue) {
+    return (field && row[field]) || defaultValue;
+};
 
 // Added in Epifamily so we can include Bees [Epifamily Anthophila]
 const storeRanks = ["stateofmatter", "kingdom", "phylum", "subphylum", "class", "order", "epifamily", "family", "genus"];
@@ -327,23 +395,19 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
         if (strategy === "bees") {
             await hortis.applyName(row, i, "Tracheophyta", null, invertedSwaps, taxa, unmappedTaxa, strategyBigRec.plant);
             await hortis.applyName(row, i, "Arthropoda", null, invertedSwaps, taxa, unmappedTaxa, strategyBigRec.pollinator);
-        } else if (strategy === "reintegrated") {
-            await hortis.applyName(row, i, row.Phylum, row.Rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
-        } else if (strategy.startsWith("DwC")) {
-            await hortis.applyName(row, i, row.phylum, row.taxonRank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
-        } else if (strategy === "iNat") {
-            await hortis.applyName(row, i, row.phylum, row.taxon_rank, invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
-        } else if (strategy === "Saanich") {
-            await hortis.applyName(row, i, "Tracheophyta", "species", invertedSwaps, taxa, unmappedTaxa, strategyBigRec);
+        } else {
+            const s = strategyBigRec;
+            await hortis.applyName(row, i, hortis.rowValue(row, s.phylumField, s.phylum), hortis.rowValue(row, s.rankField, s.rank),
+                invertedSwaps, taxa, unmappedTaxa, s);
         }
 
         mapped.push(row);
     }
-    const resolveOut = fluid.module.resolvePath(outputFile);
+    const resolveOut = fluid.module.resolvePath(driver.output);
     await hortis.writeCSV(resolveOut, Object.keys(mapped[0]), mapped, fluid.promise());
 
     const taxaRows = hortis.flattenTaxa(taxa);
-    await hortis.writeCSV(outputTaxaFile, Object.keys(taxaRows[0]), taxaRows, fluid.promise());
+    await hortis.writeCSV(driver.taxa, Object.keys(taxaRows[0]), taxaRows, fluid.promise());
 
     const unmapped = Object.keys(unmappedTaxa);
     if (unmapped.length > 0) {
@@ -353,7 +417,7 @@ Promise.all([reader.completionPromise, swapsReader.completionPromise, source.eve
             console.log(key + ", original name " + scientificName);
             return {taxonName: key, originalName: scientificName};
         });
-        await hortis.writeCSV(mismatchFile, Object.keys(unmappedRows[0]), unmappedRows, fluid.promise());
+        await hortis.writeCSV(driver.mismatches, Object.keys(unmappedRows[0]), unmappedRows, fluid.promise());
     }
-
+    hortis.writeDriver(driverOutFile, driver);
 });

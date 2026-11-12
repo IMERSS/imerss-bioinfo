@@ -8,6 +8,8 @@ const hortis = fluid.registerNamespace("hortis");
 const sqlite = require("sqlite");
 const sqlite3 = require("sqlite3");
 const pako = require("pako");
+const fs = require("fs");
+const nodePath = require("path");
 
 fluid.registerNamespace("hortis.codecs.zlib");
 
@@ -60,6 +62,8 @@ hortis.sqliteDB.openDB = async function (dbFile) {
     const path = fluid.module.resolvePath(dbFile);
     try {
         fluid.log("Opening SQLite database at ", path);
+        // Ensure the database's directory exists, since SQLite will create the file but not its parents
+        fs.mkdirSync(nodePath.dirname(path), {recursive: true});
         return sqlite.open({
             filename: path,
             driver: sqlite3.Database
