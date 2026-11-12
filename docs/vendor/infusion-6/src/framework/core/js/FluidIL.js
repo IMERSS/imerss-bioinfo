@@ -3671,7 +3671,9 @@ const $fluidILScope = function (fluid) {
         }
     };
 
-    // Get the underlying value hosted by a proxy - probably only of real value in test cases
+    // Get the underlying value hosted by a proxy. Besides test cases, this is of value in performance-critical code,
+    // such as a loop over many rows of component material - reads of the bare value skip the proxy's per-access
+    // tracking, which can cost many times the work of the loop itself. Such reads are not tracked as dependencies
     fluid.unwrapProxy = function (maybeProxy) {
         const target = maybeProxy?.[$t];
         return target ? fluid.deSignal(target) : maybeProxy;

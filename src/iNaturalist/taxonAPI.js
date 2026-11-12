@@ -158,8 +158,14 @@ hortis.DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 fluid.defaults("hortis.cachedApiSource", {
     gradeNames: ["fluid.dataSource", "fluid.dataSource.noencoding"],
-    refreshInDays: 180,
+    refreshInDays: 365,
     disableCache: false,
+    // Set to false for sources whose documents are large and never requested twice in a run, e.g. observation pages
+    useInMemoryCache: true,
+    retry: {
+        attempts: 6,
+        initialDelay: 5000 // doubled after each failed attempt
+    },
     components: {
         inMemorySource: {
             type: "fluid.inMemoryCachedSource"
@@ -179,6 +185,40 @@ fluid.defaults("hortis.cachedApiSource", {
     }
 });
 
+/** Issue a get against a dataSource, retrying with exponential backoff on failure (e.g. transient DNS or network
+ * errors such as EAI_AGAIN or ECONNRESET)
+ * @param {fluid.dataSource} source - The dataSource to read from
+ * @param {Object} query - The directModel for the request
+ * @param {Object} retry - Retry policy, holding members `attempts` and `initialDelay` (in ms)
+ * @return {Promise<any>} A promise for the dataSource's response, rejecting with the final error if all attempts fail
+ */
+hortis.getWithRetry = async function (source, query, retry) {
+    const attempts = retry?.attempts || 1;
+    let delay = retry?.initialDelay || 5000;
+    let result, lastError;
+    let succeeded = false;
+    for (let attempt = 1; attempt <= attempts && !succeeded; ++attempt) {
+        try {
+            result = await source.get(query);
+            succeeded = true;
+        } catch (e) {
+            lastError = e;
+            if (attempt < attempts) {
+                console.log("Got API error on attempt " + attempt + " of " + attempts + ", retrying in " + delay + "ms: ", e);
+                await new Promise(resolve => setTimeout(resolve, delay));
+                delay *= 2;
+            } else {
+                console.log("Got API error on final attempt " + attempt + ", giving up: ", e);
+            }
+        }
+    }
+    if (succeeded) {
+        return result;
+    } else {
+        throw lastError;
+    }
+};
+
 hortis.readNoValue = function (value) {
     return value === fluid.NO_VALUE ? undefined : value;
 };
@@ -189,7 +229,8 @@ hortis.writeNoValue = function (value) {
 
 hortis.cachedApiSource.read = async function (that, payload, options) {
     const query = options.directModel;
-    const firstLevel = await that.inMemorySource.get(query);
+    const useInMemory = that.options.useInMemoryCache;
+    const firstLevel = useInMemory ? await that.inMemorySource.get(query) : undefined;
     if (firstLevel) {
         return hortis.readNoValue(firstLevel);
     } else {
@@ -197,27 +238,23 @@ hortis.cachedApiSource.read = async function (that, payload, options) {
         if (cached && !that.options.disableCache) {
             const staleness = Date.now() - Date.parse(cached.fetched_at);
             if (staleness < that.options.refreshInDays * hortis.DAY_IN_MS) {
-                await that.inMemorySource.set(query, cached);
+                if (useInMemory) {
+                    await that.inMemorySource.set(query, cached);
+                }
                 return cached;
             } else {
                 console.log("Staleness is " + moment.duration(staleness).humanize() + " so fetching live document");
             }
         }
-        let live;
-        try {
-            live = await that.apiSource.get(query);
-        } catch (e) {
-            console.log("Got API error ", e);
-            await new Promise(resolve => setTimeout(resolve, 5000));
-            debugger;
-            live = await that.apiSource.get(query);
-        }
+        const live = await hortis.getWithRetry(that.apiSource, query, that.options.retry);
         const writer = async function (query, toWrite) {
             if (toWrite.doc) { // Only write to db if we got live
                 await that.dbSource.set(query, toWrite);
             }
-            // Always write to top-level cache
-            await that.inMemorySource.set(query, hortis.writeNoValue(toWrite));
+            // Always write to top-level cache if enabled
+            if (useInMemory) {
+                await that.inMemorySource.set(query, hortis.writeNoValue(toWrite));
+            }
         };
         const toWrite = await that.upgradeLiveDocument(query, live, writer);
 
@@ -340,7 +377,7 @@ hortis.genusMatch = function (a, b) {
 
     // Return everything before the whitespace
     return j > 0 ? a.slice(0, j - 1) : "";
-}
+};
 
 // Highest iNat rank is 100 for Life - we want the most specific taxon of those selected
 hortis.scoreNameMatch = async function (result, query, byIdSource) {

@@ -52,13 +52,19 @@ hortis.taxonSearchFilter.select = function (that, id, dokkument) {
  * Filter observations to those of a taxon, or of any taxon beneath it.
  * @param {Object[]} obsRows - The observations
  * @param {TaxonRow|null} filterState - The chosen taxon, or null if none is chosen
- * @param {Object<String, TaxonRow>} rowById - Map of taxon id to indexed taxon row
+ * The taxa arrive as component material, read through a proxy which tracks each access - since the filter visits
+ * every observation and climbs the taxonomy for each, the bare values are read instead, which is many times faster.
+ * @param {Object[]} obsRows - The observations
+ * @param {TaxonRow|null} filterState - The chosen taxon, or null if none is chosen
+ * @param {Object<String, TaxonRow>} rowById - Map of taxon id to indexed taxon row, possibly as a proxy
  * @return {Object[]} The observations surviving the filter
  */
 hortis.taxonSearchFilter.doFilter = function (obsRows, filterState, rowById) {
+    const bareRowById = fluid.unwrapProxy(rowById);
+    const filterId = filterState?.id;
     const includeRow = function (obsRow) {
-        let taxonRow = rowById[obsRow.iNaturalistTaxonId];
-        while (taxonRow && taxonRow.id !== filterState.id) {
+        let taxonRow = bareRowById[obsRow.iNaturalistTaxonId];
+        while (taxonRow && taxonRow.id !== filterId) {
             taxonRow = taxonRow.parent;
         }
         return !!taxonRow;

@@ -190,16 +190,22 @@ const projectArgs = hortis.iNatProjects[parsedArgs._[0] || "GalianoData"];
 
 const jwt = hortis.readJSONSync("jwt.json", "reading JWT token file");
 
-const source = hortis.iNat.obsSource({
-    headers: {
-        Authorization: "Bearer " + jwt.api_token
-    },
-    paramMap: projectArgs.paramMap
+// Observation pages are fetched via a short-lived cache held in the same database as taxa, so that an interrupted run
+// can be resumed quickly. Pass --disableObsCache to force all pages to be fetched live.
+const iNatTaxonSource = hortis.iNatTaxonSource({
+    jwt: jwt,
+    components: {
+        obsPages: {
+            type: "hortis.cachediNatObsPage",
+            options: {
+                paramMap: projectArgs.paramMap,
+                refreshInDays: parsedArgs.disableObsCache ? 0 : 3
+            }
+        }
+    }
 });
 
-const iNatTaxonSource = hortis.iNatTaxonSource({
-    jwt: jwt
-});
+const source = iNatTaxonSource.obsPages;
 
 const fileVars = {
     Date: new Date().toISOString().substring(0, 10).replaceAll("-", "_")
@@ -234,9 +240,8 @@ hortis.applyResponse = async function (data) {
         const lastId = fluid.peek(rows).id;
         console.log("got last id " + lastId);
         directModel.id_above = lastId;
-        setTimeout(function () {
-            hortis.makeObsRequest(directModel);
-        }, 1000);
+        // Live requests are rate-limited by hortis.iNatAPILimiter, cached pages are served immediately
+        hortis.makeObsRequest(directModel);
     } else {
         hortis.writeObs("obsoutput.csv", rows).then(function () {
             const fileTarget = fluid.stringTemplate(projectArgs.outputFile, fileVars);
@@ -249,12 +254,13 @@ hortis.applyResponse = async function (data) {
 
 hortis.makeObsRequest = function (directModel) {
     console.log("Making request ", directModel);
-    const promise = source.get(directModel);
+    const promise = source.get({...directModel});
 
-    promise.then(async function (data) {
-        await hortis.applyResponse(data);
+    promise.then(async function (record) {
+        await hortis.applyResponse(record.doc);
     }, function (error) {
-        console.log("Got ERROUR: ", error);
+        console.log("Failed to fetch observations after retries, rerun to resume from cache: ", error);
+        process.exitCode = 1;
     });
 };
 

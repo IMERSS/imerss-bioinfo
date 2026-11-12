@@ -155,3 +155,95 @@ fluid.defaults("hortis.iNatObsAPI.byIdDBSource", {
         query: "SELECT id from iNatObsId"
     }
 });
+
+// A cached source for pages of the observations search API, so that an interrupted run of inatObs.js can be resumed
+// rapidly. The cache is short-lived since observations change much more rapidly than taxa.
+// Accepts the same directModel as hortis.iNat.obsSource, e.g. {per_page, id_above}, and resolves to a record
+// {key, fetched_at, doc} where doc is the API response.
+// Expected to be instantiated as a child of hortis.iNatTaxonSource in order to share its database and JWT.
+fluid.defaults("hortis.cachediNatObsPage", {
+    gradeNames: "hortis.cachedApiSource",
+    refreshInDays: 3,
+    // Pages are large and each is requested only once per run, so holding them in memory would exhaust the heap
+    useInMemoryCache: false,
+    // paramMap: Object - search parameters for the observations query, merged with those in hortis.iNat.obsSource
+    components: {
+        apiSource: {
+            type: "hortis.iNat.obsSource",
+            options: {
+                gradeNames: "hortis.withINatRateLimit",
+                paramMap: "{cachediNatObsPage}.options.paramMap"
+            }
+        },
+        dbSource: {
+            type: "hortis.iNatObsAPI.pageDBSource",
+            options: {
+                invokers: {
+                    encodeQueryKey: "hortis.cachediNatObsPage.encodeQueryKey({arguments}.0, {cachediNatObsPage}.apiSource)"
+                }
+            }
+        }
+    },
+    invokers: {
+        upgradeLiveDocument: "hortis.cachediNatObsPage.upgradeLiveDocument({arguments}.0, {arguments}.1, {arguments}.2, {that}.apiSource)"
+    }
+});
+
+/** Compute the database key for an observations page query - this is the full resolved API URL
+ * @param {Object} query - The directModel for the query, or a record already holding its `key`
+ * @param {Component} apiSource - The hortis.iNat.obsSource issuing the requests
+ * @return {Object} The query, supplemented with member `key`
+ */
+hortis.cachediNatObsPage.encodeQueryKey = function (query, apiSource) {
+    let key = query.key;
+    if (!key) {
+        key = apiSource.resolveUrl(apiSource.options.url, apiSource.options.termMap, query);
+    }
+    return {
+        ...query,
+        key
+    };
+};
+
+/** Convert a live observations page response into the record form stored in the database
+ * @param {Object} query - The directModel for the query
+ * @param {Object} live - The response from the observations API
+ * @param {Function} writer - Function accepting (query, record) which writes the record to the caches
+ * @param {Component} apiSource - The hortis.iNat.obsSource issuing the requests
+ * @return {Promise<Object>} A promise for the record {key, fetched_at, doc}
+ */
+hortis.cachediNatObsPage.upgradeLiveDocument = async function (query, live, writer, apiSource) {
+    const toWrite = {
+        key: hortis.cachediNatObsPage.encodeQueryKey(query, apiSource).key,
+        fetched_at: new Date().toISOString(),
+        doc: live
+    };
+    // Don't cache the final empty page, so that a rerun will always pick up observations added since
+    if (live && live.results && live.results.length > 0) {
+        await writer(query, toWrite);
+    }
+    return toWrite;
+};
+
+fluid.defaults("hortis.iNatObsAPI.pageDBSource", {
+    gradeNames: ["hortis.listableSqliteSource"],
+    createString: "CREATE TABLE IF NOT EXISTS iNatObsPage (key TEXT PRIMARY KEY, fetched_at TEXT, doc BLOB)",
+    columnCodecs: {
+        doc: "zlib"
+    },
+    readQuery: {
+        query: "SELECT key, fetched_at, doc from iNatObsPage WHERE key = ?",
+        args: ["%key"]
+    },
+    writeQuery: {
+        query: "INSERT OR REPLACE INTO iNatObsPage (key, fetched_at, doc) VALUES ($key, $fetched_at, $doc)",
+        args: {
+            $key: "%key",
+            $fetched_at: "%fetched_at",
+            $doc: "%doc"
+        }
+    },
+    listQuery: {
+        query: "SELECT key from iNatObsPage"
+    }
+});

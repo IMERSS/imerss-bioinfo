@@ -61,6 +61,10 @@
     min-height: 0;
     overflow-x: scroll;
     overflow-y: auto;
+    /* Only the rows near those in view are rendered, between spacers. The browser's scroll anchoring would otherwise
+       move the scrolled position each time a new block of rows replaces the old, so that scrolling runs away from the
+       pointer */
+    overflow-anchor: none;
 }
 
 .hortis-dataTable-scroll table {

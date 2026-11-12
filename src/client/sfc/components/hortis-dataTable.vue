@@ -30,6 +30,10 @@ fluid.def("hortis.dataTable", {
     scrollTop: 0,
     viewHeight: 0,
     rowHeight: 26.5,
+    // The least change in the measured height of a row for which `rowHeight` is updated. Rows differ in height by a
+    // fraction of a pixel, by their content and the display's scaling, and since every row not rendered is reckoned at
+    // `rowHeight`, following each such difference would change the height of a long table by thousands of pixels
+    rowHeightTolerance: 0.5,
     resolvedColumns: "$compute:hortis.dataTable.resolveColumns({self}.rows, {self}.columns)",
     displayRows: "$compute:hortis.dataTable.sortRows({self}.rows, {self}.sortColumn, {self}.sortDirection)",
     window: "$compute:hortis.dataTable.window({self}.displayRows.length, {self}.scrollTop, {self}.viewHeight, {self}.rowHeight, {self}.minBlockSize)",
@@ -179,9 +183,27 @@ hortis.dataTable.pageInfo = function (window) {
 };
 
 /**
+ * Measure the height of the rows rendered in a table's scrolled element, as their mean, since they may differ by a
+ * fraction of a pixel.
+ * @param {Element} scrollEl - The table's scrolled element
+ * @return {Number} The mean height of the rendered rows, or 0 if none is rendered
+ */
+hortis.dataTable.measureRowHeight = function (scrollEl) {
+    const rows = scrollEl.querySelectorAll("tbody tr:not(.hortis-dataTable-spacer)");
+    const first = rows[0], last = rows[rows.length - 1];
+    return rows.length > 0 ? (last.getBoundingClientRect().bottom - first.getBoundingClientRect().top) / rows.length : 0;
+};
+
+/**
  * Track the scrolled position and the height of the view of a table's scrolled element, writing them into the table
  * on each animation frame in which they change, and the height of its head into the element's CSS variable
  * --data-table-head-height.
+ * The table's `rowHeight`, by which the heights of the spacers standing for the rows not rendered are reckoned, is
+ * corrected only when the rows' measured height departs from it by more than `rowHeightTolerance`, and never whilst
+ * the pointer is pressed within the scrolled element. A change of `rowHeight` changes the height of the whole table,
+ * and whilst the scrollbar's thumb is dragged, the browser holds the thumb at the pointer by moving the scrolled
+ * position in proportion - which rendered other rows, measured afresh, in a loop which ran the table to its end. Once
+ * `rowHeight` is corrected, the scrolled position is moved so that the same row stays at the top of the view.
  * @param {hortis.dataTable} that - The table
  * @param {Element} container - The table's rendered container
  * @param {Window} window - The window holding the table
@@ -190,32 +212,50 @@ hortis.dataTable.pageInfo = function (window) {
 hortis.dataTable.track = function (that, container, window) {
     const scrollEl = container.querySelector(".hortis-dataTable-scroll");
     let frame = null;
+    // Whether the pointer is pressed within the scrolled element, e.g. dragging its scrollbar's thumb
+    let pressed = false;
     const update = () => {
         frame = null;
         const theadHeight = scrollEl.querySelector("thead")?.getBoundingClientRect().height || 0;
-        const row = scrollEl.querySelector("tbody tr:not(.hortis-dataTable-spacer)");
-        const rowHeight = row?.getBoundingClientRect().height;
         // Confines the vertical scrollbar's track to the rows, beneath the sticky head - see data-table.css
         scrollEl.style.setProperty("--data-table-head-height", theadHeight + "px");
+        const rowHeight = hortis.dataTable.measureRowHeight(scrollEl);
+        if (!pressed && rowHeight > 0 && Math.abs(rowHeight - that.rowHeight) > that.rowHeightTolerance) {
+            const topRow = scrollEl.scrollTop / that.rowHeight;
+            that.rowHeight = rowHeight;
+            scrollEl.scrollTop = topRow * rowHeight;
+        }
         that.scrollTop = scrollEl.scrollTop;
         that.viewHeight = Math.max(scrollEl.clientHeight - theadHeight, 0);
-        if (rowHeight > 0 && Math.abs(rowHeight - that.rowHeight) > 0.01) {
-            that.rowHeight = rowHeight;
-        }
     };
     const schedule = () => {
         if (!frame) {
             frame = window.requestAnimationFrame(update);
         }
     };
+    const press = () => {
+        pressed = true;
+    };
+    const release = () => {
+        if (pressed) {
+            pressed = false;
+            schedule();
+        }
+    };
     scrollEl.addEventListener("scroll", schedule);
+    scrollEl.addEventListener("pointerdown", press);
+    window.addEventListener("pointerup", release);
+    window.addEventListener("pointercancel", release);
     const observer = new window.ResizeObserver(schedule);
     observer.observe(scrollEl);
-    return {scrollEl, schedule, observer, window, cancel: () => frame && window.cancelAnimationFrame(frame)};
+    return {scrollEl, schedule, press, release, observer, window, cancel: () => frame && window.cancelAnimationFrame(frame)};
 };
 
 hortis.dataTable.untrack = function (record) {
     record.scrollEl.removeEventListener("scroll", record.schedule);
+    record.scrollEl.removeEventListener("pointerdown", record.press);
+    record.window.removeEventListener("pointerup", record.release);
+    record.window.removeEventListener("pointercancel", record.release);
     record.observer.disconnect();
     record.cancel();
 };
