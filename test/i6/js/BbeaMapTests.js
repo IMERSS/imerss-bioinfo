@@ -201,7 +201,7 @@ QUnit.test("Start-up is sequenced by availability", async function (assert) {
     assert.ok(hortis.tests.indexOfLog(map, "addLayer obsgrid-layer") > setStyle, "Observation grid added after the style has applied");
     assert.ok(hortis.tests.indexOfLog(map, "fitBounds") > setStyle, "Map zoomed to observations after the style has applied");
     assert.equal(map.log.filter(entry => entry === "setStyle").length, 1, "Style applied exactly once");
-    assert.deepEqual(map.style._order, ["baseMap", "ecoL3", "obsgrid-layer"], "Layers sorted by their sort keys");
+    assert.deepEqual(map.style._order, ["baseMap", "ecoL3", "obsgrid-layer", "obsgrid-outline-layer"], "Layers sorted by their sort keys, the cells beneath their outlines");
     assert.equal(map.sources["obsgrid-source"].data.features.length, 2, "Observations fall into two grid cells");
 
     that.destroy();

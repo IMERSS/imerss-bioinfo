@@ -15,7 +15,6 @@
 // real records without error. Since only the built form of Infusion is copied, the page's minimal form cannot be
 // loaded from the site - the round trip between its two forms is verified by build.js, of the same page in this
 // checkout's docs.
-// The files of the visualisation's former build, for Infusion 4, are removed from the site.
 
 const fs = require("fs-extra"),
     path = require("path"),
@@ -45,11 +44,6 @@ const pageFiles = {
     "data/b-team/placeholder/plant-pollinators-OBA-2025-assigned-taxa.viz": "data/b-team/placeholder/plant-pollinators-OBA-2025-assigned-taxa.viz",
     "data/b-team/placeholder/plant-pollinators-OBA-2025-regionIndirection.csv": "data/b-team/placeholder/plant-pollinators-OBA-2025-regionIndirection.csv"
 };
-
-// Files of the visualisation's former build for Infusion 4, written by an earlier version of this script
-const obsoleteFiles = ["js/bipartitePP.js", "js/imerss-bbea.js", "js/imerss-viz-lib.js", "js/imerss-viz-new-core.js",
-    "js/imerss-viz-new.js", "js/jquery.js", "js/vizjs.js", "css/imerss-bbea.css", "css/imerss-viz-lib.css",
-    "css/imerss-viz-new-core.css", "css/imerss-viz-new.css"];
 
 /**
  * Run a node script in a child process, failing if it fails
@@ -83,10 +77,6 @@ const copyMelitOut = function () {
         "--source", "imerss-bioinfo=" + bagatelle, "--framework", "built", "--ignore-missing", "sites/all/",
         "--ignore-missing", "fonts/OSU/"]);
     runNode([path.join(infusion6Dir, "src/framework/server/hydrate.js"), page, "-o", page, "--framework", "built"]);
-    obsoleteFiles.map(file => path.join(docs, file)).filter(file => fs.existsSync(file)).forEach(file => {
-        fs.removeSync(file);
-        console.log("Removed obsolete " + file);
-    });
 };
 
 /**

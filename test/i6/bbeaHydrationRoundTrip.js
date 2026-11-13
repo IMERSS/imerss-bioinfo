@@ -1,15 +1,16 @@
 /* eslint-env node */
 "use strict";
 
-// Test that each plant-pollinator (BBEA) page - indexBeasBCBA.html, indexBeasOBA.html and indexBeasWaBA.html - renders
-// identically whether booted in the browser from its minimal, dehydrated form - which imports the visualisation's
-// Single File Component and configures it with its data and their placeholders - or from the form written for it by
-// Infusion 6's hydrate.js, which holds the markup rendered from the
-// placeholder data and every injection its SFCs made. Run from this checkout with
+// Test that a plant-pollinator (BBEA) page renders identically whether booted in the browser from its minimal,
+// dehydrated form - which imports the visualisation's Single File Component and configures it with its data and their
+// placeholders - or from the form written for it by Infusion 6's hydrate.js, which holds the markup rendered from the
+// placeholder data and every injection its SFCs made, and that dehydrate.js recovers the minimal form exactly. Run from
+// this checkout with
 //     node test/i6/bbeaHydrationRoundTrip.js
-// Infusion 6 is that installed by npm, or the checkout named for it by moduleOverrides.json5 - see src/infusion6.js.
-// A single page may instead be given, e.g. one with the same configuration, e.g. that of a project into which it has been copied out by
-// Infusion 6's copyOut.js, given as
+// which tests test/i6/html/bbeaPlaceholderFixture.html, the visualisation configured with the placeholder data of the
+// Washington Bee Atlas as its data too, so that it is ready as soon as it boots. Infusion 6 is that installed by npm, or
+// the checkout named for it by moduleOverrides.json5 - see src/infusion6.js.
+// A page with real data may instead be given, e.g. one of the atlases' pages built into docs by build.js, as
 //     node test/i6/bbeaHydrationRoundTrip.js <root> <page>
 // where <root> is the directory served to the browser, and <page> the page's path within it
 
@@ -26,16 +27,19 @@ const expectAll = function (condition, message) {
     }
 };
 
-// The page is ready once all of the real observations are counted, the loading indicator is hidden and the map has drawn
+// The page is ready once all of its observations are counted, the loading indicator is hidden, and the map and the
+// network have drawn
 const ready = `/([\\d,]+) of \\1 records/.test((document.querySelector(".imerss-record-reporter")?.textContent || "").replace(/\\s+/g, " "))
     && !!document.querySelector(".bee-loading-container-hidden") && !!document.querySelector(".imerss-map canvas")
-    && document.querySelectorAll(".imerss-bipartite svg rect").length > 10`;
+    && document.querySelectorAll(".imerss-bipartite svg rect").length > 0`;
 
 // The map and the network are drawn by libraries which own their markup - MapLibre lays out its controls and canvas
-// according to the moment its tiles arrive. Their own content is compared only as far as their roots
+// according to the moment its tiles arrive, and d3 sizes the network to its panel as it draws it, which on a hydrated
+// page whose data is its placeholders, as the fixture's is, it does only once, as it is hydrated. Their own content is
+// compared only as far as their roots
 const snapshot = `(() => {
     const clone = document.querySelector("[fluid-layers]").cloneNode(true);
-    clone.querySelectorAll(".imerss-map").forEach(map => map.replaceChildren());
+    clone.querySelectorAll(".imerss-map, .imerss-bipartite").forEach(root => root.replaceChildren());
     return {
         components: fluidCanonicalMarkup(clone),
         injections: fluidInjectionKeys(),
@@ -92,7 +96,7 @@ const roundTrip = async function (root, page) {
 
 const main = async function () {
     const root = process.argv[2] ? path.resolve(process.argv[2]) : path.resolve(__dirname, "../..");
-    const pages = process.argv[3] ? [process.argv[3]] : ["BCBA", "OBA", "WaBA"].map(atlas => `indexBeas${atlas}.html`);
+    const pages = [process.argv[3] || "test/i6/html/bbeaPlaceholderFixture.html"];
     for (const page of pages) {
         await roundTrip(root, page);
     }

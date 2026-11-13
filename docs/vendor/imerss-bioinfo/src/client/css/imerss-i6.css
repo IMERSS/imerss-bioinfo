@@ -95,16 +95,60 @@
     display: none;
 }
 
-/* The dual range input of hortis-dualRangeInput.vue - its detents are marked on a strip above its track, and the
-   values chosen may be shown beneath its thumbs, following them as they are slid */
+/* The dual range input of hortis-dualRangeInput.vue - its detents are marked on a scale above its track, whose spaces
+   between them may be labelled, and the values chosen may be shown beneath its thumbs, following them as they are
+   slid */
 .dual-range-holder {
     position: relative;
+    container: dual-range / inline-size;
 }
 
-.dual-range-ticks {
+/* The scale spans the track between the centres of the thumbs at its ends */
+.dual-range-scale {
+    position: relative;
     height: 6px;
     margin: 0 calc(var(--dri-thumb-width, 20px) / 2);
-    background-repeat: no-repeat;
+}
+
+.dual-range-scale.dual-range-scale-labelled {
+    height: 14px;
+}
+
+/* Each tick is drawn by its border, which is drawn a whole number of device pixels wide at any zoom, so that all are
+   drawn alike - centred on its value, the first at the left end of the scale and the last at its right */
+.dual-range-tick {
+    position: absolute;
+    bottom: 0;
+    height: 6px;
+    width: 0;
+    margin-left: -0.5px;
+    border-left: 1px solid var(--dri-tick-color, #999);
+}
+
+.dual-range-tick-label {
+    position: absolute;
+    bottom: 3px;
+    transform: translateX(-50%);
+    font-size: 9px;
+    line-height: 1;
+    color: var(--dri-tick-label-color, #666);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* The months' first three letters if the input is wide enough to hold them, otherwise their first letters */
+.dual-range-tick-label-long {
+    display: none;
+}
+
+@container dual-range (min-width: 300px) {
+    .dual-range-tick-label-long {
+        display: inline;
+    }
+
+    .dual-range-tick-label-short {
+        display: none;
+    }
 }
 
 .dual-range-disabled .dual-range-input input {

@@ -187,7 +187,16 @@ QUnit.test("Reset control", function (assert) {
     that.destroy();
 });
 
+// Slides a range input to a value and releases it, whereupon the value is written at once
 hortis.tests.input = function (element, value) {
+    element.value = value;
+    element.dispatchEvent(new Event("input", {bubbles: true}));
+    element.dispatchEvent(new Event("change", {bubbles: true}));
+    fluid.cell.stabilize();
+};
+
+// Slides a range input to a value without releasing it, as each of the many input events of a drag does
+hortis.tests.slide = function (element, value) {
     element.value = value;
     element.dispatchEvent(new Event("input", {bubbles: true}));
     fluid.cell.stabilize();
@@ -332,31 +341,36 @@ QUnit.test("Filter states are held in the URL", function (assert) {
     that.destroy();
 });
 
-QUnit.test("Phenology filter chooses months or a period, exclusively", function (assert) {
+QUnit.test("Phenology filter chooses months or a period of the year, exclusively", function (assert) {
     const that = hortis.tests.bbeaLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     const hashManager = fluid.hashManager.instance;
     const hash = () => ({...hashManager.hash});
     const phenology = that.phenologyFacet.body.phenologyFilter;
-    const toDay = hortis.phenologyFilter.toDay;
+    // The number in the year of a day, from its month from 1 to 12 and its day of the month
+    const day = (month, date) => hortis.phenologyFilter.dayOfYear(month - 1, date);
     const months = () => qsa(".imerss-phenology-months input");
     const minInput = qs(".imerss-phenology-period .dual-range-min"),
         maxInput = qs(".imerss-phenology-period .dual-range-max");
 
-    assert.deepEqual({...phenology.dualRangeInput.range}, {min: toDay("2024-04-20"), max: toDay("2024-07-03")},
-        "The period spans the observations' days");
+    assert.deepEqual({...phenology.dualRangeInput.range}, {min: 0, max: day(12, 31)},
+        "The period spans the whole year, whatever the observations' days");
     assert.deepEqual([...qsa(".imerss-phenology-period .dual-range-thumb-label")].map(label => label.textContent),
-        ["20 Apr 24", "3 Jul 24"], "Each end of the period is shown as its day");
-    assert.deepEqual(phenology.dualRangeInput.ticks, [toDay("2024-05-01"), toDay("2024-06-01"), toDay("2024-07-01")],
-        "A detent is marked at the first day of each month within the period");
+        ["1 Jan", "31 Dec"], "Each end of the period is shown as its day of the year");
+    assert.deepEqual(phenology.dualRangeInput.ticks, [...fluid.iota(12, 1).map(month => day(month, 1)), day(12, 31)],
+        "A detent is marked at the first day of each month, and at the end of the year");
+    assert.equal(qsa(".imerss-phenology-period .dual-range-tick").length, 13, "Each detent is rendered");
+    assert.deepEqual([...qsa(".imerss-phenology-period .dual-range-tick-label-long")].map(label => label.textContent),
+        hortis.shortMonths, "The space between each detent and the next is labelled with its month");
+    assert.equal(hortis.phenologyFilter.toDay("2019-03-01"), day(3, 1), "A day falls on the same day of the year in any year");
     assert.ok(!minInput.disabled && !months()[5].disabled, "Neither mode is disabled before either is operated");
 
-    hortis.tests.input(maxInput, String(toDay("2024-06-15")));
-    assert.deepEqual(phenology.filterState.days, {lower: toDay("2024-04-20"), upper: toDay("2024-06-15")},
+    hortis.tests.input(maxInput, String(day(6, 15)));
+    assert.deepEqual(phenology.filterState.days, {lower: 0, upper: day(6, 15)},
         "Moving the input chooses a period, written through its lens to the filter's state");
-    assert.equal(hash().phenology, "2024-04-20~2024-06-15", "The period is held in the URL as its first and last days");
+    assert.equal(hash().phenology, "01-01~06-15", "The period is held in the URL as the months and days of its ends");
     assert.equal(that.filteredObs.length, 4, "Four observations fall within the period");
-    assert.equal(qs(".imerss-phenology-period .dual-range-thumb-max").textContent, "15 Jun 24", "The end slid shows its day");
+    assert.equal(qs(".imerss-phenology-period .dual-range-thumb-max").textContent, "15 Jun", "The end slid shows its day");
     assert.ok(months().every(input => input.disabled), "Choosing a period disables the months");
     assert.ok(!minInput.disabled, "The period's input is not disabled");
     assert.equal(phenology.filterSummary.count, 1, "The filter summarises its period");
@@ -373,12 +387,46 @@ QUnit.test("Phenology filter chooses months or a period, exclusively", function 
     assert.equal(hash().phenology, "6", "The month is held in the URL");
 
     // As when the user navigates the URL's history
-    hashManager.hash = {phenology: "2024-05-01~2024-06-30"};
+    hashManager.hash = {phenology: "05-01~06-30"};
     fluid.cell.stabilize();
-    assert.deepEqual({...phenology.dualRangeInput.range}, {min: toDay("2024-05-01"), max: toDay("2024-06-30")},
+    assert.deepEqual({...phenology.dualRangeInput.range}, {min: day(5, 1), max: day(6, 30)},
         "The period's input follows the URL through both lenses");
     assert.ok(!june.checked && june.disabled, "The month is cleared and disabled by a period in the URL");
     assert.equal(that.filteredObs.length, 2, "Two observations fall within the period from the URL");
+
+    // A period held in the URL by an earlier version of the filter, as full dates, is read by their months and days
+    hashManager.hash = {phenology: "2023-05-01~2023-06-30"};
+    fluid.cell.stabilize();
+    assert.deepEqual({...phenology.filterState.days}, {lower: day(5, 1), upper: day(6, 30)},
+        "A period of full dates is read as a period of the year");
+    that.destroy();
+});
+
+QUnit.test("Sliding a range input filters once the input events are handled, coalescing them", async function (assert) {
+    const that = hortis.tests.bbeaLoader({container: hortis.tests.root()});
+    fluid.cell.stabilize();
+    const elevation = that.elevationFacet.body.elevationFilter;
+    const maxInput = qs(".imerss-elevation-filter .dual-range-max");
+    // Each write of the range passes back through its lens to the filter's state
+    const toState = hortis.elevationFilter.toState;
+    let writes = 0;
+    hortis.elevationFilter.toState = (...args) => {
+        writes++;
+        return toState(...args);
+    };
+    [1400, 1200, 1000, 950].forEach(value => hortis.tests.slide(maxInput, String(value)));
+    assert.equal(elevation.dualRangeInput.range.max, 1500, "The range is not written as each input event arrives");
+    assert.equal(qs(".imerss-elevation-filter .dual-range-thumb-max").textContent.trim(), "950 m", "The label follows the thumb at once");
+    await new Promise(resolve => setTimeout(resolve, 10));
+    fluid.cell.stabilize();
+    assert.equal(elevation.dualRangeInput.range.max, 950, "The range is written once the input events are handled");
+    assert.equal(writes, 1, "Four input events are coalesced into a single write");
+    hortis.elevationFilter.toState = toState;
+    assert.equal(elevation.filterState.upper, 950, "The filter's state follows the range");
+    hortis.tests.slide(maxInput, "900");
+    qs(".imerss-elevation-filter .dual-range-max").dispatchEvent(new Event("change", {bubbles: true}));
+    fluid.cell.stabilize();
+    assert.equal(elevation.dualRangeInput.range.max, 900, "Releasing the thumb writes its value at once");
     that.destroy();
 });
 
@@ -398,9 +446,13 @@ QUnit.test("Codecs of filter states", function (assert) {
     assert.equal(codecs.polygons.encode([features[1]]), "POLYGON((1 2,3 4,5 6,1 2))", "A single polygon is a POLYGON");
     assert.deepEqual(hortis.phenologyFilter.urlCodec.decode("1,12").months.filter(range => range.checked).map(range => range.month),
         ["January", "December"], "Months decoded by number");
-    const period = hortis.phenologyFilter.urlCodec.decode("2024-04-01~2024-06-15");
-    assert.equal(hortis.phenologyFilter.urlCodec.encode(period), "2024-04-01~2024-06-15", "Period round trips");
+    const period = hortis.phenologyFilter.urlCodec.decode("04-01~06-15");
+    assert.equal(hortis.phenologyFilter.urlCodec.encode(period), "04-01~06-15", "Period round trips");
+    assert.equal(hortis.phenologyFilter.urlCodec.encode(hortis.phenologyFilter.urlCodec.decode("02-29~12-31")), "02-29~12-31",
+        "A period from 29 February to 31 December round trips");
     assert.ok(period.months.every(range => !range.checked), "A period checks no month");
     assert.equal(hortis.phenologyFilter.urlCodec.decode("junk~").days, null, "Malformed period decodes to none");
-    assert.equal(hortis.phenologyFilter.formatDay(hortis.phenologyFilter.toDay("2024-04-01")), "1 Apr 24", "Days formatted as 1 Apr 24");
+    assert.equal(hortis.phenologyFilter.urlCodec.decode("06-31~07-01").days, null, "A period with an invalid day decodes to none");
+    assert.equal(hortis.phenologyFilter.urlCodec.decode("07-01~06-01").days, null, "A period ending before it starts decodes to none");
+    assert.equal(hortis.phenologyFilter.formatDay(hortis.phenologyFilter.toDay("2024-04-01")), "1 Apr", "Days formatted as 1 Apr");
 });

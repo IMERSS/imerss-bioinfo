@@ -32,7 +32,7 @@ fluid.def("hortis.bipartite", {
     download: "$method:hortis.bipartite.downloadFrom({self}.view.renderedContainer)"
 });
 
-// This gets injected into a rendered bipartite diagram - keep in step with imerss-bbea.css etc.
+// This gets injected into a rendered bipartite diagram - keep in step with imerss-bbea-i6.css etc.
 hortis.bipartite.css = `
 <style>
     svg {

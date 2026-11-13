@@ -28,6 +28,9 @@
 
 .imerss-container {
     display: block;
+    /* The We overlay is larger than the map beneath it, by 20% - clip it at the visualisation's edge, as the paint
+       containment once given to every .imerss-container by imerss-core.css did */
+    overflow: clip;
 }
 
 .imerss-map-holder {

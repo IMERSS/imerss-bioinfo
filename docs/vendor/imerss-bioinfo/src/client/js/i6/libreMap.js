@@ -107,12 +107,66 @@ fluid.def("hortis.libreMap", {
  * @return {maplibregl.Map|Unavailable} The map, or an unavailable value if the MapLibre library is not loaded
  */
 hortis.libreMap.make = function (container, maplibregl) {
-    return maplibregl ? new maplibregl.Map({container, style: fluid.copy(hortis.blankMapStyle)}) :
-        fluid.unavailable({message: "The MapLibre library is not loaded", variety: "config"});
+    let togo;
+    if (maplibregl) {
+        togo = new maplibregl.Map({container, style: fluid.copy(hortis.blankMapStyle)});
+        const window = container.ownerDocument.defaultView;
+        // Only a map drawn by WebGL in a browser has pixels to track
+        if (typeof togo.getPixelRatio === "function" && typeof window.matchMedia === "function") {
+            hortis.libreMap.trackPixels(togo, window);
+        }
+    } else {
+        togo = fluid.unavailable({message: "The MapLibre library is not loaded", variety: "config"});
+    }
+    return togo;
 };
 
 hortis.libreMap.destroy = function (map) {
+    hortis.libreMap.untrackPixels(map);
     map.remove();
+};
+
+/**
+ * Make each pixel of a map's canvas fall on exactly one pixel of the screen, at any zoom of the browser, so that what is
+ * drawn a pixel wide, such as the outlines of the grid's cells, stays a pixel wide. MapLibre sizes the canvas's
+ * backing store to the whole number of device pixels beneath the container's width in CSS pixels, but displays it
+ * across that width - at a zoom of 125%, a container 801 pixels wide holds a backing store of 1001 device pixels shown
+ * across 1001.25, which the browser rescales, smearing a line a pixel wide across two pixels at some places but not at
+ * others. Here the canvas is displayed across exactly as many device pixels as it holds, after every resize. The map is
+ * also resized whenever the ratio of device pixels to CSS pixels changes, as zooming the browser changes it, since that
+ * does not always resize the window, by which MapLibre would see it.
+ * @param {maplibregl.Map} map - The map
+ * @param {Window} window - The window holding the map
+ */
+hortis.libreMap.trackPixels = function (map, window) {
+    const record = {window, query: null};
+    record.fit = () => {
+        const canvas = map.getCanvas();
+        const ratio = map.getPixelRatio();
+        canvas.style.width = canvas.width / ratio + "px";
+        canvas.style.height = canvas.height / ratio + "px";
+    };
+    record.watch = () => {
+        record.query = window.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`);
+        record.query.addEventListener("change", record.change);
+    };
+    record.change = () => {
+        record.query.removeEventListener("change", record.change);
+        map.resize();
+        record.watch();
+    };
+    map.on("resize", record.fit);
+    record.fit();
+    record.watch();
+    map.hortisPixelTracker = record;
+};
+
+hortis.libreMap.untrackPixels = function (map) {
+    const record = map.hortisPixelTracker;
+    if (record) {
+        record.query.removeEventListener("change", record.change);
+        map.off("resize", record.fit);
+    }
 };
 
 /**
@@ -520,7 +574,10 @@ hortis.libreMap.natureStops = [
 fluid.def("hortis.libreMap.withObsGrid", {
     fillStops: hortis.libreMap.viridisStops,
     fillOpacity: 0.6,
+    // The colour and opacity of the outline of each cell, drawn exactly one device pixel wide at any zoom by a layer of
+    // its own - see hortis.libreMap.gridOutlineLayer
     outlineColour: "black",
+    outlineOpacity: 1,
     gridResolution: 100,
     gridVisible: true,
     zoomToObsBounds: true,
@@ -591,6 +648,14 @@ fluid.def("hortis.libreMap.withObsGrid", {
         }
     },
     updateMarkers: "$effect:hortis.libreMap.updateMarkers({self}.markerLayer, {self}.readyMap, {self}.markerRows, {self}.selectedRecord)",
+    // On a touch screen, a tap on a cell or a marker shows the tooltip which hovering over it would show, and a second tap
+    // selects it, as a click would
+    tapTooltips: {
+        $bindable: {
+            bind: "hortis.libreMap.bindTapTooltips({self}, {self}.map, {self}.markerLayer)",
+            unbind: "hortis.libreMap.unbindTapTooltips({boundValue})"
+        }
+    },
     centreRecord: "$effect:hortis.libreMap.centreRecord({self}.readyMap, {self}.selectedRecord, {self}.zoomDuration)",
     // Whether the grid is shown - it fades away whilst markers are shown in its place
     gridShown: "$compute:hortis.libreMap.gridShown({self}.gridVisible, {self}.showMarkers)",
@@ -657,6 +722,16 @@ hortis.libreMap.obsGridFeature = function (grid, latres, longres, maxObsCountOve
     };
 };
 
+/**
+ * Draw the grid of cells counting observations, or update it with fresh counts and opacity. The cells are filled by one
+ * layer, and outlined by another - see hortis.libreMap.gridOutlineLayer. The fills are drawn without antialiasing,
+ * whose partly covered pixels along each edge would otherwise overlap those of the neighbouring cell, so that each
+ * pixel along a shared edge is covered by exactly one of the two cells.
+ * @param {hortis.libreMap} that - The map component, with members `fillStops`, `outlineColour` and `outlineOpacity`
+ * @param {maplibregl.Map} map - The map
+ * @param {Object} geojson - The cells, as a GeoJSON FeatureCollection
+ * @param {Number} gridOpacity - The opacity of the cells
+ */
 hortis.libreMap.updateObsGrid = function (that, map, geojson, gridOpacity) {
     const source = map.getSource("obsgrid-source");
     if (source) {
@@ -679,16 +754,196 @@ hortis.libreMap.updateObsGrid = function (that, map, geojson, gridOpacity) {
                 },
                 "fill-opacity": gridOpacity,
                 "fill-opacity-transition": {duration: hortis.libreMap.gridFadeDuration, delay: 0},
-                "fill-outline-color": that.outlineColour
+                "fill-antialias": false
             },
             metadata: {
                 sortKey: 100
             }
         });
+        map.addLayer(hortis.libreMap.gridOutlineLayer(map, that.outlineColour));
         // Ensure that the numerous layers inserted by the MapboxDraw plugin, which have no sortKey, float on top of ours
         that.sortLayers(map);
     }
     map.setPaintProperty("obsgrid-layer", "fill-opacity", gridOpacity);
+    const outline = map.getLayer("obsgrid-outline-layer")?.implementation;
+    if (outline) {
+        outline.setEdges(hortis.libreMap.gridEdges(geojson, hortis.libreMap.mercator));
+        outline.setOpacity(gridOpacity > 0 ? that.outlineOpacity : 0);
+    }
+};
+
+/** The outlines of the grid's cells **/
+
+/**
+ * Project a longitude and latitude to MapLibre's Web Mercator coordinates, in which the world spans 0 to 1, as
+ * maplibregl.MercatorCoordinate.fromLngLat does - in double precision, unlike the 32-bit floats of WebGL.
+ */
+hortis.libreMap.mercator = {
+    fromLngLat: ([lng, lat]) => ({
+        x: (180 + lng) / 360,
+        y: (180 - (180 / Math.PI) * Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360))) / 360
+    })
+};
+
+/**
+ * Find each edge of the grid's cells once, however many cells share it, as pairs of points in Web Mercator coordinates.
+ * An edge shared by two neighbouring cells, drawn by each, would light its pixels twice.
+ * @param {Object} geojson - The cells, as a GeoJSON FeatureCollection of polygons
+ * @param {Object} MercatorCoordinate - A projection with method `fromLngLat`, e.g. hortis.libreMap.mercator
+ * @return {Number[]} The edges, as successive values x1, y1, x2, y2
+ */
+hortis.libreMap.gridEdges = function (geojson, MercatorCoordinate) {
+    const seen = new Set();
+    const edges = [];
+    const key = point => point[0].toFixed(9) + "," + point[1].toFixed(9);
+    geojson.features.forEach(feature => {
+        const ring = feature.geometry.coordinates[0];
+        for (let i = 0; i + 1 < ring.length; i++) {
+            const [a, b] = [key(ring[i]), key(ring[i + 1])];
+            const edgeKey = a < b ? a + "|" + b : b + "|" + a;
+            if (!seen.has(edgeKey) && a !== b) {
+                seen.add(edgeKey);
+                const p = MercatorCoordinate.fromLngLat(ring[i]), q = MercatorCoordinate.fromLngLat(ring[i + 1]);
+                edges.push(p.x, p.y, q.x, q.y);
+            }
+        }
+    });
+    return edges;
+};
+
+/**
+ * Parse a CSS colour into its red, green, blue and alpha components, each from 0 to 1.
+ * @param {String} colour - The colour, e.g. "black" or "#336699"
+ * @param {Document} dokkument - A document, whose canvas parses the colour
+ * @return {Number[]} The components
+ */
+hortis.libreMap.parseColour = function (colour, dokkument) {
+    const context = dokkument.createElement("canvas").getContext("2d");
+    context.fillStyle = colour;
+    context.fillRect(0, 0, 1, 1);
+    return [...context.getImageData(0, 0, 1, 1).data].map(component => component / 255);
+};
+
+hortis.libreMap.outlineVertexShader = `
+attribute vec2 a_pos;
+uniform mat4 u_matrix;
+void main() {
+    gl_Position = u_matrix * vec4(a_pos, 0.0, 1.0);
+}`;
+
+hortis.libreMap.outlineFragmentShader = `
+precision mediump float;
+uniform vec4 u_colour;
+void main() {
+    gl_FragColor = u_colour;
+}`;
+
+/**
+ * Create the layer outlining the grid's cells, as a MapLibre custom layer drawing WebGL lines. A line drawn by MapLibre
+ * as a "line" layer, or as the outline of a "fill", is antialiased, and spread across two pixels in proportions
+ * depending on where it falls between them, so that the edges of cells look uneven and blotchy, and doubled where
+ * cells meet. WebGL draws its own lines, of width 1, without antialiasing, lighting exactly one pixel of the drawing
+ * buffer across each - and, since the map's canvas maps those pixels exactly onto the screen's, see
+ * hortis.libreMap.trackPixels, exactly one device pixel at any zoom. Each edge is drawn once - see
+ * hortis.libreMap.gridEdges - and WebGL lights no pixel twice where one line ends and the next begins, so that no edge
+ * is drawn darker or thicker than another. Its opacity fades with the cells' over hortis.libreMap.gridFadeDuration.
+ * The vertices are held relative to the first of them, so that the precision of the 32-bit floats holding them is
+ * spent on the grid rather than the world.
+ * @param {maplibregl.Map} map - The map
+ * @param {String} colour - The outlines' colour, in CSS syntax
+ * @return {Object} The layer, a MapLibre CustomLayerInterface, with methods `setEdges` and `setOpacity`
+ */
+hortis.libreMap.gridOutlineLayer = function (map, colour) {
+    const now = () => performance.now();
+    const layer = {
+        id: "obsgrid-outline-layer",
+        type: "custom",
+        renderingMode: "2d",
+        metadata: {sortKey: 101},
+        // Parsed once the layer is added to a map drawn by WebGL, in whose document
+        colour: [0, 0, 0, 1],
+        edges: [],
+        origin: [0, 0],
+        dirty: true,
+        fade: {from: 0, to: 0, start: 0},
+        setEdges(edges) {
+            layer.edges = edges;
+            layer.dirty = true;
+            map.triggerRepaint();
+        },
+        setOpacity(opacity) {
+            if (opacity !== layer.fade.to) {
+                layer.fade = {from: layer.opacity(), to: opacity, start: now()};
+                map.triggerRepaint();
+            }
+        },
+        // The opacity at this moment of the fade towards that last set
+        opacity() {
+            const {from, to, start} = layer.fade;
+            const progress = Math.min(1, (now() - start) / hortis.libreMap.gridFadeDuration);
+            return from + (to - from) * progress;
+        },
+        onAdd(map, gl) {
+            layer.colour = hortis.libreMap.parseColour(colour, gl.canvas.ownerDocument);
+            const compile = (type, source) => {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                return shader;
+            };
+            layer.program = gl.createProgram();
+            gl.attachShader(layer.program, compile(gl.VERTEX_SHADER, hortis.libreMap.outlineVertexShader));
+            gl.attachShader(layer.program, compile(gl.FRAGMENT_SHADER, hortis.libreMap.outlineFragmentShader));
+            gl.linkProgram(layer.program);
+            layer.aPos = gl.getAttribLocation(layer.program, "a_pos");
+            layer.uMatrix = gl.getUniformLocation(layer.program, "u_matrix");
+            layer.uColour = gl.getUniformLocation(layer.program, "u_colour");
+            layer.buffer = gl.createBuffer();
+            layer.dirty = true;
+        },
+        onRemove(map, gl) {
+            gl.deleteBuffer(layer.buffer);
+            gl.deleteProgram(layer.program);
+        },
+        render(gl, matrix) {
+            if (layer.dirty) {
+                const edges = layer.edges;
+                layer.origin = edges.length ? [edges[0], edges[1]] : [0, 0];
+                const relative = new Float32Array(edges.length);
+                edges.forEach((value, i) => {
+                    relative[i] = value - layer.origin[i % 2];
+                });
+                gl.bindBuffer(gl.ARRAY_BUFFER, layer.buffer);
+                gl.bufferData(gl.ARRAY_BUFFER, relative, gl.STATIC_DRAW);
+                layer.count = edges.length / 2;
+                layer.dirty = false;
+            }
+            const opacity = layer.opacity();
+            if (opacity > 0 && layer.count > 0) {
+                // Translate the projection to the vertices' origin, in double precision
+                const [ox, oy] = layer.origin;
+                const m = Array.from(matrix);
+                for (let row = 0; row < 4; row++) {
+                    m[12 + row] = matrix[row] * ox + matrix[4 + row] * oy + matrix[12 + row];
+                }
+                const [r, g, b, a] = layer.colour;
+                const alpha = a * opacity;
+                gl.useProgram(layer.program);
+                gl.uniformMatrix4fv(layer.uMatrix, false, m);
+                // MapLibre blends with premultiplied alpha
+                gl.uniform4f(layer.uColour, r * alpha, g * alpha, b * alpha, alpha);
+                gl.bindBuffer(gl.ARRAY_BUFFER, layer.buffer);
+                gl.enableVertexAttribArray(layer.aPos);
+                gl.vertexAttribPointer(layer.aPos, 2, gl.FLOAT, false, 0, 0);
+                gl.lineWidth(1);
+                gl.drawArrays(gl.LINES, 0, layer.count);
+            }
+            if (opacity !== layer.fade.to) {
+                map.triggerRepaint();
+            }
+        }
+    };
+    return layer;
 };
 
 hortis.libreMap.swapBounds = function (bounds) {
@@ -979,6 +1234,8 @@ hortis.libreMap.markerFadeDuration = 400;
  * @property {Map<Object, Object>} markers - Each observation's record of its marker, with members `marker`,
  * `element` and, whilst it fades away, `removal`
  * @property {Number|null} hideTimer - The timer hiding the tooltip once the pointer has left it and its marker
+ * @property {WeakMap<HTMLElement, Object>} rowOfElement - The observation of each marker's element, by which a tap on it
+ * is resolved - see `hortis.libreMap.bindTapTooltips`
  * @property {HTMLElement|null} tooltipNode - The tooltip's element, once bound by `hortis.libreMap.bindTooltipNode`
  */
 
@@ -991,7 +1248,7 @@ hortis.libreMap.markerFadeDuration = 400;
  */
 hortis.libreMap.makeMarkerLayer = function (that, map, maplibregl) {
     return {that, map, maplibregl, window: map.getContainer().ownerDocument.defaultView, markers: new Map(),
-        hideTimer: null, tooltipNode: null};
+        rowOfElement: new WeakMap(), hideTimer: null, tooltipNode: null};
 };
 
 hortis.libreMap.destroyMarkerLayer = function (layer) {
@@ -1055,11 +1312,97 @@ hortis.libreMap.addMarker = function (layer, row) {
     });
     element.addEventListener("mouseleave", () => hortis.libreMap.scheduleTooltipHide(layer));
     element.addEventListener("click", () => that.recordSelector.select(row));
+    layer.rowOfElement.set(element, row);
     const marker = new maplibregl.Marker({element, anchor: "bottom"})
         .setLngLat([+row.decimalLongitude, +row.decimalLatitude]).addTo(map);
     // Once the marker is in the document with its initial opacity, so that it fades in
     window.requestAnimationFrame(() => element.classList.add("imerss-obs-marker-visible"));
     return {marker, element};
+};
+
+/** Tooltips shown by tapping, on touch screens **/
+
+// The furthest in pixels that a touch may travel, and the longest in milliseconds that it may last, to count as a tap
+hortis.libreMap.tapSlop = 10;
+hortis.libreMap.tapDuration = 500;
+
+/**
+ * Show on a tap the tooltip of a cell or marker, which a mouse shows by hovering, and select it on a second tap, as a
+ * mouse does by clicking. MapLibre takes the touches made on the map for its own gestures, so that the browser sends
+ * none of the mouse events by which it imitates hovering on the rest of the page, nor even a click - the tap is
+ * recognised here from the pointer events, which still arrive. A tap on a marker shows the observation's tooltip, a tap
+ * on a cell shows the cell's, and a tap on neither, or moving the map, puts both away. A tap on the marker or cell whose
+ * tooltip is already shown selects it, as clicking it would, keeping its tooltip. The map's container is marked with
+ * `data-hortis-tap-tooltips`, so that `hortis.tooltip.dismissOnTouch` leaves its taps to these listeners.
+ * @param {hortis.libreMap} that - The map component
+ * @param {maplibregl.Map} map - The map
+ * @param {MarkerLayer} layer - The layer of markers
+ * @return {Object} A record of the listeners, to be supplied to `hortis.libreMap.unbindTapTooltips`
+ */
+hortis.libreMap.bindTapTooltips = function (that, map, layer) {
+    const record = {map, container: map.getContainer(), start: null};
+    record.container.setAttribute("data-hortis-tap-tooltips", "");
+    const hideAll = () => {
+        hortis.libreMap.cancelTooltipHide(layer);
+        that.markerTooltip.hoverAt(null);
+        that.gridSelector?.hoverAt(null);
+    };
+    const tap = event => {
+        const markerElement = event.target.closest?.(".imerss-obs-marker");
+        const row = markerElement ? layer.rowOfElement.get(markerElement) : undefined;
+        hortis.libreMap.cancelTooltipHide(layer);
+        if (row) {
+            if (that.markerTooltip.hoverId === row) {
+                that.recordSelector.select(row);
+            }
+            that.gridSelector?.hoverAt(null);
+            that.markerTooltip.hoverAt(row, event);
+        } else {
+            const rect = map.getCanvas().getBoundingClientRect();
+            const point = [event.clientX - rect.left, event.clientY - rect.top];
+            const cellId = that.gridVisible && that.gridSelector ? hortis.libreMap.eventToProp(map, {point}, "cellId") : null;
+            if (hortis.isValue(cellId) && that.gridSelector.hoverId === cellId) {
+                // Dispatched as MapLibre dispatches a click, to the map's click handlers - see hortis.libreMap.bindClick
+                map.fire("click", {point, lngLat: map.unproject(point), originalEvent: event});
+            }
+            that.markerTooltip.hoverAt(null);
+            that.gridSelector?.hoverAt(cellId, event);
+        }
+    };
+    record.down = event => {
+        record.start = event.pointerType === "touch" && event.isPrimary ?
+            {id: event.pointerId, x: event.clientX, y: event.clientY, time: event.timeStamp} : null;
+    };
+    record.up = event => {
+        const start = record.start;
+        record.start = null;
+        if (start && event.pointerId === start.id && event.timeStamp - start.time <= hortis.libreMap.tapDuration &&
+            Math.hypot(event.clientX - start.x, event.clientY - start.y) <= hortis.libreMap.tapSlop) {
+            tap(event);
+        }
+    };
+    record.cancel = () => {
+        record.start = null;
+    };
+    // A move begun by a gesture, rather than by the map's own animation, leaves the tooltip behind its cell or marker
+    record.moveStart = event => {
+        if (event.originalEvent) {
+            hideAll();
+        }
+    };
+    record.container.addEventListener("pointerdown", record.down, true);
+    record.container.addEventListener("pointerup", record.up, true);
+    record.container.addEventListener("pointercancel", record.cancel, true);
+    map.on("movestart", record.moveStart);
+    return record;
+};
+
+hortis.libreMap.unbindTapTooltips = function (record) {
+    record.container.removeAttribute("data-hortis-tap-tooltips");
+    record.container.removeEventListener("pointerdown", record.down, true);
+    record.container.removeEventListener("pointerup", record.up, true);
+    record.container.removeEventListener("pointercancel", record.cancel, true);
+    record.map.off("movestart", record.moveStart);
 };
 
 /**

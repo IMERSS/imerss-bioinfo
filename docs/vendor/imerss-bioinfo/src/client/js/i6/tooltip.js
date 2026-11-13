@@ -150,6 +150,36 @@ hortis.tooltip.show = function (tooltip, content, pos) {
     }
 };
 
+/** Dismissal of tooltips on touch screens **/
+
+/**
+ * Put away every tooltip when the screen is touched. A touch screen imitates hovering by moving its pointer to whatever
+ * is tapped, so that a tap on something with a tooltip shows it - but a tap on anything else sends no movement at all,
+ * and a tooltip once shown would never be hidden. So every component showing tooltips is cleared as a touch begins,
+ * and a tap on something with a tooltip then shows it again at once, by the movement the browser sends to it.
+ * Touches within the tooltip itself are left alone, so that a link in it may be followed, as are those within an
+ * element marked `data-hortis-tap-tooltips`, which manages the tooltips shown by tapping it - e.g. a map, see
+ * hortis.libreMap.bindTapTooltips.
+ * @param {Window} window - The window whose touches put the tooltips away
+ */
+hortis.tooltip.dismissOnTouch = function (window) {
+    if (!window.hortisTooltipDismissal) {
+        window.hortisTooltipDismissal = true;
+        window.addEventListener("pointerdown", event => {
+            if (event.pointerType === "touch" && !event.target.closest?.(".imerss-tooltip-holder, [data-hortis-tap-tooltips]")) {
+                fluid.queryILSelector(fluid.globalInstantiator.rootComponent, "hortis.withTooltip")
+                    .filter(that => !fluid.isUnavailable(that))
+                    .forEach(that => that.hoverAt(null));
+            }
+        }, true);
+    }
+};
+
+// Only in a browser
+if (typeof window !== "undefined" && window.addEventListener) {
+    hortis.tooltip.dismissOnTouch(window);
+}
+
 /** Tooltips of elements bearing a title **/
 
 // Shows the title of whatever element is hovered within its scope in a tooltip of its own, in place of the browser's -

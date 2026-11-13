@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>BBEA visualisation on placeholder data</title>
+
+        <!-- A fixture for test/i6/bbeaHydrationRoundTrip.js - the plant-pollinator visualisation, configured with the
+             8 placeholder observations of the Washington Bee Atlas as its data as well as its placeholders, so that it
+             is fully loaded as soon as it boots, and its rendering from the placeholders is its final rendering. Served
+             from the root of this checkout, as are the pages it imitates, e.g. indexBeasWaBA.html -->
+
+        <script src="../../../node_modules/infusion-6/src/framework/core/js/FluidBoot.js"></script>
+        <fluid-module id="imerss-bioinfo" src="../../../" modules="fluid-modules.json"></fluid-module>
+
+        <fluid-import src="../../../src/client/sfc/bbea/hortis-beaVizLoader.vue"></fluid-import>
+        <script>
+            "use strict";
+            fluid.def("hortis.bbea.placeholderFixture", {
+                $layers: "hortis.beaVizLoader",
+                obsFile: "../../../data/b-team/placeholder/plant-pollinators-WaBA-2026-labels.viz",
+                obsPlaceholderFile: "../../../data/b-team/placeholder/plant-pollinators-WaBA-2026-labels.viz",
+                taxaFile: "../../../data/b-team/placeholder/plant-pollinators-WaBA-2026-assigned-taxa.viz",
+                taxaPlaceholderFile: "../../../data/b-team/placeholder/plant-pollinators-WaBA-2026-assigned-taxa.viz",
+                regionIndirectionFile: "../../../data/b-team/placeholder/plant-pollinators-WaBA-2026-regionIndirection.csv",
+                regionIndirectionPlaceholderFile: "../../../data/b-team/placeholder/plant-pollinators-WaBA-2026-regionIndirection.csv",
+                stateCode: "WA",
+                softwareVersion: "Test fixture",
+                datasetVersion: "Placeholder data"
+            });
+        </script>
+    </head>
+
+    <body>
+        <h2>BBEA TTOOL</h2>
+        <div fluid-layers="hortis.bbea.placeholderFixture"></div>
+    </body>
+</html>

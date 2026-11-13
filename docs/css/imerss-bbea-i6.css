@@ -60,6 +60,8 @@ body {
 
 /* Beat the flex column layout of .imerss-container in imerss-core.css */
 .imerss-container.mf {
+    /* Holds the loading indicator, which covers the visualisation rather than the page holding it */
+    position: relative;
     display: grid;
     grid-template-rows: minmax(0, 1fr) auto;
     overflow: hidden;
@@ -1022,7 +1024,7 @@ label.imerss-taxon { cursor: pointer; }
 }
 
 .bee-loading-container {
-    position: fixed;
+    position: absolute;
     z-index: 999;
     opacity: 95%;
     display: flex;
@@ -1038,6 +1040,16 @@ label.imerss-taxon { cursor: pointer; }
 .bee-loading-container-hidden {
     opacity: 0;
     transition: opacity 1s ease-in;
+}
+
+/* The bee is drawn as the CodePen drew it, in the default content-box sizing - imerss-core.css gives everything in
+   .imerss-container border-box sizing, which would shrink each part of it within its border, so that the stripe of its
+   body would hang below the body and its wings would close to rings */
+.imerss-container .bee,
+.imerss-container .bee *,
+.imerss-container .bee *::before,
+.imerss-container .bee *::after {
+    box-sizing: content-box;
 }
 
 .bee {

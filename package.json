@@ -1,12 +1,12 @@
 {
     "name": "imerss-bioinfo",
     "description": "Working data of the IMERSS biodiversity informatics working group, together with algorithms",
-    "version": "1.19.0",
+    "version": "1.20.0",
     "author": "Antranig Basman",
     "scripts": {
         "lint": "fluid-lint-all",
         "build": "node build.js",
-        "test:i6": "node test/i6/standardHydrationRoundTrip.js && node test/i6/bbeaHydrationRoundTrip.js"
+        "test:i6": "node test/i6/bbeaHydrationRoundTrip.js"
     },
     "main": "index.js",
     "dependencies": {

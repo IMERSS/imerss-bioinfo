@@ -11,7 +11,6 @@
     flex-direction: column;
     height: 100%;
     min-height: 0; /* Essential otherwise it overflows */
-    contain: paint; /* Makes sure loading indicator is clipped */
 }
 
 /** To prevent black content in fullscreen mode - https://stackoverflow.com/questions/16163089/background-element-goes-black-when-entering-fullscreen-with-html5 **/

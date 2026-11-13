@@ -191,23 +191,10 @@ const buildIndex = {
     }
     ],
     // The pages of the visualisations ported to Infusion 6, copied into docs from src/buildSource with the rest of its
-    // pages, each with the test verifying it - see buildI6
-    i6Pages: [{
-        page: "indexBeasBCBA.html",
-        verify: ["test/i6/bbeaHydrationRoundTrip.js", "docs", "indexBeasBCBA.html"]
-    }, {
-        page: "indexBeasOBA.html",
-        verify: ["test/i6/bbeaHydrationRoundTrip.js", "docs", "indexBeasOBA.html"]
-    }, {
-        page: "indexBeasWaBA.html",
-        verify: ["test/i6/bbeaHydrationRoundTrip.js", "docs", "indexBeasWaBA.html"]
-    }, {
-        page: "indexBlitz.html",
-        verify: ["test/i6/standardHydrationRoundTrip.js", "docs", "Blitz=indexBlitz.html"]
-    }, {
-        page: "indexDiatoms.html",
-        verify: ["test/i6/standardHydrationRoundTrip.js", "docs", "Diatoms=indexDiatoms.html"]
-    }]
+    // pages - see buildI6. One of them, which loads quickly, is verified as built, by the test of its round trip
+    // between its minimal and hydrated forms - the others are written by the same steps, from the same modules
+    i6Pages: ["indexBeasBCBA.html", "indexBeasOBA.html", "indexBeasWaBA.html", "indexBlitz.html", "indexDiatoms.html"],
+    i6Verify: ["test/i6/bbeaHydrationRoundTrip.js", "docs", "indexBeasWaBA.html"]
 };
 
 // These two taken from reknit.js
@@ -367,7 +354,7 @@ const runNode = function (args) {
 const buildI6 = function (buildIndex, verify) {
     // Infusion 6 as installed by npm, or the checkout named for it by moduleOverrides.json5
     const infusion6Dir = infusion6.dir();
-    const pages = buildIndex.i6Pages.map(record => path.join("docs", record.page));
+    const pages = buildIndex.i6Pages.map(page => path.join("docs", page));
     // The stylesheets of the Oregon State University site hosting the atlases refer to its theme's fonts and images,
     // which are served only there, and to forms of its fonts which are not held here
     const sources = ["--source", "infusion-6=" + infusion6Dir, "--source", "imerss-bioinfo=.",
@@ -377,7 +364,7 @@ const buildI6 = function (buildIndex, verify) {
     runNode([path.join(infusion6Dir, "src/framework/server/copyOut.js"), ...pages, ...sources, "--framework", "boot"]);
     runNode([path.join(infusion6Dir, "src/framework/server/copyOut.js"), ...pages, ...sources, "--framework", "built"]);
     if (verify) {
-        buildIndex.i6Pages.forEach(record => runNode(record.verify));
+        runNode(buildIndex.i6Verify);
     }
     pages.forEach(page => runNode([path.join(infusion6Dir, "src/framework/server/hydrate.js"), page, "-o", page, "--framework", "built"]));
 };

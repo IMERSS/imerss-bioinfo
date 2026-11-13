@@ -15,6 +15,11 @@ fluid.def("hortis.dualRangeInput", {
     thumbLabels: false,
     // Values at which detents are marked on the track, e.g. the first day of each month
     ticks: [],
+    // Labels of the spaces between successive ticks, e.g. the months, each with members `long` and `short` - the long
+    // label is shown when the input is wider than 300px, and the short one otherwise - or null to label none
+    tickLabels: null,
+    // If true, the bounds of the range and the range chosen are shown in a row beneath the input
+    valueLabels: true,
     // If true, the inputs are disabled
     disabled: false,
     // The chosen range. Each member tracks its bound until the user moves it, and is overwritten whenever the bound
@@ -27,9 +32,26 @@ fluid.def("hortis.dualRangeInput", {
         min: "{self}.minRange",
         max: "{self}.maxRange"
     },
+    // The values to which the thumbs have been slid but which are not yet written to `range`, or null if there are none -
+    // see hortis.dualRangeInput.input. Shown at once by the labels, whilst the costlier work of filtering by them
+    // follows, once the browser is free of the input events which slid them
+    sliding: null,
+    shownRange: "$compute:hortis.dualRangeInput.shownRange({self}.range, {self}.sliding)",
     // The text and position of each value shown - see hortis.dualRangeInput.labels
-    labels: "$compute:hortis.dualRangeInput.labels({self}.range, {self}.minRange, {self}.maxRange, {self}.unit, {self}.formatter)",
-    tickStyle: "$compute:hortis.dualRangeInput.tickStyle({self}.ticks, {self}.minRange, {self}.maxRange)",
+    labels: "$compute:hortis.dualRangeInput.labels({self}.shownRange, {self}.minRange, {self}.maxRange, {self}.unit, {self}.formatter)",
+    // The scale above the track, marking the ticks and labelling the spaces between them
+    scale: {
+        $component: {
+            $layers: "fluid.component",
+            markup: "$compute:hortis.dualRangeInput.scaleMarkup({dualRangeInput}.ticks, {dualRangeInput}.tickLabels, {dualRangeInput}.minRange, {dualRangeInput}.maxRange)",
+            view: {
+                $component: {
+                    $layers: "fluid.templateViewComponent",
+                    template: "{scale}.markup"
+                }
+            }
+        }
+    },
     view: {
         $component: {
             elideParent: false
@@ -38,7 +60,7 @@ fluid.def("hortis.dualRangeInput", {
     // The widget arranging the two inputs, constructed once the markup is rendered
     control: {
         $bindable: {
-            bind: "hortis.dualRangeInput.makeControl({self}.view.renderedContainer)",
+            bind: "hortis.dualRangeInput.makeControl({self}, {self}.view.renderedContainer)",
             unbind: "hortis.dualRangeInput.destroyControl({boundValue})",
             onceOnly: true
         }
@@ -54,8 +76,63 @@ fluid.def("hortis.dualRangeInput", {
     }
 });
 
+/**
+ * Record a value to which a thumb has been slid, and arrange for it to be written to the input's `range`. The range
+ * usually filters a whole dataset, and redraws whatever shows it, which is far too costly to do as each input event
+ * arrives - the thumb would lag behind the pointer. So the value is shown at once by the labels, through `sliding`, but
+ * written to `range` only once the browser has handled every input event already queued, in a task of its own. Any
+ * values slid to in the meantime replace those pending, so that however many events arrive, the range is written once
+ * with the latest values. Releasing the thumb, which the browser marks by a change event, writes them at once.
+ * @param {Event} event - The input event
+ * @param {hortis.dualRangeInput} that - The dual range input
+ * @param {String} which - `min` or `max`, naming the thumb slid
+ */
 hortis.dualRangeInput.input = function (event, that, which) {
-    that.range[which] = +event.target.value;
+    const control = that.control;
+    control.pending = {...control.pending, [which]: +event.target.value};
+    that.sliding = {...that.shownRange, ...control.pending};
+    if (control.commitTimer === null) {
+        control.commitTimer = control.window.setTimeout(control.commit, 0);
+    }
+};
+
+/**
+ * Write at once any values slid to and not yet written to the range, e.g. as the thumb is released.
+ * @param {hortis.dualRangeInput} that - The dual range input
+ */
+hortis.dualRangeInput.flush = function (that) {
+    that.control.commit();
+};
+
+/**
+ * Write the values slid to and pending to a dual range input's range, as its own change, so that its effect moving
+ * the inputs does not move them back. Does nothing if none are pending.
+ * @param {hortis.dualRangeInput} that - The dual range input
+ * @param {DualRangeInput} control - Its control, holding the pending values as `pending`
+ */
+hortis.dualRangeInput.commit = function (that, control) {
+    control.window.clearTimeout(control.commitTimer);
+    control.commitTimer = null;
+    const pending = control.pending;
+    control.pending = null;
+    if (pending) {
+        fluid.cell.withAmbientSource(fluid.domSources(fluid.selfSource(that)), () => {
+            Object.entries(pending).forEach(([which, value]) => {
+                that.range[which] = value;
+            });
+            that.sliding = null;
+        })();
+    }
+};
+
+/**
+ * The range shown by the labels - the range, or the values slid to whilst they are yet to be written to it.
+ * @param {Object} range - The range chosen, with members `min` and `max`
+ * @param {Object|null} sliding - The values slid to, with members `min` and `max`, or null if none are pending
+ * @return {Object} The range shown, with members `min` and `max`
+ */
+hortis.dualRangeInput.shownRange = function (range, sliding) {
+    return sliding || range;
 };
 
 /**
@@ -85,20 +162,27 @@ hortis.dualRangeInput.labels = function (range, minRange, maxRange, unit, format
 };
 
 /**
- * Compute the style of a dual range input's track marking its detents, as a background of thin lines.
- * @param {Number[]} ticks - The values at which detents are marked
+ * Compute the markup of a dual range input's scale - an element for each tick, and a label centred in the space between
+ * each tick and the next. Each tick is drawn by its border, which the browser draws a whole number of device pixels
+ * wide at any zoom, so that every tick is drawn the same width - a gradient of the same width, as the scale was once
+ * drawn, falls across device pixels differently at each tick.
+ * @param {Number[]} ticks - The values at which ticks are marked, in ascending order
+ * @param {Object[]|null} tickLabels - The labels of the spaces between successive ticks, each with members `long` and
+ * `short`, or null if there are none
  * @param {Number} minRange - The lower bound of the range
  * @param {Number} maxRange - The upper bound of the range
- * @return {String} The style
+ * @return {String} The scale's markup
  */
-hortis.dualRangeInput.tickStyle = function (ticks, minRange, maxRange) {
+hortis.dualRangeInput.scaleMarkup = function (ticks, tickLabels, minRange, maxRange) {
     const extent = maxRange - minRange || 1;
-    const lines = ticks.map(tick => {
-        const pos = (100 * (tick - minRange) / extent).toFixed(2);
-        return `linear-gradient(to right, transparent calc(${pos}% - 1px), var(--dri-tick-color, #999) calc(${pos}% - 1px), ` +
-            `var(--dri-tick-color, #999) calc(${pos}% + 1px), transparent calc(${pos}% + 1px))`;
-    });
-    return lines.length ? "background-image: " + lines.join(", ") + ";" : "";
+    const position = value => (100 * (value - minRange) / extent).toFixed(3);
+    const tickMarkup = ticks.map(tick => `<span class="dual-range-tick" style="left: ${position(tick)}%"></span>`);
+    const labelMarkup = (tickLabels || []).slice(0, Math.max(ticks.length - 1, 0)).map((label, i) =>
+        `<span class="dual-range-tick-label" style="left: ${position((ticks[i] + ticks[i + 1]) / 2)}%">` +
+        `<span class="dual-range-tick-label-long">${hortis.encodeHTML(label.long)}</span>` +
+        `<span class="dual-range-tick-label-short">${hortis.encodeHTML(label.short)}</span></span>`);
+    const labelled = labelMarkup.length ? " dual-range-scale-labelled" : "";
+    return `<div class="dual-range-scale${labelled}">${tickMarkup.join("")}${labelMarkup.join("")}</div>`;
 };
 
 hortis.dualRangeInput.reset = function (that) {
@@ -206,11 +290,24 @@ class DualRangeInput {
     }
 }
 
-hortis.dualRangeInput.makeControl = function (container) {
-    return new DualRangeInput(container.querySelector(".dual-range-min"), container.querySelector(".dual-range-max"));
+/**
+ * Construct the widget arranging the two inputs, which also holds the values slid to and not yet written to the
+ * range - see hortis.dualRangeInput.input.
+ * @param {hortis.dualRangeInput} that - The dual range input
+ * @param {HTMLElement} container - Its rendered container
+ * @return {DualRangeInput} The widget
+ */
+hortis.dualRangeInput.makeControl = function (that, container) {
+    const control = new DualRangeInput(container.querySelector(".dual-range-min"), container.querySelector(".dual-range-max"));
+    control.window = container.ownerDocument.defaultView;
+    control.pending = null;
+    control.commitTimer = null;
+    control.commit = () => hortis.dualRangeInput.commit(that, control);
+    return control;
 };
 
 hortis.dualRangeInput.destroyControl = function (control) {
+    control.window.clearTimeout(control.commitTimer);
     control.destroy();
 };
 
@@ -226,16 +323,16 @@ hortis.dualRangeInput.updateControl = function (control, range, minRange, maxRan
 
 <template>
     <div class="dual-range-holder" @class="dual-range-disabled:@{disabled}">
-        <div class="dual-range-ticks" style="@{tickStyle}"></div>
+        <div @id="scale"></div>
         <div class="dual-range-input">
-            <input type="range" step="1" class="dual-range-min" disabled="@{disabled}" @oninput="hortis.dualRangeInput.input({0}, {self}, min)"/>
-            <input type="range" step="1" class="dual-range-max" disabled="@{disabled}" @oninput="hortis.dualRangeInput.input({0}, {self}, max)"/>
+            <input type="range" step="1" class="dual-range-min" disabled="@{disabled}" @oninput="hortis.dualRangeInput.input({0}, {self}, min)" @onchange="hortis.dualRangeInput.flush({self})"/>
+            <input type="range" step="1" class="dual-range-max" disabled="@{disabled}" @oninput="hortis.dualRangeInput.input({0}, {self}, max)" @onchange="hortis.dualRangeInput.flush({self})"/>
         </div>
         <div class="dual-range-thumb-labels" @class="dual-range-thumb-labels-shown:@{thumbLabels}">
             <span class="dual-range-thumb-label dual-range-thumb-min" style="left: max(5em, @{labels.minPos}%)">@{labels.min}</span>
             <span class="dual-range-thumb-label dual-range-thumb-max" style="left: min(100% - 5em, @{labels.maxPos}%)">@{labels.max}</span>
         </div>
-        <div class="dual-range-values">
+        <div class="dual-range-values" @class="fl-hidden:!@{valueLabels}">
             <span>@{labels.lower}</span>
             <span>@{labels.span}</span>
             <span>@{labels.upper}</span>
