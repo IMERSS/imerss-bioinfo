@@ -1379,6 +1379,16 @@ const $fluidScope = function (fluid) {
                 sortedListeners = fluid.sortByPriority(Object.values(byNamespace));
             },
             /**
+             * Removes the listener with a namespace from this event, if there is one.
+             * @param {String} namespace - The namespace of the listener, as supplied to `addListener`
+             */
+            removeListener: function (namespace) {
+                if (byNamespace[namespace]) {
+                    delete byNamespace[namespace];
+                    sortedListeners = fluid.sortByPriority(Object.values(byNamespace));
+                }
+            },
+            /**
              * Fires this event to its listeners, in order of priority. The signature of this method is free. Any
              * exception thrown by a listener propagates, and no further listeners are notified.
              * @param {...any} args - The arguments to be supplied to each listener
@@ -1411,6 +1421,23 @@ const $fluidScope = function (fluid) {
     // actions filtering the log arguments before dispatching may be referred to it
     fluid.loggingEvent.addListener(fluid.identity, "filterArgs", "before:log");
     fluid.loggingEvent.addListener(fluid.addTimestampArg, "addTimestampArg", "after:filterArgs");
+
+    /**
+     * Precede each unavailable value amongst the arguments to be logged with a description of it as text, its variety
+     * and message, so that it can be read in any console - e.g. a headless browser's, which shows an object logged as an
+     * argument only as an opaque handle. The value itself is kept, for inspection in a browser's development tools.
+     * @param {any[]} args - The arguments to be logged, which are modified in place
+     */
+    fluid.describeUnavailableArgs = function (args) {
+        for (let i = args.length - 1; i >= 0; --i) {
+            const arg = args[i];
+            if (fluid.isUnavailable && fluid.isUnavailable(arg)) {
+                args.splice(i, 0, `[unavailable (${arg.variety}): ${arg.message}]`);
+            }
+        }
+    };
+
+    fluid.loggingEvent.addListener(fluid.describeUnavailableArgs, "describeUnavailableArgs", "after:filterArgs");
 
     /*** FLUID ERROR SYSTEM ***/
 
@@ -2144,6 +2171,79 @@ const $fluidScope = function (fluid) {
             }
             return togo;
         }
+    };
+
+    /**
+     * Record against a layer which is not defined who is waiting for it - the layer naming it amongst its `$layers`, if
+     * any, and the path of the component whose layers were being resolved, if it has one - see fluid.undefinedLayers
+     * @param {String} layerName - The name of the layer which is not defined
+     * @param {String} [requiredBy] - The name of the layer naming it amongst its `$layers`
+     * @param {Shadow} [shadow] - The shadow of the component whose layers were being resolved
+     */
+    fluid.recordLayerDemand = function (layerName, requiredBy, shadow) {
+        const layerSig = fluid.layerStore._value[layerName];
+        if (layerSig) {
+            layerSig.requiredBy ||= new Set();
+            layerSig.componentPaths ||= new Set();
+            if (requiredBy) {
+                layerSig.requiredBy.add(requiredBy);
+            }
+            if (shadow?.path !== undefined) {
+                layerSig.componentPaths.add(shadow.path);
+            }
+        }
+    };
+
+    /**
+     * @typedef {Object} UndefinedLayerRecord
+     * @property {String} layerName - The name of a layer which a component needs, but which is not defined
+     * @property {String[]} requiredBy - The names of the layers naming it amongst their `$layers`
+     * @property {String[]} componentPaths - The paths of the components waiting for it
+     * @property {Boolean} imported - `true` if an import, e.g. a `<fluid-import>`, is registered under the layer's name -
+     * if loading has settled, its file was loaded but did not define the layer
+     * @property {String} message - A description of the problem, suitable for logging
+     */
+
+    /**
+     * List the layers which components have demanded but which are not defined, e.g. since nothing loads the file
+     * defining them. A component naming such a layer amongst its layers is unavailable until it is defined, so once
+     * loading has settled, each such layer is likely to be an error - see fluid.reportUndefinedLayers
+     * @return {UndefinedLayerRecord[]} A record of each such layer
+     */
+    fluid.undefinedLayers = function () {
+        const store = fluid.layerStore._value;
+        return Object.entries(store).filter(([, layerSig]) => layerSig.demanded && fluid.isUnavailable(layerSig._value))
+            .map(([layerName, layerSig]) => {
+                const requiredBy = [...layerSig.requiredBy || []];
+                const componentPaths = [...layerSig.componentPaths || []];
+                const imported = !!fluid.importMap[layerName];
+                const waiting = (requiredBy.length ? `, required by layer ${requiredBy.join(", ")}` : "") +
+                    (componentPaths.length ? ` for component at path ${componentPaths.join(", ")}` : "");
+                const why = imported ? "the file imported for it was loaded but did not define it" :
+                    "no import or module supplies it - note that a Single File Component imported by <fluid-import> is loaded " +
+                    "only when the layer named after its file is demanded, e.g. foo-barBaz.vue for foo.barBaz, so that a layer " +
+                    "demanded by name needs a file of its own";
+                return {layerName, requiredBy, componentPaths, imported,
+                    message: `Layer ${layerName}${waiting} is not defined: ${why}`};
+            });
+    };
+
+    // The messages of the undefined layers already reported by fluid.reportUndefinedLayers
+    fluid.reportedUndefinedLayers = new Set();
+
+    /**
+     * Log each layer which components have demanded but which is not defined, as listed by fluid.undefinedLayers, and
+     * which has not already been reported with the same message. Called whenever the graph falls idle once a document
+     * has booted - see fluid.bootDocument
+     * @return {UndefinedLayerRecord[]} The records logged
+     */
+    fluid.reportUndefinedLayers = function () {
+        const fresh = fluid.undefinedLayers().filter(rec => !fluid.reportedUndefinedLayers.has(rec.message));
+        fresh.forEach(rec => {
+            fluid.reportedUndefinedLayers.add(rec.message);
+            fluid.log(fluid.logLevel.FAIL, rec.message);
+        });
+        return fresh;
     };
 
     /**
@@ -3449,9 +3549,11 @@ const $fluidScope = function (fluid) {
          *
          * @param {Object} layer - A layer definition object containing a `$layers` property listing parent layer names.
          * @param {String} rootLayer - The name of the current root layer being resolved, used to detect circular references.
+         * @param {String} [requiredBy] - The name of the layer whose parents these are, recorded against any of them which is
+         * not defined - see fluid.undefinedLayers
          * @return {fluid.cell[]} An array of Signals, one for each stored parent layer, or an `unavailable` signal if a circular reference is detected.
          */
-        storeParents(layer, rootLayer) {
+        storeParents(layer, rootLayer, requiredBy) {
             return layer.$layers.map(layerName => {
                 if (layerName === rootLayer) {
                     this.unavailableLayers[layerName] =
@@ -3459,7 +3561,7 @@ const $fluidScope = function (fluid) {
                         fluid.unavailable(`Layer name ${layerName} circularly refers to layer ${rootLayer}`);
                     return fluid.placeholderLayer();
                 } else {
-                    return this.storeLayer(layerName, rootLayer);
+                    return this.storeLayer(layerName, rootLayer, requiredBy);
                 }
             });
         }
@@ -3471,9 +3573,11 @@ const $fluidScope = function (fluid) {
          *
          * @param {String} layerName - The name of the layer to be stored and resolved.
          * @param {String} [rootLayer] - The original root layer used for cycle detection. Defaults to `layerName` if not provided.
+         * @param {String} [requiredBy] - The name of the layer naming this one amongst its `$layers`, if any, recorded
+         * against the layer if it is not defined - see fluid.undefinedLayers
          * @return {LayerDef} A layer definition
          */
-        storeLayer(layerName, rootLayer) {
+        storeLayer(layerName, rootLayer, requiredBy) {
             let layerDef = this.flatDefs[layerName];
             if (!layerDef) {
                 // Guard the cache for recursive encounters to same layer along different routes by writing in a value first
@@ -3492,6 +3596,7 @@ const $fluidScope = function (fluid) {
                 }
                 if (unavailableLayer !== null) {
                     this.unavailableLayers[layerName] = unavailableLayer;
+                    fluid.recordLayerDemand(layerName, requiredBy, this.shadow);
                     layerDef = fluid.placeholderLayer();
                 } else {
                     const readerExpanded = fluid.readerExpandLayer(fluid.deSignal(layer.raw));
@@ -3499,7 +3604,7 @@ const $fluidScope = function (fluid) {
                     // being merged once it is available - it takes no part in the layer's static hierarchy
                     const [dynamicParents, staticParents] = fluid.partition(readerExpanded.$layers, fluid.isILReference);
                     layerDef = dynamicParents.length === 0 ? readerExpanded : fluid.staticParentsLayer(readerExpanded, staticParents);
-                    this.storeParents(layerDef, rootLayer || layerName);
+                    this.storeParents(layerDef, rootLayer || layerName, layerName);
                     // Pushed after those of the layer's parents, so that, as for the layers themselves, those of a
                     // derived layer are stronger
                     this.dynamicLayerNames.push(...dynamicParents);

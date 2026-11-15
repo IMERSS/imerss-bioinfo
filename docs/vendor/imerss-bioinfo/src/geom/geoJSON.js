@@ -18,7 +18,9 @@ hortis.countTrue = function (array) {
     return array.reduce(function (a, c) {return a + c;}, 0);
 };
 
-hortis.pointSymbol = Symbol("point");
+// The key under which an observation's point is kept on it - shared with imerss-core.js's hortis.rowPoint, whichever is
+// loaded first
+hortis.pointSymbol = hortis.pointSymbol || Symbol("point");
 
 hortis.intersections = 0;
 

@@ -38,6 +38,30 @@ hortis.parseFloat = function (str) {
     return isNaN(str) ? NaN : parseFloat(str);
 };
 
+// The key under which an observation's point is kept on it - shared with geoJSON.js, whichever is loaded first
+hortis.pointSymbol = hortis.pointSymbol || Symbol("point");
+
+/**
+ * The position of an observation, as its point [longitude, latitude], or `null` if it has none - its coordinates
+ * missing, not numbers, or both zero. A row's coordinates are held as the strings read from its CSV, and every pass
+ * over the observations which needs them, e.g. to grid them, to find those within the map's viewport, or to filter them
+ * by a polygon drawn, would otherwise parse them afresh. Each row's point is parsed once, and kept on the row under
+ * `hortis.pointSymbol`, as geoJSON.js reads it. It is kept on the bare row, since a row read through a component's
+ * proxy would take a write as one to the component's state.
+ * @param {Object} row - The observation, possibly read through a proxy
+ * @return {Number[]|null} Its point, as [longitude, latitude], or `null` if it has none
+ */
+hortis.rowPoint = function (row) {
+    let point = row[hortis.pointSymbol];
+    if (point === undefined) {
+        const lat = row.decimalLatitude, long = row.decimalLongitude;
+        const latNum = lat === "" || !hortis.isValue(lat) ? NaN : +lat, longNum = long === "" || !hortis.isValue(long) ? NaN : +long;
+        point = Number.isFinite(latNum) && Number.isFinite(longNum) && !(latNum === 0 && longNum === 0) ? [longNum, latNum] : null;
+        fluid.unwrapProxy(row)[hortis.pointSymbol] = point;
+    }
+    return point;
+};
+
 /**
  * Interpolate the terms of a template written with %term placeholders, as for Infusion 4's fluid.stringTemplate.
  * Longer terms are substituted first, so that a term which is a prefix of another does not disturb it.

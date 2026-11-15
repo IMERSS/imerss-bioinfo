@@ -46,10 +46,8 @@ fluid.def("hortis.libreMap.polygonFilter", {
     // The "features" array of the GeoJSON FeatureCollection drawn
     filterState: [],
     drawMode: null,
-    // The point of each observation, in the form expected by hortis.intersectsAnyFeature, cached by row
-    pointCache: "$compute:hortis.libreMap.polygonFilter.pointCache({self}.obsRows)",
     filterSummary: "$compute:hortis.libreMap.polygonFilter.summarise({self}.filterState)",
-    doFilter: "$method:hortis.libreMap.polygonFilter.doFilter({0}:obsRows, {1}:filterState, {self}.pointCache)",
+    doFilter: "$method:hortis.libreMap.polygonFilter.doFilter({0}:obsRows, {1}:filterState)",
     reset: "$method:hortis.libreMap.polygonFilter.reset({self})",
     // Bound to the styled map, since MapboxDraw's layers would not survive the application of the map's style
     mapboxDraw: {
@@ -64,10 +62,6 @@ fluid.def("hortis.libreMap.polygonFilter", {
     syncDraw: "$effect:hortis.libreMap.polygonFilter.syncDraw({self}.filterState, {self}.mapboxDraw)"
 });
 
-hortis.libreMap.polygonFilter.pointCache = function (obsRows) {
-    return new Map(obsRows.map(row => [row, {[hortis.pointSymbol]: [hortis.parseFloat(row.decimalLongitude), hortis.parseFloat(row.decimalLatitude)]}]));
-};
-
 hortis.libreMap.polygonFilter.summarise = function (filterState) {
     return hortis.countSummary(filterState.length, ["polygon", "polygons"]);
 };
@@ -75,16 +69,16 @@ hortis.libreMap.polygonFilter.summarise = function (filterState) {
 /**
  * Filter observations to those lying within any of the polygons drawn. The polygons arrive as component material, read
  * through a proxy which tracks each access - since every observation is tested against every vertex of the polygons,
- * their bare values are read instead, which is many times faster.
+ * their bare values are read instead, which is many times faster. Each observation's point is that kept on it by
+ * hortis.rowPoint, under the key hortis.intersectsAnyFeature reads - an observation without one lies within no polygon.
  * @param {Object[]} obsRows - The observations
  * @param {Object[]} filterState - The polygons drawn, as GeoJSON features, possibly as a proxy
- * @param {Map<Object, Object>} pointCache - Map of each observation to its point, possibly as a proxy
  * @return {Object[]} The observations within any of the polygons
  */
-hortis.libreMap.polygonFilter.doFilter = function (obsRows, filterState, pointCache) {
+hortis.libreMap.polygonFilter.doFilter = function (obsRows, filterState) {
     const features = fluid.unwrapProxy(filterState);
-    const points = fluid.unwrapProxy(pointCache);
-    return features.length === 0 ? obsRows : obsRows.filter(row => hortis.intersectsAnyFeature(features, points.get(row)));
+    return features.length === 0 ? obsRows : obsRows.filter(row => hortis.rowPoint(row) !== null &&
+        hortis.intersectsAnyFeature(features, fluid.unwrapProxy(row)));
 };
 
 hortis.libreMap.polygonFilter.reset = function (that) {

@@ -453,7 +453,13 @@ hortis.longToLat = function (lng, lat) {
 
 hortis.obsBounds = function (rows) {
     const bounds = hortis.initBounds();
-    rows.forEach(row => hortis.updateBounds(bounds, row.decimalLatitude, row.decimalLongitude));
+    // Observations without a position are passed over - the strings of their empty coordinates would read as zero
+    rows.forEach(row => {
+        const point = hortis.rowPoint(row);
+        if (point) {
+            hortis.updateBounds(bounds, point[1], point[0]);
+        }
+    });
     return bounds;
 };
 
@@ -517,7 +523,11 @@ hortis.obsQuantiser.coordToCellId = function (lat, long, latres, longres) {
  * @return {Map<Object, String>} Map of each observation row to its cell id
  */
 hortis.obsQuantiser.cellIds = function (allObs, latRes, longRes) {
-    return new Map(allObs.map(row => [row, hortis.obsQuantiser.coordToCellId(row.decimalLatitude, row.decimalLongitude, latRes, longRes)]));
+    // An observation without a position is allotted the cell "0|0", which is not gridded - see indexObs
+    return new Map(allObs.map(row => {
+        const point = hortis.rowPoint(row);
+        return [row, point ? hortis.obsQuantiser.coordToCellId(point[1], point[0], latRes, longRes) : "0|0"];
+    }));
 };
 
 /**
@@ -539,7 +549,8 @@ hortis.obsQuantiser.indexObs = function (rows, cellIds, latRes, longRes, maxBoun
     rows.forEach(function (row, index) {
         const cellId = cellIds.get(row);
         if (cellId !== "0|0") { // TODO: More principled way of detecting obs without coordinates = note that ""/0.5 === 0!
-            hortis.updateBounds(grid.bounds, row.decimalLatitude, row.decimalLongitude);
+            const point = hortis.rowPoint(row);
+            hortis.updateBounds(grid.bounds, point[1], point[0]);
             const bucket = grid.buckets[cellId] || (grid.buckets[cellId] = newBucketFunc());
             bucket.obsCount++;
             grid.maxObsCount = Math.max(grid.maxObsCount, bucket.obsCount);
@@ -1081,15 +1092,12 @@ hortis.libreMap.gridSelector.unbindHover = function (record) {
 /** Markers of individual observations **/
 
 /**
- * Determine whether an observation has coordinates - one without has none, or the placeholder 0, 0.
+ * Determine whether an observation has coordinates - one without has none, or the placeholder 0, 0 - see
+ * hortis.rowPoint, which parses them once for each observation.
  * @param {Object} row - The observation
  * @return {Boolean} `true` if the observation has coordinates
  */
-hortis.libreMap.hasCoords = function (row) {
-    const lat = row.decimalLatitude, long = row.decimalLongitude;
-    return hortis.isValue(lat) && hortis.isValue(long) && lat !== "" && long !== "" &&
-        Number.isFinite(+lat) && Number.isFinite(+long) && !(+lat === 0 && +long === 0);
-};
+hortis.libreMap.hasCoords = row => hortis.rowPoint(row) !== null;
 
 /**
  * Track the bounds of a map's viewport, writing them into the map component whenever the map has moved or resized.
@@ -1129,8 +1137,9 @@ hortis.libreMap.viewportObs = function (rows, bounds, padding, threshold) {
         const latPad = (bounds.north - bounds.south) * padding, longPad = (bounds.east - bounds.west) * padding;
         const limit = threshold * 4;
         rows.forEach(row => {
-            if (hortis.libreMap.hasCoords(row)) {
-                const lat = +row.decimalLatitude, long = +row.decimalLongitude;
+            const point = hortis.rowPoint(row);
+            if (point) {
+                const long = point[0], lat = point[1];
                 if (lat >= bounds.south - latPad && lat <= bounds.north + latPad && long >= bounds.west - longPad && long <= bounds.east + longPad) {
                     if (lat >= bounds.south && lat <= bounds.north && long >= bounds.west && long <= bounds.east) {
                         togo.inView++;
@@ -1314,7 +1323,7 @@ hortis.libreMap.addMarker = function (layer, row) {
     element.addEventListener("click", () => that.recordSelector.select(row));
     layer.rowOfElement.set(element, row);
     const marker = new maplibregl.Marker({element, anchor: "bottom"})
-        .setLngLat([+row.decimalLongitude, +row.decimalLatitude]).addTo(map);
+        .setLngLat(hortis.rowPoint(row)).addTo(map);
     // Once the marker is in the document with its initial opacity, so that it fades in
     window.requestAnimationFrame(() => element.classList.add("imerss-obs-marker-visible"));
     return {marker, element};
@@ -1476,8 +1485,9 @@ hortis.libreMap.whenStill = function (map, func) {
  * @param {Number} duration - The duration in milliseconds of the move
  */
 hortis.libreMap.centreRecord = function (map, row, duration) {
-    if (row && hortis.libreMap.hasCoords(row)) {
-        hortis.libreMap.whenStill(map, () => map.easeTo({center: [+row.decimalLongitude, +row.decimalLatitude], duration, essential: true}));
+    const point = row && hortis.rowPoint(row);
+    if (point) {
+        hortis.libreMap.whenStill(map, () => map.easeTo({center: point, duration, essential: true}));
     }
 };
 
