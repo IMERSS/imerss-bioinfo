@@ -11,7 +11,7 @@
 // the table shows its first block of rows.
 fluid.def("hortis.dataTable", {
     $layers: "fluid.component",
-    // rows: Object[]
+    // rows: Object[] - or a hortis.SelectionRows, standing in for the rows of a selection of the observations
     // Each with members `key` and `label`, and optionally `numeric`, `width` and `formatter`, the global name of a
     // function rendering a cell's value - by default, one column for each member of the first row
     columns: [],
@@ -60,6 +60,14 @@ fluid.def("hortis.dataTable", {
     }
 });
 
+/**
+ * Read a row of a table, whose rows may be an array or a hortis.SelectionRows.
+ * @param {Object[]|hortis.SelectionRows} rows - The rows
+ * @param {Number} index - The row's index
+ * @return {Object|undefined} The row
+ */
+hortis.dataTable.rowAt = (rows, index) => index < rows.length ? rows.at ? rows.at(index) : rows[index] : undefined;
+
 hortis.dataTable.encode = function (text) {
     return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 };
@@ -72,7 +80,8 @@ hortis.dataTable.encode = function (text) {
  * @return {Object[]} The columns
  */
 hortis.dataTable.resolveColumns = function (rows, columns) {
-    return columns.length > 0 ? columns : rows[0] ? Object.keys(rows[0]).map(key => ({key, label: key})) : [];
+    const first = hortis.dataTable.rowAt(rows, 0);
+    return columns.length > 0 ? columns : first ? Object.keys(first).map(key => ({key, label: key})) : [];
 };
 
 /**
@@ -87,7 +96,7 @@ hortis.dataTable.sortRows = function (rows, sortColumn, sortDirection) {
         const av = a[sortColumn] ?? "", bv = b[sortColumn] ?? "";
         return av < bv ? -sortDirection : av > bv ? sortDirection : 0;
     };
-    return sortColumn ? rows.slice().sort(compare) : rows;
+    return !sortColumn ? rows : rows.sortedBy ? rows.sortedBy(sortColumn, sortDirection) : rows.slice().sort(compare);
 };
 
 /**
@@ -169,7 +178,7 @@ hortis.dataTable.bodyMarkup = function (rows, columns, window, rowHeight, rowSel
     const spacer = height => height > 0 ? `<tr class="hortis-dataTable-spacer" style="height:${height}px"><td colspan="${columnCount}"></td></tr>` : "";
     const body = rows.slice(window.start, window.end).map((row, i) => {
         const index = window.start + i;
-        const selected = row === selectedRow;
+        const selected = hortis.sameRow(row, selectedRow);
         const check = rowSelectable ? `<td class="hortis-dataTable-select-cell"><input type="checkbox" class="hortis-dataTable-row-check" data-row-index="${index}"${selected ? " checked" : ""}/></td>` : "";
         const cells = columns.map(col => `<td${col.numeric ? " class=\"hortis-dataTable-num\"" : ""}>${hortis.dataTable.renderCell(col, row)}</td>`).join("");
         const rowAttrs = rowSelectable ? ` data-row-index="${index}" class="hortis-dataTable-selectable-row${selected ? " hortis-dataTable-selected-row" : ""}"` : "";
@@ -280,10 +289,10 @@ hortis.dataTable.click = function (event, that) {
         that.sortDirection = that.sortColumn === key ? -that.sortDirection : 1;
         that.sortColumn = key;
     } else if (check) {
-        that.selectRow(check.checked ? that.displayRows[+check.dataset.rowIndex] : null);
+        that.selectRow(check.checked ? hortis.dataTable.rowAt(that.displayRows, +check.dataset.rowIndex) : null);
     } else if (rowEl && that.selectOnRowClick && !event.target.closest("a, button, input, select, label")) {
-        const row = that.displayRows[+rowEl.dataset.rowIndex];
-        that.selectRow(row === that.selectedRow ? null : row);
+        const row = hortis.dataTable.rowAt(that.displayRows, +rowEl.dataset.rowIndex);
+        that.selectRow(hortis.sameRow(row, that.selectedRow) ? null : row);
     } else if (move) {
         hortis.dataTable.navigate(that, event.target.closest(".hortis-dataTable-wrap").querySelector(".hortis-dataTable-scroll"), move.dataset.move);
     }

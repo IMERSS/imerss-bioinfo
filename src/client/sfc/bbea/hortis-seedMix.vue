@@ -15,12 +15,13 @@ fluid.def("hortis.seedMix", {
     tabId: "seed",
     // Number of candidate plants listed before the user asks to see them all
     shortListLength: 60,
-    allObs: "{vizLoader}.obsRows",
+    pkg: "{vizLoader}.pkg",
+    allObs: "{vizLoader}.allObs",
     // Observations passing the filters but not the bee and plant selections - these define the site
     siteObs: "{vizLoader}.filteredObs",
     rowById: "{vizLoader}.taxa.rowById",
-    network: "$compute:hortis.seedMix.computeNetwork({self}.allObs, {self}.rowById)",
-    established: "$compute:hortis.seedMix.computeEstablished({self}.siteObs, {self}.allObs, {self}.rowById)",
+    network: "$compute:hortis.seedMix.computeNetwork({self}.pkg, {self}.allObs, {self}.rowById)",
+    established: "$compute:hortis.seedMix.computeEstablished({self}.pkg, {self}.siteObs, {self}.rowById)",
     note: "$compute:hortis.seedMix.note({self}.established)",
     // Hashes to true of the ids of established plants which the user has unticked, and of further plants they have ticked
     removed: {
@@ -58,18 +59,20 @@ fluid.def("hortis.seedMix", {
 });
 
 /**
- * Index the whole dataset's plant-pollinator network at the level of species.
- * @param {Object[]} obsRows - All observations in the dataset
- * @param {Object<String, Object>} rowById - Map of taxon id to taxon row
- * @return {Object} Members `plants`, a Map of plant id to `{id, label, bees}` where `bees` is the Set of ids of bee
- * species recorded visiting it, and `beeFamily`, a Map of the id of each bee species recorded on any plant to its family
+ * Compute the network of plants and the bees observed on them, over all the observations of the dataset.
+ * @param {VizPackage} pkg - The data package
+ * @param {Selection} allObs - All observations in the dataset
+ * @param {Object<String, TaxonRow>} rowById - Map of taxon id to taxon row
+ * @return {Object} Members `plants`, a Map of plant species id to its entry, with members `id`, `row`, `label` and
+ * `bees`, a Set of the ids of the bee species observed on it, and `beeFamily`, a Map of bee species id to its family
  */
-hortis.seedMix.computeNetwork = function (obsRows, rowById) {
+hortis.seedMix.computeNetwork = function (pkg, allObs, rowById) {
+    const bareRowById = fluid.unwrapProxy(rowById);
     const plants = new Map();
     const beeFamily = new Map();
-    obsRows.forEach(obsRow => {
-        const plantRow = rowById[obsRow.plantINatId];
-        const beeRow = rowById[obsRow.pollinatorINatId];
+    hortis.countObsByPair(pkg, allObs, "plantINatId", "pollinatorINatId").forEach(([plantId, pollId]) => {
+        const plantRow = bareRowById[plantId];
+        const beeRow = bareRowById[pollId];
         if (plantRow && beeRow) {
             const plant = hortis.speciesRowOf(plantRow);
             const bee = hortis.speciesRowOf(beeRow);
@@ -88,19 +91,20 @@ hortis.seedMix.computeNetwork = function (obsRows, rowById) {
 };
 
 /**
- * Determine which plants are already established on the site - those recorded in observations passing the current
- * filters. If no filter is active there is no site, and no plant is established.
- * @param {Object[]} siteObs - Observations passing the current filters
- * @param {Object[]} allObs - All observations in the dataset
- * @param {Object<String, Object>} rowById - Map of taxon id to taxon row
- * @return {Set<String>} The ids of established plant species
+ * Compute the plant species established at the site chosen by the filters - those observed there with a bee. If the
+ * filters choose every observation, no site is chosen, and none is established.
+ * @param {VizPackage} pkg - The data package
+ * @param {Selection} siteObs - Observations passing the current filters
+ * @param {Object<String, TaxonRow>} rowById - Map of taxon id to taxon row
+ * @return {Set<String>} The ids of the established plant species
  */
-hortis.seedMix.computeEstablished = function (siteObs, allObs, rowById) {
+hortis.seedMix.computeEstablished = function (pkg, siteObs, rowById) {
+    const bareRowById = fluid.unwrapProxy(rowById);
     const togo = new Set();
-    if (siteObs.length < allObs.length) {
-        siteObs.forEach(obsRow => {
-            const plantRow = rowById[obsRow.plantINatId];
-            if (plantRow && rowById[obsRow.pollinatorINatId]) {
+    if (siteObs.count < siteObs.rowCount) {
+        hortis.countObsByPair(pkg, siteObs, "plantINatId", "pollinatorINatId").forEach(([plantId, pollId]) => {
+            const plantRow = bareRowById[plantId];
+            if (plantRow && bareRowById[pollId]) {
                 togo.add(hortis.speciesRowOf(plantRow).id);
             }
         });

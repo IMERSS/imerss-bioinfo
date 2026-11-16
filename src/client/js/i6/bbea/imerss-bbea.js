@@ -24,20 +24,15 @@ var hortis = fluid.registerNamespace("hortis");
 
 /**
  * Compute the plant and pollinator taxa, and all their ancestors, which are recorded in a set of observations.
- * @param {Object[]} filteredObs - The observations
+ * @param {VizPackage} pkg - The data package
+ * @param {Selection} selection - The observations
  * @param {Object<String, TaxonRow>} rowById - Map of taxon id to taxon row
  * @return {Object} Members `plantRowFocus` and `pollRowFocus`, each a hash of taxon ids to `true`
  */
-hortis.twoTaxaFromObs = function (filteredObs, rowById) {
-    const plantIds = {},
-        pollIds = {};
-    filteredObs.forEach(row => {
-        plantIds[row.plantINatId] = true;
-        pollIds[row.pollinatorINatId] = true;
-    });
+hortis.twoTaxaFromObs = function (pkg, selection, rowById) {
     return {
-        plantRowFocus: hortis.closeParentTaxa(plantIds, rowById),
-        pollRowFocus: hortis.closeParentTaxa(pollIds, rowById)
+        plantRowFocus: hortis.taxaFromObs(pkg, selection, rowById, "plantINatId"),
+        pollRowFocus: hortis.taxaFromObs(pkg, selection, rowById, "pollinatorINatId")
     };
 };
 
@@ -46,11 +41,16 @@ hortis.twoTaxaFromObs = function (filteredObs, rowById) {
 // Counts plant-pollinator interactions in the filtered observations for the current taxonomic selections
 fluid.def("hortis.interactions", {
     $layers: "fluid.component",
-    // obsRows: Object[]
+    // pkg: VizPackage
+    // selection: Selection - the observations surviving the filters
     // plantSelection: Object<String, Boolean>
     // pollSelection: Object<String, Boolean>
     // rowById: Object<String, TaxonRow>
-    result: "$compute:hortis.interactions.count({self}.obsRows, {self}.plantSelection, {self}.pollSelection, {self}.rowById)",
+    // Each pair of plant and pollinator observed together, with its count - which the taxonomic selections only regroup
+    plantField: "plantINatId",
+    pollField: "pollinatorINatId",
+    pairs: "$compute:hortis.countObsByPair({self}.pkg, {self}.selection, {self}.plantField, {self}.pollField)",
+    result: "$compute:hortis.interactions.count({self}.pkg, {self}.selection, {self}.pairs, {self}.plantSelection, {self}.pollSelection, {self}.rowById)",
     crossTable: "{self}.result.crossTable",
     plantCounts: "{self}.result.plantCounts",
     pollCounts: "{self}.result.pollCounts"
@@ -116,53 +116,53 @@ hortis.ancestorHitCache = function (selection, rowById) {
 
 /**
  * Count plant-pollinator interactions for the current taxonomic selection. Each observation is counted against the
- * nearest selected ancestor of its plant and of its pollinator.
- * @param {Object[]} rows - The observations surviving the filters
+ * nearest selected ancestor of its plant and of its pollinator - which, since all the observations of a pair of plant
+ * and pollinator are counted alike, is computed for each pair rather than each observation.
+ * @param {VizPackage} pkg - The data package
+ * @param {Selection} selection - The observations surviving the filters
+ * @param {Array[]} pairs - Each pair of plant and pollinator ids observed, with its count, as by hortis.countObsByPair
  * @param {Object<String, Boolean>} plantSelection - The currently selected plant taxa
  * @param {Object<String, Boolean>} pollSelection - The currently selected pollinator taxa
  * @param {Object<String, TaxonRow>} rowById - Map of taxon id to taxon row
  * @return {Object} Members `crossTable`, mapping the integer key of each plant and pollinator pair to its count,
  * `plantCounts` and `pollCounts`, each holding `counts` mapping taxon id to count and their `max`, and
- * `finalFilteredObs`, the observations counted
+ * `finalFilteredObs`, the observations counted, as a Selection
  */
-hortis.interactions.count = function (rows, plantSelection, pollSelection, rowById) {
-    const plantAncestor = hortis.ancestorHitCache(plantSelection, rowById);
-    const pollAncestor = hortis.ancestorHitCache(pollSelection, rowById);
+hortis.interactions.count = function (pkg, selection, pairs, plantSelection, pollSelection, rowById) {
+    const bareRowById = fluid.unwrapProxy(rowById);
+    const plantAncestor = hortis.ancestorHitCache(fluid.unwrapProxy(plantSelection), bareRowById);
+    const pollAncestor = hortis.ancestorHitCache(fluid.unwrapProxy(pollSelection), bareRowById);
 
     const crossTable = {};
     const plantCounts = {counts: {}, max: 0};
     const pollCounts = {counts: {}, max: 0};
-    const finalFilteredObs = [];
+    const plantIds = new Set(), pollIds = new Set();
     const now = Date.now();
 
-    rows.forEach(function (row) {
-        const {pollinatorINatId: pollId, plantINatId: plantId} = row;
-        if (plantId && pollId) {
-            const plantCountKey = plantAncestor(plantId);
-            const pollCountKey = pollAncestor(pollId);
-            if (plantCountKey && pollCountKey) {
-                hortis.addCount(crossTable, hortis.intIdsToKey(plantCountKey, pollCountKey));
-                hortis.addCount(plantCounts.counts, plantCountKey);
-                hortis.addCount(pollCounts.counts, pollCountKey);
-                finalFilteredObs.push(row);
-            }
+    fluid.unwrapProxy(pairs).forEach(function ([plantId, pollId, count]) {
+        const plantCountKey = plantAncestor(plantId);
+        const pollCountKey = pollAncestor(pollId);
+        if (plantCountKey && pollCountKey) {
+            hortis.addCount(crossTable, hortis.intIdsToKey(plantCountKey, pollCountKey), count);
+            hortis.addCount(plantCounts.counts, plantCountKey, count);
+            hortis.addCount(pollCounts.counts, pollCountKey, count);
+            plantIds.add(plantId);
+            pollIds.add(pollId);
         }
     });
 
     plantCounts.max = hortis.max(plantCounts.counts);
     pollCounts.max = hortis.max(pollCounts.counts);
-    fluid.log("Counted " + rows.length + " obs into " + Object.keys(crossTable).length + " interaction cells in " + (Date.now() - now) + " ms");
+    // An observation is counted if both its plant and its pollinator lie within the selections, independently
+    const finalFilteredObs = hortis.selectObs(pkg, [
+        {field: "plantINatId", op: "in", value: [...plantIds]},
+        {field: "pollinatorINatId", op: "in", value: [...pollIds]}
+    ], selection);
+    fluid.log("Counted " + selection.count + " obs into " + Object.keys(crossTable).length + " interaction cells in " + (Date.now() - now) + " ms");
     return {crossTable, plantCounts, pollCounts, finalFilteredObs};
 };
 
 /** The map **/
-
-hortis.bbeaGridBucket = () => ({obsCount: 0, byTaxonId: {}, plantByTaxonId: {}});
-
-hortis.indexBbeaObs = function (bucket, row, index) {
-    fluid.pushArray(bucket.byTaxonId, row.pollinatorINatId, index);
-    fluid.pushArray(bucket.plantByTaxonId, row.plantINatId, index);
-};
 
 hortis.bbeaGridTooltipTemplate =
 `<div class="imerss-tooltip imerss-bbea-grid-tooltip">
@@ -183,10 +183,10 @@ hortis.renderBbeaGridTooltip = function (grid, rowById, cellId) {
     let togo = null;
     if (bucket) {
         const rowTemplate = "<div>%beeName: %obsCount observation%s</div>";
-        const rows = Object.entries(bucket.byTaxonId).map(([taxonId, obsIds]) => ({
+        const rows = Object.entries(grid.taxaOf(cellId)).map(([taxonId, obsCount]) => ({
             beeName: rowById[taxonId]?.iNaturalistTaxonName || "Unknown",
-            obsCount: obsIds.length,
-            s: obsIds.length === 1 ? "" : "s"
+            obsCount,
+            s: obsCount === 1 ? "" : "s"
         })).sort((rowa, rowb) => rowb.obsCount - rowa.obsCount);
         togo = hortis.stringTemplate(hortis.bbeaGridTooltipTemplate, {
             obsCount: bucket.obsCount,

@@ -10,13 +10,10 @@ QUnit.config.reorder = false;
 
 fluid.def("hortis.tests.viewsLoader", {
     $layers: "hortis.beaVizLoader",
+    // The test's data, as a columnar data package made in memory - see hortis.viz.fromRows
+    pkg: "$compute:hortis.tests.makePackage()",
     taxaRows: hortis.tests.taxaRows,
-    obsRows: hortis.tests.obsRows,
-    regionIndirection: {
-        $component: {
-            rows: hortis.tests.regionIndirectionRows
-        }
-    },
+    regionIndirectionRows: hortis.tests.regionIndirectionRows || [],
     collectorFacet: {
         $component: {
             body: {

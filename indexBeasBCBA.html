@@ -19,16 +19,11 @@
         <fluid-import src="src/client/sfc/bbea/hortis-beaVizLoader.vue"></fluid-import>
         <script>
             "use strict";
-            // The plant-pollinator visualisation of the BC Bee Atlas dataset. Its data files are relative to this page, each
-            // with a placeholder of the same shape from which the page is rendered statically by Infusion 6's hydrate.js
+            // The plant-pollinator visualisation of the BC Bee Atlas dataset. Its data package is relative to this page,
+            // and the page is rendered statically from it by Infusion 6's hydrate.js, which captures its queries of startup
             fluid.def("hortis.bbea.bcba", {
                 $layers: "hortis.beaVizLoader",
-                obsFile: "data/b-team/plant-pollinators-BCBA-labels.viz",
-                obsPlaceholderFile: "data/b-team/placeholder/plant-pollinators-BCBA-labels.viz",
-                taxaFile: "data/b-team/plant-pollinators-BCBA-assigned-taxa.viz",
-                taxaPlaceholderFile: "data/b-team/placeholder/plant-pollinators-BCBA-assigned-taxa.viz",
-                regionIndirectionFile: "data/b-team/plant-pollinators-BCBA-regionIndirection.csv",
-                regionIndirectionPlaceholderFile: "data/b-team/placeholder/plant-pollinators-BCBA-regionIndirection.csv",
+                vizFile: "data/b-team/plant-pollinators-BCBA.viz",
                 // The state whose volunteer reports are linked to
                 stateCode: "BC",
                 softwareVersion: "Software Version 1.2 - Updated February 17th, 2026",

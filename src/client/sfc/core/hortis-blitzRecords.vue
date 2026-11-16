@@ -18,7 +18,7 @@ fluid.def("hortis.blitzRecords", {
     statusById: "$compute:hortis.reportingStatusById({self}.rowById)",
     counts: "$compute:hortis.blitzRecords.counts({self}.statusById)",
     filterSummary: "$compute:hortis.blitzRecords.summarise({self}.filterState)",
-    doFilter: "$method:hortis.blitzRecords.doFilter({0}:obsRows, {1}:filterState, {self}.statusById)",
+    predicates: "$compute:hortis.blitzRecords.predicates({self}.filterState, {self}.statusById)",
     toggle: "$method:hortis.blitzRecords.toggle({self}, {0}:status)",
     reset: "$method:hortis.blitzRecords.reset({self})"
 });
@@ -40,10 +40,18 @@ hortis.blitzRecords.summarise = function (filterState) {
     return hortis.countSummary(filterState.confirmed + filterState.unconfirmed + filterState.new, ["record status", "record statuses"]);
 };
 
-hortis.blitzRecords.doFilter = function (obsRows, filterState, statusById) {
+/**
+ * Compute the predicates of a filter of the observations to those of taxa of the chosen statuses - every observation
+ * is selected if none or all of them are chosen.
+ * @param {Object} filterState - The filter state, with a Boolean member for each status
+ * @param {Object<String, String>} statusById - Map of taxon id to its status
+ * @return {Object[]} The predicates
+ */
+hortis.blitzRecords.predicates = function (filterState, statusById) {
     const count = filterState.confirmed + filterState.unconfirmed + filterState.new;
     const all = count === 0 || count === 3;
-    return all ? obsRows : obsRows.filter(obsRow => filterState[statusById[obsRow.iNaturalistTaxonId]]);
+    const ids = Object.keys(statusById).filter(id => filterState[statusById[id]]);
+    return all ? [] : [{field: "iNaturalistTaxonId", op: "in", value: ids}];
 };
 
 hortis.blitzRecords.toggle = function (that, status) {

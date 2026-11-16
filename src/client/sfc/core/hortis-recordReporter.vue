@@ -5,15 +5,21 @@
 // Reports how many observations survive the filters and selections
 fluid.def("hortis.recordReporter", {
     $layers: "fluid.component",
-    // filteredRows: Object[]
-    // allRows: Object[]
-    counts: "$compute:hortis.recordReporter.renderModel({self}.filteredRows, {self}.allRows)"
+    // filtered: Selection - the observations shown
+    // all: Selection - every observation
+    counts: "$compute:hortis.recordReporter.renderModel({self}.filtered, {self}.all)"
 });
 
-hortis.recordReporter.renderModel = function (filteredRows, allRows) {
+/**
+ * Render the counts of the observations shown and of all of them.
+ * @param {Selection} filtered - The observations shown
+ * @param {Selection} all - Every observation
+ * @return {Object} Members `filteredRows` and `allRows`, the counts formatted
+ */
+hortis.recordReporter.renderModel = function (filtered, all) {
     return {
-        filteredRows: hortis.formatInt(filteredRows.length),
-        allRows: hortis.formatInt(allRows.length)
+        filteredRows: hortis.formatInt(filtered.count),
+        allRows: hortis.formatInt(all.count)
     };
 };
 </script>

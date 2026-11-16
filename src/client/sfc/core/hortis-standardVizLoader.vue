@@ -7,6 +7,8 @@
 <fluid-import src="../components/hortis-pageTabs.vue"></fluid-import>
 <script src="%papaparse/papaparse.min.js" data-fl-scope="global"></script>
 <script src="%pako/dist/pako_inflate.min.js" data-fl-scope="global"></script>
+<script src="../../js/i6/vizPackage.js"></script>
+<script src="../../js/i6/qdl.js"></script>
 <script src="../../js/i6/imerss-core.js"></script>
 <script src="../../js/i6/filters.js"></script>
 <script src="../../js/i6/hashManager.js"></script>
@@ -25,24 +27,15 @@
 fluid.def("hortis.standardVizLoader", {
     $layers: "hortis.vizLoader",
     title: "",
-    // obsFile: String
-    // taxaFile: String
-    // regionIndirectionFile: String
+    // vizFile: String - the columnar data package, holding the tables obs, taxa and regionIndirection
     gridResolution: 100,
-    regionIndirection: {
-        $component: {
-            $layers: ["hortis.csvReader", "fluid.withPlaceholder"],
-            url: "{vizLoader}.regionIndirectionFile",
-            placeholderUrl: "{vizLoader}.regionIndirectionPlaceholderFile"
-        }
-    },
     obsFilters: {
         $component: {
             $layers: "hortis.obsFilters"
         }
     },
     filteredObs: "{self}.obsFilters.allOutput",
-    taxaFromObs: "$compute:hortis.taxaFromObs({self}.filteredObs, {self}.taxa.rowById)",
+    taxaFromObs: "$compute:hortis.taxaFromObs({self}.pkg, {self}.filteredObs, {self}.taxa.rowById)",
     collectorFilter: {
         $component: {
             $layers: "hortis.collectorFilter",
@@ -55,7 +48,7 @@ fluid.def("hortis.standardVizLoader", {
             filterName: "Dataset",
             fieldNames: ["dataset"],
             summaryNouns: ["dataset", "datasets"],
-            indirectionRows: "{vizLoader}.regionIndirection.rows"
+            indirectionRows: "{vizLoader}.regionIndirectionRows"
         }
     },
     map: {
@@ -84,8 +77,8 @@ fluid.def("hortis.standardVizLoader", {
     recordReporter: {
         $component: {
             $layers: "hortis.recordReporter",
-            filteredRows: "{vizLoader}.finalFilteredObs",
-            allRows: "{vizLoader}.obsRows"
+            filtered: "{vizLoader}.finalFilteredObs",
+            all: "{vizLoader}.allObs"
         }
     },
     filterControls: {
@@ -97,7 +90,7 @@ fluid.def("hortis.standardVizLoader", {
     records: null,
     // true once the observations shown are the real ones - a rendering from placeholder data, e.g. by a static build
     // of the page, marks the visualisation as loading until the real data has loaded
-    loaded: "$compute:hortis.standardVizLoader.loaded({self}.finalFilteredObs, {self}.isPlaceholder, {self}.regionIndirection.isPlaceholder)"
+    loaded: "$compute:hortis.standardVizLoader.loaded({self}.finalFilteredObs, {self}.isPlaceholder)"
 });
 
 // Loaded once the observations are filtered, from genuine data rather than placeholders

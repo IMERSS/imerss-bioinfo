@@ -24,6 +24,17 @@ hortis.tests.loadAllImports = async function () {
 };
 
 /**
+ * Make the columnar data package of a test's data, from its rows of observations, taxa and region indirection - see
+ * hortis.viz.fromRows.
+ * @return {VizPackage} The package
+ */
+hortis.tests.makePackage = () => hortis.viz.fromRows({
+    obs: hortis.tests.obsRows,
+    taxa: hortis.tests.taxaRows,
+    regionIndirection: hortis.tests.regionIndirectionRows || []
+});
+
+/**
  * The element in the QUnit fixture into which a test renders the visualisation
  * @return {Element} The element
  */

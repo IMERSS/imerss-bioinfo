@@ -29,7 +29,7 @@ fluid.def("hortis.groupedRegionFilter", {
     // Bound two-way to the search box
     query: "",
     filterSummary: "$compute:hortis.keyCountSummary({self}.filterState, {self}.summaryNouns)",
-    doFilter: "$method:hortis.groupedRegionFilter.doFilter({self}.indirectionRows, {0}:obsRows, {1}:filterState)",
+    predicates: "$compute:hortis.groupedRegionFilter.predicates({self}.indirectionRows, {self}.filterState)",
     reset: "$method:hortis.groupedRegionFilter.reset({self})",
     view: {
         $component: {
@@ -67,25 +67,19 @@ hortis.groupedRegionFilter.computeGroups = function (indirectionRows, leadingFie
 };
 
 /**
- * Filter observations by the selected regions - ORing within each region field and ANDing between region fields.
+ * Compute the predicates of a filter of the observations to those in a selected region of each field of regions with
+ * any selection - the regions of one field are alternatives, the fields are all required.
  * @param {Object[]} indirectionRows - Rows of the indirection table
- * @param {Object[]} obsRows - The observation rows to be filtered
  * @param {Object<String, Boolean>} filterState - Hash of selected indirection row indices to `true`
- * @return {Object[]} The filtered observation rows
+ * @return {Object[]} The predicates
  */
-hortis.groupedRegionFilter.doFilter = function (indirectionRows, obsRows, filterState) {
-    const selected = Object.keys(filterState);
-    let togo = obsRows;
-    if (selected.length > 0) {
-        const byField = {};
-        selected.forEach(index => {
-            const iRow = indirectionRows[index];
-            fluid.pushArray(byField, iRow.regionField, iRow.id);
-        });
-        const fieldEntries = Object.entries(byField);
-        togo = obsRows.filter(obsRow => fieldEntries.every(([regionField, ids]) => ids.includes(obsRow[regionField])));
-    }
-    return togo;
+hortis.groupedRegionFilter.predicates = function (indirectionRows, filterState) {
+    const byField = {};
+    Object.keys(filterState).forEach(index => {
+        const iRow = indirectionRows[index];
+        fluid.pushArray(byField, iRow.regionField, iRow.id);
+    });
+    return Object.entries(byField).map(([regionField, ids]) => ({field: regionField, op: "in", value: ids}));
 };
 
 hortis.groupedRegionFilter.reset = function (that) {

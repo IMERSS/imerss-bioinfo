@@ -47,7 +47,7 @@ fluid.def("hortis.libreMap.polygonFilter", {
     filterState: [],
     drawMode: null,
     filterSummary: "$compute:hortis.libreMap.polygonFilter.summarise({self}.filterState)",
-    doFilter: "$method:hortis.libreMap.polygonFilter.doFilter({0}:obsRows, {1}:filterState)",
+    predicates: "$compute:hortis.libreMap.polygonFilter.predicates({self}.filterState)",
     reset: "$method:hortis.libreMap.polygonFilter.reset({self})",
     // Bound to the styled map, since MapboxDraw's layers would not survive the application of the map's style
     mapboxDraw: {
@@ -67,19 +67,13 @@ hortis.libreMap.polygonFilter.summarise = function (filterState) {
 };
 
 /**
- * Filter observations to those lying within any of the polygons drawn. The polygons arrive as component material, read
- * through a proxy which tracks each access - since every observation is tested against every vertex of the polygons,
- * their bare values are read instead, which is many times faster. Each observation's point is that kept on it by
- * hortis.rowPoint, under the key hortis.intersectsAnyFeature reads - an observation without one lies within no polygon.
- * @param {Object[]} obsRows - The observations
- * @param {Object[]} filterState - The polygons drawn, as GeoJSON features, possibly as a proxy
- * @return {Object[]} The observations within any of the polygons
+ * Compute the predicates of a filter of the observations to those lying within any of the polygons drawn - an
+ * observation without a position lies within none.
+ * @param {Object[]} filterState - The polygons drawn, as GeoJSON features
+ * @return {Object[]} The predicates
  */
-hortis.libreMap.polygonFilter.doFilter = function (obsRows, filterState) {
-    const features = fluid.unwrapProxy(filterState);
-    return features.length === 0 ? obsRows : obsRows.filter(row => hortis.rowPoint(row) !== null &&
-        hortis.intersectsAnyFeature(features, fluid.unwrapProxy(row)));
-};
+hortis.libreMap.polygonFilter.predicates = filterState => filterState.length === 0 ? [] :
+    [{field: ["decimalLongitude", "decimalLatitude"], op: "inPolygons", value: {type: "FeatureCollection", features: filterState}}];
 
 hortis.libreMap.polygonFilter.reset = function (that) {
     that.filterState = [];

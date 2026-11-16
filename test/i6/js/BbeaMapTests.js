@@ -143,8 +143,10 @@ hortis.tests.obsRows = [
 
 fluid.def("hortis.tests.mapLoader", {
     $layers: "hortis.beaVizLoader",
+    // The test's data, as a columnar data package made in memory - see hortis.viz.fromRows
+    pkg: "$compute:hortis.tests.makePackage()",
     taxaRows: hortis.tests.taxaRows,
-    obsRows: hortis.tests.obsRows,
+    regionIndirectionRows: hortis.tests.regionIndirectionRows || [],
     // Don't fetch the index of volunteers' reports
     collectorFacet: {
         $component: {
@@ -274,17 +276,19 @@ QUnit.test("Clicking a grid cell filters observations, and clicking elsewhere re
     map.fire("load");
     await hortis.tests.waitFor(() => map.getSource("obsgrid-source"));
 
-    const cellId = that.map.obsQuantiser.cellIds.get(hortis.tests.obsRows[0]);
-    const cellFeature = {layer: {paint: {"fill-opacity": 0.6}}, properties: {cellId}};
-    map.fire("click", {point: {features: [cellFeature]}});
+    // The cell of the two observations near Corvallis
+    const cellId = Object.entries(that.map.obsQuantiser.grid.buckets).find(([, bucket]) => bucket.obsCount === 2)[0];
+    const cellFeature = {layer: {id: "obsgrid-layer", paint: {"fill-opacity": 0.6}}, properties: {cellId}};
+    // Each click bears its time, as a browser's does - the test's environment has no performance clock to fall back on
+    map.fire("click", {point: {features: [cellFeature]}, originalEvent: {timeStamp: 100000}});
     fluid.cell.stabilize();
     assert.equal(that.map.gridSelector.filterState, cellId, "Grid cell selected");
-    assert.equal(that.filteredObs.length, 2, "Observations filtered to the selected cell");
+    assert.equal(that.filteredObs.count, 2, "Observations filtered to the selected cell");
     assert.equal(map.sources["obsgrid-source"].data.features.length, 1, "Grid redrawn with the one selected cell");
 
-    map.fire("click", {point: {features: []}});
+    map.fire("click", {point: {features: []}, originalEvent: {timeStamp: 200000}});
     fluid.cell.stabilize();
     assert.equal(that.map.gridSelector.filterState, null, "Selection reset by a click elsewhere");
-    assert.equal(that.filteredObs.length, 3, "All observations restored");
+    assert.equal(that.filteredObs.count, 3, "All observations restored");
     that.destroy();
 });

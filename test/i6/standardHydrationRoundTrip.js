@@ -76,8 +76,11 @@ const roundTrip = async function (spec) {
     });
     const {document} = linkedom.parseHTML(result.hydratedText);
     spec.checks(document);
-    expect(result.hydrated.initial.reporter === "Displaying 8 of 8 records" && result.hydrated.initial.loading,
-        `${spec.name} hydrated page shows its placeholder rendering as soon as it is parsed - found ${JSON.stringify(result.hydrated.initial)}`);
+    // The page is hydrated against its real data, so that it shows its real records as soon as it is parsed
+    const allRecords = `Displaying ${spec.allRows} of ${spec.allRows} records`;
+    expect(result.hydrated.initial.reporter === allRecords && !result.hydrated.initial.loading,
+        `${spec.name} hydrated page shows its real rendering as soon as it is parsed - found ${JSON.stringify(result.hydrated.initial)}`);
+    expect(!!document.getElementById("hortis-query-cache"), `${spec.name} hydrated page holds the results of the queries of its startup`);
     expect(result.dehydrated.initial.reporter === "", `${spec.name} dehydrated page holds no markup of its own`);
     [["dehydrated", result.dehydrated], ["hydrated", result.hydrated]].forEach(([name, loaded]) => {
         expect(loaded.errors.length === 0, `No errors in ${spec.name} ${name} page - found ${JSON.stringify(loaded.errors)}`);

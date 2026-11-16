@@ -42,10 +42,12 @@ fluid.def("hortis.summarisedFilter", {
     // filterSummary - should be implemented
 });
 
-// A filter of observation rows, found by hortis.obsFilters
+// A filter of the observations, found by hortis.obsFilters. Rather than filtering rows itself, it computes from its
+// state a list of predicates of the query description language - see notes/query-description-language.md - which is
+// empty when it selects every observation
 fluid.def("hortis.obsFilter", {
     $layers: ["hortis.filter", "hortis.summarisedFilter"]
-    // doFilter: $method accepting (rows, filterState) - must be implemented
+    // predicates: Object[] - must be implemented, typically as a $compute of the filter's state
 });
 
 /**
@@ -94,16 +96,82 @@ hortis.filters.evaluate = function (allInput, filterComps) {
     return output;
 };
 
+// Gathers the predicates of every filter of the observations beneath the visualisation, in tree order, and selects
+// the observations passing them all. A change in any filter's state changes its predicates, and so the selection
 fluid.def("hortis.obsFilters", {
-    $layers: "hortis.filters",
-    allInput: "{vizLoader}.obsRows",
-    filterComps: "{vizLoader hortis.obsFilter}"
+    $layers: "fluid.component",
+    filterComps: "{vizLoader hortis.obsFilter}",
+    predicates: "$compute:hortis.obsFilters.predicates({self}, {self}.filterComps)",
+    allOutput: "$compute:hortis.obsFilters.select({vizLoader}.pkg, {self}.predicates)"
 });
+
+/**
+ * Gather the predicates of the active filters, each read through its proxy so that a change in any reruns the
+ * gathering. A filter whose activity or predicates are unavailable takes no part - e.g. one whose state is held in the
+ * URL, when the page is rendered statically, and so has none - so that the page is rendered as with no such filter.
+ * The predicates are those of the last gathering if they are equal to them, so that the reactive graph is cut off
+ * there - the gathering reruns whenever a filter appears, as the panes of a page are constructed, and since Infusion
+ * cuts off only an identical value, fresh but equal predicates would select the observations, and recompute all that
+ * depends on them, afresh.
+ * @param {hortis.obsFilters} that - The component gathering them, by which the last gathering is remembered
+ * @param {Component[]} filterComps - The filters, each bearing `isActive` and `predicates`
+ * @return {Object[]} The predicates, bare
+ */
+hortis.obsFilters.predicates = function (that, filterComps) {
+    const togo = hortis.bareQuery(filterComps.flatMap(function (filterComp) {
+        const isActive = fluid.unwrapProxy(filterComp.isActive), predicates = fluid.unwrapProxy(filterComp.predicates);
+        return isActive && !fluid.isUnavailable(isActive) && Array.isArray(predicates) ? predicates : [];
+    }));
+    return hortis.sameAsLast(that, "predicates", togo, hortis.qdl.canonical(togo));
+};
+
+// The last value computed by each component under each name, with its key - see hortis.sameAsLast
+hortis.lastValues = new WeakMap();
+
+/**
+ * Return the value last computed by a component under a name, if its key is that of the new value, else the new value
+ * - so that a computation which yields an equal value yields the identical one, and Infusion, which cuts off only an
+ * identical value, cuts off the reactive graph there.
+ * @param {fluid.component} that - The component
+ * @param {String} name - The name of the value
+ * @param {any} value - The new value
+ * @param {String} key - The key of the new value, equal for equal values
+ * @return {any} The value to be returned
+ */
+hortis.sameAsLast = function (that, name, value, key) {
+    const bare = fluid.unwrapProxy(that);
+    let records = hortis.lastValues.get(bare);
+    if (!records) {
+        records = {};
+        hortis.lastValues.set(bare, records);
+    }
+    const last = records[name];
+    let togo = value;
+    if (last && last.key === key) {
+        togo = last.value;
+    } else {
+        records[name] = {key, value};
+    }
+    return togo;
+};
+
+/**
+ * Select the observations passing every filter's predicates.
+ * @param {VizPackage} pkg - The data package
+ * @param {Object[]} predicates - The predicates
+ * @return {Selection} The observations selected
+ */
+hortis.obsFilters.select = function (pkg, predicates) {
+    const now = Date.now();
+    const togo = hortis.selectObs(pkg, predicates);
+    fluid.log("Filtered " + togo.rowCount + " rows to " + togo.count + " through " + predicates.length + " predicates in " + (Date.now() - now) + " ms");
+    return togo;
+};
 
 // Mixin for a filter which needs the full set of observations, e.g. to compute the range of values to be offered
 fluid.def("hortis.obsDrivenFilter", {
     $layers: "hortis.obsFilter",
-    obsRows: "{vizLoader}.obsRows"
+    pkg: "{vizLoader}.pkg"
 });
 
 /**

@@ -18,8 +18,10 @@ hortis.tests.countingCount = function (...args) {
 
 fluid.def("hortis.tests.bbeaLoader", {
     $layers: "hortis.beaVizLoader",
+    // The test's data, as a columnar data package made in memory - see hortis.viz.fromRows
+    pkg: "$compute:hortis.tests.makePackage()",
     taxaRows: hortis.tests.taxaRows,
-    obsRows: hortis.tests.obsRows,
+    regionIndirectionRows: hortis.tests.regionIndirectionRows || [],
     // Don't fetch the index of volunteers' reports
     collectorFacet: {
         $component: {
@@ -34,15 +36,10 @@ fluid.def("hortis.tests.bbeaLoader", {
             }
         }
     },
-    regionIndirection: {
-        $component: {
-            rows: hortis.tests.regionIndirectionRows
-        }
-    },
     regionLeadingFields: ["ecoregion"],
     interactions: {
         $component: {
-            result: "$compute:hortis.tests.countingCount({self}.obsRows, {self}.plantSelection, {self}.pollSelection, {self}.rowById)"
+            result: "$compute:hortis.tests.countingCount({self}.pkg, {self}.selection, {self}.pairs, {self}.plantSelection, {self}.pollSelection, {self}.rowById)"
         }
     }
 });
@@ -79,8 +76,8 @@ QUnit.test("Initial dataflow and rendering", function (assert) {
     const that = hortis.tests.bbeaLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
 
-    assert.equal(that.filteredObs.length, 5, "All observations pass the filters initially");
-    assert.equal(that.finalFilteredObs.length, 5, "All observations pass the empty taxon selections");
+    assert.equal(that.filteredObs.count, 5, "All observations pass the filters initially");
+    assert.equal(that.finalFilteredObs.count, 5, "All observations pass the empty taxon selections");
     assert.equal(Object.keys(that.interactions.crossTable).length, 4, "Four distinct plant-pollinator pairs are counted");
     assert.equal(hortis.tests.reporterText(), "Displaying 5 of 5 records", "Record reporter rendered");
 
@@ -104,7 +101,7 @@ QUnit.test("Checking a family selects its descendants and filters the interactio
         "Selection holds the checked family - its descendants are hidden by folding");
     assert.equal(that.beeFacet.body.pollChecklist.idToState["12"].selected, "selected", "A species within the family is selected");
     assert.equal(that.beeFacet.body.pollChecklist.idToState["1"].selected, "indeterminate", "The root is indeterminate");
-    assert.equal(that.finalFilteredObs.length, 3, "Only observations of Apidae survive");
+    assert.equal(that.finalFilteredObs.count, 3, "Only observations of Apidae survive");
     assert.equal(hortis.tests.reporterText(), "Displaying 3 of 5 records", "Record reporter updated");
 
     const root = hortis.tests.checkboxFor(".imerss-pollinators", "1");
@@ -146,17 +143,17 @@ QUnit.test("Filters narrow the checklists, which keep their selections", functio
     female.checked = true;
     hortis.tests.change(female);
     assert.deepEqual(that.beeFacet.body.pollChecklist.extraFilter.filterState, {male: false, female: true}, "Sex filter state written back from the DOM");
-    assert.equal(that.filteredObs.length, 3, "Three observations are of females");
-    assert.equal(that.finalFilteredObs.length, 2, "Two of them are of Apidae");
+    assert.equal(that.filteredObs.count, 3, "Three observations are of females");
+    assert.equal(that.finalFilteredObs.count, 2, "Two of them are of Apidae");
 
     // Each month's checkbox is bound two-way to its record in the phenology filter's state, through its $for
     const june = qsa(".imerss-phenology-filter input")[5];
     june.checked = true;
     hortis.tests.change(june);
     assert.equal(that.phenologyFacet.body.phenologyFilter.filterState.months[5].checked, true, "June written through to the phenology filter's state");
-    assert.equal(that.filteredObs.length, 1, "One female observation in June");
+    assert.equal(that.filteredObs.count, 1, "One female observation in June");
     assert.deepEqual(hortis.tests.displayedNames(".imerss-pollinators"), ["Anthophila", "Apidae"], "Andrenidae has left the bee checklist");
-    assert.equal(that.finalFilteredObs.length, 1, "The June observation is of Apidae");
+    assert.equal(that.finalFilteredObs.count, 1, "The June observation is of Apidae");
 
     hortis.tests.interactionCounts = 0;
     june.checked = false;
@@ -164,7 +161,7 @@ QUnit.test("Filters narrow the checklists, which keep their selections", functio
     assert.equal(hortis.tests.interactionCounts, 1, "The interactions table, reached by several paths, is evaluated once for the change");
     assert.deepEqual(hortis.tests.displayedNames(".imerss-pollinators"), ["Anthophila", "Andrenidae", "Apidae"], "Andrenidae has returned");
     assert.equal(that.beeFacet.body.pollChecklist.idToState["10"].selected, "selected", "Apidae is still selected");
-    assert.equal(that.finalFilteredObs.length, 2, "Selection of Apidae still applies");
+    assert.equal(that.finalFilteredObs.count, 2, "Selection of Apidae still applies");
     assert.equal(that.beeFacet.body.pollChecklist.extraFilter.filterSummary.count, 1, "Sex filter summarises one selected sex");
     that.destroy();
 });
@@ -178,10 +175,10 @@ QUnit.test("Reset control", function (assert) {
     hortis.tests.click(apidae);
     that.beeFacet.body.pollChecklist.extraFilter.filterState.male = true;
     fluid.cell.stabilize();
-    assert.equal(that.finalFilteredObs.length, 1, "One observation of a male of Apidae");
+    assert.equal(that.finalFilteredObs.count, 1, "One observation of a male of Apidae");
 
     hortis.tests.click(qs(".imerss-reset-filter"));
-    assert.equal(that.finalFilteredObs.length, 5, "Every observation survives after reset");
+    assert.equal(that.finalFilteredObs.count, 5, "Every observation survives after reset");
     assert.notOk(hortis.tests.checkboxFor(".imerss-pollinators", "10").checked, "Family checkbox is unchecked");
     assert.notOk(qsa(".imerss-sex-filter input")[1].checked, "Male checkbox is unchecked");
     that.destroy();
@@ -216,11 +213,11 @@ QUnit.test("Grouped region filter", function (assert) {
     const cascades = qs(".imerss-region-filter .imerss-region-check[data-row-id=\"2\"]");
     cascades.checked = true;
     hortis.tests.change(cascades);
-    assert.equal(that.filteredObs.length, 2, "Two observations in the Cascades");
+    assert.equal(that.filteredObs.count, 2, "Two observations in the Cascades");
     const benton = qs(".imerss-region-filter .imerss-region-check[data-row-id=\"0\"]");
     benton.checked = true;
     hortis.tests.change(benton);
-    assert.equal(that.filteredObs.length, 1, "Selections in different groups are ANDed");
+    assert.equal(that.filteredObs.count, 1, "Selections in different groups are ANDed");
     assert.equal(qs(".imerss-region-filter .imerss-group[data-group=\"1\"] .imerss-group-state").textContent, "1", "Group badge counts its selections");
     assert.equal(that.regionFacet.body.regionFilter.filterSummary.count, 2, "Filter summarises two selected regions");
 
@@ -233,7 +230,7 @@ QUnit.test("Grouped region filter", function (assert) {
 
     that.regionFacet.body.regionFilter.reset();
     fluid.cell.stabilize();
-    assert.equal(that.filteredObs.length, 5, "Reset restores every observation");
+    assert.equal(that.filteredObs.count, 5, "Reset restores every observation");
     assert.equal(qs(".imerss-region-filter .imerss-region-search").value, "", "Reset clears the search box");
     that.destroy();
 });
@@ -252,10 +249,10 @@ QUnit.test("Collector filter", function (assert) {
     assert.ok(clear.classList.contains("fl-hidden"), "Clear control hidden whilst no collector is chosen");
     collector.confirmAutocomplete("Charles Babbage");
     fluid.cell.stabilize();
-    assert.equal(that.filteredObs.length, 2, "Observations filtered to the chosen collector");
+    assert.equal(that.filteredObs.count, 2, "Observations filtered to the chosen collector");
     assert.notOk(clear.classList.contains("fl-hidden"), "Clear control shown");
     hortis.tests.click(clear);
-    assert.equal(that.filteredObs.length, 5, "Clear control resets the filter");
+    assert.equal(that.filteredObs.count, 5, "Clear control resets the filter");
     that.destroy();
 });
 
@@ -270,12 +267,12 @@ QUnit.test("Elevation filter", function (assert) {
 
     hortis.tests.input(qs(".imerss-elevation-filter .dual-range-max"), "950");
     assert.equal(elevation.dualRangeInput.range.max, 950, "Moving the upper input narrows the range");
-    assert.equal(that.filteredObs.length, 4, "Observations above 950 m are excluded");
+    assert.equal(that.filteredObs.count, 4, "Observations above 950 m are excluded");
     assert.equal(elevation.filterSummary.count, 1, "Filter summarises its narrowed range");
 
     elevation.reset();
     fluid.cell.stabilize();
-    assert.equal(that.filteredObs.length, 5, "Reset restores the full range");
+    assert.equal(that.filteredObs.count, 5, "Reset restores the full range");
     that.destroy();
 });
 
@@ -290,7 +287,7 @@ QUnit.test("Checklist search selects the chosen taxon", function (assert) {
     fluid.cell.stabilize();
     assert.equal(that.beeFacet.body.pollChecklist.idToState["12"].selected, "selected", "Chosen taxon is selected");
     assert.notEqual(that.beeFacet.body.pollChecklist.idToState["11"].folded, "folded", "Its genus is unfolded to show it");
-    assert.equal(that.finalFilteredObs.length, 2, "Observations filtered to the chosen taxon");
+    assert.equal(that.finalFilteredObs.count, 2, "Observations filtered to the chosen taxon");
     that.destroy();
 });
 
@@ -369,7 +366,7 @@ QUnit.test("Phenology filter chooses months or a period of the year, exclusively
     assert.deepEqual(phenology.filterState.days, {lower: 0, upper: day(6, 15)},
         "Moving the input chooses a period, written through its lens to the filter's state");
     assert.equal(hash().phenology, "01-01~06-15", "The period is held in the URL as the months and days of its ends");
-    assert.equal(that.filteredObs.length, 4, "Four observations fall within the period");
+    assert.equal(that.filteredObs.count, 4, "Four observations fall within the period");
     assert.equal(qs(".imerss-phenology-period .dual-range-thumb-max").textContent, "15 Jun", "The end slid shows its day");
     assert.ok(months().every(input => input.disabled), "Choosing a period disables the months");
     assert.ok(!minInput.disabled, "The period's input is not disabled");
@@ -392,7 +389,7 @@ QUnit.test("Phenology filter chooses months or a period of the year, exclusively
     assert.deepEqual({...phenology.dualRangeInput.range}, {min: day(5, 1), max: day(6, 30)},
         "The period's input follows the URL through both lenses");
     assert.ok(!june.checked && june.disabled, "The month is cleared and disabled by a period in the URL");
-    assert.equal(that.filteredObs.length, 2, "Two observations fall within the period from the URL");
+    assert.equal(that.filteredObs.count, 2, "Two observations fall within the period from the URL");
 
     // A period held in the URL by an earlier version of the filter, as full dates, is read by their months and days
     hashManager.hash = {phenology: "2023-05-01~2023-06-30"};

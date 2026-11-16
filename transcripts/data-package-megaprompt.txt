@@ -1,0 +1,8 @@
+Produce an implementation of the columnar data package, this will belong at the imerss-bioinfo level. Produce a migration tool which will take an existing vizLoader driver, look at its arguments and pack them into the new format.
+  Let's reuse the old "viz" suffix for the new all-in-one package which will appear in the component tree as {dataLoader}, and then vizLoader can then refer to its contents symbolically as {dataLoader}.taxa, {dataLoader}.obs etc. I
+  think we don't need an R version of this since it's widely required that node is available during the publication workflow, but add steps in build.R to invoke this as a final stage of data preparation. Write full docs for this
+  format and the drivers in bagatelle/notes/columnar-data-package.md . Take an inventory of what the core fields are to display the initial viz views for i6-based viz and bioreportr, as well as the *Beas* variants which have two
+  taxa per obs row. Then go ahead and define the query description language, spec in nodes/query-description-language.md which is written against the columnar data's loaded form, and rewrite all data access within the i6
+  imerss-bioinfo viz package and bioreportr against the QDL, including all filters and map gridding and binning. Since there is general upheaval this might be a good time to move the data loading code into a web worker so that
+  mobile clients remain responsive. Finally, beef up the hydration process, which should now be run against real data rather than placeholders, to capture any queries used during app startup and package them along with the hydrated
+  drivers so that they are available during real startup.

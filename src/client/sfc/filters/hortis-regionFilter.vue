@@ -20,7 +20,7 @@ fluid.def("hortis.regionFilter", {
     // Hash of the index of each selected row of filterRows to true
     filterState: {},
     filterSummary: "$compute:hortis.keyCountSummary({self}.filterState, {self}.summaryNouns)",
-    doFilter: "$method:hortis.regionFilter.doFilter({self}.filterRows, {0}:obsRows, {1}:filterState)",
+    predicates: "$compute:hortis.regionFilter.predicates({self}.filterRows, {self}.filterState)",
     reset: "$method:hortis.regionFilter.reset({self})",
     regionRows: {
         $component: {
@@ -58,9 +58,20 @@ hortis.regionFilter.reset = function (that) {
     that.filterState = {};
 };
 
-hortis.regionFilter.doFilter = function (filterRows, obsRows, filterState) {
-    const selected = Object.keys(filterState).map(index => filterRows[index]);
-    return selected.length === 0 ? obsRows : obsRows.filter(obsRow => selected.some(iRow => obsRow[iRow.regionField] === iRow.id));
+/**
+ * Compute the predicates of a filter of the observations to those in any of the selected regions.
+ * @param {Object[]} filterRows - The rows of the region indirection offered by the filter
+ * @param {Object<String, Boolean>} filterState - Hash of the index of each selected row to `true`
+ * @return {Object[]} The predicates
+ */
+hortis.regionFilter.predicates = function (filterRows, filterState) {
+    const byField = {};
+    Object.keys(filterState).forEach(index => {
+        const iRow = filterRows[index];
+        fluid.pushArray(byField, iRow.regionField, iRow.id);
+    });
+    const any = Object.entries(byField).map(([regionField, ids]) => ({field: regionField, op: "in", value: ids}));
+    return any.length === 0 ? [] : [{any}];
 };
 </script>
 

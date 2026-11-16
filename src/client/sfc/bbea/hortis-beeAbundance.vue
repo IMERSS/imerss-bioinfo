@@ -23,7 +23,8 @@ fluid.def("hortis.beeAbundance", {
     minBand: 16,
     // Maximum width in pixels allotted to each bar
     maxBand: 80,
-    obsRows: "{vizLoader}.finalFilteredObs",
+    pkg: "{vizLoader}.pkg",
+    selection: "{vizLoader}.finalFilteredObs",
     rowById: "{vizLoader}.taxa.rowById",
     charts: "$compute:hortis.querySelectorIn({self}.view.renderedContainer, .mf-charts)",
     // Zero until the charts are first laid out, which they are only once the view's tab is selected
@@ -33,7 +34,7 @@ fluid.def("hortis.beeAbundance", {
             unbind: "hortis.unobserveWidth({boundValue})"
         }
     },
-    abundance: "$compute:hortis.beeAbundance.compute({self}.obsRows, {self}.rowById)",
+    abundance: "$compute:hortis.beeAbundance.compute({self}.pkg, {self}.selection, {self}.rowById)",
     keySlot: {
         $component: {
             $layers: "hortis.verbatimSlot",
@@ -50,33 +51,35 @@ fluid.def("hortis.beeAbundance", {
 });
 
 /**
- * Count bee observations by family, genus and species.
- * @param {Object[]} obsRows - The observations
- * @param {Object<String, Object>} rowById - Map of taxon id to taxon row
- * @return {Object} Members `family`, `genus` and `species`, each an array of records with members `label`, `family`
- * and `count` sorted by descending count
+ * Tally the observations of each bee family, genus and species.
+ * @param {VizPackage} pkg - The data package
+ * @param {Selection} selection - The observations
+ * @param {Object<String, TaxonRow>} rowById - Map of taxon id to taxon row
+ * @return {Object} Members `family`, `genus` and `species`, each a list of tallies with members `label`, `family`
+ * and `count`, in descending order of count
  */
-hortis.beeAbundance.compute = function (obsRows, rowById) {
+hortis.beeAbundance.compute = function (pkg, selection, rowById) {
+    const bareRowById = fluid.unwrapProxy(rowById);
     const tallies = {family: new Map(), genus: new Map(), species: new Map()};
-    const tally = (map, key, label, family) => {
+    const tally = (map, key, label, family, count) => {
         const existing = map.get(key);
         if (existing) {
-            ++existing.count;
+            existing.count += count;
         } else {
-            map.set(key, {label, family, count: 1});
+            map.set(key, {label, family, count});
         }
     };
-    obsRows.forEach(obsRow => {
-        const row = rowById[obsRow.pollinatorINatId];
+    hortis.countObsBy(pkg, selection, "pollinatorINatId").forEach((count, taxonId) => {
+        const row = bareRowById[taxonId];
         if (row) {
             const family = hortis.familyNameOf(row);
             const genusRow = hortis.ancestorAtRank(row, "genus");
             const speciesRow = hortis.speciesRowOf(row);
-            tally(tallies.family, family, family, family);
+            tally(tallies.family, family, family, family, count);
             if (genusRow) {
-                tally(tallies.genus, genusRow.id, genusRow.iNaturalistTaxonName, family);
+                tally(tallies.genus, genusRow.id, genusRow.iNaturalistTaxonName, family, count);
             }
-            tally(tallies.species, speciesRow.id, hortis.taxonLabel(speciesRow), family);
+            tally(tallies.species, speciesRow.id, hortis.taxonLabel(speciesRow), family, count);
         }
     });
     const sorted = map => [...map.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));

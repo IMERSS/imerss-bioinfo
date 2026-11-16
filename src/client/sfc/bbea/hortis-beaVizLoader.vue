@@ -19,6 +19,8 @@
 
 <script src="%papaparse/papaparse.min.js" data-fl-scope="global"></script>
 <script src="%pako/dist/pako_inflate.min.js" data-fl-scope="global"></script>
+<script src="../../js/i6/vizPackage.js"></script>
+<script src="../../js/i6/qdl.js"></script>
 <script src="../../js/i6/imerss-core.js"></script>
 <script src="../../js/i6/filters.js"></script>
 <script src="../../js/i6/hashManager.js"></script>
@@ -41,21 +43,12 @@
 // indexBeasBCBA.html
 fluid.def("hortis.beaVizLoader", {
     $layers: ["hortis.icons", "hortis.vizLoader"],
-    // obsFile: String
-    // taxaFile: String
-    // regionIndirectionFile: String
+    // vizFile: String - the columnar data package, holding the tables obs, taxa and regionIndirection
     // The state whose volunteer reports are linked to, if they are to be restricted to one
     stateCode: null,
     // The versions of the software and dataset shown in the colophon
     softwareVersion: "",
     datasetVersion: "",
-    regionIndirection: {
-        $component: {
-            $layers: ["hortis.csvReader", "fluid.withPlaceholder"],
-            url: "{vizLoader}.regionIndirectionFile",
-            placeholderUrl: "{vizLoader}.regionIndirectionPlaceholderFile"
-        }
-    },
     // The filters, each held within the body of a section of the filter concertina
     obsFilters: {
         $component: {
@@ -101,7 +94,7 @@ fluid.def("hortis.beaVizLoader", {
                         $component: {
                             $layers: "hortis.groupedRegionFilter",
                             leadingFields: "{vizLoader}.regionLeadingFields",
-                            indirectionRows: "{vizLoader}.regionIndirection.rows"
+                            indirectionRows: "{vizLoader}.regionIndirectionRows"
                         }
                     }
                 }
@@ -147,7 +140,7 @@ fluid.def("hortis.beaVizLoader", {
             $layers: "hortis.bbeaLibreMap"
         }
     },
-    taxaFromObs: "$compute:hortis.twoTaxaFromObs({self}.filteredObs, {self}.taxa.rowById)",
+    taxaFromObs: "$compute:hortis.twoTaxaFromObs({self}.pkg, {self}.filteredObs, {self}.taxa.rowById)",
     beeFacet: {
         $component: {
             $layers: "hortis.filterFacet",
@@ -204,7 +197,8 @@ fluid.def("hortis.beaVizLoader", {
     interactions: {
         $component: {
             $layers: "hortis.interactions",
-            obsRows: "{vizLoader}.filteredObs",
+            pkg: "{vizLoader}.pkg",
+            selection: "{vizLoader}.filteredObs",
             plantSelection: "{vizLoader}.plantFacet.body.plantChecklist.rowSelection",
             pollSelection: "{vizLoader}.beeFacet.body.pollChecklist.rowSelection",
             rowById: "{vizLoader}.taxa.rowById"
@@ -213,12 +207,12 @@ fluid.def("hortis.beaVizLoader", {
     finalFilteredObs: "{self}.interactions.result.finalFilteredObs",
     // true once the observations to be shown are available, which hides the loading indicator - a rendering from
     // placeholder data, e.g. by a static build of the page, shows it until the real data has loaded
-    loaded: "$compute:hortis.beaVizLoader.loaded({self}.finalFilteredObs, {self}.isPlaceholder, {self}.regionIndirection.isPlaceholder)",
+    loaded: "$compute:hortis.beaVizLoader.loaded({self}.finalFilteredObs, {self}.isPlaceholder)",
     recordReporter: {
         $component: {
             $layers: "hortis.recordReporter",
-            filteredRows: "{vizLoader}.finalFilteredObs",
-            allRows: "{vizLoader}.obsRows"
+            filtered: "{vizLoader}.finalFilteredObs",
+            all: "{vizLoader}.allObs"
         }
     },
     filterControls: {

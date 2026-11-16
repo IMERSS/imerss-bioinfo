@@ -135,50 +135,23 @@ const buildIndex = {
         src: "src/lib/brightsign-keyboard.js",
         dest: "docs/js/brightsign-keyboard.js"
     }, {
-        src: "data/b-team/plant-pollinators-OBA-2025-labels.viz",
-        dest: "docs/data/b-team/plant-pollinators-OBA-2025-labels.viz"
+        src: "data/b-team/plant-pollinators-OBA-2025.viz",
+        dest: "docs/data/b-team/plant-pollinators-OBA-2025.viz"
     }, {
-        src: "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz",
-        dest: "docs/data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz"
+        src: "data/b-team/plant-pollinators-WaBA-2026.viz",
+        dest: "docs/data/b-team/plant-pollinators-WaBA-2026.viz"
     }, {
-        src: "data/b-team/plant-pollinators-OBA-2025-regionIndirection.csv",
-        dest: "docs/data/b-team/plant-pollinators-OBA-2025-regionIndirection.csv"
+        src: "data/b-team/plant-pollinators-BCBA.viz",
+        dest: "docs/data/b-team/plant-pollinators-BCBA.viz"
     }, {
-        src: "data/b-team/plant-pollinators-WaBA-2026-labels.viz",
-        dest: "docs/data/b-team/plant-pollinators-WaBA-2026-labels.viz"
+        src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.viz",
+        dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.viz"
     }, {
-        src: "data/b-team/plant-pollinators-WaBA-2026-assigned-taxa.viz",
-        dest: "docs/data/b-team/plant-pollinators-WaBA-2026-assigned-taxa.viz"
+        src: "data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03.viz",
+        dest: "docs/data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03.viz"
     }, {
-        src: "data/b-team/plant-pollinators-WaBA-2026-regionIndirection.csv",
-        dest: "docs/data/b-team/plant-pollinators-WaBA-2026-regionIndirection.csv"
-    }, {
-        src: "data/b-team/plant-pollinators-BCBA-labels.viz",
-        dest: "docs/data/b-team/plant-pollinators-BCBA-labels.viz"
-    }, {
-        src: "data/b-team/plant-pollinators-BCBA-assigned-taxa.viz",
-        dest: "docs/data/b-team/plant-pollinators-BCBA-assigned-taxa.viz"
-    }, {
-        src: "data/b-team/plant-pollinators-BCBA-regionIndirection.csv",
-        dest: "docs/data/b-team/plant-pollinators-BCBA-regionIndirection.csv"
-    }, {
-        src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv",
-        dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.csv"
-    }, {
-        src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared-taxa.csv",
-        dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared-taxa.csv"
-    },  {
-        src: "data/Galiano 2023 BioBlitz/regionIndirection.csv",
-        dest: "docs/data/Galiano 2023 BioBlitz/regionIndirection.csv"
-    }, {
-        src: "data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-prepared.csv",
-        dest: "docs/data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-prepared.csv"
-    }, {
-        src: "data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-assigned-taxa.csv",
-        dest: "docs/data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-assigned-taxa.csv"
-    },  {
-        src: "data/dataPaper-II/regionIndirection.csv",
-        dest: "docs/data/dataPaper-II/regionIndirection.csv"
+        src: "data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-details.viz",
+        dest: "docs/data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-details.viz"
     }, {
         src: "data/b-team/placeholder/*",
         dest: "docs/data/b-team/placeholder"
