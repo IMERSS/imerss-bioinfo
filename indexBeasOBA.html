@@ -9,7 +9,7 @@
         <!-- Infusion 6 is loaded from node_modules, so this page may be served from this checkout -->
 
         <!-- The one reference to the location of Infusion - every other is relative, or through a module -->
-        <script src="node_modules/infusion-6/src/framework/core/js/FluidBoot.js"></script>
+        <script src="docs/vendor/infusion-6/src/framework/core/js/FluidBoot.js" data-fluid-dev-mode></script>
         <!-- This checkout, as the module holding the page, and its map of the modules it depends upon - see
              Infusion 6's copyOut.js --in-place -->
         <fluid-module id="imerss-bioinfo" src="./" modules="fluid-modules.json"></fluid-module>

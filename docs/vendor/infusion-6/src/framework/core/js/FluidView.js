@@ -321,22 +321,203 @@ const fluidViewScope = function (fluid) {
     };
 
     // `true` whilst a document is being rendered statically, e.g. by hydrate.js, rather than live in the browser - set
-    // by fluid.loadAndBootDocument in server-support.js before the document is booted. A component bearing
-    // fluid.withPlaceholder then fetches its placeholder in place of its genuine data
+    // by fluid.loadAndBootDocument in server-support.js before the document is booted. A design may consult it, e.g. to
+    // record in the static rendering what the browser may reuse rather than compute again. It no longer determines
+    // what a component fetches - a document is rendered statically from the same data as in the browser - see FLUID-7032
     fluid.renderingStatically = false;
 
-    // A mixin for a component which fetches data from its `url`, as it does through its member `fetchUrl` - e.g.
-    // fluid.jsonReader - supplying as `placeholderUrl` a short file of the same shape, which is fetched in its place when
-    // the document is rendered statically. So the static rendering, e.g. a page written by hydrate.js, is rendered from
-    // the placeholder, and is replaced once the page boots in the browser and fetches the genuine data. The component's
-    // `isPlaceholder` is then `true`, so that it, or what holds it, can render as it should until its genuine data
-    // arrives, e.g. by showing a loading indicator. Each such component is listed in fluid.withPlaceholder.instances, so
-    // that the hydrater can find, without knowing the design, every file a page fetches and what stands in for it
+    /** Placeholders - see FLUID-7032 **/
+
+    // A placeholder is a minimal representative of the data which a layer needs in order to instantiate correctly and
+    // render the majority of its content, for use by basic rendering test fixtures and by authoring tools. A layer
+    // names one as the default of a member holding a URL, as a URL of the scheme "placeholder:", e.g.
+    //     url: "placeholder://fluid.tests.rt.app/records"
+    // naming the resource "records" declared by the layer "fluid.tests.rt.app". A fixture uses the layer as it is, and
+    // so is rendered from the placeholder - a runnable application overrides the member with the URL of its real data,
+    // from which it is rendered, statically as in the browser. Since a placeholder is as minimal as possible, it is
+    // always held inline, by a top-level block of the layer's Single File Component, so that it travels with the SFC
+    // wherever it is copied - as text, or, if it is binary, encoded in base64:
+    //     <placeholder name="records" type="application/json">[{"name": "Placeholder"}]</placeholder>
+    //     <placeholder name="viz" type="application/octet-stream" encoding="base64">H4sIAAAAAAAA...</placeholder>
+    // or else by fluid.registerPlaceholder. Such a block may be written from a file by
+    // src/framework/server/inlinePlaceholder.js. See fluid.resolveUrl for how a placeholder's URL is resolved
+
+    // The scheme of the URL of a placeholder
+    fluid.placeholderScheme = "placeholder:";
+
+    // The pattern of the URL of a placeholder - placeholder://{layerName}/{resourceName}
+    fluid.placeholderUrlRegex = /^placeholder:\/\/([^/]+)\/(.+)$/;
+
+    /**
+     * @typedef {Object} PlaceholderResource
+     * @property {String} text - The material itself - as text, or encoded as base64 if `encoding` is "base64"
+     * @property {String} [encoding] - "base64" if the material is binary, encoded in `text` as base64
+     * @property {String} [type] - The media type of the material, by default "application/json"
+     * @property {String} [blobUrl] - The Blob URL allocated for the material once it is first resolved
+     */
+
+    /** @type {Object<String, PlaceholderResource>} Map of "{layerName}/{resourceName}" to the resource fulfilling it */
+    fluid.placeholderStore = Object.create(null);
+
+    /**
+     * Declare the material fulfilling a placeholder of a layer, replacing any declared before, e.g. by an earlier
+     * version of the layer's Single File Component
+     * @param {String} layerName - The name of the layer declaring the placeholder
+     * @param {String} resourceName - The name of the resource
+     * @param {PlaceholderResource} resource - The material
+     */
+    fluid.registerPlaceholder = function (layerName, resourceName, resource) {
+        const key = layerName + "/" + resourceName;
+        const existing = fluid.placeholderStore[key];
+        if (existing?.blobUrl) {
+            URL.revokeObjectURL(existing.blobUrl);
+        }
+        fluid.placeholderStore[key] = {...resource};
+        const waiters = fluid.placeholderWaiters[key];
+        if (waiters) {
+            delete fluid.placeholderWaiters[key];
+            waiters.forEach(waiter => waiter.resolve());
+        }
+    };
+
+    /**
+     * @typedef {Object} PlaceholderWaiter
+     * @property {Function} resolve - Called once the placeholder is declared
+     * @property {Function} reject - Called with an Error if the SFC of its layer is parsed without declaring it
+     */
+
+    /** @type {Object<String, PlaceholderWaiter[]>} Map of the key of a placeholder not yet declared to those awaiting
+     * its declaration - see fluid.resolveUrl */
+    fluid.placeholderWaiters = Object.create(null);
+
+    /**
+     * Describe the error of a placeholder whose material is not declared
+     * @param {String} url - The URL of the placeholder
+     * @param {String} layerName - The name of the layer it names
+     * @param {String} resourceName - The name of the resource it names
+     * @return {String} The description of the error
+     */
+    fluid.undeclaredPlaceholderMessage = (url, layerName, resourceName) => `No material has been declared for placeholder ${url} - `
+        + `expected a <placeholder name="${resourceName}"> block in the Single File Component of layer ${layerName}, or a `
+        + "call to fluid.registerPlaceholder";
+
+    /**
+     * Fail whatever still awaits a placeholder of a layer, once the Single File Component of the layer has been parsed
+     * without declaring it
+     * @param {String} layerName - The name of the layer
+     */
+    fluid.rejectPlaceholderWaiters = function (layerName) {
+        Object.keys(fluid.placeholderWaiters).filter(key => key.startsWith(layerName + "/")).forEach(key => {
+            const waiters = fluid.placeholderWaiters[key];
+            delete fluid.placeholderWaiters[key];
+            const resourceName = key.substring(layerName.length + 1);
+            const message = fluid.undeclaredPlaceholderMessage(`placeholder://${key}`, layerName, resourceName);
+            waiters.forEach(waiter => waiter.reject(new Error(message)));
+        });
+    };
+
+    /**
+     * Decode material encoded as base64, ignoring any whitespace with which it is wrapped
+     * @param {String} text - The encoded material
+     * @return {Uint8Array} The decoded bytes
+     */
+    fluid.decodeBase64 = function (text) {
+        const binary = atob(text.replace(/\s+/g, ""));
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; ++i) {
+            bytes[i] = binary.charCodeAt(i);
+        }
+        return bytes;
+    };
+
+    /**
+     * Resolve the URL of a placeholder whose material has been declared, allocating a Blob URL for its material when
+     * it is first resolved
+     * @param {PlaceholderResource} resource - The material declared for it
+     * @return {String} The Blob URL to be fetched
+     */
+    fluid.resolvePlaceholderResource = function (resource) {
+        if (!resource.blobUrl) {
+            const content = resource.encoding === "base64" ? fluid.decodeBase64(resource.text) : resource.text;
+            resource.blobUrl = URL.createObjectURL(new Blob([content], {type: resource.type || "application/json"}));
+        }
+        return resource.blobUrl;
+    };
+
+    /**
+     * Determine whether a URL is that of a placeholder - see fluid.placeholderScheme
+     * @param {any} url - The URL
+     * @return {Boolean} `true` if it is a String of the scheme "placeholder:"
+     */
+    fluid.isPlaceholderUrl = url => typeof(url) === "string" && url.startsWith(fluid.placeholderScheme);
+
+    /**
+     * Resolve a URL to one which may be fetched. A URL of a placeholder, placeholder://{layerName}/{resourceName}, is
+     * resolved through the material declared for it, to a Blob URL allocated once it is first resolved. A module-relative URL, e.g. "%my-module/data/records.json", is resolved
+     * through `fluid.module.resolvePath`, and any other URL is returned unchanged. A Blob URL is local to the document
+     * fetching it, and is never to be written into markup.
+     * A placeholder is resolved once its material is declared. If it is not yet declared, and the Single File Component
+     * of its layer is not yet parsed - as in a hydrated document, whose layers are defined by the scripts in its markup
+     * before their SFCs are loaded - a promise is returned for its URL once it is declared, which is rejected if the SFC
+     * is parsed without declaring it.
+     * @param {String} url - The URL to be resolved
+     * @return {String|Promise<String>|fluid.unavailable} The URL to be fetched, a promise for it, or an unavailable
+     * value if the URL is that of a placeholder which its layer's parsed SFC does not declare
+     */
+    fluid.resolveUrl = function (url) {
+        let togo;
+        if (fluid.isPlaceholderUrl(url)) {
+            const match = fluid.placeholderUrlRegex.exec(url);
+            const key = match && match[1] + "/" + match[2];
+            const resource = key && fluid.placeholderStore[key];
+            const sfcParsed = match && fluid.sfcStore[match[1]]?.loadCompletion?._value === true;
+            if (resource) {
+                togo = fluid.resolvePlaceholderResource(resource);
+            } else if (match && !sfcParsed) {
+                togo = new Promise((resolve, reject) => fluid.pushArray(fluid.placeholderWaiters, key, {resolve, reject}))
+                    .then(() => fluid.resolvePlaceholderResource(fluid.placeholderStore[key]));
+            } else {
+                togo = fluid.unavailable({message: match ? fluid.undeclaredPlaceholderMessage(url, match[1], match[2]) :
+                    `Malformed placeholder URL ${url} - expected placeholder://{layerName}/{resourceName}`, variety: "error"});
+            }
+        } else {
+            togo = fluid.module.resolvePath(url);
+        }
+        return togo;
+    };
+
+    /**
+     * Declare the placeholders held by the top-level `<placeholder>` blocks of a Single File Component - see
+     * fluid.registerPlaceholder. Each block's material is read verbatim from the SFC's text. A placeholder is always
+     * held inline, so that it travels with its SFC - a block with a `src` is rejected.
+     * @param {VNode} vTree - The parsed SFC
+     * @param {String} layerName - The name of the layer defined by the SFC
+     * @param {String} text - The text of the SFC
+     */
+    fluid.registerSFCPlaceholders = function (vTree, layerName, text) {
+        fluid.sfcBlocks(vTree, "placeholder").forEach(node => {
+            const attrs = node.attrs || {};
+            if (!attrs.name) {
+                fluid.log(fluid.logLevel.FAIL, `Error in SFC for ${layerName}: a <placeholder> block has no name`);
+            } else if (attrs.src) {
+                fluid.log(fluid.logLevel.FAIL, `Error in SFC for ${layerName}: <placeholder name="${attrs.name}"> refers to `
+                    + `${attrs.src} - a placeholder is held inline, encoded in base64 if it is binary. Write it into the SFC `
+                    + "with src/framework/server/inlinePlaceholder.js");
+            } else {
+                fluid.registerPlaceholder(layerName, attrs.name, {text: fluid.sfcBlockInnerText(text, node),
+                    type: attrs.type, encoding: attrs.encoding});
+            }
+        });
+    };
+
+    // A mixin for a component which fetches data from its `url`, e.g. fluid.jsonReader, whose `url` may be that of a
+    // placeholder - its `isPlaceholder` is then `true`. Each such component is listed in fluid.withPlaceholder.instances,
+    // so that the hydrater can find, without knowing the design, which of a page's components are rendered from
+    // placeholders - see fluid.documentPlaceholders in server-support.js
     fluid.def("fluid.withPlaceholder", {
-        // url: String - the genuine URL, relative to the document
-        placeholderUrl: null,
-        isPlaceholder: "$compute:fluid.withPlaceholder.isPlaceholder({self}.placeholderUrl)",
-        fetchUrl: "$compute:fluid.withPlaceholder.fetchUrl({self}.url, {self}.placeholderUrl)",
+        // url: String - relative to the document, module-relative, or that of a placeholder - see fluid.resolveUrl
+        isPlaceholder: "$compute:fluid.isPlaceholderUrl({self}.url)",
+        fetchUrl: "$compute:fluid.resolveUrl({self}.url)",
         registration: {
             $bindable: {
                 bind: "fluid.withPlaceholder.register({self})",
@@ -344,21 +525,6 @@ const fluidViewScope = function (fluid) {
             }
         }
     });
-
-    /**
-     * Determine whether a component bearing `fluid.withPlaceholder` fetches its placeholder in place of its genuine data
-     * @param {String|null} placeholderUrl - The URL of its placeholder, if it has one
-     * @return {Boolean} `true` if the document is rendered statically, and the component has a placeholder
-     */
-    fluid.withPlaceholder.isPlaceholder = placeholderUrl => fluid.renderingStatically && !!placeholderUrl;
-
-    /**
-     * Determine the URL fetched by a component bearing `fluid.withPlaceholder`
-     * @param {String} url - Its genuine URL
-     * @param {String|null} placeholderUrl - The URL of its placeholder, if it has one
-     * @return {String} The URL of its placeholder if it is fetched in place of its genuine data, else its genuine URL
-     */
-    fluid.withPlaceholder.fetchUrl = (url, placeholderUrl) => fluid.withPlaceholder.isPlaceholder(placeholderUrl) ? placeholderUrl : url;
 
     // Each component bearing fluid.withPlaceholder which is live
     fluid.withPlaceholder.instances = new Set();
@@ -373,19 +539,19 @@ const fluidViewScope = function (fluid) {
     };
 
     /**
-     * Determine whether any of a set of components bearing `fluid.withPlaceholder` fetches its placeholder - e.g. to
-     * decide whether what holds them is rendering placeholder data
+     * Determine whether any of a set of components bearing `fluid.withPlaceholder` is rendered from a placeholder - e.g.
+     * to decide whether what holds them is
      * @param {...Boolean} isPlaceholders - The `isPlaceholder` member of each component
-     * @return {Boolean} `true` if any of them fetches its placeholder
+     * @return {Boolean} `true` if any of them fetches a placeholder
      */
     fluid.withPlaceholder.any = (...isPlaceholders) => isPlaceholders.some(isPlaceholder => isPlaceholder);
 
-    // A loader for a JSON file at `url`. Its `data` member is pending until the file has been loaded and parsed. It
-    // fetches its `fetchUrl`, which is its `url` unless it bears fluid.withPlaceholder
+    // A loader for a JSON file at `url`, which may be that of a placeholder - see fluid.resolveUrl. Its `data` member
+    // is pending until the file has been loaded and parsed
     fluid.def("fluid.jsonReader", {
         $layers: "fluid.component",
         // url: String
-        fetchUrl: "{self}.url",
+        fetchUrl: "$compute:fluid.resolveUrl({self}.url)",
         data: "$compute:fluid.fetchJSON({self}.fetchUrl)"
     });
 
@@ -1365,6 +1531,9 @@ const fluidViewScope = function (fluid) {
             // Load any SFCs this one imports before its own script executes, so that their layers are known to be
             // forthcoming when it is instantiated
             fluid.loadImportMap(fluid.sfcImportMap(vTree, rec.url));
+            // Declare its placeholders before its layer is defined, so that they are known before it is instantiated
+            fluid.registerSFCPlaceholders(vTree, layerName, text);
+            fluid.rejectPlaceholderWaiters(layerName);
             const injRecs = fluid.sfcToInjRecs(vTree, layerName, text, rec.url);
             const ownScriptText = Object.values(injRecs).find(injRec => injRec.ownLayer)?.text;
             // An edit which leaves the script defining our layer unchanged, e.g. to the template alone, will not
@@ -2806,6 +2975,91 @@ const fluidViewScope = function (fluid) {
     };
 
     /**
+     * @typedef {Object} TemplateSlot
+     * @property {String} viewLayer - The layer of the view the slot's record configures
+     * @property {Cell|Object} container - The view's container - a cell relaying the element of the slot's current
+     * vnode, or the unavailable value marking a fragment slot
+     * @property {Cell|Object|null} containerSource - The element signal of the vnode the container currently relays
+     * @property {Cell<VNode>} parentTemplate - The markup found at the slot in the parent's template
+     * @property {MergeRecord} record - The template record pushed to the slot's component
+     */
+
+    /**
+     * Find, or else allocate, the stable template record of a slot designated by `@id` in a template - the same record
+     * is pushed to the slot's component by every activation of the template, so that a rerendering of the template
+     * which leaves the slot unchanged leaves the component's potentia unchanged too, and the component, and everything
+     * beneath it, neither remerges nor turns over - see fluid.isSamePotentia. What varies between activations is held
+     * in the record's cells - the element of the slot's current vnode, relayed into its container, and the slot's
+     * markup, which is set only if it differs structurally from what it was.
+     * @param {Shadow} shadow - The shadow of the component holding the slot's component
+     * @param {String} idValue - The member name of the slot's component, as written in `@id`
+     * @param {String} viewLayer - The layer of the view the record configures
+     * @param {Cell|Object} containerSource - The element signal of the slot's vnode, or the unavailable value marking a
+     * fragment slot
+     * @param {VNode} parentTemplate - The markup found at the slot
+     * @return {TemplateSlot} The slot
+     */
+    fluid.templateSlotRecord = function (shadow, idValue, viewLayer, containerSource, parentTemplate) {
+        const slots = shadow.templateSlots ||= Object.create(null);
+        const relayed = fluid.isSignal(containerSource);
+        let slot = slots[idValue];
+        if (!slot || slot.viewLayer !== viewLayer || relayed !== fluid.isSignal(slot.container)) {
+            const container = relayed ? fluid.cell(undefined, {name: `container of template slot ${idValue} at path ${shadow.path}`}) : containerSource;
+            const parentTemplateCell = fluid.cell(parentTemplate, {name: `parentTemplate of template slot ${idValue} at path ${shadow.path}`});
+            slot = slots[idValue] = {
+                viewLayer,
+                container,
+                containerSource: null,
+                parentTemplate: parentTemplateCell,
+                record: {
+                    mergeRecordType: "template",
+                    layer: {
+                        $layers: "fluid.component",
+                        view: {
+                            $component: {
+                                $layers: viewLayer,
+                                container,
+                                parentTemplate: parentTemplateCell
+                            }
+                        }
+                    }
+                }
+            };
+        } else if (!fluid.vTreeEquals(slot.parentTemplate._value, parentTemplate)) {
+            slot.parentTemplate.set(parentTemplate);
+        }
+        if (relayed && slot.containerSource !== containerSource) {
+            if (slot.containerSource) {
+                slot.container.computed(null, [slot.containerSource]);
+            }
+            slot.container.computed(element => element, [containerSource], {isFree: true});
+            slot.containerSource = containerSource;
+        }
+        return slot;
+    };
+
+    /**
+     * Determine whether two trees of markup, as found in templates, are structurally equal - the same tags, text and
+     * attributes, with equal children in the same order
+     * @param {VNode} a - The first tree
+     * @param {VNode} b - The second tree
+     * @return {Boolean} `true` if the trees are equal
+     */
+    fluid.vTreeEquals = function (a, b) {
+        let togo;
+        if (a === b) {
+            togo = true;
+        } else if (!a || !b || typeof(a) !== "object" || typeof(b) !== "object") {
+            togo = false;
+        } else {
+            const aChildren = a.children || [], bChildren = b.children || [];
+            togo = a.tag === b.tag && a.text === b.text && fluid.shallowEquals(a.attrs || {}, b.attrs || {})
+                && aChildren.length === bChildren.length && aChildren.every((child, i) => fluid.vTreeEquals(child, bChildren[i]));
+        }
+        return togo;
+    };
+
+    /**
      * Process a vTree to parse text and attribute templates, creating effects to bind to markup during the later renderView stage.
      *
      * Template references, e.g. to `{self}`, are resolved in the context of the view's parent, since a template has no
@@ -2996,11 +3250,11 @@ const fluidViewScope = function (fluid) {
                             fluid.pushPotentia(shadow, idValue, [{mergeRecordType: "template"}]);
                         };
                         disposable.$variety = "$component";
-                        const parentTemplate = fluid.cell({
+                        const parentTemplate = {
                             tag: vnode.tag,
                             attrs: fluid.filterObjKeys(vnode.attrs, key => key !== "@id"),
                             children: vnode.children.map(fluid.retemplatise)
-                        }, {name: `parentTemplate signal for vnode ${vnode._id}`});
+                        };
                         delete vnode.children;
                         vnode.attrs = fluid.filterObjKeys(vnode.attrs, key => !key.startsWith("@"));
 
@@ -3010,21 +3264,10 @@ const fluidViewScope = function (fluid) {
                         // its tree is spliced into ours in place of the slot by fluid.patchChildren
                         const isFragment = vnode.tag === fluid.fragmentSlotTag;
                         const viewLayer = fluid.isComponentListMember(shadow, idValue) ? "fluid.listViewComponent" : "fluid.viewComponent";
-                        const templateRecord = {
-                            mergeRecordType: "template",
-                            layer: {
-                                $layers: "fluid.component",
-                                view: {
-                                    $component: {
-                                        $layers: viewLayer,
-                                        container: isFragment ? fluid.fragmentSlotContainer : vnode.elementSignal,
-                                        parentTemplate
-                                    }
-                                }
-                            }
-                        };
+                        const slot = fluid.templateSlotRecord(shadow, idValue, viewLayer,
+                            isFragment ? fluid.fragmentSlotContainer : vnode.elementSignal, parentTemplate);
 
-                        const childShadow = fluid.pushPotentia(shadow, idValue, [templateRecord]);
+                        const childShadow = fluid.pushPotentia(shadow, idValue, [slot.record]);
                         if (isFragment) {
                             vnode.fragmentOf = childShadow;
                         }

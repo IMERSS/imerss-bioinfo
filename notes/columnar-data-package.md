@@ -168,9 +168,23 @@ fluid.def("hortis.bbea.oba", {
 ```
 
 This replaces the six members `obsFile`, `taxaFile` and `regionIndirectionFile`, each with its `…PlaceholderFile`. A
-driver may still name `vizPlaceholderFile`, a small package of the same shape, to render the page statically from that
-in place of its data - but none now does, so that the static page shows the real data and holds the results of its
-queries of startup.
+driver names only its real data, from which its page is hydrated - so that the static page shows the real data and holds
+the results of its queries of startup - as well as rendered in the browser.
+
+Placeholders are only for basic rendering test fixtures and authoring tools - see
+[FLUID-7032](https://github.com/fluid-project/infusion-6/issues/32). Each variant of the visualisation supplies one as
+the default of its `vizFile`, `placeholder://{layerName}/viz` - a minimal package representative of the data it needs
+to instantiate and render the majority of its content, held inline in its Single File Component as a `<placeholder>`
+block encoded in base64, so that it travels with the SFC wherever it is copied. They are those of
+`hortis.beaVizLoader`, `hortis.standardVizLoader` and `hortis.blitzVizLoader`, whose taxa bear their reporting status.
+A fixture, such as `test/i6/html/bbeaPlaceholderFixture.html`, uses the variant as it is, and so renders from its
+placeholder; a page which is a runnable application overrides `vizFile`, and `build.js` hydrates it with
+`--no-placeholders`, refusing it if any component is rendered from a placeholder. A placeholder package must be
+self-contained, holding no details beside it, and is written into its SFC by
+
+```
+node src/inlineVizPlaceholders.js <layerName> <package.viz>
+```
 
 `hortis.vizLoader` holds the package's loader as its member `dataLoader`, of the layers `hortis.dataLoader` and
 `fluid.withPlaceholder`, so that every part of the visualisation refers to its tables symbolically:
@@ -181,7 +195,7 @@ queries of startup.
 | `{dataLoader}.obs`, `{dataLoader}.taxa`, `{dataLoader}.regionIndirection` | The tables, as `VizTable`s - an empty table standing for a region indirection the package lacks |
 | `{dataLoader}.tables.<name>` | Any other table of the package |
 | `{dataLoader}.detailed` | The package once its details are attached, pending until then, or the package itself if it has none |
-| `{dataLoader}.isPlaceholder` | `true` if the page is rendered from the placeholder |
+| `{dataLoader}.isPlaceholder` | `true` if the visualisation is rendered from its placeholder, as in a test fixture |
 
 Every part of the visualisations reads the observations through the
 [query description language](query-description-language.md), and `hortis.vizLoader` holds them as `Selection`s -
@@ -232,7 +246,8 @@ optionally `regionIndirectionFile` and their placeholders - the tool packs the f
 observations, and the placeholders into another beside theirs, each named by what the names of its observation and taxon
 files have in common, e.g. `plant-pollinators-BCBA.viz` for `plant-pollinators-BCBA-labels.viz` and
 `plant-pollinators-BCBA-assigned-taxa.viz`. It then rewrites the six members of the driver as `vizFile` and
-`vizPlaceholderFile`. With `-n` it reports what it would do, and writes nothing. It leaves the superseded files in
+`vizPlaceholderFile`. The latter is no longer read - remove it, and inline any placeholder worth keeping into its
+variant's SFC with `src/inlineVizPlaceholders.js`. With `-n` it reports what it would do, and writes nothing. It leaves the superseded files in
 place, and lists them, to be removed once the migrated driver has been checked - together with their entries in any
 list of files to be published, such as `buildIndex.copy` in `build.js`.
 
@@ -301,7 +316,3 @@ which is selected, and `eventDate`'s time never.
 * **The order of rows.** Ordering the observations by a Hilbert or Morton key of their position at build time would make
   each cell's, and roughly each viewport's, records contiguous - see the plan in saanich-peninsula-flora. The format
   allows it, since nothing outside a package refers to a row by its index, but the writer does not yet do it.
-* **Placeholders.** Pages are now hydrated against their real data - see "Captured at hydration" in
-  [the query description language](query-description-language.md) - and no driver names a placeholder. The placeholder
-  packages under `data/*/placeholder` are now used only by the fixture `test/i6/html/bbeaPlaceholderFixture.html`, and
-  may be removed with it.

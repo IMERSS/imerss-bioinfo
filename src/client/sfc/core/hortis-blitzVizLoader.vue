@@ -8,6 +8,8 @@
 // reporting status, which filter the observations, and checklist rows decorated by their status
 fluid.def("hortis.blitzVizLoader", {
     $layers: "hortis.standardVizLoader",
+    // By default the placeholder declared below, whose taxa bear their reporting status
+    vizFile: "placeholder://hortis.blitzVizLoader/viz",
     records: {
         $component: {
             $layers: "hortis.blitzRecords"
@@ -38,3 +40,37 @@ fluid.def("hortis.blitzVizLoader", {
         </g>
     </symbol>
 </symbols>
+<placeholder name="viz" type="application/octet-stream" encoding="base64">
+    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
+    AA==
+</placeholder>

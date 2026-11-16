@@ -1,7 +1,7 @@
 {
     "name": "imerss-bioinfo",
     "description": "Working data of the IMERSS biodiversity informatics working group, together with algorithms",
-    "version": "1.22.0",
+    "version": "1.23.0",
     "author": "Antranig Basman",
     "scripts": {
         "lint": "fluid-lint-all",
@@ -12,7 +12,7 @@
     "main": "index.js",
     "dependencies": {
         "infusion": "4.6.0",
-        "infusion-6": "6.2.4",
+        "infusion-6": "6.2.5",
         "papaparse": "5.4.1",
         "pretty-checkbox": "3.0",
         "d3": "5.9.2",

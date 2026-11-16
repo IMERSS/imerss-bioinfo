@@ -15,11 +15,12 @@ fluid.def("hortis.taxonListView", {
     // colourByFamily: Boolean - whether family headings carry a colour chip
     // noun: String - "bee" or "plant"
     // downloadFile: String
-    obsRows: "{vizLoader}.finalFilteredObs",
+    pkg: "{vizLoader}.pkg",
+    selection: "{vizLoader}.finalFilteredObs",
     rowById: "{vizLoader}.taxa.rowById",
     arrange: "family",
     arrangeOn: "$compute:hortis.taxonListView.arrangeOn({self}.arrange)",
-    listRows: "$compute:hortis.taxonListView.computeRows({self}.obsRows, {self}.rowById, {self}.idField)",
+    listRows: "$compute:hortis.taxonListView.computeRows({self}.pkg, {self}.selection, {self}.rowById, {self}.idField)",
     countSlot: {
         $component: {
             $layers: "hortis.verbatimSlot",
@@ -55,25 +56,26 @@ hortis.taxonListView.isListable = function (row) {
 };
 
 /**
- * Count the observations of each taxon in a set of observations, rolling infraspecific taxa up into their species.
- * Records for intermediate taxa such as a genus or subgenus are marked as not `listed` unless no other taxon is
- * recorded within them - see `hortis.taxonListView.isListable`.
- * @param {Object[]} obsRows - The observations
- * @param {Object<String, Object>} rowById - Map of taxon id to taxon row
- * @param {String} idField - The observation field holding the taxon id to be counted
- * @return {Object[]} One record per taxon with members `id`, `row`, `label`, `family`, `count` and `listed`
+ * Compute the rows of the list - one for each species, or taxon not identified to species, with its count of
+ * observations.
+ * @param {VizPackage} pkg - The data package
+ * @param {Selection} selection - The observations
+ * @param {Object<String, TaxonRow>} rowById - Map of taxon id to taxon row
+ * @param {String} idField - The observation field holding the taxon id listed
+ * @return {Object[]} The rows
  */
-hortis.taxonListView.computeRows = function (obsRows, rowById, idField) {
+hortis.taxonListView.computeRows = function (pkg, selection, rowById, idField) {
+    const bareRowById = fluid.unwrapProxy(rowById);
     const byId = new Map();
-    obsRows.forEach(obsRow => {
-        const row = rowById[obsRow[idField]];
+    hortis.countObsBy(pkg, selection, idField).forEach((count, taxonId) => {
+        const row = bareRowById[taxonId];
         if (row) {
             const speciesRow = hortis.speciesRowOf(row);
             const existing = byId.get(speciesRow.id);
             if (existing) {
-                ++existing.count;
+                existing.count += count;
             } else {
-                byId.set(speciesRow.id, {row: speciesRow, count: 1});
+                byId.set(speciesRow.id, {row: speciesRow, count});
             }
         }
     });

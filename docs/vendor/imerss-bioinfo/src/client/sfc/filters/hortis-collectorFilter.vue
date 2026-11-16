@@ -13,9 +13,9 @@ fluid.def("hortis.collectorFilter", {
     placeholder: "Volunteer name",
     filterState: null,
     // TODO: This is lazy, we really want it computed at any "idle time" so as not to delay 3rd keystroke
-    allCollectors: "$compute:hortis.computeAllCollectors({self}.obsRows, {self}.fieldName)",
+    allCollectors: "$compute:hortis.computeAllCollectors({self}.pkg, {self}.fieldName)",
     filterSummary: "$compute:hortis.collectorFilter.summarise({self}.filterState, {self}.filterName)",
-    doFilter: "$method:hortis.collectorFilter.doFilter({0}:obsRows, {1}:filterState, {self}.fieldName)",
+    predicates: "$compute:hortis.collectorFilter.predicates({self}.filterState, {self}.fieldName)",
     reset: "$method:hortis.collectorFilter.reset({self}, {global}.document)",
     queryAutocomplete: "$method:hortis.queryAutocompleteCollector({self}.allCollectors, {0}:query, {1}:callback)",
     confirmAutocomplete: "$method:hortis.collectorFilter.confirm({self}, {0}:selection)"
@@ -46,16 +46,25 @@ hortis.collectorFilter.summarise = function (filterState, filterName) {
     };
 };
 
-hortis.computeAllCollectors = function (obsRows, fieldName) {
+/**
+ * Find every collector named by the observations, whose field may name several separated by semicolons.
+ * @param {VizPackage} pkg - The data package
+ * @param {String} fieldName - The field naming the collectors
+ * @return {String[]} The collectors
+ */
+hortis.computeAllCollectors = function (pkg, fieldName) {
     const collectors = new Set();
-    obsRows.forEach(row => (row[fieldName] || "").split(";").forEach(lump => collectors.add(lump.trim())));
+    hortis.distinctObs(pkg, null, fieldName).forEach(value => value.split(";").forEach(lump => collectors.add(lump.trim())));
     return [...collectors].filter(collector => collector);
 };
 
-hortis.collectorFilter.doFilter = function (obsRows, filterState, fieldName) {
-    // TODO: Fix this to parse properly during computeCollectors
-    return filterState ? obsRows.filter(row => (row[fieldName] || "").includes(filterState)) : obsRows;
-};
+/**
+ * Compute the predicates of a filter of the observations to those whose field includes a chosen value.
+ * @param {String|null} filterState - The chosen value, or null if none is chosen
+ * @param {String} fieldName - The field
+ * @return {Object[]} The predicates
+ */
+hortis.collectorFilter.predicates = (filterState, fieldName) => filterState ? [{field: fieldName, op: "contains", value: filterState}] : [];
 
 hortis.queryAutocompleteCollector = function (allCollectors, query, callback) {
     const lowerQuery = query.toLowerCase();

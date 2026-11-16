@@ -30,6 +30,39 @@ const $fluidSignalsScope = function (fluid) {
         }
     };
 
+    // Policies for when an update leaves a cell's value morally unchanged, to be supplied as the `equiv` of a cell or
+    // of a $compute record - see fluid.cell.isEquivalent. Each is `(oldValue, newValue) => Boolean`, and is applied only
+    // to available values
+    fluid.equiv = {};
+
+    /**
+     * Equivalent if both are arrays of the same length holding identical elements in the same order, or plain objects
+     * with the same keys holding identical values - e.g. a list of components, or of predicates, assembled afresh
+     * @param {any} a - The value held
+     * @param {any} b - The new value
+     * @return {Boolean} `true` if the values are equivalent
+     */
+    fluid.equiv.elementwise = function (a, b) {
+        let togo;
+        if (a === b) {
+            togo = true;
+        } else if (!a || !b || typeof(a) !== "object" || typeof(b) !== "object" || Array.isArray(a) !== Array.isArray(b)) {
+            togo = false;
+        } else {
+            const aKeys = Object.keys(a), bKeys = Object.keys(b);
+            togo = aKeys.length === bKeys.length && aKeys.every(key => Object.prototype.hasOwnProperty.call(b, key) && a[key] === b[key]);
+        }
+        return togo;
+    };
+
+    /**
+     * Make a policy under which values are equivalent if a key computed from each is the same - e.g. a canonical
+     * serialisation of a query
+     * @param {Function} keyOf - A function from a value to its key, e.g. a String, compared by identity
+     * @return {Function} The policy
+     */
+    fluid.equiv.byKey = keyOf => (a, b) => a === b || keyOf(a) === keyOf(b);
+
     /** Any object with a member <code>then</code> of type <code>function</code> passes this test, essentially for
      * a "foreign thenable".
      * @param {any} totest - The value to test
@@ -143,7 +176,12 @@ const $fluidSignalsScope = function (fluid) {
      * @property {String|undefined} [name] - A name or address for the cell.
      * @property {CacheState} _state - The cache state of the cell (clean, check, or dirty).
      * @property {CacheState} _prePendingState - A "high watermark" of our _state at the point we went into a pending state
-     * @property {Cell|null} _dirtyFrom - Cell from along which we were dirtied
+     * @property {Cell|null} _dirtyFrom - Cell from along which we were dirtied - follow it back with fluid.cell.findCause,
+     * or fluid.cell.explain for the names along the whole chain of cause, including the writes which began it
+     * @property {String[]|null} _setCause - Why the cell was last given a value by `set`, if any were recorded - the
+     * `cause` and `source` supplied to it, and any source markers in force - see fluid.cell.explain
+     * @property {Cell|null} _setDuring - The cell whose update was in progress when this one was last given a value by
+     * `set`, e.g. an effect writing to a component, or `null` if it was set from outside the graph
      * @property {Map<Cell, Number>|null} _observers - Cells that have us as sources (out links), in the order in which
      * they began to observe us, each with the number of times it does so - see fluid.cell.addObserver
      * @property {Edge[]|null} _inEdges - Array of incoming edges which could update this node
@@ -160,6 +198,8 @@ const $fluidSignalsScope = function (fluid) {
      * @property {Boolean} _isQueued - If an effect, are we queued?
      * @property {Boolean} _checking - Whether fluid.cell.updateIfNecessary is bringing the cell up to date
      * @property {Fit|null} _fit - The current update fit that the cell is enlisted in
+     * @property {Function} [equiv] - The cell's own policy for when an update leaves its value morally unchanged - see
+     * fluid.cell.isEquivalent
      */
 
     /** An edge between two reactive cells
@@ -191,7 +231,12 @@ const $fluidSignalsScope = function (fluid) {
      * Creates a new reactive cell for managing state and computations.
      *
      * @param {any|undefined} [initialValue] - The initial value to store in the cell.
-     * @param {Object} [props] - Additional properties to contextualise the cell
+     * @param {Object} [props] - Additional properties to contextualise the cell. Its `equiv`, if supplied, is a function
+     * `(oldValue, newValue) => Boolean` deciding when an update leaves the cell's value morally unchanged - the cell then
+     * keeps the value it held, and notifies nothing - in place of fluid.cell.equals, which is applied to values which
+     * are unavailable. See fluid.equiv for some. Its `name` is what diagnostics report
+     * the cell as - by convention "<role> for path <component path>", e.g. "potentia for path story-6.lostPlants" - and
+     * is what fluid.cell.findCause and fluid.cell.explain report in following the chain of cause back from a cell
      * @return {Cell} The newly created cell object.
      */
     fluid.cell = function (initialValue, props) {
@@ -202,6 +247,8 @@ const $fluidSignalsScope = function (fluid) {
         cell.cellId = fluid.cell.cellId++;
         cell._value = initialValue === undefined ? fluid.cell.initialUnavailable : initialValue;
         cell._dirtyFrom = null;
+        cell._setCause = null;
+        cell._setDuring = null;
         cell._observers = null; // nodes that have us as sources (outgoing links)
         cell._inEdges = null;
         cell._consumedSources = null;
@@ -455,6 +502,53 @@ const $fluidSignalsScope = function (fluid) {
         } else {
             return null;
         }
+    };
+
+    // The cell whose computation is in progress, whose writes by `set` are recorded as made during it - see
+    // fluid.cell.update and fluid.cell.explain. Unlike $t.CurrentReaction, it is not cleared by fluid.cell.untracked,
+    // within which components are written to - see fluid.setForComponent
+    fluid.cell.updatingCell = null;
+
+    /**
+     * Describe a source marker or cause with which a cell was set, for fluid.cell.explain
+     * @param {any} source - The source - usually a String, but possibly any value compared by identity, e.g. a shadow
+     * @return {String} Its description
+     */
+    fluid.cell.describeSource = source => typeof(source) === "string" ? source :
+        source?.path !== undefined ? `component at path ${source.path}` : String(source);
+
+    /**
+     * Explain why a cell last changed, as the names of the cells along the whole chain of its cause - an agent or a
+     * developer debugging an unexpected update should reach for this first. It follows `_dirtyFrom` back from the cell,
+     * as fluid.cell.findCause does, to the cell whose change began the reaction. Where that cell was given its value by
+     * `set`, it reports why - the `cause` and sources supplied to `set` - and continues from the update during which it
+     * was set, e.g. the effect which wrote it, so that the chain reaches back past each write to what provoked it. E.g.
+     *     ["flatMergedComputer for path story-6.lostPlants",
+     *      "potentia for path story-6.lostPlants (set: first write to cards of story-6.lostPlants ...)",
+     *      "during $effect at path load of component at path story-6.lostPlants", ...]
+     * @param {Cell} [inTarget] - The cell whose last change is to be explained - by default that whose update is in
+     * progress
+     * @return {String[]} The descriptions of the cells along the chain, starting with the target, or an empty array if
+     * there is no target
+     */
+    fluid.cell.explain = function (inTarget) {
+        const togo = [];
+        const visited = new Set();
+        const describe = cell => cell.name || `cell ${cell.cellId}`;
+        let target = inTarget || fluid.cell.updatingCell || $t.CurrentReaction?.target;
+        let prefix = "";
+        while (target && !visited.has(target)) {
+            const chain = fluid.cell.findCause(target).filter(cell => !visited.has(cell));
+            chain.forEach(cell => visited.add(cell));
+            chain.forEach((cell, i) => {
+                const cause = cell._setCause ? ` (set: ${cell._setCause.map(fluid.cell.describeSource).join(", ")})` : "";
+                togo.push((i === 0 ? prefix : "") + describe(cell) + cause);
+            });
+            const last = chain[chain.length - 1];
+            target = last?._setDuring;
+            prefix = "during ";
+        }
+        return togo;
     };
 
     fluid.cell.findAllCauses = function (inEdge) {
@@ -885,7 +979,21 @@ const $fluidSignalsScope = function (fluid) {
         }
     };
 
-    fluid.cell.notifiableChange = function (oldValue, newValue, prePendingState) {
+    /**
+     * Determine whether a cell holding one value would be morally unchanged by taking another - by the cell's own
+     * `equiv`, if it was constructed with one and both values are available, or else by fluid.cell.equals
+     * @param {Cell} cell - The cell
+     * @param {any} oldValue - The value it holds
+     * @param {any} newValue - The value it would take
+     * @return {Boolean} `true` if the values are equivalent
+     */
+    fluid.cell.isEquivalent = function (cell, oldValue, newValue) {
+        return cell.equiv && !fluid.isUnavailable(oldValue) && !fluid.isUnavailable(newValue) ?
+            !!cell.equiv(oldValue, newValue) : fluid.cell.equals(oldValue, newValue);
+    };
+
+    fluid.cell.notifiableChange = function (oldValue, newValue, prePendingState, cell) {
+        const equivalent = (a, b) => cell ? fluid.cell.isEquivalent(cell, a, b) : fluid.cell.equals(a, b);
         let equalValues = true;
         let earlyCutoff = false;
         const oldUnavail = fluid.isUnavailable(oldValue);
@@ -897,13 +1005,13 @@ const $fluidSignalsScope = function (fluid) {
         if (oldUnavail !== newUnavail) {
             equalValues = false;
             if (oldUnavail && oldValue.variety === "pending" && prePendingState) {
-                earlyCutoff = fluid.cell.equals(oldValue.staleValue, newValue);
+                earlyCutoff = equivalent(oldValue.staleValue, newValue);
             }
         } else if (oldUnavail) {
             // Both unavailable: variety change is observable; otherwise treat as same
             equalValues = oldValue.variety === newValue.variety;
         } else {
-            equalValues = fluid.cell.equals(oldValue, newValue);
+            equalValues = equivalent(oldValue, newValue);
         }
         return {toPending, fromPending, earlyCutoff, equalValues};
     };
@@ -917,7 +1025,14 @@ const $fluidSignalsScope = function (fluid) {
         const oldValue = cell._value;
         cell._value = newValue;
 
-        const {equalValues, toPending, fromPending, earlyCutoff} = fluid.cell.notifiableChange(oldValue, newValue, cell._prePendingState);
+        const {equalValues, toPending, fromPending, earlyCutoff} = fluid.cell.notifiableChange(oldValue, newValue, cell._prePendingState, cell);
+        // A cell with an equiv of its own which finds the new value equivalent keeps the value it held, so that its
+        // readers, which are not notified, go on reading the identical value
+        if (cell.equiv && equalValues && !fluid.isUnavailable(oldValue)) {
+            cell._value = oldValue;
+        } else if (cell.equiv && earlyCutoff) {
+            cell._value = oldValue.staleValue;
+        }
 
         if (!equalValues || earlyCutoff) {
             // Misleading original comment:
@@ -1003,7 +1118,7 @@ const $fluidSignalsScope = function (fluid) {
      */
     fluid.cell.prototype.set = function (value, options) {
         this._state = CacheClean;
-        if (!fluid.cell.equals(this._value, value)) {
+        if (!fluid.cell.isEquivalent(this, this._value, value)) {
             // A fresh change leaves any fit held open by pending effects which an earlier change of ours started - it is
             // a new transaction, which is not to carry that fit's sources - see fluid.cell.releaseFit
             if (this._fit?.held) {
@@ -1014,6 +1129,11 @@ const $fluidSignalsScope = function (fluid) {
             // Writes made by an effect also carry the sources of the change which triggered it - FLUID-5498
             const inherited = fluid.cell.inheritedSources || [];
             const sources = explicitSource ? [explicitSource, ...ambient, ...inherited] : [...ambient, ...inherited];
+            // Record why, and during what, the cell was set, for diagnostics alone - see fluid.cell.explain. A `cause`
+            // takes no part in propagation, unlike a source
+            const cause = options?.cause ? [options.cause, ...sources] : sources;
+            this._setCause = cause.length > 0 ? cause : null;
+            this._setDuring = fluid.cell.updatingCell;
             // A fit is only started to carry a source marker - see fluid.cell.needsFit
             if (sources.length > 0 && (!this._fit || !this._fit.isActive)) {
                 this._fit = fluid.cell.startFit();
@@ -1194,16 +1314,19 @@ const $fluidSignalsScope = function (fluid) {
                 const triggerFit = cell._isEffect ? fit || fluid.cell.findFit(cell) : undefined;
                 const prevInherited = fluid.cell.inheritedSources;
                 fluid.cell.inheritedSources = triggerFit?.sources.length ? triggerFit.sources : prevInherited;
+                const prevUpdating = fluid.cell.updatingCell;
+                fluid.cell.updatingCell = cell;
                 try {
                     result = inEdge.dispatcher !== null ? inEdge.dispatcher(inEdge.fn, args, unavailable, cell._value) :
                         unavailable && !inEdge.isFree ? unavailable : inEdge.fn.apply(null, args);
                 } finally {
                     fluid.cell.inheritedSources = prevInherited;
+                    fluid.cell.updatingCell = prevUpdating;
                 }
             }
         } catch (e) {
             if (fluid.isLogging()) {
-                fluid.log(`Failure during update of ${cell.name}: `, e);
+                fluid.log(`Failure during update of ${cell.name} - caused by ${fluid.cell.explain(cell).slice(1).join(" <- ") || "nothing recorded"}: `, e);
             }
             result = fluid.unavailable(e);
             syncUpdate = true;

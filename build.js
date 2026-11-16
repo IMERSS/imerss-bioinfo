@@ -6,7 +6,7 @@ const glob = require("glob"),
     childProcess = require("child_process");
 
 const fluid = require("infusion"),
-    infusion6 = require("./src/infusion6.js");
+    infusion6 = require("./src/locateInfusion6.js");
 const terser = require("terser");
 const path = require("path");
 
@@ -152,15 +152,6 @@ const buildIndex = {
     }, {
         src: "data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-details.viz",
         dest: "docs/data/dataPaper-II/Salish_Sea_marine_diatom_records_consolidated_aligned_2025-03-details.viz"
-    }, {
-        src: "data/b-team/placeholder/*",
-        dest: "docs/data/b-team/placeholder"
-    }, {
-        src: "data/Galiano 2023 BioBlitz/placeholder/*",
-        dest: "docs/data/Galiano 2023 BioBlitz/placeholder"
-    }, {
-        src: "data/dataPaper-II/placeholder/*",
-        dest: "docs/data/dataPaper-II/placeholder"
     }
     ],
     // The pages of the visualisations ported to Infusion 6, copied into docs from src/buildSource with the rest of its
@@ -318,9 +309,10 @@ const runNode = function (args) {
  * modules each page depends upon, from this checkout and from Infusion 6 - installed by npm, or as named by moduleOverrides.json5 - and writes docs/fluid-modules.json
  * locating them. Each page is then verified by its test, which checks that it renders identically in the browser
  * whether booted from its minimal form or from its hydrated form, and that its hydration is reversed exactly by
- * dehydrate.js. Finally each page is hydrated in place, with Infusion in its built form, so that it shows its
- * rendering from placeholder data before it boots - the page as written in src/buildSource is recovered from it by
- * dehydrate.js.
+ * dehydrate.js. Finally each page is hydrated in place from its real data, with Infusion in its built form, so that it
+ * shows its rendering, and holds the results of its queries of startup, before it boots - the page as written in
+ * src/buildSource is recovered from it by dehydrate.js. Being a runnable application, a page is refused if any of its
+ * components is rendered from a placeholder - see FLUID-7032.
  * @param {Object} buildIndex - The build index
  * @param {Boolean} verify - `false` if the pages are not to be verified
  */
@@ -339,7 +331,8 @@ const buildI6 = function (buildIndex, verify) {
     if (verify) {
         runNode(buildIndex.i6Verify);
     }
-    pages.forEach(page => runNode([path.join(infusion6Dir, "src/framework/server/hydrate.js"), page, "-o", page, "--framework", "built"]));
+    pages.forEach(page => runNode([path.join(infusion6Dir, "src/framework/server/hydrate.js"), page, "-o", page, "--framework", "built",
+        "--no-placeholders"]));
 };
 
 fluid.setLogging(true);

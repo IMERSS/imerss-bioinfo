@@ -1,16 +1,16 @@
 /* eslint-env node */
 "use strict";
 
-// Test that a plant-pollinator (BBEA) page hydrated by Infusion 6's hydrate.js against its real data, rather than
-// placeholders, holds the results of the queries it executed at startup - see hortis.queryCache in imerss-core.js -
+// Test that a plant-pollinator (BBEA) page hydrated by Infusion 6's hydrate.js against its real data, as a runnable
+// application is, holds the results of the queries it executed at startup - see hortis.queryCache in imerss-core.js -
 // that it renders identically whether booted in the browser from its minimal, dehydrated form or from its hydrated
 // form, which answers its queries of startup from those results, and that dehydrate.js recovers the minimal form
 // exactly, removing the cache with the rest of what hydration wrote. Run from this checkout with
 //     node test/i6/queryCacheRoundTrip.js [<root> <page>]
-// which by default tests test/i6/html/bbeaRealDataFixture.html, the visualisation of the Washington Bee Atlas with no
-// placeholder
+// which by default tests test/i6/html/bbeaRealDataFixture.html, the visualisation configured with the real data of the
+// Washington Bee Atlas
 
-const infusion6 = require("../../src/infusion6.js");
+const infusion6 = require("../../src/locateInfusion6.js");
 const path = require("path"),
     linkedom = require("linkedom");
 
@@ -31,7 +31,7 @@ const ready = `/([\\d,]+) of \\1 records/.test((document.querySelector(".imerss-
 
 // The map and the network are drawn by libraries which own their markup - MapLibre lays out its controls and canvas
 // according to the moment its tiles arrive, and d3 sizes the network to its panel as it draws it, which on a hydrated
-// page whose data is its placeholders, as the fixture's is, it does only once, as it is hydrated. Their own content is
+// page whose data is already loaded it does only once, as it is hydrated. Their own content is
 // compared only as far as their roots
 const snapshot = `(() => {
     const clone = document.querySelector("[fluid-layers]").cloneNode(true);

@@ -9,7 +9,7 @@
 // by default the development page of howe-sound-mapping-2026, whose static/vendor has been filled by copyOut.js and
 // whose material has been written by its src/js/storyBuild.js. The page is served from the project alone.
 
-const infusion6 = require("../../src/infusion6.js");
+const infusion6 = require("../../src/locateInfusion6.js");
 const fs = require("fs"),
     path = require("path"),
     linkedom = require("linkedom");

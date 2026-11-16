@@ -4,6 +4,12 @@
 
 // A dual range input ported to Infusion 6 - corresponds to the since removed src/client/js/new/dual-range-input.js
 
+fluid.registerNamespace("hortis.dualRangeInput");
+
+// The time in milliseconds for which the thumbs must rest before the values slid to are written to the range - see
+// the `commitSliding` effect
+hortis.dualRangeInput.commitDelay = 150;
+
 fluid.def("hortis.dualRangeInput", {
     $layers: "fluid.component",
     // minRange: Number, maxRange: Number - the bounds of the range
@@ -32,9 +38,9 @@ fluid.def("hortis.dualRangeInput", {
         min: "{self}.minRange",
         max: "{self}.maxRange"
     },
-    // The values to which the thumbs have been slid but which are not yet written to `range`, or null if there are none -
-    // see hortis.dualRangeInput.input. Shown at once by the labels, whilst the costlier work of filtering by them
-    // follows, once the browser is free of the input events which slid them
+    // The values to which the thumbs have been slid but which are not yet written to `range`, with members `min` and
+    // `max`, or null if there are none - see hortis.dualRangeInput.input. Shown at once by the labels, whilst the
+    // costlier work of filtering by them follows only once the thumbs come to rest
     sliding: null,
     shownRange: "$compute:hortis.dualRangeInput.shownRange({self}.range, {self}.sliding)",
     // The text and position of each value shown - see hortis.dualRangeInput.labels
@@ -65,6 +71,20 @@ fluid.def("hortis.dualRangeInput", {
             onceOnly: true
         }
     },
+    // Writes the values slid to into the range once the thumbs have rested for a moment. The range usually filters a
+    // whole dataset, and redraws whatever shows it, which costs far more than the interval between input events - were
+    // it written as each arrived, or even once per task as they arrive, the thumb would be repainted only between
+    // redraws and lag behind the pointer. Waiting until the values have rested leaves the browser free to repaint the
+    // thumb throughout a drag, and writes the range once with its latest values. The write is the component's own, so
+    // that its effect moving the inputs does not move them back
+    commitSliding: {
+        $effect: {
+            func: "hortis.dualRangeInput.commit",
+            args: ["{self}", "{self}.sliding"],
+            debounce: hortis.dualRangeInput.commitDelay,
+            source: "self"
+        }
+    },
     // Moves the inputs to the range and its bounds. A change the user made through the inputs is already shown by them,
     // and is not written back
     updateControl: {
@@ -77,51 +97,27 @@ fluid.def("hortis.dualRangeInput", {
 });
 
 /**
- * Record a value to which a thumb has been slid, and arrange for it to be written to the input's `range`. The range
- * usually filters a whole dataset, and redraws whatever shows it, which is far too costly to do as each input event
- * arrives - the thumb would lag behind the pointer. So the value is shown at once by the labels, through `sliding`, but
- * written to `range` only once the browser has handled every input event already queued, in a task of its own. Any
- * values slid to in the meantime replace those pending, so that however many events arrive, the range is written once
- * with the latest values. Releasing the thumb, which the browser marks by a change event, writes them at once.
+ * Record a value to which a thumb has been slid, which the labels show at once, and which is written to the input's
+ * `range` once the thumbs have rested - see the `commitSliding` effect.
  * @param {Event} event - The input event
  * @param {hortis.dualRangeInput} that - The dual range input
  * @param {String} which - `min` or `max`, naming the thumb slid
  */
 hortis.dualRangeInput.input = function (event, that, which) {
-    const control = that.control;
-    control.pending = {...control.pending, [which]: +event.target.value};
-    that.sliding = {...that.shownRange, ...control.pending};
-    if (control.commitTimer === null) {
-        control.commitTimer = control.window.setTimeout(control.commit, 0);
-    }
+    that.sliding = {...that.shownRange, [which]: +event.target.value};
 };
 
 /**
- * Write at once any values slid to and not yet written to the range, e.g. as the thumb is released.
+ * Write the values slid to into a dual range input's range. Does nothing if none are pending.
  * @param {hortis.dualRangeInput} that - The dual range input
+ * @param {Object|null} sliding - The values slid to, with members `min` and `max`, or null if there are none
  */
-hortis.dualRangeInput.flush = function (that) {
-    that.control.commit();
-};
-
-/**
- * Write the values slid to and pending to a dual range input's range, as its own change, so that its effect moving
- * the inputs does not move them back. Does nothing if none are pending.
- * @param {hortis.dualRangeInput} that - The dual range input
- * @param {DualRangeInput} control - Its control, holding the pending values as `pending`
- */
-hortis.dualRangeInput.commit = function (that, control) {
-    control.window.clearTimeout(control.commitTimer);
-    control.commitTimer = null;
-    const pending = control.pending;
-    control.pending = null;
-    if (pending) {
-        fluid.cell.withAmbientSource(fluid.domSources(fluid.selfSource(that)), () => {
-            Object.entries(pending).forEach(([which, value]) => {
-                that.range[which] = value;
-            });
-            that.sliding = null;
-        })();
+hortis.dualRangeInput.commit = function (that, sliding) {
+    if (sliding) {
+        // Both bounds are written at once, so that no range is ever seen holding one new bound and one old - which,
+        // were both thumbs slid past each other's old values, would be inverted
+        that.range = {min: sliding.min, max: sliding.max};
+        that.sliding = null;
     }
 };
 
@@ -227,12 +223,33 @@ class DualRangeInput {
         this.$min.addEventListener("touchstart", this.updateCeil);
         this.$max.addEventListener("touchstart", this.updateFloor);
 
+        // The least separation of the thumbs depends on the width of the input, which changes, e.g. as a collapsed panel
+        // holding it is expanded. A document which is not laid out, e.g. one rendered under node, has no such observer
+        const ResizeObserver = $min.ownerDocument.defaultView.ResizeObserver;
+        this.resizeObserver = ResizeObserver ? new ResizeObserver(() => this.update()) : null;
+        if (this.resizeObserver) {
+            this.resizeObserver.observe($min.parentElement);
+        }
+
         this.update();
 
         this.$min.dataset.ready = "true";
         this.$max.dataset.ready = "true";
     }
 
+    /**
+     * Lay out the two inputs, so that each value lies at the same place along the track whichever thumb is set to it,
+     * and that place is that of the thumb's centre - as the scale above the track marks it. A native range input of
+     * width w, whose thumb is t wide, places the centre of its thumb a fraction f of the way through its range at
+     * t / 2 + f * (w - t), so that, across the whole input of width W, a value a fraction p of the way through the
+     * range must lie at t / 2 + p * (W - t). The lower input spans the values from the lower end of the range to a split
+     * value, m1, and the upper input those from m2 to the upper end, where m2 lies above m1 by at least the values
+     * spanned by one thumb width - so that, holding these at their places, the lower input ends no further along than
+     * the upper begins, and the thumbs never overlap. A gap left between the inputs, since m2 - m1 is rounded up to a
+     * whole number of steps, is less than a step wide. The split lies midway between the thumbs, rounded towards the
+     * upper thumb if the lower is being slid, and towards the lower if the upper, so that the thumb being slid has room.
+     * @param {String} [method] - "ceil" if the lower thumb is being slid, or "floor" if the upper
+     */
     update(method = "ceil") {
         const thumbWidthVar = "var(--dri-thumb-width)";
 
@@ -241,23 +258,36 @@ class DualRangeInput {
         const step = parseFloat(this.$min.step) || 1;
         const minValue = parseFloat(this.$min.value);
         const maxValue = parseFloat(this.$max.value);
+        const range = max - min || 1;
 
-        const midValue = (maxValue - minValue) / 2;
-        const mid = minValue + Math[method](midValue / step) * step;
+        // The values spanned by one thumb width, the least by which the thumbs' values may differ - unknown whilst the
+        // input is not laid out, e.g. in a collapsed panel, whereupon it is computed once it is, or in a document which
+        // is never laid out, e.g. one rendered under node, whereupon the thumbs may take any values
+        const width = this.$min.parentElement.clientWidth;
+        const window = this.$min.ownerDocument.defaultView;
+        const thumbWidth = window.getComputedStyle ? parseFloat(window.getComputedStyle(this.$min).minWidth) || 0 : 0;
+        const thumbSpan = width > thumbWidth ? thumbWidth * range / (width - thumbWidth) : 0;
+        const gap = Math.min(Math.ceil(thumbSpan / step) * step, range);
 
-        const range = max - min;
+        const slack = Math.max(maxValue - minValue - gap, 0);
+        const m1 = Math.min(minValue + Math[method](slack / 2 / step) * step, max - gap);
+        const m2 = m1 + gap;
 
-        const leftWidth = (((mid - min) / range) * 100).toFixed(this.precision);
-        const rightWidth = (((max - mid) / range) * 100).toFixed(this.precision);
+        // The fractions of the range at which the lower input ends and the upper begins
+        const p1 = ((m1 - min) / range).toFixed(this.precision);
+        const p2 = ((m2 - min) / range).toFixed(this.precision);
+        const span = `(100% - ${thumbWidthVar})`;
 
-        this.$min.style.flexBasis = `calc(${leftWidth}% + ${thumbWidthVar})`;
-        this.$max.style.flexBasis = `calc(${rightWidth}% + ${thumbWidthVar})`;
+        this.$min.style.flexBasis = `calc(${thumbWidthVar} + ${p1} * ${span})`;
+        this.$max.style.flexBasis = `calc(${thumbWidthVar} + (1 - ${p2}) * ${span})`;
+        this.$max.style.marginInlineStart = `calc((${p2} - ${p1}) * ${span} - ${thumbWidthVar})`;
 
-        this.$min.max = mid.toFixed(this.precision);
-        this.$max.min = mid.toFixed(this.precision);
+        this.$min.max = m1;
+        this.$max.min = m2;
 
-        const minFill = (minValue - min) / (mid - min) || 0;
-        const maxFill = (maxValue - mid) / (max - mid) || 0;
+        // The track of each input is filled from its thumb's centre towards the other thumb
+        const minFill = (minValue - min) / (m1 - min) || 0;
+        const maxFill = (maxValue - m2) / (max - m2) || 0;
 
         const minFillPercentage = (minFill * 100).toFixed(this.precision);
         const maxFillPercentage = (maxFill * 100).toFixed(this.precision);
@@ -287,33 +317,33 @@ class DualRangeInput {
 
         this.$min.removeEventListener("touchstart", this.updateCeil);
         this.$max.removeEventListener("touchstart", this.updateFloor);
+
+        if (this.resizeObserver) {
+            this.resizeObserver.disconnect();
+        }
     }
 }
 
 /**
- * Construct the widget arranging the two inputs, which also holds the values slid to and not yet written to the
- * range - see hortis.dualRangeInput.input.
+ * Construct the widget arranging the two inputs.
  * @param {hortis.dualRangeInput} that - The dual range input
  * @param {HTMLElement} container - Its rendered container
  * @return {DualRangeInput} The widget
  */
 hortis.dualRangeInput.makeControl = function (that, container) {
-    const control = new DualRangeInput(container.querySelector(".dual-range-min"), container.querySelector(".dual-range-max"));
-    control.window = container.ownerDocument.defaultView;
-    control.pending = null;
-    control.commitTimer = null;
-    control.commit = () => hortis.dualRangeInput.commit(that, control);
-    return control;
+    return new DualRangeInput(container.querySelector(".dual-range-min"), container.querySelector(".dual-range-max"));
 };
 
 hortis.dualRangeInput.destroyControl = function (control) {
-    control.window.clearTimeout(control.commitTimer);
     control.destroy();
 };
 
 hortis.dualRangeInput.updateControl = function (control, range, minRange, maxRange) {
-    // Must update range first otherwise value update will be rejected
+    // Each input must span the whole range before its value is set, else a value beyond the split between them, as
+    // last laid out, is clamped to it - update then splits the range afresh
     control.$min.min = minRange;
+    control.$min.max = maxRange;
+    control.$max.min = minRange;
     control.$max.max = maxRange;
     control.$min.value = range.min;
     control.$max.value = range.max;
@@ -325,12 +355,12 @@ hortis.dualRangeInput.updateControl = function (control, range, minRange, maxRan
     <div class="dual-range-holder" @class="dual-range-disabled:@{disabled}">
         <div @id="scale"></div>
         <div class="dual-range-input">
-            <input type="range" step="1" class="dual-range-min" disabled="@{disabled}" @oninput="hortis.dualRangeInput.input({0}, {self}, min)" @onchange="hortis.dualRangeInput.flush({self})"/>
-            <input type="range" step="1" class="dual-range-max" disabled="@{disabled}" @oninput="hortis.dualRangeInput.input({0}, {self}, max)" @onchange="hortis.dualRangeInput.flush({self})"/>
+            <input type="range" step="1" class="dual-range-min" disabled="@{disabled}" @oninput="hortis.dualRangeInput.input({0}, {self}, min)"/>
+            <input type="range" step="1" class="dual-range-max" disabled="@{disabled}" @oninput="hortis.dualRangeInput.input({0}, {self}, max)"/>
         </div>
         <div class="dual-range-thumb-labels" @class="dual-range-thumb-labels-shown:@{thumbLabels}">
-            <span class="dual-range-thumb-label dual-range-thumb-min" style="left: max(5em, @{labels.minPos}%)">@{labels.min}</span>
-            <span class="dual-range-thumb-label dual-range-thumb-max" style="left: min(100% - 5em, @{labels.maxPos}%)">@{labels.max}</span>
+            <span class="dual-range-thumb-label dual-range-thumb-min" style="--dri-thumb-pos: @{labels.minPos}">@{labels.min}</span>
+            <span class="dual-range-thumb-label dual-range-thumb-max" style="--dri-thumb-pos: @{labels.maxPos}">@{labels.max}</span>
         </div>
         <div class="dual-range-values" @class="fl-hidden:!@{valueLabels}">
             <span>@{labels.lower}</span>

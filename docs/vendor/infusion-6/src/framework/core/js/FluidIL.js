@@ -166,6 +166,57 @@ const $fluidILScope = function (fluid) {
         return togo;
     };
 
+    /**
+     * @typedef {Object} QueryIndexEntry
+     * @property {Shadow} shadow - The shadow of an available component beneath the head of the traversal
+     * @property {Shadow[]} shadowStack - The shadows from the head down to the component, as supplied to
+     * fluid.matchILSelector
+     * @property {Object[]} scopes - The own scopes of those shadows
+     */
+
+    /**
+     * @typedef {Object} QueryIndex
+     * @property {QueryIndexEntry[]} entries - Each available component beneath the head, in traversal order
+     * @property {Unavailable|null} unavailable - The merged unavailable value of the components traversed which are
+     * unavailable, if there are any - whatever its selector, a query of the tree is then unavailable, since such a
+     * component's layers may not yet be known
+     */
+
+    /**
+     * Find, or else allocate, the index of the tree beneath a head component which is shared by all the live queries of
+     * that tree - see fluid.liveQueryILSelector. It is computed by a single traversal, which depends on the scope of
+     * every component traversed and on its availability, and so is recomputed once whenever either changes anywhere in
+     * the tree, rather than once for each query.
+     *
+     * Note that each recomputation still traverses the whole tree. An incremental algorithm, which on a change rematches
+     * only the components whose scope changed, and their descendants, against the queries of each head above them, is
+     * possible - see a-scratch/reports/live-query-il-selector-strategies.md for a sketch of it and its costs.
+     * @param {Component} root - The head component
+     * @param {Boolean} [flat] - `true` if the index is of the head's children alone
+     * @return {Cell<QueryIndex>} The index
+     */
+    fluid.queryIndexFor = function (root, flat = false) {
+        const shadow = root[$m];
+        const key = flat ? "!" : "";
+        const indexMap = shadow.queryIndexMap ||= Object.create(null);
+        return indexMap[key] ||= fluid.cell(undefined, {name: `query index${flat ? " (flat)" : ""} for component at path ${shadow.path}`}).computed(() => {
+            const entries = [];
+            const unavailables = [];
+            fluid.visitComponentsForMatching(shadow, {flat}, function (childShadow, shadowStack, scopes) {
+                // A simple component, e.g. the root's child resolveRootComponent, has no availableInstance and is always
+                // available
+                const thisUnavailable = childShadow.availableInstance ? childShadow.availableInstance.get() : childShadow.that;
+                if (fluid.isUnavailable(thisUnavailable)) {
+                    unavailables.push(fluid.deproxyUnavailable(fluid.unavailableComponentProxy(childShadow, thisUnavailable)));
+                } else {
+                    // Copied, since the traversal reuses its arrays
+                    entries.push({shadow: childShadow, shadowStack: [...shadowStack], scopes: [...scopes]});
+                }
+            });
+            return {entries, unavailable: fluid.mergeUnavailables(unavailables)};
+        });
+    };
+
     // USER-FACING METHOD
     /** Query for all components matching a selector in a particular tree, returning a live computed collection
      * @param {Component} root - The root component at which to start the search
@@ -176,6 +227,8 @@ const $fluidILScope = function (fluid) {
      * Note that with <code>flat=false</code> this search will scan every component below the root and may well be very slow.
      * @return {Cell<Unavailable|Component[]>} An array holding all components matching the selector, or an unavailable value if any
      * unavailable components were traversed
+     * The queries of one tree share a single traversal of it, held in its head's index - see fluid.queryIndexFor, which
+     * notes that an incremental algorithm is possible - and each filters that index with its own selector.
      */
     fluid.liveQueryILSelector = function (root, selector, flat = false) {
         const shadow = root[$m];
@@ -184,18 +237,22 @@ const $fluidILScope = function (fluid) {
         if (existing) {
             return existing;
         } else {
+            const parsed = fluid.parseSelector(selector, fluid.ILSSMatcher);
             let previous = null;
             return shadow.queryILMap[key] = fluid.cell(undefined, {name: `liveQueryILSelector for ${selector}`}).computed(() => {
-                const results = fluid.queryILSelector(root, selector, flat);
-                const unavailableComponents = fluid.mergeUnavailables(results.map(fluid.deproxyUnavailable));
-                if (unavailableComponents) {
-                    return unavailableComponents;
+                const index = fluid.queryIndexFor(root, flat).get();
+                let togo;
+                if (index.unavailable) {
+                    togo = index.unavailable;
                 } else {
-                    // The query is reevaluated whenever any component beneath the root turns over - only deliver a
+                    const results = index.entries.filter(entry => fluid.matchILSelector(parsed, entry.shadowStack, entry.scopes, 1))
+                        .map(entry => fluid.proxyMat(entry.shadow.computer, entry.shadow, []));
+                    // The index is recomputed whenever any component beneath the root turns over - only deliver a
                     // fresh list if the matched components have changed. Root proxies keep their identity across turnover.
                     previous = previous !== null && fluid.arrayEqual(previous, results) ? previous : results;
-                    return previous;
+                    togo = previous;
                 }
+                return togo;
             });
         }
     };
@@ -395,24 +452,36 @@ const $fluidILScope = function (fluid) {
             }
             fluid.withdrawFromScopes(shadow, withdrawn);
             shadow.appliedContexts = ownScope;
+            // The complement of contexts this component applies - each name, the component it resolves to and its
+            // priority, and where it is applied. The scope's consumers - context references and live IL selectors - see
+            // nothing but this, so that a run which leaves it equivalent, e.g. on a turnover of the component which
+            // leaves its layers unchanged, ticks nothing - see FLUID-7032 follow-up
+            const resolveRoot = !!shadow.resolveRoot && !shadow.inert;
+            const complement = [applyToParent, resolveRoot, ...ownScope.flatMap(context => [context, shadow.ownScope[context].value, shadow.ownScope[context].priority])];
+            const changed = withdrawn.length > 0 || !shadow.scopeComplement || !fluid.equiv.elementwise(shadow.scopeComplement, complement);
+            shadow.scopeComplement = complement;
             ownScope.forEach(context => {
                 const rec = shadow.ownScope[context];
                 if (applyToParent) {
                     fluid.applyToScope(shadow.parentShadow.childrenScope, context, rec.value, rec.priority);
                 }
                 // An inert component, e.g. the avatar of a fluid.resolveRoot layer, must not displace live ones at root
-                if (shadow.resolveRoot && !shadow.inert) {
+                if (resolveRoot) {
                     fluid.applyToScope(rootComponent[$m].childrenScope, context, rec.value, rec.priority);
-                    rootComponent[$m].ownScopeTick.set(rootComponent[$m].ownScopeTick._value + 1);
+                    if (changed) {
+                        rootComponent[$m].ownScopeTick.set(rootComponent[$m].ownScopeTick._value + 1);
+                    }
                 }
             });
-            if (applyToParent) {
-                // The parent's own scope has changed via its childrenScope - any context already resolved at the parent,
-                // e.g. a reference to this component from a sibling member, may need to be reevaluated
-                const parentTick = shadow.parentShadow.ownScopeTick;
-                parentTick.set(parentTick._value + 1);
+            if (changed) {
+                if (applyToParent) {
+                    // The parent's own scope has changed via its childrenScope - any context already resolved at the parent,
+                    // e.g. a reference to this component from a sibling member, may need to be reevaluated
+                    const parentTick = shadow.parentShadow.ownScopeTick;
+                    parentTick.set(parentTick._value + 1);
+                }
+                shadow.ownScopeTick.set(shadow.ownScopeTick._value + 1);
             }
-            shadow.ownScopeTick.set(shadow.ownScopeTick._value + 1);
         }, [], {name: `scopeEffect for path "${shadow.path}"`, shadow});
     };
 
@@ -564,6 +633,10 @@ const $fluidILScope = function (fluid) {
      * @property {Object} oldShadowMap - Previous value of shadowMap from the last time flatMerged turned over
      * @property {Object<String, Cell>} sitedRefMap - Map of all $sitedRef signals so far dispensed for this component, indexed by path
      * @property {Object<String, Cell>} queryILMap - Map of all $sitedRef signals so far dispensed for this component, indexed by path
+     * @property {Set<fluid.TransientHolder>} [transientHolders] - The holders of the component's `$transient` members, which are
+     * disposed with it - see fluid.disposeTransients
+     * @property {Object<String, Cell<QueryIndex>>} [queryIndexMap] - The indexes of the tree beneath this component shared by its live
+     * queries, keyed "" for the whole tree and "!" for its children alone - see fluid.queryIndexFor
      * @property {Object<String, Cell>} contextReferenceMap - Map of all $contextRef signals so far dispensed for this component, indexed by path
      */
 
@@ -617,7 +690,20 @@ const $fluidILScope = function (fluid) {
         // fluid.clearDistributions(shadow);
 
         shadow.lifecycleStatus = "destroyed";
+        fluid.disposeTransients(shadow);
         fluid.markDestroyed(shadow);
+    };
+
+    /**
+     * Dispose the holder of each `$transient` member of a component which is destroyed, releasing what each holds - see
+     * fluid.TransientHolder. Other products of its records are cells, which are cut off as the component is marked
+     * destroyed
+     * @param {Shadow} shadow - The shadow of the component destroyed
+     */
+    fluid.disposeTransients = function (shadow) {
+        // Held in a registry of their own, since by the time the component is destroyed its shadow maps may have been
+        // reset by the emptying of its potentia
+        [...shadow.transientHolders || []].forEach(holder => holder.dispose());
     };
 
     /**
@@ -1113,9 +1199,17 @@ const $fluidILScope = function (fluid) {
             const valueSignal = fluid.cell(oldValue, {name: `Initial liveLayer signal at path ${path} for component path ${shadow.path}`});
             fluid.set(shadow.liveLayer, segs, valueSignal);
             // Remerge to take account that this top-level prop is now drawn from signal layer -
-            // Could be much more efficient
-            fluid.log("Upgrading path ", path, " to live");
-            shadow.potentia.set(Object.assign({}, shadow.potentia.get()));
+            // Could be much more efficient. The whole component is remerged and its instance turns over, together with
+            // everything beneath it - the cause is recorded on its potentia, so that fluid.cell.explain of any cell this
+            // turns over reports the write which provoked it
+            const cause = `first write to ${segs.join(".")} of component at path ${shadow.path}, `
+                + "upgrading it to live and remerging the component - see fluid.pathToLive";
+            if (fluid.isLogging()) {
+                const writer = fluid.cell.updatingCell ? fluid.cell.explain(fluid.cell.updatingCell).join(" <- ") : "outside any update";
+                fluid.log(`Upgrading path ${segs.join(".")} of component at path ${shadow.path} to live, remerging the `
+                    + `component - written during ${writer}`);
+            }
+            shadow.potentia.set(Object.assign({}, shadow.potentia.get()), {cause});
             return valueSignal;
         } else {
             return existing;
@@ -1208,6 +1302,12 @@ const $fluidILScope = function (fluid) {
         const value = fluid.deproxyMat(inValue);
         const segs = fluid.pathToSegs(path),
             shadow = component[$m];
+        const holder = fluid.transientHolderAt(shadow, segs);
+        if (holder) {
+            // A $transient member is written in place, notifying nothing - see fluid.TransientHolder
+            holder.set(value);
+            return undefined;
+        }
         // A write at or beneath a lens is applied to its source rather than held here
         const lensSite = fluid.findLensSite(shadow, segs);
         let togo;
@@ -1488,6 +1588,15 @@ const $fluidILScope = function (fluid) {
 
             if (fluid.isUnavailable(value)) {
                 return value;
+            } else if (value instanceof fluid.TransientHolder) {
+                // A $transient member referred to from a record is read raw and untracked - which within a computation is
+                // likely an error, since the computation is not rerun as it changes
+                if (!value.warned && /of \$compute /.test(fluid.trackingVars.CurrentReaction?.target?.name || "")) {
+                    value.warned = true;
+                    fluid.log(fluid.logLevel.WARN, `Warning: $transient member at ${ult.site ? fluid.renderSite(ult.site) : "unknown site"} is read `
+                        + "within a computation, which will not be rerun when it changes - see fluid.TransientHolder");
+                }
+                return value.value;
             } else if (ult.$variety === "$component") {
                 return fluid.proxyMat(ult, ult.shadow, []);
             } else {
@@ -1616,6 +1725,15 @@ const $fluidILScope = function (fluid) {
      * @property {String|any} [func] - A reference to a function, as an Infusion context reference string a global
      * function name to be resolved via `fluid.getGlobalValue` or as a direct function value.
      * @property {Array<any>} [args] - Optional arguments to be passed to the function. These may include context references or values.
+     * @property {Number} [debounce] - For an `$effect` record, a delay in milliseconds: the effect runs only once its
+     * arguments have rested unchanged for this long, with their latest values, rather than on every notification. A
+     * pending run is cancelled if the effect is disposed. Note that a debounced effect runs outside the reactive graph, so
+     * that fluid.cell.settle, and hence a static rendering, does not wait for it
+     * @property {String|Function} [equiv] - For a `$compute` record, the policy for when a recomputation leaves its value
+     * morally unchanged - a function `(oldValue, newValue) => Boolean`, or the global name of one, e.g.
+     * "fluid.equiv.elementwise". The computed cell then keeps the value it held, and notifies nothing - see
+     * fluid.cell.isEquivalent. An argument of a `$compute` written as `{$oldValue}` receives the value the computation last
+     * produced, or `undefined` if none, so that it may build on its own previous result
      */
 
     /**
@@ -1689,7 +1807,17 @@ const $fluidILScope = function (fluid) {
         const {func, resolvedArgs} = fluid.resolveFuncRecord(record, shadow, [...segs, "$compute"]);
         const dispatchCompute = fluid.makeFuncDispatcher(func);
         const name = `$compute at path ${segs} of component at path ${shadow.path}`;
-        const togo = fluid.cell(undefined, {name}).computed(dispatchCompute, fluid.flattenedArgCells(resolvedArgs, name));
+        const equiv = typeof(record.equiv) === "string" ? fluid.getGlobalValue(record.equiv) : record.equiv;
+        if (record.equiv !== undefined && typeof(equiv) !== "function") {
+            fluid.fail(`Cannot resolve equiv ${record.equiv} of $compute at path ${segs} of component at path ${shadow.path} to a function`);
+        }
+        // An argument written as {$oldValue} receives the value the computation last produced, or `undefined` if it has
+        // produced none, so that a computation may build on its own previous result - a reducer
+        const dispatchWithOldValue = (...args) => {
+            const previous = fluid.isUnavailable(togo._value) ? togo._value.staleValue : togo._value;
+            return dispatchCompute(...args.map(arg => arg === fluid.OldValue ? previous : arg));
+        };
+        const togo = fluid.cell(undefined, equiv ? {name, equiv} : {name}).computed(dispatchWithOldValue, fluid.flattenedArgCells(resolvedArgs, name));
         togo.$variety = "$compute";
         return togo;
     };
@@ -2066,6 +2194,33 @@ const $fluidILScope = function (fluid) {
     };
 
     /**
+     * Wrap the dispatcher of an effect so that it runs only once it has rested for a delay, with the arguments of its
+     * latest notification - see the `debounce` member of a FuncRecord
+     * @param {Function} dispatch - The effect's dispatcher
+     * @param {Number} delay - The delay in milliseconds
+     * @return {Object} Members `dispatch`, the debounced dispatcher, and `cancel`, which cancels any run pending
+     */
+    fluid.debounceDispatch = function (dispatch, delay) {
+        let timer = null;
+        const cancel = () => {
+            if (timer !== null) {
+                clearTimeout(timer);
+                timer = null;
+            }
+        };
+        return {
+            dispatch: (...args) => {
+                cancel();
+                timer = setTimeout(() => {
+                    timer = null;
+                    dispatch(...args);
+                }, delay);
+            },
+            cancel
+        };
+    };
+
+    /**
      * Expands an effect-style function record into a reactive effect.
      * The function and its arguments are resolved from the record, and an effect is created that runs in response to changes.
      *
@@ -2082,9 +2237,11 @@ const $fluidILScope = function (fluid) {
         const dispatchEffect = record.source === undefined ? dispatch :
             fluid.cell.withAmbientSource(fluid.resolveSourceName(record.source, shadow), dispatch);
         const name = `$effect at path ${segs} of component at path ${shadow.path}`;
-        const togo = fluid.cell.effect(dispatchEffect, fluid.flattenedArgCells(resolvedArgs, name), {
+        const debounced = record.debounce === undefined ? null : fluid.debounceDispatch(dispatchEffect, record.debounce);
+        const togo = fluid.cell.effect(debounced ? debounced.dispatch : dispatchEffect, fluid.flattenedArgCells(resolvedArgs, name), {
             includeSource: fluid.resolveSourceName(record.includeSource, shadow),
             excludeSource: fluid.resolveSourceName(record.excludeSource, shadow),
+            onDispose: debounced ? debounced.cancel : undefined,
             name});
         togo.$variety = "$effect";
         fluid.log("Allocated effect " + togo.cellId + " at path " + segs.join(".") + " at component " + shadow.path);
@@ -2780,6 +2937,83 @@ const $fluidILScope = function (fluid) {
     fluid.elementExpanderRecord = function () {};
 
     /**
+     * The holder of a member declared by a `$transient` record - state belonging to one instance of a component which
+     * takes no part in the reactive graph, e.g. a drag in progress, or a timer. Reading it creates no dependency, writing
+     * it notifies nothing, and it is never raised into the live layer, so that a write never remerges its component. The
+     * holder is the product of its record, mounted by fluid.mountSignalRecord, and so is kept across turnover of its
+     * component whilst its record is unchanged, and disposed with it - see fluid.expandTransientRecord.
+     * @param {any} value - The initial value
+     * @param {Function|null} disposer - Any function releasing a value which is overwritten or disposed, e.g. a timer
+     * @param {Shadow} shadow - The shadow of the component holding the member
+     * @class
+     */
+    fluid.TransientHolder = function (value, disposer, shadow) {
+        this.value = value;
+        this.disposer = disposer;
+        this.shadow = shadow;
+        // Registered with its component, which disposes it on destruction - see fluid.disposeTransients
+        (shadow.transientHolders ||= new Set()).add(this);
+    };
+
+    /**
+     * Release the value held, if it is to be released
+     */
+    fluid.TransientHolder.prototype.release = function () {
+        if (this.disposer && this.value !== null && this.value !== undefined) {
+            this.disposer(this.value);
+        }
+    };
+
+    /**
+     * Hold a new value, releasing any other value held
+     * @param {any} value - The new value
+     */
+    fluid.TransientHolder.prototype.set = function (value) {
+        if (value !== this.value) {
+            this.release();
+            this.value = value;
+        }
+    };
+
+    /**
+     * Release the value held, as the holder's member is withdrawn or its component destroyed
+     */
+    fluid.TransientHolder.prototype.dispose = function () {
+        this.release();
+        this.value = undefined;
+        this.shadow.transientHolders.delete(this);
+    };
+
+    /**
+     * Expand a `$transient` record, `{$transient: initialValue, dispose?}`, into the holder of its member - see
+     * fluid.TransientHolder. The initial value is copied for each instance. `dispose` is a function, or the global name
+     * of one, receiving each value which is overwritten, and the value held when the member is withdrawn or its component
+     * destroyed - e.g. "clearTimeout" for a timer.
+     * @param {Object} record - The element bearing the record
+     * @param {Shadow} shadow - The shadow of the component holding it
+     * @param {String[]} segs - The path of the member within the component
+     * @return {fluid.TransientHolder} The holder
+     */
+    fluid.expandTransientRecord = function (record, shadow, segs) {
+        const disposer = typeof(record.dispose) === "string" ? fluid.getGlobalValue(record.dispose) : record.dispose || null;
+        if (record.dispose !== undefined && typeof(disposer) !== "function") {
+            fluid.fail(`Cannot resolve dispose ${record.dispose} of $transient at path ${segs.join(".")} of component at path ${shadow.path} to a function`);
+        }
+        return new fluid.TransientHolder(fluid.copy(record.$transient), disposer, shadow);
+    };
+
+    /**
+     * Find the holder of a member declared by a `$transient` record, if a path addresses one
+     * @param {Shadow} shadow - The shadow of the component
+     * @param {String[]} segs - The path within the component
+     * @return {fluid.TransientHolder|undefined} The holder, if the path is that of a top-level `$transient` member
+     */
+    fluid.transientHolderAt = function (shadow, segs) {
+        const member = segs.length === 1 ? shadow.that?.[segs[0]] : undefined;
+        return member instanceof fluid.TransientHolder ? member : undefined;
+    };
+
+    /**
      * An array of handler records that define how different element types are expanded. Each record contains a key representing the type
      * of element (e.g., "$method", "$compute", "$effect", "$component") and a handler function that processes the record. The handler
      * function will expand or transform the record into a different form, such as a computed signal, effect, or component expansion.
@@ -2814,6 +3048,14 @@ const $fluidILScope = function (fluid) {
         // Supplied with the element as a whole, since members alongside its record also contribute to its value
         wholeElement: true,
         // Recognised whatever its value, since a root may hold any value, including a falsy one such as false or null
+        byPresence: true
+    }, {
+        // State of an instance which takes no part in the reactive graph - see fluid.TransientHolder
+        key: "$transient",
+        handler: fluid.expandTransientRecord,
+        // Supplied with the element as a whole, since its `dispose` is held alongside its record
+        wholeElement: true,
+        // Recognised whatever its value, since its initial value may be falsy, e.g. null
         byPresence: true
     }, {
         key: "$component",
@@ -3423,17 +3665,54 @@ const $fluidILScope = function (fluid) {
             const newMergeRecords = filteredRecords.concat(mergeRecords.filter(mergeRecord => mergeRecord.layer));
             const newLayerNames = oldPotentia.layerNames || layerNames;
 
-            const potentia = {mergeRecords: newMergeRecords, layerNames: newLayerNames};
-            if (variables) {
-                // Assign before setting potentia since this read is not tracked by flatMergedComputer
-                shadow.variablesLayer = variables;
+            // A push which leaves the potentia equal - e.g. that of an unchanged subcomponent record or template slot,
+            // pushed again since its parent turned over or rerendered - is not applied, so that the component neither
+            // remerges nor turns over, and nor does anything beneath it
+            if (!fluid.isSamePotentia(oldPotentia, newMergeRecords, newLayerNames) || variables && !fluid.shallowEquals(variables, shadow.variablesLayer)) {
+                const potentia = {mergeRecords: newMergeRecords, layerNames: newLayerNames};
+                if (variables) {
+                    // Assign before setting potentia since this read is not tracked by flatMergedComputer
+                    shadow.variablesLayer = variables;
+                }
+                shadow.potentia.set(potentia);
             }
-            shadow.potentia.set(potentia);
             return shadow;
         } else {
             return fluid.computeInstance({mergeRecords, layerNames}, parentShadow, memberName, variables).shadow;
         }
     };
+    /**
+     * Determine whether two plain objects have the same keys, each holding the identical value
+     * @param {Object} a - The first object
+     * @param {Object} b - The second object
+     * @return {Boolean} `true` if the objects are shallowly equal
+     */
+    fluid.shallowEquals = function (a, b) {
+        let togo;
+        if (a === b) {
+            togo = true;
+        } else {
+            const aKeys = Object.keys(a), bKeys = Object.keys(b);
+            togo = aKeys.length === bKeys.length && aKeys.every(key => Object.prototype.hasOwnProperty.call(b, key) && a[key] === b[key]);
+        }
+        return togo;
+    };
+
+    /**
+     * Determine whether a component's potentia would be left equal by a push of the supplied merge records and layer
+     * names - each record is shallowly equal to the existing one at the same position, i.e. of the same type, name and
+     * priority, holding the identical layer, since a push typically allocates fresh records around unchanged layers
+     * @param {Potentia} oldPotentia - The component's existing potentia
+     * @param {MergeRecord[]} mergeRecords - The merge records it would hold after the push
+     * @param {String[]} layerNames - The layer names it would hold after the push
+     * @return {Boolean} `true` if the push leaves the potentia equal
+     */
+    fluid.isSamePotentia = function (oldPotentia, mergeRecords, layerNames) {
+        const oldRecords = oldPotentia.mergeRecords || [];
+        return oldRecords.length === mergeRecords.length && mergeRecords.every((record, i) => fluid.shallowEquals(record, oldRecords[i]))
+            && (oldPotentia.layerNames === layerNames || fluid.arrayEqual(oldPotentia.layerNames || [], layerNames || []));
+    };
+
     fluid.busyUnavailable = fluid.unavailable("System is busy", "pending");
 
     // Was used to schedule renders in tag singularity branch, currently disused
@@ -3667,6 +3946,9 @@ const $fluidILScope = function (fluid) {
                     return deTarget[prop];
                 } else if (segs.length === 0 && fluid.isUnavailable(deTarget) && !(prop in deTarget) && !fluid.probedMembers[prop]) {
                     return fluid.readUnavailableComponent(shadow, deTarget, prop);
+                } else if (segs.length === 0 && deTarget[prop] instanceof fluid.TransientHolder) {
+                    // A $transient member is read raw and untracked - see fluid.TransientHolder
+                    return deTarget[prop].value;
                 } else {
                     const nextSegs = [...segs, prop];
                     // Note that logic is quite similar to fluid.flattenSignals
@@ -3728,6 +4010,12 @@ const $fluidILScope = function (fluid) {
             // Neither a write nor a deletion tracks what it consults in finding its site - see fluid.setForComponent
             const setHandler = function (target, prop, value) {
                 fluid.expectLiveComponent(shadow, prop);
+                const holder = segs.length === 0 ? fluid.transientHolderAt(shadow, [prop]) : undefined;
+                if (holder) {
+                    // A $transient member is written in place, notifying nothing - see fluid.TransientHolder
+                    holder.set(value);
+                    return true;
+                }
                 fluid.cell.untracked(() => {
                     const nextSegs = [...segs, prop];
                     // A member already raised into the live layer is held locally, and is written in place

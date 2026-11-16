@@ -16,7 +16,7 @@ fluid.def("hortis.sexFilter", {
         }
     },
     filterSummary: "$compute:hortis.sexFilter.summarise({self}.filterState)",
-    doFilter: "$method:hortis.sexFilter.doFilter({0}:obsRows, {1}:filterState)",
+    predicates: "$compute:hortis.sexFilter.predicates({self}.filterState)",
     reset: "$method:hortis.sexFilter.reset({self})"
 });
 
@@ -35,9 +35,14 @@ hortis.sexFilter.summarise = function (filterState) {
     return hortis.countSummary((filterState.male ? 1 : 0) + (filterState.female ? 1 : 0), ["sex", "sexes"]);
 };
 
-hortis.sexFilter.doFilter = function (obsRows, filterState) {
-    const all = !(filterState.female || filterState.male);
-    return all ? obsRows : obsRows.filter(row => row.sex === "F" && filterState.female || row.sex === "M" && filterState.male);
+/**
+ * Compute the predicates of the sex filter - every observation is selected unless just one sex is chosen.
+ * @param {Object} filterState - The filter state, with Boolean members `male` and `female`
+ * @return {Object[]} The predicates
+ */
+hortis.sexFilter.predicates = function (filterState) {
+    const sexes = [filterState.female ? "F" : null, filterState.male ? "M" : null].filter(sex => sex);
+    return sexes.length === 0 ? [] : [{field: "sex", op: "in", value: sexes}];
 };
 </script>
 

@@ -241,9 +241,9 @@ below, attacks more directly.
 ### Captured at hydration
 
 Implemented as `hortis.queryCache` in `src/client/js/i6/imerss-core.js`, through which `hortis.query` executes every
-query. Pages are now hydrated by Infusion 6's `hydrate.js` against their **real** data - their drivers name no
-placeholder - so that the static page shows the real data, and every query executed under node is recorded with its
-result. The results are written into the page as a `<script type="application/json" id="hortis-query-cache">` in its
+query. Pages are hydrated by Infusion 6's `hydrate.js` against their **real** data - placeholders are only for test
+fixtures, see [the columnar data package](columnar-data-package.md) - so that the static page shows the real data, and
+every query executed under node is recorded with its result. The results are written into the page as a `<script type="application/json" id="hortis-query-cache">` in its
 head, typed arrays as base64 and selections as runs of their selected rows, each of at most 64 KB as encoded - a larger
 result, such as the ids of every row grouped by taxon, being cheaper executed than read. The element is not of the
 page's source, so it is marked as hydrated, and `dehydrate.js` removes it with the rest.

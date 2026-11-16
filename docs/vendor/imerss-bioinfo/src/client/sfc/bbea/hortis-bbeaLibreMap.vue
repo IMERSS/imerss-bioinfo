@@ -29,8 +29,8 @@ fluid.def("hortis.bbeaLibreMap", {
     obsQuantiser: {
         $component: {
             baseLatitude: 44,
-            newBucket: "hortis.bbeaGridBucket",
-            indexObs: "hortis.indexBbeaObs"
+            // A cell's tooltip lists the bees observed within it
+            taxonField: "pollinatorINatId"
         }
     }
 });

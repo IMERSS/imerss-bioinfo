@@ -701,8 +701,11 @@ fluid.def("hortis.libreMap.withObsGrid", {
     // The camera, with members `center` and `zoom`, to which the map returns once no filter narrows the observations -
     // if null, it is fitted to the bounds of all of them
     homeCamera: null,
-    zoomToObsBoundsEffect: `$effect:hortis.libreMap.fitObs({self}.readyMap, {self}.gridBounds, {self}.zoomToObsBounds, {self}.zoomDuration,
-        {self}.homeCamera, {self}.obsQuantiser.selection.count, {self}.obsQuantiser.selection.rowCount)`
+    // The fitting of the map to the filtered observations, together with whether it was last fitted to filtered ones -
+    // built from its own previous value, so that the map returns to its home camera only once the filters are cleared
+    fitState: `$compute:hortis.libreMap.fitState({$oldValue}, {self}.readyMap, {self}.gridBounds, {self}.zoomToObsBounds,
+        {self}.zoomDuration, {self}.homeCamera, {self}.obsQuantiser.selection.count, {self}.obsQuantiser.selection.rowCount)`,
+    zoomToObsBoundsEffect: "$effect:hortis.libreMap.fitObs({self}.fitState)"
 });
 
 hortis.libreMap.computeGridOpacity = function (gridShown, fillOpacity) {
@@ -984,13 +987,22 @@ hortis.libreMap.swapBounds = function (bounds) {
     return bounds.map(coords => [coords[1], coords[0]]);
 };
 
-// Whether each map was last fitted to filtered observations, so that it returns to its home camera only once the
-// filters are cleared, and not as the page loads, when its camera is placed by other means, e.g. a story's panes
-hortis.libreMap.wasFiltered = new WeakMap();
+/**
+ * @typedef {Object} FitState
+ * @property {maplibregl.Map} map - The loaded map
+ * @property {Number[][]} bounds - The bounds of the filtered observations, as [[lat, long], [lat, long]]
+ * @property {Boolean} zoomToObsBounds - Whether the map follows the observations at all
+ * @property {Number} zoomDuration - The duration in milliseconds of the move
+ * @property {Object|null} homeCamera - The camera, with members `center` and `zoom`, to return to, if any
+ * @property {Boolean} filtered - Whether a filter narrows the observations
+ * @property {Boolean|undefined} wasFiltered - Whether the same map was last fitted to filtered observations, or
+ * `undefined` if it has not yet been fitted - as the page loads, when its camera is placed by other means, e.g. a story's
+ * panes
+ */
 
 /**
- * Move a map smoothly to show the filtered observations - fitted to their bounds while a filter narrows them, and back
- * to its home camera once none does, if it has one, or else fitted to the bounds of them all.
+ * Compute the fitting of a map to the filtered observations, from its previous value - see `{$oldValue}`.
+ * @param {FitState|undefined} previous - The previous fitting, if any
  * @param {maplibregl.Map} map - The loaded map
  * @param {Number[][]} bounds - The bounds of the filtered observations, as [[lat, long], [lat, long]]
  * @param {Boolean} zoomToObsBounds - Whether the map follows the observations at all
@@ -998,11 +1010,20 @@ hortis.libreMap.wasFiltered = new WeakMap();
  * @param {Object|null} homeCamera - The camera, with members `center` and `zoom`, to return to, if any
  * @param {Number} filteredCount - The number of filtered observations
  * @param {Number} allCount - The number of all observations
+ * @return {FitState} The fitting
  */
-hortis.libreMap.fitObs = function (map, bounds, zoomToObsBounds, zoomDuration, homeCamera, filteredCount, allCount) {
-    const filtered = filteredCount !== allCount;
-    const wasFiltered = hortis.libreMap.wasFiltered.get(map);
-    hortis.libreMap.wasFiltered.set(map, filtered);
+hortis.libreMap.fitState = function (previous, map, bounds, zoomToObsBounds, zoomDuration, homeCamera, filteredCount, allCount) {
+    return {map, bounds, zoomToObsBounds, zoomDuration, homeCamera, filtered: filteredCount !== allCount,
+        wasFiltered: previous?.map === map ? previous.filtered : undefined};
+};
+
+/**
+ * Move a map smoothly to show the filtered observations - fitted to their bounds while a filter narrows them, and back
+ * to its home camera once none does, if it has one, or else fitted to the bounds of them all.
+ * @param {FitState} fitState - The fitting, as computed by hortis.libreMap.fitState
+ */
+hortis.libreMap.fitObs = function (fitState) {
+    const {map, bounds, zoomToObsBounds, zoomDuration, homeCamera, filtered, wasFiltered} = fluid.unwrapProxy(fitState);
     // A change of filters may change the layout around the map, e.g. a story page's panel describing a chosen taxon -
     // a move begun before the map has taken up its new size lands away from where it was aimed
     hortis.libreMap.afterLayout(map, () => {

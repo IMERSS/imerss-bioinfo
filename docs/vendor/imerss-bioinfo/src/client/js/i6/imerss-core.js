@@ -7,7 +7,7 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
-/* global Papa, pako */
+/* global Papa, pako, require */
 
 "use strict";
 
@@ -291,13 +291,12 @@ hortis.inflateUint8Array = async function (url) {
     return pako.inflate(byteArray, {to: "string"});
 };
 
-// A loader for a CSV file at `url`. Its `parsed` member is pending until the file has been loaded and parsed. It fetches
-// its `fetchUrl`, which is its `url` unless it bears fluid.withPlaceholder, which supplies a placeholder fetched in its
-// place when the page is rendered statically
+// A loader for a CSV file at `url`, which may be that of a placeholder - see fluid.resolveUrl. Its `parsed` member is
+// pending until the file has been loaded and parsed
 fluid.def("hortis.csvReader", {
     $layers: "fluid.component",
     // url: String
-    fetchUrl: "{self}.url",
+    fetchUrl: "$compute:fluid.resolveUrl({self}.url)",
     csvOptions: {
         header: true,
         skipEmptyLines: true
@@ -541,59 +540,538 @@ hortis.lookupTaxon = function (rows, query, maxSuggestions = 1) {
     return maxSuggestions === 1 ? output[0] : output;
 };
 
+/** Queries **/
+
+/**
+ * A set of the observations, as the visualisation passes it between its parts in place of an array of rows.
+ * @typedef {Object} Selection
+ * @property {Uint8Array} selection - 1 for each row of the table selected, else 0
+ * @property {Number} count - The number of rows selected
+ * @property {Number} rowCount - The number of rows of the table
+ * @property {String} key - The key of the query which computed it, by which a query narrowing it is cached - see
+ * hortis.queryCache
+ */
+
+/**
+ * Execute a query of the query description language over the visualisation's data package - see qdl.js and
+ * notes/query-description-language.md. The package and any selection are read bare, since the executor visits every
+ * row, and the query is copied bare from any proxy through which it was read.
+ * @param {VizPackage} pkg - The package
+ * @param {Object} query - The query
+ * @param {Selection} [within] - A selection which the query narrows
+ * @return {Object} The result of the query
+ */
+hortis.query = function (pkg, query, within) {
+    const barePkg = fluid.unwrapProxy(pkg), bareQuery = hortis.bareQuery(query);
+    const bareWithin = within ? fluid.unwrapProxy(within) : undefined;
+    const key = hortis.queryCache.key(barePkg, bareQuery, bareWithin);
+    let togo = hortis.queryCache.restore(key);
+    if (togo === undefined) {
+        togo = hortis.qdl.execute(barePkg, bareQuery, bareWithin?.selection);
+        hortis.queryCache.record(key, togo);
+    }
+    return togo;
+};
+
+/** The cache of the queries of startup, captured at hydration **/
+
+// When a page is rendered statically by Infusion 6's hydrate.js, against its real data, every query it executes is
+// recorded with its result, and written into the page as a script element of JSON - which dehydrate.js removes again,
+// since it is not of the page's source. When the hydrated page boots in the browser, each of those queries is answered
+// from it, once, rather than executed. A query is keyed by its canonical form together with the hash of the table it
+// queries and the key of the selection it narrows, so that a page whose data has changed since it was hydrated finds
+// none of its queries, and executes them all as usual
+fluid.registerNamespace("hortis.queryCache");
+
+hortis.queryCache.scriptId = "hortis-query-cache";
+// The largest result recorded, as encoded - a larger one, e.g. the ids of every row, is cheaper executed than read
+hortis.queryCache.maxEntryLength = 65536;
+// The results recorded under node, by key, as encoded
+hortis.queryCache.recorded = new Map();
+// The results restored in the browser from the page, by key, as encoded - read when first needed
+hortis.queryCache.restored = null;
+// The number of queries answered from the page, e.g. for a test
+hortis.queryCache.hits = 0;
+
+/**
+ * Compute the key of a query.
+ * @param {VizPackage} pkg - The data package
+ * @param {Object} query - The query, bare
+ * @param {Selection} [within] - The selection it narrows
+ * @return {String} The key
+ */
+// Base64, which the sandbox in which Infusion renders a page under node does not hold as a global
+/* eslint-disable jsdoc/require-jsdoc */
+// They are wrapped, since the browser's are called only as functions of the window
+hortis.queryCache.btoa = typeof(btoa) !== "undefined" ? binary => btoa(binary) : binary => require("buffer").Buffer.from(binary, "latin1").toString("base64");
+hortis.queryCache.atob = typeof(atob) !== "undefined" ? text => atob(text) : text => require("buffer").Buffer.from(text, "base64").toString("latin1");
+/* eslint-enable jsdoc/require-jsdoc */
+
+hortis.queryCache.key = (pkg, query, within) => hortis.qdl.hash(query, pkg) + (within ? "|" + within.key : "");
+
+// The document of the visualisation, bound by hortis.vizLoader once it has rendered - under node, where there is no
+// global document, the page being rendered
+hortis.queryCache.boundDocument = null;
+
+/**
+ * Find the document into which results are written, or from which they are read.
+ * @return {Document|null} The document, if there is one
+ */
+hortis.queryCache.document = () => hortis.queryCache.boundDocument || fluid.global.document || null;
+
+/**
+ * Bind the document of a rendered visualisation, and write into it any results recorded before it was rendered.
+ * @param {Element} container - The visualisation's rendered container
+ * @return {Document} Its document
+ */
+hortis.queryCache.bindDocument = function (container) {
+    const dokkument = container.ownerDocument;
+    hortis.queryCache.boundDocument = dokkument;
+    hortis.queryCache.write();
+    return dokkument;
+};
+
+/**
+ * Write the results recorded into the document, as a script element of JSON in its head, if the page is rendered
+ * statically.
+ */
+hortis.queryCache.write = function () {
+    const dokkument = hortis.queryCache.document();
+    if (fluid.renderingStatically && dokkument && hortis.queryCache.recorded.size > 0) {
+        let element = dokkument.getElementById(hortis.queryCache.scriptId);
+        if (!element) {
+            element = dokkument.createElement("script");
+            element.setAttribute("type", "application/json");
+            element.setAttribute("id", hortis.queryCache.scriptId);
+            dokkument.head.appendChild(element);
+        }
+        element.textContent = JSON.stringify(Object.fromEntries(hortis.queryCache.recorded));
+    }
+};
+
+/**
+ * Restore a query's result from those written into the page at hydration, if it holds it.
+ * @param {String} key - The query's key
+ * @return {Object|undefined} The result, or `undefined` if the page does not hold it
+ */
+hortis.queryCache.restore = function (key) {
+    let togo;
+    if (!fluid.renderingStatically) {
+        if (hortis.queryCache.restored === null) {
+            const element = hortis.queryCache.document()?.getElementById(hortis.queryCache.scriptId);
+            hortis.queryCache.restored = new Map(element ? Object.entries(JSON.parse(element.textContent)) : []);
+        }
+        const encoded = hortis.queryCache.restored.get(key);
+        if (encoded !== undefined) {
+            // Each result is restored once, since the next execution of the same query is of a later state of the page
+            hortis.queryCache.restored.delete(key);
+            try {
+                togo = hortis.queryCache.decode(encoded);
+                ++hortis.queryCache.hits;
+            } catch (e) {
+                // A result which can't be read is executed instead
+                fluid.log("Failed to restore the cached result of query " + key + ": " + e);
+            }
+        }
+    }
+    return togo;
+};
+
+/**
+ * Record a query's result, if the page is rendered statically, and write the results recorded into the document.
+ * @param {String} key - The query's key
+ * @param {Object} result - Its result
+ */
+hortis.queryCache.record = function (key, result) {
+    if (fluid.renderingStatically) {
+        const encoded = hortis.queryCache.encode(result);
+        if (JSON.stringify(encoded).length <= hortis.queryCache.maxEntryLength) {
+            hortis.queryCache.recorded.set(key, encoded);
+            hortis.queryCache.write();
+        }
+    }
+};
+
+/**
+ * Encode a result as JSON, each typed array as its type and its bytes in base64 - a selection, a Uint8Array of 0s and
+ * 1s, as the runs of its 1s.
+ * @param {any} value - The result, or any part of it
+ * @return {any} The encoded value
+ */
+hortis.queryCache.encode = function (value) {
+    let togo;
+    if (value instanceof Uint8Array) {
+        const runs = [];
+        for (let i = 0; i < value.length; ++i) {
+            if (value[i] === 1 && (i === 0 || value[i - 1] === 0)) {
+                runs.push(i);
+            } else if (value[i] === 0 && i > 0 && value[i - 1] === 1) {
+                runs.push(i);
+            }
+        }
+        if (value.length > 0 && value[value.length - 1] === 1) {
+            runs.push(value.length);
+        }
+        togo = {$selection: value.length, runs: hortis.queryCache.encode(Int32Array.from(runs))};
+    } else if (ArrayBuffer.isView(value)) {
+        const bytes = new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
+        let binary = "";
+        for (let i = 0; i < bytes.length; i += 32768) {
+            binary += String.fromCharCode.apply(null, bytes.subarray(i, i + 32768));
+        }
+        togo = {$typed: value.constructor.name, base64: hortis.queryCache.btoa(binary)};
+    } else if (Array.isArray(value)) {
+        togo = value.map(hortis.queryCache.encode);
+    } else if (value && typeof(value) === "object") {
+        togo = fluid.transform(value, hortis.queryCache.encode);
+    } else if (typeof(value) === "number" && !isFinite(value)) {
+        togo = {$number: String(value)};
+    } else {
+        togo = value;
+    }
+    return togo;
+};
+
+/**
+ * Decode a result encoded by hortis.queryCache.encode.
+ * @param {any} value - The encoded result, or any part of it
+ * @return {any} The result
+ */
+hortis.queryCache.decode = function (value) {
+    let togo;
+    if (Array.isArray(value)) {
+        togo = value.map(hortis.queryCache.decode);
+    } else if (value && typeof(value) === "object" && value.$selection !== undefined) {
+        togo = new Uint8Array(value.$selection);
+        const runs = hortis.queryCache.decode(value.runs);
+        for (let r = 0; r < runs.length; r += 2) {
+            togo.fill(1, runs[r], runs[r + 1]);
+        }
+    } else if (value && typeof(value) === "object" && value.$typed !== undefined) {
+        const binary = hortis.queryCache.atob(value.base64);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; ++i) {
+            bytes[i] = binary.charCodeAt(i);
+        }
+        togo = new hortis.viz.arrayTypes[value.$typed.replace(/Array$/, "")](bytes.buffer);
+    } else if (value && typeof(value) === "object" && value.$number !== undefined) {
+        togo = Number(value.$number);
+    } else if (value && typeof(value) === "object") {
+        togo = fluid.transform(value, hortis.queryCache.decode);
+    } else {
+        togo = value;
+    }
+    return togo;
+};
+
+/**
+ * Copy a query, or part of one, bare from any proxy through which it was read - a proxy must not itself be serialised,
+ * since it answers for any member, `toJSON` among them.
+ * @param {Object} query - The query
+ * @return {Object} The bare copy
+ */
+hortis.bareQuery = query => JSON.parse(JSON.stringify(fluid.unwrapProxy(query)));
+
+/**
+ * Select the observations passing a list of predicates.
+ * @param {VizPackage} pkg - The package
+ * @param {Object[]} predicates - The predicates, as gathered from the visualisation's filters
+ * @param {Selection} [within] - A selection which they narrow
+ * @return {Selection} The rows selected
+ */
+hortis.selectObs = function (pkg, predicates, within) {
+    const barePkg = fluid.unwrapProxy(pkg), query = {from: "obs", where: hortis.bareQuery(predicates)};
+    const bareWithin = within ? fluid.unwrapProxy(within) : undefined;
+    // The key by which a query narrowing this selection is cached - that of the queries which computed it
+    const key = hortis.queryCache.key(barePkg, query, bareWithin);
+    // A selection made again by the same query over the same data is the identical one, so that whatever depends on it
+    // is cut off from recomputing
+    let selections = hortis.selectObs.memo.get(barePkg);
+    if (!selections) {
+        selections = new Map();
+        hortis.selectObs.memo.set(barePkg, selections);
+    }
+    let togo = selections.get(key);
+    if (!togo) {
+        const result = hortis.query(barePkg, query, bareWithin);
+        togo = {selection: result.selection, count: result.count, rowCount: result.rowCount, key};
+        // Only the most recent selections are kept - those of the states between which a viewer moves back and forth
+        if (selections.size >= hortis.selectObs.memoSize) {
+            selections.delete(selections.keys().next().value);
+        }
+        selections.set(key, togo);
+    }
+    return togo;
+};
+
+// The selections made over each package, by key - see hortis.selectObs
+hortis.selectObs.memo = new WeakMap();
+hortis.selectObs.memoSize = 32;
+
+// The predicates of the observations which have a position, as hortis.rowPoint holds - neither coordinate empty, nor
+// both of them 0, a common placeholder for none
+hortis.mappedPredicates = [
+    {field: "decimalLatitude", op: "notNull"}, {field: "decimalLongitude", op: "notNull"},
+    {not: {all: [{field: "decimalLatitude", op: "=", value: 0}, {field: "decimalLongitude", op: "=", value: 0}]}}
+];
+
+/**
+ * Select every observation.
+ * @param {VizPackage} pkg - The package
+ * @return {Selection} Every row of its table of observations
+ */
+hortis.selectAllObs = pkg => hortis.selectObs(pkg, []);
+
+/**
+ * Count a selection's observations by the value of a field, e.g. of a taxon.
+ * @param {VizPackage} pkg - The package
+ * @param {Selection} selection - The observations
+ * @param {String} field - The field
+ * @return {Map<String, Number>} Map of each value, as text, to its count
+ */
+hortis.countObsBy = function (pkg, selection, field) {
+    const result = hortis.query(pkg, {from: "obs", groupBy: [field], measures: {count: {count: true}}}, selection);
+    const bare = fluid.unwrapProxy(pkg);
+    const togo = new Map();
+    for (let g = 0; g < result.groups; ++g) {
+        togo.set(String(hortis.qdl.decode(bare, {from: "obs"}, field, result.keys[field][g])), result.measures.count[g]);
+    }
+    return togo;
+};
+
+/**
+ * Count a selection's observations by each pair of values of two fields, e.g. a plant and its pollinator.
+ * @param {VizPackage} pkg - The package
+ * @param {Selection} selection - The observations
+ * @param {String} field1 - The first field
+ * @param {String} field2 - The second
+ * @return {Array[]} The pairs, each an array of the two values, as text, and their count
+ */
+hortis.countObsByPair = function (pkg, selection, field1, field2) {
+    const result = hortis.query(pkg, {from: "obs", groupBy: [field1, field2], measures: {count: {count: true}}}, selection);
+    const bare = fluid.unwrapProxy(pkg);
+    const decode = (field, value) => String(hortis.qdl.decode(bare, {from: "obs"}, field, value));
+    return Array.from({length: result.groups}, (x, g) => [decode(field1, result.keys[field1][g]), decode(field2, result.keys[field2][g]), result.measures.count[g]]);
+};
+
+/**
+ * Find the distinct values of a field over a selection of the observations.
+ * @param {VizPackage} pkg - The package
+ * @param {Selection|null} selection - The observations, or `null` for all of them
+ * @param {String} field - The field
+ * @return {String[]} The values, as text
+ */
+hortis.distinctObs = function (pkg, selection, field) {
+    const result = hortis.query(pkg, {from: "obs", measures: {values: {distinct: field}}}, selection || undefined);
+    const bare = fluid.unwrapProxy(pkg);
+    return Array.from(result.values, value => String(hortis.qdl.decode(bare, {from: "obs"}, field, value)));
+};
+
+/**
+ * Read the observations of a selection as row objects, for a view which shows them one by one, e.g. a download of the
+ * records. The text of each field is as in the package's source.
+ * @param {VizPackage} pkg - The package
+ * @param {Selection} selection - The observations
+ * @return {Object[]} The rows
+ */
+hortis.selectionRows = function (pkg, selection) {
+    const result = hortis.query(pkg, {from: "obs", select: {rows: true}}, selection);
+    return hortis.qdl.rowObjects(fluid.unwrapProxy(pkg).tables.obs, result.rows);
+};
+
+/**
+ * The rows of a selection of the observations, as a table shows them - read by index as row objects only as they are
+ * shown, so that a table of hundreds of thousands of records builds an object only for each row it renders. It stands
+ * in for an array of rows, with `length`, `at(i)` and `slice(start, end)`, and sorts by a field through a query.
+ */
+hortis.SelectionRows = class {
+    /**
+     * @param {VizPackage} pkg - The data package, bare
+     * @param {Selection} selection - The observations
+     * @param {Int32Array} ids - The ids of their rows, in the order shown
+     */
+    constructor(pkg, selection, ids) {
+        this.pkg = pkg;
+        this.selection = selection;
+        this.ids = ids;
+        this.table = pkg.tables.obs;
+        this.cache = new Map();
+    }
+    get length() {
+        return this.ids.length;
+    }
+    at(i) {
+        let row = this.cache.get(i);
+        if (!row) {
+            row = hortis.qdl.rowObject(this.table, this.ids[i]);
+            this.cache.set(i, row);
+        }
+        return row;
+    }
+    slice(start = 0, end = this.length) {
+        const togo = [];
+        for (let i = start; i < Math.min(end, this.length); ++i) {
+            togo.push(this.at(i));
+        }
+        return togo;
+    }
+    /**
+     * Sort the rows by a field, through a query ordering the selection's ids.
+     * @param {String} field - The field - if it is not one of the table's, the rows are left in their order
+     * @param {Number} direction - 1 for ascending, -1 for descending
+     * @return {hortis.SelectionRows} The rows sorted
+     */
+    sortedBy(field, direction) {
+        let togo = this;
+        if (this.table.columns[field]) {
+            const ids = hortis.qdl.execute(this.pkg, {from: "obs", select: {rows: true, orderBy: [{field, direction: direction === -1 ? "desc" : "asc"}]}},
+                this.selection.selection).rows;
+            togo = new hortis.SelectionRows(this.pkg, this.selection, ids);
+        }
+        return togo;
+    }
+};
+
+/**
+ * Show a selection of the observations as the rows of a table - see hortis.SelectionRows.
+ * @param {VizPackage} pkg - The data package
+ * @param {Selection} selection - The observations
+ * @return {hortis.SelectionRows} The rows
+ */
+hortis.selectionRowSource = function (pkg, selection) {
+    const bare = fluid.unwrapProxy(pkg), bareSelection = fluid.unwrapProxy(selection);
+    const ids = hortis.qdl.execute(bare, {from: "obs", select: {rows: true}}, bareSelection.selection).rows;
+    return new hortis.SelectionRows(bare, bareSelection, ids);
+};
+
+/**
+ * Determine whether two rows are the same observation - the same object, or two row objects read from the same row of
+ * the data package.
+ * @param {Object|null} a - A row
+ * @param {Object|null} b - Another
+ * @return {Boolean} `true` if they are the same
+ */
+hortis.sameRow = (a, b) => a === b || !!a && !!b && a[hortis.qdl.rowIndexSymbol] !== undefined && a[hortis.qdl.rowIndexSymbol] === b[hortis.qdl.rowIndexSymbol];
+
 /**
  * Find the taxa of a set of observations, together with all their ancestors.
- * @param {Object[]} filteredObs - The observations, each with an `iNaturalistTaxonId`
+ * @param {VizPackage} pkg - The package
+ * @param {Selection} selection - The observations
  * @param {Object<String, TaxonRow>} rowById - Map of taxon id to indexed taxon row
+ * @param {String} [taxonField] - The field of the observations holding their taxon's id
  * @return {Object<String, Boolean>} Map of the id of each such taxon to true
  */
-hortis.taxaFromObs = function (filteredObs, rowById) {
+hortis.taxaFromObs = function (pkg, selection, rowById, taxonField = "iNaturalistTaxonId") {
     const taxonIds = {};
-    filteredObs.forEach(row => {
-        taxonIds[row.iNaturalistTaxonId] = true;
+    hortis.distinctObs(pkg, selection, taxonField).forEach(id => {
+        taxonIds[id] = true;
     });
-    return hortis.closeParentTaxa(taxonIds, rowById);
+    return hortis.closeParentTaxa(taxonIds, fluid.unwrapProxy(rowById));
 };
+
+/** The columnar data package **/
+
+// A loader for a columnar data package at `url` - see vizPackage.js and notes/columnar-data-package.md. It is held in
+// a visualisation as its member `dataLoader`, so that the visualisation's parts refer to its tables as
+// {dataLoader}.obs, {dataLoader}.taxa, {dataLoader}.regionIndirection, and to any further table under its own name.
+// Each table is a VizTable, whose columns are typed arrays. Its `package` member is pending until the package is
+// loaded. Its `url` may be that of a placeholder - see fluid.resolveUrl
+fluid.def("hortis.dataLoader", {
+    $layers: "fluid.component",
+    // url: String
+    fetchUrl: "$compute:fluid.resolveUrl({self}.url)",
+    package: "$compute:hortis.dataLoader.load({self}.fetchUrl)",
+    tables: "{self}.package.tables",
+    obs: "{self}.tables.obs",
+    taxa: "{self}.tables.taxa",
+    // A visualisation without a region indirection table is given an empty one
+    regionIndirection: "$compute:hortis.dataLoader.regionIndirection({self}.tables)",
+    // The package once its details - the columns it holds in full only once the visualisation is shown, e.g. the
+    // times of its dates - are attached to it, or the package itself if it has none. Nothing shown at startup waits for
+    // them: a column with details reads its text from them once they are attached
+    detailed: "$compute:hortis.dataLoader.loadDetails({self}.fetchUrl, {self}.package)"
+});
+
+/**
+ * Load the details of a package and attach them to it.
+ * @param {String} url - The URL of the package
+ * @param {VizPackage} pkg - The package
+ * @return {Promise<VizPackage>|VizPackage} A promise for the package, once its details are attached, or the package
+ * itself if it has no details
+ */
+hortis.dataLoader.loadDetails = function (url, pkg) {
+    const bare = fluid.unwrapProxy(pkg);
+    const detailsUrl = hortis.viz.detailsUrl(url, bare);
+    let togo = bare;
+    if (detailsUrl) {
+        const now = Date.now();
+        togo = hortis.viz.load(detailsUrl).then(details => {
+            fluid.log("Loaded details of data package " + url + " in " + (Date.now() - now) + " ms");
+            return hortis.viz.attachDetails(bare, details);
+        }, err => fluid.unavailable({message: "Error loading details of data package " + url + ": " + err, variety: "error"}));
+    }
+    return togo;
+};
+
+/**
+ * Load a columnar data package.
+ * @param {String} url - The URL of the package
+ * @return {Promise<VizPackage>} A promise for the package, or for an unavailable value if it could not be loaded
+ */
+hortis.dataLoader.load = function (url) {
+    const now = Date.now();
+    return hortis.viz.load(url).then(pkg => {
+        fluid.log("Loaded data package " + url + " in " + (Date.now() - now) + " ms");
+        return pkg;
+    }, err => fluid.unavailable({message: "Error loading data package " + url + ": " + err, variety: "error"}));
+};
+
+/**
+ * Find a table of a package which it may not hold, an empty table standing in for it if it does not.
+ * @param {Object<String, VizTable>} tables - The package's tables
+ * @param {String} name - The table's name
+ * @return {VizTable} The table
+ */
+hortis.dataLoader.optionalTable = (tables, name) => tables[name] || {name, rowCount: 0, fields: [], columns: {}};
+
+hortis.dataLoader.regionIndirection = tables => hortis.dataLoader.optionalTable(tables, "regionIndirection");
 
 /** The visualisation loader **/
 
-// Loads the observation and taxon tables and holds the observations surviving the filters
+// Loads the visualisation's data package and holds the observations surviving the filters, as a Selection. Every part
+// of the visualisation reads the observations through queries of the query description language - see qdl.js and
+// notes/query-description-language.md - over {dataLoader}.package, narrowing a Selection such as {vizLoader}.
+// filteredObs. The small tables of taxa and of the region indirection are also materialised as row objects, at
+// taxaRows and regionIndirectionRows, from which the taxonomy and the region filters are built
 fluid.def("hortis.vizLoader", {
     $layers: "fluid.component",
-    // obsFile: String
-    // taxaFile: String
-    // Each file may name beside it a placeholder, a short file of the same shape which is loaded in its place when the
-    // page is rendered statically - see fluid.withPlaceholder
-    obsPlaceholderFile: null,
-    taxaPlaceholderFile: null,
-    // The file of a visualisation's region indirection table, if it has one, and its placeholder
-    regionIndirectionPlaceholderFile: null,
-    taxaLoader: {
+    // vizFile: String - the columnar data package. Each variant of the visualisation supplies as its default a
+    // placeholder, placeholder://{layerName}/viz, a minimal package representative of the data, from which a test
+    // fixture renders - a page which is a runnable application overrides it with its real data. See FLUID-7032
+    dataLoader: {
         $component: {
-            $layers: ["hortis.csvReader", "fluid.withPlaceholder"],
-            url: "{vizLoader}.taxaFile",
-            placeholderUrl: "{vizLoader}.taxaPlaceholderFile"
+            $layers: ["hortis.dataLoader", "fluid.withPlaceholder"],
+            url: "{vizLoader}.vizFile"
         }
     },
-    obsLoader: {
-        $component: {
-            $layers: ["hortis.csvReader", "fluid.withPlaceholder"],
-            url: "{vizLoader}.obsFile",
-            placeholderUrl: "{vizLoader}.obsPlaceholderFile"
-        }
-    },
-    // `true` if the visualisation is rendered from placeholders, e.g. by a static build of its page
-    isPlaceholder: "$compute:fluid.withPlaceholder.any({self}.taxaLoader.isPlaceholder, {self}.obsLoader.isPlaceholder)",
-    taxaRows: "{self}.taxaLoader.rows",
-    obsRows: "{self}.obsLoader.rows",
+    // `true` if the visualisation is rendered from its placeholder, as in a test fixture
+    isPlaceholder: "{self}.dataLoader.isPlaceholder",
+    pkg: "{self}.dataLoader.package",
+    taxaRows: "$compute:hortis.viz.toRows({dataLoader}.taxa)",
+    regionIndirectionRows: "$compute:hortis.viz.toRows({dataLoader}.regionIndirection)",
+    // Every observation, as a Selection
+    allObs: "$compute:hortis.selectAllObs({self}.pkg)",
     taxa: {
         $component: {
             $layers: "hortis.taxa",
             rows: "{vizLoader}.taxaRows"
         }
     },
-    // Overridden by visualisations with filters
-    filteredObs: "{self}.obsRows",
+    // Overridden by visualisations with filters - the observations surviving them, as a Selection
+    filteredObs: "{self}.allObs",
     // Overridden by visualisations with a further taxon-based selection
-    finalFilteredObs: "{self}.filteredObs"
+    finalFilteredObs: "{self}.filteredObs",
+    // The document into which the queries of startup are written when the page is rendered statically - see
+    // hortis.queryCache. A visualisation which is not a view has no container, and binds none
+    queryCacheDocument: "$effect:hortis.queryCache.bindDocument({self}.view.renderedContainer)"
 });

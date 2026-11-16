@@ -291,13 +291,12 @@ hortis.inflateUint8Array = async function (url) {
     return pako.inflate(byteArray, {to: "string"});
 };
 
-// A loader for a CSV file at `url`. Its `parsed` member is pending until the file has been loaded and parsed. It fetches
-// its `fetchUrl`, which is its `url` unless it bears fluid.withPlaceholder, which supplies a placeholder fetched in its
-// place when the page is rendered statically
+// A loader for a CSV file at `url`, which may be that of a placeholder - see fluid.resolveUrl. Its `parsed` member is
+// pending until the file has been loaded and parsed
 fluid.def("hortis.csvReader", {
     $layers: "fluid.component",
     // url: String
-    fetchUrl: "{self}.url",
+    fetchUrl: "$compute:fluid.resolveUrl({self}.url)",
     csvOptions: {
         header: true,
         skipEmptyLines: true
@@ -786,7 +785,7 @@ hortis.selectObs = function (pkg, predicates, within) {
     // The key by which a query narrowing this selection is cached - that of the queries which computed it
     const key = hortis.queryCache.key(barePkg, query, bareWithin);
     // A selection made again by the same query over the same data is the identical one, so that whatever depends on it
-    // is cut off from recomputing - see hortis.sameAsLast
+    // is cut off from recomputing
     let selections = hortis.selectObs.memo.get(barePkg);
     if (!selections) {
         selections = new Map();
@@ -976,12 +975,11 @@ hortis.taxaFromObs = function (pkg, selection, rowById, taxonField = "iNaturalis
 // a visualisation as its member `dataLoader`, so that the visualisation's parts refer to its tables as
 // {dataLoader}.obs, {dataLoader}.taxa, {dataLoader}.regionIndirection, and to any further table under its own name.
 // Each table is a VizTable, whose columns are typed arrays. Its `package` member is pending until the package is
-// loaded. It fetches its `fetchUrl`, which is its `url` unless it bears fluid.withPlaceholder, which supplies a
-// placeholder fetched in its place when the page is rendered statically
+// loaded. Its `url` may be that of a placeholder - see fluid.resolveUrl
 fluid.def("hortis.dataLoader", {
     $layers: "fluid.component",
     // url: String
-    fetchUrl: "{self}.url",
+    fetchUrl: "$compute:fluid.resolveUrl({self}.url)",
     package: "$compute:hortis.dataLoader.load({self}.fetchUrl)",
     tables: "{self}.package.tables",
     obs: "{self}.tables.obs",
@@ -1047,18 +1045,16 @@ hortis.dataLoader.regionIndirection = tables => hortis.dataLoader.optionalTable(
 // taxaRows and regionIndirectionRows, from which the taxonomy and the region filters are built
 fluid.def("hortis.vizLoader", {
     $layers: "fluid.component",
-    // vizFile: String - the columnar data package
-    // The file may name beside it a placeholder, a small package of the same shape which is loaded in its place when
-    // the page is rendered statically - see fluid.withPlaceholder
-    vizPlaceholderFile: null,
+    // vizFile: String - the columnar data package. Each variant of the visualisation supplies as its default a
+    // placeholder, placeholder://{layerName}/viz, a minimal package representative of the data, from which a test
+    // fixture renders - a page which is a runnable application overrides it with its real data. See FLUID-7032
     dataLoader: {
         $component: {
             $layers: ["hortis.dataLoader", "fluid.withPlaceholder"],
-            url: "{vizLoader}.vizFile",
-            placeholderUrl: "{vizLoader}.vizPlaceholderFile"
+            url: "{vizLoader}.vizFile"
         }
     },
-    // `true` if the visualisation is rendered from placeholders, e.g. by a static build of its page
+    // `true` if the visualisation is rendered from its placeholder, as in a test fixture
     isPlaceholder: "{self}.dataLoader.isPlaceholder",
     pkg: "{self}.dataLoader.package",
     taxaRows: "$compute:hortis.viz.toRows({dataLoader}.taxa)",

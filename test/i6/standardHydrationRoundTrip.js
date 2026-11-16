@@ -14,7 +14,7 @@
 // where <root> is the directory served, <Name> is Blitz or Diatoms and <page> the path of its page within <root> -
 // the Blitz page is then not driven
 
-const infusion6 = require("../../src/infusion6.js");
+const infusion6 = require("../../src/locateInfusion6.js");
 const path = require("path"),
     linkedom = require("linkedom"),
     puppeteer = require("puppeteer");

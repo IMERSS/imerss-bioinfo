@@ -89,10 +89,10 @@ fluid.def("hortis.phenologyFilter", {
     monthsActive: "$compute:hortis.phenologyFilter.monthsActive({self}.filterState)",
     // true when a period is chosen, which disables the checkboxes of the months
     daysActive: "$compute:hortis.phenologyFilter.daysActive({self}.filterState)",
-    // Month and day of the year of each observation, cached by row rather than written onto it
-    dateCache: "$compute:hortis.phenologyFilter.dateCache({self}.obsRows)",
     filterSummary: "$compute:hortis.phenologyFilter.summarise({self}.filterState)",
-    doFilter: "$method:hortis.phenologyFilter.doFilter({0}:obsRows, {1}:filterState, {self}.dateCache)",
+    // The field holding each observation's date
+    dateField: "eventDate",
+    predicates: "$compute:hortis.phenologyFilter.predicates({self}.filterState, {self}.dateField)",
     reset: "$method:hortis.phenologyFilter.reset({self})",
     monthRows: {
         $component: {
@@ -132,23 +132,6 @@ fluid.def("hortis.phenologyFilter", {
     }
 });
 
-/**
- * Compute the month and day of the year of each observation.
- * @param {Object[]} obsRows - The observations, each with an `eventDate`
- * @return {Object} Members `months`, a Map of each observation row to its month, from 0 to 11, and `days`, a Map of
- * each observation row with a valid date to the number of its day in the year
- */
-hortis.phenologyFilter.dateCache = function (obsRows) {
-    const cache = {months: new Map(), days: new Map()};
-    obsRows.forEach(row => {
-        cache.months.set(row, new Date(row.eventDate).getUTCMonth());
-        const day = hortis.phenologyFilter.toDay(row.eventDate);
-        if (!isNaN(day)) {
-            cache.days.set(row, day);
-        }
-    });
-    return cache;
-};
 
 hortis.phenologyFilter.monthsActive = function (filterState) {
     return filterState.months.some(range => range.checked);
@@ -250,13 +233,19 @@ hortis.phenologyFilter.summarise = function (filterState) {
     } : hortis.countSummary(filterState.months.filter(range => range.checked).length, ["month", "months"]);
 };
 
-hortis.phenologyFilter.doFilter = function (obsRows, filterState, dateCache) {
+/**
+ * Compute the predicates of the phenology filter - to the observations of the chosen months, or else of the chosen
+ * period of the year, each day numbered as by hortis.phenologyFilter.dayOfYear, as the query description language's
+ * `dayOfYear` numbers it.
+ * @param {Object} filterState - The filter state, with members `months`, each with `checked`, and `days`
+ * @param {String} dateField - The field holding each observation's date
+ * @return {Object[]} The predicates
+ */
+hortis.phenologyFilter.predicates = function (filterState, dateField) {
     const days = filterState.days;
-    const selected = new Set(filterState.months.map((range, index) => range.checked ? index : -1).filter(index => index !== -1));
-    return days ? obsRows.filter(row => {
-        const day = dateCache.days.get(row);
-        return day >= days.lower && day <= days.upper;
-    }) : selected.size === 0 ? obsRows : obsRows.filter(row => selected.has(dateCache.months.get(row)));
+    const months = filterState.months.map((range, index) => range.checked ? index + 1 : 0).filter(month => month);
+    return days ? [{field: dateField, op: "dayOfYearBetween", value: [days.lower, days.upper]}] :
+        months.length === 0 ? [] : [{field: dateField, op: "monthIn", value: months}];
 };
 </script>
 

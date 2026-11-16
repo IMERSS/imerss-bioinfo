@@ -9,12 +9,12 @@ fluid.def("hortis.elevationFilter", {
     $layers: ["hortis.obsDrivenFilter", "hortis.urlMappedFilter"],
     urlCodec: "hortis.urlCodecs.range",
     fieldName: "verbatimElevation",
-    rangeCache: "$compute:hortis.elevationFilter.rangeCache({self}.obsRows, {self}.fieldName)",
+    rangeCache: "$compute:hortis.elevationFilter.rangeCache({self}.pkg, {self}.fieldName)",
     // The selected range, with members `lower` and `upper`, or null if the whole range of the data is selected. This
     // is free to be held elsewhere, e.g. in the URL - the dual range input views it through a lens
     filterState: null,
     filterSummary: "$compute:hortis.elevationFilter.summarise({self}.filterState)",
-    doFilter: "$method:hortis.elevationFilter.doFilter({0}:obsRows, {1}:filterState, {self}.rangeCache)",
+    predicates: "$compute:hortis.elevationFilter.predicates({self}.filterState, {self}.fieldName)",
     reset: "$method:hortis.elevationFilter.reset({self})",
     dualRangeInput: {
         $component: {
@@ -36,24 +36,16 @@ fluid.def("hortis.elevationFilter", {
 });
 
 /**
- * Compute the elevation of each observation, and the range of elevations.
- * @param {Object[]} obsRows - The observations
+ * Compute the range of the elevations of all the observations. Observations without an elevation take no part in the
+ * range, and are excluded once it is narrowed.
+ * @param {VizPackage} pkg - The data package
  * @param {String} fieldName - The field holding each observation's elevation
- * @return {Object} Members `lower` and `upper` bounding the elevations, and `elevations`, a Map of each observation row
- * with an elevation to its elevation as a Number
+ * @return {Object} The range, with members `lower` and `upper`
  */
-hortis.elevationFilter.rangeCache = function (obsRows, fieldName) {
-    const range = {lower: Number.POSITIVE_INFINITY, upper: Number.NEGATIVE_INFINITY, elevations: new Map()};
-    obsRows.forEach(row => {
-        const elevation = hortis.parseFloat(row[fieldName]);
-        // Observations without an elevation take no part in the range, and are excluded once it is narrowed
-        if (!isNaN(elevation)) {
-            range.elevations.set(row, elevation);
-            range.lower = Math.min(elevation, range.lower);
-            range.upper = Math.max(elevation, range.upper);
-        }
-    });
-    return range;
+hortis.elevationFilter.rangeCache = function (pkg, fieldName) {
+    const field = {number: fieldName};
+    const result = hortis.query(pkg, {from: "obs", measures: {lower: {min: field}, upper: {max: field}}});
+    return {lower: isNaN(result.lower) ? Number.POSITIVE_INFINITY : result.lower, upper: isNaN(result.upper) ? Number.NEGATIVE_INFINITY : result.upper};
 };
 
 /**
@@ -95,12 +87,14 @@ hortis.elevationFilter.summarise = function (filterState) {
     };
 };
 
-hortis.elevationFilter.doFilter = function (obsRows, filterState, rangeCache) {
-    return filterState === null ? obsRows : obsRows.filter(row => {
-        const elevation = rangeCache.elevations.get(row);
-        return elevation >= filterState.lower && elevation <= filterState.upper;
-    });
-};
+/**
+ * Compute the predicates of a filter of the observations to a range of elevations.
+ * @param {Object|null} filterState - The range, with members `lower` and `upper`, or null if none is chosen
+ * @param {String} fieldName - The field holding each observation's elevation
+ * @return {Object[]} The predicates
+ */
+hortis.elevationFilter.predicates = (filterState, fieldName) => filterState === null ? [] :
+    [{field: {number: fieldName}, op: "between", value: [filterState.lower, filterState.upper]}];
 </script>
 
 <template>

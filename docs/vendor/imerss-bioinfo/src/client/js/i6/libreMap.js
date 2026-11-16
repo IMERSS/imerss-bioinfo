@@ -470,26 +470,28 @@ fluid.def("hortis.obsQuantiser", {
     /** Grid resolution in metres */
     gridResolution: 100,
     baseLatitude: 49,
-    // allObs: Object[] - all observations, which are allocated to cells once for each resolution
-    // obsRows: Object[] - the observations to be gridded
-    // Global name of a function constructing an empty bucket
-    newBucket: "hortis.gridBucket",
-    // Global name of a function indexing an observation into a bucket, accepting (bucket, row, index)
-    indexObs: "hortis.indexObs",
+    // pkg: VizPackage - the data package
+    // selection: Selection - the observations to be gridded
+    // The field of the observations holding the taxon counted in each cell, e.g. by a cell's tooltip
+    taxonField: "iNaturalistTaxonId",
+    // The expression of the query description language computing each observation's cell - see qdl.js
+    cellExpr: "$compute:hortis.obsQuantiser.cellExpr({self}.gridResolution, {self}.baseLatitude)",
     longResolution: "$compute:hortis.metresToLong({self}.gridResolution, {self}.baseLatitude)",
     latResolution: "$compute:hortis.longToLat({self}.longResolution, {self}.baseLatitude)",
-    maxBounds: "$compute:hortis.obsBounds({self}.allObs)",
-    // The cell of each observation, cached by row rather than written onto it
-    cellIds: "$compute:hortis.obsQuantiser.cellIds({self}.allObs, {self}.latResolution, {self}.longResolution)",
-    grid: `$compute:hortis.obsQuantiser.indexObs({self}.obsRows, {self}.cellIds, {self}.latResolution, {self}.longResolution,
-        {self}.maxBounds, {self}.newBucket, {self}.indexObs)`
+    maxBounds: "$compute:hortis.obsQuantiser.allBounds({self}.pkg)",
+    grid: `$compute:hortis.obsQuantiser.indexObs({self}.pkg, {self}.selection, {self}.cellExpr, {self}.latResolution, {self}.longResolution,
+        {self}.maxBounds, {self}.taxonField)`
 });
 
-hortis.gridBucket = () => ({obsCount: 0, byTaxonId: {}});
-
-hortis.indexObs = function (bucket, row, index) {
-    fluid.pushArray(bucket.byTaxonId, hortis.rowToLinkTaxonId(row), index);
-};
+/**
+ * The expression of the query description language computing each observation's cell of a grid.
+ * @param {Number} gridResolution - The size of a cell in metres
+ * @param {Number} baseLatitude - The latitude at which a cell is of that size
+ * @return {Object} The expression
+ */
+hortis.obsQuantiser.cellExpr = (gridResolution, baseLatitude) => ({
+    snapToGrid: ["decimalLongitude", "decimalLatitude"], metres: gridResolution, baseLatitude
+});
 
 /**
  * Converts a cell ID string to its corresponding latitude and longitude coordinates.
@@ -504,64 +506,84 @@ hortis.obsQuantiser.cellIdToCoord = function (index, latres, longres) {
 };
 
 /**
- * Computes a unique cell ID string for a given latitude and longitude, based on grid resolution.
- * @param {Number} lat - The latitude coordinate.
- * @param {Number} long - The longitude coordinate.
- * @param {Number} latres - The grid resolution for latitude.
- * @param {Number} longres - The grid resolution for longitude.
- * @return {String} The cell ID in the format "latIndex|longIndex".
+ * Write a cell's number, as the query description language's `snapToGrid` computes it, as its id - the cell's index
+ * of latitude and of longitude separated by "|", by which it is held in the URL.
+ * @param {Number} cell - The cell's number
+ * @return {String} Its id
  */
-hortis.obsQuantiser.coordToCellId = function (lat, long, latres, longres) {
-    return Math.floor(lat / latres) + "|" + Math.floor(long / longres);
+hortis.obsQuantiser.cellId = cell => hortis.qdl.cellIndices(cell).join("|");
+
+/**
+ * Read a cell's id as its number.
+ * @param {String} cellId - The cell's id
+ * @return {Number} Its number
+ */
+hortis.obsQuantiser.cellNumber = function (cellId) {
+    const [latIndex, longIndex] = String(cellId).split("|").map(Number);
+    return hortis.qdl.cellNumber(latIndex, longIndex);
 };
 
 /**
- * Allocate each observation to a grid cell.
- * @param {Object[]} allObs - The observations
- * @param {Number} latRes - The grid resolution for latitude
- * @param {Number} longRes - The grid resolution for longitude
- * @return {Map<Object, String>} Map of each observation row to its cell id
+ * Compute the bounds of all observations with a position.
+ * @param {VizPackage} pkg - The data package
+ * @return {Number[][]} The bounds, as [[minLat, minLong], [maxLat, maxLong]]
  */
-hortis.obsQuantiser.cellIds = function (allObs, latRes, longRes) {
-    // An observation without a position is allotted the cell "0|0", which is not gridded - see indexObs
-    return new Map(allObs.map(row => {
-        const point = hortis.rowPoint(row);
-        return [row, point ? hortis.obsQuantiser.coordToCellId(point[1], point[0], latRes, longRes) : "0|0"];
-    }));
+hortis.obsQuantiser.allBounds = function (pkg) {
+    const extent = hortis.query(pkg, {from: "obs", measures: {bounds: {extent: ["decimalLongitude", "decimalLatitude"]}}}).bounds;
+    const bounds = hortis.initBounds();
+    if (extent) {
+        hortis.updateBounds(bounds, extent[0][1], extent[0][0]);
+        hortis.updateBounds(bounds, extent[1][1], extent[1][0]);
+    }
+    return bounds;
 };
 
 /**
- * Index observations into grid cells.
- * @param {Object[]} rows - The observations to be gridded
- * @param {Map<Object, String>} cellIds - Map of each observation row to its cell id
+ * Index observations into grid cells, by one query grouping them by cell.
+ * @param {VizPackage} pkg - The data package
+ * @param {Selection} selection - The observations to be gridded
+ * @param {Object} cellExpr - The expression of each observation's cell
  * @param {Number} latRes - The grid resolution for latitude
  * @param {Number} longRes - The grid resolution for longitude
  * @param {Number[][]} maxBounds - The bounds of all observations, used if there are none to be gridded
- * @param {String} newBucket - Global name of a function constructing an empty bucket
- * @param {String} indexObs - Global name of a function indexing an observation into a bucket
- * @return {Object} The grid, with members `buckets`, a map of cell id to bucket, `maxObsCount` and `bounds`
+ * @param {String} taxonField - The field of the observations holding the taxon counted in each cell
+ * @return {Object} The grid, with members `buckets`, a map of cell id to bucket, each with member `obsCount`,
+ * `maxObsCount` and `bounds`, and the method `taxaOf`, accepting a cell id and returning a map of each taxon id
+ * observed in it to its number of observations
  */
-hortis.obsQuantiser.indexObs = function (rows, cellIds, latRes, longRes, maxBounds, newBucket, indexObs) {
-    const newBucketFunc = fluid.getGlobalValue(newBucket),
-        indexObsFunc = fluid.getGlobalValue(indexObs);
-    const grid = {bounds: hortis.initBounds(), maxObsCount: 0, buckets: {}};
+hortis.obsQuantiser.indexObs = function (pkg, selection, cellExpr, latRes, longRes, maxBounds, taxonField) {
     const now = Date.now();
-    rows.forEach(function (row, index) {
-        const cellId = cellIds.get(row);
-        if (cellId !== "0|0") { // TODO: More principled way of detecting obs without coordinates = note that ""/0.5 === 0!
-            const point = hortis.rowPoint(row);
-            hortis.updateBounds(grid.bounds, point[1], point[0]);
-            const bucket = grid.buckets[cellId] || (grid.buckets[cellId] = newBucketFunc());
-            bucket.obsCount++;
-            grid.maxObsCount = Math.max(grid.maxObsCount, bucket.obsCount);
-            indexObsFunc(bucket, row, index);
-        }
-    });
-    if (rows.length === 0) {
+    const bareCellExpr = hortis.bareQuery(cellExpr);
+    const result = hortis.query(pkg, {
+        from: "obs",
+        let: {cell: bareCellExpr},
+        groupBy: ["cell"],
+        measures: {records: {count: true}, bounds: {extent: ["decimalLongitude", "decimalLatitude"]}}
+    }, selection);
+    const grid = {bounds: hortis.initBounds(), maxObsCount: 0, buckets: {}};
+    for (let g = 0; g < result.groups; ++g) {
+        const obsCount = result.measures.records[g];
+        const extent = result.measures.bounds[g];
+        grid.buckets[hortis.obsQuantiser.cellId(result.keys.cell[g])] = {obsCount};
+        grid.maxObsCount = Math.max(grid.maxObsCount, obsCount);
+        hortis.updateBounds(grid.bounds, extent[0][1], extent[0][0]);
+        hortis.updateBounds(grid.bounds, extent[1][1], extent[1][0]);
+    }
+    if (result.groups === 0) {
         grid.bounds = fluid.copy(maxBounds);
     }
     hortis.expandBounds(grid.bounds, 0.1, latRes * 6, longRes * 6); // mapBox fitBounds are a bit tight
-    fluid.log("Gridded " + rows.length + " rows in " + (Date.now() - now) + " ms");
+    const taxaCache = new Map();
+    grid.taxaOf = function (cellId, field = taxonField) {
+        const key = cellId + "|" + field;
+        let togo = taxaCache.get(key);
+        if (!togo) {
+            togo = Object.fromEntries(hortis.countObsBy(pkg, hortis.selectObs(pkg, [{field: bareCellExpr, op: "=", value: hortis.obsQuantiser.cellNumber(cellId)}], selection), field));
+            taxaCache.set(key, togo);
+        }
+        return togo;
+    };
+    fluid.log("Gridded " + selection.count + " rows into " + result.groups + " cells in " + (Date.now() - now) + " ms");
     return grid;
 };
 
@@ -600,8 +622,8 @@ fluid.def("hortis.libreMap.withObsGrid", {
         $component: {
             $layers: "hortis.obsQuantiser",
             gridResolution: "{libreMap}.gridResolution",
-            allObs: "{vizLoader}.obsRows",
-            obsRows: "{vizLoader}.finalFilteredObs"
+            pkg: "{vizLoader}.pkg",
+            selection: "{vizLoader}.finalFilteredObs"
         }
     },
     gridSelector: {
@@ -636,7 +658,8 @@ fluid.def("hortis.libreMap.withObsGrid", {
             unbind: "hortis.libreMap.untrackBounds({boundValue})"
         }
     },
-    viewportObs: "$compute:hortis.libreMap.viewportObs({self}.obsQuantiser.obsRows, {self}.viewBounds, {self}.markerPadding, {self}.markerThreshold)",
+    viewportObs: `$compute:hortis.libreMap.viewportObs({vizLoader}.pkg, {self}.obsQuantiser.selection, {self}.viewBounds, {self}.markerPadding,
+        {self}.markerThreshold, {self}.obsQuantiser.maxBounds, {self}.obsQuantiser.grid)`,
     recordSelector: {
         $component: {
             $layers: ["hortis.libreMap.recordSelector"]
@@ -678,8 +701,11 @@ fluid.def("hortis.libreMap.withObsGrid", {
     // The camera, with members `center` and `zoom`, to which the map returns once no filter narrows the observations -
     // if null, it is fitted to the bounds of all of them
     homeCamera: null,
-    zoomToObsBoundsEffect: `$effect:hortis.libreMap.fitObs({self}.readyMap, {self}.gridBounds, {self}.zoomToObsBounds, {self}.zoomDuration,
-        {self}.homeCamera, {self}.obsQuantiser.obsRows.length, {self}.obsQuantiser.allObs.length)`
+    // The fitting of the map to the filtered observations, together with whether it was last fitted to filtered ones -
+    // built from its own previous value, so that the map returns to its home camera only once the filters are cleared
+    fitState: `$compute:hortis.libreMap.fitState({$oldValue}, {self}.readyMap, {self}.gridBounds, {self}.zoomToObsBounds,
+        {self}.zoomDuration, {self}.homeCamera, {self}.obsQuantiser.selection.count, {self}.obsQuantiser.selection.rowCount)`,
+    zoomToObsBoundsEffect: "$effect:hortis.libreMap.fitObs({self}.fitState)"
 });
 
 hortis.libreMap.computeGridOpacity = function (gridShown, fillOpacity) {
@@ -961,13 +987,22 @@ hortis.libreMap.swapBounds = function (bounds) {
     return bounds.map(coords => [coords[1], coords[0]]);
 };
 
-// Whether each map was last fitted to filtered observations, so that it returns to its home camera only once the
-// filters are cleared, and not as the page loads, when its camera is placed by other means, e.g. a story's panes
-hortis.libreMap.wasFiltered = new WeakMap();
+/**
+ * @typedef {Object} FitState
+ * @property {maplibregl.Map} map - The loaded map
+ * @property {Number[][]} bounds - The bounds of the filtered observations, as [[lat, long], [lat, long]]
+ * @property {Boolean} zoomToObsBounds - Whether the map follows the observations at all
+ * @property {Number} zoomDuration - The duration in milliseconds of the move
+ * @property {Object|null} homeCamera - The camera, with members `center` and `zoom`, to return to, if any
+ * @property {Boolean} filtered - Whether a filter narrows the observations
+ * @property {Boolean|undefined} wasFiltered - Whether the same map was last fitted to filtered observations, or
+ * `undefined` if it has not yet been fitted - as the page loads, when its camera is placed by other means, e.g. a story's
+ * panes
+ */
 
 /**
- * Move a map smoothly to show the filtered observations - fitted to their bounds while a filter narrows them, and back
- * to its home camera once none does, if it has one, or else fitted to the bounds of them all.
+ * Compute the fitting of a map to the filtered observations, from its previous value - see `{$oldValue}`.
+ * @param {FitState|undefined} previous - The previous fitting, if any
  * @param {maplibregl.Map} map - The loaded map
  * @param {Number[][]} bounds - The bounds of the filtered observations, as [[lat, long], [lat, long]]
  * @param {Boolean} zoomToObsBounds - Whether the map follows the observations at all
@@ -975,11 +1010,20 @@ hortis.libreMap.wasFiltered = new WeakMap();
  * @param {Object|null} homeCamera - The camera, with members `center` and `zoom`, to return to, if any
  * @param {Number} filteredCount - The number of filtered observations
  * @param {Number} allCount - The number of all observations
+ * @return {FitState} The fitting
  */
-hortis.libreMap.fitObs = function (map, bounds, zoomToObsBounds, zoomDuration, homeCamera, filteredCount, allCount) {
-    const filtered = filteredCount !== allCount;
-    const wasFiltered = hortis.libreMap.wasFiltered.get(map);
-    hortis.libreMap.wasFiltered.set(map, filtered);
+hortis.libreMap.fitState = function (previous, map, bounds, zoomToObsBounds, zoomDuration, homeCamera, filteredCount, allCount) {
+    return {map, bounds, zoomToObsBounds, zoomDuration, homeCamera, filtered: filteredCount !== allCount,
+        wasFiltered: previous?.map === map ? previous.filtered : undefined};
+};
+
+/**
+ * Move a map smoothly to show the filtered observations - fitted to their bounds while a filter narrows them, and back
+ * to its home camera once none does, if it has one, or else fitted to the bounds of them all.
+ * @param {FitState} fitState - The fitting, as computed by hortis.libreMap.fitState
+ */
+hortis.libreMap.fitObs = function (fitState) {
+    const {map, bounds, zoomToObsBounds, zoomDuration, homeCamera, filtered, wasFiltered} = fluid.unwrapProxy(fitState);
     // A change of filters may change the layout around the map, e.g. a story page's panel describing a chosen taxon -
     // a move begun before the map has taken up its new size lands away from where it was aimed
     hortis.libreMap.afterLayout(map, () => {
@@ -1041,7 +1085,7 @@ fluid.def("hortis.libreMap.gridSelector", {
     handle: "$method:hortis.libreMap.gridSelector.handle({self}, {libreMap}.map, {0}:event)",
     resetSelection: "$method:hortis.libreMap.gridSelector.reset({self})",
     reset: "$method:hortis.libreMap.gridSelector.reset({self})",
-    doFilter: "$method:hortis.libreMap.gridSelector.doFilter({0}:obsRows, {1}:filterState, {libreMap}.obsQuantiser.cellIds)",
+    predicates: "$compute:hortis.libreMap.gridSelector.predicates({self}.filterState, {libreMap}.obsQuantiser.cellExpr)",
     hover: {
         $bindable: {
             bind: "hortis.libreMap.gridSelector.bindHover({self}, {libreMap}, {libreMap}.map)",
@@ -1066,9 +1110,14 @@ hortis.libreMap.gridSelector.summarise = function (filterState) {
     return {count: filterState ? 1 : 0, dot: true, title: "A map cell is selected"};
 };
 
-hortis.libreMap.gridSelector.doFilter = function (obsRows, selectedCell, cellIds) {
-    return selectedCell === null ? obsRows : obsRows.filter(row => cellIds.get(row) === selectedCell);
-};
+/**
+ * Compute the predicates of the selection of a cell of the grid.
+ * @param {String|null} selectedCell - The id of the selected cell, if any
+ * @param {Object} cellExpr - The expression of each observation's cell
+ * @return {Object[]} The predicates
+ */
+hortis.libreMap.gridSelector.predicates = (selectedCell, cellExpr) => selectedCell === null ? [] :
+    [{field: cellExpr, op: "=", value: hortis.obsQuantiser.cellNumber(selectedCell)}];
 
 hortis.libreMap.gridSelector.bindHover = function (that, libreMap, map) {
     const listener = e => {
@@ -1123,33 +1172,36 @@ hortis.libreMap.untrackBounds = function (record) {
 
 /**
  * Find the observations within a map's viewport, and those near it.
- * @param {Object[]} rows - The filtered observations
+ * @param {VizPackage} pkg - The data package
+ * @param {Selection} selection - The filtered observations
  * @param {Object|null} bounds - The viewport, with members `west`, `south`, `east` and `north`, or null if unknown
  * @param {Number} padding - The proportion of the viewport's size beyond it within which an observation is near it
  * @param {Number} threshold - The number of observations within the viewport at most which markers are shown - no
  * more than four times as many near ones are collected
+ * @param {Number[][]} maxBounds - The bounds of every observation with a position, as [[minLat, minLong], [maxLat, maxLong]]
+ * @param {Object} grid - The grid of the filtered observations, as computed by hortis.obsQuantiser.indexObs, whose
+ * cells count every one of them with a position
  * @return {Object} Members `inView`, the number of observations within the viewport, and `nearby`, those within or
- * near it, up to the limit
+ * near it, up to the limit, as row objects
  */
-hortis.libreMap.viewportObs = function (rows, bounds, padding, threshold) {
+hortis.libreMap.viewportObs = function (pkg, selection, bounds, padding, threshold, maxBounds, grid) {
     const togo = {inView: 0, nearby: []};
     if (bounds && threshold > 0) {
         const latPad = (bounds.north - bounds.south) * padding, longPad = (bounds.east - bounds.west) * padding;
-        const limit = threshold * 4;
-        rows.forEach(row => {
-            const point = hortis.rowPoint(row);
-            if (point) {
-                const long = point[0], lat = point[1];
-                if (lat >= bounds.south - latPad && lat <= bounds.north + latPad && long >= bounds.west - longPad && long <= bounds.east + longPad) {
-                    if (lat >= bounds.south && lat <= bounds.north && long >= bounds.west && long <= bounds.east) {
-                        togo.inView++;
-                    }
-                    if (togo.nearby.length < limit) {
-                        togo.nearby.push(row);
-                    }
-                }
-            }
-        });
+        const point = ["decimalLongitude", "decimalLatitude"];
+        const padded = {field: point, op: "inBox", value: [[bounds.west - longPad, bounds.south - latPad], [bounds.east + longPad, bounds.north + latPad]]};
+        const inView = {field: point, op: "inBox", value: [[bounds.west, bounds.south], [bounds.east, bounds.north]]};
+        // A viewport holding the bounds of every observation, as the map's does while it is fitted to them or zoomed
+        // out, holds every filtered observation with a position, which the grid has already counted - so that the
+        // observations need not be scanned for it
+        const holdsAll = bounds.south <= maxBounds[0][0] && bounds.west <= maxBounds[0][1] && bounds.north >= maxBounds[1][0] && bounds.east >= maxBounds[1][1];
+        togo.inView = holdsAll ? Object.values(grid.buckets).reduce((sum, bucket) => sum + bucket.obsCount, 0) :
+            hortis.query(pkg, {from: "obs", where: [inView], measures: {count: {count: true}}}, selection).count;
+        // The nearby observations are needed only once few enough are in view for markers to be shown
+        if (togo.inView > 0 && togo.inView <= threshold) {
+            const ids = hortis.query(pkg, {from: "obs", where: [padded], select: {rows: true, limit: threshold * 4}}, selection).rows;
+            togo.nearby = hortis.qdl.rowObjects(fluid.unwrapProxy(pkg).tables.obs, ids);
+        }
     }
     return togo;
 };
@@ -1417,17 +1469,18 @@ hortis.libreMap.unbindTapTooltips = function (record) {
 /**
  * Fade away the marker of an observation, removing it once it has faded.
  * @param {MarkerLayer} layer - The layer of markers
- * @param {Object} row - The observation
+ * @param {Number|Object} rowKey - The key of the observation's marker - the index of its row
  * @param {Object} record - The marker's record
  */
-hortis.libreMap.fadeMarker = function (layer, row, record) {
+hortis.libreMap.fadeMarker = function (layer, rowKey, record) {
     record.element.classList.remove("imerss-obs-marker-visible");
-    if (layer.that.markerTooltip.hoverId === row) {
+    const hovered = layer.that.markerTooltip.hoverId;
+    if (hovered && (hovered[hortis.qdl.rowIndexSymbol] ?? hovered) === rowKey) {
         layer.that.markerTooltip.hoverAt(null);
     }
     record.removal = layer.window.setTimeout(() => {
         record.marker.remove();
-        layer.markers.delete(row);
+        layer.markers.delete(rowKey);
     }, hortis.libreMap.markerFadeDuration);
 };
 
@@ -1440,14 +1493,16 @@ hortis.libreMap.fadeMarker = function (layer, row, record) {
  * @param {Object|null} selectedRecord - The selected record, whose marker is distinguished
  */
 hortis.libreMap.updateMarkers = function (layer, map, rows, selectedRecord) {
-    const wanted = new Set(rows);
-    layer.markers.forEach((record, row) => {
-        if (!wanted.has(row) && !record.removal) {
-            hortis.libreMap.fadeMarker(layer, row, record);
+    // Markers are keyed by the index of their row, since a row is read afresh as an object whenever it is wanted
+    const key = row => row[hortis.qdl.rowIndexSymbol] ?? row;
+    const wanted = new Set(rows.map(key));
+    layer.markers.forEach((record, rowKey) => {
+        if (!wanted.has(rowKey) && !record.removal) {
+            hortis.libreMap.fadeMarker(layer, rowKey, record);
         }
     });
     rows.forEach(row => {
-        const existing = layer.markers.get(row);
+        const existing = layer.markers.get(key(row));
         if (existing) {
             if (existing.removal) {
                 // Fading away, but wanted again
@@ -1456,10 +1511,11 @@ hortis.libreMap.updateMarkers = function (layer, map, rows, selectedRecord) {
                 existing.element.classList.add("imerss-obs-marker-visible");
             }
         } else {
-            layer.markers.set(row, hortis.libreMap.addMarker(layer, row));
+            layer.markers.set(key(row), hortis.libreMap.addMarker(layer, row));
         }
     });
-    layer.markers.forEach((record, row) => hortis.toggleClass(record.element, "imerss-obs-marker-selected", row === selectedRecord));
+    const selectedKey = selectedRecord ? key(selectedRecord) : undefined;
+    layer.markers.forEach((record, rowKey) => hortis.toggleClass(record.element, "imerss-obs-marker-selected", rowKey === selectedKey));
 };
 
 /**
@@ -1500,7 +1556,8 @@ fluid.def("hortis.libreMap.recordSelector", {
     filterState: null,
     urlKey: "record",
     idField: "{libreMap}.recordIdField",
-    recordIndex: "$compute:hortis.libreMap.recordIndex({vizLoader}.obsRows, {self}.idField)",
+    // Finds records by id, and the ids of records - see hortis.libreMap.recordIndex
+    recordIndex: "$compute:hortis.libreMap.recordIndex({vizLoader}.pkg, {self}.idField)",
     selectedRow: "$compute:hortis.libreMap.recordSelector.selectedRow({self}.recordIndex, {self}.filterState)",
     filterSummary: "$compute:hortis.libreMap.recordSelector.summarise({self}.filterState)",
     // Toggles the selection of a record, or clears it if supplied null
@@ -1522,25 +1579,42 @@ hortis.libreMap.recordId = function (row, index, idField) {
     return hortis.isValue(id) && id !== "" ? String(id) : "#" + index;
 };
 
+
 /**
- * Index all observations by their ids.
- * @param {Object[]} obsRows - All observations
+ * Index the observations by their ids, lazily - nothing is computed until a record is sought.
+ * @param {VizPackage} pkg - The data package
  * @param {String} idField - The field holding an observation's id
- * @return {Object} Members `byId`, a Map of id to observation, and `ids`, a Map of observation to id
+ * @return {Object} The index, with members `byId`, whose `get` accepts an id and returns the first observation bearing
+ * it in its id field, or that with the index given by an id of the form "#<index>", as a row object, `ids`, whose `get`
+ * accepts a row object and returns its id, and the method `recordsOf`, accepting a field and a value and returning a
+ * pair of each observation with that value and its id
  */
-hortis.libreMap.recordIndex = function (obsRows, idField) {
-    const byId = new Map(), ids = new Map();
-    obsRows.forEach((row, index) => {
-        const id = hortis.libreMap.recordId(row, index, idField);
-        // The first of any observations sharing an id wins, so that each id names one observation
-        if (!byId.has(id)) {
-            byId.set(id, row);
+hortis.libreMap.recordIndex = function (pkg, idField) {
+    const obs = fluid.unwrapProxy(pkg).tables.obs;
+    return {
+        byId: {
+            get: function (recordId) {
+                const id = String(recordId);
+                const index = id.startsWith("#") ? Number(id.substring(1)) : hortis.qdl.findRow(obs, idField, id);
+                return index >= 0 && index < obs.rowCount ? hortis.qdl.rowObject(obs, index) : undefined;
+            }
+        },
+        ids: {
+            get: row => hortis.libreMap.recordId(row, row[hortis.qdl.rowIndexSymbol], idField)
+        },
+        recordsOf: function (field, value) {
+            const ids = hortis.query(pkg, {from: "obs", where: [{field, op: "=", value}], select: {rows: true}}).rows;
+            return hortis.qdl.rowObjects(obs, ids).map(row => [row, hortis.libreMap.recordId(row, row[hortis.qdl.rowIndexSymbol], idField)]);
         }
-        ids.set(row, id);
-    });
-    return {byId, ids};
+    };
 };
 
+/**
+ * Find the record selected by its id.
+ * @param {Object} recordIndex - The index of the observations, as computed by hortis.libreMap.recordIndex
+ * @param {String|null} filterState - The id of the selected record, if any
+ * @return {Object|null} The record, as a row object, or null if none is selected or none has the id
+ */
 hortis.libreMap.recordSelector.selectedRow = (recordIndex, filterState) => hortis.isValue(filterState) ? recordIndex.byId.get(filterState) ?? null : null;
 
 hortis.libreMap.recordSelector.summarise = function (filterState) {
@@ -1553,7 +1627,7 @@ hortis.libreMap.recordSelector.summarise = function (filterState) {
  * @param {Object|null} row - The record, or null to clear the selection
  */
 hortis.libreMap.recordSelector.select = function (that, row) {
-    const id = row ? that.recordIndex.ids.get(row) : null;
+    const id = row ? hortis.libreMap.recordId(row, row[hortis.qdl.rowIndexSymbol], that.idField) : null;
     that.filterState = hortis.isValue(id) && id !== that.filterState ? id : null;
 };
 
@@ -1665,10 +1739,10 @@ hortis.renderVizGridTooltip = function (grid, rowById, cellId) {
     let togo = null;
     if (bucket) {
         const rowTemplate = "<div>%taxonName: %obsCount observation%s</div>";
-        const rows = Object.entries(bucket.byTaxonId).map(([taxonId, obsIds]) => ({
+        const rows = Object.entries(grid.taxaOf(cellId)).map(([taxonId, obsCount]) => ({
             taxonName: rowById[taxonId]?.iNaturalistTaxonName || "Unknown",
-            obsCount: obsIds.length,
-            s: obsIds.length === 1 ? "" : "s"
+            obsCount,
+            s: obsCount === 1 ? "" : "s"
         })).sort((rowa, rowb) => rowb.obsCount - rowa.obsCount);
         const shown = rows.slice(0, 10);
         togo = hortis.stringTemplate(hortis.vizGridTooltipTemplate, {

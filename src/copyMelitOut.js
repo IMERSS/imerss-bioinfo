@@ -7,10 +7,12 @@
 //     node src/copyMelitOut.js [--no-verify]
 // The page is written from its source in src/buildSource/indexBeasOBA.html, which is written as served from a docs
 // directory. The files it refers to directly - the stylesheets, images and fonts of the Oregon State University site
-// and its data with their placeholders - are copied beside it, and then Infusion 6's copyOut.js copies into
-// docs/vendor the files of every module it depends upon, from this checkout and from Infusion 6 - installed by npm, or as named by moduleOverrides.json5 - in the built form
-// of Infusion, writing docs/fluid-modules.json to locate them. The page is then hydrated in place by hydrate.js, so that
-// it shows its rendering from placeholder data before it boots - its source is recovered from it by dehydrate.js.
+// and its data - are copied beside it, and then Infusion 6's copyOut.js copies into
+// docs/vendor the files of every module it depends upon, from this checkout and from Infusion 6 - installed by npm, or
+// as named by moduleOverrides.json5 - in the built form of Infusion, writing docs/fluid-modules.json to locate them. The
+// page is then hydrated in place by hydrate.js from its real data, refusing any placeholder - see FLUID-7032 - so that
+// it shows its rendering, and holds the results of its queries of startup, before it boots - its source is recovered
+// from it by dehydrate.js.
 // Unless --no-verify is given, the hydrated page is then loaded in a headless browser, which must show all of its
 // real records without error. Since only the built form of Infusion is copied, the page's minimal form cannot be
 // loaded from the site - the round trip between its two forms is verified by build.js, of the same page in this
@@ -19,7 +21,7 @@
 const fs = require("fs-extra"),
     path = require("path"),
     childProcess = require("child_process"),
-    infusion6 = require("./infusion6.js");
+    infusion6 = require("./locateInfusion6.js");
 
 const bagatelle = path.resolve(__dirname, ".."),
     // Infusion 6 as installed by npm, or the checkout named for it by moduleOverrides.json5
@@ -37,12 +39,7 @@ const pageFiles = {
     "src/client/img/external-link.svg": "img/external-link.svg",
     "src/client/fonts/OSU/Stratum2WebBold.woff2": "fonts/OSU/Stratum2WebBold.woff2",
     "src/client/fonts/OSU/Stratum2WebLight.woff2": "fonts/OSU/Stratum2WebLight.woff2",
-    "data/b-team/plant-pollinators-OBA-2025-labels.viz": "data/b-team/plant-pollinators-OBA-2025-labels.viz",
-    "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz": "data/b-team/plant-pollinators-OBA-2025-assigned-taxa.viz",
-    "data/b-team/plant-pollinators-OBA-2025-regionIndirection.csv": "data/b-team/plant-pollinators-OBA-2025-regionIndirection.csv",
-    "data/b-team/placeholder/plant-pollinators-OBA-2025-labels.viz": "data/b-team/placeholder/plant-pollinators-OBA-2025-labels.viz",
-    "data/b-team/placeholder/plant-pollinators-OBA-2025-assigned-taxa.viz": "data/b-team/placeholder/plant-pollinators-OBA-2025-assigned-taxa.viz",
-    "data/b-team/placeholder/plant-pollinators-OBA-2025-regionIndirection.csv": "data/b-team/placeholder/plant-pollinators-OBA-2025-regionIndirection.csv"
+    "data/b-team/plant-pollinators-OBA-2025.viz": "data/b-team/plant-pollinators-OBA-2025.viz"
 };
 
 /**
@@ -76,7 +73,7 @@ const copyMelitOut = function () {
     runNode([path.join(infusion6Dir, "src/framework/server/copyOut.js"), page, "--source", "infusion-6=" + infusion6Dir,
         "--source", "imerss-bioinfo=" + bagatelle, "--framework", "built", "--ignore-missing", "sites/all/",
         "--ignore-missing", "fonts/OSU/"]);
-    runNode([path.join(infusion6Dir, "src/framework/server/hydrate.js"), page, "-o", page, "--framework", "built"]);
+    runNode([path.join(infusion6Dir, "src/framework/server/hydrate.js"), page, "-o", page, "--framework", "built", "--no-placeholders"]);
 };
 
 /**

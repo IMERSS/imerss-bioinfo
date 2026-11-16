@@ -101,7 +101,15 @@ hortis.filters.evaluate = function (allInput, filterComps) {
 fluid.def("hortis.obsFilters", {
     $layers: "fluid.component",
     filterComps: "{vizLoader hortis.obsFilter}",
-    predicates: "$compute:hortis.obsFilters.predicates({self}, {self}.filterComps)",
+    // Fresh but equal predicates leave the gathering unchanged, so that the reactive graph is cut off there - see
+    // hortis.obsFilters.samePredicates
+    predicates: {
+        $compute: {
+            func: "hortis.obsFilters.predicates",
+            args: ["{self}.filterComps"],
+            equiv: "hortis.obsFilters.samePredicates"
+        }
+    },
     allOutput: "$compute:hortis.obsFilters.select({vizLoader}.pkg, {self}.predicates)"
 });
 
@@ -109,51 +117,28 @@ fluid.def("hortis.obsFilters", {
  * Gather the predicates of the active filters, each read through its proxy so that a change in any reruns the
  * gathering. A filter whose activity or predicates are unavailable takes no part - e.g. one whose state is held in the
  * URL, when the page is rendered statically, and so has none - so that the page is rendered as with no such filter.
- * The predicates are those of the last gathering if they are equal to them, so that the reactive graph is cut off
- * there - the gathering reruns whenever a filter appears, as the panes of a page are constructed, and since Infusion
- * cuts off only an identical value, fresh but equal predicates would select the observations, and recompute all that
- * depends on them, afresh.
- * @param {hortis.obsFilters} that - The component gathering them, by which the last gathering is remembered
+ * The gathering reruns whenever a filter appears, as the panes of a page are constructed - fresh but equal predicates
+ * are cut off by the `equiv` of the computation, hortis.obsFilters.samePredicates, so that they do not select the
+ * observations, and recompute all that depends on them, afresh.
  * @param {Component[]} filterComps - The filters, each bearing `isActive` and `predicates`
  * @return {Object[]} The predicates, bare
  */
-hortis.obsFilters.predicates = function (that, filterComps) {
+hortis.obsFilters.predicates = function (filterComps) {
     const togo = hortis.bareQuery(filterComps.flatMap(function (filterComp) {
         const isActive = fluid.unwrapProxy(filterComp.isActive), predicates = fluid.unwrapProxy(filterComp.predicates);
         return isActive && !fluid.isUnavailable(isActive) && Array.isArray(predicates) ? predicates : [];
     }));
-    return hortis.sameAsLast(that, "predicates", togo, hortis.qdl.canonical(togo));
-};
-
-// The last value computed by each component under each name, with its key - see hortis.sameAsLast
-hortis.lastValues = new WeakMap();
-
-/**
- * Return the value last computed by a component under a name, if its key is that of the new value, else the new value
- * - so that a computation which yields an equal value yields the identical one, and Infusion, which cuts off only an
- * identical value, cuts off the reactive graph there.
- * @param {fluid.component} that - The component
- * @param {String} name - The name of the value
- * @param {any} value - The new value
- * @param {String} key - The key of the new value, equal for equal values
- * @return {any} The value to be returned
- */
-hortis.sameAsLast = function (that, name, value, key) {
-    const bare = fluid.unwrapProxy(that);
-    let records = hortis.lastValues.get(bare);
-    if (!records) {
-        records = {};
-        hortis.lastValues.set(bare, records);
-    }
-    const last = records[name];
-    let togo = value;
-    if (last && last.key === key) {
-        togo = last.value;
-    } else {
-        records[name] = {key, value};
-    }
     return togo;
 };
+
+/**
+ * Determine whether two gatherings of predicates are equivalent - their canonical forms are the same, as for the key of
+ * a query - see hortis.qdl.canonical. The equiv of hortis.obsFilters' predicates
+ * @param {Object[]} oldPredicates - The predicates last gathered
+ * @param {Object[]} newPredicates - The predicates gathered afresh
+ * @return {Boolean} `true` if they are equivalent
+ */
+hortis.obsFilters.samePredicates = (oldPredicates, newPredicates) => hortis.qdl.canonical(oldPredicates) === hortis.qdl.canonical(newPredicates);
 
 /**
  * Select the observations passing every filter's predicates.

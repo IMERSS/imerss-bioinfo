@@ -32,6 +32,8 @@ fluid.def("hortis.mfShell", {
     viewsClosed: false,
     // true whilst a grip is being dragged
     dragging: false,
+    // The press of a grip in progress, if any, with the grip pressed - no business of the reactive graph
+    press: {$transient: null},
     fullScreen: false,
     // The style of the shell's root, holding the custom properties sizing its panes
     rootStyle: "$compute:hortis.mfShell.rootStyle({self}.filterWidth, {self}.mapShare)",
@@ -88,28 +90,26 @@ hortis.mfShell.moveGrip = function (shell, grip, position) {
     }
 };
 
-// The state of each grip being pressed, which is no business of the reactive graph
-hortis.mfShell.presses = new WeakMap();
-
 hortis.mfShell.axisPos = (grip, event) => grip.dataset.axis === "y" ? event.clientY : event.clientX;
 
 hortis.mfShell.pointerDown = function (event, shell) {
     const grip = event.currentTarget;
     const tab = grip.querySelector(".mf-grip-tab");
     // Capture retargets later events to the grip, so decide here whether the press began on the tab
-    hortis.mfShell.presses.set(grip, {
+    shell.press = {
+        grip,
         origin: hortis.mfShell.axisPos(grip, event),
         moved: false,
         onTab: tab !== null && tab.contains(event.target)
-    });
+    };
     grip.setPointerCapture(event.pointerId);
     shell.dragging = true;
 };
 
 hortis.mfShell.pointerMove = function (event, shell) {
     const grip = event.currentTarget;
-    const press = hortis.mfShell.presses.get(grip);
-    if (press) {
+    const press = shell.press;
+    if (press && press.grip === grip) {
         const position = hortis.mfShell.axisPos(grip, event);
         if (Math.abs(position - press.origin) > shell.dragSlop) {
             press.moved = true;
@@ -122,10 +122,10 @@ hortis.mfShell.pointerMove = function (event, shell) {
 
 hortis.mfShell.pointerUp = function (event, shell) {
     const grip = event.currentTarget;
-    const press = hortis.mfShell.presses.get(grip);
-    if (press) {
+    const press = shell.press;
+    if (press && press.grip === grip) {
         grip.releasePointerCapture(event.pointerId);
-        hortis.mfShell.presses.delete(grip);
+        shell.press = null;
         if (press.onTab && !press.moved) {
             hortis.mfShell.toggleGrip(shell, grip);
         }

@@ -101,13 +101,26 @@
 .dual-range-holder {
     position: relative;
     container: dual-range / inline-size;
+    /* The width of a thumb, as the dual range input's stylesheet defines it on the input itself - defined here too, so
+       that the scale and the thumbs' labels, which lie beside the input rather than within it, are laid out by it */
+    --dri-thumb-width: 1.25rem;
+}
+
+/* The inputs are laid out to fill the track exactly - see DualRangeInput.update - rather than within the end padding
+   allowed them by the dual range input's stylesheet. They may be separated by a gap less than a step wide, which lies
+   between the thumbs, and so shows the filled track beneath them - which spans only the track between the centres of
+   the thumbs at its ends, so that none shows beyond a thumb at either end, e.g. at the rounded ends of the tracks */
+.dual-range-holder .dual-range-input {
+    padding-inline-end: 0;
+    background: linear-gradient(var(--dri-track-filled-color), var(--dri-track-filled-color)) center /
+        calc(100% - var(--dri-thumb-width)) var(--dri-track-height) no-repeat;
 }
 
 /* The scale spans the track between the centres of the thumbs at its ends */
 .dual-range-scale {
     position: relative;
     height: 6px;
-    margin: 0 calc(var(--dri-thumb-width, 20px) / 2);
+    margin: 0 calc(var(--dri-thumb-width) / 2);
 }
 
 .dual-range-scale.dual-range-scale-labelled {
@@ -159,7 +172,7 @@
     display: none;
     position: relative;
     height: 1.4em;
-    margin: 2px calc(var(--dri-thumb-width, 20px) / 2) 0;
+    margin: 2px calc(var(--dri-thumb-width) / 2) 0;
     font-size: 12px;
     font-variant-numeric: tabular-nums;
 }
@@ -168,17 +181,12 @@
     display: block;
 }
 
-/* The label of the lower value ends at its thumb and that of the upper begins at its thumb, so that they never
-   overlap, but each is held within the track */
+/* Each label is centred beneath its thumb, at --dri-thumb-pos, the percentage of the range at which its value lies.
+   Every value lies, beneath the centre of a thumb set to it, at that percentage of the way along this row - which, as
+   the scale is, is inset by half a thumb width at each end - see DualRangeInput.update */
 .dual-range-thumb-label {
     position: absolute;
     white-space: nowrap;
-}
-
-.dual-range-thumb-min {
-    transform: translateX(-100%);
-}
-
-.dual-range-thumb-max {
-    transform: translateX(0);
+    transform: translateX(-50%);
+    left: calc(var(--dri-thumb-pos) * 1%);
 }

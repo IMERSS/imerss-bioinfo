@@ -184,7 +184,7 @@ QUnit.test("Reset control", function (assert) {
     that.destroy();
 });
 
-// Slides a range input to a value and releases it, whereupon the value is written at once
+// Enters a value into an input and commits it, as by typing into a text input and leaving it
 hortis.tests.input = function (element, value) {
     element.value = value;
     element.dispatchEvent(new Event("input", {bubbles: true}));
@@ -197,6 +197,19 @@ hortis.tests.slide = function (element, value) {
     element.value = value;
     element.dispatchEvent(new Event("input", {bubbles: true}));
     fluid.cell.stabilize();
+};
+
+// Waits for the thumbs of a dual range input to have rested for long enough that the values slid to are written to its
+// range - see hortis.dualRangeInput.commitDelay
+hortis.tests.rest = async function () {
+    await new Promise(resolve => setTimeout(resolve, hortis.dualRangeInput.commitDelay + 20));
+    fluid.cell.stabilize();
+};
+
+// Slides a range input to a value and lets it rest, whereupon the value is written to its range
+hortis.tests.slideAndRest = async function (element, value) {
+    hortis.tests.slide(element, value);
+    await hortis.tests.rest();
 };
 
 QUnit.test("Grouped region filter", function (assert) {
@@ -256,7 +269,7 @@ QUnit.test("Collector filter", function (assert) {
     that.destroy();
 });
 
-QUnit.test("Elevation filter", function (assert) {
+QUnit.test("Elevation filter", async function (assert) {
     const that = hortis.tests.bbeaLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     const elevation = that.elevationFacet.body.elevationFilter;
@@ -265,7 +278,7 @@ QUnit.test("Elevation filter", function (assert) {
         "Range rendered");
     assert.equal(elevation.filterSummary.count, 0, "Filter is inactive over the full range");
 
-    hortis.tests.input(qs(".imerss-elevation-filter .dual-range-max"), "950");
+    await hortis.tests.slideAndRest(qs(".imerss-elevation-filter .dual-range-max"), "950");
     assert.equal(elevation.dualRangeInput.range.max, 950, "Moving the upper input narrows the range");
     assert.equal(that.filteredObs.count, 4, "Observations above 950 m are excluded");
     assert.equal(elevation.filterSummary.count, 1, "Filter summarises its narrowed range");
@@ -291,7 +304,7 @@ QUnit.test("Checklist search selects the chosen taxon", function (assert) {
     that.destroy();
 });
 
-QUnit.test("Filter states are held in the URL", function (assert) {
+QUnit.test("Filter states are held in the URL", async function (assert) {
     const that = hortis.tests.bbeaLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     const hashManager = fluid.hashManager.instance;
@@ -308,7 +321,7 @@ QUnit.test("Filter states are held in the URL", function (assert) {
     checklist.reset();
 
     const elevation = that.elevationFacet.body.elevationFilter;
-    hortis.tests.input(qs(".imerss-elevation-filter .dual-range-max"), "950");
+    await hortis.tests.slideAndRest(qs(".imerss-elevation-filter .dual-range-max"), "950");
     assert.equal(hash().elevation, "100,950", "Moving the dual range input writes the elevation range through its lens to the URL");
     assert.deepEqual(elevation.filterState, {lower: 100, upper: 950}, "The filter's state is a view of its entry in the URL");
     elevation.reset();
@@ -338,7 +351,7 @@ QUnit.test("Filter states are held in the URL", function (assert) {
     that.destroy();
 });
 
-QUnit.test("Phenology filter chooses months or a period of the year, exclusively", function (assert) {
+QUnit.test("Phenology filter chooses months or a period of the year, exclusively", async function (assert) {
     const that = hortis.tests.bbeaLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     const hashManager = fluid.hashManager.instance;
@@ -362,7 +375,7 @@ QUnit.test("Phenology filter chooses months or a period of the year, exclusively
     assert.equal(hortis.phenologyFilter.toDay("2019-03-01"), day(3, 1), "A day falls on the same day of the year in any year");
     assert.ok(!minInput.disabled && !months()[5].disabled, "Neither mode is disabled before either is operated");
 
-    hortis.tests.input(maxInput, String(day(6, 15)));
+    await hortis.tests.slideAndRest(maxInput, String(day(6, 15)));
     assert.deepEqual(phenology.filterState.days, {lower: 0, upper: day(6, 15)},
         "Moving the input chooses a period, written through its lens to the filter's state");
     assert.equal(hash().phenology, "01-01~06-15", "The period is held in the URL as the months and days of its ends");
@@ -399,7 +412,7 @@ QUnit.test("Phenology filter chooses months or a period of the year, exclusively
     that.destroy();
 });
 
-QUnit.test("Sliding a range input filters once the input events are handled, coalescing them", async function (assert) {
+QUnit.test("Sliding a range input filters once the thumbs come to rest, coalescing the input events", async function (assert) {
     const that = hortis.tests.bbeaLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     const elevation = that.elevationFacet.body.elevationFilter;
@@ -414,16 +427,17 @@ QUnit.test("Sliding a range input filters once the input events are handled, coa
     [1400, 1200, 1000, 950].forEach(value => hortis.tests.slide(maxInput, String(value)));
     assert.equal(elevation.dualRangeInput.range.max, 1500, "The range is not written as each input event arrives");
     assert.equal(qs(".imerss-elevation-filter .dual-range-thumb-max").textContent.trim(), "950 m", "The label follows the thumb at once");
-    await new Promise(resolve => setTimeout(resolve, 10));
-    fluid.cell.stabilize();
-    assert.equal(elevation.dualRangeInput.range.max, 950, "The range is written once the input events are handled");
+    await hortis.tests.rest();
+    assert.equal(elevation.dualRangeInput.range.max, 950, "The range is written once the thumbs have rested");
     assert.equal(writes, 1, "Four input events are coalesced into a single write");
     hortis.elevationFilter.toState = toState;
     assert.equal(elevation.filterState.upper, 950, "The filter's state follows the range");
     hortis.tests.slide(maxInput, "900");
-    qs(".imerss-elevation-filter .dual-range-max").dispatchEvent(new Event("change", {bubbles: true}));
+    maxInput.dispatchEvent(new Event("change", {bubbles: true}));
     fluid.cell.stabilize();
-    assert.equal(elevation.dualRangeInput.range.max, 900, "Releasing the thumb writes its value at once");
+    assert.equal(elevation.dualRangeInput.range.max, 950, "Releasing the thumb does not write its value at once");
+    await hortis.tests.rest();
+    assert.equal(elevation.dualRangeInput.range.max, 900, "The value is written once the released thumb has rested");
     that.destroy();
 });
 

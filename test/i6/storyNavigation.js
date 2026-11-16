@@ -9,7 +9,7 @@
 // where <page> is the path of the story page beneath the parent of this checkout - by default the development page
 // of howe-sound-mapping-2026, whose material is written by its src/js/storyBuild.js
 
-const infusion6 = require("../../src/infusion6.js");
+const infusion6 = require("../../src/locateInfusion6.js");
 const fs = require("fs"),
     path = require("path"),
     puppeteer = require("puppeteer");
