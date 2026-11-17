@@ -19,7 +19,7 @@ hortis.filterControls.resetAll = function (filters, checklists) {
 <template>
     <span class="imerss-filter-controls">
         <button class="imerss-linkbtn imerss-reset-filter" type="button" title="Reset all filters and selections" @onclick="{self}.resetAll()">
-            <svg width="13" height="13" aria-hidden="true"><use href="#imerss-i-reset"/></svg> Reset
+            <svg width="16" height="16" aria-hidden="true"><use href="#imerss-i-filter-reset"/></svg> Reset
         </button>
     </span>
 </template>

@@ -22,6 +22,8 @@
 <script src="../../js/i6/vizPackage.js"></script>
 <script src="../../js/i6/qdl.js"></script>
 <script src="../../js/i6/imerss-core.js"></script>
+<script src="%@popperjs/core/dist/umd/popper-lite.min.js" fluid-client data-fl-scope="global"></script>
+<script src="../../js/i6/tooltip.js"></script>
 <script src="../../js/i6/filters.js"></script>
 <script src="../../js/i6/hashManager.js"></script>
 <script src="../../js/i6/bbea/mfShell.js"></script>
@@ -158,7 +160,9 @@ fluid.def("hortis.beaVizLoader", {
                             urlKey: "bees",
                             searchControlId: "fli-imerss-bee-search",
                             rootId: "1",
-                            filterRanks: ["epifamily", "family", "tribe", "genus", "subgenus", "species"],
+                            // Subspecies are shown beneath their species, named as community standards write them,
+                            // e.g. Anthidiellum notatum ssp. robertsoni - see hortis.rowToScientific
+                            filterRanks: ["epifamily", "family", "tribe", "genus", "subgenus", "species", "subspecies"],
                             disclosableRanks: ["tribe", "genus", "subgenus", "species"],
                             summaryNouns: ["bee taxon", "bee taxa"],
                             rowFocus: "{vizLoader}.taxaFromObs.pollRowFocus",

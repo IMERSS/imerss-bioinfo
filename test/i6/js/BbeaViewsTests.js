@@ -165,6 +165,12 @@ QUnit.test("Seed mix evaluator", function (assert) {
     fluid.cell.stabilize();
     assert.deepEqual({...that.seedMix.added}, {"103": true}, "Ticking a plant adds it to the mix");
     assert.ok(qs(".mf-seedread", seed).textContent.startsWith("3 of 3 bee species supported"), "Rosa nutkana supports every bee");
+    const beeList = qs(".mf-seed-bees", seed);
+    assert.deepEqual(qsa(".imerss-famhead span", beeList).map(node => node.textContent), ["Apidae", "Andrenidae"],
+        "The bees supported are listed by family, the family with most observations on the mix first");
+    assert.deepEqual(qsa(".imerss-taxon-name", beeList).map(node => node.textContent),
+        ["Bombus mixtus", "Bombus vosnesenskii", "Andrena nigrihirta"], "Each bee supported is listed, alphabetically within its family");
+    assert.equal(qsa(".imerss-listbar", beeList).length, 0, "The list is not offered for rearrangement");
 
     that.regionFacet.body.regionFilter.filterState = {2: true}; // Cascades
     fluid.cell.stabilize();
@@ -172,6 +178,43 @@ QUnit.test("Seed mix evaluator", function (assert) {
     assert.ok(qs("input[data-seed=\"203\"]", seed).hasAttribute("checked"), "The plant recorded there is established and ticked");
     hortis.tests.dispatch(qs(".imerss-seed-reset", seed), "click");
     assert.deepEqual({...that.seedMix.added}, {}, "Reset clears the added plants");
+
+    // Clearing the mix unticks every plant, even one established on the site
+    rosa.checked = true;
+    rosa.dispatchEvent(new Event("change", {bubbles: true}));
+    fluid.cell.stabilize();
+    hortis.tests.dispatch(qs(".imerss-seed-clear", seed), "click");
+    fluid.cell.stabilize();
+    assert.deepEqual([{...that.seedMix.removed}, {...that.seedMix.added}], [{"203": true}, {}], "Clearing removes the established plant and the added one");
+    assert.deepEqual(qsa("input[data-seed]", seed).filter(input => input.checked), [], "No plant is ticked once the mix is cleared");
+    assert.ok(qs(".mf-seedread", seed).textContent.startsWith("0 of 3 bee species supported"), "A cleared mix supports no bee");
+    assert.equal(qs(".mf-seed-bees .imerss-empty", seed).textContent, "No bees are supported by the plants in the mix.", "The list of bees is emptied");
+    hortis.tests.dispatch(qs(".imerss-seed-reset", seed), "click");
+    fluid.cell.stabilize();
+    assert.ok(qs("input[data-seed=\"203\"]", seed).checked, "Resetting restores the established plant");
+    that.destroy();
+});
+
+QUnit.test("Seed mix evaluator answers to every filter, though only those of place define its site", function (assert) {
+    const that = hortis.tests.viewsLoader({container: hortis.tests.root()});
+    fluid.cell.stabilize();
+    hortis.tests.selectTab("seed");
+    const seed = qs(".imerss-seed-mix");
+    // Only one observation is in July - of bee 12 on plant 203, in the Cascades
+    const july = qsa(".imerss-phenology-filter input")[6];
+    july.checked = true;
+    july.dispatchEvent(new Event("change", {bubbles: true}));
+    fluid.cell.stabilize();
+    assert.ok(qs(".mf-seednote", seed).textContent.startsWith("No site is defined"), "A filter of phenology alone defines no site");
+    assert.deepEqual(qsa("input[data-seed]", seed).map(input => input.dataset.seed), ["203"],
+        "Only the plant recorded in July is a candidate");
+    assert.ok(qs(".mf-seedread", seed).textContent.includes("of 1 bee species supported"), "Only the bee recorded in July is counted");
+
+    that.regionFacet.body.regionFilter.filterState = {2: true}; // Cascades
+    fluid.cell.stabilize();
+    assert.ok(qs(".mf-seednote", seed).textContent.startsWith("Plants recorded under the current filters"), "A region defines a site");
+    assert.ok(qs("input[data-seed=\"203\"]", seed).hasAttribute("checked"), "The plant recorded there in July is established and ticked");
+    assert.ok(qs(".mf-seedread", seed).textContent.startsWith("1 of 1 bee species supported"), "It supports the bee recorded in July");
     that.destroy();
 });
 

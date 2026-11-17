@@ -92,7 +92,8 @@ hortis.drawInteractions.layout = function (crossTable, plantCounts, pollCounts, 
         const plantRow = rowById[plantId];
         const pollRow = rowById[pollId];
         if (plantRow && pollRow) {
-            bipartiteRows.push([pollRow.iNaturalistTaxonName, plantRow.iNaturalistTaxonName, count]);
+            // Named as the checklists name them - these names are also matched against those sorted by hortis.computeRankColours
+            bipartiteRows.push([hortis.rowToScientific(pollRow), hortis.rowToScientific(plantRow), count]);
         }
     });
     return {selectedPlantIds, selectedPollIds, cellTable, cellMin: cellMin.value, cellMax: cellMax.value, bipartiteRows,
@@ -142,7 +143,7 @@ hortis.drawInteractions.renderTree = function (that, layout) {
     const countScale = 100 * (1 - 2 / countDimen);
     const percent = (count, max) => Math.round(countScale * count / max * 100) / 100;
     const div = (clazz, attrs, children) => ({tag: "div", attrs: {"class": clazz, ...attrs}, children: children || []});
-    const label = (id, style) => div("imerss-int-label", {"data-row-id": id, style}, [{text: rowById[id].iNaturalistTaxonName}]);
+    const label = (id, style) => div("imerss-int-label", {"data-row-id": id, style}, [{text: hortis.rowToScientific(rowById[id])}]);
     const plantLabels = selectedPlantIds.map((id, index) => label(id, `top: ${pos(index)}px`));
     const plantBars = selectedPlantIds.map((id, index) => div("imerss-int-count", {"data-row-id": id,
         style: `top: ${pos(index)}px; width: ${percent(plantCounts.counts[id], plantCounts.max)}%; height: ${side}px;`}));
@@ -238,7 +239,7 @@ hortis.drawInteractions.bindEvents = function (that, container) {
  */
 hortis.drawInteractions.renderTooltip = function (layout, hoverId) {
     const [kind, id] = hoverId.split(":");
-    const name = taxonId => layout.rowById[taxonId]?.iNaturalistTaxonName;
+    const name = taxonId => layout.rowById[taxonId] ? hortis.rowToScientific(layout.rowById[taxonId]) : undefined;
     let togo = null;
     if (kind === "cell") {
         const {plantId, pollId} = hortis.keyToIntIds(+id);

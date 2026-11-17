@@ -70,8 +70,8 @@ hortis.bipartite.render = function (container, active, containerWidth, bipartite
         const {rows: plantRows} = hortis.computeRankColours(plantSelection, hortis.plantColours, plantIdToEntry);
         const {renderedWidth, renderedHeight} = imerss.bipartitePP(bipartiteRows, svg, containerWidth, container.clientHeight, {
             FigureLabel: "",
-            sortedBeeNames: beeRows.map(row => row.iNaturalistTaxonName),
-            sortedPlantNames: plantRows.map(row => row.iNaturalistTaxonName),
+            sortedBeeNames: beeRows.map(hortis.rowToScientific),
+            sortedPlantNames: plantRows.map(hortis.rowToScientific),
             beeColors: beeColours
         });
         // Explain each bar and its count - these titles are not drawn into the downloaded image

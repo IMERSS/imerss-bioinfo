@@ -50,6 +50,13 @@ fluid.def("hortis.obsFilter", {
     // predicates: Object[] - must be implemented, typically as a $compute of the filter's state
 });
 
+// Marks a filter of the observations which selects a place - a region, an area drawn on the map or a cell of its grid -
+// as distinct from one selecting by any other quality, e.g. time of year. The places so selected together make up the
+// site whose established plants the seed mix evaluator starts from - see hortis.seedMix
+fluid.def("hortis.siteFilter", {
+    $layers: "fluid.component"
+});
+
 /**
  * Summarise a filter whose active settings can simply be counted.
  * @param {Number} count - The number of active settings

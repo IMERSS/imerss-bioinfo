@@ -9,7 +9,7 @@
 // Selections are ORed within a group and ANDed between groups. Rendered as a computed tree whose root delegates its
 // events, as for hortis.checklist
 fluid.def("hortis.groupedRegionFilter", {
-    $layers: ["hortis.icons", "hortis.obsFilter", "hortis.urlMappedFilter"],
+    $layers: ["hortis.icons", "hortis.obsFilter", "hortis.siteFilter", "hortis.urlMappedFilter"],
     urlCodec: "hortis.urlCodecs.keys",
     // indirectionRows: Object[] - rows with members {regionField, id, label}
     controlId: "fli-imerss-region-search",

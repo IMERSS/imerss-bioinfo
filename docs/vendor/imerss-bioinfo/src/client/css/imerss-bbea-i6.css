@@ -194,7 +194,8 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    padding: 4px 6px;
+    padding: 2px 6px 2px;
+    margin-bottom: 6px;
     border: 0;
     border-radius: var(--mf-radius);
     background: none;
@@ -207,6 +208,9 @@ body {
 }
 
 .mf .imerss-linkbtn:hover { color: var(--mf-accent); background: var(--mf-accent-wash); }
+
+/* Filled icons, e.g. imerss-i-filter-reset, take the button's colour - stroked ones set fill="none" themselves */
+.mf .imerss-linkbtn svg { fill: currentColor; }
 
 .mf .mf-iconbtn {
     display: grid;
@@ -335,7 +339,6 @@ body {
     color: var(--mf-ink);
     font-weight: 400;
     font-size: 14px;
-    line-height: 1.3;
     font-family: inherit;
 }
 
@@ -749,7 +752,6 @@ body {
 
 .imerss-taxon {
     display: flex;
-    align-items: baseline;
     gap: 7px;
     padding: 2px 3px;
     border-radius: var(--mf-radius);
@@ -805,6 +807,7 @@ label.imerss-taxon { cursor: pointer; }
 .mf-seedcol .imerss-combo { margin: 8px 0 0; }
 
 .mf-seedtop { display: flex; align-items: center; justify-content: space-between; }
+.mf-seedbuttons { display: inline-flex; gap: 4px; }
 .mf-seedhead { font-size: 13px; font-weight: 700; }
 
 .mf-seednote {
@@ -842,6 +845,9 @@ label.imerss-taxon { cursor: pointer; }
 .mf-seedread { font-size: 13px; color: var(--mf-ink-2); }
 .mf-seedread b { color: var(--mf-ink); font-variant-numeric: tabular-nums; }
 .mf-seedchart { display: block; margin-top: 10px; max-width: 100%; height: auto; }
+/* The bees supported by the mix, beneath the chart - listed in full within the scrolling column, rather than scrolling themselves */
+.mf-seed-bees { margin-top: 12px; }
+.mf-seed-bees .imerss-listbody { flex: none; overflow: visible; padding: 6px 0 0; }
 
 @media (max-width: 1100px) {
     .mf-seedwrap { grid-template-columns: minmax(0, 1fr); }

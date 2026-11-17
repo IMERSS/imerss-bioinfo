@@ -368,8 +368,42 @@ hortis.renderSpeciesName = function (name) {
     return name.replace(hortis.annoteRegex, `<span class="checklist-annote">$1</span>`);
 };
 
+// The annotation written between the species and infraspecific epithets of a name of each infraspecific rank, as
+// community standards write them, which iNaturalist's names omit
+hortis.infraRankAnnotations = {
+    subspecies: "ssp.",
+    variety: "var."
+};
+
+/**
+ * Normalise an iNaturalist taxon name to community standards, by inserting the annotation of its infraspecific rank
+ * between its second and third components - e.g. "Anthidiellum notatum robertsoni" of rank "subspecies" becomes
+ * "Anthidiellum notatum ssp. robertsoni". A name of any other rank, of other than three components, or already bearing
+ * an annotation, is returned unchanged.
+ * @param {String} name - The iNaturalist taxon name
+ * @param {String} [rank] - The taxon's rank
+ * @return {String} The normalised name
+ */
+hortis.normaliseINatName = function (name, rank) {
+    const annotation = hortis.infraRankAnnotations[rank];
+    const parts = name.split(" ");
+    let togo = name;
+    if (annotation && parts.length === 3 && !parts.some(part => hortis.sppAnnotations.includes(part))) {
+        togo = [parts[0], parts[1], annotation, parts[2]].join(" ");
+    }
+    return togo;
+};
+
+/**
+ * The scientific name by which a taxon is displayed - the authoritative name supplied for it by the checklist, as its
+ * curated `taxonName` or its `scientificName`, if it has one, or else its iNaturalist name normalised to community
+ * standards - see hortis.normaliseINatName
+ * @param {TaxonRow} row - The taxon's row
+ * @return {String} The name
+ */
 hortis.rowToScientific = function (row) {
-    return row.taxonName || row.iNaturalistTaxonName || row.linkTaxonName;
+    const authoritative = row.taxonName || row.scientificName;
+    return authoritative || (row.iNaturalistTaxonName ? hortis.normaliseINatName(row.iNaturalistTaxonName, row.rank) : row.linkTaxonName);
 };
 
 hortis.rowToLinkTaxonName = function (row) {
@@ -1045,6 +1079,13 @@ hortis.dataLoader.regionIndirection = tables => hortis.dataLoader.optionalTable(
 // taxaRows and regionIndirectionRows, from which the taxonomy and the region filters are built
 fluid.def("hortis.vizLoader", {
     $layers: "fluid.component",
+    // Shows the title of any element of the visualisation in a styled tooltip placed by Popper, in place of the
+    // browser's - see tooltip.js, which a page hosting a visualisation loads, as does the SFC of each variant's loader
+    titleTooltips: {
+        $component: {
+            $layers: "hortis.titleTooltips"
+        }
+    },
     // vizFile: String - the columnar data package. Each variant of the visualisation supplies as its default a
     // placeholder, placeholder://{layerName}/viz, a minimal package representative of the data, from which a test
     // fixture renders - a page which is a runnable application overrides it with its real data. See FLUID-7032

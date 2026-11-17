@@ -11,6 +11,7 @@ obsoutput.csv
 obsoutput.json
 
 moduleOverrides.json5
+moduleOverrides-inactive.json5
 
 data/Galiano 2024/bigdata/**
 data/Janszen/**

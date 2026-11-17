@@ -666,6 +666,25 @@ const $fluidSignalsScope = function (fluid) {
     };
 
     /**
+     * Retain, as read by the reaction in progress, all of the sources it read when it last ran - for an update which
+     * deliberately does not evaluate the computation, e.g. an effect bypassed for early cutoff, or one skipped through
+     * its `includeSource` or `excludeSource`. Its static sources are read in mapping its arguments whether or not it
+     * runs, but its dynamic sources are only discovered by running it. Without this, `fluid.cell.updateDynamicDependencies`
+     * would find that it read none of them, and withdraw it as their observer, so that it would never again be notified
+     * of a change to them - FLUID-7036
+     * @return {Cell[]} The sources retained, beyond any already read in the course of the update
+     */
+    fluid.cell.retainTrackedSources = function () {
+        const reaction = $t.CurrentReaction;
+        let retained = [];
+        if (reaction?.sources && !$t.CurrentGets) {
+            retained = reaction.sources.slice($t.CurrentGetsIndex);
+            $t.CurrentGetsIndex = reaction.sources.length;
+        }
+        return retained;
+    };
+
+    /**
      * Updates the dependency links for a reactive cell after its computation has been evaluated.
      * If the sources demanded during computation have diverged from the previous sources, this function
      * updates the edge's sources array and the observer links from the new sources to the cell.
@@ -1366,6 +1385,9 @@ const $fluidSignalsScope = function (fluid) {
                     // It was a plain value, update now
                     fluid.cell.updateComplete(result, cell);
                 }
+            } else {
+                // A skipped update reads none of the edge's dynamic sources - keep observing them
+                fluid.cell.retainTrackedSources();
             }
 
             fluid.cell.updateDynamicDependencies(cell, inEdge);
@@ -1571,13 +1593,21 @@ const $fluidSignalsScope = function (fluid) {
             // Bypass effect for early cutoff if state was Check when going pending, unless it's a free edge
             const shouldBypass = effect._prePendingState === CacheCheck && !effect._isFree;
 
-            if (effect._isDisposed || shouldBypass) {
-                return true;
+            let togo;
+            if (effect._isDisposed) {
+                togo = true;
+            } else if (shouldBypass) {
+                // The effect's function is not run, so it reads none of its dynamic sources - keep observing them. As an
+                // effect with static sources is pending whilst any of them is, so is this one whilst any it retains is,
+                // so that it holds open its fit, and fluid.cell.settle waits for it - FLUID-7036
+                const retained = fluid.cell.retainTrackedSources();
+                togo = retained.map(source => source._value).find(value => fluid.isPending(value)) || true;
             } else {
                 const result = fn.apply(effect, args);
                 // Pending status on a free edge needs to propagate, pass through all values other than undefined
-                return result ?? true;
+                togo = result ?? true;
             }
+            return togo;
         };
 
         // Set up "computation" which will invoke us

@@ -586,9 +586,20 @@ const $fluidILScope = function (fluid) {
     // This holds a record of IL information for each instantiated component.
     // It is allocated at: fluid.computeInstance or fluid.freshComponent for a "simple component"
     // It is destroyed at: instantiator's "clearComponent"
+    // Every member which every component acquires is allocated in fluid.computeInstance, if only as null, so that every
+    // shadow has the same shape from its construction. Members marked optional below are written only for components
+    // which use the feature concerned, and are absent from the shadows of others.
     /**
      * @typedef {Object} Shadow
      * @property {fluid.component} that - The component for which this shadow is held - shorthand for {Shadow}.computer._value
+     * @property {Proxy<fluid.component>|null} proxy - The component's root proxy, through which it is read and written by
+     * user code, allocated by `fluid.proxyMat` on first demand. Since it dereferences the component's current instance on
+     * every access, it is held here rather than in the shadowMap of any one instance, and keeps its identity across turnover
+     * @property {String|null} lifecycleStatus - `null` whilst the component is live, `"destroying"` once its destruction
+     * has begun in `instantiator.clearComponent`, and `"destroyed"` once `fluid.doDestroy` has completed it - see
+     * `fluid.isDestroyedShadow`
+     * @property {Unavailable|null} destroyedValue - The unavailable value read from the component and from each of its
+     * members once it has been destroyed, written by `fluid.markDestroyed`
      * @property {String} path - The principal allocated path (point of construction) of the component in the component tree.
      * @property {String} memberName - The name of the component within its parent.
      * @property {Shadow|null} parentShadow - The shadow record associated with the parent component.
@@ -598,6 +609,19 @@ const $fluidILScope = function (fluid) {
      * @property {Object<String, Shadow>} childComponents - A record of child components keyed by their member names.
      * @property {Object<String, ScopeRecord>} ownScope - Cached layer scopes for the component.
      * @property {Object<String, ScopeRecord>} childrenScope - Cached layer scopes for the component.
+     * @property {Cell<Number>} ownScopeTick - Ticked whenever the contexts applied to this component's own scope or its
+     * children's change, allocated by `fluid.cacheLayerScopes` and ticked by its scope effect and by
+     * `fluid.clearScope` and `fluid.withdrawFromScopes`
+     * @property {Cell<Number>} scopeTick - The sum of this component's `ownScopeTick` and its parent's, read by context
+     * references and IL selectors resolved within the component so that they are reevaluated when its scope changes -
+     * allocated by `fluid.cacheLayerScopes`
+     * @property {String[]|null} appliedContexts - The context names this component most recently applied to its own
+     * scope, written by the scope effect of `fluid.cacheLayerScopes` so that it may withdraw any it no longer holds, and
+     * read by `fluid.clearScope` as the component is cleared
+     * @property {Array|null} scopeComplement - A flat record of the contexts this component most recently applied - for
+     * each, its name, the shadow it resolves to and its priority, preceded by whether they are applied to the parent and
+     * at root - written by the scope effect of `fluid.cacheLayerScopes`, which ticks `ownScopeTick` only if it changes,
+     * so that a turnover leaving the component's contexts unchanged ticks nothing
      * @property {Object} [injectedPaths] - A record of paths where this component has been injected, keyed by path.
      * @property {Object<String, InjectionRecord>} [injections] - Records of components injected into this component, keyed by member name
      * @property {Site|null} [lensedSite] - For a member of a component list, the site of the data item from which it is lensed
@@ -606,9 +630,15 @@ const $fluidILScope = function (fluid) {
      * @property {fluid.instantiator} instantiator - The instantiator which allocated this component/shadow
      * @property {Object} frameworkEffects - A possibly deep structure of effects allocated by the framework which
      * which need to be disposed when the component is destroyed. Any user effects are disposed as layers come and go.
+     * @property {Cell} effectScheduler - The effect which schedules the component's framework and user effects with
+     * `fluid.scheduleEffects` each time its instance becomes available, allocated by `fluid.allocateEffectScheduler`
+     * and disposed in `instantiator.clearComponent`
      *
      * @property {Object} variablesLayer - Layer holding any iteration variables applied through $for, merged just below the liveLayer
      * @property {Object} liveLayer - The live layer associated with runtime modifications to the object
+     * @property {Cell<MergeRecord>} dynamicMergeRecord - The merge record holding the layers to which the component's
+     * dynamic layer names resolve, allocated by `fluid.computeInstance` and written by the dynamic layer effect of
+     * `fluid.scheduleEffects`, stronger than the component's other merge records
      * @property {Cell<String[]>} dynamicLayerNames - Dynamic layer names supplied as direct arguments to the component
      * @property {Cell<Object<String, Unavailable>>} unavailableLayerMap - Map of layers which are currently unavailable
      * @property {Boolean} [resolveRoot] - Whether this shadow's scope names will resolve globally
@@ -623,14 +653,21 @@ const $fluidILScope = function (fluid) {
      * Inertness is inherited from a component's parent at construction.
      *
      * @property {Cell<Object>} flatMerged - The result of a deep recursive merge of all layer records for the component
-     * @property {Object} [lastMerge] - The inputs and products of the most recent merge, used by `fluid.flatMergedComputer`
+     * @property {MergeRecord[]|null} mergeRecords - The merge records of the most recent merge, in order of merging,
+     * written by `fluid.flatMergedComputer` - read, e.g., in reporting an error to resolve the container of the component
+     * @property {Object|null} layerMap - Recursive map, matching the structure of `flatMerged`, of the layer from which each
+     * of its members was merged, and the reactive links and literals at each reactive root, written by
+     * `fluid.flatMergedComputer` through `fluid.mergeLayerRecords`, and read by `fluid.transferShadowMap` and in finding the
+     * layer responsible for a site, e.g. `fluid.layerForSite`
+     * @property {Object|null} lastMerge - The inputs and products of the most recent merge, used by `fluid.flatMergedComputer`
      * to avoid remerging when its inputs are unchanged
      * @property {Cell<Object>} computer - Signal for the component reference ("that")
      * @property {Cell<Unavailable|Component>} availableInstance - Signal tracking whether the component's instance should be publically
      * available, through having a complete set of available layers, etc.
      *
      * @property {Object} shadowMap - Recursive map indexed by path segments and $m of any live mounted signal products and their records
-     * @property {Object} oldShadowMap - Previous value of shadowMap from the last time flatMerged turned over
+     * @property {Object|null} oldShadowMap - Previous value of shadowMap from the last time flatMerged turned over, written
+     * as the component's instance is computed in `fluid.computeInstance` and as it is cleared
      * @property {Object<String, Cell>} sitedRefMap - Map of all $sitedRef signals so far dispensed for this component, indexed by path
      * @property {Object<String, Cell>} queryILMap - Map of all $sitedRef signals so far dispensed for this component, indexed by path
      * @property {Set<fluid.TransientHolder>} [transientHolders] - The holders of the component's `$transient` members, which are
@@ -638,6 +675,23 @@ const $fluidILScope = function (fluid) {
      * @property {Object<String, Cell<QueryIndex>>} [queryIndexMap] - The indexes of the tree beneath this component shared by its live
      * queries, keyed "" for the whole tree and "!" for its children alone - see fluid.queryIndexFor
      * @property {Object<String, Cell>} contextReferenceMap - Map of all $contextRef signals so far dispensed for this component, indexed by path
+     * @property {Object<String, AddressWriter>} [siteWriters] - The address writers of the component's lenses, keyed by the
+     * stable key of each lens's site, written by `fluid.registerSiteWriter` for a component holding a lens
+     *
+     * Members written only for a component which renders, by FluidView.js:
+     * @property {Object<String, TemplateSlot>} [templateSlots] - The slots of the component's template into which its
+     * subcomponents render, keyed by the member name written in each slot's `@id`, written by `fluid.templateSlotRecord`
+     * @property {String[]} [templateJointNames] - For a view component, the names of the conditional elements and islands
+     * allocated by the most recent activation of its template, written by `fluid.activateTemplate` so that
+     * the next activation may withdraw any it no longer holds
+     * @property {String[]} [removedMemberNames] - For a view component, the names of the members whose elements the most
+     * recent activation of its template omitted because they had been removed, written alongside `templateJointNames`, so
+     * that the next activation inserts afresh the element of any which has returned
+     *
+     * Members written by the editor, in src/framework/edit:
+     * @property {Object<String, Boolean>} [renderPass] - For the editor's substrate tree, the paths of the components already
+     * visited in its current rendering, reset by `fluid.substrateTree.rootEntries` and written by
+     * `fluid.substrateTree.componentToEntry`, so that a circular path to a component is detected rather than followed
      */
 
     /** @typedef {Object} Instantiator
@@ -3457,6 +3511,17 @@ const $fluidILScope = function (fluid) {
         shadow.sitedRefMap = Object.create(null);
         shadow.queryILMap = Object.create(null);
         shadow.contextReferenceMap = Object.create(null);
+        // Members which every component acquires in the course of its life, written by the framework as described in
+        // the Shadow typedef - allocated here so that every shadow has the same shape from its construction
+        shadow.proxy = null;
+        shadow.lifecycleStatus = null;
+        shadow.destroyedValue = null;
+        shadow.mergeRecords = null;
+        shadow.layerMap = null;
+        shadow.lastMerge = null;
+        shadow.oldShadowMap = null;
+        shadow.appliedContexts = null;
+        shadow.scopeComplement = null;
 
         shadow.dynamicMergeRecord = fluid.cell({
             mergeRecordType: "dynamicLayers",
@@ -3913,9 +3978,10 @@ const $fluidILScope = function (fluid) {
         // If we're at the component root, expose an instance which may be unavailable if it has unavailable constituents
         const target = segs.length === 0 ? shadow.availableInstance : inTarget;
         // The root proxy dereferences the component's current instance on every access, and so is held by the shadow
-        // rather than by the shadowMap of any one instance - it keeps its identity across turnover
-        const rec = segs.length === 0 ? shadow.rootProxyRec ||= {} : fluid.getRecInsist(shadow.shadowMap, [...segs, $m]);
-        const existing = rec.proxy;
+        // itself, as `shadow.proxy`, rather than by the shadowMap of any one instance - it keeps its identity across turnover
+        const isRoot = segs.length === 0;
+        const rec = isRoot ? null : fluid.getRecInsist(shadow.shadowMap, [...segs, $m]);
+        const existing = isRoot ? shadow.proxy : rec.proxy;
         if (existing) {
             return existing;
         } else {
@@ -4053,7 +4119,12 @@ const $fluidILScope = function (fluid) {
                     return deTarget === undefined || deTarget === null ? null : Object.getPrototypeOf(deTarget);
                 }
             });
-            return rec.proxy = proxy;
+            if (isRoot) {
+                shadow.proxy = proxy;
+            } else {
+                rec.proxy = proxy;
+            }
+            return proxy;
         }
     };
 

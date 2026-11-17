@@ -10,6 +10,8 @@
 <script src="../../js/i6/vizPackage.js"></script>
 <script src="../../js/i6/qdl.js"></script>
 <script src="../../js/i6/imerss-core.js"></script>
+<script src="%@popperjs/core/dist/umd/popper-lite.min.js" fluid-client data-fl-scope="global"></script>
+<script src="../../js/i6/tooltip.js"></script>
 <script src="../../js/i6/filters.js"></script>
 <script src="../../js/i6/hashManager.js"></script>
 <style src="%infusion/src/framework/core/css/fluid.css"></style>

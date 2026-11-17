@@ -33,7 +33,7 @@ fluid.def("hortis.libreMap.withPolygonDraw", {
 });
 
 fluid.def("hortis.libreMap.polygonFilter", {
-    $layers: ["hortis.obsDrivenFilter", "hortis.urlMappedFilter"],
+    $layers: ["hortis.obsDrivenFilter", "hortis.siteFilter", "hortis.urlMappedFilter"],
     urlKey: "polygon",
     urlCodec: "hortis.urlCodecs.polygons",
     mapboxDrawOptions: {
@@ -115,6 +115,8 @@ hortis.libreMap.polygonFilter.makeDraw = function (that, map, mapboxDrawOptions,
             }
         };
         trashButton?.addEventListener("click", trashAll, true);
+        // MapboxDraw titles the button only "Delete"
+        trashButton?.setAttribute("title", "Delete polygon");
         togo = {map, draw, listeners, trashButton, trashAll};
     } else {
         togo = fluid.unavailable({message: "The MapboxDraw library is not loaded", variety: "config"});

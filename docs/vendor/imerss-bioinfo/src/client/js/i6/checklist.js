@@ -468,8 +468,10 @@ hortis.checklist.entryNode = function (entry, options, idToState) {
         names.push(nameNode("checklist-hulq-name", [{tag: "em", attrs: {}, children: [{text: accessed.nativeName}]}]));
     }
     if (accessed.scientificName) {
+        // The name of a species or an infraspecific taxon may bear an annotation such as "ssp.", set in Roman type
+        const annotated = rank === "species" || !!hortis.infraRankAnnotations[rank];
         names.push(nameNode("checklist-scientific-name",
-            rank === "species" ? hortis.speciesNameNodes(accessed.scientificName) : [{text: accessed.scientificName}]));
+            annotated ? hortis.speciesNameNodes(accessed.scientificName) : [{text: accessed.scientificName}]));
     }
     if (accessed.commonName) {
         names.push(nameNode("checklist-common-name", [{text: accessed.commonName}]));

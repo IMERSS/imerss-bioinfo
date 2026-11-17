@@ -177,7 +177,7 @@ const $fluidCoreJSScope = function (fluid) {
      * Each cause's message is included, separated by newlines.
      *
      * @param {UnavailableCause[]} causes - An array of cause records explaining the unavailability.
-     * @return {string} A formatted string listing all cause messages.
+     * @return {String} A formatted string listing all cause messages.
      */
     fluid.formatCauses = function (causes) {
         return "Value is unavailable - causes are:\n" + causes.map(cause => cause.message).join("\n");

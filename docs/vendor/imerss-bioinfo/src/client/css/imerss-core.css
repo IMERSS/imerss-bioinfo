@@ -840,7 +840,9 @@ li.checklist-row {
     font-style: italic;
 }
 
-.checklist-rank-species > p {
+.checklist-rank-species > p,
+.checklist-rank-subspecies > p,
+.checklist-rank-variety > p {
     font-size: 1.0em;
     font-style: italic;
 }

@@ -1,4 +1,5 @@
 <fluid-import src="../core/hortis-icons.vue"></fluid-import>
+<fluid-import src="../core/hortis-taxonListView.vue"></fluid-import>
 <script src="%@popperjs/core/dist/umd/popper-lite.min.js" fluid-client data-fl-scope="global"></script>
 <script src="../../js/colour.js" data-fl-scope="global"></script>
 <script src="../../js/i6/imerss-core.js"></script>
@@ -6,6 +7,7 @@
 <script src="../../js/i6/bbea/mfShell.js"></script>
 <script src="../../js/i6/libreMap.js"></script>
 <script src="../../js/i6/bbea/imerss-bbea.js"></script>
+<script src="../../js/i6/filters.js"></script>
 <script>
 "use strict";
 
@@ -16,12 +18,26 @@ fluid.def("hortis.seedMix", {
     // Number of candidate plants listed before the user asks to see them all
     shortListLength: 60,
     pkg: "{vizLoader}.pkg",
-    allObs: "{vizLoader}.allObs",
-    // Observations passing the filters but not the bee and plant selections - these define the site
+    // Observations passing every filter but not the bee and plant selections - those passing the filters which select a
+    // place, e.g. a region, define the site, on which the plants recorded are established
     siteObs: "{vizLoader}.filteredObs",
+    // The filters which select a place, and all the filters of the observations
+    siteFilters: "{vizLoader hortis.siteFilter}",
+    obsFilters: "{vizLoader hortis.obsFilter}",
+    siteDefined: "$compute:hortis.seedMix.siteDefined({self}.siteFilters)",
+    // Observations passing every filter other than those selecting a place, e.g. of phenology or elevation - the data
+    // over which the network of plants and their bees is drawn, which so answers to all the filters but the site
+    contextPredicates: {
+        $compute: {
+            func: "hortis.seedMix.contextPredicates",
+            args: ["{self}.obsFilters"],
+            equiv: "hortis.obsFilters.samePredicates"
+        }
+    },
+    contextObs: "$compute:hortis.obsFilters.select({self}.pkg, {self}.contextPredicates)",
     rowById: "{vizLoader}.taxa.rowById",
-    network: "$compute:hortis.seedMix.computeNetwork({self}.pkg, {self}.allObs, {self}.rowById)",
-    established: "$compute:hortis.seedMix.computeEstablished({self}.pkg, {self}.siteObs, {self}.rowById)",
+    network: "$compute:hortis.seedMix.computeNetwork({self}.pkg, {self}.contextObs, {self}.rowById)",
+    established: "$compute:hortis.seedMix.computeEstablished({self}.pkg, {self}.siteObs, {self}.rowById, {self}.siteDefined)",
     note: "$compute:hortis.seedMix.note({self}.established)",
     // Hashes to true of the ids of established plants which the user has unticked, and of further plants they have ticked
     removed: {
@@ -55,22 +71,73 @@ fluid.def("hortis.seedMix", {
             markup: "{seedMix}.output.chartMarkup"
         }
     },
+    // The bees the mix supports, as rows of a taxon list - see hortis.taxonListView.computeRows
+    supportedRows: "$compute:hortis.seedMix.supportedRows({self}.active, {self}.network, {self}.established, {self}.removed, {self}.added)",
+    // The bees the mix supports, beneath the chart of support by family, as the Bee list shows them, always by family
+    beeList: {
+        $component: {
+            $layers: "hortis.taxonListView",
+            // Shown with the evaluator, rather than as a tab of its own, and so never chosen by the download button
+            tabId: "seed-bees",
+            active: "{seedMix}.active",
+            inactive: false,
+            noun: "bee",
+            colourByFamily: true,
+            arrange: "family",
+            countScope: "on plants in the mix, under the current filters",
+            emptyText: "No bees are supported by the plants in the mix.",
+            listRows: "{seedMix}.supportedRows",
+            view: {
+                $component: {
+                    template: `<div class="mf-seed-bees" @onmouseover="hortis.taxonListView.hover({0}, {self})"
+                        @onmouseleave="hortis.taxonListView.hover({0}, {self})">
+                        <p class="mf-seedhead">Bees supported</p>
+                        <div class="imerss-listbody" @id="bodySlot"></div>
+                    </div>`
+                }
+            }
+        }
+    },
     download: "$method:hortis.seedMix.download({self}.network, {self}.established, {self}.removed, {self}.added)"
 });
 
 /**
- * Compute the network of plants and the bees observed on them, over all the observations of the dataset.
+ * Determine whether a site is chosen - whether any filter selecting a place selects one. A filter selecting every
+ * observation has no predicates, though it takes part - see hortis.obsFilters.predicates.
+ * @param {Component[]} siteFilters - The filters selecting a place
+ * @return {Boolean} `true` if any selects a place
+ */
+hortis.seedMix.siteDefined = function (siteFilters) {
+    return hortis.obsFilters.predicates(siteFilters).length > 0;
+};
+
+/**
+ * Gather the predicates of every active filter of the observations other than those selecting a place - see
+ * hortis.obsFilters.predicates.
+ * @param {Component[]} obsFilters - All the filters of the observations
+ * @return {Object[]} The predicates, bare
+ */
+hortis.seedMix.contextPredicates = function (obsFilters) {
+    return hortis.obsFilters.predicates(obsFilters.filter(filterComp => !fluid.hasLayer(filterComp, "hortis.siteFilter")));
+};
+
+/**
+ * Compute the network of plants and the bees observed on them, over the observations passing every filter other than
+ * those selecting a place.
  * @param {VizPackage} pkg - The data package
- * @param {Selection} allObs - All observations in the dataset
+ * @param {Selection} allObs - The observations over which the network is drawn
  * @param {Object<String, TaxonRow>} rowById - Map of taxon id to taxon row
- * @return {Object} Members `plants`, a Map of plant species id to its entry, with members `id`, `row`, `label` and
- * `bees`, a Set of the ids of the bee species observed on it, and `beeFamily`, a Map of bee species id to its family
+ * @return {Object} Members `plants`, a Map of plant species id to its entry, with members `id`, `row`, `label`,
+ * `bees`, a Set of the ids of the bee species observed on it, and `beeCounts`, a Map of each of those ids to the number of
+ * observations of the bee on it, `beeFamily`, a Map of bee species id to its family, and `beeRows`, a Map of bee species
+ * id to its taxon row
  */
 hortis.seedMix.computeNetwork = function (pkg, allObs, rowById) {
     const bareRowById = fluid.unwrapProxy(rowById);
     const plants = new Map();
     const beeFamily = new Map();
-    hortis.countObsByPair(pkg, allObs, "plantINatId", "pollinatorINatId").forEach(([plantId, pollId]) => {
+    const beeRows = new Map();
+    hortis.countObsByPair(pkg, allObs, "plantINatId", "pollinatorINatId").forEach(([plantId, pollId, count]) => {
         const plantRow = bareRowById[plantId];
         const beeRow = bareRowById[pollId];
         if (plantRow && beeRow) {
@@ -78,30 +145,55 @@ hortis.seedMix.computeNetwork = function (pkg, allObs, rowById) {
             const bee = hortis.speciesRowOf(beeRow);
             let entry = plants.get(plant.id);
             if (!entry) {
-                entry = {id: plant.id, row: plant, label: hortis.taxonLabel(plant), bees: new Set()};
+                entry = {id: plant.id, row: plant, label: hortis.taxonLabel(plant), bees: new Set(), beeCounts: new Map()};
                 plants.set(plant.id, entry);
             }
             entry.bees.add(bee.id);
+            entry.beeCounts.set(bee.id, (entry.beeCounts.get(bee.id) || 0) + count);
             if (!beeFamily.has(bee.id)) {
                 beeFamily.set(bee.id, hortis.familyNameOf(bee));
+                beeRows.set(bee.id, bee);
             }
         }
     });
-    return {plants, beeFamily};
+    return {plants, beeFamily, beeRows};
 };
 
 /**
- * Compute the plant species established at the site chosen by the filters - those observed there with a bee. If the
- * filters choose every observation, no site is chosen, and none is established.
+ * Compute the bees supported by the seed mix, as rows of a taxon list - each with the number of its observations on
+ * plants in the mix, under the filters over which the network is drawn.
+ * @param {Boolean} active - `true` if the evaluator's tab is selected - otherwise none is computed
+ * @param {Object} network - The plant-pollinator network, as computed by `hortis.seedMix.computeNetwork`
+ * @param {Set<String>} established - The ids of the plants established on the site
+ * @param {Object<String, Boolean>} removedHash - The established plants which the user has unticked
+ * @param {Object<String, Boolean>} addedHash - The further plants which the user has ticked
+ * @return {Object[]} The rows, as for `hortis.taxonListView.computeRows`
+ */
+hortis.seedMix.supportedRows = function (active, network, established, removedHash, addedHash) {
+    const counts = new Map();
+    if (active) {
+        const mix = hortis.seedMix.mix(established, hortis.seedMix.keySet(removedHash), hortis.seedMix.keySet(addedHash));
+        mix.forEach(id => network.plants.get(id)?.beeCounts.forEach((count, beeId) => counts.set(beeId, (counts.get(beeId) || 0) + count)));
+    }
+    return [...counts].map(([beeId, count]) => {
+        const row = network.beeRows.get(beeId);
+        return {id: row.id, row, label: hortis.taxonLabel(row), family: network.beeFamily.get(beeId), count, listed: true};
+    });
+};
+
+/**
+ * Compute the plant species established at the site chosen by the filters - those observed there with a bee, under
+ * every filter. If no filter selecting a place is active, no site is chosen, and none is established.
  * @param {VizPackage} pkg - The data package
  * @param {Selection} siteObs - Observations passing the current filters
  * @param {Object<String, TaxonRow>} rowById - Map of taxon id to taxon row
+ * @param {Boolean} siteDefined - `true` if any filter selecting a place is active
  * @return {Set<String>} The ids of the established plant species
  */
-hortis.seedMix.computeEstablished = function (pkg, siteObs, rowById) {
+hortis.seedMix.computeEstablished = function (pkg, siteObs, rowById, siteDefined) {
     const bareRowById = fluid.unwrapProxy(rowById);
     const togo = new Set();
-    if (siteObs.count < siteObs.rowCount) {
+    if (siteDefined) {
         hortis.countObsByPair(pkg, siteObs, "plantINatId", "pollinatorINatId").forEach(([plantId, pollId]) => {
             const plantRow = bareRowById[plantId];
             if (plantRow && bareRowById[pollId]) {
@@ -129,13 +221,13 @@ hortis.seedMix.plantMarkup = function (plant, checked) {
     const beeCount = plant.bees.size;
     return `<label class="imerss-taxon"><input type="checkbox" data-seed="${plant.id}"${checked ? " checked" : ""}>` +
         `<span>${hortis.taxonNameMarkup(plant.row)}</span>` +
-        `<i title="Visited by ${hortis.plural(beeCount, "bee species", "bee species")} across the whole dataset">${beeCount}</i></label>`;
+        `<i title="Visited by ${hortis.plural(beeCount, "bee species", "bee species")} recorded under the current filters, anywhere in the dataset">${beeCount}</i></label>`;
 };
 
 /**
  * Render the chart of the share of each bee family's species supported by the seed mix, as SVG markup.
  * @param {String[]} families - The bee families, in display order
- * @param {Map<String, Number>} totals - Number of species of each family recorded on plants in the dataset
+ * @param {Map<String, Number>} totals - Number of species of each family recorded on plants under the current filters
  * @param {Map<String, Number>} reached - Number of species of each family supported by the mix
  * @return {String} The chart's SVG markup
  */
@@ -163,7 +255,7 @@ hortis.seedMix.familyChart = function (families, totals, reached) {
     });
     parts.push(`<line x1="${left}" y1="${base}" x2="${right}" y2="${base}" class="imerss-chart-axis-line"/>`);
     parts.push(`<text x="0" y="0" text-anchor="middle" class="imerss-chart-axis" transform="translate(12 ${(top + base) / 2}) rotate(-90)">Species supported<title>Share of each family's species recorded visiting a plant in the mix</title></text>`);
-    parts.push(`<text x="${(left + right) / 2}" y="${height - 4}" text-anchor="middle" class="imerss-chart-axis">Bee family<title>Bee families recorded on plants in this dataset</title></text>`);
+    parts.push(`<text x="${(left + right) / 2}" y="${height - 4}" text-anchor="middle" class="imerss-chart-axis">Bee family<title>Bee families recorded on plants under the current filters</title></text>`);
     return `<svg class="mf-seedchart" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Share of each bee family supported">${parts.join("")}</svg>`;
 };
 
@@ -242,7 +334,7 @@ hortis.seedMix.listMarkup = function (that, active, network, established, query,
                 `<div class="imerss-taxon-list mf-taxa-cols">${establishedPlants.map(plant => hortis.seedMix.plantMarkup(plant, !removed.has(plant.id))).join("")}</div>`;
         }
         markup += groupHead(`Available for seed mixes (${candidates.length})`,
-            `${hortis.plural(candidates.length, "further plant species", "further plant species")} recorded in the dataset, ordered by the number of bee species visiting them`) +
+            `${hortis.plural(candidates.length, "further plant species", "further plant species")} recorded under the current filters, ordered by the number of bee species visiting them`) +
             `<div class="imerss-taxon-list mf-taxa-cols">${candidates.slice(0, limit).map(plant => hortis.seedMix.plantMarkup(plant, added.has(plant.id))).join("")}</div>`;
         if (limit < candidates.length) {
             markup += `<button type="button" class="imerss-linkbtn imerss-seed-more">Show all ${hortis.formatInt(candidates.length)} plants</button>`;
@@ -279,10 +371,10 @@ hortis.seedMix.output = function (active, network, established, removedHash, add
         const families = [...totals.keys()].sort((a, b) => totals.get(b) - totals.get(a));
         togo = {
             share,
-            meterTitle: `${share}% of the bee species recorded on plants in this dataset visit a plant in the mix`,
+            meterTitle: `${share}% of the bee species recorded on plants under the current filters visit a plant in the mix`,
             readMarkup: `<b title="Bee species recorded visiting at least one plant in the mix">${hortis.formatInt(supported.size)}</b> of ` +
-                `<span title="All bee species recorded visiting plants anywhere in this dataset">${hortis.formatInt(all)}</span> bee species supported` +
-                ` &mdash; <span title="Share of the dataset's bee species supported by the mix">${share}%</span>` +
+                `<span title="All bee species recorded visiting plants under the current filters, anywhere in the dataset">${hortis.formatInt(all)}</span> bee species supported` +
+                ` &mdash; <span title="Share of those bee species supported by the mix">${share}%</span>` +
                 `<br/><span title="Number of plant species currently ticked">${hortis.plural(mix.size, "plant species", "plant species")} in the mix</span>`,
             chartMarkup: hortis.seedMix.familyChart(families, totals, reached)
         };
@@ -308,21 +400,37 @@ hortis.seedMix.change = function (event, that) {
 };
 
 /**
- * Respond to a click within the seed mix evaluator - on the buttons showing every plant or resetting the mix.
+ * Set the plants ticked into the mix, and the checkboxes showing them - the list's markup may be unchanged by the
+ * change, and so not rerendered, so the ticks the user has changed are set directly.
+ * @param {hortis.seedMix} that - The evaluator
+ * @param {Object<String, Boolean>} removed - The established plants to be unticked
+ * @param {Object<String, Boolean>} added - The further plants to be ticked
+ * @param {Element} container - The element holding the list's checkboxes
+ */
+hortis.seedMix.setTicks = function (that, removed, added, container) {
+    that.removed = removed;
+    that.added = added;
+    that.listVersion = that.listVersion + 1;
+    container.querySelectorAll("input[data-seed]").forEach(input => {
+        const id = input.dataset.seed;
+        input.checked = that.established.has(id) ? !removed[id] : !!added[id];
+    });
+};
+
+/**
+ * Respond to a click within the seed mix evaluator - on the buttons showing every plant, clearing the mix or resetting it.
  * @param {Event} event - The click event
  * @param {hortis.seedMix} that - The evaluator
  */
 hortis.seedMix.click = function (event, that) {
     if (event.target.closest(".imerss-seed-more")) {
         that.showAll = true;
+    } else if (event.target.closest(".imerss-seed-clear")) {
+        // Untick every plant, including those established on the site
+        const removed = Object.fromEntries([...that.established].map(id => [id, true]));
+        hortis.seedMix.setTicks(that, removed, {}, event.currentTarget);
     } else if (event.target.closest(".imerss-seed-reset")) {
-        that.removed = {};
-        that.added = {};
-        that.listVersion = that.listVersion + 1;
-        // The list's markup may be unchanged by the reset, and so not rerendered - restore the ticks the user has changed
-        event.currentTarget.querySelectorAll("input[data-seed]").forEach(input => {
-            input.checked = that.established.has(input.dataset.seed);
-        });
+        hortis.seedMix.setTicks(that, {}, {}, event.currentTarget);
     }
 };
 </script>
@@ -334,9 +442,14 @@ hortis.seedMix.click = function (event, that) {
             <div class="mf-seedcol">
                 <div class="mf-seedtop">
                     <p class="mf-seedhead">Plants in your seed mix</p>
-                    <button class="imerss-linkbtn imerss-seed-reset" type="button" title="Restore the established plants and clear any added ones">
-                        <svg width="13" height="13" aria-hidden="true"><use href="#imerss-i-reset"/></svg> Reset mix
-                    </button>
+                    <span class="mf-seedbuttons">
+                        <button class="imerss-linkbtn imerss-seed-clear" type="button" title="Untick every plant, including those established on the site">
+                            <svg width="13" height="13" aria-hidden="true"><use href="#imerss-i-clear"/></svg> Clear mix
+                        </button>
+                        <button class="imerss-linkbtn imerss-seed-reset" type="button" title="Restore the established plants and clear any added ones">
+                            <svg width="16" height="16" aria-hidden="true"><use href="#imerss-i-filter-reset"/></svg> Reset mix
+                        </button>
+                    </span>
                 </div>
                 <p class="mf-seednote">@{note}</p>
                 <div class="imerss-combo">
@@ -351,6 +464,7 @@ hortis.seedMix.click = function (event, that) {
                 <div class="mf-meter" title="@{output.meterTitle}"><div class="mf-meter-fill" style="width: @{output.share}%"></div></div>
                 <p class="mf-seedread" @id="readSlot"></p>
                 <div class="mf-seedchart-holder" @id="chartSlot"></div>
+                <div @id="beeList"></div>
             </div>
         </div>
     </div>

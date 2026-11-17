@@ -739,13 +739,25 @@ const fluidViewScope = function (fluid) {
         }
     };
 
+    /**
+     * The comment appended to the text of a style injected from a Single File Component, naming its source to the
+     * browser's debugger. An output document is to be published, and so does not reveal the location of the SFC's
+     * source. Overridden in server-support.js so that a document rendered on the server names it relative to itself
+     * rather than by its location on the machine which rendered it - FLUID-7037
+     * @param {Document} dokkument - The document into which the style is injected
+     * @param {String} url - The absolute URL of the Single File Component holding the style
+     * @return {String} The comment, or an empty string if none is to be written
+     */
+    fluid.styleSourceComment = function (dokkument, url) {
+        return fluid.isOutputDocument(dokkument) ? "" : `\n/*# sourceURL=${url}*/`;
+    };
+
     // CSS nodes are live - a <style> re-parses on any change to its text and a <link> re-fetches on any change to its href -
     // so an existing node of the right kind is updated in place rather than replaced
     fluid.cssInjectionStyles = {
         literal: {
             apply: ({dokkument, injRec, url}, existing) => {
-                // An output document is to be published, and so does not reveal the location of the SFC's source
-                const text = injRec.text + (fluid.isOutputDocument(dokkument) ? "" : `\n/*# sourceURL=${url}*/`);
+                const text = injRec.text + fluid.styleSourceComment(dokkument, url);
                 if (existing?.localName === "style") {
                     existing.textContent = text;
                 } else {

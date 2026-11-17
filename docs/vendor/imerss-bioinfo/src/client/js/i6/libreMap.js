@@ -1076,7 +1076,7 @@ hortis.libreMap.eventToProp = function (map, e, propName) {
 // Selects a grid cell when it is clicked, and filters observations to those in the selected cell. Selection of a cell
 // stacks with any other selection on the map, e.g. of a region
 fluid.def("hortis.libreMap.gridSelector", {
-    $layers: ["hortis.libreMap.clickHandler", "hortis.obsFilter", "hortis.withTooltip", "hortis.urlMappedFilter"],
+    $layers: ["hortis.libreMap.clickHandler", "hortis.obsFilter", "hortis.siteFilter", "hortis.withTooltip", "hortis.urlMappedFilter"],
     filterState: null, // The id of the selected cell
     urlKey: "cell",
     // The hovered cell is held at hoverId by hortis.withTooltip - by default no tooltip is shown for it
@@ -1740,7 +1740,7 @@ hortis.renderVizGridTooltip = function (grid, rowById, cellId) {
     if (bucket) {
         const rowTemplate = "<div>%taxonName: %obsCount observation%s</div>";
         const rows = Object.entries(grid.taxaOf(cellId)).map(([taxonId, obsCount]) => ({
-            taxonName: rowById[taxonId]?.iNaturalistTaxonName || "Unknown",
+            taxonName: rowById[taxonId] ? hortis.rowToScientific(rowById[taxonId]) : "Unknown",
             obsCount,
             s: obsCount === 1 ? "" : "s"
         })).sort((rowa, rowb) => rowb.obsCount - rowa.obsCount);

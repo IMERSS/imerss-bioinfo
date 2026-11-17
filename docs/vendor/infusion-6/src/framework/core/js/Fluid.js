@@ -718,6 +718,20 @@ const $fluidScope = function (fluid) {
     fluid.metadataSymbol = Symbol("fluid.metadata");
     const $m = fluid.metadataSymbol;
 
+    /**
+     * Attach metadata to an object which may reach user code, e.g. a merged layer read as a member of a component, as
+     * a non-enumerable property, so that the object spreads, assigns and serialises as the plain object it was written
+     * as, without the framework's internals - FLUID-7038. It remains writable, so that later writes through `[$m]`
+     * update it in place.
+     * @param {Object} target - The object to bear the metadata
+     * @param {Object} metadata - The metadata
+     * @return {Object} The target
+     */
+    fluid.attachMetadata = function (target, metadata) {
+        Object.defineProperty(target, $m, {value: metadata, writable: true, configurable: true, enumerable: false});
+        return target;
+    };
+
     fluid.unavailableProxy = function (target) {
         const proxy = new Proxy(target, {
             get: function (target, prop) {
@@ -1462,9 +1476,7 @@ const $fluidScope = function (fluid) {
     /*** DEFAULTS AND OPTIONS MERGING SYSTEM ***/
 
     fluid.makeLayer = function (memberName, parent) {
-        const togo = Object.create(null);
-        togo[$m] = {type: "layer", memberName, parent};
-        return togo;
+        return fluid.attachMetadata(Object.create(null), {type: "layer", memberName, parent});
     };
 
     // Lookup of layer names to signal<{raw: layer}>
@@ -2650,7 +2662,7 @@ const $fluidScope = function (fluid) {
                 togo = {$effect: merged.map(entry => entry.record)};
                 // Record the material merged here, so that a fresh merge of the same material may be recognised as
                 // equivalent - see fluid.isSameSignalRecord
-                togo[$m] = {contributions: contributions.map(contribution => contribution.value)};
+                fluid.attachMetadata(togo, {contributions: contributions.map(contribution => contribution.value)});
             }
         }
         return togo;

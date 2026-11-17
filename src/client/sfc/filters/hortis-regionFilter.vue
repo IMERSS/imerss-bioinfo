@@ -10,7 +10,7 @@
 // table, with members `regionField`, the column of the observations holding the region, `id`, the value found there
 // and `label`. Rows of the regionFields `fieldNames` are offered - e.g. ["dataset"] for a filter by dataset
 fluid.def("hortis.regionFilter", {
-    $layers: ["hortis.obsFilter", "hortis.urlMappedFilter"],
+    $layers: ["hortis.obsFilter", "hortis.siteFilter", "hortis.urlMappedFilter"],
     urlCodec: "hortis.urlCodecs.keys",
     filterName: "Region",
     // fieldNames: String[]

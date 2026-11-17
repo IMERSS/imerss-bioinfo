@@ -85,7 +85,9 @@ QUnit.test("Initial dataflow and rendering", function (assert) {
         "Bee checklist shows its root and families, with genera folded away");
     assert.deepEqual(hortis.tests.displayedNames(".imerss-plants"), ["Plantae", "Asterales", "Rosales"],
         "Plant checklist shows its root and orders");
-    assert.equal(qsa(".imerss-pollinators .imerss-rank-fold option").length, 12, "Rank fold controls rendered");
+    // Its "Expand all to" and "Collapse all to" controls each offer a prompt and the bee checklist's ranks beneath its
+    // first, down to subspecies
+    assert.equal(qsa(".imerss-pollinators .imerss-rank-fold option").length, 14, "Rank fold controls rendered");
     that.destroy();
 });
 
@@ -466,4 +468,36 @@ QUnit.test("Codecs of filter states", function (assert) {
     assert.equal(hortis.phenologyFilter.urlCodec.decode("06-31~07-01").days, null, "A period with an invalid day decodes to none");
     assert.equal(hortis.phenologyFilter.urlCodec.decode("07-01~06-01").days, null, "A period ending before it starts decodes to none");
     assert.equal(hortis.phenologyFilter.formatDay(hortis.phenologyFilter.toDay("2024-04-01")), "1 Apr", "Days formatted as 1 Apr");
+});
+
+QUnit.test("Taxa are named by their authoritative names, or by iNaturalist names normalised to community standards", function (assert) {
+    const subspecies = {id: "361496", rank: "subspecies", iNaturalistTaxonName: "Anthidiellum notatum robertsoni"};
+    assert.equal(hortis.rowToScientific(subspecies), "Anthidiellum notatum ssp. robertsoni",
+        "A subspecies without an authoritative name is named by its iNaturalist name, annotated with ssp.");
+    assert.equal(hortis.rowToScientific({rank: "variety", iNaturalistTaxonName: "Ceanothus velutinus laevigatus"}),
+        "Ceanothus velutinus var. laevigatus", "A variety's iNaturalist name is annotated with var.");
+    assert.equal(hortis.rowToScientific({rank: "species", iNaturalistTaxonName: "Anthidiellum notatum"}), "Anthidiellum notatum",
+        "A species' iNaturalist name is unchanged");
+    assert.equal(hortis.rowToScientific({rank: "hybrid", iNaturalistTaxonName: "Salix × fragilis"}), "Salix × fragilis",
+        "A hybrid's iNaturalist name is unchanged");
+    assert.equal(hortis.normaliseINatName("Anthidiellum notatum ssp. robertsoni", "subspecies"), "Anthidiellum notatum ssp. robertsoni",
+        "A name already annotated is unchanged");
+    assert.equal(hortis.rowToScientific({...subspecies, scientificName: "Anthidiellum notatum ssp. robertsoni"}),
+        "Anthidiellum notatum ssp. robertsoni", "An authoritative scientificName is preferred");
+    assert.equal(hortis.rowToScientific({rank: "species", iNaturalistTaxonName: "Cerastium holosteoides",
+        scientificName: "Cerastium fontanum ssp. vulgare"}), "Cerastium fontanum ssp. vulgare",
+    "The checklist's scientificName is preferred where it differs from iNaturalist's name");
+    assert.equal(hortis.rowToScientific({rank: "species", iNaturalistTaxonName: "Life", scientificName: ""}), "Life",
+        "An empty scientificName falls back to the iNaturalist name");
+    assert.equal(hortis.rowToScientific({...subspecies, taxonName: "Anthidiellum notatum robertsoni", scientificName: "Other"}),
+        "Anthidiellum notatum robertsoni", "A curated taxonName is preferred above all");
+
+    const node = hortis.checklist.entryNode({row: subspecies, children: []}, {}, {[subspecies.id]: {folded: "folded"}});
+    assert.equal(node.attrs["class"], "checklist-row checklist-rank-subspecies", "The subspecies is rendered at its rank");
+    const nameNode = node.children.find(child => child.attrs?.["class"] === "checklist-scientific-name");
+    const text = nameNode.children.map(child => child.text ?? child.children[0].text).join("");
+    assert.equal(text, "Anthidiellum notatum ssp. robertsoni", "The checklist renders the subspecies by its normalised name");
+    const annote = nameNode.children.find(child => child.tag === "span");
+    assert.deepEqual([annote?.attrs["class"], annote?.children[0].text], ["checklist-annote", "ssp."],
+        "Its annotation is held in a span, so that it is set in Roman type");
 });

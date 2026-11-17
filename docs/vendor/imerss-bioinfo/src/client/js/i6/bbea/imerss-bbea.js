@@ -184,7 +184,7 @@ hortis.renderBbeaGridTooltip = function (grid, rowById, cellId) {
     if (bucket) {
         const rowTemplate = "<div>%beeName: %obsCount observation%s</div>";
         const rows = Object.entries(grid.taxaOf(cellId)).map(([taxonId, obsCount]) => ({
-            beeName: rowById[taxonId]?.iNaturalistTaxonName || "Unknown",
+            beeName: rowById[taxonId] ? hortis.rowToScientific(rowById[taxonId]) : "Unknown",
             obsCount,
             s: obsCount === 1 ? "" : "s"
         })).sort((rowa, rowb) => rowb.obsCount - rowa.obsCount);
@@ -209,14 +209,16 @@ fluid.def("hortis.bbeaView", {
 });
 
 // The colours of bee families and plant phyla in the views
+// The colours of the bee families - ColorBrewer's Set1 adjusted as little as possible in hue and lightness so that
+// no two are confused under protanopia or deuteranopia - see notes/deuteranopia-bee-families.md
 hortis.pollColours = {
     family: {
-        "Andrenidae": "#E41A1C",
-        "Apidae": "#377EB8",
-        "Colletidae": "#4DAF4A",
-        "Megachilidae": "#FF7F00",
-        "Halictidae": "#984EA3",
-        "Melittidae": "#ECC846"
+        "Andrenidae": "#E60916",
+        "Apidae": "#0178DF",
+        "Colletidae": "#18B97F",
+        "Megachilidae": "#FC7900",
+        "Halictidae": "#9B4D9B",
+        "Melittidae": "#EDC947"
     }
 };
 
@@ -230,7 +232,9 @@ hortis.computeRankColours = function (selection, colourIndex, idToEntry) {
     const entries = Object.keys(selection).map(id => idToEntry[id]).filter(entry => entry);
     const rows = entries.sort((a, b) => a.index - b.index).map(entry => entry.row);
     const colourEntries = rows.map(row => {
-        let togo = [row.iNaturalistTaxonName, null];
+        // Named as the checklists and the bipartite diagram name it, though looked up in the colour index by its
+        // iNaturalist name
+        let togo = [hortis.rowToScientific(row), null];
         while (row) {
             const entry = colourIndex[row.rank]?.[row.iNaturalistTaxonName];
             if (entry) {

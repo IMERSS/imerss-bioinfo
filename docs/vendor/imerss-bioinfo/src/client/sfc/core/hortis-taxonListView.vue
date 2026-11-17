@@ -19,6 +19,9 @@ fluid.def("hortis.taxonListView", {
     selection: "{vizLoader}.finalFilteredObs",
     rowById: "{vizLoader}.taxa.rowById",
     arrange: "family",
+    // Where the observations counted beside each taxon were made, as described in its tooltip
+    countScope: "in the current selection",
+    emptyText: "$compute:hortis.taxonListView.emptyText({self}.noun)",
     arrangeOn: "$compute:hortis.taxonListView.arrangeOn({self}.arrange)",
     listRows: "$compute:hortis.taxonListView.computeRows({self}.pkg, {self}.selection, {self}.rowById, {self}.idField)",
     countSlot: {
@@ -31,7 +34,7 @@ fluid.def("hortis.taxonListView", {
         $component: {
             $layers: "hortis.verbatimSlot",
             markup: `$compute:hortis.taxonListView.bodyMarkup({taxonListView}.active, {taxonListView}.arrange, {taxonListView}.listRows,
-                {taxonListView}.noun, {taxonListView}.colourByFamily)`
+                {taxonListView}.noun, {taxonListView}.colourByFamily, {taxonListView}.countScope, {taxonListView}.emptyText)`
         }
     },
     download: "$method:hortis.taxonListView.download({self}.listRows, {self}.downloadFile)"
@@ -111,9 +114,18 @@ hortis.taxonListView.byFamily = function (listRows) {
     return togo;
 };
 
-hortis.taxonListView.rowMarkup = function (listRow, noun) {
+hortis.taxonListView.emptyText = noun => `No ${noun}s match the current filters and selections.`;
+
+/**
+ * Render the row of one taxon of a list.
+ * @param {Object} listRow - The taxon's record, as computed by `hortis.taxonListView.computeRows`
+ * @param {String} noun - "bee" or "plant"
+ * @param {String} countScope - Where the observations counted were made, e.g. "in the current selection"
+ * @return {String} The row's markup
+ */
+hortis.taxonListView.rowMarkup = function (listRow, noun, countScope) {
     const count = hortis.formatInt(listRow.count);
-    const tip = `${hortis.plural(listRow.count, "observation")} of this ${noun} in the current selection`;
+    const tip = `${hortis.plural(listRow.count, "observation")} of this ${noun} ${countScope}`;
     return `<div class="imerss-taxon"><span class="imerss-taxon-name" data-row-id="${listRow.id}">${hortis.taxonNameMarkup(listRow.row)}</span>` +
         `<i title="${tip}">${count}</i></div>`;
 };
@@ -151,15 +163,17 @@ hortis.taxonListView.countMarkup = function (active, listRows, noun) {
  * @param {Object[]} listRows - The rows of the list, as computed by `hortis.taxonListView.computeRows`
  * @param {String} noun - "bee" or "plant"
  * @param {Boolean} colourByFamily - Whether family headings carry a colour chip
+ * @param {String} countScope - Where the observations counted were made, e.g. "in the current selection"
+ * @param {String} emptyText - The message shown when the list is empty
  * @return {String} The markup of the list
  */
-hortis.taxonListView.bodyMarkup = function (active, arrange, listRows, noun, colourByFamily) {
+hortis.taxonListView.bodyMarkup = function (active, arrange, listRows, noun, colourByFamily, countScope, emptyText) {
     let togo = "";
     if (active) {
         const listed = rows => rows.filter(listRow => listRow.listed);
         let markup;
         if (listRows.length === 0) {
-            markup = `<p class="imerss-empty">No ${noun}s match the current filters and selections.</p>`;
+            markup = `<p class="imerss-empty">${hortis.encodeHTML(emptyText)}</p>`;
         } else if (arrange === "family") {
             markup = hortis.taxonListView.byFamily(listRows).map(family => {
                 const familyRows = listed(family.rows);
@@ -167,11 +181,11 @@ hortis.taxonListView.bodyMarkup = function (active, arrange, listRows, noun, col
                 const chip = colourByFamily ? `<b style="background: ${colour || "#999"}"></b>` : "";
                 const tip = `${hortis.plural(familyRows.length, noun + " taxon", noun + " taxa")} listed, with ${hortis.plural(family.count, "observation")} in ${family.family}`;
                 return `<div class="imerss-famhead">${chip}<span>${hortis.encodeHTML(family.family)}</span><i title="${tip}">${hortis.plural(familyRows.length, "taxon", "taxa")}</i></div>` +
-                    familyRows.map(listRow => hortis.taxonListView.rowMarkup(listRow, noun)).join("");
+                    familyRows.map(listRow => hortis.taxonListView.rowMarkup(listRow, noun, countScope)).join("");
             }).join("");
         } else {
             markup = listed(listRows).sort((a, b) => a.label.localeCompare(b.label))
-                .map(listRow => hortis.taxonListView.rowMarkup(listRow, noun)).join("");
+                .map(listRow => hortis.taxonListView.rowMarkup(listRow, noun, countScope)).join("");
         }
         togo = `<div class="imerss-taxon-list">${markup}</div>`;
     }
