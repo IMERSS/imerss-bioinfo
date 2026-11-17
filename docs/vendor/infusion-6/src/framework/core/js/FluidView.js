@@ -810,6 +810,21 @@ const fluidViewScope = function (fluid) {
         return host;
     };
 
+    /**
+     * Parse the markup of a `<symbols>` block into nodes in the SVG namespace. It is parsed within an `<svg>` element, as
+     * it would be in a document, rather than as the `innerHTML` of an SVG element, which not every DOM parses as SVG -
+     * linkedom, under which a page is rendered statically, parses it as HTML, so that a self-closing element such as
+     * `<path d="..."/>` is left open and swallows the elements following it, which then don't render
+     * @param {Document} dokkument - The document into which the symbols are injected
+     * @param {String} text - The markup
+     * @return {Node[]} The nodes parsed from it
+     */
+    fluid.parseSymbols = function (dokkument, text) {
+        const holder = dokkument.createElement("div");
+        holder.innerHTML = `<svg xmlns="${fluid.svgNamespace}">${text}</svg>`;
+        return [...holder.firstElementChild.childNodes];
+    };
+
     // The symbols of a Single File Component are injected as a <defs> element holding the markup of its <symbols> block,
     // within the shared host - see fluid.symbolsHost. Since symbols are inert, an existing <defs> is updated in place,
     // and any <use> referring to them updates live
@@ -817,11 +832,11 @@ const fluidViewScope = function (fluid) {
         literal: {
             apply: ({dokkument, injRec}, existing) => {
                 if (existing?.localName === "defs") {
-                    existing.innerHTML = injRec.text;
+                    existing.replaceChildren(...fluid.parseSymbols(dokkument, injRec.text));
                 } else {
                     const fresh = dokkument.createElementNS(fluid.svgNamespace, "defs");
                     fresh.setAttribute("id", injRec.nodeId);
-                    fresh.innerHTML = injRec.text;
+                    fresh.append(...fluid.parseSymbols(dokkument, injRec.text));
                     fresh.flInjected = true;
                     if (existing) {
                         existing.replaceWith(fresh);
@@ -3257,6 +3272,10 @@ const fluidViewScope = function (fluid) {
                         };
                         delete vnode.children;
                         vnode.attrs = fluid.filterObjKeys(vnode.attrs, key => !key.startsWith("@"));
+                        // The element is written by two templates - this one, and the root of the child's, elided onto
+                        // it - so that what it holds before this one first writes it is not taken as this one's - see
+                        // fluid.patchAttrs
+                        vnode.isTemplateSlot = true;
 
                         // The template record ensures that the child has a view, rendering into the container supplied
                         // here - if the child is a component list, its view renders its members' views in sequence. A
@@ -3421,9 +3440,14 @@ const fluidViewScope = function (fluid) {
         // An attribute is removed only if this writer wrote it before - not if it was written by some other agent, e.g. a
         // widget marking an element of the template. On the first patch of an element by the template in which it
         // appears, whatever it holds was written by that template, e.g. in markup claimed from a static build, since
-        // an element created by rendering holds nothing until then
-        const previouslyWritten = attrName => isRoot ? !!element.flRootAttrs?.has(attrName) :
-            element.flJointAttrs ? element.flJointAttrs.has(attrName) : true;
+        // an element created by rendering holds nothing until then - unless the element is the slot of a child, onto
+        // which the root of the child's template is elided. Whatever such an element holds beyond what the template in
+        // which it appears writes was written by the child's root, and is left for the root's own first patch, which
+        // may come much later, e.g. once the child's template has loaded - so that the element keeps, meanwhile, what
+        // a static build rendered of the child
+        const previouslyWritten = attrName => isRoot ?
+            element.flRootAttrs ? element.flRootAttrs.has(attrName) : !!element.flIsSlot :
+            element.flJointAttrs ? element.flJointAttrs.has(attrName) : !element.flIsSlot;
         const removable = attrName => !owned.has(attrName) && !attrName.startsWith("data-fl-transient") && !ownedByOther?.has(attrName) &&
             previouslyWritten(attrName);
         for (let i = element.attributes.length - 1; i >= 0; i--) {
@@ -3522,8 +3546,11 @@ const fluidViewScope = function (fluid) {
         const writers = element.flClassWriters;
         writers[writer] = new Set(tokens(text));
         // The classes the element held before any writer wrote are taken to have been written by its templates, once
-        // the template in which it appears has written it, or if it was claimed from earlier markup
-        const previous = new Set([...(element.flClassWritten ?? []), ...(writers.joint || element.flClassClaimed ? element.flClassPrior : [])]);
+        // the template in which it appears has written it, or if it was claimed from earlier markup - or, for the slot
+        // of a child, once the root of the child's template has written it, since they are then the root's, which the
+        // template in which the slot appears, writing first, must not remove - see fluid.patchAttrs
+        const priorWriter = element.flIsSlot ? writers.root : writers.joint;
+        const previous = new Set([...(element.flClassWritten ?? []), ...(priorWriter || element.flClassClaimed ? element.flClassPrior : [])]);
         const written = new Set(fluid.classWriters.flatMap(oneWriter => [...(writers[oneWriter] ?? [])]));
         // Classes neither written now nor previously by any writer were added by some other agent
         const foreign = current.filter(token => !written.has(token) && !previous.has(token));
@@ -3674,6 +3701,10 @@ const fluidViewScope = function (fluid) {
         // Recorded before binding, so that the effect binding any class of the node writes it as the same writer - see
         // fluid.classWriterOf
         vnode.renderedAsRoot = isRoot;
+        // Recorded before any attribute or class is written - see fluid.patchAttrs and fluid.applyClassTokens
+        if (vnode.isTemplateSlot) {
+            element.flIsSlot = true;
+        }
         fluid.bindDom(vnode, element); // Will assign to elementSignal and allocate binding effects
         if (vnode.text !== undefined && !fluid.isSignal(vnode.text) && vnode.text !== element.nodeValue) {
             element.nodeValue = vnode.text;

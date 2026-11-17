@@ -52,6 +52,7 @@ hortis.blitzChecklistDecoration = function (row) {
     const decoration = hortis.blitzChecklistDecorations[status];
     return decoration ? {tag: "svg", attrs: {width: "18", height: "18", "class": "imerss-checklist-decoration"}, children: [
         {tag: "title", attrs: {}, children: [{text: decoration.title}]},
-        {tag: "use", attrs: {href: "#" + decoration.symbol}, children: []}
+        // The icons are the symbols imerss-i-tick, imerss-i-question and imerss-i-exclamation - see hortis-blitzVizLoader.vue
+        {tag: "use", attrs: {href: "#imerss-i-" + decoration.symbol}, children: []}
     ]} : null;
 };

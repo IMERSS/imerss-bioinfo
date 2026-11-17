@@ -87,7 +87,7 @@ hortis.queryAutocompleteCollector = function (allCollectors, query, callback) {
 
 <symbols>
     <symbol id="imerss-i-x-circle-close" viewBox="0 0 24 24">
-        <path d="M16 8L12 12M12 12L8 16M12 12L8 8M12 12L16 16" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="12" cy="12" r="10" fill="none" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 8L12 12M12 12L8 16M12 12L8 8M12 12L16 16" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <circle cx="12" cy="12" r="10" fill="none" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
     </symbol>
 </symbols>

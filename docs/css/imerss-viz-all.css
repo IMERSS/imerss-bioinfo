@@ -1450,6 +1450,10 @@ a.ui-button:active,
 
 .imerss-checklist-decoration {
     margin: -2px -0.3em -2px -0.8em;
+    /* Nudged to sit centred on the row's text, without disturbing the row's layout, as a margin would */
+    position: relative;
+    top: 2px;
+    left: -2px;
 }
 
 .imerss-checklist ul {

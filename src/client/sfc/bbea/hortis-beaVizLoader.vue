@@ -409,10 +409,10 @@ hortis.beaVizLoader.loaded = () => true;
 
 <symbols>
     <symbol id="imerss-i-fullscreen" viewBox="0 0 24 24">
-        <path d="M9 4H4L4 9M20 9V4L15 4M15 20H20L20 15M4 15L4 20L9.00002 20" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 4H4L4 9M20 9V4L15 4M15 20H20L20 15M4 15L4 20L9.00002 20" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
     </symbol>
     <symbol id="imerss-i-fullscreen-exit" viewBox="0 0 32 32" stroke-width="2" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 12 L12 12 12 4 M20 4 L20 12 28 12 M4 20 L12 20 12 28 M28 20 L20 20 20 28" />
+        <path d="M4 12 L12 12 12 4 M20 4 L20 12 28 12 M4 20 L12 20 12 28 M28 20 L20 20 20 28"></path>
     </symbol>
 </symbols>
 <placeholder name="viz" type="application/octet-stream" encoding="base64">

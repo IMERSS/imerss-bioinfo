@@ -4,6 +4,12 @@
 
 // A dual range input ported to Infusion 6 - corresponds to the since removed src/client/js/new/dual-range-input.js
 
+fluid.registerNamespace("hortis.dualRangeInput");
+
+// The time in milliseconds for which the thumbs must rest before the values slid to are written to the range - see
+// the `commitSliding` effect
+hortis.dualRangeInput.commitDelay = 150;
+
 fluid.def("hortis.dualRangeInput", {
     $layers: "fluid.component",
     // minRange: Number, maxRange: Number - the bounds of the range
@@ -75,7 +81,7 @@ fluid.def("hortis.dualRangeInput", {
         $effect: {
             func: "hortis.dualRangeInput.commit",
             args: ["{self}", "{self}.sliding"],
-            debounce: 150,
+            debounce: hortis.dualRangeInput.commitDelay,
             source: "self"
         }
     },
@@ -218,9 +224,12 @@ class DualRangeInput {
         this.$max.addEventListener("touchstart", this.updateFloor);
 
         // The least separation of the thumbs depends on the width of the input, which changes, e.g. as a collapsed panel
-        // holding it is expanded
-        this.resizeObserver = new ($min.ownerDocument.defaultView.ResizeObserver)(() => this.update());
-        this.resizeObserver.observe($min.parentElement);
+        // holding it is expanded. A document which is not laid out, e.g. one rendered under node, has no such observer
+        const ResizeObserver = $min.ownerDocument.defaultView.ResizeObserver;
+        this.resizeObserver = ResizeObserver ? new ResizeObserver(() => this.update()) : null;
+        if (this.resizeObserver) {
+            this.resizeObserver.observe($min.parentElement);
+        }
 
         this.update();
 
@@ -252,9 +261,11 @@ class DualRangeInput {
         const range = max - min || 1;
 
         // The values spanned by one thumb width, the least by which the thumbs' values may differ - unknown whilst the
-        // input is not laid out, e.g. in a collapsed panel, whereupon it is computed once it is
+        // input is not laid out, e.g. in a collapsed panel, whereupon it is computed once it is, or in a document which
+        // is never laid out, e.g. one rendered under node, whereupon the thumbs may take any values
         const width = this.$min.parentElement.clientWidth;
-        const thumbWidth = parseFloat(this.$min.ownerDocument.defaultView.getComputedStyle(this.$min).minWidth) || 0;
+        const window = this.$min.ownerDocument.defaultView;
+        const thumbWidth = window.getComputedStyle ? parseFloat(window.getComputedStyle(this.$min).minWidth) || 0 : 0;
         const thumbSpan = width > thumbWidth ? thumbWidth * range / (width - thumbWidth) : 0;
         const gap = Math.min(Math.ceil(thumbSpan / step) * step, range);
 
@@ -307,7 +318,9 @@ class DualRangeInput {
         this.$min.removeEventListener("touchstart", this.updateCeil);
         this.$max.removeEventListener("touchstart", this.updateFloor);
 
-        this.resizeObserver.disconnect();
+        if (this.resizeObserver) {
+            this.resizeObserver.disconnect();
+        }
     }
 }
 
