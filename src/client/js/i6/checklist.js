@@ -57,8 +57,9 @@ hortis.alwaysRejectRanks = [];
 hortis.acceptChecklistRowAS = function (row, filterRanks, rowFocus) {
     const acceptBasic = !filterRanks || filterRanks.includes(row.rank) || row.species;
     const alwaysReject = hortis.alwaysRejectRanks.includes(row.rank);
-    // Special request from AS - suppress any checklist entry at species level if there are any ssp
-    const rejectSpecies = row.rank === "species" && row.children.length > 0;
+    // Special request from AS - suppress any checklist entry at species level if there are any ssp - counting only those
+    // which may themselves be displayed, so that a species whose infrataxa are all filtered away is not lost with them
+    const rejectSpecies = row.rank === "species" && (row.children || []).some(child => rowFocus[child.id]);
     // "taxonName" being set will be a proxy for "there is an entry in the curated summary" so we always accept
     const acceptChecklist = row.taxonName;
     return rowFocus[row.id] && (acceptBasic && !rejectSpecies && !alwaysReject || acceptChecklist);

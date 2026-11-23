@@ -38,6 +38,8 @@ fluid.def("hortis.seedMix", {
     rowById: "{vizLoader}.taxa.rowById",
     network: "$compute:hortis.seedMix.computeNetwork({self}.pkg, {self}.contextObs, {self}.rowById)",
     established: "$compute:hortis.seedMix.computeEstablished({self}.pkg, {self}.siteObs, {self}.rowById, {self}.siteDefined)",
+    // The plants introduced in the states of the site, or of the observations if no site is defined - listed apart
+    introduced: "$compute:hortis.seedMix.computeIntroduced({self}.pkg, {self}.network, {self}.siteDefined, {self}.siteObs, {self}.contextObs)",
     note: "$compute:hortis.seedMix.note({self}.established)",
     // Hashes to true of the ids of established plants which the user has unticked, and of further plants they have ticked
     removed: {
@@ -46,6 +48,10 @@ fluid.def("hortis.seedMix", {
     added: {
         $reactiveRoot: {}
     },
+    // Markup to be shown beside plants in the list, as a hash of plant species id to its markup - none by default. A
+    // layer laid over the evaluator may supply it, e.g. hortis.oregonNursery.seedMix, which marks the plants available
+    // from Oregon's native plant nurseries
+    plantAnnotations: {},
     // Bound two-way to the search box
     query: "",
     showAll: false,
@@ -55,8 +61,8 @@ fluid.def("hortis.seedMix", {
     listSlot: {
         $component: {
             $layers: "hortis.verbatimSlot",
-            markup: `$compute:hortis.seedMix.listMarkup({seedMix}, {seedMix}.active, {seedMix}.network, {seedMix}.established, {seedMix}.query,
-                {seedMix}.showAll, {seedMix}.listVersion)`
+            markup: `$compute:hortis.seedMix.listMarkup({seedMix}, {seedMix}.active, {seedMix}.network, {seedMix}.established,
+                {seedMix}.introduced, {seedMix}.plantAnnotations, {seedMix}.query, {seedMix}.showAll, {seedMix}.listVersion)`
         }
     },
     readSlot: {
@@ -98,7 +104,7 @@ fluid.def("hortis.seedMix", {
             }
         }
     },
-    download: "$method:hortis.seedMix.download({self}.network, {self}.established, {self}.removed, {self}.added)"
+    download: "$method:hortis.seedMix.download({self}.network, {self}.established, {self}.introduced, {self}.removed, {self}.added)"
 });
 
 /**
@@ -204,6 +210,38 @@ hortis.seedMix.computeEstablished = function (pkg, siteObs, rowById, siteDefined
     return togo;
 };
 
+// The field of the observations naming the state of a data set of several states, and the prefix of the fields of the
+// taxa holding each one's establishment means in that state, e.g. establishmentOR - see notes/establishment-means-experiments.md
+hortis.seedMix.stateField = "state";
+hortis.seedMix.establishmentPrefix = "establishment";
+
+/**
+ * Compute the plants of the network which are introduced - those whose establishment means is "introduced" in any of
+ * the states of the observations. Every other plant is treated as native, including any whose means is unknown, e.g.
+ * since the state's checklist does not list it. A data set which is not of several states, without the field "state",
+ * has no plant introduced.
+ * @param {VizPackage} pkg - The data package
+ * @param {Object} network - The plant-pollinator network, as computed by `hortis.seedMix.computeNetwork`
+ * @param {Boolean} siteDefined - `true` if any filter selecting a place is active
+ * @param {Selection} siteObs - The observations of the site, whose states are considered if a site is defined
+ * @param {Selection} contextObs - The observations over which the network is drawn, whose states are considered otherwise
+ * @return {Set<String>} The ids of the introduced plant species
+ */
+hortis.seedMix.computeIntroduced = function (pkg, network, siteDefined, siteObs, contextObs) {
+    const togo = new Set();
+    const scopeObs = siteDefined ? siteObs : contextObs;
+    const obsFields = fluid.unwrapProxy(pkg).tables.obs.fields;
+    if (obsFields.includes(hortis.seedMix.stateField)) {
+        const states = hortis.distinctObs(pkg, scopeObs, hortis.seedMix.stateField).filter(state => state !== "");
+        network.plants.forEach(plant => {
+            if (states.some(state => plant.row[hortis.seedMix.establishmentPrefix + state] === "introduced")) {
+                togo.add(plant.id);
+            }
+        });
+    }
+    return togo;
+};
+
 /**
  * Compute the plants currently making up the seed mix.
  * @param {Set<String>} established - Ids of plants established on the site
@@ -217,10 +255,17 @@ hortis.seedMix.mix = function (established, removed, added) {
     return mix;
 };
 
-hortis.seedMix.plantMarkup = function (plant, checked) {
+/**
+ * Render one plant of the list of plants which may be ticked into the seed mix.
+ * @param {Object} plant - The plant, an entry of the network - see hortis.seedMix.computeNetwork
+ * @param {Boolean} checked - `true` if the plant is ticked into the mix
+ * @param {String} [annotation] - Further markup to be shown beside the plant's name, if any
+ * @return {String} The markup of the plant
+ */
+hortis.seedMix.plantMarkup = function (plant, checked, annotation) {
     const beeCount = plant.bees.size;
     return `<label class="imerss-taxon"><input type="checkbox" data-seed="${plant.id}"${checked ? " checked" : ""}>` +
-        `<span>${hortis.taxonNameMarkup(plant.row)}</span>` +
+        `<span>${hortis.taxonNameMarkup(plant.row)}</span>${annotation || ""}` +
         `<i title="Visited by ${hortis.plural(beeCount, "bee species", "bee species")} recorded under the current filters, anywhere in the dataset">${beeCount}</i></label>`;
 };
 
@@ -278,16 +323,17 @@ hortis.seedMix.updateHash = function (hash, id, present) {
     return togo;
 };
 
-hortis.seedMix.download = function (network, established, removedHash, addedHash) {
+hortis.seedMix.download = function (network, established, introduced, removedHash, addedHash) {
     const mix = hortis.seedMix.mix(established, hortis.seedMix.keySet(removedHash), hortis.seedMix.keySet(addedHash));
     const ids = new Set([...established, ...mix]);
     const rows = [...ids].map(id => network.plants.get(id)).filter(plant => plant).map(plant => [
         plant.label,
         established.has(plant.id) ? "established" : "added",
         mix.has(plant.id) ? "yes" : "no",
+        introduced.has(plant.id) ? "introduced" : "native",
         plant.bees.size
     ]);
-    hortis.downloadCSV(["plant", "status", "inMix", "beeSpeciesVisiting"], rows, "seed-mix.csv");
+    hortis.downloadCSV(["plant", "status", "inMix", "establishment", "beeSpeciesVisiting"], rows, "seed-mix.csv");
 };
 
 /** Markup of the seed mix evaluator **/
@@ -311,11 +357,14 @@ hortis.seedMix.note = function (established) {
  * @param {Boolean} active - `true` if the view's tab is selected - otherwise nothing is rendered
  * @param {Object} network - The plant-pollinator network, as computed by `hortis.seedMix.computeNetwork`
  * @param {Set<String>} established - The ids of the plants established on the site
+ * @param {Set<String>} introduced - The ids of the introduced plants, which are listed apart, below the others,
+ * whether established or not - see hortis.seedMix.computeIntroduced
+ * @param {Object<String, String>} plantAnnotations - Markup to be shown beside plants, by plant species id
  * @param {String} query - The contents of the search box
  * @param {Boolean} showAll - `true` if every candidate plant is to be listed
  * @return {String} The markup of the list
  */
-hortis.seedMix.listMarkup = function (that, active, network, established, query, showAll) {
+hortis.seedMix.listMarkup = function (that, active, network, established, introduced, plantAnnotations, query, showAll) {
     let markup = "";
     if (active) {
         // Read the user's ticks without depending on them, so that ticking a plant doesn't rerender the list beneath the
@@ -324,20 +373,44 @@ hortis.seedMix.listMarkup = function (that, active, network, established, query,
         const words = hortis.queryWords(query);
         const matches = plant => words.every(word => plant.label.toLowerCase().includes(word));
         const byBees = (a, b) => b.bees.size - a.bees.size || a.label.localeCompare(b.label);
-        const establishedPlants = [...established].map(id => network.plants.get(id)).filter(plant => plant && matches(plant)).sort(byBees);
-        const candidates = [...network.plants.values()].filter(plant => !established.has(plant.id) && matches(plant)).sort(byBees);
-        const limit = showAll || words.length > 0 ? candidates.length : that.shortListLength;
+        const establishedPlants = [...established].map(id => network.plants.get(id))
+            .filter(plant => plant && !introduced.has(plant.id) && matches(plant)).sort(byBees);
+        const candidates = [...network.plants.values()]
+            .filter(plant => !established.has(plant.id) && !introduced.has(plant.id) && matches(plant)).sort(byBees);
+        const introducedPlants = [...network.plants.values()].filter(plant => introduced.has(plant.id) && matches(plant)).sort(byBees);
+        const unlimited = showAll || words.length > 0;
+        const limit = unlimited ? candidates.length : that.shortListLength;
+        const introducedLimit = unlimited ? introducedPlants.length : that.shortListLength;
+        // A site may hold over a thousand plants, which are listed in full only on request, as are the others, since
+        // rendering and laying them all out delays the evaluator's appearing
+        const establishedLimit = unlimited ? establishedPlants.length : that.shortListLength;
         const groupHead = (title, tip) => `<p class="mf-seedgroup" title="${tip}">${title}</p>`;
+        const isTicked = plant => established.has(plant.id) ? !removed.has(plant.id) : added.has(plant.id);
+        const annotations = fluid.unwrapProxy(plantAnnotations) || {};
+        const plantMarkup = (plant, checked) => hortis.seedMix.plantMarkup(plant, checked, annotations[plant.id]);
+        // Beneath a section listed in part, a button listing every plant of every section
+        const more = (shown, all) => shown < all ?
+            `<button type="button" class="imerss-linkbtn imerss-seed-more">Showing ${hortis.formatInt(shown)} of ${hortis.formatInt(all)} - show all plants</button>` : "";
         if (establishedPlants.length > 0) {
             markup += groupHead(`Already established on site (${establishedPlants.length})`,
                 `${hortis.plural(establishedPlants.length, "plant species", "plant species")} recorded under the current filters`) +
-                `<div class="imerss-taxon-list mf-taxa-cols">${establishedPlants.map(plant => hortis.seedMix.plantMarkup(plant, !removed.has(plant.id))).join("")}</div>`;
+                `<div class="imerss-taxon-list mf-taxa-cols">${establishedPlants.slice(0, establishedLimit).map(plant => plantMarkup(plant, !removed.has(plant.id))).join("")}</div>` +
+                more(establishedLimit, establishedPlants.length);
         }
         markup += groupHead(`Available for seed mixes (${candidates.length})`,
             `${hortis.plural(candidates.length, "further plant species", "further plant species")} recorded under the current filters, ordered by the number of bee species visiting them`) +
-            `<div class="imerss-taxon-list mf-taxa-cols">${candidates.slice(0, limit).map(plant => hortis.seedMix.plantMarkup(plant, added.has(plant.id))).join("")}</div>`;
-        if (limit < candidates.length) {
-            markup += `<button type="button" class="imerss-linkbtn imerss-seed-more">Show all ${hortis.formatInt(candidates.length)} plants</button>`;
+            `<div class="imerss-taxon-list mf-taxa-cols">${candidates.slice(0, limit).map(plant => plantMarkup(plant, added.has(plant.id))).join("")}</div>` +
+            more(limit, candidates.length);
+        if (introducedPlants.length > 0) {
+            const establishedCount = introducedPlants.filter(plant => established.has(plant.id)).length;
+            markup += groupHead(`Introduced plants (${introducedPlants.length})`,
+                `${hortis.plural(introducedPlants.length, "plant species", "plant species")} recorded under the current filters which ` +
+                "iNaturalist lists as introduced. Whether a plant is native or introduced is determined by iNaturalist's checklists, " +
+                "which are held at the level of the state or province - a plant is listed here if it is recorded as introduced in any " +
+                "state of the site, or, if no site is defined, of the records shown. Plants which a state's checklist does not list are " +
+                `treated as native${establishedCount > 0 ? `. ${establishedCount} of these plants are established on the site` : ""}`) +
+                `<div class="imerss-taxon-list mf-taxa-cols mf-seed-introduced">${introducedPlants.slice(0, introducedLimit).map(plant =>
+                    plantMarkup(plant, isTicked(plant))).join("")}</div>` + more(introducedLimit, introducedPlants.length);
         }
     }
     return markup;

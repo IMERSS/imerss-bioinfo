@@ -1,0 +1,123 @@
+{
+    "title": "Atlas: filtering by month of the phenology filter updates the record count and network together",
+    "page": "indexBeasAtlas.html",
+    "viewport": {"width": 1600, "height": 1000},
+    "ready": [
+        {
+            "description": "all records are displayed, and their total is saved",
+            "target": {"selector": ".imerss-record-reporter"},
+            "text": {"contains": "Displaying"},
+            "number": {"pattern": "of (\\d+) records", "greaterThan": 0, "save": "total"}
+        },
+        {
+            "description": "the loading indicator is hidden",
+            "target": {"selector": ".bee-loading-container-hidden"},
+            "count": {"equals": 1}
+        },
+        {
+            "description": "the network has drawn its bars, whose counts are saved",
+            "target": {"selector": ".imerss-bipartite text.lab"},
+            "count": {"atLeast": 2},
+            "number": {"sum": true, "greaterThan": 0, "save": "network"}
+        }
+    ],
+    "steps": [
+        {
+            "description": "Unfold the Phenology facet of the filters panel",
+            "action": {"type": "click", "target": {"selector": ".imerss-facet-head", "text": "Phenology"}},
+            "expect": [
+                {
+                    "description": "the facet's head is marked expanded",
+                    "target": {"selector": ".imerss-facet-head[aria-expanded=true]", "text": "Phenology"},
+                    "count": {"equals": 1}
+                },
+                {
+                    "description": "the month of May is offered",
+                    "target": {"selector": ".imerss-phenology-months .imerss-phenology-label", "exactText": "May"},
+                    "visible": true
+                }
+            ]
+        },
+        {
+            "description": "Check May, and the record count and network shrink together",
+            "action": {"type": "click", "target": {"selector": "input.checklist-check", "within": {"selector": ".imerss-phenology-months .imerss-filter-row", "text": "May"}}},
+            "expect": [
+                {
+                    "description": "May is checked",
+                    "target": {"selector": "input.checklist-check", "within": {"selector": ".imerss-phenology-months .imerss-filter-row", "text": "May"}},
+                    "checked": true
+                },
+                {
+                    "description": "fewer records are displayed, out of the same total",
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "lessThan": "total", "greaterThan": 0, "save": "may"}
+                },
+                {
+                    "description": "the total is unchanged",
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "of (\\d+) records", "equals": "total"}
+                },
+                {
+                    "description": "the network's counts shrink",
+                    "target": {"selector": ".imerss-bipartite text.lab"},
+                    "number": {"sum": true, "lessThan": "network", "greaterThan": 0}
+                },
+                {
+                    "description": "the Phenology facet shows one active setting",
+                    "target": {"selector": ".imerss-facet-state", "within": {"selector": ".imerss-facet-head", "text": "Phenology"}},
+                    "visible": true,
+                    "text": {"equals": "1"}
+                }
+            ]
+        },
+        {
+            "description": "Check June as well, and more records are displayed than for May alone",
+            "action": {"type": "click", "target": {"selector": "input.checklist-check", "within": {"selector": ".imerss-phenology-months .imerss-filter-row", "text": "June"}}},
+            "expect": [
+                {
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "greaterThan": "may", "lessThan": "total"}
+                },
+                {
+                    "description": "the Phenology facet shows two active settings",
+                    "target": {"selector": ".imerss-facet-state", "within": {"selector": ".imerss-facet-head", "text": "Phenology"}},
+                    "text": {"equals": "2"}
+                }
+            ]
+        },
+        {
+            "description": "Uncheck June, and the count returns to that for May",
+            "action": {"type": "click", "target": {"selector": "input.checklist-check", "within": {"selector": ".imerss-phenology-months .imerss-filter-row", "text": "June"}}},
+            "expect": [
+                {
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "equals": "may"}
+                }
+            ]
+        },
+        {
+            "description": "Uncheck May, and the record count and network return to their originals",
+            "action": {"type": "click", "target": {"selector": "input.checklist-check", "within": {"selector": ".imerss-phenology-months .imerss-filter-row", "text": "May"}}},
+            "expect": [
+                {
+                    "target": {"selector": "input.checklist-check", "within": {"selector": ".imerss-phenology-months .imerss-filter-row", "text": "May"}},
+                    "checked": false
+                },
+                {
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "equals": "total"}
+                },
+                {
+                    "description": "the network's counts are restored",
+                    "target": {"selector": ".imerss-bipartite text.lab"},
+                    "number": {"sum": true, "equals": "network"}
+                },
+                {
+                    "description": "the Phenology facet shows no active setting",
+                    "target": {"selector": ".imerss-facet-state", "within": {"selector": ".imerss-facet-head", "text": "Phenology"}},
+                    "visible": false
+                }
+            ]
+        }
+    ]
+}

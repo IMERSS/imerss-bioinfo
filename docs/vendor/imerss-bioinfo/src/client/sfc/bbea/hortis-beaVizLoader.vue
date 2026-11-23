@@ -329,8 +329,8 @@ hortis.beaVizLoader.loaded = () => true;
 
                 <div class="mf-facets imerss-facets">
 
-                    <section @id="collectorFacet"></section>
                     <section @id="regionFacet"></section>
+                    <section @id="collectorFacet"></section>
                     <section @id="phenologyFacet"></section>
                     <section @id="elevationFacet"></section>
                     <section @id="beeFacet"></section>

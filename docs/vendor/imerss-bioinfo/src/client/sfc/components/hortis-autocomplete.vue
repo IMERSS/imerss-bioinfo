@@ -19,6 +19,25 @@ fluid.def("hortis.autocomplete", {
     }
 });
 
+/**
+ * Answer the widget's query, offering no suggestions while its input hasn't the focus. A value written into the input
+ * from outside, e.g. the name of a taxon chosen in the checklist by hortis.taxonSearchFilter.select, is picked up by the
+ * widget's polling of its input as if typed, and would otherwise open its menu on the one suggestion matching it, which
+ * stays open since the input is never left to close it.
+ * @param {hortis.autocompleteHost} host - The component hosting the widget, which answers its queries
+ * @param {HTMLElement} container - The container into which the widget is rendered
+ * @param {String} query - The query
+ * @param {Function} callback - The widget's callback, accepting the suggestions
+ */
+hortis.autocomplete.query = function (host, container, query, callback) {
+    const input = container.querySelector("input");
+    if (input && input.ownerDocument.activeElement === input) {
+        host.queryAutocomplete(query, callback);
+    } else {
+        callback([]);
+    }
+};
+
 hortis.autocomplete.bind = function (that, host, container, accessibleAutocomplete) {
     let togo;
     if (accessibleAutocomplete) {
@@ -30,7 +49,7 @@ hortis.autocomplete.bind = function (that, host, container, accessibleAutocomple
             minLength: host.minLength,
             displayMenu: "overlay",
             confirmOnBlur: false,
-            source: (query, callback) => host.queryAutocomplete(query, callback),
+            source: (query, callback) => hortis.autocomplete.query(host, container, query, callback),
             templates: {
                 suggestion: fluid.getGlobalValue(host.renderSuggestion),
                 inputValue: fluid.getGlobalValue(host.renderInputValue)

@@ -350,6 +350,17 @@ hortis.urlCodecs.keys = {
     decode: text => text === undefined || text === "" ? {} : Object.fromEntries(String(text).split(",").map(key => [key, true]))
 };
 
+// A state which is a hash of names to true, e.g. the names of selected regions, held as the names separated by commas -
+// as hortis.urlCodecs.keys, but for names which may themselves hold commas, which are escaped as %2C, and so % as %25
+hortis.urlCodecs.names = {
+    encode: function (state) {
+        const names = Object.keys(state || {}).filter(name => state[name]);
+        return names.length === 0 ? undefined : names.map(name => name.replace(/%/g, "%25").replace(/,/g, "%2C")).join(",");
+    },
+    decode: text => text === undefined || text === "" ? {} : Object.fromEntries(String(text).split(",").map(name =>
+        [name.replace(/%(25|2C)/g, escape => escape === "%25" ? "%" : ","), true]))
+};
+
 /**
  * Construct a codec for a state which is a fixed set of Boolean flags, held as the names of those which are set
  * separated by commas.

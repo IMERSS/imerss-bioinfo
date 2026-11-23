@@ -472,6 +472,7 @@ body {
 
 .mf input[type="checkbox"]:not(.checklist-check) {
     flex: none;
+    cursor: pointer;
     width: 14px;
     height: 14px;
     margin: 2px 0 0;
@@ -528,6 +529,18 @@ body {
 
 .imerss-group-state:not([hidden]) + .imerss-group-count { margin-left: 4px; }
 .imerss-group-body { padding-left: 18px; }
+
+/* A state of a data set of several states, whose checkbox selects all its records, above the groups of its regions */
+.imerss-state-head {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding-left: 4px;
+}
+.mf .imerss-state-head > .imerss-state-check { margin: 0; }
+.mf .imerss-state-head > .imerss-group-head { flex: 1; min-width: 0; font-size: 14px; }
+.imerss-state + .imerss-state { border-top: 1px solid var(--mf-rule-soft); margin-top: 2px; padding-top: 2px; }
+.mf .imerss-state-body .imerss-group-head { font-weight: 500; font-size: 13px; }
 
 /* Phenology and elevation filters */
 .imerss-facet .imerss-phenology-months .imerss-filter-body {
@@ -817,14 +830,15 @@ label.imerss-taxon { cursor: pointer; }
     color: var(--mf-ink-2);
 }
 
-.mf-seedgroup {
-    margin: 9px 0 3px;
-    font-size: 12px;
+/* Scoped by .mf so as to outrank ".mf p", which would otherwise remove its margins */
+.mf .mf-seedgroup {
+    margin: 18px 0 6px;
+    font-size: larger;
     font-weight: 600;
     color: var(--mf-ink-2);
 }
 
-.mf-seedgroup:first-child { margin-top: 0; }
+.mf .mf-seedgroup:first-child { margin-top: 4px; }
 
 .mf-meter {
     height: 13px;

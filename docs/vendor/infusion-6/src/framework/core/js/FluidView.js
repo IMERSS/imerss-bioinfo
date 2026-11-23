@@ -234,15 +234,23 @@ const fluidViewScope = function (fluid) {
     /**
      * Wrap source text in a function scope without disturbing its line numbers. The prefix shares line 1 with the original
      * text so that only columns on that line shift, and any leading "use strict" remains in the function's directive
-     * prologue.
+     * prologue. An inline script of a Single File Component, whose record bears `sfcLayer`, is also bracketed by calls to
+     * `fluid.beginSFCScript` and `fluid.endSFCScript`, so that the definition of the SFC's own layer is augmented
+     * however the script comes to be evaluated - whether injected, or run from the markup of a document built
+     * statically. A script of "global" scope has no function scope, so that a "use strict" leading such a script would
+     * follow the call to `fluid.beginSFCScript` and lose its effect.
      * @param {String} text - The source text to be wrapped.
      * @param {String} absUrl - The absolute URL to be reported to the debugger.
      * @param {String} scope - A injection scope style - "global" is supported
+     * @param {InjectRecord} [injRec] - The injection record of the script
      * @return {String} The wrapped source, ready for insertion into a script element.
      */
-    fluid.wrapScriptSource = function (text, absUrl, scope) {
-        return (scope !== "global" ? "(function () {" : "") + text +
+    fluid.wrapScriptSource = function (text, absUrl, scope, injRec) {
+        const sfcLayer = injRec?.sfcLayer;
+        const begin = sfcLayer ? `fluid.beginSFCScript(${JSON.stringify(sfcLayer)}, ${JSON.stringify(injRec.nodeId)}, ${!!injRec.sfcTemplate});` : "";
+        return begin + (scope !== "global" ? "(function () {" : "") + text +
             (scope !== "global" ? "\n}).call(globalThis);" : "") +
+            (sfcLayer ? "\nfluid.endSFCScript();" : "") +
             "\n//# sourceURL=" + absUrl;
     };
 
@@ -612,18 +620,43 @@ const fluidViewScope = function (fluid) {
      * describes, since the document was rendered from the same SFC - should the SFC change, it is injected afresh.
      * @param {Document} dokkument - The document
      * @param {Object<String, InjectRecord>} injRecs - The injection records of the SFC
+     * @param {String} [layerName] - The layer of the SFC, which claims any script it adopts
      * @return {Object<String, InjectRecord>} The records adopted, keyed by node id
      */
-    fluid.adoptMarkupInjections = function (dokkument, injRecs) {
+    fluid.adoptMarkupInjections = function (dokkument, injRecs, layerName) {
         const adopted = {};
         Object.values(injRecs).forEach(injRec => {
             const node = dokkument.getElementById(injRec.nodeId);
             if (node && !node.flInjected && (injRec.variety !== "script" || fluid.hostRunsMarkupScripts())) {
                 node.flInjected = true;
                 adopted[injRec.nodeId] = injRec;
+                // A script adopted is claimed, as one injected would be, so that another SFC referring to it, e.g. a
+                // library shared by a family of SFCs, does not inject it again - see fluid.claimSharedScripts
+                if (injRec.variety === "script" && injRec.url && layerName) {
+                    fluid.claimAdoptedScript(dokkument, layerName, injRec.url);
+                }
             }
         });
         return adopted;
+    };
+
+    /**
+     * Record that an SFC has adopted a script from a document's markup, which has executed, as its claim of the script -
+     * see fluid.claimSharedScripts
+     * @param {Document} dokkument - The document
+     * @param {String} layerName - The layer of the SFC adopting the script
+     * @param {String} url - The script's URL, as its injection record holds it
+     */
+    fluid.claimAdoptedScript = function (dokkument, layerName, url) {
+        let claims = fluid.sharedScriptClaims.get(dokkument);
+        if (!claims) {
+            claims = new Map();
+            fluid.sharedScriptClaims.set(dokkument, claims);
+        }
+        const key = fluid.module.resolvePath(url);
+        if (!claims.has(key)) {
+            claims.set(key, {layerName, done: Promise.resolve(), resolve: fluid.identity});
+        }
     };
 
     /**
@@ -663,7 +696,7 @@ const fluidViewScope = function (fluid) {
     fluid.applyEvaluatedScriptInjection = function ({dokkument, injRec, material}, existing) {
         let togo;
         const fresh = dokkument.createElement("script");
-        fresh.text = fluid.wrapScriptSource(material.text, material.sourceUrl, injRec.scope);
+        fresh.text = fluid.wrapScriptSource(material.text, material.sourceUrl, injRec.scope, injRec);
         fresh.id = injRec.nodeId;
         if (injRec.client) {
             fresh.setAttribute("fluid-client", "");
@@ -687,6 +720,10 @@ const fluidViewScope = function (fluid) {
         try {
             fluid.swapInjectedNode(dokkument, existing, fresh);
         } finally {
+            // A script which failed before reaching its end leaves the interceptor of its SFC armed
+            if (injRec.sfcLayer) {
+                fluid.endSFCScript();
+            }
             view?.removeEventListener("error", errorListener);
             dokkument.removeEventListener?.("securitypolicyviolation", refusalListener);
         }
@@ -902,8 +939,11 @@ const fluidViewScope = function (fluid) {
      * @property {String} [url] - A resolved URL for the script or style source.
      * @property {String} [text] - The inline script or style content with a source map comment.
      * @property {String} [scope] - For a "script" its injection scope style
-     * @property {Boolean} [ownLayer] - For a "script", `true` if it holds the definition of the SFC's own layer
-     * @property {Boolean} [client] - For a "script", `true` if it is payload for the browser alone - see `ScriptNodeInfo`
+     * @property {String} [sfcLayer] - For an inline "script", the name of the layer defined by its SFC, whose definition
+     * is augmented whilst the script is evaluated - see `fluid.beginSFCScript`
+     * @property {Boolean} [sfcTemplate] - For an inline "script", `true` if its SFC has a `<template>` block
+     * @property {Boolean} [client] - For a "script" with a `url`, `true` if it bears `fluid-client`, marking it as
+     * payload for the browser alone, e.g. a widget library, which the server records but does not evaluate
      */
 
     /**
@@ -964,6 +1004,11 @@ const fluidViewScope = function (fluid) {
         return fields.every(field => rec1[field] === rec2[field]);
     };
 
+    // The fields of injection records which, if any differ, cause a record to be injected afresh. An inline script of an
+    // SFC which gains or loses its <template> block is evaluated afresh, so that the definition of its layer is
+    // augmented to match - see fluid.beginSFCScript
+    fluid.injRecDiffFields = ["url", "text", "sfcTemplate"];
+
     /**
      * Decode an injection record into a payload for injection if it differs from the record previously injected under its
      * node id. No DOM changes are made here - any existing node is replaced during the commit phase.
@@ -976,10 +1021,8 @@ const fluidViewScope = function (fluid) {
      */
     fluid.decodeInjectSFCElement = function (dokkument, injRec, url, oldInjRecs, injStyles) {
         const nodeId = injRec.nodeId;
-        const diffFields = ["url", "text"];
-
         const existing = oldInjRecs[nodeId];
-        const shouldInject = !existing || !fluid.diffFields(existing, injRec, diffFields);
+        const shouldInject = !existing || !fluid.diffFields(existing, injRec, fluid.injRecDiffFields);
 
         if (shouldInject) {
             // Note that an empty block such as <style></style> has empty text but is still literal
@@ -1058,8 +1101,10 @@ const fluidViewScope = function (fluid) {
 
     /**
      * Acquires all `<fluid-import>` elements within the given DOM root and registers them in the `fluid.importMap`.
-     * Each `<fluid-import>` element must have a `layer` and a `src` attribute. The `src` is resolved to an absolute URL.
-     * The function also initiates the loading of the Single File Component (SFC) for each import.
+     * Each `<fluid-import>` element has a `src` attribute, resolved to an absolute URL, and may have a `layer` attribute
+     * naming the layer it defines, which is otherwise derived from the file's name. Each Single File Component (SFC) is
+     * loaded only once its layer is demanded - or at once, if its element bears `eager`, e.g. a layer which a palette
+     * offers, which can be listed only once it is defined.
      *
      * @param {Document} dokkument - The document object into which any injection directives will be injected
      * @param {VNode|Element} root - The root element to search for `<fluid-import>` elements.
@@ -1080,11 +1125,11 @@ const fluidViewScope = function (fluid) {
                 importMap[layerName] = {path, node};
             }
         });
-        fluid.loadImportMap(importMap);
-
-        // We can do this early in case the imports are found in a doc, otherwise it will happen when the layer
-        // is demanded - in time this should be removed
-        Object.keys(importMap).forEach(layerName => fluid.subscribeDocToInjections(layerName, dokkument));
+        // Each file is loaded, and injected into the document, only once its layer is demanded - see fluid.loadImport -
+        // unless its import bears `eager`, e.g. one of the layers offered by a palette, which must be defined to be listed
+        fluid.loadImportMap(importMap, dokkument);
+        Object.entries(importMap).filter(([, {node}]) => node.attrs.eager !== undefined)
+            .forEach(([layerName]) => fluid.subscribeDocToInjections(layerName, dokkument));
 
         return importMap;
     };
@@ -1119,86 +1164,6 @@ const fluidViewScope = function (fluid) {
         const removeAll = recs => fluid.each(recs, rec => fluid.removeArrayElement(rec.node.parentNode, rec.node));
         removeAll(fluid.acquireModules(dokkument, root));
         removeAll(fluid.docToImportMap(dokkument, root));
-    };
-
-    /**
-     * Represents the result of parsing a single `<script>` node in an SFC.
-     *
-     * - If the script node has a `src` attribute, only the `src` string is recorded.
-     * - Otherwise, the inline script is parsed to extract a `DefMap` and its original text.
-     *
-     * @typedef {Object} ScriptNodeInfo
-     * @property {String} [url] - The source URL if the script uses `src`.
-     * @property {DefMap} [defMaps] - The parsed defMap for inline script content.
-     * @property {String} [text] - The original text of the inline script.
-     * @property {String} [scope] - A possible scope marker for a script injection style - supported value is "global"
-     * @property {Boolean} [client] - `true` if the script bears `fluid-client`, marking it as payload for the browser
-     * alone, e.g. a widget library, which the server records but does not evaluate
-     */
-
-    /**
-     * Parses a list of SFC `<script>` nodes (`VNode[]`) and returns structural metadata for each script.
-     *
-     * Each node is analyzed as follows:
-     * - If it contains a `src` attribute, a record is returned with only the `src`.
-     * - Otherwise, the inline text is parsed using `fluid.parseDefMaps`, producing a `DefMap` and returning
-     *   both the map and the original text.
-     *
-     * @param {VNode[]} scriptNodes - An array of virtual DOM nodes representing `<script>` elements.
-     * @return {ScriptNodeInfo[]} - A list of metadata records for each script node.
-     */
-    fluid.parseSFCScripts = function (scriptNodes) {
-        const defMapList = scriptNodes.map((scriptNode) => {
-            const src = scriptNode.attrs?.src;
-            if (src) {
-                return {url: src, scope: scriptNode.attrs["data-fl-scope"], client: scriptNode.attrs["fluid-client"] !== undefined};
-            } else {
-                const text = scriptNode.children[0]?.text;
-                const defMaps = fluid.parseDefMaps(text, 0);
-                return {defMaps, text};
-            }
-        });
-        return defMapList;
-    };
-
-    /**
-     * Metadata describing where a given layer definition appears within a script.
-     *
-     * @typedef {Object} LayerDefLocation
-     * @property {Integer} scriptIndex - Index of the script in the original `defMapList`.
-     * @property {Integer} from - Start offset of the definition in the source text.
-     * @property {Integer} to - End offset of the definition in the source text.
-     */
-
-    /**
-     * An index mapping layer (definition) names to their source locations across multiple scripts.
-     *
-     * @typedef {Object.<String, LayerDefLocation>} LayerDefIndex
-     */
-
-    /**
-     * Builds an index of all top-level layer (definition) names from a list of parsed script records.
-     *
-     * This function iterates through each entry in the `defMapList` (typically the result of `fluid.parseSFCScripts`),
-     * skipping any entries that are external `src` strings. For inline scripts, it extracts the top-level
-     * keys in each `defMaps` object and records their character range along with the index of the script.
-     *
-     * The resulting index allows efficient lookup of where a given layer is defined within the full set of scripts.
-     *
-     * @param {ScriptNodeInfo[]} defMapList - A list of parsed script records (inline or external).
-     * @return {LayerDefIndex} - A map from layer names to their locations within the source scripts.
-     */
-    fluid.indexLayerDefs = function (defMapList) {
-        const layerDefIndex = {};
-        defMapList.forEach( (rec, index) => {
-            if (typeof(rec) !== "string") {
-                const {defMaps} = rec;
-                fluid.each(defMaps, (range, layerName) => {
-                    layerDefIndex[layerName] = {scriptIndex: index, ...range};
-                });
-            }
-        });
-        return layerDefIndex;
     };
 
     /**
@@ -1262,8 +1227,9 @@ const fluidViewScope = function (fluid) {
     };
 
     /**
-     * Describe the error of a Single File Component which defines its view's template twice - see
-     * `fluid.hasSFCTemplateConflict`
+     * Describe the error of a Single File Component which defines its view's template twice - both as a `<template>`
+     * block and as `view.$component.template` in the definition of its own layer, which the block would be written
+     * over, silently discarding it - see `fluid.sfcAugmentDef`
      * @param {String} layerName - The name of the layer defined by the SFC
      * @return {String} The description of the error
      */
@@ -1271,22 +1237,6 @@ const fluidViewScope = function (fluid) {
         + "view.$component.template, but the SFC also has a <template> block, which would replace it - remove one or "
         + "the other. A template which is computed, e.g. by \"$compute:...\", should be held in view.$component.template, "
         + "with no <template> block";
-
-    /**
-     * Determine whether a Single File Component defines its view's template twice - both as a `<template>` block and
-     * as `view.$component.template` in the definition of its own layer. The block would be written over the member,
-     * silently discarding it. A partial view, whose `<template>` block is written elsewhere, is not affected.
-     * @param {VNode} vTree - The virtual DOM tree representing the Single File Component
-     * @param {ScriptNodeInfo} ourSNI - The parsed script holding the definition of the SFC's own layer
-     * @param {String} layerName - The name of the layer defined by the SFC
-     * @return {Boolean} `true` if the template is defined twice
-     */
-    fluid.hasSFCTemplateConflict = function (vTree, ourSNI, layerName) {
-        const docTemplate = fluid.sfcBlocks(vTree, "template")[0];
-        const ownTemplate = fluid.get(ourSNI.defMaps, [layerName, "view", "$component", "template", $m]);
-        const viewLayers = fluid.defFromMap(ourSNI.text, ourSNI.defMaps, layerName, ["view", "$component", "$layers"]);
-        return !!docTemplate && !!ownTemplate && !fluid.makeArray(viewLayers).includes("fluid.partialViewComponent");
-    };
 
     /**
      * The provenance of a Single File Component, recorded in a top-level `<provenance>` block holding an element for
@@ -1397,9 +1347,193 @@ const fluidViewScope = function (fluid) {
     };
 
     /**
-     * Processes a vTree to extract and prepare injection records for scripts and styles.
-     * This function validates the presence of required script nodes, parses their definitions, and updates
-     * the layer definition with appropriate metadata. It also handles template blocks and style nodes.
+     * Copy an object with a member written into it - an existing member is replaced where it stands, otherwise the
+     * member is placed first or last among the object's keys
+     * @param {Object} obj - The object
+     * @param {String} key - The member's key
+     * @param {Any} value - The member's value
+     * @param {String} disposition - "first" or "last", where an absent member is placed
+     * @return {Object} The copied object
+     */
+    fluid.withMember = function (obj, key, value, disposition) {
+        let togo;
+        if (Object.hasOwn(obj, key)) {
+            togo = Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, k === key ? value : v]));
+        } else if (disposition === "first") {
+            togo = {[key]: value, ...obj};
+        } else {
+            togo = {...obj, [key]: value};
+        }
+        return togo;
+    };
+
+    /**
+     * Copy an object with a value written at a path of keys - any intermediate objects are copied with the value written
+     * into them, and absent ones are created
+     * @param {Object} obj - The object
+     * @param {String[]} segs - The path of keys
+     * @param {Any} value - The value to be written
+     * @param {String} disposition - "first" or "last", where an absent member is placed
+     * @return {Object} The copied object
+     */
+    fluid.withMemberPath = function (obj, segs, value, disposition) {
+        const [key, ...rest] = segs;
+        const existing = obj[key];
+        let newValue;
+        if (rest.length === 0) {
+            newValue = value;
+        } else if (fluid.isPlainObject(existing, true)) {
+            newValue = fluid.withMemberPath(existing, rest, value, disposition);
+        } else if (existing !== undefined) {
+            fluid.fail(`Cannot write path ${segs.join(".")} into non-object value `, existing);
+        } else {
+            newValue = rest.reduceRight((acc, seg) => ({[seg]: acc}), value);
+        }
+        return fluid.withMember(obj, key, newValue, disposition);
+    };
+
+    /**
+     * Augment the definition of the layer defined by a Single File Component, as its script supplies it to `fluid.def`,
+     * with what the SFC implies:
+     * - the view's template refers to the SFC's `<template>` block in the template store, unless the view is partial
+     * - if the view has no layers, it is given one resolving its template
+     * - the tag layer `fluid.sfcLayer` is placed first, where it is weakest, among the layer's own layers
+     * @param {Object} def - The definition of the layer, as supplied to `fluid.def`
+     * @param {String} layerName - The name of the layer
+     * @param {Boolean} hasTemplate - `true` if the SFC has a `<template>` block
+     * @return {Object|Unavailable} The augmented definition, or an unavailable value if the SFC defines its view's
+     * template twice, both as a `<template>` block and as `view.$component.template` - unless its view is partial,
+     * whose `<template>` block is found elsewhere
+     */
+    fluid.sfcAugmentDef = function (def, layerName, hasTemplate) {
+        const viewLayersPath = ["view", "$component", "$layers"];
+        const oldLayers = def.$layers;
+        const oldViewLayers = fluid.get(def, viewLayersPath);
+        const partial = fluid.makeArray(oldViewLayers).includes("fluid.partialViewComponent");
+        let togo;
+        if (hasTemplate && !partial && fluid.get(def, ["view", "$component", "template"]) !== undefined) {
+            togo = fluid.unavailable(fluid.sfcTemplateConflictMessage(layerName));
+        } else {
+            togo = def;
+            if (hasTemplate && !partial) {
+                togo = fluid.withMemberPath(togo, ["view", "$component", "template"], {sfcLayer: layerName}, "last");
+            }
+            if (!oldViewLayers && (hasTemplate || !oldLayers)) {
+                const addLayers = hasTemplate ? ["fluid.sfcTemplateViewComponent"] : ["fluid.templateViewComponent"];
+                togo = fluid.withMemberPath(togo, viewLayersPath, addLayers, "first");
+            }
+            if (!oldLayers) {
+                togo = fluid.withMember(togo, "$layers", ["fluid.sfcLayer", "fluid.component"], "first");
+            } else if (!fluid.makeArray(oldLayers).includes("fluid.sfcLayer")) {
+                togo = fluid.withMember(togo, "$layers", ["fluid.sfcLayer", ...fluid.makeArray(oldLayers)], "first");
+            }
+        }
+        return togo;
+    };
+
+    /**
+     * Describe the error of a Single File Component whose scripts do not define the layer it is named for
+     * @param {String} layerName - The name of the layer the SFC should define
+     * @param {String[]} found - The names of the layers its scripts define instead
+     * @return {String} The description of the error
+     */
+    fluid.sfcMissingDefMessage = (layerName, found) =>
+        `Error in SFC: Expected definition for layer ${layerName} but found ${found.join(", ")} instead`;
+
+    /**
+     * What is known of the definitions made by the inline scripts of a Single File Component as they were last evaluated
+     * @typedef {Object} SFCScriptRecord
+     * @property {String|null} ownNodeId - The node id of the script which defined the SFC's own layer, or `null` if
+     * none has
+     * @property {Set<String>} found - The names of the other layers its scripts defined, as they were last injected
+     */
+
+    /** @type {Object<String, SFCScriptRecord>} */
+    fluid.sfcScriptRecords = Object.create(null);
+
+    /**
+     * Fetch, creating if necessary, the record of the definitions made by the inline scripts of a Single File Component
+     * @param {String} layerName - The name of the layer defined by the SFC
+     * @return {SFCScriptRecord} The record
+     */
+    fluid.sfcScriptRecord = function (layerName) {
+        return fluid.sfcScriptRecords[layerName] ??= {ownNodeId: null, found: new Set()};
+    };
+
+    /**
+     * Called by an inline script of a Single File Component as it begins to run - see `fluid.wrapScriptSource`. Until
+     * `fluid.endSFCScript` is called, the definition of the SFC's own layer is augmented by `fluid.sfcAugmentDef` as it
+     * is supplied to `fluid.def`, and the definition of any layer is noted in the SFC's `SFCScriptRecord`.
+     * @param {String} layerName - The name of the layer defined by the SFC
+     * @param {String} nodeId - The node id of the script
+     * @param {Boolean} hasTemplate - `true` if the SFC has a `<template>` block
+     */
+    fluid.beginSFCScript = function (layerName, nodeId, hasTemplate) {
+        const record = fluid.sfcScriptRecord(layerName);
+        fluid.defInterceptors = {
+            "*": (layer, defName) => {
+                let togo = layer;
+                if (defName === layerName) {
+                    record.ownNodeId = nodeId;
+                    togo = fluid.sfcAugmentDef(layer, layerName, hasTemplate);
+                } else {
+                    record.found.add(defName);
+                }
+                return togo;
+            }
+        };
+    };
+
+    /**
+     * Called by an inline script of a Single File Component as it finishes running, and by its injector in case it did
+     * not - disarms the interceptor armed by `fluid.beginSFCScript`
+     */
+    fluid.endSFCScript = function () {
+        fluid.defInterceptors = null;
+    };
+
+    /**
+     * Evaluate the inline scripts of a Single File Component without registering anything they define, capturing the
+     * definitions they supply to `fluid.def`, with that of the SFC's own layer augmented by `fluid.sfcAugmentDef` - e.g.
+     * so that an SFC may be checked before it is registered. Any other effect of the scripts' top-level code, e.g. on a
+     * global, does take place.
+     * @param {VNode} vTree - The virtual DOM tree representing the Single File Component
+     * @param {String} layerName - The name of the layer defined by the SFC
+     * @return {Object<String, Object>|Unavailable} The definitions keyed by layer name, or an unavailable value if the
+     * scripts could not be evaluated
+     */
+    fluid.sfcDryRunDefs = function (vTree, layerName) {
+        const hasTemplate = fluid.sfcBlocks(vTree, "template").length > 0;
+        const texts = fluid.sfcBlocks(vTree, "script").filter(node => !node.attrs?.src).map(node => node.children[0]?.text ?? "");
+        const defs = {};
+        const def = fluid.def;
+        fluid.def = (defName, layer) => {
+            let togo;
+            if (layer === undefined) {
+                togo = def(defName);
+            } else {
+                defs[defName] = defName === layerName ? fluid.sfcAugmentDef(layer, layerName, hasTemplate) : layer;
+            }
+            return togo;
+        };
+        let togo;
+        try {
+            texts.forEach(text => new Function(text).call(fluid.global));
+            togo = defs;
+        } catch (e) {
+            togo = fluid.unavailable({message: `Error in SFC for ${layerName}: its script could not be evaluated - ${e.message}`, cause: e});
+        } finally {
+            fluid.def = def;
+        }
+        return togo;
+    };
+
+    /**
+     * Processes a vTree to extract and prepare injection records for scripts and styles. Each inline script is injected
+     * as written, and augments the definition of the SFC's own layer as it is evaluated - see `fluid.beginSFCScript`.
+     * An SFC with no inline script is rejected at once, by defining its layer as unavailable - one whose scripts, once
+     * evaluated, have not defined its layer is rejected by `fluid.subscribeDocToInjections`. Any `<template>` block is
+     * stored in the template registry.
      *
      * @param {VNode} vTree - The virtual DOM tree representing the Single File Component (SFC).
      * @param {String} layerName - The name of the layer associated with the SFC.
@@ -1407,113 +1541,56 @@ const fluidViewScope = function (fluid) {
      * `<symbols>` block is read verbatim. Without it, any such block is ignored.
      * @param {String} [sfcUrl] - The absolute URL of the SFC, against which relative `src` paths of its blocks are
      * resolved - see `fluid.resolveSFCPath`
-     * @return {Object<String, InjectRecord>} A map of injection records keyed by node ID, or `undefined` if an error occurs.
+     * @return {Object<String, InjectRecord>} A map of injection records keyed by node ID, empty if the SFC is rejected.
      */
     fluid.sfcToInjRecs = function (vTree, layerName, text, sfcUrl) {
-        const reject = message => {
-            const unavailable = fluid.unavailable(message);
-            fluid.def(layerName, unavailable);
-        };
-
         /** @type {Object<String, InjectRecord>} */
         const injRecs = {};
         const scriptNodes = fluid.sfcBlocks(vTree, "script");
         if (scriptNodes.length === 0) {
-            reject(`Error in SFC: Expected definition for layer ${layerName} but no script node was found`);
+            fluid.def(layerName, fluid.unavailable(`Error in SFC: Expected definition for layer ${layerName} but no script node was found`));
+        } else if (scriptNodes.every(scriptNode => scriptNode.attrs?.src)) {
+            fluid.def(layerName, fluid.unavailable(fluid.sfcMissingDefMessage(layerName, [])));
         } else {
-            /** @type {ScriptNodeInfo[]} */
-            const defMapList = fluid.parseSFCScripts(scriptNodes);
-            /** @type {LayerDefIndex} */
-            const layerDefIndex = fluid.indexLayerDefs(defMapList);
-            if (!layerDefIndex[layerName]) {
-                reject(`Error in SFC: Expected definition for layer ${layerName} but found ${Object.keys(layerDefIndex).join(", ")} instead`);
-            } else if (fluid.hasSFCTemplateConflict(vTree, defMapList[layerDefIndex[layerName].scriptIndex], layerName)) {
-                reject(fluid.sfcTemplateConflictMessage(layerName));
-            } else {
-                /** @type {LayerDefLocation} */
-                const ourDef = layerDefIndex[layerName];
-                /** @type {ScriptNodeInfo} */
-                const ourSNI = defMapList[ourDef.scriptIndex];
-                const oldLayers = fluid.defFromMap(ourSNI.text, ourSNI.defMaps, layerName, "$layers");
-                const viewLayersPath = ["view", "$component", "$layers"];
-                const oldViewLayers = fluid.defFromMap(ourSNI.text, ourSNI.defMaps, layerName, viewLayersPath);
+            /** @type {VNode} */
+            const docTemplate = fluid.sfcBlocks(vTree, "template")[0];
+            if (docTemplate) {
+                fluid.writeParsedTemplate(layerName, docTemplate);
+            }
 
-                const partial = fluid.makeArray(oldViewLayers).includes("fluid.partialViewComponent");
+            scriptNodes.forEach((scriptNode, index) => {
+                const nodeId = `fl-script-${layerName}-${index}`;
+                const src = scriptNode.attrs?.src;
+                const injRec = src ?
+                    {url: fluid.resolveSFCPath(sfcUrl, src), scope: scriptNode.attrs["data-fl-scope"],
+                        client: scriptNode.attrs["fluid-client"] !== undefined} :
+                    {text: scriptNode.children[0]?.text ?? "", sfcLayer: layerName, sfcTemplate: !!docTemplate};
+                injRec.nodeId = nodeId;
+                injRec.variety = "script";
+                injRecs[nodeId] = injRec;
+            });
 
-                let patchedText = ourSNI.text;
+            const styleNodes = fluid.sfcBlocks(vTree, "style");
+            styleNodes.forEach((styleNode, index) => {
+                const nodeId = `fl-style-${layerName}-${index}`;
+                const src = styleNode.attrs?.src;
+                const injRec = src ?
+                    {url: fluid.resolveSFCPath(sfcUrl, src)} :
+                    {text: styleNode.children[0]?.text ?? ""};
+                injRec.nodeId = nodeId;
+                injRec.variety = "style";
+                injRecs[nodeId] = injRec;
+            });
 
-                /** @type {VNode} */
-                const docTemplate = fluid.sfcBlocks(vTree, "template")[0];
-
-                let addLayers = ["fluid.templateViewComponent"];
-
-                // If a <template> block is present, store it in the template registry and add a definition to resolve it
-                if (docTemplate) {
-                    addLayers = ["fluid.sfcTemplateViewComponent"];
-                    // Template configuration is written onto the component's view. The template of a partial is found
-                    // in the template store by fluid.partialContributions, together with the cutpoint configured in the
-                    // layer's own definition or overridden by another layer
-                    if (!partial) {
-                        // The template is written as the view's template member, referring to the template store, so
-                        // that a template supplied by any stronger layer, e.g. a layer derived from this one, overrides it
-                        patchedText = fluid.patchDefMapPath(patchedText, ourDef, ["view", "$component", "template"], {sfcLayer: layerName}, "last");
-                    }
-                    fluid.writeParsedTemplate(layerName, docTemplate);
-                }
-
-                // Reparse if the text has already been patched since existing entries may have moved
-                const reparse = () => patchedText === ourSNI.text ? ourDef :
-                    {scriptIndex: ourDef.scriptIndex, ...fluid.parseDefMaps(patchedText, 0)[layerName]};
-                // If no layers were written for the component's view, add one that will correctly resolve its template.
-                // Any view inherited from the component's other layers will accumulate this layer.
-                if (!oldViewLayers && (docTemplate || !oldLayers)) {
-                    patchedText = fluid.patchDefMapPath(patchedText, reparse(), viewLayersPath, addLayers, "first");
-                }
-                // Add the tag layer marking the layer as derived from an SFC. This must be placed first, where it is
-                // weakest, since any of the existing layers may themselves be derived from an SFC - C3 linearization will
-                // then demand that they are stronger than the tag layer.
-                if (!oldLayers) {
-                    patchedText = fluid.patchDefMap(patchedText, reparse(), "$layers", ["fluid.sfcLayer", "fluid.component"], "first");
-                } else if (!fluid.makeArray(oldLayers).includes("fluid.sfcLayer")) {
-                    patchedText = fluid.patchDefMap(patchedText, reparse(), "$layers", ["fluid.sfcLayer", ...fluid.makeArray(oldLayers)], "first");
-                }
-                ourSNI.text = patchedText;
-
-
-                defMapList.forEach((sni, index) => {
-                    const nodeId = `fl-script-${layerName}-${index}`;
-                    const injRec = sni.url ?
-                        {url: fluid.resolveSFCPath(sfcUrl, sni.url), scope: sni.scope, client: sni.client} :
-                        {text: sni.text};
-                    injRec.defMaps = sni.defMaps;
-                    injRec.nodeId = nodeId;
-                    injRec.variety = "script";
-                    injRec.ownLayer = index === ourDef.scriptIndex;
-                    injRecs[nodeId] = injRec;
+            if (text !== undefined) {
+                fluid.sfcBlocks(vTree, "symbols").forEach((symbolsNode, index) => {
+                    const nodeId = `fl-symbols-${layerName}-${index}`;
+                    injRecs[nodeId] = {
+                        text: fluid.sfcBlockInnerText(text, symbolsNode),
+                        nodeId,
+                        variety: "symbols"
+                    };
                 });
-
-                const styleNodes = fluid.sfcBlocks(vTree, "style");
-                styleNodes.forEach((styleNode, index) => {
-                    const nodeId = `fl-style-${layerName}-${index}`;
-                    const src = styleNode.attrs?.src;
-                    const injRec = src ?
-                        {url: fluid.resolveSFCPath(sfcUrl, src)} :
-                        {text: styleNode.children[0]?.text ?? ""};
-                    injRec.nodeId = nodeId;
-                    injRec.variety = "style";
-                    injRecs[nodeId] = injRec;
-                });
-
-                if (text !== undefined) {
-                    fluid.sfcBlocks(vTree, "symbols").forEach((symbolsNode, index) => {
-                        const nodeId = `fl-symbols-${layerName}-${index}`;
-                        injRecs[nodeId] = {
-                            text: fluid.sfcBlockInnerText(text, symbolsNode),
-                            nodeId,
-                            variety: "symbols"
-                        };
-                    });
-                }
             }
         }
         return injRecs;
@@ -1557,18 +1634,21 @@ const fluidViewScope = function (fluid) {
             const vTree = fluid.parseHTMLToTree(text);
             // Load any SFCs this one imports before its own script executes, so that their layers are known to be
             // forthcoming when it is instantiated
-            fluid.loadImportMap(fluid.sfcImportMap(vTree, rec.url));
+            // Declared on behalf of the document which declared this SFC's own import
+            fluid.loadImportMap(fluid.sfcImportMap(vTree, rec.url), fluid.importMap[layerName]?.dokkument);
             // Declare its placeholders before its layer is defined, so that they are known before it is instantiated
             fluid.registerSFCPlaceholders(vTree, layerName, text);
             fluid.rejectPlaceholderWaiters(layerName);
             const injRecs = fluid.sfcToInjRecs(vTree, layerName, text, rec.url);
-            const ownScriptText = Object.values(injRecs).find(injRec => injRec.ownLayer)?.text;
             // An edit which leaves the script defining our layer unchanged, e.g. to the template alone, will not
             // reinject it, and so will not reach fluid.writeLayer - record the edit in the history here instead
-            if (previousText !== undefined && ownScriptText !== undefined && ownScriptText === rec.ownScriptText) {
+            const previousInjRecs = rec.injRecsSignal._value;
+            const ownNodeId = fluid.sfcScriptRecords[layerName]?.ownNodeId;
+            const previousOwn = ownNodeId && !fluid.isUnavailable(previousInjRecs) ? previousInjRecs?.[ownNodeId] : undefined;
+            const own = ownNodeId ? injRecs[ownNodeId] : undefined;
+            if (previousText !== undefined && previousOwn && own && fluid.diffFields(previousOwn, own, fluid.injRecDiffFields)) {
                 fluid.pushSFCHistory(layerName, previousText, text);
             }
-            rec.ownScriptText = ownScriptText;
             rec.injRecsSignal.set(injRecs);
             rec.loadCompletion.set(true);
             fluid.log("**** SFC completion for layer ", layerName);
@@ -1581,7 +1661,6 @@ const fluidViewScope = function (fluid) {
      * @property {Signal} textSignal - A signal containing the SFC's text content or an "unavailable" placeholder.
      * @property {Signal} injRecsSignal - A signal containing the injection records for the SFC.
      * @property {Map<Document, Effect>} docInjectEffects - A map of document-specific injection effects.
-     * @property {String} [ownScriptText] - The text of the script defining the SFC's own layer when last parsed
      */
 
     /** @type {Object<String, SFCRecord>} */
@@ -1647,8 +1726,16 @@ const fluidViewScope = function (fluid) {
         if (!fluid.templateStore[layerName]) {
             fluid.templateStore[layerName] = fluid.cell(fluid.unavailable({message: `Template of SFC for ${layerName} is not yet loaded`,
                 variety: "pending"}), {name: `template store for layer ${layerName}`});
+            // An input of whatever the template renders - in the terms of fluid.cell.upstream
+            fluid.templateStore[layerName].$traceInput = {kind: "template", layerName};
         }
-        return fluid.templateStore[layerName].get();
+        const template = fluid.templateStore[layerName].get();
+        // A template awaited demands its SFC - in a hydrated document the SFC's layer is defined by the scripts in its
+        // markup, and so is never demanded as a layer, but its template is parsed only from the SFC itself
+        if (fluid.isUnavailable(template)) {
+            fluid.loadImport(layerName);
+        }
+        return template;
     };
 
     /**
@@ -1662,6 +1749,7 @@ const fluidViewScope = function (fluid) {
             existing.set(template);
         } else {
             fluid.templateStore[layerName] = fluid.cell(template, {name: `template store for layer ${layerName}`});
+            fluid.templateStore[layerName].$traceInput = {kind: "template", layerName};
         }
     };
 
@@ -1711,7 +1799,7 @@ const fluidViewScope = function (fluid) {
                 {name: `load completion for SFC for layer ${layerName}`});
             rec.url = url;
             fluid.sfcLayerNames.set([...fluid.sfcLayerNames._value, layerName]);
-            // TODO: Currently starts fetch immediately but in future will be initiated by fluid.ensureImportsLoaded
+            // Begun by fluid.loadImport, once the layer is demanded
             rec.fetchSignal = fluid.fetchText(url);
             rec.textSignal.computed(x => x, [rec.fetchSignal]);
             rec.parseEffect = fluid.parseSFC(rec, layerName);
@@ -1784,6 +1872,8 @@ const fluidViewScope = function (fluid) {
      * @return {Signal<Boolean>} - A signal which resolves to `true` when injections are resolved
      */
     fluid.subscribeDocToInjections = function (layerName, dokkument) {
+        // Subscribing a document to a layer's injections demands the layer, whose file is loaded if it is imported
+        fluid.loadImport(layerName);
         const rec = fluid.readSFC(layerName);
         // TODO: One day clear these out
         let docEffect = rec.docInjectEffects.get(dokkument);
@@ -1798,7 +1888,7 @@ const fluidViewScope = function (fluid) {
                 let claimed = [];
                 if (!adoptChecked) {
                     adoptChecked = true;
-                    oldInjRecs = fluid.adoptMarkupInjections(dokkument, injRecs);
+                    oldInjRecs = fluid.adoptMarkupInjections(dokkument, injRecs, layerName);
                 }
                 try {
                     /** @type {DocInjectionRecord[]} */
@@ -1812,12 +1902,28 @@ const fluidViewScope = function (fluid) {
                     const prepared = await Promise.all(shared.docInjRecs.map(fluid.prepareSFCElement));
                     // Any script shared with another SFC which claimed it first must have executed before ours do
                     await Promise.all(shared.awaited);
+                    // The inline scripts of the SFC which are to be evaluated, which may define its layer afresh
+                    const evaluated = fluid.isOutputDocument(dokkument) ? [] :
+                        prepared.filter(docInjRec => docInjRec.injRec.sfcLayer === layerName);
+                    const record = fluid.sfcScriptRecord(layerName);
+                    if (evaluated.length > 0) {
+                        if (evaluated.some(docInjRec => docInjRec.injRec.nodeId === record.ownNodeId)) {
+                            record.ownNodeId = null;
+                        }
+                        record.found = new Set();
+                    }
                     // Commit phase - one synchronous block, so no stabilisation can observe a partial set of definitions
                     // Stylesheet links return promises which settle once the sheet is applied
                     const outcomes = await Promise.all(prepared.map(fluid.doInjectSFCElement));
 
                     outcomes.filter(fluid.isUnavailable).forEach(outcome =>
                         fluid.log(fluid.logLevel.FAIL, `Injection failure for layer ${layerName}: `, outcome));
+                    // Scripts which all evaluated without defining the SFC's layer reject it - one which failed is
+                    // reported above, leaving any definition it made before in force
+                    const failed = evaluated.some(docInjRec => fluid.isUnavailable(outcomes[prepared.indexOf(docInjRec)]));
+                    if (evaluated.length > 0 && !failed && !injRecs[record.ownNodeId]) {
+                        fluid.def(layerName, fluid.unavailable(fluid.sfcMissingDefMessage(layerName, [...record.found])));
+                    }
                 } finally {
                     claimed.forEach(claim => claim.resolve());
                     injDone.set(true);
@@ -1971,7 +2077,7 @@ const fluidViewScope = function (fluid) {
     fluid.siteRootAttribute = "fluid-site-root";
 
     // TODO: need equivalent for server-style injections where there is no document - this would use "require" or "import".
-    // Also: In future this will be the point that fluid.layerLoaders is actually triggered
+    // This is the point at which fluid.layerLoaders is triggered for a layer which is imported - see fluid.loadImport
     /**
      * Ensures that the specified layers are loaded and their imports are bound to the document.
      * @param {Shadow} shadow - The shadow object representing the component context.
@@ -1981,8 +2087,12 @@ const fluidViewScope = function (fluid) {
     fluid.ensureImportsLoaded = function (shadow, layerName) {
         // A layer cannot be defined by injecting its SFC into an output document, in which nothing executes
         const found = fluid.findDocument(shadow);
-        const dokkument = found && !fluid.isOutputDocument(found) ? found : fluid.defaultDocument;
         const importRec = fluid.importMap[layerName];
+        // A component with no document of its own, e.g. a free component on the server, has its layer's file injected
+        // into the document which declared the import, e.g. the host document of a static build
+        const dokkument = found && !fluid.isOutputDocument(found) ? found : fluid.defaultDocument ?? importRec?.dokkument;
+        // The layer is demanded, so its file is loaded, if it is imported and is not already loading
+        fluid.loadImport(layerName);
         if (importRec && dokkument === undefined) {
             // A component with no document, e.g. an avatar or a free component with no container on the server, cannot
             // inject the layer's SFC - its layer remains unavailable until the SFC is injected into a document for
@@ -2058,6 +2168,21 @@ const fluidViewScope = function (fluid) {
      * @type {WeakMap<Element, Shadow>}
      */
     fluid.viewContainerRegistry = new WeakMap();
+
+    /**
+     * The elements rendered as component islands within verbatim markup - see `allocateIsland` in
+     * `fluid.activateTemplate`. Each bears `fluid-layers`, as an element which boots itself does, but is rendered by a
+     * child of the component whose markup holds it, and so must never be booted by the document's self-boot effect -
+     * which would otherwise instantiate a second, free, component over it whenever it sees the element before the
+     * island's own view has registered it in `fluid.viewContainerRegistry`, e.g. whilst the island's SFC is loading
+     * @type {WeakSet<Element>}
+     */
+    fluid.islandElements = new WeakSet();
+
+    // The attribute marking the root element of a page whose own component tree will be booted over the whole of it, e.g.
+    // from its model - so that the document's self-boot effect boots none of its elements, e.g. the islands of its
+    // content, which the page's components render as their children, as free components of their own
+    fluid.pageBootAttribute = "fluid-page-boot";
 
     fluid.noteViewContainerRegistry = function (element, shadow) {
         const existing = fluid.viewContainerRegistry.get(element);
@@ -2265,6 +2390,34 @@ const fluidViewScope = function (fluid) {
         return fluid.booleanAttrs.has(key) && value === "false" ? false : value;
     };
 
+    // The attributes holding URLs which `fluid.siteRelativeAttrValue` resolves against the root of a page's site
+    fluid.siteUrlAttrs = new Set(["href", "src"]);
+
+    /**
+     * Resolve a site-absolute URL written into an attribute of a page of a site - one beginning with a single "/", e.g.
+     * "/css/main.css" - against the root of the site, as the page's root element records it in
+     * `fluid.siteRootAttribute`, e.g. to "../../css/main.css". Such a URL means the site's resource wherever the site
+     * is served from - at the root of a domain, beneath a path, or from files - and the page renders the same markup on
+     * the server and on the client, so that no pass over the output is needed to make it relative (Hugo's
+     * `relativeURLs`). This applies to every attribute written by rendering, whether bound in a template or held in
+     * verbatim markup, e.g. that of content rendered from markdown. A page which does not record its site's root, and
+     * any other URL, is left as written.
+     * @param {Element} element - The element to which the attribute is written
+     * @param {String} key - The attribute name
+     * @param {any} value - The value to be written
+     * @return {any} The value, with a site-absolute URL resolved against the site's root
+     */
+    fluid.siteRelativeAttrValue = function (element, key, value) {
+        let togo = value;
+        if (fluid.siteUrlAttrs.has(key) && typeof(value) === "string" && value.startsWith("/") && !value.startsWith("//")) {
+            const siteRoot = element.ownerDocument?.documentElement?.getAttribute(fluid.siteRootAttribute);
+            if (siteRoot) {
+                togo = siteRoot + value.substring(1);
+            }
+        }
+        return togo;
+    };
+
     /**
      * Materialise the serialisable form of an attribute value onto a DOM element. This is normally the attribute
      * itself, but the value of a `textarea` is materialised as its text content, and the value of a `select` as
@@ -2274,6 +2427,7 @@ const fluidViewScope = function (fluid) {
      * @param {any} value - The value to be materialised
      */
     fluid.materialiseAttr = function (element, key, value) {
+        value = fluid.siteRelativeAttrValue(element, key, value);
         const absent = fluid.isAbsentAttrValue(key, value);
         const tag = element.localName;
         if (key === "value" && tag === "textarea") {
@@ -2983,6 +3137,85 @@ const fluidViewScope = function (fluid) {
      * @param {Object<String, String>} attrs - The attributes of the element
      * @return {Object<String, String>} The element's data attributes in the form of its dataset
      */
+    // The attribute of an island's element, or of an element booting itself, holding the potentia of its component as
+    // JSON - e.g. a widget's settings and state, written into content as
+    //     <div fluid-layers="fluid.demos.counter" fluid-potentia='{"count": 3}'></div>
+    // A nested component's potentia is held at its member as a `$component` record, as in any layer, so that one JSON
+    // object holds what a PTF document holds in its potentia parts. Its member `$live` holds what PTF's live parts hold -
+    // the values written into the live layers of the component and of those beneath it, by path, e.g.
+    // `{"/": {"state": {"count": 4}}, "/inner": {"note": "edited"}}` - which are written once the component is first
+    // made, as PTF writes them - see fluid.ptf.islandFromParts and fluid.ptf.islandPotentia. It is an
+    // attribute rather than a child, since the island's own rendering replaces the element's children but keeps its
+    // attributes, so that it survives in markup rendered statically, and across re-renders
+    fluid.potentiaAttribute = "fluid-potentia";
+
+    /**
+     * Parse the text of a potentia attribute. One which does not parse, or does not hold an object, yields an
+     * unavailable value at `potentiaError`, so that the island renders and reports what is wrong with it
+     * @param {String} [text] - The attribute's text
+     * @return {Object} The potentia, less any `$layers`, which the element's `fluid-layers` names - empty if there is no
+     * attribute
+     */
+    fluid.parsePotentiaText = function (text) {
+        let togo = {};
+        if (text !== undefined && text !== null) {
+            try {
+                const parsed = JSON.parse(text);
+                if (fluid.isPlainObject(parsed, true)) {
+                    const {$layers, ...rest} = parsed; // eslint-disable-line no-unused-vars
+                    togo = rest;
+                } else {
+                    togo = {potentiaError: fluid.unavailable("The potentia of an island must be a JSON object", "error")};
+                }
+            } catch (error) {
+                togo = {potentiaError: fluid.unavailable("The potentia of an island is not valid JSON: " + error.message, "error")};
+            }
+        }
+        return togo;
+    };
+
+    /**
+     * Find what an element configures its component with - its `data-` attributes as `dataset`, and its potentia
+     * attribute - as an island's element and an element booting itself both do
+     * @param {Object<String, String>} attrs - The element's attributes
+     * @return {Object} The potentia, with `dataset`
+     */
+    fluid.attrsToPotentia = function (attrs) {
+        const {$live, ...potentia} = fluid.parsePotentiaText(attrs[fluid.potentiaAttribute]); // eslint-disable-line no-unused-vars
+        return {...potentia, dataset: fluid.attrsToDataset(attrs)};
+    };
+
+    /**
+     * Find the live values an element's potentia attribute holds - see fluid.potentiaAttribute
+     * @param {Object<String, String>} attrs - The element's attributes
+     * @return {Object<String, Object>|null} The values to be written, by the path of the component holding them as PTF
+     * names it, e.g. "/inner", or null if there are none
+     */
+    fluid.attrsToLive = function (attrs) {
+        const live = fluid.parsePotentiaText(attrs[fluid.potentiaAttribute]).$live;
+        return fluid.isPlainObject(live, true) && Object.keys(live).length > 0 ? live : null;
+    };
+
+    /**
+     * Write the live values of an island, or of an element booting itself, into its component and those beneath it,
+     * once it is available - as PTF writes a document's live parts, without recording them as the user's edits. PTF
+     * is loaded after this file, and is required only by a page whose islands hold live values
+     * @param {fluid.component} that - The component
+     * @param {Object<String, Object>} live - The values, as found by fluid.attrsToLive
+     * @return {Promise} Resolves once written
+     */
+    fluid.writeElementLive = function (that, live) {
+        return fluid.ptf.applyParts(that, Object.entries(live).map(([filename, values]) =>
+            ({kind: "live", contentType: "application/json", filename, body: JSON.stringify(values)})));
+    };
+
+    /**
+     * Read the attributes of an element as a plain object
+     * @param {Element} element - The element
+     * @return {Object<String, String>} Its attributes, by name
+     */
+    fluid.elementAttrs = element => Object.fromEntries([...element.attributes].map(attr => [attr.name, attr.value]));
+
     fluid.attrsToDataset = function (attrs) {
         const entries = Object.entries(attrs || {}).filter(([key]) => key.startsWith("data-"))
             .map(([key, value]) => [key.substring(5).replace(/-([a-z])/g, (match, letter) => letter.toUpperCase()), value]);
@@ -3214,13 +3447,26 @@ const fluidViewScope = function (fluid) {
             };
             vnode.elementSignal ||= fluid.cell(fluid.unavailableElement, {name: `Element signal for vnode ${vnode._id}`});
             delete vnode.children;
+            // As for a slot bearing @id, the element is written both by the verbatim markup and by the root of the
+            // island's own template, elided onto it - so that what the island's root wrote, e.g. into markup claimed
+            // from a static build, is not taken as the markup's and removed - see fluid.patchAttrs
+            vnode.isTemplateSlot = true;
+            vnode.isIsland = true;
+            // What the element configures the island with beyond its layers - see fluid.potentiaAttribute
+            const potentia = fluid.attrsToPotentia(vnode.attrs);
+            const live = fluid.attrsToLive(vnode.attrs);
+            // Live values are written only into an island made afresh - one which outlives its markup's re-rendering
+            // keeps what has been written into it since
+            const existed = !!selfShadow.childComponents[memberName];
             fluid.pushPotentia(selfShadow, memberName, [{
                 mergeRecordType: "template",
                 layer: {
+                    ...potentia,
                     $layers: ["fluid.component", ...layers],
-                    dataset: fluid.attrsToDataset(vnode.attrs),
                     view: {
+                        ...potentia.view,
                         $component: {
+                            ...potentia.view?.$component,
                             $layers: "fluid.viewComponent",
                             container: vnode.elementSignal,
                             parentTemplate
@@ -3228,6 +3474,12 @@ const fluidViewScope = function (fluid) {
                     }
                 }
             }]);
+            if (live && !existed) {
+                const child = selfShadow.childComponents[memberName];
+                if (child) {
+                    fluid.writeElementLive(fluid.proxyMat(child.computer, child, []), live);
+                }
+            }
             jointNames.push(memberName);
         }
 
@@ -3717,6 +3969,11 @@ const fluidViewScope = function (fluid) {
         if (vnode.isTemplateSlot) {
             element.flIsSlot = true;
         }
+        // Recorded before its attributes are written, so that the document's self-boot never sees the island's
+        // `fluid-layers` unrecorded - see fluid.islandElements
+        if (vnode.isIsland) {
+            fluid.islandElements.add(element);
+        }
         fluid.bindDom(vnode, element); // Will assign to elementSignal and allocate binding effects
         if (vnode.text !== undefined && !fluid.isSignal(vnode.text) && vnode.text !== element.nodeValue) {
             element.nodeValue = vnode.text;
@@ -3755,7 +4012,10 @@ const fluidViewScope = function (fluid) {
         fluid.allocateDomId(container);
         fluid.subscribeOutputDocumentInjections(self, container.ownerDocument);
         // console.log(`renderView beginning for ${self[$m].path} with vTree ${vTree._id} container `, container.flDomId);
-        fluid.patchChildren(vTree, container, true);
+        // A template whose root is a <fluid-fragment> slot, e.g. one rendering a list into the container with no element
+        // of its own, renders the slot as the sole child of a root writing nothing to the container
+        const root = vTree.tag === fluid.fragmentSlotTag ? {tag: vTree.tag, attrs: {}, children: [vTree]} : vTree;
+        fluid.patchChildren(root, container, true);
     };
 
     /**
@@ -3873,7 +4133,7 @@ const fluidViewScope = function (fluid) {
     });
 
     // A view rendering the template held as its member `template` - either markup, or a reference `{sfcLayer}` to the
-    // template of a Single File Component, as written by fluid.sfcToInjRecs
+    // template of a Single File Component, as written by fluid.sfcAugmentDef
     fluid.def("fluid.templateViewComponent", {
         $layers: "fluid.viewComponent",
         templateTree: "$compute:fluid.templateToTree({self}.template, {self}.verbatim)",
@@ -4000,13 +4260,13 @@ const fluidViewScope = function (fluid) {
         return togo;
     };
 
-    // Tag layer applied by fluid.sfcToInjRecs to every layer which was loaded from a Single File Component, allowing
+    // Tag layer applied by fluid.sfcAugmentDef to every layer which was loaded from a Single File Component, allowing
     // its MIME type to be determined by fluid.layerMimeType
     fluid.def("fluid.sfcLayer", {
         $variety: "framework"
     });
 
-    // Tag layer applied by fluid.sfcToInjRecs to the view of a layer loaded from a Single File Component with a template
+    // Tag layer applied by fluid.sfcAugmentDef to the view of a layer loaded from a Single File Component with a template
     fluid.def("fluid.sfcTemplateViewComponent", {
         $layers: "fluid.templateViewComponent",
         $variety: "framework"
@@ -4202,7 +4462,9 @@ const fluidViewScope = function (fluid) {
      * @param {String} tag - The tag
      * @return {Boolean} `true` if it is the tag of a template's root
      */
-    fluid.isTemplateRootTag = tag => tag === "fragment" || tag === "template" || tag === fluid.fragmentSlotTag;
+    // The tags of the roots of templates which are not themselves rendered - including the root holding the top-level
+    // nodes of verbatim markup, so that a member of a list rendering verbatim markup splices its nodes into the list
+    fluid.isTemplateRootTag = tag => tag === "fragment" || tag === "template" || tag === "verbatim" || tag === fluid.fragmentSlotTag;
 
     /**
      * Compute the vTree for a list of view components by concatenating the vTrees rendered by their views
@@ -4284,21 +4546,31 @@ const fluidViewScope = function (fluid) {
         const selfBootQuery = fluid.liveQuerySelectorAll("*[fluid-layers]", dokkument, dokkument);
         return fluid.cell.effect( () => {
             const elements = selfBootQuery.get();
-            elements.forEach(element => {
+            // A page whose own component tree renders it boots none of its elements alone - see fluid.pageBootAttribute
+            const pageBoots = dokkument.documentElement?.hasAttribute(fluid.pageBootAttribute);
+            (pageBoots ? [] : elements).forEach(element => {
                 const existing = fluid.viewContainerRegistry.get(element);
-                if (!existing) {
+                if (!existing && !fluid.islandElements.has(element)) {
                     const layers = element.getAttribute("fluid-layers").split(" ").map(layer => layer.trim());
                     const [firstLayer, ...restLayers] = layers;
+                    const potentia = fluid.attrsToPotentia(fluid.elementAttrs(element));
                     const instance = fluid.initFreeComponent(firstLayer, {
+                        ...potentia,
                         $layers: restLayers,
                         view: {
+                            ...potentia.view,
                             $component: {
+                                ...potentia.view?.$component,
                                 container: element
                             }
                         }
                     });
                     // Put this in early in case instantiation fails - TODO standardise access to shadow
                     fluid.viewContainerRegistry.set(element, instance[$t].shadow);
+                    const live = fluid.attrsToLive(fluid.elementAttrs(element));
+                    if (live) {
+                        fluid.writeElementLive(instance, live);
+                    }
                 }
             });
         }, null, {name: `fluid.selfBootEffect for document at ${dokkument.location}`});

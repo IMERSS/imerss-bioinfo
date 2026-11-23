@@ -35,7 +35,6 @@ https://github.com/fluid-project/infusion/raw/main/Infusion-LICENSE.txt
         bootPath: "src/framework/core/js/FluidBoot.js",
         // The files a page loads, in order, relative to Infusion's root directory
         files: [
-            "src/lib/lezer/lezer-javascript-browser.js",
             "src/framework/core/js/FluidCore.js",
             "src/framework/core/js/FluidSignals.js",
             "src/framework/core/js/Fluid.js",
@@ -43,9 +42,10 @@ https://github.com/fluid-project/infusion/raw/main/Infusion-LICENSE.txt
             "src/framework/core/js/FluidIL.js",
             "src/framework/core/js/FluidView.js",
             "src/framework/core/js/FluidPTF.js",
-            "src/framework/core/js/FluidView-browser.js",
             "src/framework/core/js/template-parser.js",
-            "src/framework/core/js/sfc-parser.js"
+            // Last, since it boots the document as it runs - which, in a page already loaded, is at once, so that every
+            // file it relies on, e.g. the template parser reading the SFCs it imports, must have loaded before it
+            "src/framework/core/js/FluidView-browser.js"
         ],
         // The bundle of the same files, built by build.js
         builtFile: "dist/fluid.boot.min.js",

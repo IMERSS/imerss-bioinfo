@@ -1,0 +1,280 @@
+{
+    "title": "Atlas: a region defines a site for the seed mix evaluator, and the view tabs are operated from the keyboard",
+    "page": "indexBeasAtlas.html",
+    "viewport": {"width": 1600, "height": 1000},
+    "ready": [
+        {
+            "description": "all records are displayed, and their total is saved",
+            "target": {"selector": ".imerss-record-reporter"},
+            "number": {"pattern": "of (\\d+) records", "greaterThan": 0, "save": "total"}
+        },
+        {
+            "target": {"selector": ".imerss-record-reporter"},
+            "number": {"pattern": "Displaying (\\d+)", "equals": "total"}
+        },
+        {
+            "target": {"selector": ".imerss-bipartite text.lab"},
+            "count": {"atLeast": 2}
+        }
+    ],
+    "steps": [
+        {
+            "description": "Unfold the Region facet of the filters panel",
+            "action": {"type": "click", "target": {"selector": ".imerss-facet-head", "text": "Region"}},
+            "expect": [
+                {
+                    "target": {"selector": "[aria-label='All records of Oregon']"},
+                    "visible": true
+                },
+                {
+                    "description": "Region is the first of the filters",
+                    "target": {"selector": ".imerss-facets .imerss-facet-name", "index": 0},
+                    "text": {"equals": "Region"}
+                }
+            ]
+        },
+        {
+            "description": "Search the regions, and only those matching are shown",
+            "action": {"type": "type", "target": {"selector": "#fli-imerss-region-search"}, "text": "Willamette"},
+            "expect": [
+                {
+                    "target": {"selector": ".imerss-groups .imerss-check", "text": "Willamette Valley"},
+                    "count": {"atLeast": 1},
+                    "visible": true
+                },
+                {
+                    "description": "a region not matching is hidden",
+                    "target": {"selector": ".imerss-groups .imerss-check", "text": "Coast Range"},
+                    "visible": false
+                }
+            ]
+        },
+        {
+            "description": "Clear the search",
+            "action": {"type": "type", "target": {"selector": "#fli-imerss-region-search"}, "text": "", "clear": true},
+            "expect": [
+                {
+                    "target": {"selector": "#fli-imerss-region-search"},
+                    "value": {"equals": ""}
+                }
+            ]
+        },
+        {
+            "description": "Check all of Oregon, and fewer records are displayed",
+            "action": {"type": "click", "target": {"selector": "[aria-label='All records of Oregon']"}},
+            "expect": [
+                {
+                    "target": {"selector": "[aria-label='All records of Oregon']"},
+                    "checked": true
+                },
+                {
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "lessThan": "total", "greaterThan": 0, "save": "oregon"}
+                },
+                {
+                    "description": "the Region facet shows that it is active",
+                    "target": {"selector": ".imerss-facet-state", "within": {"selector": ".imerss-facet-head", "text": "Region"}},
+                    "visible": true
+                }
+            ]
+        },
+        {
+            "description": "Focus the selected Network tab",
+            "action": {"type": "focus", "target": {"selector": ".mf-tab", "exactText": "Network"}},
+            "expect": [
+                {
+                    "target": {"selector": ".mf-tab[aria-selected=true]", "exactText": "Network"},
+                    "focused": true
+                }
+            ]
+        },
+        {
+            "description": "Move to the Matrix tab with the right arrow key",
+            "action": {"type": "press", "key": "ArrowRight"},
+            "expect": [
+                {
+                    "target": {"selector": ".mf-tab[aria-selected=true]"},
+                    "count": {"equals": 1},
+                    "focused": true,
+                    "text": {"equals": "Matrix"}
+                },
+                {
+                    "description": "the matrix is shown, and the network hidden",
+                    "target": {"selector": ".imerss-interactions-canvas"},
+                    "visible": true
+                },
+                {
+                    "target": {"selector": ".imerss-bipartite"},
+                    "visible": false
+                }
+            ]
+        },
+        {
+            "description": "Move to the Plant list tab, which lists the plants of Oregon",
+            "action": {"type": "press", "key": "ArrowRight", "times": 2},
+            "expect": [
+                {
+                    "target": {"selector": ".mf-tab[aria-selected=true]"},
+                    "focused": true,
+                    "text": {"equals": "Plant list"}
+                },
+                {
+                    "description": "the list counts the observations displayed",
+                    "target": {"selector": ".imerss-plant-list .imerss-listbar-count"},
+                    "visible": true,
+                    "text": {"contains": "taxa"},
+                    "number": {"pattern": "(\\d+) observations", "greaterThan": 0}
+                },
+                {
+                    "description": "the list is arranged by family",
+                    "target": {"selector": ".imerss-plant-list .imerss-famhead"},
+                    "count": {"atLeast": 1}
+                }
+            ]
+        },
+        {
+            "description": "Arrange the plant list from A to Z",
+            "action": {"type": "click", "target": {"selector": ".imerss-plant-list .imerss-seg-btn", "text": "A – Z"}},
+            "expect": [
+                {
+                    "target": {"selector": ".imerss-plant-list .imerss-seg-on"},
+                    "text": {"equals": "A – Z"}
+                },
+                {
+                    "target": {"selector": ".imerss-plant-list .imerss-famhead"},
+                    "count": {"equals": 0}
+                },
+                {
+                    "target": {"selector": ".imerss-plant-list .imerss-taxon"},
+                    "count": {"atLeast": 1}
+                }
+            ]
+        },
+        {
+            "description": "Return to the tab strip by clicking the selected Plant list tab",
+            "action": {"type": "click", "target": {"selector": ".mf-tab", "exactText": "Plant list"}},
+            "expect": [
+                {
+                    "description": "the selected tab holds the focus",
+                    "target": {"selector": ".mf-tab[aria-selected=true]"},
+                    "focused": true,
+                    "text": {"equals": "Plant list"}
+                }
+            ]
+        },
+        {
+            "description": "Move on to the Bee abundance tab, whose charts are drawn",
+            "action": {"type": "press", "key": "ArrowRight"},
+            "expect": [
+                {
+                    "target": {"selector": ".mf-tab[aria-selected=true]"},
+                    "text": {"equals": "Bee abundance"}
+                },
+                {
+                    "target": {"selector": ".imerss-bee-abundance .imerss-chart-title", "text": "Bee families"},
+                    "visible": true
+                }
+            ]
+        },
+        {
+            "description": "Move on to the Seed mix evaluator, whose site is the region selected",
+            "action": {"type": "press", "key": "ArrowRight"},
+            "expect": [
+                {
+                    "target": {"selector": ".mf-tab[aria-selected=true]"},
+                    "focused": true,
+                    "text": {"equals": "Seed mix evaluator"}
+                },
+                {
+                    "description": "the plants established on the site start ticked",
+                    "target": {"selector": ".mf-seed-list input[data-seed]:checked"},
+                    "count": {"atLeast": 1}
+                },
+                {
+                    "description": "the habitat provided by the mix is read, and saved",
+                    "target": {"selector": ".mf-seedread"},
+                    "visible": true,
+                    "number": {"pattern": "(\\d+) of \\d+ bee species", "greaterThan": 0, "save": "supported"}
+                }
+            ]
+        },
+        {
+            "description": "Tab out of the tab strip, past the download button, into the seed mix's controls",
+            "action": {"type": "press", "key": "Tab", "times": 2},
+            "expect": [
+                {
+                    "target": {"selector": ".imerss-seed-clear"},
+                    "focused": true
+                }
+            ]
+        },
+        {
+            "description": "Clear the mix with Enter, and no bees are supported",
+            "action": {"type": "press", "key": "Enter"},
+            "expect": [
+                {
+                    "target": {"selector": ".mf-seed-list input[data-seed]:checked"},
+                    "count": {"equals": 0}
+                },
+                {
+                    "target": {"selector": ".mf-seedread"},
+                    "number": {"pattern": "(\\d+) of \\d+ bee species", "equals": 0}
+                }
+            ]
+        },
+        {
+            "description": "Tick one plant into the mix, and some bees are supported",
+            "action": {"type": "click", "target": {"selector": ".mf-seed-list input[data-seed]", "index": 0}},
+            "expect": [
+                {
+                    "target": {"selector": ".mf-seed-list input[data-seed]:checked"},
+                    "count": {"equals": 1}
+                },
+                {
+                    "target": {"selector": ".mf-seedread"},
+                    "number": {"pattern": "(\\d+) of \\d+ bee species", "greaterThan": 0, "lessThan": "supported"}
+                }
+            ]
+        },
+        {
+            "description": "Reset the mix, and the established plants are restored",
+            "action": {"type": "click", "target": {"selector": ".imerss-seed-reset"}},
+            "expect": [
+                {
+                    "target": {"selector": ".mf-seedread"},
+                    "number": {"pattern": "(\\d+) of \\d+ bee species", "equals": "supported"}
+                }
+            ]
+        },
+        {
+            "description": "Search the plants of the seed mix",
+            "action": {"type": "type", "target": {"selector": ".mf-seed-search"}, "text": "Phacelia"},
+            "expect": [
+                {
+                    "target": {"selector": ".mf-seed-list .imerss-taxon", "index": 0},
+                    "text": {"contains": "Phacelia"}
+                },
+                {
+                    "description": "every plant listed matches the search",
+                    "target": {"selector": ".mf-seed-list .imerss-taxon", "last": true},
+                    "text": {"contains": "Phacelia"}
+                }
+            ]
+        },
+        {
+            "description": "Uncheck Oregon, and every record is displayed again",
+            "action": {"type": "click", "target": {"selector": "[aria-label='All records of Oregon']"}},
+            "expect": [
+                {
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "equals": "total"}
+                },
+                {
+                    "description": "with no site, the seed mix evaluator says so",
+                    "target": {"selector": ".mf-seednote"},
+                    "text": {"contains": "No site is defined"}
+                }
+            ]
+        }
+    ]
+}

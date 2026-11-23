@@ -320,7 +320,7 @@ const fluidPTFScope = function (fluid) {
      * i) the definitions of all user layers resolved in the `$layers` of the component and any of its subcomponents,
      * sorted by `fluid.ptf.sortLayerNames` so that the layer of the component itself comes first,
      * ii) the user potentia of the component and any subcomponents having one and iii) the contents of the live layers
-     * of the component and its subcomponents.
+     * of the component and its subcomponents. A subcomponent still being constructed is transmitted from its potentia.
      * @param {fluid.component} component - The component to be transmitted
      * @return {PTFPart[]} The parts required to reconstruct the component
      */
@@ -333,8 +333,11 @@ const fluidPTFScope = function (fluid) {
         const liveParts = [];
         const visit = function (shadow, segs) {
             const isRoot = segs.length === 0;
-            fluid.deSignal(shadow.that.$layers).forEach(layerName => {
-                if (fluid.isUserLayer(layerName)) {
+            // A component still being constructed, e.g. a view whilst its template loads, has no instance yet - its
+            // layers are read from its potentia, as are those of the root above
+            const ownLayers = shadow.that ? fluid.deSignal(shadow.that.$layers) : shadow.potentia.get().layerNames;
+            ownLayers.forEach(layerName => {
+                if (typeof(layerName) === "string" && !fluid.isReferenceOrExpander(layerName) && fluid.isUserLayer(layerName)) {
                     layerNames.add(layerName);
                 }
             });
@@ -770,6 +773,118 @@ const fluidPTFScope = function (fluid) {
     fluid.ptf.instantiate = function (text, options) {
         const parts = fluid.ptf.decode(text);
         return fluid.isUnavailable(parts) ? Promise.reject(parts) : fluid.ptf.instantiateParts(parts, options);
+    };
+
+    /*** Islands - a component written into content as an element, e.g. a widget in a post ***/
+
+    // A component may be written into markup as an element bearing `fluid-layers` and `fluid-potentia` - see
+    // fluid.potentiaAttribute in FluidView.js. These functions convert between that and PTF, so that a widget may be
+    // inserted, copied, pasted and saved as one and the same thing
+
+    /**
+     * Deep-merge plain objects, as layers merge, for folding potentia
+     * @param {Object} target - The object merged into, which is modified
+     * @param {Object} source - The object merged from
+     * @return {Object} The target
+     */
+    fluid.ptf.mergeInto = function (target, source) {
+        fluid.each(source, (value, key) => {
+            if (fluid.isPlainObject(value, true) && fluid.isPlainObject(target[key], true)) {
+                fluid.ptf.mergeInto(target[key], value);
+            } else {
+                target[key] = value;
+            }
+        });
+        return target;
+    };
+
+    /**
+     * Fold the parts of a PTF document into what an island's element holds - its layers, and one potentia object, in
+     * which the potentia of each component beneath the root is held at its member as a `$component` record, and the
+     * live values of all of them at `$live`
+     * @param {PTFPart[]} parts - The decoded parts
+     * @return {Object} `{layers, potentia, layerParts}` - the layers its `fluid-layers` names, the root first, its
+     * potentia, and the parts defining layers, which a host must make available, e.g. by writing them to the site
+     */
+    fluid.ptf.islandFromParts = function (parts) {
+        const rootPart = parts.find(fluid.ptf.isRootPotentiaPart);
+        if (!rootPart) {
+            throw fluid.unavailable("PTF document has no potentia for its root component", "error");
+        }
+        const {$layers, ...rootPotentia} = JSON.parse(rootPart.body);
+        const potentia = fluid.ptf.mergeInto({}, rootPotentia);
+        parts.filter(part => part.kind === "potentia" && part !== rootPart).forEach(part => {
+            const segs = fluid.ptf.filenameToSegs(part.filename);
+            const holder = segs.reduce((acc, seg) => {
+                acc[seg] = fluid.isPlainObject(acc[seg], true) ? acc[seg] : {};
+                acc[seg].$component = fluid.isPlainObject(acc[seg].$component, true) ? acc[seg].$component : {};
+                return acc[seg].$component;
+            }, potentia);
+            fluid.ptf.mergeInto(holder, JSON.parse(part.body));
+        });
+        const liveParts = parts.filter(part => part.kind === "live");
+        if (liveParts.length > 0) {
+            potentia.$live = Object.fromEntries(liveParts.map(part => [part.filename, JSON.parse(part.body)]));
+        }
+        return {layers: fluid.makeArray($layers), potentia, layerParts: parts.filter(part => part.kind === "layer")};
+    };
+
+    /**
+     * Escape text to stand within a single-quoted attribute of markup
+     * @param {String} text - The text
+     * @return {String} The escaped text
+     */
+    fluid.ptf.escapeAttribute = text => text.replace(/&/g, "&amp;").replace(/'/g, "&#39;").replace(/</g, "&lt;");
+
+    /**
+     * Write the element holding an island - one line, so that markdown takes it as a single HTML block
+     * @param {Object} island - The island
+     * @param {String[]} island.layers - The layers its `fluid-layers` names
+     * @param {Object} [island.potentia] - Its potentia, as made by `islandFromParts` or `islandPotentia`
+     * @param {String} [island.id] - The member name its `fluid-id` gives it, so that it keeps its identity
+     * @param {String} [island.tag] - Its element's tag, by default "div"
+     * @return {String} The markup
+     */
+    fluid.ptf.islandMarkup = function ({layers, potentia, id, tag = "div"}) {
+        const hasPotentia = potentia && Object.keys(potentia).length > 0;
+        return `<${tag} fluid-layers="${layers.join(" ")}"` + (id ? ` fluid-id="${id}"` : "") +
+            (hasPotentia ? ` fluid-potentia='${fluid.ptf.escapeAttribute(JSON.stringify(potentia))}'` : "") + `></${tag}>`;
+    };
+
+    /**
+     * Compute what an island's element should now hold as its potentia - what it was written with, and the values
+     * since written into the live layers of its component and those beneath it, so that a widget's state is saved
+     * with the content holding it
+     * @param {fluid.component} that - The island's component
+     * @param {Object<String, String>} attrs - The attributes its element was written with
+     * @return {Object} The potentia, for `islandMarkup`
+     */
+    fluid.ptf.islandPotentia = function (that, attrs) {
+        const {$live, ...written} = fluid.parsePotentiaText(attrs[fluid.potentiaAttribute]);
+        const live = fluid.ptf.mergeInto({}, fluid.isPlainObject($live, true) ? $live : {});
+        fluid.ptf.componentToParts(that).filter(part => part.kind === "live").forEach(part => {
+            live[part.filename] = fluid.ptf.mergeInto(live[part.filename] || {}, JSON.parse(part.body));
+        });
+        return Object.keys(live).length > 0 ? {...written, $live: live} : written;
+    };
+
+    /**
+     * Make the parts of a PTF document holding an island, e.g. to copy it to the clipboard. Its potentia is held in
+     * the template of its parent rather than as the user's, so the root potentia part is made from its element's
+     * attributes, and its live values as live parts
+     * @param {fluid.component} that - The island's component
+     * @param {Object<String, String>} attrs - The attributes of its element
+     * @return {PTFPart[]} The parts
+     */
+    fluid.ptf.islandToParts = function (that, attrs) {
+        const {$live, ...potentia} = fluid.ptf.islandPotentia(that, attrs);
+        const layers = (attrs["fluid-layers"] || "").split(/\s+/).filter(layer => layer);
+        const layerParts = fluid.ptf.componentToParts(that).filter(part => part.kind === "layer");
+        const rootPart = {kind: "potentia", contentType: fluid.layerMimeTypes.json, filename: fluid.ptf.segsToFilename([]),
+            body: JSON.stringify({$layers: layers, ...potentia}, null, 4)};
+        const liveParts = Object.entries($live || {}).map(([filename, values]) =>
+            ({kind: "live", contentType: fluid.layerMimeTypes.json, filename, body: JSON.stringify(values, null, 4)}));
+        return [...layerParts, rootPart, ...liveParts];
     };
 
     /*** Undoable histories of an arena, and their persistence ***/

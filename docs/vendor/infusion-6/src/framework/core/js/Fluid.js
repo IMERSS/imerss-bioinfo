@@ -1108,12 +1108,30 @@ const $fluidScope = function (fluid) {
         }
     };
 
+    /**
+     * The first segment of a global path - the name of the global at which it is rooted
+     * @param {String|String[]} path - The global path
+     * @return {String} The name of its root
+     */
+    fluid.globalRoot = path => Array.isArray(path) ? path[0] : String(path).split(".")[0];
+
+    /**
+     * Determine whether a global path is rooted at a global property of its own, rather than at a name the global
+     * object reaches otherwise - in a browser, the named access by which `window.x` yields the element with id or name
+     * "x" if no global "x" is defined, e.g. a `<fluid-module id="x">` declaring a module whose layers are named x.*.
+     * Such an element is not the namespace of those layers, and writing to it as one would lose what is written once a
+     * global of the name is defined
+     * @param {String|String[]} path - The global path
+     * @return {Boolean} `true` if the global object holds its root as a property of its own
+     */
+    fluid.isOwnGlobal = path => Object.prototype.hasOwnProperty.call(fluid.global, fluid.globalRoot(path));
+
     /** Returns any value held at a particular global path. This may be an object or a function, depending on what has been stored there.
      * @param {String|String[]} path - The global path from which the value is to be fetched
      * @return {any} The value that was stored at the path, or a fluid.unavailable value if there is none.
      */
     fluid.getGlobalValue = path => {
-        const value = fluid.get(fluid.global, path);
+        const value = fluid.isOwnGlobal(path) ? fluid.get(fluid.global, path) : undefined;
         return value === undefined ? fluid.unavailable({
             message: "Global value " + path + " is not defined",
             path
@@ -1144,6 +1162,11 @@ const $fluidScope = function (fluid) {
      * @param {any} value - The value to set at the specified global path.
      */
     fluid.setGlobalValue = (path, value) => {
+        const root = fluid.globalRoot(path);
+        if (!fluid.isOwnGlobal(path)) {
+            // A fresh own property shadows whatever the root's name reached otherwise, e.g. an element of the same id
+            fluid.global[root] = undefined;
+        }
         fluid.set(fluid.global, path, value);
     };
 
@@ -2143,7 +2166,10 @@ const $fluidScope = function (fluid) {
      */
     fluid.newLayer = function (layerName, layerDef) {
         const store = fluid.layerStore.get();
-        const newStore = {...store, [layerName]: fluid.cell(layerDef, {name: `Layer definition for ${layerName}`})};
+        const layerCell = fluid.cell(layerDef, {name: `Layer definition for ${layerName}`});
+        // An input of whatever is built from the layer - its task description, in the terms of fluid.cell.upstream
+        layerCell.$traceInput = {kind: "layer", layerName};
+        const newStore = {...store, [layerName]: layerCell};
         fluid.layerStore.set(newStore);
         fluid.history.push({type: "newLayer", newStore, oldStore: store, layerName});
     };
@@ -2177,6 +2203,7 @@ const $fluidScope = function (fluid) {
                 message: "Layer " + layerName + " is not defined",
                 path: ["layer", layerName]
             }, "config"), {name: `Layer store signal for layer ${layerName}`});
+            togo.$traceInput = {kind: "layer", layerName};
             if (demand) {
                 // TODO: Initiate fetch at this point if it is in importMap
                 togo.demanded = true;
@@ -2231,7 +2258,11 @@ const $fluidScope = function (fluid) {
                 const imported = !!fluid.importMap[layerName];
                 const waiting = (requiredBy.length ? `, required by layer ${requiredBy.join(", ")}` : "") +
                     (componentPaths.length ? ` for component at path ${componentPaths.join(", ")}` : "");
-                const why = imported ? "the file imported for it was loaded but did not define it" :
+                // An import whose loader never ran was declared but never demanded as loaded - distinct from one whose
+                // file arrived without defining the layer
+                const loaded = !fluid.importMap[layerName]?.loader || fluid.importMap[layerName].loading;
+                const why = imported ? (loaded ? "the file imported for it was loaded but did not define it" :
+                    "the file imported for it was never loaded") :
                     "no import or module supplies it - note that a Single File Component imported by <fluid-import> is loaded " +
                     "only when the layer named after its file is demanded, e.g. foo-barBaz.vue for foo.barBaz, so that a layer " +
                     "demanded by name needs a file of its own";
@@ -2529,6 +2560,10 @@ const $fluidScope = function (fluid) {
      * rather than merging them. A layer may instead hold an IL reference at the path - whether this designates a
      * component, which will then be injected there, can only be known once it is resolved (see
      * `fluid.expandReferenceRecord`) and so, as for any other value, it simply overrides all weaker contributions. A
+     * stronger subcomponent record naming no `$layers` does not displace the reference, but *refines* what it injects:
+     * it is collected into `refinements`, and merged into the injected component, as any operation at an injected site
+     * is an operation on what is injected there - see `fluid.distributeRefinements`. One naming `$layers` constructs a
+     * fresh component, displacing the reference. A
      * layer may also remove the subcomponent by holding `null`, or `{$component: null}`, at the path, which likewise
      * overrides all weaker contributions - a stronger contribution brings the subcomponent back. Any other value at that
      * path which is not a subcomponent record is an error.
@@ -2536,21 +2571,30 @@ const $fluidScope = function (fluid) {
      * @param {String} key - The key at which the subcomponent record is held
      * @param {String[]} segs - The path of the layers' parent within the root being merged
      * @param {MergeRecord[]} mergeRecords - The merge records holding the layers
+     * @param {ComponentContribution[]} [refinements] - Accumulates the records refining the component injected by an IL
+     * reference which is the strongest value at the path, each with the name of its merge record
      * @return {Object|String|null} A value holding the collected contributions as its `$component` member, or an IL
      * reference if this is the strongest value at the path, or `null` if the subcomponent has been removed
      */
-    fluid.collectComponentRecords = function (layers, key, segs, mergeRecords) {
+    fluid.collectComponentRecords = function (layers, key, segs, mergeRecords, refinements = []) {
         const contributions = [];
         let reference;
         layers.forEach((layer, i) => {
             if (fluid.isPlainObject(layer) && key in layer) {
                 const value = layer[key];
-                if (fluid.isComponentRecordHolder(value) && fluid.isPlainObject(value.$component, true)) {
-                    contributions.push({record: value.$component, mergeRecordName: mergeRecords[i].mergeRecordName});
+                const record = fluid.isComponentRecordHolder(value) && fluid.isPlainObject(value.$component, true) ? value.$component : null;
+                if (record && typeof(reference) === "string" && record.$layers === undefined) {
+                    // A record naming no layers, stronger than a reference, refines whatever component the reference
+                    // injects, rather than displacing it - see fluid.refinedReferenceRecord
+                    refinements.push({record, mergeRecordName: mergeRecords[i].mergeRecordName});
+                } else if (record) {
+                    contributions.push({record, mergeRecordName: mergeRecords[i].mergeRecordName});
                     reference = undefined;
+                    refinements.length = 0;
                 } else if (fluid.isILReference(value) || value === null || fluid.isComponentRecordHolder(value) && value.$component === null) {
                     // An IL reference or a removal discards all weaker contributions
                     contributions.length = 0;
+                    refinements.length = 0;
                     reference = fluid.isILReference(value) ? value : null;
                 } else if (value !== undefined) {
                     const from = mergeRecords[i].mergeRecordName ?? mergeRecords[i].mergeRecordType;
@@ -2743,7 +2787,11 @@ const $fluidScope = function (fluid) {
             }
         }
         if (holdsComponent) {
-            newTarget = fluid.collectComponentRecords(layers, key, segs, mergeRecords);
+            const refinements = [];
+            newTarget = fluid.collectComponentRecords(layers, key, segs, mergeRecords, refinements);
+            if (refinements.length > 0 && typeof(newTarget) === "string") {
+                fluid.set(layerMap, [...segs, key, $m, "refinements"], new fluid.refinedReferenceRecord(newTarget, refinements));
+            }
         } else if (count > 1 && fluid.effectMaterial(last)) {
             newTarget = fluid.collectEffectRecords(layers, key, segs, plainLayers);
         } else if (count > 1 && fluid.isPlainObject(last, true)) {
@@ -2760,6 +2808,31 @@ const $fluidScope = function (fluid) {
         }
         target[key] = newTarget;
         fluid.set(layerMap, [...segs, key, $m, "source"], mergeRecords[lastIndex].mergeRecordName);
+    };
+
+    /**
+     * The record of an IL reference at a member which injects a component there, together with the records refining that
+     * component - stronger subcomponent records at the member which name no `$layers`, and which are merged into the
+     * injected component rather than displacing the reference - see `fluid.collectComponentRecords`
+     * @param {String} reference - The IL reference
+     * @param {ComponentContribution[]} refinements - The refining records, weakest first, each with the name of its merge record
+     */
+    fluid.refinedReferenceRecord = function (reference, refinements) {
+        this.reference = reference;
+        this.refinements = refinements;
+    };
+
+    /**
+     * Determine whether two refined references are equivalent, so that the injection allocated for one may be reused
+     * for the other
+     * @param {fluid.refinedReferenceRecord} oldRecord - The record for which an injection was allocated
+     * @param {fluid.refinedReferenceRecord} newRecord - The record currently recorded at the same site
+     * @return {Boolean} `true` if they hold the same reference and the same refinements
+     */
+    fluid.isSameRefinedReference = function (oldRecord, newRecord) {
+        return oldRecord.reference === newRecord.reference && oldRecord.refinements.length === newRecord.refinements.length &&
+            oldRecord.refinements.every((refinement, i) => refinement.record === newRecord.refinements[i].record &&
+                refinement.mergeRecordName === newRecord.refinements[i].mergeRecordName);
     };
 
     /**
@@ -3686,24 +3759,66 @@ const $fluidScope = function (fluid) {
 
     fluid.importMap = {};
 
-    fluid.loadImportMap = function (importMap) {
+    /**
+     * Declare the files defining layers, so that each is loaded once its layer is demanded - see `fluid.loadImport`
+     * @param {Object<String, Object>} importMap - For each layer's name, a record whose `path` is that of its file
+     * @param {Document} [dokkument] - The document declaring the imports, e.g. by <fluid-import>, into which each file is
+     * injected for a component which has no document of its own
+     */
+    fluid.loadImportMap = function (importMap, dokkument) {
         fluid.transform(importMap, ({path}, layerName) => {
             const url = fluid.module.resolvePath(path);
-            fluid.importMap[layerName] = {
-                loadStyle: "sfc",
-                url
-            };
             const extension = url.split(".").pop();
             const loader = fluid.layerLoaders[extension];
             if (!loader) {
                 fluid.fail("Can't find loader for file ", url);
             } else {
-                // TODO: Note that loadImportMap currently starts load immediately - in future this will only happen
-                // in fluid.ensureImportsLoaded when the layer is actually demanded
-                fluid.invokeGlobalFunction(loader, [layerName, url]);
+                const existing = fluid.importMap[layerName];
+                // The document declaring the import, if any, into which the file is injected for a component which has
+                // no document of its own - see fluid.ensureImportsLoaded
+                fluid.importMap[layerName] = {loadStyle: "sfc", url, loader, loading: false, dokkument};
+                // Nothing is loaded until its layer is demanded - see fluid.loadImport - unless it was already loading,
+                // whereupon it is loaded from where it is now declared, or was demanded before its import was declared,
+                // e.g. by an element booted while Infusion loaded, before the document's imports were read
+                const layerSig = fluid.layerStore._value[layerName];
+                // A template awaited is a demand too - see fluid.fetchParsedTemplate - e.g. that of an SFC whose layer
+                // a hydrated document defines from its markup, imported by another SFC only once that one is parsed
+                const templateSig = fluid.templateStore?.[layerName];
+                const demanded = !!layerSig?.demanded && fluid.isUnavailable(layerSig._value) ||
+                    !!templateSig && fluid.isUnavailable(templateSig._value);
+                // A layer in use which is already defined, though its file was never declared, let alone loaded - in a
+                // hydrated document, by the scripts its file injected into the markup, which run before its import is
+                // declared. Its file is loaded nonetheless, since it may import the files of other layers which only it
+                // declares - e.g. that holding the template of a layer it derives from, which would otherwise be
+                // awaited forever. The file's injections are adopted from the markup rather than run again - see
+                // fluid.adoptMarkupInjections. The demand of a defined layer is recorded on its value - see fluid.readLayer
+                const definedUnloaded = !existing && !!layerSig && !fluid.isUnavailable(layerSig._value) && !!layerSig._value.demanded;
+                if (existing?.loading || demanded || definedUnloaded) {
+                    fluid.loadImport(layerName);
+                }
+                // Whoever demanded it found no import to bind into their document - it is bound into the one declaring it
+                if (demanded && dokkument && fluid.subscribeDocToInjections) {
+                    fluid.subscribeDocToInjections(layerName, dokkument);
+                }
             }
-
         });
+    };
+
+    /**
+     * Begin loading the file which an import declares defines a layer, once - when the layer is first demanded, e.g. by
+     * a component bearing it, from `fluid.ensureImportsLoaded`. A page may therefore declare imports of every layer it
+     * might use, and loads the files of just those it does use
+     * @param {String} layerName - The layer
+     * @return {Boolean} `true` if the layer is imported, whether or not its load has just begun
+     */
+    fluid.loadImport = function (layerName) {
+        const importRec = fluid.importMap[layerName];
+        // An entry with no loader is that of a layer whose material arrived otherwise, e.g. transmitted - see FluidPTF.js
+        if (importRec && importRec.loader && !importRec.loading) {
+            importRec.loading = true;
+            fluid.invokeGlobalFunction(importRec.loader, [layerName, importRec.url]);
+        }
+        return !!importRec;
     };
 
     /**
@@ -3738,6 +3853,37 @@ const $fluidScope = function (fluid) {
     };
 
     /**
+     * A function intercepting the definition of a layer by `fluid.def`, returning the definition to be written in its
+     * place - e.g. the definition augmented with the layers of a Single File Component, see `fluid.beginSFCScript`
+     * @callback DefInterceptor
+     * @param {Object} layer - The definition supplied to `fluid.def`
+     * @param {String} layerName - The name of the layer being defined
+     * @return {Object} The definition to be written
+     */
+
+    // Interceptors armed by fluid.withDefInterceptors, keyed by the name of the layer whose definition they intercept,
+    // or by "*" for one intercepting the definition of any layer which has no interceptor of its own
+    /** @type {Object<String, DefInterceptor>|null} */
+    fluid.defInterceptors = null;
+
+    /**
+     * Run a function during which calls to `fluid.def` for the named layers pass through interceptors - e.g. whilst the
+     * script of a Single File Component is evaluated. Any interceptors already armed are restored afterwards.
+     * @param {Object<String, DefInterceptor>} interceptors - Interceptors keyed by the name of the layer they intercept
+     * @param {Function} func - The function to run
+     * @return {Any} The return value of `func`
+     */
+    fluid.withDefInterceptors = function (interceptors, func) {
+        const previous = fluid.defInterceptors;
+        fluid.defInterceptors = {...previous, ...interceptors};
+        try {
+            return func();
+        } finally {
+            fluid.defInterceptors = previous;
+        }
+    };
+
+    /**
      * Retrieves and stores a layer's configuration centrally.
      *
      * @param {String} layerName - The name of the grade whose options are to be read or written
@@ -3749,6 +3895,11 @@ const $fluidScope = function (fluid) {
         if (layer === undefined) {
             return fluid.deSignal(fluid.readLayer(layerName).get().raw);
         } else {
+            const interceptors = fluid.defInterceptors;
+            const interceptor = interceptors && (interceptors[layerName] ?? interceptors["*"]);
+            if (interceptor) {
+                layer = interceptor(layer, layerName);
+            }
             if (fluid.defBuffer) {
                 fluid.makeComponentCreator(layerName);
                 fluid.defBuffer[layerName] = layer;

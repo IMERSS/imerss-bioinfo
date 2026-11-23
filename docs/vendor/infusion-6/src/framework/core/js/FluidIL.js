@@ -1873,6 +1873,8 @@ const $fluidILScope = function (fluid) {
         };
         const togo = fluid.cell(undefined, equiv ? {name, equiv} : {name}).computed(dispatchWithOldValue, fluid.flattenedArgCells(resolvedArgs, name));
         togo.$variety = "$compute";
+        // The site of the computation, so that a trace may record its value - see fluid.traceOutputDocuments
+        togo.$computeSite = {shadow, segs: [...segs]};
         return togo;
     };
 
@@ -2099,8 +2101,13 @@ const $fluidILScope = function (fluid) {
      * @return {Cell[]} A computed cell for each argument, holding its flattened value
      */
     fluid.flattenedArgCells = function (resolvedArgs, name) {
-        return resolvedArgs.map((arg, i) => fluid.cell(undefined, {name: `flattened argument ${i} of ${name}`})
-            .computed(() => fluid.flattenSignals(arg)));
+        return resolvedArgs.map((arg, i) => {
+            const cell = fluid.cell(undefined, {name: `flattened argument ${i} of ${name}`}).computed(() => fluid.flattenSignals(arg));
+            // What the cell is an argument of, so that a trace may record the argument's value - see
+            // fluid.traceOutputDocuments
+            cell.$argumentOf = {name, index: i};
+            return cell;
+        });
     };
 
     fluid.expandCompactSubelement = function (subel) {
@@ -2488,6 +2495,9 @@ const $fluidILScope = function (fluid) {
                 {name: `expandReactiveRoot for record at path ${segs.join(".")} of component at path ${shadow.path}`});
         // This is otherwise a no-op since marking the shadowMap is done in fluid.transferShadowMap
         togo.$variety = "$reactiveRoot";
+        // The site of the root, so that a read of it is known as a read of the model at this path - see
+        // fluid.traceOutputDocuments
+        togo.$rootSite = {shadow, segs: [...segs]};
         return togo;
     };
 
@@ -2677,16 +2687,20 @@ const $fluidILScope = function (fluid) {
      * @param {Shadow} shadow - The shadow record of the component holding the reference
      * @param {String[]} segs - The path in the component holding the reference, which will have a single segment
      * @param {String} memberName - The member name holding the reference
+     * @param {ComponentContribution[]} [refinements] - Records refining the component injected, merged into it as
+     * distributions - see `fluid.distributeRefinements`
      * @return {Signal<any>} A signal for the value of the reference, which is unavailable if it designates a component
      * which has been destroyed. Includes a `$variety` property set to `"$memberRef"`.
      */
-    fluid.expandReferenceRecord = function (reference, shadow, segs, memberName) {
+    fluid.expandReferenceRecord = function (reference, shadow, segs, memberName, refinements = []) {
         const path = fluid.composeSegment(shadow.path, memberName);
         /** @type {InjectionRecord} */
         const injection = {
             parentShadow: shadow,
             memberName,
             path,
+            refinements,
+            distributedTo: null,
             targetShadow: null,
             scopeContexts: [],
             withdrawals: fluid.cell(0, {name: `withdrawals of injected component at path ${path}`})
@@ -2704,22 +2718,37 @@ const $fluidILScope = function (fluid) {
                 // Read the target's own scope tick so that its scope entries are reapplied if its layers change
                 target.ownScopeTick.get();
                 fluid.registerInjectedComponent(injection, target);
+                fluid.distributeRefinements(injection, target);
             } else {
+                fluid.retractRefinements(injection);
                 fluid.withdrawInjectedComponent(injection);
             }
         }, [], {
             name: `injector for reference ${reference} at path ${path}`,
-            onDispose: () => fluid.withdrawInjectedComponent(injection)
+            onDispose: () => {
+                fluid.retractRefinements(injection);
+                fluid.withdrawInjectedComponent(injection);
+            }
         });
         const togo = fluid.cell(undefined, {name: `member reference ${reference} at path ${path}`}).computed(() => {
             injection.withdrawals.get();
             const target = targetShadow.get();
+            // Records refining what is injected can refine nothing but a component
+            const value = refinements.length > 0 && !target ? fluid.deSignal(referenceSignal) : undefined;
             return target && fluid.isDestroyedShadow(target) ? fluid.unavailable({
                 message: `Component designated by ${reference} at path ${path} has been destroyed`,
+                site: {shadow, segs: [...segs]}
+            }, "config") : value !== undefined && !fluid.isUnavailable(value) ? fluid.unavailable({
+                message: `Options at path ${path} refine the value of ${reference}, which is not a component - write them `
+                    + "with $layers to construct a fresh component there instead",
                 site: {shadow, segs: [...segs]}
             }, "config") : referenceSignal;
         });
         togo.$variety = "$memberRef";
+        // The member's own site, and what it designates, so that a read through it can be known as a read of what it
+        // designates - see fluid.traceAliasedRead
+        togo.$memberSite = {shadow, segs: [...segs]};
+        togo.$referenceSignal = referenceSignal;
         togo.injection = injection;
         togo.dispose = () => injector.dispose();
         return togo;
@@ -2729,6 +2758,97 @@ const $fluidILScope = function (fluid) {
     fluid.memberReferenceExpanderRecord = {
         key: "$memberRef",
         handler: fluid.expandReferenceRecord
+    };
+
+    // Handler record for IL references held at top-level members together with records refining what they inject -
+    // see fluid.refinedReferenceRecord
+    fluid.refinedReferenceExpanderRecord = {
+        key: "$refinedRef",
+        handler: (record, shadow, segs, memberName) => fluid.expandReferenceRecord(record.reference, shadow, segs, memberName, record.refinements)
+    };
+
+    /**
+     * Render the contextual IL references within a record refining an injected component as global references, resolved
+     * from the site injecting it - so that they resolve as they would there, rather than from the injected component,
+     * whose scope may hold none of their contexts, or others of the same names. `{self}` within the record designates the
+     * injected component, as it does within any `$component` record, and is left as it is
+     * @param {any} value - The record, or any value within it
+     * @param {Shadow} shadow - The shadow of the component holding the injecting site
+     * @return {any} The value, with its references rewritten
+     */
+    fluid.globaliseRefinement = function (value, shadow) {
+        let togo;
+        if (fluid.isILReference(value)) {
+            const parsed = fluid.parseContextReference(value);
+            const target = parsed.context === "self" || parsed.context.startsWith("/") ? null : fluid.deSignal(fluid.resolveContext(parsed.context, shadow));
+            togo = fluid.isComponent(target) ? fluid.renderGlobalReference({shadow: target[$m], segs: []})
+                + (parsed.path ? "." + parsed.path : "") + (parsed.selector ? parsed.selector : "") : value;
+        } else if (Array.isArray(value)) {
+            togo = value.map(element => fluid.globaliseRefinement(element, shadow));
+        } else if (fluid.isPlainObject(value, true)) {
+            togo = fluid.transform(value, element => fluid.globaliseRefinement(element, shadow));
+        } else {
+            togo = value;
+        }
+        return togo;
+    };
+
+    /**
+     * Distribute the records refining an injected component to it, as merge records of its own of the type
+     * "distribution" - stronger than its own definition and the options it was constructed with, and weaker than
+     * template entries, dynamic layers and live writes. Any distributed by the same injection to another component are
+     * first retracted
+     * @param {InjectionRecord} injection - The injection, holding the refining records
+     * @param {Shadow} targetShadow - The shadow of the injected component
+     */
+    fluid.distributeRefinements = function (injection, targetShadow) {
+        if (injection.distributedTo && injection.distributedTo !== targetShadow) {
+            fluid.retractRefinements(injection);
+        }
+        if (injection.refinements.length > 0) {
+            const layers = injection.refinements.map(({record}) => fluid.readerExpandLayer(fluid.globaliseRefinement(record, injection.parentShadow)));
+            const existing = targetShadow.distributedMergeRecords._value[injection.path];
+            // Redistributed only if changed, since the injector reruns whenever the scope it resolved them in changes
+            if (!existing || JSON.stringify(existing.layers) !== JSON.stringify(layers)) {
+                // The names of the records holding the refinements, where they have any - a creator function's arguments have none
+                const names = injection.refinements.map(({mergeRecordName}) => mergeRecordName).filter(name => name).join(", ");
+                const records = {...targetShadow.distributedMergeRecords._value, [injection.path]: {layers, names}};
+                targetShadow.distributedMergeRecords.set(records);
+            }
+            injection.distributedTo = targetShadow;
+        }
+    };
+
+    /**
+     * Retract the records which an injection distributed to the component it injected
+     * @param {InjectionRecord} injection - The injection
+     */
+    fluid.retractRefinements = function (injection) {
+        const target = injection.distributedTo;
+        if (target && target.distributedMergeRecords && injection.path in target.distributedMergeRecords._value) {
+            const {[injection.path]: removed, ...rest} = target.distributedMergeRecords._value; // eslint-disable-line no-unused-vars
+            target.distributedMergeRecords.set(rest);
+        }
+        injection.distributedTo = null;
+    };
+
+    /**
+     * Form the merge records distributed to a component by the sites injecting it, ordered by the paths of those sites,
+     * a later path's being the stronger, and within each site by the order of its refining records
+     * @param {Object<String, Object>} distributed - The records distributed, by the path of the injecting site, each as
+     * `{layers, names}`
+     * @return {MergeRecord[]} The merge records, weakest first
+     */
+    fluid.distributedMergeRecords = function (distributed) {
+        const paths = Object.keys(distributed).sort();
+        const all = paths.flatMap(path => distributed[path].layers.map(layer => ({path, layer, names: distributed[path].names})));
+        return all.map(({path, layer, names}, i) => ({
+            mergeRecordType: "distribution",
+            mergeRecordName: `distribution from ${path}` + (names ? ` (${names})` : ""),
+            // Within the band of distributions - a smaller priority is stronger
+            priority: fluid.mergeRecordTypes.distribution + (all.length - i) / (all.length + 1),
+            layer
+        }));
     };
 
     /**
@@ -2810,6 +2930,8 @@ const $fluidILScope = function (fluid) {
             newRecord instanceof fluid.componentRecords && sameContributions() ||
             oldRecord instanceof fluid.referenceFallbackRecord && newRecord instanceof fluid.referenceFallbackRecord &&
             fluid.isSameReferenceFallback(oldRecord, newRecord) ||
+            oldRecord instanceof fluid.refinedReferenceRecord && newRecord instanceof fluid.refinedReferenceRecord &&
+            fluid.isSameRefinedReference(oldRecord, newRecord) ||
             oldMerged !== undefined && newMerged !== undefined && fluid.arrayEqual(oldMerged, newMerged);
     };
 
@@ -2873,71 +2995,76 @@ const $fluidILScope = function (fluid) {
         if (forRecord) {
             const sourceSignal = fluid.fetchContextReference(forRecord.source, shadow);
             let listShadow;
-            const componentList = fluid.cell(undefined, {name: `componentList for record ${forRecord.source} at path ${segs} of ${shadow.path}`})
-                .computed(source => {
-                    const allKeys = [];
-                    const sourceRef = fluid.deSignalToSite(sourceSignal);
-                    const sourceSite = fluid.isSignal(sourceRef) && sourceRef.$variety === "$sitedRef" ? sourceRef.site : null;
+            const componentList = fluid.cell(undefined, {name: `componentList for record ${forRecord.source} at path ${segs} of ${shadow.path}`});
+            // For a trace, the list depends on the keys of its source alone, where each member reads its own entry
+            // through a site of its own - see fluid.traceOutputDocuments. Not so if layers are made from the entries
+            if (forRecord.layerAs === undefined) {
+                componentList.$traceShapeOf = sourceSignal;
+            }
+            componentList.computed(source => {
+                const allKeys = [];
+                const sourceRef = fluid.deSignalToSite(sourceSignal);
+                const sourceSite = fluid.isSignal(sourceRef) && sourceRef.$variety === "$sitedRef" ? sourceRef.site : null;
 
-                    /**
-                     * Allocate the member of the list for one entry of the source collection
-                     * @param {any} value - The value of the entry
-                     * @param {String|Number} subKey - The key of the entry - its index if the source is an array
-                     * @param {Number} index - The position of the entry within the source, once ordered
-                     * @param {Number} length - The number of entries in the source
-                     * @return {ComponentComputer} The member allocated for the entry
-                     */
-                    const pushSubcomponentPotentia = function (value, subKey, index, length) {
-                        allKeys.push("" + subKey);
-                        const variables = {};
-                        // A value which is itself a proxy onto a site, e.g. an element selected by filter() from
-                        // proxied material, retains the provenance of that site. Otherwise, where the source has a
-                        // site, its element is the site of the value
-                        const valueRef = fluid.unProxy(value);
-                        const valueSite = fluid.isSignal(valueRef) && valueRef.$variety === "$sitedRef" ? valueRef.site :
-                            sourceSite ? {shadow: sourceSite.shadow, segs: [...sourceSite.segs, "" + subKey]} : null;
-                        if (forRecord.valueAs !== undefined) {
-                            // Express a sited value as a global reference to it so that it stays live
-                            variables[forRecord.valueAs] = valueSite ? fluid.renderGlobalReference(valueSite) : value;
-                        }
-                        if (forRecord.keyAs !== undefined) {
-                            variables[forRecord.keyAs] = subKey;
-                        }
-                        if (forRecord.positionAs !== undefined) {
-                            // Position within the collection regardless of how it is keyed, e.g. for rendering
-                            // separators between members
-                            variables[forRecord.positionAs] = {index, first: index === 0, last: index === length - 1};
-                        }
-                        const forLayerRecord = forRecord.layerAs !== undefined ?
-                            fluid.forLayerRecord(forRecord.layerAs, value, subKey, forRecord.source) : undefined;
-                        const computer = fluid.pushSubcomponentPotentia(listShadow, subKey, contributions, variables, forLayerRecord);
-                        // Record the data item from which the component is lensed, so that destroying the component
-                        // deletes the item from its source - see fluid.destroyComponent
-                        computer.shadow.lensedSite = valueSite;
-                        return computer;
-                    };
-
-                    let togo;
-                    if (Array.isArray(source)) {
-                        togo = source.map((value, index) => pushSubcomponentPotentia(value, index, index, source.length));
-                    } else if (fluid.isPlainObject(source)) {
-                        const entries = fluid.orderKeyedRecords(source);
-                        togo = entries.map(([key, value], index) => pushSubcomponentPotentia(value, key, index, entries.length));
-                    } else if (fluid.isUnavailable(source)) {
-                        return source;
-                    } else {
-                        return fluid.unavailable({cause: `Unable to iterate over object ${source} to produce a ComponentList`, errorSite: sourceSignal.site});
+                /**
+                 * Allocate the member of the list for one entry of the source collection
+                 * @param {any} value - The value of the entry
+                 * @param {String|Number} subKey - The key of the entry - its index if the source is an array
+                 * @param {Number} index - The position of the entry within the source, once ordered
+                 * @param {Number} length - The number of entries in the source
+                 * @return {ComponentComputer} The member allocated for the entry
+                 */
+                const pushSubcomponentPotentia = function (value, subKey, index, length) {
+                    allKeys.push("" + subKey);
+                    const variables = {};
+                    // A value which is itself a proxy onto a site, e.g. an element selected by filter() from
+                    // proxied material, retains the provenance of that site. Otherwise, where the source has a
+                    // site, its element is the site of the value
+                    const valueRef = fluid.unProxy(value);
+                    const valueSite = fluid.isSignal(valueRef) && valueRef.$variety === "$sitedRef" ? valueRef.site :
+                        sourceSite ? {shadow: sourceSite.shadow, segs: [...sourceSite.segs, "" + subKey]} : null;
+                    if (forRecord.valueAs !== undefined) {
+                        // Express a sited value as a global reference to it so that it stays live
+                        variables[forRecord.valueAs] = valueSite ? fluid.renderGlobalReference(valueSite) : value;
                     }
+                    if (forRecord.keyAs !== undefined) {
+                        variables[forRecord.keyAs] = subKey;
+                    }
+                    if (forRecord.positionAs !== undefined) {
+                        // Position within the collection regardless of how it is keyed, e.g. for rendering
+                        // separators between members
+                        variables[forRecord.positionAs] = {index, first: index === 0, last: index === length - 1};
+                    }
+                    const forLayerRecord = forRecord.layerAs !== undefined ?
+                        fluid.forLayerRecord(forRecord.layerAs, value, subKey, forRecord.source) : undefined;
+                    const computer = fluid.pushSubcomponentPotentia(listShadow, subKey, contributions, variables, forLayerRecord);
+                    // Record the data item from which the component is lensed, so that destroying the component
+                    // deletes the item from its source - see fluid.destroyComponent
+                    computer.shadow.lensedSite = valueSite;
+                    return computer;
+                };
 
-                    // Destroy components which no longer have matching entries
-                    // Consult only the keys of elements last pushed, since the list may have other children, e.g. its view
-                    const goneKeys = (listShadow.listKeys || []).filter(k => !allKeys.includes(k));
-                    const goneShadows = goneKeys.map(k => listShadow.childComponents[k]).filter(shadow => shadow);
-                    goneShadows.forEach(shadow => shadow.potentia.set(fluid.emptyPotentia));
-                    listShadow.listKeys = allKeys;
+                let togo;
+                if (Array.isArray(source)) {
+                    togo = source.map((value, index) => pushSubcomponentPotentia(value, index, index, source.length));
+                } else if (fluid.isPlainObject(source)) {
+                    const entries = fluid.orderKeyedRecords(source);
+                    togo = entries.map(([key, value], index) => pushSubcomponentPotentia(value, key, index, entries.length));
+                } else if (fluid.isUnavailable(source)) {
+                    return source;
+                } else {
+                    return fluid.unavailable({cause: `Unable to iterate over object ${source} to produce a ComponentList`, errorSite: sourceSignal.site});
+                }
 
-                    return togo.map(computer => fluid.proxyMat(computer, computer.shadow, []));
-                }, [sourceSignal], {mapArg: fluid.deSignal});
+                // Destroy components which no longer have matching entries
+                // Consult only the keys of elements last pushed, since the list may have other children, e.g. its view
+                const goneKeys = (listShadow.listKeys || []).filter(k => !allKeys.includes(k));
+                const goneShadows = goneKeys.map(k => listShadow.childComponents[k]).filter(shadow => shadow);
+                goneShadows.forEach(shadow => shadow.potentia.set(fluid.emptyPotentia));
+                listShadow.listKeys = allKeys;
+
+                return togo.map(computer => fluid.proxyMat(computer, computer.shadow, []));
+            }, [sourceSignal], {mapArg: fluid.deSignal});
             componentList.$variety = "$componentList";
             componentList.$source = sourceSignal;
             const listLayer = {
@@ -3263,8 +3390,13 @@ const $fluidILScope = function (fluid) {
                 return element;
             }
         } else if (fluid.isILReference(element)) {
+            // A reference at a member, with records refining the component it injects there
+            const refined = segs.length === 1 ? fluid.get(shadow.layerMap, [...segs, $m, "refinements"]) : undefined;
             // A reference overriding weaker material falls back to it if it resolves to undefined
             const fallback = fluid.get(shadow.layerMap, [...segs, $m, "fallback"]);
+            if (refined) {
+                return fluid.mountSignalRecord(fluid.refinedReferenceExpanderRecord, refined, shadow, segs);
+            }
             // A reference at a top-level member may designate a component, which will be injected there
             return fallback ? fluid.mountSignalRecord(fluid.fallbackReferenceExpanderRecord, fallback, shadow, segs) :
                 segs.length === 1 ? fluid.mountSignalRecord(fluid.memberReferenceExpanderRecord, element, shadow, segs) :
@@ -3419,7 +3551,9 @@ const $fluidILScope = function (fluid) {
             const potentia = shadow.potentia.get();
             const {layerNames, mergeRecords} = potentia;
             const dynamicMergeRecord = shadow.dynamicMergeRecord.get();
-            const allMergeRecords = [...mergeRecords, dynamicMergeRecord];
+            const distributed = shadow.distributedMergeRecords.get();
+            const distributedRecords = fluid.distributedMergeRecords(distributed);
+            const allMergeRecords = [...mergeRecords, ...distributedRecords, dynamicMergeRecord];
             shadow.mergeRecords = allMergeRecords; // Put this in early so we can resolve container if there is an error
 
             // The layers named by our merge records, weakest record first, preceded by our direct layer names - within
@@ -3453,7 +3587,7 @@ const $fluidILScope = function (fluid) {
             // Note that the resolution above must still run on every evaluation since its reads of the layer registry
             // are our dependencies on the definitions of our layers. The resolved records are the same array whenever
             // the same chain of the same definitions is resolved - see fluid.definitionMergeRecords
-            const mergeInputs = [potentia, dynamicMergeRecord, resolved.mergeRecords];
+            const mergeInputs = [potentia, dynamicMergeRecord, distributed, resolved.mergeRecords];
             const previous = shadow.lastMerge;
             if (previous && fluid.arrayEqual(previous.mergeInputs, mergeInputs)) {
                 shadow.mergeRecords = previous.layers;
@@ -3461,7 +3595,7 @@ const $fluidILScope = function (fluid) {
                 return previous.flatMerged;
             }
 
-            const layers = resolved.mergeRecords.concat(mergeRecords).concat({
+            const layers = resolved.mergeRecords.concat(mergeRecords, distributedRecords).concat({
                 mergeRecordType: "variables",
                 mergeRecordName: "variables",
                 layer: shadow.variablesLayer
@@ -3527,6 +3661,9 @@ const $fluidILScope = function (fluid) {
             mergeRecordType: "dynamicLayers",
             layer: {}
         }, {name: `dynamicMergeRecord for path ${shadow.path}`});
+        // Records refining this component distributed to it by the sites injecting it, by their paths - see
+        // fluid.distributeRefinements
+        shadow.distributedMergeRecords = fluid.cell({}, {name: `distributedMergeRecords for path ${shadow.path}`});
         shadow.dynamicLayerNames = fluid.cell([], {name: `dynamicLayerNames for path ${shadow.path}`});
         shadow.unavailableLayerMap = fluid.cell(Object.create(null), {name: `unavailableLayerMap for path ${shadow.path}`});
 
@@ -4318,7 +4455,16 @@ const $fluidILScope = function (fluid) {
      * @param {ComponentComputer} proxy - The component to be destroyed.
      */
     fluid.destroyComponent = function (proxy) {
-        const shadow = proxy[$t].shadow;
+        fluid.destroyComponentShadow(proxy[$t].shadow);
+    };
+
+    /**
+     * Destroy the component with the supplied shadow, as `fluid.destroyComponent` does - usable whether or not the
+     * component is yet available, e.g. one booted over an element whose layers are still loading, whose `that` is not
+     * yet a proxy. The destruction takes effect as the graph next stabilises
+     * @param {Shadow} shadow - The shadow of the component to be destroyed
+     */
+    fluid.destroyComponentShadow = function (shadow) {
         if (shadow.lensedSite) {
             const site = fluid.upstreamSite(shadow.lensedSite.shadow, shadow.lensedSite.segs);
             fluid.deleteForComponent(site.shadow.that, site.segs);

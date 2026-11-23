@@ -3340,6 +3340,17 @@ hortis.urlCodecs.keys = {
     decode: text => text === undefined || text === "" ? {} : Object.fromEntries(String(text).split(",").map(key => [key, true]))
 };
 
+// A state which is a hash of names to true, e.g. the names of selected regions, held as the names separated by commas -
+// as hortis.urlCodecs.keys, but for names which may themselves hold commas, which are escaped as %2C, and so % as %25
+hortis.urlCodecs.names = {
+    encode: function (state) {
+        const names = Object.keys(state || {}).filter(name => state[name]);
+        return names.length === 0 ? undefined : names.map(name => name.replace(/%/g, "%25").replace(/,/g, "%2C")).join(",");
+    },
+    decode: text => text === undefined || text === "" ? {} : Object.fromEntries(String(text).split(",").map(name =>
+        [name.replace(/%(25|2C)/g, escape => escape === "%25" ? "%" : ","), true]))
+};
+
 /**
  * Construct a codec for a state which is a fixed set of Boolean flags, held as the names of those which are set
  * separated by commas.
@@ -3448,8 +3459,17 @@ fluid.hashManager.parseSegment = function (segment) {
     return [key, parsedValue];
 };
 
+/**
+ * Render one segment of a URL hash, as `key:value`. Since a hash is parsed by splitting it at each "&" and then
+ * decoding each segment's percent-encoding, any "%" and "&" in the segment are percent-encoded, so that it is parsed
+ * back exactly - e.g. a name holding an escape of a codec, such as the %2C of hortis.urlCodecs.names.
+ * @param {String} key - The segment's key
+ * @param {any} value - Its value, written as JSON unless it is primitive
+ * @return {String} The segment
+ */
 fluid.hashManager.renderSegment = function (key, value) {
-    return key + ":" + (fluid.isPrimitive(value) ? "" + value : JSON.stringify(value));
+    const segment = key + ":" + (fluid.isPrimitive(value) ? "" + value : JSON.stringify(value));
+    return segment.replace(/%/g, "%25").replace(/&/g, "%26");
 };
 
 /**
@@ -3532,7 +3552,7 @@ fluid.hashManager.instance = fluid.hashManager(typeof(window) === "undefined" ||
 
 }).call(globalThis);
 //# sourceURL=vendor/imerss-bioinfo/src/client/js/i6/hashManager.js</script>
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.standardVizLoader-9">(function () {
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.standardVizLoader-9">fluid.beginSFCScript("hortis.standardVizLoader", "fl-script-hortis.standardVizLoader-9", true);(function () {
 "use strict";
 
 // The standard visualisation of a set of observations - a map and checklist in tabs, beside filters by recorder and
@@ -3540,7 +3560,7 @@ fluid.hashManager.instance = fluid.hashManager(typeof(window) === "undefined" ||
 // @id. A page hosts it on an element bearing fluid-layers together with a layer of its own configuring its title and
 // data files - see indexDiatoms.html
 fluid.def("hortis.standardVizLoader", {
-    $layers: ["fluid.sfcLayer","hortis.vizLoader"],
+    $layers: "hortis.vizLoader",
     title: "",
     // The columnar data package, holding the tables obs, taxa and regionIndirection - by default the placeholder
     // declared below, from which a test fixture renders. A page which is a runnable application overrides it with its
@@ -3607,29 +3627,28 @@ fluid.def("hortis.standardVizLoader", {
     // Widgets shown beneath the tabs - by default there are none, and the slot is omitted
     records: null,
     // true once the observations to be shown are available
-    loaded: "$compute:hortis.standardVizLoader.loaded({self}.finalFilteredObs)",
-    view: {"$component":{    $layers: ["fluid.sfcTemplateViewComponent"],
-"template":{"sfcLayer":"hortis.standardVizLoader"}}}
+    loaded: "$compute:hortis.standardVizLoader.loaded({self}.finalFilteredObs)"
 });
 
 // Loaded once the observations are filtered - whether from real data or, in a test fixture, from the placeholder
 hortis.standardVizLoader.loaded = () => true;
 
 }).call(globalThis);
+fluid.endSFCScript();
 //# sourceURL=vendor/imerss-bioinfo/src/client/sfc/core/hortis-standardVizLoader.vue</script>
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.standardVizLoader-0" href="vendor/infusion/src/framework/core/css/fluid.css" rel="stylesheet">
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.standardVizLoader-1" href="vendor/infusion/src/lib/jquery/ui/css/default-theme/tooltip.css" rel="stylesheet">
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.standardVizLoader-2" href="vendor/imerss-bioinfo/src/client/css/imerss-core.css" rel="stylesheet">
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.standardVizLoader-3" href="vendor/imerss-bioinfo/src/client/css/imerss-blitz.css" rel="stylesheet">
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.standardVizLoader-4" href="vendor/imerss-bioinfo/src/client/css/imerss-i6.css" rel="stylesheet">
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.pageTabs-0">(function () {
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.pageTabs-0">fluid.beginSFCScript("hortis.pageTabs", "fl-script-hortis.pageTabs-0", true);(function () {
 "use strict";
 
 // A strip of tabs in the style of jQuery UI's, choosing which of a set of panels is shown. The panels are placed by
 // the parent's template, each hidden by binding to this component's `panelHidden`, e.g.
 // hidden="@{tabs.panelHidden.map}"
 fluid.def("hortis.pageTabs", {
-    $layers: ["fluid.sfcLayer","fluid.component"],
+    $layers: "fluid.component",
     // tabs: Object[] - one record per tab, with members `id`, `label` and `panelId`, the id of its panel
     // selectedTab: String - the id of the selected tab
     panelHidden: "$compute:hortis.pageTabs.panelHidden({self}.tabs, {self}.selectedTab)",
@@ -3641,9 +3660,7 @@ fluid.def("hortis.pageTabs", {
                 valueAs: "tab"
             }
         }
-    },
-    view: {"$component":{    $layers: ["fluid.sfcTemplateViewComponent"],
-"template":{"sfcLayer":"hortis.pageTabs"}}}
+    }
 });
 
 hortis.pageTabs.panelHidden = (tabs, selectedTab) => Object.fromEntries(tabs.map(tab => [tab.id, tab.id !== selectedTab]));
@@ -3660,30 +3677,17 @@ hortis.pageTabs.click = function (event, tab) {
 };
 
 }).call(globalThis);
+fluid.endSFCScript();
 //# sourceURL=vendor/imerss-bioinfo/src/client/sfc/components/hortis-pageTabs.vue</script>
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.pageTabs-0" href="vendor/jquery-ui/themes/base/tabs.css" rel="stylesheet">
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.pageTabs-1" href="vendor/infusion/src/lib/jquery/ui/css/default-theme/core.css" rel="stylesheet">
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.pageTabs-2" href="vendor/infusion/src/lib/jquery/ui/css/default-theme/theme.css" rel="stylesheet">
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.standardFilterControls-0">(function () {
-"use strict";
-
-// The button resetting every filter of the standard visualisation, in its own style
-fluid.def("hortis.standardFilterControls", {
-    $layers: ["fluid.sfcLayer","hortis.filterControls"],
-    // The text beside the button - the story page shows the button alone
-    label: "Reset filters",
-    view: {"$component":{    $layers: ["fluid.sfcTemplateViewComponent"],
-"template":{"sfcLayer":"hortis.standardFilterControls"}}}
-});
-
-}).call(globalThis);
-//# sourceURL=vendor/imerss-bioinfo/src/client/sfc/filters/hortis-standardFilterControls.vue</script>
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.collectorFilter-2">(function () {
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.collectorFilter-2">fluid.beginSFCScript("hortis.collectorFilter", "fl-script-hortis.collectorFilter-2", true);(function () {
 "use strict";
 
 // Filters observations by a single collector chosen with an autocomplete
 fluid.def("hortis.collectorFilter", {
-    $layers: ["fluid.sfcLayer","hortis.autocompleteHost","hortis.obsDrivenFilter","hortis.urlMappedFilter"],
+    $layers: ["hortis.autocompleteHost", "hortis.obsDrivenFilter", "hortis.urlMappedFilter"],
     filterName: "Collector",
     fieldName: "recordedBy",
     controlId: "fli-imerss-collector",
@@ -3695,9 +3699,7 @@ fluid.def("hortis.collectorFilter", {
     predicates: "$compute:hortis.collectorFilter.predicates({self}.filterState, {self}.fieldName)",
     reset: "$method:hortis.collectorFilter.reset({self}, {global}.document)",
     queryAutocomplete: "$method:hortis.queryAutocompleteCollector({self}.allCollectors, {0}:query, {1}:callback)",
-    confirmAutocomplete: "$method:hortis.collectorFilter.confirm({self}, {0}:selection)",
-    view: {"$component":{    $layers: ["fluid.sfcTemplateViewComponent"],
-"template":{"sfcLayer":"hortis.collectorFilter"}}}
+    confirmAutocomplete: "$method:hortis.collectorFilter.confirm({self}, {0}:selection)"
 });
 
 hortis.collectorFilter.confirm = function (that, selection) {
@@ -3751,15 +3753,16 @@ hortis.queryAutocompleteCollector = function (allCollectors, query, callback) {
 };
 
 }).call(globalThis);
+fluid.endSFCScript();
 //# sourceURL=vendor/imerss-bioinfo/src/client/sfc/filters/hortis-collectorFilter.vue</script>
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.regionFilter-2">(function () {
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.regionFilter-2">fluid.beginSFCScript("hortis.regionFilter", "fl-script-hortis.regionFilter-2", true);(function () {
 "use strict";
 
 // Filters observations by the regions in which they lie, offering a checkbox for each row of a region indirection
 // table, with members `regionField`, the column of the observations holding the region, `id`, the value found there
 // and `label`. Rows of the regionFields `fieldNames` are offered - e.g. ["dataset"] for a filter by dataset
 fluid.def("hortis.regionFilter", {
-    $layers: ["fluid.sfcLayer","hortis.obsFilter","hortis.siteFilter","hortis.urlMappedFilter"],
+    $layers: ["hortis.obsFilter", "hortis.siteFilter", "hortis.urlMappedFilter"],
     urlCodec: "hortis.urlCodecs.keys",
     filterName: "Region",
     // fieldNames: String[]
@@ -3780,9 +3783,7 @@ fluid.def("hortis.regionFilter", {
                 keyAs: "index"
             }
         }
-    },
-    view: {"$component":{    $layers: ["fluid.sfcTemplateViewComponent"],
-"template":{"sfcLayer":"hortis.regionFilter"}}}
+    }
 });
 
 hortis.regionFilter.filterRows = function (indirectionRows, fieldNames) {
@@ -3826,20 +3827,32 @@ hortis.regionFilter.predicates = function (filterRows, filterState) {
 };
 
 }).call(globalThis);
+fluid.endSFCScript();
 //# sourceURL=vendor/imerss-bioinfo/src/client/sfc/filters/hortis-regionFilter.vue</script>
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.regionFilter-0" href="vendor/pretty-checkbox/dist/pretty-checkbox.min.css" rel="stylesheet">
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.regionFilter-1" href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css" rel="stylesheet">
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.recordReporter-1">(function () {
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.standardFilterControls-0">fluid.beginSFCScript("hortis.standardFilterControls", "fl-script-hortis.standardFilterControls-0", true);(function () {
+"use strict";
+
+// The button resetting every filter of the standard visualisation, in its own style
+fluid.def("hortis.standardFilterControls", {
+    $layers: "hortis.filterControls",
+    // The text beside the button - the story page shows the button alone
+    label: "Reset filters"
+});
+
+}).call(globalThis);
+fluid.endSFCScript();
+//# sourceURL=vendor/imerss-bioinfo/src/client/sfc/filters/hortis-standardFilterControls.vue</script>
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.recordReporter-1">fluid.beginSFCScript("hortis.recordReporter", "fl-script-hortis.recordReporter-1", true);(function () {
 "use strict";
 
 // Reports how many observations survive the filters and selections
 fluid.def("hortis.recordReporter", {
-    $layers: ["fluid.sfcLayer","fluid.component"],
+    $layers: "fluid.component",
     // filtered: Selection - the observations shown
     // all: Selection - every observation
-    counts: "$compute:hortis.recordReporter.renderModel({self}.filtered, {self}.all)",
-    view: {"$component":{    $layers: ["fluid.sfcTemplateViewComponent"],
-"template":{"sfcLayer":"hortis.recordReporter"}}}
+    counts: "$compute:hortis.recordReporter.renderModel({self}.filtered, {self}.all)"
 });
 
 /**
@@ -3856,103 +3869,21 @@ hortis.recordReporter.renderModel = function (filtered, all) {
 };
 
 }).call(globalThis);
+fluid.endSFCScript();
 //# sourceURL=vendor/imerss-bioinfo/src/client/sfc/core/hortis-recordReporter.vue</script>
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.filterControls-0">(function () {
-"use strict";
-
-// The button resetting every filter and checklist beneath the visualisation loader
-fluid.def("hortis.filterControls", {
-    $layers: ["fluid.sfcLayer","hortis.icons","fluid.component"],
-    filters: "{vizLoader hortis.filter}",
-    checklists: "{vizLoader hortis.checklist}",
-    resetAll: "$method:hortis.filterControls.resetAll({self}.filters, {self}.checklists)",
-    view: {"$component":{    $layers: ["fluid.sfcTemplateViewComponent"],
-"template":{"sfcLayer":"hortis.filterControls"}}}
-});
-
-hortis.filterControls.resetAll = function (filters, checklists) {
-    filters.forEach(filter => filter.reset());
-    checklists.forEach(checklist => checklist.reset());
-};
-
-}).call(globalThis);
-//# sourceURL=vendor/imerss-bioinfo/src/client/sfc/filters/hortis-filterControls.vue</script>
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.autocomplete-0" fluid-client="" fluid-src="vendor/accessible-autocomplete/dist/accessible-autocomplete.min.js" src="vendor/accessible-autocomplete/dist/accessible-autocomplete.min.js"></script>
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.autocomplete-1">(function () {
-"use strict";
-
-// An accessible-autocomplete widget, rendered into a container of its own so that no template reconciles its markup
-fluid.def("hortis.autocomplete", {
-    $layers: ["fluid.sfcLayer","fluid.component"],
-    view: {
-        $component: {
-            $layers: "fluid.selfTemplateViewComponent"
-        }
-    },
-    widget: {
-        $bindable: {
-            bind: "hortis.autocomplete.bind({self}, {autocompleteHost}, {self}.view.renderedContainer, {global}.accessibleAutocomplete)",
-            onceOnly: true
-        }
-    }
-});
-
-hortis.autocomplete.bind = function (that, host, container, accessibleAutocomplete) {
-    let togo;
-    if (accessibleAutocomplete) {
-        fluid.disableRendering(that);
-        togo = accessibleAutocomplete({
-            element: container,
-            id: host.controlId,
-            placeholder: host.placeholder,
-            minLength: host.minLength,
-            displayMenu: "overlay",
-            confirmOnBlur: false,
-            source: (query, callback) => host.queryAutocomplete(query, callback),
-            templates: {
-                suggestion: fluid.getGlobalValue(host.renderSuggestion),
-                inputValue: fluid.getGlobalValue(host.renderInputValue)
-            },
-            onConfirm: selection => host.confirmAutocomplete(selection)
-        });
-        container.querySelector("input")?.setAttribute("spellcheck", "false");
-    } else {
-        togo = fluid.unavailable({message: "The accessible-autocomplete library is not loaded", variety: "config"});
-    }
-    return togo;
-};
-
-}).call(globalThis);
-//# sourceURL=vendor/imerss-bioinfo/src/client/sfc/components/hortis-autocomplete.vue</script>
-        <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.autocomplete-0" href="vendor/accessible-autocomplete/dist/accessible-autocomplete.min.css" rel="stylesheet">
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.pageTabs.tab-0">(function () {
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.pageTabs.tab-0">fluid.beginSFCScript("hortis.pageTabs.tab", "fl-script-hortis.pageTabs.tab-0", true);(function () {
 "use strict";
 
 // One tab of hortis.pageTabs
 fluid.def("hortis.pageTabs.tab", {
-    $layers: ["fluid.sfcLayer","fluid.component"],
+    $layers: "fluid.component",
     selected: "$compute:hortis.pageTabs.isSelected({pageTabs}.selectedTab, {self}.tab.id)",
-    select: "$method:hortis.pageTabs.select({pageTabs}, {self}.tab.id)",
-    view: {"$component":{    $layers: ["fluid.sfcTemplateViewComponent"],
-"template":{"sfcLayer":"hortis.pageTabs.tab"}}}
+    select: "$method:hortis.pageTabs.select({pageTabs}, {self}.tab.id)"
 });
 
 }).call(globalThis);
+fluid.endSFCScript();
 //# sourceURL=vendor/imerss-bioinfo/src/client/sfc/components/hortis-pageTabs-tab.vue</script>
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.regionFilter.row-0">(function () {
-"use strict";
-
-// The row for one region of hortis.regionFilter, whose checkbox selects or deselects it
-fluid.def("hortis.regionFilter.row", {
-    $layers: ["fluid.sfcLayer","fluid.component"],
-    checked: "$compute:hortis.regionFilter.isChecked({regionFilter}.filterState, {self}.index)",
-    toggle: "$method:hortis.regionFilter.toggle({regionFilter}, {self}.index, {0}:checked)",
-    view: {"$component":{    $layers: ["fluid.sfcTemplateViewComponent"],
-"template":{"sfcLayer":"hortis.regionFilter.row"}}}
-});
-
-}).call(globalThis);
-//# sourceURL=vendor/imerss-bioinfo/src/client/sfc/filters/hortis-regionFilter-row.vue</script>
         <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.vizLibreMap-0" fluid-client="" fluid-src="vendor/maplibre-gl/dist/maplibre-gl-dev.js" src="vendor/maplibre-gl/dist/maplibre-gl-dev.js"></script>
         <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.vizLibreMap-1" fluid-client="" fluid-src="vendor/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw-unminified.js" src="vendor/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw-unminified.js"></script>
         <script data-fluid-indent="8" data-fluid-hydrated="" fluid-src="vendor/imerss-bioinfo/src/lib/point-in-polygon.js" id="fl-script-hortis.vizLibreMap-3">/* eslint-env node */
@@ -6172,13 +6103,14 @@ hortis.urlCodecs.polygons = {
 
 }).call(globalThis);
 //# sourceURL=vendor/imerss-bioinfo/src/client/js/i6/polygonDraw.js</script>
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.vizLibreMap-11">(function () {
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.vizLibreMap-11">fluid.beginSFCScript("hortis.vizLibreMap", "fl-script-hortis.vizLibreMap-11", false);(function () {
 "use strict";
 
 // The map of the standard visualisation, over street map tiles, gridding the observations surviving the filters, whose
 // cells and drawn polygons select observations. It renders into the markup its parent's template places at its @id
 fluid.def("hortis.vizLibreMap", {
-    $layers: ["fluid.sfcLayer","hortis.libreMap.withTiles","hortis.libreMap.streetmapTiles","hortis.libreMap.withPolygonDraw","hortis.libreMap.withObsGridLegend","hortis.libreObsMap"],
+    $layers: ["hortis.libreMap.withTiles", "hortis.libreMap.streetmapTiles", "hortis.libreMap.withPolygonDraw", "hortis.libreMap.withObsGridLegend",
+        "hortis.libreObsMap"],
     legendPosition: "bottom-left",
     gridSelector: {
         $component: {
@@ -6189,6 +6121,7 @@ fluid.def("hortis.vizLibreMap", {
 
 
 }).call(globalThis);
+fluid.endSFCScript();
 //# sourceURL=vendor/imerss-bioinfo/src/client/sfc/core/hortis-vizLibreMap.vue</script>
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.vizLibreMap-0" href="vendor/imerss-bioinfo/src/client/css/maplibre-gl.css" rel="stylesheet">
         <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.vizLibreMap-1" href="vendor/imerss-bioinfo/src/client/css/mapbox-gl-draw.css" rel="stylesheet">
@@ -6251,8 +6184,9 @@ hortis.alwaysRejectRanks = [];
 hortis.acceptChecklistRowAS = function (row, filterRanks, rowFocus) {
     const acceptBasic = !filterRanks || filterRanks.includes(row.rank) || row.species;
     const alwaysReject = hortis.alwaysRejectRanks.includes(row.rank);
-    // Special request from AS - suppress any checklist entry at species level if there are any ssp
-    const rejectSpecies = row.rank === "species" && row.children.length > 0;
+    // Special request from AS - suppress any checklist entry at species level if there are any ssp - counting only those
+    // which may themselves be displayed, so that a species whose infrataxa are all filtered away is not lost with them
+    const rejectSpecies = row.rank === "species" && (row.children || []).some(child => rowFocus[child.id]);
     // "taxonName" being set will be a proxy for "there is an entry in the curated summary" so we always accept
     const acceptChecklist = row.taxonName;
     return rowFocus[row.id] && (acceptBasic && !rejectSpecies && !alwaysReject || acceptChecklist);
@@ -6868,13 +6802,13 @@ hortis.checklist.download = function (allLeaves, downloadFile) {
 
 }).call(globalThis);
 //# sourceURL=vendor/imerss-bioinfo/src/client/js/i6/checklist.js</script>
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.standardChecklist-5">(function () {
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.standardChecklist-5">fluid.beginSFCScript("hortis.standardChecklist", "fl-script-hortis.standardChecklist-5", true);(function () {
 "use strict";
 
 // The checklist of the standard visualisation, of the taxa of the observations surviving the filters. Its search
 // filters all observations to a single taxon, as does clicking a name, and it can be downloaded as CSV
 fluid.def("hortis.standardChecklist", {
-    $layers: ["fluid.sfcLayer","hortis.checklist.withDownload","hortis.checklist"],
+    $layers: ["hortis.checklist.withDownload", "hortis.checklist"],
     label: "Species",
     rootId: "48460", // Life
     filterRanks: ["epifamily", "family", "tribe", "genus", "subgenus", "species"],
@@ -6888,9 +6822,7 @@ fluid.def("hortis.standardChecklist", {
             $layers: "hortis.taxonSearchFilter"
         }
     },
-    selectName: "$method:hortis.standardChecklist.selectName({self}, {0}:id)",
-    view: {"$component":{    $layers: ["fluid.sfcTemplateViewComponent"],
-"template":{"sfcLayer":"hortis.standardChecklist"}}}
+    selectName: "$method:hortis.standardChecklist.selectName({self}, {0}:id)"
 });
 
 hortis.standardChecklist.selectName = function (that, id) {
@@ -6900,15 +6832,116 @@ hortis.standardChecklist.selectName = function (that, id) {
 };
 
 }).call(globalThis);
+fluid.endSFCScript();
 //# sourceURL=vendor/imerss-bioinfo/src/client/sfc/core/hortis-standardChecklist.vue</script>
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.taxonSearchFilter-3">(function () {
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.autocomplete-0" fluid-client="" fluid-src="vendor/accessible-autocomplete/dist/accessible-autocomplete.min.js" src="vendor/accessible-autocomplete/dist/accessible-autocomplete.min.js"></script>
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.autocomplete-1">fluid.beginSFCScript("hortis.autocomplete", "fl-script-hortis.autocomplete-1", false);(function () {
+"use strict";
+
+// An accessible-autocomplete widget, rendered into a container of its own so that no template reconciles its markup
+fluid.def("hortis.autocomplete", {
+    $layers: "fluid.component",
+    view: {
+        $component: {
+            $layers: "fluid.selfTemplateViewComponent"
+        }
+    },
+    widget: {
+        $bindable: {
+            bind: "hortis.autocomplete.bind({self}, {autocompleteHost}, {self}.view.renderedContainer, {global}.accessibleAutocomplete)",
+            onceOnly: true
+        }
+    }
+});
+
+/**
+ * Answer the widget's query, offering no suggestions while its input hasn't the focus. A value written into the input
+ * from outside, e.g. the name of a taxon chosen in the checklist by hortis.taxonSearchFilter.select, is picked up by the
+ * widget's polling of its input as if typed, and would otherwise open its menu on the one suggestion matching it, which
+ * stays open since the input is never left to close it.
+ * @param {hortis.autocompleteHost} host - The component hosting the widget, which answers its queries
+ * @param {HTMLElement} container - The container into which the widget is rendered
+ * @param {String} query - The query
+ * @param {Function} callback - The widget's callback, accepting the suggestions
+ */
+hortis.autocomplete.query = function (host, container, query, callback) {
+    const input = container.querySelector("input");
+    if (input && input.ownerDocument.activeElement === input) {
+        host.queryAutocomplete(query, callback);
+    } else {
+        callback([]);
+    }
+};
+
+hortis.autocomplete.bind = function (that, host, container, accessibleAutocomplete) {
+    let togo;
+    if (accessibleAutocomplete) {
+        fluid.disableRendering(that);
+        togo = accessibleAutocomplete({
+            element: container,
+            id: host.controlId,
+            placeholder: host.placeholder,
+            minLength: host.minLength,
+            displayMenu: "overlay",
+            confirmOnBlur: false,
+            source: (query, callback) => hortis.autocomplete.query(host, container, query, callback),
+            templates: {
+                suggestion: fluid.getGlobalValue(host.renderSuggestion),
+                inputValue: fluid.getGlobalValue(host.renderInputValue)
+            },
+            onConfirm: selection => host.confirmAutocomplete(selection)
+        });
+        container.querySelector("input")?.setAttribute("spellcheck", "false");
+    } else {
+        togo = fluid.unavailable({message: "The accessible-autocomplete library is not loaded", variety: "config"});
+    }
+    return togo;
+};
+
+}).call(globalThis);
+fluid.endSFCScript();
+//# sourceURL=vendor/imerss-bioinfo/src/client/sfc/components/hortis-autocomplete.vue</script>
+        <link data-fluid-indent="8" data-fluid-hydrated="" id="fl-style-hortis.autocomplete-0" href="vendor/accessible-autocomplete/dist/accessible-autocomplete.min.css" rel="stylesheet">
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.regionFilter.row-0">fluid.beginSFCScript("hortis.regionFilter.row", "fl-script-hortis.regionFilter.row-0", true);(function () {
+"use strict";
+
+// The row for one region of hortis.regionFilter, whose checkbox selects or deselects it
+fluid.def("hortis.regionFilter.row", {
+    $layers: "fluid.component",
+    checked: "$compute:hortis.regionFilter.isChecked({regionFilter}.filterState, {self}.index)",
+    toggle: "$method:hortis.regionFilter.toggle({regionFilter}, {self}.index, {0}:checked)"
+});
+
+}).call(globalThis);
+fluid.endSFCScript();
+//# sourceURL=vendor/imerss-bioinfo/src/client/sfc/filters/hortis-regionFilter-row.vue</script>
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.filterControls-0">fluid.beginSFCScript("hortis.filterControls", "fl-script-hortis.filterControls-0", true);(function () {
+"use strict";
+
+// The button resetting every filter and checklist beneath the visualisation loader
+fluid.def("hortis.filterControls", {
+    $layers: ["hortis.icons", "fluid.component"],
+    filters: "{vizLoader hortis.filter}",
+    checklists: "{vizLoader hortis.checklist}",
+    resetAll: "$method:hortis.filterControls.resetAll({self}.filters, {self}.checklists)"
+});
+
+hortis.filterControls.resetAll = function (filters, checklists) {
+    filters.forEach(filter => filter.reset());
+    checklists.forEach(checklist => checklist.reset());
+};
+
+}).call(globalThis);
+fluid.endSFCScript();
+//# sourceURL=vendor/imerss-bioinfo/src/client/sfc/filters/hortis-filterControls.vue</script>
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.taxonSearchFilter-3">fluid.beginSFCScript("hortis.taxonSearchFilter", "fl-script-hortis.taxonSearchFilter-3", true);(function () {
 "use strict";
 
 // A search box over a checklist's displayed taxa, whose chosen taxon becomes a filter of all observations to those of
 // that taxon and the taxa beneath it - as used by the standard visualisation, whose checklist selects nothing itself.
 // Clicking a name in the checklist chooses its taxon, as if it had been picked from the search
 fluid.def("hortis.taxonSearchFilter", {
-    $layers: ["fluid.sfcLayer","hortis.autocompleteHost","hortis.obsFilter","hortis.urlMappedFilter"],
+    $layers: ["hortis.autocompleteHost", "hortis.obsFilter", "hortis.urlMappedFilter"],
     urlKey: "taxon",
     urlCodec: "hortis.urlCodecs.taxonRow",
     controlId: "{checklist}.searchControlId",
@@ -6928,9 +6961,7 @@ fluid.def("hortis.taxonSearchFilter", {
     // The field of the observations holding their taxon
     taxonField: "iNaturalistTaxonId",
     predicates: "$compute:hortis.taxonSearchFilter.predicates({self}.filterState, {self}.taxonField)",
-    reset: "$method:hortis.collectorFilter.reset({self}, {global}.document)",
-    view: {"$component":{    $layers: ["fluid.sfcTemplateViewComponent"],
-"template":{"sfcLayer":"hortis.taxonSearchFilter"}}}
+    reset: "$method:hortis.collectorFilter.reset({self}, {global}.document)"
 });
 
 /**
@@ -6959,17 +6990,19 @@ hortis.taxonSearchFilter.select = function (that, id, dokkument) {
 hortis.taxonSearchFilter.predicates = (filterState, taxonField) => filterState ? [{field: taxonField, op: "within", taxa: [filterState.id]}] : [];
 
 }).call(globalThis);
+fluid.endSFCScript();
 //# sourceURL=vendor/imerss-bioinfo/src/client/sfc/filters/hortis-taxonSearchFilter.vue</script>
-        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.icons-0">(function () {
+        <script data-fluid-indent="8" data-fluid-hydrated="" id="fl-script-hortis.icons-0">fluid.beginSFCScript("hortis.icons", "fl-script-hortis.icons-0", false);(function () {
 "use strict";
 
 // The icons of the BBEA visualisation's interface, shared by several of its components. A component whose template
 // refers to one of them bears this layer, so that the icons are injected into any document it renders into
 fluid.def("hortis.icons", {
-    $layers: ["fluid.sfcLayer","fluid.component"]
+    $layers: "fluid.component"
 });
 
 }).call(globalThis);
+fluid.endSFCScript();
 //# sourceURL=vendor/imerss-bioinfo/src/client/sfc/core/hortis-icons.vue</script>
         <script>
             "use strict";

@@ -21,6 +21,28 @@ imerss.maxTextWidth = function (labels, fontSize) {
     }, 0) * fontSize * 1.02; // Add on 2% since our font seems just a touch wider than the respondent's
 };
 
+/**
+ * Compute the vertical position of a bar's label and count, relative to the bar's centre. They are centred on the part
+ * of the bar visible before its container is scrolled, so that the label of a bar running beyond the container's
+ * bottom, e.g. the single bar of a sole bee taxon, is not hidden. A bar lying wholly in view, or wholly out of it,
+ * keeps its label at its centre.
+ * @param {Object} bar - A main bar laid out by viz.bP, holding its centre `y` and half its height, `height`
+ * @param {Number} visibleBottom - The bottom of the visible part of the figure, in the coordinates of the bars
+ * @return {Number} The `y` of the label within the bar's group, whose origin is the bar's centre
+ */
+imerss.visibleLabelY = function (bar, visibleBottom) {
+    const top = bar.y - bar.height, bottom = bar.y + bar.height;
+    const visibleTop = Math.max(top, 0), visibleBarBottom = Math.min(bottom, visibleBottom);
+    let centre;
+    if (visibleBarBottom > visibleTop) {
+        centre = (visibleTop + visibleBarBottom) / 2;
+    } else {
+        centre = bar.y;
+    }
+    // 6 lowers the text's baseline so that it is centred on the point
+    return centre - bar.y + 6;
+};
+
 imerss.bipartitePP = function (data, svg, width, height, options) { // eslint-disable-line no-unused-vars
     const {sortedBeeNames, sortedPlantNames, beeColors, FigureLabel} = options;
 
@@ -154,16 +176,21 @@ imerss.bipartitePP = function (data, svg, width, height, options) { // eslint-di
         .attr("class", "header")
         .text(FigureLabel); // comes from subset name - only applicable sometimes
 
+    // The figure may be taller than its container, which scrolls - the part of it visible before scrolling, in the
+    // coordinates of the bars
+    const visibleBottom = height - RowPos;
+    const labelY = d => imerss.visibleLabelY(d, visibleBottom);
+
     g1.selectAll(".mainBars").append("text").attr("class", "label")
         .attr("x", d => (d.part === "primary" ? BoxLabPosBee : BoxLabPosPlant))
-        .attr("y", 6)
+        .attr("y", labelY)
         .text(d => d.key)
         .attr("text-anchor", d => (d.part === "primary" ? "end" : "start"));
 
     if (IncludeCount) {
         g1.selectAll(".mainBars").append("text").attr("class", "lab")
             .attr("x", d => (d.part === "primary" ? CountPosBee : CountPosPlant))
-            .attr("y", 6)
+            .attr("y", labelY)
             .text(function (d) {
                 return (d.value);
             })

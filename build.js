@@ -144,6 +144,9 @@ const buildIndex = {
         src: "data/b-team/plant-pollinators-BCBA.viz",
         dest: "docs/data/b-team/plant-pollinators-BCBA.viz"
     }, {
+        src: "data/b-team/plant-pollinators-Atlas.viz",
+        dest: "docs/data/b-team/plant-pollinators-Atlas.viz"
+    }, {
         src: "data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.viz",
         dest: "docs/data/Galiano 2023 BioBlitz/Galiano_Island_vascular_plant_records_consolidated-prepared.viz"
     }, {
@@ -157,7 +160,7 @@ const buildIndex = {
     // The pages of the visualisations ported to Infusion 6, copied into docs from src/buildSource with the rest of its
     // pages - see buildI6. One of them, which loads quickly, is verified as built, by the test of its round trip
     // between its minimal and hydrated forms - the others are written by the same steps, from the same modules
-    i6Pages: ["indexBeasBCBA.html", "indexBeasOBA.html", "indexBeasWaBA.html", "indexBlitz.html", "indexDiatoms.html"],
+    i6Pages: ["indexBeasAtlas.html", "indexBeasBCBA.html", "indexBeasOBA.html", "indexBeasWaBA.html", "indexBlitz.html", "indexDiatoms.html"],
     i6Verify: ["test/i6/bbeaHydrationRoundTrip.js", "docs", "indexBeasWaBA.html"]
 };
 

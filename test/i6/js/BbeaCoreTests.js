@@ -214,7 +214,19 @@ hortis.tests.slideAndRest = async function (element, value) {
     await hortis.tests.rest();
 };
 
-QUnit.test("Grouped region filter", function (assert) {
+/**
+ * Tick or untick a region's checkbox, and wait for the filter to apply it - which it does only in a later task, by
+ * fluid.invokeLater, so that the browser may paint the tick first - see hortis.groupedRegionFilter.change.
+ * @param {Element} check - The checkbox, already ticked or unticked
+ * @return {Promise} A promise which resolves once the change is applied
+ */
+hortis.tests.changeRegion = async function (check) {
+    check.dispatchEvent(new Event("change", {bubbles: true}));
+    await new Promise(resolve => setTimeout(resolve, 0));
+    fluid.cell.stabilize();
+};
+
+QUnit.test("Grouped region filter", async function (assert) {
     const that = hortis.tests.bbeaLoader({container: hortis.tests.root()});
     fluid.cell.stabilize();
     const groupNames = () => qsa(".imerss-region-filter .imerss-group-name").map(node => node.textContent);
@@ -225,16 +237,23 @@ QUnit.test("Grouped region filter", function (assert) {
     hortis.tests.click(qs(".imerss-region-filter .imerss-group-head[data-group=\"0\"]"));
     assert.notOk(groupBody(0).hidden, "Clicking a group's head unfolds it");
 
-    const cascades = qs(".imerss-region-filter .imerss-region-check[data-row-id=\"2\"]");
+    const cascades = qs(".imerss-region-filter .imerss-region-check[data-region-key=\"ecoregion:Cascades\"]");
     cascades.checked = true;
-    hortis.tests.change(cascades);
+    cascades.dispatchEvent(new Event("change", {bubbles: true}));
+    fluid.cell.stabilize();
+    assert.equal(that.filteredObs.count, 5, "The filter is not applied within the event, so that the tick is painted at once");
+    assert.ok(cascades.checked, "whilst the checkbox shows its tick");
+    await new Promise(resolve => setTimeout(resolve, 0));
+    fluid.cell.stabilize();
     assert.equal(that.filteredObs.count, 2, "Two observations in the Cascades");
-    const benton = qs(".imerss-region-filter .imerss-region-check[data-row-id=\"0\"]");
+    const benton = qs(".imerss-region-filter .imerss-region-check[data-region-key=\"county:Benton\"]");
     benton.checked = true;
-    hortis.tests.change(benton);
+    await hortis.tests.changeRegion(benton);
     assert.equal(that.filteredObs.count, 1, "Selections in different groups are ANDed");
     assert.equal(qs(".imerss-region-filter .imerss-group[data-group=\"1\"] .imerss-group-state").textContent, "1", "Group badge counts its selections");
     assert.equal(that.regionFacet.body.regionFilter.filterSummary.count, 2, "Filter summarises two selected regions");
+    assert.deepEqual({...that.regionFacet.body.regionFilter.filterState}, {"ecoregion:Cascades": true, "county:Benton": true},
+        "Regions are selected by their names");
 
     hortis.tests.input(qs(".imerss-region-filter .imerss-region-search"), "lin");
     assert.equal(that.regionFacet.body.regionFilter.query, "lin", "Search box written back to the query");
@@ -343,9 +362,9 @@ QUnit.test("Filter states are held in the URL", async function (assert) {
     assert.equal(hash().collector, "Charles Babbage", "Choosing a collector holds the name in the URL");
 
     // As when the user navigates the URL's history
-    hashManager.hash = {region: "2", elevation: "200,800", plants: "103"};
+    hashManager.hash = {region: "ecoregion:Cascades", elevation: "200,800", plants: "103"};
     fluid.cell.stabilize();
-    assert.deepEqual({...that.regionFacet.body.regionFilter.filterState}, {2: true}, "Region filter follows the URL");
+    assert.deepEqual({...that.regionFacet.body.regionFilter.filterState}, {"ecoregion:Cascades": true}, "Region filter follows the URL, by region name");
     assert.deepEqual({...elevation.dualRangeInput.range}, {min: 200, max: 800}, "Elevation filter's input follows the URL through both lenses");
     assert.deepEqual({...that.plantFacet.body.plantChecklist.filterState}, {103: true}, "Plant checklist follows the URL");
     assert.equal(that.collectorFacet.body.collectorFilter.filterState, null, "Filter absent from the URL reverts to its empty state");
@@ -447,6 +466,13 @@ QUnit.test("Codecs of filter states", function (assert) {
     const codecs = hortis.urlCodecs;
     assert.deepEqual(codecs.keys.decode(codecs.keys.encode({a: true, b: false, c: true})), {a: true, c: true}, "Keys round trip");
     assert.equal(codecs.keys.encode({}), undefined, "Empty hash of keys is held as nothing");
+    const names = {"Oregon:USA Counties:Benton County": true, "Odd, 100% & name": true};
+    const encodedNames = codecs.names.encode(names);
+    assert.equal(encodedNames, "Oregon:USA Counties:Benton County,Odd%2C 100%25 & name", "Commas and % within names are escaped");
+    assert.deepEqual(codecs.names.decode(encodedNames), names, "Names round trip through their codec");
+    const rendered = fluid.hashManager.render({region: encodedNames, pane: "net"});
+    assert.deepEqual(codecs.names.decode(fluid.hashManager.parse(rendered).region), names, "and through the URL's hash");
+    assert.equal(fluid.hashManager.parse(rendered).pane, "net", "A & within a name does not split the hash");
     assert.deepEqual(hortis.sexFilter.urlCodec.decode(undefined), {male: false, female: false}, "Flags decode to every flag");
     assert.deepEqual(codecs.range.decode("1,2"), {lower: 1, upper: 2}, "Range decodes");
     assert.equal(codecs.range.decode("junk"), null, "Malformed range decodes to none");
@@ -500,4 +526,52 @@ QUnit.test("Taxa are named by their authoritative names, or by iNaturalist names
     const annote = nameNode.children.find(child => child.tag === "span");
     assert.deepEqual([annote?.attrs["class"], annote?.children[0].text], ["checklist-annote", "ssp."],
         "Its annotation is held in a span, so that it is set in Roman type");
+});
+
+QUnit.test("The region filter of a data set of several states nests each state's regions beneath it", function (assert) {
+    const rows = [
+        {regionField: "state", id: "OR", label: "Oregon", state: "OR"},
+        {regionField: "state", id: "BC", label: "British Columbia", state: "BC"},
+        {regionField: "USA Counties", id: "1", label: "Benton County", state: "OR"},
+        {regionField: "USA Counties", id: "2", label: "Baker County", state: "OR"},
+        {regionField: "US Ecoregions Level III", id: "1", label: "1. Coast Range", state: "OR"},
+        {regionField: "BC Ecoprovinces", id: "1", label: "COM - Coast and Mountains", state: "BC"}
+    ];
+    const states = hortis.groupedRegionFilter.computeStates(rows, ["US Ecoregions Level III", "BC Ecoprovinces"]);
+    assert.deepEqual(states.map(state => state.row.label), ["Oregon", "British Columbia"], "One entry for each state, in order");
+    assert.deepEqual(states[0].groups.map(group => group.regionField), ["US Ecoregions Level III", "USA Counties"],
+        "Oregon holds its own region fields alone, its leading field first");
+    assert.deepEqual(states[0].groups[1].rows.map(({key}) => key), ["Oregon:USA Counties:Baker County", "Oregon:USA Counties:Benton County"],
+        "Its counties are sorted by label, each named by its state, region field and label");
+    assert.deepEqual(states[1].groups.map(group => group.regionField), ["BC Ecoprovinces"], "British Columbia holds no US regions");
+    assert.equal(hortis.groupedRegionFilter.computeStates(rows.slice(2).map(row => fluid.censorKeys(row, ["state"])), []), null,
+        "A table without rows of states is not nested");
+
+    const predicates = state => hortis.groupedRegionFilter.predicates(rows, state);
+    assert.deepEqual(predicates({}), [], "Nothing selected filters nothing");
+    assert.deepEqual(predicates({"Oregon": true}), [{field: "state", op: "in", value: ["OR"]}], "Selecting a state selects its records");
+    assert.deepEqual(predicates({"Oregon:USA Counties:Benton County": true, "Oregon:US Ecoregions Level III:1. Coast Range": true}), [
+        {field: "state", op: "in", value: ["OR"]},
+        {field: "USA Counties", op: "in", value: ["1"]},
+        {field: "US Ecoregions Level III", op: "in", value: ["1"]}
+    ], "Regions of one state select records of that state alone, ANDed between their fields");
+    assert.deepEqual(predicates({"British Columbia": true, "Oregon:USA Counties:Benton County": true}), [{any: [
+        {all: [{field: "state", op: "in", value: ["BC"]}]},
+        {all: [{field: "state", op: "in", value: ["OR"]}, {field: "USA Counties", op: "in", value: ["1"]}]}
+    ]}], "Selections of different states are alternatives");
+    assert.deepEqual(predicates({"Oregon:USA Counties:Lane County": true}), [], "A name of no region of the table, e.g. from a stale URL, is ignored");
+
+    const tree = hortis.groupedRegionFilter.renderTree([], states, {"Oregon:USA Counties:Benton County": true}, {}, "", "Region", "control");
+    const groupsNode = tree.children[0].children[2];
+    const stateNodes = groupsNode.children;
+    assert.deepEqual(stateNodes.map(node => node.attrs["data-state"]), ["OR", "BC"], "Each state is rendered at the top level");
+    const head = stateNodes[0].children[0];
+    assert.equal(head.children[0].attrs["data-region-key"], "Oregon", "A state's checkbox selects the state by its name");
+    assert.equal(head.children[1].children[2].children[0].text, "1", "A state counts its selected regions");
+    assert.equal(stateNodes[0].children[1].children.length, 2, "A state's body holds the groups of its regions");
+
+    const searched = hortis.groupedRegionFilter.renderTree([], states, {}, {}, "coast", "Region", "control").children[0].children[2].children;
+    assert.deepEqual(searched.map(node => node.attrs.hidden === undefined), [true, true], "A search shows each state with a matching region");
+    const bakerSearch = hortis.groupedRegionFilter.renderTree([], states, {}, {}, "baker", "Region", "control").children[0].children[2].children;
+    assert.deepEqual(bakerSearch.map(node => node.attrs.hidden === undefined), [true, false], "and hides each state without one");
 });

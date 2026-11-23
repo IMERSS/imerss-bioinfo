@@ -73,8 +73,17 @@ fluid.hashManager.parseSegment = function (segment) {
     return [key, parsedValue];
 };
 
+/**
+ * Render one segment of a URL hash, as `key:value`. Since a hash is parsed by splitting it at each "&" and then
+ * decoding each segment's percent-encoding, any "%" and "&" in the segment are percent-encoded, so that it is parsed
+ * back exactly - e.g. a name holding an escape of a codec, such as the %2C of hortis.urlCodecs.names.
+ * @param {String} key - The segment's key
+ * @param {any} value - Its value, written as JSON unless it is primitive
+ * @return {String} The segment
+ */
 fluid.hashManager.renderSegment = function (key, value) {
-    return key + ":" + (fluid.isPrimitive(value) ? "" + value : JSON.stringify(value));
+    const segment = key + ":" + (fluid.isPrimitive(value) ? "" + value : JSON.stringify(value));
+    return segment.replace(/%/g, "%25").replace(/&/g, "%26");
 };
 
 /**

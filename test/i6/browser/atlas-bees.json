@@ -1,0 +1,134 @@
+{
+    "title": "Atlas: the bee checklist's autocomplete, driven from the keyboard, and the sex filter, with the Reset of all filters",
+    "page": "indexBeasAtlas.html",
+    "viewport": {"width": 1600, "height": 1000},
+    "ready": [
+        {
+            "description": "all records are displayed, and their total is saved",
+            "target": {"selector": ".imerss-record-reporter"},
+            "number": {"pattern": "of (\\d+) records", "greaterThan": 0, "save": "total"}
+        },
+        {
+            "target": {"selector": ".imerss-record-reporter"},
+            "number": {"pattern": "Displaying (\\d+)", "equals": "total"}
+        },
+        {
+            "description": "the network has drawn its bars, whose counts are saved",
+            "target": {"selector": ".imerss-bipartite text.lab"},
+            "count": {"atLeast": 2},
+            "number": {"sum": true, "greaterThan": 0, "save": "network"}
+        }
+    ],
+    "steps": [
+        {
+            "description": "Unfold the Bees facet of the filters panel",
+            "action": {"type": "click", "target": {"selector": ".imerss-facet-head", "text": "Bees"}},
+            "expect": [
+                {
+                    "target": {"selector": "#fli-imerss-bee-search"},
+                    "visible": true
+                },
+                {
+                    "description": "the bee checklist is shown",
+                    "target": {"selector": "#imerss-facet-bees li.checklist-row"},
+                    "count": {"atLeast": 1}
+                }
+            ]
+        },
+        {
+            "description": "Type a genus, and the autocomplete suggests its species and the genus itself",
+            "action": {"type": "type", "target": {"selector": "#fli-imerss-bee-search"}, "text": "Bombus vos"},
+            "expect": [
+                {
+                    "target": {"selector": "#fli-imerss-bee-search__listbox .autocomplete__option", "text": "Bombus vosnesenskii"},
+                    "count": {"equals": 1},
+                    "visible": true
+                }
+            ]
+        },
+        {
+            "description": "Move to the first suggestion with the arrow key",
+            "action": {"type": "press", "key": "ArrowDown"},
+            "expect": [
+                {
+                    "description": "the first suggestion holds the focus",
+                    "target": {"selector": "#fli-imerss-bee-search__listbox .autocomplete__option", "index": 0},
+                    "focused": true,
+                    "text": {"contains": "Bombus vosnesenskii"}
+                }
+            ]
+        },
+        {
+            "description": "Choose it with Enter, and the records and network are filtered to that bee",
+            "action": {"type": "press", "key": "Enter"},
+            "expect": [
+                {
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "lessThan": "total", "greaterThan": 0, "save": "bee"}
+                },
+                {
+                    "description": "the network's counts shrink",
+                    "target": {"selector": ".imerss-bipartite text.lab"},
+                    "number": {"sum": true, "lessThan": "network", "greaterThan": 0}
+                },
+                {
+                    "description": "the label of the sole bee's bar, which runs beyond the bottom of the network's panel, can be seen without scrolling",
+                    "target": {"selector": ".imerss-bipartite text.label", "exactText": "Bombus vosnesenskii"},
+                    "inView": true
+                },
+                {
+                    "description": "as can its count",
+                    "target": {"selector": "text.lab", "within": {"selector": ".imerss-bipartite .mainBars", "text": "Bombus vosnesenskii"}},
+                    "inView": true,
+                    "number": {"greaterThan": 0}
+                },
+                {
+                    "description": "the network no longer shows other bee families",
+                    "target": {"selector": ".imerss-bipartite text.label", "exactText": "Andrenidae"},
+                    "count": {"equals": 0}
+                },
+                {
+                    "description": "the Bees facet shows that it is active",
+                    "target": {"selector": ".imerss-facet-state", "within": {"selector": ".imerss-facet-head", "text": "Bees"}},
+                    "visible": true
+                }
+            ]
+        },
+        {
+            "description": "Check Female in the sex filter, and the records are narrowed further",
+            "action": {"type": "click", "target": {"selector": "input.checklist-check", "within": {"selector": ".imerss-sex-filter .imerss-inline-check", "text": "Female"}}},
+            "expect": [
+                {
+                    "target": {"selector": "input.checklist-check", "within": {"selector": ".imerss-sex-filter .imerss-inline-check", "text": "Female"}},
+                    "checked": true
+                },
+                {
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "lessThan": "bee", "greaterThan": 0}
+                }
+            ]
+        },
+        {
+            "description": "Reset all filters, and the records and network return to their originals",
+            "action": {"type": "click", "target": {"selector": ".imerss-reset-filter"}},
+            "expect": [
+                {
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "equals": "total"}
+                },
+                {
+                    "target": {"selector": ".imerss-bipartite text.lab"},
+                    "number": {"sum": true, "equals": "network"}
+                },
+                {
+                    "target": {"selector": "input.checklist-check", "within": {"selector": ".imerss-sex-filter .imerss-inline-check", "text": "Female"}},
+                    "checked": false
+                },
+                {
+                    "target": {"selector": ".imerss-facet-state", "within": {"selector": ".imerss-facet-head", "text": "Bees"}},
+                    "visible": false
+                }
+            ]
+        }
+    ]
+}

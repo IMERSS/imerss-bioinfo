@@ -1290,6 +1290,9 @@ const $fluidSignalsScope = function (fluid) {
         if (cell._trackingRecord || !cell._inEdges) {
             return;
         }
+        if (fluid.cell.recorders.size > 0) {
+            fluid.cell.recorders.forEach(recorder => recorder.cells.add(cell));
+        }
         // An edge which has previously returned a promise or async iterable is treated as asynchronous from the outset
         let syncUpdate = !inEdge.isAsync;
         let result;
@@ -1815,6 +1818,78 @@ const $fluidSignalsScope = function (fluid) {
      */
     fluid.cell.isQuiescent = function () {
         return fluid.cell.EffectQueue.length === 0 && [...fluid.cell.CurrentFits].every(fit => fit.staticFit);
+    };
+
+    // The recorders active - see fluid.cell.recordUpdates
+    fluid.cell.recorders = new Set();
+
+    /**
+     * @typedef {Object} UpdateRecorder
+     * @property {Set<Cell>} cells - Every cell whose computation was evaluated whilst the recorder was active, in order
+     * @property {Function} stop - Stops the recording
+     */
+
+    /**
+     * Begin recording the cells whose computations are evaluated - computed cells and effects alike - until the
+     * recorder returned is stopped. Together with `fluid.cell.upstream`, this forms the traces of a build in the sense
+     * of Mokhov et al.'s "Build Systems a la Carte": the recorder finds the tasks which ran, e.g. the effects which
+     * rendered a document, and `fluid.cell.upstream` the inputs each of them read. It costs nothing whilst no recorder
+     * is active
+     * @return {UpdateRecorder} The recorder
+     */
+    fluid.cell.recordUpdates = function () {
+        const recorder = {
+            cells: new Set(),
+            stop: () => fluid.cell.recorders.delete(recorder)
+        };
+        fluid.cell.recorders.add(recorder);
+        return recorder;
+    };
+
+    /**
+     * List the sources a cell's computations read when they were last evaluated - their static sources, and those they
+     * read dynamically
+     * @param {Cell} cell - The cell
+     * @return {Cell[]} Its sources
+     */
+    fluid.cell.sourcesOf = function (cell) {
+        return cell._inEdges ? cell._inEdges.flatMap(edge => edge.sources || []) : [];
+    };
+
+    /**
+     * @typedef {Object} UpstreamRecord
+     * @property {Set<Cell>} cells - Every cell reached, including the roots
+     * @property {Cell[]} leaves - The cells reached at which the walk ended - those with no sources, which are inputs
+     * to the graph, set from outside it, and those at which `stop` ended it
+     */
+
+    /**
+     * Walk the reactive graph upstream from some cells, along the sources each computation read when last evaluated, to
+     * the inputs from which their values were computed. Since dependencies are those actually read, the walk follows
+     * the graph as it now stands, e.g. a conditional's chosen branch alone - the inputs found are those of a verifying
+     * trace of the roots (Mokhov et al. section 4.2.2)
+     * @param {Cell[]} roots - The cells to walk from
+     * @param {Function} [stop] - Receives each cell reached, and returns `true` if the walk is to end at it, e.g. at a
+     * cell standing for an input of the build such as a member of a model, though it is itself computed
+     * @return {UpstreamRecord} The cells reached, and the leaves at which the walk ended
+     */
+    fluid.cell.upstream = function (roots, stop) {
+        const cells = new Set();
+        const leaves = [];
+        const stack = [...roots];
+        while (stack.length > 0) {
+            const cell = stack.pop();
+            if (!cells.has(cell)) {
+                cells.add(cell);
+                const sources = fluid.cell.sourcesOf(cell);
+                if (sources.length === 0 || stop && stop(cell)) {
+                    leaves.push(cell);
+                } else {
+                    sources.forEach(source => stack.push(source));
+                }
+            }
+        }
+        return {cells, leaves};
     };
 
     /**

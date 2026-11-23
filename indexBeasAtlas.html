@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>BBEA TTOOL Atlas</title>
+
+        <!-- Infusion 6 is loaded from node_modules, so this page may be served from this checkout -->
+
+        <!-- The one reference to the location of Infusion - every other is relative, or through a module -->
+        <script src="docs/vendor/infusion-6/src/framework/core/js/FluidBoot.js" data-fluid-dev-mode></script>
+        <!-- This checkout, as the module holding the page, and its map of the modules it depends upon - see
+             Infusion 6's copyOut.js --in-place -->
+        <fluid-module id="imerss-bioinfo" src="./" modules="fluid-modules.json"></fluid-module>
+
+        <!-- The plant-pollinator visualisation, which imports every Single File Component, script and stylesheet it
+             depends on -->
+        <fluid-import src="src/client/sfc/bbea/hortis-beaVizLoader.vue"></fluid-import>
+        <!-- Marks the plants of the seed mix available from Oregon's native plant nurseries, whilst Oregon is selected -->
+        <fluid-import src="src/client/sfc/bbea/hortis-oregonNursery.vue"></fluid-import>
+        <script>
+            "use strict";
+            // The plant-pollinator visualisation of the combined atlases of Oregon, Washington, Idaho and British Columbia,
+            // whose region filters are nested beneath a selector for each state - see hortis.groupedRegionFilter. Its data
+            // package is relative to this page, and the page is rendered statically from it by Infusion 6's hydrate.js, which captures its queries of startup
+            fluid.def("hortis.bbea.atlas", {
+                $layers: ["hortis.beaVizLoader", "hortis.oregonNursery"],
+                vizFile: "data/b-team/plant-pollinators-Atlas.viz",
+                softwareVersion: "Software Version 2.0 - Updated November 20th, 2026",
+                datasetVersion: "Dataset Revision V1 - Updated November 19th, 2026",
+                // The leading fields of the region filter, by which its regions are grouped
+                regionLeadingFields: ["US Ecoregions Level III", "BC Ecoprovinces"]
+            });
+        </script>
+    </head>
+
+    <body>
+        <h2>BBEA TTOOL</h2>
+        <div fluid-layers="hortis.bbea.atlas"></div>
+    </body>
+</html>

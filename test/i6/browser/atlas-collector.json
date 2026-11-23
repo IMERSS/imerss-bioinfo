@@ -1,0 +1,107 @@
+{
+    "title": "Atlas: choosing a collector through the autocomplete filters the records, and clearing it restores them",
+    "page": "indexBeasAtlas.html",
+    "viewport": {"width": 1600, "height": 1000},
+    "ready": [
+        {
+            "description": "all records are displayed, and their total is saved",
+            "target": {"selector": ".imerss-record-reporter"},
+            "number": {"pattern": "of (\\d+) records", "greaterThan": 0, "save": "total"}
+        },
+        {
+            "target": {"selector": ".imerss-record-reporter"},
+            "number": {"pattern": "Displaying (\\d+)", "equals": "total"}
+        },
+        {
+            "description": "the network has drawn its bars, whose counts are saved",
+            "target": {"selector": ".imerss-bipartite text.lab"},
+            "count": {"atLeast": 2},
+            "number": {"sum": true, "greaterThan": 0, "save": "network"}
+        }
+    ],
+    "steps": [
+        {
+            "description": "Unfold the Collector facet of the filters panel",
+            "action": {"type": "click", "target": {"selector": ".imerss-facet-head", "text": "Collector"}},
+            "expect": [
+                {
+                    "target": {"selector": "#fli-imerss-collector"},
+                    "visible": true
+                }
+            ]
+        },
+        {
+            "description": "Type part of a collector's name, and the autocomplete suggests matching collectors",
+            "action": {"type": "type", "target": {"selector": "#fli-imerss-collector"}, "text": "Robert Ped"},
+            "expect": [
+                {
+                    "target": {"selector": "#fli-imerss-collector__listbox .autocomplete__option", "exactText": "Robert Pederson"},
+                    "count": {"equals": 1},
+                    "visible": true
+                },
+                {
+                    "description": "the record count is unchanged until a collector is chosen",
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "equals": "total"}
+                }
+            ]
+        },
+        {
+            "description": "Choose the suggestion, and the records, network and collector's report update together",
+            "action": {"type": "click", "target": {"selector": "#fli-imerss-collector__listbox .autocomplete__option", "exactText": "Robert Pederson"}},
+            "expect": [
+                {
+                    "target": {"selector": "#fli-imerss-collector"},
+                    "value": {"equals": "Robert Pederson"}
+                },
+                {
+                    "description": "fewer records are displayed",
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "lessThan": "total", "greaterThan": 0}
+                },
+                {
+                    "description": "the network's counts shrink",
+                    "target": {"selector": ".imerss-bipartite text.lab"},
+                    "number": {"sum": true, "lessThan": "network", "greaterThan": 0}
+                },
+                {
+                    "description": "the collector's report is offered",
+                    "target": {"selector": ".imerss-collector-report"},
+                    "visible": true,
+                    "text": {"contains": "Robert Pederson"}
+                },
+                {
+                    "description": "the Collector facet shows that it is active",
+                    "target": {"selector": ".imerss-facet-state", "within": {"selector": ".imerss-facet-head", "text": "Collector"}},
+                    "visible": true
+                }
+            ]
+        },
+        {
+            "description": "Clear the filter, and everything returns to its original",
+            "action": {"type": "click", "target": {"selector": ".imerss-collector-filter .imerss-filter-clear"}},
+            "expect": [
+                {
+                    "target": {"selector": "#fli-imerss-collector"},
+                    "value": {"equals": ""}
+                },
+                {
+                    "target": {"selector": ".imerss-record-reporter"},
+                    "number": {"pattern": "Displaying (\\d+)", "equals": "total"}
+                },
+                {
+                    "target": {"selector": ".imerss-bipartite text.lab"},
+                    "number": {"sum": true, "equals": "network"}
+                },
+                {
+                    "target": {"selector": ".imerss-collector-report"},
+                    "visible": false
+                },
+                {
+                    "target": {"selector": ".imerss-facet-state", "within": {"selector": ".imerss-facet-head", "text": "Collector"}},
+                    "visible": false
+                }
+            ]
+        }
+    ]
+}

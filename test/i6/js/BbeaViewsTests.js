@@ -172,7 +172,7 @@ QUnit.test("Seed mix evaluator", function (assert) {
         ["Bombus mixtus", "Bombus vosnesenskii", "Andrena nigrihirta"], "Each bee supported is listed, alphabetically within its family");
     assert.equal(qsa(".imerss-listbar", beeList).length, 0, "The list is not offered for rearrangement");
 
-    that.regionFacet.body.regionFilter.filterState = {2: true}; // Cascades
+    that.regionFacet.body.regionFilter.filterState = {"ecoregion:Cascades": true};
     fluid.cell.stabilize();
     assert.ok(qs(".mf-seednote", seed).textContent.startsWith("Plants recorded under the current filters"), "A region defines a site");
     assert.ok(qs("input[data-seed=\"203\"]", seed).hasAttribute("checked"), "The plant recorded there is established and ticked");
@@ -210,7 +210,7 @@ QUnit.test("Seed mix evaluator answers to every filter, though only those of pla
         "Only the plant recorded in July is a candidate");
     assert.ok(qs(".mf-seedread", seed).textContent.includes("of 1 bee species supported"), "Only the bee recorded in July is counted");
 
-    that.regionFacet.body.regionFilter.filterState = {2: true}; // Cascades
+    that.regionFacet.body.regionFilter.filterState = {"ecoregion:Cascades": true};
     fluid.cell.stabilize();
     assert.ok(qs(".mf-seednote", seed).textContent.startsWith("Plants recorded under the current filters"), "A region defines a site");
     assert.ok(qs("input[data-seed=\"203\"]", seed).hasAttribute("checked"), "The plant recorded there in July is established and ticked");
@@ -238,4 +238,83 @@ QUnit.test("Collector reports and grips", function (assert) {
     fluid.cell.stabilize();
     grip.dispatchEvent(new KeyboardEvent("keydown", {key: "Enter", bubbles: true}));
     assert.ok(qs(".mf-shell").classList.contains("mf-f-closed"), "Grip unbound on destruction");
+});
+
+QUnit.test("Seed mix evaluator lists apart the plants introduced in the states of the site", function (assert) {
+    const pkg = hortis.viz.fromRows({
+        obs: [
+            {state: "OR", plantINatId: "103", pollinatorINatId: "12"},
+            {state: "BC", plantINatId: "203", pollinatorINatId: "12"}
+        ],
+        taxa: [{id: "1"}]
+    });
+    const orObs = hortis.selectObs(pkg, [{field: "state", op: "in", value: ["OR"]}]);
+    const allObs = hortis.selectObs(pkg, []);
+    const plant = (id, name, bees, means) => ({id, label: name, bees: new Set(bees),
+        row: {id, rank: "species", iNaturalistTaxonName: name, ...means}});
+    const network = {plants: new Map([
+        ["103", plant("103", "Rosa nutkana", ["12", "13"], {establishmentOR: "native", establishmentBC: "native"})],
+        ["203", plant("203", "Solidago lepida", ["12"], {establishmentOR: "introduced", establishmentBC: ""})],
+        ["303", plant("303", "Taraxacum officinale", ["12", "13", "22"], {establishmentOR: "", establishmentBC: "introduced"})]
+    ])};
+    const ids = set => [...set].sort();
+    assert.deepEqual(ids(hortis.seedMix.computeIntroduced(pkg, network, true, orObs, allObs)), ["203"],
+        "On an Oregon site, a plant is introduced if Oregon's checklist says so - one it does not list is native");
+    assert.deepEqual(ids(hortis.seedMix.computeIntroduced(pkg, network, false, orObs, allObs)), ["203", "303"],
+        "With no site, a plant is introduced if it is so in any state of the observations");
+    const singleState = hortis.viz.fromRows({obs: [{plantINatId: "103", pollinatorINatId: "12"}], taxa: [{id: "1"}]});
+    assert.deepEqual(ids(hortis.seedMix.computeIntroduced(singleState, network, false, null, hortis.selectObs(singleState, []))), [],
+        "A data set not of several states has no plant introduced");
+
+    const that = {removed: {}, added: {"303": true}, shortListLength: 60};
+    const markup = hortis.seedMix.listMarkup(that, true, network, new Set(["203"]), new Set(["203", "303"]), {}, "", false);
+    const holder = document.createElement("div");
+    holder.innerHTML = markup;
+    assert.deepEqual(qsa(".mf-seedgroup", holder).map(node => node.textContent),
+        ["Available for seed mixes (1)", "Introduced plants (2)"], "The introduced plants are listed last, in a section of their own");
+    assert.deepEqual(qsa(".mf-seed-introduced input[data-seed]", holder).map(input => [input.dataset.seed, input.hasAttribute("checked")]),
+        [["303", true], ["203", true]], "Introduced plants keep their ticks - one added, one established on the site");
+});
+
+// A loader of a data set of two states, of which the plant Rosa nutkana is available from Oregon's nurseries, with
+// hortis.oregonNursery laid over it, as by the page of the combined atlas
+fluid.def("hortis.tests.nurseryLoader", {
+    $layers: ["hortis.tests.viewsLoader", "hortis.oregonNursery"],
+    pkg: "$compute:hortis.tests.makeNurseryPackage()",
+    taxaRows: "$compute:hortis.tests.nurseryTaxaRows()",
+    regionIndirectionRows: "$compute:hortis.tests.nurseryRegionRows()"
+});
+
+hortis.tests.nurseryTaxaRows = () => hortis.tests.taxaRows.map(row => row.id === "103" ? {...row, oregonNurseries: "Echo Valley Natives"} : row);
+
+hortis.tests.nurseryRegionRows = () => [
+    {regionField: "state", id: "OR", label: "Oregon", state: "OR"},
+    {regionField: "state", id: "WA", label: "Washington", state: "WA"}
+];
+
+hortis.tests.makeNurseryPackage = () => hortis.viz.fromRows({
+    obs: hortis.tests.obsRows.map((row, i) => ({...row, state: i < 3 ? "OR" : "WA"})),
+    taxa: hortis.tests.nurseryTaxaRows(),
+    regionIndirection: hortis.tests.nurseryRegionRows()
+});
+
+QUnit.test("Plants available from Oregon's nurseries are marked whilst Oregon is selected", function (assert) {
+    const that = hortis.tests.nurseryLoader({container: hortis.tests.root()});
+    fluid.cell.stabilize();
+    hortis.tests.selectTab("seed");
+    const seed = qs(".imerss-seed-mix");
+    assert.equal(qsa(".mf-oregon-nursery", seed).length, 0, "No plant is marked whilst Oregon is not selected");
+
+    that.regionFacet.body.regionFilter.filterState = {"Oregon": true};
+    fluid.cell.stabilize();
+    const marks = qsa(".mf-oregon-nursery", seed);
+    assert.equal(marks.length, 1, "Once Oregon is selected, the one plant available is marked");
+    assert.equal(marks[0].closest("label").querySelector("input").dataset.seed, "103", "The mark is beside Rosa nutkana");
+    assert.equal(marks[0].getAttribute("href"), "https://oregonflora.org/taxa/search.php?search=Rosa%20nutkana", "It links to OregonFlora's search for the plant");
+    assert.equal(marks[0].getAttribute("title"), "Seeds available from Oregon Nursery Native Plants", "It bears its tooltip");
+
+    that.regionFacet.body.regionFilter.filterState = {"Washington": true};
+    fluid.cell.stabilize();
+    assert.equal(qsa(".mf-oregon-nursery", seed).length, 0, "Selecting another state removes the marks");
+    that.destroy();
 });

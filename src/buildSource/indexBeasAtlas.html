@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Melittoflora &ndash; Pacific Northwest Bee Atlases Plant-Pollinator Interactions</title>
+
+        <!-- Cloudflare Web Analytics -->
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "2901dd2a6ed44260a89af92f9e32e34b"}'></script>
+        <!-- End Cloudflare Web Analytics -->
+
+        <!-- This page is written as it is served from docs, into which build.js copies it, together with the modules it
+             depends upon, by Infusion 6's copyOut.js, and then hydrates it in place - see build.js -->
+        <!-- The one reference to the location of Infusion - every other is relative, or through a module -->
+        <script src="vendor/infusion-6/src/framework/core/js/FluidBoot.js"></script>
+        <!-- The site, as the module holding the page, and its map of the modules it depends upon, written by copyOut.js -->
+        <fluid-module id="imerss-bioinfo-docs" src="./" modules="fluid-modules.json"></fluid-module>
+
+        <!-- The plant-pollinator visualisation, which imports every Single File Component, script and stylesheet it
+             depends on -->
+        <fluid-import src="%imerss-bioinfo/src/client/sfc/bbea/hortis-beaVizLoader.vue"></fluid-import>
+        <!-- Marks the plants of the seed mix available from Oregon's native plant nurseries, whilst Oregon is selected -->
+        <fluid-import src="%imerss-bioinfo/src/client/sfc/bbea/hortis-oregonNursery.vue"></fluid-import>
+        <script>
+            "use strict";
+            // The plant-pollinator visualisation of the dataset of this atlas, from which the page is rendered, statically by
+            // hydrate.js as in the browser. Its data package is relative to this page
+            fluid.def("hortis.bbea.atlas", {
+                $layers: ["hortis.beaVizLoader", "hortis.oregonNursery"],
+                vizFile: "data/b-team/plant-pollinators-Atlas.viz",
+                softwareVersion: "Software Version 2.0 - Updated November 20th, 2026",
+                datasetVersion: "Dataset Revision V1 - Updated November 19th, 2026",
+                // The leading fields of the region filter, by which its regions are grouped
+                regionLeadingFields: ["US Ecoregions Level III", "BC Ecoprovinces"]
+            });
+        </script>
+
+        <!-- The chrome of the Oregon State University site hosting the atlas -->
+        <link rel="stylesheet" type="text/css" href="css/OSU.css"/>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/OSU-superfish.css"/>
+        <link rel="stylesheet" type="text/css" href="css/OSU-overrides.css"/>
+    </head>
+
+    <body>
+
+    <header id="navbar" role="banner" class="navbar container-fluid navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-top">
+                <div id="search-overlay">
+                    <form class="search" role="search" action="https://agsci.oregonstate.edu/bee-atlas" method="post" id="osu-search-top-hat-form" accept-charset="UTF-8"><div><div class="form-item form-item-term form-type-textfield form-group"><input class="search-terms form-control form-text" placeholder="Search this site" type="text" id="edit-term" name="term" value="" size="60" maxlength="128"> <label class="control-label element-invisible" for="edit-term">Search Field</label>
+                    </div><button class="icon-search word-hide btn btn-primary form-submit" type="submit" id="edit-submit" name="op" value="Search">Search</button>
+                        <input type="hidden" name="group_path" value="bee-atlas">
+                        <input type="hidden" name="form_build_id" value="form-r2V0JEln9IIk_xK1OaATeKlF-4w9F8Nc58lHtCJjb3Y">
+                        <input type="hidden" name="form_id" value="osu_search_top_hat_form">
+                    </div></form>        <button class="exit-search">Exit Search</button>
+                </div>
+                <div class="navbar-header">
+                    <div class="navbar-logo navbar-col">
+                        <p><a class="logo navbar-btn" href="https://oregonstate.edu" title="University Home">
+                            <img src="img/OSU/OSU-logo.png" alt="Oregon State University">
+                        </a></p>
+                    </div>
+
+                    <div class="navbar-group navbar-col">
+                        <div class="navbar-group-middle navbar-vcol">
+                            <span class="group-parent"><a class="parent-site" href="https://agsci.oregonstate.edu"> College of Agricultural Sciences</a> <span class="group-header-separator">»</span> </span>
+                            <a class="group" href="https://agsci.oregonstate.edu/bee-atlas">Pacific Northwest Bee Atlases</a>          </div>
+                    </div>
+
+                    <div class="navbar-upper-nav navbar-col">
+                        <div class="site-search">
+                            <a href="https://agsci.oregonstate.edu/search/google" id="search-link" class="m-icon-link">
+                                <i class="icon-search"></i><span class="sr-only">Open search box</span>
+                            </a>
+                        </div>
+
+                        <div class="upper-nav-menu">
+                            <p><a href="https://admissions.oregonstate.edu/apply-choose-application">Apply</a>&nbsp;&nbsp;&nbsp;<a href="https://agsci.oregonstate.edu/mycas">MyCAS</a></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="content-main">
+        <div fluid-layers="hortis.bbea.atlas"></div>
+    </section>
+    </body>
+</html>

@@ -1,0 +1,18 @@
+/* The mark beside a plant of the seed mix evaluator which is available from Oregon Nursery Native Plants - see
+   hortis-oregonNursery.vue. Its icon is OregonFlora's favicon, at https://oregonflora.org/favicon.ico, converted to PNG
+   at its own size of 32 by 31 pixels, so as to be sharp at 16 pixels on a screen of twice the density */
+.mf-oregon-nursery {
+    flex: none;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    vertical-align: middle;
+    background: url("../img/oregonflora-favicon.png") center / contain no-repeat;
+}
+
+.mf-oregon-nursery:hover,
+.mf-oregon-nursery:focus-visible {
+    outline: 1px solid var(--mf-accent, #2a6f97);
+    outline-offset: 1px;
+}

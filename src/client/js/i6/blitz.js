@@ -43,15 +43,18 @@ hortis.blitzChecklistDecorations = {
 };
 
 /**
- * Decorate a checklist row with an icon showing its taxon's reporting status, if it has one.
+ * Decorate a checklist row with an icon showing its taxon's reporting status, if it has one. Its description is borne
+ * as the icon's title attribute rather than as an SVG <title> child, since the page's tooltips, of hortis.titleTooltips,
+ * show only titles borne as attributes, and the browser would otherwise show its own besides - and as its aria-label,
+ * for assistive technology.
  * @param {TaxonRow} row - The checklist's taxon row
  * @return {VNode|null} The icon, or null if the taxon has no reporting status
  */
 hortis.blitzChecklistDecoration = function (row) {
     const status = hortis.reportingStatusById({[row.id]: row})[row.id];
     const decoration = hortis.blitzChecklistDecorations[status];
-    return decoration ? {tag: "svg", attrs: {width: "18", height: "18", "class": "imerss-checklist-decoration"}, children: [
-        {tag: "title", attrs: {}, children: [{text: decoration.title}]},
+    return decoration ? {tag: "svg", attrs: {width: "18", height: "18", "class": "imerss-checklist-decoration",
+        title: decoration.title, role: "img", "aria-label": decoration.title}, children: [
         // The icons are the symbols imerss-i-tick, imerss-i-question and imerss-i-exclamation - see hortis-blitzVizLoader.vue
         {tag: "use", attrs: {href: "#imerss-i-" + decoration.symbol}, children: []}
     ]} : null;
